@@ -60,7 +60,7 @@
   <p class="hm-recap-lede">${esc(lede)}</p>
   ${officialLink ? '<p class="hm-recap-source">' + officialLink + '</p>' : ''}
   ${tracker}
-  ${stars ? `<div class="hm-recap-stars"><small>THREE STARS</small><ol>${stars}</ol></div>` : ''}
+  ${stars ? `<div class="hm-recap-stars"><small>WILDMAN THREE STARS</small><ol>${stars}</ol></div>` : ''}
   ${rest || stats ? `<details class="hm-recap-more"><summary>Read full recap</summary>${rest}${stats ? `<div class="hm-recap-stats">${stats}</div><p class="hm-recap-note">Calgary listed first. Source: ${esc(source)}.</p>` : ''}</details>` : ''}
 </article>`;
   }
