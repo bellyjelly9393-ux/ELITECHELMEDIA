@@ -170,7 +170,7 @@
       const draw = () => {
         const q = lower(search.value).trim();
         if (!q) {
-          results.innerHTML = `<div class="empty-state">Search a team, gamertag or tournament. When Pro Series rosters are imported, the entire field will be searchable here.</div>`;
+          results.innerHTML = `<div class="empty-state">Search for a team or tournament event. Public player directory results are temporarily hidden during the site cleanup.</div>`;
           return;
         }
         const teamRows = state.teams.filter(t => lower(`${t.name} ${t.abbreviation}`).includes(q)).slice(0,8).map(t => ({type:"TEAM", title:t.name, meta:t.team_type === "external" ? "Tournament Team" : "Wildman", href:teamHref(t)}));
@@ -182,7 +182,7 @@
           return {type:"PLAYER", title:p.gamertag, meta:`${entry.pos || "POS TBD"}${team ? ` · ${team.name}` : ""}`, href:playerHref(p)};
         });
         const eventRows = state.events.filter(e => lower(`${e.name} ${e.organizer} ${e.game_title}`).includes(q)).slice(0,5).map(e => ({type:"EVENT", title:e.name, meta:`${e.organizer || "Tournament"} · ${e.status}`, href:e.slug === "road-to-pro-2026" ? "pro-series.html" : "esports-hub.html"}));
-        const rows = [...teamRows, ...playerRows, ...eventRows];
+        const rows = [...teamRows, ...eventRows];
         results.innerHTML = rows.length ? rows.map(r => `<a class="network-result" href="${esc(r.href)}"><span>${esc(r.type)}</span><div><strong>${esc(r.title)}</strong><small>${esc(r.meta)}</small></div><b>OPEN →</b></a>`).join("") : `<div class="empty-state">Nothing indexed for “${esc(search.value)}” yet.</div>`;
       };
       search.oninput = draw;
