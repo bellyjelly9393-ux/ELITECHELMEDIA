@@ -23,11 +23,11 @@
     'index.html':'index.html',
     'team.html':'team.html','history.html':'team.html',
     'esports-hub.html':'esports-hub.html','esports-team.html':'esports-hub.html','services.html':'esports-hub.html',
-    'events.html':'pro-series.html','event-format.html':'pro-series.html','pro-series.html':'pro-series.html','caps-gaming.html':'pro-series.html',
+    'events.html':'events.html','event-format.html':'events.html','pro-series.html':'events.html','caps-gaming.html':'events.html',
     'game-center.html':'game-center.html','live-channel.html':'game-center.html','multiview.html':'game-center.html','vod-center.html':'game-center.html','reports.html':'game-center.html','game.html':'game-center.html','live-game.html':'game-center.html','postgame.html':'game-center.html',
-    'players.html':'players.html','esports-player.html':'players.html','player-rusty.html':'players.html','player-williamson20.html':'players.html','player-williamson88.html':'players.html','rosters.html':'players.html','season.html':'players.html',
+    
     'academy.html':'academy.html','academy-training.html':'academy.html',
-    'signup.html':'signup.html',
+    'signup.html':'interest.html','interest.html':'interest.html','lgchl-leaders.html':'lgchl-leaders.html',
     'management.html':'management.html',
     'wildman-media.html':'wildman-media.html','hitmen-media.html':'wildman-media.html','media.html':'wildman-media.html'
   };
@@ -55,20 +55,22 @@
           ${simpleLink('index.html','Home')}
           ${simpleLink('team.html','Wildman')}
           ${simpleLink('esports-hub.html','Esports Hub')}
-          ${simpleLink('pro-series.html','Road to Pro')}
+          ${simpleLink('events.html','Events')}
           ${dropdown('Live','game-center.html',[
-            ['game-center.html?channel=wildman','Wildman Live','Tournaments + network broadcasts'],
-            ['game-center.html?channel=hitmen','Hitmen Live','Calgary LGCHL team channel']
+            ['game-center.html?channel=hitmen','Hitmen Live','Calgary LGCHL game night and schedule'],
+            ['multiview.html','Multiview','Watch multiple Twitch and YouTube feeds'],
+            ['game-center.html?channel=wildman','Wildman Live','Wildman network channel']
           ])}
-          ${simpleLink('players.html','Players')}
+          ${simpleLink('lgchl-leaders.html','LGCHL Stats')}
           ${simpleLink('academy.html','Academy')}
+          ${simpleLink('interest.html','Join Events')}
           ${dropdown('Media','wildman-media.html',[
             ['wildman-media.html','Wildman Media','Tournaments + esports network'],
             ['hitmen-media.html','Hitmen Media','LGCHL team coverage']
           ])}
           ${simpleLink('management.html','Management')}
         </nav>
-        <a class="wm-join-btn" href="signup.html">Join Wildman</a>
+        <a class="wm-join-btn" href="interest.html">Register Interest</a>
       `;
 
       header.querySelectorAll('.nav-menu-trigger').forEach(trigger=>{
@@ -102,6 +104,10 @@
   document.querySelectorAll('a[href="#"]').forEach(a => {
     a.addEventListener('click', e => e.preventDefault());
   });
+
+  if (!document.querySelector('link[href*="network-cleanup.css"]')) {
+    const clean=document.createElement('link'); clean.rel='stylesheet'; clean.href='network-cleanup.css?v=20261010-2'; document.head.appendChild(clean);
+  }
 
   if (!document.querySelector('script[src*="ui-polish.js"]')) {
     const s=document.createElement('script');
