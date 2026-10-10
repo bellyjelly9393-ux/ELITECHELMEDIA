@@ -73,16 +73,17 @@
   S.sources.forEach((s,i)=>{const opt=document.createElement('option');opt.value=String(i);opt.textContent=s.display_label||((sourceKey(s)==='hitmen'?'Calgary Hitmen':'Wildman')+' channel');opt.selected=s.id===chosen.id;select.append(opt);});
   select.addEventListener('change',()=>{const s=S.sources[Number(select.value)];if(!s)return;S.broadcast=sourceKey(s);const link=new URL(location.href);link.searchParams.set('channel',S.broadcast);history.replaceState(null,'',link);renderBroadcast();});
   const label=document.createElement('label');label.textContent='WATCH CHANNEL ';label.append(select);picker.append(label);
-  const src=twitchEmbed(chosen.url),id=chosen.id;
+  const hitmenChannel=sourceKey(chosen)==='hitmen';
+  const src=hitmenChannel?'public-broadcast-stage.html?channel=hitmen-main':twitchEmbed(chosen.url),id=chosen.id;
   if(stage.dataset.sourceId!==id){
     stage.dataset.sourceId=id;stage.replaceChildren();
     const holder=document.createElement('section');holder.className='hg-broadcast-player';
-    if(src){const frame=document.createElement('iframe');frame.src=src;frame.allowFullscreen=true;frame.allow='autoplay; fullscreen; picture-in-picture';frame.title=chosen.display_label||'Calgary Hitmen broadcast';holder.append(frame);}
+    if(src){const frame=document.createElement('iframe');frame.src=src;frame.allowFullscreen=true;frame.allow='autoplay; fullscreen; picture-in-picture';frame.title=hitmenChannel?'Calgary Hitmen EliteChel Broadcast Studio':(chosen.display_label||'Calgary Hitmen broadcast');holder.append(frame);}
     else{holder.innerHTML='<div class="featured-placeholder">This channel opens on its streaming provider.</div>';}
     const meta=document.createElement('aside');meta.className='hg-broadcast-meta';
     const title=document.createElement('h3');title.textContent=chosen.display_label||'Hitmen broadcast channel';
-    const p=document.createElement('p');p.textContent='Channel attached · A public source is not proof that the streamer is currently live.';
-    const link=document.createElement('a');link.className='small-btn';link.href=chosen.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open Original Channel ↗';
+    const p=document.createElement('p');p.textContent=hitmenChannel?'Hitmen Broadcast Studio · The stream feed follows configured production sources. Game times and score results below come from the official LGCHL season log.':'Channel attached · A public source is not proof that the streamer is currently live.';
+    const link=document.createElement('a');link.className='small-btn';link.href=chosen.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open Stream Source ↗';
     const mv=document.createElement('a');mv.className='small-btn';mv.href='multiview.html';mv.textContent='Launch Multiview →';
     meta.append(title,p,link,mv);stage.append(holder,meta);
   }
