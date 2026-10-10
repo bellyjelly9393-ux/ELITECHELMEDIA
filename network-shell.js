@@ -55,7 +55,6 @@
           ${simpleLink('index.html','Home')}
           ${simpleLink('team.html','Wildman')}
           ${simpleLink('esports-hub.html','Esports Hub')}
-          ${simpleLink('events.html','Events')}
           ${dropdown('Live','game-center.html',[
             ['game-center.html?channel=hitmen','Hitmen Live','Calgary LGCHL game night and schedule'],
             ['multiview.html','Multiview','Watch multiple Twitch and YouTube feeds'],
@@ -63,7 +62,7 @@
           ])}
           ${simpleLink('lgchl-leaders.html','LGCHL Stats')}
           ${simpleLink('academy.html','Academy')}
-          ${simpleLink('interest.html','Join Events')}
+          ${simpleLink('interest.html','Competitions')}
           ${dropdown('Media','wildman-media.html',[
             ['wildman-media.html','Wildman Media','Tournaments + esports network'],
             ['hitmen-media.html','Hitmen Media','LGCHL team coverage']
