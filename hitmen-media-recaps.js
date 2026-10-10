@@ -46,7 +46,10 @@
     const source = m.source_label || 'LeagueGaming imported data';
     const gameId = Number(m.lg_game_id);
     const officialLink = Number.isSafeInteger(gameId) && gameId > 0 ? '<a class="hm-official-game-link" target="_blank" rel="noopener noreferrer" href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=' + gameId + '">Official LeagueGaming box score →</a>' : '';
-    return `<article class="hm-recap">
+    const articleId=Number.isSafeInteger(gameId)&&gameId>0 ? ` id="game-${gameId}"` : "";
+    const verifiedActions=Array.isArray(m.verified_actions)?m.verified_actions.filter(a=>a&&a.verified===true&&a.source==="EA"&&Number.isFinite(Number(a.period))&&Number(a.period)>0).slice(0,25):[];
+    const tracker=verifiedActions.length?`<div class="hm-actions"><small>VERIFIED EA ACTION TRACKER</small>${verifiedActions.map(a=>`<p><b>P${esc(a.period)} ${esc(a.clock||"")}</b> · ${esc(a.action||"Event")}${a.player?" · "+esc(a.player):""}</p>`).join("")}</div>`:"";
+    return `<article class="hm-recap"${articleId}>
   <header class="hm-recap-head">
     <div class="hm-recap-meta"><span>${esc(dateLabel(m))}</span>${m.game_no ? `<span>GAME ${esc(m.game_no)}</span>` : ''}${m.record ? `<span>RECORD ${esc(m.record)}</span>` : `<span>LGCHL S${esc(m.season || 55)}</span>`}</div>
     ${m.final ? `<div class="hm-recap-score${result === 'W' ? ' is-win' : ''}">${result ? `<b>${result}</b>` : ''}<strong>${esc(m.final)}</strong></div>` : ''}
@@ -56,6 +59,7 @@
   ${m.dek ? `<p class="hm-recap-dek">${esc(m.dek)}</p>` : ''}
   <p class="hm-recap-lede">${esc(lede)}</p>
   ${officialLink ? '<p class="hm-recap-source">' + officialLink + '</p>' : ''}
+  ${tracker}
   ${stars ? `<div class="hm-recap-stars"><small>THREE STARS</small><ol>${stars}</ol></div>` : ''}
   ${rest || stats ? `<details class="hm-recap-more"><summary>Read full recap</summary>${rest}${stats ? `<div class="hm-recap-stats">${stats}</div><p class="hm-recap-note">Calgary listed first. Source: ${esc(source)}.</p>` : ''}</details>` : ''}
 </article>`;
@@ -69,6 +73,11 @@
       return;
     }
     list.innerHTML = rows.map((p, i) => card(p).replace('<article class="hm-recap"', `<article class="hm-recap"${i >= FIRST ? ' hidden' : ''}`)).join('');
+    const wanted=window.location.hash.match(/^#game-(\d+)$/)?.[1];
+    if(wanted){
+      const article=document.getElementById('game-'+wanted);
+      if(article){article.hidden=false;requestAnimationFrame(()=>article.scrollIntoView({behavior:'smooth',block:'start'}));}
+    }
     if (more && rows.length > FIRST) {
       more.hidden = false;
       more.onclick = () => { list.querySelectorAll('.hm-recap[hidden]').forEach(el => { el.hidden = false; }); more.hidden = true; };
