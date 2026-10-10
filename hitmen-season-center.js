@@ -7,7 +7,7 @@
  const TEAM=412, SEASON=55, $=id=>document.getElementById(id);
  if(!db||!$('hitmenSeasonGames'))return;
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const S={games:[],teams:new Map(),recaps:new Map(),sources:[],filter:'all',week:'all',broadcast:'',loading:false};
+ const S={games:[],teams:new Map(),recaps:new Map(),sources:[],filter:'all',week:'all',broadcast:'',loading:false,expanded:false};
  const official=id=>'https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid='+encodeURIComponent(id);
  const time=date=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true}).format(new Date(date));
  const team=id=>S.teams.get(id)||'Team '+id;
@@ -32,9 +32,16 @@
  }
  function render(){
   const root=$('hitmenSeasonGames');root.replaceChildren();
-  const rows=S.games.filter(g=>S.week==='all'||String(g.week)===S.week).filter(g=>S.filter==='all'||(S.filter==='final'?isFinal(g):S.filter==='upcoming'?!isFinal(g):g.status==='live'));
+  let rows=S.games.filter(g=>S.week==='all'||String(g.week)===S.week).filter(g=>S.filter==='all'||(S.filter==='final'?isFinal(g):S.filter==='upcoming'?!isFinal(g):g.status==='live'));
+  const totalFiltered=rows.length;
   // Upcoming first, then completed from newest to oldest. Reordering is display-only.
-  rows.sort((a,b)=>Number(!isFinal(a))-Number(!isFinal(b))||(!isFinal(a)?Date.parse(a.game_at)-Date.parse(b.game_at):Date.parse(b.game_at)-Date.parse(a.game_at)));
+  rows.sort((a,b)=>Number(isFinal(a))-Number(isFinal(b))||(!isFinal(a)?Date.parse(a.game_at)-Date.parse(b.game_at):Date.parse(b.game_at)-Date.parse(a.game_at)));
+  if(!S.expanded && S.filter==='all' && S.week==='all'){
+    const upcoming=rows.filter(g=>!isFinal(g)).slice(0,9);
+    const recent=rows.filter(isFinal).slice(0,9);
+    rows=[...upcoming,...recent];
+  }
+  const show=$('hitmenShowAll');if(show){show.hidden=totalFiltered<=rows.length;show.textContent=S.expanded?'Showing Full Season':'Show All '+totalFiltered+' Season Games';}
   if(!rows.length){root.innerHTML='<div class="empty-state">No Calgary games match these filters yet.</div>';return;}
   let currentWeek='';
   rows.forEach(g=>{
@@ -105,6 +112,7 @@
  }
  $('gameWeekFilter')?.addEventListener('change',e=>{S.week=e.target.value;render();});
  $('gameStatusFilter')?.addEventListener('change',e=>{S.filter=e.target.value;render();});
+ $('hitmenShowAll')?.addEventListener('click',()=>{S.expanded=true;render();});
  $('hitmenRefresh')?.addEventListener('click',load);
  load();setInterval(()=>{if(!document.hidden)load();},60000);
 })();
