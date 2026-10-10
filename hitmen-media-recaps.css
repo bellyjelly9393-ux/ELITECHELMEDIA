@@ -40,3 +40,15 @@
 @media(max-width:680px){.hm-recap-grid{grid-template-columns:1fr}.hm-recap{padding:18px}}
 .hm-recap-more>summary+.hm-recap-sub{margin-top:4px}
 .hm-recap-more .hm-recap-sub+p{margin-top:0}
+
+
+/* Editorial readability and action evidence */
+.hm-recap-source a{display:inline-block;color:#f6b7cb;font-size:12px;line-height:1.5;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.hm-recap-more p{line-height:1.76}
+.hm-recap-more[open]{padding-top:13px}
+.hm-recap:target{outline:2px solid #ffd1e4;outline-offset:3px;scroll-margin-top:95px}
+.hm-actions{border:1px solid #b9d6ed46;background:#11222b;padding:13px;margin:9px 0}
+.hm-actions>small{color:#bbdff5;font-size:11px;font-weight:900;letter-spacing:.1em}
+.hm-actions p{color:#e8edf4;margin:7px 0;font-size:12px;line-height:1.5}
+.hm-actions p b{color:#b7daf0}
+@media(max-width:680px){.hm-recap h3{font-size:clamp(25px,7.4vw,33px);line-height:1.03}.hm-recap-lede,.hm-recap-more p{font-size:14px;line-height:1.7}.hm-recap-head{gap:6px}.hm-recap{border-radius:6px}.hm-recap-meta{font-size:9px}.hm-recap-stars li{grid-template-columns:18px 1fr;row-gap:3px}.hm-recap-stars li em{grid-column:2;text-align:left}.hm-recap-source a{min-height:40px}}
