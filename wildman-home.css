@@ -276,8 +276,7 @@ p { margin: 0; }
 .feature-slot > .empty { color: #1d2630; }
 .feature { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); filter: drop-shadow(0 18px 28px rgba(0,0,0,.45)); }
 .jersey { position: relative; overflow: hidden; isolation: isolate; min-height: 260px; display: grid; align-content: center; justify-items: center; gap: 2px; padding: 22px 12px;
-  background: linear-gradient(180deg, rgba(60,8,10,.35), rgba(10,4,5,.85)), #1a0507 url("assets/wildman/home/hitmen.webp") 58% 30% / cover no-repeat; }
-.jersey::before { content: ""; position: absolute; left: -10%; right: -10%; bottom: 12%; height: 22px; background: var(--red); transform: rotate(-4deg); box-shadow: 0 30px 0 -7px #f4f2ee, 0 50px 0 -5px var(--red); opacity: .85; z-index: -1; }
+  background: linear-gradient(180deg, rgba(60,8,10,.35), rgba(10,4,5,.85)), #1a0507 url("assets/wildman/home/hitmen.webp") 55% 55% / cover no-repeat; }
 .jersey .res { font-family: var(--f-ui); font-weight: 600; letter-spacing: .2em; font-size: 20px; line-height: 1; text-transform: uppercase; color: var(--gold-hi); text-shadow: 0 2px 8px #000; }
 .jersey .no { font-family: var(--f-slash); font-style: italic; font-weight: 900; font-size: clamp(80px, 8.4vw, 124px); line-height: 1; letter-spacing: -.03em; color: #fff; -webkit-text-stroke: 3px var(--red); paint-order: stroke fill; text-shadow: 0 10px 24px rgba(0,0,0,.7); }
 .jersey .name { font-family: var(--f-ui); font-weight: 600; font-size: 20px; letter-spacing: .06em; text-transform: uppercase; color: #e6e3dc; text-shadow: 0 2px 8px #000; }
