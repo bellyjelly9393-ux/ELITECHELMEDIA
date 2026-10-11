@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/gm-connected",
+      "destination": "/gm-connected.html"
+    },
+    {
       "source": "/hitmen-hub",
       "destination": "/hitmen-workspace.html"
     },

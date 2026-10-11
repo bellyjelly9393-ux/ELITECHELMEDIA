@@ -1,0 +1,58 @@
+/* GM Connected Inaugural Championship (gm-connected.html).
+   Extends wildman-home.css: same fonts, tokens, notched .card skin, bands and buttons. */
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- hero: the championship art is shown whole (it carries its own lettering) ---------- */
+.gmc-hero { position: relative; isolation: isolate; overflow: hidden; background: #05070b; border-bottom: 1px solid var(--line); }
+.gmc-hero::before { content: ""; position: absolute; inset: -60px; z-index: -1; background: url("assets/wildman/gm-connected-championship-960.webp") center / cover no-repeat; filter: blur(30px) saturate(.9) brightness(.45); }
+.gmc-art { display: block; width: min(1320px, 100%); margin: 0 auto; }
+.gmc-art img { display: block; width: 100%; height: auto; aspect-ratio: 1672 / 941; object-fit: cover; filter: drop-shadow(0 26px 50px rgba(0,0,0,.75)); }
+
+/* ---------- facts strip: built on the Hitmen stat strip ---------- */
+.gmc-strip { display: flex; flex-wrap: wrap; align-items: stretch; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, rgba(7,8,10,.96), rgba(12,14,18,.92)); position: relative; }
+.gmc-strip::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: linear-gradient(90deg, var(--gold) 0 30%, transparent 30% 32%, #5cb8ff 32% 40%, transparent 40%); }
+.gmc-strip .stat b { font-size: 34px; line-height: 1; padding-top: 4px; text-transform: uppercase; }
+.gmc-strip .stat span { font-size: 14px; color: var(--mute); }
+.gmc-strip .stat b.gold { color: var(--gold-hi); }
+.gmc-reg { margin-left: auto; display: flex; align-items: center; gap: 14px; padding: 10px 22px 10px 16px; align-self: center; margin-block: 10px; color: inherit; --tc: 227,181,74; }
+.gmc-reg .dot { width: 12px; height: 12px; border-radius: 50%; background: #8be3a6; box-shadow: 0 0 0 4px rgba(139,227,166,.18), 0 0 14px rgba(139,227,166,.7); flex-shrink: 0; }
+.gmc-reg small { display: block; font-family: var(--f-ui); font-weight: 500; letter-spacing: .18em; font-size: 16px; line-height: 1; text-transform: uppercase; color: var(--bone); }
+.gmc-reg b { display: block; font-family: var(--f-ui); font-weight: 600; font-size: 24px; line-height: 1.05; color: var(--gold-hi); text-transform: uppercase; letter-spacing: .02em; }
+.gmc-reg span.sub { font-size: 14px; color: var(--mute); }
+
+/* ---------- how entry works: Who We Play band with numbered tiles (a real sequence) ---------- */
+.gmc-steps .opp-in { gap: 24px; }
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.step { --tc: 227,181,74; display: grid; gap: 8px; align-content: start; padding: 18px 18px 20px; }
+.step .step-n { font-style: normal; font-family: var(--f-slash); font-style: italic; font-weight: 900; font-size: 46px; line-height: 1; color: var(--gold); text-shadow: 0 4px 0 rgba(0,0,0,.5); }
+.step b { font-family: var(--f-head); font-weight: 400; text-transform: uppercase; font-size: 26px; line-height: 1; letter-spacing: .01em; }
+.step p { font-size: 16px; color: #c9c7c0; }
+
+/* ---------- registration: league band with the form in a notched card ---------- */
+.gmc-register .league-in { align-items: start; }
+.gmc-register .lg-copy ul { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 6px; color: #c8cfd8; font-size: 17px; max-width: 42ch; }
+.gmc-form.card { background: linear-gradient(160deg, rgba(14,22,34,.9), rgba(6,9,14,.94)); backdrop-filter: blur(6px); }
+.gmc-form .leaders-head { border-bottom: 1px solid var(--line); }
+.gmc-form form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 18px 16px 20px; }
+.gmc-form label { display: grid; gap: 6px; font-family: var(--f-ui); font-weight: 600; font-size: 17px; letter-spacing: .1em; text-transform: uppercase; color: #dcdad3; }
+.gmc-form .wide { grid-column: 1 / -1; }
+.gmc-form input:not([type=checkbox]), .gmc-form select, .gmc-form textarea { width: 100%; min-height: 46px; font: 500 17px/1.3 var(--f-body); letter-spacing: 0; text-transform: none; color: var(--bone); background: rgba(5,7,10,.85); border: 0; box-shadow: inset 0 0 0 1px var(--line-2); padding: 11px 12px; border-radius: 0; }
+.gmc-form textarea { min-height: 88px; resize: vertical; }
+.gmc-form input:focus, .gmc-form select:focus, .gmc-form textarea:focus { outline: 2px solid var(--gold); outline-offset: 0; }
+.gmc-form .check { display: flex; gap: 12px; align-items: flex-start; font-family: var(--f-body); font-weight: 500; font-size: 15px; letter-spacing: 0; text-transform: none; color: #c9c7c0; line-height: 1.4; }
+.gmc-form .check input { width: 20px; height: 20px; margin-top: 2px; flex: 0 0 auto; accent-color: var(--gold); }
+.gmc-form .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.gmc-form button.btn { justify-self: start; min-height: 48px; }
+.gmc-form button.btn[disabled] { opacity: .6; cursor: progress; }
+.gmc-form #interestMessage { font-size: 16px; min-height: 1.4em; }
+
+@media (max-width: 1100px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 860px) { .gmc-reg { margin-left: 0; width: 100%; } }
+@media (max-width: 620px) {
+  .steps { grid-template-columns: 1fr; }
+  .gmc-strip .stat { padding-right: 16px; margin-right: 16px; }
+  .gmc-strip .stat b { font-size: 28px; }
+  .gmc-form form { grid-template-columns: 1fr; }
+  .gmc-form button.btn { justify-self: stretch; justify-content: center; }
+}

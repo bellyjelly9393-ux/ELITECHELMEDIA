@@ -27,7 +27,7 @@
     'game-center.html':'game-center.html','live-channel.html':'game-center.html','multiview.html':'game-center.html','vod-center.html':'game-center.html','reports.html':'game-center.html','game.html':'game-center.html','live-game.html':'game-center.html','postgame.html':'game-center.html',
     
     'academy.html':'academy.html','academy-training.html':'academy.html',
-    'signup.html':'interest.html','interest.html':'interest.html','lgchl-leaders.html':'lgchl-leaders.html',
+    'signup.html':'interest.html','interest.html':'interest.html','gm-connected.html':'interest.html','lgchl-leaders.html':'lgchl-leaders.html',
     'management.html':'management.html',
     'wildman-media.html':'wildman-media.html','hitmen-media.html':'wildman-media.html','media.html':'wildman-media.html'
   };
@@ -62,7 +62,11 @@
           ])}
           ${simpleLink('lgchl-leaders.html','LGCHL Stats')}
           ${simpleLink('academy.html','Academy')}
-          ${simpleLink('interest.html','Competitions')}
+          ${dropdown('Competitions','interest.html',[
+            ['gm-connected.html','GM Connected Championship','Inaugural championship · registration open'],
+            ['interest.html#hut','Wildman HUT','Tournament interest list'],
+            ['interest.html','All competitions','Competition intake']
+          ])}
           ${dropdown('Media','wildman-media.html',[
             ['wildman-media.html','Wildman Media','Tournaments + esports network'],
             ['hitmen-media.html','Hitmen Media','LGCHL team coverage']
