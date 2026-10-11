@@ -41,8 +41,11 @@
       const valid = sources.filter(s => { try { const u = new URL(s.url); return u.protocol === 'https:' && ['twitch.tv', 'www.twitch.tv', 'youtube.com', 'www.youtube.com', 'youtu.be'].includes(u.hostname); } catch { return false; } });
       if (!valid.length) { $('broadcast-status').textContent = 'No public channels assigned yet · Multiview is open'; return; }
       $('broadcast-status').textContent = 'Live across LGCHL, tournaments and more · ' + valid.length + ' channel' + (valid.length === 1 ? '' : 's') + ' configured';
-      rail.innerHTML = valid.map(s => '<a class="stream" href="game-center.html?channel=' + encodeURIComponent(s.metadata?.channel_key || 'hitmen') + '"><div class="stream-pic"><span class="stream-tag">' + esc(String(s.provider || 'Watch').toUpperCase()) + '</span></div><div class="stream-cap"><b>' + esc(s.display_label || 'Network broadcast') + '</b><span>Channel ready · open to watch</span></div></a>').join('') +
-        '<a class="stream" href="multiview.html"><div class="stream-pic"><span class="stream-tag">MULTI</span></div><div class="stream-cap"><b>Build your multiview</b><span>Twitch + YouTube</span></div></a>';
+      const prov = s => { const h = new URL(s.url).hostname; return h.includes('twitch') ? ['Twitch', '145,70,255'] : ['YouTube', '230,30,30']; };
+      const icon = s => /hitmen|calgary|cgy/i.test((s.display_label || '') + ' ' + (s.metadata?.channel_key || '')) ? 'assets/lgchl/s55/team412.png' : 'assets/wildman/home/wildman-crest.webp';
+      rail.innerHTML = valid.map(s => { const [p, c] = prov(s), ic = icon(s);
+        return '<a class="tile card tinted" href="game-center.html?channel=' + encodeURIComponent(s.metadata?.channel_key || 'hitmen') + '" style="--tc:' + c + '"><span class="wm" aria-hidden="true" style="--logo:url(\'' + ic + '\')"></span><span class="tile-ic"><img src="' + ic + '" width="48" height="48" alt=""></span><span class="tile-txt"><b>' + esc(s.display_label || 'Network broadcast') + '</b><small>' + p + ' · channel ready</small></span><span class="go" aria-hidden="true">→</span></a>'; }).join('') +
+        '<a class="tile card tinted" href="multiview.html" style="--tc:227,181,74"><span class="wm" aria-hidden="true" style="--logo:url(\'assets/wildman/home/wildman-crest.webp\')"></span><span class="tile-ic"><img src="assets/wildman/home/wildman-crest.webp" width="48" height="48" alt=""></span><span class="tile-txt"><b>Build your multiview</b><small>Twitch + YouTube side by side</small></span><span class="go" aria-hidden="true">→</span></a>';
     } catch { $('broadcast-status').textContent = 'Channel feed unavailable · Multiview remains available'; }
   }
 
@@ -123,6 +126,7 @@
       if (next) {
         const o = byId.get(oppId(next)), home = next.home_lg_team_id === CGY;
         $('nextBadge').innerHTML = logoImg(o, 'nl');
+        if (o?.logo_path) { $('nextWm').style.setProperty('--logo', "url('" + logoUrl(o) + "')"); $('nextTile').dataset.logo = logoUrl(o); tintCards($('nextTile').parentNode); }
         $('nextName').textContent = (home ? 'vs ' : 'at ') + (o?.name || 'Opponent pending');
         $('nextWhen').textContent = when(next.game_at);
         countdownTarget = Date.parse(next.game_at); tick();
@@ -217,9 +221,10 @@
         const n = q.source_metrics || {}, s = n.calgary_score != null && n.opponent_score != null ? n.calgary_score + '–' + n.opponent_score : (n.final || 'S55');
         const opp = String(n.opponent || '').split(' ').slice(-1)[0];
         const ot = byName.get(String(n.opponent || '').toLowerCase());
-        return '<a class="mini card" href="' + href(q) + '">' + wm(ot) + '<div class="mini-score' + (n.result === 'L' ? ' loss' : '') + '"><b>' + esc(s) + '</b><small>' + esc((n.result === 'W' ? 'W' : n.result === 'L' ? 'L' : '') + (/OT/i.test(n.final || '') ? ' OT' : '') + (opp ? ' · ' + opp.slice(0, 10).toUpperCase() : '')) + '</small></div>' +
+        return '<a class="mini card tinted" href="' + href(q) + '"' + (ot?.logo_path ? ' data-logo="' + logoUrl(ot) + '"' : '') + '>' + wm(ot) + '<div class="mini-score' + (n.result === 'L' ? ' loss' : '') + '"><b>' + esc(s) + '</b><small>' + esc((n.result === 'W' ? 'W' : n.result === 'L' ? 'L' : '') + (/OT/i.test(n.final || '') ? ' OT' : '') + (opp ? ' · ' + opp.slice(0, 10).toUpperCase() : '')) + '</small></div>' +
           '<div><h4>' + esc(nb(q.title)) + '</h4><div class="meta"><span>' + esc(dateOf(q)) + '</span><span>' + mins(q) + ' min read</span></div></div></a>';
       }).join('');
+      tintCards($('sideStories'));
     } catch { $('featureSlot').innerHTML = '<p class="empty">Published stories could not load. Visit Hitmen Media for coverage.</p>'; }
   }
 
