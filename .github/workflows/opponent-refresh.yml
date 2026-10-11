@@ -3,7 +3,7 @@ on:
   push:
     branches: [main, feature/opponent-weekly-refresh]
   pull_request:
-    paths: ['hitmen-opponent*', 'lib/opponent-refresh.mjs', 'supabase/functions/hitmen-opponent-refresh/**', 'test-opponent-*', 'docs/sql/opponent_refresh*', '.github/workflows/opponent-refresh.yml']
+    paths: ['hitmen-opponent*', 'hitmen-headquarters*', 'hitmen-workspace.html', 'hitmen-team-locker.html', 'hitmen-player-locker.html', 'test-headquarters-browser.cjs', 'data/hitmen/**', 'vercel.json', 'lib/opponent-refresh.mjs', 'supabase/functions/hitmen-opponent-refresh/**', 'test-opponent-*', 'docs/sql/opponent_refresh*', '.github/workflows/opponent-refresh.yml']
 permissions:
   contents: read
 jobs:
@@ -25,4 +25,4 @@ jobs:
       - name: Opponent dashboard desktop and mobile
         env:
           NODE_PATH: /tmp/opponent-browser/node_modules
-        run: node test-opponent-browser.cjs
+        run: node test-opponent-browser.cjs && node test-headquarters-browser.cjs

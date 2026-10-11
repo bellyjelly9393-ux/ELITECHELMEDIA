@@ -99,6 +99,21 @@
       "source": "/hitmen-hub.html",
       "destination": "/hitmen-workspace.html",
       "permanent": false
+    },
+    {
+      "source": "/hitmen/headquarters",
+      "destination": "/hitmen-workspace.html",
+      "permanent": false
+    },
+    {
+      "source": "/hitmen/game-center",
+      "destination": "/hitmen-workspace.html",
+      "permanent": false
+    },
+    {
+      "source": "/hitmen-game-center",
+      "destination": "/hitmen-workspace.html",
+      "permanent": false
     }
   ]
 }

@@ -14,20 +14,19 @@
   <link rel="stylesheet" href="hitmen-war-tools.css">
   <link rel="stylesheet" href="hitmen-gm-ai.css">
   <link rel="stylesheet" href="network-v2.css?v=20260920a">
+<link rel="stylesheet" href="hitmen-headquarters.css?v=20261011" data-hn-last>
 </head>
-<body class="wildman-site management-protected hitmen-tool-page wm-theme-hitmen">
+<body id="hitmenSite" class="hm-hq wildman-site management-protected hitmen-tool-page wm-theme-hitmen">
 <header class="site-header hitmen-private-header">
-  <a class="brand" href="hitmen-workspace.html"><span class="wm-brand-mark">H</span><span class="brand-copy wm-brand-copy">CALGARY HITMEN<br><b>LGCHL SEASON 55</b></span></a>
+  <a class="brand" href="hitmen-workspace.html"><img class="hq-crest" src="assets/lgchl/s55/team412.png" width="52" height="52" alt="Calgary Hitmen crest"><span class="brand-copy wm-brand-copy">CALGARY HITMEN<br><b>LGCHL SEASON 55</b></span></a>
   <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
-  <nav class="main-nav">
-    <a href="hitmen-workspace.html">War Room</a>
-    <a href="hitmen-team-locker.html">Locker Room</a>
-    <a href="hitmen-locker-room.html">Lineups</a>
-    <a href="hitmen-opponents.html">Opponents</a>
-    <a href="hitmen-battle-plan.html">Battle Plan</a>
-    <a href="vod-lab.html?team=calgary-hitmen">VOD</a>
-    <a class="active-nav" href="hitmen-gm-ai.html">GM AI</a>
-  </nav>
+  <nav class="main-nav hn-nav" aria-label="Calgary Hitmen"><a href="hitmen-workspace.html">Headquarters</a>
+<a href="hitmen-team-locker.html">Locker Room</a>
+<a href="hitmen-player-locker.html">My Stall</a>
+<a href="hitmen-team-locker.html#lineupLab">Lineup Lab</a>
+<a href="hitmen-opponents.html">Scouting</a>
+<a href="vod-lab.html?team=calgary-hitmen">Film Room</a>
+<a href="hitmen-media.html">Media</a></nav>
   <a class="hm-private-pill" href="admin.html">Private Admin</a>
 </header>
 
@@ -164,5 +163,6 @@
 <script src="wildman-player-intelligence.js"></script>
 <script src="script.js"></script>
 <script src="hitmen-gm-ai.js"></script>
+<script src="hitmen-neutral.js?v=20261004-neutral"></script>
 </body>
 </html>
