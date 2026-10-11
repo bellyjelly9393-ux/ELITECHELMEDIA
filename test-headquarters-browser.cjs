@@ -55,7 +55,7 @@ const pages = ['hitmen-workspace.html','hitmen-team-locker.html','hitmen-player-
   }
   const routes=JSON.parse(fs.readFileSync('vercel.json','utf8'));
   for(const route of ['/hitmen','/calgary','/war-room','/hitmen/game-center']){
-   assert.equal(routes.rewrites.find(r=>r.source===route)?.destination,'/hitmen-workspace.html');
+   assert.equal([...routes.rewrites,...(routes.redirects||[])].find(r=>r.source===route)?.destination,'/hitmen-workspace.html');
   }
   console.log('PASS: headquarters desktop/tablet/mobile layout, crest, department links, protected initial state and home routes');
  } finally {await browser.close();await new Promise(r=>server.close(r));}

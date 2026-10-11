@@ -1,18 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/hitmen-game-center",
-      "destination": "/hitmen-workspace.html"
-    },
-    {
-      "source": "/hitmen/game-center",
-      "destination": "/hitmen-workspace.html"
-    },
-    {
-      "source": "/hitmen/headquarters",
-      "destination": "/hitmen-workspace.html"
-    },
-    {
       "source": "/hitmen-hub",
       "destination": "/hitmen-workspace.html"
     },
@@ -109,6 +97,21 @@
     },
     {
       "source": "/hitmen-hub.html",
+      "destination": "/hitmen-workspace.html",
+      "permanent": false
+    },
+    {
+      "source": "/hitmen/headquarters",
+      "destination": "/hitmen-workspace.html",
+      "permanent": false
+    },
+    {
+      "source": "/hitmen/game-center",
+      "destination": "/hitmen-workspace.html",
+      "permanent": false
+    },
+    {
+      "source": "/hitmen-game-center",
       "destination": "/hitmen-workspace.html",
       "permanent": false
     }
