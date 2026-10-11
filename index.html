@@ -6,14 +6,12 @@
 <meta name="theme-color" content="#08090b">
 <meta name="description" content="Wildman Hockey & Esports Network: Connected Franchise interest, the Wildman HUT tournament, live multiview and Calgary Hitmen LGCHL Season 55 coverage.">
 <title>Wildman Hockey | The Hockey Esports Network</title>
-<link rel="preload" href="assets/fonts/BigShouldersDisplay.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/wildman/home/franchise.webp" as="image">
 <link rel="preload" href="assets/wildman/home/hut.webp" as="image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:ital,wght@1,800;1,900&family=IBM+Plex+Mono:wght@500;600&display=swap">
-<link rel="stylesheet" href="wildman-home.css?v=20261011-1">
-<script src="wildman-home.js?v=20261011-1" defer></script>
+<link rel="stylesheet" href="wildman-home.css?v=20261011-2">
+<script src="wildman-home.js?v=20261011-2" defer></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -64,7 +62,7 @@
         <h2 class="wordmark"><span class="wm-steel">HUT</span><span class="wm-gold">Tournament</span></h2>
         <p class="kicker">The first ever Wildman Hockey HUT tournament</p>
         <p class="lede">Multiple divisions. Fair and competitive matchups. Open to all skill levels.</p>
-        <a class="btn btn-line" href="interest.html?program=hut#apply">Register interest <span class="arr">→</span></a>
+        <a class="btn btn-line" href="interest.html?program=hut#apply"><span class="btxt">Register interest</span> <span class="arr">→</span></a>
         <p class="fine">Format, divisions, dates and prizes not announced</p>
       </div>
     </div>
@@ -81,7 +79,7 @@
         </div>
         <div class="live-meta">
           <small id="broadcast-status" aria-live="polite">Loading channels…</small>
-          <a class="btn btn-line btn-sm" href="multiview.html">Open multiview <span class="arr">→</span></a>
+          <a class="btn btn-line btn-sm" href="multiview.html"><span class="btxt">Open multiview</span> <span class="arr">→</span></a>
         </div>
       </div>
       <div class="rail-wrap">
@@ -105,7 +103,7 @@
         </div>
         <div class="slogan">
           <p><span>Our City</span><span>Our Team</span></p>
-          <a class="btn btn-line" href="hitmen-media.html">View Hitmen media <span class="arr">→</span></a>
+          <a class="btn btn-line" href="hitmen-media.html"><span class="btxt">View Hitmen media</span> <span class="arr">→</span></a>
         </div>
       </div>
     </div>
@@ -133,8 +131,8 @@
     <div class="opp-in">
       <div class="opp-head">
         <div>
-          <p class="eyebrow opp-eye">LGCHL · Season 55</p>
-          <h2>Who we play</h2>
+          <span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">LGCHL · Season 55</p>
+          <h2 class="sec-title">Who we <em>play</em></h2>
           <p class="opp-sub num" id="oppSub">Loading the Hitmen schedule…</p>
         </div>
         <div class="seg" role="tablist" aria-label="Filter by league">
@@ -145,16 +143,16 @@
         </div>
       </div>
       <div class="opp-grid" id="oppGrid"></div>
-      <button class="btn btn-line btn-sm opp-more" id="oppMore" type="button" hidden>Show all <span class="arr">→</span></button>
+      <button class="btn btn-line btn-sm opp-more" id="oppMore" type="button" hidden><span class="btxt">Show all</span> <span class="arr">→</span></button>
     </div>
   </section>
 
   <section class="stories band" id="stories" aria-label="Latest Hitmen stories">
     <div class="stories-in">
       <div class="st-intro">
-        <h2>Latest<br>Hitmen stories</h2>
+        <span class="sec-rule" aria-hidden="true"></span><h2 class="sec-title">Latest <em>Hitmen</em> stories</h2>
         <p>Game recaps, analysis, highlights and more from around the LGCHL.</p>
-        <a class="btn btn-line btn-sm" href="hitmen-media.html">View all stories <span class="arr">→</span></a>
+        <a class="btn btn-line btn-sm" href="hitmen-media.html"><span class="btxt">View all stories</span> <span class="arr">→</span></a>
       </div>
       <div class="feature-slot" id="featureSlot"><p class="empty">Loading published Hitmen stories…</p></div>
       <div class="side" id="sideStories"></div>
@@ -171,11 +169,11 @@
         <path d="M48 76 l3 6 l6 1 l-4.5 4 l1 6 l-5.5 -3 l-5.5 3 l1 -6 l-4.5 -4 l6 -1z" fill="#e3b54a"/>
       </svg>
       <div class="lg-copy">
-        <h2>League coverage.</h2>
+        <h2 class="sec-title">League <em>coverage</em></h2>
         <p>Stats, power rankings, top performers and the best games from around the league.</p>
         <a class="btn btn-gold btn-sm" href="lgchl-leaders.html">View LGCHL hub <span class="arr">→</span></a>
       </div>
-      <div class="leaders" aria-label="Power index">
+      <div class="leaders card" aria-label="Power index">
         <div class="leaders-head"><span>Power index</span><small id="power-stamp">Wildman model · not an official LG ranking</small></div>
         <div id="power"><div class="lrow"><i>—</i><b>Loading rankings…</b><em></em><strong></strong></div></div>
       </div>

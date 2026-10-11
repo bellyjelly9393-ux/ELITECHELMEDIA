@@ -4,6 +4,7 @@
   const KEY = 'sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
   const CGY = 412;
   const $ = id => document.getElementById(id);
+  const nb = v => String(v ?? '').replace(/(\d)[-–](\d)/g, '$1\u2011$2');
   const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const fmtDay = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Toronto', weekday: 'short', month: 'short', day: 'numeric' });
   const fmtTime = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Toronto', hour: 'numeric', minute: '2-digit' });
@@ -50,6 +51,39 @@
   const leagueOf = t => { const d = String(t?.division || ''); return d.startsWith('QMJHL') ? 'QMJHL' : d.startsWith('OHL') ? 'OHL' : d.startsWith('WHL') ? 'WHL' : 'LGCHL'; };
   const logoImg = (t, cls) => t?.logo_path ? '<img class="' + cls + '" src="' + esc(t.logo_path.replace(/^\//, '')) + '" width="52" height="52" loading="lazy" alt="' + esc(t.name) + ' logo">' : '';
 
+  const logoUrl = t => t?.logo_path ? esc(t.logo_path.replace(/^\//, '')) : '';
+  const wm = t => t?.logo_path ? '<span class="wm" aria-hidden="true" style="--logo:url(\'' + logoUrl(t) + '\')"></span>' : '';
+  const teamsP = read('lgchl_teams', { select: 'lg_team_id,name,abbr,division,logo_path', season: 'eq.55' });
+  teamsP.catch(() => {});
+
+  // pull each club's dominant colour out of its logo so its card glows in team colours
+  const colorCache = new Map();
+  function teamColor(src) {
+    if (colorCache.has(src)) return colorCache.get(src);
+    const p = new Promise(res => {
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const c = document.createElement('canvas'); c.width = c.height = 24;
+          const x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(img, 0, 0, 24, 24);
+          const d = x.getImageData(0, 0, 24, 24).data; let r = 0, g = 0, b = 0, n = 0;
+          for (let i = 0; i < d.length; i += 4) {
+            const R = d[i], G = d[i + 1], B = d[i + 2], A = d[i + 3], mx = Math.max(R, G, B), mn = Math.min(R, G, B);
+            if (A < 200 || mx < 50 || mx - mn < 45) continue; // skip transparent, dark and grey pixels
+            r += R; g += G; b += B; n++;
+          }
+          res(n > 8 ? Math.round(r / n) + ',' + Math.round(g / n) + ',' + Math.round(b / n) : null);
+        } catch { res(null); }
+      };
+      img.onerror = () => res(null);
+      img.src = src;
+    });
+    colorCache.set(src, p); return p;
+  }
+  function tintCards(root) {
+    root.querySelectorAll('[data-logo]').forEach(el => teamColor(el.dataset.logo).then(c => { if (c) el.style.setProperty('--tc', c); }));
+  }
+
   let countdownTarget = 0;
   function tick() {
     const cd = $('countdown'); if (!countdownTarget) return;
@@ -65,7 +99,7 @@
     try {
       const [snap, teams, games] = await Promise.all([
         read('lgchl_standings_snapshots', { select: 'lg_team_id,gp,w,l,otl,pts,gf,ga,taken_at', season: 'eq.55', order: 'taken_at.desc', limit: '1000' }),
-        read('lgchl_teams', { select: 'lg_team_id,name,abbr,division,logo_path', season: 'eq.55' }),
+        teamsP,
         read('lgchl_games', { select: 'lg_game_id,game_at,status,home_lg_team_id,away_lg_team_id,home_score,away_score', season: 'eq.55', or: '(home_lg_team_id.eq.' + CGY + ',away_lg_team_id.eq.' + CGY + ')', order: 'game_at.asc', limit: '200' })
       ]);
       const byId = new Map(teams.map(t => [t.lg_team_id, t]));
@@ -109,13 +143,13 @@
 
       // power index
       const rank = [...latest.values()].filter(s => s.gp >= 5).map(s => ({ ...s, score: powerScore(s) })).sort((a, b) => b.score - a.score || b.pts - a.pts);
-      $('power').innerHTML = rank.slice(0, 4).map((s, i) => '<div class="lrow' + (s.lg_team_id === CGY ? ' me' : '') + '"><i>0' + (i + 1) + '</i><b>' + esc(byId.get(s.lg_team_id)?.name || 'Team ' + s.lg_team_id) + '</b><em>' + esc(s.w + '-' + s.l + '-' + s.otl) + '</em><strong>' + s.score.toFixed(1) + '</strong></div>').join('') || '<div class="lrow"><i>—</i><b>No qualifying standings yet</b><em></em><strong></strong></div>';
+      $('power').innerHTML = rank.slice(0, 4).map((s, i) => '<div class="lrow' + (s.lg_team_id === CGY ? ' me' : '') + '" style="--pw:' + Math.max(8, Math.min(100, s.score)).toFixed(1) + '%"><i>' + (i + 1) + '</i>' + (logoImg(byId.get(s.lg_team_id), 'rl') || '<span></span>') + '<b>' + esc(byId.get(s.lg_team_id)?.name || 'Team ' + s.lg_team_id) + '</b><em>' + esc(s.w + '-' + s.l + '-' + s.otl) + '</em><strong>' + s.score.toFixed(1) + '</strong></div>').join('') || '<div class="lrow"><i>—</i><b>No qualifying standings yet</b><em></em><strong></strong></div>';
       $('power-stamp').textContent = 'Wildman model · min 5 GP' + (snap.length ? ' · ' + fmtShort.format(new Date(snap[0].taken_at)) : '');
     } catch {
       $('standings-stamp').textContent = 'Standings unavailable right now — try reloading.';
       $('nextName').textContent = 'Schedule unavailable';
       $('oppSub').textContent = 'Opponent list unavailable right now.';
-      $('power').innerHTML = '<div class="lrow"><i>—</i><b>Power index unavailable</b><em></em><strong></strong></div>';
+      $('power').innerHTML = '<div class="lrow"><i>—</i><span></span><b>Power index unavailable</b><em></em><strong></strong></div>';
     }
   }
 
@@ -137,9 +171,10 @@
         ? '<b class="' + (t.w > t.l + t.otl ? 'up' : t.w < t.l + t.otl ? 'dn' : '') + '">' + t.w + '-' + (t.l + t.otl) + '</b><small>H2H · ' + t.gf + '–' + t.ga + '</small>'
         : '<span class="pill-new">First meeting</span>';
       const nxt = t.next ? (isNext ? '<em>Next · </em>' : '') + esc(when(t.next.game_at)) : 'Season series complete';
-      return '<article class="team' + (isNext ? ' is-next' : '') + '">' + (logoImg(t.team, 'logo') || '<span class="logo"></span>') +
+      return '<article class="team card' + (isNext ? ' is-next' : '') + '"' + (t.team.logo_path ? ' data-logo="' + logoUrl(t.team) + '"' : '') + '>' + wm(t.team) + (logoImg(t.team, 'logo') || '<span class="logo"></span>') +
         '<div class="team-name"><b>' + esc(t.team.name) + '</b><small>' + esc(t.lg) + ' · ' + nxt + '</small></div><div class="team-rec">' + rec + '</div></article>';
     }).join('');
+    tintCards(grid);
     more.hidden = list.length <= LIMIT;
     more.firstChild.textContent = expanded ? 'Show fewer ' : 'Show all ' + list.length + ' ';
   }
@@ -154,6 +189,7 @@
   async function stories() {
     try {
       const posts = await read('media_posts', { select: 'id,title,body,source_metrics,published_at', published: 'eq.true', post_type: 'eq.recap', 'source_metrics->>team': 'eq.Calgary Hitmen', order: 'published_at.desc', limit: '30' });
+      const byName = new Map((await teamsP.catch(() => [])).map(t => [String(t.name).toLowerCase(), t]));
       const sortKey = p => Date.parse(p.source_metrics?.sort_at || p.source_metrics?.ended_utc || p.source_metrics?.game_date || p.published_at);
       posts.sort((a, b) => sortKey(b) - sortKey(a));
       const href = p => { const id = Number(p.source_metrics?.lg_game_id); return 'hitmen-media.html' + (Number.isSafeInteger(id) && id > 0 ? '#game-' + id : '#hmRecapList'); };
@@ -168,11 +204,11 @@
       const ks = m.key_stats || {};
       const rows = [['Shots', ks.shots], ['Faceoffs', ks.faceoffs], ['Power play', ks.power_play], ['Time on attack', ks.zone_time]].filter(r => r[1]);
       $('featureSlot').innerHTML =
-        '<a class="feature" href="' + href(p) + '"><div class="jersey" aria-hidden="true">' +
+        '<a class="feature card" href="' + href(p) + '"><div class="jersey" aria-hidden="true">' +
         '<span class="res">' + esc(m.result === 'W' ? 'Hitmen win' : m.result === 'L' ? 'Final' : 'Recap') + (/OT/i.test(m.final || '') ? ' · OT' : '') + '</span>' +
         '<span class="no">' + esc(score || 'S55') + '</span>' +
         '<span class="name">' + esc(m.opponent ? 'vs ' + m.opponent : 'LGCHL Season 55') + '</span></div>' +
-        '<div class="feat-body"><span class="tag">Game recap</span><h3>' + esc(p.title) + '</h3><p>' + esc(lede.slice(0, 220)) + (lede.length > 220 ? '…' : '') + '</p>' +
+        '<div class="feat-body"><span class="tag">Game recap</span><h3>' + esc(nb(p.title)) + '</h3><p>' + esc(lede.slice(0, 220)) + (lede.length > 220 ? '…' : '') + '</p>' +
         (rows.length ? '<div class="boxscore"><table><thead><tr><th>Stat</th><th>CGY – OPP</th></tr></thead><tbody>' + rows.map(r => '<tr><td>' + esc(r[0]) + '</td><td>' + esc(String(r[1]).replace(' - ', ' – ')) + '</td></tr>').join('') + '</tbody></table></div>' : '') +
         (star ? '<p class="star">★ ' + esc(star.player) + ' · ' + esc(star.line) + '</p>' : '') +
         '<div class="meta"><span>' + esc(dateOf(p)) + '</span><span>Season 55</span><span>' + mins(p) + ' min read</span></div></div></a>';
@@ -180,8 +216,9 @@
       $('sideStories').innerHTML = posts.slice(1, 4).map(q => {
         const n = q.source_metrics || {}, s = n.calgary_score != null && n.opponent_score != null ? n.calgary_score + '–' + n.opponent_score : (n.final || 'S55');
         const opp = String(n.opponent || '').split(' ').slice(-1)[0];
-        return '<a class="mini" href="' + href(q) + '"><div class="mini-score' + (n.result === 'L' ? ' loss' : '') + '"><b>' + esc(s) + '</b><small>' + esc((n.result === 'W' ? 'W' : n.result === 'L' ? 'L' : '') + (/OT/i.test(n.final || '') ? ' OT' : '') + (opp ? ' · ' + opp.slice(0, 10).toUpperCase() : '')) + '</small></div>' +
-          '<div><h4>' + esc(q.title) + '</h4><div class="meta"><span>' + esc(dateOf(q)) + '</span><span>' + mins(q) + ' min read</span></div></div></a>';
+        const ot = byName.get(String(n.opponent || '').toLowerCase());
+        return '<a class="mini card" href="' + href(q) + '">' + wm(ot) + '<div class="mini-score' + (n.result === 'L' ? ' loss' : '') + '"><b>' + esc(s) + '</b><small>' + esc((n.result === 'W' ? 'W' : n.result === 'L' ? 'L' : '') + (/OT/i.test(n.final || '') ? ' OT' : '') + (opp ? ' · ' + opp.slice(0, 10).toUpperCase() : '')) + '</small></div>' +
+          '<div><h4>' + esc(nb(q.title)) + '</h4><div class="meta"><span>' + esc(dateOf(q)) + '</span><span>' + mins(q) + ' min read</span></div></div></a>';
       }).join('');
     } catch { $('featureSlot').innerHTML = '<p class="empty">Published stories could not load. Visit Hitmen Media for coverage.</p>'; }
   }
