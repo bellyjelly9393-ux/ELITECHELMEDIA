@@ -81,6 +81,9 @@ const fixture=()=>{
     {player:'Synthetic CHEL',strengths:'Same player evidence',evidence_timestamps:[1950]},
     {player:'Opponent Name',strengths:'Opponent evidence',evidence_timestamps:[2000]}
   ]);
+  // The fixture database returns cloned rows; reload after changing its report.
+  await page.locator('#refreshVod').click();
+  await page.waitForFunction(()=>document.getElementById('gameReviewLayers').textContent.includes('Synthetic CHEL'));
   await page.locator('#loadVodPlayerMatches').click();
   await page.locator('[data-vod-player-name="synthetic chel"]').waitFor();
   assert.equal(await page.locator('[data-vod-player-name="testgt"]').inputValue(),'locker-one');
