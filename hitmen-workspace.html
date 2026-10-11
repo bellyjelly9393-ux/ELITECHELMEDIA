@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="hitmen-headquarters.css?v=20261011" data-hn-last>
 <link rel="stylesheet" href="hitmen-media-recaps.css?v=20261011">
 </head>
-<body id="hitmenSite" class="hm-hq wildman-site management-protected hitmen-war-room hm-neutral">
+<body id="hitmenSite" class="hm-hq wildman-site management-protected hitmen-war-room hm-neutral" data-hn-navsync>
 <div class="hn-net"><img class="ec-mark" src="assets/brand/elitechel-mark-48@2x.png?v=20261004-brand" width="22" height="22" alt=""><span class="ec-name">EliteChel Series Media</span><span class="hn-sep" aria-hidden="true">&middot;</span><span class="hn-season">LGCHL Season 55</span><span class="hn-sp"></span><span class="hn-page">Team headquarters</span></div>
 <header class="site-header hitmen-private-header hn-header">
   <a class="brand hn-brand" href="hitmen-workspace.html"><img class="hn-crest" src="assets/lgchl/s55/team412.png?v=20261004-broadcast" width="34" height="34" alt=""><span class="brand-copy">CALGARY HITMEN<br><b>WAR ROOM</b></span></a>
@@ -34,7 +34,7 @@
 <a href="hitmen-player-locker.html">My Stall</a>
 <a href="hitmen-team-locker.html#lineupLab">Lineup Lab</a>
 <a href="hitmen-opponents.html">Scouting</a>
-<a href="vod-lab.html?team=calgary-hitmen">Film Room</a>
+<a data-management-nav hidden href="vod-lab.html?team=calgary-hitmen">Film Room · VOD</a>
 <a href="hitmen-media.html">Media</a><a href="obs-control.html" style="color:#ffc6d2;font-weight:900">OBS Controls</a></nav>
   <a class="hm-private-pill hn-mgmt-link" href="management.html">Private Management</a>
 </header>
@@ -42,7 +42,7 @@
 <main class="hn-main">
     <section class="hn-wide hq-welcome" aria-labelledby="hqTitle">
       <div class="hq-identity"><img src="assets/lgchl/s55/team412.png" width="96" height="96" alt="Calgary Hitmen crest"><div><div class="eyebrow">CALGARY HITMEN · SEASON 55</div><h1 id="hqTitle">War Room</h1><p>Your headquarters. Every matchup, every player, every game.</p></div></div>
-      <nav class="hq-quick" aria-label="Game center shortcuts"><a href="#hqWeekly">This week’s lineups</a><a href="#hqMedia">Media write-ups</a><a href="#hitmen-live-session">Game-night controls</a><a href="obs-control.html">🎥 OBS Controls</a><a href="game-center.html?channel=hitmen">Watch Hitmen live ↗</a></nav>
+      <nav class="hq-quick" aria-label="Game center shortcuts"><a href="#hqWeekly">This week’s lineups</a><a href="#hqMedia">Media write-ups</a><a href="#hitmen-live-session">Game-night controls</a><a href="obs-control.html">🎥 OBS Controls</a><a href="game-center.html?channel=hitmen">Watch Hitmen live ↗</a><a data-management-nav hidden href="vod-lab.html?team=calgary-hitmen">Film Room · VOD (management) →</a></nav>
     </section>
 <!-- Public LG lineups and published media; management tools below retain their guard. -->
 <div class="hn-wide" id="hqWeekly"></div>
@@ -103,7 +103,7 @@
       <a class="hm-command-card" href="hitmen-team-locker.html#lineupLab"><span class="hm-command-icon">⌗</span><small>LINES + MATCHUPS</small><h3>Lineup Lab</h3><p>Tonight's six, a lineup sandbox with live chemistry, and a box-score simulation against each of tonight's opponents.</p></a>
       <a class="hm-command-card" href="hitmen-opponents.html"><span class="hm-command-icon">◎</span><small>SEASON INTELLIGENCE</small><h3>Scouting</h3><p>Roster, tendencies, results, danger players and linked VOD evidence for every Season 55 opponent.</p></a>
       <a class="hm-command-card" href="hitmen-team-locker.html#labSim"><span class="hm-command-icon">⚔</span><small>GAME PREP</small><h3>Battle Plan</h3><p>Now the game sheet inside Simulate Tonight. Keys to win and assignments, next to the matchup for each game.</p></a>
-      <a class="hm-command-card" href="vod-lab.html?team=calgary-hitmen"><span class="hm-command-icon">▶</span><small>PRIVATE FILM ROOM</small><h3>Film Room</h3><p>Period review, clips, player evidence and game scouting reports stay inside management.</p></a>
+      <a class="hm-command-card" href="vod-lab.html?team=calgary-hitmen"><span class="hm-command-icon">▶</span><small>PRIVATE · VOD LAB</small><h3>Film Room · VOD</h3><p>Period review, clips, player evidence and game scouting reports stay inside management.</p></a>
       <a class="hm-command-card" href="hitmen-gm-ai.html"><span class="hm-command-icon">AI</span><small>HOCKEY OPS</small><h3>GM AI</h3><p>Database-first roster, player and matchup questions with evidence-aware reasoning.</p></a>
       <a class="hm-command-card" href="#hitmen-live-session"><span class="hm-command-icon">▣</span><small>PREPARE · EXECUTE</small><h3>Game Night</h3><p>Active series controls, stream bridge, results and postgame handoff.</p></a>
       <a class="hm-command-card" href="obs-control.html"><span class="hm-command-icon">OBS</span><small>LIVE PRODUCTION</small><h3>Broadcast Studio</h3><p>Run the Calgary scorebug, intermission, final and player graphics from one permanent OBS Browser Source.</p></a>
