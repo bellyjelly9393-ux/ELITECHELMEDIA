@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#08090b">
 <title>Calgary Hitmen Media | Elitechel Media</title>
-<meta name="description" content="Calgary Hitmen Media from Elitechel Media: tonight's LGCHL Season 55 games with a live countdown, opponent write-ups from official LeagueGaming data, and the Postgame Desk recaps.">
+<meta name="description" content="Calgary Hitmen Media from Elitechel Media: tonight's LGCHL Season 55 games with a live countdown, opponent write-ups from official LeagueGaming data, standings and the latest Postgame Desk recaps.">
 <link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="wildman-home.css?v=20261011-4">
-<link rel="stylesheet" href="wildman-media-desk.css?v=20261011-1">
+<link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
+<script>/* Recap links (#game-…, #recaps, #archive) now live on the Postgame Desk. */(function(h){if(/^#(game-\d+|recaps|hmRecapList|archive)$/.test(h))location.replace('hitmen-postgame.html'+h);})(location.hash);</script>
 </head>
 <body>
 <header class="top band">
@@ -39,6 +40,14 @@
       <a class="wild" href="wildman-media.html"><img src="assets/wildman/home/wildman-crest.webp" alt=""><span>Wildman Media</span></a>
       <a class="hit" href="hitmen-media.html" aria-current="page"><img src="assets/lgchl/s55/team412.png" alt=""><span>Hitmen Media</span></a>
     </div>
+  </div>
+</nav>
+
+<nav class="sub-bar band" aria-label="Hitmen Media sections">
+  <div class="sub-in">
+    <a href="hitmen-media.html" aria-current="page">Game night</a>
+    <a href="hitmen-postgame.html">Postgame Desk</a>
+    <a href="hitmen-media.html#race">Standings</a>
   </div>
 </nav>
 
@@ -91,45 +100,14 @@
     <p class="stamp band num" id="stStamp">Loading official LG standings…</p>
   </section>
 
-  <section class="art-banner red" id="postgame" style="--art:url('assets/wildman/media/postgame-desk-960.webp')" aria-label="Postgame Desk">
-    <picture>
-      <source media="(max-width: 900px)" srcset="assets/wildman/media/postgame-desk-960.webp">
-      <img src="assets/wildman/media/postgame-desk.webp" width="1672" height="941" loading="lazy" alt="Postgame Desk: Hitmen recaps by Elitechel Media">
-    </picture>
-  </section>
-
-  <section class="stories band" id="recaps" aria-label="Hitmen game stories">
-    <div class="stories-in">
-      <div class="st-intro">
-        <a class="ec-badge" href="wildman-media.html" aria-label="Elitechel Media"><img src="assets/wildman/home/elitechel-media.webp" width="260" height="257" loading="lazy" alt="Elitechel Media"><span>Coverage by Elitechel Media</span></a>
-        <span class="sec-rule" aria-hidden="true"></span><h2 class="sec-title">Game <em>stories</em></h2>
-        <p>Postgame recaps from every Calgary game, grounded in official LeagueGaming box scores.</p>
-        <a class="btn btn-line btn-sm" href="#archive"><span class="btxt">Every recap</span> <span class="arr">↓</span></a>
+  <section class="pg-teaser band" id="postgame" aria-labelledby="pgTitle">
+    <div class="pg-in">
+      <a class="pg-art card" href="hitmen-postgame.html"><img src="assets/wildman/media/postgame-desk.webp" width="1672" height="941" loading="lazy" alt="Postgame Desk: Hitmen recaps by Elitechel Media"></a>
+      <div class="pg-side-wrap">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Elitechel Media · Calgary Hitmen</p><h2 class="sec-title" id="pgTitle">Postgame <em>desk</em></h2><p class="opp-sub num" id="pgCount">Loading the latest recaps…</p></div>
+        <div class="side" id="pgSide"></div>
+        <a class="btn btn-gold btn-sm" href="hitmen-postgame.html">Open the Postgame Desk <span class="arr">→</span></a>
       </div>
-      <div class="feature-slot" id="featureSlot"><p class="empty">Loading the latest recap…</p></div>
-      <div class="side" id="sideStories"></div>
-    </div>
-  </section>
-
-  <section class="night band" id="nightWrap" aria-label="Postgame Desk night wrap" hidden>
-    <div class="night-in">
-      <div class="band-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye" id="nwEyebrow">Postgame Desk · night wrap</p><h2 class="sec-title">Night <em>wrap</em></h2></div></div>
-      <div id="nwCard"></div>
-    </div>
-  </section>
-
-  <section class="opp band" id="archive" aria-label="Recap archive">
-    <div class="opp-in">
-      <div class="opp-head">
-        <div>
-          <span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Postgame Desk · Season 55</p>
-          <h2 class="sec-title">Every <em>recap</em></h2>
-          <p class="opp-sub num" id="arSub">Loading published recaps…</p>
-        </div>
-        <div class="seg" role="tablist" aria-label="Filter recaps" id="arSeg"></div>
-      </div>
-      <span id="hmRecapList" aria-hidden="true"></span>
-      <div class="recap-grid" id="arGrid"></div>
     </div>
   </section>
 
@@ -140,7 +118,7 @@
     </div>
   </section>
 
-  <section class="league band" aria-label="Conference standings">
+  <section class="league band" id="race" aria-label="Conference standings">
     <div class="league-in">
       <div class="lg-copy">
         <img class="lg-logo" src="assets/wildman/home/lgchl-logo.webp" width="760" height="434" loading="lazy" alt="LGCHL, Canadian Hockey League">
@@ -159,12 +137,12 @@
 <footer class="band">
   <div class="foot">
     <span class="foot-brand"><img src="assets/wildman/home/wildman-crest.webp" width="96" height="85" loading="lazy" alt="Wildman Hockey logo"><span>© 2026 Wildman Hockey &amp; Esports Network</span></span>
-    <nav class="foot-nav" aria-label="Footer"><a href="wildman-media.html">Wildman Media</a><a href="hitmen-media.html">Hitmen Media</a><a href="game-center.html?channel=hitmen">Game Center</a><a href="multiview.html">Multiview</a><a href="lgchl-leaders.html">LGCHL Stats</a></nav>
+    <nav class="foot-nav" aria-label="Footer"><a href="wildman-media.html">Wildman Media</a><a href="hitmen-media.html">Hitmen Media</a><a href="hitmen-postgame.html">Postgame Desk</a><a href="game-center.html?channel=hitmen">Game Center</a><a href="multiview.html">Multiview</a><a href="lgchl-leaders.html">LGCHL Stats</a></nav>
     <span>Season data: LeagueGaming imports · Times Eastern</span>
   </div>
 </footer>
 <noscript><p class="band empty">Enable JavaScript to load tonight's games, standings and published recaps.</p></noscript>
 <script src="media-desk.js?v=20261011-1"></script>
-<script src="hitmen-media-desk.js?v=20261011-1"></script>
+<script src="hitmen-media-desk.js?v=20261011-2"></script>
 </body>
 </html>

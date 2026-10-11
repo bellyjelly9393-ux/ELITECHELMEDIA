@@ -14,7 +14,7 @@
   const root = $('recapRoot');
   const SELECT = 'id,title,body,source_metrics,published_at';
   const base = { select: SELECT, published: 'eq.true', post_type: 'eq.recap', 'source_metrics->>team': 'eq.Calgary Hitmen' };
-  const notFound = msg => { root.innerHTML = '<section class="article band"><div class="article-in"><div><h1 class="sec-title" style="font-size:44px">Recap <em>not found</em></h1><p class="empty">' + esc(msg) + '</p><a class="btn btn-gold btn-sm" href="hitmen-media.html#archive">Every Hitmen recap <span class="arr">→</span></a></div></div></section>'; };
+  const notFound = msg => { root.innerHTML = '<section class="article band"><div class="article-in"><div><h1 class="sec-title" style="font-size:44px">Recap <em>not found</em></h1><p class="empty">' + esc(msg) + '</p><a class="btn btn-gold btn-sm" href="hitmen-postgame.html#archive">Every Hitmen recap <span class="arr">→</span></a></div></div></section>'; };
 
   const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const postP = id && uuid.test(id) ? read('media_posts', Object.assign({ id: 'eq.' + id, limit: '1' }, base))
