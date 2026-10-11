@@ -5,7 +5,8 @@
 (() => {
   const API = 'https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/media_posts';
   const KEY = 'sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
-  const FIRST = 6;
+  const requested = Number(document.getElementById("hmRecapList")?.dataset.first);
+  const FIRST = Number.isInteger(requested) && requested > 0 ? requested : 6;
   const list = document.getElementById('hmRecapList');
   if (!list) return;
   const more = document.getElementById('hmRecapMore');

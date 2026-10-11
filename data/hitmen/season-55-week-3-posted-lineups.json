@@ -1,0 +1,158 @@
+{
+  "season": 55,
+  "week": 3,
+  "team_id": 412,
+  "source": "LeagueGaming public game pages",
+  "games": [
+    {
+      "lg_game_id": 917306,
+      "scheduled_game_id": "a9e2c47a-e5a0-4d21-b095-af2d1cac031e",
+      "opponent_name": "Saskatoon Blades",
+      "opponent_lg_team_id": 379,
+      "scheduled_at": "2026-10-12T01:00:00Z",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917306",
+      "captured_at": "2026-10-11T16:36:33.671Z",
+      "status": "verified_posted_lineups",
+      "lineups": {
+        "calgary": {
+          "LW": "offtheyrk",
+          "C": "thenny32",
+          "RW": "Gullyrr",
+          "LD": "BxbbyBxnds",
+          "G": "XxPASTRNAK88",
+          "RD": "Koldex Bands"
+        },
+        "opponent": {
+          "LW": "mgb2092",
+          "C": "Stat1c40",
+          "RW": "Txyylor",
+          "LD": "ElJuanSimone",
+          "G": "Butcher73_Qc",
+          "RD": "MrManuk"
+        }
+      }
+    },
+    {
+      "lg_game_id": 917330,
+      "scheduled_game_id": "4c319ab1-6d9a-4040-9534-e2c6cbde06b9",
+      "opponent_name": "Moose Jaw Warriors",
+      "opponent_lg_team_id": 411,
+      "scheduled_at": "2026-10-12T01:35:00Z",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917330",
+      "captured_at": "2026-10-11T16:36:33.672Z",
+      "status": "verified_posted_lineups",
+      "lineups": {
+        "calgary": {
+          "LW": "offtheyrk",
+          "C": "thenny32",
+          "RW": "Gullyrr",
+          "LD": "BxbbyBxnds",
+          "G": "XxPASTRNAK88",
+          "RD": "Koldex Bands"
+        },
+        "opponent": {
+          "LW": "I Scribbzy I",
+          "C": "lxbiz",
+          "RW": "Hxllowayy",
+          "LD": "xYucky-",
+          "G": "Hellesic",
+          "RD": "Nealrambo"
+        }
+      }
+    },
+    {
+      "lg_game_id": 917365,
+      "scheduled_game_id": "2690a2bb-e830-4926-b38e-cbbc351c497c",
+      "opponent_name": "Prince Albert Raiders",
+      "opponent_lg_team_id": 413,
+      "scheduled_at": "2026-10-12T02:10:00Z",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917365",
+      "captured_at": "2026-10-11T16:36:33.672Z",
+      "status": "verified_posted_lineups",
+      "lineups": {
+        "calgary": {
+          "LW": "offtheyrk",
+          "C": "thenny32",
+          "RW": "Gullyrr",
+          "LD": "BxbbyBxnds",
+          "G": "XxPASTRNAK88",
+          "RD": "Koldex Bands"
+        },
+        "opponent": {
+          "LW": "ItsThibs",
+          "C": "CaptainFrat591",
+          "RW": "K inG x NeymaR",
+          "LD": "Sunz",
+          "G": "Stolikerr",
+          "RD": "Eagleeee141"
+        }
+      }
+    },
+    {
+      "lg_game_id": 917391,
+      "scheduled_game_id": "3689ecc4-1649-4f61-991c-6c2e7ae19474",
+      "opponent_name": "Regina Pats",
+      "opponent_lg_team_id": 414,
+      "scheduled_at": "2026-10-13T01:00:00Z",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917391",
+      "captured_at": "2026-10-11T16:36:33.672Z",
+      "status": "not_visible_in_public_source",
+      "lineups": null
+    },
+    {
+      "lg_game_id": 917424,
+      "scheduled_game_id": "03333adf-a6f6-4734-b56a-98a97b704020",
+      "opponent_name": "Brandon Wheat Kings",
+      "opponent_lg_team_id": 409,
+      "scheduled_at": "2026-10-13T01:35:00Z",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917424",
+      "captured_at": "2026-10-11T16:36:33.672Z",
+      "status": "not_visible_in_public_source",
+      "lineups": null
+    },
+    {
+      "lg_game_id": 917459,
+      "scheduled_game_id": "f2a86dda-68b2-4203-88d0-238bbe1acca1",
+      "opponent_name": "Swift Current Broncos",
+      "opponent_lg_team_id": 377,
+      "scheduled_at": "2026-10-13T02:10:00Z",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917459",
+      "captured_at": "2026-10-11T16:36:33.672Z",
+      "status": "not_visible_in_public_source",
+      "lineups": null
+    },
+    {
+      "lg_game_id": 917493,
+      "scheduled_game_id": "482a6396-4176-4236-9c40-edd3db32d131",
+      "opponent_name": "Lethbridge Hurricanes",
+      "opponent_lg_team_id": 418,
+      "scheduled_at": "2026-10-14T01:00:00Z",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917493",
+      "captured_at": "2026-10-11T16:36:33.672Z",
+      "status": "not_visible_in_public_source",
+      "lineups": null
+    },
+    {
+      "lg_game_id": 917523,
+      "scheduled_game_id": "7b7710e2-e4bc-41bd-9be3-648f76c171ce",
+      "opponent_name": "Chilliwack Bruins",
+      "opponent_lg_team_id": 2983,
+      "scheduled_at": "2026-10-14T01:35:00Z",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917523",
+      "captured_at": "2026-10-11T16:36:33.672Z",
+      "status": "not_visible_in_public_source",
+      "lineups": null
+    },
+    {
+      "lg_game_id": 917554,
+      "scheduled_game_id": "ffbdf335-ff55-4a9f-ba52-b20522c0ad6a",
+      "opponent_name": "Red Deer Rebels",
+      "opponent_lg_team_id": 385,
+      "scheduled_at": "2026-10-14T02:10:00Z",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917554",
+      "captured_at": "2026-10-11T16:36:33.672Z",
+      "status": "not_visible_in_public_source",
+      "lineups": null
+    }
+  ]
+}

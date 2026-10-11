@@ -1,0 +1,98 @@
+/* Shared Hitmen headquarters skin. Opt-in pages only; all data/access logic lives in existing controllers.
+   The body ID deliberately wins over the older neutral theme's !important selectors. */
+#hitmenSite.hm-hq {
+ --hq-line:#3b424b; --hq-soft:#bac1cb; --hq-red:#b62739;
+ --hn-muted:#bac1cb; --hn-text:#f3f1ed; --hn-hair:#3b424b;
+ background:linear-gradient(180deg,#101214d9,#101214 700px),url("assets/broadcast/arena-tunnel.webp") center top/cover no-repeat fixed!important;
+ color:#f3f1ed!important; font:16px/1.6 Inter,"Segoe UI",Arial,sans-serif!important;
+}
+#hitmenSite.hm-hq::after { display:none!important; }
+#hitmenSite.hm-hq [hidden] { display:none!important; }
+#hitmenSite.hm-hq :is(.section-shell,.hn-wide,.wr-shell,.bc-broadcast) { width:min(1480px,calc(100% - 48px))!important; max-width:1480px!important; margin-left:auto!important; margin-right:auto!important; }
+#hitmenSite.hm-hq :is(.site-header,.hn-header,.hitmen-app-topbar,.hitmen-app-sidebar) { background:#121518!important; border-color:#3b424b!important; box-shadow:0 8px 24px #0005!important; }
+#hitmenSite.hm-hq .site-header { gap:18px; padding:16px 24px!important; flex-wrap:wrap; }
+#hitmenSite.hm-hq .brand { display:flex; align-items:center; gap:12px; }
+#hitmenSite.hm-hq :is(.hq-crest,.hn-crest,.hr-crest) { width:52px!important; height:52px!important; object-fit:contain; filter:drop-shadow(0 3px 5px #0008); }
+#hitmenSite.hm-hq .brand-copy { font:600 12px/1.4 Inter,"Segoe UI",sans-serif!important; letter-spacing:.06em!important; color:#bac1cb!important; }
+#hitmenSite.hm-hq .brand-copy b { font-size:20px!important; color:#f3f1ed!important; }
+#hitmenSite.hm-hq .main-nav { gap:5px!important; flex-wrap:wrap; }
+#hitmenSite.hm-hq :is(.main-nav a,.hitmen-top-tabs a,.hitmen-app-side-nav a) { font-size:13px!important; line-height:1.4!important; min-height:44px; padding:12px!important; letter-spacing:.01em!important; }
+#hitmenSite.hm-hq :is(.main-nav a.active-nav,.hitmen-top-tabs a.active,.hitmen-app-side-nav a.active) { background:#292e35!important; color:#fff!important; border-bottom:3px solid #b62739!important; }
+#hitmenSite.hm-hq :is(.hn-content,.hoi-main) { gap:24px!important; }
+#hitmenSite.hm-hq :is(.hn-k,.eyebrow,.wr-k,.bc-k) { font-size:12px!important; color:#bac1cb!important; letter-spacing:.08em!important; }
+#hitmenSite.hm-hq :is(.hn-h2,.section-heading h2) { font:750 clamp(24px,2.6vw,34px)/1.2 Inter,"Segoe UI",sans-serif!important; text-transform:none!important; letter-spacing:-.025em!important; }
+#hitmenSite.hm-hq :is(.hn-lede,.wr-note,.hm-save-note) { font-size:14px!important; line-height:1.6!important; color:#bac1cb!important; }
+#hitmenSite.hm-hq :is(.hq-welcome,.hm-command-card,.hm-status-card,.hm-mission-card,.hm-upcoming-card,.hitmen-panel,.hm-tool-card,.gm-ai-panel,.wr-panel,.wr-g,.lab-panel,.stall-dashboard-card,.player-panel,.line-report-card) {
+ background:linear-gradient(145deg,#24292f,#191d22)!important; border:1px solid #3b424b!important; border-radius:8px!important;
+ box-shadow:inset 0 1px 0 #ffffff0c,0 12px 28px #0005!important;
+}
+#hitmenSite.hm-hq .hq-welcome { padding:28px!important; border-top:3px solid #b62739!important; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px; align-items:center; }
+#hitmenSite.hm-hq .hq-identity { display:flex; align-items:center; gap:22px; min-width:0; }
+#hitmenSite.hm-hq .hq-identity img { flex:none; width:96px; height:96px; object-fit:contain; filter:drop-shadow(0 5px 6px #0009); }
+#hitmenSite.hm-hq #hqTitle { font:800 clamp(36px,4.5vw,64px)/1.08 Inter,"Segoe UI",sans-serif!important; letter-spacing:-.04em!important; text-transform:none!important; margin:8px 0!important; }
+#hitmenSite.hm-hq .hq-welcome p { font-size:16px!important; color:#bac1cb!important; margin:0!important; }
+#hitmenSite.hm-hq .hq-quick { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+#hitmenSite.hm-hq .hq-quick a { display:flex; align-items:center; min-height:48px; padding:12px 16px; border:1px solid #515965!important; border-radius:5px!important; background:#292f37!important; color:#f3f1ed; text-decoration:none; font-size:13px; font-weight:650; }
+#hitmenSite.hm-hq .hq-quick a:first-child { border-color:#b34b58!important; background:#78212e!important; }
+#hitmenSite.hm-hq .hq-inline { font-size:14px; color:#d9dde3; text-underline-offset:4px; }
+#hitmenSite.hm-hq :is(#wrTonight,#wrSeason,#hqDepartments,#hitmen-live-session) { scroll-margin-top:150px; }
+#hitmenSite.hm-hq .hm-command-deck { grid-template-columns:repeat(4,minmax(0,1fr))!important; gap:16px!important; }
+#hitmenSite.hm-hq .hm-command-card { display:flex; flex-direction:column; padding:22px!important; min-height:190px!important; }
+#hitmenSite.hm-hq .hm-command-card small { font:650 11px/1.4 Inter,"Segoe UI",sans-serif!important; color:#bac1cb!important; letter-spacing:.06em!important; }
+#hitmenSite.hm-hq .hm-command-card h3 { font:750 23px/1.25 Inter,"Segoe UI",sans-serif!important; text-transform:none!important; margin:8px 0!important; letter-spacing:-.02em!important; }
+#hitmenSite.hm-hq .hm-command-card p { display:block!important; font:400 14px/1.6 Inter,"Segoe UI",sans-serif!important; color:#bac1cb!important; }
+#hitmenSite.hm-hq .hm-command-card .hm-command-icon { border-radius:5px!important; width:36px!important; height:36px!important; background:#303640!important; border-color:#515965!important; }
+#hitmenSite.hm-hq .hm-command-card:hover { border-color:#bc5360!important; background:linear-gradient(145deg,#2c323a,#21262c)!important; }
+#hitmenSite.hm-hq .hm-war-dashboard { grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:20px!important; }
+#hitmenSite.hm-hq :is(.hm-status-row,.hitmen-panel p,.hm-tool-card p,.hm-form-grid label,.hm-form-grid input,.hm-form-grid select,.hm-form-grid textarea) { font-size:15px!important; line-height:1.6!important; }
+#hitmenSite.hm-hq :is(.hm-mission-card h2,.hm-upcoming-card h3,.hitmen-panel h3,.hm-tool-card h3) { font:750 24px/1.25 Inter,"Segoe UI",sans-serif!important; letter-spacing:-.02em!important; text-transform:none!important; }
+#hitmenSite.hm-hq :is(.hm-tool-hero,.hm-lineup-hero,.gm-ai-hero) { border:1px solid #3b424b!important; border-top:3px solid #b62739!important; border-radius:8px!important; background:linear-gradient(120deg,#252a31,#171b20)!important; padding:32px!important; }
+#hitmenSite.hm-hq :is(.hm-tool-hero h1,.hm-lineup-hero h1,.gm-ai-hero h1) { font:800 clamp(32px,4vw,56px)/1.1 Inter,"Segoe UI",sans-serif!important; letter-spacing:-.035em!important; }
+#hitmenSite.hm-hq :is(.hm-tool-hero h1 span,.hm-lineup-hero h1 span,.gm-ai-hero h1 span) { color:#f3f1ed!important; }
+#hitmenSite.hm-hq :is(.management-login-shell h2,.locker-access-shell h2) { font-size:24px!important; }
+#hitmenSite.hm-hq :is(.hm-save,.small-btn,.hm-red-btn,.field,.select-field,.session-builder input,.session-builder select) { font-size:14px!important; min-height:44px; border-radius:5px!important; }
+#hitmenSite.hm-hq :is(.field,.select-field,.session-builder input,.session-builder select) { background:#11151a!important; color:#f3f1ed!important; border:1px solid #515965!important; padding:12px!important; }
+#hitmenSite.hm-hq :is(.small-btn.primary,.hm-red-btn) { color:#fff!important; background:#852432!important; border-color:#bb4d5a!important; }
+#hitmenSite.hm-hq :is(.wr-chip,.bc-sb-line dt,.wr-empty-row) { font-size:12px!important; }
+#hitmenSite.hm-hq :is(.wr-panel,.wr-g,.hitmen-panel,.lab-panel) { min-width:0; }
+#hitmenSite.hm-hq :is(a,button,input,select,textarea,summary):focus-visible { outline:2px solid #f1d6a5!important; outline-offset:3px!important; }
+#hitmenSite.hm-hq .hn-footer { border-top:1px solid #3b424b!important; background:#11151a!important; }
+@media(max-width:1100px) {
+ #hitmenSite.hm-hq .hq-welcome { grid-template-columns:1fr; }
+ #hitmenSite.hm-hq .hm-command-deck { grid-template-columns:repeat(2,minmax(0,1fr))!important; }
+}
+@media(max-width:700px) {
+ #hitmenSite.hm-hq :is(.section-shell,.hn-wide,.wr-shell,.bc-broadcast) { width:calc(100% - 24px)!important; }
+ #hitmenSite.hm-hq .hq-welcome { padding:20px!important; }
+ #hitmenSite.hm-hq .hq-identity { gap:14px; align-items:flex-start; }
+ #hitmenSite.hm-hq .hq-identity img { width:64px; height:64px; }
+ #hitmenSite.hm-hq .hq-quick a { padding:10px; font-size:12px; }
+ #hitmenSite.hm-hq .hm-command-deck,#hitmenSite.hm-hq .hm-war-dashboard { grid-template-columns:1fr!important; }
+ #hitmenSite.hm-hq .hm-command-card { min-height:0!important; padding:20px!important; }
+ #hitmenSite.hm-hq .hn-section-head { flex-wrap:wrap; gap:12px; }
+ #hitmenSite.hm-hq .site-header { padding:12px!important; }
+ #hitmenSite.hm-hq .main-nav { max-width:100%; }
+ #hitmenSite.hm-hq :is(.hm-tool-hero,.hm-lineup-hero,.gm-ai-hero) { padding:22px!important; }
+}
+@media(prefers-reduced-motion:reduce) {
+ #hitmenSite.hm-hq * { scroll-behavior:auto!important; transition:none!important; animation:none!important; }
+}
+
+/* Public team desk: visible to players while management controls stay protected. */
+#hitmenSite.hm-hq .hn-main > #hqWeekly,#hitmenSite.hm-hq .hn-main > #hqMedia {order:1;margin-top:24px;margin-bottom:12px;}
+#hitmenSite.hm-hq .hq-week-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+#hitmenSite.hm-hq .hq-game {padding:20px;border:1px solid #3b424b!important;border-radius:8px!important;background:linear-gradient(145deg,#24292f,#191d22)!important;min-width:0;}
+#hitmenSite.hm-hq .hq-game h3 {font:700 22px/1.25 Inter,Arial,sans-serif!important;margin:8px 0;}
+#hitmenSite.hm-hq .hq-game p,#hitmenSite.hm-hq .hq-game li {font-size:14px!important;color:#bac1cb!important;overflow-wrap:anywhere;}
+#hitmenSite.hm-hq .hq-game ul {list-style:none;padding:0;margin:10px 0;}
+#hitmenSite.hm-hq .hq-game li {padding:5px 0;border-bottom:1px solid #ffffff12;}
+#hitmenSite.hm-hq .hq-game li b {display:inline-block;width:30px;color:#fff;}
+#hitmenSite.hm-hq .hq-game summary {cursor:pointer;min-height:44px;padding:10px 0;font-size:15px!important;}
+#hitmenSite.hm-hq .hq-game a {display:inline-block;padding:10px 0;font-size:14px;text-underline-offset:4px;}
+#hitmenSite.hm-hq .hm-recap-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+#hitmenSite.hm-hq .hm-recap {background:linear-gradient(145deg,#24292f,#191d22)!important;border:1px solid #3b424b!important;border-radius:8px!important;min-width:0;}
+#hitmenSite.hm-hq .hm-recap p {font-size:15px!important;line-height:1.7!important;color:#c4cad2!important;}
+#hitmenSite.hm-hq .hm-recap h3 {font:750 25px/1.25 Inter,Arial,sans-serif!important;}
+#hitmenSite.hm-hq :is(#hqWeekly,#hqMedia) {scroll-margin-top:130px;}
+@media(max-width:1000px){#hitmenSite.hm-hq .hq-week-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:700px){#hitmenSite.hm-hq .hq-week-grid,#hitmenSite.hm-hq .hm-recap-grid{grid-template-columns:1fr;}}
