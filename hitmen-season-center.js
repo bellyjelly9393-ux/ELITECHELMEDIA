@@ -109,7 +109,7 @@
   const week=$('gameWeekFilter');let chosen=week.value;
   week.innerHTML='<option value="all">All Weeks</option>'+[...new Set(S.games.map(g=>g.week))].sort((a,b)=>a-b).map(w=>'<option value="'+esc(w)+'">Week '+esc(w)+'</option>').join('');
   week.value=[...week.options].some(o=>o.value===chosen)?chosen:'all';S.week=week.value;
-  render();renderBroadcast();S.loading=false;
+  render();S.loading=false;
  }
  $('gameWeekFilter')?.addEventListener('change',e=>{S.week=e.target.value;render();});
  $('gameStatusFilter')?.addEventListener('change',e=>{S.filter=e.target.value;render();});
