@@ -1,6 +1,6 @@
 (() => {
   if(window.WildmanVODPipelineInstalled)return;window.WildmanVODPipelineInstalled=true;
-  const WORKER='https://wildman-video-worker-production.up.railway.app';
+  const WORKER='https://wildman-video-worker-vod-restore-test.up.railway.app';
   const db=()=>window.VVHLBackend?.db;
   const auth=()=>window.VVHLBackend?.state||{};
   let pollTimer=null;

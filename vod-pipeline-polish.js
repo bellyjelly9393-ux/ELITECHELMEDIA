@@ -1,6 +1,6 @@
 (() => {
   if(window.WildmanVODPolishInstalled)return;window.WildmanVODPolishInstalled=true;
-  const WORKER='https://wildman-video-worker-production.up.railway.app';
+  const WORKER='https://wildman-video-worker-vod-restore-test.up.railway.app';
   const db=()=>window.VVHLBackend?.db;
   let timer=null;
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -86,3 +86,4 @@
   const start=()=>{install();observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class','hidden']});setInterval(()=>{if(!document.hidden)refresh();},30000);};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
+
