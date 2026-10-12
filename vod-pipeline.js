@@ -136,9 +136,9 @@
     const anchor=document.getElementById('manualPeriodBuilder')||detail.querySelector('.vod-detail-head'); if(!anchor)return;
     const panel=document.createElement('div');
     panel.id='vodPipelinePanel'; panel.className='analysis-note'; panel.style.marginTop='16px';
-    panel.innerHTML=`<div class="eyebrow">GAME ANALYSIS</div><h3 style="margin:6px 0 8px">Step 2 · Analyze Game</h3><p>Analyze Game sends the saved period times to the video worker. Pressing it again reuses the same job: unchanged periods are not paid for twice, and changed times re-run only that game.</p><div class="vod-actions"><button id="vodAnalyzeGame" class="small-btn primary" type="button">Analyze Game</button></div><details id="vodPipelineAdvanced"><summary>Advanced Tools</summary><div class="vod-actions"><button id="vodCheckPipeline" class="small-btn" type="button">Check Status</button><button id="vodRetryPipeline" class="small-btn" type="button">Continue / Retry</button><button id="vodRefreshReport" class="small-btn" type="button">Refresh Detailed Report</button><button id="vodEliteReanalyze" class="small-btn" type="button">Re-run Elite Scout</button></div>
+    panel.innerHTML=`<div class="eyebrow">GAME ANALYSIS</div><h3 style="margin:6px 0 8px">Analyze Game</h3><p>Analyze Game detects P1/P2/P3 automatically, or uses the period times you saved. Pressing it again reuses the same job: unchanged periods are not paid for twice, and changed times re-run only that game.</p><div class="vod-actions"><button id="vodAnalyzeGame" class="small-btn primary" type="button">Analyze Game</button></div><details id="vodPipelineAdvanced"><summary>Advanced Tools</summary><div class="vod-actions"><button id="vodCheckPipeline" class="small-btn" type="button">Check Status</button><button id="vodRetryPipeline" class="small-btn" type="button">Continue / Retry</button><button id="vodRefreshReport" class="small-btn" type="button">Refresh Detailed Report</button><button id="vodEliteReanalyze" class="small-btn" type="button">Re-run Elite Scout</button></div>
     <details id="vodTwitchConnect" style="margin-top:12px"><summary>Twitch Retrieval Connection <span id="vodTwitchAuthBadge" class="status-pill" style="margin-left:8px">CHECKING</span></summary><p><strong>Only needed when Twitch blocks anonymous VOD playback.</strong> Paste the Twitch website <code>auth-token</code> here, never into chat. It is stored privately on the Railway worker and is not written to logs.</p><div class="vod-form"><label class="wide">Twitch web auth-token<input id="vodTwitchToken" class="field mono" type="password" autocomplete="off" placeholder="Private token · not your password"></label></div><div class="vod-actions"><button id="vodSaveTwitchAuth" class="small-btn primary" type="button">Connect Twitch Retrieval</button><button id="vodClearTwitchAuth" class="small-btn" type="button">Disconnect</button><span id="vodTwitchAuthMsg" class="copy-feedback"></span></div><small>This token can grant broad Twitch account access. Use it only on this private management page and revoke it from Twitch Security if you no longer want the worker connected.</small></details>
-    <details style="margin-top:12px"><summary>Recording source / game window / upload fallback</summary><p>Use the exact Twitch replay plus the start and end of this game inside the full broadcast. The worker retrieves bounded slices of this game and keeps each period separate.</p><div class="vod-form"><label class="wide">Saved Twitch replay URL<input id="vodReplayUrl" class="field" type="url" placeholder="https://www.twitch.tv/videos/..."></label><label>Game starts in full VOD<input id="vodSourceStart" class="field mono" placeholder="0:00"></label><label>Game ends in full VOD<input id="vodSourceEnd" class="field mono" placeholder="28:40"></label><label>Game format<select id="vodGameFormat" class="select-field"><option value="6s">6s</option><option value="4s">4s</option><option value="3s">3s</option><option value="HUT">HUT</option><option value="unknown">Unknown</option></select></label><label class="wide">Lineup / scouting context<textarea id="vodScoutingContext" class="text-input" placeholder="Calgary: LW ..., C ..., RW ..., LD ..., RD ..., G ...&#10;Opponent: ..."></textarea></label></div><button id="vodSaveReplay" class="small-btn" type="button">Save source + game window</button><p>Or upload an MP4 / MOV recording containing this game:</p><input id="vodPipelineFile" class="field" type="file" accept="video/mp4,video/quicktime,.mp4,.mov"><button id="vodStartPipeline" class="small-btn" type="button">Upload & Start Pipeline</button></details></details><small id="vodPipelineStatus">Save the period times, then press Analyze Game.</small>`;
+    <details style="margin-top:12px"><summary>Recording source / game window / upload fallback</summary><p>Use the exact Twitch replay plus the start and end of this game inside the full broadcast. The worker retrieves bounded slices of this game and keeps each period separate.</p><div class="vod-form"><label class="wide">Saved Twitch replay URL<input id="vodReplayUrl" class="field" type="url" placeholder="https://www.twitch.tv/videos/..."></label><label>Game starts in full VOD<input id="vodSourceStart" class="field mono" placeholder="0:00"></label><label>Game ends in full VOD<input id="vodSourceEnd" class="field mono" placeholder="28:40"></label><label>Game format<select id="vodGameFormat" class="select-field"><option value="6s">6s</option><option value="4s">4s</option><option value="3s">3s</option><option value="HUT">HUT</option><option value="unknown">Unknown</option></select></label><label class="wide">Lineup / scouting context<textarea id="vodScoutingContext" class="text-input" placeholder="Calgary: LW ..., C ..., RW ..., LD ..., RD ..., G ...&#10;Opponent: ..."></textarea></label></div><button id="vodSaveReplay" class="small-btn" type="button">Save source + game window</button><p>Or upload an MP4 / MOV recording containing this game:</p><input id="vodPipelineFile" class="field" type="file" accept="video/mp4,video/quicktime,.mp4,.mov"><button id="vodStartPipeline" class="small-btn" type="button">Upload & Start Pipeline</button></details></details><small id="vodPipelineStatus">Press Analyze Game to detect periods, or save corrected times to continue.</small>`;
     anchor.insertAdjacentElement('afterend',panel);
     document.getElementById('vodStartPipeline')?.addEventListener('click',start);
     document.getElementById('vodCheckPipeline')?.addEventListener('click',checkSelected);
@@ -232,22 +232,24 @@
       const {data:segments,error:segError}=await db().from('vod_review_segments').select('*').eq('review_id',review.id);
       if(segError)throw segError;
       const model=window.WildmanVODReview;
-      const problems=model.periodErrors(review,segments||[]);
+      const hasPeriods=model.activeSegments(segments||[]).some(s=>['period','overtime'].includes(s.segment_type));
+      const problems=hasPeriods?model.periodErrors(review,segments||[]):[];
       if(problems.length){
         document.getElementById('manualPeriodBuilder')?.setAttribute('open','');
         throw new Error('Save the period times first (Step 1). '+problems.join(' '));
       }
-      const periods=model.workerPeriods(review,segments||[]);
-      setStatus('Sending the period times to the video worker…');
+      const periods=hasPeriods?model.workerPeriods(review,segments||[]):null;
+      if(!periods&&!(Number(review.source_end_seconds)>sourceOffset(review)))throw new Error('Save this game’s start and end in the VOD before automatic detection.');
+      setStatus(periods?'Sending the period times to the video worker…':'Starting automatic P1 / P2 / P3 detection…');
       const {job}=await workerFetch(`/reviews/${encodeURIComponent(review.id)}/analyze`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
         source_start_seconds:sourceOffset(review),source_end_seconds:Number(review.source_end_seconds),
-        overtime_confirmed:periods.some(p=>/^Overtime/.test(p.label)),periods})});
+        ...(periods?{overtime_confirmed:periods.some(p=>/^Overtime/.test(p.label)),periods}:{})})});
       if(!job)throw new Error('The video worker did not return a job.');
       // The game keeps the job the worker answered with; the poller never swaps it afterwards.
       const {error}=await db().from('vod_review_sessions').update({worker_job_id:job.id,worker_status:job.status,worker_updated_at:new Date().toISOString()}).eq('id',review.id);
       if(error)throw error;
       if(selectedReviewId()!==review.id)return;
-      setStatus('Analysis queued with your period times.','good');
+      setStatus(periods?'Analysis queued with your period times.':'Automatic period detection queued. Uncertain boundaries, restarts or overtime will pause for your confirmation.','good');
       beginPoll(job.id,review.id);
     }catch(e){
       const msg=e.code==='periods_required'?'Save the period times first (Step 1), then press Analyze Game.':(e.message||'Could not start the analysis.');
@@ -396,7 +398,7 @@
       const response=await workerFetch(`/reviews/${encodeURIComponent(reviewId)}/job`);
       const job=response.job;
       if(selectedReviewId()!==reviewId)return;
-      if(!job){if(!showDurable(savedState)&&loud)setStatus('Save the period times, then press Analyze Game.');return;}
+      if(!job){if(!showDurable(savedState)&&loud)setStatus('Press Analyze Game to detect periods, or save corrected times to continue.');return;}
       if(job.waiting_for_capture){if(!showDurable(savedState))setStatus(`Game capture: ${job.status}. Waiting for the saved recording; no upload needed.`,'good');return;}
       // Never silently move a game onto a different job: only link when it has none yet.
       const {data:link,error:linkError}=await db().from('vod_review_sessions').select('worker_job_id,worker_status').eq('id',reviewId).maybeSingle();
@@ -415,7 +417,7 @@
       if(savedState?.analysisComplete&&job.status!=='ready_for_review'){showDurable(savedState);}
       else if(job.status==='needs_periods'){
         if(selectedReviewId()===reviewId)document.getElementById('manualPeriodBuilder')?.setAttribute('open','');
-        setStatus('Enter the period times in Step 1, save them, then press Analyze Game. Nothing is analyzed until the times are set.','warn');
+        setStatus('Automatic detection needs confirmation. Enter or correct the period times and any restart/OT mapping, save, then continue. No uncertain periods are analyzed.','warn');
       }
       else if(job.status==='awaiting_ai')setStatus(job.result?.period_detection==='auto'?'Periods detected automatically ✓ Video is split and ready. AI scouting is the only remaining connection. No re-upload needed.':'Video validated and split into period-sized work. AI is not connected to Railway yet. No re-upload is needed once the AI connection is added.','warn');
       else if(job.status==='ready_for_review'){
@@ -457,6 +459,26 @@
     }catch(e){if(selectedReviewId()===reviewId&&!showDurable(savedState))setStatus(e.message||'Could not reach video worker. Retrying…','bad');}finally{checking=false;}
   }
 
+  async function importDetectedPeriods(reviewId,job){
+    const model=window.WildmanVODReview;
+    if(!['auto','live_scoreboard','replay_scoreboard'].includes(job.result?.period_detection))return false;
+    const b=await window.WildmanVODCache.bundle(reviewId,{force:true});
+    if(!b?.review||model.activeSegments(b.segments).some(s=>['period','overtime'].includes(s.segment_type))||b.publication?.active)return false;
+    const offset=sourceOffset(b.review);
+    const periods=(job.result?.detected_periods||[]).map(p=>{
+      const label=model.periodLabel(p.label),match=label.match(/^(Period|Overtime) ([1-9]\d*)$/);
+      if(!match)throw new Error('Automatic detection returned an unknown period. Confirm the period times.');
+      return {label,segment_type:match[1]==='Period'?'period':'overtime',segment_index:Number(match[2]),start_seconds:Math.round(offset+Number(p.start)),end_seconds:Math.round(offset+Number(p.end))};
+    });
+    const problems=model.periodErrors(b.review,periods);
+    if(problems.length)throw new Error('Confirm detected period times: '+problems.join(' '));
+    const {error}=await db().rpc('set_vod_period_windows',{target_review:reviewId,expected_updated_at:b.review.updated_at,
+      window_start:offset,window_end:Number(b.review.source_end_seconds),periods,skip_ranges:b.review.skip_ranges||[]});
+    if(error)throw error;
+    window.WildmanVODCache.invalidate(reviewId);
+    return true;
+  }
+
   function importKey(job){
     const text=JSON.stringify([job.id,job.result?.review_version,job.result?.game_rollup,job.result?.period_reports,job.result?.chunks]);
     let hash=2166136261;for(let i=0;i<text.length;i++)hash=Math.imul(hash^text.charCodeAt(i),16777619);
@@ -464,6 +486,7 @@
   }
   async function ingest(job,reviewId){
     const model=window.WildmanVODReview;
+    await importDetectedPeriods(reviewId,job);
     let chunks=job?.result?.chunks||[];
     let periodReports=job?.result?.period_reports||[];
     if(!chunks.length&&!periodReports.length)throw new Error('The worker finished without importable period evidence. Keep this review private and retry the worker before approving.');
@@ -630,7 +653,7 @@ window.addEventListener('vvhl-vod-rendered',event=>{
       lastSelectedReviewId=id;savedState=null;
       clearInterval(pollTimer);pollTimer=null;
       document.getElementById('manualPeriodBuilder')?.removeAttribute('open');
-      setStatus('Save the period times, then press Analyze Game.');
+      setStatus('Press Analyze Game to detect periods, or save corrected times to continue.');
       syncStoredStatus();
       maybeAutoAnalyze(id);
     }
