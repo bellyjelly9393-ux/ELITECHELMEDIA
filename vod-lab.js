@@ -90,7 +90,7 @@
     state.loading=true; setStatus(`Loading ${teamName()} VOD reviews…`);
     try{
       const [r,s,m,p]=await Promise.all([
-        db().from("vod_review_sessions").select("*").eq("team_id",state.teamId).neq("status","archived").order("game_date",{ascending:false}),
+        db().from("vod_review_sessions").select("*").eq("team_id",state.teamId).order("game_date",{ascending:false}),
         db().from("vod_review_segments").select("*").eq("team_id",state.teamId).order("start_seconds"),
         db().from("vod_review_markers").select("*").eq("team_id",state.teamId).order("timestamp_seconds"),
         db().from("vod_game_publications").select("review_id,active,report,published_at").eq("team_id",state.teamId)
@@ -125,7 +125,11 @@
   function renderLibrary(){
     const el=$("vodLibrary"); if(!el)return;
     if(!state.reviews.length){el.innerHTML=`<div class="vod-empty">No VOD reviews in this workspace yet.</div>`;return;}
-    el.innerHTML=state.reviews.map(r=>{
+    const filter=$("vodLibraryFilter")?.value||'reviewed';
+    const filed=new Set(state.publications.filter(p=>p.active).map(p=>p.review_id));
+    const visible=state.reviews.filter(r=>filter==='all'||(filter==='active'?r.status!=='archived':filter==='filed'?r.status==='archived'&&filed.has(r.id):r.status!=='archived'||filed.has(r.id))||r.id===state.selectedReviewId);
+    if(!visible.length){el.innerHTML=`<div class="vod-empty">No reviews in this view. Choose All reviews to see retained archives.</div>`;return;}
+    el.innerHTML=visible.map(r=>{
       const segs=reviewSegments(r.id),done=segs.filter(s=>s.status==="complete").length;
       return `<div class="vod-library-entry"><button class="vod-row${r.id===state.selectedReviewId?" active":""}" data-vod-id="${esc(r.id)}"><strong>${esc(r.title)}</strong><span>${esc(r.opponent_label||"No opponent label")}</span><small>${esc(String(r.intake_mode||"scout").toUpperCase())} · ${esc(String(r.game_type||"scouting").replaceAll("_"," "))} · ${done}/${segs.length} segments complete · ${r.game_date?new Date(r.game_date).toLocaleDateString():"No date"}</small></button><button hidden type="button" class="small-btn" data-delete-vod="${esc(r.id)}" aria-label="Delete ${esc(r.title)}">Delete review</button></div>`;
     }).join("");
@@ -148,6 +152,7 @@
     const p=(i)=>segs.find(s=>s.segment_type==="period"&&s.segment_index===i);
     const ots=segs.filter(s=>s.segment_type==="overtime").map(s=>fmtTime(s.start_seconds));
     const switchedReview=manualFieldsReviewId!==r.id;
+    if(switchedReview&&$("publishVodStatus"))$("publishVodStatus").textContent="";
     // Never overwrite times the manager is typing; refill only on a new game or after a save.
     if(switchedReview||!periodFieldsDirty){
       const absoluteEnd=sourceEnd!=null?sourceEnd:(r.duration_seconds!=null?sourceStart+Number(r.duration_seconds):null);
@@ -160,7 +165,7 @@
       if(switchedReview&&$("periodTimesStatus"))$("periodTimesStatus").textContent="";
       manualFieldsReviewId=r.id;periodFieldsDirty=false;
     }
-    if(manualBuilder&&switchedReview)manualBuilder.open=!(p(1)&&p(2)&&p(3));
+    if(manualBuilder&&switchedReview)manualBuilder.open=r.worker_status==='needs_periods';
     $("gameSummary").value=r.full_game_summary||""; $("gamePatterns").value=r.recurring_patterns||""; $("gameStrengths").value=r.strengths||""; $("gameCorrections").value=r.corrections||"";
     if($("gameTactical")) $("gameTactical").value=r.tactical_report||"";
     if($("gamePlayers")) $("gamePlayers").value=r.player_report||"";
@@ -285,7 +290,7 @@
     await loadData();
     setStatus(
       intakeMode==="scout"&&provider==="twitch"
-        ?"Scout review created. Step 1: enter the period times below and save them. Step 2: press Analyze Game."
+        ?"Scout review created. Press Analyze Game to detect periods automatically."
         :intakeMode==="scout"
           ?"Scout review created. Analyze Game will retrieve the recording and run scouting intelligence."
           :intakeMode==="media"
@@ -294,8 +299,8 @@
       "success"
     );
     if(intakeMode==="scout"){
-      // Analysis starts only after the period times are entered; nothing is guessed from the scoreboard.
-      const builder=$("manualPeriodBuilder");if(builder){builder.open=true;setTimeout(()=>builder.scrollIntoView({behavior:"smooth",block:"start"}),200);}
+      // Explicit Analyze starts automatic detection; manual correction remains available.
+      document.getElementById("vodPipelinePanel")?.scrollIntoView({behavior:"smooth",block:"start"});
     }
   }
 
@@ -347,7 +352,7 @@
     state.selectedSegmentId="";
     $("batchVodUrl").value=url;
     await loadData();
-    if(status)status.textContent=`Created ${ids.length} games. Open each game, enter its period times, then press Analyze Game.`;
+    if(status)status.textContent=`Created ${ids.length} games. Open each game and press Analyze Game for automatic period detection.`;
   }
 
   async function buildSegments(){
@@ -678,6 +683,7 @@
   }
 
   function bind(){
+    $("vodLibraryFilter")?.addEventListener("change",renderLibrary);
     $("vodTeam")?.addEventListener("change",e=>{state.teamId=e.target.value;state.selectedReviewId="";state.selectedSegmentId="";loadData();});
     $("refreshVod")?.addEventListener("click",loadData); $("createVod")?.addEventListener("click",createReview); $("batchCreateVod")?.addEventListener("click",createBatchReviews); $("buildSegments")?.addEventListener("click",buildSegments);
     for(const id of ["period1Start","period2Start","period3Start","periodVodEnd","periodOtStarts","periodSkips"])$(id)?.addEventListener("input",()=>{periodFieldsDirty=true;}); $("addCustomSegment")?.addEventListener("click",addCustomSegment);
