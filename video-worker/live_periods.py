@@ -75,7 +75,7 @@ def infer_period_ranges(reads, duration, initial_period=1, confirm_reads=2, inte
         if current == 0 and observed is None and clock is not None:
             observed, reason = 1, 'game_clock'
         if (observed is None and previous_clock is not None and clock is not None
-                and 1 <= current < 8 and previous_clock <= 6 * 60 and clock >= 14 * 60
+                and 1 <= current < 3 and previous_clock <= 6 * 60 and clock >= 14 * 60
                 and clock - previous_clock >= 8 * 60):
             observed = current + 1
             reason = 'clock_reset'

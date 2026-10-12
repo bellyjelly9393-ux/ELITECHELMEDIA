@@ -66,6 +66,16 @@ class LivePeriodTests(unittest.TestCase):
         reads=[{'at':12,'period':2},{'at':24,'period':2},{'at':36,'period':1},{'at':48,'period':2}]
         self.assertFalse(live_periods.infer_period_ranges(reads,60)['restart_detected'])
 
+    def test_clock_noise_after_third_period_cannot_invent_overtime(self):
+        reads=[{'at':12,'period':3,'clock_seconds':120},{'at':24,'period':None,'clock_seconds':1079}]
+        scan=live_periods.infer_period_ranges(reads,60,initial_period=3)
+        self.assertEqual([p['label'] for p in scan['ranges']],['Period 3'])
+
+    def test_overtime_still_requires_two_explicit_period_reads(self):
+        reads=[{'at':12,'period':4,'clock_seconds':280},{'at':24,'period':4,'clock_seconds':250}]
+        scan=live_periods.infer_period_ranges(reads,60,initial_period=3)
+        self.assertEqual(scan['ranges'][-1]['label'],'Overtime')
+
 
 if __name__=='__main__':
     unittest.main()
