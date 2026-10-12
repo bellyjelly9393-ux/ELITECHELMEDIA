@@ -59,3 +59,31 @@
 .hg-watch-sidebar .hg-watch-main-action,.hg-watch-sidebar .hg-watch-secondary{width:100%;min-height:42px;padding:12px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;text-align:center;text-decoration:none;border-radius:2px}
 .hg-watch-sidebar .hg-watch-secondary{background:#151922;color:#f3d9df!important;border:1px solid #61535e}
 @media(max-width:850px){.hg-watch-live-layout{grid-template-columns:1fr}.hg-watch-sidebar{display:grid;grid-template-columns:75px 1fr;align-items:center;gap:10px;padding:18px}.hg-watch-sidebar>img{grid-row:span 2;width:68px;height:68px}.hg-watch-sidebar h2{font-size:37px;margin:0}.hg-watch-sidebar p{grid-column:1/-1}.hg-watch-sidebar .hg-watch-main-action,.hg-watch-sidebar .hg-watch-secondary{grid-column:1/-1}.hg-watch-sidebar .hg-watch-network-mark{font-size:20px}}
+
+/* Prioritize the game picture. Side tools should never shrink the broadcast. */
+.hg-watch-live-layout{grid-template-columns:minmax(0,4fr) minmax(200px,1fr)}
+.hg-watch-video iframe{aspect-ratio:16/9;width:100%;min-height:460px}
+.hg-watch-sidebar{padding:18px 14px;gap:9px}
+.hg-watch-sidebar>img{width:56px;height:56px}
+.hg-watch-sidebar h2{font-size:35px}
+@media(max-width:1100px){
+  .hg-watch-live-layout{grid-template-columns:1fr}
+  .hg-watch-video iframe{min-height:0;aspect-ratio:16/9;width:100%}
+  .hg-watch-sidebar{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px;padding:14px}
+  .hg-watch-sidebar>img{width:45px;height:45px}
+  .hg-watch-sidebar .hg-watch-network-mark{font-size:18px}
+  .hg-watch-sidebar h2{font-size:27px;margin:0}
+  .hg-watch-sidebar p{display:none}
+  .hg-watch-sidebar .hg-watch-main-action,.hg-watch-sidebar .hg-watch-secondary{width:auto;flex:1 1 145px;min-height:40px;padding:9px}
+}
+@media(max-width:600px){
+  .hg-watch-section{width:100%!important;max-width:100%!important;padding-left:0!important;padding-right:0!important}
+  .hg-watch-kicker{padding:0 12px}
+  .hg-watch-live-layout{display:block;width:100%;border-left:0;border-right:0}
+  .hg-watch-video-head,.hg-watch-video-foot{padding:8px 12px;font-size:10px}
+  .hg-watch-video-head span:last-child{display:none}
+  .hg-watch-video iframe{aspect-ratio:16/9!important;min-height:0!important;height:auto!important;width:100%!important;display:block}
+  .hg-watch-sidebar{padding:12px;gap:8px}
+  .hg-watch-sidebar>img,.hg-watch-sidebar .hg-watch-network-mark,.hg-watch-sidebar h2{display:none}
+  .hg-watch-sidebar .hg-watch-main-action,.hg-watch-sidebar .hg-watch-secondary{flex:1 1 130px;font-size:10px}
+}
