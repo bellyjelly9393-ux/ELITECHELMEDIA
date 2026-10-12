@@ -100,6 +100,7 @@ class GeminiDirect(unittest.TestCase):
         self.assertEqual((result.status, result.code), (503, 'model_unavailable'))
         self.assertEqual(self.sent, [])
 
+    @unittest.skipIf(os.name == 'nt', 'Windows environment names are case-insensitive; exact-case precedence requires Linux.')
     def test_the_key_works_under_a_different_capitalisation_of_its_name(self):
         env = {k: v for k, v in ENV.items() if k != 'GEMINI_API_KEY'}
         self.run_analyze([gemini_reply()], env={**env, 'Gemini_api_key': 'mixed-case-key'})

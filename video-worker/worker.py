@@ -1413,12 +1413,21 @@ def process_streamed_replay(job_id):
                 'Confirm actual period boundaries and any restart/OT mapping. No AI analysis was run.'
             )
             return
-        # OCR only suggests periods; paid analysis starts when someone confirms them.
+        if any(is_overtime(p['label']) for p in periods) and not metadata.get('overtime_confirmed'):
+            result['detected_periods'] = periods
+            update_metadata(job_id, metadata, 'needs_periods', result,
+                            'Confirm overtime and any restart mapping before AI analysis.')
+            return
+        metadata['period_units'] = bounded_period_units(periods)
+        metadata['period_unit_index'] = 0
+        metadata['periods'] = periods
+        metadata['period_source'] = 'replay_scoreboard'
+        metadata['replay_phase'] = 'analyze_periods'
         result['detected_periods'] = periods
-        result['period_note'] = 'Suggested from local scoreboard period/game-clock OCR. Confirm them to start AI review.'
+        result['period_note'] = 'P1/P2/P3 locked using local scoreboard period/game-clock OCR.'
+        result['stage'] = 'period_boundaries_locked'
         result.pop('failure_code', None)
-        update_metadata(job_id, metadata, 'needs_periods', result,
-                        'Confirm the suggested period times before AI analysis. No AI analysis was run.')
+        update_metadata(job_id, metadata, 'retrieving', result, '')
         return
 
     # PHASE 2: fetch one <=370s part of a detected period, analyze it, save it, delete it.
@@ -1759,11 +1768,15 @@ def process(job_id):
     period_mode = (job['metadata'].get('period_source') or result.get('period_detection', 'manual')) if periods else None
     if not periods:
         detected = [] if result.get('period_detection') == 'full_game_fallback' else detect_periods(source, duration)
-        # OCR only suggests periods; paid analysis starts when someone confirms them.
-        result.update({'duration': duration, 'stage': 'needs_period_boundaries',
-                       'period_detection': 'auto' if detected else 'needs_periods', 'detected_periods': detected})
-        update(job_id, 'needs_periods', result, 'Confirm actual period boundaries before AI analysis. The recording is preserved.')
-        return
+        periods = normalize_regulation_periods(detected, duration)
+        if re.search(r'lag[- ]?out|restart|replayed period', job['metadata'].get('players', ''), re.I):
+            periods = []
+        if len(periods) < 3 or any(is_overtime(p['label']) for p in periods):
+            result.update({'duration': duration, 'stage': 'needs_period_boundaries',
+                           'period_detection': 'needs_periods', 'detected_periods': detected})
+            update(job_id, 'needs_periods', result, 'Confirm actual period boundaries and any restart/OT mapping before AI analysis. The recording is preserved.')
+            return
+        period_mode = 'auto'
     plan = segments(periods, duration)
     result.update({
         'duration': duration,

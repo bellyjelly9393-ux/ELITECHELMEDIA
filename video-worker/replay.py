@@ -381,10 +381,18 @@ def resolve(review, owner, create=False):
     """The caller supplies a review read through RLS, never unverified body fields.
 
     Finds the review's job whoever owns it (expired jobs included). Analyze (create=True)
-    resumes a failed job with saved work, but never creates a job: periods come first."""
+    resumes saved work and creates one automatic-detection job when none exists."""
     with worker.WRITE_LOCK:
         with worker.connect() as db:
             job_id = linked_job_id(db, review)
+            if job_id is None and create:
+                capture = review.get('_capture') or {}
+                if capture.get('status') in ('armed', 'queued', 'capturing', 'captured', 'processing'):
+                    return {'id': None, 'status': capture['status'], 'waiting_for_capture': True}
+                start, end = review_window(review)
+                if end is None:
+                    raise worker.Problem(422, 'Set the game start and end before automatic period detection.', 'game_window_required')
+                job_id = insert_review_job(db, review, owner, 'retrieving')
         if job_id:
             job = worker.get_job(job_id)
             meta = job['metadata']
@@ -399,13 +407,18 @@ def resolve(review, owner, create=False):
                 # Analyze Game resumes saved part evidence and retries only what is missing.
                 worker.update_metadata(job_id, resume_metadata(job_id, meta), 'queued')
                 job = worker.get_job(job_id)
+            elif create and job['status'] in ('failed','expired') and meta.get('source_kind') == 'twitch_replay':
+                # Retry the original bounded source; keep saved evidence and period state.
+                replay_url(meta.get('vod_url'))
+                worker.update_metadata(job_id, resume_metadata(job_id, meta), 'retrieving', job['result'], '')
+                job = worker.get_job(job_id)
             return job
     capture = review.get('_capture') or {}
     if capture.get('status') in ('armed', 'queued', 'capturing', 'captured', 'processing'):
         return {'id': None, 'status': capture['status'], 'waiting_for_capture': True}
     if not create:
         return None
-    raise worker.Problem(422, 'Enter the period start times before analyzing.', 'periods_required')
+    raise worker.Problem(422, 'Set the game window before analyzing.', 'game_window_required')
 
 
 def split_download_unit(metadata):
