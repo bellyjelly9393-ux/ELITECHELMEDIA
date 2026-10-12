@@ -184,7 +184,6 @@
     var strip=byId('obsSceneStrip');
     if(!strip)return;
     var list=SCENES&&Array.isArray(SCENES.all)?SCENES.all:[];
-    if(config().channel!=='hitmen-main')list=list.filter(function(item){return item.id!=='starting-hitmen-bobbleheads';});
     if(!list.length){
       strip.innerHTML='<button type="button" data-preset="game-matchup" data-scene="game"><b>Gameplay</b><small>Matchup Panel</small></button>';
       return;
@@ -197,6 +196,7 @@
   function setSceneButtons(){
     document.querySelectorAll('#obsSceneStrip [data-preset]').forEach(function(button){
       button.classList.toggle('active',button.dataset.preset===currentPresetId);
+      if(button.dataset.preset==='starting-hitmen-bobbleheads')button.hidden=config().channel!=='hitmen-main';
     });
   }
   function setValue(id,value){var node=byId(id);if(node)node.value=value;}
@@ -383,6 +383,7 @@
       currentTeamId=e.target.value;
       window.localStorage.setItem('vvhl-team-context',currentTeamId);
       updateSourceLinks();
+      setSceneButtons();
       await loadState(true);
     });
     document.querySelectorAll('#obsSceneStrip [data-preset]').forEach(function(button){
