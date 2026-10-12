@@ -40,3 +40,22 @@
 .hg-watch-detail{font-size:9px}
 }
 @media(max-width:450px){.hg-watch-actions{width:100%}.hg-watch-actions a{width:100%}.hg-watch-copy p{font-size:13px}.hg-watch-copy h2{font-size:58px}}
+
+/* Live-first split layout: game always remains playable. */
+.hg-watch-live-layout{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(235px,.65fr);gap:0;background:#090d13;border:1px solid #65505b;overflow:hidden}
+.hg-watch-video{min-width:0;display:flex;flex-direction:column;background:#030407}
+.hg-watch-video-head,.hg-watch-video-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:12px 15px;background:#0a1019;color:#e9d4d8}
+.hg-watch-video-head strong{font-size:12px;letter-spacing:.08em}
+.hg-watch-video-head span:last-child{font-size:9px;color:#bac0c7}
+.hg-watch-video .hg-watch-pulse{display:inline-block;margin-right:5px;flex:0 0 8px}
+.hg-watch-video iframe{display:block;width:100%;aspect-ratio:16/9;border:0;background:#000;min-height:0}
+.hg-watch-video-foot{font-size:11px;line-height:1.4}.hg-watch-video-foot a{color:#eec48e}
+.hg-watch-sidebar{min-width:0;padding:24px 21px;display:flex;flex-direction:column;align-items:flex-start;gap:13px;background:radial-gradient(ellipse at 75% 10%,#81283b55,transparent 65%),linear-gradient(155deg,#1a1018,#0b1016)}
+.hg-watch-sidebar>img{width:78px;height:78px;object-fit:contain;filter:drop-shadow(0 4px 13px #000)}
+.hg-watch-sidebar .hg-watch-network-mark{font-size:22px}.hg-watch-sidebar .hg-watch-network-mark span{text-align:left}
+.hg-watch-sidebar h2{font:900 clamp(39px,3.7vw,57px)/.9 "Barlow Condensed",Impact,sans-serif;color:white;margin:7px 0}
+.hg-watch-sidebar h2 em{font-style:normal;color:#ff849f}
+.hg-watch-sidebar p{font-size:12px;color:#c7c8d0;line-height:1.6;margin:0 0 3px}
+.hg-watch-sidebar .hg-watch-main-action,.hg-watch-sidebar .hg-watch-secondary{width:100%;min-height:42px;padding:12px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;text-align:center;text-decoration:none;border-radius:2px}
+.hg-watch-sidebar .hg-watch-secondary{background:#151922;color:#f3d9df!important;border:1px solid #61535e}
+@media(max-width:850px){.hg-watch-live-layout{grid-template-columns:1fr}.hg-watch-sidebar{display:grid;grid-template-columns:75px 1fr;align-items:center;gap:10px;padding:18px}.hg-watch-sidebar>img{grid-row:span 2;width:68px;height:68px}.hg-watch-sidebar h2{font-size:37px;margin:0}.hg-watch-sidebar p{grid-column:1/-1}.hg-watch-sidebar .hg-watch-main-action,.hg-watch-sidebar .hg-watch-secondary{grid-column:1/-1}.hg-watch-sidebar .hg-watch-network-mark{font-size:20px}}
