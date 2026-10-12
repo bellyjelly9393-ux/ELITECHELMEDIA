@@ -432,7 +432,6 @@ body[data-brand="hitmen"][data-preset="starting-hitmen-bobbleheads"] .obs-hitmen
 body[data-brand="hitmen"][data-preset="starting-hitmen-bobbleheads"] .obs-full-card{display:none!important}
 .obs-hitmen-starting-art::before{content:"";position:absolute;inset:0;z-index:-2;background:
     linear-gradient(90deg,rgba(8,4,9,.1) 0%,rgba(8,4,9,.05) 59%,rgba(8,4,9,.85) 100%),
-    url('assets/broadcast/hitmen-starting-bobbleheads.webp') center center/cover no-repeat,
     url('assets/wildman/home/hitmen.webp') center center/cover no-repeat;
 }
 .obs-hitmen-starting-art::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;border:12px solid #140609;box-shadow:inset 0 0 105px #000b,inset 0 0 0 2px #e9486a6a}
@@ -443,3 +442,26 @@ body[data-brand="hitmen"][data-preset="starting-hitmen-bobbleheads"] .obs-full-c
 .obs-hitmen-starting-caption h1 span{display:block;color:#ff357e}
 .obs-hitmen-starting-caption p{color:#fee2eb;font:800 15px/1.5 Inter,sans-serif;letter-spacing:.13em}
 @media(max-width:760px){.obs-hitmen-starting-caption{right:3%;width:48%;padding:17px}.obs-hitmen-starting-caption h1{font-size:66px}.obs-hitmen-starting-caption strong{font-size:23px}.obs-hitmen-starting-caption small{font-size:10px}}
+
+
+/* Actual Hitmen team bobbleheads, with no new OBS image-source setup required. */
+.obs-hitmen-figures{position:absolute;inset:0 37% 0 0;display:flex;align-items:center;justify-content:center;gap:1.8%;padding:4% 1.6% 4% 2.3%;background:radial-gradient(ellipse at 47% 55%,rgba(230,33,99,.34),transparent 62%),linear-gradient(90deg,rgba(0,0,0,.1),rgba(0,0,0,.5))}
+.obs-hitmen-figure{position:relative;margin:0;min-width:0;width:32%;height:73%;overflow:hidden;border:2px solid rgba(241,105,149,.75);border-radius:5px;background:#180c16;box-shadow:0 22px 42px #000b,0 0 21px #f63d8d33;transform:perspective(850px) rotateY(3deg)}
+.obs-hitmen-figure:nth-child(2){height:81%;width:35%;z-index:2;transform:perspective(850px) translateY(-14px) scale(1.02);border-color:#ff92c1}
+.obs-hitmen-figure:nth-child(3){transform:perspective(850px) rotateY(-3deg)}
+.obs-hitmen-figure::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#050409e8 0%,transparent 32%),linear-gradient(180deg,transparent 78%,rgba(255,72,144,.07));box-shadow:inset 0 0 34px #000a}
+.obs-hitmen-figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+.obs-hitmen-figure figcaption{position:absolute;bottom:2.5%;left:5%;right:5%;color:#fff;font:900 clamp(14px,1.7vw,25px)/.95 "Barlow Condensed",Impact,sans-serif;letter-spacing:.02em;text-align:center;text-shadow:0 2px 8px #000;z-index:1}
+.obs-hitmen-figure figcaption small{display:block;margin-top:7px;color:#ff9ebf;font:800 clamp(8px,.9vw,12px)/1 Inter,sans-serif;letter-spacing:.13em}
+.obs-hitmen-starting-crest{position:absolute;right:14%;top:10%;width:125px;height:125px;object-fit:contain;opacity:.88;filter:drop-shadow(0 8px 15px #000)}
+.obs-hitmen-starting-caption{right:2.5%;width:34%;padding-left:24px}
+.obs-hitmen-starting-caption h1{font-size:clamp(74px,8vw,128px)}
+.obs-hitmen-starting-caption p{font-size:12px}
+@media(max-width:760px){
+  .obs-hitmen-figures{inset:0 38% 0 0;gap:1%;padding:10% 1% 8%}
+  .obs-hitmen-figure{height:60%;width:34%}
+  .obs-hitmen-figure:nth-child(2){height:66%;width:36%;transform:translateY(-7px)}
+  .obs-hitmen-starting-caption{width:35%;right:2%;padding-left:10px}
+  .obs-hitmen-starting-caption h1{font-size:clamp(49px,9vw,70px)}
+  .obs-hitmen-starting-crest{right:11%;top:10%;width:70px;height:70px}
+}
