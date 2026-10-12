@@ -185,11 +185,22 @@ class PeriodsEndpoint(Base):
 
 
 class AnalyzeAndJobRoutes(Base):
-    def test_analyze_without_periods_needs_them_and_never_creates_a_job(self):
+    def test_analyze_without_periods_starts_one_automatic_job(self):
         status, payload = self.call('POST', f'/reviews/{self.review["id"]}/analyze')
-        self.assertEqual((status, payload['code']), (422, 'periods_required'))
-        self.assertEqual(payload['error'], 'Enter the period start times before analyzing.')
-        self.assertEqual(self.call('GET', f'/reviews/{self.review["id"]}/job'), (200, {'job': None}))
+        self.assertEqual((status, payload['job']['status']), (200, 'retrieving'))
+        job_id = payload['job']['id']
+        self.assertEqual(self.call('POST', f'/reviews/{self.review["id"]}/analyze')[1]['job']['id'], job_id)
+        self.assertEqual(self.jobs(), [job_id])
+        self.assertEqual(payload['job']['metadata']['periods'], [])
+
+    def test_automatic_intake_requires_a_bounded_game_window(self):
+        self.review['source_end_seconds'] = None
+        self.assertEqual(self.call('POST', f'/reviews/{self.review["id"]}/analyze')[0], 422)
+        self.assertEqual(self.jobs(), [])
+
+    def test_automatic_intake_still_checks_management_access(self):
+        self.allowed.clear()
+        self.assertEqual(self.call('POST', f'/reviews/{self.review["id"]}/analyze')[0], 404)
         self.assertEqual(self.jobs(), [])
 
     def test_analyze_returns_the_linked_job_and_with_periods_acts_like_put(self):
@@ -271,7 +282,7 @@ class AuditFixes(Base):
         self.assertEqual((meta['keep'], meta['source_start_seconds']), ('me', 10))
         self.assertNotIn('completed_parts', meta)
 
-    def test_finished_ocr_scan_only_suggests_periods(self):
+    def test_finished_confident_ocr_scan_starts_bounded_period_analysis(self):
         spans = [{'label': f'Period {n}', 'start': (n - 1) * 400, 'end': n * 400} for n in (1, 2, 3)]
         meta = {'streamed_replay': True, 'replay_phase': 'scan_periods', 'scan_units': [{'start': 0, 'end': 1200}],
                 'scan_unit_index': 0, 'source_start_seconds': 0, 'source_end_seconds': 1200, 'players': ''}
@@ -284,10 +295,12 @@ class AuditFixes(Base):
                 patch.object(worker, 'analyze', side_effect=AssertionError('paid analysis')):
             worker.process(job_id)
         job = worker.get_job(job_id)
-        self.assertEqual(job['status'], 'needs_periods')
+        self.assertEqual(job['status'], 'retrieving')
         self.assertEqual(job['result']['period_detection'], 'replay_scoreboard')
         self.assertEqual([p['label'] for p in job['result']['detected_periods']], ['Period 1', 'Period 2', 'Period 3'])
-        self.assertNotEqual(job['metadata']['replay_phase'], 'analyze_periods')
+        self.assertEqual(job['metadata']['replay_phase'], 'analyze_periods')
+        self.assertTrue(all(p['end']-p['start']<=370 for p in job['metadata']['period_units']))
+        self.assertFalse((worker.ROOT/job_id/'source.mp4').exists())
 
     def test_upload_ocr_detection_also_waits_for_confirmation(self):
         job_id = self.insert('queued', {'periods': []})

@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import subprocess
 from pathlib import Path
 import tempfile
 import unittest
@@ -83,11 +84,11 @@ class ReplayTests(unittest.TestCase):
         with worker.connect() as db:
             self.assertEqual(db.execute('select count(*) from jobs').fetchone()[0], 0)
 
-    def test_analyze_without_periods_returns_the_failed_job_without_rewriting_its_window(self):
+    def test_analyze_retries_failed_retrieval_without_rewriting_its_window(self):
         job = self.make(dict(self.review, source_start_seconds=100, source_end_seconds=1900))
         worker.update(job['id'], 'failed', error='not available')
         again = replay.resolve(dict(self.review, source_start_seconds=5, source_end_seconds=50), 'owner', True)
-        self.assertEqual((again['id'], again['status']), (job['id'], 'failed'))
+        self.assertEqual((again['id'], again['status']), (job['id'], 'retrieving'))
         self.assertEqual(again['metadata']['source_start_seconds'], 100)
         self.assertEqual(again['metadata']['source_end_seconds'], 1900)
 
@@ -141,12 +142,17 @@ class ReplayTests(unittest.TestCase):
         executable.chmod(0o755)
         review = dict(self.review, source_start_seconds=120, source_end_seconds=240)
         job = self.make(review)
-        with patch.dict(os.environ, {'PATH': str(worker.ROOT) + os.pathsep + os.environ['PATH']}):
+        real_popen = subprocess.Popen
+        def launch(args, *a, **kw):
+            if args[0] == 'streamlink':
+                args = [sys.executable, str(executable), *args[1:]]
+            return real_popen(args, *a, **kw)
+        with patch.object(replay.subprocess, 'Popen', side_effect=launch):
             replay.retrieve(job['id'])
         argv = json.loads(args_file.read_text())
         self.assertEqual(argv[argv.index('--hls-start-offset') + 1], '120.0')
         self.assertEqual(argv[argv.index('--stream-segmented-duration') + 1], '120.0')
-        self.assertEqual(argv[-1], '480p,360p,worst')
+        self.assertEqual(argv[-1], '480p30,480p60,480p,360p30,360p60,360p,worst')
         self.assertEqual(worker.get_job(job['id'])['status'], 'queued')
         self.assertGreater(worker.probe(worker.ROOT / job['id'] / 'source.mp4'), 0)
         self.assertFalse((worker.ROOT / job['id'] / 'replay.ts').exists())

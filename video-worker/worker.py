@@ -1368,6 +1368,7 @@ def process_streamed_replay(job_id):
         update(job_id, 'processing', result)
 
         scan = live_periods.scan_recording_periods(source, duration, initial_period, confirmed=confirmed)
+        metadata['scan_restart_detected'] = bool(metadata.get('scan_restart_detected') or scan.get('restart_detected'))
         local_ranges = scan.get('ranges') or ([{
             'label': f'Period {initial_period}', 'period': initial_period,
             'start': 0.0, 'end': duration
@@ -1403,7 +1404,11 @@ def process_streamed_replay(job_id):
 
         total_duration = float(metadata.get('source_end_seconds') or 0) - float(metadata.get('source_start_seconds') or 0)
         periods = normalize_regulation_periods(result.get('period_spans'), total_duration)
-        if re.search(r'lag[- ]?out|restart|replayed period', metadata.get('players', ''), re.I):
+        print('VOD clock scan:', job_id, json.dumps({'spans':result.get('period_spans'),
+              'restart_detected':metadata.get('scan_restart_detected'),
+              'reads':[{k:r.get(k) for k in ('at','period','clock_seconds')}
+                       for d in diagnostics for r in d.get('reads',[])]}), flush=True)
+        if metadata.get('scan_restart_detected') or re.search(r'lag[- ]?out|restart|replayed period', metadata.get('players', ''), re.I):
             periods = []
         result['stage'] = 'needs_period_boundaries'
         if len(periods) < 3:
@@ -1413,12 +1418,21 @@ def process_streamed_replay(job_id):
                 'Confirm actual period boundaries and any restart/OT mapping. No AI analysis was run.'
             )
             return
-        # OCR only suggests periods; paid analysis starts when someone confirms them.
+        if any(is_overtime(p['label']) for p in periods) and not metadata.get('overtime_confirmed'):
+            result['detected_periods'] = periods
+            update_metadata(job_id, metadata, 'needs_periods', result,
+                            'Confirm overtime and any restart mapping before AI analysis.')
+            return
+        metadata['period_units'] = bounded_period_units(periods)
+        metadata['period_unit_index'] = 0
+        metadata['periods'] = periods
+        metadata['period_source'] = 'replay_scoreboard'
+        metadata['replay_phase'] = 'analyze_periods'
         result['detected_periods'] = periods
-        result['period_note'] = 'Suggested from local scoreboard period/game-clock OCR. Confirm them to start AI review.'
+        result['period_note'] = 'P1/P2/P3 locked using local scoreboard period/game-clock OCR.'
+        result['stage'] = 'period_boundaries_locked'
         result.pop('failure_code', None)
-        update_metadata(job_id, metadata, 'needs_periods', result,
-                        'Confirm the suggested period times before AI analysis. No AI analysis was run.')
+        update_metadata(job_id, metadata, 'retrieving', result, '')
         return
 
     # PHASE 2: fetch one <=370s part of a detected period, analyze it, save it, delete it.
@@ -1759,7 +1773,8 @@ def process(job_id):
     period_mode = (job['metadata'].get('period_source') or result.get('period_detection', 'manual')) if periods else None
     if not periods:
         detected = [] if result.get('period_detection') == 'full_game_fallback' else detect_periods(source, duration)
-        # OCR only suggests periods; paid analysis starts when someone confirms them.
+        # Uploaded recordings retain their existing confirmation step: their older
+        # detector does not validate restart/OT evidence like the Twitch scanner.
         result.update({'duration': duration, 'stage': 'needs_period_boundaries',
                        'period_detection': 'auto' if detected else 'needs_periods', 'detected_periods': detected})
         update(job_id, 'needs_periods', result, 'Confirm actual period boundaries before AI analysis. The recording is preserved.')
@@ -1923,7 +1938,7 @@ PERIOD_RANK = lambda label: int(label.split()[1]) + (3 if label.startswith('Over
 # Cursor and per-run state a period change (or a fresh pass) must not inherit.
 RUN_STATE_KEYS = ('completed_parts', 'pending_period_rollup', 'part_attempts', 'ai_rate_limit_retries',
                   'active_replay_unit', 'scan_units', 'scan_unit_index', 'scan_current_period',
-                  'scan_period_confirmed', 'resume_marker', 'synthesis_only')
+                  'scan_period_confirmed', 'scan_restart_detected', 'resume_marker', 'synthesis_only')
 
 
 def period_spec_hash(start, end, periods, overtime):
