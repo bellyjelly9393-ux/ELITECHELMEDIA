@@ -1941,7 +1941,7 @@ PERIOD_RANK = lambda label: int(label.split()[1]) + (3 if label.startswith('Over
 # Cursor and per-run state a period change (or a fresh pass) must not inherit.
 RUN_STATE_KEYS = ('completed_parts', 'pending_period_rollup', 'part_attempts', 'ai_rate_limit_retries',
                   'active_replay_unit', 'scan_units', 'scan_unit_index', 'scan_current_period',
-                  'scan_period_confirmed', 'resume_marker', 'synthesis_only')
+                  'scan_period_confirmed', 'scan_restart_detected', 'resume_marker', 'synthesis_only')
 
 
 def period_spec_hash(start, end, periods, overtime):

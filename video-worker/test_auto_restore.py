@@ -7,10 +7,16 @@ from unittest.mock import patch
 import worker
 import replay
 import live_periods
-from test_worker_reliability import Base
+from test_worker_reliability import Base, BODY
 
 
 class AutoRestore(Base):
+    def test_manual_restart_mapping_clears_the_previous_scan_warning(self):
+        job_id=self.insert('needs_periods',{'source_kind':'twitch_replay','vod_url':self.review['vod_url'],
+                                          'scan_restart_detected':True})
+        worker.apply_period_spec(job_id,worker.parse_period_spec(BODY))
+        self.assertNotIn('scan_restart_detected',worker.get_job(job_id)['metadata'])
+
     def test_concurrent_automatic_clicks_create_one_job(self):
         with ThreadPoolExecutor(2) as pool:
             jobs = list(pool.map(lambda _: replay.resolve(self.review, 'caller', True), range(2)))
