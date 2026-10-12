@@ -1,107 +1,148 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080507">
-<meta name="description" content="Calgary Hitmen Season 55: hockey-reporter recaps, live team media, verified LeagueGaming box scores, game-night results and film-room coverage.">
-<title>Calgary Hitmen Media | EliteChel Media Network</title>
-<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="hub.css"><link rel="stylesheet" href="wildman.css"><link rel="stylesheet" href="operations.css">
-<link rel="stylesheet" href="hitmen-media.css?v=20261007-room">
-<link rel="stylesheet" href="hitmen-media-recaps.css?v=20261010-editorial">
-<link rel="stylesheet" href="media-cinematic.css?v=20261011-a">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<title>Calgary Hitmen Media | Elitechel Media</title>
+<meta name="description" content="Calgary Hitmen Media from Elitechel Media: tonight's LGCHL Season 55 games with a live countdown, opponent write-ups from official LeagueGaming data, standings and the latest Postgame Desk recaps.">
+<link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="wildman-home.css?v=20261011-4">
+<link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
+<script>/* Recap links (#game-…, #recaps, #archive) now live on the Postgame Desk. */(function(h){if(/^#(game-\d+|recaps|hmRecapList|archive)$/.test(h))location.replace('hitmen-postgame.html'+h);})(location.hash);</script>
 </head>
-<body class="wildman-site hitmen-media-page wm-media-rebuild">
-<header class="site-header"></header>
-<main>
-<section class="md-hero" style="--md-hero-art:url('assets/wildman/home/hitmen.webp')" aria-label="Calgary Hitmen media">
-  <div class="section-shell md-hero-inside">
-    <div class="md-network-identity"><img src="assets/lgchl/s55/team412.png" alt="Calgary Hitmen official LGCHL team crest" width="83" height="83">
-    <span>CALGARY HITMEN<br>LGCHL SEASON 55 · ELITECHEL MEDIA</span></div>
-    <div class="md-tiny">ONE CITY · ONE TEAM · EVERY NIGHT</div>
-    <h1 class="md-display">CALGARY<br><em>HITMEN.</em><br>MEDIA.</h1>
-    <p class="md-sub">The stories from inside the season. The comeback wins, overtime heartbreak, big nights in goal and the players who define each Calgary game.</p>
-    <div class="md-actions"><a class="md-cta" href="#recaps">Read Game Recaps ↗</a><a class="md-cta outline" href="game-center.html?channel=hitmen#live-board">Season Schedule ↗</a></div>
-    <div class="md-hitmen-score">
-      <div><small>Imported season record</small><strong id="hmSeasonRecord">—</strong></div>
-      <div><small>Next scheduled game</small><strong id="hmSeasonNext" style="font-size:22px">Checking schedule…</strong></div>
-      <div><small>Game-night feed</small><strong>LGCHL S55</strong></div>
+<body>
+<header class="top band">
+  <div class="top-in">
+    <a class="brand" href="index.html" aria-label="Wildman Hockey home">
+      <img class="crest" src="assets/wildman/home/wildman-crest.webp" width="112" height="99" alt="">
+      <div class="brand-txt"><b>Wildman Hockey</b><span>Elitechel Media</span><span>Network</span></div>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="team.html">Wildman</a>
+      <a href="esports-hub.html">Esports Hub</a>
+      <a href="game-center.html">Live</a>
+      <a href="academy.html">Academy</a>
+      <a href="hitmen-media.html" class="on" aria-current="page">Media</a>
+      <a href="management.html">Management</a>
+    </nav>
+    <a class="icon-btn search-btn" href="lgchl-leaders.html" aria-label="LGCHL stats"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </div>
+</header>
+
+<nav class="desk-bar band" aria-label="Media desks">
+  <div class="desk-in">
+    <p class="eyebrow">Elitechel Media · choose a desk</p>
+    <div class="desk-toggle">
+      <a class="wild" href="wildman-media.html"><img src="assets/wildman/home/wildman-crest.webp" alt=""><span>Wildman Media</span></a>
+      <a class="hit" href="hitmen-media.html" aria-current="page"><img src="assets/lgchl/s55/team412.png" alt=""><span>Hitmen Media</span></a>
     </div>
   </div>
-  <div class="md-hero-rail" aria-hidden="true"><span>OFFICIAL<br>BOX SCORES</span><span>GAME-NIGHT<br>REPORTING</span><span>VIDEO<br>ANALYSIS</span></div>
-  <div class="md-hero-glow"></div>
-</section>
+</nav>
 
-<div class="md-bar"><div class="section-shell md-bar-inner">
-  <div><strong>HITMEN <span>MEDIA ROOM</span></strong><br><small>Season 55 · Published hockey-reporter game recaps · Official result links</small></div>
-  <nav class="md-bar-links" aria-label="Hitmen media sections"><a href="#media-room">Game Wire ↗</a><a href="#recaps">Full Recaps ↗</a><a href="game-center.html?channel=hitmen">Watch ↗</a><a href="wildman-media.html">Wildman Desk ↗</a></nav>
-</div></div>
+<nav class="sub-bar band" aria-label="Hitmen Media sections">
+  <div class="sub-in">
+    <a href="hitmen-media.html" aria-current="page">Game night</a>
+    <a href="hitmen-postgame.html">Postgame Desk</a>
+    <a href="hitmen-media.html#race">Standings</a>
+  </div>
+</nav>
 
-<section class="md-block" id="top-story">
-  <div class="section-shell md-section-title"><div><div class="md-tiny">EDITOR'S SELECTION · SEASON 55 · GAME 917148</div><h2 class="md-head">THE BIG <em>STORY.</em></h2></div><p>From the confirmed box scores and published postgame reports. No invented goals, penalties or action tracker timestamps.</p></div>
-  <article class="md-feature" style="--md-feature-art:url('assets/wildman/home/hitmen.webp')">
-    <div class="section-shell">
-      <div class="md-tiny">CALGARY 10 · REGINA 2 · SEASON 55</div>
-      <h3>TEN GOALS.<br>NINE POINTS.<br>ONE STATEMENT.</h3>
-      <p>offtheyrk stacked up three goals and six assists. geocustom scored four times and added four helpers. Calgary buried five in the final period to finish an explosive 10–2 victory over the Pats.</p>
-      <div class="md-actions"><a class="md-cta" href="#game-917148">Read the Full Story ↗</a><a class="md-cta outline" href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917148" target="_blank" rel="noopener noreferrer">Official Box Score ↗</a></div>
+<main id="top">
+  <section class="art-banner red" style="--art:url('assets/wildman/media/hitmen-media-960.webp')" aria-labelledby="hmTitle">
+    <h1 id="hmTitle" class="sr-only">Calgary Hitmen Media · Elitechel Media</h1>
+    <picture>
+      <source media="(max-width: 900px)" srcset="assets/wildman/media/hitmen-media-960.webp">
+      <img src="assets/wildman/media/hitmen-media.webp" width="1672" height="941" alt="Calgary Hitmen Media, Elitechel Media studio" fetchpriority="high">
+    </picture>
+  </section>
+
+  <section class="tonight band" id="tonight" aria-labelledby="tonightTitle">
+    <div class="tonight-in">
+      <div class="tonight-head">
+        <div>
+          <span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye" id="tnEyebrow">Game night · LGCHL Season 55</p>
+          <h2 class="sec-title" id="tonightTitle"><span id="tnTitleA">Tonight's</span> <em>games</em></h2>
+          <p class="opp-sub num" id="tnSub">Loading the official LG schedule…</p>
+        </div>
+        <div class="countdown-card card" id="cdCard">
+          <small>Puck drop · <span id="cdLabel">checking the schedule…</span></small>
+          <div class="cd-clock num" aria-hidden="true"><span><b id="cdD">--</b><i>days</i></span><span><b id="cdH">--</b><i>hrs</i></span><span><b id="cdM">--</b><i>min</i></span><span><b id="cdS">--</b><i>sec</i></span></div>
+          <p class="sr-only" id="cdSr" aria-live="polite"></p>
+          <div class="cd-actions">
+            <a class="btn btn-gold btn-sm" href="game-center.html?channel=hitmen">Watch Hitmen live <span class="arr">→</span></a>
+            <a class="btn btn-line btn-sm" id="cdLg" href="game-center.html?channel=hitmen#live-board" target="_blank" rel="noopener noreferrer"><span class="btxt">Official LG game</span> <span class="arr">↗</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="ow-grid" id="owGrid" aria-live="polite"><p class="empty">Loading tonight's opponents…</p></div>
+      <p class="stamp-note" id="owNote">Records and splits: official LG standings import. Head-to-head: official LG finals. Scorers: imported LG player stats. Write-ups are built only from that data.</p>
     </div>
-  </article>
-  <div class="section-shell"><div class="md-news-rail">
-    <a href="#game-917273"><small>OVERTIME WIN · EDMONTON</small><strong>Pastrnak's 20-save night shuts the door on the Oil Kings.</strong><span>Calgary 2 · Edmonton 1 · OT ↗</span></a>
-    <a href="#game-917212"><small>EXTRA-TIME HEROICS · MEDICINE HAT</small><strong>Richy ends it in overtime after 25 saves from Pastrnak.</strong><span>Calgary 3 · Medicine Hat 2 · OT ↗</span></a>
-    <a href="#game-917113"><small>THIRD-PERIOD RALLY · MOOSE JAW</small><strong>geocustom scores twice as Calgary turns the game around.</strong><span>Calgary 3 · Moose Jaw 2 ↗</span></a>
-  </div></div>
-</section>
+  </section>
 
-<section class="md-band" style="--md-band-art:url('assets/wildman/home/arena.webp')">
-  <div class="section-shell">
-    <div class="md-tiny">ELITECHEL MEDIA · CALGARY TEAM BROADCAST</div>
-    <h2 class="md-head">FROM PUCK DROP<br><em>TO FINAL HORN.</em></h2>
-    <p>The Calgary team channel, all Season 55 fixtures and completed results in one place. Switch to Multiview when multiple LG games are streaming.</p>
-    <div class="md-actions"><a class="md-cta" href="game-center.html?channel=hitmen">Hitmen Live + Games ↗</a><a class="md-cta outline" href="multiview.html">Open Multiview ↗</a></div>
-  </div>
-</section>
+  <section class="hit hit-stats" aria-label="Calgary Hitmen season">
+    <div class="hit-strip band">
+      <div class="stat"><small>Record</small><b id="stRecord">—</b></div>
+      <div class="stat"><small>Points</small><b id="stPts">—</b></div>
+      <div class="stat"><small>Goals for</small><b id="stGF">—</b></div>
+      <div class="stat"><small>Goals against</small><b id="stGA">—</b></div>
+      <div class="stat"><small id="stRankLbl">Conference</small><b id="stRank" class="gold">—</b></div>
+      <a class="next card tinted" id="nextTile" href="#tonight" style="--tc:212,42,42" hidden>
+        <span class="wm" id="nextWm" aria-hidden="true"></span>
+        <span class="next-logo" id="nextBadge" aria-hidden="true"></span>
+        <span class="next-play" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 10 10"><path d="M1 1l4 4-4 4M5 1l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></span>
+        <span class="next-txt"><small>Next game</small><b id="nextName">—</b><span id="nextWhen"></span></span>
+      </a>
+    </div>
+    <p class="stamp band num" id="stStamp">Loading official LG standings…</p>
+  </section>
 
-<section id="media-room" class="md-block hm-room">
-  <div class="section-shell">
-    <div class="md-section-title"><div><div class="md-tiny">LATEST PUBLISHED UPDATES · GAME-NIGHT WIRE</div><h2 class="md-head">THE HITMEN <em>WIRE.</em></h2></div><p>Nightly summaries and official final-score updates, straight from the connected team media feed.</p></div>
-    <div id="hmRoomStatus" class="md-tiny" role="status" aria-live="polite">LOADING MEDIA ROOM…</div>
-    <div id="hmRoomLead" class="hm-room-lead"><p class="hm-recap-empty">Loading the latest game-night wrap…</p></div>
-    <div id="hmRoomUpdates" class="hm-room-updates" aria-live="polite"></div>
-  </div>
-</section>
+  <section class="pg-teaser band" id="postgame" aria-labelledby="pgTitle">
+    <div class="pg-in">
+      <a class="pg-art card" href="hitmen-postgame.html"><img src="assets/wildman/media/postgame-desk.webp" width="1672" height="941" loading="lazy" alt="Postgame Desk: Hitmen recaps by Elitechel Media"></a>
+      <div class="pg-side-wrap">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Elitechel Media · Calgary Hitmen</p><h2 class="sec-title" id="pgTitle">Postgame <em>desk</em></h2><p class="opp-sub num" id="pgCount">Loading the latest recaps…</p></div>
+        <div class="side" id="pgSide"></div>
+        <a class="btn btn-gold btn-sm" href="hitmen-postgame.html">Open the Postgame Desk <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
 
-<section id="recaps" class="md-block">
-  <div class="section-shell">
-    <div class="md-section-title"><div><div class="md-tiny">HITMEN REPORTER'S DESK · LGCHL SEASON 55</div><h2 class="md-head">THE GAME <em>STORIES.</em></h2></div><div><span class="md-tiny" id="hmRecapCount">LOADING RECAPS</span><p class="md-sub" style="font-size:12px;max-width:280px">Open any full article for period breakdowns, star selections and key stats.</p></div></div>
-    <p class="md-source-note">Stories are based on published LeagueGaming statistics and verified game evidence. Detailed EA Action Tracker timelines appear only when separately verified. Original game results are linked inside each article.</p>
-    <div id="hmRecapList" class="hm-recap-grid" data-first="5" aria-live="polite"><p class="hm-recap-empty">Loading published Hitmen game reports…</p></div>
-    <div class="hm-recap-actions"><button id="hmRecapMore" class="small-btn" type="button" hidden>Show More Game Stories ↓</button></div>
-  </div>
-</section>
+  <section class="opp band" id="comingUp" aria-label="Coming up" hidden>
+    <div class="opp-in">
+      <div class="opp-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">LGCHL · Season 55</p><h2 class="sec-title">Coming <em>up</em></h2><p class="opp-sub num" id="cuSub"></p></div></div>
+      <div class="sched-grid" id="cuGrid"></div>
+    </div>
+  </section>
 
-<section class="md-band" style="--md-band-art:url('assets/wildman/home/ice.webp')">
-  <div class="section-shell">
-    <div class="md-tiny">VIDEO · STATS · EVIDENCE</div><h2 class="md-head">BEYOND THE<br><em>BOX SCORE.</em></h2>
-    <p>The media room brings the public story. Finished game film and deeper scouting evidence feed the protected Hitmen player stalls and War Room, where access stays limited to authorized team members.</p>
-    <div class="md-actions"><a class="md-cta" href="vod-center.html">Public VOD Center ↗</a><a class="md-cta outline" href="lgchl-leaders.html">Stats + Power Index ↗</a></div>
-  </div>
-</section>
-
-<section class="md-block"><div class="section-shell">
-  <div class="md-section-title"><div><div class="md-tiny">THE FULL WILDMAN NETWORK</div><h2 class="md-head">MORE HOCKEY.<br><em>MORE COVERAGE.</em></h2></div><p>Follow the full LGCHL or switch to Wildman Media for community tournaments, network broadcasts and esports stories.</p></div>
-  <div class="md-longlinks">
-    <a href="wildman-media.html">Wildman Media Network <span>Switch Media Desk ↗</span></a>
-    <a href="lgchl-leaders.html">LGCHL Stats + Power Rankings <span>Explore ↗</span></a>
-    <a href="game-center.html?channel=hitmen#live-board">Calgary Season Game Log <span>Fixtures ↗</span></a>
-    <a href="multiview.html">Wildman Network Multiview <span>Watch ↗</span></a>
-  </div>
-</div></section>
+  <section class="league band" id="race" aria-label="Conference standings">
+    <div class="league-in">
+      <div class="lg-copy">
+        <img class="lg-logo" src="assets/wildman/home/lgchl-logo.webp" width="760" height="434" loading="lazy" alt="LGCHL, Canadian Hockey League">
+        <h2 class="sec-title">The <em>race</em></h2>
+        <p id="raceCopy">Calgary's place in the conference, from the official LG standings import.</p>
+        <a class="btn btn-gold btn-sm" href="lgchl-leaders.html">View LGCHL hub <span class="arr">→</span></a>
+      </div>
+      <div class="leaders card" aria-label="Conference standings">
+        <div class="leaders-head"><span id="raceHead">Conference</span><small>Official LG standings import · W-L-OTL · PTS</small></div>
+        <div id="raceRows"><div class="lrow"><i>—</i><b>Loading standings…</b><em></em><strong></strong></div></div>
+      </div>
+    </div>
+  </section>
 </main>
-<footer class="md-footer"><div class="section-shell md-footer-inner"><div style="display:flex;gap:14px;align-items:center"><img src="assets/lgchl/s55/team412.png" alt="Calgary Hitmen crest"><div><strong>CALGARY HITMEN · ELITECHEL MEDIA</strong><p>Team coverage · Season 55 · Wildman Network</p></div></div><nav><a href="index.html">Home</a><a href="wildman-media.html">Wildman Media</a><a href="game-center.html?channel=hitmen">Hitmen Live</a><a href="lgchl-leaders.html">Stats</a></nav></div></footer>
-<script src="network-shell.js?v=20261010-clean2"></script>
-<script src="script.js"></script>
-<script src="hitmen-media-room.js?v=20261007-room"></script>
-<script src="hitmen-media-recaps.js?v=20261010-editorial2"></script>
-<script src="hitmen-media-hero.js?v=20261011-a"></script>
-</body></html>
+
+<footer class="band">
+  <div class="foot">
+    <span class="foot-brand"><img src="assets/wildman/home/wildman-crest.webp" width="96" height="85" loading="lazy" alt="Wildman Hockey logo"><span>© 2026 Wildman Hockey &amp; Esports Network</span></span>
+    <nav class="foot-nav" aria-label="Footer"><a href="wildman-media.html">Wildman Media</a><a href="hitmen-media.html">Hitmen Media</a><a href="hitmen-postgame.html">Postgame Desk</a><a href="game-center.html?channel=hitmen">Game Center</a><a href="multiview.html">Multiview</a><a href="lgchl-leaders.html">LGCHL Stats</a></nav>
+    <span>Season data: LeagueGaming imports · Times Eastern</span>
+  </div>
+</footer>
+<noscript><p class="band empty">Enable JavaScript to load tonight's games, standings and published recaps.</p></noscript>
+<script src="media-desk.js?v=20261011-1"></script>
+<script src="hitmen-media-desk.js?v=20261011-2"></script>
+</body>
+</html>

@@ -1,98 +1,128 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#05080c">
-<meta name="description" content="Wildman Hockey EliteChel Media: live network broadcasts, hockey news, verified Calgary Hitmen stories, LGCHL league coverage and postgame video.">
-<title>Wildman Media | EliteChel Hockey Network</title>
-<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="hub.css"><link rel="stylesheet" href="wildman.css"><link rel="stylesheet" href="operations.css">
-<link rel="stylesheet" href="media-cinematic.css?v=20261011-a">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<title>Wildman Hockey Media | Elitechel Media</title>
+<meta name="description" content="Wildman Hockey Media from Elitechel Media: Wildman Network Live channels, Connected Franchise and HUT competition news, and the VVHL network wire.">
+<link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="wildman-home.css?v=20261011-4">
+<link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
 </head>
-<body class="wildman-site elite-media-page wm-media-rebuild">
-<header class="site-header"></header>
-<main>
-<section class="md-hero" style="--md-hero-art:url('assets/wildman/home/elitechel-media.webp')" aria-label="Wildman EliteChel Media">
-  <div class="section-shell md-hero-inside">
-    <div class="md-network-identity">
-      <img src="assets/brand/elitechel-shield-320.webp" alt="EliteChel Media crest" width="83" height="83">
-      <span>WILDMAN HOCKEY<br>ELITECHEL MEDIA NETWORK</span>
-    </div>
-    <div class="md-tiny">FROM THE ICE · TO THE NETWORK · TO YOU</div>
-    <h1 class="md-display">THE<br>WILDMAN<br><em>MEDIA DESK.</em></h1>
-    <p class="md-sub">The stories that make competitive hockey worth watching. Game-night coverage, broadcast highlights, league reports, film-room insight and the moments that deserve another look.</p>
-    <div class="md-actions">
-      <a class="md-cta" href="multiview.html">Watch Network Streams ↗</a>
-      <a class="md-cta outline" href="#headlines">Read Latest Stories ↓</a>
+<body>
+<header class="top band">
+  <div class="top-in">
+    <a class="brand" href="index.html" aria-label="Wildman Hockey home">
+      <img class="crest" src="assets/wildman/home/wildman-crest.webp" width="112" height="99" alt="">
+      <div class="brand-txt"><b>Wildman Hockey</b><span>Elitechel Media</span><span>Network</span></div>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="team.html">Wildman</a>
+      <a href="esports-hub.html">Esports Hub</a>
+      <a href="game-center.html">Live</a>
+      <a href="academy.html">Academy</a>
+      <a href="hitmen-media.html" class="on" aria-current="page">Media</a>
+      <a href="management.html">Management</a>
+    </nav>
+    <a class="icon-btn search-btn" href="lgchl-leaders.html" aria-label="LGCHL stats"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </div>
+</header>
+
+<nav class="desk-bar band" aria-label="Media desks">
+  <div class="desk-in">
+    <p class="eyebrow">Elitechel Media · choose a desk</p>
+    <div class="desk-toggle">
+      <a class="wild" href="wildman-media.html" aria-current="page"><img src="assets/wildman/home/wildman-crest.webp" alt=""><span>Wildman Media</span></a>
+      <a class="hit" href="hitmen-media.html"><img src="assets/lgchl/s55/team412.png" alt=""><span>Hitmen Media</span></a>
     </div>
   </div>
-  <div class="md-hero-rail" aria-hidden="true"><span>NETWORK<br>REPORTING</span><span>GAME-NIGHT<br>COVERAGE</span><span>POSTGAME<br>ANALYSIS</span></div>
-  <div class="md-hero-glow"></div>
-</section>
+</nav>
 
-<div class="md-bar"><div class="section-shell md-bar-inner">
-  <div><strong>THE WILDMAN <span>NETWORK WIRE</span></strong><br><small>Hockey stories · Verified results · Broadcasts across competitive Chel</small></div>
-  <nav class="md-bar-links" aria-label="Wildman media sections"><a href="#headlines">Top stories ↗</a><a href="#broadcast">On air ↗</a><a href="#film-room">Film room ↗</a><a href="hitmen-media.html">Hitmen Desk ↗</a></nav>
-</div></div>
+<main id="top">
+  <section class="art-banner" style="--art:url('assets/wildman/media/wildman-media-960.webp')" aria-labelledby="wmTitle">
+    <h1 id="wmTitle" class="sr-only">Wildman Hockey Media · Elitechel Media</h1>
+    <picture>
+      <source media="(max-width: 900px)" srcset="assets/wildman/media/wildman-media-960.webp">
+      <img src="assets/wildman/media/wildman-media.webp" width="1672" height="941" alt="Wildman Hockey Media and Elitechel Media broadcast studio" fetchpriority="high">
+    </picture>
+  </section>
+  <nav class="feature-row band" aria-label="Featured network coverage">
+    <a class="tile card tinted" href="interest.html?program=franchise#apply" style="--tc:227,181,74"><span class="wm" aria-hidden="true" style="--logo:url('assets/wildman/home/wildman-crest.webp')"></span><span class="tile-ic"><img src="assets/wildman/home/wildman-crest.webp" width="48" height="48" alt=""></span><span class="tile-txt"><b>Connected Franchise</b><small>Interest list open · $25 proposed buy-in</small></span><span class="go" aria-hidden="true">→</span></a>
+    <a class="tile card tinted" href="interest.html?program=hut#apply" style="--tc:200,160,80"><span class="wm" aria-hidden="true" style="--logo:url('assets/wildman/home/wildman-crest.webp')"></span><span class="tile-ic"><img src="assets/wildman/home/wildman-crest.webp" width="48" height="48" alt=""></span><span class="tile-txt"><b>Wildman HUT tournament</b><small>Register interest · format not announced</small></span><span class="go" aria-hidden="true">→</span></a>
+    <a class="tile card tinted" href="#live" style="--tc:60,110,220"><span class="wm" aria-hidden="true" style="--logo:url('assets/wildman/home/elitechel-media.webp')"></span><span class="tile-ic"><img src="assets/wildman/home/elitechel-media.webp" width="48" height="48" alt=""></span><span class="tile-txt"><b>Wildman Network Live</b><small>Channels + multiview</small></span><span class="go" aria-hidden="true">→</span></a>
+    <a class="tile card tinted" href="#wire" style="--tc:200,210,225"><span class="wm" aria-hidden="true" style="--logo:url('assets/wildman/home/elitechel-media.webp')"></span><span class="tile-ic"><img src="assets/wildman/home/elitechel-media.webp" width="48" height="48" alt=""></span><span class="tile-txt"><b>Network wire</b><small>VVHL and Wildman stories</small></span><span class="go" aria-hidden="true">→</span></a>
+  </nav>
+  <div class="ice-edge" aria-hidden="true"></div>
 
-<section id="headlines" class="md-block">
-  <div class="section-shell">
-    <div class="md-section-title"><div><div class="md-tiny">WILDMAN NEWSROOM · EDITOR'S DESK</div><h2 class="md-head">TONIGHT'S <em>HEADLINES.</em></h2></div><p>Real reporting from the LGCHL and across the Wildman network. Each game story links back to a verified final or official statistics.</p></div>
-  </div>
-  <article class="md-feature" style="--md-feature-art:url('assets/wildman/home/hitmen.webp')">
-    <div class="section-shell">
-      <div class="md-tiny">CALGARY HITMEN · SEASON 55 · FEATURED GAME STORY</div>
-      <h3>ONE NIGHT.<br>TEN CALGARY GOALS.</h3>
-      <p>The Hitmen unleashed a 10–2 result over Regina, powered by nine points from offtheyrk and eight from geocustom. The official numbers tell the story of a commanding night in the LGCHL.</p>
-      <div class="md-actions"><a class="md-cta" href="hitmen-media.html#game-917148">Read the full recap ↗</a><a class="md-cta outline" href="hitmen-media.html">Open Hitmen Media ↗</a></div>
+  <section class="live band with-art" id="live" aria-label="Wildman Network Live">
+    <div class="live-in">
+      <a class="live-art card" href="multiview.html"><img src="assets/wildman/media/network-live.webp" width="1672" height="941" loading="lazy" alt="Wildman Network Live, Elitechel Media broadcast desk"></a>
+      <div class="live-side">
+        <div class="live-head">
+          <span class="live-badge"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z" fill="#fff"/></svg>LIVE</span>
+          <h2>Wildman Network Live</h2>
+          <p>Multiple streams. One place. Your hockey hub.</p>
+        </div>
+        <div class="rail" id="rail">
+          <a class="tile card tinted" href="multiview.html" style="--tc:227,181,74"><span class="wm" aria-hidden="true" style="--logo:url('assets/wildman/home/wildman-crest.webp')"></span><span class="tile-ic"><img src="assets/wildman/home/wildman-crest.webp" width="48" height="48" alt=""></span><span class="tile-txt"><b>Build your multiview</b><small>Twitch + YouTube side by side</small></span><span class="go" aria-hidden="true">→</span></a>
+        </div>
+        <div class="live-meta">
+          <small id="lvStatus" aria-live="polite">Loading channels…</small>
+          <a class="btn btn-line btn-sm" href="multiview.html"><span class="btxt">Open multiview</span> <span class="arr">→</span></a>
+        </div>
+      </div>
     </div>
-  </article>
-  <div class="section-shell"><div class="md-news-rail" id="wmMediaWireRail">
-    <a href="hitmen-media.html#game-917113"><small>COMEBACK REPORT · LGCHL</small><strong>Calgary turns a 2–1 deficit into a Moose Jaw victory.</strong><span>Game 917113 · Source: LeagueGaming ↗</span></a>
-    <a href="hitmen-media.html#game-917212"><small>OVERTIME DRAMA · LGCHL</small><strong>Pastrnak stops 25 as the Hitmen survive Medicine Hat.</strong><span>Game 917212 · Verified box score ↗</span></a>
-    <a href="lgchl-leaders.html"><small>LEAGUE INTELLIGENCE · SEASON 55</small><strong>Scoring leaders, power index and the games worth studying.</strong><span>Official imported LGCHL results ↗</span></a>
-  </div></div>
-</section>
+  </section>
 
-<section id="broadcast" class="md-band" style="--md-band-art:url('assets/wildman/home/arena.webp')">
-  <div class="section-shell">
-    <div class="md-tiny">WILDMAN NETWORK · BROADCAST DIVISION</div>
-    <h2 class="md-head">EVERY GAME.<br><em>ONE DESK.</em></h2>
-    <p>Build a personal live broadcast desk with up to eight public Twitch or YouTube feeds, or switch straight to Calgary's dedicated game-night channel. Stream availability depends on the broadcasters.</p>
-    <div class="md-actions"><a class="md-cta" href="multiview.html">Launch Multiview ↗</a><a class="md-cta outline" href="game-center.html?channel=hitmen">Hitmen Live ↗</a></div>
-  </div>
-</section>
+  <section class="opp band" id="wire" aria-label="Network wire">
+    <div class="opp-in">
+      <div class="opp-head">
+        <div>
+          <span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Elitechel Media · network desk</p>
+          <h2 class="sec-title">Network <em>wire</em></h2>
+          <p class="opp-sub num" id="wireSub">Loading published network stories…</p>
+        </div>
+      </div>
+      <div class="recap-grid" id="wireGrid"></div>
+    </div>
+  </section>
 
-<section id="film-room" class="md-block">
- <div class="section-shell md-editorial">
-   <div class="md-editorial-image" style="--md-editorial-art:url('assets/wildman/home/ice.webp')" aria-label="Arena ice and broadcast lighting"></div>
-   <div class="md-editorial-copy">
-     <div class="md-tiny">ELITECHEL MEDIA · THE FILM ROOM</div>
-     <h2 class="md-head">MORE THAN<br><em>THE FINAL SCORE.</em></h2>
-     <p>Games are more than a result. The Wildman workflow brings together official match statistics, recorded broadcasts, approved period-by-period evidence and human-readable hockey analysis. Public stories stay separate from private scouting.</p>
-     <div class="md-actions"><a class="md-cta" href="vod-center.html">Explore Published VODs ↗</a><a class="md-cta outline" href="reports.html">Game Reports ↗</a></div>
-   </div>
- </div>
-</section>
-
-<section class="md-band" style="--md-band-art:url('assets/wildman/home/lgchl-logo.webp')">
- <div class="section-shell"><div class="md-tiny">LGCHL · SEASON 55 · LEAGUE COVERAGE</div>
-   <h2 class="md-head">THE REST OF<br><em>THE LEAGUE.</em></h2>
-   <p>From goal-fests and extra-time finishes to the scoring race and statistical power rankings. Follow the league beyond Calgary, with source-linked results and no invented play-by-play.</p>
-   <div class="md-actions"><a class="md-cta" href="lgchl-leaders.html">League Stats & Power Index ↗</a></div>
- </div>
-</section>
-
-<section class="md-block">
- <div class="section-shell"><div class="md-section-title"><div><div class="md-tiny">COMPETITION REPORTING · WILDMAN HOCKEY</div><h2 class="md-head">WHAT'S <em>NEXT.</em></h2></div><p>Community competitions are taking shape, and the newsroom will follow their stories as formats and schedules are confirmed.</p></div>
- <div class="md-longlinks">
-  <a href="interest.html?program=franchise#apply">Connected Franchise · $25 buy-in <span>Express Interest ↗</span></a>
-  <a href="interest.html?program=hut#apply">Inaugural Wildman HUT Tournament <span>Express Interest ↗</span></a>
-  <a href="hitmen-media.html">Calgary Hitmen Team Media <span>Open Desk ↗</span></a>
-  <a href="game-center.html?channel=hitmen">Season 55 Game Center <span>View Schedule ↗</span></a>
- </div></div>
-</section>
+  <section class="league band" id="network" aria-label="Network desk">
+    <div class="league-in">
+      <div class="lg-copy">
+        <img class="lg-logo" src="assets/wildman/home/elitechel-media.webp" width="260" height="257" loading="lazy" alt="Elitechel Media" style="width: 220px">
+        <h2 class="sec-title">Network <em>desk</em></h2>
+        <p>Wildman tournaments, Connected Franchise, HUT and VVHL coverage from the Elitechel Media desk. Calgary Hitmen coverage has its own desk.</p>
+        <a class="btn btn-gold btn-sm" href="interest.html">Competition intake <span class="arr">→</span></a>
+      </div>
+      <div class="leaders card" aria-label="Open competitions">
+        <div class="leaders-head"><span>Open competitions</span><small>Dates, formats and prizes are announced by organizers</small></div>
+        <div class="lrow" style="--pw:100%"><i>1</i><img class="rl" src="assets/wildman/home/wildman-crest.webp" alt=""><b>Connected Franchise</b><em>Interest list</em><strong>OPEN</strong></div>
+        <div class="lrow" style="--pw:100%"><i>2</i><img class="rl" src="assets/wildman/home/wildman-crest.webp" alt=""><b>Wildman HUT tournament</b><em>Register interest</em><strong>OPEN</strong></div>
+      </div>
+      <nav class="lg-links" aria-label="Media sections">
+        <a class="tile card tinted" href="hitmen-media.html" style="--tc:214,48,48"><span class="wm wm-lg" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><img src="assets/lgchl/s55/team412.png" width="48" height="48" alt=""></span><span class="tile-txt"><b>Hitmen Media</b><small>Tonight's games + Postgame Desk</small></span><span class="go" aria-hidden="true">→</span></a>
+        <a class="tile card tinted" href="game-center.html" style="--tc:60,110,220"><span class="wm wm-lg" aria-hidden="true" style="--logo:url('assets/wildman/home/lgchl-logo.webp')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="3.5" width="13" height="10" rx="1"/><path d="M1.5 6.5h13M5 1.5v3M11 1.5v3"/></svg></span><span class="tile-txt"><b>Game Center</b><small>Live and upcoming games</small></span><span class="go" aria-hidden="true">→</span></a>
+        <a class="tile card tinted" href="multiview.html" style="--tc:227,181,74"><span class="wm wm-lg" aria-hidden="true" style="--logo:url('assets/wildman/home/wildman-crest.webp')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="1.5" width="5.5" height="5.5"/><rect x="9" y="1.5" width="5.5" height="5.5"/><rect x="1.5" y="9" width="5.5" height="5.5"/><rect x="9" y="9" width="5.5" height="5.5"/></svg></span><span class="tile-txt"><b>Multiview</b><small>Every feed on one page</small></span><span class="go" aria-hidden="true">→</span></a>
+        <a class="tile card tinted" href="interest.html" style="--tc:200,210,225"><span class="wm wm-lg" aria-hidden="true" style="--logo:url('assets/wildman/home/wildman-crest.webp')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="1.5" width="11" height="13" rx="1"/><path d="M5 5h6M5 8h6M5 11h4"/></svg></span><span class="tile-txt"><b>Competition intake</b><small>Franchise + HUT interest lists</small></span><span class="go" aria-hidden="true">→</span></a>
+      </nav>
+    </div>
+  </section>
 </main>
-<footer class="md-footer"><div class="section-shell md-footer-inner"><div style="display:flex;align-items:center;gap:14px"><img src="assets/brand/elitechel-shield-320.webp" alt="EliteChel Media logo"><div><strong>WILDMAN HOCKEY · ELITECHEL MEDIA</strong><p>Game-night coverage. Broadcasts. Hockey stories.</p></div></div><nav><a href="index.html">Home</a><a href="multiview.html">Multiview</a><a href="hitmen-media.html">Hitmen</a><a href="lgchl-leaders.html">LGCHL Stats</a><a href="management.html">Management</a></nav></div></footer>
-<script src="network-shell.js?v=20261010-clean2"></script><script src="script.js"></script>
-<script src="wildman-media-wire.js?v=20261011-a"></script>
-</body></html>
+
+<footer class="band">
+  <div class="foot">
+    <span class="foot-brand"><img src="assets/wildman/home/wildman-crest.webp" width="96" height="85" loading="lazy" alt="Wildman Hockey logo"><span>© 2026 Wildman Hockey &amp; Esports Network</span></span>
+    <nav class="foot-nav" aria-label="Footer"><a href="wildman-media.html">Wildman Media</a><a href="hitmen-media.html">Hitmen Media</a><a href="interest.html">Competition intake</a><a href="multiview.html">Multiview</a><a href="game-center.html">Game Center</a></nav>
+    <span>Season data: LeagueGaming imports · Times Eastern</span>
+  </div>
+</footer>
+<noscript><p class="band empty">Enable JavaScript to load channels and network stories. All links remain available.</p></noscript>
+<script src="media-desk.js?v=20261011-1"></script>
+<script src="wildman-media-desk.js?v=20261011-1"></script>
+</body>
+</html>
