@@ -1773,15 +1773,12 @@ def process(job_id):
     period_mode = (job['metadata'].get('period_source') or result.get('period_detection', 'manual')) if periods else None
     if not periods:
         detected = [] if result.get('period_detection') == 'full_game_fallback' else detect_periods(source, duration)
-        periods = normalize_regulation_periods(detected, duration)
-        if re.search(r'lag[- ]?out|restart|replayed period', job['metadata'].get('players', ''), re.I):
-            periods = []
-        if len(periods) < 3 or any(is_overtime(p['label']) for p in periods):
-            result.update({'duration': duration, 'stage': 'needs_period_boundaries',
-                           'period_detection': 'needs_periods', 'detected_periods': detected})
-            update(job_id, 'needs_periods', result, 'Confirm actual period boundaries and any restart/OT mapping before AI analysis. The recording is preserved.')
-            return
-        period_mode = 'auto'
+        # Uploaded recordings retain their existing confirmation step: their older
+        # detector does not validate restart/OT evidence like the Twitch scanner.
+        result.update({'duration': duration, 'stage': 'needs_period_boundaries',
+                       'period_detection': 'auto' if detected else 'needs_periods', 'detected_periods': detected})
+        update(job_id, 'needs_periods', result, 'Confirm actual period boundaries before AI analysis. The recording is preserved.')
+        return
     plan = segments(periods, duration)
     result.update({
         'duration': duration,
