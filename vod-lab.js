@@ -152,6 +152,7 @@
     const p=(i)=>segs.find(s=>s.segment_type==="period"&&s.segment_index===i);
     const ots=segs.filter(s=>s.segment_type==="overtime").map(s=>fmtTime(s.start_seconds));
     const switchedReview=manualFieldsReviewId!==r.id;
+    if(switchedReview&&$("publishVodStatus"))$("publishVodStatus").textContent="";
     // Never overwrite times the manager is typing; refill only on a new game or after a save.
     if(switchedReview||!periodFieldsDirty){
       const absoluteEnd=sourceEnd!=null?sourceEnd:(r.duration_seconds!=null?sourceStart+Number(r.duration_seconds):null);

@@ -651,6 +651,8 @@ window.addEventListener('vvhl-vod-rendered',event=>{
     const id=selectedReviewId();
     if(id!==lastSelectedReviewId){
       lastSelectedReviewId=id;savedState=null;
+      const analyzeButton=document.getElementById('vodAnalyzeGame');
+      if(analyzeButton)analyzeButton.textContent='Analyze Game';
       clearInterval(pollTimer);pollTimer=null;
       document.getElementById('manualPeriodBuilder')?.removeAttribute('open');
       setStatus('Press Analyze Game to detect periods, or save corrected times to continue.');

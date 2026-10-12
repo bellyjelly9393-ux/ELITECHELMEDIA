@@ -73,6 +73,14 @@ const wait=async(test)=>{for(let i=0;i<150;i++){if(test())return;await new Promi
   await wait(()=>r.status==='archived');
   await wait(()=>w.document.querySelector('[data-vod-id="game"]'));
   assert.equal(rows.vod_game_publications[0].active,true);
+  w.document.querySelector('[data-vod-id="game"]').click();
+  await wait(()=>w.document.getElementById('vodAnalyzeGame').textContent==='View Reports');
+  rows.vod_review_sessions.push({...r,id:'newgame',status:'queued',worker_status:null,worker_job_id:null,worker_result:{},review_document:null,pending_worker_result:null,full_game_summary:''});
+  w.document.getElementById('refreshVod').click();
+  await wait(()=>w.document.querySelector('[data-vod-id="newgame"]'));
+  w.document.querySelector('[data-vod-id="newgame"]').click();
+  await wait(()=>w.document.getElementById('vodAnalyzeGame').textContent==='Analyze Game');
+  assert.equal(w.document.getElementById('publishVodStatus').textContent,'','A different game must not inherit the prior publication notice');
   console.log('PASS: filed library access, automatic intake, detected period import with absolute VOD offsets, saved reports, management approval/publication/filing, repeat import preservation');
  }finally{observers.forEach(o=>o.disconnect());dom.window.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
