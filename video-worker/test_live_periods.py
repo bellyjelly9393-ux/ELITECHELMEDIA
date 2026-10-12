@@ -58,6 +58,14 @@ class LivePeriodTests(unittest.TestCase):
         self.assertEqual(inferred['current_period'], 2)
         self.assertEqual(len(inferred['ranges']), 2)
 
+    def test_confirmed_backwards_period_is_a_restart(self):
+        reads=[{'at':12,'period':2},{'at':24,'period':2},{'at':36,'period':1},{'at':48,'period':1}]
+        self.assertTrue(live_periods.infer_period_ranges(reads,60)['restart_detected'])
+
+    def test_single_backwards_ocr_error_does_not_confirm_a_restart(self):
+        reads=[{'at':12,'period':2},{'at':24,'period':2},{'at':36,'period':1},{'at':48,'period':2}]
+        self.assertFalse(live_periods.infer_period_ranges(reads,60)['restart_detected'])
+
 
 if __name__=='__main__':
     unittest.main()

@@ -63,6 +63,9 @@ def infer_period_ranges(reads, duration, initial_period=1, confirm_reads=2, inte
     streak = 0
     candidate_at = None
     previous_clock = None
+    restart_detected = False
+    regression = None
+    regression_streak = 0
 
     for item in reads:
         at = max(0.0, min(duration, float(item.get('at') or 0)))
@@ -82,6 +85,14 @@ def infer_period_ranges(reads, duration, initial_period=1, confirm_reads=2, inte
             observed = int(observed) if observed is not None else None
         except (TypeError, ValueError):
             observed = None
+        if observed is not None and 0 < observed < current:
+            regression_streak = regression_streak + 1 if regression == observed else 1
+            regression = observed
+            if regression_streak >= max(2, int(confirm_reads)):
+                restart_detected = True
+        else:
+            regression = None
+            regression_streak = 0
         if observed is None or observed == current:
             candidate = None
             streak = 0
@@ -131,7 +142,8 @@ def infer_period_ranges(reads, duration, initial_period=1, confirm_reads=2, inte
         period = int(item['period'])
         label = f'Period {period}' if period <= 3 else ('Overtime' if period == 4 else f'Overtime {period - 3}')
         ranges.append({'label': label, 'period': period, 'start': round(start, 1), 'end': round(end, 1)})
-    return {'ranges': ranges, 'current_period': max(1, current), 'boundaries': clean, 'confirmed': current >= 1}
+    return {'ranges': ranges, 'current_period': max(1, current), 'boundaries': clean, 'confirmed': current >= 1,
+            'restart_detected': restart_detected}
 
 
 def scan_recording_periods(source, duration, initial_period=1, interval=REPLAY_INTERVAL, confirmed=True):

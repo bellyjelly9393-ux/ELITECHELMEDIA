@@ -152,7 +152,7 @@ class ReplayTests(unittest.TestCase):
         argv = json.loads(args_file.read_text())
         self.assertEqual(argv[argv.index('--hls-start-offset') + 1], '120.0')
         self.assertEqual(argv[argv.index('--stream-segmented-duration') + 1], '120.0')
-        self.assertEqual(argv[-1], '480p,360p,worst')
+        self.assertEqual(argv[-1], '480p30,480p60,480p,360p30,360p60,360p,worst')
         self.assertEqual(worker.get_job(job['id'])['status'], 'queued')
         self.assertGreater(worker.probe(worker.ROOT / job['id'] / 'source.mp4'), 0)
         self.assertFalse((worker.ROOT / job['id'] / 'replay.ts').exists())

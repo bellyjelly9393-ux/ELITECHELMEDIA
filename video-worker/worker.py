@@ -1368,6 +1368,7 @@ def process_streamed_replay(job_id):
         update(job_id, 'processing', result)
 
         scan = live_periods.scan_recording_periods(source, duration, initial_period, confirmed=confirmed)
+        metadata['scan_restart_detected'] = bool(metadata.get('scan_restart_detected') or scan.get('restart_detected'))
         local_ranges = scan.get('ranges') or ([{
             'label': f'Period {initial_period}', 'period': initial_period,
             'start': 0.0, 'end': duration
@@ -1403,7 +1404,11 @@ def process_streamed_replay(job_id):
 
         total_duration = float(metadata.get('source_end_seconds') or 0) - float(metadata.get('source_start_seconds') or 0)
         periods = normalize_regulation_periods(result.get('period_spans'), total_duration)
-        if re.search(r'lag[- ]?out|restart|replayed period', metadata.get('players', ''), re.I):
+        print('VOD clock scan:', job_id, json.dumps({'spans':result.get('period_spans'),
+              'restart_detected':metadata.get('scan_restart_detected'),
+              'reads':[{k:r.get(k) for k in ('at','period','clock_seconds')}
+                       for d in diagnostics for r in d.get('reads',[])]}), flush=True)
+        if metadata.get('scan_restart_detected') or re.search(r'lag[- ]?out|restart|replayed period', metadata.get('players', ''), re.I):
             periods = []
         result['stage'] = 'needs_period_boundaries'
         if len(periods) < 3:

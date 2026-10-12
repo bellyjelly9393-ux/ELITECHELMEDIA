@@ -559,7 +559,10 @@ def retrieve(job_id):
             args.append('--twitch-api-header=Authorization=OAuth ' + twitch_token)
         if force_integrity:
             args.extend(['--twitch-force-client-integrity', '--twitch-purge-client-integrity'])
-        quality = '360p,worst' if max_height <= 360 else '480p,360p,worst'
+        # Twitch exposes frame-rate suffixed names (e.g. 360p30), not always 360p.
+        # Missing those names silently selects worst/160p and makes OCR unreadable.
+        low_quality = '360p30,360p60,360p,worst'
+        quality = low_quality if max_height <= 360 else '480p30,480p60,480p,' + low_quality
         args.extend(['-o', str(source), url, quality])
         with diagnostic.open('wb') as err:
             return subprocess.Popen(args, stdout=subprocess.DEVNULL, stderr=err)
