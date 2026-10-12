@@ -1,5 +1,5 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
-import { TEAM, SEASON, ROSTER_URL, LG_STATS_URL, parseRosters, matchLeaguePlayers, eaMembers } from '../../../lib/opponent-refresh.mjs';
+import { TEAM, SEASON, ROSTER_URL, LG_STATS_URL, parseRosters, matchLeaguePlayers, eaMembers, rawGoals, findRestartGroup } from '../../../lib/opponent-refresh.mjs';
 
 const db = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, {auth: {persistSession: false}});
 const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), {status, headers: {'Content-Type': 'application/json'}});
@@ -116,11 +116,34 @@ async function reconcileOfficialGames(task: any, club: string, platform: string,
       const ts=Number(m?.timestamp||0)*1000;
       const diff=Number.isFinite(scheduled)&&ts ? Math.abs(ts-scheduled) : Number.MAX_SAFE_INTEGER;
       return {m,tc,oc,diff};
-    }).filter((x:any)=>x.tc&&x.oc&&Number(x.tc.score)===gf&&Number(x.oc.score)===ga&&!used.has(String(x.m.matchId))&&x.diff<=24*60*60*1000)
+    }).filter((x:any)=>x.tc&&x.oc&&((Number(x.tc.score)===gf&&Number(x.oc.score)===ga)||(rawGoals(x.tc)===gf&&rawGoals(x.oc)===ga))&&!used.has(String(x.m.matchId))&&x.diff<=24*60*60*1000)
       .sort((a:any,b:any)=>a.diff-b.diff);
 
     if (!candidates.length) {
-      unmatched.push({lg_game_id:g.lg_game_id,opponent:otherName,score:gf+'-'+ga,reason:'No exact EA club/score match within 24h'});
+      // Disconnect + restart: several EA matches whose raw goals add up to the official final.
+      const restart = findRestartGroup(matches, club, otherClub, gf, ga, scheduled, used);
+      if (!restart) {
+        unmatched.push({lg_game_id:g.lg_game_id,opponent:otherName,score:gf+'-'+ga,reason:'No exact EA club/score match within 24h'});
+        continue;
+      }
+      restart.parts.forEach((m:any, k:number) => {
+        used.add(String(m.matchId));
+        const tc=m.clubs[club], oc=m.clubs[otherClub];
+        rows.push({
+          team_id:TEAM,season:SEASON,opponent_name:task.opponent_name,source_game_id:String(m.matchId),
+          ea_club_id:club,opponent_club_id:otherClub,played_at:new Date(Number(m.timestamp)*1000).toISOString(),
+          // Result is the official LG result; goals are this part's raw on-ice goals.
+          result:gf>ga?'W':gf<ga?'L':'T',goals_for:rawGoals(tc),goals_against:rawGoals(oc),
+          team_stats:tc||{},opponent_stats:oc||{},
+          player_stats:{team:m?.players?.[club]||{},opponent:m?.players?.[otherClub]||{}},
+          raw_payload:{...m,reconciliation:{official_lg_game:true,lg_game_id:g.lg_game_id,lg_game_at:g.game_at,lg_source_url:g.source_url,other_team:otherName,
+            restart_part:k+1,restart_parts:restart.parts.length,restart_match_ids:restart.parts.map((x:any)=>String(x.matchId)),
+            ea_recorded_score:`${tc?.score}-${oc?.score}`,raw_score:`${rawGoals(tc)}-${rawGoals(oc)}`}},
+          source_updated_at:asOf,updated_at:asOf,
+          lg_game_id:g.lg_game_id,verified_official:true,verification_confidence:0.97,
+          verification_basis:`Disconnect restart: ${restart.parts.length} back-to-back EA matches between the exact EA clubs; raw goals sum to the official LGCHL final ${gf}-${ga}`
+        });
+      });
       continue;
     }
     const pick=candidates[0], m=pick.m;
@@ -136,7 +159,7 @@ async function reconcileOfficialGames(task: any, club: string, platform: string,
       raw_payload:{...m,reconciliation:{official_lg_game:true,lg_game_id:g.lg_game_id,lg_game_at:g.game_at,lg_source_url:g.source_url,other_team:otherName,time_difference_seconds:Math.round(pick.diff/1000)}},
       source_updated_at:asOf,updated_at:asOf,
       lg_game_id:g.lg_game_id,verified_official:true,verification_confidence:confidence,
-      verification_basis:'Exact EA club IDs + exact final score + nearest timestamp to official LGCHL game'
+      verification_basis:(Number(pick.tc.score)===gf&&Number(pick.oc.score)===ga)?'Exact EA club IDs + exact final score + nearest timestamp to official LGCHL game':'Exact EA club IDs + raw (pre-forfeit) goals equal the official final + nearest timestamp'
     });
   }
   if (rows.length) await checked(db.from('hitmen_opponent_ea_games').upsert(rows,{onConflict:'team_id,season,opponent_name,source_game_id'}));
