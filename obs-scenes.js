@@ -87,6 +87,20 @@
       }
     },
     {
+      id:'starting-hitmen-bobbleheads',
+      scene:'starting',
+      label:'Hitmen Starting Soon',
+      sublabel:'Bobblehead Team Graphic',
+      template:'full',
+      preset:{
+        feedLayout:'full',
+        bugPosition:'hidden',
+        showScoreboard:false,
+        logoBug:'off',
+        streamMuted:true
+      }
+    },
+    {
       id:'intermission',
       scene:'intermission',
       label:'Intermission',
