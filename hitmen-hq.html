@@ -10,7 +10,7 @@
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="wildman-home.css?v=20261011-5">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
-<link rel="stylesheet" href="hitmen-hq.css?v=20261013-4">
+<link rel="stylesheet" href="hitmen-hq.css?v=20261013-5">
 </head>
 <body>
 <header class="top band">
@@ -48,10 +48,10 @@
 <nav class="sub-bar band" aria-label="War Room rooms">
   <div class="sub-in">
     <a href="hitmen-hq.html" aria-current="page">Headquarters</a>
-    <a href="hitmen-opponents.html">Scouting</a>
-    <a href="hitmen-team-locker.html#lineupLab">Lineup Lab</a>
-    <a href="hitmen-team-locker.html">Locker Room</a>
-    <a href="hitmen-player-locker.html">My Stall</a>
+    <a href="hitmen-scouting.html">Scouting</a>
+    <a href="hitmen-lineup.html">Lineup Lab</a>
+    <a href="hitmen-locker.html">Locker Room</a>
+    <a href="hitmen-stall.html">My Stall</a>
     <a href="hitmen-workspace.html">Game Center</a>
     <a href="vod-lab.html?team=calgary-hitmen" class="vod">VOD Control Center</a>
     <a href="hitmen-media.html">Media</a>
@@ -94,8 +94,8 @@
             <div class="cd-clock num" aria-hidden="true"><span><b id="cdD">--</b><i>days</i></span><span><b id="cdH">--</b><i>hrs</i></span><span><b id="cdM">--</b><i>min</i></span><span><b id="cdS">--</b><i>sec</i></span></div>
             <p class="sr-only" id="cdSr" aria-live="polite"></p>
             <div class="cd-actions">
-              <a class="btn btn-gold btn-sm" href="hitmen-team-locker.html#lineupLab">Open Lineup Lab <span class="arr">→</span></a>
-              <a class="btn btn-line btn-sm" href="hitmen-opponents.html"><span class="btxt" id="gnScout">Scouting</span> <span class="arr">→</span></a>
+              <a class="btn btn-gold btn-sm" href="hitmen-lineup.html">Open Lineup Lab <span class="arr">→</span></a>
+              <a class="btn btn-line btn-sm" href="hitmen-scouting.html"><span class="btxt" id="gnScout">Scouting</span> <span class="arr">→</span></a>
             </div>
           </div>
         </div>
@@ -123,10 +123,10 @@
         </div>
         <div class="band-head"><div><p class="eyebrow opp-eye">Rooms</p></div></div>
         <nav class="rooms" aria-label="War Room rooms">
-          <a class="tile card tinted" href="hitmen-opponents.html" style="--tc:212,42,42"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 7h10M3 11h7M12 13l3 3M10 9a3 3 0 1 0 6 0 3 3 0 0 0-6 0"/></svg></span><span class="tile-txt"><b>Scouting</b><small>Opponent files, danger players, pregame reports</small></span><span class="go" aria-hidden="true">→</span></a>
-          <a class="tile card tinted" href="hitmen-team-locker.html#lineupLab" style="--tc:227,181,74"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12v8H2zM8 4v8M2 8h12"/></svg></span><span class="tile-txt"><b>Lineup Lab</b><small>Tonight's six, sandbox lines, game sheet</small></span><span class="go" aria-hidden="true">→</span></a>
-          <a class="tile card tinted" href="hitmen-team-locker.html" style="--tc:200,210,225"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h4v12H3zM9 2h4v12H9z"/></svg></span><span class="tile-txt"><b>Locker Room</b><small id="roomLocker">Stalls, training camp, line performance</small></span><span class="go" aria-hidden="true">→</span></a>
-          <a class="tile card tinted" href="hitmen-player-locker.html" style="--tc:139,227,166"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM3 14c0-3 2-4.5 5-4.5S13 11 13 14"/></svg></span><span class="tile-txt"><b>My Stall</b><small>Your jersey, stats and game reports</small></span><span class="go" aria-hidden="true">→</span></a>
+          <a class="tile card tinted" href="hitmen-scouting.html" style="--tc:212,42,42"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 7h10M3 11h7M12 13l3 3M10 9a3 3 0 1 0 6 0 3 3 0 0 0-6 0"/></svg></span><span class="tile-txt"><b>Scouting</b><small>Opponent files, danger players, pregame reports</small></span><span class="go" aria-hidden="true">→</span></a>
+          <a class="tile card tinted" href="hitmen-lineup.html" style="--tc:227,181,74"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12v8H2zM8 4v8M2 8h12"/></svg></span><span class="tile-txt"><b>Lineup Lab</b><small>Tonight's six, sandbox lines, game sheet</small></span><span class="go" aria-hidden="true">→</span></a>
+          <a class="tile card tinted" href="hitmen-locker.html" style="--tc:200,210,225"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h4v12H3zM9 2h4v12H9z"/></svg></span><span class="tile-txt"><b>Locker Room</b><small id="roomLocker">Stalls, training camp, line performance</small></span><span class="go" aria-hidden="true">→</span></a>
+          <a class="tile card tinted" href="hitmen-stall.html" style="--tc:139,227,166"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM3 14c0-3 2-4.5 5-4.5S13 11 13 14"/></svg></span><span class="tile-txt"><b>My Stall</b><small>Your jersey, stats and game reports</small></span><span class="go" aria-hidden="true">→</span></a>
           <a class="tile card tinted" href="vod-lab.html?team=calgary-hitmen" style="--tc:120,160,255"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12v8H2zM7 6.5v3l3-1.5z"/></svg></span><span class="tile-txt"><b>VOD Control Center</b><small>Submit replays, review periods, filed reports</small></span><span class="go" aria-hidden="true">→</span></a>
           <a class="tile card tinted" href="hitmen-workspace.html" style="--tc:214,48,48"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v10H2zM2 6h12M5 9h6"/></svg></span><span class="tile-txt"><b>Game-night tools</b><small>Game Night Series, stall requests, broadcast board</small></span><span class="go" aria-hidden="true">→</span></a>
         </nav>
@@ -138,13 +138,13 @@
 <footer class="band">
   <div class="foot">
     <span class="foot-brand"><img src="assets/lgchl/s55/team412.png" width="96" height="96" loading="lazy" alt="Calgary Hitmen logo"><span>Calgary Hitmen War Room · private</span></span>
-    <nav class="foot-nav" aria-label="Footer"><a href="hitmen-hq.html">Headquarters</a><a href="hitmen-opponents.html">Scouting</a><a href="hitmen-team-locker.html">Locker Room</a><a href="hitmen-media.html">Hitmen Media</a></nav>
+    <nav class="foot-nav" aria-label="Footer"><a href="hitmen-hq.html">Headquarters</a><a href="hitmen-scouting.html">Scouting</a><a href="hitmen-lineup.html">Lineup Lab</a><a href="hitmen-locker.html">Locker Room</a><a href="hitmen-media.html">Hitmen Media</a></nav>
     <span>Data: official LeagueGaming imports and War Room saves · Times Eastern</span>
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script src="backend.js"></script>
 <script src="media-desk.js?v=20261011-1"></script>
-<script src="hitmen-hq.js?v=20261013-2"></script>
+<script src="hitmen-hq.js?v=20261013-3"></script>
 </body>
 </html>

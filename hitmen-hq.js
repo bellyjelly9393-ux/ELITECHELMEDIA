@@ -282,7 +282,7 @@
         (o ? '<dl class="ow-stats"><div><dt>Record</dt><dd>' + rec(o) + '</dd></div><div><dt>' + 'WHL East' + '</dt><dd>' + (rankOf(o.lg_team_id) ? ordinal(rankOf(o.lg_team_id)) : '–') + '</dd></div><div><dt>Last 10</dt><dd>' + esc(o.last10 || '–') + '</dd></div><div><dt>' + split[0] + '</dt><dd>' + esc(split[1] || '–') + '</dd></div><div><dt>GF / GA</dt><dd>' + o.gf + ' / ' + o.ga + '</dd></div></dl>' : '') +
         '<p>' + blurb + esc(seriesTxt) + '</p>' +
         '<div class="prep">' + chip(p.rep[0], p.rep[1]) + chip(p.pl[0], p.pl[1]) + (rosterAt ? chip('info', 'Roster ' + whenTxt(rosterAt).replace(' ET', '')) : '') + '</div>' +
-        '<a class="ow-link" href="hitmen-opponents.html">Open opponent file →</a></article>';
+        '<a class="ow-link" href="hitmen-scouting.html?opp=' + encodeURIComponent(o?.name || '') + '">Open opponent file →</a></article>';
     }).join('');
     tint($('gnGrid'));
   }
