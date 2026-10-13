@@ -1,0 +1,6 @@
+/* Calgary Hitmen War Room header picture, shown under the nav on the private Hitmen pages. */
+.hm-wr-banner{position:relative;width:100%;max-width:1440px;margin:0 auto;background:#0a0b0c;border-bottom:1px solid rgba(182,39,57,.55);overflow:hidden;line-height:0}
+.hm-wr-banner img{display:block;width:100%;height:auto;max-height:560px;object-fit:cover;object-position:50% 0}
+.hm-wr-banner::after{content:"";position:absolute;inset:auto 0 0 0;height:22%;background:linear-gradient(180deg,rgba(10,11,12,0),rgba(10,11,12,.85));pointer-events:none}
+.hm-wr-banner .hm-wr-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:640px){.hm-wr-banner img{max-height:none}}
