@@ -136,7 +136,9 @@
       return { rep, pl, fresh: rep[0] === 'ok', planned: !!plan };
     }
 
-    renderNext(nextNight, byId, oppOf, isHome, finals, cs, os, prepFor);
+    const rankOf = id => whlEast.findIndex(t => t.lg_team_id === id) + 1;
+    const rosterAt = runR.ok && runR.v[0]?.finished_at ? runR.v[0].finished_at : null;
+    renderNext(nextNight, byId, oppOf, isHome, finals, cs, os, prepFor, rankOf, rosterAt);
 
     /* ---------- readiness ---------- */
     const rows = [];
@@ -248,7 +250,7 @@
   }
   setInterval(tick, 1000);
 
-  function renderNext(list, byId, oppOf, isHome, finals, cs, os, prepFor) {
+  function renderNext(list, byId, oppOf, isHome, finals, cs, os, prepFor, rankOf, rosterAt) {
     if (!list.length) {
       $('gnTitleA').textContent = 'Season'; $('gnSub').textContent = 'No upcoming Calgary games in the official LG schedule.';
       $('cdLabel').textContent = 'no game scheduled'; $('gnGrid').innerHTML = ''; return;
@@ -257,6 +259,7 @@
     $('gnEyebrow').textContent = 'Next game night · Week ' + (first.week || '–') + ' · ' + F.longDay.format(new Date(first.game_at));
     $('gnTitleA').textContent = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Toronto', weekday: 'long' }).format(new Date(first.game_at)) + '’s';
     $('gnTitleB').textContent = list.length === 3 ? 'three' : list.length === 1 ? 'game' : 'games';
+    $('gnScout').textContent = 'Scout ' + new Intl.DateTimeFormat('en-US', { timeZone: 'America/Toronto', weekday: 'long' }).format(new Date(first.game_at));
     $('gnSub').textContent = list.length + ' game' + (list.length === 1 ? '' : 's') + ' · times Eastern · official LG schedule';
     const fo = byId.get(oppOf(first));
     $('cdLabel').textContent = (isHome(first) ? 'vs ' : 'at ') + (fo?.name || 'TBA') + ' · ' + F.time.format(new Date(first.game_at)) + ' ET';
@@ -268,13 +271,17 @@
       const w = series.filter(f => cs(f) > os(f)).length, l = series.length - w;
       const p = prepFor(g);
       const seriesTxt = series.length ? 'Calgary is ' + w + '-' + l + ' against them: ' + series.map(f => (cs(f) > os(f) ? 'W ' : 'L ') + cs(f) + '–' + os(f) + ' on ' + F.md.format(new Date(f.game_at))).join(', ') + '.' : 'First meeting this season.';
+      const sk = /^-?(\d+)\s*([A-Za-z]+)$/.exec(String(o?.streak || '').trim());
+      const run = sk && +sk[1] > 0 ? ' ' + (/^w/i.test(sk[2]) ? 'Won ' : 'Lost ') + sk[1] + ' coming in.' : '';
+      const diff = o ? (o.gf >= o.ga ? 'have outscored opponents ' + o.gf + '–' + o.ga : 'have been outscored ' + o.ga + '–' + o.gf) : '';
+      const blurb = o ? esc(o.name) + ' are ' + rec(o) + ' and ' + diff + '.' + run + ' ' : '';
       const split = home ? ['On road', o?.away] : ['At home', o?.home];
       return '<article class="ow card tinted' + (i === 0 ? ' is-now' : '') + '" data-logo="' + src + '"><span class="wm wm-lg" aria-hidden="true" style="--logo:url(\'' + src + '\')"></span>' +
         '<header class="ow-top"><img src="' + src + '" width="56" height="56" alt=""><div><span class="ow-time">Game ' + (i + 1) + ' · ' + esc(F.time.format(new Date(g.game_at))) + ' ET · ' + (home ? 'Home' : 'Away') + '</span><h3>' + (home ? 'vs ' : 'at ') + esc(o?.name || 'TBA') + '</h3></div>' +
         '<span class="ow-h2h' + (w < l ? ' dn' : '') + '"><b>' + w + '-' + l + '</b><small>Calgary H2H</small></span></header>' +
-        (o ? '<dl class="ow-stats"><div><dt>Record</dt><dd>' + rec(o) + '</dd></div><div><dt>Points</dt><dd>' + o.pts + '</dd></div><div><dt>Last 10</dt><dd>' + esc(o.last10 || '–') + '</dd></div><div><dt>' + split[0] + '</dt><dd>' + esc(split[1] || '–') + '</dd></div><div><dt>GF / GA</dt><dd>' + o.gf + ' / ' + o.ga + '</dd></div></dl>' : '') +
-        '<p>' + esc(seriesTxt) + '</p>' +
-        '<div class="prep">' + chip(p.rep[0], p.rep[1]) + chip(p.pl[0], p.pl[1]) + '</div>' +
+        (o ? '<dl class="ow-stats"><div><dt>Record</dt><dd>' + rec(o) + '</dd></div><div><dt>' + 'WHL East' + '</dt><dd>' + (rankOf(o.lg_team_id) ? ordinal(rankOf(o.lg_team_id)) : '–') + '</dd></div><div><dt>Last 10</dt><dd>' + esc(o.last10 || '–') + '</dd></div><div><dt>' + split[0] + '</dt><dd>' + esc(split[1] || '–') + '</dd></div><div><dt>GF / GA</dt><dd>' + o.gf + ' / ' + o.ga + '</dd></div></dl>' : '') +
+        '<p>' + blurb + esc(seriesTxt) + '</p>' +
+        '<div class="prep">' + chip(p.rep[0], p.rep[1]) + chip(p.pl[0], p.pl[1]) + (rosterAt ? chip('info', 'Roster ' + whenTxt(rosterAt).replace(' ET', '')) : '') + '</div>' +
         '<a class="ow-link" href="hitmen-opponents.html">Open opponent file →</a></article>';
     }).join('');
     tint($('gnGrid'));
