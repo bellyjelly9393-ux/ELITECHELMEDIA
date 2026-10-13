@@ -109,7 +109,7 @@
     const sinceYmd = new Date(Date.now() - 60 * 864e5).toISOString().slice(0, 10);
     const [schedR, repR, planR, runR, boxR, statR, recapR, lockR] = await Promise.all([
       safe(q(db.from('hitmen_schedule_games').select('id,scheduled_at,opponent_name,status').eq('team_id', TEAM).eq('season', SEASON))),
-      safe(q(db.from('hitmen_opponent_pregame_reports').select('id,opponent_name,scheduled_game_id,created_at').eq('team_id', TEAM).eq('season', SEASON).order('created_at', { ascending: false }).limit(300))),
+      safe(q(db.from('hitmen_opponent_pregame_reports').select('id,opponent_name,scheduled_game_id,created_at,evidence_summary').eq('team_id', TEAM).eq('season', SEASON).order('created_at', { ascending: false }).limit(300))),
       safe(q(db.from('hitmen_battle_plans').select('id,opponent_name,game_date,schedule_game_id,status,updated_at').eq('team_id', TEAM).gte('game_date', sinceYmd))),
       safe(q(db.from('hitmen_opponent_refresh_runs').select('requested_at,finished_at').eq('team_id', TEAM).order('requested_at', { ascending: false }).limit(1))),
       safe(finals.length ? q(db.from('lg_game_box_scores').select('lg_game_id,captured_at').in('lg_game_id', finals.map(g => g.lg_game_id))) : Promise.resolve([])),
@@ -125,7 +125,7 @@
 
     function prepFor(g) {
       const s = schedFor(g), opp = byId.get(oppOf(g));
-      const reports = repR.ok ? repR.v.filter(r => (s && r.scheduled_game_id === s.id) || (opp && strip(r.opponent_name) === strip(opp.name))) : null;
+      const reports = repR.ok ? repR.v.filter(r => s ? r.scheduled_game_id === s.id : (opp && strip(r.opponent_name) === strip(opp.name))) : null;
       const latest = reports && reports[0];
       const plan = planR.ok && s ? planR.v.find(p => p.schedule_game_id === s.id) : null;
       const rep = reports === null ? ['info', 'Reports unavailable']
@@ -133,7 +133,7 @@
         : Date.parse(latest.created_at) >= lastFinalAt ? ['ok', 'Report ' + F.md.format(new Date(latest.created_at))]
         : ['warn', 'Report ' + F.md.format(new Date(latest.created_at)) + ' · stale'];
       const pl = !planR.ok ? ['info', 'Plans unavailable'] : plan ? ['ok', 'Battle plan saved'] : ['warn', 'No battle plan'];
-      return { rep, pl, fresh: rep[0] === 'ok', planned: !!plan };
+      return { rep, pl, latest, fresh: rep[0] === 'ok', planned: !!plan };
     }
 
     const rankOf = id => whlEast.findIndex(t => t.lg_team_id === id) + 1;
@@ -282,7 +282,7 @@
         (o ? '<dl class="ow-stats"><div><dt>Record</dt><dd>' + rec(o) + '</dd></div><div><dt>' + 'WHL East' + '</dt><dd>' + (rankOf(o.lg_team_id) ? ordinal(rankOf(o.lg_team_id)) : '–') + '</dd></div><div><dt>Last 10</dt><dd>' + esc(o.last10 || '–') + '</dd></div><div><dt>' + split[0] + '</dt><dd>' + esc(split[1] || '–') + '</dd></div><div><dt>GF / GA</dt><dd>' + o.gf + ' / ' + o.ga + '</dd></div></dl>' : '') +
         '<p>' + blurb + esc(seriesTxt) + '</p>' +
         '<div class="prep">' + chip(p.rep[0], p.rep[1]) + chip(p.pl[0], p.pl[1]) + (rosterAt ? chip('info', 'Roster ' + whenTxt(rosterAt).replace(' ET', '')) : '') + '</div>' +
-        '<a class="ow-link" href="hitmen-scouting.html?opp=' + encodeURIComponent(o?.name || '') + '">Open opponent file →</a></article>';
+        (p.latest ? '<a class="ow-link" href="hitmen-scouting-report.html?report=' + encodeURIComponent(p.latest.id) + '"><b>Pregame scouting report →</b><span class="hq-opp-six">' + ['LW','C','RW','LD','RD','G'].map(pos => '<span><i>' + pos + '</i> ' + esc(p.latest.evidence_summary?.lineups?.opponent?.[pos] || 'Awaiting posted player') + '</span>').join('') + '</span></a>' : '') + '<a class="ow-link" href="hitmen-scouting.html?opp=' + encodeURIComponent(o?.name || '') + '">Opponent intelligence · all games →</a></article>';
     }).join('');
     tint($('gnGrid'));
   }

@@ -101,3 +101,9 @@
   .sub-in { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
   .sub-in a { justify-content: center; text-align: center; white-space: normal; padding: 4px 6px 0; min-height: 44px; font-size: 16px; line-height: 1.1; }
 }
+
+/* Posted opponent six links to the exact game report. */
+.hq-opp-six { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:12px 0; }
+.hq-opp-six span { min-width:0; overflow-wrap:anywhere; font-size:15px; }
+.hq-opp-six i { color:var(--gold-hi); font-style:normal; margin-right:6px; }
+.ow-link:focus-visible, .posted-report-link:focus-visible { outline:2px solid var(--gold-hi); outline-offset:4px; }

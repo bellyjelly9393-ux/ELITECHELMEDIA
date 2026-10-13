@@ -11,8 +11,8 @@
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="wildman-home.css?v=20261011-5">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
-<link rel="stylesheet" href="hitmen-hq.css?v=20261013-5">
-<link rel="stylesheet" href="hitmen-rooms.css?v=20261013-1">
+<link rel="stylesheet" href="hitmen-hq.css?v=20261013-6">
+<link rel="stylesheet" href="hitmen-rooms.css?v=20261013-2">
 </head>
 <body data-room="lineup">
 <header class="top band">
@@ -88,6 +88,7 @@
           <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye" id="labEye">Posted six</p><h2 class="sec-title" id="labTitle">Tonight’s <em>six</em></h2></div>
           <span id="labChip"></span>
         </div>
+        <div class="sheet-tabs" role="tablist" aria-label="Tonight’s games" id="nightTabs"></div>
         <div class="lab">
           <div class="rink card" id="rink" aria-label="Posted six">
             <div class="rink-head"><b>Unit 1</b><span class="src" id="rinkSrc">LG season line beside each player</span></div>
@@ -97,11 +98,12 @@
             <div><p class="eyebrow" style="margin-bottom:6px">Active roster not dressed</p><div class="bench" id="bench"></div></div>
           </div>
           <div class="sheet card" aria-label="Battle plans">
-            <div class="sheet-tabs" role="tablist" id="sheetTabs"></div>
+            <div id="sheetTabs"></div>
             <div class="sheet-body" id="sheetBody"><p class="hq-loading">Loading game sheets…</p></div>
           </div>
         </div>
         <p class="stamp-note" id="labNote"></p>
+        <div id="opponentHistory" class="card" aria-label="Opponent intelligence"></div>
         <div class="rooms-actions"><a class="btn btn-gold btn-sm" href="hitmen-team-locker.html#lineupLab">Open lineup builder <span class="arr">→</span></a><a class="btn btn-line btn-sm" href="hitmen-battle-plan.html"><span class="btxt">Battle plans</span> <span class="arr">→</span></a></div>
       </div>
     </section>
@@ -119,6 +121,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script src="backend.js"></script>
 <script src="media-desk.js?v=20261011-1"></script>
-<script src="hitmen-rooms.js?v=20261013-1"></script>
+<script src="hitmen-rooms.js?v=20261013-2"></script>
 </body>
 </html>

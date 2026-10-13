@@ -176,3 +176,18 @@ a.stall.me:hover { box-shadow: inset 0 0 0 2px var(--gold); }
   .danger .lrow strong { grid-column: 4; grid-row: 1 / span 2; }
   .danger .lrow i, .danger .lrow .pos { grid-row: 1 / span 2; align-self: center; }
 }
+
+#nightTabs { margin-bottom:18px; }
+.posted-report-link { display:block; color:inherit; text-decoration:none; padding:12px; }
+.posted-report-link > b { display:block; color:var(--gold-hi); margin-top:12px; }
+.opponent-six { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+.opponent-six .slot { min-height:100px; }
+.opponent-six .slot b { white-space:normal; overflow-wrap:anywhere; }
+.pregame-excerpt { margin:16px 0; padding:12px; border-block:1px solid var(--line); }
+.pregame-excerpt summary { cursor:pointer; color:var(--gold-hi); }
+.pre-wrap { white-space:pre-line; }
+#opponentHistory { margin-top:20px; }
+.opponent-results { display:grid; max-height:480px; overflow:auto; }
+.opponent-results a { display:grid; grid-template-columns:72px minmax(0,1fr) 60px; gap:10px; padding:10px 16px; color:inherit; text-decoration:none; border-top:1px solid var(--line); }
+.opponent-results a:hover { background:rgba(255,255,255,.06); }
+.opponent-results b { overflow-wrap:anywhere; }

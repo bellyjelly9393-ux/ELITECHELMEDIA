@@ -128,9 +128,26 @@
       "opponent_lg_team_id": 418,
       "scheduled_at": "2026-10-14T01:00:00Z",
       "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917493",
-      "captured_at": "2026-10-11T16:36:33.672Z",
-      "status": "not_visible_in_public_source",
-      "lineups": null
+      "captured_at": "2026-10-13T21:04:02.190Z",
+      "status": "verified_posted_lineups",
+      "lineups": {
+        "calgary": {
+          "LW": "gtcoop73",
+          "C": "l Setty l",
+          "RW": "geocustom",
+          "LD": "Crybaby_cameron",
+          "RD": "imona_plain",
+          "G": "Kudolken"
+        },
+        "opponent": {
+          "LW": "lllG1lll",
+          "C": "Grxffon",
+          "RW": "LilRiptGitch69",
+          "LD": "That Battery",
+          "RD": "KREIDIE",
+          "G": "KOLLER"
+        }
+      }
     },
     {
       "lg_game_id": 917523,
@@ -139,9 +156,26 @@
       "opponent_lg_team_id": 2983,
       "scheduled_at": "2026-10-14T01:35:00Z",
       "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917523",
-      "captured_at": "2026-10-11T16:36:33.672Z",
-      "status": "not_visible_in_public_source",
-      "lineups": null
+      "captured_at": "2026-10-13T21:04:02.190Z",
+      "status": "verified_posted_lineups",
+      "lineups": {
+        "calgary": {
+          "LW": "gtcoop73",
+          "C": "l Setty l",
+          "RW": "geocustom",
+          "LD": "Crybaby_cameron",
+          "RD": "imona_plain",
+          "G": "Kudolken"
+        },
+        "opponent": {
+          "LW": "iCLassYxTTV",
+          "C": "Im-Rukia",
+          "RW": "Br0midas",
+          "LD": "Mxstro x 21",
+          "RD": "Ccrowder2",
+          "G": "disgraziiatooo"
+        }
+      }
     },
     {
       "lg_game_id": 917554,
@@ -150,9 +184,26 @@
       "opponent_lg_team_id": 385,
       "scheduled_at": "2026-10-14T02:10:00Z",
       "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917554",
-      "captured_at": "2026-10-11T16:36:33.672Z",
-      "status": "not_visible_in_public_source",
-      "lineups": null
+      "captured_at": "2026-10-13T21:04:02.190Z",
+      "status": "verified_posted_lineups",
+      "lineups": {
+        "calgary": {
+          "LW": "gtcoop73",
+          "C": "l Setty l",
+          "RW": "geocustom",
+          "LD": "Crybaby_cameron",
+          "RD": "imona_plain",
+          "G": "Kudolken"
+        },
+        "opponent": {
+          "LW": "DeaconDish21",
+          "C": "BROLLZ28",
+          "RW": "mr_couture._85073",
+          "LD": "I 2k Clampz",
+          "RD": "Nickiscool28",
+          "G": "Freedoms_A_Must1"
+        }
+      }
     }
   ]
 }

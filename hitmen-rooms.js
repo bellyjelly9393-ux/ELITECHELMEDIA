@@ -152,7 +152,7 @@
       const p = Promise.all([
         safe(q(db.from('hitmen_opponent_player_stats').select('gamertag,position,source,games_played,goals,assists,points,plus_minus,goalie_save_pct,goalie_gaa,source_updated_at').eq('team_id', TEAM).eq('season', SEASON).eq('opponent_name', name))),
         safe(q(db.from('hitmen_opponent_roster_players').select('gamertag,position,roster_role,source_updated_at').eq('team_id', TEAM).eq('season', SEASON).eq('opponent_name', name).eq('active', true))),
-        safe(q(db.from('hitmen_opponent_pregame_reports').select('report,created_at').eq('team_id', TEAM).eq('season', SEASON).eq('opponent_name', name).order('created_at', { ascending: false }).limit(1)))
+        safe(q(db.from('hitmen_opponent_pregame_reports').select('id,report,created_at,evidence_summary').eq('team_id', TEAM).eq('season', SEASON).eq('opponent_name', name).order('created_at', { ascending: false }).limit(1)))
       ]);
       cache.set(name, p);
       return p;
@@ -208,7 +208,7 @@
           (hurt.length ? '<h4>What can hurt us</h4><ul>' + hurt.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
           (plan.length ? '<h4>Plan to win</h4><ul>' + plan.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
           (!hurt.length && !plan.length ? '<p class="lede">' + esc(text.slice(0, 600)) + '</p>' : '') + '</div>' +
-          '<div class="report-foot"><span class="src">Written ' + esc(whenTxt(rep.created_at)) + ' · excerpt</span><a class="btn btn-gold btn-sm" href="hitmen-opponents.html">' + (fresh ? 'Full report' : 'Regenerate report') + ' <span class="arr">→</span></a></div></div>';
+          '<div class="report-foot"><span class="src">Written ' + esc(whenTxt(rep.created_at)) + ' · excerpt</span><a class="btn btn-gold btn-sm" href="hitmen-scouting-report.html?report=' + encodeURIComponent(rep.id) + '">' + (fresh ? 'Full report' : 'Full report · older evidence') + ' <span class="arr">→</span></a></div></div>';
       }
 
       /* LG roster by position; training camp faded */
@@ -220,7 +220,9 @@
           '<div class="roster">' + groups.map(([p, list]) => '<div class="roster-col"><h5>' + p + '</h5>' + list.map(r => { const tc = r.roster_role === 'Training Camp'; return '<div class="rp' + (tc ? ' tc' : '') + '"><span>' + esc(r.gamertag) + '</span><i>' + (tc ? 'TC' : 'ACT') + '</i></div>'; }).join('') + '</div>').join('') + '</div>'
         : '<p class="hq-empty">' + (rosR.ok ? 'No LG roster imported for ' + esc(t.name) + ' yet.' : 'The LG roster could not load.') + '</p>';
 
-      $('oppFile').innerHTML = head + '<div class="scout-grid">' + danger + report + '</div>' + rosterHtml;
+      const six = rep?.evidence_summary?.lineups?.opponent;
+      const posted = '<div class="report card"><div class="leaders-head"><span>Tonight’s opponent six</span></div>' + (six ? '<a class="posted-report-link" href="hitmen-scouting-report.html?report=' + encodeURIComponent(rep.id) + '"><div class="hq-opp-six">' + POS.map(p => '<span><i>' + p + '</i> ' + esc(six[p] || 'Not posted') + '</span>').join('') + '</div><b>Open pregame scouting report →</b></a>' : '<p class="hq-empty">No posted opponent six captured yet.</p>') + '</div>';
+      $('oppFile').innerHTML = head + posted + '<div class="scout-grid">' + report + danger + '</div>' + '<div class="report-foot"><a class="btn btn-line btn-sm" href="hitmen-lineup.html?game=' + Number(g.lg_game_id) + '#opponentHistory">Opponent intelligence · all games played →</a></div>' + rosterHtml;
       tint($('oppFile'));
     }
     show();
@@ -228,82 +230,79 @@
 
   /* =================================================================== Lineup Lab */
   async function lineup(L) {
-    const [lockR, statS, lineR] = await Promise.all([
+    const games = L.nextNight;
+    if (!games.length) { $('roomBody').innerHTML = '<p class="hq-empty">No upcoming game night is scheduled.</p>'; return; }
+    const date = etDate(games[0].game_at);
+    const [lockR, statS, lineR, schedR, repR, planR] = await Promise.all([
       safe(lockers()), seasonStats(),
-      safe(q(db.from('lineups').select('id,game_date,game_label,opponent_name,status,is_active,updated_at').eq('team_id', TEAM).eq('lineup_type', 'game').order('game_date', { ascending: false }).order('updated_at', { ascending: false }).limit(15)))
+      safe(q(db.from('lineups').select('id,game_date,game_label,opponent_name,status,updated_at').eq('team_id', TEAM).eq('lineup_type', 'game').eq('game_date', date).order('updated_at', { ascending: false }))),
+      safe(q(db.from('hitmen_schedule_games').select('id,scheduled_at,opponent_name').eq('team_id', TEAM).eq('season', SEASON))),
+      safe(q(db.from('hitmen_opponent_pregame_reports').select('id,scheduled_game_id,opponent_name,report,evidence_summary,created_at').eq('team_id', TEAM).eq('season', SEASON).order('created_at', { ascending: false }).limit(300))),
+      safe(q(db.from('hitmen_battle_plans').select('schedule_game_id,opponent_name,keys_to_win,matchup_assignments,reminders,status,updated_at').eq('team_id', TEAM).eq('game_date', date).order('updated_at', { ascending: false })))
     ]);
-    const lock = lockR.ok ? lockR.v : [];
-    const byPlayer = new Map(lock.filter(l => l.player_id).map(l => [l.player_id, l]));
-    const nextDate = L.nextNight.length ? etDate(L.nextNight[0].game_at) : null;
+    const lock = lockR.ok ? lockR.v : [], byPlayer = new Map(lock.map(l => [l.player_id, l]));
+    const byTag = new Map(lock.map(l => [strip(l.gamertag), l]));
     const lines = lineR.ok ? lineR.v : [];
-    const forNext = nextDate ? lines.filter(x => x.game_date === nextDate) : [];
-    const shown = forNext.length ? forNext : lines.filter(x => x.game_date === lines[0]?.game_date);
-    const nextDay = L.nextNight.length ? weekday(L.nextNight[0].game_at) : '';
-    $('labChip').innerHTML = nextDate ? chip(forNext.length ? 'ok' : 'warn', nextDay + '’s six ' + (forNext.length ? 'posted' : 'not posted')) : '';
-
-    if (!shown.length) {
-      $('labEye').textContent = 'No posted six yet';
-      $('rink').innerHTML = '<p class="hq-empty">' + (lineR.ok ? 'No game lineup is saved yet. Post the six in the lineup builder.' : 'Lineups could not load.') + '</p>';
-    } else {
-      const ids = shown.map(x => x.id);
-      const slotsR = await safe(q(db.from('lineup_slots').select('lineup_id,slot,player_id,jersey_number,note').in('lineup_id', ids)));
-      const slots = slotsR.ok ? slotsR.v : [];
-      const unitOf = id => { const m = new Map(); slots.filter(s => s.lineup_id === id && /^L1_/.test(s.slot)).forEach(s => m.set(s.slot.slice(3), s)); return m; };
-      const main = shown.find(x => x.is_active) || shown[0];
-      const unit = unitOf(main.id);
-      const sig = id => POS.map(p => unitOf(id).get(p)?.player_id || '').join('|');
-      const same = shown.every(x => sig(x.id) === sig(main.id));
-      const dayTxt = F.day.format(new Date(main.game_date + 'T16:00:00Z'));
-      $('labEye').textContent = 'Posted six · ' + dayTxt + ' · ' + (shown.length > 1 ? (same ? 'confirmed for all ' + (shown.length === 3 ? 'three' : shown.length) + ' games' : 'for ' + (main.opponent_name || main.game_label || 'game 1')) : (main.opponent_name || main.game_label || ''));
-      $('labTitle').innerHTML = (forNext.length ? 'Tonight’s' : 'Last posted') + ' <em>six</em>';
-      const slot = pos => {
-        const s = unit.get(pos), lk = s && byPlayer.get(s.player_id), st = lk && lk.lg_user_id ? statS.map.get(Number(lk.lg_user_id)) : null;
-        const tag = lk?.gamertag || (s ? 'Unknown player' : 'Open');
-        const num = s?.jersey_number || lk?.jersey_number;
-        const line = statLine(st);
-        const gaa = st && st.player_kind === 'goalie' ? fix2(st.stats?.gaa) + ' GAA' : '';
-        return '<div class="slot card tinted' + (st ? '' : ' empty-slot') + '" style="--tc:' + posTint(pos) + '"><div class="sp"><i>' + pos + '</i>' + (num ? '<span class="num">#' + esc(num) + '</span>' : '') + '</div><b>' + esc(tag) + '</b>' +
-          (line ? '<span class="line">' + esc(line) + '</span>' : '<small>' + esc(!s ? 'Not posted' : lk?.roster_class === 'tc' ? 'TC call-up · no LG stats on file' : 'No LG stats on file') + '</small>') + (gaa ? '<small>' + gaa + '</small>' : '') + '</div>';
-      };
-      $('sixF').innerHTML = ['LW', 'C', 'RW'].map(slot).join('');
-      $('sixD').innerHTML = ['LD', 'RD'].map(slot).join('');
-      $('sixG').innerHTML = slot('G');
-      const dressed = new Set([...unit.values()].map(s => s.player_id));
-      const bench = lock.filter(l => l.roster_class === 'active_roster' && !dressed.has(l.player_id));
-      $('bench').innerHTML = bench.length ? bench.map(l => '<span>' + esc(l.gamertag) + '<i>' + esc(l.position || '') + '</i></span>').join('') : '<span>Everyone on the active roster is dressed</span>';
-      $('rinkSrc').textContent = 'LG season line beside each player' + (statS.at ? ' · imported ' + whenTxt(statS.at) : '');
+    const slotsR = lines.length ? await safe(q(db.from('lineup_slots').select('lineup_id,slot,player_id,jersey_number').in('lineup_id', lines.map(x => x.id)))) : { ok: true, v: [] };
+    const schedAt = new Map((schedR.ok ? schedR.v : []).map(s => [Date.parse(s.scheduled_at), s]));
+    const model = games.map(g => {
+      const t = L.byId.get(L.oppOf(g)), sg = schedAt.get(Date.parse(g.game_at));
+      const candidates = (repR.ok ? repR.v : []).filter(r => sg && r.scheduled_game_id === sg.id);
+      const report = candidates.find(r => r.evidence_summary?.lineups?.calgary && r.evidence_summary?.lineups?.opponent) || candidates[0];
+      const line = lines.find(l => strip(l.opponent_name) === strip(t?.name));
+      const six = report?.evidence_summary?.lineups?.calgary || Object.fromEntries((slotsR.ok ? slotsR.v : []).filter(s => line && s.lineup_id === line.id && /^L1_/.test(s.slot)).map(s => [s.slot.slice(3), byPlayer.get(s.player_id)?.gamertag]));
+      const plan = (planR.ok ? planR.v : []).find(p => sg && p.schedule_game_id === sg.id);
+      return { g, t, report, six, plan };
+    });
+    const want = new URLSearchParams(location.search).get('game');
+    let selected = Math.max(0, model.findIndex(m => String(m.g.lg_game_id) === want));
+    const historyCache = new Map();
+    const fullHref = m => m.report ? 'hitmen-scouting-report.html?report=' + encodeURIComponent(m.report.id) : 'hitmen-scouting.html?opp=' + encodeURIComponent(m.t?.name || '');
+    const reportHtml = report => String(report || '').split(/\n+/).map(line => /^##\s/.test(line) ? '<h4>' + esc(line.replace(/^##\s*/, '')) + '</h4>' : '<p class="ctx">' + esc(line.replace(/^[-*]\s*/, '• ')) + '</p>').join('');
+    const sixHtml = (six, own) => POS.map(pos => {
+      const tag = six?.[pos], lk = tag && byTag.get(strip(tag));
+      const st = own && lk?.lg_user_id ? statS.map.get(Number(lk.lg_user_id)) : null;
+      const source = !own && model[selected].report?.evidence_summary?.posted_player_stats?.find(p => p.position === pos);
+      const stats = st ? statLine(st) : source?.line || '';
+      return '<div class="slot card tinted" style="--tc:' + posTint(pos) + '"><div class="sp"><i>' + pos + '</i>' + (own && lk?.jersey_number ? '<span class="num">#' + esc(lk.jersey_number) + '</span>' : '') + '</div><b>' + esc(tag || 'Not posted') + '</b>' + (stats ? '<span class="line">' + esc(stats) + '</span>' : '') + '</div>';
+    });
+    async function showHistory(m) {
+      const host = $('opponentHistory');
+      host.innerHTML = '<p class="hq-loading">Loading opponent intelligence…</p>';
+      const id = m.t?.lg_team_id;
+      if (!id) { host.innerHTML = '<p class="hq-empty">Opponent unavailable.</p>'; return; }
+      if (!historyCache.has(id)) historyCache.set(id, safe(read('lgchl_games', { select: 'lg_game_id,game_at,status,home_lg_team_id,away_lg_team_id,home_score,away_score', season: 'eq.' + SEASON, or: '(home_lg_team_id.eq.' + id + ',away_lg_team_id.eq.' + id + ')', order: 'game_at.desc', limit: '300' })));
+      const r = await historyCache.get(id);
+      if (model[selected] !== m) return;
+      const finals = (r.ok ? r.v : []).filter(g => g.status === 'final');
+      host.innerHTML = '<div class="leaders-head"><span>Opponent intelligence · ' + esc(m.t.name) + '</span><small>' + m.t.gp + ' GP · ' + rec(m.t) + ' · ' + m.t.pts + ' PTS</small></div><div class="report-foot"><span class="src">All completed Season 55 games · official LG results</span><a class="btn btn-line btn-sm" href="hitmen-scouting.html?opp=' + encodeURIComponent(m.t.name) + '">Full opponent file →</a></div>' +
+        (r.ok ? '<div class="opponent-results">' + finals.map(g => {
+          const home = g.home_lg_team_id === id, foe = L.byId.get(home ? g.away_lg_team_id : g.home_lg_team_id);
+          const a = home ? g.home_score : g.away_score, b = home ? g.away_score : g.home_score;
+          return '<a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=' + Number(g.lg_game_id) + '" target="_blank" rel="noopener noreferrer"><span>' + esc(F.md.format(new Date(g.game_at))) + '</span><b>' + (home ? 'vs ' : 'at ') + esc(foe?.name || 'Opponent') + '</b><span>' + (a > b ? 'W ' : 'L ') + a + '–' + b + '</span></a>';
+        }).join('') + '</div>' : '<p class="hq-empty">Opponent results could not load.</p>');
     }
-
-    /* game sheets: battle plans for the shown night (or the next night when none is posted) */
-    const sheetDate = shown[0]?.game_date || nextDate;
-    const planR = sheetDate ? await safe(q(db.from('hitmen_battle_plans').select('opponent_name,game_date,keys_to_win,matchup_assignments,danger_players,tendencies,reminders,status,updated_at').eq('team_id', TEAM).eq('game_date', sheetDate))) : { ok: true, v: [] };
-    const nightGames = [...L.finals, ...L.upcoming].filter(g => etDate(g.game_at) === sheetDate);
-    const gameFor = name => nightGames.find(g => strip(L.byId.get(L.oppOf(g))?.name) === strip(name));
-    const plans = (planR.ok ? planR.v : []).map(p => ({ p, g: gameFor(p.opponent_name) })).sort((a, b) => (a.g ? Date.parse(a.g.game_at) : 9e15) - (b.g ? Date.parse(b.g.game_at) : 9e15));
-    if (!plans.length) {
-      $('sheetTabs').innerHTML = '';
-      $('sheetBody').innerHTML = '<h4>Game sheets</h4><p class="ctx">' + (planR.ok ? 'No battle plans are saved for ' + (sheetDate ? F.longDay.format(new Date(sheetDate + 'T16:00:00Z')) : 'the next game night') + ' yet.' : 'Battle plans could not load.') + '</p><div class="rooms-actions"><a class="btn btn-gold btn-sm" href="hitmen-battle-plan.html">Open battle plans <span class="arr">→</span></a></div>';
-      $('labNote').textContent = 'Player lines are official LG season stats.';
-      return;
+    function render() {
+      const m = model[selected], {g,t,report,six,plan} = m;
+      $('nightTabs').innerHTML = model.map((m,i) => '<button type="button" role="tab" aria-selected="' + (i === selected) + '" data-i="' + i + '"><small>Game ' + (i+1) + ' · ' + esc(F.time.format(new Date(m.g.game_at))) + ' ET</small><b>' + (L.isHome(m.g) ? 'vs ' : 'at ') + esc(m.t?.name || 'Opponent') + '</b></button>').join('');
+      $('labEye').textContent = weekday(g.game_at) + ' · ' + whenTxt(g.game_at) + ' · ' + (L.isHome(g) ? 'Home' : 'Away');
+      $('labTitle').innerHTML = 'Tonight’s <em>six</em>';
+      const complete = POS.every(p => six?.[p]);
+      $('labChip').innerHTML = chip(complete ? 'ok' : 'warn', complete ? 'Posted LG lineup' : 'Lineup not posted');
+      const cards = sixHtml(six, true);
+      $('sixF').innerHTML = cards.slice(0,3).join(''); $('sixD').innerHTML = cards.slice(3,5).join(''); $('sixG').innerHTML = cards[5];
+      $('rink').querySelector('.rink-head b').textContent = 'Calgary · Game ' + (selected+1);
+      $('rinkSrc').textContent = 'Posted positions for this game · LG season stats';
+      const dressed = new Set(Object.values(six || {}).map(strip));
+      $('bench').innerHTML = lock.filter(l => l.roster_class === 'active_roster' && !dressed.has(strip(l.gamertag))).map(l => '<span>' + esc(l.gamertag) + '<i>' + esc(l.position || '') + '</i></span>').join('');
+      $('sheetBody').innerHTML = '<h4>' + esc(t?.name || 'Opponent') + ' · posted six</h4><a class="posted-report-link" href="' + fullHref(m) + '"><div class="opponent-six">' + sixHtml(report?.evidence_summary?.lineups?.opponent, false).join('') + '</div><b>Open pregame scouting report →</b></a>' +
+        (report ? '<details class="pregame-excerpt"><summary>Pregame scouting report</summary>' + reportHtml(report.report) + '</details>' : '<p class="ctx">No pregame report saved for this game yet.</p>') +
+        '<h4>Battle plan</h4>' + (plan ? '<p class="ctx pre-wrap">' + esc(plan.keys_to_win || '') + '</p><h4>Assignments</h4><p class="ctx pre-wrap">' + esc(plan.matchup_assignments || '') + '</p>' : '<p class="ctx">No battle plan saved for this game yet.</p>');
+      $('labNote').textContent = report?.evidence_summary?.captured_at ? 'Lineups checked ' + whenTxt(report.evidence_summary.captured_at) + '. Check LG for changes before puck drop.' : 'Each game uses its own saved lineup and pregame report.';
+      showHistory(m);
     }
-    const res = g => g && g.status === 'final' && g.home_score != null ? { w: L.cs(g) > L.os(g), t: (L.cs(g) > L.os(g) ? 'W ' : 'L ') + L.cs(g) + '–' + L.os(g) } : null;
-    const keys = t => { const s = String(t || '').trim(); const parts = s.split(/\s*\d+[).]\s+/).map(x => x.trim()).filter(Boolean); return parts.length > 1 ? parts : s.split(/\n+/).map(x => x.replace(/^[-*•]\s*/, '').trim()).filter(Boolean); };
-    const assign = t => { const out = []; const re = /(?:^|[.;\n]\s*)(LW|C|RW|LD|RD|G)\s+([^:;()\n]+?):\s*(.*?)(?=[.;\n]\s*(?:LW|C|RW|LD|RD|G)\s+[^:;()\n]+?:|$)/gs; let m; while ((m = re.exec(String(t || '')))) out.push([m[1], m[2].trim(), m[3].trim()]); return out; };
-    let sel = 0;
-    const renderSheet = () => {
-      $('sheetTabs').innerHTML = plans.map(({ p, g }, i) => { const r = res(g); return '<button type="button" role="tab" aria-selected="' + (i === sel) + '" data-i="' + i + '"><small>' + (g ? (L.isHome(g) ? 'vs' : 'at') + ' · ' + esc(F.time.format(new Date(g.game_at))) : 'Plan') + (r ? ' · <span style="color:' + (r.w ? 'var(--ok)' : 'var(--crit)') + '">' + r.t + '</span>' : '') + '</small><b>' + esc(p.opponent_name) + '</b></button>'; }).join('');
-      const { p, g } = plans[sel], r = res(g), k = keys(p.keys_to_win), a = assign(p.matchup_assignments);
-      $('sheetBody').innerHTML = '<div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><h4>Keys to win</h4>' + (r ? chip(r.w ? 'ok' : 'crit', 'Final · ' + r.t) : chip('info', p.status ? p.status : 'Saved')) + '</div>' +
-        (k.length ? '<ol class="keys">' + k.map(x => '<li>' + esc(x) + '</li>').join('') + '</ol>' : '<p class="ctx">No keys saved.</p>') +
-        '<h4>Matchup assignments</h4>' + (a.length ? '<div class="assign">' + a.map(x => '<div><i>' + x[0] + '</i><span><b>' + esc(x[1]) + '</b> · ' + esc(x[2]) + '</span></div>').join('') + '</div>' : '<p class="ctx">' + esc(p.matchup_assignments || 'No assignments saved.') + '</p>') +
-        (p.danger_players ? '<h4>Danger players</h4><p class="ctx">' + esc(p.danger_players) + '</p>' : '') +
-        (p.tendencies ? '<h4>Their six</h4><p class="ctx">' + esc(p.tendencies) + '</p>' : '') +
-        (p.reminders ? '<h4>Reminders</h4><p class="ctx">' + esc(p.reminders) + '</p>' : '');
-    };
-    $('sheetTabs').addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (!b) return; sel = +b.dataset.i; renderSheet(); });
-    renderSheet();
-    const savedAt = plans.reduce((m, x) => Math.max(m, Date.parse(x.p.updated_at) || 0), 0);
-    $('labNote').textContent = 'Game sheets are the battle plans saved ' + (savedAt ? whenTxt(savedAt) : '') + (plans.some(x => res(x.g)) ? ', with the final score added' : '') + '. Player lines are official LG season stats.';
+    $('nightTabs').addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (!b) return; selected = Number(b.dataset.i); render(); history.replaceState(null, '', '?game=' + model[selected].g.lg_game_id); });
+    render();
   }
 
   /* =================================================================== Locker Room */
