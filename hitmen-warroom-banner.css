@@ -4,3 +4,11 @@
 .hm-wr-banner::after{content:"";position:absolute;inset:auto 0 0 0;height:22%;background:linear-gradient(180deg,rgba(10,11,12,0),rgba(10,11,12,.85));pointer-events:none}
 .hm-wr-banner .hm-wr-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (max-width:640px){.hm-wr-banner img{max-height:none}}
+
+/* War Room nav: every room is always on screen. On phones the bar is a wrapped grid under the header, not a hidden menu. */
+@media (max-width:900px){
+  html body.hm-hq.hm-hq .menu-toggle{display:none!important}
+  html body.hm-hq.hm-hq .site-header .main-nav.hn-nav,
+  html body.hm-hq.hm-hq .hn-header .main-nav.hn-nav{display:grid!important;position:static!important;width:100%!important;max-width:100%!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px!important;padding:6px 0!important;margin:0!important;flex-basis:100%;overflow:visible!important;transform:none!important;border:0!important;background:transparent!important;box-shadow:none!important}
+  html body.hm-hq.hm-hq .main-nav.hn-nav a{display:flex!important;align-items:center;justify-content:center;text-align:center;white-space:normal;min-height:44px;padding:6px 4px!important;font-size:12px!important;line-height:1.15}
+}

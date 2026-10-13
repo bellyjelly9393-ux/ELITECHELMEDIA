@@ -93,3 +93,11 @@
 @media (max-width: 1100px) { .ops { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 620px) { .chip { white-space: normal; } }
 @media (min-width: 481px) { .wr-id { padding-left: 128px; } }
+
+/* every War Room room stays visible: the bar wraps instead of scrolling sideways */
+.sub-in { flex-wrap: wrap; overflow: visible; }
+.sub-in a { flex: 0 0 auto; padding-inline: 12px; font-size: 18px; }
+@media (max-width: 700px) {
+  .sub-in { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+  .sub-in a { justify-content: center; text-align: center; white-space: normal; padding: 4px 6px 0; min-height: 44px; font-size: 16px; line-height: 1.1; }
+}
