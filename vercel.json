@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/hitmen-hub",
-      "destination": "/hitmen-workspace.html"
+      "destination": "/hitmen-hq.html"
     },
     {
       "source": "/academy-trainees",
@@ -18,7 +18,7 @@
     },
     {
       "source": "/calgary",
-      "destination": "/hitmen-workspace.html"
+      "destination": "/hitmen-hq.html"
     },
     {
       "source": "/war-room",
@@ -34,7 +34,7 @@
     },
     {
       "source": "/hitmen",
-      "destination": "/hitmen-workspace.html"
+      "destination": "/hitmen-hq.html"
     },
     {
       "source": "/vod-lab",
@@ -92,27 +92,27 @@
   "redirects": [
     {
       "source": "/hitmen-game-center.html",
-      "destination": "/hitmen-workspace.html",
+      "destination": "/hitmen-hq.html",
       "permanent": false
     },
     {
       "source": "/hitmen-hub.html",
-      "destination": "/hitmen-workspace.html",
+      "destination": "/hitmen-hq.html",
       "permanent": false
     },
     {
       "source": "/hitmen/headquarters",
-      "destination": "/hitmen-workspace.html",
+      "destination": "/hitmen-hq.html",
       "permanent": false
     },
     {
       "source": "/hitmen/game-center",
-      "destination": "/hitmen-workspace.html",
+      "destination": "/hitmen-hq.html",
       "permanent": false
     },
     {
       "source": "/hitmen-game-center",
-      "destination": "/hitmen-workspace.html",
+      "destination": "/hitmen-hq.html",
       "permanent": false
     }
   ]

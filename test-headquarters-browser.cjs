@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const http = require('node:http');
 const path = require('node:path');
 const assert = require('node:assert/strict');
-const pages = ['hitmen-workspace.html','hitmen-team-locker.html','hitmen-player-locker.html','hitmen-locker-room.html','hitmen-battle-plan.html','hitmen-gm-ai.html','hitmen-opponents.html'];
+const pages = ['hitmen-team-locker.html','hitmen-player-locker.html','hitmen-locker-room.html','hitmen-battle-plan.html','hitmen-gm-ai.html','hitmen-opponents.html'];
 (async () => {
  const root=process.cwd();
  const mime={'.html':'text/html','.css':'text/css','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff2':'font/woff2'};
@@ -23,39 +23,31 @@ const pages = ['hitmen-workspace.html','hitmen-team-locker.html','hitmen-player-
   for(const width of [390,768,1440]){
    const page=await browser.newPage({viewport:{width,height:1000}});
    await page.route('https://**/*',r=>r.abort());
-   await page.goto('http://127.0.0.1:'+server.address().port+'/hitmen-workspace.html');
-   // The real document must begin protected.
-   assert.equal(await page.locator('[data-management-content]').getAttribute('hidden'),'');
-   await page.evaluate(()=>{
-    document.body.classList.add('management-authorized');
-    document.querySelector('[data-management-content]').hidden=false;
-    document.querySelector('.management-login-shell').hidden=true;
-   });
-   await page.addScriptTag({content:fs.readFileSync('hitmen-headquarters.js','utf8')});
-   await page.waitForSelector('.hq-game');
-   assert.equal(await page.locator('.hq-game').count(),9);
-   assert.equal(await page.locator('.hq-game details').count(),6);
-   assert.equal(await page.locator('#hmRecapList').getAttribute('data-first'),'2');
-   assert.equal(await page.locator('#hqTitle').innerText(),'War Room');
-   assert.ok(await page.locator('.hq-identity img').evaluate(img=>img.complete&&img.naturalWidth>0));
-   assert.ok(await page.locator('#hqTitle').evaluate(el=>parseFloat(getComputedStyle(el).fontSize)>=36));
-   assert.equal(await page.locator('#hqDepartments .hm-command-card').count(),10);
-   assert.ok(await page.evaluate(()=>document.querySelector('#wrSeason').compareDocumentPosition(document.querySelector('#hqDepartments')) & Node.DOCUMENT_POSITION_FOLLOWING));
+   await page.goto('http://127.0.0.1:'+server.address().port+'/hitmen-hq.html');
+   // Headquarters starts behind the sign-in gate; the merged game-night tools live inside the gated app.
+   assert.equal(await page.locator('#hqApp').getAttribute('hidden'),'');
+   await page.evaluate(()=>{document.getElementById('hqApp').hidden=false;document.getElementById('hqGate').hidden=true;});
+   for(const id of ['weeklyPrep','gameNight','createSession','activeSession','sessionHistory','stallReqPanel'])
+    assert.equal(await page.locator('#'+id).count(),1,'Merged section present: '+id);
+   assert.equal(await page.locator('.sub-in a[href*="hitmen-workspace"]').count(),0,'No Game Center tab left');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'No horizontal page overflow at '+width);
-   assert.equal(await page.locator('.hq-welcome').evaluate(el=>getComputedStyle(el).borderTopColor),'rgb(182, 39, 57)');
    await page.close();
   }
+  const hq=fs.readFileSync('hitmen-hq.html','utf8');
+  const hqIds=[...hq.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+  assert.equal(new Set(hqIds).size,hqIds.length,'Unique IDs: hitmen-hq.html');
+  assert.ok(fs.readFileSync('hitmen-workspace.html','utf8').includes('hitmen-hq.html'),'Old Game Center page redirects to Headquarters');
   for(const file of pages){
    const html=fs.readFileSync(file,'utf8');
    const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
    assert.equal(new Set(ids).size,ids.length,'Unique IDs: '+file);
    assert.equal((html.match(/data-hn-last/g)||[]).length,1,'One final stylesheet: '+file);
    assert.ok(html.includes('hitmen-headquarters.css'),'Shared theme: '+file);
-   assert.ok(html.includes('href="hitmen-workspace.html"'),'Headquarters return: '+file);
+   assert.ok(html.includes('href="hitmen-hq.html"'),'Headquarters return: '+file);
   }
   const routes=JSON.parse(fs.readFileSync('vercel.json','utf8'));
   for(const route of ['/hitmen','/calgary','/war-room','/hitmen/game-center']){
-   assert.equal([...routes.rewrites,...(routes.redirects||[])].find(r=>r.source===route)?.destination,'/hitmen-workspace.html');
+   assert.equal([...routes.rewrites,...(routes.redirects||[])].find(r=>r.source===route)?.destination,'/hitmen-hq.html');
   }
   console.log('PASS: headquarters desktop/tablet/mobile layout, crest, department links, protected initial state and home routes');
  } finally {await browser.close();await new Promise(r=>server.close(r));}
