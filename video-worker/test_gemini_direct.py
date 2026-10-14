@@ -166,3 +166,76 @@ class TwoBrainKeys(unittest.TestCase):
         env = {k: v for k, v in self.ENV.items() if k != 'GEMINI_DEEP_API_KEY'}
         env['Gemini_deep_api_key'] = 'mixed-case'
         self.assertEqual(self.key('gemini/gemini-4-argon', env), 'mixed-case')
+
+
+class AgentPlatformDeepBrain(unittest.TestCase):
+    """A Google Cloud ("AQ.") deep key sends VOD_MODEL_DEEP to Agent Platform in native format."""
+    ENV = {'OPENROUTER_API_KEY': 'or-key', 'AI_PROVIDER': 'openrouter',
+           'GEMINI_API_KEY': 'AIza-basic', 'GEMINI_DEEP_API_KEY': 'AQ.deep-key',
+           'VOD_MODEL_BASIC': 'gemini/gemini-3.8-flash', 'VOD_MODEL_DEEP': 'gemini/gemini-4-argon'}
+    PAYLOAD = {'instructions': 'You are the analyst.', 'max_output_tokens': 5000,
+               'input': [{'role': 'user', 'content': [
+                   {'type': 'input_text', 'text': 'Break down the period.'},
+                   {'type': 'input_image', 'image_url': 'data:image/jpeg;base64,QUJD'}]}],
+               'text': {'format': {'type': 'json_schema', 'name': 'r', 'schema': {'type': 'object'}}}}
+
+    @staticmethod
+    def native_reply(text='{"ok": true}', finish='STOP'):
+        return {'candidates': [{'content': {'parts': [{'text': 'hmm', 'thought': True}, {'text': text}]},
+                                'finishReason': finish}],
+                'usageMetadata': {'promptTokenCount': 900, 'candidatesTokenCount': 120, 'thoughtsTokenCount': 400}}
+
+    def call(self, model, replies, env=None):
+        sent = []
+
+        def fake(url, headers, payload=None, deadline=None):
+            sent.append((url, headers, json.loads(json.dumps(payload))))
+            return replies[len(sent) - 1]
+        with patch.dict(os.environ, env or self.ENV, clear=True), patch.object(worker, 'gm_profile', return_value={}), \
+                patch.object(worker, 'ai_budget_gate'), patch.object(worker, 'ai_usage_record'), \
+                patch.object(worker, 'http_json', side_effect=fake):
+            return worker.request_ai(dict(self.PAYLOAD), model=model), sent
+
+    def test_deep_model_goes_to_agent_platform_natively(self):
+        result, sent = self.call('gemini/gemini-4-argon', [self.native_reply()])
+        url, headers, body = sent[0]
+        self.assertTrue(url.startswith('https://aiplatform.googleapis.com/'))
+        self.assertTrue(url.endswith('/gemini-4-argon:generateContent'))
+        self.assertEqual(headers['x-goog-api-key'], 'AQ.deep-key')
+        self.assertNotIn('Authorization', headers)
+        self.assertEqual(body['systemInstruction']['parts'][0]['text'], 'You are the analyst.')
+        self.assertEqual(body['contents'][0]['parts'][1]['inlineData'], {'mimeType': 'image/jpeg', 'data': 'QUJD'})
+        config = body['generationConfig']
+        self.assertEqual(config['thinkingConfig'], {'thinkingLevel': 'MEDIUM'})
+        self.assertGreater(config['maxOutputTokens'], 5000)
+        self.assertEqual(config['responseMimeType'], 'application/json')
+        for banned in ('temperature', 'topP', 'topK', 'thinkingBudget', 'candidateCount'):
+            self.assertNotIn(banned, config)
+        self.assertEqual(result['status'], 'completed')
+        self.assertEqual(result['output'][0]['content'][0]['text'], '{"ok": true}')  # thoughts dropped
+        self.assertEqual(result['usage']['output_tokens'], 520)
+
+    def test_basic_model_stays_on_ai_studio(self):
+        reply = {'choices': [{'message': {'content': '{"ok": true}'}, 'finish_reason': 'stop'}], 'usage': {}}
+        _, sent = self.call('gemini/gemini-3.8-flash', [reply])
+        self.assertEqual(sent[0][0], worker.GEMINI_ENDPOINT)
+        self.assertEqual(sent[0][1]['Authorization'], 'Bearer AIza-basic')
+
+    def test_cut_off_answer_retries_with_a_bigger_native_cap(self):
+        result, sent = self.call('gemini/gemini-4-argon',
+                                 [self.native_reply('', 'MAX_TOKENS'), self.native_reply()])
+        first = sent[0][2]['generationConfig']['maxOutputTokens']
+        second = sent[1][2]['generationConfig']['maxOutputTokens']
+        self.assertGreater(second, first)
+        self.assertEqual(result['status'], 'completed')
+
+    def test_thinking_level_is_configurable(self):
+        env = {**self.ENV, 'GEMINI_DEEP_THINKING': 'high'}
+        _, sent = self.call('gemini/gemini-4-argon', [self.native_reply()], env=env)
+        self.assertEqual(sent[0][2]['generationConfig']['thinkingConfig'], {'thinkingLevel': 'HIGH'})
+
+    def test_platform_can_be_forced_to_ai_studio(self):
+        env = {**self.ENV, 'GEMINI_DEEP_PLATFORM': 'studio'}
+        reply = {'choices': [{'message': {'content': '{"ok": true}'}, 'finish_reason': 'stop'}], 'usage': {}}
+        _, sent = self.call('gemini/gemini-4-argon', [reply], env=env)
+        self.assertEqual(sent[0][0], worker.GEMINI_ENDPOINT)

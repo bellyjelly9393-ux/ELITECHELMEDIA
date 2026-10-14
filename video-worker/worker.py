@@ -762,6 +762,113 @@ def gemini_response(data):
     return out
 
 
+# Agent Platform (Google Cloud) connection for the deep brain.
+# Google Cloud API keys start with "AQ." (AI Studio keys start with "AIza"); those keys are
+# only accepted by aiplatform.googleapis.com with Google's native generateContent format.
+# GEMINI_DEEP_PLATFORM=agent|studio overrides the auto-detection.
+AGENT_PLATFORM_BASE = 'https://aiplatform.googleapis.com/v1beta1/publishers/google/models/'
+DEEP_THINKING_HEADROOM = {'LOW': 4000, 'MEDIUM': 12000, 'HIGH': 24000}
+
+
+def uses_agent_platform(model, key):
+    if not key or key != _env_any_case('GEMINI_DEEP_API_KEY'):
+        return False
+    if model != os.getenv('VOD_MODEL_DEEP', '').strip():
+        return False
+    forced = os.getenv('GEMINI_DEEP_PLATFORM', '').strip().lower()
+    if forced in ('agent', 'studio'):
+        return forced == 'agent'
+    return key.startswith('AQ.')
+
+
+def deep_thinking_level():
+    level = os.getenv('GEMINI_DEEP_THINKING', 'MEDIUM').strip().upper()
+    return level if level in DEEP_THINKING_HEADROOM else 'MEDIUM'
+
+
+def _data_url_part(url):
+    if isinstance(url, str) and url.startswith('data:') and ';base64,' in url:
+        head, data = url.split(';base64,', 1)
+        return {'inlineData': {'mimeType': head[5:] or 'image/jpeg', 'data': data}}
+    return {'fileData': {'mimeType': 'image/jpeg', 'fileUri': url}}
+
+
+def agent_platform_request(payload):
+    """Turn an OpenAI Responses-style request into a native Gemini generateContent request."""
+    contents = []
+    for item in payload.get('input') or []:
+        parts = []
+        for part in item.get('content') or []:
+            if part.get('type') == 'input_text':
+                parts.append({'text': part['text']})
+            elif part.get('type') == 'input_image':
+                parts.append(_data_url_part(part.get('image_url')))
+        if parts:
+            role = 'model' if item.get('role') == 'assistant' else 'user'
+            contents.append({'role': role, 'parts': parts})
+    level = deep_thinking_level()
+    # Thinking tokens count against the output cap, so add headroom on top of the answer budget.
+    answer_cap = int(payload.get('max_output_tokens') or 4800)
+    config = {'maxOutputTokens': answer_cap + DEEP_THINKING_HEADROOM[level],
+              'thinkingConfig': {'thinkingLevel': level}}
+    fmt = (payload.get('text') or {}).get('format') or {}
+    if fmt.get('type') == 'json_schema':
+        config['responseMimeType'] = 'application/json'
+        config['responseJsonSchema'] = fmt.get('schema') or {}
+    body = {'contents': contents, 'generationConfig': config}
+    if payload.get('instructions'):
+        body['systemInstruction'] = {'parts': [{'text': payload['instructions']}]}
+    return body
+
+
+def agent_platform_response(data):
+    """Turn a native generateContent response into the Responses shape the worker parses."""
+    candidate = (data.get('candidates') or [{}])[0]
+    parts = (candidate.get('content') or {}).get('parts') or []
+    text = ''.join(p.get('text', '') for p in parts if not p.get('thought'))
+    finish = candidate.get('finishReason')
+    usage = data.get('usageMetadata') or {}
+    out = {'output': [{'content': [{'type': 'output_text', 'text': text}]}],
+           'usage': {'input_tokens': usage.get('promptTokenCount'),
+                     'output_tokens': (usage.get('candidatesTokenCount') or 0) + (usage.get('thoughtsTokenCount') or 0)}}
+    if finish in ('STOP', None) and text:
+        out['status'] = 'completed'
+    else:
+        out['status'] = 'incomplete'
+        out['incomplete_details'] = {'reason': 'max_output_tokens' if finish == 'MAX_TOKENS' else str(finish or 'empty')}
+    return out
+
+
+def probe_deep_model():
+    """One tiny startup call so the logs show whether the deep brain can be reached (never logs keys)."""
+    model = os.getenv('VOD_MODEL_DEEP', '').strip()
+    if not model.startswith(GEMINI_PREFIX) or not _env_any_case('GEMINI_DEEP_API_KEY'):
+        return
+    key = gemini_api_key(model)
+    agent = uses_agent_platform(model, key)
+    name = model[len(GEMINI_PREFIX):]
+    try:
+        if agent:
+            body = {'contents': [{'role': 'user', 'parts': [{'text': 'Reply with the single word: ready'}]}],
+                    'generationConfig': {'maxOutputTokens': 2000, 'thinkingConfig': {'thinkingLevel': 'LOW'}}}
+            data = http_json(AGENT_PLATFORM_BASE + name + ':generateContent',
+                             {'x-goog-api-key': key, 'Content-Type': 'application/json'}, body, deadline=90)
+            reply = agent_platform_response(data)
+        else:
+            data = http_json(GEMINI_ENDPOINT, {'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'},
+                             {'model': name, 'messages': [{'role': 'user', 'content': 'Reply with the single word: ready'}],
+                              'max_tokens': 2000}, deadline=90)
+            reply = gemini_response(data)
+        text = reply['output'][0]['content'][0]['text'].strip()[:40]
+        print(f'VOD deep brain probe: OK model={model} via={"agent-platform" if agent else "ai-studio"} reply={text!r}', flush=True)
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode('utf-8', 'ignore')[:300]
+        print(f'VOD deep brain probe: FAILED model={model} via={"agent-platform" if agent else "ai-studio"} '
+              f'HTTP {exc.code}: {detail}', flush=True)
+    except Exception as exc:
+        print(f'VOD deep brain probe: FAILED model={model} {type(exc).__name__}: {str(exc)[:200]}', flush=True)
+
+
 def request_ai(request_payload, model=None, rate_limit_retries=2, escalate=True):
     """Use the same bounded provider recovery for chunks and the final report."""
     provider, key, default_model, endpoint = ai_config()
@@ -782,18 +889,26 @@ def request_ai(request_payload, model=None, rate_limit_retries=2, escalate=True)
         gemini_key = gemini_api_key(model)
         if not gemini_key:
             raise Problem(503, f'{model} needs GEMINI_API_KEY set on the worker.', 'model_unavailable')
-        provider, endpoint, key = 'Gemini', GEMINI_ENDPOINT, gemini_key
-        request_payload = gemini_request(model, request_payload)
+        agent = uses_agent_platform(model, gemini_key)
+        if agent:
+            provider, key = 'Google Agent Platform', gemini_key
+            endpoint = AGENT_PLATFORM_BASE + model[len(GEMINI_PREFIX):] + ':generateContent'
+            request_payload = agent_platform_request(request_payload)
+        else:
+            provider, endpoint, key = 'Gemini', GEMINI_ENDPOINT, gemini_key
+            request_payload = gemini_request(model, request_payload)
+    else:
+        agent = False
     result = None
     for attempt in range(3):
         try:
             ai_budget_gate()
-            result = http_json(
-                endpoint,
-                {'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'},
-                request_payload
-            )
-            if direct:
+            headers = ({'x-goog-api-key': key, 'Content-Type': 'application/json'} if agent else
+                       {'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'})
+            result = http_json(endpoint, headers, request_payload)
+            if agent:
+                result = agent_platform_response(result)
+            elif direct:
                 result = gemini_response(result)
             ai_usage_record(result, truncated=result.get('status') != 'completed', model=model)
             if result.get('status') == 'completed':
@@ -802,7 +917,15 @@ def request_ai(request_payload, model=None, rate_limit_retries=2, escalate=True)
             if reason == 'max_output_tokens' and not escalate:
                 # Bounded synthesis steps shrink their input/output budget instead.
                 raise Problem(502, 'AI report exceeded its bounded output size.', 'output_cap')
-            if reason == 'max_output_tokens' and attempt < 2:
+            if reason == 'max_output_tokens' and attempt < 2 and agent:
+                config = request_payload['generationConfig']
+                current_limit = int(config.get('maxOutputTokens') or 4800)
+                next_limit = min(40000, current_limit + 8000)
+                if next_limit > current_limit:
+                    config['maxOutputTokens'] = next_limit
+                    print(f'VOD AI output hit token cap at {current_limit}; retrying with {next_limit}.', flush=True)
+                    continue
+            if reason == 'max_output_tokens' and attempt < 2 and not agent:
                 current_limit = int(request_payload.get('max_output_tokens', 4800))
                 next_limit = min(12000, max(current_limit + 2000, current_limit * 2))
                 if next_limit > current_limit:
