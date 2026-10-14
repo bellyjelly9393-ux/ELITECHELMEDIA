@@ -676,20 +676,35 @@ def request_routed(step, payload, parse, escalate=True):
 
 
 # Models written "gemini/<name>" go straight to Google's Gemini API with GEMINI_API_KEY
+# (or GEMINI_DEEP_API_KEY for the VOD_MODEL_DEEP model when that is set)
 # (pay-as-you-go, no OpenRouter credits). Everything else uses the configured provider.
 GEMINI_PREFIX = 'gemini/'
 GEMINI_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions'
 
 
-def gemini_api_key():
-    """GEMINI_API_KEY, tolerating a different capitalisation of the name (e.g. Gemini_api_key)."""
-    exact = os.getenv('GEMINI_API_KEY', '').strip()
+def _env_any_case(wanted):
+    """An env var, tolerating a different capitalisation of the name (e.g. Gemini_api_key)."""
+    exact = os.getenv(wanted, '').strip()
     if exact:
         return exact
     for name, value in os.environ.items():
-        if name.upper() == 'GEMINI_API_KEY' and value.strip():
+        if name.upper() == wanted and value.strip():
             return value.strip()
     return ''
+
+
+def gemini_api_key(model=None):
+    """Key for a direct Gemini call.
+
+    Two-brain setup: when GEMINI_DEEP_API_KEY is set, the deep model (VOD_MODEL_DEEP,
+    e.g. gemini/gemini-4-argon) uses that key; every other Gemini model keeps GEMINI_API_KEY.
+    Without GEMINI_DEEP_API_KEY, everything uses GEMINI_API_KEY as before.
+    """
+    if model:
+        deep_key = _env_any_case('GEMINI_DEEP_API_KEY')
+        if deep_key and model == os.getenv('VOD_MODEL_DEEP', '').strip():
+            return deep_key
+    return _env_any_case('GEMINI_API_KEY')
 
 
 def _gemini_schema(node):
@@ -764,7 +779,7 @@ def request_ai(request_payload, model=None, rate_limit_retries=2, escalate=True)
         request_payload['instructions'] = profile['instructions'] + '\n\nFor video analysis, the attached frames and reviewed observations are the evidence packet. Cite their recording timestamps instead of unavailable database E IDs. Return only the requested JSON schema; all findings remain provisional. Do not infer missing roster or season context.'
     direct = model.startswith(GEMINI_PREFIX)
     if direct:
-        gemini_key = gemini_api_key()
+        gemini_key = gemini_api_key(model)
         if not gemini_key:
             raise Problem(503, f'{model} needs GEMINI_API_KEY set on the worker.', 'model_unavailable')
         provider, endpoint, key = 'Gemini', GEMINI_ENDPOINT, gemini_key

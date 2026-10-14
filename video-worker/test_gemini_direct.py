@@ -141,3 +141,28 @@ class GeminiDirect(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class TwoBrainKeys(unittest.TestCase):
+    """GEMINI_DEEP_API_KEY powers only the deep model; the basic model keeps GEMINI_API_KEY."""
+    ENV = {'GEMINI_API_KEY': 'basic-key', 'GEMINI_DEEP_API_KEY': 'argon-key',
+           'VOD_MODEL_BASIC': 'gemini/gemini-3.8-flash', 'VOD_MODEL_DEEP': 'gemini/gemini-4-argon'}
+
+    def key(self, model, env):
+        with patch.dict(os.environ, env, clear=True):
+            return worker.gemini_api_key(model)
+
+    def test_deep_model_uses_the_deep_key(self):
+        self.assertEqual(self.key('gemini/gemini-4-argon', self.ENV), 'argon-key')
+
+    def test_basic_model_keeps_the_regular_key(self):
+        self.assertEqual(self.key('gemini/gemini-3.8-flash', self.ENV), 'basic-key')
+
+    def test_without_a_deep_key_everything_uses_the_regular_key(self):
+        env = {k: v for k, v in self.ENV.items() if k != 'GEMINI_DEEP_API_KEY'}
+        self.assertEqual(self.key('gemini/gemini-4-argon', env), 'basic-key')
+
+    def test_deep_key_name_is_case_tolerant(self):
+        env = {k: v for k, v in self.ENV.items() if k != 'GEMINI_DEEP_API_KEY'}
+        env['Gemini_deep_api_key'] = 'mixed-case'
+        self.assertEqual(self.key('gemini/gemini-4-argon', env), 'mixed-case')
