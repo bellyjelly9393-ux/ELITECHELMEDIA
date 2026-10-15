@@ -91,11 +91,6 @@
   },
   "redirects": [
     {
-      "source": "/hitmen-team-locker.html",
-      "destination": "/hitmen-locker.html",
-      "permanent": false
-    },
-    {
       "source": "/hitmen-player-locker.html",
       "destination": "/hitmen-stall.html",
       "permanent": false

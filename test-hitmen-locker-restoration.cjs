@@ -11,6 +11,7 @@ const OTHER='22222222-2222-4222-8222-222222222222';
 const TC='33333333-3333-4333-8333-333333333333';
 const root=process.cwd();
 const config=JSON.parse(fs.readFileSync('vercel.json','utf8'));
+assert.ok(!(config.redirects||[]).some(r=>r.source==='/hitmen-team-locker.html'),'Keep the existing full Lineup Lab reachable from its locker-room tool URL');
 const scripts=new Set(['management-guard.js','media-desk.js','hitmen-locker-shell.js','hitmen-team-locker.js','hitmen-stall-scene.js','hitmen-stall-upgrade.js','vod-review-model.js','hitmen-player-locker.js']);
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff':'font/woff','.woff2':'font/woff2'};
 const server=http.createServer((req,res)=>{

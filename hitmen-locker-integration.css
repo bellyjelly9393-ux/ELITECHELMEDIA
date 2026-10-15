@@ -105,3 +105,6 @@
 }
 
 .wr-locker-page .report-note small { font:500 14px/1.3 var(--f-ui); color:var(--gold-hi); }
+
+.wr-locker-page .recent-stat-list span { font:400 15px/1.4 var(--f-body)!important; }
+.wr-locker-page .weekly-chart-empty, .wr-locker-page .chart-empty, .wr-locker-page .dashboard-empty { font:400 15px/1.5 var(--f-body)!important; color:var(--mute); }
