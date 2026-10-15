@@ -31,7 +31,8 @@ const server=http.createServer((req,res)=>{
   });
   res.setHeader('Content-Type',mime[ext]||'application/octet-stream');res.end(data);
 });
-function fixture({role='gm',team=TEAM,signedIn=true}={}){
+function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn=true}={}){
+  const TEAM='b0bcbdda-da9d-419d-8f61-b34937966d49';
   const user=signedIn?{id:'fixture-user'}:null;
   const state={user,profile:{role:'member'},memberships:user?[{team_id:team,role,active:true}]:[]};
   const make=(id,gamertag,roster_class,extra={})=>({id,gamertag,team_id:TEAM,season:55,roster_class,position:'C',jersey_name:gamertag,jersey_number:'19',...extra});
@@ -82,7 +83,7 @@ function fixture({role='gm',team=TEAM,signedIn=true}={}){
     await context.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
     await context.addInitScript(fixture,options||{});
     const page=await context.newPage();
-    page.on('pageerror',e=>errors.push(e.message));
+    page.on('pageerror',e=>{errors.push(e.message);console.error('Browser error:',e.message);});
     return {page,context};
   }
   try{
