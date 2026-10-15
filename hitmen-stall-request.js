@@ -42,7 +42,7 @@
   function startPoll() { if (!poll) poll = setInterval(() => { if (!document.hidden) refresh(); }, POLL_MS); }
 
   function openStall(lockerId) {
-    const url = 'hitmen-player-locker.html' + (lockerId ? '?player=' + encodeURIComponent(lockerId) + '&stall=approved' : '');
+    const url = (document.body.classList.contains('wr-locker-page') ? 'hitmen-stall.html' : 'hitmen-player-locker.html') + (lockerId ? '?player=' + encodeURIComponent(lockerId) + '&stall=approved' : '');
     location.replace(url);
   }
 

@@ -1,0 +1,110 @@
+/* Original photo stalls and player tools inside the existing War Room shell.
+   The shared header, navigation, banner and HQ styles stay owned by hitmen-hq.css. */
+.wr-locker-page [hidden] { display:none!important; }
+.wr-locker-page #roomBody { min-width:0; }
+.wr-locker-page .wr-room-section { min-width:0; padding:0; display:grid; gap:16px; }
+.wr-locker-page .wr-room-section + .wr-room-section { border-top:1px solid var(--line); padding-top:28px; }
+.wr-locker-page .hn-meta { display:flex; gap:20px; flex-wrap:wrap; margin:0; }
+.wr-locker-page .hn-meta div { display:grid; gap:4px; }
+.wr-locker-page .hn-meta dt { font:500 15px/1 var(--f-ui); text-transform:uppercase; letter-spacing:.08em; color:var(--mute); }
+.wr-locker-page .hn-meta dd { margin:0; font:600 32px/1 var(--f-ui); color:var(--gold-hi); }
+.wr-locker-page .locker-stall-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr))!important; gap:14px!important; }
+.wr-locker-page .locker-stall { max-width:none; width:100%; margin:0; border-radius:0!important; min-width:0; }
+.wr-locker-page .locker-stall.hs-upgraded { border-color:var(--line-2)!important; }
+.wr-locker-page .locker-stall:focus-visible { outline:2px solid var(--gold-hi); outline-offset:3px; }
+.wr-locker-page .locker-stall.hs-upgraded > .hs-stall { width:100%; aspect-ratio:1856/2304; }
+.wr-locker-page .stall-footer-v2 { display:flex!important; flex-direction:column; align-items:flex-start!important; gap:5px!important; padding:12px!important; min-height:88px!important; }
+.wr-locker-page .stall-footer-v2 small { font:500 16px/1.25 var(--f-ui)!important; color:var(--mute)!important; letter-spacing:.04em!important; }
+.wr-locker-page .stall-footer-v2 b { border:0; border-radius:0; background:none; padding:0; color:var(--gold-hi)!important; font:600 16px/1.2 var(--f-ui)!important; letter-spacing:.06em; }
+.wr-locker-page .hn-tc-tag { position:absolute; top:12px; left:10px; z-index:4; padding:3px 7px; background:#08090b; border:1px solid var(--line-2); color:var(--gold-hi); font:600 16px/1 var(--f-ui); }
+.wr-locker-page .locker-line-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.wr-locker-page .line-report-card, .wr-locker-page .locker-empty { border-radius:0; border-color:var(--line-2); background:rgba(6,8,11,.65); }
+.wr-locker-page .locker-empty { font:400 16px/1.5 var(--f-body); color:var(--mute); padding:20px; }
+.wr-locker-page .line-report-card h3 { font:400 26px/1.1 var(--f-head); }
+.wr-locker-page .line-report-card p { font:400 16px/1.5 var(--f-body); color:var(--mute); }
+.wr-locker-page .line-report-card .line-meta span { border-radius:0; font:500 15px/1.2 var(--f-ui); }
+
+/* Preserve the stall art's aspect ratio and overlay positions. Surrounding panels use the HQ UI. */
+.wr-locker-page #roomBody.hitmen-player-locker-page { --font-ui:var(--f-body); --font-display:var(--f-ui); --stall-pink:var(--wr-red); background:transparent!important; min-height:0; color:var(--bone); }
+.wr-locker-page #roomBody::before, .wr-locker-page #roomBody::after { display:none; }
+.wr-locker-page .reference-hero { grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:20px; background:none; border:0; min-height:0; align-items:start; }
+.wr-locker-page .reference-locker-pane { height:auto; aspect-ratio:1856/2304; max-width:530px; width:100%; margin-inline:auto; border:1px solid var(--line-2); }
+.wr-locker-page .reference-locker-pane .player-stall-photo .hs-stall { inset:0; width:100%; height:100%; transform:none; aspect-ratio:1856/2304!important; }
+.wr-locker-page .reference-flip-controls { border-radius:0; border-color:var(--line-2); background:rgba(5,7,10,.9); backdrop-filter:none; width:240px; grid-template-columns:20px 1fr 1fr 20px; }
+.wr-locker-page .reference-flip-controls button { min-height:44px; border-radius:0; font:600 18px/1 var(--f-ui); }
+.wr-locker-page .reference-flip-controls button.active { color:#100c06; background:var(--gold-hi); box-shadow:none; }
+.wr-locker-page .reference-flip-caption { font:500 13px/1 var(--f-ui); color:var(--bone); }
+.wr-locker-page .reference-player-pane { padding:20px; background:rgba(8,10,14,.9); min-width:0; }
+.wr-locker-page .reference-player-head { grid-template-columns:minmax(0,1fr); gap:12px; }
+.wr-locker-page .reference-player-head h1 { font:400 clamp(36px,4vw,56px)/1 var(--f-head)!important; overflow-wrap:anywhere; }
+.wr-locker-page .reference-edit { justify-self:start; min-height:44px; border:1px solid var(--line-2); border-radius:0; font:600 16px/1 var(--f-ui); color:var(--gold-hi); background:none; }
+.wr-locker-page .stall-profile-topline { font:500 16px/1.25 var(--f-ui)!important; color:var(--mute); flex-wrap:wrap; }
+.wr-locker-page .stall-profile-topline b { color:var(--gold-hi); }
+.wr-locker-page .stall-profile-meta { flex-wrap:wrap; font:500 16px/1.4 var(--f-ui)!important; color:var(--mute); }
+.wr-locker-page .stall-profile-tabs { display:flex; flex-wrap:wrap; border-bottom:1px solid var(--line); }
+.wr-locker-page .stall-profile-tabs button { flex:1 1 auto; padding:12px 8px; min-height:44px; font:600 17px/1 var(--f-ui)!important; background:none; color:var(--mute); border-radius:0; }
+.wr-locker-page .stall-profile-tabs button.active { color:var(--gold-hi); box-shadow:inset 0 -2px var(--wr-red); background:rgba(212,42,42,.08); }
+.wr-locker-page .stall-profile-stats { grid-template-columns:repeat(5,minmax(0,1fr)); gap:0; background:none; border:1px solid var(--line); }
+.wr-locker-page .stall-profile-stats > div { padding:12px 4px; min-width:0; }
+.wr-locker-page .stall-profile-stats strong { font:600 32px/1 var(--f-ui)!important; color:var(--bone); }
+.wr-locker-page .stall-profile-stats small { font:500 13px/1.1 var(--f-ui)!important; color:var(--mute); letter-spacing:.04em; }
+.wr-locker-page :is(.stall-bio-card,.stall-tab-card,.locker-edit-box) { background:rgba(5,7,10,.6); border:1px solid var(--line); border-radius:0; padding:16px; box-shadow:none; }
+.wr-locker-page :is(.stall-bio-card,.stall-tab-card,.stall-dashboard-card)::before { display:none; }
+.wr-locker-page .stall-card-title h2, .wr-locker-page .stall-card-title h3, .wr-locker-page .player-panel-head h2 { font:400 24px/1.1 var(--f-head)!important; color:var(--bone); }
+.wr-locker-page .stall-card-title > span, .wr-locker-page .player-panel-head > span { font:500 14px/1.3 var(--f-ui)!important; color:var(--mute); }
+.wr-locker-page .stall-bio-layout { grid-template-columns:minmax(0,1fr) 110px; gap:12px; }
+.wr-locker-page .stall-bio-card dl > div { grid-template-columns:100px minmax(0,1fr); gap:8px; }
+.wr-locker-page .stall-bio-card dt { font:400 15px/1.4 var(--f-body)!important; color:var(--mute); }
+.wr-locker-page .stall-bio-card dd { font:500 15px/1.4 var(--f-body)!important; overflow-wrap:anywhere; color:var(--bone); }
+.wr-locker-page .stall-bio-avatar { height:150px; background:#0b0e13; border:1px solid var(--line); }
+.wr-locker-page .reference-dashboard-row { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.wr-locker-page .reference-dashboard-row .stall-dashboard-card { min-height:0; padding:20px; background:rgba(8,10,14,.9); border-radius:0; }
+.wr-locker-page .reference-secondary { gap:18px; }
+.wr-locker-page .reference-secondary .player-panel { padding:20px; background:rgba(8,10,14,.9); border-radius:0; }
+.wr-locker-page .recent-stat-list > div { font:400 16px/1.4 var(--f-body); padding-block:8px; color:var(--mute); }
+.wr-locker-page .recent-stat-list b { font:600 24px/1 var(--f-ui)!important; color:var(--gold-hi); }
+.wr-locker-page .stall-note { border-radius:0; background:rgba(5,7,10,.5); }
+.wr-locker-page .stall-note b { font:600 16px/1.3 var(--f-ui)!important; }
+.wr-locker-page .stall-note p { font:400 15px/1.5 var(--f-body)!important; color:var(--mute); }
+.wr-locker-page .player-tool-list button { padding:12px; border-radius:0; min-height:60px; }
+.wr-locker-page .player-tool-list b { font:600 17px/1.3 var(--f-ui)!important; }
+.wr-locker-page .player-tool-list small { font:400 14px/1.4 var(--f-body)!important; color:var(--mute); }
+.wr-locker-page .player-ratings-grid { gap:12px; }
+.wr-locker-page .player-ratings-grid article { border-radius:0; border-color:var(--line); }
+.wr-locker-page .player-ratings-grid h3 { font:600 20px/1 var(--f-ui); }
+.wr-locker-page .metric-row { font:400 15px/1.4 var(--f-body)!important; padding-block:6px; }
+.wr-locker-page .metric-row b { font:600 22px/1 var(--f-ui)!important; color:var(--gold-hi); }
+.wr-locker-page :is(.locker-edit-grid,.profile-settings-grid) { gap:12px; }
+.wr-locker-page :is(.locker-edit-grid,.profile-settings-grid) label { font:400 15px/1.4 var(--f-body)!important; color:var(--mute); }
+.wr-locker-page :is(input,select,textarea) { max-width:100%; min-width:0; font:400 16px/1.4 var(--f-body)!important; color:var(--bone); background:#090c11; border:1px solid var(--line-2); border-radius:0; min-height:44px; }
+.wr-locker-page :is(.small-btn,#saveJersey,#savePlayerProfile,#uploadChelImage) { min-height:44px; padding:10px 14px; border:1px solid var(--line-2); background:#171c24; color:var(--bone); font:600 17px/1.2 var(--f-ui)!important; border-radius:0; }
+.wr-locker-page #saveJersey { background:var(--gold-hi); color:#100c06; }
+.wr-locker-page :is(#jerseySaveStatus,#profileSaveStatus,#uploadStatus) { font:400 15px/1.4 var(--f-body); }
+.wr-locker-page .upload-layout { grid-template-columns:minmax(0,1fr) 180px; }
+.wr-locker-page .upload-layout p { font:400 16px/1.5 var(--f-body); color:var(--mute); }
+.wr-locker-page :is(.player-report,.weekly-card,.night-summary-card) { border-radius:0; border-color:var(--line); background:rgba(5,7,10,.65); }
+.wr-locker-page .player-report-head h3 { font:400 26px/1.2 var(--f-head); }
+.wr-locker-page .player-report-head small, .wr-locker-page .player-report-statline small { font:500 14px/1.3 var(--f-ui); }
+.wr-locker-page .report-note { border-radius:0; }
+.wr-locker-page .report-note p { font:400 15px/1.5 var(--f-body); color:var(--mute); white-space:pre-line; }
+.wr-locker-page .weekly-performance-chart { min-height:150px; }
+@media(max-width:1000px) {
+ .wr-locker-page .reference-hero { grid-template-columns:minmax(0,1fr); }
+ .wr-locker-page .locker-line-grid { grid-template-columns:minmax(0,1fr); }
+}
+@media(max-width:620px) {
+ .wr-locker-page .locker-stall-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:10px!important; }
+ .wr-locker-page .stall-footer-v2 { padding:9px!important; }
+ .wr-locker-page .reference-dashboard-row, .wr-locker-page .player-ratings-grid, .wr-locker-page .player-report-grid, .wr-locker-page .upload-layout { grid-template-columns:minmax(0,1fr); }
+ .wr-locker-page .reference-player-pane { padding:16px 12px; }
+ .wr-locker-page .stall-bio-layout { grid-template-columns:minmax(0,1fr); }
+ .wr-locker-page .stall-bio-avatar { width:110px; }
+ .wr-locker-page .band-head { align-items:start; }
+ .wr-locker-page .hn-meta { gap:16px; }
+ .wr-locker-page .reference-dashboard-row .stall-dashboard-card, .wr-locker-page .reference-secondary .player-panel { padding:16px; }
+}
+
+.wr-locker-page .report-note small { font:500 14px/1.3 var(--f-ui); color:var(--gold-hi); }
+
+.wr-locker-page .recent-stat-list span { font:400 15px/1.4 var(--f-body)!important; }
+.wr-locker-page .weekly-chart-empty, .wr-locker-page .chart-empty, .wr-locker-page .dashboard-empty { font:400 15px/1.5 var(--f-body)!important; color:var(--mute); }

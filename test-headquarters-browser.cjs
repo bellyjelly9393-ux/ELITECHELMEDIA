@@ -5,6 +5,8 @@ const fs = require('node:fs');
 const http = require('node:http');
 const path = require('node:path');
 const assert = require('node:assert/strict');
+const lineupSnapshot=JSON.parse(fs.readFileSync('data/hitmen/season-55-week-3-posted-lineups.json','utf8'));
+const verifiedLineups=lineupSnapshot.games.filter(g=>g.status==='verified_posted_lineups'&&g.lineups).length;
 const pages = ['hitmen-workspace.html','hitmen-team-locker.html','hitmen-player-locker.html','hitmen-locker-room.html','hitmen-battle-plan.html','hitmen-gm-ai.html','hitmen-opponents.html'];
 (async () => {
  const root=process.cwd();
@@ -33,12 +35,12 @@ const pages = ['hitmen-workspace.html','hitmen-team-locker.html','hitmen-player-
    });
    await page.addScriptTag({content:fs.readFileSync('hitmen-headquarters.js','utf8')});
    await page.waitForSelector('.hq-game');
-   assert.equal(await page.locator('.hq-game').count(),9);
-   assert.equal(await page.locator('.hq-game details').count(),6);
+   assert.equal(await page.locator('.hq-game').count(),lineupSnapshot.games.length);
+   assert.equal(await page.locator('.hq-game details').count(),verifiedLineups*2);
    assert.equal(await page.locator('#hmRecapList').getAttribute('data-first'),'2');
-   assert.equal(await page.locator('#hqTitle').innerText(),'War Room');
-   assert.ok(await page.locator('.hq-identity img').evaluate(img=>img.complete&&img.naturalWidth>0));
-   assert.ok(await page.locator('#hqTitle').evaluate(el=>parseFloat(getComputedStyle(el).fontSize)>=36));
+   assert.equal(await page.locator('#hqTitle').textContent(),'Calgary Hitmen War Room');
+   assert.ok(await page.locator('.hn-brand img.hn-crest').evaluate(img=>img.complete&&img.naturalWidth>0));
+   assert.ok(await page.locator('.hm-wr-banner img').evaluate(img=>img.complete&&img.naturalWidth>0&&img.getBoundingClientRect().width>=240));
    assert.equal(await page.locator('#hqDepartments .hm-command-card').count(),10);
    assert.ok(await page.evaluate(()=>document.querySelector('#wrSeason').compareDocumentPosition(document.querySelector('#hqDepartments')) & Node.DOCUMENT_POSITION_FOLLOWING));
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'No horizontal page overflow at '+width);
@@ -51,7 +53,7 @@ const pages = ['hitmen-workspace.html','hitmen-team-locker.html','hitmen-player-
    assert.equal(new Set(ids).size,ids.length,'Unique IDs: '+file);
    assert.equal((html.match(/data-hn-last/g)||[]).length,1,'One final stylesheet: '+file);
    assert.ok(html.includes('hitmen-headquarters.css'),'Shared theme: '+file);
-   assert.ok(html.includes('href="hitmen-workspace.html"'),'Headquarters return: '+file);
+   assert.match(html,/href="hitmen-(?:hq|workspace)\.html"/,'Headquarters return: '+file);
   }
   const routes=JSON.parse(fs.readFileSync('vercel.json','utf8'));
   for(const route of ['/hitmen','/calgary','/war-room','/hitmen/game-center']){

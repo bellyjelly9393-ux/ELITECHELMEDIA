@@ -50,9 +50,19 @@
     let mine=await findMine();
 
     if(wanted){
-      const target=await base().eq('id',wanted).maybeSingle();
+      // The retired room linked ?player=<gamertag>. Resolve those old bookmarks once,
+      // within the same team/season and existing access checks, then keep the locker ID.
+      const isLockerId=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(wanted);
+      const target=await base().eq(isLockerId?'id':'gamertag',wanted).maybeSingle();
       if(target.error)throw target.error;
-      if(target.data && (canManage() || target.data.user_id===uid))return target.data;
+      if(target.data && (canManage() || target.data.user_id===uid)){
+        if(!isLockerId){
+          const canonical=new URL(location.href);
+          canonical.searchParams.set('player',target.data.id);
+          history.replaceState(history.state,'',canonical);
+        }
+        return target.data;
+      }
       if(mine)return mine;
     }
 
