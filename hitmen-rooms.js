@@ -374,6 +374,29 @@
     const cap = s => s ? s[0].toUpperCase() + s.slice(1) : 'Not set';
     $('meBio').innerHTML = '<dt>Position</dt><dd>' + esc(me.position || 'Not set') + (me.secondary_position ? ' / ' + esc(me.secondary_position) : '') + '</dd><dt>Shoots</dt><dd>' + esc(cap(me.handedness)) + '</dd><dt>Jersey</dt><dd>' + esc(plate) + (me.jersey_number ? ' · #' + esc(me.jersey_number) : '') + '</dd><dt>Role</dt><dd>' + esc(role) + '</dd><dt>Height</dt><dd>' + esc(me.height_label || 'Not set') + '</dd><dt>Country</dt><dd>' + esc(me.country_code || 'Not set') + '</dd>';
     $('meJersey').innerHTML = '<dt>Nameplate</dt><dd>' + esc(plate) + '</dd><dt>Number</dt><dd>' + esc(me.jersey_number || 'Not set') + '</dd>';
+    /* jersey editor: live preview on the stall art, saves to the stall (same fields as the old player locker) */
+    const mgr = ['admin', 'commissioner'].includes(String(state.profile?.role || '').toLowerCase()) || (state.memberships || []).some(m => m.team_id === TEAM && m.active !== false && ['owner', 'gm', 'agm'].includes(String(m.role || '').toLowerCase()));
+    if (mine || mgr) {
+      $('meEdit').hidden = false;
+      $('meEdit').innerHTML = '<div class="jedit"><label>Name on back<input id="jerseyNameInput" maxlength="18" placeholder="PLAYER" value="' + esc(me.jersey_name || me.gamertag) + '"></label><label>Number<input id="jerseyNumberInput" maxlength="2" inputmode="numeric" placeholder="00" value="' + esc(String(me.jersey_number || '')) + '"></label></div>' +
+        '<div class="jedit-btns"><button class="btn btn-gold btn-sm" id="saveJersey" type="button">Save jersey</button><button class="btn btn-line btn-sm" id="jerseyFrontBtn" type="button"><span class="btxt">Front</span></button><button class="btn btn-line btn-sm" id="jerseyBackBtn" type="button"><span class="btxt">Back</span></button><span id="jerseySaveStatus" role="status"></span></div>';
+      const paint = () => { const nm = $('jerseyNameInput').value.trim() || me.gamertag, no = $('jerseyNumberInput').value.replace(/\D/g, '').slice(0, 2); HitmenStall.update($('stallArt'), { name: nm, number: no, empty: !no }); };
+      $('jerseyNameInput').addEventListener('input', paint);
+      $('jerseyNumberInput').addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 2); paint(); });
+      const flip = back => { const st = $('stallArt').querySelector('.hs-stall'); if (st) HitmenStall.setBack(st, back); };
+      $('jerseyFrontBtn').addEventListener('click', () => flip(false));
+      $('jerseyBackBtn').addEventListener('click', () => flip(true));
+      $('saveJersey').addEventListener('click', async () => {
+        const nm = $('jerseyNameInput').value.trim().slice(0, 18) || me.gamertag, no = $('jerseyNumberInput').value.trim();
+        $('jerseySaveStatus').textContent = 'Saving…';
+        const r = await db.from('team_player_lockers').update({ jersey_name: nm, jersey_number: no || null, updated_at: new Date().toISOString() }).eq('id', me.id);
+        if (r.error) { $('jerseySaveStatus').textContent = r.error.message; return; }
+        me.jersey_name = nm; me.jersey_number = no || null;
+        $('jerseySaveStatus').textContent = 'Saved ✓';
+        $('meJersey').innerHTML = '<dt>Nameplate</dt><dd>' + esc(nm) + '</dd><dt>Number</dt><dd>' + esc(no || 'Not set') + '</dd>';
+        $('meMeta').textContent = [no ? '#' + no : '', me.position, me.management_role].filter(Boolean).join(' · ');
+      });
+    }
 
     const grR = await safe(q(db.from('team_player_game_reports').select('game_date,opponent_name,result,stats,coach_summary,improvements,strengths').eq('team_id', TEAM).eq('season', SEASON).eq('locker_id', me.id).order('game_date', { ascending: false }).limit(18)));
     /* a game can have a box-score report and a coach review: merge them into one card */

@@ -198,3 +198,9 @@ a.stall.me:hover { box-shadow: inset 0 0 0 2px var(--gold); }
 .stall .hs-host { display: block; margin: -14px -14px 6px; }
 .stall .hs-mini { aspect-ratio: 1856/2304; }
 .locker-scene + .me-photo { position: static; inset: auto; width: 100%; height: auto; max-width: 380px; margin-top: 10px; display: block; }
+
+.jedit { display: grid; grid-template-columns: minmax(0, 1fr) 96px; gap: 8px; }
+.jedit label { display: grid; gap: 4px; font-family: var(--f-ui); font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.jedit input { min-height: 44px; min-width: 0; font: 500 16px/1.3 var(--f-body); color: var(--bone); background: rgba(5,7,10,.85); border: 0; box-shadow: inset 0 0 0 1px var(--line-2); padding: 10px 12px; text-transform: uppercase; }
+.jedit-btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+#jerseySaveStatus { font-size: 15px; color: var(--ok); }
