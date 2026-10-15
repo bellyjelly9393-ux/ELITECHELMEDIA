@@ -143,7 +143,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
     assert.equal(await owned.page.locator('#lockerRoster a').count(),1,'Player can open own stall only');
     await owned.page.goto(origin+'/hitmen-stall.html?player='+OTHER);
     await owned.page.waitForFunction(()=>document.getElementById('playerTitle').textContent==='Fixture Active');
-    assert.equal(await owned.page.locator('#playerTitle').innerText(),'Fixture Active','Another player link cannot expose another dossier');
+    assert.equal(await owned.page.locator('#playerTitle').textContent(),'Fixture Active','Another player link cannot expose another dossier');
     await owned.context.close();
     for(const options of [{signedIn:false},{role:'gm',team:'unrelated-team'}]){
       for(const url of ['/hitmen-locker.html','/hitmen-stall.html?player='+OWN]){
