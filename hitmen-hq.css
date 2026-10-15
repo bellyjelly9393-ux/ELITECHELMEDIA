@@ -160,3 +160,12 @@
   .gn-game > span:nth-child(2) { grid-column: 1 / -1; order: 3; }
   .six ul { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ---------- Merged War Room panels ---------- */
+.wr-in > .bc-broadcast { width: 100%; }
+.sd-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
+.sd-mission blockquote { font-family: var(--f-slash); font-style: italic; font-size: 18px; color: var(--gold-hi); border-left: 3px solid var(--wr-red); padding-left: 12px; }
+.sd-row { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-family: var(--f-ui); font-size: 18px; letter-spacing: .06em; text-transform: uppercase; }
+.sd-row b { font-weight: 700; color: var(--gold-hi); font-variant-numeric: tabular-nums; }
+@media (max-width: 1100px) { .sd-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .sd-grid { grid-template-columns: minmax(0, 1fr); } }

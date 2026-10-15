@@ -27,7 +27,7 @@ const pages = ['hitmen-team-locker.html','hitmen-player-locker.html','hitmen-loc
    // Headquarters starts behind the sign-in gate; the merged game-night tools live inside the gated app.
    assert.equal(await page.locator('#hqApp').getAttribute('hidden'),'');
    await page.evaluate(()=>{document.getElementById('hqApp').hidden=false;document.getElementById('hqGate').hidden=true;});
-   for(const id of ['weeklyPrep','gameNight','createSession','activeSession','sessionHistory','stallReqPanel'])
+   for(const id of ['hitmenBroadcast','wrTonight','wrSeason','weeklyPrep','hmRecapList','seasonDesk','gameNight','createSession','activeSession','sessionHistory','stallReqPanel'])
     assert.equal(await page.locator('#'+id).count(),1,'Merged section present: '+id);
    assert.equal(await page.locator('.sub-in a[href*="hitmen-workspace"]').count(),0,'No Game Center tab left');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'No horizontal page overflow at '+width);

@@ -10,7 +10,13 @@
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="wildman-home.css?v=20261011-5">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
-<link rel="stylesheet" href="hitmen-hq.css?v=20261014-1">
+<link rel="stylesheet" href="broadcast-tokens.css?v=20261004-brand">
+<link rel="stylesheet" href="team-hitmen.css?v=20261004-broadcast">
+<link rel="stylesheet" href="broadcast-components.css?v=20261004-brand">
+<link rel="stylesheet" href="shot-location-analysis.css?v=20261009">
+<link rel="stylesheet" href="war-room-tonight.css?v=20261009-colors">
+<link rel="stylesheet" href="hitmen-media-recaps.css?v=20261011">
+<link rel="stylesheet" href="hitmen-hq.css?v=20261015-2">
 <link rel="stylesheet" href="hitmen-stall-requests.css?v=20261004-sr">
 </head>
 <body>
@@ -130,7 +136,65 @@
           <a class="tile card tinted" href="hitmen-stall.html" style="--tc:139,227,166"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM3 14c0-3 2-4.5 5-4.5S13 11 13 14"/></svg></span><span class="tile-txt"><b>My Stall</b><small>Your jersey, stats and game reports</small></span><span class="go" aria-hidden="true">→</span></a>
           <a class="tile card tinted" href="vod-lab.html?team=calgary-hitmen" style="--tc:120,160,255"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12v8H2zM7 6.5v3l3-1.5z"/></svg></span><span class="tile-txt"><b>VOD Control Center</b><small>Submit replays, review periods, filed reports</small></span><span class="go" aria-hidden="true">→</span></a>
           <a class="tile card tinted" href="#gameNight" style="--tc:214,48,48"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v10H2zM2 6h12M5 9h6"/></svg></span><span class="tile-txt"><b>Game-night tools</b><small>Game Night Series, stall requests, broadcast board</small></span><span class="go" aria-hidden="true">→</span></a>
+          <a class="tile card tinted" href="hitmen-gm-ai.html" style="--tc:185,212,234"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h10v7H8l-3 3v-3H3z"/></svg></span><span class="tile-txt"><b>GM AI</b><small>Database-first roster, player and matchup questions</small></span><span class="go" aria-hidden="true">→</span></a>
+          <a class="tile card tinted" href="hitmen-opponents.html" style="--tc:212,42,42"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><circle cx="8" cy="8" r="1.5"/></svg></span><span class="tile-txt"><b>Opponents</b><small>Season intelligence on every Season 55 opponent</small></span><span class="go" aria-hidden="true">→</span></a>
+          <a class="tile card tinted" href="obs-control.html" style="--tc:227,181,74"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="8"/><path d="M6 14h4"/></svg></span><span class="tile-txt"><b>Broadcast Studio</b><small>Scorebug, intermission, final and player graphics for OBS</small></span><span class="go" aria-hidden="true">→</span></a>
         </nav>
+      </div>
+    </section>
+
+    <section class="wr-sec band" id="scoreboard" aria-label="Calgary Hitmen scoreboard and this week's matchups">
+      <div class="wr-in">
+        <section class="bc-broadcast team-hitmen" id="hitmenBroadcast">
+          <div class="bc-stage-wrap">
+            <div class="bc-stage">
+              <picture><source srcset="assets/broadcast/arena-tunnel.webp?v=20261004-broadcast" type="image/webp"><img class="bc-stage-photo" src="assets/broadcast/arena-tunnel.jpg?v=20261004-broadcast" width="1280" height="720" alt="View from the Zamboni tunnel onto the ice, with the scoreboard hanging over centre ice" decoding="async" loading="lazy"></picture>
+              <div class="bc-spill bc-spill-halo"></div><div class="bc-spill bc-spill-under"></div><div class="bc-spill bc-spill-ice"></div>
+              <div class="bc-q bc-jt-left"></div>
+              <div class="bc-q bc-jt-front" id="hitmenJumbo" aria-hidden="true"><div class="bc-jt-empty">Schedule TBA</div></div>
+              <div class="bc-q bc-jt-right"></div>
+            </div>
+            <img class="ec-bug" src="assets/brand/elitechel-mark-96@2x.png?v=20261004-brand" alt="" aria-hidden="true">
+            <ul class="bc-sr" id="hitmenJumboSr" aria-label="This week's matchups"><li>Schedule TBA</li></ul>
+          </div>
+          <div class="bc-scorebug">
+            <section class="bc-sb-team">
+              <img class="bc-sb-crest" src="assets/lgchl/s55/team412.png?v=20261004-broadcast" width="104" height="104" alt="Calgary Hitmen crest">
+              <div><span class="bc-k">LGCHL &middot; Season 55</span><h2 class="bc-wordmark"><span>Calgary</span> <b>Hitmen</b></h2></div>
+            </section>
+            <section class="bc-sb-record">
+              <span class="bc-k">Season record</span>
+              <div class="bc-sb-big" id="hitmenSbRecord" aria-label="Season record W-L-OTL">&mdash;</div>
+              <dl class="bc-sb-line">
+                <div><dd id="hitmenSbPts">&mdash;</dd><dt>PTS</dt></div>
+                <div><dd id="hitmenSbGf">&mdash;</dd><dt>GF</dt></div>
+                <div><dd id="hitmenSbGa">&mdash;</dd><dt>GA</dt></div>
+                <div><dd id="hitmenSbDiff">&mdash;</dd><dt>DIFF</dt></div>
+                <div><dd id="hitmenSbStreak">&mdash;</dd><dt>STRK</dt></div>
+              </dl>
+            </section>
+            <section class="bc-sb-next">
+              <div class="bc-sb-next-hd"><span class="bc-k" id="hitmenSbNextTag">Next game</span><span class="bc-k" id="hitmenSbNextDate">&mdash;</span></div>
+              <div class="bc-sb-opp"><span class="bc-crest" id="hitmenSbOppCrest" aria-hidden="true"></span><div><small>VS</small><h3 id="hitmenSbOppName">Schedule TBA</h3></div></div>
+              <div class="bc-sb-cd"><b id="hitmenSbCountdown" role="timer" aria-label="Time to puck drop">--:--:--</b><span id="hitmenSbTimes">&mdash; ET<br>&mdash; MT</span></div>
+            </section>
+            <div class="bc-sb-rail"><span id="hitmenSbRailLeft">LGCHL &middot; Season 55</span><span id="hitmenSbRailRight">Puck drop &middot; ET / MT</span></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="wr-sec dark band" id="tonightGames" aria-labelledby="tgTitle">
+      <div class="wr-in">
+        <div class="band-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">The posted six, jobs and scouting</p><h2 class="sec-title" id="tgTitle">Tonight’s <em>games</em></h2></div></div>
+        <section class="wr-shell wr-tonight wr-scope" id="wrTonight" aria-label="Tonight's games, the posted six, jobs and scouting"></section>
+      </div>
+    </section>
+
+    <section class="wr-sec band" id="seasonSchedule" aria-labelledby="ssTitle">
+      <div class="wr-in">
+        <div class="band-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Season 55 · LeagueGaming</p><h2 class="sec-title" id="ssTitle">Schedule &amp; <em>league</em></h2></div></div>
+        <section class="wr-scope wrs" id="wrSeason" aria-live="polite" aria-label="Hitmen schedule, WHL standings and league scores"><div class="wr-panel wr-empty-row">Loading the LGCHL schedule…</div></section>
       </div>
     </section>
 
@@ -139,6 +203,50 @@
         <div class="band-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye" id="hqWeeklyTag">Posted lineups</p><h2 class="sec-title" id="wpTitle">Weekly <em>game prep</em></h2></div></div>
         <p class="stamp-note">Official LG posted six for both teams. Lineups can change before puck drop; check the source for the latest. Unavailable names are never filled from the full roster.</p>
         <div class="hq-prep-grid" id="hqWeekly"><p class="hq-loading">Loading Calgary’s posted lineups…</p></div>
+      </div>
+    </section>
+
+    <section class="wr-sec blood band" id="hqMediaDesk" aria-labelledby="mdTitle">
+      <div class="wr-in">
+        <div class="band-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Calgary media desk</p><h2 class="sec-title" id="mdTitle">Media <em>write-ups</em></h2></div><a class="btn btn-line btn-sm" href="hitmen-media.html#recaps"><span class="btxt">All game recaps</span> <span class="arr">→</span></a></div>
+        <p class="stamp-note">Read the latest published game stories, results and player features.</p>
+        <span id="hmRecapCount" class="chip info">Loading recaps</span>
+        <div id="hmRecapList" class="hm-recap-grid" data-first="2" aria-live="polite"><p class="hq-loading">Loading published Calgary write-ups…</p></div>
+        <button id="hmRecapMore" class="small-btn" type="button" hidden>More write-ups</button>
+      </div>
+    </section>
+
+    <section class="wr-sec dark band" id="seasonDesk" aria-labelledby="sdTitle">
+      <div class="wr-in">
+        <div class="band-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Season 55</p><h2 class="sec-title" id="sdTitle">Season <em>desk</em></h2></div></div>
+        <div class="sd-grid">
+          <article class="card gn-panel sd-mission">
+            <div class="eyebrow">Season 55 mission</div>
+            <h3>Build Calgary into a championship team.</h3>
+            <p>Every scouting report, lineup decision and film review should move the roster toward one standard: compete every night and build something that lasts.</p>
+            <blockquote>“Opportunities don’t create themselves. We go get them.”</blockquote>
+          </article>
+          <article class="card gn-panel sd-stat">
+            <div class="eyebrow">Team status</div>
+            <div class="sd-row"><span>Management</span><b>3</b></div>
+            <div class="sd-row"><span>Roster stalls</span><b id="hitmenRosterCount">0</b></div>
+            <div class="sd-row"><span>TC players</span><b id="hitmenTcCount">0</b></div>
+            <div class="sd-row"><span>Tracked record</span><b id="hitmenRecord">&mdash;</b></div>
+          </article>
+          <article class="card gn-panel sd-stat">
+            <div class="eyebrow">War Room data</div>
+            <div class="sd-row"><span>Player reports</span><b id="hitmenReportCount">0</b></div>
+            <div class="sd-row"><span>Saved lineups</span><b id="hitmenLineupCount">0</b></div>
+            <div class="sd-row"><span>VOD workflow</span><b>Ready</b></div>
+            <div class="sd-row"><span>War Room sync</span><b>Linked</b></div>
+          </article>
+          <article class="card gn-panel sd-next">
+            <div class="eyebrow">Next action</div>
+            <h3>Build tonight’s plan</h3>
+            <p>Check tonight’s six, try changes in the sandbox and simulate each matchup. The game sheet sits under the simulation.</p>
+            <a class="btn btn-gold btn-sm" href="hitmen-lineup.html">Open the Lineup Lab <span class="arr">→</span></a>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -183,7 +291,13 @@
 <script src="backend.js"></script>
 <script src="media-desk.js?v=20261011-1"></script>
 <script src="hitmen-hq.js?v=20261013-6"></script>
-<script src="hitmen-hq-gamenight.js?v=20261014-1"></script>
+<script src="hitmen-broadcast.js?v=20261005-games"></script>
+<script src="hitmen-workspace.js?v=20261015-1"></script>
+<script src="war-room-rink.js?v=20261004-lab"></script>
+<script src="shot-zone-map.js?v=20261009-heatcolors"></script>
+<script src="war-room-tonight.js?v=20261007-sla"></script>
+<script src="hitmen-hq-gamenight.js?v=20261015-1"></script>
+<script src="hitmen-media-recaps.js?v=20261011"></script>
 <script src="hitmen-stall-requests-admin.js?v=20261004-sr"></script>
 <script src="hitmen-game-center-sync.js"></script>
 <script src="hitmen-vod-handoff.js?v=20261009-egress"></script>
