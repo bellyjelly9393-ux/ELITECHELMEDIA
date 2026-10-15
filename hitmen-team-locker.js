@@ -30,7 +30,7 @@ function stall(l){
  const displayName=esc((l.jersey_name||l.gamertag).toUpperCase()),displayNum=esc(l.jersey_number||'');
  const roleLabel=l.management_role?esc(l.management_role.toUpperCase()):(tc?'TC':'ROSTER');
  const mine=Boolean(ST().user&&l.user_id===ST().user.id);
- const shellStart=playerView()&&!mine?'<div class="locker-stall locker-preview-v2 '+(tc?'is-tc':'')+'">':'<a class="locker-stall locker-preview-v2 '+(tc?'is-tc':'')+'" href="hitmen-player-locker.html?player='+encodeURIComponent(l.id)+'">';
+ const shellStart=playerView()&&!mine?'<div class="locker-stall locker-preview-v2 '+(tc?'is-tc':'')+'">':'<a class="locker-stall locker-preview-v2 '+(tc?'is-tc':'')+'" href="'+(document.body.classList.contains('wr-locker-page')?'hitmen-stall.html':'hitmen-player-locker.html')+'?player='+encodeURIComponent(l.id)+'">';
  const shellEnd=playerView()&&!mine?'</div>':'</a>';
  const footer=playerView()
    ?'<small><span class="stall-position">'+esc(l.position||'—')+'</span> · '+roleLabel+'</small><b>'+(mine?'OPEN MY STALL →':'TEAMMATE')+'</b>'
@@ -75,6 +75,7 @@ async function load(){
  E('lockerTcRoster').innerHTML=tc.map(stall).join('')||'<div class="locker-empty">No TC stalls loaded.</div>';
  E('lockerLineReports').innerHTML=lineReports.length?lineReports.slice(0,6).map(r=>'<article class="line-report-card"><div class="eyebrow">WEEK '+esc(r.week)+'</div><h3>'+esc(r.line_label)+'</h3><p>'+esc(r.summary||'Weekly line report will populate after games are reviewed.')+'</p><div class="line-meta"><span>'+esc(r.record||'0-0-0')+'</span><span>GF '+esc(r.goals_for??'—')+'</span><span>GA '+esc(r.goals_against??'—')+'</span></div></article>').join(''):'<div class="locker-empty">Line reports will populate once saved units have game evidence.</div>';
 }
+window.HitmenTeamLocker={hasAccess:allowed};
 window.addEventListener('vvhl-auth-change',()=>{syncNav();if(allowed())load()});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{if(allowed())load()});else if(allowed())load();
 })();

@@ -11,7 +11,7 @@ const OTHER='22222222-2222-4222-8222-222222222222';
 const TC='33333333-3333-4333-8333-333333333333';
 const root=process.cwd();
 const config=JSON.parse(fs.readFileSync('vercel.json','utf8'));
-const scripts=new Set(['management-guard.js','hitmen-team-locker.js','hitmen-stall-scene.js','hitmen-stall-upgrade.js','vod-review-model.js','hitmen-player-locker.js']);
+const scripts=new Set(['management-guard.js','media-desk.js','hitmen-locker-shell.js','hitmen-team-locker.js','hitmen-stall-scene.js','hitmen-stall-upgrade.js','vod-review-model.js','hitmen-player-locker.js']);
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff':'font/woff','.woff2':'font/woff2'};
 const server=http.createServer((req,res)=>{
   const url=new URL(req.url,'http://localhost');
@@ -90,14 +90,17 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
     for(const width of [360,390,768,1440]){
       const {page,context}=await pageFor(width);
       await page.goto(origin+'/hitmen-locker.html');
-      assert.equal(new URL(page.url()).pathname,'/hitmen-team-locker.html');
+      assert.equal(new URL(page.url()).pathname,'/hitmen-locker.html');
+      assert.equal(await page.locator('header.top').count(),1,'Shared Headquarters header');
+      assert.equal(await page.locator('nav.sub-bar a[aria-current="page"]').textContent(),'Locker Room');
+      assert.equal(await page.locator('script[src*="hitmen-rooms.js"]').count(),0,'Use original full locker controller');
       await page.waitForSelector('#lockerRoster .hs-stall');
       assert.equal(await page.locator('#lockerRoster .hs-stall').count(),2,'Active roster photo stalls');
       assert.equal(await page.locator('#lockerTcRoster .hs-stall').count(),2,'Both TC roster classes have stalls');
       assert.equal(await page.locator('#lockerRosterCount').innerText(),'2');
       assert.equal(await page.locator('#lockerTcCount').innerText(),'2');
       assert.equal(await page.locator('.locker-stall').filter({hasText:'Fixture Archived'}).count(),0);
-      assert.equal(await page.locator('#lockerRoster a').first().getAttribute('href'),'hitmen-player-locker.html?player='+OWN);
+      assert.equal(await page.locator('#lockerRoster a').first().getAttribute('href'),'hitmen-stall.html?player='+OWN);
       await page.locator('#lockerRoster .hs-img').first().scrollIntoViewIfNeeded();
       await page.locator('#lockerRoster .hs-img').first().evaluate(img=>img.decode());
       assert.ok(await page.locator('#lockerRoster .hs-img').first().evaluate(img=>img.naturalWidth>0),'Original stall art loads');
@@ -118,6 +121,8 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       await page.waitForFunction(()=>document.getElementById('jerseySaveStatus').textContent.includes('Saved'));
       assert.equal(await page.locator('#stallScene .hs-name').innerText(),'UPDATED FIXTURE');
       assert.equal(await page.locator('#stallScene .hs-bnum').innerText(),'27');
+      assert.equal(await page.locator('.hitmen-app-sidebar').count(),0,'No duplicate legacy sidebar');
+      assert.equal(await page.locator('.sub-in a[aria-current="page"]').textContent(),'My Stall');
       assert.equal(await page.evaluate(()=>window.lockerFixture.writes.length),1,'One isolated customization write');
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Player stall fits '+width);
       await page.locator('[data-stall-tab="overview"]').click();
@@ -125,20 +130,34 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       await page.screenshot({path:path.join(screenshots,'player-'+width+'.png')});
       await context.close();
     }
+    const shared=await pageFor(390);
+    await shared.page.goto(origin+'/hitmen-hq.html');
+    const rooms=await shared.page.locator('.sub-in a').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
+    assert.equal(rooms.filter(p=>p==='hitmen-hq.html').length,1,'One merged headquarters destination');
+    assert.equal(await shared.page.locator('#hitmen-live-session').count(),1,'Game-night War Room controls stay in Headquarters');
+    await shared.page.goto(origin+'/hitmen-locker.html');
+    await shared.page.waitForSelector('#lockerRoster .hs-stall');
+    assert.deepEqual(await shared.page.locator('.sub-in a').evaluateAll(links=>links.map(a=>a.getAttribute('href'))),rooms,'Same room navigation as Headquarters');
+    const readsBefore=await shared.page.evaluate(()=>window.lockerFixture.reads.length);
+    await shared.page.evaluate(()=>{window.VVHLBackend.state.user=null;window.dispatchEvent(new Event('vvhl-auth-change'));});
+    assert.equal(await shared.page.locator('#hqApp').getAttribute('hidden'),'','Team content hides on signout');
+    assert.equal(await shared.page.locator('.locker-stall').count(),0,'Stalls clear on signout');
+    assert.equal(await shared.page.evaluate(()=>window.lockerFixture.reads.length),readsBefore,'Signout does not re-query private data');
+    await shared.context.close();
     // Alias bookmarks keep UUIDs and view parameters; legacy names canonicalize after auth.
     for(const player of [OTHER,'Fixture Teammate']){
       const {page,context}=await pageFor(390);
-      await page.goto(origin+'/hitmen-stall.html?player='+encodeURIComponent(player)+'&view=stats#games');
+      await page.goto(origin+'/hitmen-player-locker.html?player='+encodeURIComponent(player)+'&view=stats#games');
       await page.waitForFunction(()=>document.getElementById('playerTitle').textContent==='Fixture Teammate');
       const url=new URL(page.url());
-      assert.equal(url.pathname,'/hitmen-player-locker.html');
+      assert.equal(url.pathname,'/hitmen-stall.html');
       assert.equal(url.searchParams.get('player'),OTHER);
       assert.equal(url.searchParams.get('view'),'stats');
       assert.equal(url.hash,'#games');
       await context.close();
     }
     const owned=await pageFor(390,{role:'player'});
-    await owned.page.goto(origin+'/hitmen-locker.html');
+    await owned.page.goto(origin+'/hitmen-team-locker.html');
     await owned.page.waitForSelector('#lockerRoster .hs-stall');
     assert.equal(await owned.page.locator('#lockerRoster a').count(),1,'Player can open own stall only');
     await owned.page.goto(origin+'/hitmen-stall.html?player='+OTHER);

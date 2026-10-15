@@ -6,7 +6,8 @@ on:
       - 'hitmen-team-locker*'
       - 'hitmen-player-locker*'
       - 'hitmen-stall*'
-      - 'hitmen-locker.html'
+      - 'hitmen-locker*'
+      - 'media-desk.js'
       - 'test-hitmen-locker-restoration.cjs'
       - '.github/workflows/hitmen-locker-restoration.yml'
 permissions:
@@ -25,6 +26,8 @@ jobs:
           node --check hitmen-player-locker.js
           node --check hitmen-stall-scene.js
           node --check hitmen-stall-upgrade.js
+          node --check hitmen-locker-shell.js
+          node --check hitmen-stall-request.js
           node --test test-calgary-roster.mjs test-opponent-refresh.mjs test-vod-review.cjs test-deep-scout.cjs test-hitmen-tonight-prep.cjs
       - run: npm install --prefix /tmp/locker-browser playwright@1.56.1
       - run: /tmp/locker-browser/node_modules/.bin/playwright install --with-deps chromium
