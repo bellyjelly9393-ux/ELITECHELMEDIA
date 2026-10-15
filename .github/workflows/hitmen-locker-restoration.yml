@@ -1,0 +1,39 @@
+name: Hitmen locker restoration
+on:
+  pull_request:
+    paths:
+      - 'vercel.json'
+      - 'hitmen-team-locker*'
+      - 'hitmen-player-locker*'
+      - 'hitmen-stall*'
+      - 'hitmen-locker.html'
+      - 'test-hitmen-locker-restoration.cjs'
+      - '.github/workflows/hitmen-locker-restoration.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Syntax and existing roster, scouting and VOD regressions
+        run: |
+          node --check hitmen-team-locker.js
+          node --check hitmen-player-locker.js
+          node --check hitmen-stall-scene.js
+          node --check hitmen-stall-upgrade.js
+          node --test test-calgary-roster.mjs test-opponent-refresh.mjs test-vod-review.cjs test-deep-scout.cjs test-hitmen-tonight-prep.cjs
+      - run: npm install --prefix /tmp/locker-browser playwright@1.56.1
+      - run: /tmp/locker-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Restored locker navigation, photo stalls, player access and mobile
+        env:
+          NODE_PATH: /tmp/locker-browser/node_modules
+        run: node test-hitmen-locker-restoration.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hitmen-locker-screenshots
+          path: artifacts/locker-stalls/
