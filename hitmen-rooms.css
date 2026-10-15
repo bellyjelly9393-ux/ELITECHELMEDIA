@@ -91,7 +91,7 @@
 .sheet-body .ctx { font-size: 15px; color: #c3c0b8; line-height: 1.45; }
 
 /* ---------- Locker room ---------- */
-.stalls { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; }
+.stalls { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
 .stall { position: relative; display: grid; gap: 4px; padding: 14px 14px 12px; min-height: 168px; align-content: end; background: linear-gradient(180deg, rgba(212,42,42,.10), rgba(10,10,12,.92) 55%), #0d0e11; }
 .stall .jn { position: absolute; top: 6px; right: 12px; font-family: var(--f-head); font-size: 64px; line-height: 1; color: rgba(255,255,255,.08); }
 .stall .pos { font-family: var(--f-ui); font-weight: 600; font-size: 16px; letter-spacing: .14em; color: var(--gold-hi); }
@@ -191,3 +191,10 @@ a.stall.me:hover { box-shadow: inset 0 0 0 2px var(--gold); }
 .opponent-results a { display:grid; grid-template-columns:72px minmax(0,1fr) 60px; gap:10px; padding:10px 16px; color:inherit; text-decoration:none; border-top:1px solid var(--line); }
 .opponent-results a:hover { background:rgba(255,255,255,.06); }
 .opponent-results b { overflow-wrap:anywhere; }
+
+/* Photo stall art (hitmen-stall-scene.css) inside the HQ cards */
+.locker-scene.hs-host { display: block; aspect-ratio: auto; padding: 0; background: #0b090a; }
+.locker-scene.hs-host::before { display: none; }
+.stall .hs-host { display: block; margin: -14px -14px 6px; }
+.stall .hs-mini { aspect-ratio: 1856/2304; }
+.locker-scene + .me-photo { position: static; inset: auto; width: 100%; height: auto; max-width: 380px; margin-top: 10px; display: block; }

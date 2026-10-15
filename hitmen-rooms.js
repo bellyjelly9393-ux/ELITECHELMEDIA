@@ -320,8 +320,9 @@
     if (dup.length) $('dupChip').innerHTML = chip('warn', dup.map(([n, v]) => '#' + n + ' used twice: ' + v.join(', ')).join(' · ')); else $('dupChip').hidden = true;
     $('stalls').innerHTML = active.map(a => {
       const st = a.lg_user_id ? statS.map.get(Number(a.lg_user_id)) : null, mine = me && a.user_id === me;
-      return '<a class="stall card' + (mine ? ' me' : '') + '" href="hitmen-stall.html' + (mine ? '' : '?player=' + encodeURIComponent(a.gamertag)) + '"><span class="jn" aria-hidden="true">' + esc(a.jersey_number || '') + '</span><span class="pos">' + esc(a.position || '–') + (a.jersey_number ? ' · #' + esc(a.jersey_number) : '') + '</span><b>' + esc(a.gamertag) + '</b><span class="pts">' + esc(statLine(st, true) || 'No LG stats on file') + '</span><span class="tags">' + (a.management_role ? '<span class="role">' + esc(a.management_role) + '</span>' : '') + (a.user_id ? '' : '<span class="open">Unclaimed</span>') + (mine ? '<span>You</span>' : '') + '</span></a>';
+      return '<a class="stall card' + (mine ? ' me' : '') + '" href="hitmen-stall.html' + (mine ? '' : '?player=' + encodeURIComponent(a.gamertag)) + '"><span class="hs-host" data-hs="' + esc(a.id) + '"></span><span class="pos">' + esc(a.position || '–') + (a.jersey_number ? ' · #' + esc(a.jersey_number) : '') + '</span><b>' + esc(a.gamertag) + '</b><span class="pts">' + esc(statLine(st, true) || 'No LG stats on file') + '</span><span class="tags">' + (a.management_role ? '<span class="role">' + esc(a.management_role) + '</span>' : '') + (a.user_id ? '' : '<span class="open">Unclaimed</span>') + (mine ? '<span>You</span>' : '') + '</span></a>';
     }).join('') || '<p class="hq-empty">No active stalls for Season ' + SEASON + ' yet.</p>';
+    if (window.HitmenStall) active.forEach(a => { const h = $('stalls').querySelector('[data-hs="' + CSS.escape(String(a.id)) + '"]'); if (h) HitmenStall.mount(h, { mini: true, empty: !a.jersey_number, name: a.jersey_name || a.gamertag, number: a.jersey_number || '' }); });
     $('tcEye').textContent = tc.length + ' training camp players';
     $('tcList').innerHTML = tc.map(t => '<span><i>' + esc(t.position || '') + '</i>' + esc(t.gamertag) + '</span>').join('') || '<span>No training camp stalls</span>';
     const reports = lineR.ok ? lineR.v : [];
@@ -358,13 +359,12 @@
     $('meEye').textContent = (mine ? 'My stall · ' : 'Stall · ') + (me.roster_class === 'tc' ? 'training camp' : 'active roster');
     document.title = (mine ? 'My Stall' : me.gamertag) + ' | Calgary Hitmen War Room';
     const plate = me.jersey_name || me.gamertag;
-    $('jersey').innerHTML = '<small>' + esc(plate) + '</small><b>' + esc(me.jersey_number || '') + '</b>';
-    $('jersey').setAttribute('aria-label', 'Jersey preview: ' + plate + (me.jersey_number ? ', number ' + me.jersey_number : ''));
+    if (window.HitmenStall) HitmenStall.mount($('stallArt'), { empty: !me.jersey_number, name: plate, number: me.jersey_number || '' });
     if (me.chel_player_image_path) {
       try {
         const r = await db.storage.from('hitmen-player-images').createSignedUrl(me.chel_player_image_path, 3600);
-        if (r.data?.signedUrl) $('meFrame').outerHTML = '<img class="me-photo" src="' + esc(r.data.signedUrl) + '" alt="' + esc(me.gamertag) + ' CHEL player">';
-      } catch { /* keep the empty frame */ }
+        if (r.data?.signedUrl) $('stallArt').insertAdjacentHTML('afterend', '<img class="me-photo" src="' + esc(r.data.signedUrl) + '" alt="' + esc(me.gamertag) + ' CHEL player">');
+      } catch { /* the stall art stays on its own */ }
     }
     const stats = !st ? [] : st.player_kind === 'goalie'
       ? [['Games', st.games_played ?? x.ggp], ['Record', x.record, 1], ['Save %', pct3(x.savep), 1], ['GAA', fix2(x.gaa)], ['Shots against', x.sog], ['Goals against', x.ga], ['Shutouts', x.gso], ['Breakaway saves', x.brks]]
