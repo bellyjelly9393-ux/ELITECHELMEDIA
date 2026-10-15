@@ -10,7 +10,8 @@
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="wildman-home.css?v=20261011-5">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
-<link rel="stylesheet" href="hitmen-hq.css?v=20261013-6">
+<link rel="stylesheet" href="hitmen-stall-requests.css?v=20261004-sr">
+<link rel="stylesheet" href="hitmen-hq.css?v=20261014-3">
 </head>
 <body>
 <header class="top band">
@@ -110,6 +111,47 @@
       </div>
     </section>
 
+
+    <section class="wr-sec dark band" id="hitmen-live-session" aria-labelledby="serTitle">
+      <div class="wr-in">
+        <div class="band-head">
+          <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Game night command · prepare and execute</p><h2 class="sec-title" id="serTitle">Game night <em>series</em></h2></div>
+          <div class="rooms-actions"><a class="btn btn-gold btn-sm" href="game-center.html?channel=hitmen" target="_blank" rel="noopener">Watch Hitmen live <span class="arr">→</span></a><a class="btn btn-line btn-sm" href="obs-control.html"><span class="btxt">OBS Controls</span> <span class="arr">→</span></a></div>
+        </div>
+        <div id="hitmenStatus" class="hitmen-status" hidden aria-live="polite">Loading Calgary Hitmen War Room…</div>
+        <div class="series-grid">
+          <div class="card series-card">
+            <div class="leaders-head"><span>Game Night Series</span><small>Create or continue tonight’s series</small></div>
+            <div class="series-body">
+              <p class="src">Start and final controls feed the series state, the Game Center feed and the VOD handoff.</p>
+              <div class="session-builder">
+                <input id="sessionLabel" class="field" value="Calgary Hitmen Game Night" placeholder="Session label" aria-label="Session label">
+                <input id="sessionOpponent" class="field" placeholder="Opponent / lobby label (optional)" aria-label="Opponent or lobby label">
+                <select id="sessionBestOf" class="select-field" aria-label="Series length"><option value="3" selected>Best of 3</option><option value="5">Best of 5</option><option value="1">Single game</option></select>
+                <input id="sessionStream" class="field wide" type="url" placeholder="Twitch / YouTube stream URL" aria-label="Stream URL">
+              </div>
+              <div class="hitmen-actions"><button id="createSession" class="small-btn primary" type="button">Create Game Night Series</button></div>
+              <div id="activeSession"></div>
+            </div>
+          </div>
+          <div class="card series-card">
+            <div class="leaders-head"><span>Session history</span><small>Season 55 tracker</small></div>
+            <div class="series-body"><div id="sessionHistory" class="session-history"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wr-sec blood band" id="hqSchedule" aria-labelledby="schTitle">
+      <div class="wr-in">
+        <div class="band-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye" id="schEye">Season 55 · LeagueGaming</p><h2 class="sec-title" id="schTitle">Schedule &amp; <em>league</em></h2></div></div>
+        <div class="gc-cols">
+          <div><p class="eyebrow opp-eye">Upcoming</p><div class="gc-list" id="schUpcoming"></div></div>
+          <div><p class="eyebrow opp-eye">Latest finals</p><div class="gc-list" id="schFinals"></div></div>
+        </div>
+      </div>
+    </section>
+
     <section class="wr-sec dark band" aria-labelledby="opsTitle">
       <div class="wr-in">
         <div class="band-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">What's current and what needs a run</p><h2 class="sec-title" id="opsTitle">Room <em>readiness</em></h2></div></div>
@@ -127,8 +169,47 @@
           <a class="tile card tinted" href="hitmen-locker.html" style="--tc:200,210,225"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h4v12H3zM9 2h4v12H9z"/></svg></span><span class="tile-txt"><b>Locker Room</b><small id="roomLocker">Stalls, training camp, line performance</small></span><span class="go" aria-hidden="true">→</span></a>
           <a class="tile card tinted" href="hitmen-stall.html" style="--tc:139,227,166"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM3 14c0-3 2-4.5 5-4.5S13 11 13 14"/></svg></span><span class="tile-txt"><b>My Stall</b><small>Your jersey, stats and game reports</small></span><span class="go" aria-hidden="true">→</span></a>
           <a class="tile card tinted" href="vod-lab.html?team=calgary-hitmen" style="--tc:120,160,255"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12v8H2zM7 6.5v3l3-1.5z"/></svg></span><span class="tile-txt"><b>VOD Control Center</b><small>Submit replays, review periods, filed reports</small></span><span class="go" aria-hidden="true">→</span></a>
-          <a class="tile card tinted" href="hitmen-workspace.html" style="--tc:214,48,48"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v10H2zM2 6h12M5 9h6"/></svg></span><span class="tile-txt"><b>Game Center</b><small>Game Night Series, stall requests, broadcast board, schedule</small></span><span class="go" aria-hidden="true">→</span></a>
+          <a class="tile card tinted" href="hitmen-media.html" style="--tc:214,48,48"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h10v10H3zM5 6h6M5 8.5h6M5 11h4"/></svg></span><span class="tile-txt"><b>Hitmen Media</b><small>Game night desk and Postgame Desk</small></span><span class="go" aria-hidden="true">→</span></a>
         </nav>
+      </div>
+    </section>
+
+    <section class="wr-sec blood band" id="hqMedia" aria-labelledby="mdTitle">
+      <div class="wr-in">
+        <div class="band-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Hitmen Media · published recaps</p><h2 class="sec-title" id="mdTitle">Latest <em>write-ups</em></h2></div><a class="btn btn-line btn-sm" href="hitmen-media.html"><span class="btxt">Hitmen Media</span> <span class="arr">→</span></a></div>
+        <div class="results" id="hqRecaps"><p class="hq-loading">Loading write-ups…</p></div>
+      </div>
+    </section>
+
+    <section class="wr-sec dark band" aria-labelledby="deskTitle">
+      <div class="wr-in">
+        <div class="band-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Season 55</p><h2 class="sec-title" id="deskTitle">Season <em>desk</em></h2></div></div>
+        <div class="desk-grid">
+          <article class="card tinted desk-mission" style="--tc:212,42,42">
+            <p class="eyebrow opp-eye">Season 55 mission</p>
+            <h3>Build Calgary into a championship team.</h3>
+            <p>Every scouting report, lineup decision and film review should move the roster toward one standard: compete every night and build something that lasts.</p>
+            <blockquote>“Opportunities don’t create themselves. We go get them.”</blockquote>
+          </article>
+          <article class="card tinted desk-stats" style="--tc:227,181,74">
+            <p class="eyebrow opp-eye">Team status</p>
+            <dl class="kv">
+              <dt>Roster stalls</dt><dd id="hitmenRosterCount">0</dd>
+              <dt>TC players</dt><dd id="hitmenTcCount">0</dd>
+              <dt>Tracked record</dt><dd id="hitmenRecord">&mdash;</dd>
+              <dt>Player reports</dt><dd id="hitmenReportCount">0</dd>
+              <dt>Saved lineups</dt><dd id="hitmenLineupCount">0</dd>
+            </dl>
+            <div class="rooms-actions"><a class="btn btn-gold btn-sm" href="hitmen-lineup.html">Build tonight’s plan <span class="arr">→</span></a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="wr-sec blood band sr-wrap">
+      <div class="wr-in">
+        <div class="band-head sr-head" id="stallReqHead" hidden><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Roster desk · management only</p><h2 class="sec-title">Stall <em>requests</em></h2></div><span class="chip info" id="stallReqCount"></span></div>
+        <section class="sr-admin" id="stallReqPanel" hidden aria-live="polite" aria-label="Stall requests"></section>
       </div>
     </section>
   </div>
@@ -144,6 +225,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script src="backend.js"></script>
 <script src="media-desk.js?v=20261011-1"></script>
-<script src="hitmen-hq.js?v=20261013-6"></script>
+<script src="hitmen-hq.js?v=20261014-1"></script>
+<script src="hitmen-workspace.js?v=20261005-games"></script>
+<script src="hitmen-stall-requests-admin.js?v=20261004-sr"></script>
+<script src="hitmen-game-center-sync.js"></script>
 </body>
 </html>

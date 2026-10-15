@@ -103,6 +103,8 @@
     renderStrip(cgy, rank, confLabel, nextNight[0], byId);
     renderRace(whlEast);
     renderLast(lastNight, lastNightDate, byId, oppOf, isHome, cs, os);
+    renderSchedule(upcoming, finals, byId, oppOf, isHome, cs, os, cgy);
+    renderRecaps();
     tint(document);
 
     /* private reads; any one failing leaves its row marked as unavailable */
@@ -237,6 +239,32 @@
     $('lastNight').innerHTML = list.map(g => {
       const o = byId.get(oppOf(g)), win = cs(g) > os(g), src = logo(o?.logo_path);
       return '<div class="res card tinted ' + (win ? 'w' : 'l') + '" style="--tc:' + (win ? '139,227,166' : '255,123,123') + '"><img src="' + src + '" width="44" height="44" alt=""><div style="min-width:0"><small>' + esc(F.time.format(new Date(g.game_at))) + ' ET · ' + (isHome(g) ? 'Home' : 'Away') + '</small><b>' + (isHome(g) ? 'vs ' : 'at ') + esc(o?.name || 'Opponent') + '</b></div><div class="sc">' + nb(cs(g) + '–' + os(g)) + '<i>' + (win ? 'Win' : 'Loss') + '</i></div></div>';
+    }).join('');
+  }
+
+  /* ---------- schedule + write-ups (the old Game Center page, merged into Headquarters) ---------- */
+  function renderSchedule(upcoming, finals, byId, oppOf, isHome, cs, os, cgy) {
+    const row = g => {
+      const t = byId.get(oppOf(g)), fin = g.status === 'final', win = fin && cs(g) > os(g);
+      return '<div class="res card tinted ' + (fin ? (win ? 'w' : 'l') : '') + '" style="--tc:' + (fin ? (win ? '139,227,166' : '255,123,123') : '200,210,225') + '"><img src="' + logo(t?.logo_path) + '" width="44" height="44" alt=""><div style="min-width:0"><small>' + esc(F.day.format(new Date(g.game_at))) + ' · ' + esc(F.time.format(new Date(g.game_at))) + ' ET · ' + (isHome(g) ? 'Home' : 'Away') + '</small><b>' + (isHome(g) ? 'vs ' : 'at ') + esc(t?.name || 'TBA') + '</b></div>' +
+        '<div class="sc">' + (fin ? nb(cs(g) + '–' + os(g)) + '<i>' + (cs(g) > os(g) ? 'Win' : 'Loss') + '</i>' : '<i style="color:var(--mute)">Wk ' + (g.week || '–') + '</i>') + '</div></div>';
+    };
+    const up = upcoming.slice(0, 9), done = finals.slice(-9).reverse();
+    $('schUpcoming').innerHTML = up.length ? up.map(row).join('') : '<p class="hq-loading">No upcoming games on the schedule.</p>';
+    $('schFinals').innerHTML = done.length ? done.map(row).join('') : '<p class="hq-loading">No finals yet this season.</p>';
+    if (cgy) $('schEye').textContent = 'Season 55 · ' + rec(cgy) + ' · ' + cgy.pts + ' pts';
+  }
+
+  async function renderRecaps() {
+    const r = await safe(read('media_posts', { select: 'id,title,body,published_at,source_metrics', published: 'eq.true', post_type: 'eq.recap', 'source_metrics->>team': 'eq.Calgary Hitmen', limit: '40' }));
+    const box = $('hqRecaps');
+    if (!r.ok) { box.innerHTML = '<p class="hq-loading">Write-ups could not load right now.</p>'; return; }
+    const posts = r.v.sort((a, b) => D.recapSortKey(b) - D.recapSortKey(a)).slice(0, 3);
+    if (!posts.length) { box.innerHTML = '<p class="hq-loading">No Hitmen recaps are published yet.</p>'; return; }
+    box.innerHTML = posts.map(p => {
+      const sc = D.recapScore(p.source_metrics || {}), win = sc.win, m = p.source_metrics || {};
+      const lede = (D.recapLede ? D.recapLede(p) : '') || '';
+      return '<a class="res card tinted ' + (win === true ? 'w' : win === false ? 'l' : '') + '" href="' + esc(D.recapHref(p)) + '" style="--tc:' + (win === true ? '139,227,166' : win === false ? '255,123,123' : '200,210,225') + ';text-decoration:none;color:inherit"><span class="recap-ic" aria-hidden="true">▤</span><div style="min-width:0"><small>' + esc(D.recapDate(m) || '') + (m.opponent ? ' · ' + esc(m.opponent) : '') + '</small><b>' + esc(p.title || 'Game recap') + '</b></div><div class="sc">' + esc(sc.text || '') + '<i>' + (sc.res === 'W' ? 'Win' : sc.res === 'OTL' ? 'OTL' : 'Loss') + '</i></div></a>';
     }).join('');
   }
 

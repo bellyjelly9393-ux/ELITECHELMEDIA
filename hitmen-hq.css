@@ -107,3 +107,93 @@
 .hq-opp-six span { min-width:0; overflow-wrap:anywhere; font-size:15px; }
 .hq-opp-six i { color:var(--gold-hi); font-style:normal; margin-right:6px; }
 .ow-link:focus-visible, .posted-report-link:focus-visible { outline:2px solid var(--gold-hi); outline-offset:4px; }
+
+/* ===== Game Center merged into War Room Headquarters: series controls, schedule, write-ups, season desk, stall requests ===== */
+.rooms-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.gc-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.gc-list { display: grid; gap: 10px; margin-top: 8px; }
+.kv { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 18px; margin: 0; font-size: 16px; }
+.kv dt { font-family: var(--f-ui); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); font-size: 14px; padding-top: 3px; }
+.kv dd { margin: 0; color: var(--bone); font-weight: 700; font-family: var(--f-ui); font-size: 20px; font-variant-numeric: tabular-nums; }
+.recap-ic { width: 44px; height: 44px; display: grid; place-items: center; font-size: 22px; color: var(--gold-hi); box-shadow: inset 0 0 0 1px var(--line-2); }
+
+/* game night series */
+.series-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.series-card { padding: 0; background: linear-gradient(160deg, rgba(20,12,14,.92), rgba(7,8,10,.95)); }
+.series-body { padding: 14px 18px 18px; display: grid; gap: 12px; }
+.hitmen-status { padding: 10px 14px 8px; font-family: var(--f-ui); font-weight: 600; font-size: 16px; letter-spacing: .06em; color: var(--bone); background: rgba(255,255,255,.04); box-shadow: inset 0 0 0 1px var(--line-2); }
+.hitmen-status.success { color: var(--ok); box-shadow: inset 0 0 0 1px rgba(139,227,166,.45); }
+.hitmen-status.error { color: var(--crit); box-shadow: inset 0 0 0 1px rgba(255,123,123,.5); }
+.session-builder { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.session-builder .wide { grid-column: 1 / -1; }
+.field, .select-field { width: 100%; min-height: 44px; padding: 10px 12px 8px; border: 0; border-radius: 0; color: var(--bone); background: #07080a; box-shadow: inset 0 0 0 1px var(--line-2); font-family: var(--f-ui); font-weight: 500; font-size: 18px; letter-spacing: .03em; }
+.field:focus, .select-field:focus { outline: 2px solid var(--gold-hi); outline-offset: 1px; }
+.field:disabled { opacity: .55; }
+input.field[type="number"] { text-align: center; font-variant-numeric: tabular-nums; }
+.hitmen-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.small-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 16px 8px; border: 0; cursor: pointer; text-decoration: none; color: var(--bone); background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px var(--line-2); font-family: var(--f-ui); font-weight: 700; font-size: 17px; letter-spacing: .1em; text-transform: uppercase; transform: skewX(-8deg); }
+.small-btn:hover { background: rgba(255,255,255,.12); }
+.small-btn.primary { color: #1a1205; background: linear-gradient(180deg, var(--gold-hi), var(--gold) 60%, var(--gold-lo)); box-shadow: none; }
+.small-btn:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 2px; }
+.scout-empty { padding: 14px 16px 12px; color: #c3c0b8; font-size: 16px; box-shadow: inset 0 0 0 1px var(--line); background: rgba(255,255,255,.025); }
+.session-card { display: grid; gap: 12px; padding: 14px 16px 16px; background: rgba(0,0,0,.35); box-shadow: inset 0 0 0 1px var(--line-2); }
+.session-head { display: flex; justify-content: space-between; align-items: end; gap: 12px; flex-wrap: wrap; }
+.session-head small { font-family: var(--f-ui); font-weight: 600; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-hi); }
+.session-head h4 { margin: 2px 0 0; font-family: var(--f-head); font-weight: 400; text-transform: uppercase; font-size: 28px; line-height: 1; }
+.series-score { font-family: var(--f-ui); font-weight: 700; font-size: 30px; letter-spacing: .06em; font-variant-numeric: tabular-nums; color: var(--gold-hi); }
+.session-card p { margin: 0; font-size: 16px; color: #d4d2cb; }
+.session-games { display: grid; gap: 8px; }
+.session-game { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr) 70px 70px auto; gap: 8px; align-items: center; padding: 8px 10px; background: rgba(255,255,255,.035); box-shadow: inset 0 0 0 1px var(--line); }
+.session-game > span { display: grid; gap: 1px; min-width: 0; font-size: 15px; color: #c3c0b8; }
+.session-game strong { font-family: var(--f-head); font-weight: 400; text-transform: uppercase; font-size: 20px; color: var(--bone); }
+.session-game.not_required { opacity: .55; }
+.game-status { font-family: var(--f-ui); font-weight: 600; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.game-status.live { color: var(--warn); }
+.game-status.final { color: var(--ok); }
+.session-game b { color: var(--ok); font-size: 22px; text-align: center; }
+.session-history-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.session-history-row:last-child { border-bottom: 0; }
+.session-history-row span { display: grid; gap: 1px; min-width: 0; }
+.session-history-row strong { font-family: var(--f-head); font-weight: 400; text-transform: uppercase; font-size: 19px; }
+.session-history-row small { font-size: 14px; color: var(--mute); }
+.session-history-row b { font-family: var(--f-ui); font-weight: 700; font-size: 26px; font-variant-numeric: tabular-nums; color: var(--gold-hi); }
+.game-center-bridge { display: grid; gap: 8px; padding: 12px 14px; background: rgba(120,160,255,.06); box-shadow: inset 0 0 0 1px rgba(120,160,255,.28); }
+.game-center-bridge .eyebrow { font-family: var(--f-ui); font-weight: 600; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; color: #9fbcff; }
+.game-center-bridge h4 { margin: 2px 0 0; font-family: var(--f-head); font-weight: 400; text-transform: uppercase; font-size: 22px; }
+.game-center-bridge p { margin: 4px 0 0; font-size: 15px; color: #c3c0b8; }
+.game-center-bridge-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px; align-items: center; }
+.game-center-bridge small { font-size: 14px; color: var(--mute); }
+.game-center-bridge small[data-tone="good"] { color: var(--ok); }
+.game-center-bridge small[data-tone="bad"] { color: var(--crit); }
+
+/* season desk */
+.desk-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
+.desk-mission, .desk-stats { padding: 20px 22px; display: grid; gap: 12px; align-content: start; }
+.desk-mission h3 { margin: 0; font-family: var(--f-head); font-weight: 400; text-transform: uppercase; font-size: clamp(30px, 3.4vw, 46px); line-height: .95; }
+.desk-mission p { margin: 0; color: #d4d2cb; font-size: 17px; line-height: 1.45; }
+.desk-mission blockquote { margin: 0; padding-left: 14px; border-left: 3px solid var(--wr-red); font-family: var(--f-ui); font-size: 20px; letter-spacing: .03em; color: var(--gold-hi); }
+
+/* stall requests (hitmen-stall-requests.css, re-skinned to the HQ palette) */
+.sr-wrap:not(:has(#stallReqPanel:not([hidden]))) { display: none; }
+.sr-admin { --sr-bg: #0a0c10; --sr-raise: #12151a; --sr-text: var(--bone); --sr-soft: #c3c0b8; --sr-muted: var(--mute); --sr-steel: var(--gold-hi); margin-bottom: 0; }
+.sr-btn.primary, .sr-btn.armed { background: linear-gradient(180deg, var(--gold-hi), var(--gold) 60%, var(--gold-lo)) !important; color: #1a1205 !important; border-color: transparent !important; }
+
+@media (max-width: 1100px) { .series-grid, .desk-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 860px) { .gc-cols { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 620px) {
+  .session-builder { grid-template-columns: minmax(0, 1fr); }
+  .session-game { grid-template-columns: minmax(0, 1fr) 64px 64px; }
+  .session-game > span:nth-child(2) { display: none; }
+  .session-game .small-btn, .session-game b { grid-column: 1 / -1; }
+  .game-center-bridge-controls { grid-template-columns: minmax(0, 1fr); }
+  .small-btn { transform: none; }
+}
+
+.series-grid > *, .series-body, .session-card, .session-games, .session-game > *, .desk-grid > * { min-width: 0; }
+.session-game .field { padding-inline: 4px; }
+.session-game .game-status { display: block; position: static; background: none !important; border: 0; padding: 0; margin: 0; min-height: 0; aspect-ratio: auto; max-width: none; overflow: visible; isolation: auto; }
+.session-game .game-status::before, .session-game .game-status::after { content: none; display: none; }
+@media (max-width: 860px) { .session-game { grid-template-columns: minmax(0, 1fr) 64px 64px; } .session-game > span:nth-child(2) { display: none; } .session-game .small-btn, .session-game b { grid-column: 1 / -1; } }
+#hqRecaps .res b { white-space: normal; overflow: visible; text-overflow: clip; font-size: 19px; line-height: 1.08; }
+#hqRecaps .res { grid-template-columns: 44px minmax(0, 1fr) auto; align-items: start; }
+@media (max-width: 1100px) { #hqRecaps { grid-template-columns: minmax(0, 1fr); } }
