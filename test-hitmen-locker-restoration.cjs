@@ -107,6 +107,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Team room fits '+width);
       await page.locator('#hnRoomTitle').scrollIntoViewIfNeeded();
       await page.screenshot({path:path.join(screenshots,'team-'+width+'.png')});
+      if([390,1440].includes(width))console.log('LOCKER_VISUAL team '+width+' '+(await page.screenshot({type:'jpeg',quality:50})).toString('base64'));
       await page.locator('#lockerRoster a').first().click();
       await page.waitForFunction(()=>document.getElementById('playerTitle').textContent==='Fixture Active');
       await page.locator('#stallScene .hs-img').first().evaluate(img=>img.decode());
@@ -128,6 +129,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       await page.locator('[data-stall-tab="overview"]').click();
       await page.locator('#stall').scrollIntoViewIfNeeded();
       await page.screenshot({path:path.join(screenshots,'player-'+width+'.png')});
+      if([390,1440].includes(width))console.log('LOCKER_VISUAL player '+width+' '+(await page.screenshot({type:'jpeg',quality:50})).toString('base64'));
       await context.close();
     }
     const shared=await pageFor(390);
