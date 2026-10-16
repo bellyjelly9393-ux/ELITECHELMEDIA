@@ -231,3 +231,6 @@
 .lg-provenance summary{cursor:pointer;min-height:44px;display:flex;align-items:center;color:var(--gold-hi)}
 .lg-provenance b{font-weight:600;color:var(--bone)}
 .lg-form-card{min-width:0}
+
+.lg-leader-links{display:flex;flex-wrap:wrap;gap:10px 20px;padding-top:12px;border-top:1px solid var(--line,#36383d)}
+.lg-leader-links a{display:inline-flex;align-items:center;min-height:44px;color:#ead39b;font-size:13px;font-weight:800;text-decoration:underline;text-underline-offset:4px}

@@ -10,7 +10,7 @@
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="wildman-home.css?v=20261011-4">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
-<link rel="stylesheet" href="lgchl-media.css?v=20261016-2">
+<link rel="stylesheet" href="lgchl-media.css?v=20261016-3">
 </head>
 <body>
 <header class="top band">
@@ -107,7 +107,7 @@
       <div class="card lg-panel" id="lgStatsSec">
         <span class="wm wm-lg lg-wm-ecm" aria-hidden="true"></span>
         <div class="lg-panel-head">
-          <div><p class="eyebrow">Season 55 regular season</p><h2 class="lg-panel-title">League leaders</h2></div>
+          <div><p class="eyebrow">Season 55 regular season</p><h2 class="lg-panel-title">Top 10 league leaders</h2></div>
           <div class="lg-tabs" role="group" aria-label="Leaderboard">
             <button type="button" data-metric="points" aria-pressed="true">Points</button>
             <button type="button" data-metric="goals" aria-pressed="false">Goals</button>
@@ -118,6 +118,7 @@
         <div class="lg-tbl-box"><table class="lg-tbl num"><thead id="lgLeadersHead"><tr><th>#</th><th>Player</th><th class="r">G</th><th class="r">A</th><th class="r">PTS</th><th class="r">+/-</th></tr></thead><tbody id="lgLeaders"><tr><td colspan="6" class="empty">Loading leaders…</td></tr></tbody></table></div>
         <div class="lg-goalies" id="lgGoalies"></div>
         <p class="lg-fine" id="lgLeadersNote">Source: LG player stats import.</p>
+        <div class="lg-leader-links"><a id="lgFullLeaders" href="lgchl-leaders.html?metric=points#lgPlayerBoard">VIEW TOP 150 →</a><a id="lgFindPlayer" href="lgchl-leaders.html?metric=points&amp;search=1#lgPlayerSearch">SEARCH PLAYERS →</a></div>
       </div>
     </div>
   </section>
@@ -234,6 +235,6 @@
 <script src="media-desk.js?v=20261011-1"></script>
 <script src="lgchl-media-config.js?v=20261016-2"></script>
 <script src="lgchl-media-public.js?v=20261016-2"></script>
-<script src="lgchl-media.js?v=20261016-2"></script>
+<script src="lgchl-media.js?v=20261016-3"></script>
 </body>
 </html>

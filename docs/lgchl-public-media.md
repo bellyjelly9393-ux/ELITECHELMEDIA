@@ -98,3 +98,13 @@ With public ingestion opted in, the shared pause now blocks ordinary schedule/pr
 Regression tests cover partial games, wrong source identities, missing period/team stats, both anon/auth RPC denial, paused/expired request leases, and identifiers above the binary64 exact range.
 
 These are source/offline test checks, not a live database security audit. Migrations remain unapplied, the new cron and all readiness flags remain disabled, actual LG HTML is still unvalidated, and the real local SQLite file is still unavailable. Owner approval is still required.
+
+## Player discovery follow-up
+
+The media desk shows the top 10 qualifying players for points, goals, assists and save percentage. Its full-board and search links carry the selected metric into the existing `lgchl-leaders.html` destination.
+
+That destination reads up to 150 players per metric from the existing public `wm_lgchl_s55_player_leaders` view, with 25 rows per page and local player/team search. Points, goals, assists and the existing extended/goalie metrics are supported. GAA sorts ascending; save percentage sorts descending. Both goalie boards use an explicit 8-GP threshold.
+
+Tied values share a competition rank; games played and gamertag order the tied rows. Filtering and pagination preserve those original board ranks. Search is explicitly limited to the selected metric's top 150; a missing result is not a claim the player is absent from the full import. Source/import times remain visible, and unavailable values are not replaced with zero.
+
+No database migration, parser change, private data access or new API is required for this display expansion. Existing public data already supports the larger read. New browser regressions exercise real top-ten-to-full-board links, search, ties across pages, the last page, goalie ordering/qualification and empty/unavailable states at 390/768/1440 pixels.
