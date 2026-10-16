@@ -27,7 +27,7 @@
         root.querySelectorAll('form').forEach(f => f.replaceWith(...f.childNodes));
       };
       const contentRoot = doc => doc.querySelector('main,.p-body-main,#content,.mainContent,.pageContent') || doc.body;
-      // One line per table cell / block, the layout the Public Log parser expects.
+      /* One line per table cell / block, the layout the Public Log parser expects. */
       const linesOf = root => {
         const c = root.cloneNode(true);
         strip(c);
@@ -60,7 +60,7 @@
         }))
       }));
 
-      // Classify by the URL's page id. LG's site navigation mentions every page type, so body text is not used.
+      /* Classify by the URL's page id. LG's site navigation mentions every page type, so body text is not used. */
       const page = String(new URL(location.href).searchParams.get('page') || '').toLowerCase();
       const byPage = {roster:'roster', game:'game', league_game_edit_log:'box_score', team_page_schedule:'schedule',
         team_page:'schedule', schedule:'schedule', player_stats:'stats', player_stats_advanced:'stats', standings:'stats'};
@@ -87,8 +87,8 @@
         return;
       }
 
-      // The bridge may ask this tab for specific Calgary game Public Logs. Only numeric game ids are
-      // accepted, only LG's own Public Log page is fetched, and only from the Wildman bridge window.
+      /* The bridge may ask this tab for specific Calgary game Public Logs. Only numeric game ids are
+         accepted, only LG's own Public Log page is fetched, and only from the Wildman bridge window. */
       const onRequest = async ev => {
         if (ev.origin !== TARGET || ev.source !== bridge) return;
         const d = ev.data;
@@ -124,7 +124,20 @@
     }
   }
 
-  const bookmarklet = 'javascript:(' + collector.toString() + ')(' + JSON.stringify(location.origin) + ')';
+  /* Browsers strip newlines when a javascript: URL is pasted or saved as a bookmark, so the
+     bookmarklet must work as a single line: drop any comments and collapse all line breaks.
+     (Newlines inside the collector only occur between tokens; string escapes like '\n' are
+     two characters in the source and are untouched.) Keep collector free of // comments. */
+  function toBookmarklet(fn, target) {
+    const src = fn.toString()
+      .replace(/\/\*[\s\S]*?\*\//g, ' ')
+      .replace(/^\s*\/\/.*$/gm, '')
+      .replace(/\s*\n\s*/g, ' ')
+      .trim();
+    return 'javascript:(' + src + ')(' + JSON.stringify(target) + ');void 0';
+  }
+  const bookmarklet = toBookmarklet(collector, location.origin);
+  window.WildmanLgAuthSync = { collector, toBookmarklet, bookmarklet };
 
   function setMessage(text, bad = false) {
     const el = E('authSyncMessage');
