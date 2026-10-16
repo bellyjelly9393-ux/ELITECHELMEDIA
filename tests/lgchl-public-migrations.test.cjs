@@ -16,11 +16,18 @@ test('unapplied migrations: real PostgreSQL RLS, atomic publication and identity
   const html=fs.readFileSync('tests/fixtures/lgchl/public-game.example.html','utf8');
   for(let i=0;i<6;i++){
    const game=(await db.query('select public.lgchl_media_claim_box($1) as game',[owner])).rows[0].game;
-   const payload=parsePublicGame(html,game);
+   const payload=parsePublicGame(html.replace('gameid=999999','gameid='+game.lg_game_id),game);
+   if(i===0){
+    const save=x=>db.query('select public.lgchl_media_save_box($1,$2,$3,$4)',[owner,JSON.stringify(x),'2026-10-16T21:00:00Z','a'.repeat(64)]);
+    await assert.rejects(save({...payload,source_game_id:999999}),/Canonical source game mismatch/);
+    await assert.rejects(save({...payload,players:payload.players.filter(p=>p.lg_user_id!==1003)}),/Incomplete/);
+    await assert.rejects(save({...payload,team_stats:{}}),/team statistics/);
+    await assert.rejects(save({...payload,period_scoring:[]}),/period scoring/);
+   }
    if(game.lg_game_id===10006)payload.players.find(p=>p.lg_user_id===1001).gamertag='Renamed Example';
    payload.private_cookie='never-public';payload.team_stats['413'].lg_user_id=1001;
-   payload.period_scoring.push({lg_team_id:413,periods:[{label:'lg_user_id',goals:1001}]});
-   assert.equal((await db.query('select public.lgchl_media_save_box($1,$2,$3,$4) as n',[owner,JSON.stringify(payload),'2026-10-16T21:00:00Z','a'.repeat(64)])).rows[0].n,4);
+   payload.period_scoring[0].periods.push({label:'lg_user_id',goals:1001});
+   assert.equal((await db.query('select public.lgchl_media_save_box($1,$2,$3,$4) as n',[owner,JSON.stringify(payload),'2026-10-16T21:00:00Z','a'.repeat(64)])).rows[0].n,12);
   }
   assert.equal((await db.query('select public.lgchl_media_claim_box($1) as game',[owner])).rows[0].game,null,'Successful pages are never claimed twice');
   const trend=(await db.query("select * from public.lgchl_public_trending where gamertag='Renamed Example'")).rows[0];
@@ -28,7 +35,19 @@ test('unapplied migrations: real PostgreSQL RLS, atomic publication and identity
   const pub=(await db.query('select * from public.lgchl_public_box_scores')).rows;
   assert.ok(!JSON.stringify(pub).includes('lg_user_id'));assert.ok(!JSON.stringify(pub).includes('never-public'));
   const weekly=(await db.query('select * from public.lgchl_public_weekly_players')).rows;
-  assert.equal(weekly.length,2);assert.equal(weekly[0].gp,6);
+  assert.equal(weekly.length,10);assert.equal(weekly[0].gp,6);
+  const functions=(await db.query("select p.oid::regprocedure::text as signature from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname like 'lgchl_media_%'")).rows;
+  for(const role of ['anon','authenticated'])for(const f of functions)assert.equal((await db.query("select has_function_privilege($1,$2,'execute') as ok",[role,f.signature])).rows[0].ok,false);
+  const expiry=(await db.query('select public.lgchl_media_before_fetch($1) as expiry',[owner])).rows[0].expiry;
+  assert.ok(Date.parse(expiry)>Date.now());
+  await db.query('select public.lgchl_media_fail_box($1,null,$2,true)',[owner,'Test challenge']);
+  assert.equal((await db.query('select public.lgchl_media_before_fetch($1) as expiry',[owner])).rows[0].expiry,null);
+  await db.query('select public.lgchl_media_release_lease($1)',[owner]);
+  assert.equal((await db.query('select public.lgchl_media_acquire_lease($1) as ok',[owner])).rows[0].ok,false,'Pause prevents ordinary sync and probe requests as well as queue claims');
+  await db.query('select public.lgchl_media_resume_boxes()');
+  assert.equal((await db.query('select public.lgchl_media_acquire_lease($1) as ok',[owner])).rows[0].ok,true);
+  await db.exec("update private.lgchl_media_sync_control set expires_at=clock_timestamp()-interval '1 second'");
+  assert.equal((await db.query('select public.lgchl_media_before_fetch($1) as expiry',[owner])).rows[0].expiry,null,'Expired owner cannot fetch');
   await db.exec('set role anon');
   assert.equal((await db.query('select * from public.lgchl_public_box_scores')).rows.length,6);
   assert.equal((await db.query('select * from public.lg_public_player_seasons')).rows.length,0);

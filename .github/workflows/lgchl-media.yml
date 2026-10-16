@@ -36,7 +36,7 @@ jobs:
       - name: Edge Function type check
         run: '"$RUNNER_TEMP/lgchl-tools/node_modules/.bin/deno" check --config supabase/functions/lgchl-league-sync/deno.json supabase/functions/lgchl-league-sync/index.ts'
       - name: Parsers and serial worker
-        run: node --experimental-strip-types --test tests/lgchl-public-parser.test.mjs tests/lgchl-public-worker.test.mjs
+        run: node --experimental-strip-types --test tests/lgchl-public-parser.test.mjs tests/lgchl-public-worker.test.mjs tests/lgchl-public-sync.test.cjs
       - name: Isolated PostgreSQL migrations and RLS
         run: NODE_PATH="$RUNNER_TEMP/lgchl-tools/node_modules" node --test tests/lgchl-public-migrations.test.cjs
       - name: Read-only SQLite importer

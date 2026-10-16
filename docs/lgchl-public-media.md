@@ -38,9 +38,9 @@ Do not run `supabase db push` or execute these migrations against live Supabase 
 
 `LGCHL_PUBLIC_BOX_SCORES_ENABLED=true` opts the deployed Edge Function into the new queue and shared lease; absent/false preserves the existing schedule workflow.
 
-One identified LG GET runs at a time, with 1.5 seconds after every success/failure. HTTP 403/429 or Cloudflare content stops the call. A challenged box job also pauses the private queue until manual service-role review. Successful, failed, blocked and interrupted game fetches are not automatically fetched a second time. Failures must be reviewed explicitly; there is no automatic retry/bypass loop.
+One identified LG GET runs at a time, with 1.5 seconds after every success/failure. HTTP 403/429 or Cloudflare content stops the call. A challenged LG request pauses the shared sync until manual service-role review when public ingestion is opted in. Successful, failed, blocked and interrupted game fetches are not automatically fetched a second time. Failures must be reviewed explicitly; there is no automatic retry/bypass loop.
 
-The default parser rejects incomplete/unknown tables, missing canonical team/player IDs, inconsistent totals and missing sides. It retains period scoring, team stats and allowlisted skater/goalie lines, with source URL, HTML SHA-256, fetch time and import time. **This validates the offline contract, not the actual LG layout.**
+The default parser rejects incomplete/unknown tables, missing or mismatched canonical game/team/player IDs, inconsistent totals and incomplete sixes rosters/stat sections. It retains period scoring, team stats and allowlisted skater/goalie lines, with source URL, HTML SHA-256, fetch time and import time. **This validates the offline contract, not the actual LG layout.**
 
 Before enabling: obtain an authorized, manually saved public game HTML file without login/cookies, inspect for unrelated private content, add a real sanitized fixture and validate all observed skater/goalie columns and team/period stats. A blocked fetch is not evidence the parser works against production markup.
 
@@ -84,3 +84,17 @@ There is no root package/build/lint command in this static repository. Checks ar
 Browser checks use isolated, explicitly synthetic API fixtures; these never enter production data. They exercise pending, populated and empty feeds at 390, 768 and 1440 pixels, tabs, literal rendering of markup-like names, and no horizontal overflow or console/page errors. A scoped GitHub Actions workflow repeats these checks and stores screenshots.
 
 Remaining integration checks: actual LG captured HTML; dry run against the user's actual SQLite schema; approved live migrations/import; controlled Edge Function verification. These are prerequisites for live statistics, not accomplished by offline fixture tests.
+
+## Security review follow-up (2026-10-16)
+
+An independent read-only code review found no urgent credential leak, anonymous write grant or private Calgary publication path. It identified two publication-integrity gaps and one low-severity canonical-ID issue, corrected in the follow-up candidate:
+
+- A complete supported sixes game now requires at least five skaters and a goalie on each team, required stat fields, team statistics and reconciled period scoring. Unknown or partial layouts fail closed for manual review.
+- Canonical/OG game identity in the HTML must match the official queued game; conflicting source season/league identifiers are rejected. SQL also validates the parsed source game ID.
+- Python parses integer identifiers exactly with Decimal, rejecting out-of-range PostgreSQL bigint values rather than rounding through binary floating point.
+
+With public ingestion opted in, the shared pause now blocks ordinary schedule/probe requests as well as public queue requests. Every LG request renews and verifies the owning lease first; a delayed/expired lease response cannot begin a request. The existing 1.5-second delay and stop-on-challenge behavior remain.
+
+Regression tests cover partial games, wrong source identities, missing period/team stats, both anon/auth RPC denial, paused/expired request leases, and identifiers above the binary64 exact range.
+
+These are source/offline test checks, not a live database security audit. Migrations remain unapplied, the new cron and all readiness flags remain disabled, actual LG HTML is still unvalidated, and the real local SQLite file is still unavailable. Owner approval is still required.

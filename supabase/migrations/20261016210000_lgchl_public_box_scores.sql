@@ -70,8 +70,18 @@ create function public.lgchl_media_acquire_lease(p_owner uuid) returns boolean
 language plpgsql security definer set search_path='' as $$
 begin
  update private.lgchl_media_sync_control set owner=p_owner,expires_at=now()+interval '180 seconds'
- where singleton and (owner is null or expires_at<now());
+ where singleton and not paused and (owner is null or expires_at<clock_timestamp());
  return found;
+end $$;
+-- Renew and fence each LG request; return server expiry so a delayed response cannot start an expired fetch.
+create function public.lgchl_media_before_fetch(p_owner uuid) returns timestamptz
+language plpgsql security definer set search_path='' as $$
+declare v_expiry timestamptz;
+begin
+ update private.lgchl_media_sync_control set expires_at=clock_timestamp()+interval '180 seconds'
+ where singleton and owner=p_owner and expires_at>clock_timestamp() and not paused
+ returning expires_at into v_expiry;
+ return v_expiry;
 end $$;
 create function public.lgchl_media_release_lease(p_owner uuid) returns void
 language sql security definer set search_path='' as $$
@@ -113,14 +123,21 @@ declare g public.lgchl_games; p jsonb; v_player uuid; v_n integer:=0; v_stats js
 begin
  if not exists(select 1 from private.lgchl_media_sync_control where singleton and owner=p_owner and expires_at>now()) then raise exception 'No sync lease'; end if;
  select * into strict g from public.lgchl_games where lg_game_id=(p_payload->>'lg_game_id')::bigint and status='final' and season=55;
+ if (p_payload->>'source_game_id')::bigint is distinct from g.lg_game_id then raise exception 'Canonical source game mismatch'; end if;
  if g.away_score is distinct from (p_payload->>'away_score')::integer or g.home_score is distinct from (p_payload->>'home_score')::integer
  or g.away_lg_team_id is distinct from (p_payload->>'away_lg_team_id')::bigint or g.home_lg_team_id is distinct from (p_payload->>'home_lg_team_id')::bigint then raise exception 'Official final mismatch'; end if;
  if exists(select 1 from public.lgchl_public_box_scores where lg_game_id=g.lg_game_id) then
   update private.lgchl_public_box_jobs set status='done' where lg_game_id=g.lg_game_id; return 0;
  end if;
  if not exists(select 1 from private.lgchl_public_box_jobs where lg_game_id=g.lg_game_id and status='fetching') then raise exception 'Game was not claimed'; end if;
- if jsonb_typeof(p_payload->'players')<>'array' or jsonb_array_length(p_payload->'players')<4 then raise exception 'Incomplete player lines'; end if;
+ if jsonb_typeof(p_payload->'players')<>'array' or jsonb_array_length(p_payload->'players')<12 then raise exception 'Incomplete player lines'; end if;
+ if exists(select 1 from jsonb_array_elements(p_payload->'players') x
+  where x->>'player_kind'='skater' and (
+   x->>'position' is null or exists(select 1 from unnest(array['goals','assists','points','plus_minus','toi_seconds','twp_seconds','shots','deflections','passing_pct','hits','takeaways','giveaways','blocked_shots','interceptions','pim']) k where jsonb_typeof(x->k) is distinct from 'number'))
+  or x->>'player_kind'='goalie' and exists(select 1 from unnest(array['saves','shots_against','goals_against','save_pct','gaa','toi_seconds']) k where jsonb_typeof(x->k) is distinct from 'number')
+ ) then raise exception 'Missing required player statistics'; end if;
  foreach v_side in array array[g.away_lg_team_id,g.home_lg_team_id] loop
+  if (select count(*) from jsonb_array_elements(p_payload->'players') x where (x->>'lg_team_id')::bigint=v_side and x->>'player_kind'='skater')<5 then raise exception 'Incomplete sixes roster'; end if;
   if not exists(select 1 from jsonb_array_elements(p_payload->'players') x where (x->>'lg_team_id')::bigint=v_side and x->>'player_kind'='goalie')
   or (select sum((x->>'goals')::integer) from jsonb_array_elements(p_payload->'players') x where (x->>'lg_team_id')::bigint=v_side and x->>'player_kind'='skater')
      is distinct from (case when v_side=g.away_lg_team_id then g.away_score else g.home_score end) then raise exception 'Player scoring does not reconcile'; end if;
@@ -128,6 +145,9 @@ begin
   select coalesce(jsonb_object_agg(e.key,e.value),'{}') into v_one
   from jsonb_each(coalesce(p_payload->'team_stats'->v_side::text,'{}')) e
   where e.key in ('goals','shots','hits','pim','possession_seconds','passing_pct','faceoffs_won','pp_goals','pp_opportunities') and jsonb_typeof(e.value) in ('number','null');
+  if exists(select 1 from unnest(array['goals','shots','possession_seconds']) k where jsonb_typeof(v_one->k) is distinct from 'number')
+  or (v_one->>'goals')::integer is distinct from (case when v_side=g.away_lg_team_id then g.away_score else g.home_score end)
+  then raise exception 'Missing or contradictory team statistics'; end if;
   v_stats:=v_stats||jsonb_build_object(v_side::text,v_one);
  end loop;
  for v_period in select * from jsonb_array_elements(coalesce(p_payload->'period_scoring','[]')) loop
@@ -138,6 +158,19 @@ begin
      and jsonb_typeof(x->'goals')='number' and (x->>'goals')::numeric between 0 and 100;
    v_periods:=v_periods||jsonb_build_array(jsonb_build_object('lg_team_id',(v_period->>'lg_team_id')::bigint,'periods',v_cells));
   end if;
+ end loop;
+ foreach v_side in array array[g.away_lg_team_id,g.home_lg_team_id] loop
+  if (select count(*) from jsonb_array_elements(v_periods) x where (x->>'lg_team_id')::bigint=v_side)<>1 then raise exception 'Incomplete period scoring'; end if;
+  select x->'periods' into v_cells from jsonb_array_elements(v_periods) x where (x->>'lg_team_id')::bigint=v_side;
+  if (select count(*) from jsonb_array_elements(v_cells) x where x->>'label' ~* '^(1st|1|period 1)$')<>1
+   or (select count(*) from jsonb_array_elements(v_cells) x where x->>'label' ~* '^(2nd|2|period 2)$')<>1
+   or (select count(*) from jsonb_array_elements(v_cells) x where x->>'label' ~* '^(3rd|3|period 3)$')<>1
+   then raise exception 'Missing or duplicate regular period'; end if;
+  if (select count(*) from jsonb_array_elements(v_cells) x where x->>'label' ~* '^(total|final)$')<>1
+   or (select (x->>'goals')::integer from jsonb_array_elements(v_cells) x where x->>'label' ~* '^(total|final)$') is distinct from (case when v_side=g.away_lg_team_id then g.away_score else g.home_score end)
+   or (select count(*) from jsonb_array_elements(v_cells) x where x->>'label' !~* '^(total|final)$')<3
+   or (select sum((x->>'goals')::integer) from jsonb_array_elements(v_cells) x where x->>'label' !~* '^(total|final)$') is distinct from (case when v_side=g.away_lg_team_id then g.away_score else g.home_score end)
+  then raise exception 'Period scoring does not reconcile'; end if;
  end loop;
  insert into public.lgchl_public_box_scores(lg_game_id,season,week,game_at,away_lg_team_id,home_lg_team_id,away_score,home_score,team_stats,period_scoring,source_url,source_sha256,fetched_at) values(g.lg_game_id,g.season,g.week,g.game_at,g.away_lg_team_id,g.home_lg_team_id,g.away_score,g.home_score,v_stats,
  v_periods,'https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid='||g.lg_game_id,p_sha256,p_fetched_at);

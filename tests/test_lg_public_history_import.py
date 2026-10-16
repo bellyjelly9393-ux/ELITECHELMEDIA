@@ -66,5 +66,13 @@ class PublicImportTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             module.main(["--captured-at", "2026-10-16T12:00:00"])
 
+    def test_exact_canonical_bigint_identifiers(self):
+        self.assertEqual(module.number("9007199254740993", "lg_user_id"), 9007199254740993)
+        self.assertEqual(module.number("9223372036854775807", "lg_user_id"), 9223372036854775807)
+        with self.assertRaises(ValueError):
+            module.number("9223372036854775808", "lg_user_id")
+        with self.assertRaises(ValueError):
+            module.number("123.5", "lg_user_id")
+
 if __name__ == "__main__":
     unittest.main()

@@ -10,7 +10,7 @@ test('one claimed final creates one fetch and one atomic save, never a second fe
  const result=await drainPublicBoxes(client,async()=>{fetched++;return html;},()=>false,Date.now()+60000,'owner');
  assert.equal(result.imported,1);assert.equal(fetched,1);
  const saved=client.calls.find(c=>c.name==='lgchl_media_save_box').args;
- assert.equal(saved.p_payload.players.length,4);assert.match(saved.p_sha256,/^[a-f0-9]{64}$/);
+ assert.equal(saved.p_payload.players.length,12);assert.match(saved.p_sha256,/^[a-f0-9]{64}$/);
 });
 test('blocked access pauses the job and stops before asking for another page',async()=>{
  const client=db(),blocked=new Error('403 blocked');

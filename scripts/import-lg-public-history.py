@@ -4,6 +4,7 @@ After migration approval, --upload sends allowlisted rows to service-only stagin
 The server replaces LG IDs with random public UUIDs and publishes a complete import atomically.
 """
 import argparse
+from decimal import Decimal, InvalidOperation
 import datetime as dt
 import json
 import os
@@ -49,19 +50,21 @@ def number(value, field):
     if text.endswith("%"):
         text = text[:-1]
     try:
-        val = float(text)
-    except ValueError:
+        val = Decimal(text)
+    except InvalidOperation:
         raise ValueError("Invalid numeric field: " + field) from None
-    if not __import__("math").isfinite(val):
+    if not val.is_finite():
         raise ValueError("Invalid numeric field: " + field)
     if field in ("save_pct", "gaa"):
         if field == "save_pct" and val > 1:
             val /= 100
         if val < 0 or (field == "save_pct" and val > 1):
             raise ValueError("Invalid goalie rate: " + field)
-        return val
-    if not val.is_integer() or (field != "plus_minus" and val < 0):
+        return float(val)
+    if val != val.to_integral_value() or (field != "plus_minus" and val < 0):
         raise ValueError("Invalid integer field: " + field)
+    if field in ("lg_user_id", "lg_team_id") and val > 9223372036854775807:
+        raise ValueError("Identifier exceeds PostgreSQL bigint range: " + field)
     return int(val)
 
 def projection(connection, table, kind):
