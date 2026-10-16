@@ -94,3 +94,9 @@ The old staff-only read of `hitmen_schedule_games` is retired. A read-only diff 
 
 Gap: LG schedule rows have no OT flag. Per-game results therefore show W/L only, but the record
 still counts OTL correctly because it comes from the standings.
+
+## Proposed public box-score/media extension (not applied)
+
+The preview-only extension, new public/private boundaries, disabled queue, source-validation blockers,
+one-way local history importer and approval sequence are documented in [lgchl-public-media.md](lgchl-public-media.md).
+Its migrations remain unapplied. It does not alter the private Calgary box-score tables or existing site API routes.
