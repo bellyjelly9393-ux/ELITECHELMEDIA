@@ -1,0 +1,62 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
+const {PGlite}=require('@electric-sql/pglite');
+test('unapplied migrations: real PostgreSQL RLS, atomic publication and identity-safe public projections',async()=>{
+ const db=new PGlite();
+ try{
+  await db.exec("create role anon; create role authenticated; create role service_role bypassrls; create schema cron; create table cron.job(id bigserial primary key,name text,active boolean default true); create function cron.schedule(text,text,text) returns bigint language plpgsql as $$declare i bigint;begin insert into cron.job(name) values($1) returning id into i;return i;end$$; create function cron.alter_job(bigint,active boolean) returns void language sql as $$update cron.job set active=$2 where id=$1$$;");
+  await db.exec("create table public.lgchl_games(lg_game_id bigint primary key,season integer,status text,week integer,game_at timestamptz,away_lg_team_id bigint,home_lg_team_id bigint,away_score integer,home_score integer); grant select on public.lgchl_games to anon,authenticated;");
+  for(let i=1;i<=6;i++)await db.query("insert into public.lgchl_games values($1,55,'final',3,$2,413,412,3,4)",[10000+i,'2026-10-'+String(i).padStart(2,'0')+'T01:00:00Z']);
+  await db.exec(fs.readFileSync('supabase/migrations/20261016210000_lgchl_public_box_scores.sql','utf8'));
+  await db.exec(fs.readFileSync('supabase/migrations/20261016211000_lg_public_player_history.sql','utf8'));
+  assert.equal((await db.query('select active from cron.job')).rows[0].active,false,'New cron remains disabled');
+  const owner='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+  assert.equal((await db.query('select public.lgchl_media_acquire_lease($1) as ok',[owner])).rows[0].ok,true);
+  assert.equal((await db.query('select public.lgchl_media_acquire_lease($1) as ok',['bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'])).rows[0].ok,false,'One network worker at a time');
+  const {parsePublicGame}=await import('../supabase/functions/lgchl-league-sync/public-box-score.mjs');
+  const html=fs.readFileSync('tests/fixtures/lgchl/public-game.example.html','utf8');
+  for(let i=0;i<6;i++){
+   const game=(await db.query('select public.lgchl_media_claim_box($1) as game',[owner])).rows[0].game;
+   const payload=parsePublicGame(html,game);
+   if(game.lg_game_id===10006)payload.players.find(p=>p.lg_user_id===1001).gamertag='Renamed Example';
+   payload.private_cookie='never-public';payload.team_stats['413'].lg_user_id=1001;
+   payload.period_scoring.push({lg_team_id:413,periods:[{label:'lg_user_id',goals:1001}]});
+   assert.equal((await db.query('select public.lgchl_media_save_box($1,$2,$3,$4) as n',[owner,JSON.stringify(payload),'2026-10-16T21:00:00Z','a'.repeat(64)])).rows[0].n,4);
+  }
+  assert.equal((await db.query('select public.lgchl_media_claim_box($1) as game',[owner])).rows[0].game,null,'Successful pages are never claimed twice');
+  const trend=(await db.query("select * from public.lgchl_public_trending where gamertag='Renamed Example'")).rows[0];
+  assert.equal(trend.gp,5);assert.equal(trend.points,15,'Last five games, not six');
+  const pub=(await db.query('select * from public.lgchl_public_box_scores')).rows;
+  assert.ok(!JSON.stringify(pub).includes('lg_user_id'));assert.ok(!JSON.stringify(pub).includes('never-public'));
+  const weekly=(await db.query('select * from public.lgchl_public_weekly_players')).rows;
+  assert.equal(weekly.length,2);assert.equal(weekly[0].gp,6);
+  await db.exec('set role anon');
+  assert.equal((await db.query('select * from public.lgchl_public_box_scores')).rows.length,6);
+  assert.equal((await db.query('select * from public.lg_public_player_seasons')).rows.length,0);
+  await assert.rejects(db.exec("delete from public.lgchl_public_player_lines"),/permission|policy/i);
+  await assert.rejects(db.exec("select * from private.lg_media_player_identities"),/permission/i);
+  await assert.rejects(db.query('select public.lgchl_media_resume_boxes()'),/permission/i);
+  await db.exec('reset role');
+  const importId='cccccccc-cccc-4ccc-8ccc-cccccccccccc';
+  await db.query('select public.lgchl_media_history_begin($1,4,$2,null)',[importId,'LG Stats Client public season statistics']);
+  const season=(uid,league,season,gp,points,tag)=>({lg_user_id:uid,league,season,gp,points,gamertag:tag,player_kind:'skater',position:'C',goals:points,assists:0,plus_minus:0,lg_team_id:413});
+  const rows=[season(1001,'CHL',54,10,10,'Old tag'),season(1001,'CHL',55,6,18,'Renamed Example'),season(1001,'AHL',54,5,5,'Old tag'),season(7777,'CHL',54,10,100,'Renamed Example')];
+  await db.query('select public.lgchl_media_history_append($1,$2)',[importId,JSON.stringify(rows.slice(0,2))]);
+  await assert.rejects(db.query('select public.lgchl_media_history_publish($1)',[importId]),/Incomplete/);
+  await db.exec('set role anon');
+  assert.equal((await db.query('select * from public.lgchl_public_breakout_watch')).rows.length,0,'Partial import not published');
+  await db.exec('reset role');
+  await db.query('select public.lgchl_media_history_append($1,$2)',[importId,JSON.stringify(rows.slice(2))]);
+  assert.equal((await db.query('select public.lgchl_media_history_publish($1) as n',[importId])).rows[0].n,4);
+  await db.exec('set role anon');
+  const breakout=(await db.query('select * from public.lgchl_public_breakout_watch')).rows;
+  assert.equal(breakout.length,1,'IDs, never display names, define history relationships');
+  assert.equal(Number(breakout[0].improvement),2);
+  assert.equal(breakout[0].player_id,trend.player_id,'Same opaque identity across box scores and history');
+  assert.equal((await db.query('select * from public.lgchl_public_ahl_movement')).rows.length,1);
+  const fields=(await db.query("select column_name from information_schema.columns where table_schema='public' and table_name in ('lg_public_player_seasons','lgchl_public_player_lines')")).rows.map(r=>r.column_name);
+  assert.ok(!fields.some(f=>/lg_user_id|alias|scouting_player_id/.test(f)));
+  await assert.rejects(db.query('select public.lgchl_media_history_append($1,$2)',[importId,'[]']),/permission/i);
+  await db.exec('reset role');
+  console.log('Only the isolated PostgreSQL test database was changed; no live migrations were applied.');
+ }finally{await db.close();}
+});
