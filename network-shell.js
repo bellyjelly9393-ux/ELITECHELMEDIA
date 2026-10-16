@@ -29,7 +29,7 @@
     'academy.html':'academy.html','academy-training.html':'academy.html',
     'signup.html':'interest.html','interest.html':'interest.html','lgchl-leaders.html':'lgchl-leaders.html',
     'management.html':'management.html',
-    'wildman-media.html':'wildman-media.html','hitmen-media.html':'wildman-media.html','media.html':'wildman-media.html'
+    'wildman-media.html':'wildman-media.html','hitmen-media.html':'wildman-media.html','media.html':'wildman-media.html','lgchl-media.html':'wildman-media.html'
   };
   const activePath = groups[path] || path;
 
@@ -65,7 +65,8 @@
           ${simpleLink('interest.html','Competitions')}
           ${dropdown('Media','wildman-media.html',[
             ['wildman-media.html','Wildman Media','Tournaments + esports network'],
-            ['hitmen-media.html','Hitmen Media','LGCHL team coverage']
+            ['hitmen-media.html','Hitmen Media','LGCHL team coverage'],
+            ['lgchl-media.html','LGCHL Media','League news, stats and power rankings']
           ])}
           ${simpleLink('management.html','Management')}
         </nav>

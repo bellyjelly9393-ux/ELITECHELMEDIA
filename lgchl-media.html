@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<title>LGCHL Media | Elitechel Media</title>
+<meta name="description" content="LGCHL Media from Elitechel Media: league-wide LeagueGaming CHL scores, power rankings, leaders, breakout players and player movement, built only from official LG data.">
+<link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="wildman-home.css?v=20261011-4">
+<link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
+<link rel="stylesheet" href="lgchl-media.css?v=20261016-1">
+</head>
+<body>
+<header class="top band">
+  <div class="top-in">
+    <a class="brand" href="index.html" aria-label="Wildman Hockey home">
+      <img class="crest" src="assets/wildman/home/wildman-crest.webp" width="112" height="99" alt="">
+      <div class="brand-txt"><b>Wildman Hockey</b><span>Elitechel Media</span><span>Network</span></div>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="team.html">Wildman</a>
+      <a href="esports-hub.html">Esports Hub</a>
+      <a href="game-center.html">Live</a>
+      <a href="academy.html">Academy</a>
+      <a href="hitmen-media.html" class="on" aria-current="page">Media</a>
+      <a href="management.html">Management</a>
+    </nav>
+    <a class="icon-btn search-btn" href="lgchl-leaders.html" aria-label="LGCHL stats"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </div>
+</header>
+
+<nav class="desk-bar band lg-desk" aria-label="Media desks">
+  <div class="desk-in">
+    <p class="eyebrow">Elitechel Media · choose a desk</p>
+    <div class="desk-toggle">
+      <a class="wild" href="wildman-media.html"><img src="assets/wildman/home/wildman-crest.webp" alt=""><span>Wildman Media</span></a>
+      <a class="hit" href="hitmen-media.html"><img src="assets/lgchl/s55/team412.png" alt=""><span>Hitmen Media</span></a>
+      <a class="lgchl" href="lgchl-media.html" aria-current="page"><img src="assets/wildman/home/lgchl-logo.webp" alt=""><span>LGCHL Media</span></a>
+    </div>
+  </div>
+</nav>
+
+<nav class="sub-bar band lg-sub" aria-label="LGCHL Media sections">
+  <div class="sub-in">
+    <a href="lgchl-media.html" aria-current="page">LGCHL Home</a>
+    <a href="#lgPowerSec">Power rankings</a>
+    <a href="#lgStatsSec">Leaders</a>
+    <a href="#lgBreakoutSec">Breakout watch</a>
+    <a href="#lgMoveSec">Movement</a>
+    <a href="#lgMatchSec">Matchups</a>
+    <a href="lgchl-leaders.html">Full LGCHL stats</a>
+  </div>
+</nav>
+
+<main class="lg-page" id="top">
+  <section class="lg-hero band" aria-labelledby="lgLeadTitle">
+    <div class="lg-hero-in">
+      <div class="lg-hero-copy">
+        <img class="lg-hero-logo" src="assets/wildman/home/lgchl-logo.webp" width="760" height="434" alt="LGCHL, Canadian Hockey League">
+        <p class="lg-kicker" id="lgLeadKicker"><span class="lg-ev lg-ev-na">Loading the latest LG import…</span></p>
+        <h1 class="lg-h1" id="lgLeadTitle">LGCHL <em>Media</em></h1>
+        <p class="lg-dek" id="lgLeadDek">League-wide scores, power rankings, leaders and player movement, built only from official LeagueGaming data.</p>
+        <div class="lg-cta">
+          <a class="btn btn-gold btn-sm" href="#lgPowerSec">Power rankings <span class="arr">→</span></a>
+          <a class="btn btn-line btn-sm" href="#lgBreakoutSec"><span>Breakout watch</span> <span class="arr">→</span></a>
+        </div>
+      </div>
+      <aside class="card tinted lg-feat" id="lgFeat" aria-label="Featured team by the numbers" hidden></aside>
+    </div>
+  </section>
+
+  <section class="lg-sec lg-scores band" aria-labelledby="lgScoresTitle">
+    <div class="lg-in">
+      <div class="lg-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">LGCHL · Season 55</p><h2 class="sec-title" id="lgScoresTitle">Last night's <em>finals</em></h2></div>
+        <p class="lg-note num" id="lgScoresNote">Loading the official LG schedule…</p>
+      </div>
+      <div class="lg-score-grid" id="lgScores" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="lg-sec band" id="lgNewsSec" aria-labelledby="lgNewsTitle">
+    <div class="lg-in">
+      <div class="lg-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Around the league</p><h2 class="sec-title" id="lgNewsTitle">League <em>notes</em></h2></div>
+        <p class="lg-note">Written automatically from the LG standings and player stats. Every number links back to its import.</p>
+      </div>
+      <div class="lg-news-grid" id="lgNews"><p class="empty">Loading league notes…</p></div>
+    </div>
+  </section>
+
+  <section class="lg-sec band" id="lgPowerSec" aria-label="Power rankings and leaders">
+    <div class="lg-in lg-two">
+      <div class="card lg-panel">
+        <span class="wm wm-lg lg-wm-league" aria-hidden="true"></span>
+        <div class="lg-panel-head">
+          <div><p class="eyebrow" id="lgPowerEyebrow">Elitechel power index</p><h2 class="lg-panel-title">Power rankings</h2></div>
+          <span class="lg-ev lg-ev-v">Formula-based</span>
+        </div>
+        <div class="lg-tbl-box"><table class="lg-tbl num"><thead><tr><th>#</th><th>Move</th><th>Team</th><th>Record</th><th class="r">GD</th><th>Last 10</th><th class="r">Score</th></tr></thead><tbody id="lgPower"><tr><td colspan="7" class="empty">Loading standings…</td></tr></tbody></table></div>
+        <p class="lg-fine" id="lgPowerNote">Score = 70% points percentage + 20% goal differential per game + 10% goals per game. Minimum 5 GP. No subjective boosts, for any team.</p>
+      </div>
+      <div class="card lg-panel" id="lgStatsSec">
+        <span class="wm wm-lg lg-wm-ecm" aria-hidden="true"></span>
+        <div class="lg-panel-head">
+          <div><p class="eyebrow">Season 55 regular season</p><h2 class="lg-panel-title">League leaders</h2></div>
+          <div class="lg-tabs" role="group" aria-label="Leaderboard">
+            <button type="button" data-metric="points" aria-pressed="true">Points</button>
+            <button type="button" data-metric="goals" aria-pressed="false">Goals</button>
+            <button type="button" data-metric="assists" aria-pressed="false">Assists</button>
+            <button type="button" data-metric="save_pct" aria-pressed="false">Save %</button>
+          </div>
+        </div>
+        <div class="lg-tbl-box"><table class="lg-tbl num"><thead id="lgLeadersHead"><tr><th>#</th><th>Player</th><th class="r">G</th><th class="r">A</th><th class="r">PTS</th><th class="r">+/-</th></tr></thead><tbody id="lgLeaders"><tr><td colspan="6" class="empty">Loading leaders…</td></tr></tbody></table></div>
+        <div class="lg-goalies" id="lgGoalies"></div>
+        <p class="lg-fine" id="lgLeadersNote">Source: LG player stats import.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-sec band" id="lgBreakoutSec" aria-labelledby="lgBoTitle">
+    <div class="lg-in">
+      <div class="lg-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Players · this season vs last</p><h2 class="sec-title" id="lgBoTitle">Breakout <em>watch</em></h2></div>
+        <p class="lg-note" id="lgBoRule">Biggest jump in points per game, LGCHL S54 to S55.</p>
+      </div>
+      <div class="lg-card-grid" id="lgBreakout"><p class="empty">Loading breakout watch…</p></div>
+      <p class="lg-fine" id="lgBoNote"></p>
+    </div>
+  </section>
+
+  <section class="lg-sec lg-move band" id="lgMoveSec" aria-labelledby="lgMoveTitle">
+    <div class="lg-in">
+      <div class="lg-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Player movement · S54 to S55</p><h2 class="sec-title" id="lgMoveTitle">Down from <em>the AHL</em></h2></div>
+        <p class="lg-note">Last season in the AHL, this season in the LGCHL. Numbers from both sides of the move.</p>
+      </div>
+      <div class="lg-card-grid" id="lgMovers"><p class="empty">Loading player movement…</p></div>
+      <div class="lg-rule">
+        <span class="lg-ev lg-ev-na">How we cover moves</span>
+        <p>The stats show where a player played, not why they moved. We put the numbers from both levels side by side. Any explanation of a call-up or send-down is labelled Editorial and reviewed before it is published. Mid-season moves get dates once LG roster changes are logged.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-sec band" aria-labelledby="lgTrendTitle">
+    <div class="lg-in">
+      <div class="lg-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Players · last 5 games</p><h2 class="sec-title" id="lgTrendTitle">Trending <em>now</em></h2></div>
+        <p class="lg-note">Shown only when the data exists. We don't estimate trends.</p>
+      </div>
+      <div class="card lg-soon">
+        <span class="lg-ev lg-ev-na">Coming soon</span>
+        <p>This will rank players by points over their last five games, read from LG's public box scores after every game night.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-sec band" id="lgMatchSec" aria-labelledby="lgMatchTitle">
+    <div class="lg-in">
+      <div class="lg-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow" id="lgMatchEyebrow">Next game night</p><h2 class="sec-title" id="lgMatchTitle">Matchups to <em>watch</em></h2></div>
+        <p class="lg-note">Picked by rule from the current standings, never by hand.</p>
+      </div>
+      <div class="lg-card-grid" id="lgMatchups"><p class="empty">Loading the schedule…</p></div>
+    </div>
+  </section>
+
+  <section class="lg-sec lg-weekly band" id="lgWeeklySec" aria-labelledby="lgWeeklyTitle">
+    <div class="lg-in lg-wk-grid">
+      <div class="card lg-wk-cover">
+        <span class="wm wm-lg lg-wm-league" aria-hidden="true"></span>
+        <p class="eyebrow">Elitechel Media · recurring series</p>
+        <h2 class="lg-wk-title" id="lgWeeklyTitle">LGCHL <em>Weekly</em></h2>
+        <p class="lg-wk-dek">One edition after every game week, reviewed before it is published.</p>
+        <span class="lg-ev lg-ev-na">First edition coming soon</span>
+      </div>
+      <div>
+        <p class="eyebrow lg-toc-eyebrow">In every edition</p>
+        <ol class="lg-toc">
+          <li><b>Around the league</b><small>Major results and developments</small></li>
+          <li><b>Players of the week</b><small>Standouts backed by game stats</small></li>
+          <li><b>Breakout watch</b><small>Clear improvement on past seasons</small></li>
+          <li><b>Team on the rise</b><small>The biggest climber, and the numbers behind it</small></li>
+          <li><b>Power rankings</b><small>Order, movement and the formula</small></li>
+          <li><b>Numbers that matter</b><small>The week's significant league stats</small></li>
+          <li><b>Matchups to watch</b><small>Upcoming games, picked by rule</small></li>
+          <li><b>Hitman Radio</b><small>The week's episode</small></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-sec lg-radio band" id="lgRadioSec" aria-labelledby="lgRadioTitle">
+    <div class="lg-in lg-radio-grid">
+      <img class="lg-radio-art" src="assets/wildman/home/elitechel-media.webp" width="520" height="514" loading="lazy" alt="Elitechel Media">
+      <div>
+        <span class="sec-rule" aria-hidden="true"></span>
+        <p class="eyebrow">Elitechel Media audio · LGCHL and Hitmen</p>
+        <h2 class="sec-title" id="lgRadioTitle">Hitman <em>Radio</em></h2>
+        <p class="lg-dek">Episodes, chapters and the archive will live here. Only approved audio and artwork are published.</p>
+        <span class="lg-ev lg-ev-na">First episode coming soon</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-legend band" aria-label="How we label evidence">
+    <div class="lg-legend-in">
+      <div><span class="lg-ev lg-ev-v">Verified stat</span><p>From the official LG import, with its import time.</p></div>
+      <div><span class="lg-ev lg-ev-vid">Video-verified</span><p>Seen on reviewed game footage, with timestamps.</p></div>
+      <div><span class="lg-ev lg-ev-ed">Editorial</span><p>Our read of the evidence, reviewed before it is published.</p></div>
+      <div><span class="lg-ev lg-ev-na">Unavailable</span><p>Data we don't have yet. Unverified claims are never shown.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="band">
+  <div class="foot">
+    <span class="foot-brand"><img src="assets/wildman/home/wildman-crest.webp" width="96" height="85" loading="lazy" alt="Wildman Hockey logo"><span>© 2026 Wildman Hockey &amp; Esports Network</span></span>
+    <nav class="foot-nav" aria-label="Footer"><a href="wildman-media.html">Wildman Media</a><a href="hitmen-media.html">Hitmen Media</a><a href="lgchl-media.html">LGCHL Media</a><a href="lgchl-leaders.html">LGCHL Stats</a><a href="game-center.html?channel=hitmen">Game Center</a></nav>
+    <span>Season data: LeagueGaming imports · LGCHL, not the real-world CHL · Times Eastern</span>
+  </div>
+</footer>
+<noscript><p class="band empty">Enable JavaScript to load LGCHL scores, standings and leaders.</p></noscript>
+<script src="media-desk.js?v=20261011-1"></script>
+<script src="lgchl-media.js?v=20261016-1"></script>
+</body>
+</html>
