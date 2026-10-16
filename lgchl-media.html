@@ -10,7 +10,7 @@
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="wildman-home.css?v=20261011-4">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
-<link rel="stylesheet" href="lgchl-media.css?v=20261016-1">
+<link rel="stylesheet" href="lgchl-media.css?v=20261016-2">
 </head>
 <body>
 <header class="top band">
@@ -147,16 +147,21 @@
     </div>
   </section>
 
-  <section class="lg-sec band" aria-labelledby="lgTrendTitle">
+  <section class="lg-sec band" id="lgTrendSec" aria-labelledby="lgTrendTitle">
     <div class="lg-in">
       <div class="lg-head">
         <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Players · last 5 games</p><h2 class="sec-title" id="lgTrendTitle">Trending <em>now</em></h2></div>
-        <p class="lg-note">Shown only when the data exists. We don't estimate trends.</p>
+        <p class="lg-note">Points across the last five imported appearances. Players need five recorded games to qualify.</p>
       </div>
-      <div class="card lg-soon">
-        <span class="lg-ev lg-ev-na">Coming soon</span>
-        <p>This will rank players by points over their last five games, read from LG's public box scores after every game night.</p>
-      </div>
+      <div class="lg-card-grid" id="lgTrendingRecords"><p class="empty">Loading public game lines…</p></div>
+      <p class="lg-fine" id="lgBoxCoverage"></p>
+    </div>
+  </section>
+  <section class="lg-sec band" id="lgPlayersWeekSec" aria-labelledby="lgPlayersWeekTitle">
+    <div class="lg-in">
+      <div class="lg-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Game-week scoring</p><h2 class="sec-title" id="lgPlayersWeekTitle">Players of <em>the Week</em></h2></div>
+      <p class="lg-note" id="lgWeekPlayersNote">Highest points in the latest recorded game week.</p></div>
+      <div class="lg-card-grid" id="lgWeekPlayers"><p class="empty">Loading public game lines…</p></div>
     </div>
   </section>
 
@@ -227,6 +232,8 @@
 </footer>
 <noscript><p class="band empty">Enable JavaScript to load LGCHL scores, standings and leaders.</p></noscript>
 <script src="media-desk.js?v=20261011-1"></script>
-<script src="lgchl-media.js?v=20261016-1"></script>
+<script src="lgchl-media-config.js?v=20261016-2"></script>
+<script src="lgchl-media-public.js?v=20261016-2"></script>
+<script src="lgchl-media.js?v=20261016-2"></script>
 </body>
 </html>

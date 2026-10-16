@@ -1,8 +1,8 @@
 /* LGCHL Media desk (lgchl-media.html).
    Public data only: the same publishable-key REST reads as the other media desks (media-desk.js),
    against public read-only views: lgchl_standings_current, lgchl_standings_snapshots,
-   lgchl_games_board and wm_lgchl_s55_player_leaders. Breakout Watch and player movement come from
-   data/lgchl/history-s55.json, a dated snapshot of public LG season stats. No private tables,
+   lgchl_games_board and wm_lgchl_s55_player_leaders. Breakout Watch and player movement prefer the narrow public history views, with
+   the supplied, explicitly dated snapshot retained while the approved import is unavailable. No private tables,
    no service keys, no Hitmen scouting data. Every sentence is generated from those numbers. */
 (() => {
   'use strict';
@@ -13,12 +13,12 @@
 
   const DAY = 864e5;
   const iso = ms => new Date(ms).toISOString();
-  const logo = id => 'assets/lgchl/s55/team' + Number(id) + '.png';
+  const logo = id => Number.isSafeInteger(Number(id)) && Number(id)>0 ? 'assets/lgchl/s55/team' + Number(id) + '.png' : 'assets/wildman/home/lgchl-logo.webp';
   const ev = (kind, text) => '<span class="lg-ev lg-ev-' + kind + '">' + esc(text) + '</span>';
-  const sgn = v => { const n = Number(v) || 0; return n > 0 ? '+' + n : n < 0 ? '−' + Math.abs(n) : '0'; };
+  const sgn = v => { if(v==null || v==='' || !Number.isFinite(Number(v)))return '—'; const n = Number(v); return n > 0 ? '+' + n : n < 0 ? '−' + Math.abs(n) : '0'; };
   const wm = id => '<span class="wm" aria-hidden="true" style="--logo:url(\'' + logo(id) + '\')"></span>';
   const unavailable = what => '<p class="empty">' + esc(what) + ' is unavailable right now.</p>';
-  const stamp = v => v ? F.md.format(new Date(v)) + ', ' + F.time.format(new Date(v)) + ' ET' : '';
+  const stamp = v => window.LGCHLPublicDesk.stamp(v);
 
   // Same formula as lgchl-leaders.js (public, documented under the table).
   function powerScore(s) {
@@ -26,7 +26,7 @@
     return 100 * (.70 * Math.min(1, pts / (2 * gp)) + .20 * Math.max(0, Math.min(1, ((gf - ga) / gp + 3) / 6)) + .10 * Math.max(0, Math.min(1, (gf / gp) / 6)));
   }
   function rankTeams(rows) {
-    return rows.filter(s => Number(s.gp) >= 5)
+    return rows.filter(s => Number(s.gp) >= 5 && ['pts','gf','ga'].every(k=>s[k]!=null && Number.isFinite(Number(s[k]))))
       .map(s => ({ ...s, score: powerScore(s), gd: Number(s.gf || 0) - Number(s.ga || 0) }))
       .sort((a, b) => b.score - a.score || b.gd - a.gd || Number(b.gf) - Number(a.gf))
       .map((s, i) => ({ ...s, rank: i + 1 }));
@@ -36,17 +36,17 @@
     const m = /^-?(\d+)\s*([WL])/i.exec(String(s || '').trim());
     return m ? { n: Number(m[1]), win: m[2].toUpperCase() === 'W', label: m[2].toUpperCase() + m[1] } : null;
   }
-  const record = t => t.w + '-' + t.l + '-' + (t.otl ?? 0);
+  const record = t => [t.w,t.l,t.otl].map(v=>v==null?'—':v).join('-');
 
   async function main() {
     const now = Date.now();
     const [standingsR, gamesR, histR] = await Promise.allSettled([
       read('lgchl_standings_current', { select: 'lg_team_id,name,abbr,nickname,league,conference,gp,w,l,otl,pts,gf,ga,gd,streak,last10,conference_rank,standings_at' }),
       read('lgchl_games_board', {
-        select: 'lg_game_id,week,game_at,status,league,away_lg_team_id,away_abbr,away_nick,away_score,away_conf_rank,home_lg_team_id,home_abbr,home_nick,home_score,home_conf_rank,big_game,big_reasons,source_url',
+        select: 'lg_game_id,week,game_at,status,league,away_lg_team_id,away_abbr,away_nick,away_score,away_conf_rank,home_lg_team_id,home_abbr,home_nick,home_score,home_conf_rank,big_game,big_reasons,source_url,fetched_at',
         season: 'eq.55', and: '(game_at.gte.' + iso(now - 9 * DAY) + ',game_at.lte.' + iso(now + 10 * DAY) + ')', order: 'game_at.asc', limit: '1000'
       }),
-      fetch('data/lgchl/history-s55.json', { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error('history'); return r.json(); })
+      window.LGCHLPublicDesk.loadHistory()
     ]);
     const standings = standingsR.status === 'fulfilled' ? standingsR.value : null;
     const games = gamesR.status === 'fulfilled' ? gamesR.value : null;
@@ -83,7 +83,8 @@
     renderPower(ranked, week, standings);
     renderBreakout(hist, teams);
     renderMovers(hist, teams);
-    renderMatchups(games, now);
+    renderMatchups(games, now, teams);
+    await window.LGCHLPublicDesk.renderRecent(teams);
     const leaders = await loadLeaders('points');
     renderNews(ranked, week, leaders);
     loadGoalies();
@@ -128,7 +129,7 @@
       const line = (id, ab, sc, w) => '<div class="lg-sc-line' + (w ? ' w' : '') + '"><img src="' + logo(id) + '" alt=""><span>' + esc(ab) + '</span><b class="num">' + esc(sc) + '</b></div>';
       return '<article class="card tinted lg-sc" data-logo="' + logo(win) + '">' + wm(win) +
         line(g.away_lg_team_id, g.away_abbr, g.away_score, awayWin) + line(g.home_lg_team_id, g.home_abbr, g.home_score, !awayWin) +
-        '<div class="lg-sc-foot"><span>Final · ' + esc(g.league) + '</span>' + (g.source_url ? '<a href="' + esc(g.source_url) + '" target="_blank" rel="noopener noreferrer">Box score ↗</a>' : '') + '</div></article>';
+        '<div class="lg-sc-foot"><span>Final · ' + esc(g.league) + '</span>' + (g.source_url ? '<a href="' + esc(g.source_url) + '" target="_blank" rel="noopener noreferrer">Box score ↗</a>' : '') + '</div><p class="lg-provenance">Source: LG schedule import, '+esc(stamp(g.fetched_at))+'.</p></article>';
     }).join('');
   }
 
@@ -148,6 +149,7 @@
       (week ? 'Move compares with the standings before Week ' + week + '. ' : '') + 'No subjective boosts, for any team.' + (at ? ' Standings import: ' + stamp(at) + '.' : '');
   }
 
+  const rate = (v,d) => v==null || v==='' || !Number.isFinite(Number(v)) ? '—' : Number(v).toFixed(d);
   const SKATER_COLS = 'gamertag,position,player_kind,lg_team_id,team_name,gp,goals,assists,points,plus_minus,save_pct,gaa,fetched_at';
   async function loadLeaders(metric) {
     const body = $('lgLeaders'), head = $('lgLeadersHead'), goalie = metric === 'save_pct';
@@ -161,7 +163,7 @@
       body.innerHTML = rows.map((p, i) => {
         const who = '<td><div class="lg-team"><img src="' + logo(p.lg_team_id) + '" alt=""><div><b>' + esc(p.gamertag) + '</b><small>' + esc(goalie ? 'G' : p.position) + ' · ' + esc(p.team_name || '') + '</small></div></div></td>';
         return goalie
-          ? '<tr><td class="lg-rk">' + (i + 1) + '</td>' + who + '<td class="r">' + esc(p.gp) + '</td><td class="r lg-pts">' + Number(p.save_pct).toFixed(3).replace(/^0/, '') + '</td><td class="r">' + Number(p.gaa).toFixed(2) + '</td></tr>'
+          ? '<tr><td class="lg-rk">' + (i + 1) + '</td>' + who + '<td class="r">' + esc(p.gp) + '</td><td class="r lg-pts">' + rate(p.save_pct,3).replace(/^0/, '') + '</td><td class="r">' + rate(p.gaa,2) + '</td></tr>'
           : '<tr><td class="lg-rk">' + (i + 1) + '</td>' + who + '<td class="r">' + esc(p.goals) + '</td><td class="r">' + esc(p.assists) + '</td><td class="r lg-pts">' + esc(p.points) + '</td><td class="r">' + sgn(p.plus_minus) + '</td></tr>';
       }).join('') || '<tr><td colspan="6" class="empty">No qualifying players yet.</td></tr>';
       const at = rows.map(r => r.fetched_at).filter(Boolean).sort().pop();
@@ -175,8 +177,8 @@
   async function loadGoalies() {
     const box = $('lgGoalies');
     try {
-      const rows = await read('wm_lgchl_s55_player_leaders', { select: 'gamertag,team_name,gp,save_pct,gaa', player_kind: 'eq.goalie', gp: 'gte.8', order: 'save_pct.desc', limit: '3' });
-      box.innerHTML = rows.map((g, i) => '<div><small>Save % · 8+ GP · ' + ordinal(i + 1) + '</small><b>' + esc(g.gamertag) + '</b><span class="num">' + Number(g.save_pct).toFixed(3).replace(/^0/, '') + '</span> <small>' + esc(g.team_name || '') + ' · ' + Number(g.gaa).toFixed(2) + ' GAA</small></div>').join('');
+      const rows = await read('wm_lgchl_s55_player_leaders', { select: 'gamertag,team_name,gp,save_pct,gaa,fetched_at', player_kind: 'eq.goalie', gp: 'gte.8', order: 'save_pct.desc', limit: '3' });
+      box.innerHTML = rows.map((g, i) => '<div><small>Save % · 8+ GP · ' + ordinal(i + 1) + '</small><b>' + esc(g.gamertag) + '</b><span class="num">' + rate(g.save_pct,3).replace(/^0/, '') + '</span> <small>' + esc(g.team_name || '') + ' · ' + rate(g.gaa,2) + ' GAA</small><p class="lg-provenance">LG player stats · imported '+esc(stamp(g.fetched_at))+'</p></div>').join('');
     } catch { box.innerHTML = ''; }
   }
 
@@ -187,7 +189,7 @@
     const cards = [];
     const story = (t, tag, title, text) => '<article class="card tinted lg-story" data-logo="' + logo(t.lg_team_id) + '">' + wm(t.lg_team_id) +
       '<div class="lg-story-tag"><img src="' + logo(t.lg_team_id) + '" alt="">' + esc(tag) + ' · ' + esc(t.league) + '</div><h3>' + title + '</h3><p>' + text + '</p>' +
-      '<div class="lg-story-meta">' + ev('v', 'Verified stats') + '<span class="lg-ev lg-ev-na">Auto from LG data</span></div></article>';
+      '<div class="lg-story-meta">' + ev('v', 'Verified stats') + '<span class="lg-ev lg-ev-na">Auto from LG data</span></div><p class="lg-provenance">'+esc(t.sourceLabel||'LG standings')+' · imported '+esc(stamp(t.standings_at))+'</p></article>';
     // Lead: top of the index.
     cards.push('<article class="card tinted lg-story lg-story-lead" data-logo="' + logo(top.lg_team_id) + '">' +
       '<div class="lg-lead-art"><img src="' + logo(top.lg_team_id) + '" width="100" height="100" alt="' + esc(top.name) + ' logo"></div>' +
@@ -195,7 +197,7 @@
       '<h3>' + esc(top.name) + (top.prev == null ? ' lead the index' : top.prev === 1 ? ' stay on top' : ' take over No. 1') + '</h3>' +
       '<p>No. 1 in the Elitechel power index' + (week ? ' after Week ' + esc(week) : '') + (top.prev && top.prev !== 1 ? ', up from ' + ordinal(top.prev) : '') + '. ' + esc(record(top)) + ' with a ' + sgn(top.gd) + ' goal differential and ' + esc(top.last10) + ' over their last ten.</p>' +
       '<div class="lg-mini num"><div><small>Record</small><b>' + esc(record(top)) + '</b></div><div><small>Points</small><b>' + esc(top.pts) + '</b></div><div><small>Goal diff</small><b>' + sgn(top.gd) + '</b></div><div><small>Index</small><b>' + top.score.toFixed(1) + '</b></div></div>' +
-      '<div class="lg-story-meta">' + ev('v', 'Verified stats') + '<span class="lg-ev lg-ev-na">Auto from LG data</span></div></div></article>');
+      '<div class="lg-story-meta">' + ev('v', 'Verified stats') + '<span class="lg-ev lg-ev-na">Auto from LG data</span></div><p class="lg-provenance">LG standings · imported '+esc(stamp(top.standings_at))+'</p></div></article>');
     const used = new Set([top.lg_team_id, hero && hero.lg_team_id]);
     const climber = ranked.filter(t => t.move > 0 && !used.has(t.lg_team_id) && t.rank <= 16).sort((a, b) => b.move - a.move)[0];
     if (climber) { used.add(climber.lg_team_id); cards.push(story(climber, 'Power index', esc(climber.name) + ' jump ' + climber.move + ' spots', 'From ' + ordinal(climber.prev) + ' to ' + ordinal(climber.rank) + ' after going ' + esc(climber.last10) + ' over their last ten. Goal differential ' + sgn(climber.gd) + '.')); }
@@ -209,7 +211,7 @@
     if (hot) { used.add(hot.t.lg_team_id); cards.push(story(hot.t, 'Streak', esc(hot.t.name) + ': ' + hot.st.n + ' straight wins', esc(record(hot.t)) + ' overall and ' + esc(hot.t.last10) + ' over their last ten. ' + ordinal(hot.t.rank) + ' in the power index.')); }
     const lead = leaders && leaders[0];
     if (lead) {
-      const t = { lg_team_id: lead.lg_team_id, league: (ranked.find(x => Number(x.lg_team_id) === Number(lead.lg_team_id)) || {}).league || 'LGCHL' };
+      const t = { lg_team_id: lead.lg_team_id, standings_at: lead.fetched_at, sourceLabel: 'LG player stats', league: (ranked.find(x => Number(x.lg_team_id) === Number(lead.lg_team_id)) || {}).league || 'LGCHL' };
       cards.push(story(t, 'Player watch', esc(lead.gamertag) + ' leads the league with ' + esc(lead.points) + ' points', esc(lead.goals) + ' goals and ' + esc(lead.assists) + ' assists in ' + esc(lead.gp) + ' games for the ' + esc(lead.team_name || 'club') + '.'));
     }
     box.innerHTML = cards.join('');
@@ -229,8 +231,8 @@
         '<div class="lg-cmp num"><div class="lg-cmp-row"><span>S54</span><div class="lg-cmp-bar"><i style="width:' + (100 * b.prev_ppg / MAX).toFixed(1) + '%"></i></div><b>' + b.prev_ppg.toFixed(2) + '</b></div>' +
         '<div class="lg-cmp-row now"><span>S55</span><div class="lg-cmp-bar"><i style="width:' + (100 * b.ppg / MAX).toFixed(1) + '%"></i></div><b>' + b.ppg.toFixed(2) + '</b></div></div>' +
         '<p class="lg-line num">' + esc(b.points) + ' PTS in ' + esc(b.gp) + ' GP · ' + esc(b.goals) + ' G · ' + sgn(b.plus_minus) + '</p>' +
-        '<p class="lg-card-note">' + esc(b.note) + '</p><div class="lg-card-foot">' + ev('v', 'Verified stats') + '</div></article>';
-    }).join('');
+        '<p class="lg-card-note">' + esc(b.note) + '</p><div class="lg-card-foot">' + ev(hist.mode==='live'?'v':'na', hist.mode==='live'?'Public history import':'Dated snapshot') + '</div>' + window.LGCHLPublicDesk.historyFoot(hist,b) + '</article>';
+    }).join('') || '<p class="empty">No players meet the published breakout thresholds in the current history import.</p>';
     $('lgBoNote').textContent = 'Early season: these are paces, not finished seasons. Sources: ' + (hist.current_source || 'LG player stats import') + ' · ' + (hist.history_source || 'LG season history') + '.';
   }
 
@@ -245,8 +247,8 @@
         '<table class="lg-mvt num"><thead><tr><th></th><th class="r">GP</th><th class="r">PTS</th><th class="r">P/GP</th><th class="r">+/-</th></tr></thead><tbody>' +
         '<tr><td>' + esc(m.from_league) + ' · S' + esc(m.from_season) + '</td><td class="r">' + esc(m.from_gp) + '</td><td class="r">' + esc(m.from_points) + '</td><td class="r">' + m.from_ppg.toFixed(2) + '</td><td class="r ' + cls(m.from_plus_minus) + '">' + sgn(m.from_plus_minus) + '</td></tr>' +
         '<tr class="now"><td>LGCHL · S55</td><td class="r">' + esc(m.gp) + '</td><td class="r">' + esc(m.points) + '</td><td class="r">' + m.ppg.toFixed(2) + '</td><td class="r ' + cls(m.plus_minus) + '">' + sgn(m.plus_minus) + '</td></tr></tbody></table>' +
-        '<p class="lg-card-note">' + esc(m.note) + '</p><div class="lg-card-foot">' + ev('v', 'Verified stats') + '</div></article>';
-    }).join('');
+        '<p class="lg-card-note">' + esc(m.note) + '</p><div class="lg-card-foot">' + ev(hist.mode==='live'?'v':'na', hist.mode==='live'?'Public history import':'Dated snapshot') + '</div>' + window.LGCHLPublicDesk.historyFoot(hist,m) + '</article>';
+    }).join('') || '<p class="empty">No players meet the AHL-to-LGCHL participation thresholds in the current history import.</p>';
   }
 
   const REASONS = {
@@ -254,7 +256,7 @@
     leader_chase: 'A conference leader against a team within 2 points of it.',
     division_race: 'Division rivals within a point of each other, both in the top half.'
   };
-  function renderMatchups(games, now) {
+  function renderMatchups(games, now, teams) {
     const box = $('lgMatchups');
     if (!games) { box.innerHTML = unavailable('The schedule'); return; }
     const upcoming = games.filter(g => g.status === 'scheduled' && Date.parse(g.game_at) > now);
@@ -273,7 +275,7 @@
       const side = (id, ab, rk) => '<div><img src="' + logo(id) + '" alt=""><b>' + esc(ab) + '</b><small>' + (rk ? ordinal(rk) + ' in conf.' : '') + '</small></div>';
       return '<article class="card tinted lg-card" data-logo="' + logo(g.home_lg_team_id) + '">' + wm(g.home_lg_team_id) +
         '<div class="lg-mu-teams">' + side(g.away_lg_team_id, g.away_abbr, g.away_conf_rank) + '<span class="lg-mu-at">@</span>' + side(g.home_lg_team_id, g.home_abbr, g.home_conf_rank) + '</div>' +
-        '<p class="lg-why">' + esc(why) + '</p><div class="lg-mu-when num">' + esc(F.day.format(new Date(g.game_at))) + ' · ' + esc(F.time.format(new Date(g.game_at))) + ' ET · ' + esc(g.league) + '</div></article>';
+        '<p class="lg-why">' + esc(why) + '</p><div class="lg-mu-when num">' + esc(F.day.format(new Date(g.game_at))) + ' · ' + esc(F.time.format(new Date(g.game_at))) + ' ET · ' + esc(g.league) + '</div><p class="lg-provenance">Source: official LG schedule, imported '+esc(stamp(g.fetched_at))+'. Standings imports: '+esc(stamp(teams.get(Number(g.away_lg_team_id))?.standings_at))+' / '+esc(stamp(teams.get(Number(g.home_lg_team_id))?.standings_at))+'.</p></article>';
     }).join('');
   }
 

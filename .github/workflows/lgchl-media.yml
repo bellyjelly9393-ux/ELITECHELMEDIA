@@ -1,0 +1,51 @@
+name: LGCHL media preview checks
+on:
+  pull_request:
+    paths:
+      - 'lgchl-media*'
+      - 'wildman-media-desk.css'
+      - 'supabase/functions/lgchl-league-sync/**'
+      - 'supabase/migrations/2026101621*'
+      - 'scripts/import-lg-public-history.py'
+      - 'tests/lgchl-*'
+      - 'tests/test_lg_public_history_import.py'
+      - 'tests/fixtures/lgchl/**'
+      - '.github/workflows/lgchl-media.yml'
+permissions:
+  contents: read
+jobs:
+  public-media:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install isolated test tools
+        run: npm install --prefix "$RUNNER_TEMP/lgchl-tools" playwright@1.56.1 @electric-sql/pglite@0.3.14 deno@2
+      - name: Install Chromium
+        run: '"$RUNNER_TEMP/lgchl-tools/node_modules/.bin/playwright" install --with-deps chromium'
+      - name: JavaScript syntax
+        run: |
+          node --check lgchl-media.js
+          node --check lgchl-media-public.js
+          node --check lgchl-media-config.js
+      - name: Edge Function type check
+        run: '"$RUNNER_TEMP/lgchl-tools/node_modules/.bin/deno" check --config supabase/functions/lgchl-league-sync/deno.json supabase/functions/lgchl-league-sync/index.ts'
+      - name: Parsers and serial worker
+        run: node --experimental-strip-types --test tests/lgchl-public-parser.test.mjs tests/lgchl-public-worker.test.mjs
+      - name: Isolated PostgreSQL migrations and RLS
+        run: NODE_PATH="$RUNNER_TEMP/lgchl-tools/node_modules" node --test tests/lgchl-public-migrations.test.cjs
+      - name: Read-only SQLite importer
+        run: python -m unittest discover -s tests -p 'test_lg_public_history_import.py'
+      - name: Responsive browser checks
+        run: NODE_PATH="$RUNNER_TEMP/lgchl-tools/node_modules" LGCHL_SCREENSHOT_DIR="$RUNNER_TEMP/lgchl-screenshots" node --test tests/lgchl-media-browser.test.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lgchl-media-responsive-screenshots
+          path: ${{ runner.temp }}/lgchl-screenshots
+          if-no-files-found: ignore

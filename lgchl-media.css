@@ -224,3 +224,10 @@
   .lg-wk-title { font-size: 48px; }
   .lg-page::before { opacity: .05; }
 }
+
+/* Public game/history provenance; shared styles remain unchanged. */
+.lg-provenance{display:grid;gap:5px;color:var(--mute);font:400 13px/1.5 var(--f-body);overflow-wrap:anywhere;margin:12px 0 0}
+.lg-provenance a{color:var(--gold-hi);text-underline-offset:3px}
+.lg-provenance summary{cursor:pointer;min-height:44px;display:flex;align-items:center;color:var(--gold-hi)}
+.lg-provenance b{font-weight:600;color:var(--bone)}
+.lg-form-card{min-width:0}
