@@ -238,3 +238,41 @@
 .lg-story-context{border-top:1px solid var(--line);padding-top:12px;margin-top:auto}.lg-story-context b,.lg-why b{color:var(--gold-hi)}.lg-match-title{font:400 28px/1.05 var(--f-head);text-transform:uppercase;color:#fff;margin:14px 0 8px}.lg-card p.lg-why{line-height:1.55;margin-bottom:12px}
 
 .lg-radio-player{display:block;width:100%;max-width:620px;margin:14px 0;color-scheme:dark}.lg-radio-runtime{color:var(--mute);font-size:15px}.lg-radio-download{display:inline-flex;align-items:center;min-height:44px;color:var(--gold-hi);text-decoration:underline;text-underline-offset:4px}.lg-radio-art{object-fit:contain}
+
+/* full power rankings page (lgchl-power.html) + "see all" link on the desk */
+.lg-pr-hero .lg-in { padding-block: 34px 38px; }
+.lg-pr-hero .lg-tabs { margin-top: 22px; }
+.lg-pr-back { display: inline-flex; align-items: center; min-height: 40px; margin-bottom: 8px; font-family: var(--f-ui); font-weight: 600; font-size: 16px; letter-spacing: .12em; text-transform: uppercase; color: var(--lg-blue-hi); }
+.lg-pr-podium { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.lg-pr-pod { position: relative; isolation: isolate; overflow: hidden; display: grid; gap: 14px; padding: 18px; }
+.lg-pr-pod .wm { width: 220px; height: 220px; right: -40px; opacity: .14; }
+.lg-pr-pod-rank { display: flex; align-items: baseline; gap: 10px; }
+.lg-pr-pod-rank b { font-family: var(--f-head); font-weight: 400; font-size: 64px; line-height: .85; color: var(--gold-hi, #f2d27a); }
+.lg-pr-pod-rank .lg-mv { font-family: var(--f-ui); font-weight: 600; font-size: 18px; }
+.lg-pr-score { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4px 12px; }
+.lg-pr-score span { font-family: var(--f-ui); font-weight: 600; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.lg-pr-score b { justify-self: end; font-family: var(--f-head); font-weight: 400; font-size: 30px; line-height: 1; }
+.lg-pr-score .lg-bar { grid-column: 1 / -1; }
+.lg-pr-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.lg-pr-row { position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-columns: 58px minmax(180px, 1.3fr) minmax(0, 2fr) 110px; align-items: center; gap: 14px; padding: 10px 14px; }
+.lg-pr-row .wm { width: 110px; height: 110px; right: 90px; opacity: .13; }
+.lg-pr-rk { display: grid; justify-items: center; gap: 2px; }
+.lg-pr-rk b { font-family: var(--f-head); font-weight: 400; font-size: 30px; line-height: 1; }
+.lg-pr-rk .lg-mv { font-family: var(--f-ui); font-weight: 600; font-size: 14px; letter-spacing: .06em; }
+.lg-pr-row .lg-team img { width: 38px; height: 38px; }
+.lg-pr-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0; }
+.lg-pr-stats dt { font-family: var(--f-ui); font-weight: 500; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.lg-pr-stats dd { margin: 2px 0 0; font-size: 17px; color: #fff; white-space: nowrap; }
+.lg-pr-stats dd.up { color: var(--lg-up); } .lg-pr-stats dd.dn { color: var(--lg-down); }
+.lg-pr-more { display: flex; justify-content: flex-end; padding-top: 12px; }
+@media (max-width: 900px) {
+  .lg-pr-podium { grid-template-columns: minmax(0, 1fr); }
+  .lg-pr-row { grid-template-columns: 46px minmax(0, 1fr) 84px; gap: 10px 12px; }
+  .lg-pr-stats { grid-column: 2 / -1; grid-row: 2; grid-template-columns: repeat(5, minmax(0, auto)); justify-content: start; gap: 6px 14px; }
+  .lg-pr-row .wm { right: -10px; }
+}
+@media (max-width: 420px) {
+  .lg-pr-stats { gap: 4px 12px; }
+  .lg-pr-stats dd { font-size: 16px; }
+  .lg-pr-pod-rank b { font-size: 54px; }
+}

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<title>LGCHL Power Rankings | Elitechel Media</title>
+<meta name="description" content="The Elitechel power index for every LGCHL team: rank, movement, record, goal differential, form and score.">
+<link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="wildman-home.css?v=20261011-4">
+<link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
+<link rel="stylesheet" href="lgchl-media.css?v=20261017-power1">
+</head>
+<body>
+<header class="top band">
+  <div class="top-in">
+    <a class="brand" href="index.html" aria-label="Wildman Hockey home">
+      <img class="crest" src="assets/wildman/home/wildman-crest.webp" width="112" height="99" alt="">
+      <div class="brand-txt"><b>Wildman Hockey</b><span>Elitechel Media</span><span>Network</span></div>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="team.html">Wildman</a>
+      <a href="esports-hub.html">Esports Hub</a>
+      <a href="game-center.html">Live</a>
+      <a href="academy.html">Academy</a>
+      <a href="hitmen-media.html" class="on" aria-current="page">Media</a>
+      <a href="management.html">Management</a>
+    </nav>
+    <a class="icon-btn search-btn" href="lgchl-leaders.html" aria-label="LGCHL stats"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </div>
+</header>
+
+<nav class="desk-bar band lg-desk" aria-label="Media desks">
+  <div class="desk-in">
+    <p class="eyebrow">Elitechel Media · choose a desk</p>
+    <div class="desk-toggle">
+      <a class="wild" href="wildman-media.html"><img src="assets/wildman/home/wildman-crest.webp" alt=""><span>Wildman Media</span></a>
+      <a class="hit" href="hitmen-media.html"><img src="assets/lgchl/s55/team412.png" alt=""><span>Hitmen Media</span></a>
+      <a class="lgchl" href="lgchl-media.html" aria-current="page"><img src="assets/wildman/home/lgchl-logo.webp" alt=""><span>LGCHL Media</span></a>
+    </div>
+  </div>
+</nav>
+
+<nav class="sub-bar band lg-sub" aria-label="LGCHL Media sections">
+  <div class="sub-in">
+    <a href="lgchl-media.html">LGCHL Home</a>
+    <a href="lgchl-media.html#lgRadioSec">Hitman Radio</a>
+    <a href="lgchl-power.html" aria-current="page">Power rankings</a>
+    <a href="lgchl-media.html#lgStatsSec">Leaders</a>
+    <a href="lgchl-media.html#lgBreakoutSec">Breakout watch</a>
+    <a href="lgchl-media.html#lgMoveSec">Movement</a>
+    <a href="lgchl-media.html#lgMatchSec">Matchups</a>
+    <a href="lgchl-leaders.html">Full LGCHL stats</a>
+  </div>
+</nav>
+
+<main class="lg-page" id="top">
+  <section class="lg-hero lg-pr-hero band" aria-labelledby="lgPrTitle">
+    <div class="lg-in">
+      <a class="lg-pr-back" href="lgchl-media.html#lgPowerSec">← LGCHL Media</a>
+      <p class="eyebrow" id="lgPrEyebrow">Elitechel power index</p>
+      <h1 class="lg-h1" id="lgPrTitle">Power <em>rankings</em></h1>
+      <p class="lg-dek">Every team in the LGCHL, ranked on one formula. No subjective boosts.</p>
+      <div class="lg-tabs" id="lgPrTabs" role="group" aria-label="Filter by league">
+        <button type="button" data-league="all" aria-pressed="true">All</button>
+        <button type="button" data-league="OHL" aria-pressed="false">OHL</button>
+        <button type="button" data-league="WHL" aria-pressed="false">WHL</button>
+        <button type="button" data-league="QMJHL" aria-pressed="false">QMJHL</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-sec band" aria-label="Top three">
+    <div class="lg-in">
+      <div class="lg-pr-podium" id="lgPrPodium"></div>
+    </div>
+  </section>
+
+  <section class="lg-sec band" aria-labelledby="lgPrListTitle">
+    <div class="lg-in">
+      <div class="lg-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow" id="lgPrCount">Loading standings…</p><h2 class="sec-title" id="lgPrListTitle">The full <em>index</em></h2></div>
+      </div>
+      <ol class="lg-pr-list" id="lgPrList"><li class="empty">Loading standings…</li></ol>
+      <p class="lg-fine" id="lgPrNote">Score = 70% points percentage + 20% goal differential per game + 10% goals per game. Minimum 5 GP. No subjective boosts, for any team.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="band">
+  <div class="foot">
+    <span class="foot-brand"><img src="assets/wildman/home/wildman-crest.webp" width="96" height="85" loading="lazy" alt="Wildman Hockey logo"><span>© 2026 Wildman Hockey &amp; Esports Network</span></span>
+    <nav class="foot-nav" aria-label="Footer"><a href="wildman-media.html">Wildman Media</a><a href="hitmen-media.html">Hitmen Media</a><a href="lgchl-media.html">LGCHL Media</a><a href="lgchl-leaders.html">LGCHL Stats</a><a href="game-center.html?channel=hitmen">Game Center</a></nav>
+    <span>LGCHL on LeagueGaming, not the real-world CHL · Times Eastern</span>
+  </div>
+</footer>
+<noscript><p class="band empty">Enable JavaScript to load the LGCHL power rankings.</p></noscript>
+<script src="media-desk.js?v=20261011-1"></script>
+<script src="lgchl-power.js?v=20261017-1"></script>
+</body>
+</html>
