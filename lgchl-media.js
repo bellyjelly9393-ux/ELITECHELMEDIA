@@ -83,7 +83,9 @@
     renderPower(ranked, week, standings);
     renderBreakout(hist, teams);
     renderMovers(hist, teams);
-    renderMatchups(games, now, teams);
+    // Matchup player spotlights use the same public season leaders as the board.
+    const matchupPlayers = await read('wm_lgchl_s55_player_leaders', { select: SKATER_COLS, player_kind: 'eq.skater', order: 'points.desc.nullslast', points: 'not.is.null', limit: '250' }).catch(() => []);
+    renderMatchups(games, now, teams, matchupPlayers);
     await window.LGCHLPublicDesk.renderRecent(teams);
     const leaders = await loadLeaders('points');
     renderNews(ranked, week, leaders);
@@ -173,7 +175,7 @@
           : '<tr><td class="lg-rk">' + rank + '</td>' + who + '<td class="r">' + esc(p.goals) + '</td><td class="r">' + esc(p.assists) + '</td><td class="r lg-pts">' + esc(p.points) + '</td><td class="r">' + sgn(p.plus_minus) + '</td></tr>';
       }).join('') || '<tr><td colspan="6" class="empty">No qualifying players yet.</td></tr>';
       const at = rows.map(r => r.fetched_at).filter(Boolean).sort().pop();
-      $('lgLeadersNote').textContent = 'Source: LG player stats import' + (at ? ', ' + stamp(at) : '') + '.' + (goalie ? ' Goalies with 8+ GP.' : '') + ' Top 10 players; tied totals share a rank. Search up to 150 on the full board.';
+      $('lgLeadersNote').textContent = 'Source: LG player stats import' + (at ? ', ' + stamp(at) : '') + '.' + (goalie ? ' Goalies with 8+ GP.' : '') + ' Top 10 players; tied totals share a rank. Search up to 250 on the full board.';
       return rows;
     } catch {
       if(request!==leaderRequest)return null;
@@ -189,6 +191,16 @@
     } catch { box.innerHTML = ''; }
   }
 
+  function leagueContext(t) {
+    if (!(Number(t.gp) > 0)) return '';
+    const attack = Number(t.gf) / Number(t.gp), defense = Number(t.ga) / Number(t.gp);
+    if (![t.gf,t.ga].every(v => v != null && Number.isFinite(Number(v)))) return '';
+    return '<p class="lg-story-context"><b>The bigger picture</b> ' + esc(t.nickname || t.name) +
+      ' average ' + attack.toFixed(2) + ' goals for and ' + defense.toFixed(2) + ' against per game.' +
+      (t.conference_rank ? ' They sit ' + ordinal(t.conference_rank) + ' in the ' + esc(t.conference || 'conference') + ' standings.' : '') +
+      ' The next test is ' + (attack > defense ? 'protecting that scoring edge as the standings race tightens.' : 'closing that scoring gap to put pressure on the teams above them.') + '</p>';
+  }
+
   function renderNews(ranked, week, leaders) {
     const box = $('lgNews');
     if (!ranked || !ranked.length) { box.innerHTML = unavailable('League notes'); return; }
@@ -196,7 +208,7 @@
     const cards = [];
     const story = (t, tag, title, text) => '<article class="card tinted lg-story" data-logo="' + logo(t.lg_team_id) + '">' + wm(t.lg_team_id) +
       '<div class="lg-story-tag"><img src="' + logo(t.lg_team_id) + '" alt="">' + esc(tag) + ' · ' + esc(t.league) + '</div><h3>' + title + '</h3><p>' + text + '</p>' +
-      '<div class="lg-story-meta">' + ev('v', 'Verified stats') + '<span class="lg-ev lg-ev-na">Auto from LG data</span></div><p class="lg-provenance">'+esc(t.sourceLabel||'LG standings')+' · imported '+esc(stamp(t.standings_at))+'</p></article>';
+      leagueContext(t) + '</article>';
     // Lead: top of the index.
     cards.push('<article class="card tinted lg-story lg-story-lead" data-logo="' + logo(top.lg_team_id) + '">' +
       '<div class="lg-lead-art"><img src="' + logo(top.lg_team_id) + '" width="100" height="100" alt="' + esc(top.name) + ' logo"></div>' +
@@ -204,7 +216,7 @@
       '<h3>' + esc(top.name) + (top.prev == null ? ' lead the index' : top.prev === 1 ? ' stay on top' : ' take over No. 1') + '</h3>' +
       '<p>No. 1 in the Elitechel power index' + (week ? ' after Week ' + esc(week) : '') + (top.prev && top.prev !== 1 ? ', up from ' + ordinal(top.prev) : '') + '. ' + esc(record(top)) + ' with a ' + sgn(top.gd) + ' goal differential and ' + esc(top.last10) + ' over their last ten.</p>' +
       '<div class="lg-mini num"><div><small>Record</small><b>' + esc(record(top)) + '</b></div><div><small>Points</small><b>' + esc(top.pts) + '</b></div><div><small>Goal diff</small><b>' + sgn(top.gd) + '</b></div><div><small>Index</small><b>' + top.score.toFixed(1) + '</b></div></div>' +
-      '<div class="lg-story-meta">' + ev('v', 'Verified stats') + '<span class="lg-ev lg-ev-na">Auto from LG data</span></div><p class="lg-provenance">LG standings · imported '+esc(stamp(top.standings_at))+'</p></div></article>');
+      leagueContext(top) + '</div></article>');
     const used = new Set([top.lg_team_id, hero && hero.lg_team_id]);
     const climber = ranked.filter(t => t.move > 0 && !used.has(t.lg_team_id) && t.rank <= 16).sort((a, b) => b.move - a.move)[0];
     if (climber) { used.add(climber.lg_team_id); cards.push(story(climber, 'Power index', esc(climber.name) + ' jump ' + climber.move + ' spots', 'From ' + ordinal(climber.prev) + ' to ' + ordinal(climber.rank) + ' after going ' + esc(climber.last10) + ' over their last ten. Goal differential ' + sgn(climber.gd) + '.')); }
@@ -219,7 +231,7 @@
     const lead = leaders && leaders[0];
     if (lead) {
       const t = { lg_team_id: lead.lg_team_id, standings_at: lead.fetched_at, sourceLabel: 'LG player stats', league: (ranked.find(x => Number(x.lg_team_id) === Number(lead.lg_team_id)) || {}).league || 'LGCHL' };
-      cards.push(story(t, 'Player watch', esc(lead.gamertag) + ' leads the league with ' + esc(lead.points) + ' points', esc(lead.goals) + ' goals and ' + esc(lead.assists) + ' assists in ' + esc(lead.gp) + ' games for the ' + esc(lead.team_name || 'club') + '.'));
+      cards.push(story(t, 'Player watch', esc(lead.gamertag) + ' leads the league with ' + esc(lead.points) + ' points', esc(lead.goals) + ' goals and ' + esc(lead.assists) + ' assists in ' + esc(lead.gp) + ' games for the ' + esc(lead.team_name || 'club') + '. ' + (Number(lead.gp)>0 ? 'That is '+(Number(lead.points)/Number(lead.gp)).toFixed(2)+' points per game; opponents have a clear name to account for in the scoring race.' : 'A player to watch in the scoring race.')));
     }
     box.innerHTML = cards.join('');
     tint(box);
@@ -258,12 +270,36 @@
     }).join('') || '<p class="empty">No players meet the AHL-to-LGCHL participation thresholds in the current history import.</p>';
   }
 
+  // Editorial interpretation stays separate from measured season totals and recorded finals.
+  function matchupPreview(g, games, teams, players) {
+    const a=teams.get(Number(g.away_lg_team_id)), h=teams.get(Number(g.home_lg_team_id));
+    const an=a?.name||g.away_nick||g.away_abbr||'The visitors', hn=h?.name||g.home_nick||g.home_abbr||'the hosts';
+    const paragraphs=[];
+    let title='A measuring-stick night';
+    if (a && h) {
+      const same=a.conference && a.conference===h.conference && a.league===h.league;
+      const gap=a.pts!=null && h.pts!=null ? Math.abs(Number(a.pts)-Number(h.pts)) : null;
+      title=same && gap!=null && gap<=2 ? 'No breathing room in the standings' : 'Contenders under the spotlight';
+      paragraphs.push(['The stakes', an+' enter '+record(a)+' with '+a.pts+' points; '+hn+' are '+record(h)+' with '+h.pts+'. '+
+        (same && gap!=null ? (gap===0?'They are level on points. A win is a chance to separate from a direct conference competitor.':gap+' points separate them in the same conference. This is a chance to change the gap against a direct competitor.') : 'They represent different conference races, making this a test of how their season records travel against another contender.')]);
+      paragraphs.push(['Form check', an+' are '+(a.last10||'without a recorded last-ten summary')+' over their last ten, with a '+sgn(a.gd)+' season goal differential. '+hn+' are '+(h.last10||'without a recorded last-ten summary')+' with a '+sgn(h.gd)+' differential.']);
+      if (Number(a.gp)>0 && Number(h.gp)>0 && [a.gf,a.ga,h.gf,h.ga].every(v=>v!=null&&Number.isFinite(Number(v)))) {
+        paragraphs.push(['What to watch', an+' score '+(a.gf/a.gp).toFixed(2)+' and allow '+(a.ga/a.gp).toFixed(2)+' goals per game; '+hn+' score '+(h.gf/h.gp).toFixed(2)+' and allow '+(h.ga/h.gp).toFixed(2)+'. '+(a.gf/a.gp===h.gf/h.gp ? 'Both clubs carry the same season scoring rate.' : (a.gf/a.gp>h.gf/h.gp ? an : hn)+' carry the higher season scoring rate.')+' The challenge is turning that edge into chances against this opponent; these averages frame the contest rather than predict its score.']);
+      }
+    } else paragraphs.push(['The stakes', an+' visit '+hn+' in '+g.league+'. '+(g.big_reasons||[]).map(r=>REASONS[r]).filter(Boolean).join(' ')]);
+    const finals=games.filter(x=>x.status==='final' && Date.parse(x.game_at)<Date.parse(g.game_at) && [x.away_score,x.home_score].every(v=>v!=null&&Number.isFinite(Number(v))) && ((Number(x.away_lg_team_id)===Number(g.away_lg_team_id)&&Number(x.home_lg_team_id)===Number(g.home_lg_team_id))||(Number(x.home_lg_team_id)===Number(g.away_lg_team_id)&&Number(x.away_lg_team_id)===Number(g.home_lg_team_id)))).sort((x,y)=>Date.parse(y.game_at)-Date.parse(x.game_at));
+    if(finals.length){const last=finals[0],winner=Number(last.away_score)>Number(last.home_score)?last.away_lg_team_id:last.home_lg_team_id;paragraphs.push(['The rematch', (Number(winner)===Number(g.away_lg_team_id)?an:hn)+' took the latest recorded meeting in the available schedule, '+Math.max(last.away_score,last.home_score)+'–'+Math.min(last.away_score,last.home_score)+' on '+F.day.format(new Date(last.game_at))+'. One side has a result to defend; the other has a chance to answer.']);}
+    const spotlights=[g.away_lg_team_id,g.home_lg_team_id].map(id=>players.filter(p=>Number(p.lg_team_id)===Number(id)&&Number(p.gp)>0).sort((x,y)=>Number(y.points)-Number(x.points))[0]).filter(Boolean);
+    if(spotlights.length) paragraphs.push(['Players to watch',spotlights.map(p=>p.gamertag+' ('+p.team_name+'): '+p.points+' points, '+p.goals+' goals and '+p.assists+' assists in '+p.gp+' games').join('; ')+'. These season totals put them on the watch list; game-night availability will determine who takes the ice.']);
+    return {title,paragraphs};
+  }
+
   const REASONS = {
     top4_clash: 'Both teams are top 4 in their conference.',
     leader_chase: 'A conference leader against a team within 2 points of it.',
     division_race: 'Division rivals within a point of each other, both in the top half.'
   };
-  function renderMatchups(games, now, teams) {
+  function renderMatchups(games, now, teams, players = []) {
     const box = $('lgMatchups');
     if (!games) { box.innerHTML = unavailable('The schedule'); return; }
     const upcoming = games.filter(g => g.status === 'scheduled' && Date.parse(g.game_at) > now);
@@ -278,11 +314,11 @@
     for (const g of big) { if (picks.length < 4 && !picks.includes(g)) picks.push(g); }
     if (!picks.length) { box.innerHTML = '<p class="empty">No games on the next slate meet the matchup rules.</p>'; return; }
     box.innerHTML = picks.map(g => {
-      const why = (g.big_reasons || []).map(r => REASONS[r]).filter(Boolean)[0] || 'Picked by the standings rule.';
+      const preview = matchupPreview(g, games, teams, players);
       const side = (id, ab, rk) => '<div><img src="' + logo(id) + '" alt=""><b>' + esc(ab) + '</b><small>' + (rk ? ordinal(rk) + ' in conf.' : '') + '</small></div>';
       return '<article class="card tinted lg-card" data-logo="' + logo(g.home_lg_team_id) + '">' + wm(g.home_lg_team_id) +
         '<div class="lg-mu-teams">' + side(g.away_lg_team_id, g.away_abbr, g.away_conf_rank) + '<span class="lg-mu-at">@</span>' + side(g.home_lg_team_id, g.home_abbr, g.home_conf_rank) + '</div>' +
-        '<p class="lg-why">' + esc(why) + '</p><div class="lg-mu-when num">' + esc(F.day.format(new Date(g.game_at))) + ' · ' + esc(F.time.format(new Date(g.game_at))) + ' ET · ' + esc(g.league) + '</div><p class="lg-provenance">Source: official LG schedule, imported '+esc(stamp(g.fetched_at))+'. Standings imports: '+esc(stamp(teams.get(Number(g.away_lg_team_id))?.standings_at))+' / '+esc(stamp(teams.get(Number(g.home_lg_team_id))?.standings_at))+'.</p></article>';
+        '<h3 class="lg-match-title">' + esc(preview.title) + '</h3>' + preview.paragraphs.map(([label,text]) => '<p class="lg-why"><b>'+esc(label)+'</b> '+esc(text)+'</p>').join('') + '<div class="lg-mu-when num">' + esc(F.day.format(new Date(g.game_at))) + ' · ' + esc(F.time.format(new Date(g.game_at))) + ' ET · ' + esc(g.league) + '</div></article>';
     }).join('');
   }
 
