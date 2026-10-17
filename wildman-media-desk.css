@@ -228,3 +228,5 @@
 .pg-side-wrap { display: grid; gap: 14px; min-width: 0; }
 .pg-side-wrap .btn { justify-self: start; }
 @media (max-width: 1000px) { .pg-in { grid-template-columns: 1fr; } }
+
+.desk-toggle a.lgchl img{width:46px}

@@ -9,6 +9,10 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { TEAM_META, standingsUrl, scheduleUrl, parseStandings, parseTeamSchedule, teamRows, snapshotRows, changedSnapshots, coverTeams, isChallenge } from './lib.ts';
 
+import { drainPublicBoxes } from './public-box-worker.ts';
+
+// Off until the owner approves/applies migrations and validates a real public game HTML fixture.
+const PUBLIC_BOX_SCORES = Deno.env.get('LGCHL_PUBLIC_BOX_SCORES_ENABLED') === 'true';
 const UA = 'Wildman-Hockey-Esports/1.0 (league schedule sync; one request at a time)';
 const PAUSE_MS = 1500;
 const GAME_LEN_MS = 35 * 60e3;
@@ -22,18 +26,25 @@ function sb() {
 class Challenge extends Error {}
 
 async function getHtml(url: string) {
+ try {
   const res = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'text/html' }, signal: AbortSignal.timeout(20000) });
   const html = await res.text();
-  if (isChallenge(res.status, html, res.headers)) throw new Challenge(`LG returned a Cloudflare challenge (${res.status})`);
-  if (!res.ok) throw new Error(`LG returned ${res.status}`);
+  if (isChallenge(res.status, html, res.headers) || /cf-chl|challenge-platform|Just a moment/i.test(html))
+    throw new Challenge('LG returned a Cloudflare challenge; stopped');
+  if (res.status === 403 || res.status === 429) throw new Challenge('LG blocked or rate-limited automated access (' + res.status + '); stopped');
+  if (!res.ok) throw new Error('LG returned ' + res.status);
   return html;
+ } finally {
+  // Applies after success, HTTP errors and timeouts, and between every kind of LG page.
+  await sleep(PAUSE_MS);
+ }
 }
 async function checked<T>(p: PromiseLike<{ data: T; error: { message: string } | null }>) {
   const { data, error } = await p; if (error) throw new Error(error.message); return data;
 }
 
-async function syncStandings(db: ReturnType<typeof sb>) {
-  const rows = parseStandings(await getHtml(standingsUrl()));
+async function syncStandings(db: ReturnType<typeof sb>, fetchHtml = getHtml) {
+  const rows = parseStandings(await fetchHtml(standingsUrl()));
   if (rows.length < 40) throw new Error(`Standings parse found only ${rows.length} teams`);
   await checked(db.from('lgchl_teams').upsert(teamRows(rows).map((t) => ({ ...t, updated_at: new Date().toISOString() })), { onConflict: 'lg_team_id' }));
   const current = await checked(db.from('lgchl_standings_current').select('lg_team_id,gp,w,l,otw,otl,pts,gf,ga,gd,streak,last10,home,away,division_rank'));
@@ -74,9 +85,36 @@ Deno.serve(async (req) => {
   const mode = ['full', 'delta', 'continue'].includes(String(body.mode)) ? String(body.mode) : 'continue';
   const deadline = Date.now() + Math.min(Number(body.budgetMs || 100000), 130000);
 
+  let leaseOwner: string | null = null;
+  if (PUBLIC_BOX_SCORES) {
+    leaseOwner = crypto.randomUUID();
+    const acquired = await checked(db.rpc('lgchl_media_acquire_lease', { p_owner: leaseOwner }));
+    if (!acquired) return json({ idle: true, reason: 'another serial sync is running' });
+  }
+  const fetchHtml = async (url: string) => {
+    if (PUBLIC_BOX_SCORES) {
+      const expires = await checked(db.rpc('lgchl_media_before_fetch', { p_owner: leaseOwner }));
+      if (!expires || Date.parse(String(expires)) <= Date.now() + 25000) throw new Error('Sync lease expired or paused before LG request');
+    }
+    try { return await getHtml(url); }
+    catch (error) {
+      if (PUBLIC_BOX_SCORES && error instanceof Challenge) {
+        await checked(db.rpc('lgchl_media_fail_box', { p_owner: leaseOwner, p_lg_game_id: null, p_error: String(error.message), p_challenge: true }));
+      }
+      throw error;
+    }
+  };
+  const publicBoxes = () => drainPublicBoxes(db, fetchHtml, e => e instanceof Challenge, deadline, leaseOwner!);
+  try {
+    if (body.publicOnly) {
+      if (!PUBLIC_BOX_SCORES) return json({ idle: true, reason: 'public box-score ingestion is disabled pending approval and source validation' });
+      try { return json({ publicBoxes: await publicBoxes() }); }
+      catch (e) { return json({ error: String((e as Error).message), challenge: e instanceof Challenge }, 502); }
+    }
+
   // Diagnostics: one standings request, nothing saved.
   if (body.action === 'probe') {
-    try { const rows = parseStandings(await getHtml(standingsUrl())); return json({ ok: true, teams: rows.length, sample: rows[0] }); }
+    try { const rows = parseStandings(await fetchHtml(standingsUrl())); return json({ ok: true, teams: rows.length, sample: rows[0] }); }
     catch (e) { return json({ ok: false, error: String((e as Error).message) }, 502); }
   }
 
@@ -84,12 +122,12 @@ Deno.serve(async (req) => {
   const log: Record<string, unknown> = { mode };
   try {
     if (!run) {
-      if (mode === 'continue') return json({ idle: true });
+      if (mode === 'continue') return json(PUBLIC_BOX_SCORES ? { publicBoxes: await publicBoxes() } : { idle: true });
       // Teams must exist before games (FK); the first ever run loads standings up front.
       const { count } = await db.from('lgchl_teams').select('lg_team_id', { count: 'exact', head: true });
-      if (!count) { log.standings = await syncStandings(db); await sleep(PAUSE_MS); }
+      if (!count) { log.standings = await syncStandings(db, fetchHtml); }
       run = await startRun(db, mode) as Run;
-      if (!run) return json({ idle: true, reason: 'no pending games' });
+      if (!run) return json(PUBLIC_BOX_SCORES ? { publicBoxes: await publicBoxes() } : { idle: true, reason: 'no pending games' });
     }
     const known = new Set(((await checked(db.from('lgchl_teams').select('lg_team_id'))) as { lg_team_id: number }[]).map((t) => t.lg_team_id));
     let i = run.next_index, requests = run.requests, failed = run.pages_failed, upserted = run.games_upserted;
@@ -97,7 +135,7 @@ Deno.serve(async (req) => {
       const teamId = run.team_ids[i];
       try {
         requests++;
-        const games = parseTeamSchedule(await getHtml(scheduleUrl(teamId))).filter((g) => known.has(g.away_lg_team_id) && known.has(g.home_lg_team_id));
+        const games = parseTeamSchedule(await fetchHtml(scheduleUrl(teamId))).filter((g) => known.has(g.away_lg_team_id) && known.has(g.home_lg_team_id));
         if (games.length) {
           const now = new Date().toISOString();
           await checked(db.from('lgchl_games').upsert(games.map((g) => { const { season: _s, ...rest } = g; return { ...rest, fetched_at: now }; }), { onConflict: 'lg_game_id' }));
@@ -110,19 +148,22 @@ Deno.serve(async (req) => {
       }
       i++;
       await checked(db.from('lgchl_sync_runs').update({ next_index: i, requests, pages_failed: failed, games_upserted: upserted, updated_at: new Date().toISOString() }).eq('id', run.id));
-      await sleep(PAUSE_MS);
     }
     if (i >= run.team_ids.length) {
       // Standings last, so its GP/W match the finals we just read from the schedules.
-      log.standings = await syncStandings(db); requests++;
+      log.standings = await syncStandings(db, fetchHtml); requests++;
       const finals = await finalsCount(db);
       await checked(db.from('lgchl_sync_runs').update({ status: 'done', requests, finals_after: finals, error: failed ? String(log.lastPageError || 'some pages failed') : null, finished_at: new Date().toISOString(), updated_at: new Date().toISOString() }).eq('id', run.id));
+      if (PUBLIC_BOX_SCORES) log.publicBoxes = await publicBoxes();
       return json({ ...log, run: run.id, kind: run.kind, done: true, pages: run.team_ids.length, failed, upserted, finals });
     }
     return json({ ...log, run: run.id, kind: run.kind, done: false, next_index: i, of: run.team_ids.length });
   } catch (e) {
     const msg = String((e as Error)?.message || e).slice(0, 500);
-    if (run) await db.from('lgchl_sync_runs').update({ status: 'failed', error: msg, finished_at: new Date().toISOString(), updated_at: new Date().toISOString() }).eq('id', run.id);
+    if (run) await db.from('lgchl_sync_runs').update({ status: 'failed', error: msg, finished_at: new Date().toISOString(), updated_at: new Date().toISOString() }).eq('id', run.id).eq('status', 'running');
     return json({ ...log, error: msg, challenge: e instanceof Challenge }, 502);
+  }
+  } finally {
+    if (leaseOwner) await db.rpc('lgchl_media_release_lease', { p_owner: leaseOwner });
   }
 });
