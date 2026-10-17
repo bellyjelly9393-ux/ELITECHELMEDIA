@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#08090b">
 <title>LGCHL Media | Elitechel Media</title>
-<meta name="description" content="LGCHL Media from Elitechel Media: league-wide LeagueGaming CHL scores, power rankings, leaders, breakout players and player movement, built only from official LG data.">
+<meta name="description" content="LGCHL Media from Elitechel Media: league-wide LeagueGaming CHL scores, power rankings, leaders, breakout players and player movement, plus Hitman Radio.">
 <link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="wildman-home.css?v=20261011-4">
@@ -47,6 +47,7 @@
 <nav class="sub-bar band lg-sub" aria-label="LGCHL Media sections">
   <div class="sub-in">
     <a href="lgchl-media.html" aria-current="page">LGCHL Home</a>
+    <a href="#lgRadioSec">Hitman Radio</a>
     <a href="#lgPowerSec">Power rankings</a>
     <a href="#lgStatsSec">Leaders</a>
     <a href="#lgBreakoutSec">Breakout watch</a>
@@ -61,15 +62,33 @@
     <div class="lg-hero-in">
       <div class="lg-hero-copy">
         <img class="lg-hero-logo" src="assets/wildman/home/lgchl-logo.webp" width="760" height="434" alt="LGCHL, Canadian Hockey League">
-        <p class="lg-kicker" id="lgLeadKicker"><span class="lg-ev lg-ev-na">Loading the latest LG import…</span></p>
+        <p class="lg-kicker" id="lgLeadKicker"><span class="lg-ev lg-ev-na">Loading…</span></p>
         <h1 class="lg-h1" id="lgLeadTitle">LGCHL <em>Media</em></h1>
-        <p class="lg-dek" id="lgLeadDek">League-wide scores, power rankings, leaders and player movement, built only from official LeagueGaming data.</p>
+        <p class="lg-dek" id="lgLeadDek">League-wide scores, power rankings, leaders and player movement.</p>
         <div class="lg-cta">
           <a class="btn btn-gold btn-sm" href="#lgPowerSec">Power rankings <span class="arr">→</span></a>
           <a class="btn btn-line btn-sm" href="#lgBreakoutSec"><span>Breakout watch</span> <span class="arr">→</span></a>
         </div>
       </div>
       <aside class="card tinted lg-feat" id="lgFeat" aria-label="Featured team by the numbers" hidden></aside>
+    </div>
+  </section>
+
+  <section class="lg-sec lg-radio band" id="lgRadioSec" aria-labelledby="lgRadioTitle">
+    <div class="lg-in lg-radio-grid">
+      <img class="lg-radio-art" src="assets/hitman-radio/episode-01-cover.webp" width="1024" height="1536" loading="lazy" alt="Hitman Radio — Elite Chel Media covering the LGCHL">
+      <div>
+        <span class="sec-rule" aria-hidden="true"></span>
+        <p class="eyebrow">Elitechel Media audio · LGCHL and Hitmen</p>
+        <h2 class="sec-title" id="lgRadioTitle">Hitman <em>Radio</em></h2>
+        <p class="lg-dek">Episode 1</p>
+        <p class="lg-radio-runtime">19 min 31 sec</p>
+        <audio class="lg-radio-player" controls preload="none" aria-label="Play Hitman Radio Episode 1">
+          <source src="assets/hitman-radio/episode-01.mp3" type="audio/mpeg">
+          Your browser does not support audio playback. <a href="assets/hitman-radio/episode-01.mp3">Listen to Episode 1</a>.
+        </audio>
+        <a class="lg-radio-download" href="assets/hitman-radio/episode-01.mp3" download="Hitman-Radio-Episode-01.mp3">Download Episode 1 (MP3)</a>
+      </div>
     </div>
   </section>
 
@@ -117,7 +136,7 @@
         </div>
         <div class="lg-tbl-box"><table class="lg-tbl num"><thead id="lgLeadersHead"><tr><th>#</th><th>Player</th><th class="r">G</th><th class="r">A</th><th class="r">PTS</th><th class="r">+/-</th></tr></thead><tbody id="lgLeaders"><tr><td colspan="6" class="empty">Loading leaders…</td></tr></tbody></table></div>
         <div class="lg-goalies" id="lgGoalies"></div>
-        <p class="lg-fine" id="lgLeadersNote">Source: LG player stats import.</p>
+        <p class="lg-fine" id="lgLeadersNote">Top 10 players; tied totals share a rank.</p>
         <div class="lg-leader-links"><a id="lgFullLeaders" href="lgchl-leaders.html?metric=points#lgPlayerBoard">VIEW TOP 250 →</a><a id="lgFindPlayer" href="lgchl-leaders.html?metric=points&amp;search=1#lgPlayerSearch">SEARCH PLAYERS →</a></div>
       </div>
     </div>
@@ -141,10 +160,6 @@
         <p class="lg-note">Last season in the AHL, this season in the LGCHL. Numbers from both sides of the move.</p>
       </div>
       <div class="lg-card-grid" id="lgMovers"><p class="empty">Loading player movement…</p></div>
-      <div class="lg-rule">
-        <span class="lg-ev lg-ev-na">How we cover moves</span>
-        <p>The stats show where a player played, not why they moved. We put the numbers from both levels side by side. Any explanation of a call-up or send-down is labelled Editorial and reviewed before it is published. Mid-season moves get dates once LG roster changes are logged.</p>
-      </div>
     </div>
   </section>
 
@@ -152,9 +167,9 @@
     <div class="lg-in">
       <div class="lg-head">
         <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Players · last 5 games</p><h2 class="sec-title" id="lgTrendTitle">Trending <em>now</em></h2></div>
-        <p class="lg-note">Points across the last five imported appearances. Players need five recorded games to qualify.</p>
+        <p class="lg-note">Points across each player's last five games.</p>
       </div>
-      <div class="lg-card-grid" id="lgTrendingRecords"><p class="empty">Loading public game lines…</p></div>
+      <div class="lg-card-grid" id="lgTrendingRecords"><p class="empty">Loading…</p></div>
       <p class="lg-fine" id="lgBoxCoverage"></p>
     </div>
   </section>
@@ -162,7 +177,7 @@
     <div class="lg-in">
       <div class="lg-head"><div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Game-week scoring</p><h2 class="sec-title" id="lgPlayersWeekTitle">Players of <em>the Week</em></h2></div>
       <p class="lg-note" id="lgWeekPlayersNote">Highest points in the latest recorded game week.</p></div>
-      <div class="lg-card-grid" id="lgWeekPlayers"><p class="empty">Loading public game lines…</p></div>
+      <div class="lg-card-grid" id="lgWeekPlayers"><p class="empty">Loading…</p></div>
     </div>
   </section>
 
@@ -182,7 +197,7 @@
         <span class="wm wm-lg lg-wm-league" aria-hidden="true"></span>
         <p class="eyebrow">Elitechel Media · recurring series</p>
         <h2 class="lg-wk-title" id="lgWeeklyTitle">LGCHL <em>Weekly</em></h2>
-        <p class="lg-wk-dek">One edition after every game week, reviewed before it is published.</p>
+        <p class="lg-wk-dek">One edition after every game week.</p>
         <span class="lg-ev lg-ev-na">First edition coming soon</span>
       </div>
       <div>
@@ -201,45 +216,20 @@
     </div>
   </section>
 
-  <section class="lg-sec lg-radio band" id="lgRadioSec" aria-labelledby="lgRadioTitle">
-    <div class="lg-in lg-radio-grid">
-      <img class="lg-radio-art" src="assets/hitman-radio/episode-01-cover.webp" width="1024" height="1536" loading="lazy" alt="Hitman Radio — Elite Chel Media covering the LGCHL">
-      <div>
-        <span class="sec-rule" aria-hidden="true"></span>
-        <p class="eyebrow">Elitechel Media audio · LGCHL and Hitmen</p>
-        <h2 class="sec-title" id="lgRadioTitle">Hitman <em>Radio</em></h2>
-        <p class="lg-dek">Episode 1</p>
-        <p class="lg-radio-runtime">19 min 31 sec</p>
-        <audio class="lg-radio-player" controls preload="none" aria-label="Play Hitman Radio Episode 1">
-          <source src="assets/hitman-radio/episode-01.mp3" type="audio/mpeg">
-          Your browser does not support audio playback. <a href="assets/hitman-radio/episode-01.mp3">Listen to Episode 1</a>.
-        </audio>
-        <a class="lg-radio-download" href="assets/hitman-radio/episode-01.mp3" download="Hitman-Radio-Episode-01.mp3">Download Episode 1 (MP3)</a>
-      </div>
-    </div>
-  </section>
 
-  <section class="lg-legend band" aria-label="How we label evidence">
-    <div class="lg-legend-in">
-      <div><span class="lg-ev lg-ev-v">Verified stat</span><p>From the official LG import, with its import time.</p></div>
-      <div><span class="lg-ev lg-ev-vid">Video-verified</span><p>Seen on reviewed game footage, with timestamps.</p></div>
-      <div><span class="lg-ev lg-ev-ed">Editorial</span><p>Our read of the evidence, reviewed before it is published.</p></div>
-      <div><span class="lg-ev lg-ev-na">Unavailable</span><p>Data we don't have yet. Unverified claims are never shown.</p></div>
-    </div>
-  </section>
 </main>
 
 <footer class="band">
   <div class="foot">
     <span class="foot-brand"><img src="assets/wildman/home/wildman-crest.webp" width="96" height="85" loading="lazy" alt="Wildman Hockey logo"><span>© 2026 Wildman Hockey &amp; Esports Network</span></span>
     <nav class="foot-nav" aria-label="Footer"><a href="wildman-media.html">Wildman Media</a><a href="hitmen-media.html">Hitmen Media</a><a href="lgchl-media.html">LGCHL Media</a><a href="lgchl-leaders.html">LGCHL Stats</a><a href="game-center.html?channel=hitmen">Game Center</a></nav>
-    <span>Season data: LeagueGaming imports · LGCHL, not the real-world CHL · Times Eastern</span>
+    <span>LGCHL on LeagueGaming, not the real-world CHL · Times Eastern</span>
   </div>
 </footer>
 <noscript><p class="band empty">Enable JavaScript to load LGCHL scores, standings and leaders.</p></noscript>
 <script src="media-desk.js?v=20261011-1"></script>
 <script src="lgchl-media-config.js?v=20261016-2"></script>
-<script src="lgchl-media-public.js?v=20261016-2"></script>
-<script src="lgchl-media.js?v=20261017-1"></script>
+<script src="lgchl-media-public.js?v=20261017-clean1"></script>
+<script src="lgchl-media.js?v=20261017-clean1"></script>
 </body>
 </html>

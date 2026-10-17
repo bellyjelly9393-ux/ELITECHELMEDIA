@@ -26,7 +26,7 @@
   return [...c,...sk,...(['points','goals','assists'].includes(metric)?[]:[[metric,metrics[metric]]])];
  }
  function cell(p,key,metric){
-  if(key==='player')return '<b>'+esc(p.gamertag)+'</b><small>'+esc(p.position||'Position unavailable')+' · '+esc(p.team_name||'Team unavailable')+'</small><small class="lg-player-import">Imported '+esc(stamp(p.fetched_at))+'</small>';
+  if(key==='player')return '<b>'+esc(p.gamertag)+'</b><small>'+esc(p.position||'Position unavailable')+' · '+esc(p.team_name||'Team unavailable')+'</small>';
   if(key==='rank')return String(p.rank);
   if(key==='save_pct')return numeric(p[key])?(Number(p[key])*100).toFixed(1)+'%':'—';
   if(key==='gaa')return rate(p[key],2);
@@ -63,11 +63,11 @@
    state.rows=sorted.map((p,i)=>{const value=Number(p[metric]);if(i===0||value!==previous)rank=i+1;previous=value;return {...p,rank};});
    const times=state.rows.map(p=>p.fetched_at).filter(Boolean).sort();
    $('lgLastUpdated').textContent='LGCHL Season 55 regular season · '+metrics[metric]+' · '+state.rows.length+' qualifying players loaded.';
-   $('lgPlayerSource').textContent='Source: LG player statistics import · '+(times.length?'imported '+stamp(times[0])+(times[0]!==times[times.length-1]?' to '+stamp(times[times.length-1]):''):'import time unavailable')+'. Individual import times appear beside each player.';
+   $('lgPlayerSource').textContent='';
   }catch{
    if(token!==state.request)return;state.failed=true;
    $('lgLastUpdated').textContent='Player statistics are unavailable.';
-   $('lgPlayerSource').textContent='Source: public LG player statistics import. No replacement statistics are estimated.';
+   $('lgPlayerSource').textContent='';
   }finally{
    if(token===state.request){state.loading=false;$('lgReload').disabled=false;render();}
   }
