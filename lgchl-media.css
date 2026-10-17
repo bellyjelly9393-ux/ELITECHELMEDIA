@@ -236,3 +236,5 @@
 .lg-leader-links a{display:inline-flex;align-items:center;min-height:44px;color:#ead39b;font-size:13px;font-weight:800;text-decoration:underline;text-underline-offset:4px}
 
 .lg-story-context{border-top:1px solid var(--line);padding-top:12px;margin-top:auto}.lg-story-context b,.lg-why b{color:var(--gold-hi)}.lg-match-title{font:400 28px/1.05 var(--f-head);text-transform:uppercase;color:#fff;margin:14px 0 8px}.lg-card p.lg-why{line-height:1.55;margin-bottom:12px}
+
+.lg-radio-player{display:block;width:100%;max-width:620px;margin:14px 0;color-scheme:dark}.lg-radio-runtime{color:var(--mute);font-size:15px}.lg-radio-download{display:inline-flex;align-items:center;min-height:44px;color:var(--gold-hi);text-decoration:underline;text-underline-offset:4px}.lg-radio-art{object-fit:contain}
