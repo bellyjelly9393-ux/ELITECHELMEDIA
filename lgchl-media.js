@@ -139,7 +139,7 @@
     const body = $('lgPower');
     if (!ranked || !ranked.length) { body.innerHTML = '<tr><td colspan="7" class="empty">Standings are unavailable right now.</td></tr>'; return; }
     if (week) $('lgPowerEyebrow').textContent = 'Elitechel power index · after Week ' + week;
-    body.innerHTML = ranked.slice(0, 10).map(t => {
+    body.innerHTML = ranked.slice(0, 15).map(t => {
       const m = t.move, mv = m == null ? '<td class="lg-mv eq">—</td>' : m > 0 ? '<td class="lg-mv up">▲' + m + '</td>' : m < 0 ? '<td class="lg-mv dn">▼' + Math.abs(m) + '</td>' : '<td class="lg-mv eq">—</td>';
       return '<tr><td class="lg-rk">' + t.rank + '</td>' + mv +
         '<td><div class="lg-team"><img src="' + logo(t.lg_team_id) + '" alt=""><div><b>' + esc(t.nickname || t.name) + '</b><small>' + esc(t.abbr) + ' · ' + esc(t.league) + '</small></div></div></td>' +
@@ -147,6 +147,7 @@
         '<td class="r"><div class="lg-score-cell"><b>' + t.score.toFixed(1) + '</b><div class="lg-bar"><i style="width:' + Math.min(100, t.score).toFixed(1) + '%"></i></div></div></td></tr>';
     }).join('');
     const at = (standings || []).map(s => s.standings_at).filter(Boolean).sort().pop();
+    const all = $('lgPowerAll'); if (all) all.textContent = 'FULL POWER RANKINGS · ALL ' + ranked.length + ' TEAMS →';
     $('lgPowerNote').textContent = 'Score = 70% points percentage + 20% goal differential per game + 10% goals per game. Minimum 5 GP. ' +
       (week ? 'Move compares with the standings before Week ' + week + '. ' : '') + 'No subjective boosts, for any team.';
   }
