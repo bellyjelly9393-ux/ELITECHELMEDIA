@@ -103,7 +103,7 @@
     const climbers = ranked.filter(t => t.rank <= 12 && t.move > 0).sort((a, b) => b.move - a.move || a.rank - b.rank);
     const t = climbers[0] || ranked[0];
     const st = streak(t.streak);
-    kicker.innerHTML = '<span class="lg-ev">' + (climbers[0] ? 'Team on the rise' : 'Top of the index') + (week ? ' · after Week ' + esc(week) : '') + '</span>' + ev('v', 'Verified stats');
+    kicker.innerHTML = '<span class="lg-ev">' + (climbers[0] ? 'Team on the rise' : 'Top of the index') + (week ? ' · after Week ' + esc(week) : '') + '</span>';
     $('lgLeadTitle').innerHTML = climbers[0]
       ? esc(t.nickname || t.name) + ' climb <em>' + t.move + ' spot' + (t.move === 1 ? '' : 's') + '</em>'
       : esc(t.nickname || t.name) + ' lead <em>the index</em>';
@@ -117,7 +117,7 @@
       '<div class="lg-feat-head"><img src="' + logo(t.lg_team_id) + '" width="100" height="100" alt="' + esc(t.name) + ' logo"><div><small>' + esc(t.league) + ' · ' + esc(t.conference) + '</small><b>' + esc(t.name) + '</b></div></div>' +
       '<div class="lg-tiles num"><div class="lg-tile"><small>Last 10</small><b>' + esc(t.last10) + '</b></div><div class="lg-tile"><small>Streak</small><b>' + esc(st ? st.label : '—') + '</b></div><div class="lg-tile"><small>Power rank</small>' + mv + '</div><div class="lg-tile"><small>Goal diff</small><b>' + sgn(t.gd) + '</b></div></div>' +
       '<div class="lg-tiles num"><div class="lg-tile"><small>Record</small><b>' + esc(record(t)) + '</b></div><div class="lg-tile"><small>Points</small><b>' + esc(t.pts) + '</b></div><div class="lg-tile"><small>GF</small><b>' + esc(t.gf) + '</b></div><div class="lg-tile"><small>GA</small><b>' + esc(t.ga) + '</b></div></div>' +
-      '<p class="lg-fine">Source: LG standings import, ' + esc(stamp(t.standings_at)) + '.' + (t.prev ? ' Rank change compares with the standings before Week ' + esc(week) + '.' : '') + '</p>';
+      (t.prev ? '<p class="lg-fine">Rank change compares with the standings before Week ' + esc(week) + '.</p>' : '');
     feat.hidden = false;
   }
 
@@ -131,7 +131,7 @@
       const line = (id, ab, sc, w) => '<div class="lg-sc-line' + (w ? ' w' : '') + '"><img src="' + logo(id) + '" alt=""><span>' + esc(ab) + '</span><b class="num">' + esc(sc) + '</b></div>';
       return '<article class="card tinted lg-sc" data-logo="' + logo(win) + '">' + wm(win) +
         line(g.away_lg_team_id, g.away_abbr, g.away_score, awayWin) + line(g.home_lg_team_id, g.home_abbr, g.home_score, !awayWin) +
-        '<div class="lg-sc-foot"><span>Final · ' + esc(g.league) + '</span>' + (g.source_url ? '<a href="' + esc(g.source_url) + '" target="_blank" rel="noopener noreferrer">Box score ↗</a>' : '') + '</div><p class="lg-provenance">Source: LG schedule import, '+esc(stamp(g.fetched_at))+'.</p></article>';
+        '<div class="lg-sc-foot"><span>Final · ' + esc(g.league) + '</span>' + (g.source_url ? '<a href="' + esc(g.source_url) + '" target="_blank" rel="noopener noreferrer">Box score ↗</a>' : '') + '</div></article>';
     }).join('');
   }
 
@@ -148,7 +148,7 @@
     }).join('');
     const at = (standings || []).map(s => s.standings_at).filter(Boolean).sort().pop();
     $('lgPowerNote').textContent = 'Score = 70% points percentage + 20% goal differential per game + 10% goals per game. Minimum 5 GP. ' +
-      (week ? 'Move compares with the standings before Week ' + week + '. ' : '') + 'No subjective boosts, for any team.' + (at ? ' Standings import: ' + stamp(at) + '.' : '');
+      (week ? 'Move compares with the standings before Week ' + week + '. ' : '') + 'No subjective boosts, for any team.';
   }
 
   const rate = (v,d) => v==null || v==='' || !Number.isFinite(Number(v)) ? '—' : Number(v).toFixed(d);
@@ -175,7 +175,7 @@
           : '<tr><td class="lg-rk">' + rank + '</td>' + who + '<td class="r">' + esc(p.goals) + '</td><td class="r">' + esc(p.assists) + '</td><td class="r lg-pts">' + esc(p.points) + '</td><td class="r">' + sgn(p.plus_minus) + '</td></tr>';
       }).join('') || '<tr><td colspan="6" class="empty">No qualifying players yet.</td></tr>';
       const at = rows.map(r => r.fetched_at).filter(Boolean).sort().pop();
-      $('lgLeadersNote').textContent = 'Source: LG player stats import' + (at ? ', ' + stamp(at) : '') + '.' + (goalie ? ' Goalies with 8+ GP.' : '') + ' Top 10 players; tied totals share a rank. Search up to 250 on the full board.';
+      $('lgLeadersNote').textContent = (goalie ? 'Goalies with 8+ GP. ' : '') + 'Top 10 players; tied totals share a rank. Search up to 250 on the full board.';
       return rows;
     } catch {
       if(request!==leaderRequest)return null;
@@ -187,7 +187,7 @@
     const box = $('lgGoalies');
     try {
       const rows = await read('wm_lgchl_s55_player_leaders', { select: 'gamertag,team_name,gp,save_pct,gaa,fetched_at', player_kind: 'eq.goalie', gp: 'gte.8', order: 'save_pct.desc', limit: '3' });
-      box.innerHTML = rows.map((g, i) => '<div><small>Save % · 8+ GP · ' + ordinal(i + 1) + '</small><b>' + esc(g.gamertag) + '</b><span class="num">' + rate(g.save_pct,3).replace(/^0/, '') + '</span> <small>' + esc(g.team_name || '') + ' · ' + rate(g.gaa,2) + ' GAA</small><p class="lg-provenance">LG player stats · imported '+esc(stamp(g.fetched_at))+'</p></div>').join('');
+      box.innerHTML = rows.map((g, i) => '<div><small>Save % · 8+ GP · ' + ordinal(i + 1) + '</small><b>' + esc(g.gamertag) + '</b><span class="num">' + rate(g.save_pct,3).replace(/^0/, '') + '</span> <small>' + esc(g.team_name || '') + ' · ' + rate(g.gaa,2) + ' GAA</small></div>').join('');
     } catch { box.innerHTML = ''; }
   }
 
@@ -250,9 +250,9 @@
         '<div class="lg-cmp num"><div class="lg-cmp-row"><span>S54</span><div class="lg-cmp-bar"><i style="width:' + (100 * b.prev_ppg / MAX).toFixed(1) + '%"></i></div><b>' + b.prev_ppg.toFixed(2) + '</b></div>' +
         '<div class="lg-cmp-row now"><span>S55</span><div class="lg-cmp-bar"><i style="width:' + (100 * b.ppg / MAX).toFixed(1) + '%"></i></div><b>' + b.ppg.toFixed(2) + '</b></div></div>' +
         '<p class="lg-line num">' + esc(b.points) + ' PTS in ' + esc(b.gp) + ' GP · ' + esc(b.goals) + ' G · ' + sgn(b.plus_minus) + '</p>' +
-        '<p class="lg-card-note">' + esc(b.note) + '</p><div class="lg-card-foot">' + ev(hist.mode==='live'?'v':'na', hist.mode==='live'?'Public history import':'Dated snapshot') + '</div>' + window.LGCHLPublicDesk.historyFoot(hist,b) + '</article>';
-    }).join('') || '<p class="empty">No players meet the published breakout thresholds in the current history import.</p>';
-    $('lgBoNote').textContent = 'Early season: these are paces, not finished seasons. Sources: ' + (hist.current_source || 'LG player stats import') + ' · ' + (hist.history_source || 'LG season history') + '.';
+        (b.note ? '<p class="lg-card-note">' + esc(b.note) + '</p>' : '') + '</article>';
+    }).join('') || '<p class="empty">No players meet the breakout thresholds yet.</p>';
+    $('lgBoNote').textContent = 'Early season: these are paces, not finished seasons.';
   }
 
   function renderMovers(hist, teams) {
@@ -266,8 +266,8 @@
         '<table class="lg-mvt num"><thead><tr><th></th><th class="r">GP</th><th class="r">PTS</th><th class="r">P/GP</th><th class="r">+/-</th></tr></thead><tbody>' +
         '<tr><td>' + esc(m.from_league) + ' · S' + esc(m.from_season) + '</td><td class="r">' + esc(m.from_gp) + '</td><td class="r">' + esc(m.from_points) + '</td><td class="r">' + m.from_ppg.toFixed(2) + '</td><td class="r ' + cls(m.from_plus_minus) + '">' + sgn(m.from_plus_minus) + '</td></tr>' +
         '<tr class="now"><td>LGCHL · S55</td><td class="r">' + esc(m.gp) + '</td><td class="r">' + esc(m.points) + '</td><td class="r">' + m.ppg.toFixed(2) + '</td><td class="r ' + cls(m.plus_minus) + '">' + sgn(m.plus_minus) + '</td></tr></tbody></table>' +
-        '<p class="lg-card-note">' + esc(m.note) + '</p><div class="lg-card-foot">' + ev(hist.mode==='live'?'v':'na', hist.mode==='live'?'Public history import':'Dated snapshot') + '</div>' + window.LGCHLPublicDesk.historyFoot(hist,m) + '</article>';
-    }).join('') || '<p class="empty">No players meet the AHL-to-LGCHL participation thresholds in the current history import.</p>';
+        (m.note ? '<p class="lg-card-note">' + esc(m.note) + '</p>' : '') + '</article>';
+    }).join('') || '<p class="empty">No AHL-to-LGCHL moves to show yet.</p>';
   }
 
   // Editorial interpretation stays separate from measured season totals and recorded finals.
@@ -322,5 +322,5 @@
     }).join('');
   }
 
-  main().catch(() => { const k = $('lgLeadKicker'); if (k) k.innerHTML = ev('na', 'LG data is unavailable right now'); });
+  main().catch(() => { const k = $('lgLeadKicker'); if (k) k.innerHTML = ev('na', 'League data is unavailable right now'); });
 })();
