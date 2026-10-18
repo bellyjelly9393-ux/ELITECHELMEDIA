@@ -107,7 +107,7 @@ async function loadLab(cfg,v,D){
   const opp=oppNames.length?ok(await db.from('hitmen_opponent_player_stats').select('opponent_name,gamertag,position,source,games_played,wins,losses,goals,assists,shots,hits,takeaways,giveaways,faceoff_pct,passing_pct,goalie_save_pct,goalie_gaa,raw_stats')
       .eq('team_id',cfg.teamId).eq('season',cfg.season).in('opponent_name',oppNames)):[];
   // game sheet (Battle Plan rows): management only, read-only here
-  const plans=v.mgmt&&games.length?ok(await db.from('hitmen_battle_plans').select('id,schedule_game_id,opponent_name,game_date,status,danger_players,tendencies,keys_to_win,matchup_assignments,reminders,management_notes,updated_at')
+  const plans=v.user&&games.length?ok(await db.from('hitmen_battle_plans').select('id,schedule_game_id,opponent_name,game_date,status,danger_players,tendencies,keys_to_win,matchup_assignments,reminders,management_notes,updated_at')
       .eq('team_id',cfg.teamId).in('schedule_game_id',games.map(g=>g.id))):[];
   // RLS: management reads every box score. A player reads team-visible rows plus only their own, which
   // would bias "games together", so the player view uses team-visible rows only (else career projection).
@@ -364,11 +364,11 @@ function h2hRow(S,l){
 }
 function gameSheetHTML(cfg,v,L,g){
   const head=`<div class="lab-gs-hd"><div><span class="wr-k">Game sheet · from Battle Plan · read-only</span><h4>GM ${g.gm} ${g.home?'vs':'@'} ${esc(g.short)}</h4></div></div>`;
-  if(!v.mgmt) return `<section class="lab-gs" aria-label="Game sheet">${head}<div class="wr-empty-row">The game sheet is management-only for now.</div></section>`;
+  // Game sheet: read-only for everyone on the roster; saving stays in Battle Plans (owner/GM/AGM).
   const plan=L.plans.filter(p=>p.schedule_game_id===g.id).sort((a,b)=>String(b.updated_at).localeCompare(String(a.updated_at)))[0];
   const date=new Date(g.at),d=`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
-  const edit=`<a href="${cfg.editors.battlePlan}?opponent=${encodeURIComponent(g.name)}&date=${encodeURIComponent(d)}">Open the Battle Plan editor →</a>`;
-  const foot=`<p class="wr-note">Read from <code>hitmen_battle_plans</code>. Saving stays in the Battle Plan editor (management only, unchanged in this release). ${edit}</p>`;
+  const edit=`<a href="${cfg.editors.battlePlan}?opponent=${encodeURIComponent(g.name)}&date=${encodeURIComponent(d)}">${v.manage?'Open the Battle Plan editor':'Open the full Battle Plan'} →</a>`;
+  const foot=`<p class="wr-note">From the Battle Plan. ${v.manage?'Edit and save it in the Battle Plan editor.':'Management writes it; this is a read-only view.'} ${edit}</p>`;
   if(!plan) return `<section class="lab-gs" aria-label="Game sheet">${head}<div class="wr-empty-row">No game sheet saved for this game yet.</div>${foot}</section>`;
   const F=[['Status','status'],['Keys to win','keys_to_win'],['Matchup assignments','matchup_assignments'],['Danger players','danger_players'],['Tendencies','tendencies'],['Reminders','reminders'],['Management notes','management_notes']];
   return `<section class="lab-gs" aria-label="Game sheet">${head}<dl class="lab-gs-dl">${F.filter(([,k])=>plan[k]).map(([t,k])=>`<div><dt>${t}</dt><dd>${esc(plan[k])}</dd></div>`).join('')}</dl>${foot}</section>`;

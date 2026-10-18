@@ -197,3 +197,5 @@ input.field[type="number"] { text-align: center; font-variant-numeric: tabular-n
 #hqRecaps .res b { white-space: normal; overflow: visible; text-overflow: clip; font-size: 19px; line-height: 1.08; }
 #hqRecaps .res { grid-template-columns: 44px minmax(0, 1fr) auto; align-items: start; }
 @media (max-width: 1100px) { #hqRecaps { grid-template-columns: minmax(0, 1fr); } }
+/* Rostered players: read-only War Room. Management-only controls are hidden (writes are also blocked by RLS). */
+.hq-player [data-mgmt-only]{display:none!important}
