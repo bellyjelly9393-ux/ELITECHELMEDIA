@@ -1,0 +1,34 @@
+{
+ "917212": {
+  "lg_game_id": 917212,
+  "status": "final",
+  "away_lg_team_id": 412,
+  "home_lg_team_id": 416,
+  "away_score": 3,
+  "home_score": 2
+ },
+ "917493": {
+  "lg_game_id": 917493,
+  "status": "final",
+  "away_lg_team_id": 418,
+  "home_lg_team_id": 412,
+  "away_score": 4,
+  "home_score": 0
+ },
+ "917523": {
+  "lg_game_id": 917523,
+  "status": "final",
+  "away_lg_team_id": 412,
+  "home_lg_team_id": 2983,
+  "away_score": 4,
+  "home_score": 5
+ },
+ "917554": {
+  "lg_game_id": 917554,
+  "status": "final",
+  "away_lg_team_id": 385,
+  "home_lg_team_id": 412,
+  "away_score": 6,
+  "home_score": 4
+ }
+}
