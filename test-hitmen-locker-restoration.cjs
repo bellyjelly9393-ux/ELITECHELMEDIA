@@ -154,6 +154,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       await page.waitForSelector('#playerWeeklyReport [data-week-report]');
       assert.equal(await page.locator('#playerWeeklyReport [data-week-report]').count(),3,'Three weeks are navigable');
       assert.ok((await page.locator('#playerWeeklyReport').innerText()).includes('Week 3 test report'),'Newest weekly report displays first');
+      await page.locator('#playerWeeklyReport .weekly-vod-evidence summary').click();
       assert.ok((await page.locator('#playerWeeklyReport').innerText()).includes('Film review note'),'Only linked approved film review is shown');
       assert.ok((await page.locator('#playerWeeklyReport').innerText()).includes('identity'),'Unverified identity caveat remains visible');
       assert.equal(await page.locator('#playerGameReports .player-report-statline span').first().locator('small').innerText(),'G','Zero goalie fields on a skater must not display goalie metrics');
