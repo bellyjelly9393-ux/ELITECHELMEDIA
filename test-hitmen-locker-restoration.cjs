@@ -45,8 +45,47 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       make('44444444-4444-4444-8444-444444444444','Fixture TC','tc',{jersey_number:null}),
       make('55555555-5555-4555-8555-555555555555','Fixture Archived','historical')
     ],
-    hitmen_roster_snapshot:[],hitmen_player_reports:[],team_player_game_reports:[],
-    team_player_weekly_reports:[],team_line_weekly_reports:[],lg_player_season_stats:[]
+    hitmen_roster_snapshot:[],hitmen_player_reports:[],
+    team_player_game_reports:[
+      {id:'stats-game-3',team_id:TEAM,season:55,locker_id:'11111111-1111-4111-8111-111111111111',
+       week:3,game_date:'2026-10-14T01:00:00Z',schedule_game_id:'game-3',
+       position_played:'LW',opponent_name:'Fixture Opponent',result:'W 2-1',
+       stats:{goals:1,assists:0,points:1,shots:3,saves:0,shots_faced:0},
+       evidence:{},ai_review_id:null},
+      {id:'approved-game-3',team_id:TEAM,season:55,locker_id:'11111111-1111-4111-8111-111111111111',
+       week:null,game_date:'2026-10-14T01:00:01Z',schedule_game_id:'game-3',
+       position_played:'LW',opponent_name:'Fixture Opponent',
+       stats:{},evidence:{verification:'approved'},ai_review_id:'review-3',
+       coach_summary:'Film review note, identity not independently verified.'}
+    ],
+    team_player_weekly_reports:[
+      {id:'weekly-3',team_id:TEAM,season:55,locker_id:'11111111-1111-4111-8111-111111111111',
+       week:3,games_played:1,record:'1-0-0',summary:'Week 3 test report',
+       strengths:'Scored a goal.',focus_next_week:'Review changes.',
+       stats:{goals:1,assists:0,points:1,shots:3,plus_minus:0,partial_team_roster_games:1},
+       evidence:[{type:'recorded_game_stats',schedule_game_id:'game-3'}]},
+      {id:'weekly-2',team_id:TEAM,season:55,locker_id:'11111111-1111-4111-8111-111111111111',
+       week:2,games_played:2,record:'1-1-0',summary:'Week 2 test report',
+       strengths:'Two games.',focus_next_week:'Protect the puck.',
+       stats:{goals:0,assists:1,points:1,shots:4},
+       evidence:[]},
+      {id:'weekly-1',team_id:TEAM,season:55,locker_id:'11111111-1111-4111-8111-111111111111',
+       week:1,games_played:1,record:'0-1-0',summary:'Week 1 test report <img src=x>',
+       strengths:'One game.',focus_next_week:'Support exits.',
+       stats:{goals:0,assists:0,points:0,shots:2},
+       evidence:[]}
+    ],
+    team_line_weekly_reports:[
+      {id:'line-3',team_id:TEAM,season:55,week:3,line_label:'Fixture Unit Week 3',
+       player_locker_ids:['11111111-1111-4111-8111-111111111111','22222222-2222-4222-8222-222222222222'],
+       games_played:2,stats:{shift_overlap_verified:false,team_record:'1-1-0'},
+       summary:'Shared roster, not confirmed shared shifts.',next_adjustments:'Verify film.'},
+      {id:'line-1',team_id:TEAM,season:55,week:1,line_label:'Fixture Unit Week 1',
+       player_locker_ids:['11111111-1111-4111-8111-111111111111'],
+       games_played:2,stats:{shift_overlap_verified:false},
+       summary:'Older group context.',next_adjustments:'Review roles.'}
+    ],
+    lg_player_season_stats:[]
   };
   window.lockerFixture={tables,reads:[],writes:[]};
   class Query{
@@ -112,6 +151,21 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       await page.locator('#lockerRoster a').first().click();
       await page.waitForFunction(()=>document.getElementById('playerTitle').textContent==='Fixture Active');
       await page.locator('#stallScene .hs-img').first().evaluate(img=>img.decode());
+      await page.waitForSelector('#playerWeeklyReport [data-week-report]');
+      assert.equal(await page.locator('#playerWeeklyReport [data-week-report]').count(),3,'Three weeks are navigable');
+      assert.ok((await page.locator('#playerWeeklyReport').innerText()).includes('Week 3 test report'),'Newest weekly report displays first');
+      assert.ok((await page.locator('#playerWeeklyReport').innerText()).includes('Film review note'),'Only linked approved film review is shown');
+      assert.ok((await page.locator('#playerWeeklyReport').innerText()).includes('identity'),'Unverified identity caveat remains visible');
+      assert.equal(await page.locator('#playerGameReports .player-report-statline span').first().locator('small').innerText(),'G','Zero goalie fields on a skater must not display goalie metrics');
+      const readsBeforeWeek=await page.evaluate(()=>window.lockerFixture.reads.length);
+      await page.locator('#playerWeeklyReport [data-week-report="1"]').click();
+      assert.ok((await page.locator('#playerWeeklyReport').innerText()).includes('Week 1 test report'),'Older weekly report is accessible');
+      assert.equal(await page.locator('#playerWeeklyReport img').count(),0,'Escaped weekly text cannot inject HTML');
+      assert.equal(await page.locator('#playerWeeklyReport [aria-pressed="true"]').count(),1,'Week navigation updates accessible selection');
+      assert.equal(await page.evaluate(()=>window.lockerFixture.reads.length),readsBeforeWeek,'Changing week makes no database query');
+      assert.equal(await page.locator('#playerLineReports details').count(),2,'Older line history remains available');
+      await page.locator('#playerLineReports details').last().locator('summary').click();
+      assert.ok((await page.locator('#playerLineReports details').last().innerText()).includes('Older group context'),'Historic line report expands');
       assert.equal(await page.locator('#stallScene .hs-name').innerText(),'FIXTURE ACTIVE');
       assert.equal(await page.locator('#stallScene .hs-bnum').innerText(),'19');
       await page.locator('#jerseyBackBtn').click();
