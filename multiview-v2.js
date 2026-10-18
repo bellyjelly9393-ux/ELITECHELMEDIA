@@ -219,7 +219,21 @@
     }catch(e){console.error('Multiview refresh error',e);note('Live feed list could not refresh. Already-open players remain running. Retry below.');}
     finally{S.loading=false;}
   }
-  readStore();fromQuery();
+  function addPublicLink(){
+    const raw=new URLSearchParams(location.search).get('add');
+    if(!raw)return;
+    const parsed=stream(raw);
+    if(!parsed){note('That public stream link is not supported. Paste a Twitch or YouTube URL instead.');return;}
+    const key='manual:'+parsed.provider+':'+parsed.id;
+    if(!S.manual.some(x=>x.key===key))S.manual.push({key,url:parsed.url,provider:parsed.provider,title:parsed.id});
+    if(!S.selected.includes(key)){
+      if(S.selected.length>=LIMIT){note('Channel saved locally. Remove one feed to add it to the eight-player grid.');}
+      else S.selected.push(key);
+    }
+    S.auto=false;
+    save();
+  }
+  readStore();fromQuery();addPublicLink();
   $('mvAddStream')?.addEventListener('click',addManual);
   $('mvStreamUrl')?.addEventListener('keydown',e=>{if(e.key==='Enter')addManual();});
   $('mvColumns')?.addEventListener('change',()=>renderGrid());
