@@ -15,7 +15,10 @@
     return (ST().memberships||[]).some(m=>m.team_id===TEAM&&m.active!==false&&['owner','gm','agm'].includes(String(m.role||'').toLowerCase()));
   }
   function fmt(v,d=0){const n=num(v);return n==null?'—':n.toFixed(d)}
-  function stat(label,value,scope=''){return '<div class="hs-stat"><small>'+esc(label)+'</small><b>'+esc(value==null?'—':value)+'</b>'+(scope?'<em>'+esc(scope)+'</em>':'')+'</div>'}
+  // Every number says where it came from: LG = official league games (feeds scouting reports); PUB = EA club/career totals that include pub games (profile only).
+  const SRC={lg:'LG games',club:'EA club · incl. pubs',pub:'Pubs + all EA modes'};
+  function stat(label,value,scope=''){const k=SRC[scope]?scope:/^(league|LG)/i.test(scope)?'lg':'';return '<div class="hs-stat'+(k?' src-'+(k==='lg'?'lg':'pub'):'')+'"><small>'+esc(label)+'</small><b>'+esc(value==null?'—':value)+'</b>'+(scope?'<em>'+esc(SRC[k]||scope)+'</em>':'')+'</div>'}
+  const badge=k=>'<span class="hs-src hs-src-'+(k==='lg'?'lg':'pub')+'">'+(k==='lg'?'LG GAMES':k==='club'?'EA CLUB · INCL. PUBS':'PUBS · ALL EA MODES')+'</span>';
   function latest(rows,source){
     const m=new Map();
     rows.filter(r=>!source||r.source===source).forEach(r=>{const k=norm(r.gamertag);if(!k)return;const p=m.get(k);if(!p||Date.parse(r.source_updated_at||0)>=Date.parse(p.source_updated_at||0))m.set(k,r)});
@@ -174,15 +177,15 @@
     let G=0,S=0,A=0;
     const body=list.map((r,i)=>{G+=r.goals;S+=r.shots;A+=r.att;const d=new Date(r.g.reconciliation?.lg_game_at||r.g.played_at);
       return '<tr><td>'+esc(d.toLocaleDateString([],{month:'short',day:'numeric'}))+'</td><td>'+(i+1)+'</td><td>'+G+'</td><td>'+S+'</td><td>'+A+'</td><td class="'+(r.shots?'delta-plus':'')+'">+'+r.shots+'</td><td class="'+(r.att?'delta-plus':'')+'">+'+r.att+'</td><td>'+esc(r.g.reconciliation?.other_team||'—')+'</td></tr>'}).reverse().join('');
-    return '<div class="eyebrow hs-tracker-k">PER-GAME TRACKER · LG-VERIFIED EA FILES</div><div class="hs-log-wrap"><table class="hs-history hs-gamelog"><thead><tr><th>Game</th><th>GP</th><th>G</th><th>SOG</th><th>ATT</th><th>Δ SOG</th><th>Δ ATT</th><th>Vs</th></tr></thead><tbody>'+body+'</tbody></table></div>';
+    return '<div class="eyebrow hs-tracker-k">PER-GAME TRACKER · LG-VERIFIED EA FILES '+badge('lg')+'</div><div class="hs-log-wrap"><table class="hs-history hs-gamelog"><thead><tr><th>Game</th><th>GP</th><th>G</th><th>SOG</th><th>ATT</th><th>Δ SOG</th><th>Δ ATT</th><th>Vs</th></tr></thead><tbody>'+body+'</tbody></table></div>';
   }
   function renderGameLog(p){
     const L=p.games||[],box=E('hsGameLog');if(!box)return;
     if(!L.length){box.innerHTML='<div class="hs-empty">No LG-verified EA game files include this player yet. They appear once he plays an official game that matches an EA match file.</div>';return}
     const s=gameLogSummary(p),G=p.position==='G'||L.every(r=>r.x?.position==='goalie'),per=v=>(v/s.gp).toFixed(1);
     const head=G
-      ?stat('VERIFIED GP',s.gp,'LG+EA')+stat('SAVES',s.saves,'EA files')+stat('SHOTS AGAINST',s.gshots,'EA files')+stat('SV%',s.gshots?(s.saves/s.gshots).toFixed(3):'—','EA files')
-      :stat('VERIFIED GP',s.gp,'LG+EA')+stat('G-A',s.goals+'-'+s.assists,'EA files')+stat('SOG / GM',per(s.shots),s.shots+' total')+stat('ATT / GM',per(s.att),s.att+' total')+stat('SH%',s.shPct==null?'—':s.shPct.toFixed(1),'goals / SOG')+stat('ON NET%',s.onNet==null?'—':s.onNet.toFixed(1),'SOG / attempts')+stat('HITS / GM',per(s.hits),'EA files')+stat('TA / GA',s.ta+' / '+s.ga,'EA files')+stat('POSS / GM',Math.round(s.pos/s.gp)+'s','EA files');
+      ?stat('LG GAMES',s.gp,'lg')+stat('SAVES',s.saves,'lg')+stat('SHOTS AGAINST',s.gshots,'lg')+stat('SV%',s.gshots?(s.saves/s.gshots).toFixed(3):'—','lg')
+      :stat('LG GAMES',s.gp,'lg')+stat('G-A',s.goals+'-'+s.assists,'lg')+stat('SOG / GM',per(s.shots),'lg')+stat('ATT / GM',per(s.att),'lg')+stat('SH%',s.shPct==null?'—':s.shPct.toFixed(1),'lg')+stat('ON NET%',s.onNet==null?'—':s.onNet.toFixed(1),'lg')+stat('HITS / GM',per(s.hits),'lg')+stat('TA / GA',s.ta+' / '+s.ga,'lg')+stat('POSS / GM',Math.round(s.pos/s.gp)+'s','lg');
     const rows=L.slice(0,15).map(({g,x})=>{
       const rc=g.reconciliation||{},d=new Date(rc.lg_game_at||g.played_at),res=(g.result||'')+(rc.restart_parts?' (restart '+rc.restart_part+'/'+rc.restart_parts+')':'');
       const lg=g.lg_game_id?'<a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid='+encodeURIComponent(g.lg_game_id)+'" target="_blank" rel="noopener noreferrer">'+esc(d.toLocaleDateString([],{month:'short',day:'numeric'}))+'</a>':esc(d.toLocaleDateString());
@@ -246,8 +249,8 @@
     if(c.state!=='ok'){box.innerHTML='<div class="hs-empty">ChelStats has no EA account under “'+esc(p.roster?.gamertag||p.name)+'”. His EA gamertag is probably different from his LG name.</div>';return}
     const f=c.profile,fx=(v,d=1)=>v==null?'—':Number(v).toFixed(d),G=p.position==='G';
     const link=p.blazeId?'Linked to '+gpOf(p)+' LG-verified EA game'+(gpOf(p)===1?'':'s')+(p.eaName&&ckey(p.eaName)!==ckey(p.name)?' as “'+esc(p.eaName)+'”':'')+'.':'No LG-verified EA game files under this EA account yet.';
-    const stats=G?stat('EA GP',f.positionGames?.G??f.gamesPlayed,'career')+stat('SV%',fx(f.savePct,3),'career')+stat('GAA',fx(f.gaa,2),'career')+(f.goalieRatings?stat('RATING',f.goalieRatings.overall,'ChelStats'):'')
-      :stat('EA GP',f.gamesPlayed,'career')+stat('SHOTS / GM',fx(f.shotsPerGame,2),'career')+stat('SH%',fx(f.shootingPct),'career')+stat('ON NET%',fx(f.shotsOnNetPct),'career')+stat('G / GM',fx(f.goalsPerGame,2),'career')+stat('A / GM',fx(f.assistsPerGame,2),'career')+stat('PASS%',fx(f.passPct),'career')+stat('HITS / GM',fx(f.hitsPerGame,2),'career')+stat('TA / GA',fx(f.takeawaysPerGame,2)+' / '+fx(f.giveawaysPerGame,2),'per game')+(f.faceoffPct?stat('FO%',fx(f.faceoffPct),'career'):'')+(f.ratings?stat('RATING',f.ratings.overall+' ('+f.ratings.offense+' OFF / '+f.ratings.defense+' DEF)','ChelStats'):'');
+    const stats=G?stat('EA GP',f.positionGames?.G??f.gamesPlayed,'pub')+stat('SV%',fx(f.savePct,3),'pub')+stat('GAA',fx(f.gaa,2),'pub')+(f.goalieRatings?stat('RATING',f.goalieRatings.overall,'pub'):'')
+      :stat('EA GP',f.gamesPlayed,'pub')+stat('SHOTS / GM',fx(f.shotsPerGame,2),'pub')+stat('SH%',fx(f.shootingPct),'pub')+stat('ON NET%',fx(f.shotsOnNetPct),'pub')+stat('G / GM',fx(f.goalsPerGame,2),'pub')+stat('A / GM',fx(f.assistsPerGame,2),'pub')+stat('PASS%',fx(f.passPct),'pub')+stat('HITS / GM',fx(f.hitsPerGame,2),'pub')+stat('TA / GA',fx(f.takeawaysPerGame,2)+' / '+fx(f.giveawaysPerGame,2),'pub')+(f.faceoffPct?stat('FO%',fx(f.faceoffPct),'pub'):'')+(f.ratings?stat('RATING',f.ratings.overall+' ('+f.ratings.offense+' OFF / '+f.ratings.defense+' DEF)','pub'):'');
     const pos=f.positionGames?Object.entries(f.positionGames).filter(([k,v])=>v&&k!=='G').map(([k,v])=>k+' '+v).join(' · '):'';
     box.innerHTML='<p class="hs-chel-id"><b>EA gamertag:</b> '+esc(f.username)+(f.chelName?' · in-game name '+esc(f.chelName):'')+(f.playstyle&&!G?' · '+esc(f.playstyle):'')+(pos?' · games by position: '+esc(pos):'')+'<br>'+link+'</p><div class="hs-stat-grid hs-log-kpis">'+stats+'</div><p class="hs-log-note">Career totals across all EA modes'+(f.mainMode?' (mostly '+esc(f.mainMode)+')':'')+', not LG-only. Use them for tendencies, not league performance.</p>';
   }
@@ -260,12 +263,13 @@
     E('hsPlayerName').textContent=p.name;E('hsPlayerPos').textContent=p.position||'—';
     E('hsPlayerMeta').textContent=metaLine(p);
     const lgPts=lg.points??((lg.goals!=null||lg.assists!=null)?Number(lg.goals||0)+Number(lg.assists||0):null);
-    E('hsPlayerStats').innerHTML=stat('LG GP',lg.games_played,'league')+stat('LG G',lg.goals,'league')+stat('LG A',lg.assists,'league')+stat('LG PTS',lgPts,'league')+
-      (p.position==='G'?stat('LG SV%',fmt(lg.goalie_save_pct,3),'league')+stat('LG GAA',fmt(lg.goalie_gaa,2),'league')+stat('EA SV%',fmt(ea.goalie_save_pct,3),'club'):
+    E('hsPlayerStats').innerHTML=stat('LG GP',lg.games_played,'lg')+stat('LG G',lg.goals,'lg')+stat('LG A',lg.assists,'lg')+stat('LG PTS',lgPts,'lg')+
+      (p.position==='G'?stat('LG SV%',fmt(lg.goalie_save_pct,3),'lg')+stat('LG GAA',fmt(lg.goalie_gaa,2),'lg')+stat('EA SV%',fmt(ea.goalie_save_pct,3),'club'):
       stat('EA SHOTS',ea.shots,'club')+stat('EA ATT',raw.skshotattempts??'—','club')+stat('PASS%',fmt(ea.passing_pct??raw.skpasspct,1),'club'))+
-      stat('HITS',lg.hits,'league')+stat('TA',lg.takeaways,'league')+stat('GA',lg.giveaways,'league');
+      stat('HITS',lg.hits,'lg')+stat('TA',lg.takeaways,'lg')+stat('GA',lg.giveaways,'lg');
     renderHeat(p);renderGameLog(p);renderHistory(p);renderChel(p);chelLookup(p);
-    E('hsAutoScout').innerHTML=autoPlayerScout(p).map(x=>'<div class="hs-scout-item"><b>'+esc(x[0])+'</b><p>'+esc(x[1])+'</p></div>').join('');
+    const SRCOF={'Shot identity':'club','Finishing area':'club','Puck-management context':'club','LG production':'lg','Verified game logs':'lg','Goalie profile':'club','Evidence scope':'club','Defensive instruction':'club'};
+    E('hsAutoScout').innerHTML=autoPlayerScout(p).map(x=>'<div class="hs-scout-item"><b>'+esc(x[0])+' '+badge(SRCOF[x[0]]||'club')+'</b><p>'+esc(x[1])+'</p></div>').join('');
     const mentions=reportMentions(p);E('hsReportMentions').innerHTML=mentions.length?'<div class="eyebrow">EXISTING REPORT MENTIONS</div>'+mentions.map(m=>'<div class="hs-mention"><b>'+esc(new Date(m.date).toLocaleDateString())+'</b> · '+esc(m.text)+'</div>').join(''):'';
     fillScout(p);renderPlayers();
   }
