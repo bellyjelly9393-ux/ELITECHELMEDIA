@@ -67,13 +67,15 @@ async function league(task: any) {
 }
 
 const CALGARY_EA_CLUB='9495';
+// LG writes some names without accents ("Chicoutimi Sagueneens") while saved opponents keep them ("Saguenéens").
+const teamKey = (v: unknown) => String(v ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
 
 async function reconcileOfficialGames(task: any, club: string, platform: string, privateMatches: any[], asOf: string) {
   const [teams, links] = await Promise.all([
     checked(db.from('lgchl_teams').select('lg_team_id,name').eq('season',SEASON)),
     checked(db.from('hitmen_opponents').select('opponent_name,ea_club_id').eq('team_id',TEAM).eq('season',SEASON))
   ]);
-  const target = teams.find((t:any)=>t.name===task.opponent_name);
+  const target = teams.find((t:any)=>t.name===task.opponent_name) || teams.find((t:any)=>teamKey(t.name)===teamKey(task.opponent_name));
   if (!target) return {official_games:0,matched:0,unmatched:[],warning:'LG team mapping missing'};
   const games = await checked(db.from('lgchl_games')
     .select('lg_game_id,game_at,home_lg_team_id,away_lg_team_id,home_score,away_score,status,source_url')
@@ -81,8 +83,8 @@ async function reconcileOfficialGames(task: any, club: string, platform: string,
     .or('home_lg_team_id.eq.'+target.lg_team_id+',away_lg_team_id.eq.'+target.lg_team_id)
     .order('game_at'));
   const nameByLg = new Map<string, string>(teams.map((t:any): [string, string]=>[String(t.lg_team_id),t.name]));
-  const clubByName = new Map<string, string>(links.filter((x:any)=>/^\d+$/.test(String(x.ea_club_id||''))).map((x:any): [string, string]=>[x.opponent_name,String(x.ea_club_id)]));
-  clubByName.set('Calgary Hitmen',CALGARY_EA_CLUB);
+  const clubByName = new Map<string, string>(links.filter((x:any)=>/^\d+$/.test(String(x.ea_club_id||''))).map((x:any): [string, string]=>[teamKey(x.opponent_name),String(x.ea_club_id)]));
+  clubByName.set(teamKey('Calgary Hitmen'),CALGARY_EA_CLUB);
   const officialRows = games.map((g:any)=>{
     const home = String(g.home_lg_team_id)===String(target.lg_team_id);
     const otherLg = home ? g.away_lg_team_id : g.home_lg_team_id;
@@ -105,7 +107,7 @@ async function reconcileOfficialGames(task: any, club: string, platform: string,
     const home = String(g.home_lg_team_id)===String(target.lg_team_id);
     const otherLg = home ? g.away_lg_team_id : g.home_lg_team_id;
     const otherName = nameByLg.get(String(otherLg)) || '';
-    const otherClub = clubByName.get(otherName);
+    const otherClub = clubByName.get(teamKey(otherName));
     const gf = Number(home ? g.home_score : g.away_score);
     const ga = Number(home ? g.away_score : g.home_score);
     if (!otherClub) { unmatched.push({lg_game_id:g.lg_game_id,opponent:otherName,reason:'EA club link missing'}); continue; }

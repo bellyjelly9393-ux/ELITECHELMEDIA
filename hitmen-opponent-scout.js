@@ -66,6 +66,8 @@
     }
     const gp=Number(lg.games_played||0),g=Number(lg.goals||0),a=Number(lg.assists||0),pts=g+a;
     if(gp)out.push(['LG production',pts+' points in '+gp+' LG games ('+(pts/gp).toFixed(2)+' P/GP). '+(a>g*1.4?'The season production leans playmaking/distribution.':g>a?'The season production leans finishing/scoring.':'Goals and assists are relatively balanced.')]);
+    const gl=gameLogSummary(p);
+    if(gl&&gl.gp)out.push(['Verified game logs',gl.gp+' LG-verified EA game'+(gl.gp===1?'':'s')+': '+(gl.shots/gl.gp).toFixed(1)+' shots on net and '+(gl.att/gl.gp).toFixed(1)+' attempts a game'+(gl.shPct!=null?', '+gl.shPct.toFixed(1)+'% shooting':'')+', '+gl.ta+' takeaways and '+gl.ga+' giveaways. These are official league games only.']);
     const ga=Number(ea.giveaways||raw.skgiveaways||0),ta=Number(ea.takeaways||raw.sktakeaways||0),pass=ea.passing_pct??raw.skpasspct;
     if(ga||ta||pass!=null)out.push(['Puck-management context','EA club totals: '+fmt(pass,1)+'% passing, '+ta+' takeaways, '+ga+' giveaways. Use this as tendency context, not LG-only performance.']);
     out.push(['Defensive instruction',pr?.ranked?.[0]?'Protect '+pr.ranked[0].name+' first, then force attempts toward lower-volume zones. Match the statistical read against VOD before treating it as a hard tactical tendency.':'No reliable zone volume is available yet; use LG production and film evidence instead.']);
@@ -76,10 +78,17 @@
     data.history.forEach(h=>{const k=norm(h.gamertag);if(!hist.has(k))hist.set(k,[]);hist.get(k).push(h)});
     data.roster.forEach(r=>roster.set(norm(r.gamertag),r));
     data.scouts.forEach(r=>scouts.set(norm(r.gamertag),r));
+    // LG-verified EA match files: this club's side only (player_stats.team), one row per player per official game.
+    const logs=new Map();
+    [...data.eaGames].sort((a,b)=>Date.parse(b.played_at||0)-Date.parse(a.played_at||0)).forEach(g=>{
+      Object.values(g.player_stats?.team||{}).forEach(x=>{const k=norm(x?.playername);if(!k)return;if(!logs.has(k))logs.set(k,[]);logs.get(k).push({g,x})});
+    });
+    const fold=v=>norm(String(v||'').replace(/[Il|]/g,'l')),logByFold=new Map();
+    logs.forEach((v,k)=>{const f=fold(k);logByFold.set(f,logByFold.has(f)?null:v)});
     const keys=new Set([...lg.keys(),...ea.keys(),...hist.keys(),...roster.keys()]);
     players=[...keys].map(k=>{
       const rr=roster.get(k),L=lg.get(k),A=ea.get(k),H=(hist.get(k)||[]).sort((a,b)=>Date.parse(a.captured_at)-Date.parse(b.captured_at));
-      return {key:k,name:rr?.gamertag||L?.gamertag||A?.gamertag||H.at(-1)?.gamertag||k,position:rr?.position||L?.position||A?.position||H.at(-1)?.position||'',current:!!rr?.active,roster:rr,lg:L,ea:A,history:H,scout:scouts.get(k)};
+      return {key:k,name:rr?.gamertag||L?.gamertag||A?.gamertag||H.at(-1)?.gamertag||k,position:rr?.position||L?.position||A?.position||H.at(-1)?.position||'',current:!!rr?.active,roster:rr,lg:L,ea:A,history:H,scout:scouts.get(k),games:logs.get(k)||logByFold.get(fold(k))||[]};
     }).sort((a,b)=>(a.current===b.current?0:a.current?-1:1)||(POS[a.position]||9)-(POS[b.position]||9)||String(a.name).localeCompare(String(b.name)));
   }
   function renderKpis(){
@@ -116,7 +125,7 @@
   function renderHeat(p){
     if(p.position==='G'){E('hsPlayerHeat').innerHTML='<div class="hs-empty">Goalies do not use the skater shooting-zone map.</div>';E('hsZoneBreakdown').innerHTML='';return}
     const rows=zoneRows(p.ea?.raw_stats||{}),pr=profile(rows);
-    if(!pr?.model.totalShots){E('hsPlayerHeat').innerHTML='<div class="hs-empty">No EA shooting-location totals stored for this player yet.</div>';E('hsZoneBreakdown').innerHTML='';return}
+    if(!pr?.model.totalShots){E('hsPlayerHeat').innerHTML='<div class="hs-empty">'+(p.games?.length?'No rink-zone map for this player. EA only publishes shot locations for club members'+(p.games.some(r=>String(r.x?.isGuest)==='1')?', and he plays for this club as a guest':' and has none stored for him')+'. His shot volume from '+p.games.length+' LG-verified EA game'+(p.games.length===1?'':'s')+' is in the game log below.':'No EA shooting-location totals stored for this player yet.')+'</div>';E('hsZoneBreakdown').innerHTML='';return}
     window.WildmanShotZones.mountAnalysis(E('hsPlayerHeat'),{ice:rows,net:netRows(p.ea?.raw_stats||{}),gp:eaGp(p),state:slaState});
     const max=Math.max(1,...pr.ranked.map(z=>z.shots));
     E('hsZoneBreakdown').innerHTML=pr.ranked.slice(0,6).map(z=>'<div class="hs-zone-row"><b>'+esc(z.name)+'</b><span>'+z.shots+' shots · '+z.goals+' goals · '+z.efficiency.toFixed(1)+'% · '+z.shotShare.toFixed(1)+'% share</span><div class="hs-zone-bar"><i style="width:'+Math.max(2,100*z.shots/max)+'%"></i></div></div>').join('');
@@ -136,6 +145,30 @@
       }
       return '<tr><td>'+esc(new Date(s.captured_at).toLocaleString([],{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}))+'</td><td>'+esc(s.games_played??'—')+'</td><td>'+esc(s.goals??'—')+'</td><td>'+esc(s.shots_on_net??'—')+'</td><td>'+esc(s.shot_attempts??'—')+'</td><td class="'+(ds>0?'delta-plus':'')+'">'+esc(ds==null?'—':(ds>=0?'+':'')+ds)+'</td><td class="'+(da>0?'delta-plus':'')+'">'+esc(da==null?'—':(da>=0?'+':'')+da)+'</td><td>'+esc(zone)+'</td></tr>'
     }).join('')+'</tbody></table>';
+  }
+  const POSNAME={center:'C',leftWing:'LW',rightWing:'RW',defenseMen:'D',goalie:'G'};
+  function gameLogSummary(p){
+    const L=p.games||[];if(!L.length)return null;
+    const t=k=>L.reduce((n,r)=>n+Number(r.x?.[k]||0),0),gp=L.length;
+    const shots=t('skshots'),att=t('skshotattempts'),goals=t('skgoals');
+    return {gp,goals,assists:t('skassists'),shots,att,hits:t('skhits'),ta:t('sktakeaways'),ga:t('skgiveaways'),pos:t('skpossession'),
+      saves:t('glsaves'),gshots:t('glshots'),shPct:shots?100*goals/shots:null,onNet:att?100*shots/att:null};
+  }
+  function renderGameLog(p){
+    const L=p.games||[],box=E('hsGameLog');if(!box)return;
+    if(!L.length){box.innerHTML='<div class="hs-empty">No LG-verified EA game files include this player yet. They appear once he plays an official game that matches an EA match file.</div>';return}
+    const s=gameLogSummary(p),G=p.position==='G'||L.every(r=>r.x?.position==='goalie'),per=v=>(v/s.gp).toFixed(1);
+    const head=G
+      ?stat('VERIFIED GP',s.gp,'LG+EA')+stat('SAVES',s.saves,'EA files')+stat('SHOTS AGAINST',s.gshots,'EA files')+stat('SV%',s.gshots?(s.saves/s.gshots).toFixed(3):'—','EA files')
+      :stat('VERIFIED GP',s.gp,'LG+EA')+stat('G-A',s.goals+'-'+s.assists,'EA files')+stat('SOG / GM',per(s.shots),s.shots+' total')+stat('ATT / GM',per(s.att),s.att+' total')+stat('SH%',s.shPct==null?'—':s.shPct.toFixed(1),'goals / SOG')+stat('ON NET%',s.onNet==null?'—':s.onNet.toFixed(1),'SOG / attempts')+stat('HITS / GM',per(s.hits),'EA files')+stat('TA / GA',s.ta+' / '+s.ga,'EA files')+stat('POSS / GM',Math.round(s.pos/s.gp)+'s','EA files');
+    const rows=L.slice(0,15).map(({g,x})=>{
+      const rc=g.reconciliation||{},d=new Date(rc.lg_game_at||g.played_at),res=(g.result||'')+(rc.restart_parts?' (restart '+rc.restart_part+'/'+rc.restart_parts+')':'');
+      const lg=g.lg_game_id?'<a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid='+encodeURIComponent(g.lg_game_id)+'" target="_blank" rel="noopener noreferrer">'+esc(d.toLocaleDateString([],{month:'short',day:'numeric'}))+'</a>':esc(d.toLocaleDateString());
+      return G
+        ?'<tr><td>'+lg+'</td><td>'+esc(rc.other_team||'—')+'</td><td>'+esc(res)+'</td><td>'+esc(x.glsaves??'—')+'</td><td>'+esc(x.glshots??'—')+'</td><td>'+esc(x.glsavepct??'—')+'</td><td>'+esc(x.glga??'—')+'</td></tr>'
+        :'<tr><td>'+lg+'</td><td>'+esc(rc.other_team||'—')+'</td><td>'+esc(res)+'</td><td>'+esc(POSNAME[x.position]||x.position||'—')+'</td><td>'+esc(x.skgoals??0)+'</td><td>'+esc(x.skassists??0)+'</td><td>'+esc(x.skshots??0)+'</td><td>'+esc(x.skshotattempts??0)+'</td><td>'+esc(x.skhits??0)+'</td><td>'+esc(x.sktakeaways??0)+'</td><td>'+esc(x.skgiveaways??0)+'</td><td>'+esc(x.skpasspct??'—')+'</td></tr>';
+    }).join('');
+    box.innerHTML='<div class="hs-stat-grid hs-log-kpis">'+head+'</div><div class="hs-log-wrap"><table class="hs-history hs-gamelog"><thead><tr>'+(G?'<th>Game</th><th>Vs</th><th>Result</th><th>SV</th><th>SA</th><th>SV%</th><th>GA</th>':'<th>Game</th><th>Vs</th><th>Result</th><th>Pos</th><th>G</th><th>A</th><th>SOG</th><th>ATT</th><th>Hits</th><th>TA</th><th>GA</th><th>Pass%</th>')+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+(L.length>15?'<p class="hs-log-note">Showing the latest 15 of '+L.length+' verified games.</p>':'');
   }
   function reportMentions(p){
     const key=String(p.name||'').toLowerCase(),out=[];
@@ -166,7 +199,7 @@
       (p.position==='G'?stat('LG SV%',fmt(lg.goalie_save_pct,3),'league')+stat('LG GAA',fmt(lg.goalie_gaa,2),'league')+stat('EA SV%',fmt(ea.goalie_save_pct,3),'club'):
       stat('EA SHOTS',ea.shots,'club')+stat('EA ATT',raw.skshotattempts??'—','club')+stat('PASS%',fmt(ea.passing_pct??raw.skpasspct,1),'club'))+
       stat('HITS',lg.hits,'league')+stat('TA',lg.takeaways,'league')+stat('GA',lg.giveaways,'league');
-    renderHeat(p);renderHistory(p);
+    renderHeat(p);renderGameLog(p);renderHistory(p);
     E('hsAutoScout').innerHTML=autoPlayerScout(p).map(x=>'<div class="hs-scout-item"><b>'+esc(x[0])+'</b><p>'+esc(x[1])+'</p></div>').join('');
     const mentions=reportMentions(p);E('hsReportMentions').innerHTML=mentions.length?'<div class="eyebrow">EXISTING REPORT MENTIONS</div>'+mentions.map(m=>'<div class="hs-mention"><b>'+esc(new Date(m.date).toLocaleDateString())+'</b> · '+esc(m.text)+'</div>').join(''):'';
     fillScout(p);renderPlayers();
@@ -191,7 +224,7 @@
         DB().from('hitmen_opponent_player_stats').select('*').eq('team_id',TEAM).eq('season',SEASON).eq('opponent_name',opponent),
         DB().from('hitmen_opponent_player_shot_history').select('*').eq('team_id',TEAM).eq('season',SEASON).eq('opponent_name',opponent).order('captured_at',{ascending:true}),
         DB().from('hitmen_opponent_lg_games').select('*').eq('team_id',TEAM).eq('season',SEASON).eq('opponent_name',opponent).order('played_at',{ascending:true}),
-        DB().from('hitmen_opponent_ea_games').select('source_game_id,lg_game_id,played_at,verified_official').eq('team_id',TEAM).eq('season',SEASON).eq('opponent_name',opponent).eq('verified_official',true),
+        DB().from('hitmen_opponent_ea_games').select('source_game_id,lg_game_id,played_at,verified_official,result,goals_for,goals_against,player_stats,reconciliation:raw_payload->reconciliation').eq('team_id',TEAM).eq('season',SEASON).eq('opponent_name',opponent).eq('verified_official',true),
         DB().from('hitmen_opponent_pregame_reports').select('id,created_at,report,evidence_summary').eq('team_id',TEAM).eq('season',SEASON).eq('opponent_name',opponent).order('created_at',{ascending:false}).limit(12),
         DB().from('hitmen_opponent_player_scout_reports').select('*').eq('team_id',TEAM).eq('season',SEASON).eq('opponent_name',opponent)
       ]);
