@@ -37,8 +37,16 @@
     const lead = gp >= 5 && ppg >= 2 ? 'A two-point-per-game pace is taking shape.' :
       gp >= 5 && ppg >= 1.5 ? 'A productive stretch of the season so far.' :
       'Here is the Season 55 scoring picture.';
-    return lead + ' ' + tag + ' has ' + points + ' points (' + goals + ' goals, ' + assists +
+    const base = lead + ' ' + tag + ' has ' + points + ' points (' + goals + ' goals, ' + assists +
       ' assists) through ' + gp + ' games, averaging ' + ppg.toFixed(2) + ' points per game.' + board;
+    const h = window.WMLgPlayerBadges?.history(p);
+    if (!h || gp < 10) return base;
+    const previous = numeric(h.prev_ppg) && numeric(h.prev_gp) && Number(h.prev_gp) >= 10
+      ? ' Last season: ' + Number(h.prev_ppg).toFixed(2) + ' points per game in ' + h.prev_gp + ' LGCHL games.' : '';
+    const career = numeric(h.career_best_ppg) && ppg >= Number(h.career_best_ppg) + .20
+      ? ' This year\'s current pace is above his or her previous LGCHL high of ' + Number(h.career_best_ppg).toFixed(2) +
+        ' points per game. The season is still in progress.' : '';
+    return base + previous + career;
   }
   function stat(label, value) {
     return '<div class="lg-profile-stat"><small>' + esc(label) + '</small><b>' + esc(String(value)) + '</b></div>';
@@ -64,6 +72,7 @@
     const name = esc(String(p.gamertag));
     const team = esc(String(p.team_name || 'Team unavailable'));
     const position = esc(String(p.position || (isGoalie ? 'G' : 'Position unavailable')));
+    const earned = window.WMLgPlayerBadges?.chips(p,true) || '';
     const badge = Number.isInteger(rank) && rank > 0
       ? '<span class="lg-profile-rank">No. ' + rank + ' · ' + esc(metrics[metric]) + '</span>'
       : '';
@@ -71,7 +80,7 @@
       '<div class="lg-profile-hero">' +
         '<div class="lg-profile-logo"><img src="' + logo(p.lg_team_id) + '" alt="' + team + ' logo" onerror="this.onerror=null;this.src=\'assets/wildman/home/lgchl-logo.webp\'"></div>' +
         '<div class="lg-profile-identity"><small>ELITECHEL MEDIA · LGCHL SEASON 55</small><h2 id="lgProfileTitle">' + name + '</h2>' +
-        '<p>' + team + ' · ' + position + '</p>' + badge + '</div>' +
+        '<p>' + team + ' · ' + position + '</p>' + badge + (earned ? '<div class="lg-player-badges">' + earned + '</div>' : '') + '</div>' +
       '</div>' +
       '<div class="lg-profile-stat-grid">' + stats + '</div>' +
       '<section class="lg-profile-story" aria-labelledby="lgProfileStoryTitle"><small>THE SEASON STORY</small>' +
@@ -79,9 +88,18 @@
       '</section>' +
       '<p class="lg-profile-source">Verified imported season totals · Updated ' + esc(stamp(p.fetched_at)) +
       '. Previous-season comparisons and last-five game lines will only be shown after their public source data is verified.</p>';
-    if (dialog.open) dialog.close();
-    if (typeof dialog.showModal === 'function') dialog.showModal();
-    else dialog.setAttribute('open', '');
+    if (!dialog.open) {
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+      else dialog.setAttribute('open', '');
+    }
+    if (!context.enriched && numeric(p.lg_user_id) && window.WMLgPlayerBadges) {
+      const active = p.gamertag + '|' + p.lg_user_id;
+      dialog.dataset.activePlayer = active;
+      window.WMLgPlayerBadges.load([p],D.read).then(ok => {
+        if (ok && dialog.open && dialog.dataset.activePlayer === active)
+          open(p,{...context,enriched:true});
+      });
+    }
   }
   document.addEventListener('click', e => {
     const button = e.target.closest('[data-lg-profile]');
