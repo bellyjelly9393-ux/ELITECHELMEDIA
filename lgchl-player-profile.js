@@ -40,11 +40,11 @@
     const base = lead + ' ' + tag + ' has ' + points + ' points (' + goals + ' goals, ' + assists +
       ' assists) through ' + gp + ' games, averaging ' + ppg.toFixed(2) + ' points per game.' + board;
     const h = window.WMLgPlayerBadges?.history(p);
-    if (!h || gp < 10) return base;
+    if (!h || gp < 6) return base;
     const previous = numeric(h.prev_ppg) && numeric(h.prev_gp) && Number(h.prev_gp) >= 10
       ? ' Last season: ' + Number(h.prev_ppg).toFixed(2) + ' points per game in ' + h.prev_gp + ' LGCHL games.' : '';
-    const career = numeric(h.career_best_ppg) && ppg >= Number(h.career_best_ppg) + .20
-      ? ' This year\'s current pace is above his or her previous LGCHL high of ' + Number(h.career_best_ppg).toFixed(2) +
+    const career = numeric(h.career_best_ppg) && ppg >= Number(h.career_best_ppg) + .30
+      ? ' This year\'s current pace is above their previous LGCHL high of ' + Number(h.career_best_ppg).toFixed(2) +
         ' points per game. The season is still in progress.' : '';
     return base + previous + career;
   }
@@ -87,7 +87,7 @@
         '<h3 id="lgProfileStoryTitle">Season 55 at a glance</h3><p>' + esc(story(p, metric, rank)) + '</p>' +
       '</section>' +
       '<p class="lg-profile-source">Verified imported season totals · Updated ' + esc(stamp(p.fetched_at)) +
-      '. Previous-season comparisons and last-five game lines will only be shown after their public source data is verified.</p>';
+      '. Historical comparisons appear only with verified source records; last-five game lines remain unavailable until the complete public game feed is ready.</p>';
     if (!dialog.open) {
       if (typeof dialog.showModal === 'function') dialog.showModal();
       else dialog.setAttribute('open', '');
