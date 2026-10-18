@@ -87,5 +87,5 @@
       return false;
     }
   }
-  window.WMLgPlayerBadges=Object.freeze({earned,chips,legend,refresh,load});
+  window.WMLgPlayerBadges=Object.freeze({earned,chips,legend,refresh,load,history:p=>records.get(id(p))||null});
 })();
