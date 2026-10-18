@@ -1,0 +1,15 @@
+/* Home-only LGCHL Live Hub dropdown, aligns with the existing homepage navigation. */
+.top .nav .home-live-menu{position:relative;display:flex;align-items:stretch;font-family:var(--f-ui);font-weight:600;color:var(--bone)}
+.top .nav .home-live-menu summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:7px;padding:3px 14px 0;text-transform:uppercase;font-size:20px;letter-spacing:.08em;line-height:1;white-space:nowrap}
+.top .nav .home-live-menu summary::-webkit-details-marker{display:none}
+.top .nav .home-live-menu summary span{font-size:14px;color:var(--gold)}
+.top .nav .home-live-menu[open] summary,.top .nav .home-live-menu summary:hover{color:var(--gold-hi)}
+.top .nav .home-live-panel{position:absolute;top:100%;left:0;z-index:150;min-width:240px;padding:10px;border:1px solid rgba(227,181,74,.32);background:#0b0c10;box-shadow:0 16px 40px rgba(0,0,0,.7);border-radius:4px}
+.top .nav .home-live-panel a{height:auto;display:block;padding:12px;color:#f1f0ec;font-size:18px;white-space:nowrap;text-transform:none}
+.top .nav .home-live-panel a:hover{color:var(--gold-hi);background:rgba(227,181,74,.09)}
+@media(max-width:900px){
+  .top .nav .home-live-menu{display:block;width:100%}
+  .top .nav .home-live-menu summary{min-height:48px;padding:10px 14px;font-size:24px;justify-content:space-between}
+  .top .nav .home-live-panel{position:static;width:100%;min-width:0;box-shadow:none;background:rgba(227,181,74,.04);border:0;border-left:2px solid var(--gold);border-radius:0}
+  .top .nav .home-live-panel a{font-size:20px;padding:12px 15px}
+}

@@ -5,7 +5,19 @@
   'use strict';
   const API='https://lrgllzvwgvqagcpiyvfd.supabase.co';
   const KEY='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
-  const LIMIT=8, STORE='wildman.multiview.v2';
+  const LIMIT=8;
+  const params=new URLSearchParams(location.search);
+  const HUB=params.get('hub')==='1';
+  const LEAGUE=['lgchl','lg3s'].includes(params.get('league'))?params.get('league'):'all';
+  const STORE=HUB?'elitechel.livehub.multiview.'+LEAGUE+'.v1':'wildman.multiview.v2';
+  if(HUB){document.body.classList.add('lh-mv-mode');document.querySelector('#mvColumns option[value="4"]')?.remove();}
+  function publicLeague(s){
+    const m=s.metadata||{};
+    const tag=[m.league,m.league_key,m.competition,m.category,m.title,s.display_label].filter(Boolean).join(' ').toLowerCase();
+    if(/\blg\s*3s\b|\blg\s*threes\b|leaguegaming\s*3s/.test(tag))return 'lg3s';
+    if(/\blgchl\b|\bcalgary hitmen\b/.test(tag))return 'lgchl';
+    return '';
+  }
   const $=id=>document.getElementById(id);
   const db=window.supabase && window.supabase.createClient(API,KEY);
   const S={channels:new Map(),selected:[],manual:[],muted:{},focused:'',auto:true,updated:0,loading:false,request:0};
@@ -50,7 +62,7 @@
     } catch(_){}
     const u=new URL(location.href),ids=S.selected.filter(x=>!x.startsWith('manual:'));
     if(ids.length)u.searchParams.set('streams',ids.join(','));else u.searchParams.delete('streams');
-    u.searchParams.delete('games'); history.replaceState(null,'',u);
+    u.searchParams.delete('games'); u.searchParams.delete('add'); history.replaceState(null,'',u);
   }
   function fromQuery(){
     const q=new URLSearchParams(location.search);
@@ -67,7 +79,7 @@
   function active(key){return all().find(x=>x.key===key);}
   function statusLine(){
     const n=all().filter(x=>x.status==='live').length;
-    $('multiviewStatus').textContent=S.selected.length+'/'+LIMIT+' SELECTED · '+n+' LIVE LISTED';
+    $('multiviewStatus').textContent=HUB?(S.selected.length+'/'+LIMIT+' SELECTED · '+all().filter(x=>x.status==='listed').length+' PUBLIC CHANNEL'+(all().filter(x=>x.status==='listed').length===1?'':'S')+' LISTED'):(S.selected.length+'/'+LIMIT+' SELECTED · '+n+' LIVE LISTED');
     const stamp=$('liveRefreshStamp');
     if(stamp&&S.updated)stamp.textContent='Updated '+new Date(S.updated).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
   }
@@ -75,7 +87,7 @@
     const root=$('multiviewPicker');
     root.textContent='';
     const rows=all();
-    if(!rows.length){root.textContent='No assigned live broadcasts. Add a Twitch or YouTube channel below.';return;}
+    if(!rows.length){root.textContent=HUB?'No registered public league broadcasts yet. Add a Twitch or YouTube channel below.':'No assigned live broadcasts. Add a Twitch or YouTube channel below.';return;}
     rows.forEach(x=>{
       const item=document.createElement('label');item.className='multi-pick';
       const input=document.createElement('input');input.type='checkbox';input.checked=S.selected.includes(x.key);
@@ -100,6 +112,7 @@
   }
   function note(message){const el=$('multiviewNotice');if(el)el.textContent=message;}
   function iframeSrc(row,key){
+    if(HUB&&row.provider==='stage'&&row.key==='hub:hitman')return new URL('public-broadcast-stage.html?channel=hitmen-main',location.href).toString();
     const v=stream(row.url);if(!v)return '';
     const mute=S.muted[key]!==false;
     if(v.provider==='twitch'){
@@ -198,20 +211,25 @@
     try{
       const [sources,games,teams]=await Promise.all([
         db.from('tournament_automation_sources').select('id,provider,url,display_label,active,public_visible,metadata').eq('active',true).eq('public_visible',true),
-        db.from('esports_games').select('id,event_id,home_team_id,away_team_id,scheduled_at,status,stream_url,stream_provider,home_score,away_score').in('status',['live','scheduled']).not('stream_url','is',null).limit(200),
-        db.from('esports_teams').select('id,name').limit(150)
+        HUB?Promise.resolve({data:[],error:null}):db.from('esports_games').select('id,event_id,home_team_id,away_team_id,scheduled_at,status,stream_url,stream_provider,home_score,away_score').in('status',['live','scheduled']).not('stream_url','is',null).limit(200),
+        HUB?Promise.resolve({data:[],error:null}):db.from('esports_teams').select('id,name').limit(150)
       ]);
       if(sources.error||games.error||teams.error)throw(sources.error||games.error||teams.error);
       const teamNames=new Map((teams.data||[]).map(t=>[t.id,t.name]));
       (sources.data||[]).forEach(s=>{
+        if(HUB&&(!publicLeague(s)||(LEAGUE!=='all'&&publicLeague(s)!==LEAGUE)))return;
         const p=stream(s.url);if(!p)return;
-        S.channels.set('source:'+s.id,{key:'source:'+s.id,title:s.display_label||s.metadata?.title||'Live channel',url:p.url,provider:p.provider,status:'live',meta:'Network feed'});
+        S.channels.set('source:'+s.id,{key:'source:'+s.id,title:s.display_label||s.metadata?.title||'Public channel',url:p.url,provider:p.provider,status:HUB?'listed':'live',meta:HUB?'Public stream · status unverified':'Network feed'});
       });
       (games.data||[]).forEach(g=>{
+        if(HUB)return;
         const p=stream(g.stream_url);if(!p)return;
         const key='game:'+g.id,title=(teamNames.get(g.home_team_id)||'TBD')+' vs '+(teamNames.get(g.away_team_id)||'TBD');
         S.channels.set(key,{key,title,url:p.url,provider:p.provider,status:g.status||'scheduled',meta:g.status==='live'?'GAME LIVE '+(g.home_score??'')+'-'+(g.away_score??''):'Scheduled game'});
       });
+      if(HUB&&LEAGUE!=='lg3s'){
+        S.channels.set('hub:hitman',{key:'hub:hitman',title:'Hitman Live · Broadcast Stage',url:'public-broadcast-stage.html?channel=hitmen-main',provider:'stage',status:'listed',meta:'Official public broadcast · studio feed'});
+      }
       if(first&&!S.selected.length&&S.auto){
         S.selected=all().filter(x=>x.status==='live'&&!x.key.startsWith('manual:')).slice(0,4).map(x=>x.key);
       }
@@ -219,7 +237,21 @@
     }catch(e){console.error('Multiview refresh error',e);note('Live feed list could not refresh. Already-open players remain running. Retry below.');}
     finally{S.loading=false;}
   }
-  readStore();fromQuery();
+  function addPublicLink(){
+    const raw=new URLSearchParams(location.search).get('add');
+    if(!raw)return;
+    const parsed=stream(raw);
+    if(!parsed){note('That public stream link is not supported. Paste a Twitch or YouTube URL instead.');return;}
+    const key='manual:'+parsed.provider+':'+parsed.id;
+    if(!S.manual.some(x=>x.key===key))S.manual.push({key,url:parsed.url,provider:parsed.provider,title:parsed.id});
+    if(!S.selected.includes(key)){
+      if(S.selected.length>=LIMIT){note('Channel saved locally. Remove one feed to add it to the eight-player grid.');}
+      else S.selected.push(key);
+    }
+    S.auto=false;
+    save();
+  }
+  readStore();fromQuery();addPublicLink();
   $('mvAddStream')?.addEventListener('click',addManual);
   $('mvStreamUrl')?.addEventListener('keydown',e=>{if(e.key==='Enter')addManual();});
   $('mvColumns')?.addEventListener('change',()=>renderGrid());
