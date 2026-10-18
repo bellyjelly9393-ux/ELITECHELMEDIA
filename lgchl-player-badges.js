@@ -11,12 +11,13 @@
   const n = x => numeric(x) ? Number(x) : null;
   const id = p => p && numeric(p.lg_user_id) && Number(p.lg_user_id) > 0
     ? String(p.lg_user_id) + '|' + (p.player_kind || 'skater') : null;
+  const svg = body => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + body + '</svg>';
   const defs = Object.freeze([
-    {key:'hot',icon:'🔥',label:'Hot Start',detail:'5–20 GP and at least 2.00 points per game in the current LGCHL season.'},
-    {key:'career',icon:'🏆',label:'Career-Year Watch',detail:'6+ GP in S55; season points-per-game pace at least 0.30 above their best previous 10+ GP LGCHL season.'},
-    {key:'rise',icon:'📈',label:'On the Rise',detail:'6+ GP in S55 and 10+ GP in S54; scoring rate improved by at least 0.50 points/game from Season 54.'},
-    {key:'streak',icon:'⚡',label:'Point Streak',detail:'Three or more consecutive appearances with a point, once complete verified game logs are available.'},
-    {key:'wall',icon:'🧱',label:'Brick Wall',detail:'Goalie with at least 8 GP and an 85.0% or better save percentage.'}
+    {key:'hot',icon:svg('<path d="M8.5 14.5A7 7 0 0 1 10 6c.4 2.5 1.5 4 3 5 .5-3 1-4.5 3-7 1.3 3 3 5.5 3 9a7 7 0 1 1-11.5 1.5Z"/>'),label:'Hot Start',detail:'5–20 GP and at least 2.00 points per game in the current LGCHL season.'},
+    {key:'career',icon:svg('<path d="M8 21h8M12 17v4M7 4h10v6a5 5 0 0 1-10 0V4ZM7 6H4v2a4 4 0 0 0 4 4M17 6h3v2a4 4 0 0 1-4 4"/>'),label:'Career-Year Watch',detail:'6+ GP in S55; season points-per-game pace at least 0.30 above their best previous 10+ GP LGCHL season.'},
+    {key:'rise',icon:svg('<path d="m3 17 6-6 4 4 7-8M14 7h6v6"/>'),label:'On the Rise',detail:'6+ GP in S55 and 10+ GP in S54; scoring rate improved by at least 0.50 points/game from Season 54.'},
+    {key:'streak',icon:svg('<path d="m13 2-9 12h7l-1 8 10-12h-7l0-8"/>'),label:'Point Streak',detail:'Three or more consecutive appearances with a point, once complete verified game logs are available.'},
+    {key:'wall',icon:svg('<path d="M3 4h18v16H3zM3 10h18M3 16h18M9 4v6M15 10v6M9 16v4"/>'),label:'Brick Wall',detail:'Goalie with at least 8 GP and an 85.0% or better save percentage.'}
   ]);
   function earned(p) {
     if (!p) return [];
