@@ -209,8 +209,8 @@
     try{
       const [sources,games,teams]=await Promise.all([
         db.from('tournament_automation_sources').select('id,provider,url,display_label,active,public_visible,metadata').eq('active',true).eq('public_visible',true),
-        db.from('esports_games').select('id,event_id,home_team_id,away_team_id,scheduled_at,status,stream_url,stream_provider,home_score,away_score').in('status',['live','scheduled']).not('stream_url','is',null).limit(200),
-        db.from('esports_teams').select('id,name').limit(150)
+        HUB?Promise.resolve({data:[],error:null}):db.from('esports_games').select('id,event_id,home_team_id,away_team_id,scheduled_at,status,stream_url,stream_provider,home_score,away_score').in('status',['live','scheduled']).not('stream_url','is',null).limit(200),
+        HUB?Promise.resolve({data:[],error:null}):db.from('esports_teams').select('id,name').limit(150)
       ]);
       if(sources.error||games.error||teams.error)throw(sources.error||games.error||teams.error);
       const teamNames=new Map((teams.data||[]).map(t=>[t.id,t.name]));
