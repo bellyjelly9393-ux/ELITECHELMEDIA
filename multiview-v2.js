@@ -5,7 +5,18 @@
   'use strict';
   const API='https://lrgllzvwgvqagcpiyvfd.supabase.co';
   const KEY='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
-  const LIMIT=8, STORE='wildman.multiview.v2';
+  const LIMIT=8;
+  const params=new URLSearchParams(location.search);
+  const HUB=params.get('hub')==='1';
+  const LEAGUE=['lgchl','lg3s'].includes(params.get('league'))?params.get('league'):'all';
+  const STORE=HUB?'elitechel.livehub.multiview.'+LEAGUE+'.v1':'wildman.multiview.v2';
+  function publicLeague(s){
+    const m=s.metadata||{};
+    const tag=[m.league,m.league_key,m.competition,m.category,m.title,s.display_label].filter(Boolean).join(' ').toLowerCase();
+    if(/\blg\s*3s\b|\blg\s*threes\b|leaguegaming\s*3s/.test(tag))return 'lg3s';
+    if(/\blgchl\b|\bcalgary hitmen\b/.test(tag))return 'lgchl';
+    return '';
+  }
   const $=id=>document.getElementById(id);
   const db=window.supabase && window.supabase.createClient(API,KEY);
   const S={channels:new Map(),selected:[],manual:[],muted:{},focused:'',auto:true,updated:0,loading:false,request:0};
@@ -67,7 +78,7 @@
   function active(key){return all().find(x=>x.key===key);}
   function statusLine(){
     const n=all().filter(x=>x.status==='live').length;
-    $('multiviewStatus').textContent=S.selected.length+'/'+LIMIT+' SELECTED · '+n+' LIVE LISTED';
+    $('multiviewStatus').textContent=HUB?(S.selected.length+'/'+LIMIT+' SELECTED · '+all().filter(x=>x.status==='listed').length+' PUBLIC CHANNELS LISTED'):(S.selected.length+'/'+LIMIT+' SELECTED · '+n+' LIVE LISTED');
     const stamp=$('liveRefreshStamp');
     if(stamp&&S.updated)stamp.textContent='Updated '+new Date(S.updated).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
   }
@@ -204,10 +215,12 @@
       if(sources.error||games.error||teams.error)throw(sources.error||games.error||teams.error);
       const teamNames=new Map((teams.data||[]).map(t=>[t.id,t.name]));
       (sources.data||[]).forEach(s=>{
+        if(HUB&&(!publicLeague(s)||(LEAGUE!=='all'&&publicLeague(s)!==LEAGUE)))return;
         const p=stream(s.url);if(!p)return;
-        S.channels.set('source:'+s.id,{key:'source:'+s.id,title:s.display_label||s.metadata?.title||'Live channel',url:p.url,provider:p.provider,status:'live',meta:'Network feed'});
+        S.channels.set('source:'+s.id,{key:'source:'+s.id,title:s.display_label||s.metadata?.title||'Public channel',url:p.url,provider:p.provider,status:HUB?'listed':'live',meta:HUB?'Public stream · status unverified':'Network feed'});
       });
       (games.data||[]).forEach(g=>{
+        if(HUB)return;
         const p=stream(g.stream_url);if(!p)return;
         const key='game:'+g.id,title=(teamNames.get(g.home_team_id)||'TBD')+' vs '+(teamNames.get(g.away_team_id)||'TBD');
         S.channels.set(key,{key,title,url:p.url,provider:p.provider,status:g.status||'scheduled',meta:g.status==='live'?'GAME LIVE '+(g.home_score??'')+'-'+(g.away_score??''):'Scheduled game'});
