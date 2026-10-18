@@ -166,7 +166,10 @@ export function parsePublicLog(raw: string) {
   }
   const mapped = players.slice(0, 40).map(p => {
     const s = p.raw;
-    const shotsAgainst = int(s.sa), goalsAgainst = int(s.ga);
+    // In the LG Public Log, a goalie's "sa" field is saves (LG's "Sv" column), not shots against;
+    // shots against is saves + goals against (LG's "S" column). e.g. game 917493: sa 13, ga 4 → 13 saves on 17.
+    const saves = int(s.sa), goalsAgainst = int(s.ga);
+    const shotsAgainst = saves != null && goalsAgainst != null ? saves + goalsAgainst : null;
     return {
       gamertag: p.gamertag, raw: s,
       goals: int(s.goals), assists: int(s.assists), points: int(s.points), plus_minus: int(s.plusminus),
@@ -175,7 +178,7 @@ export function parsePublicLog(raw: string) {
       faceoff_wins: int(s.fow), faceoff_losses: int(s.fol), pass_attempts: int(s.pass_att), pass_completions: int(s.pass_com),
       ppg: int(s.ppg), shg: int(s.shg), gwg: int(s.gwg),
       shots_against: shotsAgainst, goals_against: goalsAgainst,
-      saves: shotsAgainst != null && goalsAgainst != null ? shotsAgainst - goalsAgainst : null,
+      saves,
     };
   });
   const periodLines = periodStart > 0 ? lines.slice(periodStart + 1, periodStart + 200) : [];
