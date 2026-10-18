@@ -122,6 +122,8 @@ export function composeRecap(g, ctx) {
     .filter((c) => c.s > 0).sort((a, b) => (b.s - a.s) || a.p.gamertag.localeCompare(b.p.gamertag)).slice(0, 3);
   const stars = cand.map((c) => ({ player: c.p.gamertag, team: T[c.p.lg_team_id].abbr, line: c.line }));
 
+  // Optional evidence (EA match data + approved film review) from evidence.mjs; absent => unchanged output.
+  const ev = ctx.evidence && Array.isArray(ctx.evidence.sections) ? ctx.evidence : null;
   const source = 'LeagueGaming Game ' + g.lg_game_id + ' public box score (official final ' + dash(Math.max(cs, os), Math.min(cs, os)) + ' ' + (win ? 'Calgary' : oNick) + (ot ? ', F/' + g.status : '') + ').';
   const body = [
     lede,
@@ -129,9 +131,10 @@ export function composeRecap(g, ctx) {
     '## By the numbers\n' + numbers,
     "## Calgary's scorers\n" + calgarySection,
     '## ' + oNick + "'s scorers\n" + oppSection,
+    ...(ev ? ev.sections : []),
     '## The number: ' + number + '\n' + numberText,
     recLine,
-    'Source: ' + source,
+    'Source: ' + source + (ev && ev.sourceNote ? ' ' + ev.sourceNote : ''),
   ].filter(Boolean).join('\n\n') + '\n\nThree stars\n' + stars.map((s, i) => (i + 1) + '. ' + s.player + ' (' + s.team + '): ' + s.line).join('\n');
 
   const dek = (win ? 'Calgary beat ' + oNick + ' ' + dash(cs, os) : oNick + ' beat Calgary ' + dash(os, cs)) + (ot ? ' in ' + otWord : '') + '; ' +
@@ -151,6 +154,7 @@ export function composeRecap(g, ctx) {
     model: 'hitmen-recap-autowriter · deterministic from LG box score', calgary_score: cs, opponent_score: os,
     vod_available: false, schedule_game_id: ctx.schedule_game_id || null, source_url: ctx.source_url, auto: true,
   };
+  if (ev && ev.metrics) Object.assign(metrics, ev.metrics);
   for (const k of Object.keys(metrics.key_stats)) if (metrics.key_stats[k] === undefined) delete metrics.key_stats[k];
   return { title: title.slice(0, 160), body, metrics };
 }

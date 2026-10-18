@@ -8,10 +8,42 @@
 import { createClient } from '@supabase/supabase-js';
 import { parseLgGamePage } from './parse.mjs';
 import { composeRecap } from './compose.mjs';
+import { buildEvidence } from './evidence.mjs';
 
 const UA = 'Wildman-Hockey-Esports/1.0 (Hitmen recap writer; one request at a time)';
 const PAUSE_MS = 1500;
 const CALGARY = 412;
+const HITMEN_TEAM = 'b0bcbdda-da9d-419d-8f61-b34937966d49';
+
+// Best-effort evidence lookup. Any failure returns null so the LG-only recap still publishes.
+async function loadEvidence(db: any, g: any, teams: any) {
+  try {
+    const O = g.away_lg_team_id === CALGARY ? g.home_lg_team_id : g.away_lg_team_id;
+    const oName = String(teams[O]?.name || ''), nick = String(teams[O]?.nickname || '');
+    const oCity = nick && oName.endsWith(' ' + nick) ? oName.slice(0, -nick.length - 1) : oName;
+    const home = g.home_lg_team_id === CALGARY;
+    const final = { cs: Number(home ? g.home_score : g.away_score), os: Number(home ? g.away_score : g.home_score) };
+    const { data: eaRows } = await db.from('hitmen_opponent_ea_games')
+      .select('source_game_id,played_at,verified_official,raw_payload').eq('lg_game_id', g.lg_game_id).or('verified_official.is.null,verified_official.eq.true');
+    // Dedupe: the same EA match is stored once per club perspective.
+    const seen = new Set(); const ea = (eaRows || []).filter((r: any) => !seen.has(r.source_game_id) && seen.add(r.source_game_id))
+      .sort((a: any, b: any) => String(a.played_at).localeCompare(String(b.played_at)));
+    // VOD: published review linked by schedule game, else same opponent within 4h of puck drop.
+    const t = new Date(g.game_at).getTime();
+    const { data: sess } = await db.from('vod_review_sessions').select('id,schedule_game_id,opponent_label,title,game_date')
+      .eq('team_id', HITMEN_TEAM).gte('game_date', new Date(t - 4 * 3600e3).toISOString()).lte('game_date', new Date(t + 4 * 3600e3).toISOString());
+    const low = (s: string) => String(s || '').toLowerCase();
+    const cands = (sess || []).filter((s: any) => (g.schedule_game_id && s.schedule_game_id === g.schedule_game_id) ||
+      (oCity && (low(s.opponent_label).includes(low(oCity)) || low(s.title).includes(low(oCity)))));
+    let vod = null;
+    if (cands.length) {
+      const { data: pubs } = await db.from('vod_game_publications').select('review_id,report').eq('active', true).in('review_id', cands.map((c: any) => c.id));
+      const linked = cands.filter((c: any) => (pubs || []).some((p: any) => p.review_id === c.id));
+      if (linked.length === 1) vod = { id: linked[0].id, report: (pubs || []).find((p: any) => p.review_id === linked[0].id).report };
+    }
+    return buildEvidence({ eaRows: ea, vod, final, oNick: oCity, lgGameId: Number(g.lg_game_id) });
+  } catch (_) { return null; }
+}
 const json = (data: unknown, status = 200) => new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 class Blocked extends Error {}
@@ -52,7 +84,8 @@ Deno.serve(async (req) => {
       if (!dryRun && g.has_recap) { results.push({ lg_game_id: g.lg_game_id, skipped: 'recap already exists' }); continue; }
       const html = await getHtml(g.source_url);
       const parsed = parseLgGamePage(html, { lg_game_id: Number(g.lg_game_id), status: g.status, away_lg_team_id: g.away_lg_team_id, home_lg_team_id: g.home_lg_team_id, away_score: g.away_score, home_score: g.home_score });
-      const recap = composeRecap(parsed, { calgaryId: CALGARY, teams, game_at: g.game_at, week: g.week, game_no: g.game_no, schedule_game_id: g.schedule_game_id, source_url: g.source_url });
+      const evidence = body.evidence === false ? null : await loadEvidence(db, g, teams);
+      const recap = composeRecap(parsed, { evidence, calgaryId: CALGARY, teams, game_at: g.game_at, week: g.week, game_no: g.game_no, schedule_game_id: g.schedule_game_id, source_url: g.source_url });
       if (dryRun) { results.push({ lg_game_id: g.lg_game_id, dryRun: true, has_recap: g.has_recap, title: recap.title, body: recap.body, metrics: recap.metrics }); continue; }
       const { data: id, error: pe } = await db.rpc('hitmen_publish_verified_recap', { p_lg_game_id: Number(g.lg_game_id), p_title: recap.title, p_body: recap.body, p_metrics: recap.metrics });
       if (pe) throw new Error(pe.message);
