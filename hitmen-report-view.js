@@ -32,7 +32,29 @@ function showGate(title,msg){
  $('hrvContent').hidden=true;$('hrvGate').hidden=false;
  $('hrvGate').innerHTML='<h2>'+esc(title)+'</h2><p>'+esc(msg)+'</p>';
 }
-function inline(s){return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\[(E\d+)\]/g,'<span class="hrv-cite">[$1]</span>')}
+/* Player names in a report link to profiles: opponents to Deep Scout (heat map + shot analytics), ours to their stall. */
+let PLAYER_LINKS=null;
+const deepHref=(opp,n)=>'hitmen-opponent-scout.html?opponent='+encodeURIComponent(opp)+'&amp;player='+encodeURIComponent(n);
+const stallHref=n=>'hitmen-stall.html?player='+encodeURIComponent(n);
+function setPlayerLinks(report,mgmt){
+ const lu=report?.evidence_summary?.lineups||{},opp=report?.opponent_name||'',map=new Map();
+ Object.values(lu.opponent||{}).forEach(n=>{if(n)map.set(esc(n),deepHref(opp,n))});
+ // Stalls are private to each player, so only management gets links to our own players.
+ if(mgmt)Object.values(lu.calgary||{}).forEach(n=>{if(n&&!map.has(esc(n)))map.set(esc(n),stallHref(n))});
+ if(!map.size){PLAYER_LINKS=null;return}
+ const keys=[...map.keys()].sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
+ PLAYER_LINKS={map,re:new RegExp('(?<![A-Za-z0-9_])(?:'+keys.join('|')+')(?![A-Za-z0-9_])','g')};
+}
+const linkPlayers=h=>PLAYER_LINKS?h.replace(PLAYER_LINKS.re,m=>'<a class="hrv-player" href="'+PLAYER_LINKS.map.get(m)+'">'+m+'</a>'):h;
+function profilesHtml(report,mgmt){
+ const lu=report?.evidence_summary?.lineups;if(!lu||!lu.opponent)return'';
+ const opp=report.opponent_name||'',POS=['LW','C','RW','LD','RD','G'];
+ const row=(label,six,href,cta)=>'<div class="hrv-profiles-row"><span class="hrv-k">'+label+'</span><div class="hrv-profiles-grid">'+POS.filter(p=>six&&six[p]).map(p=>'<a class="hrv-profile" href="'+href(six[p])+'"><i>'+p+'</i><b>'+esc(six[p])+'</b><small>'+cta+' →</small></a>').join('')+'</div></div>';
+ return '<section class="hrv-profiles"><div class="hrv-heat-head"><div><span class="hrv-k">PLAYER PROFILES</span><h3>Tap a player</h3></div><span>TONIGHT\'S SIXES</span></div>'+
+  row('Their six · Deep Scout profile, heat map and shot analytics',lu.opponent,n=>deepHref(opp,n),'Deep Scout')+
+  (mgmt&&lu.calgary?row('Our six · player stall',lu.calgary,stallHref,'Stall'):'')+'</section>';
+}
+function inline(s){return linkPlayers(esc(s)).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\[(E\d+)\]/g,'<span class="hrv-cite">[$1]</span>')}
 function reportHtml(text){
  return String(text||'').split(/\r?\n/).map(line=>{
   const t=line.trim();if(!t)return'';
@@ -109,7 +131,9 @@ function renderReport(report,game,vods,v){
  if(!report){
   $('hrvReportBody').innerHTML='<div class="hrv-na"><b>REPORT NOT AVAILABLE</b>'+(v.mgmt?'No pregame report is attached to this game yet.':'The full scouting report has not been approved for player view yet.')+'</div>';
  }else{
-  $('hrvReportBody').innerHTML=reportHtml(report.report)+heatHtml(report.evidence_summary||{})+scoutHtml(report.evidence_summary||{});
+  setPlayerLinks(report,!!v?.mgmt);
+  $('hrvReportBody').innerHTML=profilesHtml(report,!!v?.mgmt)+reportHtml(report.report)+heatHtml(report.evidence_summary||{})+scoutHtml(report.evidence_summary||{});
+  PLAYER_LINKS=null;
  }
  vodSummary(vods,game,report);
  const qp=game?.id?'game='+encodeURIComponent(game.id):report?.id?'report='+encodeURIComponent(report.id)+'&opponent='+encodeURIComponent(report.opponent_name):'opponent='+encodeURIComponent(report?.opponent_name||game?.opponent_name||'');

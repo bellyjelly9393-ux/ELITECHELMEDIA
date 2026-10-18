@@ -197,8 +197,16 @@
       ]);
       const er=q.find(x=>x.error);if(er)throw er.error;
       [data.roster,data.stats,data.history,data.games,data.eaGames,data.reports,data.scouts]=q.map(x=>x.data||[]);
+      // Players see the same reports the War Room shows them: approved only. Drafts stay with management and scouts.
+      const staff=String(ST().profile?.role||'').toLowerCase()==='admin'||(ST().memberships||[]).some(m=>m.team_id===TEAM&&m.active!==false&&['owner','gm','agm','scout'].includes(String(m.role||'').toLowerCase()));
+      if(!staff)data.reports=data.reports.filter(r=>r.evidence_summary?.approved===true);
       makePlayers();renderKpis();renderTeam();renderPlayers();
-      const first=players.find(p=>p.current&&p.position!=='G')||players.find(p=>p.current)||players[0];if(first)selectPlayer(first.key);
+      // ?player=<gamertag> opens that player directly (links from pregame reports and Tonight's Six).
+      // LG shows capital I and lower-case l the same, so fall back to a folded match when it is unique.
+      const want=qs.get('player')||'',fold=v=>norm(String(v||'').replace(/[Il|]/g,'l'));
+      const asked=want?(players.find(p=>p.key===norm(want))||(f=>f.length===1?f[0]:null)(players.filter(p=>fold(p.name)===fold(want)))):null;
+      const first=asked||players.find(p=>p.current&&p.position!=='G')||players.find(p=>p.current)||players[0];if(first)selectPlayer(first.key);
+      if(asked)setTimeout(()=>E('hsPlayerDetail')?.scrollIntoView({behavior:'smooth',block:'start'}),200);
     }catch(e){console.error(e);E('hsScope').textContent='Could not load scouting data: '+(e.message||e)}
   }
   function bind(){
