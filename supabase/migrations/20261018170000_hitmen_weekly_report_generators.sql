@@ -1,7 +1,7 @@
--- Wildman Hockey / Calgary Hitmen Season 55
--- Weekly player and roster-group report generators; preserves manual reports and source game rows.
--- Deployed to the connected production Supabase project 2026-10-18.
--- REVIEW BEFORE REAPPLYING IN A DIFFERENT DATABASE.
+-- Wildman Hockey: Calgary Hitmen Season 55 weekly player and roster-group reports
+-- Source-controlled definitions of deployed private Supabase functions.
+-- Stats-only reports from unique game records; shared roster membership is NOT verified shift chemistry.
+-- Preserves manual pilot rows. Existing reports are not updated by the generator.
 
 BEGIN;
 
@@ -95,8 +95,10 @@ BEGIN
         CASE WHEN shots_faced>0 THEN round(saves::numeric*100/shots_faced,1)||'% combined save percentage. ' ELSE 'Save percentage unavailable. ' END
       ELSE
         'Week '||week||': '||games||' recorded games ('||
-        wins||'-'||losses||'-'||ot_losses||'). '||goals||' goals, '||
-        assists||' assists, '||points||' points, '||shots||' shots and '||
+        wins||'-'||losses||'-'||ot_losses||'). '||goals||CASE WHEN goals=1 THEN ' goal, ' ELSE ' goals, ' END||
+        assists||CASE WHEN assists=1 THEN ' assist, ' ELSE ' assists, ' END||
+        points||CASE WHEN points=1 THEN ' point, ' ELSE ' points, ' END||
+        shots||CASE WHEN shots=1 THEN ' shot and ' ELSE ' shots and ' END||
         CASE WHEN plus_minus>0 THEN '+' ELSE '' END||plus_minus||' recorded plus/minus. '
       END ||
       CASE WHEN partial_games>0 THEN
@@ -235,11 +237,9 @@ GRANT EXECUTE ON FUNCTION private.generate_hitmen_roster_group_weeklies(uuid,int
 
 COMMIT;
 
--- Production-only schedule (already installed, job ID 15 at initial install):
--- Daily 16:15 UTC; creates reports for recorded game-week groups at least 5 days old.
--- Backfilled 43 player-week rows and 12 roster-group rows after preserving the two pilot rows.
--- SELECT cron.schedule('hitmen-season55-weekly-development-v1','15 16 * * *',
--- $job$ SELECT private.generate_hitmen_player_weeklies('b0bcbdda-da9d-419d-8f61-b34937966d49'::uuid,55,999,false),
---              private.generate_hitmen_roster_group_weeklies('b0bcbdda-da9d-419d-8f61-b34937966d49'::uuid,55,999,false); $job$);
--- Rollback schedule only: SELECT cron.unschedule('hitmen-season55-weekly-development-v1');
--- Historical rows are never automatically deleted; manual reports are never overwritten.
+-- Live production cron: hitmen-season55-weekly-development-v1 (job 15)
+-- Daily 16:15 UTC: private.generate_hitmen_player_weeklies(team_uuid,55,999,false)
+-- and private.generate_hitmen_roster_group_weeklies(team_uuid,55,999,false)
+-- Only considers a group's last recorded game when it is at least five days old.
+-- SELECT cron.unschedule('hitmen-season55-weekly-development-v1'); -- rollback scheduler only
+-- Data backfill was run once: 43 generated player reports + 12 generated group reports.
