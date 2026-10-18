@@ -1,0 +1,20 @@
+/* Small earned emblems and their public definitions. */
+.lg-player-badges{display:inline-flex;gap:4px;align-items:center;margin-left:7px;vertical-align:middle;flex-wrap:wrap}
+.lg-player-badges[hidden]{display:none}
+.lg-player-badge{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:25px;min-height:25px;padding:2px 5px;border:1px solid #b38a48;border-radius:6px;background:#322419;color:#ffda91;font:700 13px/1.2 system-ui,Arial,sans-serif;white-space:nowrap}
+.lg-player-badge-hot{background:#4a1d16;border-color:#ce6248}
+.lg-player-badge-career{background:#3b2e16;border-color:#bba153}
+.lg-player-badge-rise{background:#173c30;border-color:#5aaf8e}
+.lg-player-badge-streak{background:#242748;border-color:#8187d3}
+.lg-player-badge-wall{background:#183b4a;border-color:#5fa6c3}
+.lg-profile-identity .lg-player-badges{display:flex;margin:9px 0 0;gap:7px}
+.lg-profile-identity .lg-player-badge{font-size:13px;padding:6px 8px}
+.lg-badge-legend{margin:14px 0 17px;padding:13px 16px;border:1px solid #58575b;border-radius:8px;background:linear-gradient(120deg,#191b21,#10131b);color:#eceef2}
+.lg-badge-legend summary{cursor:pointer;font-weight:800;font-size:14px;color:#f2cb7f;min-height:22px}
+.lg-badge-legend summary:focus-visible{outline:2px solid #9dd9fc;outline-offset:3px}
+.lg-badge-legend-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:18px 0}
+.lg-badge-legend-grid>div{display:flex;align-items:flex-start;gap:10px}
+.lg-badge-legend-grid b{display:block;color:#fff;font:700 14px system-ui,Arial,sans-serif}
+.lg-badge-legend-grid small{display:block;margin-top:4px;font:400 12px/1.5 system-ui,Arial,sans-serif;color:#afb8c5}
+.lg-badge-legend p{font-size:12px;line-height:1.5;color:#aeb7c4}
+@media(max-width:580px){.lg-badge-legend-grid{grid-template-columns:1fr}.lg-player-badges{gap:3px;margin-left:4px}}
