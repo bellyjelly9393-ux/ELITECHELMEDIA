@@ -1,0 +1,29 @@
+name: Hitmen recap autowriter
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/functions/hitmen-recap-autowriter/**'
+      - 'tests/hitmen-recap-autowriter.test.mjs'
+      - 'tests/fixtures/hitmen-recap/**'
+      - '.github/workflows/hitmen-recap-autowriter.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/functions/hitmen-recap-autowriter/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Parser and composer tests (real LG box score fixtures)
+        run: node --test tests/hitmen-recap-autowriter.test.mjs
+      - name: Type-check Edge Function
+        run: |
+          cd "$RUNNER_TEMP" && npm init -y >/dev/null && npm install deno@2 >/dev/null
+          cd "$GITHUB_WORKSPACE"
+          "$RUNNER_TEMP/node_modules/.bin/deno" check --config supabase/functions/hitmen-recap-autowriter/deno.json supabase/functions/hitmen-recap-autowriter/index.ts
