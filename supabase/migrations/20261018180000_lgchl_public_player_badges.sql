@@ -62,7 +62,27 @@ WITH valid_seasons AS (
       AND h.lg_user_id IS NOT NULL
       AND h.games_played >= 10
       AND h.stats ? 'points'
-      AND (h.stats ->> 'points') ~ '^[0-9]+(\\.[0-9]+)?$'
+      AND (h.stats ->> 'points') ~ '^[0-9]+([.][0-9]+)?
+    GROUP BY h.lg_user_id, h.player_kind, h.season
+    HAVING COUNT(*) = 1
+), history AS (
+    SELECT
+      lg_user_id,
+      player_kind,
+      MAX(gp) FILTER (WHERE season=54) AS prev_gp,
+      MAX(ppg) FILTER (WHERE season=54) AS prev_ppg,
+      MAX(ppg) AS career_best_ppg
+    FROM valid_seasons
+    GROUP BY lg_user_id, player_kind
+)
+SELECT lg_user_id, player_kind, prev_gp, prev_ppg, career_best_ppg
+FROM history;
+
+REVOKE ALL ON public.lgchl_public_player_badges FROM PUBLIC, anon, authenticated;
+GRANT SELECT ON public.lgchl_public_player_badges TO anon, authenticated;
+COMMENT ON VIEW public.lgchl_public_player_badges IS
+  'Public LGCHL regular-season historical comparison metrics, keyed by official LG user ID; no scouting, private info or VOD.';
+
     GROUP BY h.lg_user_id, h.player_kind, h.season
     HAVING COUNT(*) = 1
 ), history AS (
