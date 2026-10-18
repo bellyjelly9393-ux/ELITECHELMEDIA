@@ -35,7 +35,7 @@
     const sub=document.createElement('p');sub.textContent='Listed broadcaster · Live status not independently verified';
     const actions=document.createElement('div');actions.className='lh-card-actions';
     const watch=document.createElement('a');watch.href=s.url;watch.target='_blank';watch.rel='noopener noreferrer';watch.textContent='Open broadcast ↗';
-    const multi=document.createElement('a');multi.href='multiview.html?hub=1&league='+league+'&add='+encodeURIComponent(s.url);multi.textContent='+ Multiview';
+    const multi=document.createElement('a');multi.href='multiview.html?hub=1&league='+league+'&streams='+encodeURIComponent('source:'+s.id);multi.textContent='+ Multiview';
     actions.append(watch,multi);card.append(eyebrow,title,sub,actions);return card;
   };
   const render=league=>{
