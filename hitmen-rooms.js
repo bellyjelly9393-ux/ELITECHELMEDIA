@@ -13,6 +13,9 @@
   const D = window.WMDesk, B = window.VVHLBackend;
   if (!D || !B) return;
   const { $, esc, nb, F, etDate, ordinal, logo, read, tint } = D;
+  /* private pregame clips: [clip](storage:hitmen-vod-clips/...) -> 'Play clip' toggle (hitmen-clips.js); stripped if the helper is missing */
+  const clipStrip = s => window.HitmenClips ? window.HitmenClips.strip(s) : String(s ?? '').replace(/\s*\[clip\]\(storage:[^)\s]*\)/g, '');
+  const clipHtml = h => window.HitmenClips ? window.HitmenClips.tags(h, { compact: true }) : clipStrip(h);
   D.menu();
 
   const TEAM = 'b0bcbdda-da9d-419d-8f61-b34937966d49';
@@ -204,10 +207,10 @@
         const hurt = section(/hurt/i), plan = section(/plan/i);
         const fresh = Date.parse(rep.created_at) >= L.lastFinalAt;
         report = '<div class="report card" aria-label="Pregame report"><div class="leaders-head"><span>Pregame report</span>' + chip(fresh ? 'ok' : 'warn', F.day.format(new Date(rep.created_at)) + (fresh ? ' · current' : ' · before the latest games')) + '</div>' +
-          '<div class="report-body">' + (lede ? '<p class="lede">' + esc(lede) + '</p>' : '') +
-          (hurt.length ? '<h4>What can hurt us</h4><ul>' + hurt.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
-          (plan.length ? '<h4>Plan to win</h4><ul>' + plan.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
-          (!hurt.length && !plan.length ? '<p class="lede">' + esc(text.slice(0, 600)) + '</p>' : '') + '</div>' +
+          '<div class="report-body">' + (lede ? '<p class="lede">' + esc(clipStrip(lede)) + '</p>' : '') +
+          (hurt.length ? '<h4>What can hurt us</h4><ul>' + hurt.map(x => '<li>' + clipHtml(esc(x)) + '</li>').join('') + '</ul>' : '') +
+          (plan.length ? '<h4>Plan to win</h4><ul>' + plan.map(x => '<li>' + clipHtml(esc(x)) + '</li>').join('') + '</ul>' : '') +
+          (!hurt.length && !plan.length ? '<p class="lede">' + esc(clipStrip(text).slice(0, 600)) + '</p>' : '') + '</div>' +
           '<div class="report-foot"><span class="src">Written ' + esc(whenTxt(rep.created_at)) + ' · excerpt</span><a class="btn btn-gold btn-sm" href="hitmen-scouting-report.html?report=' + encodeURIComponent(rep.id) + '">' + (fresh ? 'Full report' : 'Full report · older evidence') + ' <span class="arr">→</span></a></div></div>';
       }
 
@@ -258,7 +261,7 @@
     let selected = Math.max(0, model.findIndex(m => String(m.g.lg_game_id) === want));
     const historyCache = new Map();
     const fullHref = m => m.report ? 'hitmen-scouting-report.html?report=' + encodeURIComponent(m.report.id) : 'hitmen-scouting.html?opp=' + encodeURIComponent(m.t?.name || '');
-    const reportHtml = report => String(report || '').split(/\n+/).map(line => /^##\s/.test(line) ? '<h4>' + esc(line.replace(/^##\s*/, '')) + '</h4>' : '<p class="ctx">' + esc(line.replace(/^[-*]\s*/, '• ')) + '</p>').join('');
+    const reportHtml = report => String(report || '').split(/\n+/).map(line => /^##\s/.test(line) ? '<h4>' + esc(clipStrip(line.replace(/^##\s*/, ''))) + '</h4>' : '<p class="ctx">' + clipHtml(esc(line.replace(/^[-*]\s*/, '• '))) + '</p>').join('');
     const sixHtml = (six, own) => POS.map(pos => {
       const tag = six?.[pos], lk = tag && byTag.get(strip(tag));
       const st = own && lk?.lg_user_id ? statS.map.get(Number(lk.lg_user_id)) : null;

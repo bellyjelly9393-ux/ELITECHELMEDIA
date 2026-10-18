@@ -32,7 +32,11 @@ function showGate(title,msg){
  $('hrvContent').hidden=true;$('hrvGate').hidden=false;
  $('hrvGate').innerHTML='<h2>'+esc(title)+'</h2><p>'+esc(msg)+'</p>';
 }
-function inline(s){return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\[(E\d+)\]/g,'<span class="hrv-cite">[$1]</span>')}
+/* Private film clips: [clip](storage:hitmen-vod-clips/...) markers render through the shared hitmen-clips.js helper. */
+const CLIPS=()=>window.HitmenClips;
+const clipTags=html=>CLIPS()?CLIPS().tags(html):html.replace(/\s*\[clip\]\(storage:[^)\s]*\)/g,'');
+const hydrateClips=root=>CLIPS()?CLIPS().hydrate(root):Promise.resolve(0);
+function inline(s){return clipTags(esc(s)).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\[(E\d+)\]/g,'<span class="hrv-cite">[$1]</span>')}
 function reportHtml(text){
  return String(text||'').split(/\r?\n/).map(line=>{
   const t=line.trim();if(!t)return'';
@@ -109,7 +113,8 @@ function renderReport(report,game,vods,v){
  if(!report){
   $('hrvReportBody').innerHTML='<div class="hrv-na"><b>REPORT NOT AVAILABLE</b>'+(v.mgmt?'No pregame report is attached to this game yet.':'The full scouting report has not been approved for player view yet.')+'</div>';
  }else{
-  $('hrvReportBody').innerHTML=reportHtml(report.report)+heatHtml(report.evidence_summary||{})+scoutHtml(report.evidence_summary||{});
+  $('hrvReportBody').innerHTML=(CLIPS()&&report.opponent_name?CLIPS().teamButton(report.opponent_name,report.report):'')+reportHtml(report.report)+heatHtml(report.evidence_summary||{})+scoutHtml(report.evidence_summary||{});
+  hydrateClips($('hrvReportBody'));
  }
  vodSummary(vods,game,report);
  const qp=game?.id?'game='+encodeURIComponent(game.id):report?.id?'report='+encodeURIComponent(report.id)+'&opponent='+encodeURIComponent(report.opponent_name):'opponent='+encodeURIComponent(report?.opponent_name||game?.opponent_name||'');
@@ -150,5 +155,6 @@ async function load(){
 $('hrvBack')?.addEventListener('click',()=>history.length>1?history.back():location.assign('hitmen-player-locker.html'));
 let timer=null;function kick(){clearTimeout(timer);timer=setTimeout(load,80)}
 window.addEventListener('vvhl-auth-change',()=>{const u=ST().user?.id||'';if(u!==lastUser){lastUser=u;kick()}});
+window.HitmenReportView={reportHtml,hydrateClips};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',kick,{once:true});else kick();
 })();
