@@ -172,7 +172,7 @@
       if(request!==leaderRequest)return null;
       body.innerHTML = rows.map((p, i) => {
         const rank=1+rows.filter(x=>Number(x[metric])>Number(p[metric])).length;
-        const who = '<td><div class="lg-team"><img src="' + logo(p.lg_team_id) + '" alt=""><div><b>' + esc(p.gamertag) + '</b><small>' + esc(goalie ? 'G' : p.position) + ' · ' + esc(p.team_name || '') + '</small></div></div></td>';
+        const who = '<td><div class="lg-team"><img src="' + logo(p.lg_team_id) + '" alt=""><div><button type="button" class="lg-player-open" data-lg-profile="' + encodeURIComponent(JSON.stringify({p,rank,metric})) + '">' + esc(p.gamertag) + '</button><small>' + esc(goalie ? 'G' : p.position) + ' · ' + esc(p.team_name || '') + '</small></div></div></td>';
         return goalie
           ? '<tr><td class="lg-rk">' + rank + '</td>' + who + '<td class="r">' + esc(p.gp) + '</td><td class="r lg-pts">' + rate(p.save_pct,3).replace(/^0/, '') + '</td><td class="r">' + rate(p.gaa,2) + '</td></tr>'
           : '<tr><td class="lg-rk">' + rank + '</td>' + who + '<td class="r">' + esc(p.goals) + '</td><td class="r">' + esc(p.assists) + '</td><td class="r lg-pts">' + esc(p.points) + '</td><td class="r">' + sgn(p.plus_minus) + '</td></tr>';
