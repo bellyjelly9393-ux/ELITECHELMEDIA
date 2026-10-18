@@ -54,11 +54,10 @@
         <nav class="main-nav">
           ${simpleLink('index.html','Home')}
           ${simpleLink('team.html','Wildman')}
-          ${simpleLink('esports-hub.html','Esports Hub')}
-          ${dropdown('Live','game-center.html',[
-            ['game-center.html?channel=hitmen','Hitmen Live','Calgary LGCHL game night and schedule'],
-            ['multiview.html','Multiview','Watch multiple Twitch and YouTube feeds'],
-            ['game-center.html?channel=wildman','Wildman Live','Wildman network channel']
+          ${dropdown('LGCHL Live Hub','esports-hub.html',[
+            ['esports-hub.html#lgchl','LGCHL Games','Public league broadcasts and multiview'],
+            ['esports-hub.html#hitman','Hitman Live','Elitechel Media broadcast channel'],
+            ['esports-hub.html#lg3s','LG Threes','Public LG Threes streams']
           ])}
           ${simpleLink('lgchl-leaders.html','LGCHL Stats')}
           ${simpleLink('academy.html','Academy')}
