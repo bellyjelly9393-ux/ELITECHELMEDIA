@@ -12,7 +12,7 @@
       if(u.protocol!=='https:')return null;
       const host=u.hostname.toLowerCase().replace(/^www\./,'');
       const path=u.pathname.split('/').filter(Boolean);
-      if(['twitch.tv','m.twitch.tv'].includes(host) && path[0] && /^[a-z0-9_]{3,25}$/i.test(path[0])){
+      if(['twitch.tv','m.twitch.tv'].includes(host) && path[0] && !['videos','search','directory','downloads','clip','settings'].includes(path[0].toLowerCase()) && /^[a-z0-9_]{3,25}$/i.test(path[0])){
         return 'https://www.twitch.tv/'+path[0].toLowerCase();
       }
       if(['youtube.com','m.youtube.com','youtu.be'].includes(host)){
