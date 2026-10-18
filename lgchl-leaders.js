@@ -26,7 +26,7 @@
   return [...c,...sk,...(['points','goals','assists'].includes(metric)?[]:[[metric,metrics[metric]]])];
  }
  function cell(p,key,metric){
-  if(key==='player')return '<b>'+esc(p.gamertag)+'</b><small>'+esc(p.position||'Position unavailable')+' · '+esc(p.team_name||'Team unavailable')+'</small>';
+  if(key==='player')return '<button type="button" class="lg-player-open" data-lg-profile="'+encodeURIComponent(JSON.stringify({p,rank:p.rank,metric}))+'">'+esc(p.gamertag)+'</button><small>'+esc(p.position||'Position unavailable')+' · '+esc(p.team_name||'Team unavailable')+'</small>';
   if(key==='rank')return String(p.rank);
   if(key==='save_pct')return numeric(p[key])?(Number(p[key])*100).toFixed(1)+'%':'—';
   if(key==='gaa')return rate(p[key],2);
