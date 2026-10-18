@@ -50,7 +50,7 @@
     } catch(_){}
     const u=new URL(location.href),ids=S.selected.filter(x=>!x.startsWith('manual:'));
     if(ids.length)u.searchParams.set('streams',ids.join(','));else u.searchParams.delete('streams');
-    u.searchParams.delete('games'); history.replaceState(null,'',u);
+    u.searchParams.delete('games'); u.searchParams.delete('add'); history.replaceState(null,'',u);
   }
   function fromQuery(){
     const q=new URLSearchParams(location.search);
