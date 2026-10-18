@@ -21,7 +21,10 @@
       }
     }catch(_){}return null;
   };
+  // Channels kept off the public Live Hub directory (still used by the Hitmen broadcast stage).
+  const HIDDEN=/twitch\.tv\/ctbli\b/i;
   const classify=s=>{
+    if(HIDDEN.test(String(s.url||'')))return null;
     const m=s.metadata||{};
     const tag=[m.league,m.league_key,m.competition,m.category,m.title,s.display_label].filter(Boolean).join(' ').toLowerCase();
     const three=/\blg\s*3s\b|\blg\s*threes\b|leaguegaming\s*3s/.test(tag);

@@ -217,6 +217,7 @@
       if(sources.error||games.error||teams.error)throw(sources.error||games.error||teams.error);
       const teamNames=new Map((teams.data||[]).map(t=>[t.id,t.name]));
       (sources.data||[]).forEach(s=>{
+        if(/twitch\.tv\/ctbli\b/i.test(String(s.url||'')))return; // kept off public multiview lists
         if(HUB&&(!publicLeague(s)||(LEAGUE!=='all'&&publicLeague(s)!==LEAGUE)))return;
         const p=stream(s.url);if(!p)return;
         S.channels.set('source:'+s.id,{key:'source:'+s.id,title:s.display_label||s.metadata?.title||'Public channel',url:p.url,provider:p.provider,status:HUB?'listed':'live',meta:HUB?'Public stream · status unverified':'Network feed'});
