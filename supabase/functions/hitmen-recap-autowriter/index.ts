@@ -41,7 +41,9 @@ async function loadEvidence(db: any, g: any, teams: any) {
       const linked = cands.filter((c: any) => (pubs || []).some((p: any) => p.review_id === c.id));
       if (linked.length === 1) vod = { id: linked[0].id, report: (pubs || []).find((p: any) => p.review_id === linked[0].id).report };
     }
-    return buildEvidence({ eaRows: ea, vod, final, oNick: oCity, lgGameId: Number(g.lg_game_id) });
+    const { data: events } = await db.from('hitmen_ea_match_events')
+      .select('side,period,game_clock,event_type,player,ice_zone,shot_type,event_count,verified,source').eq('lg_game_id', g.lg_game_id);
+    return buildEvidence({ events: events || [], eaRows: ea, vod, final, oNick: oCity, lgGameId: Number(g.lg_game_id) });
   } catch (_) { return null; }
 }
 const json = (data: unknown, status = 200) => new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
