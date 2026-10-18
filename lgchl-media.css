@@ -277,7 +277,7 @@
   .lg-pr-pod-rank b { font-size: 54px; }
 }
 
-/* league segments: races, streaks, upsets, grinders, snipers, players of the week */
+/* league segments: races, player heaters & skids, upsets, players of the week */
 .lg-race-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .lg-race { position: relative; isolation: isolate; overflow: hidden; padding: 16px; display: grid; gap: 10px; }
 .lg-race .wm { width: 170px; height: 170px; right: -30px; opacity: .12; }
@@ -309,40 +309,20 @@
 .lg-upset-vs > div:first-child small { color: var(--lg-up); }
 .lg-upset-title { font-family: var(--f-head); font-weight: 400; font-size: 24px; line-height: 1; text-transform: uppercase; }
 
-.lg-grind-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.lg-grind { position: relative; isolation: isolate; overflow: hidden; padding: 16px; display: grid; gap: 10px; align-content: start; }
-.lg-grind .wm { width: 180px; height: 180px; right: -36px; opacity: .12; }
-.lg-grind-cat { font-family: var(--f-slash); font-style: italic; font-weight: 900; font-size: 30px; line-height: 1; text-transform: uppercase; color: var(--gold-hi, #f2d27a); }
-.lg-grind-cat small { display: block; margin-top: 4px; font-family: var(--f-ui); font-style: normal; font-weight: 500; font-size: 14px; letter-spacing: .12em; color: var(--mute); }
-.lg-grind-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.lg-grind-list li { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--line); }
-.lg-grind-list img { width: 32px; height: 32px; object-fit: contain; }
-.lg-grind-list b { display: block; font-weight: 700; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.lg-grind-list small { display: block; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.lg-grind-list span { font-family: var(--f-head); font-size: 24px; }
-.lg-grind-list li.lead span { font-size: 34px; color: var(--gold-hi, #f2d27a); }
-
-.lg-snipe-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
-.lg-snipe { position: relative; isolation: isolate; overflow: hidden; padding: 14px; display: grid; gap: 8px; align-content: start; }
-.lg-snipe .wm { width: 130px; height: 130px; right: -24px; opacity: .12; }
-.lg-snipe-rk { font-family: var(--f-ui); font-weight: 600; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
-.lg-snipe-pct { font-family: var(--f-head); font-weight: 400; font-size: 46px; line-height: .9; color: var(--lg-blue-hi); }
-.lg-snipe-pct i { font-style: normal; font-size: .5em; margin-left: 2px; }
-.lg-snipe.lead .lg-snipe-pct { color: var(--gold-hi, #f2d27a); }
-
 .lg-potw-tag { font-family: var(--f-ui); font-weight: 600; font-size: 15px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-hi, #f2d27a); }
 .lg-soon { position: relative; isolation: isolate; overflow: hidden; grid-column: 1 / -1; padding: 22px; }
 .lg-soon h3 { font-family: var(--f-head); font-weight: 400; font-size: clamp(26px, 3.4vw, 40px); line-height: 1; text-transform: uppercase; }
 .lg-soon p:last-child { color: #d6d3cc; max-width: 560px; }
 
-@media (max-width: 1100px) { .lg-snipe-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 900px) {
-  .lg-race-grid, .lg-grind-grid { grid-template-columns: minmax(0, 1fr); }
+  .lg-race-grid { grid-template-columns: minmax(0, 1fr); }
   .lg-streak-cols { grid-template-columns: minmax(0, 1fr); }
-  .lg-snipe-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-.lg-snipe .lg-card-head > div, .lg-streak .lg-card-head > div { min-width: 0; }
-.lg-snipe .lg-card-head b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lg-streak .lg-card-head > div { min-width: 0; }
+.lg-streak .lg-card-head b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lg-streak-big { display: flex; align-items: baseline; gap: 8px; }
+.lg-streak-big span { font-family: var(--f-ui); font-weight: 600; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+@media (max-width: 420px) { .lg-streak-grid { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 620px) {
   .lg-race-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 86%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
   .lg-race { scroll-snap-align: start; }

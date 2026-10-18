@@ -9,7 +9,6 @@
   const logo = id => Number.isSafeInteger(Number(id)) && Number(id) > 0 ? 'assets/lgchl/s55/team' + Number(id) + '.png' : 'assets/wildman/home/lgchl-logo.webp';
   const wm = id => '<span class="wm" aria-hidden="true" style="--logo:url(\'' + logo(id) + '\')"></span>';
   const sgn = v => { const n = Number(v); if (!Number.isFinite(n)) return '—'; return n > 0 ? '+' + n : n < 0 ? '−' + Math.abs(n) : '0'; };
-  const streak = s => { const m = /^-?(\d+)\s*([WL])/i.exec(String(s || '').trim()); return m ? { n: Number(m[1]), win: m[2].toUpperCase() === 'W' } : null; };
   const empty = t => '<p class="empty">' + esc(t) + '</p>';
   const show = (id, on) => { const el = $(id); if (el) el.hidden = !on; };
 
@@ -37,18 +36,47 @@
     tint(box);
   }
 
-  /* ---------- Heaters & Skids: active streaks ---------- */
-  function renderStreaks(standings) {
+  /* ---------- Heaters & Skids: the players playing unreal, and the ones in trouble ---------- */
+  async function renderPlayerStreaks(teams) {
     const hot = $('lgHeaters'), cold = $('lgSkids');
     if (!hot || !cold) return;
-    const rows = (standings || []).map(t => ({ t, s: streak(t.streak) })).filter(x => x.s && x.s.n >= 2);
-    const card = (x, win) => '<article class="card tinted lg-streak ' + (win ? 'is-hot' : 'is-cold') + '" data-logo="' + logo(x.t.lg_team_id) + '">' + wm(x.t.lg_team_id) +
-      '<b class="lg-streak-n">' + (win ? 'W' : 'L') + x.s.n + '</b>' +
-      '<div class="lg-card-head"><img src="' + logo(x.t.lg_team_id) + '" alt="" loading="lazy"><div><b>' + esc(x.t.name) + '</b><small>' + esc(x.t.league) + ' · ' + esc(x.t.last10 || '—') + ' last 10</small></div></div></article>';
-    const heaters = rows.filter(x => x.s.win).sort((a, b) => b.s.n - a.s.n || Number(b.t.pts) - Number(a.t.pts)).slice(0, 4);
-    const skids = rows.filter(x => !x.s.win).sort((a, b) => b.s.n - a.s.n || Number(a.t.pts) - Number(b.t.pts)).slice(0, 4);
-    hot.innerHTML = heaters.map(x => card(x, true)).join('') || empty('No active win streaks of two or more.');
-    cold.innerHTML = skids.map(x => card(x, false)).join('') || empty('No active losing streaks of two or more.');
+    let rows = [], recent = false;
+    try {
+      const r = await read('lgchl_public_trending_players', { select: 'gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots', player_kind: 'eq.skater', gp: 'gte.2', limit: '2000' });
+      if (r.length >= 40) { rows = r; recent = true; }
+    } catch { /* recent form not available yet */ }
+    if (!recent) {
+      try {
+        rows = await read('wm_lgchl_s55_player_leaders', { select: 'gamertag,position,lg_team_id,team_name,gp,goals,assists,points,plus_minus,shots', player_kind: 'eq.skater', gp: 'gte.6', shots: 'gt.0', limit: '2000' });
+      } catch { show('lgStreakSec', false); return; }
+    }
+    rows = rows.filter(p => Number(p.gp) > 0 && Number(p.shots) > 0);
+    if (!rows.length) { show('lgStreakSec', false); return; }
+    const pick = (list, n, maxD) => {
+      const out = [], teamsSeen = new Set(); let d = 0;
+      for (const p of list) {
+        if (out.length >= n) break;
+        const isD = /D$/.test(String(p.position || ''));
+        if (teamsSeen.has(Number(p.lg_team_id)) || (isD && maxD != null && d >= maxD)) continue;
+        out.push(p); teamsSeen.add(Number(p.lg_team_id)); if (isD) d++;
+      }
+      return out;
+    };
+    const ppgOf = p => Number(p.points) / Number(p.gp);
+    // Playing unreal: best points per game. NCAA watch: worst plus-minus. One per team, max two D on the cold side.
+    const heaters = pick(rows.slice().sort((a, b) => ppgOf(b) - ppgOf(a) || Number(b.plus_minus) - Number(a.plus_minus)), 4, null);
+    const skids = pick(rows.slice().sort((a, b) => Number(a.plus_minus) - Number(b.plus_minus) || ppgOf(a) - ppgOf(b)), 4, 2);
+    const card = (p, win) => {
+      const team = teams.get(Number(p.lg_team_id));
+      const ppg = (Number(p.points) / Number(p.gp)).toFixed(2);
+      return '<article class="card tinted lg-streak ' + (win ? 'is-hot' : 'is-cold') + '" data-logo="' + logo(p.lg_team_id) + '">' + wm(p.lg_team_id) +
+        '<div class="lg-streak-big"><b class="lg-streak-n num">' + (win ? ppg : sgn(p.plus_minus)) + '</b><span>' + (win ? 'points per game' : 'plus-minus') + '</span></div>' +
+        '<div class="lg-card-head"><img src="' + logo(p.lg_team_id) + '" alt="" loading="lazy"><div><b>' + esc(p.gamertag) + '</b><small>' + esc(p.position || '') + ' · ' + esc(team ? team.name : (p.team_name || 'LGCHL')) + '</small></div></div>' +
+        '<p class="lg-line num">' + esc(p.goals) + ' G · ' + esc(p.assists) + ' A · ' + esc(p.points) + ' PTS · ' + (win ? sgn(p.plus_minus) : ppg + ' P/GP') + ' · ' + esc(p.gp) + ' GP</p></article>';
+    };
+    $('lgStreakEyebrow').textContent = recent ? 'Players · last two game nights' : 'Players · season so far · 6+ GP';
+    hot.innerHTML = heaters.map(p => card(p, true)).join('');
+    cold.innerHTML = skids.map(p => card(p, false)).join('');
     tint(hot); tint(cold);
   }
 
@@ -74,44 +102,6 @@
       '<div class="lg-upset-vs"><div><img src="' + logo(u.w.lg_team_id) + '" alt=""><small>No. ' + u.w.rank + '</small></div><b class="num">' + esc(u.ws) + '–' + esc(u.ls) + '</b><div><img src="' + logo(u.l.lg_team_id) + '" alt=""><small>No. ' + u.l.rank + '</small></div></div>' +
       '<h3 class="lg-upset-title">' + esc(u.w.nickname || u.w.name) + ' stun ' + esc(u.l.nickname || u.l.name) + '</h3>' +
       '<p class="lg-line">' + u.gap + ' spots apart in the power index · ' + esc(F.day.format(new Date(u.g.game_at))) + '</p></article>').join('');
-    tint(box);
-  }
-
-  /* ---------- The Grinders + Sniper Watch: season leaders beyond points ---------- */
-  async function renderGrinders() {
-    const box = $('lgGrinders');
-    if (!box) return;
-    const cols = 'gamertag,position,lg_team_id,team_name,gp,hits,blocked_shots,takeaways';
-    const cats = [['hits', 'Hits', 'Bodies on the boards'], ['blocked_shots', 'Blocks', 'Pucks taken for the team'], ['takeaways', 'Takeaways', 'Pucks stolen back']];
-    const results = await Promise.allSettled(cats.map(([k]) => read('wm_lgchl_s55_player_leaders', { select: cols, player_kind: 'eq.skater', order: k + '.desc.nullslast,gp.asc,gamertag.asc', limit: '3' })));
-    const html = cats.map(([k, label, sub], i) => {
-      const rows = results[i].status === 'fulfilled' ? results[i].value : [];
-      if (!rows.length) return '';
-      const top = rows[0];
-      return '<article class="card tinted lg-grind" data-logo="' + logo(top.lg_team_id) + '">' + wm(top.lg_team_id) +
-        '<p class="lg-grind-cat">' + esc(label) + '<small>' + esc(sub) + '</small></p>' +
-        '<ol class="lg-grind-list">' + rows.map((p, j) => '<li' + (j ? '' : ' class="lead"') + '><img src="' + logo(p.lg_team_id) + '" alt="" loading="lazy"><div><b>' + esc(p.gamertag) + '</b><small>' + esc(p.position || '') + ' · ' + esc(p.team_name || 'LGCHL') + '</small></div><span class="num">' + esc(p[k]) + '</span></li>').join('') + '</ol></article>';
-    }).join('');
-    if (!html) { show('lgGrindSec', false); return; }
-    box.innerHTML = html;
-    tint(box);
-  }
-
-  async function renderSnipers() {
-    const box = $('lgSnipers');
-    if (!box) return;
-    let rows = [];
-    try {
-      rows = await read('wm_lgchl_s55_player_leaders', { select: 'gamertag,position,lg_team_id,team_name,gp,goals,shots', player_kind: 'eq.skater', shots: 'gte.25', order: 'goals.desc', limit: '1000' });
-    } catch { show('lgSniperSec', false); return; }
-    const top = rows.filter(p => Number(p.shots) > 0).map(p => ({ ...p, pct: Number(p.goals) / Number(p.shots) }))
-      .sort((a, b) => b.pct - a.pct || Number(b.goals) - Number(a.goals)).slice(0, 5);
-    if (!top.length) { show('lgSniperSec', false); return; }
-    box.innerHTML = top.map((p, i) => '<article class="card tinted lg-snipe' + (i ? '' : ' lead') + '" data-logo="' + logo(p.lg_team_id) + '">' + wm(p.lg_team_id) +
-      '<span class="lg-snipe-rk">' + ordinal(i + 1) + '</span>' +
-      '<b class="lg-snipe-pct num">' + (100 * p.pct).toFixed(1) + '<i>%</i></b>' +
-      '<div class="lg-card-head"><img src="' + logo(p.lg_team_id) + '" alt="" loading="lazy"><div><b>' + esc(p.gamertag) + '</b><small>' + esc(p.team_name || 'LGCHL') + '</small></div></div>' +
-      '<p class="lg-line num">' + esc(p.goals) + ' goals on ' + esc(p.shots) + ' shots</p></article>').join('');
     tint(box);
   }
 
@@ -161,5 +151,5 @@
     tint($('lgWeekPlayers')); tint($('lgTrendingRecords'));
   }
 
-  window.LGCHLSegments = { renderRaces, renderStreaks, renderUpsets, renderGrinders, renderSnipers, renderForm };
+  window.LGCHLSegments = { renderRaces, renderPlayerStreaks, renderUpsets, renderForm };
 })();

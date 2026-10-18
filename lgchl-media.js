@@ -82,7 +82,7 @@
     renderScores(lastNight, lastFinal);
     renderPower(ranked, week, standings);
     const SEG = window.LGCHLSegments;
-    if (SEG) { SEG.renderRaces(standings); SEG.renderStreaks(standings); SEG.renderUpsets(games, ranked); SEG.renderGrinders(); SEG.renderSnipers(); }
+    if (SEG) { SEG.renderRaces(standings); SEG.renderPlayerStreaks(teams).catch(() => {}); SEG.renderUpsets(games, ranked); }
     renderBreakout(hist, teams);
     renderMovers(hist, teams);
     // Matchup player spotlights use the same public season leaders as the board.
