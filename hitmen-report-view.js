@@ -113,7 +113,7 @@ function renderReport(report,game,vods,v){
  if(!report){
   $('hrvReportBody').innerHTML='<div class="hrv-na"><b>REPORT NOT AVAILABLE</b>'+(v.mgmt?'No pregame report is attached to this game yet.':'The full scouting report has not been approved for player view yet.')+'</div>';
  }else{
-  $('hrvReportBody').innerHTML=reportHtml(report.report)+heatHtml(report.evidence_summary||{})+scoutHtml(report.evidence_summary||{});
+  $('hrvReportBody').innerHTML=(CLIPS()&&report.opponent_name?CLIPS().teamButton(report.opponent_name,report.report):'')+reportHtml(report.report)+heatHtml(report.evidence_summary||{})+scoutHtml(report.evidence_summary||{});
   hydrateClips($('hrvReportBody'));
  }
  vodSummary(vods,game,report);

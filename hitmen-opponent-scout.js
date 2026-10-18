@@ -4,6 +4,8 @@
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
   /* private pregame clips: [clip](storage:hitmen-vod-clips/...) -> 'Play clip' toggle (hitmen-clips.js); stripped if the helper is missing */
+  /* Team clips: every private clip saved for this opponent (signed-in Hitmen members; hitmen-clips.js) */
+  const teamClipsBtn=()=>window.HitmenClips&&opponent?(data.reports.forEach(r=>window.HitmenClips.remember(opponent,r.report)),window.HitmenClips.teamButton(opponent)):'';
   const clipHtml=h=>window.HitmenClips?window.HitmenClips.tags(h,{compact:true}):String(h??'').replace(/\s*\[clip\]\(storage:[^)\s]*\)/g,'');
   const num=v=>{const n=Number(v);return Number.isFinite(n)?n:null};
   const qs=new URLSearchParams(location.search), opponent=qs.get('opponent')||'';
@@ -170,7 +172,7 @@
       stat('HITS',lg.hits,'league')+stat('TA',lg.takeaways,'league')+stat('GA',lg.giveaways,'league');
     renderHeat(p);renderHistory(p);
     E('hsAutoScout').innerHTML=autoPlayerScout(p).map(x=>'<div class="hs-scout-item"><b>'+esc(x[0])+'</b><p>'+esc(x[1])+'</p></div>').join('');
-    const mentions=reportMentions(p);E('hsReportMentions').innerHTML=mentions.length?'<div class="eyebrow">EXISTING REPORT MENTIONS</div>'+mentions.map(m=>'<div class="hs-mention"><b>'+esc(new Date(m.date).toLocaleDateString())+'</b> · '+clipHtml(esc(m.text))+'</div>').join(''):'';
+    const mentions=reportMentions(p);E('hsReportMentions').innerHTML=teamClipsBtn()+(mentions.length?'<div class="eyebrow">EXISTING REPORT MENTIONS</div>'+mentions.map(m=>'<div class="hs-mention"><b>'+esc(new Date(m.date).toLocaleDateString())+'</b> · '+clipHtml(esc(m.text))+'</div>').join(''):'');
     fillScout(p);renderPlayers();
   }
   async function saveScout(){

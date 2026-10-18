@@ -50,6 +50,21 @@ assert.deepEqual(JSON.parse(JSON.stringify(C.extract('## Video review\n- 18:00�
  assert.equal(await C.toggle(n2,doc),false);
  assert.equal(n2.cls,'is-unavailable');assert.ok(!n2.querySelector('.hc-clip-play'));assert.equal(n2.querySelector('.hc-clip-state').textContent,'Clip unavailable');
 
+ // Team clips: lists <team>/pregame-clips/<date>/<opponent>/ with the signed-in client, labels from report lines
+ const listed=[];
+ store.list=async(prefix)=>{listed.push(prefix);
+  if(prefix===TEAM+'/pregame-clips')return {data:[{name:'2026-10-18',id:null},{name:'notes.txt',id:'x'}],error:null};
+  if(prefix===TEAM+'/pregame-clips/2026-10-18/saint_john')return {data:[{name:'2026-10-18_06_rebound-goal.mp4',id:'a'},{name:'2026-10-18_07_backdoor-goal.mp4',id:'b'}],error:null};
+  return {data:[],error:null}};
+ assert.match(C.teamButton('Saint John Sea Dogs','## Video review\n- 18:00–18:07 · backdoor goal — far post. '+M(P1)),/class="hc-team-btn" data-hc-team="Saint John Sea Dogs"/);
+ assert.ok(C.slugsFor('Saint John Sea Dogs').includes('saint_john'));
+ const team=JSON.parse(JSON.stringify(await C.teamClips('Saint John Sea Dogs')));
+ assert.deepEqual(team.map(c=>c.path),[P2,P1]);
+ assert.equal(team[1].label,'18:00–18:07 · backdoor goal — far post.');
+ assert.equal(team[0].label,'rebound goal','Fallback label from the file name');
+ assert.ok(listed.every(p=>p.startsWith(TEAM+'/pregame-clips')),'Lists only the team clip folder');
+ assert.match(fs.readFileSync('hitmen-report-view.js','utf8'),/CLIPS\(\)\.teamButton\(report\.opponent_name,report\.report\)/);
+ assert.match(fs.readFileSync('hitmen-opponent-scout.js','utf8'),/innerHTML=teamClipsBtn\(\)\+/);
  // War Room Tonight: markers never leak into threats/plan; clips listed as compact toggles in "Across from us"
  const wctx={window:Object.assign(window,{}),document:{readyState:'loading',addEventListener(){},getElementById:()=>null,querySelectorAll:()=>[]},console,Intl,Date,setInterval(){},URLSearchParams,location:{search:''}};
  vm.runInNewContext(fs.readFileSync('war-room-tonight.js','utf8'),wctx);
