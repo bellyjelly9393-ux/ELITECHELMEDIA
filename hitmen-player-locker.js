@@ -12,6 +12,7 @@
   let locker=null;
   let reports=[];
   let weekly=[];
+  let selectedWeeklyWeek=null;
   let lineReports=[];
   let signedImage=null;
   let lockerClaimAttempted=false;
@@ -275,7 +276,10 @@
       return '<div class="player-report-statline player-report-pending"><span><small>OFFICIAL GAME STATS</small><b>PENDING</b></span><em>Result and participation are linked. The verified LG Public Log will fill this game automatically.</em></div>';
     }
     const pos=String(r.position_played||locker?.position||'').toUpperCase();
-    const goalie=pos==='G'||s.shots_faced!=null||s.saves!=null;
+    // Newer LG box scores include zero-valued goalie fields on skater rows.
+    // Position takes precedence; only infer goalie when the position is unknown.
+    const goalie=pos==='G'||(!['LW','C','RW','LD','RD'].includes(pos)&&
+      (Number(s.shots_faced||0)>0||Number(s.saves||0)>0));
     const items=goalie
       ?[['SV',s.saves??0],['SA',s.shots_faced??0],['GA',s.goals_against??0],['SV%',s.save_pct_derived!=null?Number(s.save_pct_derived).toFixed(1)+'%':(Number(s.shots_faced||0)?((Number(s.saves||0)/Number(s.shots_faced))*100).toFixed(1)+'%':'—')]]
       :[['G',s.goals??0],['A',s.assists??0],['PTS',s.points??(Number(s.goals||0)+Number(s.assists||0))],['+/-',s.plus_minus??0],['S',s.shots??0],['TA',s.takeaways??0],['GV',s.giveaways??0],['BLK',s.blocks??s.blocked_shots??0]];
@@ -326,28 +330,118 @@
     ).join('');
   }
 
+  // Reports are read-only snapshots. Navigation never calls the VOD worker,
+  // writes to Supabase, or modifies the underlying evidence.
+  function weeklySourceIds(r){
+    const ids=new Set();
+    for(const item of (Array.isArray(r?.evidence)?r.evidence:[])){
+      if(!['recorded_game_stats','lg_game_stats'].includes(item?.type))continue;
+      if(item.schedule_game_id)ids.add(String(item.schedule_game_id));
+    }
+    return ids;
+  }
+
+  function weeklyFilmEvidence(r){
+    // Exact game-link only. We deliberately do not guess matches from team
+    // names, timestamps, season week or on-screen gamer tags.
+    const ids=weeklySourceIds(r);
+    if(!ids.size)return [];
+    return reports.filter(game=>game.ai_review_id &&
+      game.evidence?.verification==='approved' &&
+      game.schedule_game_id && ids.has(String(game.schedule_game_id)) &&
+      (game.coach_summary||game.improvements||game.strengths));
+  }
+
+  function weeklyMetrics(r){
+    const s=r.stats||{};
+    const goalie=s.saves!=null && s.shots_faced!=null && s.goals==null;
+    const metrics=goalie
+      ?[['GP',r.games_played??'—'],['SV',s.saves??'—'],['SA',s.shots_faced??'—'],
+        ['SV%',s.save_percentage==null?'—':Number(s.save_percentage).toFixed(1)+'%']]
+      :[['GP',r.games_played??'—'],['G',s.goals??'—'],['A',s.assists??'—'],
+        ['PTS',s.points??'—'],['S',s.shots??'—'],['+/-',s.plus_minus??'—']];
+    return '<div class="weekly-history-metrics" aria-label="Recorded weekly statistics">'+metrics.map(([key,value])=>
+      '<div><small>'+esc(key)+'</small><b>'+esc(value)+'</b></div>'
+    ).join('')+'</div>';
+  }
+
   function renderWeekly(){
     const box=E('playerWeeklyReport');
     if(!box)return;
-    const r=weekly[0];
-    if(!r){
-      box.innerHTML='<div class="locker-empty">Your first weekly development report will appear after Week 1 games are reviewed.</div>';
+    const ordered=weekly.slice().sort((a,b)=>Number(b.week)-Number(a.week));
+    if(!ordered.length){
+      T('weeklyLabel','PENDING');
+      box.innerHTML='<div class="locker-empty">Your first weekly development report will appear after games are reviewed.</div>';
       return;
     }
-    T('weeklyLabel','WEEK '+r.week);
-    box.innerHTML='<div class="weekly-card"><div><h4>WEEK SUMMARY</h4><p>'+esc(r.summary||'—')+'</p></div><div><h4>STRENGTHS</h4><p>'+esc(r.strengths||'—')+'</p></div><div><h4>NEXT WEEK FOCUS</h4><p>'+esc(r.focus_next_week||'—')+'</p></div></div>';
+    if(!ordered.some(r=>Number(r.week)===selectedWeeklyWeek)){
+      selectedWeeklyWeek=Number(ordered[0].week);
+    }
+    const r=ordered.find(row=>Number(row.week)===selectedWeeklyWeek);
+    T('weeklyLabel','WEEK '+r.week+' · '+ordered.length+' AVAILABLE');
+    const nav='<nav class="locker-week-picker" aria-label="Weekly development report history">'+ordered.map(w=>
+      '<button type="button" data-week-report="'+esc(w.week)+'" aria-pressed="'+(Number(w.week)===selectedWeeklyWeek)+'"'+
+      (Number(w.week)===selectedWeeklyWeek?' class="active"':'')+'>WEEK '+esc(w.week)+'</button>'
+    ).join('')+'</nav>';
+    const coverage=Number(r.stats?.partial_team_roster_games||0);
+    const label=coverage>0
+      ?'Partial team-roster coverage: '+coverage+' recorded game'+(coverage===1?'':'s')+'. Other players may be missing from imported box scores.'
+      :'Box-score totals from recorded games. VOD observations are shown separately when linked and approved.';
+    const film=weeklyFilmEvidence(r);
+    const evidence=film.length
+      ?'<details class="weekly-vod-evidence"><summary>APPROVED FILM OBSERVATIONS · '+film.length+
+        ' GAME'+(film.length===1?'':'S')+'</summary>'+
+        '<p class="weekly-source-caveat">These are approved VOD review notes, not newly verified player identities or confirmed chemistry. Check the game report and original footage before treating an on-screen attribution as fact.</p>'+
+        film.map(game=>
+          '<div class="weekly-film-note"><b>'+esc(game.opponent_name||'Linked game')+'</b>'+
+          '<p>'+esc(String(game.coach_summary||game.improvements||game.strengths).slice(0,950))+'</p></div>'
+        ).join('')+'<a class="weekly-history-link" href="#games">Read full game-by-game evidence</a></details>'
+      :'<p class="weekly-source-caveat">No independently linked, approved VOD review for these weekly game IDs yet. This report uses recorded game statistics; the VOD system is unchanged.</p>';
+    box.innerHTML=nav+
+      '<div class="weekly-history-meta"><b>'+esc(r.record||'Record pending')+'</b><span>'+esc(label)+'</span></div>'+
+      weeklyMetrics(r)+
+      '<div class="weekly-card">'+
+      '<div><h4>WEEK SUMMARY</h4><p>'+esc(r.summary||'—')+'</p></div>'+
+      '<div><h4>STRENGTHS</h4><p>'+esc(r.strengths||'—')+'</p></div>'+
+      '<div><h4>NEXT WEEK FOCUS</h4><p>'+esc(r.focus_next_week||'—')+'</p></div>'+
+      '</div>'+evidence;
+    box.querySelectorAll('[data-week-report]').forEach(btn=>btn.addEventListener('click',()=>{
+      selectedWeeklyWeek=Number(btn.dataset.weekReport);
+      renderWeekly();
+    }));
   }
 
   function renderLineReports(){
     const box=E('playerLineReports');
     if(!box)return;
     if(!lineReports.length){
-      box.innerHTML='<div class="locker-empty">Your unit’s weekly chemistry report will appear once line reports are created.</div>';
+      box.innerHTML='<div class="locker-empty">No line or defense-pair reports are available yet. Shared-roster appearances are not automatically proof of on-ice chemistry.</div>';
       return;
     }
-    box.innerHTML=lineReports.slice(0,4).map(r=>
-      '<article class="player-report"><div class="player-report-head"><div><small>WEEK '+r.week+'</small><h3>'+esc(r.line_label)+'</h3></div><small>'+esc(r.record||'')+'</small></div><div class="player-report-grid"><div class="report-note"><small>UNIT SUMMARY</small><p>'+esc(r.summary||'—')+'</p></div><div class="report-note"><small>NEXT ADJUSTMENTS</small><p>'+esc(r.next_adjustments||'—')+'</p></div></div></article>'
-    ).join('');
+    const byWeek=new Map();
+    lineReports.forEach(r=>{
+      const week=Number(r.week);
+      if(!byWeek.has(week))byWeek.set(week,[]);
+      byWeek.get(week).push(r);
+    });
+    const weeks=[...byWeek.keys()].sort((a,b)=>b-a);
+    box.innerHTML='<p class="weekly-source-caveat">Historical groups are based on available roster records. A chemistry rating requires independently verified shared shifts and on-ice evidence.</p>'+
+      weeks.map((week,index)=>{
+        const group=byWeek.get(week);
+        return '<details class="locker-line-week"'+(index===0?' open':'')+'>'+
+          '<summary>WEEK '+esc(week)+' · '+group.length+' REPORT'+(group.length===1?'':'S')+'</summary>'+
+          '<div class="locker-line-week-content">'+group.map(r=>{
+            const rosterOnly=r.stats?.shift_overlap_verified===false||
+              /roster/i.test(String(r.line_label||''));
+            return '<article class="player-report"><div class="player-report-head"><div>'+
+              '<small>'+esc(rosterOnly?'SHARED GAME ROSTER · SHIFTS UNVERIFIED':'UNIT REPORT')+'</small>'+
+              '<h3>'+esc(r.line_label||'Unnamed group')+'</h3></div>'+
+              '<small>'+esc(r.record||r.stats?.team_record||'')+'</small></div>'+
+              '<div class="player-report-grid"><div class="report-note"><small>UNIT SUMMARY</small><p>'+
+              esc(r.summary||'—')+'</p></div><div class="report-note"><small>NEXT ADJUSTMENTS</small><p>'+
+              esc(r.next_adjustments||'—')+'</p></div></div></article>';
+          }).join('')+'</div></details>';
+      }).join('');
   }
 
   async function render(){

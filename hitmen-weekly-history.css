@@ -1,0 +1,101 @@
+/* Read-only weekly development history. Scoped to the private player locker. */
+.hitmen-player-locker-page #playerWeeklyReport,
+.hitmen-player-locker-page #playerLineReports { min-width:0; }
+.hitmen-player-locker-page .locker-week-picker {
+  display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;
+}
+.hitmen-player-locker-page .locker-week-picker button {
+  appearance:none;min-height:42px;padding:9px 17px;cursor:pointer;
+  border-radius:8px;border:1px solid rgba(219,184,101,.24);
+  background:#171417;color:#d4c6c0;
+  font:800 15px/1 "Barlow Condensed",sans-serif;letter-spacing:.07em;
+}
+.hitmen-player-locker-page .locker-week-picker button:hover,
+.hitmen-player-locker-page .locker-week-picker button.active {
+  border-color:#d3b36e;background:rgba(211,179,110,.1);color:#f6dfab;
+}
+.hitmen-player-locker-page .locker-week-picker button:focus-visible,
+.hitmen-player-locker-page .locker-line-week summary:focus-visible,
+.hitmen-player-locker-page .weekly-vod-evidence summary:focus-visible,
+.hitmen-player-locker-page .weekly-history-link:focus-visible {
+  outline:2px solid #e5c679;outline-offset:3px;
+}
+.hitmen-player-locker-page .weekly-history-meta {
+  display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:12px;
+}
+.hitmen-player-locker-page .weekly-history-meta b {
+  color:#ead4a0;font:900 18px/1 "Barlow Condensed",sans-serif;
+}
+.hitmen-player-locker-page .weekly-history-meta span,
+.hitmen-player-locker-page .weekly-source-caveat {
+  color:#afa4a4;font:400 12px/1.55 Inter,Arial,sans-serif;
+}
+.hitmen-player-locker-page .weekly-history-metrics {
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin-bottom:11px;
+}
+.hitmen-player-locker-page .weekly-history-metrics>div {
+  padding:10px 8px;border:1px solid rgba(218,185,120,.16);
+  border-radius:8px;background:rgba(218,185,120,.035);
+}
+.hitmen-player-locker-page .weekly-history-metrics small {
+  display:block;color:#ad9b85;font:800 11px/1.2 Inter,Arial,sans-serif;
+}
+.hitmen-player-locker-page .weekly-history-metrics b {
+  display:block;margin-top:6px;color:#f1e9db;font:900 22px/1 "Barlow Condensed",sans-serif;
+}
+.hitmen-player-locker-page #playerWeeklyReport .weekly-card h4,
+.hitmen-player-locker-page #playerLineReports .report-note small {
+  font:800 16px/1.2 "Barlow Condensed",sans-serif;color:#e1cb9e;
+}
+.hitmen-player-locker-page #playerWeeklyReport .weekly-card p,
+.hitmen-player-locker-page #playerLineReports .report-note p {
+  color:#c9bec0;font:400 13px/1.65 Inter,Arial,sans-serif;overflow-wrap:anywhere;
+}
+.hitmen-player-locker-page .weekly-vod-evidence {
+  margin-top:12px;border:1px solid rgba(219,184,101,.2);border-radius:10px;
+  background:rgba(219,184,101,.025);padding:13px;
+}
+.hitmen-player-locker-page .weekly-vod-evidence summary,
+.hitmen-player-locker-page .locker-line-week summary {
+  cursor:pointer;color:#f0d9a7;font:800 16px/1.3 "Barlow Condensed",sans-serif;
+  letter-spacing:.025em;
+}
+.hitmen-player-locker-page .weekly-vod-evidence .weekly-source-caveat {margin:11px 0;}
+.hitmen-player-locker-page .weekly-film-note {
+  padding:11px 0;border-top:1px solid rgba(255,255,255,.07);overflow-wrap:anywhere;
+}
+.hitmen-player-locker-page .weekly-film-note>b {color:#f0e1d7;font-size:13px;}
+.hitmen-player-locker-page .weekly-film-note p {
+  margin:7px 0 0;color:#c8bfc0;font:400 12px/1.55 Inter,Arial,sans-serif;
+  white-space:pre-line;
+}
+.hitmen-player-locker-page .weekly-history-link {
+  display:inline-block;padding:9px 0;color:#e5c679;font-size:12px;font-weight:700;
+}
+.hitmen-player-locker-page .locker-line-week {
+  border:1px solid rgba(255,255,255,.1);border-radius:9px;
+  background:#0c0b0d;overflow:hidden;
+}
+.hitmen-player-locker-page .locker-line-week>summary {padding:14px;}
+.hitmen-player-locker-page .locker-line-week[open]>summary {
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.hitmen-player-locker-page .locker-line-week-content {display:grid;gap:10px;padding:12px;}
+.hitmen-player-locker-page #playerLineReports .player-report h3 {
+  color:#f1e5df;font:800 19px/1.25 "Barlow Condensed",sans-serif;
+  overflow-wrap:anywhere;
+}
+.hitmen-player-locker-page #playerLineReports .player-report small {
+  font-size:11px;line-height:1.4;
+}
+.hitmen-player-locker-page #playerLineReports .weekly-source-caveat {
+  margin:0 0 8px;
+}
+@media(max-width:700px){
+  .hitmen-player-locker-page .weekly-history-metrics {
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .hitmen-player-locker-page .locker-week-picker button {flex:1 0 25%;min-width:86px;}
+  .hitmen-player-locker-page .locker-line-week-content {padding:8px;}
+  .hitmen-player-locker-page .locker-line-week summary {font-size:17px;}
+}
