@@ -78,7 +78,7 @@
   function active(key){return all().find(x=>x.key===key);}
   function statusLine(){
     const n=all().filter(x=>x.status==='live').length;
-    $('multiviewStatus').textContent=HUB?(S.selected.length+'/'+LIMIT+' SELECTED · '+all().filter(x=>x.status==='listed').length+' PUBLIC CHANNELS LISTED'):(S.selected.length+'/'+LIMIT+' SELECTED · '+n+' LIVE LISTED');
+    $('multiviewStatus').textContent=HUB?(S.selected.length+'/'+LIMIT+' SELECTED · '+all().filter(x=>x.status==='listed').length+' PUBLIC CHANNEL'+(all().filter(x=>x.status==='listed').length===1?'':'S')+' LISTED'):(S.selected.length+'/'+LIMIT+' SELECTED · '+n+' LIVE LISTED');
     const stamp=$('liveRefreshStamp');
     if(stamp&&S.updated)stamp.textContent='Updated '+new Date(S.updated).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
   }
@@ -86,7 +86,7 @@
     const root=$('multiviewPicker');
     root.textContent='';
     const rows=all();
-    if(!rows.length){root.textContent='No assigned live broadcasts. Add a Twitch or YouTube channel below.';return;}
+    if(!rows.length){root.textContent=HUB?'No registered public league broadcasts yet. Add a Twitch or YouTube channel below.':'No assigned live broadcasts. Add a Twitch or YouTube channel below.';return;}
     rows.forEach(x=>{
       const item=document.createElement('label');item.className='multi-pick';
       const input=document.createElement('input');input.type='checkbox';input.checked=S.selected.includes(x.key);
