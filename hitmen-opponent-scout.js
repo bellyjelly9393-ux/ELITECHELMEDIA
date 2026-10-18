@@ -3,6 +3,10 @@
   const E=id=>document.getElementById(id), DB=()=>window.VVHLBackend?.db, ST=()=>window.VVHLBackend?.state||{};
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  /* private pregame clips: [clip](storage:hitmen-vod-clips/...) -> 'Play clip' toggle (hitmen-clips.js); stripped if the helper is missing */
+  /* Team clips: every private clip saved for this opponent (signed-in Hitmen members; hitmen-clips.js) */
+  const teamClipsBtn=()=>window.HitmenClips&&opponent?(data.reports.forEach(r=>window.HitmenClips.remember(opponent,r.report)),window.HitmenClips.teamButton(opponent)):'';
+  const clipHtml=h=>window.HitmenClips?window.HitmenClips.tags(h,{compact:true}):String(h??'').replace(/\s*\[clip\]\(storage:[^)\s]*\)/g,'');
   const num=v=>{const n=Number(v);return Number.isFinite(n)?n:null};
   const qs=new URLSearchParams(location.search), opponent=qs.get('opponent')||'';
   const POS={LW:1,C:2,RW:3,LD:4,RD:5,G:6};
@@ -270,7 +274,7 @@
     renderHeat(p);renderGameLog(p);renderHistory(p);renderChel(p);chelLookup(p);
     const SRCOF={'Shot identity':'club','Finishing area':'club','Puck-management context':'club','LG production':'lg','Verified game logs':'lg','Goalie profile':'club','Evidence scope':'club','Defensive instruction':'club'};
     E('hsAutoScout').innerHTML=autoPlayerScout(p).map(x=>'<div class="hs-scout-item"><b>'+esc(x[0])+' '+badge(SRCOF[x[0]]||'club')+'</b><p>'+esc(x[1])+'</p></div>').join('');
-    const mentions=reportMentions(p);E('hsReportMentions').innerHTML=mentions.length?'<div class="eyebrow">EXISTING REPORT MENTIONS</div>'+mentions.map(m=>'<div class="hs-mention"><b>'+esc(new Date(m.date).toLocaleDateString())+'</b> · '+esc(m.text)+'</div>').join(''):'';
+    const mentions=reportMentions(p);E('hsReportMentions').innerHTML=teamClipsBtn()+(mentions.length?'<div class="eyebrow">EXISTING REPORT MENTIONS</div>'+mentions.map(m=>'<div class="hs-mention"><b>'+esc(new Date(m.date).toLocaleDateString())+'</b> · '+clipHtml(esc(m.text))+'</div>').join(''):'');
     fillScout(p);renderPlayers();
   }
   async function saveScout(){

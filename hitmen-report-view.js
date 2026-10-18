@@ -54,7 +54,13 @@ function profilesHtml(report,mgmt){
   row('Their six · Deep Scout profile, heat map and shot analytics',lu.opponent,n=>deepHref(opp,n),'Deep Scout')+
   (mgmt&&lu.calgary?row('Our six · player stall',lu.calgary,stallHref,'Stall'):'')+'</section>';
 }
-function inline(s){return linkPlayers(esc(s)).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\[(E\d+)\]/g,'<span class="hrv-cite">[$1]</span>')}
+/* Private film clips: [clip](storage:hitmen-vod-clips/...) markers render through the shared hitmen-clips.js helper. */
+const CLIPS=()=>window.HitmenClips;
+const clipTags=html=>CLIPS()?CLIPS().tags(html):html.replace(/\s*\[clip\]\(storage:[^)\s]*\)/g,'');
+const hydrateClips=root=>CLIPS()?CLIPS().hydrate(root):Promise.resolve(0);
+// Link player names outside clip markers only, then render clips.
+const linkOutsideClips=h=>h.split(/(\[clip\]\(storage:[^)\s]*\))/).map((x,i)=>i%2?x:linkPlayers(x)).join('');
+function inline(s){return clipTags(linkOutsideClips(esc(s))).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\[(E\d+)\]/g,'<span class="hrv-cite">[$1]</span>')}
 function reportHtml(text){
  return String(text||'').split(/\r?\n/).map(line=>{
   const t=line.trim();if(!t)return'';
@@ -132,8 +138,9 @@ function renderReport(report,game,vods,v){
   $('hrvReportBody').innerHTML='<div class="hrv-na"><b>REPORT NOT AVAILABLE</b>'+(v.mgmt?'No pregame report is attached to this game yet.':'The full scouting report has not been approved for player view yet.')+'</div>';
  }else{
   setPlayerLinks(report,!!v?.mgmt);
-  $('hrvReportBody').innerHTML=profilesHtml(report,!!v?.mgmt)+reportHtml(report.report)+heatHtml(report.evidence_summary||{})+scoutHtml(report.evidence_summary||{});
+  $('hrvReportBody').innerHTML=(CLIPS()&&report.opponent_name?CLIPS().teamButton(report.opponent_name,report.report):'')+profilesHtml(report,!!v?.mgmt)+reportHtml(report.report)+heatHtml(report.evidence_summary||{})+scoutHtml(report.evidence_summary||{});
   PLAYER_LINKS=null;
+  hydrateClips($('hrvReportBody'));
  }
  vodSummary(vods,game,report);
  const qp=game?.id?'game='+encodeURIComponent(game.id):report?.id?'report='+encodeURIComponent(report.id)+'&opponent='+encodeURIComponent(report.opponent_name):'opponent='+encodeURIComponent(report?.opponent_name||game?.opponent_name||'');
@@ -174,5 +181,6 @@ async function load(){
 $('hrvBack')?.addEventListener('click',()=>history.length>1?history.back():location.assign('hitmen-player-locker.html'));
 let timer=null;function kick(){clearTimeout(timer);timer=setTimeout(load,80)}
 window.addEventListener('vvhl-auth-change',()=>{const u=ST().user?.id||'';if(u!==lastUser){lastUser=u;kick()}});
+window.HitmenReportView={reportHtml,hydrateClips};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',kick,{once:true});else kick();
 })();
