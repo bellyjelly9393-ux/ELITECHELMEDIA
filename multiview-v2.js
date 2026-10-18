@@ -10,6 +10,7 @@
   const HUB=params.get('hub')==='1';
   const LEAGUE=['lgchl','lg3s'].includes(params.get('league'))?params.get('league'):'all';
   const STORE=HUB?'elitechel.livehub.multiview.'+LEAGUE+'.v1':'wildman.multiview.v2';
+  if(HUB){document.body.classList.add('lh-mv-mode');document.querySelector('#mvColumns option[value="4"]')?.remove();}
   function publicLeague(s){
     const m=s.metadata||{};
     const tag=[m.league,m.league_key,m.competition,m.category,m.title,s.display_label].filter(Boolean).join(' ').toLowerCase();
