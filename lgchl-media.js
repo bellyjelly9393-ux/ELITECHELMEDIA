@@ -155,7 +155,7 @@
   }
 
   const rate = (v,d) => v==null || v==='' || !Number.isFinite(Number(v)) ? '—' : Number(v).toFixed(d);
-  const SKATER_COLS = 'gamertag,position,player_kind,lg_team_id,team_name,gp,goals,assists,points,plus_minus,save_pct,gaa,fetched_at';
+  const SKATER_COLS = 'gamertag,position,player_kind,lg_team_id,team_name,gp,goals,assists,points,plus_minus,save_pct,gaa,fetched_at,lg_user_id';
   let leaderRequest=0;
   async function loadLeaders(metric) {
     const request=++leaderRequest;
@@ -168,7 +168,7 @@
     try {
       const params = { select: SKATER_COLS, player_kind: 'eq.' + (goalie ? 'goalie' : 'skater'), order: metric + '.desc.nullslast,gp.desc,gamertag.asc', [metric]:'not.is.null', limit: '10' };
       if (goalie) params.gp = 'gte.8';
-      const rows = await read('wm_lgchl_s55_player_leaders', params);
+      let rows;try{rows=await read('wm_lgchl_s55_player_leaders',params);}catch{rows=await read('wm_lgchl_s55_player_leaders',{...params,select:SKATER_COLS.replace(',lg_user_id','')});}
       if(request!==leaderRequest)return null;
       body.innerHTML = rows.map((p, i) => {
         const rank=1+rows.filter(x=>Number(x[metric])>Number(p[metric])).length;
@@ -177,6 +177,8 @@
           ? '<tr><td class="lg-rk">' + rank + '</td>' + who + '<td class="r">' + esc(p.gp) + '</td><td class="r lg-pts">' + rate(p.save_pct,3).replace(/^0/, '') + '</td><td class="r">' + rate(p.gaa,2) + '</td></tr>'
           : '<tr><td class="lg-rk">' + rank + '</td>' + who + '<td class="r">' + esc(p.goals) + '</td><td class="r">' + esc(p.assists) + '</td><td class="r lg-pts">' + esc(p.points) + '</td><td class="r">' + sgn(p.plus_minus) + '</td></tr>';
       }).join('') || '<tr><td colspan="6" class="empty">No qualifying players yet.</td></tr>';
+      window.WMLgPlayerBadges?.refresh(body);
+      window.WMLgPlayerBadges?.load(rows,read).then(()=>{if(request===leaderRequest)window.WMLgPlayerBadges?.refresh(body);});
       const at = rows.map(r => r.fetched_at).filter(Boolean).sort().pop();
       $('lgLeadersNote').textContent = (goalie ? 'Goalies with 8+ GP. ' : '') + 'Top 10 players; tied totals share a rank. Search up to 250 on the full board.';
       return rows;
