@@ -32,33 +32,10 @@ function showGate(title,msg){
  $('hrvContent').hidden=true;$('hrvGate').hidden=false;
  $('hrvGate').innerHTML='<h2>'+esc(title)+'</h2><p>'+esc(msg)+'</p>';
 }
-/* Private film clips: a report line can carry [clip](storage:hitmen-vod-clips/<team_id>/...mp4).
-   Only that bucket and a plain path are accepted; the player gets a short-lived signed URL after render. */
-const CLIP_BUCKET='hitmen-vod-clips',CLIP_TTL=3600;
-const CLIP_RE=/\[clip\]\(storage:hitmen-vod-clips\/([A-Za-z0-9][A-Za-z0-9._\/-]*\.mp4)\)/g;
-const safeClipPath=p=>!/(^|\/)\.\.?(\/|$)/.test(p)&&!p.includes('//');
-function clipTags(html){
- return html.replace(CLIP_RE,(m,path)=>safeClipPath(path)?'<span class="hrv-clip" data-clip-path="'+path+'"><video controls preload="none" playsinline></video><small class="hrv-clip-state">Loading clip…</small></span>':'');
-}
-async function hydrateClips(root){
- const nodes=[...(root?.querySelectorAll?.('[data-clip-path]')||[])];
- if(!nodes.length)return 0;
- const fail=n=>{n.classList?.add('is-unavailable');const st=n.querySelector('.hrv-clip-state');if(st)st.textContent='Clip unavailable';const vid=n.querySelector('video');if(vid)vid.remove()};
- const store=DB()?.storage?.from?.(CLIP_BUCKET);
- if(!store){nodes.forEach(fail);return 0}
- let ok=0;
- await Promise.all(nodes.map(async n=>{
-  try{
-   const r=await store.createSignedUrl(n.dataset.clipPath,CLIP_TTL);
-   const url=r?.data?.signedUrl;
-   if(r?.error||!url||!/^https:\/\//i.test(url))return fail(n);
-   const vid=n.querySelector('video');vid.src=url;
-   const st=n.querySelector('.hrv-clip-state');if(st)st.remove();
-   ok++;
-  }catch(e){console.warn('Clip could not be signed',e);fail(n)}
- }));
- return ok;
-}
+/* Private film clips: [clip](storage:hitmen-vod-clips/...) markers render through the shared hitmen-clips.js helper. */
+const CLIPS=()=>window.HitmenClips;
+const clipTags=html=>CLIPS()?CLIPS().tags(html):html.replace(/\s*\[clip\]\(storage:[^)\s]*\)/g,'');
+const hydrateClips=root=>CLIPS()?CLIPS().hydrate(root):Promise.resolve(0);
 function inline(s){return clipTags(esc(s)).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\[(E\d+)\]/g,'<span class="hrv-cite">[$1]</span>')}
 function reportHtml(text){
  return String(text||'').split(/\r?\n/).map(line=>{

@@ -5,7 +5,9 @@ const store={async createSignedUrl(path,ttl){signed.push([path,ttl]);return path
 const db={storage:{from(b){assert.equal(b,'hitmen-vod-clips');return store}}};
 const window={VVHLBackend:{db,state:{}},addEventListener(){}};
 const document={body:{dataset:{view:'report'}},readyState:'complete',getElementById:()=>null,addEventListener(){}};
-vm.runInNewContext(fs.readFileSync('hitmen-report-view.js','utf8'),{window,document,console,URLSearchParams,location:{search:''},history:{},setTimeout(){},clearTimeout(){}});
+const ctx={window,document,console,URLSearchParams,location:{search:''},history:{},setTimeout(){},clearTimeout(){}};
+vm.runInNewContext(fs.readFileSync('hitmen-clips.js','utf8'),ctx);
+vm.runInNewContext(fs.readFileSync('hitmen-report-view.js','utf8'),ctx);
 const {reportHtml,hydrateClips}=window.HitmenReportView;
 const team='b0bcbdda-da9d-419d-8f61-b34937966d49';
 const good=team+'/pregame-clips/2026-10-18/barrie/2026-10-18_01_barrie-collapse-blocks.mp4';
@@ -25,7 +27,7 @@ assert.ok(!/onerror=/.test(html.replace(/&quot; onerror=&quot;/g,'')),'No attrib
 assert.ok(!html.includes('hitmen-player-images/'+team+'/x.mp4"'),'Other buckets are not turned into players');
 assert.ok(!html.includes('data-clip-path="'+team+'/../'),'Path traversal is rejected');
 // hydrate with a tiny DOM stub
-const mk=path=>{const n={dataset:{clipPath:path},classList:{added:[],add(c){this.added.push(c)}},video:{src:'',removed:false,remove(){this.removed=true}},state:{textContent:'Loading clip…',removed:false,remove(){this.removed=true}},querySelector(sel){return sel==='video'?(this.video.removed?null:this.video):this.state}};return n};
+const mk=path=>{const n={dataset:{clipPath:path},classList:{added:[],add(c){this.added.push(c)}},video:{src:'',removed:false,remove(){this.removed=true}},state:{textContent:'Loading clip…',removed:false,remove(){this.removed=true}},querySelector(sel){return sel==='video'?(this.video.removed?null:this.video):sel==='.hc-clip-state'?(this.state.removed?null:this.state):null}};return n};
 const nodes=[mk(good),mk(team+'/pregame-clips/missing.mp4')];
 (async()=>{
  const ok=await hydrateClips({querySelectorAll:()=>nodes});

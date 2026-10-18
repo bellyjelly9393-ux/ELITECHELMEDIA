@@ -41,7 +41,10 @@ function countdown(ts){
 setInterval(()=>document.querySelectorAll('[data-wr-cd]').forEach(el=>{el.textContent=countdown(+el.dataset.wrCd)}),1000);
 
 /* ---------- report text -> sections (no new claims; citation markers stripped) ---------- */
-const clean=s=>String(s||'').replace(/\s*\[E\d+\]/g,'').replace(/\*\*/g,'').replace(/\s+/g,' ').trim();
+/* private pregame clips (hitmen-clips.js): markers never leak into extracted text; clip lines are listed separately */
+const clipStrip=s=>window.HitmenClips?window.HitmenClips.strip(s):String(s??'').replace(/\s*\[clip\]\(storage:[^)\s]*\)/g,'');
+const clipList=text=>window.HitmenClips?window.HitmenClips.extract(text):[];
+const clean=s=>clipStrip(s).replace(/\s*\[E\d+\]/g,'').replace(/\*\*/g,'').replace(/\s+/g,' ').trim();
 const sentences=s=>clean(s).split(/(?<=[.!?])(?<!\b[ap]\.m\.)(?<!\bvs\.)\s+(?=\S)/).map(x=>x.trim()).filter(Boolean);
 function sections(text){
   const out=[];let cur=null;
@@ -60,7 +63,7 @@ function parseReport(row){
   const lu=ev.lineups||{};
   const opp=lu.opponent?POS.filter(p=>lu.opponent[p]).map(p=>{const raw=String(lu.opponent[p]);const m=raw.match(/^(.*?)\s*\((.+)\)\s*$/);return {pos:p,name:m?m[1]:raw,note:m?m[2]:''}}):[];
   return {id:row.id,created:row.created_at?new Date(row.created_at):null,approved:ev.approved===true,
-    six:lu.calgary||null,opp,jobs,hasJobs:!!jobsSec,
+    six:lu.calgary||null,opp,jobs,hasJobs:!!jobsSec,clips:clipList(row.report),
     threats:points(threatSec),plan:points(planSec),
     attackSource:Array.isArray(ev.attack_source_heatmap)?ev.attack_source_heatmap:[],
     deepHeat:Array.isArray(ev.deep_heatmap_top_zones)?ev.deep_heatmap_top_zones:[],
@@ -251,6 +254,7 @@ function acrossHTML(D,g){
    (r.opp.length?`<span class="wr-k wr-sub">Projected six</span><dl class="wr-opp">${r.opp.map(o=>`<div><dt>${o.pos}</dt><dd>${esc(o.name)}${o.note?`<small>${esc(o.note)}</small>`:''}</dd></div>`).join('')}</dl>`:'')+
    (r.threats.length?`<span class="wr-k wr-sub">Key threats</span><ul class="wr-threats">${r.threats.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:'')+
    (r.plan.length?`<span class="wr-k wr-sub">Game plan</span><ol class="wr-plan">${r.plan.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:'')+
+   (r.clips&&r.clips.length?`<span class="wr-k wr-sub">Film clips · ${r.clips.length}</span><ul class="wr-clips">${r.clips.map(c=>`<li><span>${esc(c.label)}</span>${window.HitmenClips?window.HitmenClips.tags('[clip](storage:hitmen-vod-clips/'+c.path+')',{compact:true}):''}</li>`).join('')}</ul>`:'')+
    (r.attackSource.length?`<span class="wr-k wr-sub">Scoring-source heat · LG</span><div class="wr-heat">${r.attackSource.map(z=>`<div><b>${esc(z.pos||'—')}</b><i><em style="width:${Math.max(2,Math.min(100,Number(z.goal_share||0)))}%"></em></i><small>${esc(Number(z.goal_share||0).toFixed(1))}% goals</small></div>`).join('')}</div>`:'')+
    (r.deepHeat.length?`<span class="wr-k wr-sub">Top shot zones · EA profile</span><div class="wr-heat">${r.deepHeat.map(z=>`<div><b>Z${esc(z.zone||'—')}</b><i><em style="width:${Math.max(2,Math.min(100,100*Number(z.shots||0)/deepMax))}%"></em></i><small>${esc(z.name||'Zone')} · ${esc(z.shots||0)} shots</small></div>`).join('')}</div>`:'')+
    `<div class="wr-rink" id="wrRink"></div>`+
@@ -399,5 +403,5 @@ async function run(){
 let lastUid;
 window.addEventListener('vvhl-auth-change',()=>{const uid=viewer().user?.id||null;if(uid!==lastUid){lastUid=uid;cache=null}run()});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
-window.WRTonight={reload:()=>{cache=null;return run()},parseReport,data,viewer,sixFor,tabsGames,initialGm,crest,esc,norm,etDay,POS};
+window.WRTonight={reload:()=>{cache=null;return run()},parseReport,acrossHTML,data,viewer,sixFor,tabsGames,initialGm,crest,esc,norm,etDay,POS};
 })();
