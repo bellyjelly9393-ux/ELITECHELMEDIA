@@ -12,9 +12,9 @@
   const id = p => p && numeric(p.lg_user_id) && Number(p.lg_user_id) > 0
     ? String(p.lg_user_id) + '|' + (p.player_kind || 'skater') : null;
   const defs = Object.freeze([
-    {key:'hot',icon:'🔥',label:'Hot Start',detail:'5–15 GP and at least 2.00 points per game in the current LGCHL season.'},
-    {key:'career',icon:'🏆',label:'Career-Year Watch',detail:'10+ GP; season points-per-game pace at least 0.20 above their best previous 10+ GP LGCHL season.'},
-    {key:'rise',icon:'📈',label:'On the Rise',detail:'10+ GP in S54 and S55; scoring rate improved by at least 0.35 points/game from Season 54.'},
+    {key:'hot',icon:'🔥',label:'Hot Start',detail:'5–20 GP and at least 2.00 points per game in the current LGCHL season.'},
+    {key:'career',icon:'🏆',label:'Career-Year Watch',detail:'6+ GP in S55; season points-per-game pace at least 0.30 above their best previous 10+ GP LGCHL season.'},
+    {key:'rise',icon:'📈',label:'On the Rise',detail:'6+ GP in S55 and 10+ GP in S54; scoring rate improved by at least 0.50 points/game from Season 54.'},
     {key:'streak',icon:'⚡',label:'Point Streak',detail:'Three or more consecutive appearances with a point, once complete verified game logs are available.'},
     {key:'wall',icon:'🧱',label:'Brick Wall',detail:'Goalie with at least 8 GP and an 85.0% or better save percentage.'}
   ]);
@@ -23,12 +23,12 @@
     const gp = n(p.gp), pts = n(p.points), ppg = gp > 0 && pts !== null ? pts / gp : null;
     if (p.player_kind === 'goalie') return gp >= 8 && n(p.save_pct) >= .85 ? ['wall'] : [];
     const found = [];
-    if (ppg !== null && gp >= 5 && gp <= 15 && ppg >= 2) found.push('hot');
+    if (ppg !== null && gp >= 5 && gp <= 20 && ppg >= 2) found.push('hot');
     const history = records.get(id(p));
-    if (history && ppg !== null && gp >= 10) {
-      if (n(history.career_best_ppg) !== null && ppg >= Number(history.career_best_ppg) + .20) found.push('career');
+    if (history && ppg !== null && gp >= 6) {
+      if (n(history.career_best_ppg) !== null && ppg >= Number(history.career_best_ppg) + .30) found.push('career');
       if (n(history.prev_gp) >= 10 && n(history.prev_ppg) !== null &&
-          ppg >= Number(history.prev_ppg) + .35) found.push('rise');
+          ppg >= Number(history.prev_ppg) + .50) found.push('rise');
     }
     // Deliberately no 'streak' without a complete, verified per-game sequence.
     return found;
