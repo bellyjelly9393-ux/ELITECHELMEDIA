@@ -22,3 +22,5 @@
 @media(max-width:980px){.hs-team-grid{grid-template-columns:1fr}.hs-workspace{grid-template-columns:1fr}.hs-sidebar{position:static;max-height:none}.hs-stat-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.hs-player-heat-layout{grid-template-columns:1fr}.hs-zone-breakdown{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.hs-hero{display:block}.hs-hero-actions{margin-top:14px}.hs-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.hs-stat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hs-zone-breakdown{grid-template-columns:1fr}.hs-form{grid-template-columns:1fr}.hs-form .wide{grid-column:auto}}/* LG-verified EA game log */
 .hs-log-kpis{margin-bottom:12px}.hs-log-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}.hs-gamelog{min-width:560px}.hs-gamelog a{color:inherit;text-decoration:underline;text-decoration-color:rgba(255,255,255,.3);text-underline-offset:2px}.hs-log-note{margin:8px 0 0;color:#81777a;font-size:9px}
+.hs-tracker-k{margin:16px 0 8px}
+.hs-workspace>*,.hs-subsection{min-width:0}

@@ -36,6 +36,9 @@
     return [...by.values()];
   }
   const slaState={base:'shots',mode:'totals'};
+  const POSNAME={center:'C',leftWing:'LW',rightWing:'RW',defenseMen:'D',goalie:'G'};
+  // A disconnect restart stores several EA files for one official game; count the LG game once.
+  const gpOf=p=>new Set((p.games||[]).map(r=>r.g.lg_game_id||r.g.source_game_id)).size;
   function sumPlayers(list){
     const by=new Map();
     list.forEach(p=>zoneRows(p.ea?.raw_stats||{}).forEach(z=>{const x=by.get(z.id)||{id:z.id,shots:0,goals:0};x.shots+=z.shots;x.goals+=z.goals;by.set(z.id,x)}));
@@ -83,12 +86,20 @@
     [...data.eaGames].sort((a,b)=>Date.parse(b.played_at||0)-Date.parse(a.played_at||0)).forEach(g=>{
       Object.values(g.player_stats?.team||{}).forEach(x=>{const k=norm(x?.playername);if(!k)return;if(!logs.has(k))logs.set(k,[]);logs.get(k).push({g,x})});
     });
-    const fold=v=>norm(String(v||'').replace(/[Il|]/g,'l')),logByFold=new Map();
+    // EA and LG spell the same tag differently (josh1401. / Josh_1401, papastener14 / papa-stener14): compare letters and digits only.
+    const fold=v=>String(v||'').replace(/[Il|]/g,'l').toLowerCase().replace(/[^a-z0-9]/g,''),logByFold=new Map();
     logs.forEach((v,k)=>{const f=fold(k);logByFold.set(f,logByFold.has(f)?null:v)});
     const keys=new Set([...lg.keys(),...ea.keys(),...hist.keys(),...roster.keys()]);
+    const known=new Map();keys.forEach(k=>{const f=fold(k);known.set(f,known.has(f)?null:k)});
+    logs.forEach((v,k)=>{if(keys.has(k)||known.get(fold(k)))return;keys.add(k)});
     players=[...keys].map(k=>{
       const rr=roster.get(k),L=lg.get(k),A=ea.get(k),H=(hist.get(k)||[]).sort((a,b)=>Date.parse(a.captured_at)-Date.parse(b.captured_at));
       return {key:k,name:rr?.gamertag||L?.gamertag||A?.gamertag||H.at(-1)?.gamertag||k,position:rr?.position||L?.position||A?.position||H.at(-1)?.position||'',current:!!rr?.active,roster:rr,lg:L,ea:A,history:H,scout:scouts.get(k),games:logs.get(k)||logByFold.get(fold(k))||[]};
+    }).map(p=>{
+      if(p.roster||p.lg||p.ea||p.history.length||!p.games.length)return p;
+      // Played in an official game file but is not on the saved roster or EA member list (guest, sub or departed player).
+      const cnt={};p.games.forEach(r=>{const q=POSNAME[r.x?.position]||'';if(q)cnt[q]=(cnt[q]||0)+1});
+      return {...p,name:p.games[0].x.playername||p.name,position:Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0]?.[0]||'',gameFilesOnly:true};
     }).sort((a,b)=>(a.current===b.current?0:a.current?-1:1)||(POS[a.position]||9)-(POS[b.position]||9)||String(a.name).localeCompare(String(b.name)));
   }
   function renderKpis(){
@@ -118,21 +129,21 @@
     const q=norm(E('hsSearch').value),list=players.filter(p=>(filter==='all'||p.current)&&(!q||norm(p.name).includes(q)));
     E('hsPlayers').innerHTML=list.length?list.map(p=>{
       const pts=p.lg?.points??((p.lg?.goals!=null||p.lg?.assists!=null)?Number(p.lg?.goals||0)+Number(p.lg?.assists||0):'—');
-      return '<button class="hs-player-button '+(selected?.key===p.key?'active':'')+'" data-player="'+esc(p.key)+'"><span class="pos">'+esc(p.position||'—')+'</span><span><strong>'+esc(p.name)+'</strong><small>'+(p.current?'CURRENT':'HISTORICAL')+' · '+(p.history.length)+' shot snapshots</small></span><span class="pts">'+esc(pts)+'</span></button>';
+      return '<button class="hs-player-button '+(selected?.key===p.key?'active':'')+'" data-player="'+esc(p.key)+'"><span class="pos">'+esc(p.position||'—')+'</span><span><strong>'+esc(p.name)+'</strong><small>'+(p.current?'CURRENT':p.gameFilesOnly?'GAME FILES ONLY':'HISTORICAL')+' · '+(p.games.length?gpOf(p)+' verified game'+(gpOf(p)===1?'':'s'):(p.history.length)+' shot snapshots')+'</small></span><span class="pts">'+esc(pts)+'</span></button>';
     }).join(''):'<div class="hs-empty">No matching players.</div>';
     E('hsPlayers').querySelectorAll('[data-player]').forEach(b=>b.addEventListener('click',()=>selectPlayer(b.dataset.player)));
   }
   function renderHeat(p){
     if(p.position==='G'){E('hsPlayerHeat').innerHTML='<div class="hs-empty">Goalies do not use the skater shooting-zone map.</div>';E('hsZoneBreakdown').innerHTML='';return}
     const rows=zoneRows(p.ea?.raw_stats||{}),pr=profile(rows);
-    if(!pr?.model.totalShots){E('hsPlayerHeat').innerHTML='<div class="hs-empty">'+(p.games?.length?'No rink-zone map for this player. EA only publishes shot locations for club members'+(p.games.some(r=>String(r.x?.isGuest)==='1')?', and he plays for this club as a guest':' and has none stored for him')+'. His shot volume from '+p.games.length+' LG-verified EA game'+(p.games.length===1?'':'s')+' is in the game log below.':'No EA shooting-location totals stored for this player yet.')+'</div>';E('hsZoneBreakdown').innerHTML='';return}
+    if(!pr?.model.totalShots){E('hsPlayerHeat').innerHTML='<div class="hs-empty">'+(p.games?.length?'No rink-zone map for this player. EA only publishes shot locations for club members'+(p.games.some(r=>String(r.x?.isGuest)==='1')?', and he plays for this club as a guest':' and has none stored for him')+'. His shot volume from '+gpOf(p)+' LG-verified EA game'+(gpOf(p)===1?'':'s')+' is in the game log below.':'No EA shooting-location totals stored for this player yet.')+'</div>';E('hsZoneBreakdown').innerHTML='';return}
     window.WildmanShotZones.mountAnalysis(E('hsPlayerHeat'),{ice:rows,net:netRows(p.ea?.raw_stats||{}),gp:eaGp(p),state:slaState});
     const max=Math.max(1,...pr.ranked.map(z=>z.shots));
     E('hsZoneBreakdown').innerHTML=pr.ranked.slice(0,6).map(z=>'<div class="hs-zone-row"><b>'+esc(z.name)+'</b><span>'+z.shots+' shots · '+z.goals+' goals · '+z.efficiency.toFixed(1)+'% · '+z.shotShare.toFixed(1)+'% share</span><div class="hs-zone-bar"><i style="width:'+Math.max(2,100*z.shots/max)+'%"></i></div></div>').join('');
   }
   function renderHistory(p){
-    const rows=p.history;
-    if(!rows.length){E('hsHistory').innerHTML='<div class="hs-empty">No historical EA shot snapshots yet.</div>';return}
+    const rows=p.history,tracker=gameTracker(p);
+    if(!rows.length){E('hsHistory').innerHTML=tracker||'<div class="hs-empty">No historical EA shot snapshots yet.</div>';return}
     const show=rows.slice(-10);
     E('hsHistory').innerHTML='<table class="hs-history"><thead><tr><th>Captured</th><th>EA GP</th><th>G</th><th>SOG</th><th>ATT</th><th>Δ SOG</th><th>Δ ATT</th><th>Largest new zone</th></tr></thead><tbody>'+show.map((s,i)=>{
       const globalIndex=rows.indexOf(s),prev=globalIndex>0?rows[globalIndex-1]:null;
@@ -144,15 +155,25 @@
         const best=deltas[0];if(best&&best.d>0)zone=(window.WildmanShotZones.byId[best.id]?.name||('Zone '+best.id))+' +'+best.d;else zone='No new mapped shots';
       }
       return '<tr><td>'+esc(new Date(s.captured_at).toLocaleString([],{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}))+'</td><td>'+esc(s.games_played??'—')+'</td><td>'+esc(s.goals??'—')+'</td><td>'+esc(s.shots_on_net??'—')+'</td><td>'+esc(s.shot_attempts??'—')+'</td><td class="'+(ds>0?'delta-plus':'')+'">'+esc(ds==null?'—':(ds>=0?'+':'')+ds)+'</td><td class="'+(da>0?'delta-plus':'')+'">'+esc(da==null?'—':(da>=0?'+':'')+da)+'</td><td>'+esc(zone)+'</td></tr>'
-    }).join('')+'</tbody></table>';
+    }).join('')+'</tbody></table>'+tracker;
   }
-  const POSNAME={center:'C',leftWing:'LW',rightWing:'RW',defenseMen:'D',goalie:'G'};
   function gameLogSummary(p){
     const L=p.games||[];if(!L.length)return null;
-    const t=k=>L.reduce((n,r)=>n+Number(r.x?.[k]||0),0),gp=L.length;
+    const t=k=>L.reduce((n,r)=>n+Number(r.x?.[k]||0),0),gp=gpOf(p);
     const shots=t('skshots'),att=t('skshotattempts'),goals=t('skgoals');
     return {gp,goals,assists:t('skassists'),shots,att,hits:t('skhits'),ta:t('sktakeaways'),ga:t('skgiveaways'),pos:t('skpossession'),
       saves:t('glsaves'),gshots:t('glshots'),shPct:shots?100*goals/shots:null,onNet:att?100*shots/att:null};
+  }
+  function gameTracker(p){
+    // Running totals, oldest official game first: one row per LG game (restart files combined).
+    const by=new Map();
+    [...(p.games||[])].reverse().forEach(({g,x})=>{const k=g.lg_game_id||g.source_game_id,r=by.get(k)||{g,goals:0,shots:0,att:0};
+      r.goals+=Number(x.skgoals||0);r.shots+=Number(x.skshots||0);r.att+=Number(x.skshotattempts||0);by.set(k,r)});
+    const list=[...by.values()];if(!list.length||p.position==='G')return'';
+    let G=0,S=0,A=0;
+    const body=list.map((r,i)=>{G+=r.goals;S+=r.shots;A+=r.att;const d=new Date(r.g.reconciliation?.lg_game_at||r.g.played_at);
+      return '<tr><td>'+esc(d.toLocaleDateString([],{month:'short',day:'numeric'}))+'</td><td>'+(i+1)+'</td><td>'+G+'</td><td>'+S+'</td><td>'+A+'</td><td class="'+(r.shots?'delta-plus':'')+'">+'+r.shots+'</td><td class="'+(r.att?'delta-plus':'')+'">+'+r.att+'</td><td>'+esc(r.g.reconciliation?.other_team||'—')+'</td></tr>'}).reverse().join('');
+    return '<div class="eyebrow hs-tracker-k">PER-GAME TRACKER · LG-VERIFIED EA FILES</div><div class="hs-log-wrap"><table class="hs-history hs-gamelog"><thead><tr><th>Game</th><th>GP</th><th>G</th><th>SOG</th><th>ATT</th><th>Δ SOG</th><th>Δ ATT</th><th>Vs</th></tr></thead><tbody>'+body+'</tbody></table></div>';
   }
   function renderGameLog(p){
     const L=p.games||[],box=E('hsGameLog');if(!box)return;
@@ -168,7 +189,7 @@
         ?'<tr><td>'+lg+'</td><td>'+esc(rc.other_team||'—')+'</td><td>'+esc(res)+'</td><td>'+esc(x.glsaves??'—')+'</td><td>'+esc(x.glshots??'—')+'</td><td>'+esc(x.glsavepct??'—')+'</td><td>'+esc(x.glga??'—')+'</td></tr>'
         :'<tr><td>'+lg+'</td><td>'+esc(rc.other_team||'—')+'</td><td>'+esc(res)+'</td><td>'+esc(POSNAME[x.position]||x.position||'—')+'</td><td>'+esc(x.skgoals??0)+'</td><td>'+esc(x.skassists??0)+'</td><td>'+esc(x.skshots??0)+'</td><td>'+esc(x.skshotattempts??0)+'</td><td>'+esc(x.skhits??0)+'</td><td>'+esc(x.sktakeaways??0)+'</td><td>'+esc(x.skgiveaways??0)+'</td><td>'+esc(x.skpasspct??'—')+'</td></tr>';
     }).join('');
-    box.innerHTML='<div class="hs-stat-grid hs-log-kpis">'+head+'</div><div class="hs-log-wrap"><table class="hs-history hs-gamelog"><thead><tr>'+(G?'<th>Game</th><th>Vs</th><th>Result</th><th>SV</th><th>SA</th><th>SV%</th><th>GA</th>':'<th>Game</th><th>Vs</th><th>Result</th><th>Pos</th><th>G</th><th>A</th><th>SOG</th><th>ATT</th><th>Hits</th><th>TA</th><th>GA</th><th>Pass%</th>')+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+(L.length>15?'<p class="hs-log-note">Showing the latest 15 of '+L.length+' verified games.</p>':'');
+    box.innerHTML='<div class="hs-stat-grid hs-log-kpis">'+head+'</div><div class="hs-log-wrap"><table class="hs-history hs-gamelog"><thead><tr>'+(G?'<th>Game</th><th>Vs</th><th>Result</th><th>SV</th><th>SA</th><th>SV%</th><th>GA</th>':'<th>Game</th><th>Vs</th><th>Result</th><th>Pos</th><th>G</th><th>A</th><th>SOG</th><th>ATT</th><th>Hits</th><th>TA</th><th>GA</th><th>Pass%</th>')+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+(L.length>15?'<p class="hs-log-note">Showing the latest 15 of '+L.length+' EA game files.</p>':'');
   }
   function reportMentions(p){
     const key=String(p.name||'').toLowerCase(),out=[];
@@ -191,9 +212,9 @@
     selected=players.find(p=>p.key===key);if(!selected)return;
     E('hsEmpty').hidden=true;E('hsPlayerDetail').hidden=false;
     const p=selected,lg=p.lg||{},ea=p.ea||{},raw=ea.raw_stats||{};
-    E('hsPlayerStatus').textContent=p.current?'CURRENT ROSTER':'HISTORICAL PLAYER';
+    E('hsPlayerStatus').textContent=p.current?'CURRENT ROSTER':p.gameFilesOnly?'PLAYED IN VERIFIED GAMES':'HISTORICAL PLAYER';
     E('hsPlayerName').textContent=p.name;E('hsPlayerPos').textContent=p.position||'—';
-    E('hsPlayerMeta').textContent=(p.roster?.management_role||p.roster?.roster_role||'Tracked player')+(p.roster?.salary!=null?' · $'+Number(p.roster.salary).toLocaleString():'')+' · '+p.history.length+' saved EA shot snapshots';
+    E('hsPlayerMeta').textContent=(p.roster?.management_role||p.roster?.roster_role||'Tracked player')+(p.roster?.salary!=null?' · $'+Number(p.roster.salary).toLocaleString():'')+' · '+(p.games.length?gpOf(p)+' LG-verified EA games':p.history.length+' saved EA shot snapshots');
     const lgPts=lg.points??((lg.goals!=null||lg.assists!=null)?Number(lg.goals||0)+Number(lg.assists||0):null);
     E('hsPlayerStats').innerHTML=stat('LG GP',lg.games_played,'league')+stat('LG G',lg.goals,'league')+stat('LG A',lg.assists,'league')+stat('LG PTS',lgPts,'league')+
       (p.position==='G'?stat('LG SV%',fmt(lg.goalie_save_pct,3),'league')+stat('LG GAA',fmt(lg.goalie_gaa,2),'league')+stat('EA SV%',fmt(ea.goalie_save_pct,3),'club'):
@@ -236,7 +257,7 @@
       makePlayers();renderKpis();renderTeam();renderPlayers();
       // ?player=<gamertag> opens that player directly (links from pregame reports and Tonight's Six).
       // LG shows capital I and lower-case l the same, so fall back to a folded match when it is unique.
-      const want=qs.get('player')||'',fold=v=>norm(String(v||'').replace(/[Il|]/g,'l'));
+      const want=qs.get('player')||'',fold=v=>String(v||'').replace(/[Il|]/g,'l').toLowerCase().replace(/[^a-z0-9]/g,'');
       const asked=want?(players.find(p=>p.key===norm(want))||(f=>f.length===1?f[0]:null)(players.filter(p=>fold(p.name)===fold(want)))):null;
       const first=asked||players.find(p=>p.current&&p.position!=='G')||players.find(p=>p.current)||players[0];if(first)selectPlayer(first.key);
       if(asked)setTimeout(()=>E('hsPlayerDetail')?.scrollIntoView({behavior:'smooth',block:'start'}),200);
