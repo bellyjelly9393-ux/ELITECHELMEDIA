@@ -111,6 +111,7 @@
   }
   function note(message){const el=$('multiviewNotice');if(el)el.textContent=message;}
   function iframeSrc(row,key){
+    if(HUB&&row.provider==='stage'&&row.key==='hub:hitman')return new URL('public-broadcast-stage.html?channel=hitmen-main',location.href).toString();
     const v=stream(row.url);if(!v)return '';
     const mute=S.muted[key]!==false;
     if(v.provider==='twitch'){
@@ -225,6 +226,9 @@
         const key='game:'+g.id,title=(teamNames.get(g.home_team_id)||'TBD')+' vs '+(teamNames.get(g.away_team_id)||'TBD');
         S.channels.set(key,{key,title,url:p.url,provider:p.provider,status:g.status||'scheduled',meta:g.status==='live'?'GAME LIVE '+(g.home_score??'')+'-'+(g.away_score??''):'Scheduled game'});
       });
+      if(HUB&&LEAGUE!=='lg3s'){
+        S.channels.set('hub:hitman',{key:'hub:hitman',title:'Hitman Live · Broadcast Stage',url:'public-broadcast-stage.html?channel=hitmen-main',provider:'stage',status:'listed',meta:'Official public broadcast · studio feed'});
+      }
       if(first&&!S.selected.length&&S.auto){
         S.selected=all().filter(x=>x.status==='live'&&!x.key.startsWith('manual:')).slice(0,4).map(x=>x.key);
       }
