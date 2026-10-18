@@ -32,7 +32,7 @@
       const role = String(membership.role || "").toLowerCase();
       if (membership.active === false) return false;
       // Rostered players can view these read-only pages (Deep Scout saving stays owner/GM/AGM in the page itself).
-      if (page === "hitmen-team-locker.html" || page === "hitmen-opponent-scout.html") {
+      if (["hitmen-team-locker.html", "hitmen-opponent-scout.html", "hitmen-opponents.html", "hitmen-battle-plan.html"].includes(page)) {
         return membership.team_id === HITMEN_TEAM_ID && (hitmenRoles.has(role) || role === "player");
       }
       if (hitmenPage) return membership.team_id === HITMEN_TEAM_ID && hitmenRoles.has(role);
@@ -57,7 +57,7 @@
       if (!state.user) {
         lockedMessage.innerHTML =
           "<b>Management sign-in required.</b><p>This workspace is restricted to authorized management accounts.</p>";
-      } else if (page === "hitmen-team-locker.html" || page === "hitmen-opponent-scout.html") {
+      } else if (["hitmen-team-locker.html", "hitmen-opponent-scout.html", "hitmen-opponents.html", "hitmen-battle-plan.html"].includes(page)) {
         lockedMessage.innerHTML =
           "<b>Calgary Hitmen team access not assigned.</b><p>Use the Discord account linked to an active Season 55 roster spot.</p>";
       } else if (hitmenPage) {
@@ -88,6 +88,17 @@
     }
 
     document.body.classList.toggle("management-authorized", allowed);
+    // Rostered players (no management role) see these pages read-only: write controls are hidden.
+    const playerOnly = allowed && !(state.profile && ["admin","commissioner"].includes(String(state.profile.role||"").toLowerCase())) &&
+      !(state.memberships || []).some((m) => m.team_id === HITMEN_TEAM_ID && m.active !== false && hitmenRoles.has(String(m.role || "").toLowerCase()));
+    document.body.classList.toggle("hitmen-readonly", playerOnly);
+    if (playerOnly && !document.getElementById("hitmenReadonlyStyle")) {
+      const st = document.createElement("style");
+      st.id = "hitmenReadonlyStyle";
+      st.textContent = 'body.hitmen-readonly [data-write-only],body.hitmen-readonly #saveBattle,body.hitmen-readonly #newBattle,body.hitmen-readonly [data-mgmt-only]{display:none!important}' +
+        'body.hitmen-readonly [data-management-content] textarea,body.hitmen-readonly [data-management-content] input:not([type=search]):not(#gameDate){pointer-events:none;opacity:.85}';
+      document.head.appendChild(st);
+    }
 
     const hitmenAllowed = Boolean(
       state?.user && (

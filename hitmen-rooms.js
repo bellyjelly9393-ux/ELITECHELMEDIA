@@ -22,6 +22,7 @@
   const CGY = 412, SEASON = 55;
   const HITMEN_ROLES = new Set(['owner', 'gm', 'agm', 'scout']);
   const ROOM = document.body.dataset.room;
+  let VIEWER = null; // role of the signed-in viewer; 'player' = read-only
   const db = B.db;
 
   /* ---------- access ---------- */
@@ -30,17 +31,22 @@
     const pr = String(state.profile?.role || '').toLowerCase();
     if (pr === 'admin' || pr === 'commissioner') return pr;
     const m = (state.memberships || []).find(x => x.team_id === TEAM && x.active !== false && HITMEN_ROLES.has(String(x.role || '').toLowerCase()));
-    return m ? String(m.role).toLowerCase() : null;
+    if (m) return String(m.role).toLowerCase();
+    // Rostered players get the same War Room view, read-only (management tools stay hidden; RLS still blocks writes).
+    const p = (state.memberships || []).find(x => x.team_id === TEAM && x.active !== false && String(x.role || '').toLowerCase() === 'player');
+    return p ? 'player' : null;
   }
   let started = false;
   function gate(state) {
     const role = access(state);
     $('hqApp').hidden = !role;
+    document.body.classList?.toggle('hq-player', role === 'player');
+    VIEWER = role;
     $('hqGate').hidden = !!role;
     if (!role) {
       $('hqLocked').innerHTML = !state?.user
-        ? '<b>Sign in to continue.</b> The War Room is limited to Calgary Hitmen management (Owner, GM, AGM or Scout).'
-        : '<b>Calgary Hitmen management access not assigned.</b> This page is limited to authorized Owner, GM, AGM or Scout accounts.';
+        ? '<b>Sign in to continue.</b> The War Room is open to the Calgary Hitmen roster and management.'
+        : '<b>Calgary Hitmen roster access not found.</b> Sign in with the Discord account linked to an active Season 55 roster spot.';
       return;
     }
     if (!started) { started = true; who(state, role); load(state).catch(e => fail(e)); }
@@ -155,7 +161,7 @@
       const p = Promise.all([
         safe(q(db.from('hitmen_opponent_player_stats').select('gamertag,position,source,games_played,goals,assists,points,plus_minus,goalie_save_pct,goalie_gaa,source_updated_at').eq('team_id', TEAM).eq('season', SEASON).eq('opponent_name', name))),
         safe(q(db.from('hitmen_opponent_roster_players').select('gamertag,position,roster_role,source_updated_at').eq('team_id', TEAM).eq('season', SEASON).eq('opponent_name', name).eq('active', true))),
-        safe(q(db.from('hitmen_opponent_pregame_reports').select('id,report,created_at,evidence_summary').eq('team_id', TEAM).eq('season', SEASON).eq('opponent_name', name).order('created_at', { ascending: false }).limit(1)))
+        safe(q(db.from('hitmen_opponent_pregame_reports').select('id,report,created_at,evidence_summary').eq('team_id', TEAM).eq('season', SEASON).eq('opponent_name', name).order('created_at', { ascending: false }).limit(10)).then(v => (VIEWER === 'player' ? v.filter(r => r.evidence_summary?.approved === true) : v).slice(0, 1)))
       ]);
       cache.set(name, p);
       return p;
@@ -198,7 +204,7 @@
       if (!rep) {
         report = '<div class="report card" aria-label="Pregame report"><div class="leaders-head"><span>Pregame report</span>' + chip(repR.ok ? 'crit' : 'info', repR.ok ? 'No report' : 'Unavailable') + '</div>' +
           '<p class="hq-empty">' + (repR.ok ? 'No pregame report is saved for ' + esc(t.name) + ' yet.' : 'Pregame reports could not load.') + '</p>' +
-          '<div class="report-foot"><span class="src">Reports are written in Opponent Intelligence.</span><a class="btn btn-gold btn-sm" href="hitmen-opponents.html">Write a report <span class="arr">→</span></a></div></div>';
+          '<div class="report-foot"><span class="src">' + (VIEWER === 'player' ? 'The report posts here once management approves it.' : 'Reports are written in Opponent Intelligence.') + '</span>' + (VIEWER === 'player' ? '' : '<a class="btn btn-gold btn-sm" href="hitmen-opponents.html">Write a report <span class="arr">→</span></a>') + '</div></div>';
       } else {
         const text = String(rep.report || '');
         const parts = text.split(/^##\s+/m);
