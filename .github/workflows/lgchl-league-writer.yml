@@ -1,0 +1,29 @@
+name: LGCHL league writer
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/functions/lgchl-league-writer/**'
+      - 'tests/lgchl-league-writer.test.mjs'
+      - 'scripts/lgchl-league-writer.mjs'
+      - '.github/workflows/lgchl-league-writer.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/functions/lgchl-league-writer/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Privacy allowlist and night-wrap composer tests
+        run: node --test tests/lgchl-league-writer.test.mjs
+      - name: Type-check Edge Function
+        run: |
+          cd "$RUNNER_TEMP" && npm init -y >/dev/null && npm install deno@2 >/dev/null
+          cd "$GITHUB_WORKSPACE"
+          "$RUNNER_TEMP/node_modules/.bin/deno" check --config supabase/functions/lgchl-league-writer/deno.json supabase/functions/lgchl-league-writer/index.ts
