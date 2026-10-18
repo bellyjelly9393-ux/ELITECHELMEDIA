@@ -3,65 +3,161 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07080b">
+<meta name="theme-color" content="#08090b">
 <meta name="description" content="LGCHL Live Hub: follow public LGCHL and LG Threes hockey broadcasts, watch Hitman Live, and build a Twitch multiview.">
 <title>LGCHL Live Hub | Elitechel Media</title>
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="hub.css">
-<link rel="stylesheet" href="wildman.css">
-<link rel="stylesheet" href="operations.css">
-<link rel="stylesheet" href="live-hub.css?v=20261017a">
+<link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="wildman-home.css?v=20261011-4">
+<link rel="stylesheet" href="live-hub-home-nav.css?v=20261017a">
+<link rel="stylesheet" href="live-hub-v2.css?v=20261017-1">
 </head>
-<body class="wildman-site">
-<header class="site-header"></header>
-<main class="lh-shell">
-  <section class="lh-hero section-shell" aria-labelledby="liveHubTitle">
-    <p class="lh-eyebrow">ELITECHEL MEDIA · HOCKEY BROADCAST NETWORK</p>
-    <h1 id="liveHubTitle">LGCHL <span>LIVE HUB</span></h1>
-    <p class="lh-lede">One home for public league broadcasts, Hitman Live and LG Threes. Pick a stream or build a multi-game desk without leaving the network.</p>
-    <nav class="lh-jump" aria-label="Live Hub sections">
-      <a href="#lgchl">LGCHL Games</a><a href="#hitman">Hitman Live</a><a href="#lg3s">LG Threes</a>
-      <a href="multiview.html?hub=1" class="lh-accent">Launch Multiview ↗</a>
+<body>
+<header class="top band">
+  <div class="top-in">
+    <a class="brand" href="index.html" aria-label="Wildman Hockey home">
+      <img class="crest" src="assets/wildman/home/wildman-crest.webp" width="112" height="99" alt="">
+      <div class="brand-txt"><b>Wildman Hockey</b><span>Elitechel Media</span><span>Network</span></div>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="team.html">Wildman</a>
+      <details class="home-live-menu is-on"><summary aria-current="page">LGCHL Live Hub <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="#lgchl">LGCHL Games</a><a href="#hitman">Hitman Live</a><a href="#lg3s">LG Threes</a></div></details>
+      <a href="academy.html">Academy</a>
+      <a href="hitmen-media.html">Media</a>
+      <a href="management.html">Management</a>
     </nav>
-  </section>
-  <section id="lgchl" class="section-shell lh-section" aria-labelledby="lgchlTitle">
-    <div class="lh-section-top">
-      <div><p class="lh-eyebrow">01 / LEAGUE COVERAGE</p><h2 id="lgchlTitle">LGCHL <em>GAMES</em></h2><p>Public Twitch and YouTube streams from broadcasters identified as LGCHL. Stream availability is not confirmed until the player connects.</p></div>
-      <a class="lh-btn" href="multiview.html?hub=1&amp;league=lgchl">Open 8-stream multiview ↗</a>
+    <a class="icon-btn search-btn" href="lgchl-leaders.html" aria-label="LGCHL stats"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </div>
+</header>
+
+<nav class="lh-sub band" aria-label="Live Hub sections">
+  <div class="lh-sub-in">
+    <a href="#lgchl">LGCHL Games</a>
+    <a href="#hitman">Hitman Live</a>
+    <a href="#lg3s">LG Threes</a>
+    <a href="#add">Add a stream</a>
+    <a class="lh-sub-cta" href="multiview.html?hub=1">Launch Multiview ↗</a>
+  </div>
+</nav>
+
+<main class="lh-page" id="top">
+  <section class="lh-hero band" aria-labelledby="liveHubTitle">
+    <div class="lh-hero-in">
+      <div class="lh-hero-copy">
+        <img class="lh-hero-logo" src="assets/wildman/home/lgchl-logo.webp" width="760" height="434" alt="LGCHL, Canadian Hockey League">
+        <p class="lh-kicker"><span class="lh-live-dot" aria-hidden="true"></span>Elitechel Media · hockey broadcast network</p>
+        <h1 class="lh-h1" id="liveHubTitle">LGCHL <em>Live Hub</em></h1>
+        <p class="lh-dek">One home for public league broadcasts, Hitman Live and LG Threes. Pick a stream, or build a multi-game desk without leaving the network.</p>
+        <div class="lh-cta">
+          <a class="btn btn-gold btn-sm" href="multiview.html?hub=1">Launch Multiview <span class="arr">↗</span></a>
+          <a class="btn btn-line btn-sm" href="#hitman"><span>Watch Hitman Live</span> <span class="arr">→</span></a>
+        </div>
+      </div>
+      <nav class="lh-channels" aria-label="Choose a channel">
+        <a class="card tinted lh-channel" href="#lgchl" style="--tc:58,107,255">
+          <span class="wm lh-wm-lgchl" aria-hidden="true"></span>
+          <img src="assets/wildman/home/lgchl-logo.webp" alt="">
+          <span class="lh-channel-txt"><small>01 · League coverage</small><b>LGCHL Games</b><span>Public league broadcasts</span></span><span class="go" aria-hidden="true">→</span>
+        </a>
+        <a class="card tinted lh-channel" href="#hitman" style="--tc:212,42,42">
+          <span class="wm lh-wm-hitmen" aria-hidden="true"></span>
+          <img src="assets/lgchl/s55/team412.png" alt="">
+          <span class="lh-channel-txt"><small>02 · Elitechel Media</small><b>Hitman Live</b><span>The Hitman hockey desk</span></span><span class="go" aria-hidden="true">→</span>
+        </a>
+        <a class="card tinted lh-channel" href="#lg3s" style="--tc:227,181,74">
+          <span class="wm lh-wm-ecm" aria-hidden="true"></span>
+          <img src="assets/wildman/home/elitechel-media.webp" alt="">
+          <span class="lh-channel-txt"><small>03 · Threes coverage</small><b>LG Threes</b><span>Public 3s broadcasts</span></span><span class="go" aria-hidden="true">→</span>
+        </a>
+      </nav>
     </div>
-    <div class="lh-tools">
-      <label class="lh-search">Find a listed broadcast <input id="lgchlFilter" type="search" placeholder="Search channels or teams..." autocomplete="off"></label>
-      <span id="lgchlCount" class="lh-pill" aria-live="polite">Checking public listings…</span>
-    </div>
-    <div id="lgchlStreams" class="lh-cards" aria-live="polite"><p class="lh-empty">Loading public league stream listings…</p></div>
-    <div class="lh-help">
-      <p>Missing a game? Paste its public Twitch or YouTube link into the multiview desk. This adds it to <strong>your device only</strong>, not the public directory.</p>
-      <a href="https://www.twitch.tv/search?term=LGCHL" target="_blank" rel="noopener noreferrer">Search LGCHL on Twitch ↗</a>
+  </section>
+
+  <section id="lgchl" class="lh-sec band" aria-labelledby="lgchlTitle">
+    <div class="lh-in">
+      <div class="lh-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">01 · League coverage</p><h2 class="sec-title" id="lgchlTitle">LGCHL <em>games</em></h2><p class="lh-note">Public Twitch and YouTube streams from broadcasters identified as LGCHL. A stream is only confirmed live once the player connects.</p></div>
+        <a class="btn btn-line btn-sm" href="multiview.html?hub=1&amp;league=lgchl"><span>Open 8-stream multiview</span> <span class="arr">↗</span></a>
+      </div>
+      <div class="lh-tools">
+        <label class="lh-search"><span>Find a listed broadcast</span><input id="lgchlFilter" type="search" placeholder="Search channels or teams…" autocomplete="off"></label>
+        <span id="lgchlCount" class="lh-count" aria-live="polite">Checking public listings…</span>
+      </div>
+      <div id="lgchlStreams" class="lh-cards" aria-live="polite"><p class="lh-empty">Loading public league stream listings…</p></div>
+      <div class="lh-help">
+        <p>Missing a game? Paste its public Twitch or YouTube link into the multiview desk. This adds it to <strong>your device only</strong>, not the public directory.</p>
+        <a href="https://www.twitch.tv/search?term=LGCHL" target="_blank" rel="noopener noreferrer">Search LGCHL on Twitch ↗</a>
+      </div>
     </div>
   </section>
-  <section id="hitman" class="section-shell lh-section" aria-labelledby="hitmanTitle">
-    <div class="lh-section-top"><div><p class="lh-eyebrow">02 / ELITECHEL MEDIA</p><h2 id="hitmanTitle">HITMAN <em>LIVE</em></h2><p>Our existing Hitmen broadcast stage, kept intact and linked to the established game center.</p></div>
-      <a class="lh-btn" href="game-center.html?channel=hitmen#featured">Hitmen Game Center ↗</a></div>
-    <div class="lh-feature">
-      <div class="lh-feature-player"><div class="lh-player-top"><span class="lh-dot" aria-hidden="true"></span><strong>HITMAN LIVE</strong><small>Broadcast available when the channel is running</small></div><iframe title="Hitman Live public broadcast stage" src="public-broadcast-stage.html?channel=hitmen-main" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
-      <aside class="lh-feature-copy"><p class="lh-eyebrow">LIVE CHANNEL</p><h3>THE HITMAN<br>HOCKEY DESK.</h3><p>Watch the featured channel here, or open the established watch center for game night coverage.</p><a class="lh-btn" href="game-center.html?channel=hitmen#featured">Watch Hitman Live ↗</a><a class="lh-quiet" href="multiview.html?hub=1&amp;streams=hub%3Ahitman">+ Add Hitman Live to Multiview →</a></aside>
+
+  <section id="hitman" class="lh-sec lh-hitman band" aria-labelledby="hitmanTitle">
+    <div class="lh-in">
+      <div class="lh-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">02 · Elitechel Media</p><h2 class="sec-title" id="hitmanTitle">Hitman <em>live</em></h2><p class="lh-note">Our Hitmen broadcast stage, linked to the game center.</p></div>
+        <a class="btn btn-line btn-sm" href="game-center.html?channel=hitmen#featured"><span>Hitmen Game Center</span> <span class="arr">↗</span></a>
+      </div>
+      <div class="lh-feature">
+        <div class="card lh-player">
+          <div class="lh-player-top"><span class="lh-live-dot" aria-hidden="true"></span><b>Hitman Live</b><small>Broadcast available when the channel is running</small></div>
+          <div class="lh-player-frame"><iframe title="Hitman Live public broadcast stage" src="public-broadcast-stage.html?channel=hitmen-main" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+        </div>
+        <aside class="card tinted lh-feature-copy" style="--tc:212,42,42">
+          <span class="wm lh-wm-hitmen" aria-hidden="true"></span>
+          <p class="eyebrow">Live channel</p>
+          <h3>The Hitman <em>hockey desk</em></h3>
+          <p>Watch the featured channel here, or open the watch center for full game-night coverage.</p>
+          <a class="btn btn-gold btn-sm" href="game-center.html?channel=hitmen#featured">Watch Hitman Live <span class="arr">↗</span></a>
+          <a class="lh-quiet" href="multiview.html?hub=1&amp;streams=hub%3Ahitman">+ Add Hitman Live to Multiview →</a>
+        </aside>
+      </div>
     </div>
   </section>
-  <section id="lg3s" class="section-shell lh-section" aria-labelledby="lg3sTitle">
-    <div class="lh-section-top"><div><p class="lh-eyebrow">03 / THREES COVERAGE</p><h2 id="lg3sTitle">LG <em>THREES</em></h2><p>Dedicated public-stream listings for LG Threes. NHL, AHL, CHL and NCAA-level connections can all follow the coverage here as it grows.</p></div>
-      <a class="lh-btn" href="multiview.html?hub=1&amp;league=lg3s">LG Threes Multiview ↗</a></div>
-    <div class="lh-tools"><label class="lh-search">Find a listed broadcast <input id="lg3sFilter" type="search" placeholder="Search LG Threes streams..." autocomplete="off"></label><span id="lg3sCount" class="lh-pill" aria-live="polite">Checking public listings…</span></div>
-    <div id="lg3sStreams" class="lh-cards" aria-live="polite"><p class="lh-empty">Loading public LG Threes listings…</p></div>
-    <div class="lh-help"><p>Have a public LG Threes stream? Open it in multiview for your own viewing desk. A channel must be verified and registered before it appears for all visitors.</p><a href="https://www.twitch.tv/search?term=LG3s" target="_blank" rel="noopener noreferrer">Search LG Threes on Twitch ↗</a></div>
+
+  <section id="lg3s" class="lh-sec band" aria-labelledby="lg3sTitle">
+    <div class="lh-in">
+      <div class="lh-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">03 · Threes coverage</p><h2 class="sec-title" id="lg3sTitle">LG <em>threes</em></h2><p class="lh-note">Public stream listings for LG Threes. NHL, AHL, CHL and NCAA-level players can all follow the coverage here as it grows.</p></div>
+        <a class="btn btn-line btn-sm" href="multiview.html?hub=1&amp;league=lg3s"><span>LG Threes Multiview</span> <span class="arr">↗</span></a>
+      </div>
+      <div class="lh-tools">
+        <label class="lh-search"><span>Find a listed broadcast</span><input id="lg3sFilter" type="search" placeholder="Search LG Threes streams…" autocomplete="off"></label>
+        <span id="lg3sCount" class="lh-count" aria-live="polite">Checking public listings…</span>
+      </div>
+      <div id="lg3sStreams" class="lh-cards" aria-live="polite"><p class="lh-empty">Loading public LG Threes listings…</p></div>
+      <div class="lh-help">
+        <p>Have a public LG Threes stream? Open it in multiview for your own viewing desk. A channel must be verified and registered before it appears for all visitors.</p>
+        <a href="https://www.twitch.tv/search?term=LG3s" target="_blank" rel="noopener noreferrer">Search LG Threes on Twitch ↗</a>
+      </div>
+    </div>
   </section>
-  <section class="section-shell lh-section lh-add" aria-labelledby="addTitle">
-    <div><p class="lh-eyebrow">PERSONAL MULTIVIEW</p><h2 id="addTitle">ADD A PUBLIC <em>STREAM</em></h2><p>Paste a Twitch or YouTube broadcast URL. We'll open it in your existing multiview, not publish it to the website.</p></div>
-    <form id="lhAddForm"><label for="lhStreamUrl">Public broadcast URL</label><div class="lh-add-row"><input id="lhStreamUrl" type="url" inputmode="url" required placeholder="https://www.twitch.tv/channelname"><button type="submit" class="lh-btn">Add to my multiview ↗</button></div><p id="lhAddError" role="status" aria-live="polite"></p></form>
+
+  <section id="add" class="lh-sec band" aria-labelledby="addTitle">
+    <div class="lh-in">
+      <div class="card lh-add">
+        <span class="wm lh-wm-ecm" aria-hidden="true"></span>
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Personal multiview</p><h2 class="sec-title" id="addTitle">Add a public <em>stream</em></h2><p class="lh-note">Paste a Twitch or YouTube broadcast link. It opens in your own multiview and is never published to the website.</p></div>
+        <form id="lhAddForm">
+          <label for="lhStreamUrl">Public broadcast URL</label>
+          <div class="lh-add-row"><input id="lhStreamUrl" type="url" inputmode="url" required placeholder="https://www.twitch.tv/channelname"><button type="submit" class="btn btn-gold btn-sm">Add to my multiview <span class="arr">↗</span></button></div>
+          <p id="lhAddError" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
   </section>
 </main>
-<footer class="lh-footer"><div class="section-shell"><b>ELITECHEL MEDIA · LGCHL LIVE HUB</b><span>Public broadcasts only · LGCHL · Hitman Live · LG Threes</span></div></footer>
-<script src="network-shell.js?v=20261017-livehub"></script>
-<script src="script.js"></script>
+
+<footer class="band">
+  <div class="foot">
+    <span class="foot-brand"><img src="assets/wildman/home/wildman-crest.webp" width="96" height="85" loading="lazy" alt="Wildman Hockey logo"><span>© 2026 Wildman Hockey &amp; Esports Network</span></span>
+    <nav class="foot-nav" aria-label="Footer"><a href="esports-hub.html">LGCHL Live Hub</a><a href="multiview.html?hub=1">Multiview</a><a href="game-center.html?channel=hitmen">Game Center</a><a href="lgchl-media.html">LGCHL Media</a><a href="hitmen-media.html">Hitmen Media</a></nav>
+    <span>Public broadcasts only · LGCHL · Hitman Live · LG Threes</span>
+  </div>
+</footer>
+<script src="media-desk.js?v=20261011-1"></script>
+<script>window.WMDesk && window.WMDesk.menu();</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script src="live-hub.js?v=20261017a"></script>
 </body>

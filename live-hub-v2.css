@@ -1,0 +1,148 @@
+/* LGCHL Live Hub (esports-hub.html only). Same design language as the homepage and media desks:
+   built on wildman-home.css tokens and shared components (.card, .tinted, .wm, .sec-title, .btn).
+   live-hub.js still renders the stream cards (.lh-card) and is unchanged. */
+
+/* header: Live Hub is the active item */
+.top .nav .home-live-menu.is-on summary { color: #fff; position: relative; background: linear-gradient(180deg, rgba(227,181,74,.16), rgba(227,181,74,0)); }
+.top .nav .home-live-menu.is-on summary::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 0; height: 3px; background: var(--gold); box-shadow: 0 0 12px var(--gold); }
+
+/* section bar */
+.lh-sub { background: linear-gradient(90deg, rgba(13,36,99,.5), rgba(7,8,10,0) 55%), linear-gradient(180deg, #0d0f13, #08090b); border-bottom: 1px solid var(--line); }
+.lh-sub-in { display: flex; align-items: center; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+.lh-sub-in::-webkit-scrollbar { display: none; }
+.lh-sub-in a { display: flex; align-items: center; min-height: 48px; padding: 4px 16px 0; font-family: var(--f-ui); font-weight: 600; font-size: 20px; letter-spacing: .08em; text-transform: uppercase; color: #cfccc5; white-space: nowrap; }
+.lh-sub-in a:hover { color: #fff; }
+.lh-sub-in .lh-sub-cta { margin-left: auto; color: var(--gold-hi); }
+@media (min-width: 481px) { .lh-sub-in { padding-left: 124px; } } /* clear the crest that hangs below the header */
+
+/* page: faded league + network logos behind everything */
+.lh-page { --lh-blue: #3a6bff; --lh-blue-hi: #a9c0ff; position: relative; isolation: isolate; overflow: hidden; }
+.lh-page::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .07; filter: grayscale(.15);
+  background:
+    url("assets/wildman/home/lgchl-logo.webp") -6% 30% / 620px auto no-repeat,
+    url("assets/lgchl/s55/team412.png") 102% 48% / 340px auto no-repeat,
+    url("assets/wildman/home/elitechel-media.webp") -6% 74% / 520px auto no-repeat,
+    url("assets/wildman/home/lgchl-logo.webp") 106% 92% / 560px auto no-repeat; }
+.lh-wm-lgchl { --logo: url("assets/wildman/home/lgchl-logo.webp"); }
+.lh-wm-hitmen { --logo: url("assets/lgchl/s55/team412.png"); }
+.lh-wm-ecm { --logo: url("assets/wildman/home/elitechel-media.webp"); }
+
+/* live dot */
+.lh-live-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 0 rgba(212,42,42,.7); animation: lh-pulse 2s infinite; flex: none; }
+@keyframes lh-pulse { 0% { box-shadow: 0 0 0 0 rgba(212,42,42,.7); } 70% { box-shadow: 0 0 0 10px rgba(212,42,42,0); } 100% { box-shadow: 0 0 0 0 rgba(212,42,42,0); } }
+@media (prefers-reduced-motion: reduce) { .lh-live-dot { animation: none; } }
+
+/* hero */
+.lh-hero { position: relative; isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); }
+.lh-hero::before { content: ""; position: absolute; inset: 0; z-index: -2; background: url("assets/wildman/home/arena.webp") center 30% / cover no-repeat; filter: saturate(.75) brightness(.55); }
+.lh-hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(55% 90% at 8% 10%, rgba(58,107,255,.38), transparent 60%), radial-gradient(45% 80% at 100% 100%, rgba(212,42,42,.3), transparent 60%), linear-gradient(180deg, rgba(7,8,10,.2), rgba(7,8,10,.9)), var(--scratch); }
+.lh-hero-in { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px 44px; padding-block: 40px 46px; align-items: center; }
+.lh-hero-logo { width: min(400px, 100%); height: auto; filter: drop-shadow(0 10px 30px rgba(0,0,0,.6)); }
+.lh-kicker { display: flex; align-items: center; gap: 10px; margin: 22px 0 12px; font-family: var(--f-ui); font-weight: 600; font-size: 18px; letter-spacing: .2em; text-transform: uppercase; color: var(--bone); }
+.lh-h1 { font-family: var(--f-head); text-transform: uppercase; line-height: .9; letter-spacing: .005em; font-size: clamp(50px, 6.4vw, 100px);
+  background: linear-gradient(180deg, #ffffff 0%, #e9e7e2 42%, #9da0a6 54%, #f1f0ec 70%, #b9bbbf 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 3px 0 rgba(0,0,0,.85)) drop-shadow(0 10px 22px rgba(0,0,0,.6)); }
+.lh-h1 em { display: block; font-family: var(--f-slash); font-style: italic; font-weight: 900; font-size: .9em; padding-right: .1em;
+  background: linear-gradient(176deg, #fff4cc 0%, var(--gold-hi) 28%, var(--gold) 58%, #8a6216 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lh-dek { margin-top: 14px; max-width: 600px; font-size: 19px; line-height: 1.45; color: #e6e3dc; }
+.lh-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+
+/* channel tiles */
+.lh-channels { display: grid; gap: 10px; }
+.lh-channel { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 18px 14px 14px; }
+.lh-channel .wm { width: 150px; height: 150px; right: -30px; opacity: .12; }
+.lh-channel img { width: 64px; height: 48px; object-fit: contain; filter: drop-shadow(0 3px 8px rgba(0,0,0,.7)); }
+.lh-channel-txt { display: grid; gap: 2px; min-width: 0; }
+.lh-channel-txt small { font-family: var(--f-ui); font-weight: 600; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); line-height: 1; }
+.lh-channel-txt b { font-family: var(--f-head); font-weight: 400; font-size: 28px; line-height: 1; text-transform: uppercase; color: #fff; }
+.lh-channel-txt span { font-size: 15px; color: #cfccc5; }
+.lh-channel .go { font-family: var(--f-ui); font-size: 26px; color: var(--gold-hi); transition: transform .15s; }
+.lh-channel:hover .go { transform: translateX(4px); }
+
+/* sections */
+.lh-sec { position: relative; border-bottom: 1px solid var(--line); }
+.lh-in { padding-block: 44px; }
+.lh-head { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: end; justify-content: space-between; margin-bottom: 20px; }
+.lh-head .eyebrow { color: var(--mute); font-size: 15px; margin-bottom: 4px; }
+.lh-note { margin-top: 10px; max-width: 62ch; font-size: 16px; color: #cfccc5; }
+.sec-title em { padding-right: .1em; }
+
+/* search + count */
+.lh-tools { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: end; justify-content: space-between; margin-bottom: 16px; }
+.lh-search { display: grid; gap: 6px; flex: 1 1 320px; max-width: 520px; }
+.lh-search span, .lh-add label { font-family: var(--f-ui); font-weight: 600; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.lh-search input, .lh-add input { width: 100%; min-height: 46px; padding: 10px 14px; font: inherit; font-size: 16px; color: var(--bone); background: rgba(7,8,10,.72); border: 1px solid var(--line-2); border-radius: 3px; }
+.lh-search input:focus, .lh-add input:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: transparent; }
+.lh-count { display: inline-flex; align-items: center; gap: 7px; font-family: var(--f-ui); font-weight: 600; font-size: 16px; letter-spacing: .12em; text-transform: uppercase; color: #8be3a6; }
+.lh-count::before { content: ""; width: 12px; height: 3px; background: currentColor; transform: skewX(-24deg); }
+
+/* stream cards (rendered by live-hub.js): same skin as .card.tinted */
+.lh-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.lh-card { --tc: 58,107,255; position: relative; isolation: isolate; overflow: hidden; display: grid; gap: 8px; align-content: start; padding: 16px 18px;
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+  background: radial-gradient(90% 140% at 0% 50%, rgba(var(--tc), .34), transparent 62%), linear-gradient(115deg, rgba(var(--tc), .12), transparent 55%), linear-gradient(160deg, rgba(26,29,35,.95), rgba(10,11,14,.97));
+  transition: transform .15s; }
+#lg3sStreams .lh-card { --tc: 227,181,74; }
+.lh-card::before { content: ""; position: absolute; right: -24px; top: 50%; width: 150px; height: 150px; transform: translateY(-50%) rotate(-10deg); z-index: -1; pointer-events: none; opacity: .12; background: url("assets/wildman/home/lgchl-logo.webp") center / contain no-repeat; transition: opacity .2s, transform .2s; }
+#lg3sStreams .lh-card::before { background-image: url("assets/wildman/home/elitechel-media.webp"); }
+.lh-card::after { content: ""; position: absolute; left: 0; right: var(--cut); top: 0; height: 2px; background: linear-gradient(90deg, rgba(var(--tc), .95), rgba(var(--tc), .1) 50%, transparent); }
+.lh-card:hover { transform: translateY(-2px); }
+.lh-card:hover::before { opacity: .22; transform: translateY(-50%) rotate(-6deg) scale(1.06); }
+.lh-card small { display: inline-flex; align-items: center; gap: 7px; font-family: var(--f-ui); font-weight: 600; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: var(--lh-blue-hi); }
+#lg3sStreams .lh-card small { color: var(--gold-hi); }
+.lh-card small::before { content: ""; width: 12px; height: 3px; background: currentColor; transform: skewX(-24deg); }
+.lh-card h3 { font-family: var(--f-head); font-weight: 400; font-size: 26px; line-height: 1; text-transform: uppercase; color: #fff; overflow-wrap: anywhere; }
+.lh-card p { font-size: 14px; color: var(--mute); }
+.lh-card-actions { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 6px; padding-top: 10px; border-top: 1px solid var(--line); }
+.lh-card-actions a { font-family: var(--f-ui); font-weight: 600; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-hi); min-height: 32px; display: inline-flex; align-items: center; }
+.lh-card-actions a + a { color: #cfccc5; }
+.lh-card-actions a:hover { color: #fff; }
+.lh-empty { grid-column: 1 / -1; padding: 18px; font-size: 16px; color: #cfccc5; background: rgba(7,8,10,.55); box-shadow: inset 0 0 0 1px var(--line); }
+.lh-help { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; justify-content: space-between; margin-top: 16px; padding: 14px 16px; background: rgba(7,8,10,.55); box-shadow: inset 0 0 0 1px var(--line); }
+.lh-help p { flex: 1 1 420px; font-size: 15px; color: #cfccc5; }
+.lh-help strong { color: var(--gold-hi); }
+.lh-help a { font-family: var(--f-ui); font-weight: 600; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-hi); white-space: nowrap; }
+.lh-help a:hover { color: #fff; }
+
+/* Hitman Live */
+.lh-hitman { background: linear-gradient(90deg, rgba(10,4,5,.94) 0%, rgba(10,4,5,.78) 35%, rgba(10,4,5,.55) 70%, rgba(10,4,5,.85) 100%), #0d0506 url("assets/wildman/home/hitmen.webp") 62% 38% / cover no-repeat; }
+.lh-hitman .sec-rule { background: linear-gradient(90deg, var(--red) 0 62%, transparent 62% 70%, var(--gold) 70%); }
+.lh-feature { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
+.lh-player { padding: 0; display: grid; grid-template-rows: auto 1fr; background: #050506; }
+.lh-player-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, rgba(212,42,42,.22), transparent 60%); }
+.lh-player-top b { font-family: var(--f-ui); font-weight: 600; font-size: 20px; letter-spacing: .12em; text-transform: uppercase; color: #fff; }
+.lh-player-top small { font-size: 14px; color: var(--mute); }
+.lh-player-frame { position: relative; aspect-ratio: 16 / 9; }
+.lh-player-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.lh-feature-copy { padding: 22px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.lh-feature-copy .wm { width: 220px; height: 220px; right: -40px; opacity: .12; }
+.lh-feature-copy .eyebrow { color: var(--mute); font-size: 15px; }
+.lh-feature-copy h3 { font-family: var(--f-head); font-weight: 400; font-size: 40px; line-height: .92; text-transform: uppercase; color: #fff; }
+.lh-feature-copy h3 em { display: block; font-family: var(--f-slash); font-style: italic; font-weight: 900; font-size: .9em; color: #ff6b6b; }
+.lh-feature-copy p { font-size: 16px; color: #dcd9d2; }
+.lh-quiet { margin-top: auto; font-family: var(--f-ui); font-weight: 600; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; color: #cfccc5; }
+.lh-quiet:hover { color: var(--gold-hi); }
+
+/* add a stream */
+.lh-add { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px 40px; align-items: end; padding: 26px; }
+.lh-add .wm { width: 280px; height: 280px; right: -60px; opacity: .07; }
+.lh-add .eyebrow { color: var(--mute); font-size: 15px; margin-bottom: 4px; }
+.lh-add form { display: grid; gap: 8px; }
+.lh-add-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.lh-add-row input { flex: 1 1 260px; }
+#lhAddError { min-height: 1.2em; font-size: 14px; color: #ff9a9a; }
+
+@media (max-width: 1000px) {
+  .lh-hero-in, .lh-feature, .lh-add { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 620px) {
+  .lh-in { padding-block: 32px; }
+  .lh-channel { grid-template-columns: 52px minmax(0, 1fr) auto; padding: 12px 14px 12px 12px; }
+  .lh-channel img { width: 52px; height: 40px; }
+  .lh-channel-txt b { font-size: 24px; }
+  .lh-sub-in a { font-size: 18px; padding-inline: 12px; }
+  .lh-sub-in .lh-sub-cta { margin-left: 0; }
+  .lh-add { padding: 20px; }
+  .lh-feature-copy h3 { font-size: 34px; }
+  .lh-page::before { opacity: .05; }
+}
