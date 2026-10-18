@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
 <title>Opponent Deep Scout | Calgary Hitmen</title>
-<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="hub.css"><link rel="stylesheet" href="wildman.css"><link rel="stylesheet" href="management.css"><link rel="stylesheet" href="network-v2.css"><link rel="stylesheet" href="hitmen-war-tools.css"><link rel="stylesheet" href="shot-location-analysis.css?v=20261009"><link rel="stylesheet" href="hitmen-opponent-scout.css?v=20261005-deep-scout">
+<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="hub.css"><link rel="stylesheet" href="wildman.css"><link rel="stylesheet" href="management.css"><link rel="stylesheet" href="network-v2.css"><link rel="stylesheet" href="hitmen-war-tools.css"><link rel="stylesheet" href="shot-location-analysis.css?v=20261009"><link rel="stylesheet" href="hitmen-opponent-scout.css?v=20261018-srclabels">
 <link rel="stylesheet" href="hitmen-warroom-banner.css?v=20261012">
 </head>
 <body class="wildman-site management-protected hitmen-tool-page">
@@ -36,7 +36,7 @@
 
 <section class="section-shell section-block hs-team-grid">
   <article class="hs-panel">
-    <div class="hs-panel-head"><div><div class="eyebrow">TEAM SHOT PROFILE</div><h2>Team Shot Location Analysis</h2><p>EA 16-zone shooting totals aggregated across active skaters.</p></div></div>
+    <div class="hs-panel-head"><div><div class="eyebrow">TEAM SHOT PROFILE <span class="hs-src hs-src-pub">EA CLUB · INCL. PUBS</span></div><h2>Team Shot Location Analysis</h2><p>EA 16-zone shooting totals aggregated across active skaters. These are EA club totals, so they include pub games. Profile only: they are never used in scouting reports.</p></div></div>
     <div id="hsTeamHeat" class="hs-team-heat"></div>
   </article>
   <article class="hs-panel">
@@ -61,21 +61,32 @@
         <div class="hs-position" id="hsPlayerPos">—</div>
       </div>
 
+      <p class="hs-src-legend"><span class="hs-src hs-src-lg">LG GAMES</span> official league games, the only numbers used in scouting reports. <span class="hs-src hs-src-pub">PUBS</span> EA club or career totals that include pub games, shown here for context only.</p>
       <div id="hsPlayerStats" class="hs-stat-grid"></div>
 
       <section class="hs-subsection">
-        <div class="hs-panel-head"><div><div class="eyebrow">SHOOTING IDENTITY</div><h3>Shot Location Analysis</h3><p>EA club shooting locations — switch Shots/Goals and Totals, Per game, Efficiency % or Total %. Use the tracking timeline below to see how the totals changed between captures.</p></div>
+        <div class="hs-panel-head"><div><div class="eyebrow">SHOOTING IDENTITY <span class="hs-src hs-src-pub">EA CLUB · INCL. PUBS</span></div><h3>Shot Location Analysis</h3><p>Profile only, not used in scouting reports. EA club shooting locations — switch Shots/Goals and Totals, Per game, Efficiency % or Total %. Use the tracking timeline below to see how the totals changed between captures.</p></div>
         </div>
         <div class="hs-player-heat-layout"><div id="hsPlayerHeat"></div><div id="hsZoneBreakdown" class="hs-zone-breakdown"></div></div>
       </section>
 
       <section class="hs-subsection">
-        <div class="hs-panel-head"><div><div class="eyebrow">FUTURE REFERENCE</div><h3>Shot Tracking Timeline</h3><p>Every successful EA refresh now stores a permanent player snapshot, including players who later leave the roster.</p></div></div>
+        <div class="hs-panel-head"><div><div class="eyebrow">LG-VERIFIED EA GAME LOGS <span class="hs-src hs-src-lg">LG GAMES ONLY</span></div><h3>Game-by-Game Shot Analytics</h3><p>Every official LGCHL game this team played that was matched to its EA match file (exact EA clubs and final score). Covers guests and non-members too. EA match files do not include shot locations, so this table has no rink zones.</p></div></div>
+        <div id="hsGameLog"></div>
+      </section>
+
+      <section class="hs-subsection">
+        <div class="hs-panel-head"><div><div class="eyebrow">CHELSTATS · EA IDENTITY <span class="hs-src hs-src-pub">PUBS · ALL EA MODES</span></div><h3>EA Account &amp; Career Profile</h3><p>Profile only, never used in scouting reports. Looks the player up on ChelStats. The EA account ID links his LG name to his EA match files even when the names are spelled differently, and gives career rates for players with no verified games.</p></div></div>
+        <div id="hsChelstats"></div>
+      </section>
+
+      <section class="hs-subsection">
+        <div class="hs-panel-head"><div><div class="eyebrow">FUTURE REFERENCE <span class="hs-src hs-src-pub">EA CLUB · INCL. PUBS</span></div><h3>Shot Tracking Timeline</h3><p>Every successful EA refresh now stores a permanent player snapshot, including players who later leave the roster.</p></div></div>
         <div id="hsHistory"></div>
       </section>
 
       <section class="hs-subsection">
-        <div class="hs-panel-head"><div><div class="eyebrow">STATISTICAL SCOUT</div><h3>Computed Player Read</h3><p>Generated from LG totals, EA club stats and the 16-zone shooting profile.</p></div></div>
+        <div class="hs-panel-head"><div><div class="eyebrow">STATISTICAL SCOUT</div><h3>Computed Player Read</h3><p>Generated from LG totals, EA club stats and the 16-zone shooting profile. Each line is tagged LG GAMES or EA CLUB · INCL. PUBS.</p></div></div>
         <div id="hsAutoScout" class="hs-scout-copy"></div>
         <div id="hsReportMentions" class="hs-report-mentions"></div>
       </section>
@@ -99,6 +110,6 @@
 </main>
 <footer><div class="section-shell footer-inner"><div><b>CALGARY HITMEN DEEP SCOUT</b><span>Team tendencies · player heat maps · persistent shot history · management scouting memory</span></div><p>Private management</p></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
-<script src="backend.js"></script><script src="management-guard.js"></script><script src="script.js"></script>
-<script src="shot-zone-map.js?v=20261009-heatcolors"></script><script src="hitmen-clips.js?v=20261018-teamclips"></script><script src="hitmen-opponent-scout.js?v=20261018-teamclips"></script>
+<script src="backend.js"></script><script src="management-guard.js?v=20261018-playerlinks"></script><script src="script.js"></script>
+<script src="shot-zone-map.js?v=20261009-heatcolors"></script><script src="hitmen-clips.js?v=20261018-merged"></script><script src="hitmen-opponent-scout.js?v=20261018-merged"></script>
 </body></html>

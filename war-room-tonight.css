@@ -285,3 +285,5 @@
 .wr-rink-map{margin:0 auto}
 .wr-rink-map .wm-ice-zone-svg{display:block;width:100%;height:auto}
 .wr-rink-sum{margin:6px 0 0;font-size:11px;color:#998d90;text-align:center}
+/* Player names link to profiles (Deep Scout heat map + shot analytics / player stalls) */
+.wr-scope a.wr-player{color:inherit;text-decoration:underline;text-decoration-color:rgba(212,167,82,.5);text-underline-offset:3px}.wr-scope a.wr-player:hover,.wr-scope a.wr-player:focus-visible{color:var(--wr-gold,#d4a752);text-decoration-color:currentColor}

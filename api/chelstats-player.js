@@ -66,6 +66,32 @@ export default async function handler(req, res) {
 
     const raw = await upstream.json();
     const node = findShotNode(raw);
+    // Career profile: EA account ID (blazeId, the key EA uses in match files) plus all-mode career rates.
+    // Works for guests too, since it does not need the player's club. No shot locations in this mode.
+    if (String(req.query.profile || "") === "1") {
+      const p = firstDefined(raw, ["Username", "username"]) ? raw : node;
+      const confirmed = String(firstDefined(p, ["Username", "username"]) || "").trim();
+      if (!p || confirmed.toLowerCase() !== username.toLowerCase()) {
+        return res.status(404).json({ error: "No exact gamertag identity was returned by ChelStats" });
+      }
+      const o = p.overall_results?.overall_results || {}, g = p.overall_results?.goalie_overall_results || {};
+      const n = (k) => { const v = firstDefined(p, [k]); return v == null ? null : numberValue(v); };
+      res.setHeader("Cache-Control", "s-maxage=900, stale-while-revalidate=3600");
+      return res.status(200).json({ source: "chelstats", scope: "EA career, all game modes (not LG-only)", profile: {
+        username: confirmed, blazeId: firstDefined(p, ["blazeId"]) ? String(p.blazeId) : null,
+        chelName: firstDefined(p, ["skplayername"]) || p.identity?.displayName || null,
+        position: firstDefined(p, ["Position"]), gamesPlayed: n("Games Played"),
+        positionGames: { C: n("C Gps"), LW: n("LW Gps"), RW: n("RW Gps"), D: n("D Gps"), G: n("Goalie games played") },
+        goalsPerGame: n("Goals per game"), assistsPerGame: n("Assists per game"), shotsPerGame: n("Shots per game"),
+        shootingPct: n("Shot %"), shotsOnNetPct: n("Shots on net %"), passPct: n("Pass %"), hitsPerGame: n("Hits per game"),
+        takeawaysPerGame: n("Takeaways per game"), giveawaysPerGame: n("Giveaways per game"), interceptionsPerGame: n("Interceptions per game"),
+        blockedShotsPerGame: n("Blocked shots per game"), faceoffPct: n("FO %"), breakawayPct: n("Breakaway %"), possessionPerMin: n("Possession per min"),
+        savePct: n("Save %"), gaa: n("GAA"),
+        playstyle: p.overall_results?.playstyle || null, mainMode: o["Main Game Mode"] || null,
+        ratings: o["Overall Rating"] != null ? { overall: o["Overall Rating"], offense: o["Offense Rating"], defense: o["Defense Rating"], categories: o["Category Ratings"] || null } : null,
+        goalieRatings: g["Overall Rating"] != null && n("Goalie games played") ? { overall: g["Overall Rating"], categories: g["Category Ratings"] || null } : null
+      }});
+    }
     // Identity lookups do not require shot-location stats (many valid profiles omit them).
     if (String(req.query.identity || "") === "1") {
       const identityProfile = firstDefined(raw, ["Username", "username"]) ? raw : node;

@@ -53,6 +53,9 @@ Use the actual Calgary roster and opponent roster when available. Build compleme
 POSTGAME
 Separate RESULT from PROCESS. Compare score to shots, possession proxies, special teams, faceoffs, turnovers and VOD evidence. Identify what was repeatable, what may be finishing/save variance, what the opponent adjusted, what Calgary adjusted, and what should change for the next meeting.
 
+LG GAMES ONLY
+Opponent scouting reports are built from official LG games only: LGCHL season stats, official LG results and EA match files matched to official LG games. EA club/member totals and ChelStats career numbers include pub games; they are deliberately not supplied for opponent reports and must not be cited or estimated. Player-level pub data lives in the player's Deep Scout profile only.
+
 EA ICE-ZONE DATA
 When an EA player raw_stats record includes ShotsLocationOnIce1..16 or GoalsLocationOnIce1..16, treat those as real EA shooting-location buckets, not inferred rink coordinates. Zone legend: 1 Behind Net Center; 2 Behind Net Left; 3 Behind Net Right; 4 Goal Crease; 5 Right Circle; 6 Close Slot Left; 7 Close Slot Center; 8 Close Slot Right; 9 Left Circle; 10 Mid Slot Center; 11 Mid Slot Left; 12 Mid Slot Right; 13 Right Point; 14 High Slot; 15 Left Point; 16 High Point. Current member totals are EA club totals and are NOT automatically LG-only. Use them for player/line shooting tendencies, and say when the scope is broader than league games. If game-specific X/Y events are later supplied, normalize them to the same 16-zone model before describing spatial tendencies.
 
@@ -215,11 +218,13 @@ async function contextFor(token,names,question,scenario,requestedLens){
   }else warnings.push('Opponent roster data could not be loaded.');
   if(snapshotResult.status==='fulfilled')add('Opponent statistical snapshots',snapshotResult.value.filter(s=>opponentNames.includes(s.opponent_name)).slice(0,100),{evidenceClass:'structured_team_stats'});
   else warnings.push('Opponent stat snapshots could not be loaded.');
-  if(playerStatsResult.status==='fulfilled')add('Opponent player public statistics',playerStatsResult.value.filter(s=>opponentNames.includes(s.opponent_name)).slice(0,180),{evidenceClass:'structured_player_stats'});
+  // Scouting reports use LG games only. EA club/member totals include pub games, so they stay in player profiles (Deep Scout) and out of reports.
+  if(playerStatsResult.status==='fulfilled')add('Opponent player LGCHL Season 55 statistics (LG games only)',playerStatsResult.value.filter(s=>opponentNames.includes(s.opponent_name)&&s.source==='lg_chl').slice(0,180),{evidenceClass:'structured_player_stats'});
   else warnings.push('Opponent player statistics could not be loaded.');
   if(sourceSnapshotResult.status==='fulfilled'){
-   const raw=sourceSnapshotResult.value.filter(s=>opponentNames.includes(s.opponent_name)).slice(0,12);
-   add('Public source snapshots including EA NHL 27 game/member logs',raw,{evidenceClass:'public_game_log'});
+   // EA snapshots carry member totals and pub match lists; only LG-sourced snapshots go into reports.
+   const raw=sourceSnapshotResult.value.filter(s=>opponentNames.includes(s.opponent_name)&&s.source!=='ea_nhl27').slice(0,12);
+   add('Public LG source snapshots',raw,{evidenceClass:'public_game_log'});
   }else warnings.push('Public EA/league source snapshots could not be loaded.');
   if(lgGamesResult.status==='fulfilled'){
    const rows=lgGamesResult.value.filter(g=>opponentNames.includes(g.opponent_name));
@@ -228,7 +233,7 @@ async function contextFor(token,names,question,scenario,requestedLens){
   }else warnings.push('Official opponent game history could not be loaded.');
   if(eaGamesResult.status==='fulfilled'){
    const rows=eaGamesResult.value.filter(g=>opponentNames.includes(g.opponent_name));
-   add('LG-reconciled EA NHL 27 game detail with player shot attempts',rows,{evidenceClass:'verified_ea_game'});
+   add('Official LG games only: EA match files matched to official LGCHL results (player shot attempts)',rows,{evidenceClass:'verified_ea_game'});
   }else warnings.push('Verified EA match details could not be loaded.');
  }else if(['opponent','postgame','general'].includes(lens)){
   addOne('Calgary Season 55 schedule/results index',{games:scheduleRows.map(g=>({week:g.week,scheduled_at:g.scheduled_at,opponent_name:g.opponent_name,status:g.status,calgary_score:g.calgary_score,opponent_score:g.opponent_score,overtime:g.overtime}))},{evidenceClass:'verified_game_record'});

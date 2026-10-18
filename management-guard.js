@@ -31,7 +31,8 @@
     return (state.memberships || []).some((membership) => {
       const role = String(membership.role || "").toLowerCase();
       if (membership.active === false) return false;
-      if (page === "hitmen-team-locker.html") {
+      // Rostered players can view these read-only pages (Deep Scout saving stays owner/GM/AGM in the page itself).
+      if (page === "hitmen-team-locker.html" || page === "hitmen-opponent-scout.html") {
         return membership.team_id === HITMEN_TEAM_ID && (hitmenRoles.has(role) || role === "player");
       }
       if (hitmenPage) return membership.team_id === HITMEN_TEAM_ID && hitmenRoles.has(role);
@@ -56,7 +57,7 @@
       if (!state.user) {
         lockedMessage.innerHTML =
           "<b>Management sign-in required.</b><p>This workspace is restricted to authorized management accounts.</p>";
-      } else if (page === "hitmen-team-locker.html") {
+      } else if (page === "hitmen-team-locker.html" || page === "hitmen-opponent-scout.html") {
         lockedMessage.innerHTML =
           "<b>Calgary Hitmen team access not assigned.</b><p>Use the Discord account linked to an active Season 55 roster spot.</p>";
       } else if (hitmenPage) {

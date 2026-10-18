@@ -235,7 +235,7 @@ function jobsHTML(D,g,ps){
   const r=g.report;
   if(!r||!ps.length) return `<div class="wr-empty-row">${esc(emptyMsg(D,'jobs'))}</div>`;
   return ps.map(p=>{const job=r.jobs[norm(p.locker?.gamertag||'')]||r.jobs[norm(r.six[p.pos])];
-    return `<article class="wr-job${p.me?' me':''}"><header><span>${p.pos}${p.me?' · YOU':p.role?' · '+esc(p.role):''}</span><b>${esc(p.locker?.gamertag||r.six[p.pos])}</b><i>${p.no?'#'+esc(p.no):'no #'}</i></header>
+    return `<article class="wr-job${p.me?' me':''}"><header><span>${p.pos}${p.me?' · YOU':p.role?' · '+esc(p.role):''}</span><b>${(n=>n&&(D.v.mgmt||p.me)?`<a class="wr-player" href="hitmen-stall.html?player=${encodeURIComponent(n)}">${esc(n)}</a>`:esc(n))(p.locker?.gamertag||r.six[p.pos])}</b><i>${p.no?'#'+esc(p.no):'no #'}</i></header>
       <p>${job?esc(job):`<span class="wr-dim">No job for this player in the GM ${g.gm} report.</span>`}</p></article>`}).join('');
 }
 const acrossLinks=(D,g,hasReport)=>{
@@ -249,16 +249,15 @@ function acrossHTML(D,g){
   const r=g.report;
   const head=`<div class="wr-across-hd">${crest(g.lg,44,g.abbr)}<div><span class="wr-k">Across from us · GM ${g.gm} · ${esc(g.time)} ET</span><h3>${esc(g.short)}</h3></div></div>`;
   if(!r) return head+`<div class="wr-empty-row">${D.v.mgmt?'No scouting report for this game yet.':'Scouting posts here once management approves tonight\'s report.'}</div>`+acrossLinks(D,g,false);
-  const deepMax=Math.max(1,...(r.deepHeat||[]).map(z=>Number(z.shots||0)));
   return head+
-   (r.opp.length?`<span class="wr-k wr-sub">Projected six</span><dl class="wr-opp">${r.opp.map(o=>`<div><dt>${o.pos}</dt><dd>${esc(o.name)}${o.note?`<small>${esc(o.note)}</small>`:''}</dd></div>`).join('')}</dl>`:'')+
+   (r.opp.length?`<span class="wr-k wr-sub">Projected six</span><dl class="wr-opp">${r.opp.map(o=>`<div><dt>${o.pos}</dt><dd><a class="wr-player" href="hitmen-opponent-scout.html?opponent=${encodeURIComponent(g.name)}&amp;player=${encodeURIComponent(o.name)}" title="Profile, heat map and shot analytics">${esc(o.name)}</a>${o.note?`<small>${esc(o.note)}</small>`:''}</dd></div>`).join('')}</dl>`:'')+
    (r.threats.length?`<span class="wr-k wr-sub">Key threats</span><ul class="wr-threats">${r.threats.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:'')+
    (r.plan.length?`<span class="wr-k wr-sub">Game plan</span><ol class="wr-plan">${r.plan.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:'')+
    (r.clips&&r.clips.length?`<span class="wr-k wr-sub">Film clips · ${r.clips.length}</span><ul class="wr-clips">${r.clips.map(c=>`<li><span>${esc(c.label)}</span>${window.HitmenClips?window.HitmenClips.tags('[clip](storage:hitmen-vod-clips/'+c.path+')',{compact:true}):''}</li>`).join('')}</ul>`:'')+
    (r.attackSource.length?`<span class="wr-k wr-sub">Scoring-source heat · LG</span><div class="wr-heat">${r.attackSource.map(z=>`<div><b>${esc(z.pos||'—')}</b><i><em style="width:${Math.max(2,Math.min(100,Number(z.goal_share||0)))}%"></em></i><small>${esc(Number(z.goal_share||0).toFixed(1))}% goals</small></div>`).join('')}</div>`:'')+
-   (r.deepHeat.length?`<span class="wr-k wr-sub">Top shot zones · EA profile</span><div class="wr-heat">${r.deepHeat.map(z=>`<div><b>Z${esc(z.zone||'—')}</b><i><em style="width:${Math.max(2,Math.min(100,100*Number(z.shots||0)/deepMax))}%"></em></i><small>${esc(z.name||'Zone')} · ${esc(z.shots||0)} shots</small></div>`).join('')}</div>`:'')+
-   `<div class="wr-rink" id="wrRink"></div>`+
-   `<p class="wr-note">${r.approved?'Approved':'Draft · not approved'}. LG heat shows scoring share by listed position. Rink-zone preview uses the saved EA club profile and is supporting tendency evidence, not LG-only shot coordinates.</p>`+acrossLinks(D,g,true);
+   // Pub-inclusive EA club data (shot zones, rink heat) stays in each player's Deep Scout profile, not in the scouting report.
+
+   `<p class="wr-note">${r.approved?'Approved':'Draft · not approved'}. Built from LG games only. Tap a name for his Deep Scout profile: rink heat maps and pub/EA club numbers are there, labelled separately.</p>`+acrossLinks(D,g,true);
 }
 /* ---------- real rink heat maps: where each opposing skater shoots from / scores from (EA 16-zone totals) ---------- */
 const heatCache=new Map();
