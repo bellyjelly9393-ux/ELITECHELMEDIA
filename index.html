@@ -11,6 +11,7 @@
 <link rel="preload" href="assets/wildman/home/franchise.webp" as="image">
 <link rel="preload" href="assets/wildman/home/hut.webp" as="image">
 <link rel="stylesheet" href="wildman-home.css?v=20261011-4">
+<link rel="stylesheet" href="live-hub-home-nav.css?v=20261017a">
 <script src="wildman-home.js?v=20261011-3" defer></script>
 </head>
 <body>
@@ -30,8 +31,7 @@
     <nav class="nav" id="nav" aria-label="Main">
       <a href="index.html" class="on" aria-current="page">Home</a>
       <a href="team.html">Wildman</a>
-      <a href="esports-hub.html">Esports Hub</a>
-      <a href="game-center.html">Live</a>
+      <details class="home-live-menu"><summary>LGCHL Live Hub <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="esports-hub.html#lgchl">LGCHL Games</a><a href="esports-hub.html#hitman">Hitman Live</a><a href="esports-hub.html#lg3s">LG Threes</a></div></details>
       <a href="academy.html">Academy</a>
       <a href="hitmen-media.html">Media</a>
       <a href="management.html">Management</a>
@@ -74,12 +74,12 @@
       <div>
         <div class="live-head">
           <span class="live-badge"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z" fill="#fff"/></svg>LIVE</span>
-          <h2>Wildman Network Live</h2>
-          <p>Multiple streams. One place. Your hockey hub.</p>
+          <h2>LGCHL Live Hub</h2>
+          <p>LGCHL games, Hitman Live and LG Threes in one place.</p>
         </div>
         <div class="live-meta">
           <small id="broadcast-status" aria-live="polite">Loading channels…</small>
-          <a class="btn btn-line btn-sm" href="multiview.html"><span class="btxt">Open multiview</span> <span class="arr">→</span></a>
+          <a class="btn btn-line btn-sm" href="esports-hub.html"><span class="btxt">Open Live Hub</span> <span class="arr">→</span></a>
         </div>
       </div>
       <div class="rail-wrap">
