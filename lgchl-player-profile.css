@@ -25,7 +25,7 @@
 @media(prefers-reduced-motion:reduce){.lg-profile-dialog::backdrop{backdrop-filter:none}}
 /* The same team-watermark treatment is shared by the quick-view and full profile page. */
 .lg-profile-shell{isolation:isolate;position:relative;overflow:hidden}
-.lg-profile-watermark{position:absolute;inset:-60px -80px auto auto;width:min(78%,480px);height:440px;opacity:.10;pointer-events:none;z-index:0;display:flex;align-items:flex-start;justify-content:flex-end;filter:grayscale(100%)}
+.lg-profile-watermark{position:absolute;inset:-60px -80px auto auto;width:min(78%,480px);height:440px;opacity:.12;pointer-events:none;z-index:0;display:flex;align-items:flex-start;justify-content:flex-end;filter:saturate(.9)}
 .lg-profile-watermark img{width:100%;height:100%;object-fit:contain}
 .lg-profile-body{position:relative;z-index:1}
 .lg-profile-full-link{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:10px 16px;border:1px solid #bd943e;border-radius:4px;color:#fee2a3;background:#242018;font-weight:800;text-decoration:none;min-height:44px}
