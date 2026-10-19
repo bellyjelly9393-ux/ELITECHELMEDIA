@@ -20,6 +20,11 @@ from urllib.parse import urlsplit
 from uuid import UUID, uuid4
 from hockey_review import HOCKEY_RUBRIC, REVIEW_VERSION, sequence_window
 from report_schema import extend_schema, lineup_roster, lineup_units, verified_report, REPORT_RUBRIC
+import accuracy
+import corrections as ai_corrections
+import game_state
+import hud_reader
+import roster as roster_sheet
 
 ROOT = Path(os.getenv('DATA_DIR', str(Path(__file__).parent / 'data')))
 MAX_UPLOAD = int(os.getenv('MAX_UPLOAD_MB', '700')) * 1024**2
@@ -881,6 +886,7 @@ def request_ai(request_payload, model=None, rate_limit_retries=2, escalate=True)
                            'Gemini Flash or a free model (or VOD_ALLOW_OPUS=1 to allow it).', 'model_blocked')
     request_payload = dict(request_payload)
     request_payload['model'] = model
+    cost_payload = request_payload  # Responses shape, before any provider conversion
     profile = gm_profile()
     if profile:
         request_payload['instructions'] = profile['instructions'] + '\n\nFor video analysis, the attached frames and reviewed observations are the evidence packet. Cite their recording timestamps instead of unavailable database E IDs. Return only the requested JSON schema; all findings remain provisional. Do not infer missing roster or season context.'
@@ -900,8 +906,16 @@ def request_ai(request_payload, model=None, rate_limit_retries=2, escalate=True)
     else:
         agent = False
     result = None
+    acc = accuracy.config()
+    job_for_cost = getattr(_CTX, 'job_id', None) or ''
+    step_for_cost = getattr(_CTX, 'ai_step', '') or ''
     for attempt in range(3):
         try:
+            if acc['max_usd_per_game'] or accuracy.bucket_for(step_for_cost) == 'spotcheck':
+                try:
+                    accuracy.cost_gate(job_for_cost, model, cost_payload, step_for_cost)
+                except accuracy.SpendCapReached as exc:
+                    raise Problem(403, f'AI spend cap reached: {exc}. Saved work is kept.', 'ai_budget')
             ai_budget_gate()
             headers = ({'x-goog-api-key': key, 'Content-Type': 'application/json'} if agent else
                        {'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'})
@@ -911,6 +925,8 @@ def request_ai(request_payload, model=None, rate_limit_retries=2, escalate=True)
             elif direct:
                 result = gemini_response(result)
             ai_usage_record(result, truncated=result.get('status') != 'completed', model=model)
+            if acc['cost_log'] or acc['escalation'] or acc['max_usd_per_game']:
+                accuracy.record_usage(job_for_cost, model, result.get('usage'), step_for_cost)
             if result.get('status') == 'completed':
                 return result
             reason = (result.get('incomplete_details') or {}).get('reason')
@@ -984,6 +1000,150 @@ def request_ai(request_payload, model=None, rate_limit_retries=2, escalate=True)
     raise Problem(502, 'AI output was incomplete. Completed analysis is saved; retry to continue.')
 
 
+# ---------------------------------------------------------------- accuracy v2 (all flags default OFF)
+# See docs/worker-accuracy-v2-PLAN.md. With no VOD_HUD_* / VOD_ROSTER_SHEET / VOD_ESCALATION /
+# VOD_CORRECTIONS_FEWSHOT / VOD_MAX_USD_PER_GAME variables set, none of this changes a request.
+_HUD_TIMELINES = {}
+
+
+def hud_timeline_for(job_id):
+    return _HUD_TIMELINES.get(job_id or '')
+
+
+def accuracy_prompt(metadata, chunk):
+    """Extra prompt text; '' unless a v2 flag is on (so default prompts are byte-identical)."""
+    cfg = accuracy.config()
+    extra = ''
+    if cfg['roster_sheet'] != 'off':
+        extra += roster_sheet.roster_prompt(roster_sheet.build_sheet(metadata))
+    if cfg['corrections_fewshot']:
+        extra += ai_corrections.fewshot_prompt(ai_corrections.load(metadata, limit=cfg['corrections_fewshot']))
+    timeline = hud_timeline_for(getattr(_CTX, 'job_id', None))
+    if cfg['hud_prompt'] and timeline and isinstance(chunk, dict):
+        extra += '\n\n' + game_state.hud_facts(timeline, float(chunk.get('start', 0)), float(chunk.get('end', 0)))
+    return extra
+
+
+def team_aliases(metadata, timeline):
+    """HUD abbreviations plus configured names, e.g. VOD_TEAM_ALIASES='CGY=Hitmen|Calgary;LET=Lethbridge'."""
+    configured = {}
+    for part in os.getenv('VOD_TEAM_ALIASES', 'CGY=Hitmen|Calgary').split(';'):
+        if '=' in part:
+            key, words = part.split('=', 1)
+            configured[key.strip().upper()] = [w.strip() for w in words.split('|') if w.strip()]
+    aliases = {str(name).upper(): list(configured.get(str(name).upper(), []))
+               for name in (timeline or {}).get('teams') or []}
+    extra = (metadata or {}).get('hud_team_aliases')
+    if isinstance(extra, dict):
+        for team, words in extra.items():
+            aliases.setdefault(str(team).upper(), []).extend(str(w) for w in words or [])
+    return aliases
+
+
+def accuracy_postprocess(review, metadata):
+    cfg = accuracy.config()
+    if cfg['roster_sheet'] != 'off':
+        review = roster_sheet.filter_review(review, roster_sheet.build_sheet(metadata), cfg['roster_sheet'])
+    timeline = hud_timeline_for(getattr(_CTX, 'job_id', None))
+    if cfg['hud_validation'] != 'off' and timeline:
+        coverage = (timeline.get('first_hud_at') or 0, (timeline.get('last_hud_at') or 0) + 30)
+        review = game_state.apply_validation(review, timeline, cfg['hud_validation'],
+                                             team_aliases(metadata, timeline), coverage)
+    return review
+
+
+def hud_known_teams(metadata):
+    known = [t for t in re.split(r'[,\s]+', os.getenv('VOD_HUD_TEAM_ABBRS', '')) if t]
+    value = (metadata or {}).get('hud_teams')
+    if isinstance(value, str):
+        known += [t for t in re.split(r'[,\s]+', value) if t]
+    return known
+
+
+def compute_hud_timeline(job_id, source, metadata, result, offset=0.0, part_label=None):
+    """Local FFmpeg + Tesseract only (no AI). Cached in memory and saved in result['hud_timeline']."""
+    cfg = accuracy.config()
+    if not (cfg['hud_reader'] or cfg['hud_periods'] != 'off'):
+        return None
+    if part_label is None and result.get('hud_timeline'):
+        _HUD_TIMELINES[job_id] = result['hud_timeline']
+        return result['hud_timeline']
+    parts = result.setdefault('hud_parts', []) if part_label is not None else None
+    if parts is not None and part_label in parts:
+        _HUD_TIMELINES[job_id] = result.get('hud_timeline')
+        return result.get('hud_timeline')
+    value = (metadata or {}).get('hud_teams')
+    teams = [t.strip().upper() for t in value.split(',')] if isinstance(value, str) and value.count(',') == 1 else None
+    previous = result.get('hud_timeline') if part_label is not None else None
+    initial = game_state.score_at(previous, float('inf')) if previous else [0, 0]
+    started = time.time()
+    try:
+        reads = hud_reader.read_video(source, 0.0, None, cfg['hud_step_seconds'])
+        part = game_state.build_timeline(reads, teams=teams or (previous or {}).get('teams'), initial_score=initial,
+                                         known_teams=hud_known_teams(metadata), offset=offset)
+    except Exception as exc:  # an OCR problem never fails the review
+        print(f'VOD HUD reader skipped: {type(exc).__name__}: {str(exc)[:160]}', flush=True)
+        return None
+    timeline = game_state.merge(previous, part) if part_label is not None else part
+    result['hud_timeline'] = timeline
+    if parts is not None:
+        parts.append(part_label)
+    _HUD_TIMELINES[job_id] = timeline
+    print(f'VOD HUD reader: job={str(job_id)[:8]} samples={part["samples"]} coverage={part["hud_coverage"]} '
+          f'goals={len(part["goals"])} power_plays={len(part["power_plays"])} '
+          f'seconds={time.time() - started:.1f}', flush=True)
+    return timeline
+
+
+def frames_as_data_urls(source, start, end, offset=0.0, size='960:540'):
+    folder = Path(source).parent / 'verify-frames'
+    shutil.rmtree(folder, ignore_errors=True)
+    try:
+        local_start = max(0.0, float(start) - offset)
+        local_end = max(local_start + 1, float(end) - offset)
+        frames = extract_frames(Path(source), folder, local_start, local_end, 1.0, size)
+        return ['data:image/jpeg;base64,' + base64.b64encode(f.read_bytes()).decode() for f in frames[:16]]
+    finally:
+        shutil.rmtree(folder, ignore_errors=True)
+
+
+def run_accuracy_escalation(job_id, source, chunks, metadata, result, offset=0.0):
+    """Premium / cross-check / spot-check verification of key moments (VOD_ESCALATION=1 only)."""
+    cfg = accuracy.config()
+    if not cfg['escalation']:
+        return
+    pending = [c for c in chunks if not c.get('escalation_checked')]
+    if not pending:
+        return
+    accuracy.LEDGER.seed(job_id, result.get('accuracy_cost'))
+    timeline = hud_timeline_for(job_id)
+    if timeline:
+        lo, hi = min(c['start'] for c in pending), max(c['end'] for c in pending)
+        timeline = dict(timeline,
+                        goals=[g for g in timeline.get('goals', []) if lo <= (g.get('last_old_at') or g['hud_changed_at']) <= hi],
+                        power_plays=[p for p in timeline.get('power_plays', []) if lo <= p['start'] <= hi])
+
+    def request(step, model, payload):
+        _CTX.ai_step = step
+        try:
+            return request_ai(payload, model=model, rate_limit_retries=1, escalate=False)
+        finally:
+            _CTX.ai_step = ''
+
+    roster_text = ''
+    if cfg['roster_sheet'] != 'off':
+        roster_text = roster_sheet.roster_prompt(roster_sheet.build_sheet(metadata))
+    done = {(m.get('kind'), round(float(m.get('at', 0)))) for m in result.get('key_moments') or []}
+    moments = accuracy.run_escalation(job_id, pending, metadata, timeline,
+                                      lambda a, b: frames_as_data_urls(source, a, b, offset), request, roster_text)
+    result.setdefault('key_moments', []).extend(
+        m for m in moments if (m.get('kind'), round(float(m.get('at', 0)))) not in done)
+    for chunk in pending:
+        chunk['escalation_checked'] = True
+    result['accuracy_cost'] = accuracy.LEDGER.summary(job_id)
+    update(job_id, 'processing', result)
+
+
 def analyze(frames, chunk, metadata, frame_step=FRAME_STEP, step='overview'):
     _, key, _, _ = ai_config()
     if not key:
@@ -1035,7 +1195,7 @@ Return structured JSON. Every player evaluation and observation remains NEEDS HU
         'previous_chunk': metadata.get('previous_chunk'),
         'game_format': metadata.get('game_format', 'unknown'),
         'sampling_seconds': frame_step,
-        'review_pass': metadata.get('review_pass', 'overview')})}]
+        'review_pass': metadata.get('review_pass', 'overview')}) + accuracy_prompt(metadata, chunk)}]
     base_text = content[0]['text']
     for index, frame in enumerate(frames):
         timestamp = min(chunk['end'], chunk['start'] + (index + .5) * frame_step)
@@ -1106,7 +1266,7 @@ Return structured JSON. Every player evaluation and observation remains NEEDS HU
                                            lambda result: parse_review(result, chunk, frame_step),
                                            escalate=False)
             parsed['model'] = model
-            return parsed
+            return accuracy_postprocess(parsed, metadata)
         except Problem as exc:
             if exc.code != 'output_cap':
                 raise
@@ -1758,6 +1918,9 @@ def analyze_period_part(job_id, metadata, result, source):
         update(job_id, 'awaiting_ai', result, f'{label} is ready. Connect the AI model, then retry.')
         return
 
+    if accuracy.any_enabled():
+        compute_hud_timeline(job_id, source, metadata, result, offset=period_base,
+                             part_label=f'{label}@{period_base:.0f}')
     local_plan = segments([{'label': label, 'start': 0.0, 'end': duration}], duration)
     period_chunks = []
     for local in local_plan:
@@ -1813,6 +1976,7 @@ def analyze_period_part(job_id, metadata, result, source):
     update(job_id, 'processing', result)
     review_sequences(job_id, source, period_chunks, metadata, result,
                      source_offset=period_base, frame_size='640:360')
+    run_accuracy_escalation(job_id, source, period_chunks, metadata, result, offset=period_base)
 
     # This part is durable now: a later failure never re-analyzes it or needs its video.
     metadata['completed_parts'] = sorted(done | {period_index})
@@ -1909,8 +2073,18 @@ def process(job_id):
     duration = probe(source)
     periods = job['metadata'].get('periods', [])
     period_mode = (job['metadata'].get('period_source') or result.get('period_detection', 'manual')) if periods else None
+    if accuracy.any_enabled():
+        compute_hud_timeline(job_id, source, job['metadata'], result)
     if not periods:
         detected = [] if result.get('period_detection') == 'full_game_fallback' else detect_periods(source, duration)
+        hud_mode = accuracy.config()['hud_periods']
+        proposal = (game_state.proposed_periods(result['hud_timeline'], duration)
+                    if hud_mode != 'off' and result.get('hud_timeline') else None)
+        if proposal:
+            result['hud_proposed_periods'] = proposal
+            if hud_mode == 'apply':
+                # Still only a proposal: management confirms or edits it before any AI spend.
+                detected = proposal
         # Uploaded recordings retain their existing confirmation step: their older
         # detector does not validate restart/OT evidence like the Twitch scanner.
         result.update({'duration': duration, 'stage': 'needs_period_boundaries',
@@ -1963,6 +2137,7 @@ def process(job_id):
     result['stage'] = 'checking_sequences'
     update(job_id, 'processing', result)
     review_sequences(job_id, source, result['chunks'], job['metadata'], result)
+    run_accuracy_escalation(job_id, source, result['chunks'], job['metadata'], result)
     result.pop('plan', None)
     # Persist chunk evidence before synthesis. A failed synthesis must remain
     # retriable, not become a successful report with missing sections.
@@ -2452,6 +2627,7 @@ class Handler(BaseHTTPRequestHandler):
                                     'maxActiveJobs': MAX_ACTIVE_JOBS,
                                     'autoReleaseTwitchMedia': AUTO_RELEASE_TWITCH_MEDIA,
                                     'workLoop': loop_health(),
+                                    'accuracyV2': accuracy.config(),
                                     'storage': storage_status()})
         if path.startswith('/internal/replay-jobs/'):
             # Operational recovery uses the existing service-only admin credential.
