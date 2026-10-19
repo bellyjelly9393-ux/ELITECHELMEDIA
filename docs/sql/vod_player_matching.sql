@@ -1,3 +1,5 @@
+-- NOTE: vod_player_match_context and publish_vod_review are superseded by
+-- 20261018_vod_player_aliases_persist.sql (sticky name links across VODs). Apply that file after this one.
 -- Game-scoped player identities. No fuzzy identity matching and no cross-team aliases.
 create or replace function public.vod_player_match_context(target_review uuid)
 returns jsonb language plpgsql security invoker set search_path='' as $$
