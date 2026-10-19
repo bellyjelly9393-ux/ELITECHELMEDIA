@@ -139,6 +139,10 @@ export function composeNightWrap(ctx, opts = {}) {
   const nick = (id) => T.get(id)?.nickname || name(id);
   const pending = ctx.nightGames.filter((g) => g.status !== 'final' || g.away_score == null || g.home_score == null);
   if (pending.length && !opts.allowPartial) return { ok: false, reason: pending.length + ' of ' + ctx.nightGames.length + ' games are not final yet', pending: pending.map((g) => g.lg_game_id) };
+  // Partial nights: write the finals we have, but only when enough of the night is in (default 80%).
+  const minFinalShare = opts.minFinalShare ?? 0.8;
+  const finalShare = (ctx.nightGames.length - pending.length) / ctx.nightGames.length;
+  if (pending.length && finalShare < minFinalShare) return { ok: false, reason: 'only ' + (ctx.nightGames.length - pending.length) + ' of ' + ctx.nightGames.length + ' games are final (' + Math.round(finalShare * 100) + '%, need ' + Math.round(minFinalShare * 100) + '%)', pending: pending.map((g) => g.lg_game_id) };
   const finals = ctx.nightGames.filter((g) => !pending.includes(g)).map((g) => {
     const awayWin = g.away_score > g.home_score;
     return { ...g, winner: awayWin ? g.away_lg_team_id : g.home_lg_team_id, loser: awayWin ? g.home_lg_team_id : g.away_lg_team_id, ws: Math.max(g.away_score, g.home_score), ls: Math.min(g.away_score, g.home_score) };
@@ -456,6 +460,9 @@ export function composeNightWrap(ctx, opts = {}) {
   const gaps = [];
   if (!historyNight) gaps.push('Player lines cover ' + coverage + ' of ' + finals.length + ' games (' + fullCoverage + ' with both teams); the rest of the league has finals only until league-wide box scores or stat history are imported.');
   if (otUnknown) gaps.push(otUnknown + ' game(s) could not be confirmed as regulation or overtime from the standings snapshots, so they carry no OT label.');
+  // Unreported games are listed by schedule only; no result is ever inferred for them.
+  if (pending.length) gaps.push('Not yet reported (' + pending.length + '): ' + pending.slice().sort((a, b) => Date.parse(a.game_at) - Date.parse(b.game_at) || a.lg_game_id - b.lg_game_id)
+    .map((g) => name(g.away_lg_team_id) + ' at ' + name(g.home_lg_team_id) + ', scheduled ' + fmtTime(Date.parse(g.game_at)) + ' ET (LG game ' + g.lg_game_id + ')').join('; ') + '. ' + (pending.length === 1 ? 'This game is' : 'These games are') + ' left out of every total, streak and standings line above until LG posts a final.');
   const stale = [...W.values()].filter((v) => !v.ok).length; if (stale) gaps.push(stale + ' team(s) lacked before/after standings snapshots and are left out of movers and races.');
   md.push('## Sources & coverage', '', '- Finals and schedule: official LG LGCHL schedule (lgchl_games).', '- Standings, streaks and records: LG standings snapshots before and after the night.',
     '- Player lines: published LG box scores' + (historyNight ? ' plus LG season-stat deltas across the night' : '') + '.', '- Season context: LG LGCHL Season 55 player stats.', ...gaps.map((g) => '- Gap: ' + g), '', '_Draft generated ' + (opts.generatedAt || new Date().toISOString()) + ' by ' + WRITER_VERSION + '. Not published._', '');
@@ -471,6 +478,6 @@ export function composeNightWrap(ctx, opts = {}) {
   return {
     ok: true, kind: 'night-wrap', night: ctx.night, season: ctx.season, title, dek: dekText, markdown: md.join('\n'), cards, scores, mentions,
     metrics: { finals: finals.length, goals: totalGoals, ot_games: otGames.length, ot_unknown: otUnknown, shutouts: teamShutouts.length, sweeps: sweeps.map(name), box_scored_games: coverage, box_scored_both_sides: fullCoverage,
-      history_deltas: !!historyNight, headline_game: H.lg_game_id, headline_reasons: headline.why, upsets: upsets.length, generator: WRITER_VERSION },
+      history_deltas: !!historyNight, scheduled_games: ctx.nightGames.length, not_reported: pending.map((g) => g.lg_game_id), headline_game: H.lg_game_id, headline_reasons: headline.why, upsets: upsets.length, generator: WRITER_VERSION },
   };
 }

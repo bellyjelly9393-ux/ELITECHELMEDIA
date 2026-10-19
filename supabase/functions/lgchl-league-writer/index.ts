@@ -1,7 +1,8 @@
 // lgchl-league-writer: deterministic LGCHL night wraps for the LG Media desk, saved as DRAFTS only.
 // No AI, no LG requests, no publishing, no Discord. Content reads go exclusively through the
 // public-source allowlist (public-sources.mjs): the composer never receives a database client.
-// POST { night?: 'YYYY-MM-DD' (Eastern; default = latest fully final night), dryRun?: boolean (default true) }
+// POST { night?: 'YYYY-MM-DD' (Eastern; default = latest night whose games have started), dryRun?: boolean (default true),
+//        partial?: boolean (default true: write finals, list unreported games; refuse below 80% final) }
 // with x-sync-token. dryRun:false stores/refreshes the draft via public.lgchl_media_save_draft.
 import { createClient } from '@supabase/supabase-js';
 import { createPublicReader, supabaseBackend } from './public-sources.mjs';
@@ -23,18 +24,19 @@ Deno.serve(async (req) => {
   let night = typeof body.night === 'string' ? body.night : null;
   if (!night) {
     const games = await reader.read('lgchl_games', ['game_at', 'status'], { season: { op: 'eq', value: 55 }, game_at: { op: 'lt', value: new Date().toISOString() } }, { order: 'game_at' });
-    const nights = new Map<string, boolean>();
-    for (const g of games) nights.set(localDate(g.game_at), (nights.get(localDate(g.game_at)) ?? true) && g.status === 'final');
-    night = [...nights.entries()].filter(([, done]) => done).map(([n]) => n).sort().pop() ?? null;
-    if (!night) return json({ idle: true, reason: 'no completed game night' });
+    // Latest night whose last game started 60+ minutes ago; partial mode handles unreported games.
+    const cutoff = Date.now() - 60 * 60e3;
+    night = games.filter((g: any) => Date.parse(g.game_at) <= cutoff).map((g: any) => localDate(g.game_at)).sort().pop() ?? null;
+    if (!night) return json({ idle: true, reason: 'no started game night' });
   }
   try {
     const ctx = await loadNight(reader, { night, season: 55 });
     if (ctx.empty) return json({ idle: true, night, reason: 'no LGCHL games that night' });
-    const wrap = composeNightWrap(ctx);
-    if (!wrap.ok) return json({ idle: true, night, ...wrap });
+    const wrap = composeNightWrap(ctx, { allowPartial: body.partial !== false, minFinalShare: 0.8 });
+    if (!wrap.ok) { console.log(JSON.stringify({ writer: WRITER_VERSION, night, saved: false, reason: wrap.reason, pending: wrap.pending })); return json({ idle: true, night, saved: false, ...wrap }); }
+    if (wrap.metrics?.not_reported?.length) console.log(JSON.stringify({ writer: WRITER_VERSION, night, partial: true, not_reported: wrap.metrics.not_reported }));
     const payload = { cards: wrap.cards, scores: wrap.scores, mentions: wrap.mentions, metrics: wrap.metrics, sources: [...new Set(reader.reads.map((r) => r.table))] };
-    if (dryRun) return json({ dryRun, night, title: wrap.title, dek: wrap.dek, body_md: wrap.markdown, payload });
+    if (dryRun) return json({ dryRun, night, would_save: true, not_reported: wrap.metrics?.not_reported ?? [], title: wrap.title, dek: wrap.dek, body_md: wrap.markdown, payload });
     const { data: id, error } = await db.rpc('lgchl_media_save_draft', { p_kind: 'night-wrap', p_season: 55, p_night: night, p_title: wrap.title, p_dek: wrap.dek, p_body_md: wrap.markdown, p_payload: payload, p_generator: WRITER_VERSION });
     if (error) return json({ error: error.message }, 500);
     return json({ dryRun, night, draft_id: id, kept_existing_review: id == null, title: wrap.title });
