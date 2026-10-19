@@ -1,0 +1,124 @@
+/* Elitechel Media homepage — layers on wildman-home.css (shared type, buttons, card skin).
+   Brand: black base, steel + gold lettering, ember red-orange pulled from the Elitechel Media crest. */
+:root {
+  --ember: #e8481c;
+  --ember-hi: #ff8a3d;
+  --ember-lo: #7a1a08;
+}
+
+/* ---------- header crest (Elitechel shield) ---------- */
+.top .crest { width: 104px; aspect-ratio: 236 / 240; margin-block: -6px -40px; filter: drop-shadow(0 6px 14px rgba(0,0,0,.8)) drop-shadow(0 0 16px rgba(232,72,24,.35)); }
+.top .brand-txt b { font-size: 30px; letter-spacing: .02em; background: linear-gradient(180deg, #ffffff 0%, #e2e4e7 40%, #8b9097 52%, #d6d8db 74%, #f4f5f6 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 0 #0d0f12); }
+.top .brand-txt span { font-family: var(--f-slash); font-style: italic; font-weight: 900; font-size: 19px; letter-spacing: .14em; margin-top: 1px;
+  background: linear-gradient(180deg, #fff0bf, var(--gold) 55%, var(--gold-lo)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.top::after { background: linear-gradient(90deg, transparent, var(--ember) 22%, var(--gold-hi) 50%, var(--ember) 78%, transparent); }
+@media (max-width: 1080px) {
+  .top .nav .home-live-menu { display: block; width: 100%; }
+  .top .nav .home-live-menu summary { min-height: 48px; padding: 10px 14px; font-size: 24px; justify-content: space-between; }
+  .top .nav .home-live-panel { position: static; width: 100%; min-width: 0; box-shadow: none; background: rgba(227,181,74,.04); border: 0; border-left: 2px solid var(--gold); border-radius: 0; }
+}
+@media (max-width: 480px) {
+  .top .crest { width: 70px; margin-block: -4px -24px; }
+  .top .brand-txt b { font-size: 23px; }
+  .top .brand-txt span { font-size: 15px; }
+}
+
+/* ---------- hero: identity + three desks ---------- */
+.ecm-hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(42% 70% at 18% 46%, rgba(232,72,24,.34), transparent 70%),
+    radial-gradient(60% 50% at 80% 0%, rgba(227,181,74,.10), transparent 70%),
+    linear-gradient(180deg, rgba(7,8,10,.55) 0%, rgba(7,8,10,.35) 40%, rgba(7,8,10,.94) 100%),
+    #07090d url("assets/wildman/home/arena.webp") center 70% / cover no-repeat; }
+.ecm-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: var(--scratch); opacity: .8; pointer-events: none; }
+.ecm-hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.ecm-hero-in { display: grid; gap: 34px; padding-block: 64px 44px; }
+
+.ecm-id { display: grid; grid-template-columns: minmax(0, 330px) minmax(0, 1fr); gap: 20px 40px; align-items: center; }
+.ecm-logo { width: 100%; height: auto; filter: drop-shadow(0 18px 34px rgba(0,0,0,.8)) drop-shadow(0 0 40px rgba(232,72,24,.3)); animation: ecm-rise .7s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes ecm-rise { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
+.ecm-copy { display: grid; gap: 18px; justify-items: start; }
+.ecm-eye { display: flex; flex-wrap: wrap; gap: 10px; color: var(--bone); font-size: 18px; }
+.ecm-eye span { padding: 6px 12px 4px; box-shadow: inset 0 0 0 1px var(--line-2); background: rgba(7,8,10,.55); transform: skewX(-12deg); }
+.ecm-eye span:first-child { box-shadow: inset 0 0 0 1px rgba(232,72,24,.7); color: var(--ember-hi); }
+.ecm-eye b { font-weight: 600; color: var(--gold-hi); }
+.ecm-word { text-transform: uppercase; line-height: .8; }
+.ecm-word .w-steel { display: block; font-family: var(--f-head); font-size: clamp(64px, 9vw, 138px); letter-spacing: .005em;
+  background: linear-gradient(180deg, #ffffff 0%, #e2e4e7 36%, #8b9097 50%, #3d4148 53%, #c8cbcf 72%, #f4f5f6 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 0 #0d0f12) drop-shadow(0 5px 0 #1b1d21) drop-shadow(0 16px 20px rgba(0,0,0,.85)); transform: skewX(-7deg); transform-origin: left bottom; }
+.ecm-word .w-ember { display: block; font-family: var(--f-slash); font-style: italic; font-weight: 900; font-size: clamp(54px, 7.4vw, 112px); letter-spacing: -.01em; margin: -.02em 0 0 .2em;
+  background: linear-gradient(175deg, #fff4cc 0%, var(--gold-hi) 22%, var(--ember-hi) 48%, var(--ember) 68%, var(--ember-lo) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 3px 0 #2a0b04) drop-shadow(0 0 28px rgba(232,72,24,.45)); transform: rotate(-4deg); transform-origin: left center; }
+.ecm-lede { max-width: 46ch; font-size: 20px; color: #e4e2db; text-shadow: 0 2px 10px #000; }
+.ecm-cta { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; margin-top: 4px; }
+
+.desks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.desk { --cut: 18px; min-height: 248px; display: grid; grid-template-rows: auto 1fr auto; align-content: stretch; gap: 10px; padding: 18px 20px 18px;
+  background: linear-gradient(180deg, rgba(8,9,11,.15) 0%, rgba(8,9,11,.55) 45%, rgba(8,9,11,.94) 100%); box-shadow: inset 0 0 0 1px var(--line); transition: transform .18s, box-shadow .18s; }
+.desk-art { position: absolute; inset: 0; z-index: -2; background: var(--art) var(--pos, center) / cover no-repeat; filter: saturate(.9) brightness(.62); transition: transform .5s, filter .3s; }
+.desk::after { right: 0; height: 3px; background: linear-gradient(90deg, var(--accent, var(--gold)) 0 46%, transparent 46% 50%, var(--gold) 50% 62%, transparent 62%); }
+.desk:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 18px 34px -16px rgba(0,0,0,.9); }
+.desk:hover .desk-art { transform: scale(1.04); filter: saturate(1) brightness(.75); }
+.desk-hit { --accent: var(--red); }
+.desk-lg { --accent: #3b6fe0; }
+.desk-live { --accent: var(--ember); }
+.desk-no { position: absolute; right: 16px; top: 6px; font-size: 76px; font-weight: 700; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.28); pointer-events: none; }
+.desk-badge { width: 64px; height: 64px; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,.8)); }
+.desk-badge-wide { width: 112px; }
+.desk-onair { justify-self: start; display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-ui); font-weight: 600; text-transform: uppercase; letter-spacing: .16em; font-size: 17px; line-height: 1; padding: 7px 12px 5px; color: #fff;
+  background: linear-gradient(180deg, #ff6a3d, var(--ember) 60%, var(--ember-lo)); clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); align-self: start; }
+.desk-onair i { width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: ecm-blink 1.4s infinite; }
+@keyframes ecm-blink { 50% { opacity: .25; } }
+.desk-txt { align-self: end; display: grid; gap: 6px; }
+.desk-t { font-family: var(--f-head); font-weight: 400; text-transform: uppercase; font-size: clamp(34px, 3.2vw, 46px); line-height: .9; color: #fff; text-shadow: 0 3px 0 rgba(0,0,0,.6), 0 10px 20px rgba(0,0,0,.7); }
+.desk-t em { font-family: var(--f-slash); font-style: italic; font-weight: 900; font-size: .9em; padding-left: .12em;
+  background: linear-gradient(176deg, #fff4cc 0%, var(--gold-hi) 28%, var(--gold) 58%, #8a6216 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.desk-txt small { font-size: 16px; color: #d4d2cb; max-width: 34ch; }
+.desk-go { font-family: var(--f-ui); font-weight: 600; text-transform: uppercase; letter-spacing: .12em; font-size: 18px; line-height: 1; color: var(--gold-hi); padding-top: 10px; border-top: 1px solid var(--line); }
+.desk-go .arr { display: inline-block; transition: transform .15s; }
+.desk:hover .desk-go .arr { transform: translateX(4px); }
+
+@media (max-width: 980px) {
+  .ecm-id { grid-template-columns: minmax(0, 210px) minmax(0, 1fr); }
+  .desks { grid-template-columns: 1fr; }
+  .desk { min-height: 0; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 16px; align-items: center; }
+  .desk-badge, .desk-onair { grid-row: 1; }
+  .desk-txt { align-self: center; }
+  .desk-go { grid-column: 1 / -1; }
+  .desk-no { font-size: 58px; }
+}
+@media (max-width: 640px) {
+  .ecm-hero-in { padding-block: 34px 28px; gap: 26px; }
+  .ecm-id { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .ecm-logo { width: min(240px, 66vw); }
+  .ecm-copy { justify-items: center; }
+  .ecm-eye, .ecm-cta { justify-content: center; }
+  .ecm-word .w-steel, .ecm-word .w-ember { transform-origin: center; }
+  .ecm-word .w-ember { margin-left: 0; }
+  .ecm-lede { font-size: 18px; }
+  .desk { grid-template-columns: 1fr; }
+  .desk-txt small { font-size: 15px; }
+}
+
+/* ---------- HUT tournament band ---------- */
+.hutband { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: linear-gradient(90deg, rgba(8,7,5,.94) 0%, rgba(8,7,5,.7) 38%, rgba(8,7,5,.1) 70%, rgba(8,7,5,.4) 100%), #0a0806 url("assets/wildman/home/hut.webp") 80% 45% / cover no-repeat; }
+.hutband::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, var(--gold) 0 34%, transparent 34% 36%, var(--ember) 36% 44%, transparent 44%); }
+.hutband canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.hut-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 22px 40px; padding-block: 44px 40px; }
+.hut-copy { display: grid; gap: 10px; max-width: 640px; }
+.hut-eye { color: var(--gold-hi); font-size: 18px; }
+.hut-word { text-transform: uppercase; line-height: .8; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .22em; }
+.hut-word .w-steel { font-family: var(--f-head); font-size: clamp(56px, 7vw, 100px);
+  background: linear-gradient(180deg, #ffffff 0%, #e2e4e7 36%, #8b9097 50%, #3d4148 53%, #c8cbcf 72%, #f4f5f6 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 0 #0d0f12) drop-shadow(0 5px 0 #1b1d21) drop-shadow(0 14px 18px rgba(0,0,0,.85)); transform: skewX(-7deg); }
+.hut-word .w-gold { font-family: var(--f-slash); font-style: italic; font-weight: 900; font-size: clamp(42px, 5.4vw, 78px); letter-spacing: -.02em;
+  background: linear-gradient(175deg, #fff6d2 0%, var(--gold-hi) 24%, var(--gold) 52%, #6f4c10 72%, var(--gold) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 3px 0 #2a1d06) drop-shadow(0 0 26px rgba(227,181,74,.4)); transform: rotate(-4deg); }
+.hut-lede { font-size: 19px; color: #e2e0d9; text-shadow: 0 2px 10px #000; max-width: 40ch; }
+.hut-act { display: grid; gap: 12px; justify-items: start; }
+.hut-act .fine { font-family: var(--f-ui); font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: rgba(243,240,233,.66); }
+@media (max-width: 640px) { .hutband { background-position: center, 70% 45%; } .hut-in { padding-block: 34px; } }
+
+@media (prefers-reduced-motion: reduce) { .ecm-logo, .desk-onair i { animation: none; } .desk, .desk-art { transition: none; } }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
