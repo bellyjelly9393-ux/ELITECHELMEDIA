@@ -131,7 +131,11 @@ export function parseLgGamePage(html, game) {
     if (s.length < 4 || !g.length) throw new Error('Incomplete lineup for team ' + id);
     if (s.reduce((a, p) => a + p.goals, 0) !== official[id]) throw new Error('Skater goals do not reconcile with the official final');
     const other = id === ids[0] ? ids[1] : ids[0];
-    if (g.reduce((a, p) => a + p.goals_against, 0) !== official[other]) throw new Error('Goalie goals against do not reconcile with the official final');
+    // Goalies can be charged fewer goals than the opponent scored (empty-net goals are not charged to a
+    // goalie), but never more. The page does not say which goals were empty-net, so the gap is only
+    // recorded, never narrated. Each goalie's saves + GA must still equal shots against (checked above).
+    const ga = g.reduce((a, p) => a + p.goals_against, 0);
+    if (ga > official[other]) throw new Error('Goalie goals against exceed the official final');
   }
   return { lg_game_id: game.lg_game_id, status, period_labels: labels, periods, records, team, skaters, goalies,
     away_lg_team_id: ids[0], home_lg_team_id: ids[1], away_score: game.away_score, home_score: game.home_score };

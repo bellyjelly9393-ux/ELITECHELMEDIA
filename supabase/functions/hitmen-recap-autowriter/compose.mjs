@@ -118,7 +118,9 @@ export function composeRecap(g, ctx) {
 
   // Three stars: points (goals weighted), then goalies by shutout/saves.
   const cand = g.skaters.map((p) => ({ p, s: p.goals * 3 + p.assists * 2 + (p.gwg ? 1 : 0), line: line(p) + (p.gwg ? ', GWG' : '') }))
-    .concat(g.goalies.map((x) => ({ p: x, s: (x.goals_against === 0 ? 9 : 0) + x.saves / 4 + ((x.lg_team_id === C) === win ? 1 : 0), line: x.saves + ' saves' + (x.goals_against === 0 ? ', shutout' : ' on ' + x.shots_against) })))
+    // A shutout needs the goalie's team to concede nothing: goalie GA can be below the final (empty-net goals).
+    .concat(g.goalies.map((x) => ({ x, so: x.goals_against === 0 && (x.lg_team_id === C ? os : cs) === 0 }))
+      .map(({ x, so }) => ({ p: x, s: (so ? 9 : 0) + x.saves / 4 + ((x.lg_team_id === C) === win ? 1 : 0), line: x.saves + ' saves' + (so ? ', shutout' : ' on ' + x.shots_against) })))
     .filter((c) => c.s > 0).sort((a, b) => (b.s - a.s) || a.p.gamertag.localeCompare(b.p.gamertag)).slice(0, 3);
   const stars = cand.map((c) => ({ player: c.p.gamertag, team: T[c.p.lg_team_id].abbr, line: c.line }));
 
