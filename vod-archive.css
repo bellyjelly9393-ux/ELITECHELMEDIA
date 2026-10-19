@@ -1,0 +1,33 @@
+/* VOD Archive: broadcast neutrals only (black, graphite, steel, off-white). */
+.va-shell{max-width:1240px;margin:0 auto;padding:40px 24px 80px;color:var(--bc-text,#E2E3E5)}
+.va-hero{border:1px solid var(--bc-hair,rgba(255,255,255,.085));border-top-color:var(--bc-hair-top,rgba(255,255,255,.15));background:linear-gradient(180deg,var(--bc-graphite,#151619),var(--bc-black,#070708));box-shadow:var(--bc-shadow);padding:28px 30px;margin-bottom:18px}
+.va-hero .eyebrow{color:var(--bc-muted,#8C9096);letter-spacing:.22em;font-size:11px}
+.va-hero h1{margin:6px 0 8px;font-size:clamp(30px,4vw,48px);letter-spacing:.04em;color:var(--bc-offwhite,#F2F3F4)}
+.va-hero h1 span{color:var(--bc-soft,#B4B7BC)}
+.va-hero p{color:var(--bc-soft,#B4B7BC);max-width:720px;margin:0}
+.va-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--bc-hair);border:1px solid var(--bc-hair);margin-bottom:18px}
+.va-stat{background:var(--bc-charcoal,#0D0E10);padding:16px 18px}
+.va-stat small{display:block;color:var(--bc-dim,#62666C);letter-spacing:.18em;font-size:10px;text-transform:uppercase}
+.va-stat b{display:block;font-size:24px;color:var(--bc-offwhite);margin-top:4px;font-variant-numeric:tabular-nums}
+.va-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.va-toolbar input,.va-toolbar select{background:var(--bc-graphite);color:var(--bc-text);border:1px solid var(--bc-steel,#2A2C30);border-radius:0;padding:9px 12px;font:inherit;min-width:220px}
+.va-toolbar input:focus,.va-toolbar select:focus{outline:1px solid var(--bc-soft);outline-offset:0}
+.va-table{width:100%;border-collapse:collapse;background:var(--bc-charcoal);border:1px solid var(--bc-hair)}
+.va-table th{text-align:left;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--bc-dim);padding:10px 12px;border-bottom:1px solid var(--bc-steel);background:var(--bc-black)}
+.va-table td{padding:11px 12px;border-bottom:1px solid var(--bc-hair-soft,rgba(255,255,255,.05));font-variant-numeric:tabular-nums;vertical-align:middle}
+.va-table tr:hover td{background:var(--bc-graphite)}
+.va-table .va-file{color:var(--bc-offwhite);font-weight:600}
+.va-table .va-sub{display:block;color:var(--bc-muted);font-size:12px;font-weight:400}
+.va-tag{display:inline-block;border:1px solid var(--bc-steel);color:var(--bc-soft);padding:2px 7px;margin:2px 4px 2px 0;font-size:11px}
+.va-ok{color:var(--bc-offwhite)}.va-pending{color:var(--bc-dim)}
+.va-btn{background:var(--bc-offwhite);color:var(--bc-black);border:0;border-radius:0;padding:8px 14px;font:inherit;font-weight:700;letter-spacing:.08em;font-size:11px;text-transform:uppercase;cursor:pointer}
+.va-btn:hover{background:#fff}.va-btn[disabled]{background:var(--bc-steel);color:var(--bc-dim);cursor:not-allowed}
+.va-empty{padding:28px;text-align:center;color:var(--bc-muted);border:1px solid var(--bc-hair);background:var(--bc-charcoal)}
+@media (max-width:760px){.va-table thead{display:none}.va-table tr{display:block;border-bottom:1px solid var(--bc-steel)}.va-table td{display:flex;justify-content:space-between;gap:12px;border:0}.va-table td::before{content:attr(data-label);color:var(--bc-dim);font-size:10px;letter-spacing:.16em;text-transform:uppercase}}
+/* Keep network-v2 gold accents out of the archive: neutrals only. */
+body.wildman-site .va-shell .eyebrow,body.wildman-site .va-shell .va-table th{color:var(--bc-muted,#8C9096)!important}
+body.wildman-site .va-shell .status-pill{color:var(--bc-soft,#B4B7BC)!important;border-color:var(--bc-steel,#2A2C30)!important;background:var(--bc-graphite,#151619)!important;box-shadow:none!important}
+body.wildman-site .va-shell .status-pill::before{background:var(--bc-soft,#B4B7BC)!important;box-shadow:none!important}
+body.wildman-site .va-shell .va-btn{background:var(--bc-offwhite,#F2F3F4)!important;color:var(--bc-black,#070708)!important;border:0!important;box-shadow:none!important}
+body.wildman-site .va-shell .va-btn[disabled]{background:var(--bc-steel,#2A2C30)!important;color:var(--bc-dim,#62666C)!important}
+body.wildman-site .va-shell .va-tag{color:var(--bc-soft,#B4B7BC)!important;border-color:var(--bc-steel,#2A2C30)!important;background:transparent!important}
