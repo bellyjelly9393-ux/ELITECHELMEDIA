@@ -122,16 +122,60 @@ function filmSections(vod, ctx) {
     '\n\n_Film notes come from the approved Wildman VOD Scout review of this game; clips stay in the private VOD room._'];
 }
 
+const ZONE_NAMES = ['behind the net', 'behind the net (left)', 'behind the net (right)', 'the crease', 'the right circle', 'the low slot (left)', 'the low slot', 'the low slot (right)',
+  'the left circle', 'the mid slot', 'the mid slot (left)', 'the mid slot (right)', 'the right point', 'the high slot', 'the left point', 'the high point'];
+const dangerOf = (z) => ([4, 6, 7, 8].includes(z) ? 'high' : [10, 11, 12, 14].includes(z) ? 'mid' : 'perimeter');
+
+/** Shot map / period / timeline sections from public.hitmen_ea_match_events. Each is gated on its own data. */
+export function eventSections(events, ctx) {
+  const ev = (Array.isArray(events) ? events : []).filter((e) => e && e.verified === true);
+  const out = [], o = ctx.oNick;
+  // Shot map: needs zone buckets for Calgary. Opponent side is reported only if present too.
+  const zones = (side, type) => ev.filter((e) => e.side === side && e.event_type === type && e.ice_zone >= 1 && e.ice_zone <= 16);
+  const cz = zones('calgary', 'shot_zone');
+  if (cz.length) {
+    const split = (rows) => rows.reduce((a, e) => (a[dangerOf(e.ice_zone)] += e.event_count, a.total += e.event_count, a), { high: 0, mid: 0, perimeter: 0, total: 0 });
+    const c = split(cz), oz = zones('opponent', 'shot_zone'), op = oz.length ? split(oz) : null;
+    const byZone = {}; for (const e of cz) byZone[e.ice_zone] = (byZone[e.ice_zone] || 0) + e.event_count;
+    const top = Object.entries(byZone).sort((a, b) => b[1] - a[1] || a[0] - b[0])[0];
+    const goalsHD = zones('calgary', 'goal_zone').filter((e) => dangerOf(e.ice_zone) === 'high').reduce((a, e) => a + e.event_count, 0);
+    const lines = [pick(ctx.lgGameId, 'map', [
+      `Of Calgary's ${c.total} shots on goal, ${c.high} came from the crease or low slot, ${c.mid} from the mid and high slot and ${c.perimeter} from the perimeter.`,
+      `Calgary's shot map: ${c.high} high-danger looks (crease and low slot), ${c.mid} from the middle of the slot, ${c.perimeter} from the outside, out of ${c.total} on goal.`,
+    ])];
+    if (top) lines.push(`The busiest spot was ${ZONE_NAMES[top[0] - 1]} (${top[1]}).`);
+    if (goalsHD) lines.push(`${goalsHD} of Calgary's goals came from high-danger ice.`);
+    if (op) lines.push(`${o} had ${op.high} high-danger shots, ${op.mid} from the slot and ${op.perimeter} from the perimeter, out of ${op.total}.`);
+    out.push('## Shot map\n' + lines.join(' ') + '\n\n_Zones are EA\'s 16 ice-location buckets for this game, taken from player totals captured just before and after the match._');
+  }
+  // Shots by period: only from rows that really carry a period.
+  const ps = ev.filter((e) => e.event_type === 'shot' && e.period >= 1);
+  if (ps.length) {
+    const per = {}; for (const e of ps) { const k = e.period; per[k] ||= { calgary: 0, opponent: 0 }; per[k][e.side] += e.event_count; }
+    const lab = (k) => (k <= 3 ? ['first', 'second', 'third'][k - 1] : 'overtime');
+    out.push('## Shots by period\n' + Object.keys(per).sort((a, b) => a - b).map((k) => `${lab(+k)[0].toUpperCase() + lab(+k).slice(1)}: Calgary ${per[k].calgary}, ${o} ${per[k].opponent}.`).join(' '));
+  }
+  // Goals timeline: needs period and clock on every goal row.
+  const gs = ev.filter((e) => e.event_type === 'goal' && e.period >= 1 && /^\d{1,2}:\d{2}$/.test(String(e.game_clock || '')));
+  if (gs.length) {
+    gs.sort((a, b) => a.period - b.period || String(b.game_clock).localeCompare(String(a.game_clock), undefined, { numeric: true }));
+    out.push('## Goals timeline\n' + gs.map((e) => `- P${e.period} ${e.game_clock}: ${e.side === 'calgary' ? 'Calgary' : o}${e.player ? ', ' + e.player : ''}${e.shot_type ? ' (' + e.shot_type + ')' : ''}${e.ice_zone ? ' from ' + ZONE_NAMES[e.ice_zone - 1] : ''}`).join('\n'));
+  }
+  return out;
+}
+
 /** Returns extra markdown sections plus metrics to merge. Never throws on missing data. */
-export function buildEvidence({ eaRows, vod, final, oNick, lgGameId }) {
+export function buildEvidence({ eaRows, vod, final, oNick, lgGameId, events }) {
   const ctx = { oNick, lgGameId };
   const ea = mergeEaMatches(eaRows, final);
-  const sections = [...(ea ? eaSections(ea, ctx) : []), ...filmSections(vod, ctx)];
+  const evSecs = eventSections(events, ctx);
+  const sections = [...evSecs, ...(ea ? eaSections(ea, ctx) : []), ...filmSections(vod, ctx)];
   const metrics = {};
   if (ea) {
     metrics.ea_match_ids = ea.matchIds;
     metrics.ea_key_stats = { shot_attempts: ea.C.att + '-' + ea.O.att, hits: ea.C.hits + '-' + ea.O.hits, takeaways: ea.C.tk + '-' + ea.O.tk, giveaways: ea.C.gv + '-' + ea.O.gv };
   }
+  if (evSecs.length) metrics.event_sections = evSecs.map((x) => x.split('\n')[0].replace(/^## /, ''));
   if (vod?.report) { metrics.vod_available = true; metrics.vod_review_id = vod.id; }
   const sources = [ea ? 'EA NHL club match' + (ea.matchIds.length > 1 ? 'es ' : ' ') + ea.matchIds.join(' + ') + (ea.split ? ' (game split across reconnects; totals combined)' : '') : null, vod?.report ? 'approved VOD Scout film review' : null].filter(Boolean);
   return { sections, metrics, sourceNote: sources.length ? 'Also: ' + sources.join('; ') + '.' : '', eaReconciled: !!ea, eaPresent: Array.isArray(eaRows) && eaRows.length > 0 };
