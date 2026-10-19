@@ -426,7 +426,12 @@ def run_escalation(job_id, chunks, metadata, timeline, frames_for, request, rost
         for name, step, model in plan:
             try:
                 cost_gate(job_id, model, payload, step)
-                verdicts[name] = dict(parse_verdict(request(step, model, payload)), model=model)
+                before = LEDGER.calls(job_id, bucket_for(step))
+                answer = request(step, model, payload)
+                if LEDGER.calls(job_id, bucket_for(step)) == before:
+                    # The transport did not report usage: book the worst case so caps still hold.
+                    LEDGER.record(job_id, model, worst_case_cost(model, payload), bucket_for(step))
+                verdicts[name] = dict(parse_verdict(answer), model=model)
             except SpendCapReached as exc:
                 skipped.append(f'{name}: {exc}')
             except Exception as exc:

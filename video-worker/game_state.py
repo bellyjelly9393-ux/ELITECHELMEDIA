@@ -266,8 +266,11 @@ def proposed_periods(timeline, duration, regulation=3):
 
 # ------------------------------------------------------------------ validators
 GOAL_WORDS = re.compile(r'\b(goal|scores?|scored|scoring|tally|lights? the lamp|buries|finishes|nets|equali[sz]er)\b', re.I)
-NOT_GOAL = re.compile(r'\b(goal ?line|goalie|goaltender|goal ?mouth|no goal|disallowed|near[- ]goal|crease|'
-                      r'scoring chance|chance|almost|nearly|denied|save[sd]?|off the post|wide|missed)\b', re.I)
+NOT_GOAL_PHRASES = re.compile(r'\b(goal ?line|goal ?mouth|goal ?posts?|goal ?judge|goalies?|goaltenders?|'
+                              r'scoring (chance|area|opportunit\w+)|own goal side)\b', re.I)
+BLOCKERS = re.compile(r'\b(no goal|disallowed|chance|almost|nearly|denied|saved?|save[sd]|robbed|off the post|'
+                      r'hits? the post|wide|missed|blocked)\b', re.I)
+STRONG_GOAL = re.compile(r'\b(scores|scored|goal (for|by)|lights? the lamp|buries it|makes it \d+\s*-\s*\d+)\b', re.I)
 PP_WORDS = re.compile(r'\b(power ?play|penalty|penalties|minor|tripping|hooking|slashing|interference|'
                       r'high[- ]sticking|holding|roughing|man advantage|short[- ]?handed|penalty kill|pk)\b', re.I)
 
@@ -275,8 +278,10 @@ PP_WORDS = re.compile(r'\b(power ?play|penalty|penalties|minor|tripping|hooking|
 def is_goal_claim(observation):
     if str(observation.get('category') or '').lower() in ('goal', 'goal_for', 'goal_against'):
         return True
-    text = f"{observation.get('category') or ''} {observation.get('note') or ''}"
-    return bool(GOAL_WORDS.search(text)) and not NOT_GOAL.search(text)
+    text = NOT_GOAL_PHRASES.sub(' ', f"{observation.get('note') or ''}")
+    if not GOAL_WORDS.search(text):
+        return False
+    return bool(STRONG_GOAL.search(text)) or not BLOCKERS.search(text)
 
 
 def is_pp_claim(observation):
@@ -352,7 +357,8 @@ def validate_structured_event(event, timeline):
     conflicts = []
     kind = str(event.get('event_type') or '').lower()
     team = str(event.get('team') or '').upper() or None
-    if kind == 'goal':
+    is_goal = 'goal' in kind and not re.search(r'no_?goal|goalie|goal_?line|disallowed', kind)
+    if is_goal:
         matches = [g for g in timeline.get('goals', []) if at - GOAL_LAG_AFTER <= g['hud_changed_at'] <= at + GOAL_LAG_BEFORE]
         if not matches and hud_seen_between(timeline, at + 5, at + GOAL_LAG_BEFORE):
             conflicts.append('fake_goal')
@@ -374,6 +380,10 @@ def validate_structured_event(event, timeline):
     advantaged = str(manpower.get('advantaged_team') or '').upper() if isinstance(manpower, dict) else ''
     if advantaged in names:
         pp = pp_team_at(timeline, at, slack=5)
+        if not pp and 'penalty' in kind:
+            # A called penalty precedes its power-play banner.
+            later = [p for p in timeline.get('power_plays', []) if at - 5 <= p['start'] <= at + 30]
+            pp = later[0] if later else None
         if pp and pp['team'] != advantaged:
             conflicts.append('reversed_pp')
     return conflicts
