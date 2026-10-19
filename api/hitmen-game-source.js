@@ -44,7 +44,7 @@ export default async function handler(req,res){
   try{
     await verify(token);
     const u=safeUrl(req.body?.url);
-    const body=await jsonFetch(u,{headers:{accept:'application/json','user-agent':'Wildman-Hockey-Hitmen-Game-Stats/1.0'},redirect:'follow'});
+    const body=await jsonFetch(u,{headers:{accept:'application/json','user-agent':'Elitechel-Media-Hitmen-Game-Stats/1.0'},redirect:'follow'});
     const game=findGameNode(body?.game||body);
     if(!game)throw fail(422,'The public source returned JSON, but no EA-style game clubs/players object was found.');
     return res.status(200).json({source:u.hostname==='chelstats.app'?'chelstats-public-game':'ea-public-game',url:u.toString(),game});

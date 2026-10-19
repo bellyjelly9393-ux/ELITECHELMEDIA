@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     const upstream = await fetch(url, {
       headers: {
         'accept': 'application/json',
-        'user-agent': 'Wildman-Hockey-Scouting/1.0'
+        'user-agent': 'Elitechel-Media-Scouting/1.0'
       },
       redirect: 'follow'
     });

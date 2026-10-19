@@ -57,7 +57,7 @@
   }
   function chemistryHtml(d){
     const rows=arr(d?.normalized?.chemistry).slice(0,8);
-    if(!rows.length)return '<div class="hsd-empty">No saved chemistry pair yet. Wildman Chemistry v1 is ready to score role compatibility immediately; historical teammate and VOD evidence will increase the evidence count as it arrives.</div>';
+    if(!rows.length)return '<div class="hsd-empty">No saved chemistry pair yet. Elitechel Chemistry v1 is ready to score role compatibility immediately; historical teammate and VOD evidence will increase the evidence count as it arrives.</div>';
     return '<div class="hsd-table-wrap"><table class="hsd-table"><thead><tr><th>Pair</th><th>Overall</th><th>Role</th><th>History</th><th>VOD</th><th>Evidence</th></tr></thead><tbody>'+rows.map(r=>'<tr><td>'+esc(r.pair_key||'pair')+'</td><td>'+esc(r.overall_score??'—')+'</td><td>'+esc(r.role_compatibility??'—')+'</td><td>'+esc(r.teammate_history_score??'—')+'</td><td>'+esc(r.vod_tendency_score??'—')+'</td><td>'+esc(r.evidence_count??0)+'</td></tr>').join('')+'</tbody></table></div>';
   }
 
@@ -256,15 +256,15 @@
       </section>
 
       <section class="hsd-value-grid">
-        <div><small>WILDMAN / SCOUT VALUE</small><strong>${moneyM(fair)}</strong><span>${d.pool.target_bid!=null?'Calgary target '+money(d.pool.target_bid):'target not set'}</span></div>
+        <div><small>ELITECHEL / SCOUT VALUE</small><strong>${moneyM(fair)}</strong><span>${d.pool.target_bid!=null?'Calgary target '+money(d.pool.target_bid):'target not set'}</span></div>
         <div><small>LIKELY PRICE</small><strong>${moneyM(likely)}</strong><span>${d.pool.max_bid!=null?'Calgary max '+money(d.pool.max_bid):walk!=null?'walk above '+moneyM(walk):'ceiling not set'}</span></div>
       </section>
 
       <section class="hsd-section">
-        <div class="hsd-brandline">WILDMAN VALUATION ENGINE</div>
+        <div class="hsd-brandline">ELITECHEL VALUATION ENGINE</div>
         <h3>VALUE PROVENANCE</h3>
         ${normVal?`<div class="hsd-value-grid" style="margin:0"><div><small>FAIR VALUE</small><strong>${money(normVal.fair_value)}</strong><span>${esc(valuationSummary(d))}</span></div><div><small>EXPECTED MARKET</small><strong>${money(normVal.expected_market)}</strong><span>Band ${money(normVal.market_low)} – ${money(normVal.market_high)} · Walk ${money(normVal.walk_price)}</span></div></div><p style="margin-top:14px;color:#aab1bc"><b>Formula/source:</b> ${esc(normVal.explanation?.formula||normVal.explanation?.note||'Source-labeled valuation snapshot.')}</p>`:'<div class="hsd-empty">No normalized valuation snapshot yet.</div>'}
-        <div class="hsd-actions" style="padding:14px 0 0"><button id="hsdRevalue" type="button">Recalculate Wildman v1</button></div>
+        <div class="hsd-actions" style="padding:14px 0 0"><button id="hsdRevalue" type="button">Recalculate Elitechel v1</button></div>
         <small id="hsdRevalueStatus"></small>
       </section>
 
@@ -310,9 +310,9 @@
         ${vodEvidenceHtml(d)}
       </section>
 
-      ${narrative?`<section class="hsd-section hsd-long-read"><div class="hsd-brandline">WILDMAN INTELLIGENCE</div><h3>FULL SCOUTING READ</h3><p>${esc(narrative)}</p></section>`:''}
+      ${narrative?`<section class="hsd-section hsd-long-read"><div class="hsd-brandline">ELITECHEL INTELLIGENCE</div><h3>FULL SCOUTING READ</h3><p>${esc(narrative)}</p></section>`:''}
 
-      <section id="hsdScoutChat" class="hsd-scout-chat"><div class="hsd-scout-chat-head">WILDMAN GM ASK · DATABASE FIRST · ${esc(p.gamertag||x.player_name||'PLAYER')}</div><div id="hsdScoutAnswer" class="hsd-scout-answer">${esc(scoutSummary)}</div><form id="hsdAskForm" class="hsd-ask-form"><input id="hsdAskInput" placeholder="Ask about fit, price, role, risk, or alternatives…"><button type="submit">↑</button></form></section>
+      <section id="hsdScoutChat" class="hsd-scout-chat"><div class="hsd-scout-chat-head">ELITECHEL GM ASK · DATABASE FIRST · ${esc(p.gamertag||x.player_name||'PLAYER')}</div><div id="hsdScoutAnswer" class="hsd-scout-answer">${esc(scoutSummary)}</div><form id="hsdAskForm" class="hsd-ask-form"><input id="hsdAskInput" placeholder="Ask about fit, price, role, risk, or alternatives…"><button type="submit">↑</button></form></section>
 
       <footer class="hsd-footer"><button data-hsd-close type="button">Close Dossier</button><span>Private Calgary Hitmen management workspace</span></footer>
     `;
@@ -372,7 +372,7 @@
       const input=document.getElementById('hsdAskInput'),answer=document.getElementById('hsdScoutAnswer');
       if(!current||!answer)return;
       const question=input?.value||'Give me an honest scouting report';
-      answer.textContent='Searching Wildman player intelligence, valuations and Calgary calculations…';
+      answer.textContent='Searching Elitechel player intelligence, valuations and Calgary calculations…';
       try{
         const search=intelligence()?.databaseFirstPlayerSearch?await intelligence().databaseFirstPlayerSearch(question,{teamId:TEAM_ID,limit:8}):null;
         const base=scoutAnswer(current,question);

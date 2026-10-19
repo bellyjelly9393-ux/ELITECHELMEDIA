@@ -41,7 +41,7 @@
     card.style.marginTop='14px';
     card.innerHTML=`
       <div class="hs-card-head">
-        <div><div class="eyebrow">WILDMAN ADMIN · LEAGUE HISTORY</div><h3>ChelScout League Collector</h3></div>
+        <div><div class="eyebrow">ELITECHEL ADMIN · LEAGUE HISTORY</div><h3>ChelScout League Collector</h3></div>
         <span id="hsCrawlBadge" class="hs-tag">IDLE</span>
       </div>
       <p class="hs-msg">Collects ChelScout suggestion results slowly, deduplicates by LG/ChelScout user ID, and imports league history only for players already in Calgary's Season 55 pool.</p>

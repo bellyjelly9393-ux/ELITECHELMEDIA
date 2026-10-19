@@ -9,7 +9,7 @@ import { createClient } from '@supabase/supabase-js';
 import { parseMembers, zoneDelta, windowHasOnlyMatch } from './zones.mjs';
 
 const CALGARY_CLUB = '9495', TEAM = 'b0bcbdda-da9d-419d-8f61-b34937966d49', PLATFORM = 'common-gen5';
-const UA = 'Wildman-Hockey-Esports/1.0 (Hitmen EA zone tracker)';
+const UA = 'Elitechel-Media-Esports/1.0 (Hitmen EA zone tracker)';
 const json = (d: unknown, s = 200) => new Response(JSON.stringify(d), { status: s, headers: { 'Content-Type': 'application/json' } });
 
 async function ea(path: string, params: Record<string, string>) {

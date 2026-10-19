@@ -13,7 +13,7 @@ form.addEventListener('submit',async e=>{
  try {
    const r=await client.from('wildman_program_interest').insert(values);
    if(r.error){if(r.error.code==='23505')throw new Error('That email is already on this program interest list.');throw new Error('Unable to save your interest right now. Please try again.');}
-   form.reset();program.value=values.program;message('Interest submitted. Wildman organizers can review it in their management dashboard.');
+   form.reset();program.value=values.program;message('Interest submitted. Elitechel organizers can review it in their management dashboard.');
  }catch(err){message(err.message||'Unable to submit. Please retry.',true);}
  finally{btn.disabled=false;btn.textContent='Submit Interest';}
 });

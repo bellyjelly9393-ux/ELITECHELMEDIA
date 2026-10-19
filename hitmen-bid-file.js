@@ -41,7 +41,7 @@
       </div>
       <div class="hbf-kpis">
         <div><small>BID FILE PLAYERS</small><strong id="hbfTotal">0</strong></div>
-        <div><small>MATCHED IN WILDMAN</small><strong id="hbfMatched">0</strong></div>
+        <div><small>MATCHED IN ELITECHEL</small><strong id="hbfMatched">0</strong></div>
         <div><small>LIVE MARKET MATCHES</small><strong id="hbfLive">0</strong></div>
         <div><small>ON CALGARY BID BOARD</small><strong id="hbfOnBoard">0</strong></div>
       </div>
@@ -290,7 +290,7 @@
     if(S.loading||!db()||!state().user||!role())return;
     S.loading=true;
     try{
-      $('hbfStatus')&&($('hbfStatus').textContent='Cross-referencing BidList.xls against Wildman…');
+      $('hbfStatus')&&($('hbfStatus').textContent='Cross-referencing BidList.xls against Elitechel…');
       const [_,pool,live,bids]=await Promise.all([
         S.file.length?Promise.resolve():loadBidFile(),
         allRows('team_scouting_pool','id,scouting_player_id,status,priority,projected_role,market_price,market_status,market_source,is_biddable,scouting_players(id,gamertag,primary_position,platform)',q=>q.eq('team_id',TEAM_ID)),
@@ -298,7 +298,7 @@
         allRows('team_bid_board','*',q=>q.eq('team_id',TEAM_ID))
       ]);
       S.pool=pool;S.live=live;S.bids=bids;rebuild();render();
-      $('hbfStatus').textContent=`Bid File loaded ✓ ${S.file.length.toLocaleString()} official biddable players · ${S.rows.filter(r=>r.matched).length.toLocaleString()} cross-referenced to Wildman.`;
+      $('hbfStatus').textContent=`Bid File loaded ✓ ${S.file.length.toLocaleString()} official biddable players · ${S.rows.filter(r=>r.matched).length.toLocaleString()} cross-referenced to Elitechel.`;
     }catch(e){
       $('hbfStatus')&&($('hbfStatus').textContent=e.message||'Could not load Bid File.');
     }finally{S.loading=false;}

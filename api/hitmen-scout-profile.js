@@ -12,6 +12,6 @@ module.exports=async(req,res)=>{
   // the secret lives in code; the secret itself stays with the worker.
   const got=crypto.createHash('sha256').update(secret).digest();
   if(!crypto.timingSafeEqual(got,WORKER_SECRET_SHA256))return res.status(403).json({error:'Worker authentication failed.'});
-  return res.status(200).json({engine:'Hitmen GM · Wildman Hockey Ops',provider:'openrouter',model:process.env.CLAUDE_MODEL||'anthropic/claude-opus-5.5',instructions:SYSTEM});
+  return res.status(200).json({engine:'Hitmen GM · Elitechel Hockey Ops',provider:'openrouter',model:process.env.CLAUDE_MODEL||'anthropic/claude-opus-5.5',instructions:SYSTEM});
  }catch{return res.status(503).json({error:'GM profile unavailable.'});}
 };

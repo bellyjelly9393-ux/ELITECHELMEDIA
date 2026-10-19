@@ -4,7 +4,7 @@
   var OBS_CFG=window.WM_OBS_CONFIG||{defaultFeedFor:function(){return '';}};
   var SCENES=window.WM_OBS_SCENES||null;
   var TEAM_CONFIG={
-    '5f36117c-7a51-4514-bf70-d4c672b41e48':{name:'Wildman Hockey',brand:'wildman',channel:'wildman-main'},
+    '5f36117c-7a51-4514-bf70-d4c672b41e48':{name:'Elitechel Media',brand:'wildman',channel:'wildman-main'},
     'b0bcbdda-da9d-419d-8f61-b34937966d49':{name:'Calgary Hitmen',brand:'hitmen',channel:'hitmen-main'}
   };
   var currentTeamId='';

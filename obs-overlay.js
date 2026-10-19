@@ -268,7 +268,7 @@
     var isHitmen=brand==='hitmen';
     if(brandLogo)brandLogo.src=isHitmen?'assets/lgchl/s55/team412.png':'assets/wildman/logo.webp';
     if(fullBrandLogo)fullBrandLogo.src=isHitmen?'assets/lgchl/s55/team412.png':'assets/wildman/logo.webp';
-    text('bugEyebrow',isHitmen?'CALGARY HITMEN':'WILDMAN HOCKEY');
+    text('bugEyebrow',isHitmen?'CALGARY HITMEN':'ELITECHEL MEDIA');
     text('bugTitle',isHitmen?'LGCHL SEASON 55':'ESPORTS NETWORK');
     text('brandLetter',isHitmen?'H':'W');
     text('fullBrandLetter',isHitmen?'H':'W');
@@ -276,18 +276,18 @@
     text('scoreEvent',payload.event,'LIVE GAME');
     text('scorePeriod',payload.period,'1ST');
     text('scoreClock',liveClock(payload),'20:00');
-    text('homeName',payload.homeName,isHitmen?'CALGARY HITMEN':'WILDMAN HOCKEY');
+    text('homeName',payload.homeName,isHitmen?'CALGARY HITMEN':'ELITECHEL MEDIA');
     text('homeScore',payload.homeScore,0);
     text('awayName',awayName,'');
     text('awayScore',payload.awayScore,0);
 
-    text('fullEyebrow',isHitmen?'CALGARY HITMEN · LGCHL SEASON 55':'WILDMAN HOCKEY ESPORTS NETWORK');
+    text('fullEyebrow',isHitmen?'CALGARY HITMEN · LGCHL SEASON 55':'ELITECHEL MEDIA');
     text('sceneTitle',sceneLabel(scene,payload));
-    text('fullHomeName',payload.homeName,isHitmen?'CALGARY HITMEN':'WILDMAN HOCKEY');
+    text('fullHomeName',payload.homeName,isHitmen?'CALGARY HITMEN':'ELITECHEL MEDIA');
     text('fullHomeScore',payload.homeScore,0);
     text('fullAwayName',awayName,'');
     text('fullAwayScore',payload.awayScore,0);
-    text('sceneMessage',payload.message,isHitmen?'CALGARY HITMEN':'WILDMAN HOCKEY ESPORTS NETWORK');
+    text('sceneMessage',payload.message,isHitmen?'CALGARY HITMEN':'ELITECHEL MEDIA');
     text('fullEvent',payload.event,'LIVE GAME');
     text('fullRecord',payload.record,'');
     if(isHitmen){
@@ -298,7 +298,7 @@
     text('playerNumber',payload.playerNumber,'00');
     text('playerRole',payload.playerRole,'PLAYER');
     text('playerName',payload.playerName,'PLAYER');
-    text('playerBrand',isHitmen?'CALGARY HITMEN':'WILDMAN HOCKEY');
+    text('playerBrand',isHitmen?'CALGARY HITMEN':'ELITECHEL MEDIA');
     text('obsStatus','LIVE · '+channel.toUpperCase());
   }
 

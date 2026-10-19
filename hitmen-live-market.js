@@ -35,7 +35,7 @@
       <details class="hlm-bridge">
         <summary><span><b>Live Source Bridge</b><small>Use your authorized market tab for true live eligibility and bidding updates</small></span><strong id="hlmBridgeBadge">READY</strong></summary>
         <div class="hlm-bridge-body">
-          <p>Wildman never receives your login cookie or password. The bridge reads the market response inside your already-authorized source tab, strips it to player/market fields, and sends only that snapshot back to this signed-in Calgary workspace.</p>
+          <p>Elitechel never receives your login cookie or password. The bridge reads the market response inside your already-authorized source tab, strips it to player/market fields, and sends only that snapshot back to this signed-in Calgary workspace.</p>
           <div class="hlm-actions"><button id="hlmOpenSource" class="hs-btn" type="button">Open Market Source</button><button id="hlmCopyBridge" class="hs-btn primary" type="button">Copy Live Sync Bookmark</button></div>
           <div id="hlmBridgeMsg" class="hs-msg">One-time setup for bidding night. Keep both tabs open after starting the bookmark.</div>
         </div>
@@ -112,13 +112,13 @@
   function openBridge(){
     const d=document.querySelector('.hlm-bridge');
     if(d)d.open=true;
-    bridgeMsg('Direct server refresh is blocked by the source. Use your authorized market tab once to start the live bridge; Wildman keeps the full stored market loaded while you connect.','BRIDGE NEEDED');
+    bridgeMsg('Direct server refresh is blocked by the source. Use your authorized market tab once to start the live bridge; Elitechel keeps the full stored market loaded while you connect.','BRIDGE NEEDED');
     d?.scrollIntoView({behavior:'smooth',block:'center'});
   }
   function liveBridgeBookmarklet(){
     function runner(){
       if(!/(^|\.)chelscout\.net$/i.test(location.hostname)){alert('Open the market source tab first.');return;}
-      if(window.__wildmanLiveTimer){alert('Wildman live sync is already running in this tab.');return;}
+      if(window.__wildmanLiveTimer){alert('Elitechel live sync is already running in this tab.');return;}
       var TARGET='https://wildmanhockey-elitechelmedia.app';
       function n(v){v=Number(v);return v===null||v===undefined||v===''||!isFinite(v)?null:v;}
       function clean(r){
@@ -137,21 +137,21 @@
           var rows=body.rows.map(clean).filter(function(r){return r.uid&&r.name;});
           var payload={type:'WILDMAN_LIVE_MARKET',data:{auction_ran:body.auction_ran===true,bids_updated:body.bids_updated||null,board_rev:body.board_rev||body.bids_updated||null,row_total:Number(body.row_total||body.rows.length||0),rows:rows}};
           var w=window.opener&&!window.opener.closed?window.opener:window.open(TARGET+'/calgary?tab=live#hitmen-scouting','wildmanLiveBridge');
-          if(!w)throw new Error('Allow the Wildman popup once');
+          if(!w)throw new Error('Allow the Elitechel popup once');
           setTimeout(function(){w.postMessage(payload,TARGET);},w===window.opener?0:1400);
           document.title='● LIVE · '+document.title.replace(/^● LIVE · /,'');
-        }catch(e){console.error(e);alert('Wildman live sync could not read the market. '+(e.message||''));}
+        }catch(e){console.error(e);alert('Elitechel live sync could not read the market. '+(e.message||''));}
       }
       send();
       window.__wildmanLiveTimer=setInterval(send,60000);
-      alert('Wildman live sync started. Keep this market tab and the Wildman tab open.');
+      alert('Elitechel live sync started. Keep this market tab and the Elitechel tab open.');
     }
     return 'javascript:('+runner.toString()+')();';
   }
   async function copyBridgeBookmark(){
     try{
       await navigator.clipboard.writeText(liveBridgeBookmarklet());
-      bridgeMsg('Copied. Save it as a bookmark named “Wildman Live Sync”, open the market source from this page, then tap that bookmark once. It will update Wildman every minute while both tabs stay open.','COPIED');
+      bridgeMsg('Copied. Save it as a bookmark named “Elitechel Live Sync”, open the market source from this page, then tap that bookmark once. It will update Elitechel every minute while both tabs stay open.','COPIED');
     }catch(e){
       bridgeMsg('Clipboard access was blocked. Use a browser that allows copying bookmark URLs.','COPY BLOCKED');
     }
