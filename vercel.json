@@ -91,6 +91,16 @@
   },
   "redirects": [
     {
+      "source": "/team.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/team",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/hitmen-player-locker.html",
       "destination": "/hitmen-stall.html",
       "permanent": false
