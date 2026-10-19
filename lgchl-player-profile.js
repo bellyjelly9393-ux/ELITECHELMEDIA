@@ -59,8 +59,15 @@
   dialog.querySelector('.lg-profile-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
 
-  function open(p, context={}) {
-    if (!p || !p.gamertag) return;
+  function profileUrl(p, metric) {
+    const lgId=Number(p.lg_user_id);
+    if (!Number.isSafeInteger(lgId)||lgId<=0) return '';
+    const kind=p.player_kind==='goalie'?'goalie':'skater';
+    const m=Object.hasOwn(metrics,metric)?metric:'points';
+    return 'lgchl-player.html?id='+lgId+'&kind='+kind+'&metric='+m;
+  }
+  function render(p, context={}) {
+    if (!p || !p.gamertag) return '';
     const metric = Object.hasOwn(metrics, context.metric) ? context.metric : 'points';
     const rank = Number(context.rank);
     const isGoalie = p.player_kind === 'goalie' || metric === 'save_pct' || metric === 'gaa';
@@ -76,28 +83,37 @@
     const badge = Number.isInteger(rank) && rank > 0
       ? '<span class="lg-profile-rank">No. ' + rank + ' · ' + esc(metrics[metric]) + '</span>'
       : '';
-    dialog.querySelector('#lgProfileContent').innerHTML =
-      '<div class="lg-profile-hero">' +
+    const url=profileUrl(p,metric);
+    const isPage=context.page===true;
+    return '<div class="lg-profile-watermark" aria-hidden="true"><img src="' + logo(p.lg_team_id) + '" alt="" loading="lazy"></div>' +
+      '<div class="lg-profile-body">' +
+       '<div class="lg-profile-hero">' +
         '<div class="lg-profile-logo"><img src="' + logo(p.lg_team_id) + '" alt="' + team + ' logo" onerror="this.onerror=null;this.src=\'assets/wildman/home/lgchl-logo.webp\'"></div>' +
         '<div class="lg-profile-identity"><small>ELITECHEL MEDIA · LGCHL SEASON 55</small><h2 id="lgProfileTitle">' + name + '</h2>' +
-        '<p>' + team + ' · ' + position + '</p>' + badge + (earned ? '<div class="lg-player-badges">' + earned + '</div>' : '') + '</div>' +
-      '</div>' +
-      '<div class="lg-profile-stat-grid">' + stats + '</div>' +
-      '<section class="lg-profile-story" aria-labelledby="lgProfileStoryTitle"><small>THE SEASON STORY</small>' +
-        '<h3 id="lgProfileStoryTitle">Season 55 at a glance</h3><p>' + esc(story(p, metric, rank)) + '</p>' +
-      '</section>' +
-      '<p class="lg-profile-source">Verified imported season totals · Updated ' + esc(stamp(p.fetched_at)) +
-      '. Historical comparisons appear only with verified source records; last-five game lines remain unavailable until the complete public game feed is ready.</p>';
+         '<p>' + team + ' · ' + position + '</p>' + badge + (earned ? '<div class="lg-player-badges">' + earned + '</div>' : '') + '</div>' +
+       '</div>' +
+       '<div class="lg-profile-stat-grid">' + stats + '</div>' +
+       '<section class="lg-profile-story" aria-labelledby="lgProfileStoryTitle"><small>THE SEASON STORY</small>' +
+         '<h3 id="lgProfileStoryTitle">Season 55 at a glance</h3><p>' + esc(story(p, metric, rank)) + '</p>' +
+       '</section>' +
+       (url && !isPage ? '<a class="lg-profile-full-link" href="' + url + '">Open full player page <span aria-hidden="true">→</span></a>' : '') +
+       '<p class="lg-profile-source">Imported LGCHL Season 55 totals · Updated ' + esc(stamp(p.fetched_at)) +
+       '. Historical comparisons appear only with matching official player IDs; verified game-by-game streaks are pending fuller coverage.</p>' +
+      '</div>';
+  }
+  function open(p, context={}) {
+    if (!p || !p.gamertag) return;
+    dialog.querySelector('#lgProfileContent').innerHTML=render(p,context);
     if (!dialog.open) {
       if (typeof dialog.showModal === 'function') dialog.showModal();
-      else dialog.setAttribute('open', '');
+      else dialog.setAttribute('open','');
     }
     if (!context.enriched && numeric(p.lg_user_id) && window.WMLgPlayerBadges) {
       const active = p.gamertag + '|' + p.lg_user_id;
       dialog.dataset.activePlayer = active;
-      window.WMLgPlayerBadges.load([p],D.read).then(ok => {
+      window.WMLgPlayerBadges.load([p],D.read).then(ok=>{
         if (ok && dialog.open && dialog.dataset.activePlayer === active)
-          open(p,{...context,enriched:true});
+          dialog.querySelector('#lgProfileContent').innerHTML=render(p,{...context,enriched:true});
       });
     }
   }
@@ -109,5 +125,5 @@
       if (payload && payload.p) open(payload.p, {metric:payload.metric,rank:payload.rank});
     } catch { /* Ignore malformed profile attributes rather than displaying invented details. */ }
   });
-  window.WMLgPlayerProfile = Object.freeze({open});
+  window.WMLgPlayerProfile = Object.freeze({open,render,profileUrl});
 })();
