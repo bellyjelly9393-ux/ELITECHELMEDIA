@@ -9,6 +9,7 @@ import { createClient } from '@supabase/supabase-js';
 import { parseLgGamePage } from './parse.mjs';
 import { composeRecap } from './compose.mjs';
 import { buildEvidence } from './evidence.mjs';
+import { withScheduleName } from './names.mjs';
 
 const UA = 'Wildman-Hockey-Esports/1.0 (Hitmen recap writer; one request at a time)';
 const PAUSE_MS = 1500;
@@ -86,8 +87,16 @@ Deno.serve(async (req) => {
       if (!dryRun && g.has_recap) { results.push({ lg_game_id: g.lg_game_id, skipped: 'recap already exists' }); continue; }
       const html = await getHtml(g.source_url);
       const parsed = parseLgGamePage(html, { lg_game_id: Number(g.lg_game_id), status: g.status, away_lg_team_id: g.away_lg_team_id, home_lg_team_id: g.home_lg_team_id, away_score: g.away_score, home_score: g.home_score });
-      const evidence = body.evidence === false ? null : await loadEvidence(db, g, teams);
-      const recap = composeRecap(parsed, { evidence, calgaryId: CALGARY, teams, game_at: g.game_at, week: g.week, game_no: g.game_no, schedule_game_id: g.schedule_game_id, source_url: g.source_url });
+      // Use the Hitmen schedule's spelling (accents) when it is the same team; the RPC only links a
+      // schedule row whose opponent matches this game's opponent (accent/case-insensitive).
+      const oppId = g.away_lg_team_id === CALGARY ? g.home_lg_team_id : g.away_lg_team_id;
+      let gTeams = teams;
+      if (g.schedule_game_id) {
+        const { data: srow } = await db.from('hitmen_schedule_games').select('opponent_name').eq('id', g.schedule_game_id).maybeSingle();
+        gTeams = withScheduleName(teams, oppId, srow?.opponent_name);
+      }
+      const evidence = body.evidence === false ? null : await loadEvidence(db, g, gTeams);
+      const recap = composeRecap(parsed, { evidence, calgaryId: CALGARY, teams: gTeams, game_at: g.game_at, week: g.week, game_no: g.game_no, schedule_game_id: g.schedule_game_id, source_url: g.source_url });
       if (dryRun) { results.push({ lg_game_id: g.lg_game_id, dryRun: true, has_recap: g.has_recap, title: recap.title, body: recap.body, metrics: recap.metrics }); continue; }
       const { data: id, error: pe } = await db.rpc('hitmen_publish_verified_recap', { p_lg_game_id: Number(g.lg_game_id), p_title: recap.title, p_body: recap.body, p_metrics: recap.metrics });
       if (pe) throw new Error(pe.message);
