@@ -20,7 +20,7 @@ body.wildman-site:not(.management-protected) .wm-brand-mark{
   width:54px!important;
   height:54px!important;
   border-radius:13px!important;
-  background:#02060a url('https://d2ol7oe51mr4n9.cloudfront.net/user_3Ic50OgPEnsF6yLkPdMjvCnPfo2/72f4c4d6-ce4d-4da6-a1b9-45079d9fb21b.png') center/contain no-repeat!important;
+  background:#02060a url('assets/brand/ecm-crest.webp') center/contain no-repeat!important;
   border:1px solid rgba(112,201,255,.5)!important;
   box-shadow:0 0 26px rgba(52,169,255,.2),0 0 16px rgba(216,173,85,.08)!important;
   color:transparent!important;
@@ -72,7 +72,7 @@ body.wildman-home{--wm-home-purple:#279fe9!important}
   position:absolute;
   right:-10px;top:-18px;
   width:128px;height:150px;
-  background:url('https://d2ol7oe51mr4n9.cloudfront.net/user_3Ic50OgPEnsF6yLkPdMjvCnPfo2/2d93c4f2-d65b-4568-bbb8-86bf81223818.png') center/contain no-repeat;
+  background:url('assets/brand/ecm-crest.webp') center/contain no-repeat;
   opacity:.16;
   filter:saturate(1.08);
   z-index:-1;

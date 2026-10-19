@@ -266,8 +266,8 @@
     var awayName=isPlaceholderName(payload.awayName)?autoOpponent:payload.awayName;
 
     var isHitmen=brand==='hitmen';
-    if(brandLogo)brandLogo.src=isHitmen?'assets/lgchl/s55/team412.png':'assets/wildman/logo.webp';
-    if(fullBrandLogo)fullBrandLogo.src=isHitmen?'assets/lgchl/s55/team412.png':'assets/wildman/logo.webp';
+    if(brandLogo)brandLogo.src=isHitmen?'assets/lgchl/s55/team412.png':'assets/brand/ecm-crest.webp';
+    if(fullBrandLogo)fullBrandLogo.src=isHitmen?'assets/lgchl/s55/team412.png':'assets/brand/ecm-crest.webp';
     text('bugEyebrow',isHitmen?'CALGARY HITMEN':'ELITECHEL MEDIA');
     text('bugTitle',isHitmen?'LGCHL SEASON 55':'ESPORTS NETWORK');
     text('brandLetter',isHitmen?'H':'W');

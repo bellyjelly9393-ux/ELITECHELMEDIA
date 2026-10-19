@@ -94,7 +94,7 @@
 .wildman-site .wm-player-meta h3{font-size:clamp(27px,3vw,34px)}
 
 .wildman-site .wm-brand-mark{
-  background-size:cover;
+  background-size:contain;
   background-position:center;
   box-shadow:0 0 22px rgba(216,173,85,.12),inset 0 0 0 1px rgba(255,255,255,.025);
 }

@@ -336,7 +336,7 @@ p { margin: 0; }
 
 /* ---------- footer ---------- */
 footer { position: relative; isolation: isolate; overflow: hidden; background: #050608; border-top: 1px solid var(--line); }
-footer::before { content: ""; position: absolute; right: -60px; top: 50%; width: 380px; height: 340px; transform: translateY(-50%) rotate(-8deg); background: url("assets/wildman/home/wildman-crest.webp") center / contain no-repeat; opacity: .07; z-index: -1; }
+footer::before { content: ""; position: absolute; right: -60px; top: 50%; width: 380px; height: 340px; transform: translateY(-50%) rotate(-8deg); background: url("assets/brand/ecm-crest.webp") center / contain no-repeat; opacity: .07; z-index: -1; }
 footer::after { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(60% 120% at 0% 100%, rgba(80,120,200,.12), transparent 60%), var(--scratch); }
 .foot { padding-block: 22px; display: flex; justify-content: space-between; align-items: center; gap: 14px 24px; flex-wrap: wrap; color: var(--mute); font-size: 14px; }
 .foot-brand { display: flex; align-items: center; gap: 14px; }

@@ -2,7 +2,7 @@
 const $=id=>document.getElementById(id),form=$('interestForm'),msg=$('interestMessage');
 const client=window.supabase?.createClient('https://lrgllzvwgvqagcpiyvfd.supabase.co','sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP');
 if(!form||!client)return;
-const program=$('interestProgram');const q=new URLSearchParams(location.search).get('program');if(['franchise','hut'].includes(q))program.value=q;
+const program=$('interestProgram');const q=new URLSearchParams(location.search).get('program');program.value='hut';
 document.querySelectorAll('[data-interest-program]').forEach(a=>a.addEventListener('click',()=>{program.value=a.dataset.interestProgram;}));
 function message(t,error){msg.textContent=t;msg.style.color=error?'#ffc4bd':'#dcd19a';}
 form.addEventListener('submit',async e=>{
