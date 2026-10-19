@@ -26,7 +26,7 @@
   return [...c,...sk,...(['points','goals','assists'].includes(metric)?[]:[[metric,metrics[metric]]])];
  }
  function cell(p,key,metric){
-  if(key==='player')return '<b>'+esc(p.gamertag)+'</b><small>'+esc(p.position||'Position unavailable')+' · '+esc(p.team_name||'Team unavailable')+'</small>';
+  if(key==='player')return '<button type="button" class="lg-player-open" data-lg-profile="'+encodeURIComponent(JSON.stringify({p,rank:p.rank,metric}))+'">'+esc(p.gamertag)+'</button><small>'+esc(p.position||'Position unavailable')+' · '+esc(p.team_name||'Team unavailable')+'</small>';
   if(key==='rank')return String(p.rank);
   if(key==='save_pct')return numeric(p[key])?(Number(p[key])*100).toFixed(1)+'%':'—';
   if(key==='gaa')return rate(p[key],2);
@@ -54,16 +54,17 @@
  async function players(){
   const token=++state.request,metric=$('lgMetric').value;
   state.metric=metric;state.page=1;state.rows=[];state.loading=true;state.failed=false;updateUrl();render();$('lgReload').disabled=true;
-  const query={select:'gamertag,position,player_kind,lg_team_id,team_name,gp,points,goals,assists,shots,hits,blocked_shots,takeaways,save_pct,gaa,fetched_at',player_kind:'eq.'+(goalie(metric)?'goalie':'skater'),[metric]:'not.is.null',order:metric+'.'+(metric==='gaa'?'asc':'desc')+'.nullslast,gp.desc,gamertag.asc',limit:String(LIMIT)};
+  const query={select:'gamertag,position,player_kind,lg_team_id,team_name,gp,points,goals,assists,shots,hits,blocked_shots,takeaways,save_pct,gaa,fetched_at,lg_user_id',player_kind:'eq.'+(goalie(metric)?'goalie':'skater'),[metric]:'not.is.null',order:metric+'.'+(metric==='gaa'?'asc':'desc')+'.nullslast,gp.desc,gamertag.asc',limit:String(LIMIT)};
   if(goalie(metric))query.gp='gte.8';
   try{
-   const rows=await read('wm_lgchl_s55_player_leaders',query);if(token!==state.request)return;
+   let rows;try{rows=await read('wm_lgchl_s55_player_leaders',query);}catch{const legacy={...query,select:query.select.replace(',lg_user_id','')};rows=await read('wm_lgchl_s55_player_leaders',legacy);}if(token!==state.request)return;
    const sorted=rows.filter(p=>numeric(p[metric])).sort((a,b)=>(Number(a[metric])-Number(b[metric]))*(metric==='gaa'?1:-1)||Number(b.gp||0)-Number(a.gp||0)||String(a.gamertag).localeCompare(String(b.gamertag))).slice(0,LIMIT);
    let rank=0,previous=null;
    state.rows=sorted.map((p,i)=>{const value=Number(p[metric]);if(i===0||value!==previous)rank=i+1;previous=value;return {...p,rank};});
    const times=state.rows.map(p=>p.fetched_at).filter(Boolean).sort();
    $('lgLastUpdated').textContent='LGCHL Season 55 regular season · '+metrics[metric]+' · '+state.rows.length+' qualifying players loaded.';
    $('lgPlayerSource').textContent='';
+   window.WMLgPlayerBadges?.load(state.rows,read).then(()=>{if(token===state.request)window.WMLgPlayerBadges?.refresh($('lgPlayerBoard'));});
   }catch{
    if(token!==state.request)return;state.failed=true;
    $('lgLastUpdated').textContent='Player statistics are unavailable.';
@@ -91,6 +92,7 @@
  $('lgPrevPage').addEventListener('click',()=>{state.page--;render();$('lgPlayerStatus').scrollIntoView({block:'nearest'});});
  $('lgNextPage').addEventListener('click',()=>{state.page++;render();$('lgPlayerStatus').scrollIntoView({block:'nearest'});});
  $('lgReload').addEventListener('click',()=>{players();power();});
+ if(window.WMLgPlayerBadges)$('lgBadgeLegend').innerHTML=window.WMLgPlayerBadges.legend();
  players();power();
  if(params.get('search')==='1')$('lgPlayerSearch').focus();
 })();
