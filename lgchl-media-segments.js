@@ -182,8 +182,8 @@
     const rowsHtml = (arr, k, label) => '<ol class="lg-potn-list num">' + arr.map((p, i) => '<li><span class="lg-potn-rk">' + (i + 1) + '</span><img src="' + logo(p.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(p.gamertag) + '</b><small>' + esc((teams.get(Number(p.lg_team_id)) || {}).name || 'LGCHL') + '</small><span class="lg-potn-v">' + esc(p[k]) + ' ' + label + '</span></li>').join('') + '</ol>';
     box.innerHTML = stars.map((p, i) => playerCard(p, teams, ['First star', 'Second star', 'Third star'][i])).join('') +
       (g ? playerCard(g, teams, 'Goalie of the night') : '') +
-      '<article class="card lg-card lg-potn-board"><p class="lg-potn-tag">Top sticks · points</p>' + rowsHtml(leadersBy('points'), 'PTS') + '</article>' +
-      '<article class="card lg-card lg-potn-board"><p class="lg-potn-tag">Top sticks · goals</p>' + rowsHtml(leadersBy('goals'), 'G') +
+      '<article class="card lg-card lg-potn-board"><p class="lg-potn-tag">Top sticks · points</p>' + rowsHtml(leadersBy('points'), 'points', 'PTS') + '</article>' +
+      '<article class="card lg-card lg-potn-board"><p class="lg-potn-tag">Top sticks · goals</p>' + rowsHtml(leadersBy('goals'), 'goals', 'G') +
       '<p class="lg-line num">' + multi + ' skater' + (multi === 1 ? '' : 's') + ' averaged two points a game or better.</p></article>';
     const pct = n.finalGoals ? Math.round(100 * n.goals / n.finalGoals) : null;
     $('lgNightCoverage').textContent = 'From LG season totals saved before and after the night: ' + n.goals + ' of ' + n.finalGoals + ' goals in ' + n.finals + ' finals accounted for' + (pct != null ? ' (' + pct + '%)' : '') +
