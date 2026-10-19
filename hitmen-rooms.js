@@ -156,6 +156,13 @@
     });
     renderSeg();
 
+    let oppNames = null;
+    const dbName = async name => {
+      oppNames ??= safe(q(db.from('hitmen_opponents').select('opponent_name').eq('team_id', TEAM).eq('season', SEASON)));
+      const r = await oppNames;
+      return (r.ok ? r.v : []).map(o => o.opponent_name).find(n => strip(n) === strip(name)) || name;
+    };
+
     async function fetchOpp(name) {
       if (cache.has(name)) return cache.get(name);
       const p = Promise.all([
@@ -178,7 +185,7 @@
         '<dl class="file-stats"><div><dt>Record</dt><dd>' + rec(t) + '</dd></div><div><dt>WHL East</dt><dd>' + L.rankOf(t.lg_team_id) + '</dd></div><div><dt>Last 10</dt><dd>' + esc(t.last10 || '–') + '</dd></div><div><dt>' + (home ? 'On road' : 'At home') + '</dt><dd>' + esc((home ? t.away : t.home) || '–') + '</dd></div><div><dt>GF / GA</dt><dd>' + t.gf + '/' + t.ga + '</dd></div><div><dt>Streak</dt><dd>' + streakTxt(t.streak) + '</dd></div></dl></div>';
       $('oppFile').innerHTML = head + '<p class="hq-loading">Loading the opponent file…</p>';
       tint($('oppFile'));
-      const [statR, rosR, repR] = await fetchOpp(t.name);
+      const [statR, rosR, repR] = await fetchOpp(await dbName(t.name));
       if (opps[cur].t !== t) return;
 
       /* players: LG CHL season lines first, EA club totals only where LG has nothing */
