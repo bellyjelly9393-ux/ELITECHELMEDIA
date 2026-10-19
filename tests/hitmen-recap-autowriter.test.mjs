@@ -11,6 +11,7 @@ const teams = {
   412: { name: 'Calgary Hitmen', nickname: 'Hitmen', abbr: 'CGY' }, 418: { name: 'Lethbridge Hurricanes', nickname: 'Hurricanes', abbr: 'LET' },
   2983: { name: 'Chilliwack Bruins', nickname: 'Bruins', abbr: 'CHW' }, 385: { name: 'Red Deer Rebels', nickname: 'Rebels', abbr: 'RDR' },
   416: { name: 'Medicine Hat Tigers', nickname: 'Tigers', abbr: 'MH' },
+  468: { name: 'Chicoutimi Saguenéens', nickname: 'Saguenéens', abbr: 'CHI' },
 };
 const ctx = (id) => ({ calgaryId: 412, teams, game_at: '2026-10-14T01:00:00Z', week: 3, game_no: 25, schedule_game_id: null, source_url: 'https://www.leaguegaming.com/x?gameid=' + id });
 
@@ -61,4 +62,43 @@ test('recaps use only parsed numbers', () => {
   assert.equal(ot.metrics.final, '4-5 OT');
   assert.match(ot.body, /Calgary led 2–1 after one period and 4–1 after two\. Chilliwack scored three times in the third to force overtime at 4–4\./);
   assert.match(ot.body, /Calgary gets a point and moves to 11-12-3\./);
+});
+
+// Goalie GA may be below the opponent's final (empty-net goals are not charged to a goalie), never above it,
+// and each goalie's saves + GA must still equal shots against.
+const goalieRow = (html, tag, [s, ga, sv]) => html.replace(
+  new RegExp('(' + tag + '<\\/a>[\\s\\S]*?<\\/td>\\s*<td[^>]*>)\\s*\\d+\\s*(<\\/td>\\s*<td[^>]*>[^<]*<\\/td>\\s*<td[^>]*>)\\s*\\d+\\s*(<\\/td>\\s*<td[^>]*>)\\s*\\d+\\s*<'),
+  (_, a, b, c) => a + s + b + ga + c + sv + '<');
+
+test('goalie GA lower than the opponent final passes (real page: 917609, Calgary goalie charged 4 of 5)', () => {
+  const g = parseLgGamePage(page(917609), games[917609]);
+  const px = g.goalies.find((x) => x.gamertag === 'XxPASTRNAK88');
+  assert.deepEqual([px.shots_against, px.goals_against, px.saves, px.lg_team_id], [16, 4, 12, 412]);
+  assert.equal(g.away_score, 5);
+  const r = composeRecap(g, ctx(917609));
+  assert.match(r.body, /XxPASTRNAK88 made 12 saves on 16 shots/);
+  assert.doesNotMatch(r.body, /empty[- ]net/i);
+  assert.equal(r.metrics.final, '3-5');
+  // Synthetic: lower a goalie's GA on another real page (shots kept consistent).
+  const low = goalieRow(page(917493), 'Kudolken', [16, 3, 13]);
+  assert.notEqual(low, page(917493));
+  const k = parseLgGamePage(low, games[917493]);
+  assert.equal(k.goalies.find((x) => x.gamertag === 'Kudolken').goals_against, 3);
+  // A goalie charged 0 while his team conceded is not a shutout.
+  const zero = composeRecap(parseLgGamePage(goalieRow(page(917493), 'Kudolken', [13, 0, 13]), games[917493]), ctx(917493));
+  assert.doesNotMatch(zero.body, /Kudolken[^\n]*shutout/);
+});
+
+test('goalie GA higher than the opponent final fails', () => {
+  const high = goalieRow(page(917493), 'Kudolken', [18, 5, 13]);
+  assert.notEqual(high, page(917493));
+  assert.throws(() => parseLgGamePage(high, games[917493]), /exceed the official final/);
+  assert.throws(() => parseLgGamePage(goalieRow(page(917609), 'XxPASTRNAK88', [18, 6, 12]), games[917609]), /exceed the official final/);
+});
+
+test('goalie saves + GA not equal to shots against fails', () => {
+  const bad = goalieRow(page(917493), 'Kudolken', [17, 4, 12]);
+  assert.notEqual(bad, page(917493));
+  assert.throws(() => parseLgGamePage(bad, games[917493]), /Goalie totals do not add up for Kudolken/);
+  assert.throws(() => parseLgGamePage(goalieRow(page(917609), 'XxPASTRNAK88', [16, 3, 12]), games[917609]), /Goalie totals do not add up/);
 });
