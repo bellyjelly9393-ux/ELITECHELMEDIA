@@ -79,3 +79,12 @@ or until the function is deployed, run
 `node scripts/lgchl-league-writer.mjs --night <YYYY-MM-DD> --snapshot <export.json>` on a public export.
 Use `payload.metrics` / `payload.cards` / `payload.mentions` for the radio segment, add only voice and transitions, and
 never add a fact, quote or stat that is not in the draft. Drafts stay drafts until Seth approves.
+
+## Partial nights (nightly job)
+
+The nightly `lgchl-night-wrap-drafts` call runs in partial-night mode by default (`partial` omitted or `true`):
+every final is written, and each unreported game is listed under **Sources & coverage** as
+`Not yet reported (N): Away at Home, scheduled H:MM PM ET (LG game ID)`. No result is ever inferred for those games.
+If fewer than 80% of the night's games are final, nothing is saved and the function logs
+`{ saved: false, reason, pending }` (also returned in the HTTP response). Pass `partial: false` for the old all-final rule.
+The CLI matches with `--partial` (80% floor; override with `--min-final 0.9`).

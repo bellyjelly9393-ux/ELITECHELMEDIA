@@ -34,7 +34,7 @@ if (!backend) { console.error('--snapshot FILE or --rest required'); process.exi
 const reader = createPublicReader(backend);
 const ctx = await loadNight(reader, { night: args.night, season: Number(args.season || 55) });
 if (ctx.empty) { console.log(JSON.stringify({ ok: false, reason: 'no LGCHL games on ' + args.night })); process.exit(0); }
-const wrap = composeNightWrap(ctx, { generatedAt: args['generated-at'] || new Date().toISOString(), allowPartial: !!args.partial });
+const wrap = composeNightWrap(ctx, { generatedAt: args['generated-at'] || new Date().toISOString(), allowPartial: !!args.partial, minFinalShare: args['min-final'] ? Number(args['min-final']) : (args.partial ? 0.8 : 1) });
 if (!wrap.ok) { console.log(JSON.stringify(wrap)); process.exit(0); }
 const out = args.out || '.';
 fs.mkdirSync(out, { recursive: true });

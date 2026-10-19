@@ -143,3 +143,36 @@ test('milestones need every team game that night box-scored', async () => {
   assert.ok(!/reached 20 points tonight/.test(wrap.markdown), 'Alpha played an un-box-scored game, so the pre-night total is unknown');
   assert.match(wrap.markdown, /1 of 2 games box-scored/);
 });
+
+test('partial night: finals written, unreported games listed by schedule only, no invented result', async () => {
+  const s = fixture();
+  s.lgchl_games[1] = { ...s.lgchl_games[1], status: 'scheduled', away_score: null, home_score: null, source_url: null };
+  // Four more finals the same night -> 5 of 6 final (83%).
+  [[21, 2, 1, 2, 5], [22, 4, 1, 1, 2], [23, 1, 4, 3, 1], [24, 3, 2, 2, 4]].forEach(([id, a, h, as, hs]) =>
+    s.lgchl_games.push({ lg_game_id: id, season: 55, week: 3, game_at: iso('2026-10-14T00:30Z'), away_lg_team_id: a, home_lg_team_id: h, away_score: as, home_score: hs, status: 'final', decided_in: null, source_url: null }));
+  const { wrap } = await run(s, { allowPartial: true, minFinalShare: 0.8 });
+  assert.ok(wrap.ok, wrap.reason);
+  assert.deepEqual(wrap.metrics.not_reported, [12]);
+  assert.equal(wrap.metrics.finals, 5);
+  assert.equal(wrap.metrics.scheduled_games, 6);
+  assert.ok(!wrap.scores.some((g) => g.lg_game_id === 12), 'unreported game has no score card');
+  const sources = wrap.markdown.slice(wrap.markdown.indexOf('## Sources & coverage'));
+  assert.match(sources, /- Gap: Not yet reported \(1\): Charlie Cats at Delta Dogs, scheduled 9:00 PM ET \(LG game 12\)\./);
+  const before = wrap.markdown.slice(0, wrap.markdown.indexOf('## Sources & coverage'));
+  assert.ok(!/Charlie Cats \d|Delta Dogs \d/.test(before.split('\n').filter((l) => /Charlie Cats/.test(l) && /Delta Dogs/.test(l)).join('\n')), 'no result line pairs the unreported teams');
+});
+
+test('partial night below the 80% floor saves nothing and says why', async () => {
+  const s = fixture(); s.lgchl_games[1] = { ...s.lgchl_games[1], status: 'scheduled', away_score: null, home_score: null };
+  const { wrap } = await run(s, { allowPartial: true, minFinalShare: 0.8 });
+  assert.equal(wrap.ok, false);
+  assert.match(wrap.reason, /only 1 of 2 games are final \(50%, need 80%\)/);
+  assert.deepEqual(wrap.pending, [12]);
+});
+
+test('nightly edge path runs in partial mode with the 80% floor and logs refusals', () => {
+  const src = fs.readFileSync(new URL('index.ts', DIR), 'utf8');
+  assert.match(src, /composeNightWrap\(ctx, \{ allowPartial: body\.partial !== false, minFinalShare: 0\.8 \}\)/);
+  assert.match(src, /console\.log\(JSON\.stringify\(\{ writer: WRITER_VERSION, night, saved: false, reason/);
+  assert.ok(src.indexOf('if (!wrap.ok)') < src.indexOf("db.rpc('lgchl_media_save_draft'"), 'refusal returns before any save');
+});
