@@ -1,6 +1,6 @@
 /* LGCHL Media desk: extra league segments (lgchl-media.html).
    Public read-only data only: the standings/schedule already loaded by lgchl-media.js, the public
-   season leaders view, and the public week/trending views. Every line is built from those numbers. */
+   season leaders view, and the public night/week/trending views (LG season totals compared over time). Every line is built from those numbers. */
 (() => {
   'use strict';
   const D = window.WMDesk;
@@ -123,8 +123,8 @@
     const upcoming = (games || []).filter(g => g.status !== 'final').map(g => Number(g.week)).filter(Boolean);
     const nextWeek = upcoming.length ? Math.min(...upcoming) : null;
     const [wk, tr] = await Promise.allSettled([
-      read('lgchl_public_week_players', { select: 'week,player_kind,gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots,saves,shots_against,goals_against', order: 'points.desc,goals.desc,gamertag.asc', limit: '400' }),
-      read('lgchl_public_trending_players', { select: 'player_kind,gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots', player_kind: 'eq.skater', order: 'points.desc,goals.desc,gp.asc,gamertag.asc', limit: '6' })
+      read('lgchl_public_week_players', { select: 'week,week_complete,player_kind,gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots,saves,shots_against,goals_against', order: 'points.desc,goals.desc,gamertag.asc', limit: '400' }),
+      read('lgchl_public_trending_players', { select: 'player_kind,gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots,since_at', player_kind: 'eq.skater', order: 'points.desc,goals.desc,gp.asc,gamertag.asc', limit: '6' })
     ]);
     // Players of the Week: top 3 skaters + best goalie (min 25 shots faced).
     const week = wk.status === 'fulfilled' ? wk.value : [];
@@ -132,8 +132,8 @@
     const goalie = week.filter(p => p.player_kind === 'goalie' && Number(p.shots_against) >= 25)
       .sort((a, b) => Number(b.saves) / Number(b.shots_against) - Number(a.saves) / Number(a.shots_against))[0];
     if (skaters.length) {
-      const w = skaters[0].week;
-      $('lgWeekPlayersNote').textContent = 'Week ' + w + ' · the league\'s top performers, game week totals.';
+      const w = skaters[0].week, done = skaters[0].week_complete !== false;
+      $('lgWeekPlayersNote').textContent = 'Week ' + w + (done ? ' · the league\'s top performers, game week totals.' : ' so far · the league\'s top performers, updated after every game night.');
       $('lgWeekPlayers').innerHTML = skaters.map((p, i) => playerCard(p, teams, ['First star', 'Second star', 'Third star'][i])).join('') + (goalie ? playerCard(goalie, teams, 'Goalie of the week') : '');
     } else {
       $('lgWeekPlayersNote').textContent = 'Three stars and a goalie of the week, every week.';
@@ -142,7 +142,7 @@
     // Trending now.
     const trend = tr.status === 'fulfilled' ? tr.value.filter(p => Number(p.points) > 0) : [];
     if (trend.length) {
-      $('lgTrendNote').textContent = 'Most points over the last two game nights.';
+      $('lgTrendNote').textContent = 'Most points over the last two game nights' + (tr.value[0] && tr.value[0].since_at ? ' (LG totals since ' + F.day.format(new Date(tr.value[0].since_at)) + ')' : '') + '.';
       $('lgTrendingRecords').innerHTML = trend.map(p => playerCard(p, teams, null)).join('');
     } else {
       $('lgTrendNote').textContent = 'The hottest sticks over the last two game nights.';
@@ -151,5 +151,45 @@
     tint($('lgWeekPlayers')); tint($('lgTrendingRecords'));
   }
 
-  window.LGCHLSegments = { renderRaces, renderPlayerStreaks, renderUpsets, renderForm };
+  /* ---------- Players of the Night (per-night LG season-stat changes) ---------- */
+  const NIGHT_COLS = 'night,night_finals,night_final_goals,player_kind,gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots,saves,shots_against,goals_against,since_at,through_at';
+  const GOTN_MIN_SHOTS = 50;
+  const skaterOrder = (a, b) => Number(b.points) - Number(a.points) || Number(b.goals) - Number(a.goals) || Number(b.shots) - Number(a.shots) || String(a.gamertag).localeCompare(String(b.gamertag));
+  const svOf = p => Number(p.shots_against) > 0 ? Number(p.saves) / Number(p.shots_against) : -1;
+  function pickNight(rows) {
+    const night = rows.map(r => r.night).sort().pop();
+    const list = rows.filter(r => r.night === night);
+    const skaters = list.filter(p => p.player_kind === 'skater' && Number(p.points) > 0).sort(skaterOrder);
+    const goalies = list.filter(p => p.player_kind === 'goalie' && Number(p.shots_against) >= GOTN_MIN_SHOTS)
+      .sort((a, b) => svOf(b) - svOf(a) || Number(b.saves) - Number(a.saves) || String(a.gamertag).localeCompare(String(b.gamertag)));
+    const goals = list.filter(p => p.player_kind === 'skater').reduce((a, p) => a + Number(p.goals || 0), 0);
+    return { night, list, skaters, goalies, goals, finals: Number(list[0]?.night_finals || 0), finalGoals: Number(list[0]?.night_final_goals || 0) };
+  }
+  async function renderNight(teams) {
+    const box = $('lgNightPlayers'); if (!box) return;
+    let rows = [];
+    try { rows = await read('lgchl_public_night_players', { select: NIGHT_COLS, order: 'night.desc', limit: '3000' }); } catch { rows = []; }
+    if (!rows.length) {
+      box.innerHTML = '<article class="card lg-card lg-soon"><span class="wm wm-lg lg-wm-league" aria-hidden="true"></span><p class="lg-potn-tag">Coming up</p><h3>Players of the Night drop after the next game night</h3><p>Three stars, the top sticks and the goalie of the night, from the LG season totals before and after each night.</p></article>';
+      $('lgNightCoverage').textContent = ''; return;
+    }
+    const n = pickNight(rows);
+    const day = F && F.day ? F.day.format(new Date(n.night + 'T16:00:00Z')) : n.night;
+    $('lgNightEyebrow').textContent = 'Game night · ' + day;
+    const stars = n.skaters.slice(0, 3), g = n.goalies[0];
+    const multi = n.skaters.filter(p => Number(p.points) >= 2 * Math.max(1, Number(p.gp))).length;
+    const leadersBy = k => n.skaters.slice().sort((a, b) => Number(b[k]) - Number(a[k]) || skaterOrder(a, b)).slice(0, 5);
+    const rowsHtml = (arr, k, label) => '<ol class="lg-potn-list num">' + arr.map((p, i) => '<li><span class="lg-potn-rk">' + (i + 1) + '</span><img src="' + logo(p.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(p.gamertag) + '</b><small>' + esc((teams.get(Number(p.lg_team_id)) || {}).name || 'LGCHL') + '</small><span class="lg-potn-v">' + esc(p[k]) + ' ' + label + '</span></li>').join('') + '</ol>';
+    box.innerHTML = stars.map((p, i) => playerCard(p, teams, ['First star', 'Second star', 'Third star'][i])).join('') +
+      (g ? playerCard(g, teams, 'Goalie of the night') : '') +
+      '<article class="card lg-card lg-potn-board"><p class="lg-potn-tag">Top sticks · points</p>' + rowsHtml(leadersBy('points'), 'PTS') + '</article>' +
+      '<article class="card lg-card lg-potn-board"><p class="lg-potn-tag">Top sticks · goals</p>' + rowsHtml(leadersBy('goals'), 'G') +
+      '<p class="lg-line num">' + multi + ' skater' + (multi === 1 ? '' : 's') + ' averaged two points a game or better.</p></article>';
+    const pct = n.finalGoals ? Math.round(100 * n.goals / n.finalGoals) : null;
+    $('lgNightCoverage').textContent = 'From LG season totals saved before and after the night: ' + n.goals + ' of ' + n.finalGoals + ' goals in ' + n.finals + ' finals accounted for' + (pct != null ? ' (' + pct + '%)' : '') +
+      '. Players without a saved pre-night total are not ranked. Goalie of the night needs ' + GOTN_MIN_SHOTS + '+ shots faced.';
+    tint(box);
+  }
+
+  window.LGCHLSegments = { renderRaces, renderPlayerStreaks, renderUpsets, renderForm, renderNight, pickNight };
 })();

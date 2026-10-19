@@ -88,3 +88,12 @@ every final is written, and each unreported game is listed under **Sources & cov
 If fewer than 80% of the night's games are final, nothing is saved and the function logs
 `{ saved: false, reason, pending }` (also returned in the HTTP response). Pass `partial: false` for the old all-final rule.
 The CLI matches with `--partial` (80% floor; override with `--min-final 0.9`).
+
+## Players of the Night
+
+`lgchl_public_night_players` (migration `20261019200000`) gives each player's change in LG season totals across each of the last 7 game nights: the latest total saved before the night's first game compared with the last total saved after it, before the next night starts. The 12:25 AM ET `lgchl-stats-postnight` refresh writes the "after" totals.
+The LG Media page and the night wrap use the same rule. The three stars are the top three skaters by points, then goals, then shots. Goalie of the night is the best save % with 50+ shots faced.
+Both show coverage as goals accounted for vs. official finals. Players without a saved pre-night total are not ranked.
+`lgchl_public_week_players` now covers the current week while it's in progress (`week_complete=false`).
+
+Backfill (Oct 19): `supabase/backfills/20261019_lgchl_stat_history_pre_oct18.sql` holds the totals as stored at 11:41 AM ET on Oct 18, before Sunday's games. They come from an allowlisted export of `wm_lgchl_s55_player_leaders`, and only rows refreshed that morning are included (1,234 rows). For Oct 18 they account for 779 of 848 goals.

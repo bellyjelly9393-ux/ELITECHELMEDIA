@@ -18,7 +18,7 @@ test('media top 10 and searchable top 250 at 390, 768 and 1440 pixels',async()=>
    if(u.hostname.endsWith('supabase.co')){
     const table=u.pathname.split('/').pop();
     assert.equal(route.request().method(),'GET','Browser statistics only perform public reads');
-    assert.ok(['wm_lgchl_s55_player_leaders','lgchl_standings_current','lgchl_games_board','lgchl_standings_snapshots'].includes(table),'Unexpected/private query: '+table);
+    assert.ok(['wm_lgchl_s55_player_leaders','lgchl_standings_current','lgchl_games_board','lgchl_standings_snapshots','lgchl_public_night_players','lgchl_public_week_players','lgchl_public_trending_players'].includes(table),'Unexpected/private query: '+table);
     if(table!=='wm_lgchl_s55_player_leaders')return route.fulfill({json:[]});
     reads.push(u);
     if(mode==='empty')return route.fulfill({json:[]});
