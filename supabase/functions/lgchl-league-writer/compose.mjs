@@ -210,7 +210,7 @@ export function composeNightWrap(ctx, opts = {}) {
   // League-wide deltas from stat history (optional source).
   let historyNight = null;
   if (Array.isArray(ctx.history) && ctx.history.length) {
-    const key = (h) => h.player_kind + '|' + h.gamertag + '|' + h.lg_team_id;
+    const key = (h) => h.player_kind + '|' + h.gamertag; // season totals follow the player across trades
     const before = new Map(), after = new Map();
     for (const h of [...ctx.history].sort((a, b) => Date.parse(a.taken_at) - Date.parse(b.taken_at))) {
       const t = Date.parse(h.taken_at);
@@ -386,6 +386,19 @@ export function composeNightWrap(ctx, opts = {}) {
   if (hatTricks.length) md.push('**Hat tricks:** ' + list(hatTricks.map((p) => mention(p.gamertag) + ' (' + name(p.team) + ')')) + '.', '');
   if (goalieNight.length) md.push('**In goal (10+ shots):** ' + list(goalieNight.slice(0, 4).map((p) => mention(p.gamertag) + ' ' + p.saves + '/' + p.sa + ' (' + svp(p.saves, p.sa) + ')')) + '.', '');
   if (teamShutouts.length) md.push('**Shutouts (' + teamShutouts.length + '):** ' + list(teamShutouts.map((g) => { const s = shutouts.find((x) => x.g.lg_game_id === g.lg_game_id); return name(g.winner) + ' ' + dash(g.ws, 0) + ' over ' + name(g.loser) + (s ? ' (' + mention(s.p.gamertag) + ', ' + plural(s.p.saves, 'save') + ')' : ''); })) + '.', '');
+
+  // Players of the Night: same rule as the LG Media page (lgchl-media-segments.js).
+  md.push('## Players of the Night', '');
+  { const stars = skaterNight.filter((p) => p.points > 0).slice(0, 3);
+    const gotn = pool.filter((p) => p.goalie && p.sa >= 50).sort((a, b) => (b.saves / b.sa) - (a.saves / a.sa) || b.saves - a.saves || a.gamertag.localeCompare(b.gamertag))[0];
+    if (!stars.length && !gotn) md.push('No player totals are available for this night yet.', '');
+    else {
+      stars.forEach((p, i) => md.push('**' + ['First', 'Second', 'Third'][i] + ' star:** ' + mention(p.gamertag) + ' (' + name(p.team) + ') — ' + nightLine(p) + '.'));
+      if (gotn) md.push('**Goalie of the night:** ' + mention(gotn.gamertag) + ' (' + name(gotn.team) + ') — ' + gotn.saves + ' saves on ' + gotn.sa + ' shots, ' + svp(gotn.saves, gotn.sa) + (gotn.gp > 1 ? ' across ' + word(gotn.gp) + ' games' : '') + ' (50+ shots faced).');
+      md.push('');
+      if (historyNight) { const g = historyNight.filter((p) => !p.goalie).reduce((a, p) => a + p.goals, 0), fg = finals.reduce((a, x) => a + x.ws + x.ls, 0);
+        md.push('_From LG season totals saved before and after the night: ' + g + ' of ' + fg + ' goals accounted for' + (fg ? ' (' + Math.round(100 * g / fg) + '%)' : '') + '; players without a saved pre-night total are not ranked._', ''); }
+    } }
 
   md.push('## Player spotlights', '');
   if (!spot.length) md.push('No spotlight tonight: no player lines are available yet.', '');

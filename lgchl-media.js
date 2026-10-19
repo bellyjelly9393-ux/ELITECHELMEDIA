@@ -88,6 +88,7 @@
     // Matchup player spotlights use the same public season leaders as the board.
     const matchupPlayers = await read('wm_lgchl_s55_player_leaders', { select: SKATER_COLS, player_kind: 'eq.skater', order: 'points.desc.nullslast', points: 'not.is.null', limit: '250' }).catch(() => []);
     renderMatchups(games, now, teams, matchupPlayers);
+    if (SEG && SEG.renderNight) await SEG.renderNight(teams).catch(() => {});
     if (SEG) await SEG.renderForm(teams, games).catch(() => {});
     const leaders = await loadLeaders('points');
     renderNews(ranked, week, leaders);

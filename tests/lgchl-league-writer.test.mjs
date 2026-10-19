@@ -176,3 +176,46 @@ test('nightly edge path runs in partial mode with the 80% floor and logs refusal
   assert.match(src, /console\.log\(JSON\.stringify\(\{ writer: WRITER_VERSION, night, saved: false, reason/);
   assert.ok(src.indexOf('if (!wrap.ok)') < src.indexOf("db.rpc('lgchl_media_save_draft'"), 'refusal returns before any save');
 });
+
+test('Players of the Night: three stars and goalie of the night from stat-history deltas, with coverage', async () => {
+  const s = fixture();
+  const H = (gamertag, kind, team, t, gp, goals, assists, ga = null, sa = null) => ({ season: 55, player_kind: kind, gamertag, lg_team_id: team, position: kind === 'goalie' ? 'G' : 'C', gp, goals, assists, points: goals + assists, plus_minus: 0, shots: 10, hits: 0,
+    goalie_saves: sa == null ? null : sa - ga, goalie_shots_against: sa, goalie_goals_against: ga, taken_at: iso(t) });
+  s.lgchl_player_stat_history = [
+    H('star_a', 'skater', 1, '2026-10-13T15:00Z', 3, 1, 1), H('star_a', 'skater', 1, '2026-10-14T10:00Z', 5, 4, 3),
+    H('star_b', 'skater', 2, '2026-10-13T15:00Z', 3, 0, 0), H('star_b', 'skater', 3, '2026-10-14T10:00Z', 5, 2, 3), // traded mid-night: still counted
+    H('star_c', 'skater', 4, '2026-10-13T15:00Z', 3, 0, 0), H('star_c', 'skater', 4, '2026-10-14T10:00Z', 5, 1, 1),
+    H('newbie', 'skater', 4, '2026-10-14T10:00Z', 2, 5, 5), // no pre-night total: never ranked
+    H('wall', 'goalie', 2, '2026-10-13T15:00Z', 3, 0, 0, 5, 60), H('wall', 'goalie', 2, '2026-10-14T10:00Z', 5, 0, 0, 7, 120),
+    H('sieve', 'goalie', 3, '2026-10-13T15:00Z', 3, 0, 0, 5, 60), H('sieve', 'goalie', 3, '2026-10-14T10:00Z', 4, 0, 0, 6, 70), // 10 shots: below 50
+  ];
+  const { wrap } = await run(s);
+  assert.ok(wrap.ok);
+  const sec = wrap.markdown.slice(wrap.markdown.indexOf('## Players of the Night'), wrap.markdown.indexOf('## Player spotlights'));
+  assert.match(sec, /\*\*First star:\*\* \*\*@star\\_a\*\* \(Alpha Aces\) — 3 G, 2 A, 5 PTS in two games/);
+  assert.match(sec, /\*\*Second star:\*\* \*\*@star\\_b\*\* \(Charlie Cats\)/);
+  assert.match(sec, /\*\*Goalie of the night:\*\* \*\*@wall\*\* \(Bravo Bears\) — 58 saves on 60 shots/);
+  assert.ok(!/newbie|sieve/.test(sec), 'no pre-night total or too few shots: not ranked');
+  assert.match(sec, /goals accounted for/);
+});
+
+test('LG Media page picks Players of the Night with the same rule', async () => {
+  const vm = await import('node:vm');
+  const win = { WMDesk: { $: () => null, esc: (x) => String(x), read: async () => [], ordinal: String, tint: () => {}, F: {} } };
+  vm.runInNewContext(fs.readFileSync(new URL('../lgchl-media-segments.js', import.meta.url), 'utf8'), { window: win });
+  const R = (night, kind, gamertag, points, goals, extra = {}) => ({ night, night_finals: 2, night_final_goals: 10, player_kind: kind, gamertag, lg_team_id: 1, gp: 2, points, goals, shots: 5, ...extra });
+  const n = win.LGCHLSegments.pickNight([R('2026-10-12', 'skater', 'old', 9, 9), R('2026-10-13', 'skater', 'b', 4, 1), R('2026-10-13', 'skater', 'a', 4, 3), R('2026-10-13', 'skater', 'zero', 0, 0),
+    R('2026-10-13', 'goalie', 'g1', 0, 0, { saves: 45, shots_against: 49 }), R('2026-10-13', 'goalie', 'g2', 0, 0, { saves: 50, shots_against: 55 })]);
+  assert.equal(n.night, '2026-10-13');
+  assert.deepEqual(n.skaters.map((p) => p.gamertag), ['a', 'b']);
+  assert.deepEqual(n.goalies.map((p) => p.gamertag), ['g2'], '50+ shots faced');
+  assert.equal(n.goals, 4); assert.equal(n.finalGoals, 10);
+});
+
+test('Players of the Night views read only public schedule and stat-history tables', () => {
+  const sql = fs.readFileSync(new URL('../supabase/migrations/20261019200000_lgchl_players_of_the_night.sql', import.meta.url), 'utf8');
+  const tables = new Set([...sql.matchAll(/(?:from|join)\s+public\.([a-z_0-9]+)/gi)].map((m) => m[1]));
+  assert.deepEqual([...tables].sort(), ['lgchl_games', 'lgchl_player_stat_history']);
+  assert.ok(!/lg_user_id|scouting|hitmen/i.test(sql.replace(/^--.*$/gm, '')));
+  assert.match(sql, /security_invoker = true/);
+});
