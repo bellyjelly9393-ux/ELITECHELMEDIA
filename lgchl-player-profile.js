@@ -103,6 +103,7 @@
   }
   function open(p, context={}) {
     if (!p || !p.gamertag) return;
+    dialog.dataset.activePlayer=p.gamertag + '|' + p.lg_user_id;
     dialog.querySelector('#lgProfileContent').innerHTML=render(p,context);
     if (!dialog.open) {
       if (typeof dialog.showModal === 'function') dialog.showModal();
