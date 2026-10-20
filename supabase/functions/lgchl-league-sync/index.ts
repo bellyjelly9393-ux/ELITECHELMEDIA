@@ -29,7 +29,9 @@ async function getHtml(url: string) {
  try {
   const res = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'text/html' }, signal: AbortSignal.timeout(20000) });
   const html = await res.text();
-  if (isChallenge(res.status, html, res.headers) || /cf-chl|challenge-platform|Just a moment/i.test(html))
+  // Normal LG pages carry Cloudflare's injected /cdn-cgi/challenge-platform/ script, so only an
+  // interstitial (title "Just a moment", cf-mitigated header, or a 403/503 challenge body) counts.
+  if (isChallenge(res.status, html, res.headers) || res.headers.get('cf-mitigated') === 'challenge' || /<title>\s*Just a moment/i.test(html))
     throw new Challenge('LG returned a Cloudflare challenge; stopped');
   if (res.status === 403 || res.status === 429) throw new Challenge('LG blocked or rate-limited automated access (' + res.status + '); stopped');
   if (!res.ok) throw new Error('LG returned ' + res.status);
