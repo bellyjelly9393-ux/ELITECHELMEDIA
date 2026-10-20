@@ -7,7 +7,7 @@
 //   delta : only the fewest team pages covering games that should be over but have no score
 //   continue : resume the running refresh
 import { createClient } from 'npm:@supabase/supabase-js@2';
-import { TEAM_META, standingsUrl, scheduleUrl, parseStandings, parseTeamSchedule, teamRows, snapshotRows, changedSnapshots, coverTeams, isChallenge } from './lib.ts';
+import { TEAM_META, standingsUrl, scheduleUrl, parseStandings, parseTeamSchedule, teamRows, snapshotRows, changedSnapshots, coverTeams, isChallenge, gameUrl, parseGameDecision } from './lib.ts';
 
 import { drainPublicBoxes } from './public-box-worker.ts';
 
@@ -75,6 +75,23 @@ async function startRun(db: ReturnType<typeof sb>, mode: string) {
   const [run] = await checked(db.from('lgchl_sync_runs').insert({ kind: mode, team_ids: teamIds, finals_before: finals }).select('*')) as never[];
   return run as Run;
 }
+// OT/SO/regulation is not on schedule pages; read it from each new final's public game page.
+// Only fills decided_in where it is still null (never overwrites), newest first, within the budget.
+async function resolveDecisions(db: ReturnType<typeof sb>, fetchHtml: (u: string) => Promise<string>, deadline: number, sinceDays = 3, max = 40) {
+  const rows = await checked(db.from('lgchl_games').select('lg_game_id').eq('status', 'final').is('decided_in', null)
+    .gt('game_at', new Date(Date.now() - sinceDays * 864e5).toISOString()).order('game_at', { ascending: false }).limit(max)) as { lg_game_id: number }[];
+  const out = { pending: rows.length, set: 0, unknown: [] as number[], failed: 0 };
+  for (const r of rows) {
+    if (Date.now() > deadline - 10000) break;
+    try {
+      const d = parseGameDecision(await fetchHtml(gameUrl(r.lg_game_id)));
+      if (!d) { out.unknown.push(r.lg_game_id); continue; }
+      await checked(db.from('lgchl_games').update({ decided_in: d }).eq('lg_game_id', r.lg_game_id).is('decided_in', null));
+      out.set++;
+    } catch (e) { if (e instanceof Challenge) throw e; out.failed++; }
+  }
+  return out;
+}
 type Run = { id: number; kind: string; team_ids: number[]; next_index: number; requests: number; pages_failed: number; games_upserted: number; error: string | null };
 
 Deno.serve(async (req) => {
@@ -111,6 +128,12 @@ Deno.serve(async (req) => {
       try { return json({ publicBoxes: await publicBoxes() }); }
       catch (e) { return json({ error: String((e as Error).message), challenge: e instanceof Challenge }, 502); }
     }
+
+  // Explicit backfill: { action: 'decisions', sinceDays?, max? }
+  if (body.action === 'decisions') {
+    try { return json({ decisions: await resolveDecisions(db, fetchHtml, deadline, Math.min(Number(body.sinceDays || 3), 120), Math.min(Number(body.max || 40), 60)) }); }
+    catch (e) { return json({ error: String((e as Error).message), challenge: e instanceof Challenge }, 502); }
+  }
 
   // Diagnostics: one standings request, nothing saved.
   if (body.action === 'probe') {
@@ -154,6 +177,8 @@ Deno.serve(async (req) => {
       log.standings = await syncStandings(db, fetchHtml); requests++;
       const finals = await finalsCount(db);
       await checked(db.from('lgchl_sync_runs').update({ status: 'done', requests, finals_after: finals, error: failed ? String(log.lastPageError || 'some pages failed') : null, finished_at: new Date().toISOString(), updated_at: new Date().toISOString() }).eq('id', run.id));
+      try { log.decisions = await resolveDecisions(db, fetchHtml, deadline); }
+      catch (e) { log.decisions = { error: String((e as Error).message).slice(0, 200) }; }
       if (PUBLIC_BOX_SCORES) log.publicBoxes = await publicBoxes();
       return json({ ...log, run: run.id, kind: run.kind, done: true, pages: run.team_ids.length, failed, upserted, finals });
     }
