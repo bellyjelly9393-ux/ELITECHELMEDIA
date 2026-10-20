@@ -1,4 +1,4 @@
-/* Hitman Radio — Nightly Show player + archive. Data lives in assets/hitman-radio/nightly/episodes.json (see README there). */
+/* Hitmen Radio — Nightly Show player + archive. Data lives in assets/hitman-radio/nightly/episodes.json (see README there). */
 (function () {
  /* Works on any page: every <section class="hn" data-manifest="..."> becomes a player. Episode links use #ep-YYYY-MM-DD. */
  document.querySelectorAll('section.hn[data-manifest]').forEach(function (s) {
