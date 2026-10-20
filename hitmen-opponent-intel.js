@@ -114,7 +114,7 @@
   function renderEa(o,snaps){
     const box=E('hoiEaClub');if(!box)return;
     if(!o?.ea_club_id){
-      box.innerHTML='<div class="hoi-ea-club-card"><div><strong>EA NHL 27 club not linked yet</strong><small>Find the matching Pro Clubs team once, then Wildman can pull public member stats and recent match logs.</small></div><span class="status">UNLINKED</span></div>';
+      box.innerHTML='<div class="hoi-ea-club-card"><div><strong>EA NHL 27 club not linked yet</strong><small>Find the matching Pro Clubs team once, then Elitechel can pull public member stats and recent match logs.</small></div><span class="status">UNLINKED</span></div>';
       return;
     }
     const last=o.ea_updated_at?new Date(o.ea_updated_at).toLocaleString():'never';
@@ -387,9 +387,9 @@
     const bridge='lg-capture.html?mode=authsync&source=roster&return=hitmen-opponents.html';
     const w=window.open(bridge,'wildmanLgAuthSync');
     if(w){
-      setStatus('Authenticated LG Sync opened. Open the LGCHL S55 Roster there, then run the Wildman Auth Sync bookmark from your signed-in LG tab. This replaces the server request that was hitting 403.');
+      setStatus('Authenticated LG Sync opened. Open the LGCHL S55 Roster there, then run the Elitechel Auth Sync bookmark from your signed-in LG tab. This replaces the server request that was hitting 403.');
       w.focus();
-    }else setStatus('Allow popups for Wildman once, then press Sync LG Rosters again.');
+    }else setStatus('Allow popups for Elitechel once, then press Sync LG Rosters again.');
   }
 
   function clubCandidates(body){
@@ -500,7 +500,7 @@
 
   async function generateReport(){
     if(!selected||!canWrite())return;
-    const b=E('hoiGenerateReport');if(b)b.disabled=true;setStatus('Building pregame scouting report with Wildman Hockey Ops…');
+    const b=E('hoiGenerateReport');if(b)b.disabled=true;setStatus('Building pregame scouting report with Elitechel Hockey Ops…');
     try{
       const t=await token();
       const question='Prepare a complete regular-season pregame scouting report for '+selected.name+'. Use the current opponent roster, individual player stats, public league information, EA NHL 27 game logs, Calgary head-to-head history, and VOD evidence if available. Identify personnel threats, team strengths and weaknesses, likely tactical tendencies that are actually supported by evidence, Calgary matchup priorities, likely counter-adjustments, uncertainty, stats and roster freshness, observed arrivals/departures since the previous snapshot, and the single most valuable film check before game time.';

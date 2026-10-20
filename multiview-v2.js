@@ -1,4 +1,4 @@
-/* Wildman live desk v2: manual Twitch/YouTube slots + official game feeds.
+/* Elitechel live desk v2: manual Twitch/YouTube slots + official game feeds.
    Viewer presets live only in their browser. Source and game changes refresh without
    remounting unchanged players. No credentials or stream keys are collected. */
 (() => {

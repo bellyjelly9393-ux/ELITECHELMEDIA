@@ -22,10 +22,10 @@
     box.style.marginBottom='14px';
     box.innerHTML=`
       <div class="hs-card-head">
-        <div><div class="eyebrow">WILDMAN ADMIN · LIVE MARKET FILTER</div><h3>ChelScout Market Import</h3></div>
+        <div><div class="eyebrow">ELITECHEL ADMIN · LIVE MARKET FILTER</div><h3>ChelScout Market Import</h3></div>
         <span id="hsMarketImportBadge" class="hs-tag">READY</span>
       </div>
-      <p class="hs-msg">Paste ChelScout Market text or a GM Hub JSON response. Wildman matches by ChelScout/LG UID first, then exact gamertag, and updates Calgary's live availability without deleting historical player intelligence.</p>
+      <p class="hs-msg">Paste ChelScout Market text or a GM Hub JSON response. Elitechel matches by ChelScout/LG UID first, then exact gamertag, and updates Calgary's live availability without deleting historical player intelligence.</p>
       <div class="hs-form">
         <label><span class="hs-label">ChelScout response</span><select id="hsMarketImportSource" class="hs-select">
           <option value="bid-board">Filtered Market / currently shown</option>
@@ -39,7 +39,7 @@
         <label class="wide"><span class="hs-label">ChelScout Market text or JSON</span><textarea id="hsMarketImportJson" class="hs-textarea" style="min-height:180px" placeholder='Paste the ChelScout player list exactly as shown, or paste a JSON response'></textarea></label>
       </div>
       <div class="hs-actions">
-        <button id="hsCopyMarketSync" class="hs-btn" type="button">Copy “Send Market to Wildman” Bookmark</button>
+        <button id="hsCopyMarketSync" class="hs-btn" type="button">Copy “Send Market to Elitechel” Bookmark</button>
         <button id="hsMarketPreview" class="hs-btn" type="button">Preview Import</button>
         <button id="hsMarketApply" class="hs-btn primary" type="button" disabled>Apply to Calgary Pool</button>
         <span id="hsMarketImportMsg" class="hs-msg"></span>
@@ -48,7 +48,7 @@
       <details style="margin-top:12px">
         <summary style="cursor:pointer;font-weight:800">How to copy the ChelScout data</summary>
         <div class="hs-msg" style="margin-top:10px;line-height:1.65">
-          <b>Fastest on mobile:</b> copy the “Send Market to Wildman” bookmark once. On ChelScout Market, tap Show more until the full filtered list is visible, then run that bookmark. It transfers only the visible page text, never your cookies or login.<br><br>
+          <b>Fastest on mobile:</b> copy the “Send Market to Elitechel” bookmark once. On ChelScout Market, tap Show more until the full filtered list is visible, then run that bookmark. It transfers only the visible page text, never your cookies or login.<br><br>
           <b>JSON option:</b> on desktop you can still copy the GM Hub response body from DevTools → Network → Fetch/XHR and paste it above.<br><br>
           Never paste your Discord login cookie, authorization headers or password.
         </div>
@@ -75,7 +75,7 @@
         }
         var payload={source:'chelscout_market_text',source_url:location.href,captured_at:new Date().toISOString(),text:txt};
         var w=window.open('about:blank','_blank');
-        if(!w){alert('Allow popups once, then run Send Market to Wildman again.');return;}
+        if(!w){alert('Allow popups once, then run Send Market to Elitechel again.');return;}
         w.name='WILDMAN_CHELSCOUT_MARKET:'+JSON.stringify(payload);
         w.location='https://wildmanhockey-esportshub.vercel.app/hitmen-workspace.html#chelscout-market-import';
       }catch(e){alert('Could not capture the ChelScout Market page.');}
@@ -86,7 +86,7 @@
   async function copyMarketBookmark(){
     try{
       await navigator.clipboard.writeText(marketBookmarklet());
-      message('Copied. Save it as a browser bookmark named “Send Market to Wildman”. On ChelScout Market, show the full filtered list and tap that bookmark.','COPIED');
+      message('Copied. Save it as a browser bookmark named “Send Market to Elitechel”. On ChelScout Market, show the full filtered list and tap that bookmark.','COPIED');
     }catch(e){
       message('Clipboard access was blocked by this browser.','COPY BLOCKED');
     }
@@ -173,7 +173,7 @@
   async function consumeMarketTransfer(){
     if(location.hash!=='#chelscout-market-import'||!String(window.name||'').startsWith(MARKET_PREFIX))return;
     if(!db()||!auth().user){
-      message('Market snapshot received. Sign into Wildman management and it will be ready to preview.','WAITING');
+      message('Market snapshot received. Sign into Elitechel management and it will be ready to preview.','WAITING');
       return;
     }
     try{

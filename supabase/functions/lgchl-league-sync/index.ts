@@ -13,7 +13,7 @@ import { drainPublicBoxes } from './public-box-worker.ts';
 
 // Off until the owner approves/applies migrations and validates a real public game HTML fixture.
 const PUBLIC_BOX_SCORES = Deno.env.get('LGCHL_PUBLIC_BOX_SCORES_ENABLED') === 'true';
-const UA = 'Wildman-Hockey-Esports/1.0 (league schedule sync; one request at a time)';
+const UA = 'Elitechel-Media-Esports/1.0 (league schedule sync; one request at a time)';
 const PAUSE_MS = 1500;
 const GAME_LEN_MS = 35 * 60e3;
 const GIVE_UP_MS = 8 * 3600e3;

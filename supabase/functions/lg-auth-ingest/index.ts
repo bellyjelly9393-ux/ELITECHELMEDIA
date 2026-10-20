@@ -197,7 +197,7 @@ Deno.serve(async (req: Request) => {
   if (req.method !== "POST") return json(req, { error: "Method not allowed" }, 405);
 
   const authHeader = req.headers.get("Authorization") || "";
-  if (!authHeader.startsWith("Bearer ")) return json(req, { error: "Sign in to Wildman management first." }, 401);
+  if (!authHeader.startsWith("Bearer ")) return json(req, { error: "Sign in to Elitechel management first." }, 401);
 
   const url = Deno.env.get("SUPABASE_URL")!;
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -205,7 +205,7 @@ Deno.serve(async (req: Request) => {
 
   const token = authHeader.slice(7);
   const { data: userData, error: userError } = await admin.auth.getUser(token);
-  if (userError || !userData.user) return json(req, { error: "Invalid Wildman session." }, 401);
+  if (userError || !userData.user) return json(req, { error: "Invalid Elitechel session." }, 401);
   const userId = userData.user.id;
 
   const [{ data: profile }, { data: memberships }] = await Promise.all([

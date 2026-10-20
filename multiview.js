@@ -14,7 +14,7 @@
   function label(g){if(g._kind==='source')return g.broadcast_title||'Tournament Stream';return `${team(g.home_team_id)?.name||'TBD'} vs ${team(g.away_team_id)?.name||'TBD'}`;}
   function stateText(g){if(g._kind==='source')return 'LIVE CHANNEL';if(g.status==='live')return `LIVE${g.period?` · P${g.period}`:''}${g.clock?` · ${g.clock}`:''}`;if(g.status==='final')return `FINAL · ${g.home_score}-${g.away_score}`;return fmt(g.scheduled_at);}
   function eligible(){
-    const sources=S.sources.filter(s=>s.active!==false&&s.public_visible===true&&s.url).map(s=>({_kind:'source',_key:`source:${s.id}`,id:s.id,event_id:s.event_id,stream_url:s.url,stream_provider:s.provider||'external',broadcast_title:s.display_label||s.metadata?.title||'Wildman Club Live',intake_mode:s.intake_mode||'media',status:'live',scheduled_at:s.created_at,featured:false}));
+    const sources=S.sources.filter(s=>s.active!==false&&s.public_visible===true&&s.url).map(s=>({_kind:'source',_key:`source:${s.id}`,id:s.id,event_id:s.event_id,stream_url:s.url,stream_provider:s.provider||'external',broadcast_title:s.display_label||s.metadata?.title||'Elitechel Club Live',intake_mode:s.intake_mode||'media',status:'live',scheduled_at:s.created_at,featured:false}));
     const used=new Set(sources.map(s=>String(s.stream_url||'').trim().toLowerCase()).filter(Boolean));
     const games=[];
     for(const g of S.games.filter(g=>g.stream_url&&['live','scheduled'].includes(g.status)).sort((a,b)=>(a.status==='live'?0:1)-(b.status==='live'?0:1)||new Date(a.scheduled_at||0)-new Date(b.scheduled_at||0))){

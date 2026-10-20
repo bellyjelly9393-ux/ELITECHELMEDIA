@@ -33,9 +33,9 @@ async function load(){
  if(!source){E('channelPlayer').innerHTML='<div class="featured-placeholder"><div><strong>No channel found</strong><p>This public broadcast source is not configured.</p></div></div>';return}
  const family=channelFamily(source.metadata?.channel_key||channel||'');
  const isHitmen=family==='hitmen';
- const title=isHitmen?'Calgary Hitmen Live':(source.display_label||'Wildman Network Live');
- const group=source.metadata?.channel_group||'Wildman Network';
- document.title=title+' | Wildman Network';
+ const title=isHitmen?'Calgary Hitmen Live':(source.display_label||'Elitechel Live');
+ const group=source.metadata?.channel_group||'Elitechel Media';
+ document.title=title+' | Elitechel Media';
  E('channelTitle').textContent=title;
  E('channelSubtitle').textContent=isHitmen?'EliteChel broadcast output · controlled by Hitmen Broadcast Studio':group+' · live broadcast channel';
  E('channelMetaTitle').textContent=title;

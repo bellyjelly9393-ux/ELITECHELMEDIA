@@ -1,4 +1,4 @@
-/* Shared helpers for the Wildman Media and Hitmen Media desks (wildman-media.html,
+/* Shared helpers for the Elitechel Media and Hitmen Media desks (wildman-media.html,
    hitmen-media.html, hitmen-recap.html). Same public Supabase REST reads and the same
    publishable key as the homepage (wildman-home.js); every table read here is public under RLS. */
 (() => {

@@ -17,7 +17,7 @@ if (document.body.classList.contains('wildman-site')) {
   finishStyles.href = 'pipeline-finish.css?v=20260916c';
   document.head.appendChild(finishStyles);
 
-  // Shared Wildman presentation system. This is cosmetic only and intentionally
+  // Shared Elitechel presentation system. This is cosmetic only and intentionally
   // sits after legacy page styles so existing functionality can keep its markup.
   if (!document.querySelector('link[href*="network-v2.css"]')) {
     const presentationStyles = document.createElement('link');

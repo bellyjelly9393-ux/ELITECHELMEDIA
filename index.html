@@ -4,15 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#08090b">
-<meta name="description" content="Wildman Hockey & Esports Network: Connected Franchise interest, the Wildman HUT tournament, live multiview and Calgary Hitmen LGCHL Season 55 coverage.">
-<title>Wildman Hockey | The Hockey Esports Network</title>
+<meta name="description" content="Elitechel Media: EA NHL coverage of the LGCHL. League news, stats and power rankings, Calgary Hitmen game coverage, the LGCHL Live Hub, Hitman Radio and the Elitechel Media HUT Tournament.">
+<title>Elitechel Media | EA NHL &amp; LGCHL Coverage</title>
+<link rel="canonical" href="https://wildmanhockey-elitechelmedia.app/">
+<link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Elitechel Media">
+<meta property="og:title" content="Elitechel Media | EA NHL &amp; LGCHL Coverage">
+<meta property="og:description" content="LGCHL news, stats and power rankings, Calgary Hitmen coverage, live games and Hitman Radio.">
+<meta property="og:url" content="https://wildmanhockey-elitechelmedia.app/">
+<meta property="og:image" content="https://wildmanhockey-elitechelmedia.app/assets/brand/ecm-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wildmanhockey-elitechelmedia.app/assets/brand/ecm-share.jpg">
 <link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="assets/wildman/home/franchise.webp" as="image">
-<link rel="preload" href="assets/wildman/home/hut.webp" as="image">
-<link rel="stylesheet" href="wildman-home.css?v=20261011-4">
-<link rel="stylesheet" href="live-hub-home-nav.css?v=20261017a">
-<script src="wildman-home.js?v=20261011-3" defer></script>
+<link rel="preload" as="image" href="assets/brand/ecm-hero-banner.webp" imagesrcset="assets/brand/ecm-hero-banner-1280.webp 1280w, assets/brand/ecm-hero-banner.webp 2103w" imagesizes="100vw" media="(min-width: 761px)">
+<link rel="stylesheet" href="wildman-home.css?v=20261019">
+<link rel="stylesheet" href="live-hub-home-nav.css?v=20261019">
+<link rel="stylesheet" href="ecm-home.css?v=20261019c">
+<script src="wildman-home.js?v=20261019" defer></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -24,51 +36,91 @@
 
 <header class="top band">
   <div class="top-in">
-    <a class="brand" href="index.html" aria-label="Wildman Hockey home">
-      <img class="crest" src="assets/wildman/home/wildman-crest.webp" width="112" height="99" alt="">
-      <div class="brand-txt"><b>Wildman Hockey</b><span>Elitechel Media</span><span>Network</span></div>
+    <a class="brand" href="index.html" aria-label="Elitechel Media home">
+      <img class="crest" src="assets/brand/ecm-crest.webp" width="118" height="120" alt="">
+      <div class="brand-txt"><b>Elitechel</b><span>Media</span></div>
     </a>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="index.html" class="on" aria-current="page">Home</a>
-      <details class="home-live-menu"><summary>LGCHL Live Hub <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="esports-hub.html#lgchl">LGCHL Games</a><a href="esports-hub.html#hitman">Hitman Live</a><a href="esports-hub.html#lg3s">LG Threes</a></div></details>
-      <a href="academy.html">Academy</a>
-      <a href="hitmen-media.html">Media</a>
-      <a href="management.html">Management</a>
+      <details class="home-live-menu"><summary>Leagues <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="lgchl-media.html">LGCHL</a><a href="esports-hub.html#lg3s">LG Threes</a><a href="lgchl-power.html">Power rankings</a></div></details>
+      <details class="home-live-menu"><summary>Player Stats <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="lgchl-leaders.html">League leaders</a><a href="lgchl-leaders.html?metric=points#lgPlayerBoard">Top 250 players</a></div></details>
+      <details class="home-live-menu"><summary>Scouting <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="#opponents">Who the Hitmen play</a><a href="lgchl-leaders.html#lgPlayerBoard">Player profiles</a><a href="hitmen-hq.html">Hitmen War Room</a></div></details>
+      <a href="interest.html?program=hut">Tournaments</a>
+      <details class="home-live-menu"><summary>Media <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="hitmen-media.html">Hitmen Desk</a><a href="lgchl-media.html">LG CHL Desk</a><a href="hitmen-postgame.html">Postgame Desk</a></div></details>
+      <a href="#radio">Hitman Radio</a>
+      <a class="nav-watch-m" href="esports-hub.html">Watch now</a>
     </nav>
-    <a class="icon-btn search-btn" href="lgchl-leaders.html" aria-label="LGCHL stats"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+    <a class="icon-btn search-btn" href="lgchl-leaders.html#lgPlayerBoard" aria-label="Find a player"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+    <a class="watch-btn" href="esports-hub.html"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M10 7.5l6 4.5-6 4.5z" fill="#141008"/></svg><span>Watch now</span></a>
     <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
   </div>
 </header>
 
 <main id="top">
-  <section class="hero" aria-label="Featured Wildman competitions">
-    <div class="promo promo-a">
-      <canvas data-scene="office" aria-hidden="true"></canvas>
-      <div class="promo-body">
-        <p class="eyebrow">Wildman Hockey</p>
-        <h1 class="wordmark"><span class="wm-steel">Connected</span><span class="wm-gold">Franchise</span></h1>
-        <p class="kicker">Build. Manage. Compete. Make history.</p>
-        <p class="lede">Be part of the first ever Wildman Hockey Connected Franchise. <strong>$25 proposed buy-in.</strong> Limited spots available.</p>
-        <a class="btn btn-gold" href="interest.html?program=franchise#apply">Join interest list <span class="arr">→</span></a>
-        <p class="fine">Terms and schedule pending · No payment collected</p>
-      </div>
+  <section class="ecm-banner" aria-labelledby="ecmTitle">
+    <h1 class="sr-only" id="ecmTitle">Elitechel Media: the home of competitive chel</h1>
+    <div class="ecm-banner-art">
+      <picture>
+        <source media="(max-width: 760px)" srcset="assets/brand/ecm-hero-banner-mobile-900.webp 960w, assets/brand/ecm-hero-banner-mobile.webp 1475w" sizes="100vw" width="1475" height="500">
+        <img src="assets/brand/ecm-hero-banner.webp" srcset="assets/brand/ecm-hero-banner-1280.webp 1280w, assets/brand/ecm-hero-banner.webp 2103w" sizes="100vw" width="2103" height="649" fetchpriority="high" alt="Elitechel Media. LGCHL, LG3S and Hitmen. Comp chel, tournaments and community. The home of competitive chel: coverage, player rankings, scouting, tournaments and original media.">
+      </picture>
+      <a class="hot hot-hub" href="lgchl-media.html"><span class="sr-only">Explore the hub</span></a>
+      <a class="hot hot-radio" href="#radio"><span class="sr-only">Watch Hitman Radio</span></a>
     </div>
-    <div class="seam" aria-hidden="true"></div>
-    <div class="promo promo-b">
-      <canvas data-scene="arena" aria-hidden="true"></canvas>
-      <div class="promo-body">
-        <p class="eyebrow">Wildman Hockey</p>
-        <h2 class="wordmark"><span class="wm-steel">HUT</span><span class="wm-gold">Tournament</span></h2>
-        <p class="kicker">The first ever Wildman Hockey HUT tournament</p>
-        <p class="lede">Multiple divisions. Fair and competitive matchups. Open to all skill levels.</p>
-        <a class="btn btn-line" href="interest.html?program=hut#apply"><span class="btxt">Register interest</span> <span class="arr">→</span></a>
-        <p class="fine">Format, divisions, dates and prizes not announced</p>
+    <div class="ecm-banner-cta band">
+      <a class="btn btn-gold" href="lgchl-media.html">Explore the hub <span class="arr">→</span></a>
+      <a class="btn btn-line" href="#radio"><span class="btxt">Watch Hitman Radio</span> <span class="arr">→</span></a>
+    </div>
+  </section>
+
+  <section class="desks-band band" aria-label="Elitechel Media desks">
+      <nav class="desks" aria-label="Desks">
+        <a class="desk card desk-hit" href="hitmen-media.html">
+          <span class="desk-art" aria-hidden="true" style="--art:url('assets/wildman/home/hitmen.webp');--pos:64% 40%"></span>
+          <span class="desk-no num" aria-hidden="true">01</span>
+          <img class="desk-badge" src="assets/lgchl/s55/team412.png" width="64" height="64" alt="">
+          <span class="desk-txt"><b class="desk-t">Hitmen <em>Desk</em></b><small>Recaps, postgame reports and film from every Calgary game</small></span>
+          <span class="desk-go">Open desk <span class="arr">→</span></span>
+        </a>
+        <a class="desk card desk-lg" href="lgchl-media.html">
+          <span class="desk-art" aria-hidden="true" style="--art:url('assets/wildman/home/arena.webp');--pos:50% 70%"></span>
+          <span class="desk-no num" aria-hidden="true">02</span>
+          <img class="desk-badge desk-badge-wide" src="assets/wildman/home/lgchl-logo.webp" width="112" height="64" alt="">
+          <span class="desk-txt"><b class="desk-t">LG CHL <em>Desk</em></b><small>Scores, power rankings, leaders and player movement across the league</small></span>
+          <span class="desk-go">Open desk <span class="arr">→</span></span>
+        </a>
+        <a class="desk card desk-live" href="esports-hub.html">
+          <span class="desk-art" aria-hidden="true" style="--art:url('assets/broadcast/arena-tunnel.webp');--pos:50% 50%"></span>
+          <span class="desk-no num" aria-hidden="true">03</span>
+          <span class="desk-onair"><i aria-hidden="true"></i>On air</span>
+          <span class="desk-txt"><b class="desk-t">Live <em>Hub</em></b><small>LGCHL games, Hitman Live and LG Threes on one screen</small></span>
+          <span class="desk-go">Watch live <span class="arr">→</span></span>
+        </a>
+      </nav>
+  </section>
+
+  <section class="radio band" id="radio" aria-labelledby="radioTitle">
+    <div class="radio-in">
+      <div class="radio-copy">
+        <span class="sec-rule" aria-hidden="true"></span>
+        <p class="eyebrow radio-eye"><span class="radio-dot" aria-hidden="true"></span>Nightly show · LGCHL</p>
+        <h2 class="sec-title" id="radioTitle">Hitman <em>Radio</em></h2>
+        <p>The night in the LGCHL: finals from around the league, the best highlights and the standout players, from the Elitechel Media desk.</p>
+        <div class="radio-act">
+          <a class="btn btn-line btn-sm" href="lgchl-media.html#lgRadioSec"><span class="btxt">More episodes</span> <span class="arr">→</span></a>
+        </div>
+      </div>
+      <div class="radio-player card">
+        <video controls playsinline preload="none" poster="assets/video/hitman-radio-nightly-poster.webp" width="1280" height="720">
+          <source src="assets/video/hitman-radio-nightly.mp4" type="video/mp4">
+          Your browser can't play this video. <a href="assets/video/hitman-radio-nightly.mp4">Download it here</a>.
+        </video>
       </div>
     </div>
   </section>
   <div class="ice-edge" aria-hidden="true"></div>
 
-  <section class="live band" id="live" aria-label="Wildman Network Live">
+  <section class="live band" id="live" aria-label="Live Hub">
     <div class="live-in">
       <div>
         <div class="live-head">
@@ -84,9 +136,24 @@
       <div class="rail-wrap">
         <div class="rail" id="rail">
           <a class="tile card tinted" href="game-center.html?channel=hitmen" style="--tc:212,42,42"><span class="wm" aria-hidden="true" style="--logo:url('assets/lgchl/s55/team412.png')"></span><span class="tile-ic"><img src="assets/lgchl/s55/team412.png" width="48" height="48" alt=""></span><span class="tile-txt"><b>Calgary Hitmen coverage</b><small>Game Center · every Hitmen game</small></span><span class="go" aria-hidden="true">→</span></a>
-          <a class="tile card tinted" href="multiview.html" style="--tc:227,181,74"><span class="wm" aria-hidden="true" style="--logo:url('assets/wildman/home/wildman-crest.webp')"></span><span class="tile-ic"><img src="assets/wildman/home/wildman-crest.webp" width="48" height="48" alt=""></span><span class="tile-txt"><b>Build your multiview</b><small>Twitch + YouTube side by side</small></span><span class="go" aria-hidden="true">→</span></a>
+          <a class="tile card tinted" href="multiview.html" style="--tc:232,72,24"><span class="wm" aria-hidden="true" style="--logo:url('assets/brand/ecm-crest.webp')"></span><span class="tile-ic"><img src="assets/brand/ecm-crest.webp" width="48" height="48" alt=""></span><span class="tile-txt"><b>Build your multiview</b><small>Twitch + YouTube side by side</small></span><span class="go" aria-hidden="true">→</span></a>
         </div>
         <button class="rail-next" id="railNext" type="button" aria-label="More channels"><svg width="14" height="14" viewBox="0 0 10 10"><path d="M3 1l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="hutband" id="hut" aria-labelledby="hutTitle">
+    <canvas data-scene="arena" aria-hidden="true"></canvas>
+    <div class="hut-in band">
+      <div class="hut-copy">
+        <p class="eyebrow hut-eye">Elitechel Media presents</p>
+        <h2 class="hut-word" id="hutTitle"><span class="w-steel">HUT</span><span class="w-gold">Tournament</span></h2>
+        <p class="hut-lede">Multiple divisions. Fair and competitive matchups. Open to all skill levels.</p>
+      </div>
+      <div class="hut-act">
+        <a class="btn btn-gold" href="interest.html?program=hut#apply">Register interest <span class="arr">→</span></a>
+        <p class="fine">Format, divisions, dates and prizes not announced</p>
       </div>
     </div>
   </section>
@@ -149,7 +216,7 @@
   <section class="stories band" id="stories" aria-label="Latest Hitmen stories">
     <div class="stories-in">
       <div class="st-intro">
-        <a class="ec-badge" href="wildman-media.html" aria-label="Elitechel Media"><img src="assets/wildman/home/elitechel-media.webp" width="260" height="257" loading="lazy" alt="Elitechel Media"><span>Coverage by Elitechel Media</span></a>
+        <a class="ec-badge" href="hitmen-media.html" aria-label="Elitechel Media Hitmen Desk"><img src="assets/brand/ecm-logo.webp" width="260" height="257" loading="lazy" alt="Elitechel Media"><span>Coverage by Elitechel Media</span></a>
         <span class="sec-rule" aria-hidden="true"></span><h2 class="sec-title">Latest <em>Hitmen</em> stories</h2>
         <p>Game recaps, analysis, highlights and more from around the LGCHL.</p>
         <a class="btn btn-line btn-sm" href="hitmen-media.html"><span class="btxt">View all stories</span> <span class="arr">→</span></a>
@@ -168,14 +235,14 @@
         <a class="btn btn-gold btn-sm" href="lgchl-leaders.html">View LGCHL hub <span class="arr">→</span></a>
       </div>
       <div class="leaders card" aria-label="Power index">
-        <div class="leaders-head"><span>Power index</span><small id="power-stamp">Wildman model · not an official LG ranking</small></div>
+        <div class="leaders-head"><span>Power index</span><small id="power-stamp">Elitechel model · not an official LG ranking</small></div>
         <div id="power"><div class="lrow"><i>—</i><b>Loading rankings…</b><em></em><strong></strong></div></div>
       </div>
       <nav class="lg-links" aria-label="League sections">
         <a class="tile card tinted" href="lgchl-leaders.html" style="--tc:227,181,74"><span class="wm wm-lg" aria-hidden="true" style="--logo:url('assets/wildman/home/lgchl-logo.webp')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="9" width="3" height="6"/><rect x="6.5" y="5" width="3" height="10"/><rect x="12" y="1" width="3" height="14"/></svg></span><span class="tile-txt"><b>League leaders</b><small>Points, goals, saves</small></span><span class="go" aria-hidden="true">→</span></a>
-        <a class="tile card tinted" href="lgchl-leaders.html#power" style="--tc:214,48,48"><span class="wm wm-lg" aria-hidden="true" style="--logo:url('assets/wildman/home/lgchl-logo.webp')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l2.2 4.5 4.8.7-3.5 3.4.8 4.9L8 12.2 3.7 14.5l.8-4.9L1 6.2l4.8-.7z"/></svg></span><span class="tile-txt"><b>Power rankings</b><small>Wildman power index</small></span><span class="go" aria-hidden="true">→</span></a>
+        <a class="tile card tinted" href="lgchl-leaders.html#power" style="--tc:214,48,48"><span class="wm wm-lg" aria-hidden="true" style="--logo:url('assets/wildman/home/lgchl-logo.webp')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l2.2 4.5 4.8.7-3.5 3.4.8 4.9L8 12.2 3.7 14.5l.8-4.9L1 6.2l4.8-.7z"/></svg></span><span class="tile-txt"><b>Power rankings</b><small>Elitechel power index</small></span><span class="go" aria-hidden="true">→</span></a>
         <a class="tile card tinted" href="game-center.html" style="--tc:60,110,220"><span class="wm wm-lg" aria-hidden="true" style="--logo:url('assets/wildman/home/lgchl-logo.webp')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="3.5" width="13" height="10" rx="1"/><path d="M1.5 6.5h13M5 1.5v3M11 1.5v3"/></svg></span><span class="tile-txt"><b>Top games</b><small>Scores and box scores</small></span><span class="go" aria-hidden="true">→</span></a>
-        <a class="tile card tinted" href="wildman-media.html" style="--tc:200,210,225"><span class="wm wm-lg" aria-hidden="true" style="--logo:url('assets/wildman/home/lgchl-logo.webp')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="1.5" width="11" height="13" rx="1"/><path d="M5 5h6M5 8h6M5 11h4"/></svg></span><span class="tile-txt"><b>Team news</b><small>Recaps across the LGCHL</small></span><span class="go" aria-hidden="true">→</span></a>
+        <a class="tile card tinted" href="lgchl-media.html#lgNewsSec" style="--tc:200,210,225"><span class="wm wm-lg" aria-hidden="true" style="--logo:url('assets/wildman/home/lgchl-logo.webp')"></span><span class="tile-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="1.5" width="11" height="13" rx="1"/><path d="M5 5h6M5 8h6M5 11h4"/></svg></span><span class="tile-txt"><b>League notes</b><small>News from around the LGCHL</small></span><span class="go" aria-hidden="true">→</span></a>
       </nav>
     </div>
   </section>
@@ -183,8 +250,8 @@
 
 <footer class="band">
   <div class="foot">
-    <span class="foot-brand"><img src="assets/wildman/home/wildman-crest.webp" width="96" height="85" loading="lazy" alt="Wildman Hockey logo"><span>© 2026 Wildman Hockey &amp; Esports Network</span></span>
-    <nav class="foot-nav" aria-label="Footer"><a href="interest.html">Competition intake</a><a href="multiview.html">Multiview</a><a href="game-center.html">Game Center</a><a href="wildman-media.html">Network Media</a><a href="management.html">Management</a></nav>
+    <span class="foot-brand"><img src="assets/brand/ecm-crest.webp" width="84" height="85" loading="lazy" alt="Elitechel Media logo"><span>© 2026 Elitechel Media</span></span>
+    <nav class="foot-nav" aria-label="Footer"><a href="hitmen-media.html">Hitmen Desk</a><a href="lgchl-media.html">LG CHL Desk</a><a href="esports-hub.html">Live Hub</a><a href="interest.html?program=hut">HUT Tournament</a><a href="management.html">Management</a></nav>
     <span>Season data: LeagueGaming imports · Times Eastern</span>
   </div>
 </footer>

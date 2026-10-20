@@ -56,7 +56,7 @@ async function fetchPublicPage(startUrl) {
         headers: {
           Accept: "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
           "Accept-Language": "en-US,en;q=0.8",
-          "User-Agent": "Wildman-Hockey-Esports/1.0 public-tournament-stats",
+          "User-Agent": "Elitechel-Media-Esports/1.0 public-tournament-stats",
         },
       });
     } finally {

@@ -1,0 +1,109 @@
+/* Elitechel Media homepage — layers on wildman-home.css (shared type, buttons, card skin).
+   Brand: black base, steel + gold lettering, ember red-orange pulled from the Elitechel Media crest. */
+/* ---------- banner hero (artwork) ---------- */
+.ecm-banner { position: relative; background: #050506; border-bottom: 1px solid var(--line); }
+.ecm-banner-art { position: relative; line-height: 0; }
+.ecm-banner-art img { display: block; width: 100%; height: auto; }
+.hot { position: absolute; display: block; border-radius: 3px; outline-offset: 3px; transition: box-shadow .15s, background .15s; }
+.hot:hover { background: rgba(255,255,255,.06); box-shadow: 0 0 0 2px rgba(247,217,138,.65), 0 0 28px rgba(227,181,74,.35); }
+.hot-hub { left: 32.76%; top: 78.4%; width: 15.5%; height: 11.25%; }
+.hot-radio { left: 49.79%; top: 78.3%; width: 17.4%; height: 11.25%; }
+.ecm-banner-cta { display: none; }
+@media (max-width: 760px) {
+  .hot { display: none; }
+  .ecm-banner-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 16px; padding-block: 16px 20px; background: linear-gradient(180deg, #060607, #0a0b0e); }
+  .ecm-banner-cta .btn { font-size: 18px; }
+}
+
+/* ---------- header: watch-now button ---------- */
+.watch-btn { display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; height: 44px; padding: 0 18px; font-family: var(--f-ui); font-weight: 600; font-size: 20px; letter-spacing: .08em; text-transform: uppercase; line-height: 1;
+  color: var(--gold-hi); border: 1.5px solid var(--gold); border-radius: 3px; background: rgba(227,181,74,.06); box-shadow: 0 0 18px -6px rgba(227,181,74,.5); transition: background .15s, transform .15s; }
+.watch-btn svg { color: var(--gold); }
+.watch-btn span { padding-top: 3px; }
+.watch-btn:hover { background: rgba(227,181,74,.16); transform: translateY(-1px); }
+.top .nav { gap: 0; }
+.top .nav > a, .top .nav .home-live-menu summary { padding-inline: 11px; font-size: 19px; white-space: nowrap; }
+.nav-watch-m { display: none !important; }
+@media (max-width: 1240px) { .top .nav > a, .top .nav .home-live-menu summary { padding-inline: 8px; font-size: 18px; } .watch-btn { padding: 0 12px; } }
+@media (max-width: 1080px) { .watch-btn { display: none; } .nav-watch-m { display: flex !important; color: var(--gold-hi) !important; } }
+
+/* ---------- desks ---------- */
+.desks-band { padding-block: 22px 26px; background: linear-gradient(180deg, #0a0b0e, #07080a); border-bottom: 1px solid var(--line); }
+.desks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.desk { --cut: 18px; min-height: 248px; display: grid; grid-template-rows: auto 1fr auto; align-content: stretch; gap: 10px; padding: 18px 20px 18px;
+  background: linear-gradient(180deg, rgba(8,9,11,.15) 0%, rgba(8,9,11,.55) 45%, rgba(8,9,11,.94) 100%); box-shadow: inset 0 0 0 1px var(--line); transition: transform .18s, box-shadow .18s; }
+.desk-art { position: absolute; inset: 0; z-index: -2; background: var(--art) var(--pos, center) / cover no-repeat; filter: saturate(.9) brightness(.62); transition: transform .5s, filter .3s; }
+.desk::after { right: 0; height: 3px; background: linear-gradient(90deg, var(--accent, var(--gold)) 0 46%, transparent 46% 50%, var(--gold) 50% 62%, transparent 62%); }
+.desk:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 18px 34px -16px rgba(0,0,0,.9); }
+.desk:hover .desk-art { transform: scale(1.04); filter: saturate(1) brightness(.75); }
+.desk-hit { --accent: var(--red); }
+.desk-lg { --accent: #3b6fe0; }
+.desk-live { --accent: var(--ember); }
+.desk-no { position: absolute; right: 16px; top: 6px; font-size: 76px; font-weight: 700; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.28); pointer-events: none; }
+.desk-badge { width: 64px; height: 64px; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,.8)); }
+.desk-badge-wide { width: 112px; }
+.desk-onair { justify-self: start; display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-ui); font-weight: 600; text-transform: uppercase; letter-spacing: .16em; font-size: 17px; line-height: 1; padding: 7px 12px 5px; color: #fff;
+  background: linear-gradient(180deg, #ff6a3d, var(--ember) 60%, var(--ember-lo)); clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); align-self: start; }
+.desk-onair i { width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: ecm-blink 1.4s infinite; }
+@keyframes ecm-blink { 50% { opacity: .25; } }
+.desk-txt { align-self: end; display: grid; gap: 6px; }
+.desk-t { font-family: var(--f-head); font-weight: 400; text-transform: uppercase; font-size: clamp(34px, 3.2vw, 46px); line-height: .9; color: #fff; text-shadow: 0 3px 0 rgba(0,0,0,.6), 0 10px 20px rgba(0,0,0,.7); }
+.desk-t em { font-family: var(--f-slash); font-style: italic; font-weight: 900; font-size: .9em; padding-left: .12em;
+  background: linear-gradient(176deg, #fff4cc 0%, var(--gold-hi) 28%, var(--gold) 58%, #8a6216 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.desk-txt small { font-size: 16px; color: #d4d2cb; max-width: 34ch; }
+.desk-go { font-family: var(--f-ui); font-weight: 600; text-transform: uppercase; letter-spacing: .12em; font-size: 18px; line-height: 1; color: var(--gold-hi); padding-top: 10px; border-top: 1px solid var(--line); }
+.desk-go .arr { display: inline-block; transition: transform .15s; }
+.desk:hover .desk-go .arr { transform: translateX(4px); }
+
+@media (max-width: 980px) {
+  .desks { grid-template-columns: 1fr; }
+  .desk { min-height: 0; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 16px; align-items: center; }
+  .desk-badge, .desk-onair { grid-row: 1; }
+  .desk-txt { align-self: center; }
+  .desk-go { grid-column: 1 / -1; }
+  .desk-no { font-size: 58px; }
+}
+@media (max-width: 640px) {
+  .desk { grid-template-columns: 1fr; }
+  .desk-txt small { font-size: 15px; }
+}
+
+/* ---------- Hitman Radio video ---------- */
+.radio { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(50% 80% at 85% 50%, rgba(212,42,42,.22), transparent 70%), radial-gradient(40% 60% at 10% 20%, rgba(232,72,24,.14), transparent 70%), #08090b; }
+.radio::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: var(--scratch); opacity: .7; pointer-events: none; }
+.radio-in { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 28px 40px; align-items: center; padding-block: 40px; }
+.radio-copy { display: grid; gap: 12px; justify-items: start; }
+.radio-copy p:not(.eyebrow) { color: #d4d2cb; font-size: 18px; max-width: 36ch; }
+.radio-eye { display: inline-flex; align-items: center; gap: 10px; color: #ff6b6b; }
+.radio-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--red); box-shadow: 0 0 10px var(--red); }
+.radio-act { margin-top: 6px; }
+.radio-player { --cut: 18px; padding: 6px; background: linear-gradient(160deg, rgba(212,42,42,.5), rgba(227,181,74,.35) 50%, rgba(255,255,255,.08)); }
+.radio-player video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px)); }
+@media (max-width: 900px) { .radio-in { grid-template-columns: 1fr; padding-block: 30px; } }
+
+/* ---------- HUT tournament band ---------- */
+.hutband { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: linear-gradient(90deg, rgba(8,7,5,.94) 0%, rgba(8,7,5,.7) 38%, rgba(8,7,5,.1) 70%, rgba(8,7,5,.4) 100%), #0a0806 url("assets/wildman/home/hut.webp") 80% 45% / cover no-repeat; }
+.hutband::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, var(--gold) 0 34%, transparent 34% 36%, var(--ember) 36% 44%, transparent 44%); }
+.hutband canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.hut-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 22px 40px; padding-block: 44px 40px; }
+.hut-copy { display: grid; gap: 10px; max-width: 640px; }
+.hut-eye { color: var(--gold-hi); font-size: 18px; }
+.hut-word { text-transform: uppercase; line-height: .8; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .22em; }
+.hut-word .w-steel { font-family: var(--f-head); font-size: clamp(56px, 7vw, 100px);
+  background: linear-gradient(180deg, #ffffff 0%, #e2e4e7 36%, #8b9097 50%, #3d4148 53%, #c8cbcf 72%, #f4f5f6 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 0 #0d0f12) drop-shadow(0 5px 0 #1b1d21) drop-shadow(0 14px 18px rgba(0,0,0,.85)); transform: skewX(-7deg); }
+.hut-word .w-gold { font-family: var(--f-slash); font-style: italic; font-weight: 900; font-size: clamp(42px, 5.4vw, 78px); letter-spacing: -.02em;
+  background: linear-gradient(175deg, #fff6d2 0%, var(--gold-hi) 24%, var(--gold) 52%, #6f4c10 72%, var(--gold) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 3px 0 #2a1d06) drop-shadow(0 0 26px rgba(227,181,74,.4)); transform: rotate(-4deg); }
+.hut-lede { font-size: 19px; color: #e2e0d9; text-shadow: 0 2px 10px #000; max-width: 40ch; }
+.hut-act { display: grid; gap: 12px; justify-items: start; }
+.hut-act .fine { font-family: var(--f-ui); font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: rgba(243,240,233,.66); }
+@media (max-width: 640px) { .hutband { background-position: center, 70% 45%; } .hut-in { padding-block: 34px; } }
+
+@media (prefers-reduced-motion: reduce) { .desk-onair i { animation: none; } .desk, .desk-art { transition: none; } }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+/* banner-style header: crest only on desktop so the full menu + Watch Now fit */
+@media (min-width: 1081px) { .top .brand-txt { display: none; } .top-in { gap: 18px; } }
+.top .nav > a:not(.on) { color: var(--bone); }

@@ -22,7 +22,7 @@ function fit(){
 
 if(feed) feed.src='obs-stage.html?channel='+encodeURIComponent(channel)+'&layer=feed';
 if(overlay) overlay.src='obs-overlay.html?channel='+encodeURIComponent(channel);
-document.title=(channel==='hitmen-main'?'Calgary Hitmen':'Wildman Hockey')+' Live Broadcast';
+document.title=(channel==='hitmen-main'?'Calgary Hitmen':'Elitechel Media')+' Live Broadcast';
 
 fit();
 if(window.ResizeObserver&&stage)new ResizeObserver(fit).observe(stage);

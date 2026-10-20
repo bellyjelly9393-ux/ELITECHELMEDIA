@@ -5,7 +5,7 @@
   const LG_ORIGIN = /^https:\/\/([a-z0-9-]+\.)?leaguegaming\.com$/i;
 
   // Runs inside the signed-in LeagueGaming tab. LG cookies, passwords and session tokens
-  // never leave that tab: only sanitized page content is posted to the Wildman bridge.
+  // never leave that tab: only sanitized page content is posted to the Elitechel bridge.
   function collector(target) {
     try {
       const TARGET = String(target || 'https://wildmanhockey-elitechelmedia.app').replace(/\/+$/,'');
@@ -83,12 +83,12 @@
 
       const bridge = window.open(TARGET + '/lg-capture.html?mode=authsync', 'wildmanLgAuthSync');
       if (!bridge) {
-        alert('Allow popups for LeagueGaming once, then run Wildman Auth Sync again.');
+        alert('Allow popups for LeagueGaming once, then run Elitechel Auth Sync again.');
         return;
       }
 
       // The bridge may ask this tab for specific Calgary game Public Logs. Only numeric game ids are
-      // accepted, only LG's own Public Log page is fetched, and only from the Wildman bridge window.
+      // accepted, only LG's own Public Log page is fetched, and only from the Elitechel bridge window.
       const onRequest = async ev => {
         if (ev.origin !== TARGET || ev.source !== bridge) return;
         const d = ev.data;
@@ -120,7 +120,7 @@
       setTimeout(send, 400);
     } catch (e) {
       console.error(e);
-      alert('Wildman LG Sync could not capture this page. ' + ((e && e.message) || ''));
+      alert('Elitechel LG Sync could not capture this page. ' + ((e && e.message) || ''));
     }
   }
 
@@ -145,9 +145,9 @@
     E('copyLgAuthSync')?.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(bookmarklet);
-        setMessage('Copied. Save it as a bookmark named “Wildman Auth Sync”.');
+        setMessage('Copied. Save it as a bookmark named “Elitechel Auth Sync”.');
       } catch {
-        setMessage('Copy failed. Drag the Wildman Auth Sync button to your bookmarks bar instead.', true);
+        setMessage('Copy failed. Drag the Elitechel Auth Sync button to your bookmarks bar instead.', true);
       }
     });
   }
@@ -186,7 +186,7 @@
     if (missing.length) {
       setMessage('Fetching ' + missing.length + ' Calgary box score' + (missing.length === 1 ? '' : 's') + ' through your LeagueGaming tab…');
       try { lgWindow.postMessage({ type: 'WILDMAN_LG_FETCH_PUBLIC_LOGS', gameIds: missing }, lgOrigin); }
-      catch { setMessage('The LeagueGaming tab was closed. Run Wildman Auth Sync again to pull box scores.', true); }
+      catch { setMessage('The LeagueGaming tab was closed. Run Elitechel Auth Sync again to pull box scores.', true); }
     } else if (needRecap.length) {
       writeRecaps(needRecap);
     }
@@ -238,11 +238,11 @@
   async function ingest(data) {
     const { db, token } = await session();
     if (!db) {
-      setMessage('Wildman account service is still loading. The capture is saved in this tab.', true);
+      setMessage('Elitechel account service is still loading. The capture is saved in this tab.', true);
       return;
     }
     if (!token) {
-      setMessage('Sign in to Wildman management below. The captured LG page will import immediately after sign-in.', true);
+      setMessage('Sign in to Elitechel management below. The captured LG page will import immediately after sign-in.', true);
       return;
     }
 
@@ -264,7 +264,7 @@
         Number(p.teams_seen || p.teams || 0).toLocaleString() + ' teams · ' +
         Number((p.added_candidates || 0) + (p.removed_candidates || 0) + (p.change_candidates || 0)).toLocaleString() +
         ' roster-change candidates queued for review.');
-      setMessage(result.duplicate ? 'This exact roster snapshot was already imported.' : 'LG roster imported through your authenticated browser session. No LG cookie or password was sent to Wildman.');
+      setMessage(result.duplicate ? 'This exact roster snapshot was already imported.' : 'LG roster imported through your authenticated browser session. No LG cookie or password was sent to Elitechel.');
     } else {
       setStatus(String(result.captureType || 'LG').replaceAll('_',' ').toUpperCase() + ' CAPTURED · snapshot ' + String(result.snapshotId || result.snapshot?.id || '').slice(0, 8));
       setMessage(result.parsed?.note || result.note || 'Authenticated LG page captured safely for parsing.');

@@ -130,7 +130,7 @@
 
   async function saveValuationV1({teamId,scoutingPlayerId,fitGrade,scarcityScore,season=55}){
     const context=await contextForScoutingPlayer(scoutingPlayerId,teamId);
-    if(!context.profile)throw new Error('Permanent Wildman player identity is not linked yet.');
+    if(!context.profile)throw new Error('Permanent Elitechel player identity is not linked yet.');
     const latest=context.seasons.find(x=>x.data_class!=='projection')||context.seasons[0]||null;
     const calibration=await valuationCalibration({season,league:'CHL'});
     const model=valuationV1({position:context.profile.primary_position,seasonRecord:latest,fitGrade,scarcityScore,marketFactor:calibration.marketFactor,calibrationSample:calibration.sample});
