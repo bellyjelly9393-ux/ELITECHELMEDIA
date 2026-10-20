@@ -17,7 +17,7 @@
     if (hl) hl.textContent = ep.headline || '';
     if (cr) { cr.innerHTML = ep.credits ? linkify(ep.credits) : ''; cr.hidden = !ep.credits; }
     s.querySelectorAll('.hn-ep').forEach(function (b) { b.setAttribute('aria-current', b.dataset.ep === ep.date ? 'true' : 'false'); });
-    var f = s.querySelector('[data-hn-featured]'); if (f && eps[0]) f.hidden = ep.date === eps[0].date;
+    var f = s.querySelector('[data-hn-featured]'); if (f && eps[0]) f.hidden = eps.length < 2 || ep.date === eps[0].date;
     if (scroll) s.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function defEp() { var want = s.dataset.default; return (want && eps.filter(function (e) { return e.date === want; })[0]) || eps[0]; }
