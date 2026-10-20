@@ -4,7 +4,7 @@ import { presignGet } from "./_s3presign.js";
 // Staff-only VOD archive. Row access is enforced by Supabase RLS on vod_archive_files
 // (is_vvhl_staff() or team management): the caller's own JWT is used, so a non-staff
 // user gets zero rows and therefore can never obtain a download link.
-const COLUMNS = "id,twitch_vod_id,streamer,game_date,teams,team_id,review_session_id,file_name,bytes,duration_seconds,sha256,verified_at,uploaded_at";
+const COLUMNS = "id,bucket,twitch_vod_id,streamer,game_date,teams,team_id,review_session_id,file_name,bytes,duration_seconds,sha256,verified_at,uploaded_at";
 
 function storageConfig() {
   const c = {
@@ -30,13 +30,13 @@ export default async function handler(req, res) {
       return res.status(200).json({ files: rows || [], downloadsEnabled: Boolean(storageConfig()) });
     }
     if (!/^[0-9a-f-]{36}$/i.test(id)) return res.status(400).json({ error: "Invalid file id" });
-    const rows = await supabaseRest(req, `/rest/v1/vod_archive_files?id=eq.${id}&select=id,file_name,bucket_key`);
+    const rows = await supabaseRest(req, `/rest/v1/vod_archive_files?id=eq.${id}&select=id,file_name,bucket,bucket_key`);
     const row = Array.isArray(rows) ? rows[0] : null;
     if (!row) return res.status(404).json({ error: "Archive file not found or not authorized" });
     const cfg = storageConfig();
     if (!cfg) return res.status(503).json({ error: "Archive storage is not configured" });
     const expiresIn = 900;
-    const url = presignGet({ ...cfg, key: row.bucket_key, filename: row.file_name, expiresIn });
+    const url = presignGet({ ...cfg, bucket: row.bucket || cfg.bucket, key: row.bucket_key, filename: row.file_name, expiresIn });
     return res.status(200).json({ url, expiresIn });
   } catch (error) {
     return res.status(error.status || 500).json({ error: error.message || "Archive request failed" });

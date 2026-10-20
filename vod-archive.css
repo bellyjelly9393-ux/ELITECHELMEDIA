@@ -31,3 +31,4 @@ body.wildman-site .va-shell .status-pill::before{background:var(--bc-soft,#B4B7B
 body.wildman-site .va-shell .va-btn{background:var(--bc-offwhite,#F2F3F4)!important;color:var(--bc-black,#070708)!important;border:0!important;box-shadow:none!important}
 body.wildman-site .va-shell .va-btn[disabled]{background:var(--bc-steel,#2A2C30)!important;color:var(--bc-dim,#62666C)!important}
 body.wildman-site .va-shell .va-tag{color:var(--bc-soft,#B4B7BC)!important;border-color:var(--bc-steel,#2A2C30)!important;background:transparent!important}
+.va-table td[data-label="Date"]{white-space:nowrap}.va-table td[data-label="Teams"]{font-size:12px;color:var(--bc-soft,#B4B7BC)}
