@@ -104,3 +104,6 @@
 
 @media (prefers-reduced-motion: reduce) { .desk-onair i { animation: none; } .desk, .desk-art { transition: none; } }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+/* banner-style header: crest only on desktop so the full menu + Watch Now fit */
+@media (min-width: 1081px) { .top .brand-txt { display: none; } .top-in { gap: 18px; } }
+.top .nav > a:not(.on) { color: var(--bone); }
