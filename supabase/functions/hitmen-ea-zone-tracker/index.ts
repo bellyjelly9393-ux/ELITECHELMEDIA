@@ -6,7 +6,7 @@
 // when it provably belongs to that one match (see zones.mjs). Read-only against EA; never publishes.
 // POST { force?: boolean, dryRun?: boolean } with x-sync-token.
 import { createClient } from '@supabase/supabase-js';
-import { parseMembers, zoneDelta, windowHasOnlyMatch } from './zones.mjs';
+import { parseMembers, zoneDelta, windowHasOnlyMatch, leagueGameFor, nextMatchAt } from './zones.mjs';
 
 const CALGARY_CLUB = '9495', TEAM = 'b0bcbdda-da9d-419d-8f61-b34937966d49', PLATFORM = 'common-gen5';
 const UA = 'Elitechel-Media-Esports/1.0 (Hitmen EA zone tracker)';
@@ -45,6 +45,10 @@ Deno.serve(async (req) => {
   const { data: teams } = await db.from('lgchl_teams').select('lg_team_id,name').eq('season', 55).in('lg_team_id', oppIds.length ? oppIds : [-1]);
   const { data: links } = await db.from('hitmen_opponents').select('opponent_name,ea_club_id').eq('team_id', TEAM).eq('season', 55)
     .in('opponent_name', (teams || []).map((t: any) => t.name).concat(['-']));
+  const clubByName = new Map((links || []).map((l: any) => [l.opponent_name, String(l.ea_club_id)]));
+  const nameById = new Map((teams || []).map((t: any) => [t.lg_team_id, t.name]));
+  const leagueGames = (games || []).map((g: any) => ({ lg_game_id: g.lg_game_id, game_at: g.game_at,
+    opp_club: clubByName.get(nameById.get(g.home_lg_team_id === 412 ? g.away_lg_team_id : g.home_lg_team_id)) || null }));
   const clubs = [CALGARY_CLUB, ...new Set((links || []).map((l: any) => String(l.ea_club_id)).filter((c: string) => /^\d+$/.test(c)))];
 
   // 1. Snapshot every tracked club.
@@ -66,15 +70,20 @@ Deno.serve(async (req) => {
     const matchId = String(m.matchId), at = Number(m.timestamp) * 1000;
     const { data: done } = await db.from('hitmen_ea_match_events').select('club_id').eq('source_game_id', matchId).eq('source', 'ea_member_zone_delta');
     const { data: link } = await db.from('hitmen_opponent_ea_games').select('lg_game_id').eq('source_game_id', matchId).not('lg_game_id', 'is', null).limit(1);
-    const lgGameId = link?.[0]?.lg_game_id ?? (games || []).find((g: any) => Math.abs(Date.parse(g.game_at) - at) < 2 * 3600e3)?.lg_game_id ?? null;
+    // Only official LGCHL games: scrims and public matchmaking after the league night are not ours to file.
+    const lgGameId = leagueGameFor(m, CALGARY_CLUB, leagueGames, link?.[0]?.lg_game_id ?? null);
+    if (!lgGameId) { results.push({ matchId, skipped: 'not an LGCHL game (no verified link, other club is not tonight\'s opponent)' }); continue; }
     for (const club of Object.keys(m.clubs)) {
       if ((done || []).some((d: any) => d.club_id === club)) continue;
+      const clubMatches = matchesByClub[club] || await allMatches(club);
+      // EA can publish the match a few minutes before member totals catch up, so use the latest snapshot
+      // taken before this club's next match (or now) rather than the first one after the match.
+      const until = nextMatchAt(clubMatches, matchId) ?? now + 60e3;
       const { data: before } = await db.from('hitmen_ea_member_zone_snapshots').select('captured_at,members').eq('club_id', club)
         .lt('captured_at', new Date(at).toISOString()).order('captured_at', { ascending: false }).limit(1);
       const { data: after } = await db.from('hitmen_ea_member_zone_snapshots').select('captured_at,members').eq('club_id', club)
-        .gt('captured_at', new Date(at).toISOString()).order('captured_at', { ascending: true }).limit(1);
+        .gt('captured_at', new Date(at).toISOString()).lt('captured_at', new Date(until).toISOString()).order('captured_at', { ascending: false }).limit(1);
       if (!before?.[0] || !after?.[0]) { results.push({ matchId, club, skipped: 'no before/after snapshot pair' }); continue; }
-      const clubMatches = matchesByClub[club] || await allMatches(club);
       if (!windowHasOnlyMatch(clubMatches, matchId, before[0].captured_at, after[0].captured_at)) { results.push({ matchId, club, skipped: 'other matches inside snapshot window' }); continue; }
       const { rows, rejected } = zoneDelta(before[0].members, after[0].members, m.players?.[club]);
       const side = club === CALGARY_CLUB ? 'calgary' : 'opponent';
