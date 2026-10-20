@@ -16,3 +16,5 @@ Never delete entries: the archive is permanent.
 Shareable link to an episode: `/#ep-YYYY-MM-DD`.
 
 Optional: `data-default="YYYY-MM-DD"` on a section pins which episode it opens on (lgchl-media.html uses this); without it the newest plays.
+
+When replacing an existing video/poster file in place, bump the `?v=` tag on its `video`/`poster` URLs in episodes.json so browsers drop the cached copy.

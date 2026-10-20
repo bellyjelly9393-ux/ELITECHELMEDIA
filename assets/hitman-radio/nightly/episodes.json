@@ -1,11 +1,18 @@
 {
   "episodes": [
     {
+      "date": "2026-10-19",
+      "label": "Oct 19 games",
+      "headline": "Bwxxd's 16-goal night & four sweeps",
+      "video": "assets/hitman-radio/nightly/2026-10-19.mp4?v=20261020-w",
+      "poster": "assets/hitman-radio/nightly/2026-10-19-poster.webp?v=20261020-w"
+    },
+    {
       "date": "2026-10-18",
       "label": "Oct 18 games",
       "headline": "Brandon St. Laurent's 14 goals lead Quebec's 27-goal night",
-      "video": "assets/hitman-radio/nightly/2026-10-18.mp4",
-      "poster": "assets/hitman-radio/nightly/2026-10-18-poster.webp",
+      "video": "assets/hitman-radio/nightly/2026-10-18.mp4?v=20261020-w",
+      "poster": "assets/hitman-radio/nightly/2026-10-18-poster.webp?v=20261020-w",
       "credits": "Highlights courtesy of twitch.tv/canate and twitch.tv/evovolcano"
     }
   ]
