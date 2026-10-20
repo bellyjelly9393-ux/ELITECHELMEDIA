@@ -9,18 +9,6 @@
       "destination": "/hitmen-hq.html"
     },
     {
-      "source": "/academy-trainees",
-      "destination": "/academy-trainees.html"
-    },
-    {
-      "source": "/academy-training",
-      "destination": "/academy-training.html"
-    },
-    {
-      "source": "/training",
-      "destination": "/academy-training.html"
-    },
-    {
       "source": "/calgary",
       "destination": "/hitmen-hq.html"
     },
@@ -31,10 +19,6 @@
     {
       "source": "/management",
       "destination": "/management.html"
-    },
-    {
-      "source": "/scouting-lab",
-      "destination": "/scouting-lab.html"
     },
     {
       "source": "/hitmen",
@@ -61,16 +45,8 @@
       "destination": "/postgame-desk.html"
     },
     {
-      "source": "/reports",
-      "destination": "/reports.html"
-    },
-    {
       "source": "/postgame",
       "destination": "/postgame.html"
-    },
-    {
-      "source": "/pro-series",
-      "destination": "/pro-series.html"
     },
     {
       "source": "/game-center",
@@ -132,6 +108,201 @@
     {
       "source": "/hitmen-game-center",
       "destination": "/hitmen-hq.html",
+      "permanent": false
+    },
+    {
+      "source": "/academy.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/academy",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/academy-training.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/academy-training",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/academy-trainees.html",
+      "destination": "/management.html",
+      "permanent": false
+    },
+    {
+      "source": "/academy-trainees",
+      "destination": "/management.html",
+      "permanent": false
+    },
+    {
+      "source": "/wildman-media.html",
+      "destination": "/hitmen-media.html",
+      "permanent": false
+    },
+    {
+      "source": "/wildman-media",
+      "destination": "/hitmen-media.html",
+      "permanent": false
+    },
+    {
+      "source": "/history.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/history",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/season.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/season",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/scouting-lab.html",
+      "destination": "/management.html",
+      "permanent": false
+    },
+    {
+      "source": "/scouting-lab",
+      "destination": "/management.html",
+      "permanent": false
+    },
+    {
+      "source": "/pro-series.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/pro-series",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/caps-gaming.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/caps-gaming",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/events.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/events",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/event-format.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/event-format",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/player-rusty.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/player-rusty",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/player-williamson20.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/player-williamson20",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/player-williamson88.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/player-williamson88",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/players.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/players",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/services.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/services",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/signup.html",
+      "destination": "/management.html",
+      "permanent": false
+    },
+    {
+      "source": "/signup",
+      "destination": "/management.html",
+      "permanent": false
+    },
+    {
+      "source": "/reports.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/reports",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/training",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/game.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/game",
+      "destination": "/",
       "permanent": false
     }
   ]

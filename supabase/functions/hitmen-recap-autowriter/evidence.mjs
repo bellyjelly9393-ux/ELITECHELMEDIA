@@ -119,7 +119,7 @@ function filmSections(vod, ctx) {
   const rating = Number.isFinite(Number(r.game_rating?.score)) ? ` The film staff graded the performance ${Number(r.game_rating.score)}/100.` : '';
   const head = pick(ctx.lgGameId, 'film', ['## Film room', '## From the film room', '## On the tape']);
   return [head + '\n' + (notes.join(' ') + rating).trim() + (picks.length ? '\n\n' + picks.map(([k, v]) => `- ${k}: ${sentence(v)}`).join('\n') : '') +
-    '\n\n_Film notes come from the approved Wildman VOD Scout review of this game; clips stay in the private VOD room._'];
+    '\n\n_Film notes come from the approved Elitechel VOD Scout review of this game; clips stay in the private VOD room._'];
 }
 
 const ZONE_NAMES = ['behind the net', 'behind the net (left)', 'behind the net (right)', 'the crease', 'the right circle', 'the low slot (left)', 'the low slot', 'the low slot (right)',

@@ -1,6 +1,6 @@
 // Synthetic unit test only (not real game data).
 import assert from 'node:assert';
-import { parseMembers, zoneDelta, windowHasOnlyMatch } from './zones.mjs';
+import { parseMembers, zoneDelta, windowHasOnlyMatch, leagueGameFor, nextMatchAt } from './zones.mjs';
 import { eventSections } from '../hitmen-recap-autowriter/evidence.mjs';
 const mk = (gp, s7, s15, g7) => ({ name: 'A', skgp: gp, skshots: s7 + s15, skgoals: g7, skShotsLocationOnIce7: s7, skShotsLocationOnIce15: s15, skGoalsLocationOnIce7: g7 });
 const b = parseMembers({ members: [mk(10, 5, 3, 1)] }), a = parseMembers({ members: [mk(11, 7, 4, 2)] });
@@ -13,4 +13,15 @@ const secs = eventSections([{ side: 'calgary', event_type: 'shot_zone', ice_zone
   { side: 'calgary', event_type: 'goal', period: 2, game_clock: '12:04', player: 'A', ice_zone: 7, event_count: 1, verified: true }, { side: 'calgary', event_type: 'shot_zone', ice_zone: 1, event_count: 9, verified: false }], { oNick: 'Red Deer', lgGameId: 1 });
 console.log(secs.join('\n\n'));
 assert.equal(eventSections([], { oNick: 'X', lgGameId: 1 }).length, 0);
+// Guests (isGuest '1') have no club totals; say so instead of 'missing snapshot'.
+r = zoneDelta(b, a, { y: { playername: 'Guesty', position: 'center', skshots: '2', skgoals: '0', isGuest: '1' } }); assert.match(r.rejected[0].why, /guest/);
+// League linking: verified link wins; else opponent club + game window; scrims/public games are not league.
+const games = [{ lg_game_id: 7, game_at: new Date(1000e3).toISOString(), opp_club: '9000' }];
+const mt = (other, ts) => ({ matchId: 'm', timestamp: ts, clubs: { 9495: {}, [other]: {} } });
+assert.equal(leagueGameFor(mt('9000', 1000 + 1800), '9495', games), 7);
+assert.equal(leagueGameFor(mt('47529', 1000 + 1800), '9495', games), null);
+assert.equal(leagueGameFor(mt('9000', 1000 + 3 * 3600), '9495', games), null);
+assert.equal(leagueGameFor(mt('47529', 1), '9495', games, 99), 99);
+assert.equal(nextMatchAt([{ matchId: 1, timestamp: 100 }, { matchId: 2, timestamp: 300 }, { matchId: 3, timestamp: 200 }], 1), 200e3);
+assert.equal(nextMatchAt([{ matchId: 1, timestamp: 100 }], 1), null);
 console.log('OK');

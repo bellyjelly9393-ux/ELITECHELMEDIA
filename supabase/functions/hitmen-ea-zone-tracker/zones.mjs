@@ -28,6 +28,9 @@ export function zoneDelta(before, after, matchPlayers) {
   for (const p of Object.values(matchPlayers || {})) {
     if (p.position === 'goalie') continue;
     const name = String(p.playername || '').trim(), b = before[name], a = after[name];
+    // EA keeps per-club running totals (and the 16 zone arrays) only for club members. Guests, which is
+    // how most LGCHL rosters dress in a club's private games, never appear in /members/stats.
+    if (String(p.isGuest) === '1' && (!b || !a)) { rejected.push({ name, why: 'guest: EA keeps no club zone totals for guests' }); continue; }
     if (!b || !a) { rejected.push({ name, why: 'missing snapshot' }); continue; }
     if (a.gp - b.gp !== 1) { rejected.push({ name, why: 'gp delta ' + (a.gp - b.gp) }); continue; }
     const ds = a.shots.map((v, i) => v - b.shots[i]), dg = a.goals.map((v, i) => v - b.goals[i]);
@@ -45,4 +48,27 @@ export function windowHasOnlyMatch(matches, matchId, fromIso, toIso) {
   const from = Date.parse(fromIso) / 1000, to = Date.parse(toIso) / 1000;
   const inWin = (matches || []).filter((m) => num(m.timestamp) > from && num(m.timestamp) <= to);
   return inWin.length === 1 && String(inWin[0].matchId) === String(matchId);
+}
+
+/**
+ * Which official LGCHL game an EA match belongs to. A verified link (hitmen_opponent_ea_games) wins;
+ * otherwise the match's other club must be the EA club of a scheduled Calgary opponent and the match
+ * must end inside that game's window (start - 10 min .. start + 100 min, which covers disconnect
+ * restarts). Anything else (scrims, drop-ins, public 6s after the league night) is not a league game.
+ * games: [{ lg_game_id, game_at, opp_club }]
+ */
+export function leagueGameFor(match, calgaryClub, games, verifiedLgGameId = null) {
+  if (verifiedLgGameId) return verifiedLgGameId;
+  const other = Object.keys(match?.clubs || {}).find((c) => c !== String(calgaryClub));
+  const at = num(match?.timestamp) * 1000;
+  const hits = (games || []).filter((g) => other && String(g.opp_club) === other && at >= Date.parse(g.game_at) - 10 * 60e3 && at <= Date.parse(g.game_at) + 100 * 60e3)
+    .sort((x, y) => Math.abs(Date.parse(x.game_at) - at) - Math.abs(Date.parse(y.game_at) - at));
+  return hits[0]?.lg_game_id ?? null;
+}
+
+/** First match timestamp (ms) for this club after the given match, or null: bounds the "after" snapshot. */
+export function nextMatchAt(matches, matchId) {
+  const me = (matches || []).find((m) => String(m.matchId) === String(matchId)); if (!me) return null;
+  const later = (matches || []).map((m) => num(m.timestamp)).filter((t) => t > num(me.timestamp)).sort((a, b) => a - b);
+  return later.length ? later[0] * 1000 : null;
 }

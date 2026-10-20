@@ -5,26 +5,30 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#08090b">
 <title>LGCHL Media | Elitechel Media</title>
+<link rel="canonical" href="https://wildmanhockey-elitechelmedia.app/lgchl-media.html"><link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp"><meta property="og:type" content="website"><meta property="og:site_name" content="Elitechel Media"><meta property="og:title" content="LGCHL Media | Elitechel Media"><meta property="og:description" content="LGCHL Media from Elitechel Media: league-wide LeagueGaming CHL scores, power rankings, leaders, breakout players and player movement, plus Hitman Radio."><meta property="og:url" content="https://wildmanhockey-elitechelmedia.app/lgchl-media.html"><meta property="og:image" content="https://wildmanhockey-elitechelmedia.app/assets/brand/ecm-share.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://wildmanhockey-elitechelmedia.app/assets/brand/ecm-share.jpg">
 <meta name="description" content="LGCHL Media from Elitechel Media: league-wide LeagueGaming CHL scores, power rankings, leaders, breakout players and player movement, plus Hitman Radio.">
 <link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="wildman-home.css?v=20261011-4">
+<link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
 <link rel="stylesheet" href="lgchl-media.css?v=20261019-potn1"><link rel="stylesheet" href="lgchl-player-profile.css?v=20261018-1"><link rel="stylesheet" href="lgchl-player-badges.css?v=20261018-1">
+<link rel="stylesheet" href="hitman-nightly.css?v=20261020-3">
+<script src="hitman-nightly.js?v=20261020-3" defer></script>
 </head>
 <body>
 <header class="top band">
   <div class="top-in">
-    <a class="brand" href="index.html" aria-label="Wildman Hockey home">
-      <img class="crest" src="assets/wildman/home/wildman-crest.webp" width="112" height="99" alt="">
-      <div class="brand-txt"><b>Wildman Hockey</b><span>Elitechel Media</span><span>Network</span></div>
+    <a class="brand" href="index.html" aria-label="Elitechel Media home">
+      <img class="crest" src="assets/brand/ecm-crest.webp" width="118" height="120" alt="">
+      <div class="brand-txt"><b>Elitechel</b><span>Media</span></div>
     </a>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="index.html">Home</a>
-      <a href="esports-hub.html">Esports Hub</a>
-      <a href="game-center.html">Live</a>
-      <a href="academy.html">Academy</a>
-      <a href="hitmen-media.html" class="on" aria-current="page">Media</a>
+      <a href="esports-hub.html">Live Hub</a>
+      <a href="hitmen-media.html">Hitmen</a>
+      <a href="lgchl-media.html" class="on" aria-current="page">LG CHL</a>
+      <a href="lgchl-leaders.html">Stats</a>
+      <a href="interest.html?program=hut">HUT Tournament</a>
       <a href="management.html">Management</a>
     </nav>
     <a class="icon-btn search-btn" href="lgchl-leaders.html" aria-label="LGCHL stats"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
@@ -36,7 +40,7 @@
   <div class="desk-in">
     <p class="eyebrow">Elitechel Media · choose a desk</p>
     <div class="desk-toggle">
-      <a class="wild" href="wildman-media.html"><img src="assets/wildman/home/wildman-crest.webp" alt=""><span>Wildman Media</span></a>
+      
       <a class="hit" href="hitmen-media.html"><img src="assets/lgchl/s55/team412.png" alt=""><span>Hitmen Media</span></a>
       <a class="lgchl" href="lgchl-media.html" aria-current="page"><img src="assets/wildman/home/lgchl-logo.webp" alt=""><span>LGCHL Media</span></a>
     </div>
@@ -75,22 +79,28 @@
     </div>
   </section>
 
-  <section class="lg-sec lg-radio band" id="lgRadioSec" aria-labelledby="lgRadioTitle">
-    <div class="lg-in lg-radio-grid">
-      <img class="lg-radio-art" src="assets/hitman-radio/episode-01-cover.webp" width="1024" height="1536" loading="lazy" alt="Hitman Radio — Elite Chel Media covering the LGCHL">
-      <div>
-        <span class="sec-rule" aria-hidden="true"></span>
-        <p class="eyebrow">Elitechel Media audio · LGCHL and Hitmen</p>
-        <h2 class="sec-title" id="lgRadioTitle">Hitman <em>Radio</em></h2>
-        <p class="lg-dek">Episode 1</p>
-        <p class="lg-radio-runtime">19 min 31 sec</p>
-        <audio class="lg-radio-player" controls preload="none" aria-label="Play Hitman Radio Episode 1">
-          <source src="assets/hitman-radio/episode-01.mp3" type="audio/mpeg">
-          Your browser does not support audio playback. <a href="assets/hitman-radio/episode-01.mp3">Listen to Episode 1</a>.
-        </audio>
-        <a class="lg-radio-download" href="assets/hitman-radio/episode-01.mp3" download="Hitman-Radio-Episode-01.mp3">Download Episode 1 (MP3)</a>
+  <!-- Hitman Radio video player: shared component (hitman-nightly.js/css + assets/hitman-radio/nightly/episodes.json). Keep id="lgRadioSec": Discord links point to it. -->
+  <section class="hn band" id="lgRadioSec" aria-labelledby="lgRadioTitle" data-manifest="assets/hitman-radio/nightly/episodes.json" data-default="2026-10-18">
+    <div class="hn-in">
+      <div class="hn-frame">
+        <video class="hn-video" controls playsinline preload="metadata" width="1280" height="720" aria-label="Hitman Radio nightly show video">
+          Your browser does not support HTML5 video.
+        </video>
+        <p class="hn-credit" data-hn-credits hidden></p>
+        <p class="hn-credit" data-hn-fallback hidden>Episode list unavailable right now. <a href="assets/hitman-radio/episode-01.mp3">Listen to Episode 1 (audio)</a>.</p>
+      </div>
+      <div class="hn-copy">
+        <div class="hn-head"><img class="hn-mark" src="assets/brand/elitechel-mark-48@2x.png" width="36" height="36" alt=""><span class="hn-brand">EliteChel Media</span></div>
+        <h2 class="hn-title" id="lgRadioTitle">Hitman Radio <em>— Nightly Show</em></h2>
+        <span class="hn-date"><i aria-hidden="true"></i><span data-hn-date>Latest episode</span></span>
+        <p class="hn-headline" data-hn-headline></p>
+        <p>The night around the LGCHL, called by Hitman Radio.</p>
+        <div class="hn-ctas"><a class="hn-cta" href="#lgAudioEditions">Audio editions <span aria-hidden="true">↓</span></a>
+        <a class="hn-cta hn-cta-ghost" data-hn-featured hidden href="#lgRadioSec">Latest episode</a></div>
       </div>
     </div>
+    <div class="hn-arch" data-hn-archive hidden></div>
+    <p class="hn-audio" id="lgAudioEditions"><b>Audio editions</b><a href="assets/hitman-radio/episode-01.mp3">Episode 1 · 19 min 31 sec (MP3)</a><a href="assets/hitman-radio/episode-01.mp3" download="Hitman-Radio-Episode-01.mp3">Download</a></p>
   </section>
 
   <section class="lg-sec lg-scores band" aria-labelledby="lgScoresTitle">
@@ -267,8 +277,8 @@
 
 <footer class="band">
   <div class="foot">
-    <span class="foot-brand"><img src="assets/wildman/home/wildman-crest.webp" width="96" height="85" loading="lazy" alt="Wildman Hockey logo"><span>© 2026 Wildman Hockey &amp; Esports Network</span></span>
-    <nav class="foot-nav" aria-label="Footer"><a href="wildman-media.html">Wildman Media</a><a href="hitmen-media.html">Hitmen Media</a><a href="lgchl-media.html">LGCHL Media</a><a href="lgchl-leaders.html">LGCHL Stats</a><a href="game-center.html?channel=hitmen">Game Center</a></nav>
+    <span class="foot-brand"><img src="assets/brand/ecm-crest.webp" width="84" height="85" loading="lazy" alt="Elitechel Media logo"><span>© 2026 Elitechel Media</span></span>
+    <nav class="foot-nav" aria-label="Footer"><a href="hitmen-media.html">Hitmen Media</a><a href="lgchl-media.html">LGCHL Media</a><a href="lgchl-leaders.html">LGCHL Stats</a><a href="game-center.html?channel=hitmen">Game Center</a></nav>
     <span>LGCHL on LeagueGaming, not the real-world CHL · Times Eastern</span>
   </div>
 </footer>

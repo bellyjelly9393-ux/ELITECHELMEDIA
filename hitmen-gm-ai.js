@@ -22,7 +22,7 @@
     const locked=$('managementLockedMessage');
     if(locked){
       locked.hidden=ok;
-      if(!ok&&auth().user)locked.innerHTML='<b>Calgary Hitmen access not assigned.</b><p>GM MVP AI requires Wildman Admin or an active Calgary Owner, GM or AGM membership.</p>';
+      if(!ok&&auth().user)locked.innerHTML='<b>Calgary Hitmen access not assigned.</b><p>GM MVP AI requires Elitechel Admin or an active Calgary Owner, GM or AGM membership.</p>';
     }
     return ok;
   }
@@ -40,7 +40,7 @@
 
   function answerText(query,search){
     const rows=search.results||[];
-    if(!rows.length)return '<div class="eyebrow">GM MVP AI</div><h3>NO DATABASE MATCH.</h3><p>I did not find a player that matches the position/budget filters in the current Wildman intelligence data. That means no match, not permission to make one up.</p>';
+    if(!rows.length)return '<div class="eyebrow">GM MVP AI</div><h3>NO DATABASE MATCH.</h3><p>I did not find a player that matches the position/budget filters in the current Elitechel intelligence data. That means no match, not permission to make one up.</p>';
     const top=rows[0];
     const pos=top.profile?.primary_position||'player';
     const val=top.valuation;
@@ -159,7 +159,7 @@
       if(generation!==analysisGeneration||auth().user?.id!==userId)return;
       const coverage=result.coverage||{},matched=(coverage.matchedOpponents||[]).join(', ')||'None',players=(coverage.selectedPlayers||[]).join(', ')||'None',warn=(coverage.warnings||[]);
       $('gmAiAnswer').innerHTML=
-        '<div class="gm-ai-analysis-head"><div><div class="eyebrow">'+esc(result.engine||'WILDMAN HOCKEY OPS')+'</div><h3>'+esc(String(result.lens||'general').replaceAll('_',' ').toUpperCase())+' ANALYSIS</h3><p class="gm-ai-depth-note">Auto depth: <b>'+esc(String(result.depthMode||'deep').toUpperCase())+'</b> · '+esc(result.depthReason||'')+'</p></div><div class="gm-ai-analysis-meta"><span>'+esc(result.model||'Claude')+'</span><span>'+esc((result.reasoningEffort||'').toUpperCase())+' REASONING</span></div></div>'+
+        '<div class="gm-ai-analysis-head"><div><div class="eyebrow">'+esc(result.engine||'ELITECHEL HOCKEY OPS')+'</div><h3>'+esc(String(result.lens||'general').replaceAll('_',' ').toUpperCase())+' ANALYSIS</h3><p class="gm-ai-depth-note">Auto depth: <b>'+esc(String(result.depthMode||'deep').toUpperCase())+'</b> · '+esc(result.depthReason||'')+'</p></div><div class="gm-ai-analysis-meta"><span>'+esc(result.model||'Claude')+'</span><span>'+esc((result.reasoningEffort||'').toUpperCase())+' REASONING</span></div></div>'+
         '<div class="gm-ai-analysis-body">'+renderAnalysisText(result.answer)+'</div>'+
         '<details class="gm-ai-evidence"><summary>Evidence packet & coverage · '+esc(String(coverage.evidenceRecords??result.sources?.length??0))+' records</summary>'+
           '<div class="gm-ai-coverage-grid"><div><small>Players</small><b>'+esc(players)+'</b></div><div><small>Opponents</small><b>'+esc(matched)+'</b></div><div><small>Selection</small><b>'+esc(coverage.selection||'—')+'</b></div><div><small>Usage</small><b>'+esc(usageText(result.usage)||'—')+'</b></div></div>'+

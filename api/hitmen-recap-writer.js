@@ -53,7 +53,7 @@ async function openRouter(prompt) {
   const r = await fetch(base + '/chat/completions', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json',
-      'HTTP-Referer': 'https://wildmanhockey-elitechelmedia.app', 'X-Title': 'Wildman Hockey · Hitmen recap writer' },
+      'HTTP-Referer': 'https://wildmanhockey-elitechelmedia.app', 'X-Title': 'Elitechel Media · Hitmen recap writer' },
     body: JSON.stringify({ model, messages: [{ role: 'system', content: STYLE }, { role: 'user', content: prompt }],
       response_format: { type: 'json_object' }, temperature: 0.4, max_tokens: 2500 }),
     signal: AbortSignal.timeout(90000),
@@ -142,10 +142,10 @@ module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') return res.status(405).json({ error: 'Use POST.' });
   const token = String(req.headers.authorization || '');
-  if (!/^Bearer \S+$/.test(token)) return res.status(401).json({ error: 'Sign in to Wildman management.' });
+  if (!/^Bearer \S+$/.test(token)) return res.status(401).json({ error: 'Sign in to Elitechel management.' });
   try {
     const user = await rest('/auth/v1/user', token);
-    if (!user?.id) throw fail(401, 'Sign in to Wildman management.');
+    if (!user?.id) throw fail(401, 'Sign in to Elitechel management.');
     const ids = [...new Set((req.body?.lgGameIds || []).map(Number).filter(n => Number.isSafeInteger(n) && n > 0))].slice(0, 12);
     if (!ids.length) throw fail(400, 'No LG game ids supplied.');
     const results = await Promise.all(ids.map(id => writeOne(id, token).catch(e => ({ lgGameId: id, ok: false, error: String(e.message || e).slice(0, 300) }))));

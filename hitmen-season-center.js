@@ -65,12 +65,12 @@
  function renderBroadcast(){
   const picker=$('broadcastChannelPicker'),stage=$('featuredBroadcast');
   picker.replaceChildren();
-  if(!S.sources.length){stage.innerHTML='<div class="featured-placeholder"><strong>No assigned broadcast channels</strong><p>Wildman can add public Twitch sources in the management console.</p></div>';$('liveBroadcastCount').textContent='NO CHANNEL ATTACHED';return;}
+  if(!S.sources.length){stage.innerHTML='<div class="featured-placeholder"><strong>No assigned broadcast channels</strong><p>Elitechel can add public Twitch sources in the management console.</p></div>';$('liveBroadcastCount').textContent='NO CHANNEL ATTACHED';return;}
   const wanted=new URLSearchParams(location.search).get('channel');
   const chosen=S.sources.find(s=>sourceKey(s)===S.broadcast)||S.sources.find(s=>sourceKey(s)===wanted)||S.sources[0];
   S.broadcast=sourceKey(chosen);
   const select=document.createElement('select');select.id='broadcastChannelSelect';select.className='select-field';select.setAttribute('aria-label','Broadcast channel');
-  S.sources.forEach((s,i)=>{const opt=document.createElement('option');opt.value=String(i);opt.textContent=s.display_label||((sourceKey(s)==='hitmen'?'Calgary Hitmen':'Wildman')+' channel');opt.selected=s.id===chosen.id;select.append(opt);});
+  S.sources.forEach((s,i)=>{const opt=document.createElement('option');opt.value=String(i);opt.textContent=s.display_label||((sourceKey(s)==='hitmen'?'Calgary Hitmen':'Elitechel')+' channel');opt.selected=s.id===chosen.id;select.append(opt);});
   select.addEventListener('change',()=>{const s=S.sources[Number(select.value)];if(!s)return;S.broadcast=sourceKey(s);const link=new URL(location.href);link.searchParams.set('channel',S.broadcast);history.replaceState(null,'',link);renderBroadcast();});
   const label=document.createElement('label');label.textContent='WATCH CHANNEL ';label.append(select);picker.append(label);
   const hitmenChannel=sourceKey(chosen)==='hitmen';
@@ -88,8 +88,8 @@
     meta.append(title,p,link,mv);stage.append(holder,meta);
   }
   $('liveBroadcastCount').textContent='CHANNEL READY';
-  $('liveRefreshStamp').textContent='Source '+(chosen.display_label||'Wildman');
-  document.querySelector('#featured .section-heading h2').textContent=sourceKey(chosen)==='hitmen'?'CALGARY HITMEN LIVE':'WILDMAN NETWORK CHANNEL';
+  $('liveRefreshStamp').textContent='Source '+(chosen.display_label||'Elitechel');
+  document.querySelector('#featured .section-heading h2').textContent=sourceKey(chosen)==='hitmen'?'CALGARY HITMEN LIVE':'ELITECHEL MEDIA CHANNEL';
  }
  async function load(){
   if(S.loading)return;S.loading=true;

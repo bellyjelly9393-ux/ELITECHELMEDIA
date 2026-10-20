@@ -36,11 +36,11 @@ function buildStream(game={}) {
 
   if (provider === 'twitch' && channel) {
     const parent = encodeURIComponent(location.hostname);
-    mount.innerHTML = `<iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(channel)}&parent=${parent}&autoplay=false" allowfullscreen loading="eager" title="Wildman Hockey Twitch stream"></iframe>`;
+    mount.innerHTML = `<iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(channel)}&parent=${parent}&autoplay=false" allowfullscreen loading="eager" title="Elitechel Media Twitch stream"></iframe>`;
     return;
   }
   if (provider === 'youtube' && channel) {
-    mount.innerHTML = `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(channel)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="eager" title="Wildman Hockey live stream"></iframe>`;
+    mount.innerHTML = `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(channel)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="eager" title="Elitechel Media live stream"></iframe>`;
     return;
   }
   mount.innerHTML = `<div class="live-stream-empty"><div class="live-play-icon">▶</div><strong>STREAM FEED READY</strong><span>The player activates automatically when a Twitch channel or YouTube video is attached to the game.</span><small>Twitch + YouTube supported</small></div>`;
@@ -85,7 +85,7 @@ function leaders(stats, playersById) {
   });
   return [['GOALS','goals'],['ASSISTS','assists'],['POINTS','points']].map(([stat,key]) => {
     const top = [...totals.entries()].sort((a,b)=>b[1][key]-a[1][key])[0];
-    return top ? {stat,value:top[1][key],player:playersById[top[0]] || 'Wildman'} : {stat,value:0,player:'TBD'};
+    return top ? {stat,value:top[1][key],player:playersById[top[0]] || 'TBD'} : {stat,value:0,player:'TBD'};
   });
 }
 
@@ -109,7 +109,7 @@ async function loadLiveData() {
     document.querySelectorAll('[data-live-opponent-score]').forEach(el => el.textContent = game?.opponent_score ?? 0);
     document.querySelectorAll('[data-live-period]').forEach(el => el.textContent = game?.period ? `P${game.period}` : '—');
     document.querySelectorAll('[data-live-clock]').forEach(el => el.textContent = game?.clock || '—');
-    document.querySelectorAll('[data-live-game-label]').forEach(el => el.textContent = game?.game_number ? `Game ${game.game_number}` : 'Next Wildman Game');
+    document.querySelectorAll('[data-live-game-label]').forEach(el => el.textContent = game?.game_number ? `Game ${game.game_number}` : 'Next Elitechel Game');
 
     const lineupMount = document.querySelector('[data-live-lineup]');
     if (lineupMount) {
@@ -129,7 +129,7 @@ async function loadLiveData() {
   } catch (err) {
     const updated = document.querySelector('[data-live-updated]');
     if (updated) updated.textContent = 'Live database temporarily unavailable';
-    console.warn('Wildman live center:', err);
+    console.warn('Elitechel live center:', err);
   }
 }
 

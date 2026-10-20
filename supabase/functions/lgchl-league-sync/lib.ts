@@ -157,3 +157,15 @@ export function isChallenge(status, body, headers) {
     ? /Just a moment|cf-chl|challenge-platform/i.test(body || '') || !!headers?.get?.('cf-mitigated')
     : false;
 }
+
+// Public game page header: "FINAL" (regulation), "F/OT" or "F/SO". Falls back to the period table
+// (a 4th period column means it went past regulation). Returns null when the page is not a final.
+export function parseGameDecision(html) {
+  const s = String(html);
+  const head = /lg_main_header_total[^>]*>\s*<span[^>]*>([^<]+)<\/span>/i.exec(s);
+  const label = head ? text(head[1]).toUpperCase().replace(/\s+/g, '') : '';
+  if (label === 'FINAL' || label === 'F') return 'REG';
+  if (/^F(INAL)?\/?SO$/.test(label)) return 'SO';
+  if (/^F(INAL)?\/?OT$/.test(label)) return 'OT';
+  return null;
+}

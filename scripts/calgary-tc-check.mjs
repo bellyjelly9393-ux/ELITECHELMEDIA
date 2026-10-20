@@ -5,7 +5,7 @@
 import fs from 'node:fs';
 import { ROSTER_URL, parseRosters } from '../lib/opponent-refresh.mjs';
 import { calgaryRows, reconcile, insertSql } from '../lib/calgary-roster.mjs';
-const res = await fetch(ROSTER_URL, {headers: {'User-Agent': 'Wildman-Hockey-Esports/1.0 (Calgary roster check; manual)', Accept: 'text/html'}});
+const res = await fetch(ROSTER_URL, {headers: {'User-Agent': 'Elitechel-Media-Esports/1.0 (Calgary roster check; manual)', Accept: 'text/html'}});
 if (!res.ok) throw new Error('LG roster HTTP ' + res.status);
 const lg = calgaryRows(parseRosters(await res.text()));
 for (const cls of ['active_roster', 'training_camp']) {

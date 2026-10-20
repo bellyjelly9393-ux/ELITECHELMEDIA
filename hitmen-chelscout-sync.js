@@ -27,7 +27,7 @@
         var all=function(s){return Array.from(document.querySelectorAll(s)).map(function(x){return clean(x.innerText);}).filter(Boolean);};
         var hero=document.querySelector('.hero-name');
         if(!hero){
-          alert('This page does not contain a completed ChelScout player report yet. Run a normal scout first, then use Send to Wildman.');
+          alert('This page does not contain a completed ChelScout player report yet. Run a normal scout first, then use Send to Elitechel.');
           return;
         }
 
@@ -129,7 +129,7 @@
         };
 
         var w=window.open('about:blank','_blank');
-        if(!w){alert('Allow popups once, then tap Send to Wildman again.');return;}
+        if(!w){alert('Allow popups once, then tap Send to Elitechel again.');return;}
         w.name='WILDMAN_CHELSCOUT:'+JSON.stringify(payload);
         w.location='https://wildmanhockey-esportshub.vercel.app/hitmen-workspace.html#chelscout-sync';
       }catch(e){
@@ -142,7 +142,7 @@
   async function copyBookmark(){
     try{
       await navigator.clipboard.writeText(bookmarklet());
-      show('Copied. Save it as a browser bookmark named “Send to Wildman”. Use it after a normal ChelScout player report finishes loading. The current report will be copied into that player’s Calgary dossier.','COPIED');
+      show('Copied. Save it as a browser bookmark named “Send to Elitechel”. Use it after a normal ChelScout player report finishes loading. The current report will be copied into that player’s Calgary dossier.','COPIED');
     }catch(e){
       show('Clipboard access was blocked. Use a browser that allows copying bookmark URLs, then try again.','COPY BLOCKED');
     }
@@ -181,7 +181,7 @@
   async function consume(){
     if(location.hash!=='#chelscout-sync'||!String(window.name||'').startsWith(PREFIX))return;
     if(!db()||!state().user){
-      show('ChelScout report received. Sign into Wildman management and this tab will finish the import.','WAITING');
+      show('ChelScout report received. Sign into Elitechel management and this tab will finish the import.','WAITING');
       return;
     }
 

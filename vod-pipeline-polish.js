@@ -61,7 +61,7 @@
       const d=await fetchReview(true); if(!d?.review)throw new Error('Select a VOD review first.');
       const r=d.review;
       const lines=[
-        `WILDMAN WRITE-UP PACKET`,
+        `ELITECHEL WRITE-UP PACKET`,
         `Title: ${r.title||'Game Review'}`,
         `Opponent: ${r.opponent_label||'Not labeled'}`,
         `Type: ${String(r.game_type||'review').replaceAll('_',' ')}`,

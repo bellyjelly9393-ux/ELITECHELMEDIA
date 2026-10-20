@@ -92,7 +92,7 @@ body.hitmen-management{
   width:42px;
   height:42px;
   border-radius:11px;
-  background:url("assets/wildman/logo.webp") center/cover no-repeat !important;
+  background:url("assets/brand/ecm-crest.webp") center/contain no-repeat !important;
   border:1px solid rgba(193,163,255,.4) !important;
   box-shadow:0 0 28px rgba(215,169,66,.24) !important;
   color:transparent !important;

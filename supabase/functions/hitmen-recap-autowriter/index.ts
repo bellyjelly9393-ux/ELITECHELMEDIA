@@ -11,7 +11,7 @@ import { composeRecap } from './compose.mjs';
 import { buildEvidence } from './evidence.mjs';
 import { withScheduleName } from './names.mjs';
 
-const UA = 'Wildman-Hockey-Esports/1.0 (Hitmen recap writer; one request at a time)';
+const UA = 'Elitechel-Media-Esports/1.0 (Hitmen recap writer; one request at a time)';
 const PAUSE_MS = 1500;
 const CALGARY = 412;
 const HITMEN_TEAM = 'b0bcbdda-da9d-419d-8f61-b34937966d49';

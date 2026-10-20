@@ -352,7 +352,7 @@
       <section class="hmu-read-card">
         <div class="eyebrow">THE SHAPE OF THIS FIVE</div>
         ${ps.length?svgRadar(rd.labels,rd.values):'<div class="hmu-empty">Fill the unit to generate a line shape.</div>'}
-        <small class="hmu-read-note">0–100 values are Wildman projections from imported performance, role/rank evidence and current scouting data. Missing measures are clearly projection-weighted rather than presented as measured fact.</small>
+        <small class="hmu-read-note">0–100 values are Elitechel projections from imported performance, role/rank evidence and current scouting data. Missing measures are clearly projection-weighted rather than presented as measured fact.</small>
       </section>
       <section class="hmu-read-card"><div class="eyebrow">WHAT DRIVES IT</div>${driverRows(ps)}</section>
       <section class="hmu-read-card"><div class="eyebrow">TOGETHER ON ICE · RECEIPTS</div><div class="hmu-receipts">${receipts(ps)}</div></section>
@@ -386,7 +386,7 @@
     state.units=units;
     const gs=state.candidates.filter(c=>c.pos==='G').sort((a,b)=>b.metrics.overall-a.metrics.overall).slice(0,2);
     state.goalies=gs.map(g=>g.key);
-    renderAll();status('Suggested lines built from position fit + Wildman overall projection. Review before saving.');
+    renderAll();status('Suggested lines built from position fit + Elitechel overall projection. Review before saving.');
   }
 
   async function savePlan(){

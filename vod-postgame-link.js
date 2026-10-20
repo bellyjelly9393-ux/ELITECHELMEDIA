@@ -14,7 +14,7 @@
   function install(){
     const visual=document.getElementById('vodPipelineVisual');if(!visual||document.getElementById('vodPostgameHandoff'))return;
     const box=document.createElement('div');box.id='vodPostgameHandoff';box.className='vod-handoff-card';
-    box.innerHTML=`<div><small>FINAL HANDOFF</small><strong id="vodHandoffTitle">Checking game connection…</strong><span id="vodHandoffText">Wildman will tell you what happens after the film review.</span></div><a id="vodHandoffBtn" class="small-btn" href="postgame-desk.html" style="display:none">Open Postgame Desk</a>`;
+    box.innerHTML=`<div><small>FINAL HANDOFF</small><strong id="vodHandoffTitle">Checking game connection…</strong><span id="vodHandoffText">Elitechel will tell you what happens after the film review.</span></div><a id="vodHandoffBtn" class="small-btn" href="postgame-desk.html" style="display:none">Open Postgame Desk</a>`;
     visual.appendChild(box);refresh();
   }
 

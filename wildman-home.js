@@ -42,10 +42,10 @@
       if (!valid.length) { $('broadcast-status').textContent = 'No public channels assigned yet · Multiview is open'; return; }
       $('broadcast-status').textContent = 'Live across LGCHL, tournaments and more · ' + valid.length + ' channel' + (valid.length === 1 ? '' : 's') + ' configured';
       const prov = s => { const h = new URL(s.url).hostname; return h.includes('twitch') ? ['Twitch', '145,70,255'] : ['YouTube', '230,30,30']; };
-      const icon = s => /hitmen|calgary|cgy/i.test((s.display_label || '') + ' ' + (s.metadata?.channel_key || '')) ? 'assets/lgchl/s55/team412.png' : 'assets/wildman/home/wildman-crest.webp';
+      const icon = s => /hitmen|calgary|cgy/i.test((s.display_label || '') + ' ' + (s.metadata?.channel_key || '')) ? 'assets/lgchl/s55/team412.png' : 'assets/brand/ecm-crest.webp';
       rail.innerHTML = valid.map(s => { const [p, c] = prov(s), ic = icon(s);
         return '<a class="tile card tinted" href="game-center.html?channel=' + encodeURIComponent(s.metadata?.channel_key || 'hitmen') + '" style="--tc:' + c + '"><span class="wm" aria-hidden="true" style="--logo:url(\'' + ic + '\')"></span><span class="tile-ic"><img src="' + ic + '" width="48" height="48" alt=""></span><span class="tile-txt"><b>' + esc(s.display_label || 'Network broadcast') + '</b><small>' + p + ' · channel ready</small></span><span class="go" aria-hidden="true">→</span></a>'; }).join('') +
-        '<a class="tile card tinted" href="multiview.html" style="--tc:227,181,74"><span class="wm" aria-hidden="true" style="--logo:url(\'assets/wildman/home/wildman-crest.webp\')"></span><span class="tile-ic"><img src="assets/wildman/home/wildman-crest.webp" width="48" height="48" alt=""></span><span class="tile-txt"><b>Build your multiview</b><small>Twitch + YouTube side by side</small></span><span class="go" aria-hidden="true">→</span></a>';
+        '<a class="tile card tinted" href="multiview.html" style="--tc:232,72,24"><span class="wm" aria-hidden="true" style="--logo:url(\'assets/brand/ecm-crest.webp\')"></span><span class="tile-ic"><img src="assets/brand/ecm-crest.webp" width="48" height="48" alt=""></span><span class="tile-txt"><b>Build your multiview</b><small>Twitch + YouTube side by side</small></span><span class="go" aria-hidden="true">→</span></a>';
     } catch { $('broadcast-status').textContent = 'Channel feed unavailable · Multiview remains available'; }
   }
 
@@ -148,7 +148,7 @@
       // power index
       const rank = [...latest.values()].filter(s => s.gp >= 5).map(s => ({ ...s, score: powerScore(s) })).sort((a, b) => b.score - a.score || b.pts - a.pts);
       $('power').innerHTML = rank.slice(0, 4).map((s, i) => '<div class="lrow' + (s.lg_team_id === CGY ? ' me' : '') + '" style="--pw:' + Math.max(8, Math.min(100, s.score)).toFixed(1) + '%"><i>' + (i + 1) + '</i>' + (logoImg(byId.get(s.lg_team_id), 'rl') || '<span></span>') + '<b>' + esc(byId.get(s.lg_team_id)?.name || 'Team ' + s.lg_team_id) + '</b><em>' + esc(s.w + '-' + s.l + '-' + s.otl) + '</em><strong>' + s.score.toFixed(1) + '</strong></div>').join('') || '<div class="lrow"><i>—</i><b>No qualifying standings yet</b><em></em><strong></strong></div>';
-      $('power-stamp').textContent = 'Wildman model · min 5 GP' + (snap.length ? ' · ' + fmtShort.format(new Date(snap[0].taken_at)) : '');
+      $('power-stamp').textContent = 'Elitechel model · min 5 GP' + (snap.length ? ' · ' + fmtShort.format(new Date(snap[0].taken_at)) : '');
     } catch {
       $('standings-stamp').textContent = 'Standings unavailable right now — try reloading.';
       $('nextName').textContent = 'Schedule unavailable';
@@ -236,7 +236,7 @@
     function size() {
       const r = cv.getBoundingClientRect(); W = r.width; H = r.height;
       cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = scene === 'arena' ? 70 : 30; parts = [];
+      const n = scene === 'embers' ? 90 : scene === 'arena' ? 70 : 30; parts = [];
       for (let i = 0; i < n; i++) parts.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.8 + .3, v: Math.random() * .35 + .08, a: Math.random() });
       draw(0);
     }
@@ -245,7 +245,7 @@
       for (const p of parts) {
         if (!reduce) { p.y -= p.v; p.x += Math.sin(t / 1000 + p.a * 6) * .15; if (p.y < -4) { p.y = H + 4; p.x = Math.random() * W; } }
         const al = .35 + .4 * Math.sin(t / 700 + p.a * 10);
-        ctx.fillStyle = scene === 'arena' ? 'rgba(255,214,120,' + al.toFixed(2) + ')' : 'rgba(200,220,255,' + (al * .6).toFixed(2) + ')';
+        ctx.fillStyle = scene === 'embers' ? (p.a > .55 ? 'rgba(255,128,48,' : 'rgba(255,206,110,') + al.toFixed(2) + ')' : scene === 'arena' ? 'rgba(255,214,120,' + al.toFixed(2) + ')' : 'rgba(200,220,255,' + (al * .6).toFixed(2) + ')';
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
       }
       ctx.globalCompositeOperation = 'source-over';
