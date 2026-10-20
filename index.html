@@ -24,6 +24,8 @@
 <link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="live-hub-home-nav.css?v=20261019">
 <link rel="stylesheet" href="ecm-home.css?v=20261019c">
+<link rel="stylesheet" href="hitman-nightly.css?v=20261020-3">
+<script src="hitman-nightly.js?v=20261020-3" defer></script>
 <script src="wildman-home.js?v=20261019" defer></script>
 </head>
 <body>
@@ -99,24 +101,27 @@
       </nav>
   </section>
 
-  <section class="radio band" id="radio" aria-labelledby="radioTitle">
-    <div class="radio-in">
-      <div class="radio-copy">
-        <span class="sec-rule" aria-hidden="true"></span>
-        <p class="eyebrow radio-eye"><span class="radio-dot" aria-hidden="true"></span>Nightly show · LGCHL</p>
-        <h2 class="sec-title" id="radioTitle">Hitman <em>Radio</em></h2>
-        <p>The night in the LGCHL: finals from around the league, the best highlights and the standout players, from the Elitechel Media desk.</p>
-        <div class="radio-act">
-          <a class="btn btn-line btn-sm" href="lgchl-media.html#lgRadioSec"><span class="btxt">More episodes</span> <span class="arr">→</span></a>
-        </div>
-      </div>
-      <div class="radio-player card">
-        <video controls playsinline preload="none" poster="assets/video/hitman-radio-nightly-poster.webp" width="1280" height="720">
-          <source src="assets/video/hitman-radio-nightly.mp4" type="video/mp4">
-          Your browser can't play this video. <a href="assets/video/hitman-radio-nightly.mp4">Download it here</a>.
+  <span id="radio" class="hn-alias" aria-hidden="true"></span><!-- #radio kept for existing header/banner links. Hitman Radio nightly show. Episodes come from assets/hitman-radio/nightly/episodes.json (see README in that folder). -->
+  <section class="hn band" id="hitmanNightly" aria-labelledby="hnTitle" data-alias="radio" data-manifest="assets/hitman-radio/nightly/episodes.json">
+    <div class="hn-in">
+      <div class="hn-frame">
+        <video class="hn-video" controls playsinline preload="metadata" width="1280" height="720" aria-label="Hitman Radio nightly show video">
+          Your browser does not support HTML5 video.
         </video>
+        <p class="hn-credit" data-hn-credits hidden></p>
+        <p class="hn-credit" data-hn-fallback hidden>Episode list unavailable right now. <a href="/lgchl-media.html#lgRadioSec">Listen on LG Media</a>.</p>
+      </div>
+      <div class="hn-copy">
+        <div class="hn-head"><img class="hn-mark" src="assets/brand/elitechel-mark-48@2x.png" width="36" height="36" alt=""><span class="hn-brand">EliteChel Media</span></div>
+        <h2 class="hn-title" id="hnTitle">Hitman Radio <em>— Nightly Show</em></h2>
+        <span class="hn-date"><i aria-hidden="true"></i><span data-hn-date>Latest episode</span></span>
+        <p class="hn-headline" data-hn-headline></p>
+        <p>The night around the LGCHL, called by Hitman Radio.</p>
+        <div class="hn-ctas"><a class="hn-cta" href="/lgchl-media.html#lgRadioSec">Full LG Media radio player <span aria-hidden="true">→</span></a>
+        <a class="hn-cta hn-cta-ghost" data-hn-featured hidden href="#hitmanNightly">Latest episode</a></div>
       </div>
     </div>
+    <div class="hn-arch" data-hn-archive hidden></div>
   </section>
   <div class="ice-edge" aria-hidden="true"></div>
 
