@@ -14,8 +14,8 @@
     if (locked) {
       locked.hidden = allowed;
       locked.innerHTML = !state.user
-        ? "<b>Admin sign-in required.</b><p>Use the account panel above. Only Wildman accounts with the Admin role can open this console.</p>"
-        : "<b>Admin role required.</b><p>Your account is signed in, but it does not have Wildman Admin permission.</p>";
+        ? "<b>Admin sign-in required.</b><p>Use the account panel above. Only Elitechel accounts with the Admin role can open this console.</p>"
+        : "<b>Admin role required.</b><p>Your account is signed in, but it does not have Elitechel Admin permission.</p>";
     }
 
     if (status) {

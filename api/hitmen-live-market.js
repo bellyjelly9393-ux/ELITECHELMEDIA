@@ -82,7 +82,7 @@ export default async function handler(req,res){
   }
   try{
     const upstream=await fetch(SOURCE,{
-      headers:{accept:'application/json','user-agent':'Wildman-Hockey-Hitmen-Market/1.0'},
+      headers:{accept:'application/json','user-agent':'Elitechel-Media-Hitmen-Market/1.0'},
       redirect:'follow',
       signal:AbortSignal.timeout(20000)
     });

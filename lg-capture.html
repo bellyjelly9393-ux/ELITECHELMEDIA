@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#09070c">
-<meta name="description" content="Wildman Hockey browser bridge for LeagueGaming Public Logs.">
-<title>LG Browser Capture | Wildman Hockey</title>
+<meta name="description" content="Elitechel Media browser bridge for LeagueGaming Public Logs.">
+<title>LG Browser Capture | Elitechel Media</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="hub.css">
 <link rel="stylesheet" href="wildman.css">
@@ -14,22 +14,22 @@
 </head>
 <body class="wildman-site">
 <header class="site-header">
-<a class="brand" href="index.html"><span class="wm-brand-mark">W</span><span class="brand-copy wm-brand-copy">WILDMAN HOCKEY<br><b>LG BROWSER BRIDGE</b></span></a>
-<nav class="main-nav"><a href="pro-series.html">Pro Series</a><a href="tournament-control.html">Tournament Control</a></nav>
+<a class="brand" href="index.html"><span class="wm-brand-mark">E</span><span class="brand-copy wm-brand-copy">ELITECHEL MEDIA<br><b>LG BROWSER BRIDGE</b></span></a>
+<nav class="main-nav"><a href="tournament-control.html">Tournament Control</a></nav>
 </header>
 <main>
 <section class="section-shell ops-hero">
 <div class="eyebrow">LEAGUEGAMING PUBLIC LOG BRIDGE</div>
 <h1>ONE CLICK.<br><span class="wm-green">NO COPY/PASTE.</span></h1>
-<p>This bookmark runs only when you click it on LeagueGaming. You can run it directly from a normal LG game page. It uses that game ID to request the matching Public Log inside your already-open LG browser session, then forwards only the public log text to Wildman Tournament Control. It does not send your LG cookies, password or session tokens to Wildman.</p>
+<p>This bookmark runs only when you click it on LeagueGaming. You can run it directly from a normal LG game page. It uses that game ID to request the matching Public Log inside your already-open LG browser session, then forwards only the public log text to Elitechel Tournament Control. It does not send your LG cookies, password or session tokens to Elitechel.</p>
 </section>
 <section class="section-shell section-block">
 <div class="control-card">
 <div class="eyebrow">INSTALL ONCE</div>
-<h3>Wildman LG Capture</h3>
+<h3>Elitechel LG Capture</h3>
 <p>Drag the button below onto your browser bookmarks bar. If dragging is awkward, use Copy Bookmarklet and create a bookmark manually with the copied text as its address.</p>
 <div class="control-actions" style="margin-top:14px">
-<a id="lgBookmarklet" class="small-btn primary" href="#">Wildman LG Capture</a>
+<a id="lgBookmarklet" class="small-btn primary" href="#">Elitechel LG Capture</a>
 <button id="copyLgBookmarklet" class="small-btn" type="button">Copy Bookmarklet</button>
 <a class="small-btn" href="tournament-control.html">Tournament Control</a>
 </div>
@@ -39,10 +39,10 @@
 <section class="section-shell section-block">
 <div class="control-card">
 <div class="eyebrow">SCHEDULE + LIVE STREAMS</div>
-<h3>Wildman LG Schedule Capture</h3>
+<h3>Elitechel LG Schedule Capture</h3>
 <p>Use this on the Pro Series schedule page or LG Streams page. It collects visible matchup team IDs, game times, LIVE state and attached Twitch, YouTube or Kick links.</p>
 <div class="control-actions" style="margin-top:14px">
-<a id="lgScheduleBookmarklet" class="small-btn primary" href="#">Wildman Schedule + Streams</a>
+<a id="lgScheduleBookmarklet" class="small-btn primary" href="#">Elitechel Schedule + Streams</a>
 <button id="copyLgScheduleBookmarklet" class="small-btn" type="button">Copy Schedule Capture</button>
 <a class="small-btn" href="tournament-control.html">Tournament Control</a>
 </div>
@@ -52,29 +52,29 @@
 <section class="section-shell section-block" id="authenticatedSync">
 <div class="control-card">
 <div class="eyebrow">AUTHENTICATED LEAGUE SYNC · 403 FALLBACK</div>
-<h3>Wildman Auth Sync</h3>
-<p>Use this when LeagueGaming blocks a direct server refresh. Sign into Wildman below, open the full LeagueGaming page while you are signed into LG, then click the bookmark. The bridge strips forms and sensitive browser state and sends only the hockey page content needed for parsing. Your LG cookie, password and session token never leave LeagueGaming.</p>
+<h3>Elitechel Auth Sync</h3>
+<p>Use this when LeagueGaming blocks a direct server refresh. Sign into Elitechel below, open the full LeagueGaming page while you are signed into LG, then click the bookmark. The bridge strips forms and sensitive browser state and sends only the hockey page content needed for parsing. Your LG cookie, password and session token never leave LeagueGaming.</p>
 <section id="accountPanel" class="panel account-panel" style="margin-top:14px"></section>
 <div class="control-actions" style="margin-top:14px">
-<a id="lgAuthSyncBookmarklet" class="small-btn primary" href="#">Wildman Auth Sync</a>
+<a id="lgAuthSyncBookmarklet" class="small-btn primary" href="#">Elitechel Auth Sync</a>
 <button id="copyLgAuthSync" class="small-btn" type="button">Copy Auth Sync Bookmark</button>
 <a id="openLgRoster" class="small-btn" href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=roster&leagueid=39&seasonid=55" target="_blank" rel="noopener">Open LGCHL S55 Roster</a>
 </div>
 <p id="authSyncMessage" class="control-message"></p>
 <div id="authSyncStatus" class="empty-state">Waiting for an authenticated LeagueGaming capture…</div>
-<p class="control-message">Roster pages are applied immediately after validation. Weekly Lines and transaction pages are captured into a review-safe staging queue until their exact LG page structure has been verified, so Wildman does not invent trades or line changes from ambiguous text.</p>
+<p class="control-message">Roster pages are applied immediately after validation. Weekly Lines and transaction pages are captured into a review-safe staging queue until their exact LG page structure has been verified, so Elitechel does not invent trades or line changes from ambiguous text.</p>
 </div>
 </section>
 <section class="section-shell section-block">
 <div class="control-card">
 <div class="eyebrow">HOW TO USE IT</div>
 <h3>Capture a Public Log</h3>
-<p>Open the normal LeagueGaming game page, like a URL ending in <b>page=game&amp;gameid=919675</b>, then click <b>Wildman LG Capture</b>. The bookmark finds that game's Public Log in your browser session, sends the public stats to Wildman, and opens Tournament Control with the log already loaded.</p>
+<p>Open the normal LeagueGaming game page, like a URL ending in <b>page=game&amp;gameid=919675</b>, then click <b>Elitechel LG Capture</b>. The bookmark finds that game's Public Log in your browser session, sends the public stats to Elitechel, and opens Tournament Control with the log already loaded.</p>
 <div id="bridgeStatus" class="empty-state">Waiting for a LeagueGaming capture…</div>
 </div>
 </section>
 </main>
-<footer><div class="section-shell footer-inner"><div><b>WILDMAN LG BROWSER BRIDGE</b><span>Public log text only · No LG credentials stored</span></div></div></footer>
+<footer><div class="section-shell footer-inner"><div><b>ELITECHEL LG BROWSER BRIDGE</b><span>Public log text only · No LG credentials stored</span></div></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script src="backend.js"></script>
 <script src="lg-capture.js"></script>

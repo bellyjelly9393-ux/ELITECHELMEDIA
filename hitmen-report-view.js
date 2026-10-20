@@ -133,7 +133,7 @@ function vodSummary(vods,game,report){
 function renderReport(report,game,vods,v){
  setHero(report,game,v);
  $('hrvReportTitle').textContent='Full scouting report';
- $('hrvReportMeta').textContent=report?fmt(report.created_at)+' · '+(report.model||'Wildman Hockey Ops')+(report.evidence_summary?.approved===true?' · Approved':' · Management view'):'';
+ $('hrvReportMeta').textContent=report?fmt(report.created_at)+' · '+(report.model||'Elitechel Hockey Ops')+(report.evidence_summary?.approved===true?' · Approved':' · Management view'):'';
  if(!report){
   $('hrvReportBody').innerHTML='<div class="hrv-na"><b>REPORT NOT AVAILABLE</b>'+(v.mgmt?'No pregame report is attached to this game yet.':'The full scouting report has not been approved for player view yet.')+'</div>';
  }else{

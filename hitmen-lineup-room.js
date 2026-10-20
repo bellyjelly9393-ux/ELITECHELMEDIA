@@ -157,7 +157,7 @@ async function analyze(){
 async function saveReport(){
  if(!writable()||!S.lastAnalysis)return;
  const meta=S.lastAnalysisMeta||{},uid=ST().user?.id;
- const payload={team_id:TEAM,season:SEASON,opponent_name:meta.opponent||E('lineupOpponent').value,scheduled_game_id:meta.game?.id||currentGame()?.id||null,model:meta.model||'Wildman Hockey Ops',report:S.lastAnalysis,evidence_summary:{coverage:meta.coverage||{},source_ids:(meta.sources||[]).map(s=>s.id),lineup_id:S.current,lineup_slots:S.slots},created_by:uid};
+ const payload={team_id:TEAM,season:SEASON,opponent_name:meta.opponent||E('lineupOpponent').value,scheduled_game_id:meta.game?.id||currentGame()?.id||null,model:meta.model||'Elitechel Hockey Ops',report:S.lastAnalysis,evidence_summary:{coverage:meta.coverage||{},source_ids:(meta.sources||[]).map(s=>s.id),lineup_id:S.current,lineup_slots:S.slots},created_by:uid};
  const r=await DB().from('hitmen_opponent_pregame_reports').insert(payload).select('id').single();
  if(r.error)return msg(r.error.message,true);E('savePregameReport').disabled=true;msg('Pregame report saved to Calgary opponent intelligence.');updateBattleLink();
 }

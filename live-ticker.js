@@ -1,4 +1,4 @@
-/*! Wildman Hockey · site-wide live ticker (self-contained).
+/*! Elitechel Media · site-wide live ticker (self-contained).
  * Drop-in: <script src="/live-ticker.js" defer></script>
  * Two independent feeds, rendered Hitmen-first:
  *   1. Calgary Hitmen  /api/live-ticker   (record, streak, next game, LIVE window, results, upcoming)

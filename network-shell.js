@@ -29,7 +29,7 @@
     'academy.html':'academy.html','academy-training.html':'academy.html',
     'signup.html':'interest.html','interest.html':'interest.html','lgchl-leaders.html':'lgchl-leaders.html',
     'management.html':'management.html',
-    'wildman-media.html':'wildman-media.html','hitmen-media.html':'wildman-media.html','media.html':'wildman-media.html','lgchl-media.html':'wildman-media.html'
+    'hitmen-media.html':'hitmen-media.html','lgchl-media.html':'hitmen-media.html'
   };
   const activePath = groups[path] || path;
 
@@ -46,30 +46,29 @@
     const header = document.querySelector('.site-header');
     if (header) {
       header.innerHTML = `
-        <a class="brand" href="index.html" aria-label="Wildman Hockey Esports Network home">
-          <span class="wm-brand-mark">W</span>
-          <span class="brand-copy wm-brand-copy">WILDMAN HOCKEY<br><b>ESPORTS NETWORK</b></span>
+        <a class="brand" href="index.html" aria-label="Elitechel Media home">
+          <span class="wm-brand-mark">E</span>
+          <span class="brand-copy wm-brand-copy">ELITECHEL<br><b>MEDIA</b></span>
         </a>
         <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
         <nav class="main-nav">
           ${simpleLink('index.html','Home')}
-          ${simpleLink('team.html','Wildman')}
-          ${dropdown('LGCHL Live Hub','esports-hub.html',[
-            ['esports-hub.html#lgchl','LGCHL Games','Public league broadcasts and multiview'],
+          ${dropdown('Live Hub','esports-hub.html',[
+            ['esports-hub.html#lgchl','LGCHL Games','Public league broadcasts'],
             ['esports-hub.html#hitman','Hitman Live','Elitechel Media broadcast channel'],
-            ['esports-hub.html#lg3s','LG Threes','Public LG Threes streams']
+            ['esports-hub.html#lg3s','LG Threes','Public LG Threes streams'],
+            ['multiview.html','Multiview','Build your own multi-stream view']
           ])}
-          ${simpleLink('lgchl-leaders.html','LGCHL Stats')}
-          ${simpleLink('academy.html','Academy')}
-          ${simpleLink('interest.html','Competitions')}
-          ${dropdown('Media','wildman-media.html',[
-            ['wildman-media.html','Wildman Media','Tournaments + esports network'],
-            ['hitmen-media.html','Hitmen Media','LGCHL team coverage'],
-            ['lgchl-media.html','LGCHL Media','League news, stats and power rankings']
+          ${dropdown('Media','hitmen-media.html',[
+            ['hitmen-media.html','Hitmen Desk','Calgary Hitmen coverage'],
+            ['lgchl-media.html','LG CHL Desk','League news, stats and power rankings'],
+            ['lgchl-media.html#lgRadioSec','Hitman Radio','The Elitechel Media audio show']
           ])}
+          ${simpleLink('lgchl-leaders.html','Stats')}
+          ${simpleLink('interest.html?program=hut','HUT Tournament')}
           ${simpleLink('management.html','Management')}
         </nav>
-        <a class="wm-join-btn" href="interest.html">Register Interest</a>
+        <a class="wm-join-btn" href="interest.html?program=hut">Register Interest</a>
       `;
 
       header.querySelectorAll('.nav-menu-trigger').forEach(trigger=>{

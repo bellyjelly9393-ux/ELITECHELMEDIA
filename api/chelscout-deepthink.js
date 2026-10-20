@@ -7,7 +7,7 @@ const KEY='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
 const OPENROUTER_DEFAULT='https://openrouter.ai/api/v1';
 const {requestGrok}=require('../lib/grok-client.cjs');
 
-const SYSTEM=`You are WILDMAN HOCKEY OPS, the Calgary Hitmen private EA Sports NHL 6v6 regular-season head scout, video coach, opponent analyst, lineup strategist and hockey operations advisor.
+const SYSTEM=`You are ELITECHEL HOCKEY OPS, the Calgary Hitmen private EA Sports NHL 6v6 regular-season head scout, video coach, opponent analyst, lineup strategist and hockey operations advisor.
 
 CURRENT PHASE
 Season 55 rosters are assembled and regular-season games are beginning. Your primary job is opponent preparation, team/player scouting, lineup and matchup decisions, postgame diagnosis, and rematch planning. Pre-draft scouting and bidding data are historical/background context only unless management explicitly asks about transactions.
@@ -314,7 +314,7 @@ async function openRouter(text,mode,provider='claude'){
    'Authorization':'Bearer '+key,
    'Content-Type':'application/json',
    'HTTP-Referer':'https://wildmanhockey-elitechelmedia.app',
-   'X-Title':'Wildman Hockey · Calgary Hitmen Hockey Ops'
+   'X-Title':'Elitechel Media · Calgary Hitmen Hockey Ops'
   },
   body:JSON.stringify({
    model,
@@ -403,7 +403,7 @@ async function handler(req,res){
    sources:packet.sources,
    usage:output.usage,
    advisory:true,
-   engine:'Wildman Hockey Ops · Regular Season v3'
+   engine:'Elitechel Hockey Ops · Regular Season v3'
   });
  }catch(e){
   return res.status(e.status||502).json({error:e.status?e.message:'Analysis is unavailable. Retry shortly; no roster changes were made.'});

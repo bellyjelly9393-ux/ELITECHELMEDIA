@@ -4,7 +4,7 @@ import { TEAM, SEASON, ROSTER_URL, LG_STATS_URL, parseRosters, matchLeaguePlayer
 const db = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, {auth: {persistSession: false}});
 const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), {status, headers: {'Content-Type': 'application/json'}});
 async function checked(q: any) { const {data, error} = await q; if (error) throw new Error(error.message); return data; }
-const UA = 'Wildman-Hockey-Esports/1.0 (opponent scouting; scheduled twice weekly)';
+const UA = 'Elitechel-Media-Esports/1.0 (opponent scouting; scheduled twice weekly)';
 async function authenticatedRoster() {
   const snap = await checked(db.from('lg_auth_snapshots').select('captured_at,source_url').eq('capture_type','roster').eq('parse_status','parsed').eq('league','LGCHL').eq('season',SEASON).order('captured_at',{ascending:false}).limit(1).maybeSingle());
   if (!snap?.captured_at) return null;
@@ -35,7 +35,7 @@ async function lgRoster() {
   const captured = await authenticatedRoster();
   if (captured) return captured;
   const res = await fetch(ROSTER_URL, {headers: {'User-Agent': UA, Accept: 'text/html'}, signal: AbortSignal.timeout(20000)});
-  if (!res.ok) throw new Error('LG roster returned HTTP ' + res.status + '; use Wildman Auth Sync, previous roster retained');
+  if (!res.ok) throw new Error('LG roster returned HTTP ' + res.status + '; use Elitechel Auth Sync, previous roster retained');
   const html = await res.text();
   const players = parseRosters(html);
   return {status: 'complete', as_of: new Date().toISOString(), players, detail: {source: ROSTER_URL}};

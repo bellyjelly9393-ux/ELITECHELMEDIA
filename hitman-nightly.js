@@ -48,7 +48,7 @@
     if (featured && eps[0]) { featured.href = '#ep-' + eps[0].date; featured.dataset.ep = eps[0].date; featured.textContent = 'Back to latest (' + (eps[0].label || eps[0].date) + ')'; }
     var h = byHash(); play(h || defEp(), false);
     // Re-anchor after async page content shifts layout (keeps #id / #ep- links landing under the sticky menu).
-    if (h || location.hash === '#' + s.id) [0, 600, 1500].forEach(function (t) { setTimeout(function () { s.scrollIntoView({ block: 'start' }); }, t); });
+    if (h || location.hash === '#' + s.id || (s.dataset.alias && location.hash === '#' + s.dataset.alias)) [0, 600, 1500].forEach(function (t) { setTimeout(function () { s.scrollIntoView({ block: 'start' }); }, t); });
   }).catch(function () { var f = s.querySelector('[data-hn-fallback]'); if (f) f.hidden = false; });
  });
 })();

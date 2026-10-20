@@ -173,7 +173,7 @@
           results.innerHTML = `<div class="empty-state">Search for a team or tournament event. Public player directory results are temporarily hidden during the site cleanup.</div>`;
           return;
         }
-        const teamRows = state.teams.filter(t => lower(`${t.name} ${t.abbreviation}`).includes(q)).slice(0,8).map(t => ({type:"TEAM", title:t.name, meta:t.team_type === "external" ? "Tournament Team" : "Wildman", href:teamHref(t)}));
+        const teamRows = state.teams.filter(t => lower(`${t.name} ${t.abbreviation}`).includes(q)).slice(0,8).map(t => ({type:"TEAM", title:t.name, meta:t.team_type === "external" ? "Tournament Team" : "Elitechel", href:teamHref(t)}));
         const playerRows = directoryEntries().filter(entry => {
           const p=entry.player;
           return lower(`${p.gamertag} ${p.display_name} ${entry.pos} ${entry.team?.name||""}`).includes(q);
@@ -266,7 +266,7 @@
         <div class="wm-player-meta">
           <small>${esc(roleLabel(r.roster_role)||String(r.roster_role||"Player").toUpperCase())} · ${esc(r.position||p.primary_position||"TBD")}</small>
           <h3>${esc(p.gamertag)}</h3>
-          <p>${esc(current?.name||"Wildman Hockey")} · active competitive roster.</p>
+          <p>${esc(current?.name||"Elitechel Media")} · active competitive roster.</p>
           <span class="wm-captain-badge">Open Player Profile →</span>
         </div>
       </a>`;
@@ -303,14 +303,14 @@
         return `<a class="network-team-card pro-team-card ${team.is_owned ? "is-wildman" : ""}" href="${esc(teamHref(team))}">
           <div class="pro-team-crest">${teamMark(team)}<span>${team.logo_url ? "TEAM CREST" : "LOGO SLOT"}</span></div>
           <div class="pro-team-copy">
-            <small>${team.is_owned ? "WILDMAN ENTRY" : "PRO SERIES · SEASON 14"}</small>
+            <small>${team.is_owned ? "ELITECHEL ENTRY" : "PRO SERIES · SEASON 14"}</small>
             <h3>${esc(team.name)}</h3>
             <div class="pro-team-meta"><span>${roster.length} PLAYERS</span>${roles ? `<span>${esc(roles)}</span>` : ""}${entry.group_name ? `<span>${esc(entry.group_name)}</span>` : ""}</div>
             <div class="pro-roster-preview">${rosterPreview(roster)}</div>
             <b>OPEN TEAM HUB →</b>
           </div>
         </a>`;
-      }).join("")}</div>${eventTeams.length <= 1 ? `<div class="network-note">Only Wildman Hockey is loaded right now. The rest of the field will appear automatically after the official tournament roster import.</div>` : ""}` : `<div class="empty-state">Official tournament teams have not been imported yet.</div>`;
+      }).join("")}</div>${eventTeams.length <= 1 ? `<div class="network-note">Only Elitechel Media is loaded right now. The rest of the field will appear automatically after the official tournament roster import.</div>` : ""}` : `<div class="empty-state">Official tournament teams have not been imported yet.</div>`;
     }
 
     const scheduleRoot = document.getElementById("proSeriesSchedule");
@@ -383,16 +383,16 @@
     const currentEventEntry = eventEntries.map(x => eventById(x.event_id)).filter(Boolean).sort((a,b) => new Date(b.starts_on || 0) - new Date(a.starts_on || 0))[0];
     const roster = currentEventEntry ? rosterForTeam(team.id, currentEventEntry.id) : permanent;
     const games = state.games.filter(g => g.home_team_id === team.id || g.away_team_id === team.id);
-    document.title = `${team.name} | Wildman Esports Network`;
+    document.title = `${team.name} | Elitechel Media`;
     const managerRows = roster.filter(r => roleLabel(r.roster_role));
     const isProSeriesTeam = currentEventEntry?.slug === "road-to-pro-2026";
     root.innerHTML = `<a class="profile-back" href="pro-series.html">← Back to Pro Series</a>
       <div class="network-profile-head pro-team-profile-head">
         <div class="pro-profile-crest">${teamMark(team)}</div>
         <div>
-          <div class="eyebrow">${isProSeriesTeam ? "PRO SERIES TEAM · SEASON 14" : (team.is_owned ? "WILDMAN ORGANIZATION" : "ESPORTS TEAM")}</div>
+          <div class="eyebrow">${isProSeriesTeam ? "PRO SERIES TEAM · SEASON 14" : (team.is_owned ? "ELITECHEL ORGANIZATION" : "ESPORTS TEAM")}</div>
           <h1>${esc(team.name)}</h1>
-          <p>${esc(currentEventEntry?.name || (team.team_type === "academy" ? "Wildman development roster" : "Esports team profile"))}</p>
+          <p>${esc(currentEventEntry?.name || (team.team_type === "academy" ? "Elitechel development roster" : "Esports team profile"))}</p>
           <div class="pro-profile-badges"><span>${roster.length} ROSTERED</span>${managerRows.map(r => {
             const p = playerById(r.player_id);
             return `<span>${esc(roleLabel(r.roster_role))} · ${esc(p?.gamertag || "Player")}</span>`;
@@ -521,7 +521,7 @@
     const trackedNote = gp > tracked.length ? `${tracked.length} of ${gp} appearances currently have detailed EA/ChelStats box scores.` : `${tracked.length} detailed box score${tracked.length===1?"":"s"} connected.`;
     const sourceLabel = lower(currentStats?.source_provider).includes("leaguegaming") ? "LeagueGaming Season 14 profile totals" : "Tournament aggregate";
 
-    document.title = `${player.gamertag} | Wildman Esports Network`;
+    document.title = `${player.gamertag} | Elitechel Media`;
     root.innerHTML = `<a class="profile-back" href="${team ? esc(teamProfileHref(team)) : "players.html"}">← ${team ? "Back to "+esc(team.name) : "Back to Player Directory"}</a>
       <div class="player-dashboard-shell">
         <aside class="player-dashboard-side">
@@ -566,8 +566,8 @@
           <section class="player-panel" id="milestones"><div class="player-panel-head"><h3>SEASON MILESTONES</h3><span>Season 14</span></div><div class="player-milestones">${milestones}</div></section>
 
           <div class="player-dashboard-grid">
-            <section class="player-panel"><div class="player-panel-head"><h3>PLAYER NEWS</h3><span>Wildman Media</span></div>
-              <div class="player-news-empty"><strong>${esc(player.gamertag)}</strong><p>No published Wildman feature is attached yet. Game recaps and player features can populate this panel without inventing a headline for the sake of filling a box.</p></div>
+            <section class="player-panel"><div class="player-panel-head"><h3>PLAYER NEWS</h3><span>Elitechel Media</span></div>
+              <div class="player-news-empty"><strong>${esc(player.gamertag)}</strong><p>No published Elitechel feature is attached yet. Game recaps and player features can populate this panel without inventing a headline for the sake of filling a box.</p></div>
             </section>
             <section class="player-panel"><div class="player-panel-head"><h3>AROUND THE TEAM</h3><span>${esc(currentEvent?.name||"Current event")}</span></div>
               <div class="player-team-summary">${team ? teamMark(team):""}<div><strong>${esc(team?.name||"No team")}</strong><p>${teamStat?`${teamRecord} · ${num(teamStat.points)} PTS · ${num(teamStat.goals_for)} GF / ${num(teamStat.goals_against)} GA`:"Team totals pending."}</p><small>${esc(race||"")}${groupRank?` · Rank #${esc(groupRank)}`:""}</small></div></div>
@@ -598,7 +598,7 @@
         stream = `<iframe class="network-stream" src="https://player.twitch.tv/?channel=${encodeURIComponent(channel)}&parent=${encodeURIComponent(location.hostname)}" allowfullscreen title="Live Twitch stream"></iframe>`;
       } else stream = `<a class="ops-card" href="${esc(game.stream_url)}" target="_blank" rel="noopener"><small>Live Broadcast</small><h3>Open Stream</h3><p>${esc(game.broadcast_title || "Watch this matchup live")}</p><span class="ops-link">WATCH →</span></a>`;
     }
-    root.innerHTML = `<a class="profile-back" href="game-center.html">← Back to Game Center</a><div class="eyebrow">${esc(event?.name || "ESPORTS GAME")}</div><div class="live-scoreboard"><div><a href="${esc(teamHref(home))}">${teamMark(home)}<strong>${esc(home?.name || "TBD")}</strong></a></div><div class="live-score"><span>${game.status === "scheduled" ? "VS" : `${game.home_score || 0} - ${game.away_score || 0}`}</span><small>${esc(game.status.toUpperCase())} · ${esc(fmtDate(game.scheduled_at))}</small></div><div><a href="${esc(teamHref(away))}">${teamMark(away)}<strong>${esc(away?.name || "TBD")}</strong></a></div></div><div class="stream-shell">${stream}</div><div class="status-board" style="margin-top:18px"><div class="wm-stat"><div class="eyebrow">STAGE</div><strong>${esc(game.stage || "TBD")}</strong><span>${esc(game.round_label || "Tournament")}</span></div><div class="wm-stat"><div class="eyebrow">COMMENTARY</div><strong>${esc((game.commentary_status || "none").toUpperCase())}</strong><span>Wildman broadcast coverage status.</span></div><div class="wm-stat"><div class="eyebrow">STREAM</div><strong>${game.stream_url ? "LIVE LINK" : "TBD"}</strong><span>${esc(game.stream_provider || "Provider pending")}</span></div><div class="wm-stat"><div class="eyebrow">GAME PAGE</div><strong>PERMANENT</strong><span>Score, stream and stats archive stay here.</span></div></div>`;
+    root.innerHTML = `<a class="profile-back" href="game-center.html">← Back to Game Center</a><div class="eyebrow">${esc(event?.name || "ESPORTS GAME")}</div><div class="live-scoreboard"><div><a href="${esc(teamHref(home))}">${teamMark(home)}<strong>${esc(home?.name || "TBD")}</strong></a></div><div class="live-score"><span>${game.status === "scheduled" ? "VS" : `${game.home_score || 0} - ${game.away_score || 0}`}</span><small>${esc(game.status.toUpperCase())} · ${esc(fmtDate(game.scheduled_at))}</small></div><div><a href="${esc(teamHref(away))}">${teamMark(away)}<strong>${esc(away?.name || "TBD")}</strong></a></div></div><div class="stream-shell">${stream}</div><div class="status-board" style="margin-top:18px"><div class="wm-stat"><div class="eyebrow">STAGE</div><strong>${esc(game.stage || "TBD")}</strong><span>${esc(game.round_label || "Tournament")}</span></div><div class="wm-stat"><div class="eyebrow">COMMENTARY</div><strong>${esc((game.commentary_status || "none").toUpperCase())}</strong><span>Elitechel broadcast coverage status.</span></div><div class="wm-stat"><div class="eyebrow">STREAM</div><strong>${game.stream_url ? "LIVE LINK" : "TBD"}</strong><span>${esc(game.stream_provider || "Provider pending")}</span></div><div class="wm-stat"><div class="eyebrow">GAME PAGE</div><strong>PERMANENT</strong><span>Score, stream and stats archive stay here.</span></div></div>`;
   }
 
   async function load() {

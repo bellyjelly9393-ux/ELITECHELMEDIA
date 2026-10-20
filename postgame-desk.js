@@ -193,7 +193,7 @@
       desk_title: draftReport(game).desk_title,
       desk_banter: draftReport(game).desk_banter,
       key_stats: draftReport(game).key_stats,
-      source_notes: "Auto-published by Wildman Postgame Media because tournament automation config has auto_publish_reports enabled.",
+      source_notes: "Auto-published by Elitechel Postgame Media because tournament automation config has auto_publish_reports enabled.",
       created_by: user?.id || null,
       updated_by: user?.id || null,
       published_at: new Date().toISOString(),
@@ -296,7 +296,7 @@
     }
     const job = S.mediaJobs.find((x) => x.esports_game_id === game.id);
     if (!job) {
-      panel.innerHTML = '<div class="eyebrow">POSTGAME MEDIA AUTOMATION</div><h3>Waiting for Final</h3><p>Once this game is Final, Wildman queues the recap/article/social package automatically.</p>';
+      panel.innerHTML = '<div class="eyebrow">POSTGAME MEDIA AUTOMATION</div><h3>Waiting for Final</h3><p>Once this game is Final, Elitechel queues the recap/article/social package automatically.</p>';
       return;
     }
     const social = job.social_copy?.short || "";
@@ -392,7 +392,7 @@
         S.lg = null; renderLgPreview();
         const bridge = `lg-capture.html?mode=authsync&source=game&lg=${encodeURIComponent(url)}&return=postgame-desk.html`;
         const preview = $("lgPreview");
-        if (preview) preview.innerHTML = `<div class="network-note"><strong>LeagueGaming blocked the direct server request.</strong><br>Use the authenticated browser bridge from your signed-in LG tab. Wildman receives only the captured hockey page, never your LG cookie or password.<div class="report-actions" style="margin-top:10px"><a class="small-btn primary" href="${esc(bridge)}" target="_blank" rel="noopener">Open Authenticated LG Sync</a><a class="small-btn" href="${esc(url)}" target="_blank" rel="noopener">Open LG Page</a></div></div>`;
+        if (preview) preview.innerHTML = `<div class="network-note"><strong>LeagueGaming blocked the direct server request.</strong><br>Use the authenticated browser bridge from your signed-in LG tab. Elitechel receives only the captured hockey page, never your LG cookie or password.<div class="report-actions" style="margin-top:10px"><a class="small-btn primary" href="${esc(bridge)}" target="_blank" rel="noopener">Open Authenticated LG Sync</a><a class="small-btn" href="${esc(url)}" target="_blank" rel="noopener">Open LG Page</a></div></div>`;
         message("lgPullMessage", `LG returned ${response.status}. Authenticated browser sync is required for this page.`, true);
         return;
       }

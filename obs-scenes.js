@@ -1,4 +1,4 @@
-/* Wildman / EliteChel OBS scene registry.
+/* Elitechel / EliteChel OBS scene registry.
    Add new scene presets here. Studio buttons and overlay behavior infer from this registry. */
 (function(){
   'use strict';

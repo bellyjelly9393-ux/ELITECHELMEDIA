@@ -86,7 +86,7 @@
       $('practiceLiveStatus').textContent=g.status.toUpperCase();
       $('practiceStreamProvider').value=g.stream_provider||'twitch';
       $('practiceStreamUrl').value=g.stream_url||'';
-      $('practiceBroadcastTitle').value=g.broadcast_title||'Wildman Practice Night';
+      $('practiceBroadcastTitle').value=g.broadcast_title||'Elitechel Practice Night';
       $('openPracticeStream').href=g.stream_url||'#';
       streamEmbed(g);
     }
@@ -255,7 +255,7 @@
     const url=$('practiceStreamUrl').value.trim();if(!url){message('practiceStreamMessage','Paste a stream URL first.',true);return;}
     try{new URL(url);}catch{message('practiceStreamMessage','That does not look like a valid URL.',true);return;}
     try{
-      const provider=$('practiceStreamProvider').value,title=$('practiceBroadcastTitle').value.trim()||'Wildman Practice Night';
+      const provider=$('practiceStreamProvider').value,title=$('practiceBroadcastTitle').value.trim()||'Elitechel Practice Night';
       const r=await db.from('esports_games').update({stream_provider:provider,stream_url:url,broadcast_title:title,updated_at:new Date().toISOString()}).eq('event_id',S.event.id);if(r.error)throw r.error;
       message('practiceStreamMessage','Stream attached to all sandbox games.');log(`Practice stream attached to all sandbox games (${provider}).`);await loadData();
     }catch(e){message('practiceStreamMessage',e.message||'Could not attach stream.',true);}

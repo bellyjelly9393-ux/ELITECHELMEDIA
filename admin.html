@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#09070c">
-  <meta name="description" content="Private Wildman Hockey administrator console.">
-  <title>Admin Console | Wildman Hockey</title>
+  <meta name="description" content="Private Elitechel Media administrator console.">
+  <title>Admin Console | Elitechel Media</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="hub.css">
   <link rel="stylesheet" href="wildman.css">
@@ -15,16 +15,16 @@
 </head>
 <body class="wildman-site management-protected admin-protected wm-page-management">
   <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Wildman Hockey home">
-      <span class="wm-brand-mark">W</span>
-      <span class="brand-copy wm-brand-copy">WILDMAN HOCKEY<br><b>ADMINISTRATION</b></span>
+    <a class="brand" href="index.html" aria-label="Elitechel Media home">
+      <span class="wm-brand-mark">E</span>
+      <span class="brand-copy wm-brand-copy">ELITECHEL MEDIA<br><b>ADMINISTRATION</b></span>
     </a>
     <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
     <nav class="main-nav">
       <a href="index.html">Public Site</a>
       <a href="management.html">Management</a>
       <a href="tournament-control.html">Tournament Ops</a>
-      <a href="scouting-lab.html">Player Intelligence</a>
+      
       <a href="vod-lab.html">VOD Lab</a>
       <a class="active-nav" href="admin.html">Admin</a>
     </nav>
@@ -33,10 +33,10 @@
   <main>
     <section class="wm-segment-header">
       <div class="wm-segment-header-inner">
-        <span class="wm-segment-badge">PRIVATE · WILDMAN ADMINISTRATION</span>
+        <span class="wm-segment-badge">PRIVATE · ELITECHEL ADMINISTRATION</span>
         <div class="eyebrow">SYSTEM CONTROL · ACCOUNTS · PERMISSIONS</div>
         <h1>ADMIN<br>CONSOLE.</h1>
-        <p>The top-level Wildman control room for user accounts, roles, team access, tournament operations and the systems behind the public network.</p>
+        <p>The top-level Elitechel control room for user accounts, roles, team access, tournament operations and the systems behind the public network.</p>
       </div>
     </section>
 
@@ -46,18 +46,18 @@
         <div id="adminAccessStatus" class="status-pill">PRIVATE · ADMIN ONLY</div>
       </div>
       <section id="accountPanel" class="panel account-panel">
-        <div><div class="eyebrow">WILDMAN ACCOUNT</div><h3>Loading account…</h3></div>
+        <div><div class="eyebrow">ELITECHEL ACCOUNT</div><h3>Loading account…</h3></div>
       </section>
       <div id="adminLockedMessage" class="wm-card" style="margin-top:16px">
         <b>Admin sign-in required.</b>
-        <p>Only Wildman accounts with the Admin role can open this console.</p>
+        <p>Only Elitechel accounts with the Admin role can open this console.</p>
       </div>
     </section>
 
     <div data-admin-content hidden>
       <section class="section-shell section-block">
         <div class="section-heading">
-          <div><div class="eyebrow">WILDMAN SYSTEM CONTROL</div><h2>ADMIN COMMAND CENTER</h2></div>
+          <div><div class="eyebrow">ELITECHEL SYSTEM CONTROL</div><h2>ADMIN COMMAND CENTER</h2></div>
           <div class="status-pill">AUTHORIZED · ADMIN</div>
         </div>
 
@@ -65,7 +65,7 @@
           <div class="wm-stat"><div class="eyebrow">ACCESS</div><strong>ADMIN</strong><span>Top-level system role.</span></div>
           <div class="wm-stat"><div class="eyebrow">ACCOUNTS</div><strong>LIVE</strong><span>Roles and team assignments.</span></div>
           <div class="wm-stat"><div class="eyebrow">TOURNAMENT OPS</div><strong>READY</strong><span>Schedules, streams and results.</span></div>
-          <div class="wm-stat"><div class="eyebrow">NETWORK</div><strong>ONLINE</strong><span>Wildman public ecosystem.</span></div>
+          <div class="wm-stat"><div class="eyebrow">NETWORK</div><strong>ONLINE</strong><span>Elitechel public ecosystem.</span></div>
         </div>
         <section class="panel" style="margin-top:18px">
           <div class="section-heading">
@@ -86,7 +86,7 @@
           <a class="ops-card" data-primary-admin-only hidden href="#accountManager">
             <small>Primary Owner Only</small>
             <h3>User Administration</h3>
-            <p>Review Wildman accounts, change roles, assign team access and set temporary passwords.</p>
+            <p>Review Elitechel accounts, change roles, assign team access and set temporary passwords.</p>
             <span class="ops-link">MANAGE ACCOUNTS →</span>
           </a>
           <a class="ops-card" href="tournament-control.html">
@@ -101,12 +101,7 @@
             <p>Check series state, readiness, source health and game-night automation.</p>
             <span class="ops-link">OPEN OPERATOR →</span>
           </a>
-          <a class="ops-card" href="scouting-lab.html">
-            <small>Player Intelligence</small>
-            <h3>Scouting Database</h3>
-            <p>Open player intelligence, private notes, watchlists, scouting evidence and connected stats.</p>
-            <span class="ops-link">OPEN SCOUTING →</span>
-          </a>
+          
           <a class="ops-card" href="vod-lab.html">
             <small>Video Intelligence</small>
             <h3>VOD Pipeline</h3>
@@ -122,15 +117,10 @@
           <a class="ops-card wm-card-hitmen" href="hitmen-gm-ai.html">
             <small>Calgary Hitmen · Private Intelligence</small>
             <h3>GM MVP AI</h3>
-            <p>Ask roster, target, position and valuation questions against the Wildman Player Intelligence database.</p>
+            <p>Ask roster, target, position and valuation questions against the Elitechel Player Intelligence database.</p>
             <span class="ops-link">OPEN GM MVP AI →</span>
           </a>
-          <a class="ops-card" href="wildman-media.html">
-            <small>Public Media</small>
-            <h3>Wildman Media</h3>
-            <p>Review the public broadcast, story and postgame presentation.</p>
-            <span class="ops-link">OPEN MEDIA →</span>
-          </a>
+          
           <a class="ops-card" href="management.html">
             <small>Management Layer</small>
             <h3>Management Home</h3>
@@ -143,10 +133,10 @@
       <section id="accountManager" class="section-shell section-block" data-primary-admin-only hidden>
         <div class="section-heading">
           <div><div class="eyebrow">ROLE-BASED ACCESS CONTROL</div><h2>ACCOUNTS & TEAM ASSIGNMENTS</h2></div>
-          <a class="small-btn" href="signup.html">Open Signup Page</a>
+          
         </div>
         <div id="accountList" class="panel account-list">
-          <div class="empty-state wm-loading">Loading Wildman accounts…</div>
+          <div class="empty-state wm-loading">Loading Elitechel accounts…</div>
         </div>
       </section>
 
@@ -164,7 +154,7 @@
 
   <footer>
     <div class="section-shell footer-inner">
-      <div><b>WILDMAN ADMIN CONSOLE</b><span>Accounts · Permissions · Operations · Network Control</span></div>
+      <div><b>ELITECHEL ADMIN CONSOLE</b><span>Accounts · Permissions · Operations · Network Control</span></div>
       <p>Admin access only</p>
     </div>
   </footer>
