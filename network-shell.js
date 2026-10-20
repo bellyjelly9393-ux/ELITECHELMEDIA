@@ -55,7 +55,7 @@
           ${simpleLink('index.html','Home')}
           ${dropdown('Live Hub','esports-hub.html',[
             ['esports-hub.html#lgchl','LGCHL Games','Public league broadcasts'],
-            ['esports-hub.html#hitman','Hitman Live','Elitechel Media broadcast channel'],
+            ['esports-hub.html#hitman','Hitmen Live','Elitechel Media broadcast channel'],
             ['esports-hub.html#lg3s','LG Threes','Public LG Threes streams'],
             ['multiview.html','Multiview','Build your own multi-stream view']
           ])}
