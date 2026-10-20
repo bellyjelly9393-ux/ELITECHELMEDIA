@@ -62,7 +62,7 @@
           ${dropdown('Media','hitmen-media.html',[
             ['hitmen-media.html','Hitmen Desk','Calgary Hitmen coverage'],
             ['lgchl-media.html','LG CHL Desk','League news, stats and power rankings'],
-            ['lgchl-media.html#lgRadioSec','Hitman Radio','The Elitechel Media audio show']
+            ['lgchl-media.html#lgRadioSec','Hitmen Radio','The Elitechel Media video show']
           ])}
           ${simpleLink('lgchl-leaders.html','Stats')}
           ${simpleLink('interest.html?program=hut','HUT Tournament')}
