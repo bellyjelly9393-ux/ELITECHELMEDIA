@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#070708">
+  <meta name="robots" content="noindex,nofollow">
+  <title>VOD Archive | Elitechel Media</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="hub.css">
+  <link rel="stylesheet" href="wildman.css">
+  <link rel="stylesheet" href="management.css">
+  <link rel="stylesheet" href="broadcast-tokens.css">
+  <link rel="stylesheet" href="network-v2.css">
+  <link rel="stylesheet" href="vod-archive.css?v=20261020">
+</head>
+<body class="wildman-site management-protected">
+<header class="site-header">
+  <a class="brand" href="management.html"><span class="wm-brand-mark">E</span><span class="brand-copy wm-brand-copy">ELITECHEL MEDIA<br><b>PRIVATE VIDEO INTELLIGENCE</b></span></a>
+  <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+  <nav class="main-nav"><a href="management.html">Management</a><a href="hitmen-workspace.html">Hitmen</a><a href="operator-assistant.html">Operator</a><a href="vod-lab.html">VOD Lab</a><a href="vod-archive.html" aria-current="page">VOD Archive</a></nav>
+</header>
+<main>
+  <section class="section-shell section-block management-login-shell">
+    <div class="section-heading"><div><div class="eyebrow">PRIVATE VIDEO STORAGE</div><h2>VOD ARCHIVE</h2></div><div id="managementAccessStatus" class="status-pill">PRIVATE · STAFF ONLY</div></div>
+    <section id="accountPanel" class="panel account-panel"><div><div class="eyebrow">SECURE ACCESS</div><h3>Loading account…</h3></div></section>
+    <div id="managementLockedMessage" class="wm-card" style="margin-top:16px"><b>Staff sign-in required.</b><p>Archived game film is restricted to league staff and team management.</p></div>
+  </section>
+  <div data-management-content hidden>
+    <section class="va-shell">
+      <div class="va-hero">
+        <div class="eyebrow">FULL-GAME SOURCE FILM · PRIVATE BUCKET</div>
+        <h1>VOD <span>ARCHIVE</span></h1>
+        <p>Every downloaded source VOD, checksum-verified and held in private storage. Download links are signed per request and expire after 15 minutes.</p>
+      </div>
+      <div class="va-stats">
+        <div class="va-stat"><small>Files</small><b id="vaCount">0</b></div>
+        <div class="va-stat"><small>Stored</small><b id="vaSize">0.00 GB</b></div>
+        <div class="va-stat"><small>Verified</small><b id="vaVerified">0 / 0</b></div>
+        <div class="va-stat"><small>Linked reviews</small><b id="vaLinked">0</b></div>
+      </div>
+      <div class="va-toolbar">
+        <input id="vaSearch" type="search" placeholder="Search streamer, team, VOD id" aria-label="Search archive">
+        <select id="vaMonth" aria-label="Filter by month"><option value="">All months</option></select>
+        <span id="vaStatus" class="status-pill">Loading archive…</span>
+      </div>
+      <table class="va-table">
+        <thead><tr><th>Date</th><th>VOD</th><th>Teams</th><th>Length</th><th>Size</th><th></th></tr></thead>
+        <tbody id="vaRows"></tbody>
+      </table>
+    </section>
+  </div>
+</main>
+<footer><div class="section-shell footer-inner"><div><b>ELITECHEL VOD ARCHIVE</b><span>Private source film storage</span></div><p>Staff and management only</p></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="backend.js"></script>
+<script src="management-guard.js"></script>
+<script src="script.js?v=20261003-durable"></script>
+<script src="vod-archive.js?v=20261020"></script>
+</body>
+</html>

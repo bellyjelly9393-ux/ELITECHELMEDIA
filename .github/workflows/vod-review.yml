@@ -8,6 +8,8 @@ on:
       - 'hitmen-player-locker*'
       - 'api/chelscout-deepthink.js'
       - 'test-vod-*'
+      - 'api/vod-archive.js'
+      - 'api/_s3presign.js'
       - 'test-deep-scout.cjs'
       - 'hitmen-gm-ai*'
       - 'lib/grok-client.cjs'
@@ -25,6 +27,7 @@ jobs:
         with:
           node-version: '24'
       - run: node --test test-vod-review.cjs test-deep-scout.cjs
+      - run: node --test test-vod-archive.mjs
       - run: node test-grok.cjs && node test-grok-code.cjs
       - run: npm install --prefix /tmp/vod-browser playwright@1.56.1
       - run: /tmp/vod-browser/node_modules/.bin/playwright install --with-deps chromium

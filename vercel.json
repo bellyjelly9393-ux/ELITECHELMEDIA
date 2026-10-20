@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/vod-archive",
+      "destination": "/vod-archive.html"
+    },
+    {
       "source": "/hitmen-hub",
       "destination": "/hitmen-hq.html"
     },
