@@ -20,10 +20,10 @@
 <meta name="twitter:image" content="https://elitechelmedia.app/assets/brand/ecm-share.jpg">
 <link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="assets/brand/ecm-logo.webp" as="image">
+<link rel="preload" as="image" href="assets/brand/ecm-hero-banner.webp" imagesrcset="assets/brand/ecm-hero-banner-1280.webp 1280w, assets/brand/ecm-hero-banner.webp 2103w" imagesizes="100vw" media="(min-width: 761px)">
 <link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="live-hub-home-nav.css?v=20261019">
-<link rel="stylesheet" href="ecm-home.css?v=20261019">
+<link rel="stylesheet" href="ecm-home.css?v=20261019b">
 <script src="wildman-home.js?v=20261019" defer></script>
 </head>
 <body>
@@ -42,34 +42,39 @@
     </a>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="index.html" class="on" aria-current="page">Home</a>
-      <details class="home-live-menu"><summary>Live Hub <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="esports-hub.html#lgchl">LGCHL Games</a><a href="esports-hub.html#hitman">Hitman Live</a><a href="esports-hub.html#lg3s">LG Threes</a><a href="multiview.html">Multiview</a></div></details>
-      <details class="home-live-menu"><summary>Media <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="hitmen-media.html">Hitmen Desk</a><a href="lgchl-media.html">LG CHL Desk</a><a href="lgchl-media.html#lgRadioSec">Hitman Radio</a></div></details>
-      <a href="lgchl-leaders.html">Stats</a>
-      <a href="interest.html?program=hut">HUT Tournament</a>
-      <a href="management.html">Management</a>
+      <details class="home-live-menu"><summary>Leagues <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="lgchl-media.html">LGCHL</a><a href="esports-hub.html#lg3s">LG Threes</a><a href="lgchl-power.html">Power rankings</a></div></details>
+      <details class="home-live-menu"><summary>Player Stats <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="lgchl-leaders.html">League leaders</a><a href="lgchl-leaders.html?metric=points#lgPlayerBoard">Top 250 players</a></div></details>
+      <details class="home-live-menu"><summary>Scouting <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="#opponents">Who the Hitmen play</a><a href="lgchl-leaders.html#lgPlayerBoard">Player profiles</a><a href="hitmen-hq.html">Hitmen War Room</a></div></details>
+      <a href="interest.html?program=hut">Tournaments</a>
+      <details class="home-live-menu"><summary>Media <span aria-hidden="true">⌄</span></summary><div class="home-live-panel"><a href="hitmen-media.html">Hitmen Desk</a><a href="lgchl-media.html">LG CHL Desk</a><a href="hitmen-postgame.html">Postgame Desk</a></div></details>
+      <a href="#radio">Hitman Radio</a>
+      <a class="nav-watch-m" href="esports-hub.html">Watch now</a>
     </nav>
-    <a class="icon-btn search-btn" href="lgchl-leaders.html" aria-label="LGCHL stats"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+    <a class="icon-btn search-btn" href="lgchl-leaders.html#lgPlayerBoard" aria-label="Find a player"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+    <a class="watch-btn" href="esports-hub.html"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M10 7.5l6 4.5-6 4.5z" fill="#141008"/></svg><span>Watch now</span></a>
     <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
   </div>
 </header>
 
 <main id="top">
-  <section class="ecm-hero" aria-labelledby="ecmTitle">
-    <canvas data-scene="embers" aria-hidden="true"></canvas>
-    <div class="ecm-hero-in band">
-      <div class="ecm-id">
-        <img class="ecm-logo" src="assets/brand/ecm-logo.webp" width="520" height="514" alt="" fetchpriority="high">
-        <div class="ecm-copy">
-          <p class="eyebrow ecm-eye"><span>EA NHL</span><span>LGCHL</span><span>Season <b class="num">55</b></span></p>
-          <h1 class="ecm-word" id="ecmTitle"><span class="sr-only">Elitechel Media: </span><span class="w-steel">Every shift</span><span class="w-ember">Covered.</span></h1>
-          <p class="ecm-lede">League news, stats and power rankings. Every Calgary Hitmen game. Live broadcasts and Hitman Radio, all in one place.</p>
-          <div class="ecm-cta">
-            <a class="btn btn-gold" href="lgchl-media.html">Latest from the league <span class="arr">→</span></a>
-            <a class="btn btn-line" href="lgchl-media.html#lgRadioSec"><span class="btxt">Hitman Radio</span> <span class="arr">→</span></a>
-          </div>
-        </div>
-      </div>
-      <nav class="desks" aria-label="Elitechel Media desks">
+  <section class="ecm-banner" aria-labelledby="ecmTitle">
+    <h1 class="sr-only" id="ecmTitle">Elitechel Media: the home of competitive chel</h1>
+    <div class="ecm-banner-art">
+      <picture>
+        <source media="(max-width: 760px)" srcset="assets/brand/ecm-hero-banner-mobile-900.webp 960w, assets/brand/ecm-hero-banner-mobile.webp 1475w" sizes="100vw" width="1475" height="500">
+        <img src="assets/brand/ecm-hero-banner.webp" srcset="assets/brand/ecm-hero-banner-1280.webp 1280w, assets/brand/ecm-hero-banner.webp 2103w" sizes="100vw" width="2103" height="649" fetchpriority="high" alt="Elitechel Media. LGCHL, LG3S and Hitmen. Comp chel, tournaments and community. The home of competitive chel: coverage, player rankings, scouting, tournaments and original media.">
+      </picture>
+      <a class="hot hot-hub" href="lgchl-media.html"><span class="sr-only">Explore the hub</span></a>
+      <a class="hot hot-radio" href="#radio"><span class="sr-only">Watch Hitman Radio</span></a>
+    </div>
+    <div class="ecm-banner-cta band">
+      <a class="btn btn-gold" href="lgchl-media.html">Explore the hub <span class="arr">→</span></a>
+      <a class="btn btn-line" href="#radio"><span class="btxt">Watch Hitman Radio</span> <span class="arr">→</span></a>
+    </div>
+  </section>
+
+  <section class="desks-band band" aria-label="Elitechel Media desks">
+      <nav class="desks" aria-label="Desks">
         <a class="desk card desk-hit" href="hitmen-media.html">
           <span class="desk-art" aria-hidden="true" style="--art:url('assets/wildman/home/hitmen.webp');--pos:64% 40%"></span>
           <span class="desk-no num" aria-hidden="true">01</span>
@@ -92,6 +97,25 @@
           <span class="desk-go">Watch live <span class="arr">→</span></span>
         </a>
       </nav>
+  </section>
+
+  <section class="radio band" id="radio" aria-labelledby="radioTitle">
+    <div class="radio-in">
+      <div class="radio-copy">
+        <span class="sec-rule" aria-hidden="true"></span>
+        <p class="eyebrow radio-eye"><span class="radio-dot" aria-hidden="true"></span>Nightly show · LGCHL</p>
+        <h2 class="sec-title" id="radioTitle">Hitman <em>Radio</em></h2>
+        <p>The night in the LGCHL: finals from around the league, the best highlights and the standout players, from the Elitechel Media desk.</p>
+        <div class="radio-act">
+          <a class="btn btn-line btn-sm" href="lgchl-media.html#lgRadioSec"><span class="btxt">More episodes</span> <span class="arr">→</span></a>
+        </div>
+      </div>
+      <div class="radio-player card">
+        <video controls playsinline preload="none" poster="assets/video/hitman-radio-nightly-poster.webp" width="1280" height="720">
+          <source src="assets/video/hitman-radio-nightly.mp4" type="video/mp4">
+          Your browser can't play this video. <a href="assets/video/hitman-radio-nightly.mp4">Download it here</a>.
+        </video>
+      </div>
     </div>
   </section>
   <div class="ice-edge" aria-hidden="true"></div>
