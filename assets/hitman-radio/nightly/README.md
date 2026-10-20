@@ -1,4 +1,4 @@
-# Hitman Radio — Nightly Show episodes (homepage player)
+# Hitmen Radio — Nightly Show episodes (homepage player)
 
 The homepage section `#hitmanNightly` (index.html) reads `episodes.json` in this folder.
 The newest `date` plays in the main player; every other entry appears under
