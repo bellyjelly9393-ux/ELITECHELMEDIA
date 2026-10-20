@@ -14,3 +14,5 @@ Never delete entries: the archive is permanent.
    `{ "date": "YYYY-MM-DD", "label": "Oct 20 games", "headline": "One line", "video": "assets/hitman-radio/nightly/YYYY-MM-DD.mp4", "poster": "assets/hitman-radio/nightly/YYYY-MM-DD-poster.webp", "credits": "optional, plain text; twitch.tv/x becomes a link" }`
 
 Shareable link to an episode: `/#ep-YYYY-MM-DD`.
+
+Optional: `data-default="YYYY-MM-DD"` on a section pins which episode it opens on (lgchl-media.html uses this); without it the newest plays.

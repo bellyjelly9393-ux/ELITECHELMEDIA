@@ -1,6 +1,7 @@
 /* Hitman Radio — Nightly Show player + archive. Data lives in assets/hitman-radio/nightly/episodes.json (see README there). */
 (function () {
-  var s = document.getElementById('hitmanNightly'); if (!s) return;
+ /* Works on any page: every <section class="hn" data-manifest="..."> becomes a player. Episode links use #ep-YYYY-MM-DD. */
+ document.querySelectorAll('section.hn[data-manifest]').forEach(function (s) {
   var v = s.querySelector('video'), lbl = s.querySelector('[data-hn-date]'), hl = s.querySelector('[data-hn-headline]'),
       cr = s.querySelector('[data-hn-credits]'), arch = s.querySelector('[data-hn-archive]'), WEEKS = 3, eps = [];
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -19,9 +20,10 @@
     var f = s.querySelector('[data-hn-featured]'); if (f && eps[0]) f.hidden = ep.date === eps[0].date;
     if (scroll) s.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+  function defEp() { var want = s.dataset.default; return (want && eps.filter(function (e) { return e.date === want; })[0]) || eps[0]; }
   function byHash() { var m = /^#ep-(\d{4}-\d{2}-\d{2})$/.exec(location.hash); return m && eps.filter(function (e) { return e.date === m[1]; })[0]; }
   function render() {
-    var past = eps.slice(1); if (!past.length) { arch.hidden = true; return; }
+    var def = defEp(), past = eps.filter(function (e) { return e !== def; }); if (!past.length) { arch.hidden = true; return; }
     var groups = [], cur = null;
     past.forEach(function (e) { var w = weekStart(e.date).getTime(); if (!cur || cur.w !== w) groups.push(cur = { w: w, list: [] }); cur.list.push(e); });
     var html = '<h3 class="hn-arch-title">Catch up — past episodes</h3>';
@@ -44,6 +46,9 @@
     var featured = s.querySelector('[data-hn-featured]'); render();
     // Featured card for the newest episode at the head of the archive area, so the latest is always one tap away.
     if (featured && eps[0]) { featured.href = '#ep-' + eps[0].date; featured.dataset.ep = eps[0].date; featured.textContent = 'Back to latest (' + (eps[0].label || eps[0].date) + ')'; }
-    var h = byHash(); play(h || eps[0], !!h);
+    var h = byHash(); play(h || defEp(), false);
+    // Re-anchor after async page content shifts layout (keeps #id / #ep- links landing under the sticky menu).
+    if (h || location.hash === '#' + s.id) [0, 600, 1500].forEach(function (t) { setTimeout(function () { s.scrollIntoView({ block: 'start' }); }, t); });
   }).catch(function () { var f = s.querySelector('[data-hn-fallback]'); if (f) f.hidden = false; });
+ });
 })();
