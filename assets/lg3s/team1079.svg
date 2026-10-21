@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 132" width="120" height="132" role="img" aria-label="Slovakia national crest">
+<defs><clipPath id="shield"><path d="M12 8L108 8 105 79Q103 101 60 128Q17 101 15 79Z"/></clipPath><linearGradient id="shine" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".31"/><stop offset=".4" stop-color="#fff" stop-opacity=".03"/><stop offset="1" stop-color="#000" stop-opacity=".26"/></linearGradient></defs>
+<path d="M9 3H111L108 81Q106 105 60 131Q14 105 12 81Z" fill="#0b111b" stroke="#dfbf65" stroke-width="3"/>
+<g clip-path="url(#shield)"><rect x="0" y="0" width="120" height="40" fill="#fff"/><rect x="0" y="40" width="120" height="40" fill="#1254ad"/><rect x="0" y="80" width="120" height="52" fill="#e52642"/><path d="M43 41H76V83L59.5 94 43 83Z" fill="#d7223d" stroke="#fff" stroke-width="3"/><path d="M60 45v34M51 55h18M55 63h10" stroke="#fff" stroke-width="5" stroke-linejoin="round"/><path d="M0 0h120v132H0" fill="url(#shine)"/><path d="M0 104h120v28H0" fill="#060c15" fill-opacity=".9"/><text x="60" y="120" text-anchor="middle" font-size="15" font-family="Arial,sans-serif" font-weight="900" fill="#ffe6a3" letter-spacing="3">SVK</text></g>
+<path d="M12 8L108 8 105 79Q103 101 60 128Q17 101 15 79Z" fill="none" stroke="#f8ead0" stroke-width="2.5"/>
+</svg>
