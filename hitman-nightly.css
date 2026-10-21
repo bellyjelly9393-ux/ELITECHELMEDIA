@@ -47,3 +47,16 @@
 .hn-audio a { color: #c9ced6; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.2); margin-right: 12px; }
 .hn-audio a:hover { color: var(--bone); }
 .hn-alias { display: block; height: 0; scroll-margin-top: 84px; }
+/* v3: double feature — 2+ episodes featured the same day ("featured" in episodes.json). Side by side on desktop, stacked on phones (list order). */
+.hn-dual { position: relative; max-width: var(--wrap); margin: 0 auto; }
+.hn-dual-head { margin-bottom: clamp(16px, 2.2vw, 26px); }
+.hn-dual-sub { margin: 0; font-family: var(--f-ui); font-size: 16px; letter-spacing: .18em; text-transform: uppercase; color: #7f8690; }
+.hn-dual-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2.6vw, 34px); align-items: start; }
+.hn-card { scroll-margin-top: 84px; display: flex; flex-direction: column; gap: 14px; }
+.hn-card-copy { padding: 0 4px; }
+.hn-kind { margin: 0 0 6px; font-family: var(--f-ui); font-weight: 600; font-size: 15px; letter-spacing: .22em; text-transform: uppercase; color: #9aa3ae; }
+.hn-card-recap .hn-kind { color: #b9c0c9; }
+.hn-card-title { font-family: var(--f-head); font-weight: 400; font-size: clamp(24px, 2.4vw, 34px); line-height: 1; margin: 0 0 10px; text-transform: uppercase; color: var(--bone); letter-spacing: .01em; }
+.hn-card .hn-headline { font-size: clamp(19px, 1.7vw, 23px); max-width: none; margin-top: 12px !important; }
+.hn-desc { color: var(--mute); margin: 8px 0 0 !important; font-size: 15px; line-height: 1.4; max-width: 60ch; }
+@media (max-width: 860px) { .hn-dual-grid { grid-template-columns: 1fr; gap: 28px; } }

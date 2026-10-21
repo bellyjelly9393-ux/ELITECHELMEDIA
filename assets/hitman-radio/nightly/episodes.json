@@ -1,7 +1,33 @@
 {
+  "featured": ["2026-10-20", "2026-10-21-recap"],
   "episodes": [
     {
+      "id": "2026-10-21-recap",
+      "date": "2026-10-21",
+      "type": "recap",
+      "label": "Week 4 recap · Oct 18–20",
+      "title": "Hitmen Radio — Week 4 Recap",
+      "headline": "All three game nights: Bwxxd's eight-goal game, Brantford's ten straight, Prince George's climb",
+      "description": "Graham and David recap Sunday to Tuesday: goalies of the week, three stars, power rankings, the Hitmen's 7-4-1 week and next week's matchups.",
+      "video": "assets/hitman-radio/nightly/2026-10-21-recap.mp4?v=20261021-d",
+      "videoPhone": "assets/hitman-radio/nightly/2026-10-21-recap-phone.mp4?v=20261021-d",
+      "poster": "assets/hitman-radio/nightly/2026-10-21-recap-poster.png?v=20261021-d"
+    },
+    {
+      "id": "2026-10-20",
+      "date": "2026-10-20",
+      "type": "nightly",
+      "label": "Oct 20 games",
+      "title": "Hitmen Radio — Nightly Show",
+      "headline": "Tuesday night: 124 games, 25 overtimes and seven sweeps",
+      "description": "Tuesday around the LGCHL: the climb of the night, seven sweeps, the goalies and the Hitmen check-in.",
+      "video": "assets/hitman-radio/nightly/2026-10-20.mp4?v=20261021-d",
+      "videoPhone": "assets/hitman-radio/nightly/2026-10-20-phone.mp4?v=20261021-d",
+      "poster": "assets/hitman-radio/nightly/2026-10-20-poster.png?v=20261021-d"
+    },
+    {
       "date": "2026-10-19",
+      "type": "nightly",
       "label": "Oct 19 games",
       "headline": "Bwxxd's 16-goal night & four sweeps",
       "video": "assets/hitman-radio/nightly/2026-10-19.mp4?v=20261020-w",
@@ -9,6 +35,7 @@
     },
     {
       "date": "2026-10-18",
+      "type": "nightly",
       "label": "Oct 18 games",
       "headline": "Brandon St. Laurent's 14 goals lead Quebec's 27-goal night",
       "video": "assets/hitman-radio/nightly/2026-10-18.mp4?v=20261020-w",
