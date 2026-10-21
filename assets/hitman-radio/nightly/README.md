@@ -18,3 +18,11 @@ Shareable link to an episode: `/#ep-YYYY-MM-DD`.
 Optional: `data-default="YYYY-MM-DD"` on a section pins which episode it opens on (lgchl-media.html uses this); without it the newest plays.
 
 When replacing an existing video/poster file in place, bump the `?v=` tag on its `video`/`poster` URLs in episodes.json so browsers drop the cached copy.
+
+## Episode fields (v3)
+- `id` (optional): anchor/key when two episodes share a date, e.g. `2026-10-21-recap` → `/#ep-2026-10-21-recap`. Defaults to `date`.
+- `type`: `nightly` or `recap`. `title`, `description`: shown on double-feature cards.
+- `videoPhone` (optional): lighter file served on screens ≤860px.
+
+## Double feature (e.g. Wednesdays: Tuesday nightly + weekly recap)
+Add a top-level `"featured": ["2026-10-20", "2026-10-21-recap"]` (left/top first). When 2+ listed ids exist and one of them is the newest episode, the section shows them side by side (stacked on phones) and the archive lists everything else. Once a newer episode is added the section falls back to the normal single player automatically; you can also just remove/replace `featured`.
