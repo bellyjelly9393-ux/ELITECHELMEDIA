@@ -182,3 +182,7 @@
 @media(max-width:880px){.lg3s .th-standings-grids{grid-template-columns:1fr}.lg3s .th-standings-grids .th-table{min-width:700px}.lg3s .th-verified{display:none}}
 @media(max-width:700px){.lg3s .th-crest{width:78px;height:78px}.lg3s .th-hero h1{font-size:clamp(47px,12vw,74px)}.lg3s .th-nations{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.lg3s .th-nation-chip span{font-size:12px}.lg3s .th-night-header strong{font-size:19px}.lg3s .th-wave-time{font-size:34px}.lg3s .th-wave-header{font-size:13px}.lg3s .th-analysis-grid{grid-template-columns:1fr}.lg3s .th-analysis-lead{grid-column:auto}.lg3s .th-analysis-card{min-height:0;padding:22px 19px}.lg3s .th-roster-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.lg3s .th-roster-controls .th-find{grid-column:span 2}.lg3s .th-schedule-section .th-switch button{font-size:17px;padding:10px 8px}.lg3s .th-game-v2{min-height:305px}}
 @media(max-width:410px){.lg3s .th-nations{grid-template-columns:repeat(3,minmax(0,1fr))}.lg3s .th-roster-controls{grid-template-columns:1fr}.lg3s .th-roster-controls .th-find{grid-column:auto}.lg3s .th-wave-header>span:last-child{display:none}}
+
+/* Locally hosted team shields: consistent transparent artwork on schedule and tables. */
+.lg3s .th-game-v2 .th-teams img,.lg3s .th-nation-chip img,.lg3s .th-team-link img{object-fit:contain;filter:drop-shadow(0 5px 10px rgba(0,0,0,.5))}
+.lg3s .th-game-v2>.th-game-wm{opacity:.065;filter:none}
