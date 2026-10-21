@@ -48,7 +48,7 @@
     }).join('');
     const all=chosenDay==='all',isWed=chosenDay==='2026-10-21';
     $('thSelectedNight').textContent=all?'FULL OPENING WEEK · OCT 21–22':isWed?'OPENING NIGHT · WEDNESDAY, OCT 21':'NIGHT TWO · THURSDAY, OCT 22';
-    $('thNightStat').textContent=(all?'30':isWed?'18':'12')+' VERIFIED FIXTURES · '+(all?'FIVE':'THREE')+' WAVES';
+    $('thNightStat').textContent=(all?'30':isWed?'18':'12')+' VERIFIED FIXTURES · '+(all?'FIVE':isWed?'THREE':'TWO')+' WAVES';
     document.querySelectorAll('.th-switch button[data-date]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.date===chosenDay)));
   }
   function standingsTable(group){
@@ -75,7 +75,7 @@
   function renderPlayers(){
     const search=$('thPlayerSearch').value.trim().toLocaleLowerCase(),tid=$('thPlayerTeam').value,status=$('thPlayerStatus').value,pos=$('thPlayerPosition').value,sort=$('thPlayerSort').value;
     let players=data.players.filter(p=>(status==='all'||p.s===status)&&(tid==='all'||String(p.t)===tid)&&(pos==='all'||p.p===pos)&&(!search||p.n.toLocaleLowerCase().includes(search)||team(p.t).name.toLocaleLowerCase().includes(search)));
-    players.sort(sort==='name'?(a,b)=>a.n.localeCompare(b.n):sort==='team'?(a,b)=>team(a.t).name.localeCompare(team(b.t).name)||a.n.localeCompare(b.n):(a,b)=>(b.v??-1)-(a.v??-1)||a.n.localeCompare(b.n)));
+    players.sort(sort==='name'?(a,b)=>a.n.localeCompare(b.n):sort==='team'?(a,b)=>team(a.t).name.localeCompare(team(b.t).name)||a.n.localeCompare(b.n):(a,b)=>(b.v??-1)-(a.v??-1)||a.n.localeCompare(b.n));
     const shown=players.slice(0,playerLimit);
     $('thPlayerRows').innerHTML=shown.length?shown.map((p,i)=>{
       const t=team(p.t);
