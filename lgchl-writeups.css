@@ -1,0 +1,24 @@
+/* "This week in the LGCHL" write-ups (lgchl-media.html). All classes prefixed wu-. */
+.wu-weeks { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.wu-weeks button { font-family: var(--f-ui); font-weight: 600; font-size: 16px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute, #a9a7a0); background: linear-gradient(180deg, #1a1d22, #0d0f12); border: 1px solid var(--line, #2a2d33); padding: 8px 14px; cursor: pointer; }
+.wu-weeks button[aria-pressed="true"] { color: var(--bone, #ece8df); border-color: #6f7884; box-shadow: inset 0 -2px 0 #a9b3bf; }
+.wu-range { font-family: var(--f-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--mute, #a9a7a0); font-size: 16px; margin: 0 0 12px; }
+.wu-body { display: grid; gap: 12px; }
+.wu-item { background: linear-gradient(160deg, rgba(30,33,38,.94), rgba(9,10,12,.96)); border: 1px solid var(--line, #2a2d33); }
+.wu-item > summary { list-style: none; cursor: pointer; padding: 16px 20px; display: grid; gap: 4px; }
+.wu-item > summary::-webkit-details-marker { display: none; }
+.wu-item > summary::after { content: "+"; position: absolute; right: 22px; top: 18px; font-size: 26px; color: #a9b3bf; }
+.wu-item[open] > summary::after { content: "–"; }
+.wu-kind { font-family: var(--f-ui); font-weight: 600; font-size: 15px; letter-spacing: .2em; text-transform: uppercase; color: #a9b3bf; }
+.wu-title { font-family: var(--f-display, inherit); font-size: clamp(22px, 2.6vw, 30px); line-height: 1.1; color: var(--bone, #ece8df); padding-right: 30px; }
+.wu-text { padding: 0 20px 20px; color: #d6d3cc; line-height: 1.6; max-width: 900px; }
+.wu-text h4 { font-family: var(--f-ui); font-size: 19px; letter-spacing: .16em; text-transform: uppercase; color: #c9d1da; margin: 22px 0 8px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.08); }
+.wu-text p, .wu-text ul, .wu-text ol { margin: 0 0 10px; }
+.wu-text ul, .wu-text ol { padding-left: 22px; }
+.wu-text strong { color: #fff; }
+.wu-text hr { border: 0; border-top: 1px solid rgba(255,255,255,.1); margin: 18px 0; }
+.wu-text blockquote { margin: 0 0 14px; padding: 10px 14px; border-left: 3px solid #8b949e; background: rgba(255,255,255,.04); }
+.wu-text table { border-collapse: collapse; width: 100%; margin: 6px 0 14px; font-size: 15px; display: block; overflow-x: auto; }
+.wu-text th, .wu-text td { text-align: left; padding: 6px 10px; border-bottom: 1px solid rgba(255,255,255,.08); white-space: nowrap; }
+.wu-text th { color: #a9b3bf; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: 13px; }
+#lgWriteups, .wu-item { scroll-margin-top: 110px; }

@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
 <link rel="stylesheet" href="lgchl-media.css?v=20261019-potn1"><link rel="stylesheet" href="lgchl-player-profile.css?v=20261018-1"><link rel="stylesheet" href="lgchl-player-badges.css?v=20261018-1">
 <link rel="stylesheet" href="hitman-nightly.css?v=20261020-5">
+<link rel="stylesheet" href="lgchl-writeups.css?v=20261021-1">
+<script src="lgchl-writeups.js?v=20261021-1" defer></script>
 <script src="hitman-nightly.js?v=20261020-5" defer></script>
 </head>
 <body>
@@ -101,6 +103,18 @@
     </div>
     <div class="hn-arch" data-hn-archive hidden></div>
     <p class="hn-audio" id="lgAudioEditions"><b>Audio editions</b><a href="assets/hitman-radio/episode-01.mp3">Episode 1 · 19 min 31 sec (MP3)</a><a href="assets/hitman-radio/episode-01.mp3" download="Hitmen-Radio-Episode-01.mp3">Download</a></p>
+  </section>
+
+  <!-- Written write-ups: data-driven from assets/lgchl-writeups/writeups.json (lgchl-writeups.js). Add a week to the top of "weeks" to publish. -->
+  <section class="lg-sec band" id="lgWriteups" aria-labelledby="lgWriteupsTitle" data-writeups="assets/lgchl-writeups/writeups.json">
+    <div class="lg-in">
+      <div class="lg-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">LG Media · EliteChel Media</p><h2 class="sec-title" id="lgWriteupsTitle">This week in <em>the LGCHL</em></h2></div>
+        <p class="lg-note">Night wraps, features, the weekly recap and the matchups ahead.</p>
+      </div>
+      <div class="wu-weeks" role="group" aria-label="Choose a week"></div>
+      <div class="wu-body" aria-live="polite"><p class="empty">Loading write-ups…</p></div>
+    </div>
   </section>
 
   <section class="lg-sec lg-scores band" aria-labelledby="lgScoresTitle">
