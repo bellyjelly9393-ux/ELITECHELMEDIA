@@ -230,3 +230,7 @@
 @media (max-width: 1000px) { .pg-in { grid-template-columns: 1fr; } }
 
 .desk-toggle a.lgchl img{width:46px}
+
+/* Third newsroom tab: LG3s, shared across existing media desks. */
+.desk-toggle a.lg3s-desk .th-desk-mark {display:inline-grid;place-items:center;flex:0 0 auto;width:28px;height:28px;border:1px solid rgba(142,205,243,.45);background:#112538;color:#abdfff;font:400 24px/1 var(--f-head);}
+.desk-toggle a.lg3s-desk[aria-current] .th-desk-mark {background:#14283b;color:#f7d98a;border-color:#456582;}
