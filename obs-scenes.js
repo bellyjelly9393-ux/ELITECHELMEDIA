@@ -170,7 +170,7 @@
     {id:'swolly-matchup',brand:'swolly',scene:'starting',label:'Matchup',sublabel:'Game Day',preset:{feedLayout:'full',sidePanel:'brand',bugPosition:'hidden',showScoreboard:false,logoBug:'off',streamMuted:true}},
     {id:'swolly-final',brand:'swolly',scene:'final',label:'Final',sublabel:'Final Score',preset:{feedLayout:'full',sidePanel:'brand',bugPosition:'hidden',showScoreboard:false,logoBug:'off',streamMuted:true}},
     {id:'swolly-player',brand:'swolly',scene:'player',label:'Player Spotlight',sublabel:'Lower Third',preset:{feedLayout:'full',sidePanel:'brand',bugPosition:'hidden',showScoreboard:false,logoBug:'off',streamMuted:false}},
-    {id:'swolly-schedule',brand:'swolly',scene:'starting',label:'Tonight's Games',sublabel:'3-Game Card',preset:{feedLayout:'full',sidePanel:'brand',bugPosition:'hidden',showScoreboard:false,logoBug:'off',streamMuted:true}},
+    {id:'swolly-schedule',brand:'swolly',scene:'starting',label:'Tonight’s Games',sublabel:'3-Game Card',preset:{feedLayout:'full',sidePanel:'brand',bugPosition:'hidden',showScoreboard:false,logoBug:'off',streamMuted:true}},
     {id:'swolly-webcam',brand:'swolly',scene:'game',label:'Webcam Frame',sublabel:'Gameplay',preset:{feedLayout:'full',sidePanel:'brand',bugPosition:'hidden',showScoreboard:false,logoBug:'off',streamMuted:false}},
     {id:'swolly-alerts',brand:'swolly',scene:'game',label:'Alerts',sublabel:'Goal / Follower',preset:{feedLayout:'full',sidePanel:'brand',bugPosition:'hidden',showScoreboard:false,logoBug:'off',streamMuted:false}}
   );
