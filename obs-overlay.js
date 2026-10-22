@@ -241,7 +241,7 @@
     if(!row) return;
     lastRow=row;
     var payload=row.payload||{};
-    var brand=row.brand==='hitmen'?'hitmen':'wildman';
+    var brand=['hitmen','swolly'].includes(row.brand)?row.brand:'wildman';
     var scene=forcedScene||row.scene||'game';
     var scenePreset=SCENES&&SCENES.infer?SCENES.infer(scene,payload):null;
     document.body.dataset.brand=brand;
@@ -299,6 +299,7 @@
     text('playerRole',payload.playerRole,'PLAYER');
     text('playerName',payload.playerName,'PLAYER');
     text('playerBrand',isHitmen?'CALGARY HITMEN':'ELITECHEL MEDIA');
+    if(brand==='swolly'&&window.WM_Swolly)window.WM_Swolly.render(payload);
     text('obsStatus','LIVE · '+channel.toUpperCase());
   }
 
