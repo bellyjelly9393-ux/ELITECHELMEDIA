@@ -7,6 +7,7 @@
   <title>Elitechel Broadcast Overlay</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="obs-overlay.css?v=20261011-bobbleheads2">
+  <link rel="stylesheet" href="obs-swolly.css?v=20261021">
 </head>
 <body data-brand="wildman" data-scene="game">
   <main id="obsRoot" class="obs-root" aria-live="polite">
@@ -212,6 +213,92 @@
       </aside>
     </section>
 
+    <section id="swollyPack" class="swolly-pack" aria-label="VVHL Swolly Stampede broadcast graphics">
+      <div class="sw-grid" aria-hidden="true"></div>
+      <div class="sw-topline"><span>VVHL · SEASON 12</span><span>SWOLLY STAMPEDE • GAME DAY</span></div>
+      <div class="sw-main">
+        <div class="sw-main-brand">
+          <img class="sw-logo" src="assets/teams/swolly-stampede.webp" alt="Swolly Stampede mammoth">
+          <div class="sw-logo-fallback" aria-hidden="true">🦣</div>
+        </div>
+        <div class="sw-overline">THE STAMPEDE HAS ARRIVED</div>
+        <h1 class="sw-title" id="swTitle">STARTING <em>SOON</em></h1>
+        <p class="sw-subtitle" id="swSubtitle">VVHL SEASON 12 · LIVE BROADCAST</p>
+      </div>
+      <div class="sw-footline"><strong>SWOLLY STAMPEDE</strong><span>BLACK • GOLD • HOCKEY</span></div>
+
+      <section class="sw-live-hud">
+        <div class="sw-hud-logo"><img src="assets/teams/swolly-stampede.webp" alt=""><b>SWOLLY</b></div>
+        <strong id="swHudHome">0</strong><span>:</span><strong id="swHudAway">0</strong>
+        <div class="sw-hud-other"><b id="swHudOpponent">OPPONENT</b><small id="swHudPeriod">1ST</small></div>
+      </section>
+
+      <section class="sw-score-panel">
+        <small id="swScoreLabel">FINAL · VVHL SEASON 12</small>
+        <div class="sw-score-teams">
+          <div><img src="assets/teams/swolly-stampede.webp" alt=""><strong>SWOLLY STAMPEDE</strong><b id="swScoreHome">0</b></div>
+          <i>:</i>
+          <div><b id="swScoreAway">0</b><strong id="swScoreOpponent">OPPONENT</strong></div>
+        </div>
+        <p id="swScoreMessage">THE STAMPEDE CONTINUES</p>
+      </section>
+
+      <section class="sw-lineup-panel">
+        <h2>TONIGHT'S <em>STARTING LINEUP</em></h2>
+        <div class="sw-lineup-rows">
+          <div><span>LW</span><strong id="swLW">CARNEY I94</strong></div>
+          <div><span>C</span><strong id="swC">MAXIMUS6684</strong></div>
+          <div><span>LD</span><strong id="swD">TRMISERY</strong></div>
+          <div><span>G</span><strong id="swG">JMEN_FISH27</strong></div>
+        </div>
+        <img src="assets/teams/swolly-stampede.webp" alt="" aria-hidden="true">
+      </section>
+
+      <section class="sw-matchup-panel">
+        <h2>NATIONWIDE BATTLES. <em>ONE STAMPEDE.</em></h2>
+        <div class="sw-matchup-logos">
+          <div><img src="assets/teams/swolly-stampede.webp" alt=""><b>SWOLLY STAMPEDE</b></div>
+          <span>VS</span>
+          <div><strong id="swMatchOpponent">OPPONENT</strong><small>VVHL · SEASON 12</small></div>
+        </div>
+      </section>
+
+      <section class="sw-schedule-panel">
+        <h2>TONIGHT'S <em>GAMES</em></h2>
+        <div class="sw-schedule-row"><small id="swTime1">GAME 1</small><b>SWOLLY</b><span>VS</span><strong id="swOpp1">TBD</strong></div>
+        <div class="sw-schedule-row"><small id="swTime2">GAME 2</small><b>SWOLLY</b><span>VS</span><strong id="swOpp2">TBD</strong></div>
+        <div class="sw-schedule-row"><small id="swTime3">GAME 3</small><b>SWOLLY</b><span>VS</span><strong id="swOpp3">TBD</strong></div>
+        <p>ALL TIMES EASTERN · VVHL SEASON 12</p>
+      </section>
+
+      <section class="sw-player-panel">
+        <div class="sw-player-crest"><img src="assets/teams/swolly-stampede.webp" alt=""></div>
+        <div><small id="swPlayerRole">PLAYER SPOTLIGHT</small><strong id="swPlayerName">PLAYER</strong><span>SWOLLY STAMPEDE</span></div>
+        <b id="swPlayerNumber">#94</b>
+      </section>
+
+      <section class="sw-social-panel">
+        <img src="assets/teams/swolly-stampede.webp" alt="">
+        <div><small>STAY CONNECTED</small><h2>JOIN THE <em>STAMPEDE</em></h2><strong id="swSocial">@SWOLLYSTAMPEDE</strong></div>
+      </section>
+
+      <section class="sw-webcam-frame" aria-label="Transparent opening for OBS webcam source">
+        <div class="sw-webcam-window"></div>
+        <footer><img src="assets/teams/swolly-stampede.webp" alt=""> SWOLLY STAMPEDE</footer>
+      </section>
+
+      <section class="sw-alert-panel">
+        <img src="assets/teams/swolly-stampede.webp" alt=""><div><small>STAMPede LIVE</small><strong id="swAlert">NEW FOLLOWER</strong></div>
+      </section>
+
+      <section class="sw-stats">
+        <small id="swStatsLabel">PERIOD BREAK</small>
+        <div><b id="swShotsHome">—</b><span>SHOTS</span><b id="swShotsAway">—</b></div>
+        <div><b id="swHitsHome">—</b><span>HITS</span><b id="swHitsAway">—</b></div>
+        <div><b id="swFaceoffsHome">—</b><span>FACEOFFS</span><b id="swFaceoffsAway">—</b></div>
+      </section>
+    </section>
+
     <section class="obs-lower-third">
       <div class="obs-lt-accent"></div>
       <div class="obs-lt-number">#<span id="playerNumber">00</span></div>
@@ -225,7 +312,8 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
-  <script src="obs-scenes.js?v=20261011-bobbleheads"></script>
-  <script src="obs-overlay.js?v=20261006hitmenart3"></script>
+  <script src="obs-scenes.js?v=20261021-swolly"></script>
+  <script src="obs-swolly.js?v=20261021"></script>
+  <script src="obs-overlay.js?v=20261021-swolly"></script>
 </body>
 </html>
