@@ -5,7 +5,8 @@
   var SCENES=window.WM_OBS_SCENES||null;
   var TEAM_CONFIG={
     '5f36117c-7a51-4514-bf70-d4c672b41e48':{name:'Elitechel Media',brand:'wildman',channel:'wildman-main'},
-    'b0bcbdda-da9d-419d-8f61-b34937966d49':{name:'Calgary Hitmen',brand:'hitmen',channel:'hitmen-main'}
+    'b0bcbdda-da9d-419d-8f61-b34937966d49':{name:'Calgary Hitmen',brand:'hitmen',channel:'hitmen-main'},
+    'swolly-stampede':{name:'VVHL · Swolly Stampede',brand:'swolly',channel:'swolly-main',teamId:'b0bcbdda-da9d-419d-8f61-b34937966d49'}
   };
   var currentTeamId='';
   var currentScene='game';
@@ -152,7 +153,7 @@
     var ids=(state.memberships||[])
       .filter(function(m){return m.active!==false&&['owner','gm','agm'].includes(String(m.role||'').toLowerCase());})
       .map(function(m){return m.team_id;});
-    return Object.keys(TEAM_CONFIG).filter(function(id){return ids.includes(id);});
+    return Object.keys(TEAM_CONFIG).filter(function(id){return ids.includes(TEAM_CONFIG[id].teamId||id);});
   }
   function populateTeams(state){
     var select=byId('obsTeamSelect');
@@ -162,6 +163,7 @@
     var preferred=ids.includes(currentTeamId)?currentTeamId:(ids.includes(state.teamId)?state.teamId:ids[0]);
     select.value=preferred;
     currentTeamId=preferred;
+    if(byId('swollyDrawer'))byId('swollyDrawer').open=config().channel==='swolly-main';
     return true;
   }
   // Player Stream dropdown: the list lives in obs-config.js (playerStreams); "Custom" = typed URL.
@@ -183,7 +185,7 @@
   function renderSceneButtons(){
     var strip=byId('obsSceneStrip');
     if(!strip)return;
-    var list=SCENES&&Array.isArray(SCENES.all)?SCENES.all:[];
+    var list=SCENES&&Array.isArray(SCENES.all)?SCENES.all.filter(function(x){return !x.brand||x.brand!=='swolly';}):[];
     if(!list.length){
       strip.innerHTML='<button type="button" data-preset="game-matchup" data-scene="game"><b>Gameplay</b><small>Matchup Panel</small></button>';
       return;
@@ -193,7 +195,16 @@
         '<b>'+item.label+'</b><small>'+item.sublabel+'</small></button>';
     }).join('');
   }
+  function renderSwollyButtons(){
+    var strip=byId('swollySceneStrip');if(!strip||!SCENES)return;
+    strip.innerHTML=SCENES.all.filter(function(item){return item.brand==='swolly';}).map(function(item){return '<button type="button" data-preset="'+item.id+'"><b>'+item.label+'</b><small>'+item.sublabel+'</small></button>';}).join('');
+    strip.querySelectorAll('button').forEach(function(button){button.addEventListener('click',function(){
+      if(config().channel!=='swolly-main'){setStatus('SELECT VVHL · SWOLLY STAMPEDE FIRST',true);return;}
+      applyScenePreset(button.dataset.preset);publish();
+    });});
+  }
   function setSceneButtons(){
+    document.querySelectorAll('#swollySceneStrip [data-preset]').forEach(function(button){button.classList.toggle('active',button.dataset.preset===currentPresetId);});
     document.querySelectorAll('#obsSceneStrip [data-preset]').forEach(function(button){
       button.classList.toggle('active',button.dataset.preset===currentPresetId);
       if(button.dataset.preset==='starting-hitmen-bobbleheads')button.hidden=config().channel!=='hitmen-main';
@@ -331,6 +342,7 @@
     setStatus('LOADING');
     try{
       var result=await window.VVHLBackend.db.from('obs_broadcast_state').select('*').eq('channel',config().channel).maybeSingle();
+      if(!result.data&&config().channel==='swolly-main'){fill({scene:'starting',payload:{presetId:'swolly-start',event:'VVHL · SEASON 12',homeName:'SWOLLY STAMPEDE',period:'1ST',feedLayout:'full',playerName:'CARNEY',playerNumber:'94',playerRole:'LW'}});setStatus('READY · PUBLISH FIRST SCENE');return;}
       if(result.error){setStatus(result.error.message,true);return;}
       fill(result.data);
       setStatus('READY');
@@ -348,7 +360,7 @@
     setStatus('PUBLISHING');
     var row={
       channel:config().channel,
-      team_id:currentTeamId,
+      team_id:config().teamId||currentTeamId,
       brand:config().brand,
       scene:currentScene,
       payload:collectPayload(),
@@ -381,6 +393,7 @@
     });
     byId('obsTeamSelect').addEventListener('change',async function(e){
       currentTeamId=e.target.value;
+      if(byId('swollyDrawer'))byId('swollyDrawer').open=config().channel==='swolly-main';
       window.localStorage.setItem('vvhl-team-context',currentTeamId);
       updateSourceLinks();
       setSceneButtons();
@@ -515,6 +528,7 @@
       byId('obsTeamSelect').disabled=false;
       populateStreams();
       renderSceneButtons();
+      renderSwollyButtons();
       wire();
       watchPreviewSize();
       initialized=true;
