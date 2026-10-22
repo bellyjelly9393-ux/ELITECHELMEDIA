@@ -210,3 +210,25 @@
 @media(max-width:1040px){.lg3s .th-hero-grid{grid-template-columns:1fr}.lg3s .th-headline{width:100%}}
 @media(max-width:700px){.lg3s .th-banner-strip{font-size:11px;letter-spacing:.07em;padding:9px 12px}.lg3s .th-banner-stripe{margin-inline:4px}.lg3s .th-hero{padding-block:24px}.lg3s .th-section{padding-block:31px 43px}}
 @media(max-width:440px){.lg3s .th-banner-strip{display:grid;text-align:center;gap:5px}.lg3s .th-banner-strip>span{display:block}}
+
+
+/* Smooth broadcast cards and readable tables */
+.lg3s .th-switch button{border-radius:8px;transition:background .18s,border-color .18s,color .18s}
+.lg3s .th-switch button:hover:not([aria-pressed="true"]){background:#21313e;color:#fff}
+.lg3s .th-night-header{border-radius:9px;background:linear-gradient(100deg,#1b2a36,#101923)}
+.lg3s .th-wave-header{padding:9px 12px;border-radius:8px 8px 0 0;background:linear-gradient(90deg,rgba(235,194,100,.065),transparent)}
+.lg3s .th-games{gap:13px}
+.lg3s .th-game-v2{min-height:300px;padding:17px;border-radius:12px;background:linear-gradient(150deg,#1a2835,#111b26 50%,#0c141c);box-shadow:0 12px 29px rgba(0,0,0,.15);transition:transform .2s,border-color .2s,box-shadow .2s}
+.lg3s .th-game-v2:hover{transform:translateY(-3px);border-color:rgba(239,202,116,.42);box-shadow:0 18px 40px rgba(0,0,0,.32)}
+.lg3s .th-game-v2 .th-teams img{width:63px;height:63px}
+.lg3s .th-game-v2 .th-game-foot p{font-size:14px;line-height:1.53;color:#cad3db}
+.lg3s .th-analysis-card{border-radius:12px;min-height:370px;background:linear-gradient(155deg,#1a2834,#101923)}
+.lg3s .th-analysis-card p:not(.eyebrow){font-size:15px;line-height:1.56}
+.lg3s .th-standing-group{border-radius:12px;overflow:hidden}
+.lg3s .th-table-scroll{border-radius:10px}
+.lg3s .th-roster-controls input,.lg3s .th-roster-controls select{border-radius:8px}
+.lg3s .th-feature{border-radius:12px;min-height:290px;transition:transform .18s,border-color .18s}
+.lg3s .th-feature:hover{transform:translateY(-2px);border-color:rgba(238,193,104,.33)}
+.lg3s .th-player{border-radius:11px;background:linear-gradient(160deg,#1b2935,#0e151e)}
+@media(max-width:760px){.lg3s .th-analysis-card,.lg3s .th-game-v2{min-height:0}}
+@media(prefers-reduced-motion:reduce){.lg3s .th-game-v2,.lg3s .th-feature,.lg3s .th-nation-chip{transition:none!important;transform:none!important}}
