@@ -49,3 +49,11 @@
 .obs-break-stat-row{display:grid;grid-template-columns:110px 1fr 1fr;gap:8px;align-items:center;padding:6px 15px}
 .obs-break-stat-row:last-child{padding-bottom:15px}.obs-break-stat-row b{color:#aaa3ad;font:800 10px/1 Inter,sans-serif;letter-spacing:.04em}.obs-break-stat-row .field{min-height:38px!important}
 @media(max-width:720px){.obs-break-stat-row{grid-template-columns:1fr 1fr}.obs-break-stat-row b{grid-column:1/-1}}
+
+/* VVHL team pack is intentionally a separate dropdown inside Broadcast Studio */
+.swolly-drawer{margin:0 0 20px;border:1px solid #806a16;background:linear-gradient(135deg,#060402,#181303);border-radius:13px;overflow:hidden}
+.swolly-drawer>summary{cursor:pointer;padding:17px 20px;color:#f6cd2a;font-weight:900;letter-spacing:.045em;display:flex;justify-content:space-between;align-items:center}
+.swolly-drawer-content{padding:0 17px 17px}.swolly-drawer-content p{color:#ddd1a3;line-height:1.5}
+.swolly-tag{font-size:11px;color:#f6cd2a;font-weight:900;letter-spacing:.17em}
+.swolly-scenes button{border-color:#7a6411!important}
+.swolly-scenes button.active{background:#f6cd2a!important;color:#090704!important}
