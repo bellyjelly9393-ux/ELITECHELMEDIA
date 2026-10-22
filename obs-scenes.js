@@ -161,6 +161,191 @@
     }
   ];
 
+  scenes.push.apply(scenes,[
+  {
+    "id": "swolly-starting",
+    "scene": "starting",
+    "label": "Starting Soon",
+    "sublabel": "Arena intro",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": true
+    }
+  },
+  {
+    "id": "swolly-live",
+    "scene": "game",
+    "label": "Live Gameplay",
+    "sublabel": "Gold scoreboard",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": false
+    }
+  },
+  {
+    "id": "swolly-intermission",
+    "scene": "intermission",
+    "label": "Intermission",
+    "sublabel": "Period recap",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": true
+    }
+  },
+  {
+    "id": "swolly-brb",
+    "scene": "brb",
+    "label": "Be Right Back",
+    "sublabel": "Mammoth break",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": true
+    }
+  },
+  {
+    "id": "swolly-lineup",
+    "scene": "swolly-lineup",
+    "label": "Starting Lineup",
+    "sublabel": "Four players",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": true
+    }
+  },
+  {
+    "id": "swolly-matchup",
+    "scene": "swolly-matchup",
+    "label": "Matchup Poster",
+    "sublabel": "Head-to-head",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": true
+    }
+  },
+  {
+    "id": "swolly-final",
+    "scene": "final",
+    "label": "Final Score",
+    "sublabel": "Postgame recap",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": true
+    }
+  },
+  {
+    "id": "swolly-player",
+    "scene": "player",
+    "label": "Player Spotlight",
+    "sublabel": "Lower third",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": false
+    }
+  },
+  {
+    "id": "swolly-schedule",
+    "scene": "swolly-schedule",
+    "label": "Game Night",
+    "sublabel": "Three games",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": true
+    }
+  },
+  {
+    "id": "swolly-social",
+    "scene": "swolly-social",
+    "label": "Social & Follow",
+    "sublabel": "Stay connected",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": true
+    }
+  },
+  {
+    "id": "swolly-webcam",
+    "scene": "swolly-webcam",
+    "label": "Webcam Frame",
+    "sublabel": "Gameplay visible",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": false
+    }
+  },
+  {
+    "id": "swolly-alerts",
+    "scene": "swolly-alerts",
+    "label": "Stream Alerts",
+    "sublabel": "Event overlay",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": false
+    }
+  },
+  {
+    "id": "swolly-outro",
+    "scene": "swolly-outro",
+    "label": "Stream Ending",
+    "sublabel": "Thanks for watching",
+    "template": "full",
+    "preset": {
+      "feedLayout": "full",
+      "bugPosition": "hidden",
+      "showScoreboard": false,
+      "logoBug": "off",
+      "streamMuted": true
+    }
+  }
+]);
+
   function get(id){
     return scenes.find(function(item){return item.id===id;})||scenes[0];
   }
