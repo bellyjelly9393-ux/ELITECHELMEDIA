@@ -186,3 +186,27 @@
 /* Locally hosted team shields: consistent transparent artwork on schedule and tables. */
 .lg3s .th-game-v2 .th-teams img,.lg3s .th-nation-chip img,.lg3s .th-team-link img{object-fit:contain;filter:drop-shadow(0 5px 10px rgba(0,0,0,.5))}
 .lg3s .th-game-v2>.th-game-wm{opacity:.065;filter:none}
+
+
+/* LG3s header image + calmer Elitechel Media broadcast rhythm. */
+.lg3s .th-banner{width:min(100%,1536px);margin:0 auto;position:relative;overflow:hidden;background:#070a0f;border-bottom:1px solid rgba(235,193,98,.28);box-shadow:0 18px 52px rgba(0,0,0,.4)}
+.lg3s .th-banner>img{display:block;width:100%;height:auto;aspect-ratio:1536/614;object-fit:contain}
+.lg3s .th-banner-strip{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;padding:12px clamp(16px,3vw,36px);background:linear-gradient(100deg,#16212a,#0a111a 55%,#211c16);border-top:2px solid #ab8544;color:#c6d3d9;font:700 14px/1.15 var(--f-ui);letter-spacing:.12em;text-transform:uppercase}
+.lg3s .th-banner-strip b{color:#fff}.lg3s .th-banner-strip span[aria-hidden]{color:var(--gold-hi);padding:0 7px}
+.lg3s .th-banner-stripe{display:inline-block;vertical-align:middle;width:2px;height:12px;background:var(--gold-hi);margin-inline:8px}
+.lg3s .th-hero{padding-block:30px 34px;background:linear-gradient(105deg,#111922,#151f29 55%,#0e151c)}
+.lg3s .th-hero-grid{grid-template-columns:minmax(0,1.3fr) minmax(285px,.7fr);gap:clamp(24px,4vw,48px)}
+.lg3s .th-hero .th-crest{width:60px;height:60px;clip-path:none;border-radius:10px}
+.lg3s .th-logo-line{margin-bottom:12px;gap:12px}.lg3s .th-label{font-size:14px;padding-left:12px}
+.lg3s .th-kicker{margin-bottom:12px}
+.lg3s .th-copy h1{font-size:clamp(38px,4.7vw,68px)}
+.lg3s .th-dek{margin-top:12px;font-size:16px;line-height:1.55}.lg3s .th-cta{margin-top:16px}.lg3s .th-hero-note{margin-top:13px;font-size:12px}
+.lg3s .th-headline{padding:20px 23px;align-self:center;border-radius:12px;border:1px solid rgba(235,199,121,.18);border-left:3px solid var(--gold);box-shadow:0 12px 42px rgba(0,0,0,.2)}
+.lg3s .th-head-stats{margin:14px 0}.lg3s .th-head-stats b{font-size:clamp(34px,3.5vw,48px)}.lg3s .th-head-stats small{font-size:11px}
+.lg3s .th-headline h2{font-size:clamp(28px,2.8vw,40px)}.lg3s .th-headline p{font-size:14px;margin:12px 0}.lg3s .th-rule{margin-bottom:16px}.lg3s .th-source{font-size:15px}
+.lg3s .th-section{padding-block:42px 54px}.lg3s .th-section-head{margin-bottom:21px}.lg3s .th-section-caption{font-size:14px;line-height:1.52}
+.lg3s .th-sub .sub-in{overflow-x:auto;scrollbar-width:thin}.lg3s .th-sub .sub-in a{white-space:nowrap;flex:none}
+.lg3s .th-nations{gap:7px}.lg3s .th-nation-chip{border-radius:9px;border-color:rgba(200,217,232,.1);padding-block:9px;background:rgba(255,255,255,.025);transition:transform .2s,border-color .2s}.lg3s .th-nation-chip:hover{transform:translateY(-2px)}
+@media(max-width:1040px){.lg3s .th-hero-grid{grid-template-columns:1fr}.lg3s .th-headline{width:100%}}
+@media(max-width:700px){.lg3s .th-banner-strip{font-size:11px;letter-spacing:.07em;padding:9px 12px}.lg3s .th-banner-stripe{margin-inline:4px}.lg3s .th-hero{padding-block:24px}.lg3s .th-section{padding-block:31px 43px}}
+@media(max-width:440px){.lg3s .th-banner-strip{display:grid;text-align:center;gap:5px}.lg3s .th-banner-strip>span{display:block}}
