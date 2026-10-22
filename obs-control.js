@@ -5,7 +5,8 @@
   var SCENES=window.WM_OBS_SCENES||null;
   var TEAM_CONFIG={
     '5f36117c-7a51-4514-bf70-d4c672b41e48':{name:'Elitechel Media',brand:'wildman',channel:'wildman-main'},
-    'b0bcbdda-da9d-419d-8f61-b34937966d49':{name:'Calgary Hitmen',brand:'hitmen',channel:'hitmen-main'}
+    'b0bcbdda-da9d-419d-8f61-b34937966d49':{name:'Calgary Hitmen',brand:'hitmen',channel:'hitmen-main'},
+    '__swolly__':{name:'Swolly Stampede · VVHL',brand:'swolly',channel:'swolly-main'}
   };
   var currentTeamId='';
   var currentScene='game';
@@ -152,7 +153,11 @@
     var ids=(state.memberships||[])
       .filter(function(m){return m.active!==false&&['owner','gm','agm'].includes(String(m.role||'').toLowerCase());})
       .map(function(m){return m.team_id;});
-    return Object.keys(TEAM_CONFIG).filter(function(id){return ids.includes(id);});
+    return Object.keys(TEAM_CONFIG).filter(function(id){return id==='__swolly__'?ids.some(function(v){return Boolean(TEAM_CONFIG[v]);}):ids.includes(id);});
+  }
+  function swollyOwnerTeamId(){
+    var ids=(stateRef&&stateRef.memberships||[]).filter(function(m){return m.active!==false&&['owner','gm','agm'].includes(String(m.role||'').toLowerCase());}).map(function(m){return m.team_id;});
+    return ids.includes('5f36117c-7a51-4514-bf70-d4c672b41e48')?'5f36117c-7a51-4514-bf70-d4c672b41e48':ids.includes('b0bcbdda-da9d-419d-8f61-b34937966d49')?'b0bcbdda-da9d-419d-8f61-b34937966d49':'5f36117c-7a51-4514-bf70-d4c672b41e48';
   }
   function populateTeams(state){
     var select=byId('obsTeamSelect');
@@ -188,13 +193,18 @@
       strip.innerHTML='<button type="button" data-preset="game-matchup" data-scene="game"><b>Gameplay</b><small>Matchup Panel</small></button>';
       return;
     }
-    strip.innerHTML=list.map(function(item){
+    strip.innerHTML=list.filter(function(item){return !item.id.startsWith('swolly-');}).map(function(item){
       return '<button type="button" data-preset="'+item.id+'" data-scene="'+item.scene+'">'+
         '<b>'+item.label+'</b><small>'+item.sublabel+'</small></button>';
     }).join('');
+    var sw=byId('swollySceneStrip');
+    if(sw)sw.innerHTML=list.filter(function(item){return item.id.startsWith('swolly-');}).map(function(item){return '<button type="button" data-preset="'+item.id+'" data-scene="'+item.scene+'"><b>'+item.label+'</b><small>'+item.sublabel+'</small></button>';}).join('');
   }
   function setSceneButtons(){
-    document.querySelectorAll('#obsSceneStrip [data-preset]').forEach(function(button){
+    var isSwolly=config().brand==='swolly';
+    if(byId('swollyMenu'))byId('swollyMenu').hidden=!isSwolly;
+    if(byId('obsSceneStrip'))byId('obsSceneStrip').hidden=isSwolly;
+    document.querySelectorAll('#obsSceneStrip [data-preset],#swollySceneStrip [data-preset]').forEach(function(button){
       button.classList.toggle('active',button.dataset.preset===currentPresetId);
       if(button.dataset.preset==='starting-hitmen-bobbleheads')button.hidden=config().channel!=='hitmen-main';
     });
@@ -227,7 +237,9 @@
     feedSummary();
   }
   function fill(row){
-    if(!row) return;
+    if(!row){
+      row={scene:config().brand==='swolly'?'starting':'game',payload:config().brand==='swolly'?{presetId:'swolly-starting',homeName:'Swolly Stampede',event:'VVHL Season 12'}:{},updated_at:''};
+    }
     var p=row.payload||{};
     currentScene=row.scene||'game';
     var savedPreset=SCENES&&SCENES.infer?SCENES.infer(currentScene,p):null;
@@ -270,6 +282,8 @@
     byId('obsStreamMuted').checked=p.streamMuted===true;
     byId('obsFeedLayout').value=p.feedLayout==='panel'?'panel':'full';
     byId('obsSidePanel').value=['brand','matchup','league','socials'].includes(p.sidePanel)?p.sidePanel:'brand';
+    var sw=p.swolly||{};
+    [['swollyLW','lw','CARNEY I94'],['swollyC','c','MAXIMUS6684'],['swollyD','d','TRMISERY'],['swollyG','g','JMEN_FISH27'],['swollyOpp1','opponent1',''],['swollyTime1','time1',''],['swollyOpp2','opponent2',''],['swollyTime2','time2',''],['swollyOpp3','opponent3',''],['swollyTime3','time3',''],['swollySocial','social','@SWOLLYSTAMPEDE'],['swollyAlert','alert','NEW FOLLOWER']].forEach(function(x){setValue(x[0],sw[x[1]]||x[2]);});
     syncStreamSelect();
     updateScoreDisplay();
     setSceneButtons();
@@ -283,6 +297,7 @@
     var clock=clockSnapshot();
     return {
       presetId:currentPresetId,
+      swolly:config().brand==='swolly'?{lw:val('swollyLW'),c:val('swollyC'),d:val('swollyD'),g:val('swollyG'),opponent1:val('swollyOpp1'),time1:val('swollyTime1'),opponent2:val('swollyOpp2'),time2:val('swollyTime2'),opponent3:val('swollyOpp3'),time3:val('swollyTime3'),social:val('swollySocial'),alert:val('swollyAlert')}:undefined,
       event:val('obsEvent'),
       homeName:val('obsHomeName')||config().name,
       awayName:val('obsAwayName'),
@@ -348,7 +363,7 @@
     setStatus('PUBLISHING');
     var row={
       channel:config().channel,
-      team_id:currentTeamId,
+      team_id:currentTeamId==='__swolly__'?swollyOwnerTeamId():currentTeamId,
       brand:config().brand,
       scene:currentScene,
       payload:collectPayload(),
@@ -386,7 +401,7 @@
       setSceneButtons();
       await loadState(true);
     });
-    document.querySelectorAll('#obsSceneStrip [data-preset]').forEach(function(button){
+    document.querySelectorAll('#obsSceneStrip [data-preset],#swollySceneStrip [data-preset]').forEach(function(button){
       button.addEventListener('click',async function(){
         applyScenePreset(button.dataset.preset);
         await publish(currentScene);
