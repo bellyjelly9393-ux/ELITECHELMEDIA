@@ -89,11 +89,17 @@ begin
           )
         )
       union
-      select va.locker_id
-      from private.vod_player_aliases va
-      where va.team_id=new.team_id
-        and va.season=game_season
-        and regexp_replace(lower(btrim(va.source_alias)), '[^a-z0-9]+', ' ', 'g')=entry.player_norm
+      -- Saved VOD links persist across seasons; map to this season's locker. Excluded names never route.
+      select resolved.locker_id
+      from (
+        select private.vod_alias_locker_for_season(va.locker_id,va.team_id,game_season) as locker_id
+        from private.vod_player_aliases va
+        where va.team_id=new.team_id
+          and not va.ignored
+          and va.locker_id is not null
+          and regexp_replace(lower(btrim(va.source_alias)), '[^a-z0-9]+', ' ', 'g')=entry.player_norm
+      ) resolved
+      where resolved.locker_id is not null
     ) candidates;
 
     if matches <> 1 then continue; end if;
