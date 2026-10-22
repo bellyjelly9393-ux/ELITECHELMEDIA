@@ -234,3 +234,6 @@
 /* Third newsroom tab: LG3s, shared across existing media desks. */
 .desk-toggle a.lg3s-desk .th-desk-mark {display:inline-grid;place-items:center;flex:0 0 auto;width:28px;height:28px;border:1px solid rgba(142,205,243,.45);background:#112538;color:#abdfff;font:400 24px/1 var(--f-head);}
 .desk-toggle a.lg3s-desk[aria-current] .th-desk-mark {background:#14283b;color:#f7d98a;border-color:#456582;}
+/* LG3s desk tab: real crest + steel/gold active state (Oct 21) */
+.desk-toggle a.lg3s-desk img{width:30px;height:30px;object-fit:cover;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+.desk-toggle a.lg3s-desk[aria-current]{background:linear-gradient(180deg,#f4f6f8,#c3ccd6 55%,#7d8894);color:#111316}

@@ -1,7 +1,7 @@
 /* LG3s Media opening-week desk. Scoped to .lg3s and .th-* to protect other pages. */
 .lg3s{--th-blue:#8ecdf3;--th-line:rgba(161,200,231,.19);--th-white:#f3f1eb;--th-muted:#bec1c6;background:#080a0e}
 .lg3s .desk-bar{background:linear-gradient(90deg,rgba(14,36,57,.5),rgba(9,10,13,.9) 70%)}
-.lg3s .desk-toggle a.lg3s-desk[aria-current]{color:#101923;background:linear-gradient(165deg,#d7efff,#94cbed 62%,#426f9f)}
+.lg3s .desk-toggle a.lg3s-desk[aria-current]{color:#111316;background:linear-gradient(180deg,#f4f6f8,#c3ccd6 55%,#7d8894)}
 .lg3s .th-desk-mark{display:flex;align-items:center;justify-content:center;width:27px;height:27px;font:700 22px/1 var(--f-head);color:var(--gold-hi);background:#152131;clip-path:polygon(12% 0,100% 0,100% 88%,88% 100%,0 100%,0 12%)}
 .lg3s .th-sub{background:#08111a}
 .lg3s .th-sub .sub-in a[aria-current]{border-bottom:2px solid var(--th-blue)}
@@ -232,3 +232,114 @@
 .lg3s .th-player{border-radius:11px;background:linear-gradient(160deg,#1b2935,#0e151e)}
 @media(max-width:760px){.lg3s .th-analysis-card,.lg3s .th-game-v2{min-height:0}}
 @media(prefers-reduced-motion:reduce){.lg3s .th-game-v2,.lg3s .th-feature,.lg3s .th-nation-chip{transition:none!important;transform:none!important}}
+
+
+/* ==========================================================================
+   Elitechel desk alignment (Oct 21): matches the Hitmen and LGCHL desks.
+   Black base, steel + gold LG3s accent, max 3px corners, notched cards,
+   faded art behind every section. Overrides the navy theme above.
+   ========================================================================== */
+.lg3s{--th-blue:#d5dde6;--th-line:rgba(255,255,255,.10);--lg3-steel:#d5dde6;--lg3-steel-lo:#8f9aa6;--lg3-cut:14px;background:#07080a}
+.lg3s .desk-bar{background:linear-gradient(180deg,#0d0f13,#08090b)}
+.lg3s .th-sub{background:linear-gradient(180deg,#0e0f12,#08090b)}
+.lg3s .th-sub .sub-in a[aria-current]{border-bottom:0;background:linear-gradient(180deg,rgba(213,221,230,.16),rgba(213,221,230,0))}
+.lg3s .th-sub .sub-in a[aria-current]::after{background:linear-gradient(90deg,var(--lg3-steel),var(--gold));box-shadow:0 0 12px rgba(227,181,74,.55)}
+.lg3s .th-page{background:#07080a}
+.lg3s .th-page:before{opacity:.5;background-image:var(--scratch)}
+
+/* square everything off */
+.lg3s .th-switch button,.lg3s .th-night-header,.lg3s .th-wave-header,.lg3s .th-game-v2,.lg3s .th-analysis-card,.lg3s .th-standing-group,
+.lg3s .th-table-scroll,.lg3s .th-roster-controls input,.lg3s .th-roster-controls select,.lg3s .th-feature,.lg3s .th-player,
+.lg3s .th-headline,.lg3s .th-nation-chip,.lg3s .th-hero .th-crest{border-radius:0}
+.lg3s .th-game-v2,.lg3s .th-analysis-card,.lg3s .th-feature,.lg3s .th-player,.lg3s .th-standing-group,.lg3s .th-headline{
+  clip-path:polygon(0 0,calc(100% - var(--lg3-cut)) 0,100% var(--lg3-cut),100% 100%,var(--lg3-cut) 100%,0 calc(100% - var(--lg3-cut)))}
+
+/* shared card skin: charcoal, grain, thin white/10 edge, top glint */
+.lg3s .th-game-v2,.lg3s .th-analysis-card,.lg3s .th-feature,.lg3s .th-player,.lg3s .th-standing-group{
+  border:0;box-shadow:inset 0 0 0 1px var(--th-line);background:linear-gradient(160deg,rgba(30,33,40,.92),rgba(12,13,16,.95) 62%)}
+.lg3s .th-game-v2::after,.lg3s .th-analysis-card::after,.lg3s .th-player::after{content:"";position:absolute;left:0;right:var(--lg3-cut);top:0;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.35),rgba(255,255,255,.05) 60%,transparent);pointer-events:none}
+.lg3s .th-game-v2{border-top:0;box-shadow:inset 0 0 0 1px var(--th-line),inset 0 3px 0 rgba(213,221,230,.45)}
+.lg3s .th-game-feature{box-shadow:inset 0 0 0 1px rgba(227,181,74,.28),inset 0 3px 0 var(--gold)}
+.lg3s .th-game-v2:hover,.lg3s .th-feature:hover{box-shadow:inset 0 0 0 1px rgba(227,181,74,.45),0 18px 34px -16px rgba(0,0,0,.9)}
+.lg3s .th-game-v2 .th-game-top strong,.lg3s .th-game-v2 .th-teams small,.lg3s .th-pick-label,.lg3s .th-vs{color:var(--lg3-steel-lo)}
+.lg3s .th-game-v2 .th-game-foot span{color:var(--lg3-steel)}
+.lg3s .th-analysis-card{border-top:0;box-shadow:inset 0 0 0 1px var(--th-line),inset 0 4px 0 var(--lg3-steel-lo)}
+.lg3s .th-analysis-lead{box-shadow:inset 0 0 0 1px rgba(227,181,74,.3),inset 0 4px 0 var(--gold);background:linear-gradient(155deg,rgba(54,42,20,.75),rgba(12,13,16,.96) 70%)}
+.lg3s .th-feature-lead{box-shadow:inset 0 0 0 1px rgba(227,181,74,.4);background:linear-gradient(145deg,rgba(54,42,20,.7),rgba(12,13,16,.96) 70%)}
+.lg3s .th-feature-flag span,.lg3s .th-player>span,.lg3s .th-roster-controls label>span{color:var(--lg3-steel)}
+.lg3s .th-player{background:linear-gradient(160deg,rgba(30,33,40,.92),rgba(12,13,16,.96))}
+.lg3s .th-player b{background:linear-gradient(180deg,#fff0bf,var(--gold) 60%,var(--gold-lo));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* buttons, toggles and inputs in the site's skewed style */
+.lg3s .th-switch{gap:0;box-shadow:inset 0 0 0 1px var(--line-2);background:rgba(7,8,10,.6);width:max-content;max-width:100%;transform:skewX(-12deg)}
+.lg3s .th-switch button{border:0;border-right:1px solid var(--th-line);background:transparent;color:#d6d4cd}
+.lg3s .th-switch button:last-child{border-right:0}
+.lg3s .th-switch button>*,.lg3s .th-switch button{font-style:normal}
+.lg3s .th-switch button:hover:not([aria-pressed="true"]){background:rgba(255,255,255,.06)}
+.lg3s .th-switch button[aria-pressed=true]{background:linear-gradient(180deg,var(--gold-hi),var(--gold) 60%,var(--gold-lo));color:#1a1205}
+.lg3s .th-roster-controls input,.lg3s .th-roster-controls select{background:rgba(7,8,10,.75);border:1px solid var(--line-2)}
+.lg3s .th-more-btn{clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);background:linear-gradient(180deg,#fff0bf 0%,var(--gold-hi) 18%,var(--gold) 55%,var(--gold-lo) 100%);border:0;padding:11px 24px 9px;letter-spacing:.08em;text-transform:uppercase}
+.lg3s .th-night-header{background:linear-gradient(90deg,rgba(30,33,40,.92),rgba(12,13,16,.9));border:0;box-shadow:inset 0 0 0 1px var(--th-line);border-left:4px solid var(--gold)}
+.lg3s .th-night-header small,.lg3s .th-verified{color:var(--lg3-steel-lo)}
+.lg3s .th-wave-header{background:none;color:var(--lg3-steel-lo)}
+.lg3s .th-wave-time{background:linear-gradient(180deg,#fff0bf,var(--gold) 55%,var(--gold-lo));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lg3s .th-roster-stats span{background:rgba(227,181,74,.07);box-shadow:inset 0 0 0 1px rgba(227,181,74,.22)}
+
+/* tables */
+.lg3s .th-table-scroll{border:0;box-shadow:inset 0 0 0 1px var(--th-line);background:rgba(10,11,14,.88)}
+.lg3s .th-table th{background:linear-gradient(180deg,#17191e,#101115);color:var(--lg3-steel);border-bottom:1px solid rgba(227,181,74,.35)}
+.lg3s .th-table tbody tr:nth-child(even){background:rgba(255,255,255,.025)}
+.lg3s .th-table tr:hover td{background:rgba(227,181,74,.07)}
+.lg3s .th-standing-title{background:linear-gradient(100deg,#1f2228,#121317)}
+.lg3s .th-player-name span,.lg3s .th-role,.lg3s .th-status{color:var(--lg3-steel-lo)}
+.lg3s .th-caption a,.lg3s .th-source,.lg3s .th-method-links a{color:var(--gold-hi)}
+
+/* ---------- hero: matches the LGCHL desk hero ---------- */
+.lg3s .th-hero{position:relative;isolation:isolate;padding-block:46px 48px;border-bottom:1px solid var(--line);background:#07080a url("assets/lg3s/art/lg3s-hero.webp") 70% 50%/cover no-repeat}
+.lg3s .th-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,8,10,.82) 0%,rgba(7,8,10,.55) 45%,rgba(7,8,10,.15) 75%),linear-gradient(180deg,transparent 60%,rgba(7,8,10,.85)),var(--scratch)}
+.lg3s .th-hero:after{height:3px;background:linear-gradient(90deg,var(--gold) 0 22%,transparent 22% 23%,var(--lg3-steel) 23% 34%,transparent 34%)}
+.lg3s .th-hero .th-crest{width:88px;height:88px;object-fit:cover;border:0;box-shadow:0 0 0 1px rgba(227,181,74,.55),0 14px 30px rgba(0,0,0,.7);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
+.lg3s .th-label{border-left:2px solid var(--gold);color:var(--bone)}
+.lg3s .th-copy h1{font-size:clamp(46px,6vw,92px);line-height:.9;
+  background:linear-gradient(180deg,#ffffff 0%,#e9e7e2 42%,#9da0a6 54%,#f1f0ec 70%,#b9bbbf 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 3px 0 rgba(0,0,0,.85)) drop-shadow(0 10px 22px rgba(0,0,0,.6))}
+.lg3s .th-copy h1 em{background:linear-gradient(176deg,#fff4cc 0%,var(--gold-hi) 28%,var(--gold) 58%,#8a6216 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.1em}
+.lg3s .th-dek{color:#e6e3dc;font-size:18px}
+.lg3s .th-hero-note{color:var(--mute)}
+.lg3s .th-headline{border:0;box-shadow:inset 0 0 0 1px var(--th-line),inset 3px 0 0 var(--gold);background:linear-gradient(150deg,rgba(18,19,23,.74),rgba(7,8,10,.86));-webkit-backdrop-filter:blur(12px) saturate(.8);backdrop-filter:blur(12px) saturate(.8)}
+.lg3s .th-headline:before{color:rgba(227,181,74,.06)}
+.lg3s .th-head-stats b{background:linear-gradient(180deg,#fff0bf,var(--gold) 55%,var(--gold-lo));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lg3s .th-head-stats small{color:var(--lg3-steel-lo)}
+
+/* banner strip under the artwork */
+.lg3s .th-banner{background:#050506;border-bottom:0;box-shadow:none}
+.lg3s .th-banner-strip{background:linear-gradient(100deg,#141518,#0a0b0e 55%,#1c170f);border-top:2px solid var(--gold);color:var(--lg3-steel-lo)}
+
+/* nations bar */
+.lg3s .th-nations-bar{background:linear-gradient(180deg,#0e0f12,#08090b);border-bottom:1px solid var(--line)}
+.lg3s .th-nation-chip{border-color:var(--th-line);background:linear-gradient(160deg,rgba(30,33,40,.8),rgba(12,13,16,.9));clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+
+/* ---------- sections: faded art behind every block ---------- */
+.lg3s .th-section{position:relative;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--line);background:#07080a}
+.lg3s .th-section:nth-of-type(even){background:#08090b}
+.lg3s .th-section::before{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:var(--th-art,none) var(--th-art-pos,center)/var(--th-art-size,cover) no-repeat;opacity:var(--th-art-o,.18);filter:saturate(.85)}
+.lg3s .th-section::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(7,8,10,.35),rgba(7,8,10,.9) 70%),var(--scratch)}
+.lg3s .th-schedule-section{--th-art:url("assets/lg3s/art/rink-3v3.svg");--th-art-pos:right -60px top 30px;--th-art-size:min(860px,90vw) auto;--th-art-o:.13;background:radial-gradient(60% 40% at 100% 0,rgba(227,181,74,.10),transparent 70%),#07080a}
+.lg3s .th-analysis-section{--th-art:url("assets/broadcast/arena-tunnel.webp");--th-art-pos:center 40%;--th-art-o:.22;background:#08090b}
+.lg3s .th-standings-section{--th-art:url("assets/lg3s/art/lg3s-groups.webp");--th-art-o:.26;background:#07080a}
+.lg3s .th-roster-section{--th-art:url("assets/wildman/home/ice.webp");--th-art-o:.07;background:#08090b}
+.lg3s .th-spotlight{--th-art:url("assets/lg3s/art/lg3s-hero.webp");--th-art-pos:80% 30%;--th-art-o:.24}
+.lg3s #players{--th-art:url("assets/lg3s/art/lg3s-bid-board.webp");--th-art-pos:center 35%;--th-art-o:.22}
+.lg3s .th-bid-section{--th-art:url("assets/lg3s/art/lg3s-bid-board.webp");--th-art-pos:center 60%;--th-art-o:.14;background:#08090b}
+.lg3s #method{--th-art:url("assets/lg3s/art/rink-3v3.svg");--th-art-pos:left -120px bottom -60px;--th-art-size:620px auto;--th-art-o:.07}
+.lg3s .th-section-head .eyebrow{color:var(--lg3-steel)}
+.lg3s .th-section-caption{color:#bdbab3}
+
+/* desk switcher badge (shared with the other desks via wildman-media-desk.css) */
+@media(max-width:700px){
+  .lg3s .th-switch{transform:none;width:100%}
+  .lg3s .th-hero{background-position:62% 50%;padding-block:30px 34px}
+  .lg3s .th-hero::before{background:linear-gradient(180deg,rgba(7,8,10,.8),rgba(7,8,10,.93)),var(--scratch)}
+  .lg3s{--lg3-cut:10px}
+  .lg3s .th-schedule-section{--th-art-pos:center 80px;--th-art-size:140% auto}
+}

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 440" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>3-on-3 rink diagram</title>
+  <g stroke="#dfe6ee" stroke-width="3">
+    <rect x="10" y="10" width="980" height="420" rx="120"/>
+    <line x1="500" y1="10" x2="500" y2="430" stroke="#e8483a" stroke-width="5"/>
+    <line x1="340" y1="10" x2="340" y2="430" stroke="#6f97ff" stroke-width="7"/>
+    <line x1="660" y1="10" x2="660" y2="430" stroke="#6f97ff" stroke-width="7"/>
+    <line x1="72" y1="18" x2="72" y2="422" stroke="#e8483a"/>
+    <line x1="928" y1="18" x2="928" y2="422" stroke="#e8483a"/>
+    <circle cx="500" cy="220" r="62"/>
+    <circle cx="180" cy="110" r="58" stroke="#e8483a"/><circle cx="180" cy="330" r="58" stroke="#e8483a"/>
+    <circle cx="820" cy="110" r="58" stroke="#e8483a"/><circle cx="820" cy="330" r="58" stroke="#e8483a"/>
+    <path d="M72 196a26 26 0 0 1 0 48" stroke="#6f97ff" stroke-width="4"/>
+    <path d="M928 196a26 26 0 0 0 0 48" stroke="#6f97ff" stroke-width="4"/>
+    <rect x="928" y="204" width="20" height="32" stroke-width="3"/>
+  </g>
+  <g fill="#e3b54a" stroke="#0b0b0d" stroke-width="3">
+    <circle cx="610" cy="96" r="17"/><circle cx="600" cy="344" r="17"/><circle cx="790" cy="214" r="17"/>
+  </g>
+  <g stroke="#f7d98a" stroke-width="4" stroke-dasharray="12 12">
+    <path d="M626 104L774 206"/><path d="M616 336L774 222"/><path d="M610 114L602 326"/>
+  </g>
+  <path d="M808 214C856 210 890 214 920 220" stroke="#f7d98a" stroke-width="5"/>
+  <path d="M906 208l18 12-18 12" stroke="#f7d98a" stroke-width="5"/>
+  <g font-family="Anton, Impact, sans-serif" font-size="22" fill="#0b0b0d" text-anchor="middle" stroke="none">
+    <text x="610" y="104">1</text><text x="600" y="352">2</text><text x="790" y="222">3</text>
+  </g>
+</svg>
