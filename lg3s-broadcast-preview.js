@@ -1,29 +1,27 @@
-/* Preview dashboard: verified local snapshot only; no invented results or affiliations. */
-(()=>{'use strict';const root=document.getElementById('lg3Broadcast');if(!root)return;
+/* International broadcast presentation. Saved fixtures are dated; predictions are editorial. */
+(()=>{'use strict';const $=id=>document.getElementById(id);if(!$('lg3Broadcast'))return;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const img=t=>'<img src="assets/lg3s/team'+Number(t.id)+'.svg" alt="'+esc(t.name)+' crest">';
-const link=id=>'https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid='+Number(id)+'&leagueid=154&seasonid=1';
-const $=id=>document.getElementById(id);
-// International championship banners: country flags, never team crests.
-// Flags are decorative and do not imply game results or rankings.
-const nations=[['Canada','ca'],['USA','us'],['Great Britain','gb'],['Germany','de'],['Sweden','se'],['Finland','fi'],['Japan','jp'],['Italy','it'],['Switzerland','ch'],['Latvia','lv'],['Poland','pl'],['Slovakia','sk'],['Kazakhstan','kz']];
-const banner=root.querySelector('.lg3-banner');
-if(banner){
- const rail=document.createElement('div');rail.className='lg3-arena-rail';rail.setAttribute('aria-label','International hockey nations');
- rail.innerHTML=nations.map(([name,code])=>'<div class="lg3-arena-banner"><span class="lg3-arena-name">'+esc(name)+'</span><div class="lg3-arena-cloth" style="--flag:url(https://flagcdn.com/'+code+'.svg)"></div></div>').join('');
- banner.prepend(rail);
-}
-
-fetch('lg3s-season1-data.json?v=20261021-2',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('data');return r.json()}).then(d=>{
-if(!Array.isArray(d.teams)||d.teams.length!==12||!Array.isArray(d.games)||!Array.isArray(d.players))throw Error('invalid');
-const byId=new Map(d.teams.map(t=>[t.id,t]));const games=d.games.slice().sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));const today=new Date().toLocaleDateString('en-CA',{timeZone:'America/Toronto'});const feature=games.find(g=>g.date>=today)||games[games.length-1];const a=byId.get(feature.away),h=byId.get(feature.home);root.style.setProperty('--lg3-feature-away','url("assets/lg3s/team'+Number(a.id)+'.svg")');root.style.setProperty('--lg3-feature-home','url("assets/lg3s/team'+Number(h.id)+'.svg")');
-$('lg3Feature').innerHTML='<div class="lg3-flags">'+img(a)+'<b>VS</b>'+img(h)+'</div><p><strong>'+esc(a.name)+' vs '+esc(h.name)+'</strong><br><span class="lg3-muted">'+esc(feature.date)+' · '+esc(feature.time)+' ET · Scheduled fixture</span></p><div class="lg3-center"><a class="lg3-action" href="#analysis">READ MATCHUP PREVIEW →</a></div>';
-$('lg3Schedule').innerHTML=games.filter(g=>g.date>=today).slice(0,5).map(g=>{const x=byId.get(g.away),y=byId.get(g.home);return '<div class="lg3-row"><span>'+img(x)+esc(x.name)+' <span class="lg3-muted">vs</span> '+esc(y.name)+img(y)+'</span><small>'+esc(g.date.slice(5))+' · '+esc(g.time)+'</small></div>'}).join('');
-/* Recent score box is rendered by the verified parser-backed module. */
-$('lg3Rankings').innerHTML=d.teams.slice().sort((x,y)=>y.pts-x.pts||x.name.localeCompare(y.name)).map((t,i)=>'<div class="lg3-row"><span><span class="lg3-rank">'+(i+1)+'.</span> '+img(t)+esc(t.name)+'</span><span>'+t.w+'-'+t.l+' · '+t.pts+' PTS</span></div>').join('')+'<p class="lg3-note">Official snapshot, tied teams listed alphabetically. Power rankings will appear once verified results are available.</p>';
-$('lg3Leaders').innerHTML='<p class="lg3-note">Verified scoring leaders will appear when game statistics are available. Until then, browse the roster index and open official LeagueGaming player profiles.</p>'+d.players.filter(p=>p.s==='Active').slice(0,6).map(p=>'<div class="lg3-row"><a class="lg3-leader" target="_blank" rel="noopener noreferrer" href="'+link(p.id)+'">'+esc(p.n)+' ↗</a><span>'+esc(byId.get(p.t)?.name)+' · '+esc(p.p)+'</span></div>').join('');
-const week=Math.floor(Date.now()/604800000);const canada=d.teams[week%d.teams.length];const lineup=d.players.filter(p=>p.t===canada.id&&p.s==='Active').slice(0,4);
-$('lg3Spotlight').style.setProperty('--lg3-nation-flag','url("assets/lg3s/team'+Number(canada.id)+'.svg")');$('lg3Spotlight').innerHTML='<h3>'+esc(canada.name)+' · FEATURED ROSTER</h3><div class="lg3-lineup">'+lineup.map(p=>'<a class="lg3-person" href="'+link(p.id)+'" target="_blank" rel="noopener noreferrer">'+esc(p.n)+'<small>'+esc(p.p)+' · LG3s</small></a>').join('')+'</div><p class="lg3-note">Four rostered players from the saved league snapshot. Division history and editorial profiles will be added only after verification.</p><a class="lg3-action" href="#rosters">VIEW LEADERBOARDS →</a>';
-$('lg3News').innerHTML='<a href="#analysis"><strong>Opening-week matchups</strong><small>Read evidence-based previews and roster storylines.</small></a><a href="#standings"><strong>Group races</strong><small>Official standings and clearly labeled ECM forecasts.</small></a><a href="#rosters"><strong>Nation rosters</strong><small>Browse all twelve teams and linked player profiles.</small></a>';
-}).catch(()=>{['lg3Feature','lg3Schedule','lg3Rankings','lg3Leaders','lg3Spotlight','lg3News'].forEach(id=>{const n=$(id);if(n)n.textContent='Verified league snapshot temporarily unavailable.'})});
+const mark=t=>'<img src="assets/lg3s/flag'+Number(t.id)+'.svg" alt="'+esc(t.name)+' flag">';
+const gameUrl=id=>'https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid='+Number(id);
+const profile=id=>'https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid='+Number(id)+'&leagueid=154&seasonid=1';
+const et=g=>g.date+' · '+g.time+' ET';
+fetch('lg3s-season1-data.json?v=20261021-2',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('snapshot');return r.json()}).then(d=>{
+if(!Array.isArray(d.teams)||d.teams.length!==12||!d.games?.length)throw Error('Incomplete snapshot');
+const teams=new Map(d.teams.map(t=>[t.id,t]));
+$('arenaNations').innerHTML=d.teams.map(t=>'<div class="lg3-arena-banner"><div class="lg3-arena-cloth" style="--flag:url(assets/lg3s/flag'+Number(t.id)+'.svg)"></div><span class="lg3-arena-name">'+esc(t.name)+'</span></div>').join('');
+const games=d.games.slice().sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const upcoming=games.filter(g=>g.date>today);const feature=upcoming[0]||games.find(g=>g.away===532&&g.home===343||g.home===532&&g.away===343)||games[0];
+const a=teams.get(feature.away),h=teams.get(feature.home);
+$('lg3Feature').innerHTML='<p class="eyebrow">'+(upcoming.length?'UPCOMING FIXTURE':'FROM THE OPENING-WEEK ARCHIVE')+'</p><div class="lg3-flags">'+mark(a)+'<b>VS</b>'+mark(h)+'</div><h3>'+esc(a.name)+' <em>vs</em> '+esc(h.name)+'</h3><p>'+esc(et(feature))+'</p><p>'+esc(feature.preview)+'</p><a class="lg3-action" href="'+gameUrl(feature.id)+'" target="_blank" rel="noopener noreferrer">OFFICIAL GAME REPORT ↗</a><p class="lg3-note">'+(upcoming.length?'Schedule snapshot · confirm fixture status at source.':'Archived fixture · preview reflects pregame editorial context. See verified scoreboard for results.')+'</p>';
+$('lg3Schedule').innerHTML=upcoming.length?upcoming.slice(0,5).map(g=>'<div class="lg3-row"><span>'+esc(teams.get(g.away).name)+' vs '+esc(teams.get(g.home).name)+'</span><small>'+esc(et(g))+'</small></div>').join(''):'<p class="eyebrow">AWAITING THE NEXT SLATE</p><p>No future fixtures are available in the October 21 snapshot. New games will appear when a verified schedule is available.</p><a class="lg3-action" href="'+esc(d.source.schedules)+'" target="_blank" rel="noopener noreferrer">OFFICIAL SCHEDULE ↗</a>';
+// Editorial order follows the existing projected wins; ties are alphabetical, never fabricated results.
+const records=new Map((d.projection?.records||[]).map(p=>[p.id,p]));
+const ranked=d.teams.slice().sort((a,b)=>(records.get(b.id)?.w||0)-(records.get(a.id)?.w||0)||a.name.localeCompare(b.name));
+$('lg3Rankings').innerHTML='<p class="lg3-note">PRESEASON EDITORIAL · OCT 21<br>Based on ECM projected wins. Ties share a rank. Movement awaits a second published edition.</p>'+ranked.map((t,i)=>{const w=records.get(t.id)?.w;const rank=ranked.findIndex(x=>records.get(x.id)?.w===w)+1;return '<div class="lg3-row"><span><span class="lg3-rank">'+rank+'</span>'+mark(t)+esc(t.name)+'</span><span class="move" aria-label="New entry; no previous ranking">NEW <span aria-hidden="true">◆</span></span></div>'}).join('');
+const nation=d.teams.find(t=>t.id===341)||d.teams[0];const active=d.players.filter(p=>p.t===nation.id&&p.s==='Active');const lineup=['C','LW','LD','G'].map(pos=>active.find(p=>p.p===pos)).filter(Boolean);
+$('lg3Spotlight').innerHTML='<p class="eyebrow">NATION FILE / SEASON 01</p><h3>'+esc(nation.name).toUpperCase()+'<br><em>THE MAPLE LEAF STANDARD.</em></h3><p>Four-player hockey. Three skaters and one goalie. Explore the people carrying Canada’s international ambitions.</p><div class="lg3-lineup">'+lineup.map(p=>'<a class="lg3-person" href="'+profile(p.id)+'" target="_blank" rel="noopener noreferrer">'+esc(p.n)+'<small>'+esc(p.p)+' · ROSTER SNAPSHOT</small></a>').join('')+'</div><p class="lg3-note">Roster selection from October 21; this is not a confirmed game lineup.</p><a class="hero-link" href="#watch">MORE NATION SPOTLIGHTS →</a>';
+$('lg3Posters').innerHTML=[feature,games.find(g=>g.id!==feature.id&&g.away!==feature.away&&g.home!==feature.home)||games[0]].map(g=>'<a class="match-poster" href="'+gameUrl(g.id)+'" target="_blank" rel="noopener noreferrer"><small>LG3S INTERNATIONAL / FIXTURE ARCHIVE</small><div class="poster-flags">'+mark(teams.get(g.away))+'<b>VS</b>'+mark(teams.get(g.home))+'</div><h3>'+esc(teams.get(g.away).name)+'<br><em>'+esc(teams.get(g.home).name)+'</em></h3><small>'+esc(et(g))+'<br>OFFICIAL GAME CENTRE ↗</small></a>').join('');
+$('lg3News').innerHTML='<a href="#analysis"><strong>Opening week: the international storylines</strong><small>PREVIEW / OCT 21 · Roster investment, marquee fixtures and ECM predictions.</small></a><a href="#lg3RecapArchive"><strong>The game-night record</strong><small>RESULTS / Verified scores and official reports. Reviewed editorial recaps are pending publication.</small></a><a href="#players"><strong>The names carrying a nation</strong><small>PLAYER FILES / A closer look at the bidding market.</small></a>';
+}).catch(()=>{['lg3Feature','lg3Schedule','lg3Rankings','lg3Spotlight','lg3Posters','lg3News'].forEach(id=>{if($(id))$(id).textContent='League snapshot temporarily unavailable. Please check official LeagueGaming coverage.'})});
 })();

@@ -47,7 +47,7 @@
       return '<div class="th-wave"><header class="th-wave-header"><span class="th-wave-time">' + shortTime(time) + ' <small>ET</small></span><span>' + label + '</span><span>' + arr.length + ' MATCHUPS</span></header><div class="th-games">' + arr.map(gameCard).join('') + '</div></div>';
     }).join('');
     const all=chosenDay==='all',isWed=chosenDay==='2026-10-21';
-    $('thSelectedNight').textContent=all?'FULL OPENING WEEK · OCT 21–22':isWed?'OPENING NIGHT · WEDNESDAY, OCT 21':'NIGHT TWO · THURSDAY, OCT 22';
+    $('thSelectedNight').textContent=all?'FULL OPENING WEEK · OCT 21–22':isWed?'ARCHIVE · WEDNESDAY, OCT 21':'ARCHIVE · THURSDAY, OCT 22';
     $('thNightStat').textContent=(all?'30':isWed?'18':'12')+' VERIFIED FIXTURES · '+(all?'FIVE':isWed?'THREE':'TWO')+' WAVES';
     document.querySelectorAll('.th-switch button[data-date]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.date===chosenDay)));
   }
@@ -91,6 +91,7 @@
     console.error('LG3s public media snapshot:',err);
     if($('thGames'))$('thGames').innerHTML='<p class="th-caption">The saved fixture board is temporarily unavailable. Check <a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=standing&leagueid=154&seasonid=1" target="_blank" rel="noopener noreferrer">official LeagueGaming</a> for the latest schedule.</p>';
     if($('thStandings'))$('thStandings').innerHTML='<p class="th-caption">Official group snapshot unavailable.</p>';
-    if($('thPlayerRows'))$('thPlayerRows').innerHTML='<tr><td colspan="6">Roster snapshot unavailable right now.</td></tr>';
+    // The independent verified leaderboard feed owns its error state.
   });
 })();
+

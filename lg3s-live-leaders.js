@@ -9,7 +9,7 @@ const profile=id=>'https://www.leaguegaming.com/forums/index.php?leaguegaming/le
 let skaters=[],goalies=[],limit=40;
 const get=async name=>{const r=await fetch(base+name+'?select=*',{headers:{apikey:key},cache:'no-store'});if(!r.ok)throw Error(name+' '+r.status);return r.json()};
 const num=v=>Number(v)||0;
-const fmt=(v,d=0)=>Number.isFinite(Number(v))?Number(v).toFixed(d):'—';
+const fmt=(v,d=0)=>v!=null&&v!==''&&Number.isFinite(Number(v))?Number(v).toFixed(d):'—';
 function mode(){return $('thPlayerStatus').value}
 function render(){
 const goalie=mode()==='goalies',src=goalie?goalies:skaters;
@@ -18,13 +18,16 @@ const data=src.filter(p=>{const nations=goalie?(p.nations_played_for||[]):[p.nat
 data.sort((a,b)=>{const av=a[metric]==null?null:Number(a[metric]),bv=b[metric]==null?null:Number(b[metric]);if(av==null&&bv!=null)return 1;if(bv==null&&av!=null)return -1;return (metric==='gaa_per_game'?(av-bv):(bv-av))||num(b.gp)-num(a.gp)||String(a.gamertag).localeCompare(String(b.gamertag))});
 const columns=goalie?['#','PLAYER','NATION','GP','SA','SV','GA','SV%','GA/G']:['#','PLAYER','NATION','GP','G','A','PTS','+/-','SHOTS','HITS'];
 $('thLeadersHead').innerHTML='<tr>'+columns.map(c=>'<th scope="col">'+c+'</th>').join('')+'</tr>';
-$('thPlayerRows').innerHTML=data.slice(0,limit).map((p,i)=>{const cells=goalie?[p.gp,p.sa,p.sv,p.ga,fmt(num(p.sv_pct)*100,1)+'%',fmt(p.gaa_per_game,2)]:[p.gp,p.g,p.a,p.p,p.plus_minus,p.shots,p.hits];const nations=goalie?(p.nations_played_for||[]).join(', '):p.nation;return '<tr><td class="th-num-rank">'+(i+1)+'</td><td><a class="th-player-name" target="_blank" rel="noopener noreferrer" href="'+profile(p.lg_user_id)+'">'+esc(p.gamertag)+' ↗</a></td><td>'+esc(nations)+'</td>'+cells.map(x=>'<td class="num">'+esc(x??'—')+'</td>').join('')+'</tr>'}).join('')||'<tr><td colspan="'+columns.length+'">No verified player statistics match these filters.</td></tr>';
+$('thPlayerRows').innerHTML=data.slice(0,limit).map((p,i)=>{const cells=goalie?[p.gp,p.sa,p.sv,p.ga,p.sv_pct!=null&&Number(p.sa)>0?fmt(Number(p.sv_pct)*100,1)+'%':'—',fmt(p.gaa_per_game,2)]:[p.gp,p.g,p.a,p.p,p.plus_minus,p.shots,p.hits];const nations=goalie?(p.nations_played_for||[]).join(', '):p.nation;return '<tr><td class="th-num-rank">'+(i+1)+'</td><td><a class="th-player-name" target="_blank" rel="noopener noreferrer" href="'+profile(p.lg_user_id)+'">'+esc(p.gamertag)+' ↗</a></td><td>'+esc(nations)+'</td>'+cells.map(x=>'<td class="num">'+esc(x??'—')+'</td>').join('')+'</tr>'}).join('')||'<tr><td colspan="'+columns.length+'">No verified player statistics match these filters.</td></tr>';
 $('thPlayerCount').textContent='SHOWING '+Math.min(limit,data.length)+' OF '+data.length+' VERIFIED '+(goalie?'GOALIES':'SKATERS');
 $('thPlayersMore').hidden=limit>=data.length;
 }
 function changeMode(){const goalie=mode()==='goalies';$('thPlayerSort').innerHTML=(goalie?[['sv_pct','Save percentage'],['sv','Saves'],['gaa_per_game','Lowest goals against per game'],['sa','Shots against'],['gp','Games played']]:[['p','Points'],['g','Goals'],['a','Assists'],['plus_minus','Plus/minus'],['shots','Shots'],['hits','Hits'],['gp','Games played']]).map(([v,t])=>'<option value="'+v+'">'+t+'</option>').join('');limit=40;render()}
-Promise.all([get('lg3s_public_skater_leaders'),get('lg3s_public_goalie_leaders')]).then(([s,g])=>{
+Promise.allSettled([get('lg3s_public_skater_leaders'),get('lg3s_public_goalie_leaders')]).then(results=>{
+const s=results[0].status==='fulfilled'?results[0].value:[],g=results[1].status==='fulfilled'?results[1].value:[];
+if(results.every(r=>r.status==='rejected'))throw Error('Verified leader views unavailable');
 skaters=s;goalies=g;
+$('thRosterStats').textContent='VERIFIED GAME REPORTS · '+s.length+' SKATERS · '+g.length+' GOALIES · FETCHED '+new Date().toLocaleString('en-US',{timeZone:'America/Toronto'})+' ET';
 const nations=[...new Set([...s.map(p=>p.nation),...g.flatMap(p=>p.nations_played_for||[])].filter(Boolean))].sort();
 $('thPlayerTeam').innerHTML='<option value="all">All nations</option>'+nations.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join('');
 $('thPlayerStatus').addEventListener('change',changeMode);
