@@ -4,6 +4,16 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const img=t=>'<img src="assets/lg3s/team'+Number(t.id)+'.svg" alt="'+esc(t.name)+' crest">';
 const link=id=>'https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid='+Number(id)+'&leagueid=154&seasonid=1';
 const $=id=>document.getElementById(id);
+// International championship banners: country flags, never team crests.
+// Flags are decorative and do not imply game results or rankings.
+const nations=[['Canada','ca'],['USA','us'],['Great Britain','gb'],['Germany','de'],['Sweden','se'],['Finland','fi'],['Japan','jp'],['Italy','it'],['Switzerland','ch'],['Latvia','lv'],['Poland','pl'],['Slovakia','sk'],['Kazakhstan','kz']];
+const banner=root.querySelector('.lg3-banner');
+if(banner){
+ const rail=document.createElement('div');rail.className='lg3-arena-rail';rail.setAttribute('aria-label','International hockey nations');
+ rail.innerHTML=nations.map(([name,code])=>'<div class="lg3-arena-banner"><span class="lg3-arena-name">'+esc(name)+'</span><div class="lg3-arena-cloth" style="--flag:url(https://flagcdn.com/'+code+'.svg)"></div></div>').join('');
+ banner.prepend(rail);
+}
+
 fetch('lg3s-season1-data.json?v=20261021-2',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('data');return r.json()}).then(d=>{
 if(!Array.isArray(d.teams)||d.teams.length!==12||!Array.isArray(d.games)||!Array.isArray(d.players))throw Error('invalid');
 const byId=new Map(d.teams.map(t=>[t.id,t]));const games=d.games.slice().sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));const today=new Date().toLocaleDateString('en-CA',{timeZone:'America/Toronto'});const feature=games.find(g=>g.date>=today)||games[games.length-1];const a=byId.get(feature.away),h=byId.get(feature.home);root.style.setProperty('--lg3-feature-away','url("assets/lg3s/team'+Number(a.id)+'.svg")');root.style.setProperty('--lg3-feature-home','url("assets/lg3s/team'+Number(h.id)+'.svg")');
