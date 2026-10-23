@@ -72,18 +72,7 @@
     $('thStandingsAsOf').textContent=boardMode==='forecast'?'EDITORIAL · NOT OFFICIAL':'OFFICIAL SNAPSHOT · OCT 21';
     document.querySelectorAll('.th-board-mode').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.boardMode===boardMode)));
   }
-  function renderPlayers(){
-    const search=$('thPlayerSearch').value.trim().toLocaleLowerCase(),tid=$('thPlayerTeam').value,status=$('thPlayerStatus').value,pos=$('thPlayerPosition').value,sort=$('thPlayerSort').value;
-    let players=data.players.filter(p=>(status==='all'||p.s===status)&&(tid==='all'||String(p.t)===tid)&&(pos==='all'||p.p===pos)&&(!search||p.n.toLocaleLowerCase().includes(search)||team(p.t).name.toLocaleLowerCase().includes(search)));
-    players.sort(sort==='name'?(a,b)=>a.n.localeCompare(b.n):sort==='team'?(a,b)=>team(a.t).name.localeCompare(team(b.t).name)||a.n.localeCompare(b.n):(a,b)=>(b.v??-1)-(a.v??-1)||a.n.localeCompare(b.n));
-    const shown=players.slice(0,playerLimit);
-    $('thPlayerRows').innerHTML=shown.length?shown.map((p,i)=>{
-      const t=team(p.t);
-      return '<tr><td class="th-num-rank">'+(i+1)+'</td><td><a class="th-player-name" href="'+userUrl(p.id)+'" target="_blank" rel="noopener noreferrer">'+esc(p.n)+' <span>↗</span></a>'+(p.r?'<small class="th-role">'+esc(p.r)+'</small>':'')+'</td><td><a class="th-team-link" href="'+teamUrl(t.id)+'" target="_blank" rel="noopener noreferrer">'+teamMark(t,30)+esc(t.name)+'</a></td><td>'+esc(p.p)+'</td><td><span class="th-status '+(p.s==='TC'?'is-tc':'')+'">'+(p.s==='TC'?'Training camp':'Active')+'</span></td><td class="num">'+salary(p.v)+'</td></tr>';
-    }).join(''):'<tr><td colspan="6">No roster members match these filters.</td></tr>';
-    $('thPlayerCount').textContent='SHOWING '+shown.length+' OF '+players.length+' MATCHING PLAYERS · '+data.players.length+' REGISTERED ACROSS THE LEAGUE · OCT 21 SNAPSHOT';
-    $('thPlayersMore').hidden=shown.length>=players.length;
-  }
+  function renderPlayers(){ /* Replaced by verified LG3s live leaderboard module. */ }
   async function start(){
     const response=await fetch('lg3s-season1-data.json?v=20261021-2',{cache:'no-store'});
     if(!response.ok)throw Error('Snapshot unavailable');
@@ -91,12 +80,12 @@
     if(!Array.isArray(data.teams)||data.teams.length!==12||data.games.length!==30||data.players.length<200)throw Error('Incomplete league snapshot');
     tm=new Map(data.teams.map(t=>[t.id,t]));
     renderNations();renderGames();renderStandings();
-    $('thPlayerTeam').innerHTML='<option value="all">All twelve nations</option>'+data.teams.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(t=>'<option value="'+t.id+'">'+esc(t.name)+'</option>').join('');
+    // Nation choices are populated from verified statistical leader views.
     renderPlayers();
     document.querySelectorAll('.th-switch button[data-date]').forEach(b=>b.addEventListener('click',()=>{chosenDay=b.dataset.date;renderGames();}));
     document.querySelectorAll('.th-board-mode').forEach(b=>b.addEventListener('click',()=>{boardMode=b.dataset.boardMode;renderStandings();}));
-    ['thPlayerSearch','thPlayerTeam','thPlayerStatus','thPlayerPosition','thPlayerSort'].forEach(id=>$(id).addEventListener(id==='thPlayerSearch'?'input':'change',()=>{playerLimit=40;renderPlayers();}));
-    $('thPlayersMore').addEventListener('click',()=>{playerLimit+=40;renderPlayers();});
+    // Leaderboard event handlers are owned by lg3s-live-leaders.js.
+    // Pagination is owned by the verified leaderboard module.
   }
   start().catch(err=>{
     console.error('LG3s public media snapshot:',err);

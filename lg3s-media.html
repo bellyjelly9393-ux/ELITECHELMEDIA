@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#08090b">
 <title>LG3s Media | Season 1 Week 1 Preview | Elitechel Media</title>
-<meta name="description" content="Elitechel Media LG3s Season 1 league-wide schedule, all twelve teams, official standings, 245-player roster board, previews and editorial opening-night picks.">
+<meta name="description" content="Elitechel Media LG3s Season 1 league-wide schedule, all twelve teams, official standings, verified skater and goalie leaderboards, previews and editorial opening-night picks.">
 <link rel="canonical" href="https://wildmanhockey-elitechelmedia.app/lg3s-media.html">
 <link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
 <meta property="og:type" content="website">
@@ -24,6 +24,10 @@
 <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
 <link rel="stylesheet" href="lg3s-media.css?v=20261021-desk">
 <script src="lg3s-media.js?v=20261021-3" defer></script>
+<link rel="stylesheet" href="lg3s-broadcast-preview.css?v=1">
+<script src="lg3s-broadcast-preview.js?v=1" defer></script>
+<script src="lg3s-live-leaders.js?v=20261022-1" defer></script>
+<script src="lg3s-recent-scores.js?v=20261022-1" defer></script>
 </head>
 <body class="lg3s">
 <header class="top band">
@@ -57,6 +61,21 @@
  <a href="#opening" aria-current="page">Season 1</a><a href="#schedule">Full schedule</a><a href="#analysis">Matchup previews</a><a href="#standings">Standings</a><a href="#rosters">Player board</a><a href="#watch">Contenders</a><a href="#bidding">Bidding</a>
 </div></nav>
 <main id="opening" class="th-page">
+<section class="lg3-broadcast" id="lg3Broadcast" aria-label="LG3s international broadcast dashboard">
+<div class="lg3-shell">
+<div class="lg3-banner"><div class="lg3-banner-label"><img src="assets/brand/ecm-crest.webp" alt="Elitechel Media"><strong>LG<em>3</em>S INTERNATIONAL HOCKEY</strong><span class="lg3-tagline">TWELVE NATIONS · ONE STAGE · ELITECHEL MEDIA</span></div></div>
+<div class="lg3-grid">
+<article class="lg3-panel"><h2>FEATURED MATCHUP <a href="#analysis">ALL PREVIEWS →</a></h2><div class="lg3-body lg3-feature" id="lg3Feature">Loading verified matchup…</div></article>
+<article class="lg3-panel"><h2>LAST VERIFIED GAME NIGHT <a href="#lg3RecapArchive">NIGHT RECAP →</a></h2><div class="lg3-body" id="lg3Scores">Checking verified results…</div><div class="lg3-body" id="lg3RecapArchive" style="border-top:1px solid rgba(255,255,255,.12)"></div></article>
+<article class="lg3-panel"><h2>UPCOMING GAMES <a href="#schedule">FULL SCHEDULE →</a></h2><div class="lg3-body" id="lg3Schedule">Loading schedule…</div></article>
+<article class="lg3-panel"><h2>POWER RANKINGS <a href="#standings">VIEW TABLE →</a></h2><div class="lg3-body" id="lg3Rankings">Loading standings…</div></article>
+<article class="lg3-panel"><h2>LEAGUE LEADERS <a href="#rosters">FULL LEADERBOARDS →</a></h2><div class="lg3-body" id="lg3Leaders">Loading players…</div></article>
+<article class="lg3-panel lg3-spot"><h2>NATION SPOTLIGHT <a href="#rosters">ALL NATIONS →</a></h2><div class="lg3-body" id="lg3Spotlight">Loading featured nation…</div></article>
+<article class="lg3-panel lg3-span2"><h2>KEY MATCHUPS <a href="#analysis">ALL PREVIEWS →</a></h2><div class="lg3-body"><p class="lg3-note">Flag-led international matchups, verified fixture information and journalist-style analysis.</p><a class="lg3-action" href="#analysis">READ THE PREVIEWS →</a></div></article>
+<article class="lg3-panel"><h2>HITMAN RADIO</h2><div class="lg3-body"><p class="lg3-note">LG3s audio coverage has not been announced.</p><strong>COMING SOON</strong></div></article>
+<article class="lg3-panel lg3-span2"><h2>LATEST NEWS <a href="#analysis">MORE COVERAGE →</a></h2><div class="lg3-body lg3-news" id="lg3News">Loading editorial links…</div></article>
+</div><p class="lg3-note">Verified data only. Snapshot statistics may not reflect games played since October 21, 2026. No illustrative mockup scores or unverified division affiliations are published.</p>
+</div></section>
 <figure class="th-banner" aria-label="Elitechel Media LG3s international hockey banner">
   <img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3Ic50OgPEnsF6yLkPdMjvCnPfo2/2c6cacaa-2fd7-47de-abb8-1a5e71387aa4.png" alt="Elitechel Media LG3S Media international hockey arena, with Canada, Italy, Switzerland, Germany, Great Britain, Japan, Latvia, Poland, Slovakia, Sweden, Kazakhstan and USA represented around the globe" width="1536" height="614" decoding="async" fetchpriority="high">
   <figcaption class="th-banner-strip"><span><b>ELITECHEL MEDIA</b> <span aria-hidden="true">/</span> INTERNATIONAL LG3S</span><span>SEASON 1 · OCT 21–22, 2026 <span class="th-banner-stripe" aria-hidden="true"></span> 12 TEAMS · 30 GAMES</span></figcaption>
@@ -104,18 +123,18 @@
 <p class="th-caption" id="thStandingsNote">Source: LeagueGaming Season 1 official group standings. This is not a live-score feed.</p>
 </div></section>
 <section class="th-section th-roster-section band" id="rosters"><div class="th-wrap">
-<header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · VERIFIED LG ROSTERS</p><h2 class="sec-title">THE PLAYER <em>INDEX.</em></h2></div><p class="th-section-caption">Browse all 12 national teams. Bid-value ranking is a preseason market board, not a points or performance leaderboard.</p></header>
-<div class="th-roster-stats" id="thRosterStats"><span>132 ACTIVE ROSTER SPOTS</span><span>113 TRAINING CAMP PLAYERS</span><span>12 NATIONAL TEAMS</span></div>
+<header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · VERIFIED GAME STATISTICS</p><h2 class="sec-title">LEAGUE <em>LEADERS.</em></h2></div><p class="th-section-caption">Live statistical leaders calculated from verified LG3s game reports. Skaters and goalies have separate rankings.</p></header>
+<div class="th-roster-stats" id="thRosterStats"><span>VERIFIED RESULTS ONLY</span><span>SKATER &amp; GOALIE BOARDS</span><span>OFFICIAL GAME SOURCES</span></div>
 <div class="th-roster-controls">
-<label class="th-find"><span>SEARCH PLAYER</span><input type="search" id="thPlayerSearch" placeholder="Gamertag or name…" autocomplete="off"></label>
-<label><span>TEAM</span><select id="thPlayerTeam"><option value="all">All twelve nations</option></select></label>
-<label><span>ROSTER</span><select id="thPlayerStatus"><option value="Active">Main roster</option><option value="TC">Training camp</option><option value="all">Everyone</option></select></label>
-<label><span>POSITION</span><select id="thPlayerPosition"><option value="all">All positions</option><option value="LW">LW</option><option value="C">C</option><option value="RW">RW</option><option value="LD">LD</option><option value="RD">RD</option><option value="G">Goalie</option></select></label>
-<label><span>SORT BY</span><select id="thPlayerSort"><option value="bid">Highest contract</option><option value="name">Player name A–Z</option><option value="team">Team A–Z</option></select></label>
+<label><span>LEADERBOARD</span><select id="thPlayerStatus"><option value="skaters">Skaters</option><option value="goalies">Goalies</option></select></label>
+<label class="th-find"><span>SEARCH PLAYER</span><input type="search" id="thPlayerSearch" placeholder="Search gamertag…" autocomplete="off"></label>
+<label><span>NATION</span><select id="thPlayerTeam"><option value="all">All nations</option></select></label>
+<label><span>POSITION</span><select id="thPlayerPosition"><option value="all">All positions</option><option value="skaters">Skaters</option><option value="goalies">Goalies</option></select></label>
+<label><span>RANK BY</span><select id="thPlayerSort"><option value="p">Points</option><option value="g">Goals</option><option value="a">Assists</option><option value="plus_minus">+/-</option><option value="shots">Shots</option><option value="hits">Hits</option></select></label>
 </div>
-<div class="th-table-scroll"><table class="th-table th-roster-table"><caption class="sr-only">Verified LG3s Season 1 player roster and bid leaderboard</caption><thead><tr><th scope="col">#</th><th scope="col">PLAYER</th><th scope="col">NATION</th><th scope="col">POS.</th><th scope="col">STATUS</th><th scope="col">CONTRACT</th></tr></thead><tbody id="thPlayerRows"><tr><td colspan="6">Loading rostered players…</td></tr></tbody></table></div>
-<div class="th-table-footer"><p class="th-caption" id="thPlayerCount">Verified snapshot · October 21, 2026</p><button type="button" id="thPlayersMore" class="th-more-btn">SHOW MORE PLAYERS ↓</button></div>
-<p class="th-caption">The league's Season 1 scoring table has no published entries in this snapshot, so we aren't inventing points, goals, saves or win records. <a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_memberstats&leagueid=154&seasonid=1" target="_blank" rel="noopener noreferrer">Official player stats ↗</a></p>
+<div class="th-table-scroll"><table class="th-table th-roster-table"><caption class="sr-only">Verified LG3s statistical leaderboard</caption><thead id="thLeadersHead"><tr><th>#</th><th>PLAYER</th><th>NATION</th><th>GP</th><th>G</th><th>A</th><th>PTS</th><th>+/-</th></tr></thead><tbody id="thPlayerRows"><tr><td colspan="8">Loading verified leaders…</td></tr></tbody></table></div>
+<div class="th-table-footer"><p class="th-caption" id="thPlayerCount">Checking verified game statistics…</p><button type="button" id="thPlayersMore" class="th-more-btn">SHOW MORE PLAYERS ↓</button></div>
+<p class="th-caption">Only verified game lines count toward rankings. Goalie save percentage is ranked only when shots against are recorded. <a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_memberstats&leagueid=154&seasonid=1" target="_blank" rel="noopener noreferrer">Official LeagueGaming stats ↗</a></p>
 </div></section>
 <section class="th-section th-spotlight band" id="watch"><div class="th-wrap">
 <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">ELITECHEL MEDIA · PRESEASON SCOUTING BOARD</p><h2 class="sec-title">WHO'S BUILT TO <em>CONTEND?</em></h2></div><p class="th-section-caption">Editorial watchlist, not an objective ranking. The bidding room reveals priorities, not chemistry.</p></header>
