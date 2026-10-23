@@ -22,3 +22,16 @@
 .lg3-broadcast #lg3Spotlight{isolation:isolate;overflow:hidden}
 .lg3-broadcast #lg3Spotlight::before{content:"";position:absolute;z-index:-1;right:-6%;top:2%;width:55%;height:96%;background:var(--lg3-nation-flag) center/contain no-repeat;opacity:.12;pointer-events:none}
 @media(max-width:620px){.lg3-broadcast .lg3-feature::before,.lg3-broadcast .lg3-feature::after{opacity:.09}.lg3-broadcast #lg3Spotlight::before{opacity:.08}}
+
+/* ECM International Championship Banner System v2: fabric flags with arena lighting */
+.lg3-broadcast .lg3-banner{min-height:clamp(300px,33vw,450px);background:radial-gradient(ellipse at 50% 20%,rgba(33,122,226,.52),transparent 40%),linear-gradient(0deg,rgba(3,8,19,.9),rgba(4,13,34,.12) 55%,rgba(0,0,0,.55)),url('assets/lg3s/art/lg3s-hero-1280.webp') center/cover;isolation:isolate}
+.lg3-broadcast .lg3-banner:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(115deg,transparent 0 12%,rgba(67,150,255,.07) 12.2%,transparent 13.5%),radial-gradient(ellipse at 50% 100%,rgba(239,45,38,.32),transparent 54%)}
+.lg3-broadcast .lg3-arena-rail{position:absolute;inset:14px 10px 52px;display:flex;justify-content:space-around;gap:clamp(2px,.55vw,10px);align-items:flex-start;overflow:hidden;perspective:900px}
+.lg3-broadcast .lg3-arena-banner{flex:1 1 0;min-width:0;max-width:94px;filter:drop-shadow(0 10px 7px rgba(0,0,0,.7));transform:rotateY(-3deg)}
+.lg3-broadcast .lg3-arena-banner:nth-child(even){transform:rotateY(4deg) translateY(9px)}
+.lg3-broadcast .lg3-arena-name{display:block;min-height:25px;overflow:hidden;text-overflow:clip;text-align:center;color:#fff;text-transform:uppercase;font:600 clamp(7px,.8vw,12px)/1.1 'Teko',Impact,sans-serif;letter-spacing:.045em;text-shadow:0 2px 5px #000}
+.lg3-broadcast .lg3-arena-cloth{position:relative;height:clamp(95px,16vw,235px);background-image:linear-gradient(90deg,rgba(0,0,0,.4),rgba(255,255,255,.25) 16%,rgba(0,0,0,.22) 35%,rgba(255,255,255,.19) 54%,rgba(0,0,0,.29) 76%,rgba(255,255,255,.15)),var(--flag);background-size:100% 100%,100% 100%;background-blend-mode:multiply,normal;border-top:3px solid #8b9cb6;box-shadow:inset 8px 0 12px rgba(0,0,0,.28),inset -6px 0 10px rgba(0,0,0,.28),0 0 12px rgba(39,135,240,.3);clip-path:polygon(0 0,100% 0,100% 94%,91% 98%,72% 95%,50% 100%,28% 95%,10% 98%,0 94%);transform:skewY(-1deg)}
+.lg3-broadcast .lg3-banner-label{z-index:3;left:50%;bottom:12px;transform:translateX(-50%);width:max-content;max-width:95%;text-align:center;background:radial-gradient(ellipse,rgba(1,7,16,.92),rgba(1,7,16,.25) 65%,transparent 75%);padding:15px 30px 7px}
+.lg3-broadcast .lg3-banner-label strong{font-size:clamp(24px,4.2vw,55px);filter:drop-shadow(0 3px 4px #000)}
+.lg3-broadcast .lg3-tagline{font-size:clamp(8px,1vw,12px)}
+@media(max-width:700px){.lg3-broadcast .lg3-banner{min-height:280px}.lg3-broadcast .lg3-arena-rail{inset:15px 3px 70px;gap:2px}.lg3-broadcast .lg3-arena-banner:nth-child(n+9){display:none}.lg3-broadcast .lg3-arena-cloth{height:150px}.lg3-broadcast .lg3-arena-name{font-size:8px;min-height:23px}.lg3-broadcast .lg3-banner-label{padding:12px 5px 5px}.lg3-broadcast .lg3-banner-label img{height:30px;margin-right:5px}.lg3-broadcast .lg3-banner-label strong{font-size:25px}}
