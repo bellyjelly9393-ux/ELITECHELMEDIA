@@ -9,6 +9,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const get=q=>fetch(base+q,{headers:{apikey:key},cache:'no-store'}).then(r=>{if(!r.ok)throw Error(q.split('?')[0]+' '+r.status);return r.json()});
 const flagUrl=id=>'assets/lg3s/flags/'+Number(id)+'.svg';
 const flagVar=id=>'--flag:url(\''+flagUrl(id)+'\')';
+const bannerVar=id=>'--flag:url(\'assets/lg3s/banners/'+Number(id)+'.svg\')';
 const crest=id=>'assets/lg3s/team'+Number(id)+'.svg';
 const profile=id=>'https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid='+Number(id)+'&leagueid=154&seasonid=1';
 const gameLink=id=>{const n=Number(id);return Number.isSafeInteger(n)&&n>0?'https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid='+n:null};
@@ -17,7 +18,7 @@ const fmtDay=d=>new Date(d).toLocaleDateString('en-US',{timeZone:TZ,weekday:'sho
 const fmtTime=d=>new Date(d).toLocaleTimeString('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit'})+' ET';
 const fmtNight=k=>new Date(k+'T12:00:00Z').toLocaleDateString('en-US',{timeZone:'UTC',month:'short',day:'numeric'});
 const weekOf=d=>Math.max(1,Math.floor((new Date(d).getTime()-SEASON_MONDAY)/604800000)+1);
-const flag=(id,name)=>id?'<img class="lg3-flag" src="'+flagUrl(id)+'" alt="'+esc(name)+' flag" loading="lazy">':'<span class="lg3-flag"></span>';
+const flag=(id,name)=>id?'<span class="lg3-flag ecm-cloth ecm-drape-sm" role="img" aria-label="'+esc(name)+' flag" style="'+flagVar(id)+'"></span>':'<span class="lg3-flag"></span>';
 const ordinal=n=>n+(['th','st','nd','rd'][(n%100-20)%10]||['th','st','nd','rd'][n%100]||'th');
 const signed=n=>(n>0?'+':'')+n;
 const sortTable=(a,b)=>b.pts-a.pts||b.gd-a.gd||b.gf-a.gf||String(a.nation).localeCompare(String(b.nation));
@@ -45,7 +46,7 @@ $('lg3Nights').addEventListener('click',e=>{const b=e.target.closest('button[dat
 $('lg3Scores').addEventListener('click',e=>{if(!e.target.closest('[data-more]'))return;showAll=!showAll;renderScores()});
 
 /* ---- upcoming, featured, key matchups ---- */
-function matchupBg(a,h){return '<div class="lg3-fm-bg" aria-hidden="true"><span style="'+flagVar(a)+'"></span><span style="'+flagVar(h)+'"></span></div>'}
+function matchupBg(a,h){return '<div class="lg3-fm-bg" aria-hidden="true"><span class="ecm-cloth ecm-drape" style="'+flagVar(a)+'"></span><span class="ecm-cloth ecm-drape" style="'+flagVar(h)+'"></span></div>'}
 function interest(g){const ra=rankOf.get(g.away_lg_team_id)||12,rh=rankOf.get(g.home_lg_team_id)||12;return ra+rh}
 function renderUpcoming(){const now=Date.now();const up=games.filter(g=>g.status==='scheduled'&&new Date(g.scheduled_at).getTime()>now-3*3600e3).sort((a,b)=>a.scheduled_at.localeCompare(b.scheduled_at)||a.lg_game_id-b.lg_game_id);
 if(!up.length){['lg3Schedule','lg3Feature','lg3Keys'].forEach(id=>$(id).innerHTML='<p class="lg3-empty">'+(gamesDown?'Schedule temporarily unavailable.':'No upcoming fixtures are published yet.')+'</p>');return}
@@ -79,7 +80,7 @@ $('lg3SpotCount').textContent=(spot+1)+'/'+spotOrder.length;
 const el=$('lg3Spotlight');el.style.cssText=flagVar(id);
 const top=lineup[0];
 const copy=esc(t.nation)+' sits '+ordinal(rank)+' in the power rankings at '+t.w+'-'+t.l+'-'+t.otl+' ('+t.pts+' PTS)'+(t.group_code?' in Group '+esc(t.group_code):'')+', with a '+signed(t.gd)+' goal differential.'+(top?' '+esc(top.gamertag)+' leads the nation with '+top.p+' points ('+top.g+'G, '+top.a+'A) in '+top.gp+' games.':'');
-el.innerHTML='<div class="lg3-spot-head">'+flag(id,t.nation)+'<h3>'+esc(t.nation)+'</h3></div><span class="lg3-ribbon">Week '+weekOf(Date.now())+' Top Scorers</span><div class="lg3-cards">'+(lineup.length?lineup.map(p=>'<a class="lg3-card" href="'+profile(p.lg_user_id)+'" target="_blank" rel="noopener noreferrer"><span class="lg3-card-img" style="'+flagVar(id)+'"><img src="'+crest(id)+'" alt="" loading="lazy"></span><b title="'+esc(p.gamertag)+'">'+esc(p.gamertag)+'</b><small>'+p.g+'G · '+p.a+'A</small><span>'+p.p+' PTS</span></a>').join(''):'<p class="lg3-empty lg3-wide">'+(skaters.length?'No verified skater lines yet.':'Verified player lines are not available right now.')+'</p>')+'</div><p class="lg3-spot-copy">'+copy+'</p><div class="lg3-spot-cta"><a class="lg3-btn" href="#rosters" data-nation="'+esc(t.nation)+'">View Full Nation Profile →</a></div>'}
+el.innerHTML='<span class="lg3-spot-banner ecm-cloth ecm-drape" style="'+bannerVar(id)+'" aria-hidden="true"></span><div class="lg3-spot-head">'+flag(id,t.nation)+'<h3>'+esc(t.nation)+'</h3></div><span class="lg3-ribbon">Week '+weekOf(Date.now())+' Top Scorers</span><div class="lg3-cards">'+(lineup.length?lineup.map(p=>'<a class="lg3-card" href="'+profile(p.lg_user_id)+'" target="_blank" rel="noopener noreferrer"><span class="lg3-card-img ecm-cloth" style="'+flagVar(id)+'"><img src="'+crest(id)+'" alt="" loading="lazy"></span><b title="'+esc(p.gamertag)+'">'+esc(p.gamertag)+'</b><small>'+p.g+'G · '+p.a+'A</small><span>'+p.p+' PTS</span></a>').join(''):'<p class="lg3-empty lg3-wide">'+(skaters.length?'No verified skater lines yet.':'Verified player lines are not available right now.')+'</p>')+'</div><p class="lg3-spot-copy">'+copy+'</p><div class="lg3-spot-cta"><a class="lg3-btn" href="#rosters" data-nation="'+esc(t.nation)+'">View Full Nation Profile →</a></div>'}
 $('lg3SpotNext').addEventListener('click',()=>{if(!spotOrder.length)return;spot=(spot+1)%spotOrder.length;renderSpotlight()});
 $('lg3Spotlight').addEventListener('click',e=>{const a=e.target.closest('[data-nation]');const sel=$('thPlayerTeam');if(!a||!sel)return;const n=a.dataset.nation;if([...sel.options].some(o=>o.value===n)){sel.value=n;sel.dispatchEvent(new Event('change'))}});
 
@@ -92,7 +93,7 @@ const ps=skaters.slice().sort((a,b)=>b.p-a.p||b.g-a.g)[0];
 if(ps)cards.push({k:'Player Spotlight',t:'Points Leader: '+esc(ps.gamertag),d:'Season 1',p:esc(ps.gamertag)+' has '+ps.p+' points ('+ps.g+'G, '+ps.a+'A) in '+ps.gp+' games for '+esc(ps.nation)+', tops among all verified skaters.',h:'#leagueLeaders',id:ps.lg_team_id});
 if(standings.length>1){const a=standings[0],b=standings[1];cards.push({k:'Storyline',t:'The Battle for the Top Spot',d:'Power Rankings',p:esc(a.nation)+' ('+a.pts+' PTS) and '+esc(b.nation)+' ('+b.pts+' PTS) lead the field'+(a.pts===b.pts?', level on points with goal differential the tiebreaker.':'.'),h:'#powerRankings',id:a.lg_team_id})}
 cards.push({k:'League Update',t:'KnifeVet22 Tops the Bid Book',d:'Oct 19, 2026',p:'Italy\'s $8.25M winning bid is the largest in the official Season 1 bidding recap.',h:'#bidding',id:822});
-$('lg3News').innerHTML=cards.slice(0,4).map(c=>'<a class="lg3-story" href="'+c.h+'"'+(c.ext?' target="_blank" rel="noopener noreferrer"':'')+'><span class="lg3-story-img" style="'+flagVar(c.id)+'"><img src="'+crest(c.id)+'" alt="" loading="lazy"></span><span><span class="lg3-story-k">'+c.k+'</span><strong>'+c.t+'</strong><time>'+esc(c.d)+'</time></span><p>'+c.p+'</p></a>').join('')}
+$('lg3News').innerHTML=cards.slice(0,4).map(c=>'<a class="lg3-story" href="'+c.h+'"'+(c.ext?' target="_blank" rel="noopener noreferrer"':'')+'><span class="lg3-story-img ecm-cloth ecm-drape-sm" style="'+flagVar(c.id)+'"><img src="'+crest(c.id)+'" alt="" loading="lazy"></span><span><span class="lg3-story-k">'+c.k+'</span><strong>'+c.t+'</strong><time>'+esc(c.d)+'</time></span><p>'+c.p+'</p></a>').join('')}
 
 /* ---- load ---- */
 fetch('lg3s-season1-data.json?v=20261021-2',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('snapshot');return r.json()}).then(d=>{
