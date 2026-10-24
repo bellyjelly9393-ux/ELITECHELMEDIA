@@ -2,7 +2,7 @@
 
 Branch: `feature/lg3s-cinematic-arena-rebuild`. Preview only; production is unchanged.
 
-The existing banner markup and styling are retained for the owner to replace later.
+The cinematic arena banner is now integrated from the supplied visual reference; the live fixture and results desk is preserved.
 
 ## Completed in this update
 
@@ -32,10 +32,21 @@ Only the existing public read-only views are used. No Supabase schema, keys, pol
 
 Source completeness determines coverage; report-derived records can lag official standings. Player cards are season totals, not player-of-the-night selections. Recaps are automatic factual score summaries, not reviewed long-form editorials. Polling does not run when the page is closed and does not replace upstream ingestion. LG3S radio episodes remain unavailable until produced.
 
-The banner is deliberately deferred. Production release remains separate from this preview update.
+The banner is included in this reference correction. Production release remains separate from this preview update.
 
 ## Visual correction against approved mockup
 
-Compared directly with `EliteChel Media LG3S Dashboard.png` from October 22. Replaced the gold/oversized layout with cyan broadcast frames, red actions and nation spotlight, a compact three-column dashboard, the embedded live leaderboard, three illustrated matchup cards and a news-card row. Existing nation artwork from the approved image is reused as CSS background regions; mockup statistics and labels are not displayed. Player cards use neutral jersey symbols rather than invented portraits. Long preseason content and additional record/player sections are disclosures. The top banner remains deferred to the owner.
+Compared directly with `EliteChel Media LG3S Dashboard.png` from October 22. Replaced the gold/oversized layout with cyan broadcast frames, red actions and nation spotlight, a compact three-column dashboard, the embedded live leaderboard, three illustrated matchup cards and a news-card row. Existing nation artwork from the approved image is reused as CSS background regions; mockup statistics and labels are not displayed. Player cards use neutral jersey symbols rather than invented portraits. Long preseason content and additional record/player sections are disclosures. The reference-style arena globe and twelve fabric flag banners are included in the subsequent visual integration.
 
 Desktop visual review, no-overflow check at 305 CSS pixels, working recap, filters and nation selector checked again after restructuring. This is a closer implementation of the reference layout, not a claim of pixel-identical artwork reproduction.
+
+
+## Reference artwork integration — October 24, 2026
+
+The supplied screenshot now drives the hero composition: a central LG3s globe crest, championship fabric banners, icy reflections and red/blue arena lighting. Optimized locally hosted WebP artwork is 134 KB. The layout retains the current live season fixture feed, verified results, report-based ranking movement, polling, recap dialogs and filters added in the preceding work.
+
+The featured matchup and posters use local national flags with fabric shading and rink reflections. The nation spotlight includes three verified skater leaders plus a goalie when a verified line is available; graphics are illustrations, never claimed as player likenesses. News now includes four cards for the verified game-night recap, a sourced player spotlight, dated previews and report-based group records. Leaderboard category tabs use the existing Supabase feeds. The full schedule and long archives are disclosures so the primary page matches the compact reference hierarchy.
+
+Remote Chromium tested the committed source loaded from GitHub with real Supabase GET responses: 48 verified finals, 110 skaters, 25 goalies at check time. Checks passed for goalie SV% columns, category tabs, empty search, four-person Great Britain spotlight including a goalie, recap open/close, and viewport widths 1440, 768, 390 and 320. No app JavaScript errors or page-wide horizontal overflow. Desktop screenshot reviewed against the supplied reference. Automated axe WCAG 2 A/AA: zero violations after adding accessible control names; gradients remain a manual color-contrast review item.
+
+Vercel preview builds successfully. Automated deployment-page access remains subject to the existing Vercel sign-in protection; browser checks above used the source, not an authenticated end-to-end deployment session. No protection settings were disabled. The illustration differs from the mockup where it would otherwise show invented players, scores, standings or non-participating Finland fixtures. No LGCHL pages, VOD files, database schemas or production deployment were changed.
