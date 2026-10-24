@@ -49,14 +49,15 @@
   const pStandings = api('lg3s_public_standings?select=lg_team_id,nation,gp,w,l,otw,otl,pts,gf,ga,gd');
   const pSkaters = api('lg3s_public_skater_leaders?select=lg_user_id,gamertag,lg_team_id,nation,gp,g,a,p,plus_minus&order=p.desc,g.desc&limit=120');
   const pGoalies = api('lg3s_public_goalie_leaders?select=lg_user_id,gamertag,nations_played_for,gp,sa,ga,sv,sv_pct,gaa_per_game&limit=60');
+  const pRecords = api('lg3s_public_goalie_records?select=lg_user_id,gamertag,nations_played_for,gp,wins,gaa,sa,ga,sv&limit=60');
   const pNews = api('lg3s_public_recaps?select=id,lg_game_id,game_night_date,title&order=game_night_date.desc&limit=4').catch(e => {
     if (!/404/.test(String(e))) console.error('LG3s dashboard data:', e);
     return null;
   });
   const settle = p => p.then(v => v, e => { console.error('LG3s dashboard data:', e); return null; });
 
-  Promise.all([local, settle(pRecent), settle(pPending), settle(pUpcoming), settle(pStandings), settle(pSkaters), settle(pGoalies), settle(pNews)])
-    .then(([data, recent, pending, upcoming, standings, skaters, goalies, news]) => {
+  Promise.all([local, settle(pRecent), settle(pPending), settle(pUpcoming), settle(pStandings), settle(pSkaters), settle(pGoalies), settle(pRecords), settle(pNews)])
+    .then(([data, recent, pending, upcoming, standings, skaters, goalies, records, news]) => {
       const teams = new Map((data && Array.isArray(data.teams) ? data.teams : []).filter(t => NATIONS.has(t.name)).map(t => [t.id, { id: t.id, name: t.name, group: t.group }]));
       const nameOf = (id, fallback) => teams.get(id)?.name || (NATIONS.has(fallback) ? fallback : '');
       const byName = new Map([...teams.values()].map(t => [t.name, t]));
@@ -68,6 +69,7 @@
       upcoming = Array.isArray(upcoming) ? upcoming.filter(g => known(g) && (!g.scheduled_at || g.scheduled_at >= nowIso)) : null;
       skaters = Array.isArray(skaters) ? skaters.filter(p => NATIONS.has(p.nation)) : null;
       goalies = Array.isArray(goalies) ? goalies.filter(g => NATIONS.has((g.nations_played_for || [])[0])) : null;
+      records = Array.isArray(records) ? records.filter(g => NATIONS.has((g.nations_played_for || [])[0])) : null;
 
       const table = (Array.isArray(standings) ? standings : []).map(s => {
         const team = teams.get(s.lg_team_id);
@@ -160,20 +162,28 @@
 
       guard('lg3Leaders', 'Leaders are unavailable right now.', () => {
         const sk = Array.isArray(skaters) ? skaters : null, gl = Array.isArray(goalies) ? goalies.filter(g => +g.sa >= 20) : null;
+        const rec = Array.isArray(records) ? records.filter(g => +g.sa >= 20) : null;
         const SETS = {
           p: [['gp', 'GP'], ['g', 'G'], ['a', 'A'], ['p', 'PTS']], g: [['gp', 'GP'], ['g', 'G'], ['a', 'A'], ['p', 'PTS']],
           a: [['gp', 'GP'], ['g', 'G'], ['a', 'A'], ['p', 'PTS']], plus_minus: [['gp', 'GP'], ['g', 'G'], ['p', 'PTS'], ['plus_minus', '+/-']],
-          sv_pct: [['gp', 'GP'], ['sv', 'SV'], ['ga', 'GA'], ['sv_pct', 'SV%']]
+          sv_pct: [['gp', 'GP'], ['sv', 'SV'], ['ga', 'GA'], ['sv_pct', 'SV%']],
+          wins: [['gp', 'GP'], ['wins', 'W'], ['ga', 'GA'], ['gaa', 'GAA']],
+          gaa: [['gp', 'GP'], ['wins', 'W'], ['ga', 'GA'], ['gaa', 'GAA']]
         };
-        const fmt = (k, v) => k === 'sv_pct' ? (v == null ? '—' : Number(v).toFixed(3).replace(/^0/, '')) : k === 'plus_minus' ? signed(+v || 0) : (v ?? '—');
+        const fmt = (k, v) => k === 'sv_pct' ? (v == null ? '—' : Number(v).toFixed(3).replace(/^0/, '')) : k === 'gaa' ? (v == null ? '—' : Number(v).toFixed(2)) : k === 'plus_minus' ? signed(+v || 0) : (v ?? '—');
         const draw = stat => {
           $('lg3LeaderTabs').querySelectorAll('[data-stat]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.stat === stat)));
-          const goalie = stat === 'sv_pct', src = goalie ? gl : sk;
+          const goalie = stat === 'sv_pct' || stat === 'wins' || stat === 'gaa';
+          const src = stat === 'wins' || stat === 'gaa' ? rec : goalie ? gl : sk;
           if (!src) { wait('lg3Leaders', 'Leaders are unavailable right now.'); return; }
-          const rows = src.slice().sort((x, y) => (Number(y[stat]) || 0) - (Number(x[stat]) || 0) || (goalie ? (+y.sv || 0) - (+x.sv || 0) : (+y.p || 0) - (+x.p || 0)) || String(x.gamertag).localeCompare(String(y.gamertag))).slice(0, 8);
+          const rows = src.slice().sort((x, y) => {
+            if (stat === 'gaa') return (Number(x.gaa) || 99) - (Number(y.gaa) || 99) || (Number(y.wins) || 0) - (Number(x.wins) || 0) || String(x.gamertag).localeCompare(String(y.gamertag));
+            return (Number(y[stat]) || 0) - (Number(x[stat]) || 0) || (goalie ? (stat === 'wins' ? (Number(x.gaa) || 99) - (Number(y.gaa) || 99) : (+y.sv || 0) - (+x.sv || 0)) : (+y.p || 0) - (+x.p || 0)) || String(x.gamertag).localeCompare(String(y.gamertag));
+          }).slice(0, 8);
           if (!rows.length) { wait('lg3Leaders', 'Leaders appear after the first game reports.'); return; }
           const cols = SETS[stat];
-          $('lg3Leaders').innerHTML = '<div class="lg3-scroll"><table class="lg3-table lg3-lead"><caption class="sr-only">LG3s ' + (goalie ? 'goalie save percentage' : 'skater') + ' leaders</caption><thead><tr><th scope="col">#</th><th scope="col">PLAYER</th><th scope="col" class="c">TEAM</th>' +
+          const caption = stat === 'wins' ? 'goalie wins' : stat === 'gaa' ? 'goalie GAA' : stat === 'sv_pct' ? 'goalie save percentage' : 'skater';
+          $('lg3Leaders').innerHTML = '<div class="lg3-scroll"><table class="lg3-table lg3-lead"><caption class="sr-only">LG3s ' + caption + ' leaders</caption><thead><tr><th scope="col">#</th><th scope="col">PLAYER</th><th scope="col" class="c">TEAM</th>' +
             cols.map(([k, l]) => '<th scope="col" class="c' + (k === stat ? ' hl' : '') + '">' + l + '</th>').join('') + '</tr></thead><tbody>' +
             rows.map((p, i) => {
               const nation = goalie ? (p.nations_played_for || [])[0] : p.nation, team = byName.get(nation);
