@@ -13,3 +13,31 @@
 @media(max-width:440px){.lg3-cinematic-banner>img{aspect-ratio:1.98}.lg3-grid #lg3Schedule .desk-fixture{grid-template-columns:minmax(0,1fr) 96px;padding:11px 0}.desk-fixture strong{font-size:18px}.desk-fixture strong img{width:25px;height:18px}.desk-fixture>span{font-size:13px}.desk-fixture small{font-size:10px}}
 @media(min-width:761px){.lg3-person{min-height:188px}.lg3-person:before{height:101px;min-height:101px;width:70px;margin-bottom:11px}.lg3-spot .lg3-lineup{padding-top:12px;padding-bottom:12px}.desk-nation-copy{margin-top:16px!important}.lg3-spot .lg3-action{margin-top:12px}}
 @media(max-width:1100px) and (min-width:761px){.lg3-person{min-height:165px}.lg3-person:before{height:84px;min-height:84px;width:56px}}
+
+/* Reference refinements: quiet brand marks underneath legible live tables. */
+#lg3Rankings,.dashboard-leaders>.lg3-body{position:relative;isolation:isolate;background:linear-gradient(135deg,#041321,#020810)}
+#lg3Rankings:before,.dashboard-leaders>.lg3-body:before{content:'';position:absolute;inset:40px 8px 30px;background:url(assets/brand/ecm-crest.webp) center/85% auto no-repeat;opacity:.085;pointer-events:none;z-index:-1;filter:grayscale(.35)}
+.dashboard-leaders>.lg3-body:before{background-image:url(assets/lg3s/art/lg3s-crest-64.webp);background-size:78% auto;opacity:.09}
+.dashboard-leaders .th-table,.dashboard-leaders .th-table tbody,.dashboard-leaders .th-table tr,.dashboard-leaders .th-table td{background-color:transparent}
+.dashboard-leaders .th-table tbody tr:nth-child(even){background:#10283c40}
+/* Flags are the main artwork, with folded fabric and a central VS lockup. */
+.match-poster{position:relative;isolation:isolate;padding:15px 10px 12px;background-image:linear-gradient(0deg,#010812 0%,#02102050 65%),url(assets/lg3s/art/international-arena.webp);border:1px solid #285a7d;box-shadow:inset 0 0 26px #0584b826;min-height:205px}
+.match-poster:after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(125deg,#ce173b30,transparent 45%,#079ce536),linear-gradient(104deg,transparent 49.3%,#ffdab277 49.7%,#59caff66 50%,transparent 50.8%)}
+.lg3-posters .poster-flags{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);gap:7px;margin:14px 0 8px}
+.poster-flag{display:block;position:relative;transform:rotate(-8deg);filter:drop-shadow(0 5px 6px #000)}
+.poster-flag:last-child{transform:rotate(8deg)}
+.lg3-posters .poster-flags .poster-flag img{display:block;width:100%;height:66px;transform:none;object-fit:cover;clip-path:polygon(0 0,100% 5%,97% 96%,72% 100%,48% 95%,22% 100%,2% 95%)}
+.poster-flag:after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,#0005,transparent 14%,#fff5 29%,#0006 43%,#fff2 59%,#0004 75%,transparent);pointer-events:none;clip-path:polygon(0 0,100% 5%,97% 96%,72% 100%,48% 95%,22% 100%,2% 95%)}
+.lg3-posters .poster-flags b{font-style:italic;font-size:27px;text-shadow:0 2px 8px #000,0 0 14px #fb8a42}
+.match-poster h3{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;margin:10px 0;font-size:19px;text-transform:uppercase}
+.match-poster .poster-result{display:block;color:#c4e6fb;font-size:14px;letter-spacing:.6px;margin-top:10px}
+.match-poster:focus-visible,.lg3-person:focus-visible{outline:2px solid #fff;outline-offset:3px}
+/* Four illustrated hockey cards, kept distinct from real player photographs. */
+.lg3-spot .lg3-body:before{height:260px;opacity:.32;background-image:linear-gradient(0deg,#190916 0%,#19091630 65%),var(--nation-flag)}
+.lg3-spot h3{text-shadow:0 2px 8px #000}.lg3-person{position:relative;isolation:isolate;background:linear-gradient(0deg,#080b13 0%,#090d1850 70%),var(--nation-flag) center/cover;border-color:#b63847;box-shadow:inset 0 0 16px #000,0 0 5px #e5263c35;text-decoration:none}
+.lg3-person:before{background:linear-gradient(0deg,transparent 20%,#e8edf3 21% 26%,transparent 27% 33%,#df2039 34% 42%,transparent 43%),linear-gradient(100deg,#b7c4d0,#f8fafb 42%,#667887);border-bottom-color:#e4eaf1;filter:drop-shadow(0 3px 5px #000);margin-top:28px}
+.lg3-person:after{content:'';position:absolute;top:11px;left:50%;transform:translateX(-50%);width:34px;height:36px;border-radius:46% 46% 35% 35%;background:linear-gradient(0deg,#121c28 0 33%,#8b9ba6 35% 39%,#101923 41% 65%,#526274 67% 72%,#080e15 74%);box-shadow:inset 5px 1px 7px #ffffff30,0 2px 4px #000;pointer-events:none}
+.lg3-person.lg3-goalie:after{background:repeating-linear-gradient(90deg,transparent 0 7px,#aab8c9 8px 9px),repeating-linear-gradient(0deg,#102133 0 7px,#aab8c9 8px 9px);border:2px solid #d2dce6}.lg3-person:nth-child(2) small{background:linear-gradient(#154881,#071d39)}.lg3-person:nth-child(3) small{background:linear-gradient(#a85f12,#43230a)}
+@media(min-width:761px) and (max-width:1100px){.lg3-posters .poster-flags .poster-flag img{height:48px}.match-poster h3{font-size:15px;gap:10px}.lg3-person:after{width:29px;height:31px}}
+@media(max-width:760px){.lg3-posters .poster-flags .poster-flag img{height:55px}.match-poster h3{font-size:17px;gap:12px}}
+@media(max-width:440px){.lg3-posters .poster-flags{grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);gap:15px}.lg3-posters .poster-flags .poster-flag img{height:90px}.match-poster h3{font-size:24px}.match-poster{min-height:230px}.lg3-person:after{width:27px;height:29px;top:10px}}
