@@ -6,7 +6,7 @@ const key='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
 const $=id=>document.getElementById(id);
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const profile=id=>'https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid='+Number(id)+'&leagueid=154&seasonid=1';
-let skaters=[],goalies=[],limit=40;const unavailable=new Set();
+let skaters=[],goalies=[],limit=10;const unavailable=new Set();
 const get=async name=>{const r=await fetch(base+name+'?select=*',{headers:{apikey:key},cache:'no-store'});if(!r.ok)throw Error(name+' '+r.status);return r.json()};
 const num=v=>Number(v)||0;
 const fmt=(v,d=0)=>v!=null&&v!==''&&Number.isFinite(Number(v))?Number(v).toFixed(d):'—';
@@ -23,7 +23,7 @@ $('thPlayerRows').innerHTML=data.slice(0,limit).map((p,i)=>{const cells=goalie?[
 $('thPlayerCount').textContent='SHOWING '+Math.min(limit,data.length)+' OF '+data.length+' VERIFIED '+(goalie?'GOALIES':'SKATERS');
 $('thPlayersMore').hidden=limit>=data.length;
 }
-function changeMode(){const goalie=mode()==='goalies';$('thPlayerSort').innerHTML=(goalie?[['sv_pct','Save percentage'],['sv','Saves'],['gaa_per_game','Lowest goals against per game'],['sa','Shots against'],['gp','Games played']]:[['p','Points'],['g','Goals'],['a','Assists'],['plus_minus','Plus/minus'],['shots','Shots'],['hits','Hits'],['gp','Games played']]).map(([v,t])=>'<option value="'+v+'">'+t+'</option>').join('');limit=40;render()}
+function changeMode(){const goalie=mode()==='goalies';$('thPlayerSort').innerHTML=(goalie?[['sv_pct','Save percentage'],['sv','Saves'],['gaa_per_game','Lowest goals against per game'],['sa','Shots against'],['gp','Games played']]:[['p','Points'],['g','Goals'],['a','Assists'],['plus_minus','Plus/minus'],['shots','Shots'],['hits','Hits'],['gp','Games played']]).map(([v,t])=>'<option value="'+v+'">'+t+'</option>').join('');limit=10;render()}
 Promise.allSettled([get('lg3s_public_skater_leaders'),get('lg3s_public_goalie_leaders')]).then(results=>{
 const s=results[0].status==='fulfilled'?results[0].value:[],g=results[1].status==='fulfilled'?results[1].value:[];
 if(results[0].status==='rejected')unavailable.add('skaters');if(results[1].status==='rejected')unavailable.add('goalies');
@@ -33,11 +33,11 @@ $('thRosterStats').textContent='VERIFIED GAME REPORTS · '+s.length+' SKATERS ·
 const nations=[...new Set([...s.map(p=>p.nation),...g.flatMap(p=>p.nations_played_for||[])].filter(Boolean))].sort();
 $('thPlayerTeam').innerHTML='<option value="all">All nations</option>'+nations.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join('');
 $('thPlayerStatus').addEventListener('change',changeMode);
-$('thPlayerSearch').addEventListener('input',()=>{limit=40;render()});
-$('thPlayerTeam').addEventListener('change',()=>{limit=40;render()});
+$('thPlayerSearch').addEventListener('input',()=>{limit=10;render()});
+$('thPlayerTeam').addEventListener('change',()=>{limit=10;render()});
 $('thPlayerSort').addEventListener('change',render);
 $('thPlayerPosition').closest('label').hidden=true;
-$('thPlayersMore').addEventListener('click',()=>{limit+=40;render()});
+$('thPlayersMore').addEventListener('click',()=>{limit+=30;render()});
 changeMode();
 }).catch(e=>{$('thPlayersMore').hidden=true;$('thPlayerCount').textContent='VERIFIED FEEDS TEMPORARILY UNAVAILABLE';console.error('LG3s verified leaderboard unavailable',e);$('thPlayerRows').innerHTML='<tr><td colspan="10">Verified leaderboards temporarily unavailable. No unverified stats are shown.</td></tr>';});
 })();

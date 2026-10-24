@@ -33,3 +33,9 @@ Only the existing public read-only views are used. No Supabase schema, keys, pol
 Source completeness determines coverage; report-derived records can lag official standings. Player cards are season totals, not player-of-the-night selections. Recaps are automatic factual score summaries, not reviewed long-form editorials. Polling does not run when the page is closed and does not replace upstream ingestion. LG3S radio episodes remain unavailable until produced.
 
 The banner is deliberately deferred. Production release remains separate from this preview update.
+
+## Visual correction against approved mockup
+
+Compared directly with `EliteChel Media LG3S Dashboard.png` from October 22. Replaced the gold/oversized layout with cyan broadcast frames, red actions and nation spotlight, a compact three-column dashboard, the embedded live leaderboard, three illustrated matchup cards and a news-card row. Existing nation artwork from the approved image is reused as CSS background regions; mockup statistics and labels are not displayed. Player cards use neutral jersey symbols rather than invented portraits. Long preseason content and additional record/player sections are disclosures. The top banner remains deferred to the owner.
+
+Desktop visual review, no-overflow check at 305 CSS pixels, working recap, filters and nation selector checked again after restructuring. This is a closer implementation of the reference layout, not a claim of pixel-identical artwork reproduction.

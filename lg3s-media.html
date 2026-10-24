@@ -23,10 +23,10 @@
 <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
 <link rel="stylesheet" href="lg3s-media.css?v=20261021-desk">
 <script src="lg3s-media.js?v=20261024" defer></script>
-<link rel="stylesheet" href="lg3s-arena.css?v=20261024">
-<script src="lg3s-desk.js?v=20261024" defer></script>
+<link rel="stylesheet" href="lg3s-arena.css?v=20261024"><link rel="stylesheet" href="lg3s-dashboard.css?v=20261024-design">
+<script src="lg3s-desk.js?v=20261024-design" defer></script>
 <script src="lg3s-broadcast-preview.js?v=20261024" defer></script>
-<script src="lg3s-live-leaders.js?v=20261023" defer></script>
+<script src="lg3s-live-leaders.js?v=20261024-design" defer></script>
 
 </head>
 <body class="lg3s"><a class="skip-link" href="#opening">Skip to coverage</a>
@@ -36,16 +36,7 @@
       <img class="crest" src="assets/brand/ecm-crest.webp" width="118" height="120" alt="">
       <div class="brand-txt"><b>Elitechel</b><span>Media</span></div>
     </a>
-    <nav class="nav" id="nav" aria-label="Main">
-      <a href="index.html">Home</a>
-      <a href="esports-hub.html">Live Hub</a>
-      <a href="hitmen-media.html">Hitmen</a>
-      <a href="lgchl-media.html">LG CHL</a>
-      <a href="lg3s-media.html" class="on" aria-current="page">LG3s</a>
-      <a href="lgchl-leaders.html">Stats</a>
-      <a href="interest.html?program=hut">HUT Tournament</a>
-      <a href="management.html">Management</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="Main"><a href="index.html">Home</a><a href="lgchl-media.html">LGCHL</a><a href="lg3s-media.html" class="on" aria-current="page">LG3s</a><a href="#lg3Scores">Scoreboard</a><a href="#rosters">League Leaders</a><a href="#lg3Posters">Key Matchups</a><a href="#lg3Spotlight">Nation Spotlights</a><a href="#radio">Hitman Radio</a></nav>
     <a class="icon-btn search-btn" href="#bidding" aria-label="Jump to LG3s bidding board">⌕</a>
     <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
   </div>
@@ -65,36 +56,12 @@
 <div class="lg3-shell">
 <div class="lg3-banner"><div class="lg3-rafters" aria-hidden="true"></div><div class="lg3-arena-rail" id="arenaNations" role="group" aria-label="The twelve competing nations"></div><div class="lg3-banner-label"><p class="eyebrow">ELITECHEL MEDIA / INTERNATIONAL HOCKEY</p><h1>FOR FLAG.<br>FOR <em>COUNTRY.</em></h1><p>Twelve nations. One stage. The international home of LG3s.</p><div class="hero-meta"><span>SEASON 01</span><span>4-PLAYER HOCKEY</span><span>INDEPENDENT COVERAGE</span></div><a class="lg3-action" href="#lg3Scores">GAME NIGHT →</a><a class="hero-link" href="#rosters">EXPLORE THE LEADERS ↗</a></div><span class="arena-caption">THE WORLD TAKES THE ICE.</span></div>
 <div class="desk-feed"><p id="deskFeedStatus" role="status">Connecting to the verified results desk…</p><button type="button" id="deskRefresh">Refresh results ↻</button></div>
-<div class="lg3-grid">
-<article class="lg3-panel"><h2>THE MAIN EVENT <a href="#schedule">ALL FIXTURES →</a></h2><div class="lg3-body lg3-feature" id="lg3Feature">Loading verified matchup…</div></article>
-<article class="lg3-panel"><h2>LAST VERIFIED GAME NIGHT <a href="#lg3RecapArchive">NIGHT RECAP →</a></h2><div class="lg3-body" id="lg3Scores">Checking verified results…</div><div class="lg3-body" id="lg3RecapArchive" style="border-top:1px solid rgba(255,255,255,.12)"></div></article>
-<article class="lg3-panel"><h2>FIXTURE DESK <a href="#schedule">FULL SCHEDULE →</a></h2><div class="lg3-body" id="lg3Schedule">Loading schedule…</div></article>
-<article class="lg3-panel"><h2>RESULTS POWER INDEX <a href="#verified-records">VIEW TABLE →</a></h2><div class="lg3-body" id="lg3Rankings">Loading editorial rankings…</div></article>
-<article class="lg3-panel"><h2>VERIFIED LEAGUE LEADERS <a href="#rosters">SKATERS + GOALIES →</a></h2><div class="lg3-body" id="lg3Leaders"><p>Skater and goalie statistics are loaded from verified game reports.</p><a class="lg3-action" href="#rosters">OPEN LIVE LEADERBOARDS →</a></div></article>
-<article class="lg3-panel lg3-spot"><h2>NATION SPOTLIGHT <a href="#rosters">ALL NATIONS →</a></h2><div class="lg3-body" id="lg3Spotlight">Loading featured nation…</div></article>
-<article class="lg3-panel desk-player-panel"><h2>PLAYERS IN THE SPOTLIGHT <a href="#rosters">FULL LEADERBOARD →</a></h2><div class="lg3-body desk-player-grid" id="deskPlayerCards">Loading verified player totals…</div></article>
-<article class="lg3-panel lg3-span2 posters-panel"><h2>THE INTERNATIONAL STAGE <a href="#schedule">ALL GAMES →</a></h2><div class="lg3-body lg3-posters" id="lg3Posters">Loading fixture archive…</div></article>
-<article class="lg3-panel radio-panel"><h2>ON THE AIR / HITMAN RADIO</h2><div class="lg3-body"><span class="radio-wave" aria-hidden="true">▂ ▅ ▃ █ ▆ ▂ ▅ ▇ ▃ ▆ ▂</span><p class="eyebrow">THE VOICE OF THE COMMUNITY</p><h3>AFTER THE<br><em>FINAL HORN.</em></h3><p>Go beyond the scores with Hitman Radio. Hockey conversation from the Elitechel Media desk.</p><a class="lg3-action" href="hitmen-media.html">EXPLORE HITMEN COVERAGE ↗</a><p class="lg3-note">LG3s-specific programming has not been announced.</p></div></article>
-<article class="lg3-panel lg3-span2"><h2>LATEST NEWS <a href="#analysis">MORE COVERAGE →</a></h2><div class="lg3-body lg3-news" id="lg3News">Loading editorial links…</div></article>
-</div><section class="desk-records" id="verified-records"><header><p class="eyebrow">THE INTERNATIONAL RACE</p><h2>THE RECORD <em>SO FAR.</em></h2><p>Calculated from verified final reports received. Straight-up wins and losses include overtime. This is a report-based record, not official league points or tiebreakers.</p></header><div id="deskRecordTable" class="th-standings-grids">Loading verified records…</div></section><p class="lg3-note">DATA DESK / Results and leaders: verified parser-backed game reports. Fixture desk: current published feed. Archived roster and bidding analysis: October 21 snapshot. Results index: calculated from verified reports; archived predictions: ECM editorial.</p>
-</div></section>
-<section class="th-nations-bar band" aria-label="All twelve LG3s national teams"><div class="th-wrap"><span class="eyebrow">12 NATIONS · ONE LEAGUE</span><div class="th-nations" id="thNations"><p>Every LG3s team. Every opening-night matchup.</p></div></div></section>
-<section class="th-section th-schedule-section band" id="schedule"><div class="th-wrap">
-  <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · LIVE FIXTURE DESK</p><h2 class="sec-title">THE FULL <em>LEAGUE SLATE.</em></h2></div><p class="th-section-caption">All twelve countries, every published game night. Filter by date and nation. Final scores appear only after verification. Times Eastern.</p></header>
-  <div class="th-night-header"><div><span class="th-live-dot"></span><strong id="thSelectedNight">OPENING NIGHT · WEDNESDAY, OCT 21</strong><small id="thNightStat">18 VERIFIED FIXTURES · THREE WAVES</small></div><span class="th-verified">PUBLISHED FIXTURES · VERIFIED FINALS</span></div>
-  <div id="deskScheduleControls" class="desk-schedule-controls"></div>
-  <div class="th-rounds" id="thGames" aria-live="polite"><p class="th-caption">Loading the verified league-wide fixtures…</p></div>
-  <p class="th-caption">Fixtures link to official LeagueGaming game reports. Scheduled and pending games have no final score until verified. <a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=standing&leagueid=154&seasonid=1" target="_blank" rel="noopener noreferrer">Check official scores and standings ↗</a></p>
-</div></section>
-<section class="th-section th-analysis-section band" id="analysis"><div class="th-wrap">
-<header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">ELITECHEL MEDIA · PRESEASON ARCHIVE</p><h2 class="sec-title">BEFORE THE <em>FIRST PUCK.</em></h2></div><p class="th-section-caption">Archived October 21 previews, preserved as pregame editorial. Current results and player totals appear above.</p></header>
-<div class="th-analysis-grid">
-<article class="th-analysis-card th-analysis-lead"><div class="th-analysis-watermark"><img src="assets/lg3s/team341.svg" alt="" loading="lazy"></div><p class="eyebrow">01 · GROUP A · STAR POWER</p><h3>CAN ANYONE STOP <em>CANADA'S</em> OPENING RUN?</h3><p>Canada begins against Switzerland, Slovakia and Great Britain. That means three very different roster builds in about 70 minutes. I Parksy x I76I ($8M) and ProdsznK ($7M) headline Canada's heavy commitment, but the bigger question is who provides support around the two prized acquisitions. Our editorial call: a 3–0 start is possible, but Japan could still finish level on night one.</p><div class="th-analysis-footer"><span>ECM NIGHT-ONE LEAN · 3–0</span><img src="assets/lg3s/team404.svg" alt="Switzerland crest"><img src="assets/lg3s/team1079.svg" alt="Slovakia crest"><img src="assets/lg3s/team1446.svg" alt="Great Britain crest"></div></article>
-<article class="th-analysis-card"><div class="th-analysis-watermark"><img src="assets/lg3s/team532.svg" alt="" loading="lazy"></div><p class="eyebrow">02 · GROUP B · STATEMENT GAME</p><h3>GERMANY VS <em>SWEDEN.</em></h3><p>At 8:35 PM, the league's highest-bidding spender meets a more balanced contender. Germany invested $22M in its winning bids, with MythicI9I leading the way at $7M. Sweden's Blehdes–vSkoon pair cost $10.5M combined. We lean Germany narrowly, but this game should give us a better clue about who can survive tight 3s rotations.</p><div class="th-analysis-footer"><span>8:35 PM ET · GAME 921544</span><img src="assets/lg3s/team343.svg" alt="Sweden crest"></div></article>
-<article class="th-analysis-card"><div class="th-analysis-watermark"><img src="assets/lg3s/team822.svg" alt="" loading="lazy"></div><p class="eyebrow">03 · GROUP B · NIGHT'S BIGGEST BID</p><h3>KNIFEVET22 <em>TAKES THE STAGE.</em></h3><p>Italy acquired KnifeVet22 for $8.25M, the biggest individual bid recorded in the recap. Italy draws Poland, Kazakhstan and Sweden on Wednesday. Our opening-night projection is 2–1, with the late meeting against Sweden the hardest call. A record bid creates expectations, not guaranteed goals.</p><div class="th-analysis-footer"><span>ITALY · THREE FIRST-NIGHT TESTS</span><img src="assets/lg3s/team1444.svg" alt="Poland crest"><img src="assets/lg3s/team531.svg" alt="Kazakhstan crest"><img src="assets/lg3s/team343.svg" alt="Sweden crest"></div></article>
-</div></div></section>
-<section class="th-section th-roster-section band" id="rosters"><div class="th-wrap">
-<header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · VERIFIED GAME STATISTICS</p><h2 class="sec-title">LEAGUE <em>LEADERS.</em></h2></div><p class="th-section-caption">Live statistical leaders calculated from verified LG3s game reports. Skaters and goalies have separate rankings.</p></header>
+<div id="lg3Leaders" hidden></div><div class="lg3-grid">
+<article class="lg3-panel"><h2>FEATURED MATCHUP <a href="#schedule">ALL FIXTURES →</a></h2><div class="lg3-body lg3-feature" id="lg3Feature">Loading verified matchup…</div></article>
+<article class="lg3-panel"><h2>LATEST SCORES <a href="#lg3RecapArchive">NIGHT RECAP →</a></h2><div class="lg3-body" id="lg3Scores">Checking verified results…</div><div class="lg3-body" id="lg3RecapArchive" style="border-top:1px solid rgba(255,255,255,.12)"></div></article>
+<article class="lg3-panel"><h2>UPCOMING GAMES <a href="#schedule">FULL SCHEDULE →</a></h2><div class="lg3-body" id="lg3Schedule">Loading schedule…</div></article>
+<article class="lg3-panel"><h2>POWER RANKINGS <a href="#verified-records">VIEW TABLE →</a></h2><div class="lg3-body" id="lg3Rankings">Loading editorial rankings…</div></article>
+<article class="lg3-panel dashboard-leaders" id="rosters"><h2>LEAGUE LEADERS <a href="#rosters">LIVE STATS →</a></h2><div class="lg3-body">
 <div class="th-roster-stats" id="thRosterStats"><span>VERIFIED RESULTS ONLY</span><span>SKATER &amp; GOALIE BOARDS</span><span>OFFICIAL GAME SOURCES</span></div>
 <div class="th-roster-controls">
 <label><span>LEADERBOARD</span><select id="thPlayerStatus"><option value="skaters">Skaters</option><option value="goalies">Goalies</option></select></label>
@@ -106,7 +73,29 @@
 <div class="th-table-scroll"><table class="th-table th-roster-table"><caption class="sr-only">Verified LG3s statistical leaderboard</caption><thead id="thLeadersHead"><tr><th>#</th><th>PLAYER</th><th>NATION</th><th>GP</th><th>G</th><th>A</th><th>PTS</th><th>+/-</th></tr></thead><tbody id="thPlayerRows"><tr><td colspan="8">Loading verified leaders…</td></tr></tbody></table></div>
 <div class="th-table-footer"><p class="th-caption" id="thPlayerCount">Checking verified game statistics…</p><button type="button" id="thPlayersMore" class="th-more-btn">SHOW MORE PLAYERS ↓</button></div>
 <p class="th-caption">Only verified game lines count toward rankings. Goalie save percentage is ranked only when shots against are recorded. <a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_memberstats&leagueid=154&seasonid=1" target="_blank" rel="noopener noreferrer">Official LeagueGaming stats ↗</a></p>
+</div></article>
+<article class="lg3-panel lg3-spot"><h2>NATION SPOTLIGHT <a href="#lg3Spotlight">12 NATIONS →</a></h2><div class="lg3-body" id="lg3Spotlight">Loading featured nation…</div></article>
+<article class="lg3-panel lg3-span2 posters-panel"><h2>KEY MATCHUPS <a href="#schedule">ALL GAMES →</a></h2><div class="lg3-body lg3-posters" id="lg3Posters">Loading fixture archive…</div></article>
+<article class="lg3-panel radio-panel" id="radio"><h2>ON THE AIR / HITMAN RADIO</h2><div class="lg3-body"><div class="dashboard-radio-art" role="img" aria-label="Hitman Radio hockey broadcast artwork"></div><span class="radio-wave" aria-hidden="true">▂ ▅ ▃ █ ▆ ▂ ▅ ▇ ▃ ▆ ▂</span><p class="eyebrow">THE VOICE OF THE COMMUNITY</p><h3>AFTER THE<br><em>FINAL HORN.</em></h3><p>Go beyond the scores with Hitman Radio. Hockey conversation from the Elitechel Media desk.</p><a class="lg3-action" href="hitmen-media.html">EXPLORE HITMEN COVERAGE ↗</a><p class="lg3-note">LG3s-specific programming has not been announced.</p></div></article>
+<article class="lg3-panel lg3-span2"><h2>LATEST NEWS <a href="#analysis">MORE COVERAGE →</a></h2><div class="lg3-body lg3-news" id="lg3News">Loading editorial links…</div></article>
+</div><details class="dashboard-extra"><summary>PLAYER SPOTLIGHTS / VERIFIED SEASON TOTALS</summary><article class="lg3-panel desk-player-panel"><h2>PLAYERS IN THE SPOTLIGHT <a href="#rosters">FULL LEADERBOARD →</a></h2><div class="lg3-body desk-player-grid" id="deskPlayerCards">Loading verified player totals…</div></article>
+</details><details class="dashboard-extra"><summary>GROUP RECORDS / VERIFIED FINAL REPORTS</summary><section class="desk-records" id="verified-records"><header><p class="eyebrow">THE INTERNATIONAL RACE</p><h2>THE RECORD <em>SO FAR.</em></h2><p>Calculated from verified final reports received. Straight-up wins and losses include overtime. This is a report-based record, not official league points or tiebreakers.</p></header><div id="deskRecordTable" class="th-standings-grids">Loading verified records…</div></section></details><p class="lg3-note">DATA DESK / Results and leaders: verified parser-backed game reports. Fixture desk: current published feed. Archived roster and bidding analysis: October 21 snapshot. Results index: calculated from verified reports; archived predictions: ECM editorial.</p>
 </div></section>
+<section class="th-nations-bar band" aria-label="All twelve LG3s national teams"><div class="th-wrap"><span class="eyebrow">12 NATIONS · ONE LEAGUE</span><div class="th-nations" id="thNations"><p>Every LG3s team. Every opening-night matchup.</p></div></div></section>
+<section class="th-section th-schedule-section band" id="schedule"><div class="th-wrap">
+  <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · LIVE FIXTURE DESK</p><h2 class="sec-title">THE FULL <em>LEAGUE SLATE.</em></h2></div><p class="th-section-caption">All twelve countries, every published game night. Filter by date and nation. Final scores appear only after verification. Times Eastern.</p></header>
+  <div class="th-night-header"><div><span class="th-live-dot"></span><strong id="thSelectedNight">OPENING NIGHT · WEDNESDAY, OCT 21</strong><small id="thNightStat">18 VERIFIED FIXTURES · THREE WAVES</small></div><span class="th-verified">PUBLISHED FIXTURES · VERIFIED FINALS</span></div>
+  <div id="deskScheduleControls" class="desk-schedule-controls"></div>
+  <div class="th-rounds" id="thGames" aria-live="polite"><p class="th-caption">Loading the verified league-wide fixtures…</p></div>
+  <p class="th-caption">Fixtures link to official LeagueGaming game reports. Scheduled and pending games have no final score until verified. <a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=standing&leagueid=154&seasonid=1" target="_blank" rel="noopener noreferrer">Check official scores and standings ↗</a></p>
+</div></section>
+<details class="dashboard-extra dashboard-archive"><summary>PRESEASON COVERAGE / BIDDING ARCHIVE</summary><section class="th-section th-analysis-section band" id="analysis"><div class="th-wrap">
+<header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">ELITECHEL MEDIA · PRESEASON ARCHIVE</p><h2 class="sec-title">BEFORE THE <em>FIRST PUCK.</em></h2></div><p class="th-section-caption">Archived October 21 previews, preserved as pregame editorial. Current results and player totals appear above.</p></header>
+<div class="th-analysis-grid">
+<article class="th-analysis-card th-analysis-lead"><div class="th-analysis-watermark"><img src="assets/lg3s/team341.svg" alt="" loading="lazy"></div><p class="eyebrow">01 · GROUP A · STAR POWER</p><h3>CAN ANYONE STOP <em>CANADA'S</em> OPENING RUN?</h3><p>Canada begins against Switzerland, Slovakia and Great Britain. That means three very different roster builds in about 70 minutes. I Parksy x I76I ($8M) and ProdsznK ($7M) headline Canada's heavy commitment, but the bigger question is who provides support around the two prized acquisitions. Our editorial call: a 3–0 start is possible, but Japan could still finish level on night one.</p><div class="th-analysis-footer"><span>ECM NIGHT-ONE LEAN · 3–0</span><img src="assets/lg3s/team404.svg" alt="Switzerland crest"><img src="assets/lg3s/team1079.svg" alt="Slovakia crest"><img src="assets/lg3s/team1446.svg" alt="Great Britain crest"></div></article>
+<article class="th-analysis-card"><div class="th-analysis-watermark"><img src="assets/lg3s/team532.svg" alt="" loading="lazy"></div><p class="eyebrow">02 · GROUP B · STATEMENT GAME</p><h3>GERMANY VS <em>SWEDEN.</em></h3><p>At 8:35 PM, the league's highest-bidding spender meets a more balanced contender. Germany invested $22M in its winning bids, with MythicI9I leading the way at $7M. Sweden's Blehdes–vSkoon pair cost $10.5M combined. We lean Germany narrowly, but this game should give us a better clue about who can survive tight 3s rotations.</p><div class="th-analysis-footer"><span>8:35 PM ET · GAME 921544</span><img src="assets/lg3s/team343.svg" alt="Sweden crest"></div></article>
+<article class="th-analysis-card"><div class="th-analysis-watermark"><img src="assets/lg3s/team822.svg" alt="" loading="lazy"></div><p class="eyebrow">03 · GROUP B · NIGHT'S BIGGEST BID</p><h3>KNIFEVET22 <em>TAKES THE STAGE.</em></h3><p>Italy acquired KnifeVet22 for $8.25M, the biggest individual bid recorded in the recap. Italy draws Poland, Kazakhstan and Sweden on Wednesday. Our opening-night projection is 2–1, with the late meeting against Sweden the hardest call. A record bid creates expectations, not guaranteed goals.</p><div class="th-analysis-footer"><span>ITALY · THREE FIRST-NIGHT TESTS</span><img src="assets/lg3s/team1444.svg" alt="Poland crest"><img src="assets/lg3s/team531.svg" alt="Kazakhstan crest"><img src="assets/lg3s/team343.svg" alt="Sweden crest"></div></article>
+</div></div></section>
 <section class="th-section th-spotlight band" id="watch"><div class="th-wrap">
 <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">ELITECHEL MEDIA · PRESEASON SCOUTING BOARD</p><h2 class="sec-title">WHO'S BUILT TO <em>CONTEND?</em></h2></div><p class="th-section-caption">Editorial watchlist, not an objective ranking. The bidding room reveals priorities, not chemistry.</p></header>
 <div class="th-features">
@@ -174,7 +163,7 @@
 <p><strong>Still a projection:</strong> how a costly acquisition performs in four-player hockey, whether an expensive duo has chemistry, or which nation is truly strongest. A 6v6 reputation is useful context, not a four-player performance statistic.</p>
 <p><strong>Results desk:</strong> records, the performance index and score summaries update from verified reports. Player spotlights use season totals. Ranking arrows compare the current index with the preceding reported game night.</p>
 <div class="th-method-links"><a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&leagueid=154&page=standing&seasonid=1" target="_blank" rel="noopener noreferrer">OFFICIAL STANDINGS ↗</a><a href="https://www.leaguegaming.com/forums/index.php?threads/lg3s-season-1-bidding-recap.378857/" target="_blank" rel="noopener noreferrer">BIDDING RECAP ↗</a></div></div>
-</div></section>
+</div></section></details>
 </main>
 <dialog id="deskArticle" class="desk-article" aria-labelledby="deskArticleTitle"><div class="desk-article-head"><h2 id="deskArticleTitle">The Final Horn</h2><button type="button" id="deskArticleClose" aria-label="Close recap">Close ×</button></div><div id="deskArticleBody"></div></dialog>
 <footer class="band"><div class="foot">
