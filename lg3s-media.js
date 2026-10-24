@@ -12,7 +12,7 @@
   const shortTime = t => ({'20:00':'8:00 PM','20:35':'8:35 PM','21:10':'9:10 PM'})[t] || esc(t);
   const teamMark = (t, size = 48) => '<img src="' + icon(t.id) + '" width="' + size + '" height="' + size + '" loading="lazy" alt="' + esc(t.name) + ' team crest">';
   const LIVE = Object.freeze({ base: 'https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/', key: 'sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP' });
-  const live = { ok: false, games: new Map(), standings: [], official: [], skaters: [], goalies: [], lines: [] };
+  const live = { ok: false, games: new Map(), standings: [], official: [], skaters: [], goalies: [], lines: [], recaps: new Map() };
   async function view(name, q) {
     const r = await fetch(LIVE.base + name + '?' + q, { headers: { apikey: LIVE.key, Authorization: 'Bearer ' + LIVE.key }, cache: 'no-store' });
     if (!r.ok) throw Error(name + ' ' + r.status);
@@ -20,12 +20,15 @@
   }
   async function loadLive() {
     const [g, s] = await Promise.all([view('lg3s_public_games', 'select=*&order=scheduled_at'), view('lg3s_public_standings', 'select=*')]);
-    const opt = (n, q) => view(n, q).catch(e => { console.warn('LG3s optional view', e); return []; });
-    const [o, sk, gl, ln] = await Promise.all([opt('lg3s_public_official_standings', 'select=*'),
+    const opt = (n, q) => view(n, q).catch(e => { if (!/recaps 404/.test(String(e))) console.warn('LG3s optional view', e); return []; });
+    const [o, sk, gl, ln, recaps] = await Promise.all([opt('lg3s_public_official_standings', 'select=*'),
       opt('lg3s_public_skater_leaders', 'select=*&order=p.desc,g.desc&limit=250'), opt('lg3s_public_goalie_leaders', 'select=*&order=sv_pct.desc.nullslast&limit=60'),
-      opt('lg3s_public_player_lines', 'select=*&order=lg_game_id&limit=5000')]);
+      opt('lg3s_public_player_lines', 'select=*&order=lg_game_id&limit=5000'),
+      opt('lg3s_public_recaps', 'select=id,lg_game_id,game_night_date,title,body_md')]);
     g.forEach(x => live.games.set(Number(x.lg_game_id), x));
-    Object.assign(live, { ok: true, standings: s, official: o, skaters: sk, goalies: gl, lines: ln });
+    const recapMap = new Map();
+    recaps.forEach(r => { if (r.lg_game_id != null) recapMap.set(Number(r.lg_game_id), r); });
+    Object.assign(live, { ok: true, standings: s, official: o, skaters: sk, goalies: gl, lines: ln, recaps: recapMap });
   }
   const etTime = iso => iso ? new Date(iso).toLocaleString('en-US', { timeZone: 'America/Toronto', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' ET' : '';
   const playerLink = (id, name) => '<a class="th-player-name" href="#player/' + Number(id) + '">' + esc(name) + '</a>';
@@ -40,45 +43,85 @@
     nav.addEventListener('click', e => { if(e.target.closest('a')) { nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }});
     document.addEventListener('keydown', e => { if(e.key === 'Escape'){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');}});
   }
-  let data, tm, chosenDay='2026-10-21', boardMode='official', playerLimit=40;
+  let data, tm, chosenDay='', weekDays=[], boardMode='official', playerLimit=40;
   function team(id){ return tm.get(Number(id)); }
+  function teamOr(id, name){ return team(id) || { id: Number(id), name: name || 'Team' }; }
+  function isoAdd(iso, n){ const [y,m,d]=iso.split('-').map(Number); return new Date(Date.UTC(y, m-1, d+n)).toISOString().slice(0,10); }
+  function isoWeekday(iso){ const [y,m,d]=iso.split('-').map(Number); return new Date(Date.UTC(y, m-1, d)).getUTCDay(); }
+  function torontoToday(){ return new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()); }
+  function nightKey(v){ return String(v||'').slice(0,10); }
+  function nightTitle(iso){
+    const [y,m,d]=iso.split('-').map(Number), dt=new Date(Date.UTC(y,m-1,d,12));
+    const weekday=dt.toLocaleDateString('en-US',{weekday:'long',timeZone:'UTC'}).toUpperCase();
+    const md=dt.toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'}).toUpperCase();
+    return weekday+' · '+md;
+  }
+  function collectNights(){
+    const set=new Set();
+    if(live.ok) live.games.forEach(g=>{ const k=nightKey(g.game_night_date); if(k) set.add(k); });
+    else (data.games||[]).forEach(g=>{ if(g.date) set.add(g.date); });
+    return [...set].sort();
+  }
+  function chooseWeek(){
+    const nights=collectNights(), today=torontoToday();
+    const anchor=[...nights].reverse().find(d=>d<=today)||nights[0];
+    if(!anchor){ weekDays=[]; chosenDay=''; return; }
+    const back={3:0,4:1,5:2,6:3,0:4,1:5,2:6}[isoWeekday(anchor)];
+    const wed=isoAdd(anchor,-back);
+    weekDays=[0,1,2].map(i=>isoAdd(wed,i));
+    chosenDay=[...weekDays].reverse().find(d=>d<=today)||weekDays[0];
+  }
+  function etClock(iso){ return new Date(iso).toLocaleTimeString('en-US',{timeZone:'America/Toronto',hour:'numeric',minute:'2-digit'}); }
+  function gamesFor(iso){
+    if(live.ok) return [...live.games.values()].filter(g=>nightKey(g.game_night_date)===iso).sort((a,b)=>String(a.scheduled_at).localeCompare(String(b.scheduled_at))||Number(a.lg_game_id)-Number(b.lg_game_id));
+    return (data.games||[]).filter(g=>g.date===iso).map(g=>({ lg_game_id:g.id, away_lg_team_id:g.away, home_lg_team_id:g.home, away_nation:'', home_nation:'', scheduled_at:null, is_verified:false, status:'scheduled', game_night_date:g.date, _static:g }));
+  }
 
   function renderNations() {
     $('thNations').innerHTML = data.teams.map(t => '<a href="#nation/' + Number(t.id) + '" class="th-nation-chip" title="' + esc(t.name) + ' nation page">' + teamMark(t,34) + '<span>' + esc(t.name) + '</span></a>').join('');
   }
-  function gameCard(g){
-    const a=team(g.away),h=team(g.home),p=g.pick ? team(g.pick):null;
-    const marquee=/MARQUEE|HEADLINER|STAR DUEL|STYLE CLASH/.test(g.tag);
-    const classes='th-game th-game-v2' + (marquee?' th-game-feature':'');
-    return '<a class="' + classes + '" href="' + gameUrl(g.id) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(a.name) + ' at ' + esc(h.name) + ', ' + shortTime(g.time) + ' Eastern, official game">' +
-      '<img class="th-game-wm" src="' + icon(h.id) + '" loading="lazy" alt="" aria-hidden="true">' +
-      '<div class="th-game-top"><span class="th-game-day">' + esc(g.tag) + '</span><strong>GAME ' + esc(String(g.id).slice(-3)) + '</strong><span class="th-action">LG GAME CENTRE ↗</span></div>' +
-      '<div class="th-teams"><div>' + teamMark(a,68) + '<strong>' + esc(a.name) + '</strong><small>AWAY</small></div><span class="th-vs">AT</span><div>' + teamMark(h,68) + '<strong>' + esc(h.name) + '</strong><small>HOME</small></div></div>' +
-      '<div class="th-game-foot"><span>THE MATCHUP</span><p>' + esc(g.preview) + '</p></div>' +
-      liveScore(g, a, h) +
-      '<div class="th-game-verdict">' + (p ? '<span>ECM PICK · <b>' + esc(p.name) + '</b></span><span class="th-pick-label">EDITORIAL PREDICTION</span>' : '<span>THURSDAY · PREVIEW ONLY</span><span class="th-pick-label">NO PICK POSTED</span>') + '</div>' +
-      '</a>';
+  function gameCard(row){
+    const snap=row._static||(data.games||[]).find(g=>Number(g.id)===Number(row.lg_game_id));
+    const a=teamOr(row.away_lg_team_id, row.away_nation), h=teamOr(row.home_lg_team_id, row.home_nation);
+    const p=snap&&snap.pick?team(snap.pick):null;
+    const marquee=snap&&/MARQUEE|HEADLINER|STAR DUEL|STYLE CLASH/.test(snap.tag||'');
+    const classes='th-game th-game-v2'+(marquee?' th-game-feature':'');
+    const clock=row._static?shortTime(row._static.time):etClock(row.scheduled_at);
+    const tag=snap&&snap.tag?snap.tag:clock+' ET';
+    const preview=snap&&snap.preview?'<div class="th-game-foot"><span>THE MATCHUP</span><p>'+esc(snap.preview)+'</p></div>':'';
+    const verdict=p?'<div class="th-game-verdict"><span>ECM PICK · <b>'+esc(p.name)+'</b></span><span class="th-pick-label">EDITORIAL PREDICTION</span></div>':'';
+    const recap=row.is_verified&&live.recaps.get(Number(row.lg_game_id));
+    const recapLink=recap?'<a class="th-recap-link" href="#recap/'+Number(row.lg_game_id)+'">Approved recap</a>':'';
+    const scoreText=row.is_verified&&row.away_score!=null&&row.home_score!=null?(' final '+Number(row.away_score)+' to '+Number(row.home_score)):'';
+    return '<div class="th-game-slot"><a class="'+classes+'" href="'+gameUrl(row.lg_game_id)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(a.name)+' at '+esc(h.name)+', '+esc(clock)+' Eastern'+scoreText+'">' +
+      '<img class="th-game-wm" src="'+icon(h.id)+'" loading="lazy" alt="" aria-hidden="true">' +
+      '<div class="th-game-top"><span class="th-game-day">'+esc(tag)+'</span><strong>GAME '+esc(String(row.lg_game_id).slice(-3))+'</strong><span class="th-action">LG GAME CENTRE ↗</span></div>' +
+      '<div class="th-teams"><div>'+teamMark(a,68)+'<strong>'+esc(a.name)+'</strong><small>AWAY</small></div><span class="th-vs">AT</span><div>'+teamMark(h,68)+'<strong>'+esc(h.name)+'</strong><small>HOME</small></div></div>' +
+      preview+scoreBlock(row,a,h)+verdict+'</a>'+recapLink+'</div>';
   }
-  function liveScore(g, a, h) {
-    const x = live.games.get(Number(g.id));
-    if (!live.ok || !x) return '';
-    if (!x.is_verified) return '<div class="th-live-score is-pending"><span>' + (x.status === 'pending_verification' ? 'FINAL POSTED · VERIFYING' : 'RESULT PENDING') + '</span><small>Scores appear once LG data passes verification</small></div>';
-    const ah = x.away_score > x.home_score;
-    return '<div class="th-live-score"><b class="' + (ah ? 'is-win' : '') + '">' + esc(a.name) + ' ' + Number(x.away_score) + '</b><span>FINAL' + (x.decided_in && x.decided_in !== 'REG' ? '/' + esc(x.decided_in) : '') + '</span><b class="' + (ah ? '' : 'is-win') + '">' + Number(x.home_score) + ' ' + esc(h.name) + '</b>' +
-      '<small>OFFICIAL LG DATA · VERIFIED ' + esc(etTime(x.verified_at)) + (x.was_corrected ? ' · CORRECTED' : '') + '</small></div>';
+  function scoreBlock(row, a, h) {
+    if (!live.ok || row._static) return '';
+    if (!row.is_verified || row.away_score==null || row.home_score==null) return '<div class="th-live-score is-pending"><span>' + (row.status === 'pending_verification' ? 'FINAL POSTED · VERIFYING' : 'RESULT PENDING') + '</span><small>Scores appear once LG data passes verification</small></div>';
+    const ah = row.away_score > row.home_score;
+    return '<div class="th-live-score"><b class="' + (ah ? 'is-win' : '') + '">' + esc(a.name) + ' ' + Number(row.away_score) + '</b><span>FINAL' + (row.decided_in && row.decided_in !== 'REG' ? '/' + esc(row.decided_in) : '') + '</span><b class="' + (ah ? '' : 'is-win') + '">' + Number(row.home_score) + ' ' + esc(h.name) + '</b>' +
+      '<small>OFFICIAL LG DATA · VERIFIED ' + esc(etTime(row.verified_at)) + (row.was_corrected ? ' · CORRECTED' : '') + '</small></div>';
+  }
+  function renderNightTabs(){
+    const box=$('thNightTabs'); if(!box) return;
+    box.innerHTML=weekDays.map(iso=>{
+      const finals=gamesFor(iso).filter(g=>g.is_verified).length;
+      return '<button type="button" role="tab" data-date="'+iso+'" aria-pressed="'+String(iso===chosenDay)+'">'+nightTitle(iso).split(' · ')[0]+' <span>'+finals+' FINAL'+(finals===1?'':'S')+'</span></button>';
+    }).join('');
   }
   function renderGames(){
-    const games=data.games.filter(g => chosenDay==='all'||g.date===chosenDay);
+    renderNightTabs();
+    const games=chosenDay?gamesFor(chosenDay):[];
     const blocks=new Map;
-    for(const g of games){const key=g.date+'|'+g.time;if(!blocks.has(key))blocks.set(key,[]);blocks.get(key).push(g);}
-    $('thGames').innerHTML=[...blocks.entries()].map(([key,arr])=>{
-      const [date,time]=key.split('|'),label=date==='2026-10-21'?'WEDNESDAY · OCT 21':'THURSDAY · OCT 22';
-      return '<div class="th-wave"><header class="th-wave-header"><span class="th-wave-time">' + shortTime(time) + ' <small>ET</small></span><span>' + label + '</span><span>' + arr.length + ' MATCHUPS</span></header><div class="th-games">' + arr.map(gameCard).join('') + '</div></div>';
-    }).join('');
-    const all=chosenDay==='all',isWed=chosenDay==='2026-10-21';
-    $('thSelectedNight').textContent=all?'FULL OPENING WEEK · OCT 21–22':isWed?'OPENING NIGHT · WEDNESDAY, OCT 21':'NIGHT TWO · THURSDAY, OCT 22';
-    $('thNightStat').textContent=(all?'30':isWed?'18':'12')+' VERIFIED FIXTURES · '+(all?'FIVE':isWed?'THREE':'TWO')+' WAVES';
-    document.querySelectorAll('.th-switch button[data-date]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.date===chosenDay)));
+    for(const g of games){ const key=g._static?shortTime(g._static.time):etClock(g.scheduled_at); if(!blocks.has(key)) blocks.set(key,[]); blocks.get(key).push(g); }
+    $('thGames').innerHTML=games.length?[...blocks.entries()].map(([time,arr])=>'<div class="th-wave"><header class="th-wave-header"><span class="th-wave-time">'+esc(time)+' <small>ET</small></span><span>'+esc(nightTitle(chosenDay))+'</span><span>'+arr.length+' MATCHUP'+(arr.length===1?'':'S')+'</span></header><div class="th-games">'+arr.map(gameCard).join('')+'</div></div>').join(''):'<p class="th-caption">No games on this night.</p>';
+    const finals=games.filter(g=>g.is_verified).length;
+    $('thSelectedNight').textContent=chosenDay?nightTitle(chosenDay):'THIS WEEK';
+    $('thNightStat').textContent=chosenDay?(finals+' VERIFIED FINAL'+(finals===1?'':'S')+' · '+games.length+' GAME'+(games.length===1?'':'S')):'VERIFIED FINALS';
   }
   function standingsTable(group){
     const teams=data.teams.filter(t=>t.group===group);
@@ -91,7 +134,7 @@
       }).join('')+'</tbody></table></div></div>';
     }
     if(live.ok&&live.standings.length===12){
-      const rows=live.standings.filter(r=>r.group_code===group).sort((a,b)=>(b.pts??-1)-(a.pts??-1)||b.gd-a.gd||b.gf-a.gf||a.nation.localeCompare(b.nation));
+      const rows=live.standings.filter(r=>{const t=team(r.lg_team_id);return t&&t.group===group;}).sort((a,b)=>(b.pts??-1)-(a.pts??-1)||b.gd-a.gd||b.gf-a.gf||a.nation.localeCompare(b.nation));
       return '<div class="th-standing-group"><header class="th-standing-title"><strong>GROUP '+group+'</strong><span>OFFICIAL LG RESULTS · VERIFIED</span></header><div class="th-table-scroll"><table class="th-table"><thead><tr><th>TEAM</th><th>GP</th><th>W</th><th>L</th><th>OTW</th><th>OTL</th><th>PTS</th><th>GF</th><th>GA</th><th>GD</th></tr></thead><tbody>'+rows.map(r=>{const t=team(r.lg_team_id);
         return '<tr><td>'+nationLink(t)+'</td>'+['gp','w','l','otw','otl','pts','gf','ga','gd'].map(k=>'<td class="num">'+(r[k]==null?'—':Number(r[k]))+'</td>').join('')+'</tr>';}).join('')+'</tbody></table></div></div>';
     }
@@ -147,7 +190,13 @@
     openDetail('<header class="th-detail-head"><div><p class="eyebrow">PLAYER CARD · '+esc(nations)+'</p><h3>'+esc(name)+'</h3><p>'+(sk.length?sk.length+' GP · '+sum(sk,'goals')+'G '+sum(sk,'assists')+'A '+sum(sk,'points')+'P':'')+(gl.length?(sk.length?' · ':'')+gl.length+' GP in goal · '+sum(gl,'saves')+' SV / '+sum(gl,'shots_against')+' SA':'')+(rp&&rp.v?' · Bid '+salary(rp.v):'')+'</p></div></header>'+
       '<h4>GAME LOG · VERIFIED</h4><div class="th-table-scroll"><table class="th-table"><tbody>'+rows+'</tbody></table></div><p class="th-caption"><a href="'+userUrl(uid)+'" target="_blank" rel="noopener noreferrer">Official LG profile ↗</a> · Lines are credited to the nation shown in each game\'s LG box score.</p>');
   }
-  function route(){const m=/^#(nation|player)\/(\d+)$/.exec(location.hash);if(!m)return;const id=Number(m[2]);m[1]==='nation'?nationPage(id):playerCard(id);}
+  function recapPage(id){
+    const recap=live.recaps.get(Number(id)), game=live.games.get(Number(id));
+    if(!recap||!game||!game.is_verified) return;
+    const body=esc(recap.body_md).replace(/\n/g,'<br>');
+    openDetail('<header class="th-detail-head"><div><p class="eyebrow">APPROVED RECAP · '+esc(nightTitle(nightKey(game.game_night_date)))+'</p><h3>'+esc(recap.title)+'</h3></div></header><div class="th-recap-body">'+body+'</div><p class="th-caption"><a href="'+gameUrl(id)+'" target="_blank" rel="noopener noreferrer">Official LG game centre ↗</a></p>');
+  }
+  function route(){const m=/^#(nation|player|recap)\/(\d+)$/.exec(location.hash);if(!m)return;const id=Number(m[2]);if(m[1]==='nation')nationPage(id);else if(m[1]==='player')playerCard(id);else recapPage(id);}
   function renderPlayers(){
     const search=$('thPlayerSearch').value.trim().toLocaleLowerCase(),tid=$('thPlayerTeam').value,status=$('thPlayerStatus').value,pos=$('thPlayerPosition').value,sort=$('thPlayerSort').value;
     let players=data.players.filter(p=>(status==='all'||p.s===status)&&(tid==='all'||String(p.t)===tid)&&(pos==='all'||p.p===pos)&&(!search||p.n.toLocaleLowerCase().includes(search)||team(p.t).name.toLocaleLowerCase().includes(search)));
@@ -167,12 +216,13 @@
     if(!Array.isArray(data.teams)||data.teams.length!==12||data.games.length!==30||data.players.length<200)throw Error('Incomplete league snapshot');
     tm=new Map(data.teams.map(t=>[t.id,t]));
     try{await loadLive();}catch(e){console.warn('LG3s verified results unavailable; showing static snapshot.',e);}
+    chooseWeek();
     renderNations();renderGames();renderStandings();renderLeaders();
     window.addEventListener('hashchange',route);route();
     const dc=$('thDetailClose');if(dc)dc.addEventListener('click',()=>{$('thDetail').close();history.replaceState(null,'',location.pathname+location.search);});
     $('thPlayerTeam').innerHTML='<option value="all">All twelve nations</option>'+data.teams.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(t=>'<option value="'+t.id+'">'+esc(t.name)+'</option>').join('');
     renderPlayers();
-    document.querySelectorAll('.th-switch button[data-date]').forEach(b=>b.addEventListener('click',()=>{chosenDay=b.dataset.date;renderGames();}));
+    const nightTabs=$('thNightTabs'); if(nightTabs) nightTabs.addEventListener('click',e=>{const b=e.target.closest('button[data-date]'); if(!b) return; chosenDay=b.dataset.date; renderGames();});
     document.querySelectorAll('.th-board-mode').forEach(b=>b.addEventListener('click',()=>{boardMode=b.dataset.boardMode;renderStandings();}));
     ['thPlayerSearch','thPlayerTeam','thPlayerStatus','thPlayerPosition','thPlayerSort'].forEach(id=>$(id).addEventListener(id==='thPlayerSearch'?'input':'change',()=>{playerLimit=40;renderPlayers();}));
     $('thPlayersMore').addEventListener('click',()=>{playerLimit+=40;renderPlayers();});

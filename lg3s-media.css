@@ -189,8 +189,8 @@
 
 
 /* LG3s header image + calmer Elitechel Media broadcast rhythm. */
-.lg3s .th-banner{width:min(100%,1536px);margin:0 auto;position:relative;overflow:hidden;background:#070a0f;border-bottom:1px solid rgba(235,193,98,.28);box-shadow:0 18px 52px rgba(0,0,0,.4)}
-.lg3s .th-banner>img{display:block;width:100%;height:auto;aspect-ratio:1536/614;object-fit:contain}
+.lg3s .th-banner{width:100%;margin:0 auto;position:relative;overflow:hidden;background:#070a0f;border-bottom:1px solid rgba(235,193,98,.28);box-shadow:0 18px 52px rgba(0,0,0,.4)}
+.lg3s .th-banner>img{display:block;width:100%;height:auto;aspect-ratio:2172/724;object-fit:cover}
 .lg3s .th-banner-strip{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;padding:12px clamp(16px,3vw,36px);background:linear-gradient(100deg,#16212a,#0a111a 55%,#211c16);border-top:2px solid #ab8544;color:#c6d3d9;font:700 14px/1.15 var(--f-ui);letter-spacing:.12em;text-transform:uppercase}
 .lg3s .th-banner-strip b{color:#fff}.lg3s .th-banner-strip span[aria-hidden]{color:var(--gold-hi);padding:0 7px}
 .lg3s .th-banner-stripe{display:inline-block;vertical-align:middle;width:2px;height:12px;background:var(--gold-hi);margin-inline:8px}
@@ -353,3 +353,7 @@
 .th-detail::backdrop{background:rgba(0,0,0,.72)}.th-detail h3{font-family:Anton,sans-serif;font-size:2rem;margin:.1rem 0}.th-detail h4{font-family:Teko,sans-serif;letter-spacing:.08em;color:#d4af37;margin:1.1rem 0 .4rem}
 .th-detail-head{display:flex;gap:1rem;align-items:center}.th-detail-close{position:sticky;top:0;float:right;background:none;border:1px solid #555;color:#fff;font-size:1.4rem;width:2.2rem;height:2.2rem;cursor:pointer}
 @media (max-width:600px){.th-live-score b{font-size:1.1rem}.th-detail{padding:1rem}.th-detail h3{font-size:1.5rem}}
+.lg3s .th-game-slot{display:flex;flex-direction:column;min-width:0}
+.lg3s .th-recap-link{align-self:flex-start;margin:8px 2px 0;font:600 13px/1 var(--f-ui);letter-spacing:.12em;text-transform:uppercase;color:#c5ced6}
+.lg3s .th-recap-link:hover{color:#f4f1ea}
+.lg3s .th-recap-body{font-size:15px;line-height:1.5;color:#d7dde2}

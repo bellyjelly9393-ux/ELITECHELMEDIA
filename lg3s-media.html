@@ -19,11 +19,14 @@
 <link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/lg3s/art/lg3s-hero-1280.webp" as="image" media="(max-width: 1280px)">
+<link rel="preload" href="assets/lg3s/art/lg3s-hero-banner.webp" as="image" media="(min-width: 1281px)">
 <link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261021-lg3">
 <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
-<link rel="stylesheet" href="lg3s-media.css?v=20261022-live1">
-<script src="lg3s-media.js?v=20261022-live1" defer></script>
+<link rel="stylesheet" href="lg3s-media.css?v=20261024-board">
+<link rel="stylesheet" href="lg3s-broadcast-preview.css?v=20261024-board3">
+<script src="lg3s-media.js?v=20261024-board2" defer></script>
+<script src="lg3s-broadcast-preview.js?v=20261024-board2" defer></script>
 </head>
 <body class="lg3s">
 <header class="top band">
@@ -54,13 +57,66 @@
   <a class="lg3s-desk" href="lg3s-media.html" aria-current="page"><img src="assets/lg3s/art/lg3s-crest-64.webp" width="32" height="32" alt=""><span>LG3s Media</span></a>
 </div></div></nav>
 <nav class="sub-bar band th-sub" aria-label="LG3s Media sections"><div class="sub-in">
- <a href="#opening" aria-current="page">Season 1</a><a href="#schedule">Full schedule</a><a href="#analysis">Matchup previews</a><a href="#standings">Standings</a><a href="#rosters">Player board</a><a href="#watch">Contenders</a><a href="#bidding">Bidding</a>
+ <a href="#opening" aria-current="page">Season 1</a><a href="#scoreboard">Scores</a><a href="#upcoming">Upcoming</a><a href="#power">Rankings</a><a href="#leaders">Leaders</a><a href="#spotlight">Spotlight</a><a href="#keymatchups">Matchups</a><a href="#radio">Hitmen Radio</a><a href="#schedule">Full schedule</a><a href="#standings">Standings</a><a href="#rosters">Player board</a><a href="#bidding">Bidding</a>
 </div></nav>
 <main id="opening" class="th-page">
 <figure class="th-banner" aria-label="Elitechel Media LG3s international hockey banner">
-  <img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3Ic50OgPEnsF6yLkPdMjvCnPfo2/2c6cacaa-2fd7-47de-abb8-1a5e71387aa4.png" alt="Elitechel Media LG3S Media international hockey arena, with Canada, Italy, Switzerland, Germany, Great Britain, Japan, Latvia, Poland, Slovakia, Sweden, Kazakhstan and USA represented around the globe" width="1536" height="614" decoding="async" fetchpriority="high">
+  <img src="assets/lg3s/art/lg3s-hero-banner.webp"
+       srcset="assets/lg3s/art/lg3s-hero-1280.webp 1280w, assets/lg3s/art/lg3s-hero-banner.webp 2172w"
+       sizes="100vw"
+       alt="Elitechel Media LG3s international hockey — all 12 nations: Canada, USA, Great Britain, Germany, Sweden, Japan, Italy, Switzerland, Latvia, Poland, Slovakia, Kazakhstan represented by arena flag banners around a central globe"
+       width="2172" height="724" decoding="async" fetchpriority="high">
   <figcaption class="th-banner-strip"><span><b>ELITECHEL MEDIA</b> <span aria-hidden="true">/</span> INTERNATIONAL LG3S</span><span>SEASON 1 · OCT 21–22, 2026 <span class="th-banner-stripe" aria-hidden="true"></span> 12 TEAMS · 30 GAMES</span></figcaption>
 </figure>
+<section class="lg3-broadcast" id="lg3Broadcast" aria-label="LG3s international hockey dashboard">
+<div class="lg3-shell">
+<div class="lg3-grid">
+<article class="lg3-panel lg3-p-feature" id="featured">
+  <header class="lg3-ph"><svg class="lg3-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V13M10 20V8M16 20V4M22 20H2"/></svg><h2>FEATURED MATCHUP</h2><span class="lg3-ph-meta" id="lg3FeatureMeta"></span></header>
+  <div class="lg3-feature" id="lg3Feature"><p class="lg3-wait">Loading the next marquee game…</p></div>
+</article>
+<article class="lg3-panel" id="scoreboard">
+  <header class="lg3-ph"><svg class="lg3-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0V4ZM7 6H3v1a4 4 0 0 0 4 4M17 6h4v1a4 4 0 0 1-4 4M12 14v4M8 21h8M9 18h6"/></svg><h2>LATEST SCORES</h2><a class="lg3-ph-link" href="#schedule">VIEW ALL →</a></header>
+  <div class="lg3-chips" id="lg3Nights" role="group" aria-label="Choose a game night"></div>
+  <div class="lg3-list lg3-scroll" id="lg3Scores"><p class="lg3-wait">Loading final scores…</p></div>
+</article>
+<article class="lg3-panel" id="upcoming">
+  <header class="lg3-ph"><svg class="lg3-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v15H3zM3 10h18M8 3v5M16 3v5"/></svg><h2>UPCOMING GAMES</h2><a class="lg3-ph-link" href="#schedule">VIEW ALL →</a></header>
+  <div class="lg3-list" id="lg3Upcoming"><p class="lg3-wait">Loading the schedule…</p></div>
+</article>
+<article class="lg3-panel" id="power">
+  <header class="lg3-ph"><svg class="lg3-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V14M10 20V9M16 20V12M22 20H2M3 9l6-4 6 4 6-5"/></svg><h2>POWER RANKINGS</h2><a class="lg3-ph-link" href="#standings">VIEW ALL →</a></header>
+  <div id="lg3Rankings"><p class="lg3-wait">Loading standings…</p></div>
+</article>
+<article class="lg3-panel" id="leaders">
+  <header class="lg3-ph"><svg class="lg3-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7Z"/></svg><h2>LEAGUE LEADERS</h2><a class="lg3-ph-link" href="#rosters">VIEW ALL →</a></header>
+  <div class="lg3-tabs" id="lg3LeaderTabs" role="tablist" aria-label="Leaderboard category">
+    <button type="button" role="tab" data-stat="p" aria-selected="true">POINTS</button><button type="button" role="tab" data-stat="g" aria-selected="false">GOALS</button><button type="button" role="tab" data-stat="a" aria-selected="false">ASSISTS</button><button type="button" role="tab" data-stat="plus_minus" aria-selected="false">+/-</button><button type="button" role="tab" data-stat="sv_pct" aria-selected="false">SAVE %</button>
+  </div>
+  <div id="lg3Leaders" role="tabpanel"><p class="lg3-wait">Loading players…</p></div>
+</article>
+<article class="lg3-panel lg3-p-red" id="spotlight">
+  <header class="lg3-ph"><svg class="lg3-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg><h2>NATION SPOTLIGHT</h2><span class="lg3-pager"><button type="button" id="lg3SpotPrev" aria-label="Previous nation">‹</button><span id="lg3SpotCount" aria-live="polite">1/12</span><button type="button" id="lg3SpotNext" aria-label="Next nation">›</button></span></header>
+  <div class="lg3-spot" id="lg3Spotlight"><p class="lg3-wait">Loading nation…</p></div>
+</article>
+<article class="lg3-panel lg3-span2" id="keymatchups">
+  <header class="lg3-ph"><svg class="lg3-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l9 9M4 8V4h4M20 4l-9 9M20 8V4h-4M7 15l-3 3 2 2 3-3M17 15l3 3-2 2-3-3"/></svg><h2>KEY MATCHUPS</h2><a class="lg3-ph-link" href="#schedule">VIEW ALL →</a></header>
+  <div class="lg3-keys" id="lg3Keys"><p class="lg3-wait">Loading matchups…</p></div>
+</article>
+<article class="lg3-panel lg3-p-red lg3-radio" id="radio">
+  <header class="lg3-ph"><svg class="lg3-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v10a3 3 0 0 1-6 0V3ZM5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></svg><h2>HITMEN RADIO</h2></header>
+  <div class="lg3-radio-body">
+    <div class="lg3-radio-art" aria-hidden="true"><span class="lg3-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><svg class="lg3-mic" viewBox="0 0 64 96"><rect x="18" y="4" width="28" height="50" rx="14"/><path d="M10 44a22 22 0 0 0 44 0M32 66v16M18 90h28"/><path class="lg3-mic-grill" d="M22 18h20M22 26h20M22 34h20M22 42h20"/></svg><strong class="lg3-radio-logo"><small>ELITECHEL MEDIA</small>HITMEN<em>RADIO</em></strong></div>
+    <p>Match breakdowns, player stories and LG3s talk from the Elitechel Media desk.</p>
+    <span class="lg3-btn lg3-btn-ghost" aria-disabled="true">COMING SOON</span>
+  </div>
+</article>
+<article class="lg3-panel lg3-span3" id="news">
+  <header class="lg3-ph"><svg class="lg3-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h13v15H6a2 2 0 0 1-2-2V5ZM17 9h3v9a2 2 0 0 1-2 2M7 9h7M7 13h7M7 17h4"/></svg><h2>LATEST NEWS</h2><a class="lg3-ph-link" href="#analysis">VIEW ALL →</a></header>
+  <div class="lg3-news" id="lg3News"><p class="lg3-wait">Loading headlines…</p></div>
+</article>
+</div>
+</div></section>
 <section class="th-hero band">
   <div class="th-wrap th-hero-grid">
     <div class="th-copy">
@@ -84,9 +140,9 @@
 
 <section class="th-nations-bar band" aria-label="All twelve LG3s national teams"><div class="th-wrap"><span class="eyebrow">12 NATIONS · ONE LEAGUE</span><div class="th-nations" id="thNations"><p>Every LG3s team. Every opening-night matchup.</p></div></div></section>
 <section class="th-section th-schedule-section band" id="schedule"><div class="th-wrap">
-  <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">OFFICIAL LG3S FIXTURES · OCT 21–22, 2026</p><h2 class="sec-title">THE FULL <em>LEAGUE SLATE.</em></h2></div><p class="th-section-caption">All 12 countries, 30 verified games over two nights. Times Eastern. Tap any fixture for its official LeagueGaming game centre.</p></header>
-  <div class="th-night-header"><div><span class="th-live-dot"></span><strong id="thSelectedNight">OPENING NIGHT · WEDNESDAY, OCT 21</strong><small id="thNightStat">18 VERIFIED FIXTURES · THREE WAVES</small></div><span class="th-verified">OFFICIAL SCHEDULE · ECM PREVIEWS</span></div>
-  <div class="th-switch" role="group" aria-label="Filter the full league slate"><button type="button" data-date="2026-10-21" aria-pressed="true">TONIGHT · OCT 21 <span>18 GAMES</span></button><button type="button" data-date="2026-10-22" aria-pressed="false">THURSDAY · OCT 22 <span>12 GAMES</span></button><button type="button" data-date="all" aria-pressed="false">ALL 30 GAMES</button></div>
+  <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">OFFICIAL LG3S FIXTURES · WEDNESDAY TO FRIDAY</p><h2 class="sec-title">THE FULL <em>LEAGUE SLATE.</em></h2></div><p class="th-section-caption">This week’s nights, Eastern time. A game after midnight stays on the previous night. Final scores are verified LeagueGaming results only.</p></header>
+  <div class="th-night-header"><div><span class="th-live-dot"></span><strong id="thSelectedNight">THIS WEEK</strong><small id="thNightStat">VERIFIED FINALS</small></div><span class="th-verified">OFFICIAL SCHEDULE · VERIFIED SCORES</span></div>
+  <div class="th-switch" id="thNightTabs" role="tablist" aria-label="Wednesday, Thursday and Friday"></div>
   <div class="th-rounds" id="thGames" aria-live="polite"><p class="th-caption">Loading the verified league-wide fixtures…</p></div>
   <p class="th-caption">Games are linked to official LeagueGaming fixtures. Editorial leans are clearly marked as <strong>predictions</strong>, not results. <a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=standing&leagueid=154&seasonid=1" target="_blank" rel="noopener noreferrer">Check official scores and standings ↗</a></p>
 </div></section>
@@ -103,7 +159,7 @@
 <div class="th-standings-grids" id="thStandings"><p class="th-caption">Loading both LG3s groups…</p></div>
 <p class="th-caption" id="thStandingsNote">Source: LeagueGaming Season 1 official results.</p>
 </div></section>
-<section class="th-section th-standings-section band" id="leaders"><div class="th-wrap"> <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · OFFICIAL LG DATA · VERIFIED GAMES ONLY</p><h2 class="sec-title">THE <em>LEADERS.</em></h2></div><p class="th-section-caption">Goalies are credited to the nation they played for in each game, never by roster. Tap a name for the player card or a nation for its page.</p></header> <div class="th-standings-grids" id="thLeaders"><p class="th-caption">Loading verified leaderboards…</p></div> </div></section>
+<section class="th-section th-standings-section band" id="verified-leaders"><div class="th-wrap"> <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · OFFICIAL LG DATA · VERIFIED GAMES ONLY</p><h2 class="sec-title">THE <em>LEADERS.</em></h2></div><p class="th-section-caption">Goalies are credited to the nation they played for in each game, never by roster. Tap a name for the player card or a nation for its page.</p></header> <div class="th-standings-grids" id="thLeaders"><p class="th-caption">Loading verified leaderboards…</p></div> </div></section>
 <dialog class="th-detail" id="thDetail" aria-label="LG3s detail"><button type="button" class="th-detail-close" id="thDetailClose" aria-label="Close">×</button><div id="thDetailBody"></div></dialog>
 <section class="th-section th-roster-section band" id="rosters"><div class="th-wrap">
 <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · VERIFIED LG ROSTERS</p><h2 class="sec-title">THE PLAYER <em>INDEX.</em></h2></div><p class="th-section-caption">Browse all 12 national teams. Bid-value ranking is a preseason market board, not a points or performance leaderboard.</p></header>

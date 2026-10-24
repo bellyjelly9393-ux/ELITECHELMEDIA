@@ -1,5 +1,5 @@
 -- Kick + DST-proof tick for lg3s-sync. Creating these functions schedules NOTHING.
--- The cron job itself lives in scheduler/lg3s_cron_DRAFT.sql and is applied only after approval.
+-- The cron job lg3s-tick is applied. The statement is kept in scheduler/lg3s_cron.sql.
 create schema if not exists private;
 
 create or replace function private.lg3s_kick_sync(p_mode text, p_ids bigint[] default null)
