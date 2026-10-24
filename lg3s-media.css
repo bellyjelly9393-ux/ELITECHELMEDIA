@@ -1,4 +1,33 @@
 /* LG3s Media opening-week desk. Scoped to .lg3s and .th-* to protect other pages. */
+
+/* ── LG3s nation scores ticker bar ───────────────────────────────────────── */
+.lg3t{display:flex;align-items:stretch;height:36px;overflow:hidden;
+  background:linear-gradient(90deg,#0e0418 0%,#0a1020 40%,#060f1c 100%);
+  border-bottom:1px solid rgba(100,160,220,.18);position:relative;z-index:40}
+.lg3t-label{display:flex;align-items:center;gap:7px;padding:0 14px 0 16px;
+  flex-shrink:0;border-right:1px solid rgba(100,160,220,.18);
+  background:linear-gradient(90deg,rgba(60,20,90,.55),transparent)}
+.lg3t-live-dot{width:7px;height:7px;border-radius:50%;background:#e34040;
+  box-shadow:0 0 8px #e34040;animation:lg3tPulse 1.6s ease-in-out infinite}
+@keyframes lg3tPulse{0%,100%{opacity:1;box-shadow:0 0 8px #e34040}50%{opacity:.35;box-shadow:0 0 3px #e34040}}
+.lg3t-live-word{font-family:var(--f-ui,sans-serif);font-size:11px;font-weight:700;
+  letter-spacing:.12em;color:#e34040;text-transform:uppercase}
+.lg3t-date{font-family:var(--f-ui,sans-serif);font-size:10px;letter-spacing:.06em;
+  color:rgba(180,200,220,.5);text-transform:uppercase;white-space:nowrap}
+.lg3t-rail{flex:1;overflow:hidden;display:flex;align-items:center;min-width:0}
+.lg3t-track{display:flex;align-items:center;gap:0;white-space:nowrap;
+  animation:lg3tScroll var(--lg3t-dur,40s) linear infinite}
+@media(prefers-reduced-motion:reduce){.lg3t-track{animation:none;overflow-x:auto}}
+@keyframes lg3tScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.lg3t-item{display:inline-flex;align-items:center;gap:5px;padding:0 6px;
+  font-family:var(--f-ui,sans-serif);font-size:12px;letter-spacing:.06em}
+.lg3t-team{color:rgba(180,200,220,.65);font-weight:600;text-transform:uppercase;font-size:11px}
+.lg3t-team.lg3t-win{color:#f0f2f4;font-weight:700}
+.lg3t-score{color:#dde2e8;font-weight:700;font-size:13px;min-width:14px;text-align:center}
+.lg3t-dash{color:rgba(150,170,190,.4);font-size:11px}
+.lg3t-sep{color:rgba(100,140,180,.3);font-size:13px;padding-left:8px}
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .lg3s{--th-blue:#8ecdf3;--th-line:rgba(161,200,231,.19);--th-white:#f3f1eb;--th-muted:#bec1c6;background:#080a0e}
 .lg3s .desk-bar{background:linear-gradient(90deg,rgba(14,36,57,.5),rgba(9,10,13,.9) 70%)}
 .lg3s .desk-toggle a.lg3s-desk[aria-current]{color:#111316;background:linear-gradient(180deg,#f4f6f8,#c3ccd6 55%,#7d8894)}
