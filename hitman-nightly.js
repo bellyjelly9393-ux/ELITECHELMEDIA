@@ -26,17 +26,17 @@
   }
   function fill(c, ep) {
     c.ep = ep; c.el.id = 'ep-' + key(ep); load(c.video, ep);
-    c.el.querySelector('[data-k=kind]').textContent = ep.type === 'recap' ? 'Weekly recap' : 'Nightly show';
-    c.el.querySelector('[data-k=title]').textContent = ep.title || (ep.type === 'recap' ? 'Hitmen Radio — Weekly Recap' : 'Hitmen Radio — Nightly Show');
+    c.el.querySelector('[data-k=kind]').textContent = ep.type === 'recap' ? 'Weekly recap' : ep.type === 'preview' ? 'Week ahead preview' : 'Nightly show';
+    c.el.querySelector('[data-k=title]').textContent = ep.title || (ep.type === 'recap' ? 'Hitmen Radio — Weekly Recap' : ep.type === 'preview' ? 'Hitmen Radio — Week Ahead' : 'Hitmen Radio — Nightly Show');
     c.el.querySelector('[data-k=date]').textContent = ep.label || ep.date;
     c.el.querySelector('[data-k=headline]').textContent = ep.headline || '';
     var ds = c.el.querySelector('[data-k=desc]'); ds.textContent = ep.description || ''; ds.hidden = !ep.description;
     var cr = c.el.querySelector('[data-k=credits]'); cr.innerHTML = ep.credits ? linkify(ep.credits) : ''; cr.hidden = !ep.credits;
   }
   function buildDual(list) {
-    var box = document.createElement('div'); box.className = 'hn-dual';
+    var box = document.createElement('div'); box.className = 'hn-dual' + (list.length === 1 ? ' hn-solo' : '');
     box.innerHTML = '<div class="hn-dual-head"><div class="hn-head"><img class="hn-mark" src="assets/brand/elitechel-mark-48@2x.png" width="36" height="36" alt=""><span class="hn-brand">EliteChel Media</span></div>' +
-      '<h2 class="hn-title">Hitmen Radio <em>— Dual Feature</em></h2><p class="hn-dual-sub">' + list.length + ' new episodes today</p></div><div class="hn-dual-grid"></div>';
+      '<h2 class="hn-title">Hitmen Radio <em>— ' + (list.length > 1 ? 'Dual Feature' : 'New Episode') + '</em></h2><p class="hn-dual-sub">' + (list.length > 1 ? list.length + ' new episodes today' : 'Latest episode') + '</p></div><div class="hn-dual-grid"></div>';
     var grid = box.querySelector('.hn-dual-grid'), cards = [];
     list.forEach(function (ep) {
       var el = document.createElement('article'); el.className = 'hn-card hn-card-' + esc(ep.type || 'nightly');
@@ -86,9 +86,9 @@
   window.addEventListener('hashchange', function () { var e = byHash(); if (e) play(e, true); });
   fetch(s.dataset.manifest, { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (j) {
     eps = (j.episodes || []).slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; });
-    // Featured list: "featured": ["id", ...] in episodes.json. 2+ resolvable ids (and no data-default pin) = side-by-side double feature.
+    // Featured list: "featured": ["id", ...] in episodes.json. 2+ resolvable ids (and no data-default pin) = side-by-side double feature; 1 id = single featured card with title/description.
     var fl = (j.featured || []).map(function (id) { return eps.filter(function (e) { return key(e) === id; })[0]; }).filter(Boolean);
-    if (fl.length >= 2 && fl.indexOf(eps[0]) >= 0 && !s.dataset.default) dual = buildDual(fl);
+    if (fl.length >= 1 && fl.indexOf(eps[0]) >= 0 && !s.dataset.default) dual = buildDual(fl);
     var featured = s.querySelector('[data-hn-featured]'); render();
     // Featured card for the newest episode at the head of the archive area, so the latest is always one tap away.
     if (featured && eps[0]) { featured.href = '#ep-' + key(eps[0]); featured.dataset.ep = key(eps[0]); featured.textContent = 'Back to latest (' + (eps[0].label || eps[0].date) + ')'; }
