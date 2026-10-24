@@ -341,6 +341,13 @@
 .lg3s .th-section-head .eyebrow{color:var(--lg3-steel)}
 .lg3s .th-section-caption{color:#bdbab3}
 
+/* ── Nation feature-card backgrounds ─────────────────────────────────────── */
+.lg3s .th-nation-japan{background:linear-gradient(155deg,rgba(20,10,10,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-japan.webp") center 20%/cover no-repeat}
+.lg3s .th-nation-germany{background:linear-gradient(155deg,rgba(20,15,5,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-germany.webp") center 20%/cover no-repeat}
+.lg3s .th-nation-great-britain{background:linear-gradient(155deg,rgba(10,5,15,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-great-britain.webp") center 30%/cover no-repeat;border-color:rgba(200,40,40,.45)}
+.lg3s .th-nation-sweden{background:linear-gradient(155deg,rgba(5,12,22,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-sweden.webp") center 20%/cover no-repeat}
+.lg3s .th-nation-slovakia{background:linear-gradient(155deg,rgba(10,10,20,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-slovakia.webp") center 20%/cover no-repeat}
+
 /* desk switcher badge (shared with the other desks via wildman-media-desk.css) */
 @media(max-width:700px){
   .lg3s .th-switch{transform:none;width:100%}
