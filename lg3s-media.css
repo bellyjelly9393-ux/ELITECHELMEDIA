@@ -77,7 +77,13 @@
 .lg3s .th-hero {background:
   radial-gradient(ellipse at 88% 18%,rgba(225,181,75,.16),transparent 49%),
   linear-gradient(105deg,rgba(4,9,14,.97),rgba(7,19,31,.83) 63%,rgba(4,8,11,.9)),
-  url("assets/broadcast/arena-tunnel.webp") center 28%/cover;}
+  url("assets/lg3s/art/ec-logo-ice.webp") center 40%/cover;}
+
+/* featured matchup card background: Canada vs USA */
+.lg3s .th-matchup-art{background:
+  linear-gradient(155deg,rgba(48,36,20,.7),rgba(15,18,20,.92)),
+  url("assets/lg3s/art/matchup-can-usa.webp") center 40%/cover no-repeat;
+  border-color:rgba(227,181,74,.56)}
 .lg3s .th-hero-grid {align-items:center}
 .lg3s .th-copy h1{font-size:clamp(54px,6.8vw,104px)}
 .lg3s .th-crest{width:112px;height:112px;border:2px solid rgba(240,207,128,.5);box-shadow:0 20px 50px rgba(0,0,0,.7),0 0 35px rgba(220,183,76,.1)}
@@ -328,7 +334,7 @@
 .lg3s .th-analysis-section{--th-art:url("assets/broadcast/arena-tunnel.webp");--th-art-pos:center 40%;--th-art-o:.22;background:#08090b}
 .lg3s .th-standings-section{--th-art:url("assets/lg3s/art/lg3s-groups.webp");--th-art-o:.26;background:#07080a}
 .lg3s .th-roster-section{--th-art:url("assets/wildman/home/ice.webp");--th-art-o:.07;background:#08090b}
-.lg3s .th-spotlight{--th-art:url("assets/lg3s/art/lg3s-hero.webp");--th-art-pos:80% 30%;--th-art-o:.24}
+.lg3s .th-spotlight{--th-art:url("assets/lg3s/art/nation-canada.webp");--th-art-pos:center 20%;--th-art-o:.28}
 .lg3s #players{--th-art:url("assets/lg3s/art/lg3s-bid-board.webp");--th-art-pos:center 35%;--th-art-o:.22}
 .lg3s .th-bid-section{--th-art:url("assets/lg3s/art/lg3s-bid-board.webp");--th-art-pos:center 60%;--th-art-o:.14;background:#08090b}
 .lg3s #method{--th-art:url("assets/lg3s/art/rink-3v3.svg");--th-art-pos:left -120px bottom -60px;--th-art-size:620px auto;--th-art-o:.07}
