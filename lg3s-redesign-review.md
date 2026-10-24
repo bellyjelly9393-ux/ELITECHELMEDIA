@@ -1,34 +1,35 @@
-# LG3s international broadcast redesign
+# LG3S results desk — October 23, 2026
 
-Feature branch: feature/lg3s-cinematic-arena-rebuild. No production deployment or merge.
+Branch: `feature/lg3s-cinematic-arena-rebuild`. Preview only; production is unchanged.
 
-## Delivered
+The existing banner markup and styling are retained for the owner to replace later.
 
-- One international arena header with twelve locally hosted national fabric banners, country labels, rafters, folds and lighting.
-- Archived featured matchups and nation-versus-nation fixture posters.
-- Dated ECM editorial power rankings, shared ranks for ties, and NEW indicators pending a second published edition.
-- Existing read-only parser-backed Supabase score and skater/goalie leader feeds preserved.
-- Upcoming fixture empty state when the saved October 21 schedule contains no future games.
-- Nation and player spotlights, archived previews, bidding coverage, game-report archive and Hitman Radio promotion.
-- Four-player format explicitly described as three skaters and a goalie.
-- Mobile typography, navigation, table scrolling, keyboard focus, skip link, and reduced-motion support.
+## Completed in this update
 
-## Validation
+- Full published season fixture feed, with game-night and nation filters; 486 fixtures observed during verification.
+- Verified final scores and an archive selector; scheduled/pending games never display a final score.
+- Readable game-night roundup dialogs generated from final scores, with links to every official report. No inferred scoring sequences, possession, or individual game claims.
+- Current results index with shared ranks for exact statistical ties, and movement relative to the preceding reported game night. Wins, goal difference, then goals scored determine rank.
+- Group records derived from received verified finals, clearly distinguished from official league points and overtime tiebreakers.
+- Player spotlight cards using verified season points, goals, assists and games played; interactive spotlight for all twelve nations.
+- Existing searchable skater and goalie leaderboards preserved.
+- Current fixture/main-event panels, matchup result posters and working article links replace stale preseason placeholders.
+- Manual results refresh and five-minute visible-page polling. Reports, fixtures and score summaries update when the existing source publishes them. No paid AI calls or new background ingestion service.
+- Preseason analysis remains explicitly dated and archived.
 
-- JavaScript syntax checks passed.
-- Static checks: no duplicate IDs or broken section anchors. Twelve flag SVGs parse successfully.
-- Remote Chromium tested the committed HTML/CSS/JavaScript loaded from GitHub, with actual Supabase GET responses. Protected Vercel deployment authentication prevented automated end-to-end access to its URL.
-- Tested widths: 1440, 768, 390 and 320 pixels. No page-wide horizontal overflow. Desktop and mobile hero screenshots reviewed.
-- Actual data loaded during testing: 74 skaters, 18 goalies, and latest verified game-night results.
-- Verified search empty state, nation filtering, pagination, skater/goalie switching, dated fixture filters, editorial forecast labels, mobile menu and Escape dismissal.
-- Automated axe WCAG 2 A/AA scan: zero violations. Gradient color contrast remains flagged for manual review.
-- Simulated unavailable feeds checked separately; simulated data is never shipped as results.
+## Verified
 
-## Remaining limits
+- Node syntax checks and two tests for invalid/unverified/future/duplicate finals and record/goal reconciliation passed.
+- HTML check: no duplicate IDs or broken section anchors.
+- Cloud browser loaded actual public API data: 36 verified finals, 92 skaters, 20 goalies at check time.
+- Schedule date/nation selection, Great Britain nation spotlight, goalie switch, recap open/close tested interactively.
+- Desktop and narrow iframe previews reviewed. Effective content widths 375 and 305 pixels had no page-wide horizontal overflow. Narrow-screen recap opened and closed successfully.
+- No application JavaScript errors observed; browser-extension metadata errors are unrelated to the app.
 
-- Preview requires the existing Vercel account sign-in. Automated share-link access was rejected; project protection remains enabled.
-- Future fixtures require an updated verified schedule; the saved fixture/roster/standings snapshot remains October 21.
-- Reviewed editorial recaps and LG3s-specific radio programming await publication. Official game reports and verified results are available.
-- Historical ranking changes cannot be calculated until another editorial ranking edition exists.
+## Data and release boundaries
 
-No LGCHL files, VOD scouting files or database schemas were changed. No privileged credentials were introduced. Design review is required before merging or releasing to production.
+Only the existing public read-only views are used. No Supabase schema, keys, policies, VOD pipeline, LGCHL, Railway, Mux or shared site styling changed.
+
+Source completeness determines coverage; report-derived records can lag official standings. Player cards are season totals, not player-of-the-night selections. Recaps are automatic factual score summaries, not reviewed long-form editorials. Polling does not run when the page is closed and does not replace upstream ingestion. LG3S radio episodes remain unavailable until produced.
+
+The banner is deliberately deferred. Production release remains separate from this preview update.
