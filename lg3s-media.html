@@ -19,6 +19,7 @@
 <link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/lg3s/art/lg3s-hero-1280.webp" as="image" media="(max-width: 1280px)">
+<link rel="preload" href="assets/lg3s/art/lg3s-hero-banner.webp" as="image" media="(min-width: 1281px)">
 <link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261021-lg3">
 <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
@@ -28,6 +29,7 @@
 <script src="lg3s-broadcast-preview.js?v=1" defer></script>
 <script src="lg3s-live-leaders.js?v=20261022-1" defer></script>
 <script src="lg3s-recent-scores.js?v=20261022-1" defer></script>
+<script src="lg3s-ticker.js?v=20261024-1" defer></script>
 </head>
 <body class="lg3s">
 <header class="top band">
@@ -77,7 +79,11 @@
 </div><p class="lg3-note">Verified data only. Snapshot statistics may not reflect games played since October 21, 2026. No illustrative mockup scores or unverified division affiliations are published.</p>
 </div></section>
 <figure class="th-banner" aria-label="Elitechel Media LG3s international hockey banner">
-  <img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3Ic50OgPEnsF6yLkPdMjvCnPfo2/2c6cacaa-2fd7-47de-abb8-1a5e71387aa4.png" alt="Elitechel Media LG3S Media international hockey arena, with Canada, Italy, Switzerland, Germany, Great Britain, Japan, Latvia, Poland, Slovakia, Sweden, Kazakhstan and USA represented around the globe" width="1536" height="614" decoding="async" fetchpriority="high">
+  <img src="assets/lg3s/art/lg3s-hero-banner.webp"
+       srcset="assets/lg3s/art/lg3s-hero-1280.webp 1280w, assets/lg3s/art/lg3s-hero-banner.webp 2172w"
+       sizes="100vw"
+       alt="Elitechel Media LG3s international hockey — all 12 nations: Canada, USA, Great Britain, Germany, Sweden, Japan, Italy, Switzerland, Latvia, Poland, Slovakia, Kazakhstan represented by arena flag banners around a central globe"
+       width="2172" height="724" decoding="async" fetchpriority="high">
   <figcaption class="th-banner-strip"><span><b>ELITECHEL MEDIA</b> <span aria-hidden="true">/</span> INTERNATIONAL LG3S</span><span>SEASON 1 · OCT 21–22, 2026 <span class="th-banner-stripe" aria-hidden="true"></span> 12 TEAMS · 30 GAMES</span></figcaption>
 </figure>
 <section class="th-hero band">
@@ -139,36 +145,66 @@
 <section class="th-section th-spotlight band" id="watch"><div class="th-wrap">
 <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">ELITECHEL MEDIA · PRESEASON SCOUTING BOARD</p><h2 class="sec-title">WHO'S BUILT TO <em>CONTEND?</em></h2></div><p class="th-section-caption">Editorial watchlist, not an objective ranking. The bidding room reveals priorities, not chemistry.</p></header>
 <div class="th-features">
-  <article class="th-feature th-feature-lead card">
+  <article class="th-feature th-feature-lead th-matchup-art card">
     <div class="th-feature-flag"><img src="assets/lg3s/team341.svg" width="72" height="72" loading="lazy" alt="Canada crest"><span>STAR POWER WATCH · GROUP A</span></div>
     <h3>CANADA <em>GOES ALL IN.</em></h3>
     <p>Canada paid $8M for I Parksy x I76I and $7M for ProdsznK. That's nearly 69% of its $21.75M bidding spend on two acquisitions. It's a serious statement of intent, but a concentrated build leaves less room for a costly supporting-cast miss.</p>
     <div class="th-tags"><span>$15M TOP TWO</span><span>9 BIDDING WINS</span><span>BIGGEST COMMITMENT</span></div>
   </article>
-  <article class="th-feature card">
+  <article class="th-feature th-nation-japan card">
     <div class="th-feature-flag"><img src="assets/lg3s/team591.svg" width="60" height="60" loading="lazy" alt="Japan crest"><span>STAR PAIRING · GROUP A</span></div>
     <h3>JAPAN <em>HAS FIREPOWER ON PAPER.</em></h3>
     <p>mynvi ($6.75M) and Kxne I88I ($6.5M) account for about 62% of Japan's spend. Japan meets Great Britain on opening night, giving us a direct look at whether the investment translates to 3s.</p><div class="th-tags"><span>$13.25M TOP TWO</span><span>67 BIDS PLACED</span></div>
   </article>
-  <article class="th-feature card">
+  <article class="th-feature th-nation-germany card">
     <div class="th-feature-flag"><img src="assets/lg3s/team532.svg" width="60" height="60" loading="lazy" alt="Germany crest"><span>SPENDING LEADER · GROUP B</span></div>
     <h3>GERMANY <em>SETS THE PRICE.</em></h3>
     <p>No country spent more on winning bids than Germany's $22M. MythicI9I ($7M), l91l Stamkos x ($5M), and l LOKY l ($3.75M) form a headline-heavy investment. Strong market conviction, but still untested.</p><div class="th-tags"><span>$22M SPENT</span><span>9 BIDDING WINS</span></div>
   </article>
-  <article class="th-feature card">
+  <article class="th-feature th-nation-great-britain card">
     <div class="th-feature-flag"><img src="assets/lg3s/team1446.svg" width="60" height="60" loading="lazy" alt="Great Britain crest"><span>BID ROOM WATCH · GROUP A</span></div>
     <h3>GREAT BRITAIN <em>TAKES ITS SHOT.</em></h3>
     <p>Four bid snipes led the field. Sceebzy ($6.75M, centre) and Pazqi ($6.25M, defender) carry $13M of bidding investment between them. Britain's week opens with Japan, Latvia and Canada, a fast evaluation of its rebuild.</p><div class="th-tags"><span>4 SNIPES</span><span>$21.5M SPENT</span></div>
   </article>
-  <article class="th-feature card">
+  <article class="th-feature th-nation-sweden card">
     <div class="th-feature-flag"><img src="assets/lg3s/team343.svg" width="60" height="60" loading="lazy" alt="Sweden crest"><span>BALANCE TO WATCH · GROUP B</span></div>
     <h3>SWEDEN <em>SPREADS THE RISK.</em></h3>
     <p>Blehdes ($5.5M) and vSkoon ($5M) consume roughly 51% of Sweden's winning-bid total, a smaller share than Canada, Japan, or Britain. Whether that balance brings deeper 3s rotations is the question.</p><div class="th-tags"><span>$20.5M SPENT</span><span>9 BIDDING WINS</span></div>
   </article>
-  <article class="th-feature card">
+  <article class="th-feature th-nation-slovakia card">
     <div class="th-feature-flag"><img src="assets/lg3s/team1079.svg" width="60" height="60" loading="lazy" alt="Slovakia crest"><span>WILD CARD · GROUP A</span></div>
     <h3>SLOVAKIA <em>COULD SHAKE THE GROUP.</em></h3>
     <p>Mantzzzy cost $7M and I Bxndit l another $4M. Slovakia's $20.5M spend and nine winning bids put it in the conversation, even if price alone can't reveal how the pieces work together.</p><div class="th-tags"><span>$11M TOP TWO</span><span>2 SNIPES</span></div>
+  </article>
+  <article class="th-feature th-nation-usa card">
+    <div class="th-feature-flag"><img src="assets/lg3s/team342.svg" width="60" height="60" loading="lazy" alt="USA crest"><span>VALUE BUILD · GROUP B</span></div>
+    <h3>USA <em>BETS ON DEPTH.</em></h3>
+    <p>Notusc- ($5.75M) and oGraavy ($2.5M) lead a $16M roster — the lightest total spend in the field. Seventy-five bids placed suggests a deliberate spread strategy. Whether that depth survives a full round-robin is the question Group B will answer.</p><div class="th-tags"><span>$16M SPENT</span><span>75 BIDS PLACED</span></div>
+  </article>
+  <article class="th-feature th-nation-switzerland card">
+    <div class="th-feature-flag"><img src="assets/lg3s/team404.svg" width="60" height="60" loading="lazy" alt="Switzerland crest"><span>QUIET THREAT · GROUP A</span></div>
+    <h3>SWITZERLAND <em>SPENT TO COMPETE.</em></h3>
+    <p>Nikyyyy-_- ($7.25M) and goosekevin ($4.75M) give Switzerland $12M tied up at the top of its roster. Nine winning bids on $21.75M of spend is among the most efficient allocations in Group A. Opens against Canada — an immediate measuring-stick moment.</p><div class="th-tags"><span>$21.75M SPENT</span><span>9 BIDDING WINS</span></div>
+  </article>
+  <article class="th-feature th-nation-latvia card">
+    <div class="th-feature-flag"><img src="assets/lg3s/team1439.svg" width="60" height="60" loading="lazy" alt="Latvia crest"><span>SLEEPER · GROUP A</span></div>
+    <h3>LATVIA <em>FLIES UNDER THE RADAR.</em></h3>
+    <p>twilightx57x ($5.75M) and Joe K l47l ($3M) headline $21.5M of bidding spend across nine wins. Forty bids placed is lower than most rivals, which may mean Latvia targeted deliberately. Opens against Great Britain in a matchup that could define the group's third seed.</p><div class="th-tags"><span>$21.5M SPENT</span><span>9 BIDDING WINS</span></div>
+  </article>
+  <article class="th-feature th-nation-poland card">
+    <div class="th-feature-flag"><img src="assets/lg3s/team1444.svg" width="60" height="60" loading="lazy" alt="Poland crest"><span>HIGH VOLUME · GROUP B</span></div>
+    <h3>POLAND <em>THREW EVERYTHING AT THE WALL.</em></h3>
+    <p>CHARAx33z ($6M) and IIII metro ($3.25M) lead the bid board, but 61 total bids placed is the second-highest in the league. Poland's $21.5M spend is spread wide — Group B will reveal whether that volume translates to results or just activity.</p><div class="th-tags"><span>$21.5M SPENT</span><span>61 BIDS PLACED</span></div>
+  </article>
+  <article class="th-feature th-nation-italy card">
+    <div class="th-feature-flag"><img src="assets/lg3s/team822.svg" width="60" height="60" loading="lazy" alt="Italy crest"><span>RECORD BID · GROUP B</span></div>
+    <h3>ITALY <em>MADE THE BIGGEST CALL.</em></h3>
+    <p>KnifeVet22 at $8.25M is the single largest individual bid in the entire draft — a statement that carries expectation. xCarrot44 ($2.5M) supports an $18M total spend. Italy opens against Poland, Kazakhstan and Sweden. If KnifeVet22 delivers, Italy earns its price tag in week one.</p><div class="th-tags"><span>$8.25M RECORD BID</span><span>9 BIDDING WINS</span></div>
+  </article>
+  <article class="th-feature th-nation-kazakhstan card">
+    <div class="th-feature-flag"><img src="assets/lg3s/team531.svg" width="60" height="60" loading="lazy" alt="Kazakhstan crest"><span>DARK HORSE · GROUP B</span></div>
+    <h3>KAZAKHSTAN <em>BUILT LEAN AND MEAN.</em></h3>
+    <p>Licks-_-97 ($4.5M) and MuggyBobcat ($4M) anchor the lowest per-win spend in Group B. Sixty-three bids placed across eight wins points to a methodical bidding approach rather than a reactive one. In a wide-open group, disciplined builds sometimes surprise.</p><div class="th-tags"><span>$18.25M SPENT</span><span>8 BIDDING WINS</span></div>
   </article>
 </div>
 </div></section>

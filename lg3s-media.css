@@ -1,4 +1,33 @@
 /* LG3s Media opening-week desk. Scoped to .lg3s and .th-* to protect other pages. */
+
+/* ── LG3s nation scores ticker bar ───────────────────────────────────────── */
+.lg3t{display:flex;align-items:stretch;height:36px;overflow:hidden;
+  background:linear-gradient(90deg,#0e0418 0%,#0a1020 40%,#060f1c 100%);
+  border-bottom:1px solid rgba(100,160,220,.18);position:relative;z-index:40}
+.lg3t-label{display:flex;align-items:center;gap:7px;padding:0 14px 0 16px;
+  flex-shrink:0;border-right:1px solid rgba(100,160,220,.18);
+  background:linear-gradient(90deg,rgba(60,20,90,.55),transparent)}
+.lg3t-live-dot{width:7px;height:7px;border-radius:50%;background:#e34040;
+  box-shadow:0 0 8px #e34040;animation:lg3tPulse 1.6s ease-in-out infinite}
+@keyframes lg3tPulse{0%,100%{opacity:1;box-shadow:0 0 8px #e34040}50%{opacity:.35;box-shadow:0 0 3px #e34040}}
+.lg3t-live-word{font-family:var(--f-ui,sans-serif);font-size:11px;font-weight:700;
+  letter-spacing:.12em;color:#e34040;text-transform:uppercase}
+.lg3t-date{font-family:var(--f-ui,sans-serif);font-size:10px;letter-spacing:.06em;
+  color:rgba(180,200,220,.5);text-transform:uppercase;white-space:nowrap}
+.lg3t-rail{flex:1;overflow:hidden;display:flex;align-items:center;min-width:0}
+.lg3t-track{display:flex;align-items:center;gap:0;white-space:nowrap;
+  animation:lg3tScroll var(--lg3t-dur,40s) linear infinite}
+@media(prefers-reduced-motion:reduce){.lg3t-track{animation:none;overflow-x:auto}}
+@keyframes lg3tScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.lg3t-item{display:inline-flex;align-items:center;gap:5px;padding:0 6px;
+  font-family:var(--f-ui,sans-serif);font-size:12px;letter-spacing:.06em}
+.lg3t-team{color:rgba(180,200,220,.65);font-weight:600;text-transform:uppercase;font-size:11px}
+.lg3t-team.lg3t-win{color:#f0f2f4;font-weight:700}
+.lg3t-score{color:#dde2e8;font-weight:700;font-size:13px;min-width:14px;text-align:center}
+.lg3t-dash{color:rgba(150,170,190,.4);font-size:11px}
+.lg3t-sep{color:rgba(100,140,180,.3);font-size:13px;padding-left:8px}
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .lg3s{--th-blue:#8ecdf3;--th-line:rgba(161,200,231,.19);--th-white:#f3f1eb;--th-muted:#bec1c6;background:#080a0e}
 .lg3s .desk-bar{background:linear-gradient(90deg,rgba(14,36,57,.5),rgba(9,10,13,.9) 70%)}
 .lg3s .desk-toggle a.lg3s-desk[aria-current]{color:#111316;background:linear-gradient(180deg,#f4f6f8,#c3ccd6 55%,#7d8894)}
@@ -77,7 +106,13 @@
 .lg3s .th-hero {background:
   radial-gradient(ellipse at 88% 18%,rgba(225,181,75,.16),transparent 49%),
   linear-gradient(105deg,rgba(4,9,14,.97),rgba(7,19,31,.83) 63%,rgba(4,8,11,.9)),
-  url("assets/broadcast/arena-tunnel.webp") center 28%/cover;}
+  url("assets/lg3s/art/ec-logo-ice.webp") center 40%/cover;}
+
+/* featured matchup card background: Canada vs USA */
+.lg3s .th-matchup-art{background:
+  linear-gradient(155deg,rgba(48,36,20,.7),rgba(15,18,20,.92)),
+  url("assets/lg3s/art/matchup-can-usa.webp") center 40%/cover no-repeat;
+  border-color:rgba(227,181,74,.56)}
 .lg3s .th-hero-grid {align-items:center}
 .lg3s .th-copy h1{font-size:clamp(54px,6.8vw,104px)}
 .lg3s .th-crest{width:112px;height:112px;border:2px solid rgba(240,207,128,.5);box-shadow:0 20px 50px rgba(0,0,0,.7),0 0 35px rgba(220,183,76,.1)}
@@ -189,8 +224,8 @@
 
 
 /* LG3s header image + calmer Elitechel Media broadcast rhythm. */
-.lg3s .th-banner{width:min(100%,1536px);margin:0 auto;position:relative;overflow:hidden;background:#070a0f;border-bottom:1px solid rgba(235,193,98,.28);box-shadow:0 18px 52px rgba(0,0,0,.4)}
-.lg3s .th-banner>img{display:block;width:100%;height:auto;aspect-ratio:1536/614;object-fit:contain}
+.lg3s .th-banner{width:100%;margin:0 auto;position:relative;overflow:hidden;background:#070a0f;border-bottom:1px solid rgba(235,193,98,.28);box-shadow:0 18px 52px rgba(0,0,0,.4)}
+.lg3s .th-banner>img{display:block;width:100%;height:auto;aspect-ratio:2172/724;object-fit:cover}
 .lg3s .th-banner-strip{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;padding:12px clamp(16px,3vw,36px);background:linear-gradient(100deg,#16212a,#0a111a 55%,#211c16);border-top:2px solid #ab8544;color:#c6d3d9;font:700 14px/1.15 var(--f-ui);letter-spacing:.12em;text-transform:uppercase}
 .lg3s .th-banner-strip b{color:#fff}.lg3s .th-banner-strip span[aria-hidden]{color:var(--gold-hi);padding:0 7px}
 .lg3s .th-banner-stripe{display:inline-block;vertical-align:middle;width:2px;height:12px;background:var(--gold-hi);margin-inline:8px}
@@ -328,12 +363,25 @@
 .lg3s .th-analysis-section{--th-art:url("assets/broadcast/arena-tunnel.webp");--th-art-pos:center 40%;--th-art-o:.22;background:#08090b}
 .lg3s .th-standings-section{--th-art:url("assets/lg3s/art/lg3s-groups.webp");--th-art-o:.26;background:#07080a}
 .lg3s .th-roster-section{--th-art:url("assets/wildman/home/ice.webp");--th-art-o:.07;background:#08090b}
-.lg3s .th-spotlight{--th-art:url("assets/lg3s/art/lg3s-hero.webp");--th-art-pos:80% 30%;--th-art-o:.24}
+.lg3s .th-spotlight{--th-art:url("assets/lg3s/art/nation-canada.webp");--th-art-pos:center 20%;--th-art-o:.28}
 .lg3s #players{--th-art:url("assets/lg3s/art/lg3s-bid-board.webp");--th-art-pos:center 35%;--th-art-o:.22}
 .lg3s .th-bid-section{--th-art:url("assets/lg3s/art/lg3s-bid-board.webp");--th-art-pos:center 60%;--th-art-o:.14;background:#08090b}
 .lg3s #method{--th-art:url("assets/lg3s/art/rink-3v3.svg");--th-art-pos:left -120px bottom -60px;--th-art-size:620px auto;--th-art-o:.07}
 .lg3s .th-section-head .eyebrow{color:var(--lg3-steel)}
 .lg3s .th-section-caption{color:#bdbab3}
+
+/* ── Nation feature-card backgrounds ─────────────────────────────────────── */
+.lg3s .th-nation-japan{background:linear-gradient(155deg,rgba(20,10,10,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-japan.webp") center 20%/cover no-repeat}
+.lg3s .th-nation-germany{background:linear-gradient(155deg,rgba(20,15,5,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-germany.webp") center 20%/cover no-repeat}
+.lg3s .th-nation-great-britain{background:linear-gradient(155deg,rgba(10,5,15,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-great-britain.webp") center 30%/cover no-repeat;border-color:rgba(200,40,40,.45)}
+.lg3s .th-nation-sweden{background:linear-gradient(155deg,rgba(5,12,22,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-sweden.webp") center 20%/cover no-repeat}
+.lg3s .th-nation-slovakia{background:linear-gradient(155deg,rgba(10,10,20,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-slovakia.webp") center 20%/cover no-repeat}
+.lg3s .th-nation-usa{background:linear-gradient(155deg,rgba(5,10,20,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-usa.webp") center 20%/cover no-repeat;border-color:rgba(180,30,30,.45)}
+.lg3s .th-nation-switzerland{background:linear-gradient(155deg,rgba(18,5,5,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-switzerland.webp") center 20%/cover no-repeat;border-color:rgba(200,20,20,.40)}
+.lg3s .th-nation-latvia{background:linear-gradient(155deg,rgba(18,8,8,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-latvia.webp") center 20%/cover no-repeat}
+.lg3s .th-nation-poland{background:linear-gradient(155deg,rgba(18,5,5,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-poland.webp") center 20%/cover no-repeat;border-color:rgba(200,20,20,.40)}
+.lg3s .th-nation-italy{background:linear-gradient(155deg,rgba(5,14,5,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-italy.webp") center 20%/cover no-repeat;border-color:rgba(20,160,50,.35)}
+.lg3s .th-nation-kazakhstan{background:linear-gradient(155deg,rgba(18,14,4,.72),rgba(15,18,20,.93)),url("assets/lg3s/art/nation-kazakhstan.webp") center 20%/cover no-repeat;border-color:rgba(220,180,20,.35)}
 
 /* desk switcher badge (shared with the other desks via wildman-media-desk.css) */
 @media(max-width:700px){
