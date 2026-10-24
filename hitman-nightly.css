@@ -60,3 +60,5 @@
 .hn-card .hn-headline { font-size: clamp(19px, 1.7vw, 23px); max-width: none; margin-top: 12px !important; }
 .hn-desc { color: var(--mute); margin: 8px 0 0 !important; font-size: 15px; line-height: 1.4; max-width: 60ch; }
 @media (max-width: 860px) { .hn-dual-grid { grid-template-columns: 1fr; gap: 28px; } }
+.hn-solo .hn-dual-grid { grid-template-columns: minmax(0, 1fr); max-width: 980px; }
+.hn-card-preview .hn-kind { color: #e8c15a; }

@@ -1,6 +1,20 @@
 {
-  "featured": ["2026-10-20", "2026-10-21-recap"],
+  "featured": [
+    "2026-10-25-preview"
+  ],
   "episodes": [
+    {
+      "id": "2026-10-25-preview",
+      "date": "2026-10-25",
+      "type": "preview",
+      "label": "Week ahead · Oct 25–27",
+      "title": "Week Ahead: Oct 25–27 Preview",
+      "headline": "Games of the week, who's on a heater, and two new segments",
+      "description": "Hitmen Radio previews the Oct 25–27 game nights: the games of the week, who's on a heater, plus the debut of Call Your Shot and the Bold Prediction Lock.",
+      "video": "assets/hitman-radio/nightly/2026-10-25-preview.mp4?v=20261025-p",
+      "videoPhone": "assets/hitman-radio/nightly/2026-10-25-preview-phone.mp4?v=20261025-p",
+      "poster": "assets/hitman-radio/nightly/2026-10-25-preview-poster.png?v=20261025-p"
+    },
     {
       "id": "2026-10-21-recap",
       "date": "2026-10-21",
