@@ -246,8 +246,16 @@
         }
         $('lg3News').innerHTML = posts.slice(0, 4).map(p => {
           const game = (recent || []).find(g => g.lg_game_id === p.lg_game_id);
-          const name = game ? nameOf(game.home_lg_team_id, game.home_nation) : '';
-          return '<a class="lg3-nc" href="#recap/' + Number(p.lg_game_id) + '"><span class="lg3-nc-thumb" style="--art:' + art(name) + '"></span><span class="lg3-nc-body"><small>APPROVED RECAP</small><b>' + esc(p.title) + '</b><time>' + esc(night(p.game_night_date)) + '</time></span></a>';
+          const A = window.LG3S_NATION_ART;
+          let thumb = '<span class="lg3-nc-thumb lg3-nc-plain"></span>';
+          if (game) {
+            const an = nameOf(game.away_lg_team_id, game.away_nation), hn = nameOf(game.home_lg_team_id, game.home_nation);
+            const aw = Number(game.away_score) > Number(game.home_score);
+            const side = (id, n, sc, win, cls) => '<span class="lg3-nc-side ' + cls + (win ? ' win' : '') + '" style="--nat:' + esc(art(n)) + (A ? ';--nc:' + esc(A.color(n)) : '') + '">' + crestImg(id) + '<b>' + Number(sc) + '</b></span>';
+            const dec = /OT|SO/i.test(String(game.decided_in || '')) ? 'FINAL/' + esc(String(game.decided_in).toUpperCase()) : 'FINAL';
+            thumb = '<span class="lg3-nc-thumb lg3-nc-vs" aria-hidden="true">' + side(game.away_lg_team_id, an, game.away_score, aw, 'a') + '<i>' + dec + '</i>' + side(game.home_lg_team_id, hn, game.home_score, !aw, 'h') + '</span>';
+          }
+          return '<a class="lg3-nc" href="#recap/' + Number(p.lg_game_id) + '">' + thumb + '<span class="lg3-nc-body"><small>APPROVED RECAP</small><b>' + esc(p.title) + '</b><time>' + esc(night(p.game_night_date)) + '</time></span></a>';
         }).join('');
       });
     })
