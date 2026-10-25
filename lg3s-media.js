@@ -92,7 +92,7 @@
   const natCls=n=>window.LG3S_NATION_ART&&window.LG3S_NATION_ART.has(n)?' has-nat':'';
   function matchupHtml(row,a,h,size,meta){
     const A=window.LG3S_NATION_ART;
-    const fin=live.ok&&!row._static&&row.is_verified&&row.away_score!=null&&row.home_score!=null?{away:row.away_score,home:row.home_score,note:'FINAL'+(row.decided_in&&row.decided_in!=='REG'?'/'+row.decided_in:'')}:null;
+    const fin=live.ok&&!row._static&&row.is_verified&&row.away_score!=null&&row.home_score!=null?{away:row.away_score,home:row.home_score,note:row.is_forfeit?'FORFEIT: ILLEGAL PLAYER':'FINAL'+(row.decided_in&&row.decided_in!=='REG'?'/'+row.decided_in:'')}:null;
     if(!A||!A.matchup) return '';
     return A.matchup({away:{name:a.name,mark:teamMark(a,size==='hero'?96:56),label:'AWAY'},home:{name:h.name,mark:teamMark(h,size==='hero'?96:56),label:'HOME'},final:fin,meta,size});
   }
@@ -120,7 +120,7 @@
     if (!live.ok || row._static) return '';
     if (!row.is_verified || row.away_score==null || row.home_score==null) return '<div class="th-live-score is-pending"><span>' + (row.status === 'pending_verification' ? 'FINAL POSTED · VERIFYING' : 'RESULT PENDING') + '</span><small>Scores appear once LG data passes verification</small></div>';
     const ah = row.away_score > row.home_score;
-    return '<div class="th-live-score"><b class="' + (ah ? 'is-win' : '') + '">' + esc(a.name) + ' ' + Number(row.away_score) + '</b><span>FINAL' + (row.decided_in && row.decided_in !== 'REG' ? '/' + esc(row.decided_in) : '') + '</span><b class="' + (ah ? '' : 'is-win') + '">' + Number(row.home_score) + ' ' + esc(h.name) + '</b>' +
+    return '<div class="th-live-score"><b class="' + (ah ? 'is-win' : '') + '">' + esc(a.name) + ' ' + Number(row.away_score) + '</b><span>' + (row.is_forfeit ? 'Forfeit: illegal player' : 'FINAL' + (row.decided_in && row.decided_in !== 'REG' ? '/' + esc(row.decided_in) : '')) + '</span><b class="' + (ah ? '' : 'is-win') + '">' + Number(row.home_score) + ' ' + esc(h.name) + '</b>' +
       '<small>OFFICIAL LG DATA · VERIFIED ' + esc(etTime(row.verified_at)) + (row.was_corrected ? ' · CORRECTED' : '') + '</small></div>';
   }
   function renderNightTabs(){
@@ -170,11 +170,13 @@
   }
   function lastVerified(){let m=null;live.games.forEach(g=>{if(g.verified_at&&(!m||g.verified_at>m))m=g.verified_at;});return m?etTime(m).toUpperCase():'—';}
   function standingsNote(){
-    const n=[...live.games.values()].filter(g=>g.is_verified).length;
+    const vg=[...live.games.values()].filter(g=>g.is_verified&&g.away_score!=null&&g.home_score!=null);
+    const n=vg.length, ff=vg.filter(g=>g.is_forfeit).length;
     const off=new Map(live.official.map(r=>[r.lg_team_id,r]));
-    const diff=live.standings.filter(r=>{const o=off.get(r.lg_team_id);return o&&(o.gp!==r.gp||o.w!==r.w+r.otw||o.l!==r.l||o.otl!==r.otl||o.pts!==r.pts||o.gf!==r.gf||o.ga!==r.ga);});
-    return 'Built only from '+n+' verified LeagueGaming finals (FINAL status, full box score, scores reconciled, stable across two checks). '+
-      (live.official.length?(diff.length?'Note: LG\'s own table currently differs for '+diff.length+' team(s), usually because a newer final is still verifying.':'Matches LeagueGaming\'s official table captured '+etTime(live.official[0].captured_at)+'.'):'')+
+    const diff=live.standings.filter(r=>{const o=off.get(r.lg_team_id);return o&&(o.gp!==r.gp||o.w!==r.w+r.otw||o.l!==r.l||o.otl!==r.otl||o.gf!==r.gf||o.ga!==r.ga);});
+    const cap=live.official.length?etTime(live.official.reduce((m,r)=>r.captured_at>m?r.captured_at:m,live.official[0].captured_at)):'';
+    return 'Built from '+n+' verified LeagueGaming finals'+(ff?' ('+(n-ff)+' with full box scores, '+ff+' forfeit'+(ff===1?'':'s')+' counted 1-0 as LG records them)':'')+'. '+
+      (cap?(diff.length?'LG\'s last captured table ('+cap+') differs for '+diff.length+' team'+(diff.length===1?'':'s')+'; results confirmed since that capture are included here.':'Matches LeagueGaming\'s official table captured '+cap+'.'):'')+
       ' Points: 2 per win (regulation or OT/SO), 1 per OT/SO loss, 0 per regulation loss, matching LeagueGaming\'s table. Ties: points, then regulation wins, then goal difference, then goals for.';
   }
   function renderLeaders(){
