@@ -23,12 +23,13 @@
 <link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261021-lg3">
 <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
-<link rel="stylesheet" href="lg3s-media.css?v=20261024-nations3">
-<link rel="stylesheet" href="lg3s-matchup.css?v=20261024-players3">
-<link rel="stylesheet" href="lg3s-broadcast-preview.css?v=20261024-players3">
-<script src="lg3s-nation-art.js?v=20261024-nations3" defer></script>
-<script src="lg3s-media.js?v=20261024-nations3" defer></script>
-<script src="lg3s-broadcast-preview.js?v=20261024-players3" defer></script>
+<link rel="stylesheet" href="lg3s-media.css?v=20261024-lb1">
+<link rel="stylesheet" href="lg3s-matchup.css?v=20261024-lb1">
+<link rel="stylesheet" href="lg3s-broadcast-preview.css?v=20261024-lb1">
+<script src="lg3s-nation-maps.js?v=20261024-bg1" defer></script>
+<script src="lg3s-nation-art.js?v=20261024-lb1" defer></script>
+<script src="lg3s-media.js?v=20261024-lb1" defer></script>
+<script src="lg3s-broadcast-preview.js?v=20261024-lb1" defer></script>
 </head>
 <body class="lg3s">
 <header class="top band">
@@ -59,7 +60,7 @@
   <a class="lg3s-desk" href="lg3s-media.html" aria-current="page"><img src="assets/lg3s/art/lg3s-crest-64.webp" width="32" height="32" alt=""><span>LG3s Media</span></a>
 </div></div></nav>
 <nav class="sub-bar band th-sub" aria-label="LG3s Media sections"><div class="sub-in">
- <a href="#opening" aria-current="page">Season 1</a><a href="#scoreboard">Scores</a><a href="#upcoming">Upcoming</a><a href="#power">Rankings</a><a href="#leaders">Leaders</a><a href="#spotlight">Spotlight</a><a href="#keymatchups">Matchups</a><a href="#radio">Hitmen Radio</a><a href="#schedule">Full schedule</a><a href="#standings">Standings</a><a href="#rosters">Player board</a><a href="#bidding">Bidding</a>
+ <a href="#opening" aria-current="page">Season 1</a><a href="#scoreboard">Scores</a><a href="#upcoming">Upcoming</a><a href="#power">Rankings</a><a href="#leaders">Leaders</a><a href="#spotlight">Spotlight</a><a href="#keymatchups">Matchups</a><a href="#radio">Hitmen Radio</a><a href="#schedule">Full schedule</a><a href="#standings">Standings</a><a href="#leaderboards">Leaderboards</a><a href="#rosters">Player board</a><a href="#bidding">Bidding</a>
 </div></nav>
 <main id="opening" class="th-page">
 <figure class="th-banner" aria-label="Elitechel Media LG3s international hockey banner">
@@ -91,7 +92,7 @@
   <div id="lg3Rankings"><p class="lg3-wait">Loading standings…</p></div>
 </article>
 <article class="lg3-panel" id="leaders">
-  <header class="lg3-ph"><svg class="lg3-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7Z"/></svg><h2>LEAGUE LEADERS</h2><a class="lg3-ph-link" href="#rosters">VIEW ALL →</a></header>
+  <header class="lg3-ph"><svg class="lg3-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7Z"/></svg><h2>LEAGUE LEADERS</h2><a class="lg3-ph-link" href="#leaderboards">VIEW ALL →</a></header>
   <div class="lg3-tabs" id="lg3LeaderTabs" role="tablist" aria-label="Leaderboard category">
     <button type="button" role="tab" data-stat="p" aria-selected="true">POINTS</button><button type="button" role="tab" data-stat="g" aria-selected="false">GOALS</button><button type="button" role="tab" data-stat="a" aria-selected="false">ASSISTS</button><button type="button" role="tab" data-stat="plus_minus" aria-selected="false">+/-</button><button type="button" role="tab" data-stat="sv_pct" aria-selected="false">SAVE %</button><button type="button" role="tab" data-stat="wins" aria-selected="false">WINS</button><button type="button" role="tab" data-stat="gaa" aria-selected="false">GAA</button>
   </div>
@@ -163,6 +164,7 @@
 </div></section>
 <section class="th-section th-standings-section band" id="verified-leaders"><div class="th-wrap"> <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · OFFICIAL LG DATA · VERIFIED GAMES ONLY</p><h2 class="sec-title">THE <em>LEADERS.</em></h2></div><p class="th-section-caption">Goalies are credited to the nation they played for in each game, never by roster. Tap a name for the player card or a nation for its page.</p></header> <div class="th-standings-grids" id="thLeaders"><p class="th-caption">Loading verified leaderboards…</p></div> </div></section>
 <dialog class="th-detail" id="thDetail" aria-label="LG3s detail"><button type="button" class="th-detail-close" id="thDetailClose" aria-label="Close">×</button><div id="thDetailBody"></div></dialog>
+<section class="th-section band lb-sec" id="leaderboards"><div class="th-wrap"><header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · VERIFIED BOX SCORES ONLY</p><h2 class="sec-title">LEADER<em>BOARDS.</em></h2></div><p class="th-section-caption">Top 10 in every category we can verify. Tap any player for their full page. <a href="#rosters">Roster &amp; bid index ↓</a></p></header><div class="lb-chips" id="lbChips" role="toolbar" aria-label="Leaderboard category"></div><p class="lb-note" id="lbNote">Loading verified box scores…</p><div id="lbBody"></div></div></section>
 <section class="th-section th-roster-section band" id="rosters"><div class="th-wrap">
 <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · VERIFIED LG ROSTERS</p><h2 class="sec-title">THE PLAYER <em>INDEX.</em></h2></div><p class="th-section-caption">Browse all 12 national teams. Bid-value ranking is a preseason market board, not a points or performance leaderboard.</p></header>
 <div class="th-roster-stats" id="thRosterStats"><span>132 ACTIVE ROSTER SPOTS</span><span>113 TRAINING CAMP PLAYERS</span><span>12 NATIONAL TEAMS</span></div>

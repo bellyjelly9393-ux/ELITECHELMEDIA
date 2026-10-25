@@ -119,3 +119,78 @@
 .lg3-broadcast .lg3-pc-line{display:flex;align-items:baseline;gap:3px}.lg3-broadcast .lg3-pc-line i{font:600 18px/1 "LG3S Teko",Impact,sans-serif;font-style:normal;color:#fff}.lg3-broadcast .lg3-pc-line small{font-size:9px;letter-spacing:.14em;color:#aebbc7;margin-right:5px}
 .lg3-broadcast .lg3-pc.is-star{border-color:#c9a24c!important;box-shadow:inset 0 1px 0 rgba(255,231,163,.45),inset 0 -3px 0 #f5cf6b,0 0 20px rgba(245,190,80,.25)}
 .lg3-broadcast .lg3-pc.is-star .lg3-pc-num{background:linear-gradient(180deg,#fff6d6,#f5cf6b 45%,#c08f2f 58%,#ffe7a3);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ===== v4: nation page schedule backgrounds + bolder lettering ===== */
+.lg3s .lg3n-sched{position:relative;isolation:isolate;padding:14px;margin:8px 0 18px;border:1px solid rgba(255,255,255,.08);background:radial-gradient(120% 90% at 80% 40%,rgba(255,255,255,.05),transparent 60%),#07090c;overflow:hidden}
+.lg3s .lg3n-bgart{position:absolute;inset:0;z-index:-1;pointer-events:none;display:flex;align-items:center;justify-content:flex-end}
+.lg3s .lg3n-bgart svg{height:120%;width:auto;max-width:none;margin-right:-4%;opacity:.42}
+.lg3s .lg3n-bgart.is-map svg{opacity:.6;height:105%;margin-right:2%}
+.lg3s .lg3n-bgart.is-code svg{opacity:.32;height:140%}
+.lg3s .lg3n-bgart.is-animal{background:center right/cover no-repeat;opacity:.38}
+.lg3s .lg3n-sched .lg3p-list{margin:0;position:relative}
+.lg3s .lg3n-g .lg3p-row,.lg3s .lg3n-sched .lg3p-row{background:linear-gradient(90deg,rgba(12,14,18,.92),rgba(12,14,18,.55) 60%,rgba(12,14,18,.35))}
+.lg3s .lg3n-link{text-decoration:none}.lg3s .lg3n-link:hover{border-color:var(--pc2)}
+#thDetail .th-nation-hero h3{font:700 clamp(44px,6vw,72px)/.9 "LG3S Teko",Impact,sans-serif;letter-spacing:.02em;text-shadow:0 3px 0 rgba(0,0,0,.6),0 6px 18px rgba(0,0,0,.85)}
+#thDetail .th-nation-hero p{font:700 15px/1.3 "LG3S Barlow",sans-serif;letter-spacing:.06em;text-shadow:0 2px 6px #000}
+#thDetail:has(.th-nation-hero) h4{font:700 26px/1 "LG3S Teko",Impact,sans-serif;letter-spacing:.06em;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+#thDetail:has(.th-nation-hero) .lg3p-id a,#thDetail:has(.th-nation-hero) .lg3p-id>span{font-weight:700;font-size:clamp(26px,2.6vw,32px)}
+#thDetail:has(.th-nation-hero) .lg3p-fig b{font-weight:700}
+#thDetail:has(.th-nation-hero) .lg3p-id small,#thDetail:has(.th-nation-hero) .lg3p-fig small{font-weight:700;text-shadow:0 1px 3px #000}
+.lg3s .lg3n-sched .lg3p-row{background:linear-gradient(90deg,rgba(10,12,16,.82),rgba(10,12,16,.3) 55%,rgba(10,12,16,.12))!important;-webkit-backdrop-filter:blur(1.5px);backdrop-filter:blur(1.5px)}
+.lg3s .lg3n-sched .lg3p-row::before{opacity:.28}
+.lg3s .lg3n-bgart{justify-content:center}.lg3s .lg3n-bgart svg{height:100%;width:100%;margin:0;opacity:.7}
+.lg3s .lg3n-bgart.is-map svg{opacity:.95}
+
+/* ===== v5: leaderboards hub + player pages ===== */
+.lg3s .lb-sec{background:radial-gradient(80% 60% at 15% 0%,rgba(80,120,255,.12),transparent 60%),radial-gradient(70% 60% at 100% 100%,rgba(255,60,80,.1),transparent 60%)}
+.lg3s .lb-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0 10px}
+.lg3s .lb-grp{font:700 11px/1 "LG3S Barlow",sans-serif;letter-spacing:.2em;color:#d9a640;margin:0 4px 0 10px}.lg3s .lb-grp:first-child{margin-left:0}
+.lg3s .lb-chips button,.lg3s .lb-idx-tabs button{font:700 17px/1 "LG3S Teko",Impact,sans-serif;letter-spacing:.06em;color:#dfe6ec;padding:7px 12px 5px;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.02)),#11151b;border:1px solid rgba(255,255,255,.14);cursor:pointer}
+.lg3s .lb-chips button[aria-pressed="true"],.lg3s .lb-idx-tabs button[aria-pressed="true"]{color:#1a1204;background:linear-gradient(180deg,#ffe7a3,#d9a640);border-color:#f5cf6b}
+.lg3s .lb-chips .lb-full{margin-left:auto}
+.lg3s .lb-note{font:700 12px/1.4 "LG3S Barlow",sans-serif;letter-spacing:.06em;color:#aebbc7;margin:0 0 14px}.lg3s .lb-note b{color:#f5cf6b}
+.lg3s .lb-top{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin-bottom:12px}
+.lg3s .lb-hero,.lg3s .lb-med{position:relative;isolation:isolate;overflow:hidden;display:grid;align-items:center;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.14);background:linear-gradient(90deg,rgba(8,10,14,.92) 0%,rgba(8,10,14,.55) 55%,rgba(8,10,14,.2)),#0b0e12}
+.lg3s .lb-hero::before,.lg3s .lb-med::before{content:"";position:absolute;inset:-8px;z-index:-1;background:var(--pa) center/cover no-repeat;filter:saturate(1.3);opacity:.75}
+.lg3s .lb-hero{grid-template-columns:auto 1fr auto;gap:16px;min-height:200px;padding:22px 24px;border-color:#c9a24c;box-shadow:inset 0 1px 0 rgba(255,231,163,.45),inset 6px 0 0 #f5cf6b,0 0 34px -6px var(--pc),0 10px 30px rgba(0,0,0,.5)}
+.lg3s .lb-meds{display:grid;gap:12px}
+.lg3s .lb-med{grid-template-columns:auto auto 1fr auto;gap:10px;padding:12px 16px;min-height:94px}
+.lg3s .lb-med.is-silver{border-color:#cfd8e0;box-shadow:inset 5px 0 0 #dfe6ec,0 0 22px -8px #dfe6ec}
+.lg3s .lb-med.is-bronze{border-color:#b9783f;box-shadow:inset 5px 0 0 #d08a4a,0 0 22px -8px #d08a4a}
+.lg3s .lb-rank1{position:absolute;top:10px;right:14px;font:700 22px/1 "LG3S Teko",Impact,sans-serif;color:#1a1204;background:linear-gradient(180deg,#ffe7a3,#d9a640);padding:4px 10px 2px}
+.lg3s .lb-hn{display:flex;flex-direction:column;gap:4px;min-width:0}
+.lg3s .lb-hn small{font:700 11px/1 "LG3S Barlow",sans-serif;letter-spacing:.2em;color:#f5cf6b}
+.lg3s .lb-hn strong{font:700 clamp(30px,4vw,58px)/.9 "LG3S Teko",Impact,sans-serif;letter-spacing:.02em;background:linear-gradient(180deg,#fff 0%,#e8edf2 46%,#9fadbb 56%,#f4f7fa 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 3px rgba(0,0,0,.9));overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lg3s .lb-med .lb-hn strong{font-size:clamp(24px,2.4vw,32px)}
+.lg3s .lb-hn em{font:700 12px/1 "LG3S Barlow",sans-serif;font-style:normal;letter-spacing:.12em;color:#dfe6ec;text-shadow:0 1px 3px #000}
+.lg3s .lb-hv{display:flex;flex-direction:column;align-items:center;padding:8px 14px 6px;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.03)),rgba(8,10,13,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.16)}
+.lg3s .lb-hv b{font:700 34px/.9 "LG3S Teko",Impact,sans-serif;color:#fff;font-variant-numeric:tabular-nums}
+.lg3s .lb-hero .lb-hv b{font-size:76px;background:linear-gradient(180deg,#fff6d6,#f5cf6b 45%,#c08f2f 58%,#ffe7a3);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 4px rgba(0,0,0,.8))}
+.lg3s .lb-hv small{font:700 10px/1 "LG3S Barlow",sans-serif;letter-spacing:.16em;color:#aebbc7}
+.lg3s .lb-rk{font:700 26px/1 "LG3S Teko",Impact,sans-serif;font-style:normal;color:#fff;min-width:30px;text-align:center}
+.lg3s .lb-med.is-silver .lb-rk{color:#e6edf3}.lg3s .lb-med.is-bronze .lb-rk{color:#e09a5a}
+.lg3s .lb-rest .lg3p-id>span,.lg3s .lb-rest .lg3p-id{flex-direction:row;align-items:center;gap:10px}
+.lg3s .lb-rest .lg3p-id{display:grid;grid-template-columns:auto auto 1fr;grid-template-rows:auto auto;column-gap:10px}
+.lg3s .lb-rest .lg3p-id .lb-rk{grid-row:1/3;color:#cfd8e0;opacity:.85}.lg3s .lb-rest .lg3p-id img{grid-row:1/3}.lg3s .lb-rest .lg3p-id small{grid-column:3}
+.lg3s .lb-idx-tabs{display:flex;gap:6px;align-items:center;margin-bottom:8px}.lg3s .lb-idx-tabs span{font:700 11px/1 "LG3S Barlow",sans-serif;letter-spacing:.12em;color:#aebbc7;margin-left:8px}
+.lg3s .lb-idx th button{all:unset;cursor:pointer;font:700 12px/1 "LG3S Barlow",sans-serif;letter-spacing:.1em;color:#c9d3dc}.lg3s .lb-idx th button.is-on{color:#f5cf6b}
+.lg3s .lb-idx td .th-player-name{font:600 19px/1 "LG3S Teko",Impact,sans-serif;letter-spacing:.02em}
+/* player page */
+#thDetail .lb-phero{position:relative;isolation:isolate;overflow:hidden;display:flex;gap:20px;align-items:center;padding:26px 24px;margin:-4px 0 16px;border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 -4px 0 var(--pc),0 0 30px -8px var(--pc);background:linear-gradient(90deg,rgba(6,8,11,.92),rgba(6,8,11,.5) 60%,rgba(6,8,11,.2)),#0b0e12}
+#thDetail .lb-phero::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--pa) center/cover no-repeat;opacity:.85}
+#thDetail .lb-phero h3{margin:2px 0 10px;font:700 clamp(40px,6vw,74px)/.9 "LG3S Teko",Impact,sans-serif;background:linear-gradient(180deg,#fff 0%,#e8edf2 46%,#9fadbb 56%,#f4f7fa 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 3px rgba(0,0,0,.9));word-break:break-word}
+#thDetail .lb-phero .eyebrow{font:700 12px/1 "LG3S Barlow",sans-serif;letter-spacing:.18em;color:#f5cf6b;text-shadow:0 1px 3px #000}
+#thDetail .lb-strip,#thDetail .lb-avg{display:flex;flex-wrap:wrap;gap:6px}
+#thDetail .lb-badges{display:flex;flex-wrap:wrap;gap:8px}
+#thDetail .lb-badge{display:flex;flex-direction:column;align-items:center;min-width:76px;padding:7px 10px 6px;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.02)),#10141a;border:1px solid rgba(255,255,255,.14)}
+#thDetail .lb-badge b{font:700 28px/.9 "LG3S Teko",Impact,sans-serif;color:#fff}#thDetail .lb-badge small{font:700 10px/1.2 "LG3S Barlow",sans-serif;letter-spacing:.1em;color:#aebbc7;text-align:center}
+#thDetail .lb-badge.is-gold{border-color:#f5cf6b;background:linear-gradient(180deg,rgba(255,215,120,.35),rgba(120,80,10,.25)),#1a140a;box-shadow:0 0 16px -4px #f5cf6b}#thDetail .lb-badge.is-gold b{color:#ffe7a3}
+#thDetail .lb-badge.is-silver{border-color:#dfe6ec;background:linear-gradient(180deg,rgba(230,238,245,.28),rgba(80,90,100,.2)),#12161b}
+#thDetail .lb-badge.is-bronze{border-color:#d08a4a;background:linear-gradient(180deg,rgba(220,140,80,.3),rgba(90,45,15,.25)),#17110c}#thDetail .lb-badge.is-bronze b{color:#f0b07a}
+#thDetail .lb-badge.is-nq{opacity:.55}
+#thDetail:has(.lb-phero) h4{font:700 24px/1 "LG3S Teko",Impact,sans-serif;letter-spacing:.06em}
+.lg3s .lb-hero,.lg3s .lb-med{transition:transform .2s}.lg3s .lb-hero:hover,.lg3s .lb-med:hover{transform:translateY(-2px)}
+@media(max-width:760px){.lg3s .lb-top{grid-template-columns:1fr}.lg3s .lb-hero{grid-template-columns:auto 1fr;min-height:150px;padding:16px}.lg3s .lb-hero .lb-hv{grid-column:1/3;justify-self:start}.lg3s .lb-hero .lb-hv b{font-size:54px}.lg3s .lb-med{grid-template-columns:auto 1fr auto}.lg3s .lb-med img{display:none}.lg3s .lb-chips .lb-full{margin-left:0}#thDetail .lb-phero{flex-direction:column;align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){.lg3s .lb-hero,.lg3s .lb-med{transition:none}.lg3s .lb-hero:hover,.lg3s .lb-med:hover{transform:none}}
+.lg3s .lg3n-bgart.is-animal{opacity:.55}
+.lg3s .lg3n-bgart.is-code svg{opacity:.75}
