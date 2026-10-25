@@ -1,0 +1,380 @@
+[
+ {
+  "game_id": 921587,
+  "date": "2026-10-28",
+  "time_et": "8:00 PM",
+  "away_team_id": 532,
+  "home_team_id": 343
+ },
+ {
+  "game_id": 921588,
+  "date": "2026-10-28",
+  "time_et": "8:00 PM",
+  "away_team_id": 1079,
+  "home_team_id": 341
+ },
+ {
+  "game_id": 921589,
+  "date": "2026-10-28",
+  "time_et": "8:00 PM",
+  "away_team_id": 822,
+  "home_team_id": 1444
+ },
+ {
+  "game_id": 921590,
+  "date": "2026-10-28",
+  "time_et": "8:00 PM",
+  "away_team_id": 1439,
+  "home_team_id": 404
+ },
+ {
+  "game_id": 921591,
+  "date": "2026-10-28",
+  "time_et": "8:00 PM",
+  "away_team_id": 1446,
+  "home_team_id": 591
+ },
+ {
+  "game_id": 921592,
+  "date": "2026-10-28",
+  "time_et": "8:00 PM",
+  "away_team_id": 342,
+  "home_team_id": 531
+ },
+ {
+  "game_id": 921593,
+  "date": "2026-10-28",
+  "time_et": "8:35 PM",
+  "away_team_id": 1444,
+  "home_team_id": 532
+ },
+ {
+  "game_id": 921594,
+  "date": "2026-10-28",
+  "time_et": "8:35 PM",
+  "away_team_id": 531,
+  "home_team_id": 822
+ },
+ {
+  "game_id": 921595,
+  "date": "2026-10-28",
+  "time_et": "8:35 PM",
+  "away_team_id": 1079,
+  "home_team_id": 1446
+ },
+ {
+  "game_id": 921596,
+  "date": "2026-10-28",
+  "time_et": "8:35 PM",
+  "away_team_id": 404,
+  "home_team_id": 341
+ },
+ {
+  "game_id": 921597,
+  "date": "2026-10-28",
+  "time_et": "8:35 PM",
+  "away_team_id": 591,
+  "home_team_id": 1439
+ },
+ {
+  "game_id": 921598,
+  "date": "2026-10-28",
+  "time_et": "8:35 PM",
+  "away_team_id": 343,
+  "home_team_id": 342
+ },
+ {
+  "game_id": 921599,
+  "date": "2026-10-28",
+  "time_et": "9:10 PM",
+  "away_team_id": 341,
+  "home_team_id": 591
+ },
+ {
+  "game_id": 921600,
+  "date": "2026-10-28",
+  "time_et": "9:10 PM",
+  "away_team_id": 342,
+  "home_team_id": 822
+ },
+ {
+  "game_id": 921601,
+  "date": "2026-10-28",
+  "time_et": "9:10 PM",
+  "away_team_id": 531,
+  "home_team_id": 532
+ },
+ {
+  "game_id": 921602,
+  "date": "2026-10-28",
+  "time_et": "9:10 PM",
+  "away_team_id": 1446,
+  "home_team_id": 404
+ },
+ {
+  "game_id": 921603,
+  "date": "2026-10-28",
+  "time_et": "9:10 PM",
+  "away_team_id": 1444,
+  "home_team_id": 343
+ },
+ {
+  "game_id": 921604,
+  "date": "2026-10-28",
+  "time_et": "9:10 PM",
+  "away_team_id": 1439,
+  "home_team_id": 1079
+ },
+ {
+  "game_id": 921605,
+  "date": "2026-10-29",
+  "time_et": "8:00 PM",
+  "away_team_id": 822,
+  "home_team_id": 343
+ },
+ {
+  "game_id": 921606,
+  "date": "2026-10-29",
+  "time_et": "8:00 PM",
+  "away_team_id": 404,
+  "home_team_id": 1079
+ },
+ {
+  "game_id": 921607,
+  "date": "2026-10-29",
+  "time_et": "8:00 PM",
+  "away_team_id": 591,
+  "home_team_id": 531
+ },
+ {
+  "game_id": 921608,
+  "date": "2026-10-29",
+  "time_et": "8:00 PM",
+  "away_team_id": 1444,
+  "home_team_id": 342
+ },
+ {
+  "game_id": 921609,
+  "date": "2026-10-29",
+  "time_et": "8:00 PM",
+  "away_team_id": 532,
+  "home_team_id": 1439
+ },
+ {
+  "game_id": 921610,
+  "date": "2026-10-29",
+  "time_et": "8:00 PM",
+  "away_team_id": 1446,
+  "home_team_id": 341
+ },
+ {
+  "game_id": 921611,
+  "date": "2026-10-29",
+  "time_et": "8:35 PM",
+  "away_team_id": 1079,
+  "home_team_id": 591
+ },
+ {
+  "game_id": 921612,
+  "date": "2026-10-29",
+  "time_et": "8:35 PM",
+  "away_team_id": 342,
+  "home_team_id": 532
+ },
+ {
+  "game_id": 921613,
+  "date": "2026-10-29",
+  "time_et": "8:35 PM",
+  "away_team_id": 822,
+  "home_team_id": 1446
+ },
+ {
+  "game_id": 921614,
+  "date": "2026-10-29",
+  "time_et": "8:35 PM",
+  "away_team_id": 343,
+  "home_team_id": 404
+ },
+ {
+  "game_id": 921615,
+  "date": "2026-10-29",
+  "time_et": "8:35 PM",
+  "away_team_id": 531,
+  "home_team_id": 1444
+ },
+ {
+  "game_id": 921616,
+  "date": "2026-10-29",
+  "time_et": "8:35 PM",
+  "away_team_id": 341,
+  "home_team_id": 1439
+ },
+ {
+  "game_id": 921617,
+  "date": "2026-10-29",
+  "time_et": "9:10 PM",
+  "away_team_id": 532,
+  "home_team_id": 822
+ },
+ {
+  "game_id": 921618,
+  "date": "2026-10-29",
+  "time_et": "9:10 PM",
+  "away_team_id": 342,
+  "home_team_id": 341
+ },
+ {
+  "game_id": 921619,
+  "date": "2026-10-29",
+  "time_et": "9:10 PM",
+  "away_team_id": 1079,
+  "home_team_id": 343
+ },
+ {
+  "game_id": 921620,
+  "date": "2026-10-29",
+  "time_et": "9:10 PM",
+  "away_team_id": 591,
+  "home_team_id": 404
+ },
+ {
+  "game_id": 921621,
+  "date": "2026-10-29",
+  "time_et": "9:10 PM",
+  "away_team_id": 1446,
+  "home_team_id": 531
+ },
+ {
+  "game_id": 921622,
+  "date": "2026-10-29",
+  "time_et": "9:10 PM",
+  "away_team_id": 1439,
+  "home_team_id": 1444
+ },
+ {
+  "game_id": 921623,
+  "date": "2026-10-30",
+  "time_et": "8:00 PM",
+  "away_team_id": 1444,
+  "home_team_id": 1079
+ },
+ {
+  "game_id": 921624,
+  "date": "2026-10-30",
+  "time_et": "8:00 PM",
+  "away_team_id": 591,
+  "home_team_id": 532
+ },
+ {
+  "game_id": 921625,
+  "date": "2026-10-30",
+  "time_et": "8:00 PM",
+  "away_team_id": 342,
+  "home_team_id": 1446
+ },
+ {
+  "game_id": 921626,
+  "date": "2026-10-30",
+  "time_et": "8:00 PM",
+  "away_team_id": 822,
+  "home_team_id": 404
+ },
+ {
+  "game_id": 921627,
+  "date": "2026-10-30",
+  "time_et": "8:00 PM",
+  "away_team_id": 1439,
+  "home_team_id": 343
+ },
+ {
+  "game_id": 921628,
+  "date": "2026-10-30",
+  "time_et": "8:00 PM",
+  "away_team_id": 341,
+  "home_team_id": 531
+ },
+ {
+  "game_id": 921629,
+  "date": "2026-10-30",
+  "time_et": "8:35 PM",
+  "away_team_id": 404,
+  "home_team_id": 1444
+ },
+ {
+  "game_id": 921630,
+  "date": "2026-10-30",
+  "time_et": "8:35 PM",
+  "away_team_id": 342,
+  "home_team_id": 591
+ },
+ {
+  "game_id": 921631,
+  "date": "2026-10-30",
+  "time_et": "8:35 PM",
+  "away_team_id": 1446,
+  "home_team_id": 1439
+ },
+ {
+  "game_id": 921632,
+  "date": "2026-10-30",
+  "time_et": "8:35 PM",
+  "away_team_id": 341,
+  "home_team_id": 822
+ },
+ {
+  "game_id": 921633,
+  "date": "2026-10-30",
+  "time_et": "8:35 PM",
+  "away_team_id": 343,
+  "home_team_id": 531
+ },
+ {
+  "game_id": 921634,
+  "date": "2026-10-30",
+  "time_et": "8:35 PM",
+  "away_team_id": 1079,
+  "home_team_id": 532
+ },
+ {
+  "game_id": 921635,
+  "date": "2026-10-30",
+  "time_et": "9:10 PM",
+  "away_team_id": 532,
+  "home_team_id": 1446
+ },
+ {
+  "game_id": 921636,
+  "date": "2026-10-30",
+  "time_et": "9:10 PM",
+  "away_team_id": 531,
+  "home_team_id": 404
+ },
+ {
+  "game_id": 921637,
+  "date": "2026-10-30",
+  "time_et": "9:10 PM",
+  "away_team_id": 343,
+  "home_team_id": 591
+ },
+ {
+  "game_id": 921638,
+  "date": "2026-10-30",
+  "time_et": "9:10 PM",
+  "away_team_id": 1444,
+  "home_team_id": 341
+ },
+ {
+  "game_id": 921639,
+  "date": "2026-10-30",
+  "time_et": "9:10 PM",
+  "away_team_id": 1439,
+  "home_team_id": 342
+ },
+ {
+  "game_id": 921640,
+  "date": "2026-10-30",
+  "time_et": "9:10 PM",
+  "away_team_id": 822,
+  "home_team_id": 1079
+ }
+]

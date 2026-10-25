@@ -1,0 +1,466 @@
+{
+ "generated_at_utc": "2026-10-25T01:08:22+00:00",
+ "ea_files_read": [],
+ "ea_records": 0,
+ "window_minutes": [
+  -15,
+  75
+ ],
+ "summary": {
+  "not_played_yet": 45,
+  "blocked_missing_club_id": 9
+ },
+ "games": [
+  {
+   "lg_game_id": 921587,
+   "away_ea_club_id": 43644,
+   "home_ea_club_id": 22440,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921588,
+   "away_ea_club_id": null,
+   "home_ea_club_id": 4526,
+   "candidates": [],
+   "flags": [
+    "An LG team has no verified EA club ID"
+   ],
+   "status": "blocked_missing_club_id"
+  },
+  {
+   "lg_game_id": 921589,
+   "away_ea_club_id": 35644,
+   "home_ea_club_id": 49305,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921590,
+   "away_ea_club_id": 50403,
+   "home_ea_club_id": 46452,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921591,
+   "away_ea_club_id": 50648,
+   "home_ea_club_id": 49675,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921592,
+   "away_ea_club_id": 22418,
+   "home_ea_club_id": 31561,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921593,
+   "away_ea_club_id": 49305,
+   "home_ea_club_id": 43644,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921594,
+   "away_ea_club_id": 31561,
+   "home_ea_club_id": 35644,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921595,
+   "away_ea_club_id": null,
+   "home_ea_club_id": 50648,
+   "candidates": [],
+   "flags": [
+    "An LG team has no verified EA club ID"
+   ],
+   "status": "blocked_missing_club_id"
+  },
+  {
+   "lg_game_id": 921596,
+   "away_ea_club_id": 46452,
+   "home_ea_club_id": 4526,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921597,
+   "away_ea_club_id": 49675,
+   "home_ea_club_id": 50403,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921598,
+   "away_ea_club_id": 22440,
+   "home_ea_club_id": 22418,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921599,
+   "away_ea_club_id": 4526,
+   "home_ea_club_id": 49675,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921600,
+   "away_ea_club_id": 22418,
+   "home_ea_club_id": 35644,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921601,
+   "away_ea_club_id": 31561,
+   "home_ea_club_id": 43644,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921602,
+   "away_ea_club_id": 50648,
+   "home_ea_club_id": 46452,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921603,
+   "away_ea_club_id": 49305,
+   "home_ea_club_id": 22440,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921604,
+   "away_ea_club_id": 50403,
+   "home_ea_club_id": null,
+   "candidates": [],
+   "flags": [
+    "An LG team has no verified EA club ID"
+   ],
+   "status": "blocked_missing_club_id"
+  },
+  {
+   "lg_game_id": 921605,
+   "away_ea_club_id": 35644,
+   "home_ea_club_id": 22440,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921606,
+   "away_ea_club_id": 46452,
+   "home_ea_club_id": null,
+   "candidates": [],
+   "flags": [
+    "An LG team has no verified EA club ID"
+   ],
+   "status": "blocked_missing_club_id"
+  },
+  {
+   "lg_game_id": 921607,
+   "away_ea_club_id": 49675,
+   "home_ea_club_id": 31561,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921608,
+   "away_ea_club_id": 49305,
+   "home_ea_club_id": 22418,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921609,
+   "away_ea_club_id": 43644,
+   "home_ea_club_id": 50403,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921610,
+   "away_ea_club_id": 50648,
+   "home_ea_club_id": 4526,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921611,
+   "away_ea_club_id": null,
+   "home_ea_club_id": 49675,
+   "candidates": [],
+   "flags": [
+    "An LG team has no verified EA club ID"
+   ],
+   "status": "blocked_missing_club_id"
+  },
+  {
+   "lg_game_id": 921612,
+   "away_ea_club_id": 22418,
+   "home_ea_club_id": 43644,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921613,
+   "away_ea_club_id": 35644,
+   "home_ea_club_id": 50648,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921614,
+   "away_ea_club_id": 22440,
+   "home_ea_club_id": 46452,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921615,
+   "away_ea_club_id": 31561,
+   "home_ea_club_id": 49305,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921616,
+   "away_ea_club_id": 4526,
+   "home_ea_club_id": 50403,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921617,
+   "away_ea_club_id": 43644,
+   "home_ea_club_id": 35644,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921618,
+   "away_ea_club_id": 22418,
+   "home_ea_club_id": 4526,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921619,
+   "away_ea_club_id": null,
+   "home_ea_club_id": 22440,
+   "candidates": [],
+   "flags": [
+    "An LG team has no verified EA club ID"
+   ],
+   "status": "blocked_missing_club_id"
+  },
+  {
+   "lg_game_id": 921620,
+   "away_ea_club_id": 49675,
+   "home_ea_club_id": 46452,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921621,
+   "away_ea_club_id": 50648,
+   "home_ea_club_id": 31561,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921622,
+   "away_ea_club_id": 50403,
+   "home_ea_club_id": 49305,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921623,
+   "away_ea_club_id": 49305,
+   "home_ea_club_id": null,
+   "candidates": [],
+   "flags": [
+    "An LG team has no verified EA club ID"
+   ],
+   "status": "blocked_missing_club_id"
+  },
+  {
+   "lg_game_id": 921624,
+   "away_ea_club_id": 49675,
+   "home_ea_club_id": 43644,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921625,
+   "away_ea_club_id": 22418,
+   "home_ea_club_id": 50648,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921626,
+   "away_ea_club_id": 35644,
+   "home_ea_club_id": 46452,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921627,
+   "away_ea_club_id": 50403,
+   "home_ea_club_id": 22440,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921628,
+   "away_ea_club_id": 4526,
+   "home_ea_club_id": 31561,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921629,
+   "away_ea_club_id": 46452,
+   "home_ea_club_id": 49305,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921630,
+   "away_ea_club_id": 22418,
+   "home_ea_club_id": 49675,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921631,
+   "away_ea_club_id": 50648,
+   "home_ea_club_id": 50403,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921632,
+   "away_ea_club_id": 4526,
+   "home_ea_club_id": 35644,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921633,
+   "away_ea_club_id": 22440,
+   "home_ea_club_id": 31561,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921634,
+   "away_ea_club_id": null,
+   "home_ea_club_id": 43644,
+   "candidates": [],
+   "flags": [
+    "An LG team has no verified EA club ID"
+   ],
+   "status": "blocked_missing_club_id"
+  },
+  {
+   "lg_game_id": 921635,
+   "away_ea_club_id": 43644,
+   "home_ea_club_id": 50648,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921636,
+   "away_ea_club_id": 31561,
+   "home_ea_club_id": 46452,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921637,
+   "away_ea_club_id": 22440,
+   "home_ea_club_id": 49675,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921638,
+   "away_ea_club_id": 49305,
+   "home_ea_club_id": 4526,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921639,
+   "away_ea_club_id": 50403,
+   "home_ea_club_id": 22418,
+   "candidates": [],
+   "flags": [],
+   "status": "not_played_yet"
+  },
+  {
+   "lg_game_id": 921640,
+   "away_ea_club_id": 35644,
+   "home_ea_club_id": null,
+   "candidates": [],
+   "flags": [
+    "An LG team has no verified EA club ID"
+   ],
+   "status": "blocked_missing_club_id"
+  }
+ ],
+ "orphan_ea_matches": []
+}
