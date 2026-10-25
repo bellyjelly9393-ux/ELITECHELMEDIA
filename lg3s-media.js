@@ -43,7 +43,7 @@
     nav.addEventListener('click', e => { if(e.target.closest('a')) { nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }});
     document.addEventListener('keydown', e => { if(e.key === 'Escape'){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');}});
   }
-  let data, tm, chosenDay='', weekDays=[], boardMode='official', playerLimit=40;
+  let data, tm, chosenDay='', weekDays=[], weekShift=0, drafts=new Map(), boardMode='official', playerLimit=40;
   function team(id){ return tm.get(Number(id)); }
   function teamOr(id, name){ return team(id) || { id: Number(id), name: name || 'Team' }; }
   function isoAdd(iso, n){ const [y,m,d]=iso.split('-').map(Number); return new Date(Date.UTC(y, m-1, d+n)).toISOString().slice(0,10); }
@@ -67,10 +67,12 @@
     const anchor=[...nights].reverse().find(d=>d<=today)||nights[0];
     if(!anchor){ weekDays=[]; chosenDay=''; return; }
     const back={3:0,4:1,5:2,6:3,0:4,1:5,2:6}[isoWeekday(anchor)];
-    const wed=isoAdd(anchor,-back);
+    const wed=isoAdd(anchor,-back+7*weekShift);
     weekDays=[0,1,2].map(i=>isoAdd(wed,i));
     chosenDay=[...weekDays].reverse().find(d=>d<=today)||weekDays[0];
   }
+  function hasWeek(shift){const n=collectNights(),s0=weekShift;weekShift=shift;const w=weekDays,c=chosenDay;chooseWeek();const ok=weekDays.some(d=>n.includes(d));weekShift=s0;weekDays=w;chosenDay=c;return ok;}
+  function draftSnippet(md){const first=String(md).split('\n\n').slice(1,3).join(' ');return esc(first.replace(/\*\*|_/g,'')).slice(0,330);}
   function etClock(iso){ return new Date(iso).toLocaleTimeString('en-US',{timeZone:'America/Toronto',hour:'numeric',minute:'2-digit'}); }
   function gamesFor(iso){
     if(live.ok) return [...live.games.values()].filter(g=>nightKey(g.game_night_date)===iso).sort((a,b)=>String(a.scheduled_at).localeCompare(String(b.scheduled_at))||Number(a.lg_game_id)-Number(b.lg_game_id));
@@ -96,7 +98,8 @@
     const classes='th-game th-game-v2'+(marquee?' th-game-feature':'');
     const clock=row._static?shortTime(row._static.time):etClock(row.scheduled_at);
     const tag=snap&&snap.tag?snap.tag:clock+' ET';
-    const preview=snap&&snap.preview?'<div class="th-game-foot"><span>THE MATCHUP</span><p>'+esc(snap.preview)+'</p></div>':'';
+    const dr=drafts.get(Number(row.lg_game_id));
+    const preview=dr&&!row.is_verified?'<div class="th-game-foot th-draft"><span>THE MATCHUP · <b>DRAFT · PENDING APPROVAL</b></span><p>'+draftSnippet(dr.body_md)+'…</p></div>':snap&&snap.preview?'<div class="th-game-foot"><span>THE MATCHUP</span><p>'+esc(snap.preview)+'</p></div>':'';
     const verdict=p?'<div class="th-game-verdict"><span>ECM PICK · <b>'+esc(p.name)+'</b></span><span class="th-pick-label">EDITORIAL PREDICTION</span></div>':'';
     const recap=row.is_verified&&live.recaps.get(Number(row.lg_game_id));
     const recapLink='<a class="th-recap-link" href="#game/'+Number(row.lg_game_id)+'">Match detail</a>'+(recap?'<a class="th-recap-link" href="#recap/'+Number(row.lg_game_id)+'">Approved recap</a>':'');
@@ -116,10 +119,11 @@
   }
   function renderNightTabs(){
     const box=$('thNightTabs'); if(!box) return;
-    box.innerHTML=weekDays.map(iso=>{
+    const nav=(sh,lbl)=>hasWeek(sh)?'<button type="button" class="th-week-nav" data-week="'+sh+'">'+lbl+'</button>':'';
+    box.innerHTML=nav(weekShift-1,'‹ PREV WEEK')+weekDays.map(iso=>{
       const finals=gamesFor(iso).filter(g=>g.is_verified).length;
       return '<button type="button" role="tab" data-date="'+iso+'" aria-pressed="'+String(iso===chosenDay)+'">'+nightTitle(iso).split(' · ')[0]+' <span>'+finals+' FINAL'+(finals===1?'':'S')+'</span></button>';
-    }).join('');
+    }).join('')+nav(weekShift+1,'NEXT WEEK ›');
   }
   function renderGames(){
     renderNightTabs();
@@ -205,7 +209,8 @@
     const ls=live.lines.filter(l=>Number(l.lg_game_id)===Number(id));
     const tbl=tid=>{const t=team(tid);const r=ls.filter(l=>l.lg_team_id===tid).map(l=>'<tr><td>'+playerLink(l.lg_user_id,l.gamertag)+'</td><td>'+(l.player_kind==='goalie'?'G':esc(l.position||''))+'</td><td class="num">'+(l.player_kind==='goalie'?l.saves+' SV / '+l.shots_against+' SA':l.goals+'G '+l.assists+'A '+l.points+'P')+'</td></tr>').join('');return r?'<h4>'+esc(t?t.name:'').toUpperCase()+' · VERIFIED BOX SCORE</h4><div class="th-table-scroll"><table class="th-table"><tbody>'+r+'</tbody></table></div>':'';};
     const status=row.is_verified?'Official LG data · verified '+esc(etTime(row.verified_at)):(row.status==='pending_verification'?'Final posted · verifying':'Result pending');
-    openDetail(heroFor(row)+'<p class="th-caption">'+status+'</p>'+(row.is_verified?tbl(row.away_lg_team_id)+tbl(row.home_lg_team_id):'')+'<p class="th-caption"><a href="'+gameUrl(id)+'" target="_blank" rel="noopener noreferrer">Official LG game centre ↗</a>'+(live.recaps.get(Number(id))?' · <a href="#recap/'+Number(id)+'">Approved recap</a>':'')+'</p>');
+    const dr=drafts.get(Number(id));const drHtml=dr&&!row.is_verified?'<h4>MATCHUP PREVIEW · DRAFT · PENDING APPROVAL</h4><div class="th-recap-body">'+esc(dr.body_md).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(^|\n)_(.+?)_(?=\n|$)/g,'$1<i>$2</i>').replace(/\n/g,'<br>')+'</div>':'';
+    openDetail(heroFor(row)+'<p class="th-caption">'+status+'</p>'+drHtml+(row.is_verified?tbl(row.away_lg_team_id)+tbl(row.home_lg_team_id):'')+'<p class="th-caption"><a href="'+gameUrl(id)+'" target="_blank" rel="noopener noreferrer">Official LG game centre ↗</a>'+(live.recaps.get(Number(id))?' · <a href="#recap/'+Number(id)+'">Approved recap</a>':'')+'</p>');
   }
   function recapPage(id){
     const recap=live.recaps.get(Number(id)), game=live.games.get(Number(id));
@@ -233,13 +238,14 @@
     if(!Array.isArray(data.teams)||data.teams.length!==12||data.games.length!==30||data.players.length<200)throw Error('Incomplete league snapshot');
     tm=new Map(data.teams.map(t=>[t.id,t]));
     try{await loadLive();}catch(e){console.warn('LG3s verified results unavailable; showing static snapshot.',e);}
+    try{const r=await fetch('lg3s-week2-preview-drafts.json?v=20261024',{cache:'no-store'});if(r.ok){const j=await r.json();(j.drafts||[]).forEach(d=>drafts.set(Number(d.lg_game_id),d));}}catch(e){}
     chooseWeek();
     renderNations();renderGames();renderStandings();renderLeaders();
     window.addEventListener('hashchange',route);route();
     const dc=$('thDetailClose');if(dc)dc.addEventListener('click',()=>{$('thDetail').close();history.replaceState(null,'',location.pathname+location.search);});
     $('thPlayerTeam').innerHTML='<option value="all">All twelve nations</option>'+data.teams.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(t=>'<option value="'+t.id+'">'+esc(t.name)+'</option>').join('');
     renderPlayers();
-    const nightTabs=$('thNightTabs'); if(nightTabs) nightTabs.addEventListener('click',e=>{const b=e.target.closest('button[data-date]'); if(!b) return; chosenDay=b.dataset.date; renderGames();});
+    const nightTabs=$('thNightTabs'); if(nightTabs) nightTabs.addEventListener('click',e=>{const w=e.target.closest('button[data-week]'); if(w){weekShift=Number(w.dataset.week);chooseWeek();renderGames();return;} const b=e.target.closest('button[data-date]'); if(!b) return; chosenDay=b.dataset.date; renderGames();});
     document.querySelectorAll('.th-board-mode').forEach(b=>b.addEventListener('click',()=>{boardMode=b.dataset.boardMode;renderStandings();}));
     ['thPlayerSearch','thPlayerTeam','thPlayerStatus','thPlayerPosition','thPlayerSort'].forEach(id=>$(id).addEventListener(id==='thPlayerSearch'?'input':'change',()=>{playerLimit=40;renderPlayers();}));
     $('thPlayersMore').addEventListener('click',()=>{playerLimit+=40;renderPlayers();});
