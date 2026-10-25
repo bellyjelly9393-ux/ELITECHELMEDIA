@@ -50,6 +50,9 @@
   </section>
 
   <div data-management-content hidden class="hn-content">
+    <section class="section-shell" id="hitmenPrivateManagementEntry" hidden aria-label="Private Hitmen management access">
+      <a href="hitmen-workspace.html" style="display:inline-flex;align-items:center;gap:.55rem;padding:.85rem 1.15rem;border:1px solid #b88c43;border-radius:10px;background:#231916;color:#ffe0a0;font-weight:800;text-decoration:none">⚙️ Open Hitmen Management →</a>
+    </section>
     <section class="bc-broadcast team-hitmen" id="hitmenBroadcast" data-hb-autoload aria-label="Calgary Hitmen scoreboard and this week's matchups">
       <div class="bc-stage-wrap">
         <div class="bc-stage">
@@ -141,5 +144,22 @@
 <script src="hitmen-neutral.js?v=20261004-neutral"></script>
 <script src="hitmen-headquarters.js?v=20261011"></script>
 <script src="hitmen-media-recaps.js?v=20261011"></script>
+<script>
+/* Navigation only: all private data and management actions remain protected by existing authorization. */
+(function(){
+  const entry=document.getElementById('hitmenPrivateManagementEntry');
+  if(!entry)return;
+  function sync(){
+    const state=window.VVHLBackend?.state||{};
+    const privileged=['admin','commissioner'].includes(String(state.profile?.role||'').toLowerCase());
+    const teamManager=(state.memberships||[]).some(m=>String(m.team_id)==='412'&&m.active!==false&&['owner','gm','agm'].includes(String(m.role||'').toLowerCase()));
+    entry.hidden=!(state.user&&(privileged||teamManager));
+  }
+  window.addEventListener('vvhl:auth-changed',sync);
+  document.addEventListener('vvhl:auth-changed',sync);
+  document.addEventListener('DOMContentLoaded',sync);
+  sync();
+})();
+</script>
 </body>
 </html>
