@@ -16,7 +16,7 @@
   function matchup(o) {
     const size = o.size === 'hero' ? 'hero' : 'card';
     const fin = o.final && Number.isFinite(+o.final.away) && Number.isFinite(+o.final.home) ? o.final : null;
-    const side = (t, cls, won) => '<div class="lg3m-side ' + cls + (won ? ' is-win' : '') + '"><span class="lg3m-badge">' + (t.mark || '') + '</span><span class="lg3m-plate"><strong>' + esc(t.name) + '</strong>' + (t.label ? '<small>' + esc(t.label) + '</small>' : '') + '</span></div>';
+    const side = (t, cls, won) => '<div class="lg3m-side ' + cls + (won ? ' is-win' : '') + '"><span class="lg3m-badge">' + (t.mark || '') + '</span><span class="lg3m-plate"><strong style="--n:' + Math.max(4, ...String(t.name || '').split(/\s+/).map(w => w.length)) + '">' + esc(t.name) + '</strong>' + (t.label ? '<small>' + esc(t.label) + '</small>' : '') + '</span></div>';
     const center = fin
       ? '<div class="lg3m-center lg3m-chip is-final"><span class="lg3m-score"><b>' + Number(fin.away) + '</b><i>–</i><b>' + Number(fin.home) + '</b></span><small>' + esc(fin.note || 'FINAL') + '</small>' + (fin.fine ? '<em class="lg3m-fine">' + esc(fin.fine) + '</em>' : '') + '</div>'
       : '<div class="lg3m-center lg3m-chip"><span class="lg3m-vs">VS</span></div>';
@@ -26,4 +26,27 @@
       (o.meta ? '<p class="lg3m-meta">' + esc(o.meta) + '</p>' : '') + '</div>';
   }
   window.LG3S_NATION_ART = { slug, src, css, color, has: n => AVAILABLE.has(slug(n)), matchup };
+})();
+
+/* Fit nation names inside their VS-banner plate: shrink font only when the name is wider than its side. */
+(function () {
+  function fit(el) {
+    const side = el.closest('.lg3m-side'), plate = el.closest('.lg3m-plate'); if (!side || !plate) return;
+    el.style.fontSize = ''; el.style.whiteSpace = 'nowrap';
+    const cs = getComputedStyle(plate), pad = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+    const avail = side.clientWidth - pad - 2; if (avail <= 0) return;
+    let fs = parseFloat(getComputedStyle(el).fontSize), w = el.scrollWidth;
+    if (w > avail) {
+      const words = el.textContent.trim().split(/\s+/);
+      if (words.length > 1) { el.style.whiteSpace = 'normal'; w = Math.max(...words.map(x => { const s = document.createElement('span'); s.textContent = x; s.style.whiteSpace = 'nowrap'; el.appendChild(s); const v = s.offsetWidth; s.remove(); return v; })); el.style.whiteSpace = 'nowrap'; }
+      el.style.whiteSpace = words.length > 1 ? 'normal' : 'nowrap';
+      if (w > avail) el.style.fontSize = Math.max(9, Math.floor(fs * avail / w * 10) / 10) + 'px';
+    }
+  }
+  const run = root => (root.querySelectorAll ? root : document).querySelectorAll('.lg3m-plate strong').forEach(fit);
+  let t = 0; const later = () => { cancelAnimationFrame(t); t = requestAnimationFrame(() => { run(document); setTimeout(() => run(document), 250); }); };
+  new MutationObserver(later).observe(document.documentElement, { childList: true, subtree: true });
+  addEventListener('resize', later); document.addEventListener('DOMContentLoaded', later);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(later);
+  document.addEventListener('toggle', later, true);
 })();

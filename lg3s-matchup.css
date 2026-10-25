@@ -299,3 +299,7 @@
 .lg3s .lg3x-card{background-blend-mode:normal,screen,screen,normal,normal}
 .lg3s .lg3x-live{text-decoration:none;background:linear-gradient(180deg,#ffe28a,#d6a734)!important;color:#111!important}
 .lg3s .lg3r{position:relative}.lg3s .lg3r-link::after{content:'';position:absolute;inset:0;z-index:1}.lg3s .th-source{font-size:11px;opacity:.7}
+.lg3m-side{max-width:100%}.lg3m-plate{box-sizing:border-box}
+@media(max-width:560px){.lg3m-hero{padding:30px 10px 16px;gap:6px}.lg3m-hero .lg3m-vs,.lg3m-hero .lg3m-score{font-size:clamp(40px,13vw,64px)}.lg3m-hero .lg3m-chip{padding:10px 12px 8px}.lg3m-hero .lg3m-side img{width:72px;height:72px}.lg3m-plate{padding:6px 8px 5px}}
+@media(max-width:560px){.lg3m-chip small{white-space:normal;display:block;max-width:76px;margin:0 auto;line-height:1.15;text-align:center}.lg3m-card .lg3m-chip{padding:6px 8px 5px}}
+@media(max-width:560px){.lg3m-chip .lg3m-fine{white-space:normal;max-width:70px;margin:2px auto 0;text-align:center}.lg3m-hero .lg3m-chip{padding:8px 8px 7px}}
