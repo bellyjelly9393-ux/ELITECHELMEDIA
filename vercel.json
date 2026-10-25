@@ -305,5 +305,16 @@
       "destination": "/",
       "permanent": false
     }
+  ],
+  "headers": [
+    {
+      "source": "/lg3s-media.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    }
   ]
 }
