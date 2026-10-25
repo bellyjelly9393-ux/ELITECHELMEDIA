@@ -26,6 +26,7 @@
   const crestImg = (id, cls = '') => '<img class="lg3-crest ' + cls + '" src="' + crest(id) + '" alt="" width="28" height="28" loading="lazy" decoding="async">';
   const profile = id => 'https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=' + Number(id) + '&leagueid=154&seasonid=1';
   const safeUrl = u => /^https:\/\/www\.leaguegaming\.com\//.test(String(u || '')) ? String(u) : null;
+  const gameHash = g => { const id = Number(g && g.lg_game_id); return Number.isSafeInteger(id) && id > 0 ? '#game/' + id : null; };
   const day = iso => new Date(iso).toLocaleDateString('en-US', { timeZone: TZ, weekday: 'short', month: 'short', day: 'numeric' });
   const time = iso => new Date(iso).toLocaleTimeString('en-US', { timeZone: TZ, hour: 'numeric', minute: '2-digit' });
   const night = d => new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', { timeZone: 'UTC', weekday: 'short', month: 'short', day: 'numeric' });
@@ -98,13 +99,13 @@
       guard('lg3Feature', 'The next featured matchup is unavailable right now.', () => {
         if (!featured) { wait('lg3Feature', 'The next featured matchup will appear once the schedule is posted.'); return; }
         const a = nameOf(featured.away_lg_team_id, featured.away_nation), h = nameOf(featured.home_lg_team_id, featured.home_nation);
-        const url = safeUrl(featured.source_url);
+        const url = gameHash(featured);
         $('lg3FeatureMeta').textContent = 'WEEK ' + weekOf(featured.game_night_date);
         $('lg3Feature').innerHTML =
-          '<' + (url ? 'a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer"' : 'div') + ' class="lg3-fm" style="--a:' + art(a) + ';--h:' + art(h) + '">' +
+          '<' + (url ? 'a href="' + esc(url) + '"' : 'div') + ' class="lg3-fm" style="--a:' + art(a) + ';--h:' + art(h) + '">' +
           (window.LG3S_NATION_ART && window.LG3S_NATION_ART.matchup ? window.LG3S_NATION_ART.matchup({ size: 'hero', away: { name: a, mark: crestImg(featured.away_lg_team_id, 'lg3-crest-xl'), label: teamLine(featured.away_lg_team_id) }, home: { name: h, mark: crestImg(featured.home_lg_team_id, 'lg3-crest-xl'), label: teamLine(featured.home_lg_team_id) }, final: null, meta: day(featured.scheduled_at).toUpperCase() + ' · ' + time(featured.scheduled_at) + ' ET' }) : '') +
           '<span class="lg3-fm-tag">LG3S INTERNATIONAL</span>' +
-          (url ? '<span class="lg3-btn">GAME CENTRE <span aria-hidden="true">↗</span></span>' : '') +
+          (url ? '<span class="lg3-btn">MATCHUP PREVIEW <span aria-hidden="true">›</span></span>' : '') +
           (url ? '</a>' : '</div>');
       });
 
@@ -121,9 +122,9 @@
             if (g.pending) {
               return '<div class="lg3-score is-pending">' + line(g.away_lg_team_id, g.away_nation, '—', false) + line(g.home_lg_team_id, g.home_nation, '—', false) + '<span class="lg3-fin">VERIFYING</span></div>';
             }
-            const as = +g.away_score, hs = +g.home_score, url = safeUrl(g.source_url);
+            const as = +g.away_score, hs = +g.home_score, url = gameHash(g);
             const ot = /OT|SO/i.test(String(g.decided_in || '')) ? String(g.decided_in).toUpperCase() : 'FINAL';
-            const tag = url ? 'a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer"' : 'div';
+            const tag = url ? 'a href="' + esc(url) + '"' : 'div';
             return '<' + tag + ' class="lg3-score">' + line(g.away_lg_team_id, g.away_nation, as, as > hs) + line(g.home_lg_team_id, g.home_nation, hs, hs > as) + '<span class="lg3-fin">' + ot + '</span>' + (url ? '</a>' : '</div>');
           }).join('');
           $('lg3Scores').scrollTop = 0;
@@ -137,7 +138,7 @@
         if (!upcoming) { wait('lg3Upcoming', 'The schedule is unavailable right now.'); return; }
         if (!upcoming.length) { wait('lg3Upcoming', 'The next game night will appear once it is scheduled.'); return; }
         $('lg3Upcoming').innerHTML = upcoming.slice(0, 6).map(g => {
-          const url = safeUrl(g.source_url), tag = url ? 'a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer"' : 'div';
+          const url = gameHash(g), tag = url ? 'a href="' + esc(url) + '"' : 'div';
           const sa = art(nameOf(g.away_lg_team_id, g.away_nation)), sh = art(nameOf(g.home_lg_team_id, g.home_nation));
           return '<' + tag + ' class="lg3-game has-split" style="--ma:' + esc(sa) + ';--mh:' + esc(sh) + '">' +
             '<span class="lg3-match"><span class="lg3-line">' + crestImg(g.away_lg_team_id) + '<span>' + esc(nameOf(g.away_lg_team_id, g.away_nation)) + '</span></span>' +
@@ -227,9 +228,9 @@
         const picks = (marquee.length > 1 ? marquee.slice(1, 4) : (upcoming || []).slice(0, 3));
         if (!picks.length) { wait('lg3Keys', 'Key matchups will appear once the next game night is scheduled.'); return; }
         $('lg3Keys').innerHTML = picks.map(g => {
-          const a = nameOf(g.away_lg_team_id, g.away_nation), h = nameOf(g.home_lg_team_id, g.home_nation), url = safeUrl(g.source_url);
+          const a = nameOf(g.away_lg_team_id, g.away_nation), h = nameOf(g.home_lg_team_id, g.home_nation), url = gameHash(g);
           const ra = rankOf.get(g.away_lg_team_id), rh = rankOf.get(g.home_lg_team_id);
-          const tag = url ? 'a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer"' : 'div';
+          const tag = url ? 'a href="' + esc(url) + '"' : 'div';
           return '<' + tag + ' class="lg3-km" style="--a:' + art(a) + ';--h:' + art(h) + '"><span class="lg3-km-bg" aria-hidden="true"><i></i><i></i></span>' +
             '<span class="lg3-km-row"><span class="lg3-km-t">' + crestImg(g.away_lg_team_id, 'lg3-crest-lg') + '<b>' + esc(a) + '</b></span><em>VS</em><span class="lg3-km-t">' + crestImg(g.home_lg_team_id, 'lg3-crest-lg') + '<b>' + esc(h) + '</b></span></span>' +
             '<span class="lg3-km-when">' + esc(day(g.scheduled_at).toUpperCase()) + '<i aria-hidden="true">|</i>' + esc(time(g.scheduled_at)) + ' ET</span>' +
@@ -255,7 +256,7 @@
             const dec = /OT|SO/i.test(String(game.decided_in || '')) ? 'FINAL/' + esc(String(game.decided_in).toUpperCase()) : 'FINAL';
             thumb = '<span class="lg3-nc-thumb lg3-nc-vs" aria-hidden="true">' + side(game.away_lg_team_id, an, game.away_score, aw, 'a') + '<i>' + dec + '</i>' + side(game.home_lg_team_id, hn, game.home_score, !aw, 'h') + '</span>';
           }
-          return '<a class="lg3-nc" href="#recap/' + Number(p.lg_game_id) + '">' + thumb + '<span class="lg3-nc-body"><small>APPROVED RECAP</small><b>' + esc(p.title) + '</b><time>' + esc(night(p.game_night_date)) + '</time></span></a>';
+          return '<a class="lg3-nc" href="#game/' + Number(p.lg_game_id) + '">' + thumb + '<span class="lg3-nc-body"><small>APPROVED RECAP</small><b>' + esc(p.title) + '</b><time>' + esc(night(p.game_night_date)) + '</time></span></a>';
         }).join('');
       });
     })
