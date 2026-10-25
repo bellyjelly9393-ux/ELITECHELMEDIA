@@ -32,6 +32,8 @@
     g.forEach(x => live.games.set(Number(x.lg_game_id), x));
     const recapMap = new Map();
     recaps.forEach(r => { if (r.lg_game_id != null) recapMap.set(Number(r.lg_game_id), r); });
+    /* LG3S points (confirmed against LG's own table): regulation W 2, OTW 2, OTL 1, regulation L 0. Our w excludes OTW. */
+    s.forEach(r => { const n = ['w','otw','otl'].map(k => r[k]); if (n.every(x => x != null)) r.pts = 2 * (Number(r.w) + Number(r.otw)) + Number(r.otl); });
     Object.assign(live, { ok: true, standings: s, official: o, skaters: sk, goalies: gl, lines: ln, recaps: recapMap });
   }
   const etTime = iso => iso ? new Date(iso).toLocaleString('en-US', { timeZone: 'America/Toronto', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' ET' : '';
@@ -150,7 +152,7 @@
       }).join('')+'</tbody></table></div></div>';
     }
     if(live.ok&&live.standings.length===12){
-      const rows=live.standings.filter(r=>{const t=team(r.lg_team_id);return t&&t.group===group;}).sort((a,b)=>(b.pts??-1)-(a.pts??-1)||b.gd-a.gd||b.gf-a.gf||a.nation.localeCompare(b.nation));
+      const rows=live.standings.filter(r=>{const t=team(r.lg_team_id);return t&&t.group===group;}).sort((a,b)=>(b.pts??-1)-(a.pts??-1)||b.w-a.w||b.gd-a.gd||b.gf-a.gf||a.nation.localeCompare(b.nation));
       const v=x=>x==null?'—':Number(x);
       return '<div class="lg3g lg3g-'+group.toLowerCase()+'"><header class="lg3g-head"><h3 class="sr-only">Group '+group+'</h3></header><table class="lg3g-t"><caption class="sr-only">Group '+group+' verified standings</caption><thead><tr><th scope="col">#</th><th scope="col" class="lg3g-tm">TEAM</th><th scope="col">GP</th><th scope="col">W</th><th scope="col">L</th><th scope="col">OTW</th><th scope="col">OTL</th><th scope="col">PTS</th></tr></thead><tbody>'+rows.map((r,i)=>{const t=team(r.lg_team_id);
         return '<tr><td><span class="lg3g-rk lg3g-rk'+(i+1)+'">'+(i+1)+'</span></td><td class="lg3g-tm"><a href="#nation/'+Number(t.id)+'">'+teamMark(t,30)+'<span>'+esc(t.name)+'</span></a></td>'+['gp','w','l','otw','otl'].map(k=>'<td>'+v(r[k])+'</td>').join('')+'<td class="lg3g-pts">'+v(r.pts)+'</td></tr>';}).join('')+'</tbody></table></div>';
@@ -170,10 +172,10 @@
   function standingsNote(){
     const n=[...live.games.values()].filter(g=>g.is_verified).length;
     const off=new Map(live.official.map(r=>[r.lg_team_id,r]));
-    const diff=live.standings.filter(r=>{const o=off.get(r.lg_team_id);return o&&(o.gp!==r.gp||o.w!==r.w||o.l!==r.l||o.pts!==r.pts||o.gf!==r.gf||o.ga!==r.ga);});
+    const diff=live.standings.filter(r=>{const o=off.get(r.lg_team_id);return o&&(o.gp!==r.gp||o.w!==r.w+r.otw||o.l!==r.l||o.otl!==r.otl||o.pts!==r.pts||o.gf!==r.gf||o.ga!==r.ga);});
     return 'Built only from '+n+' verified LeagueGaming finals (FINAL status, full box score, scores reconciled, stable across two checks). '+
       (live.official.length?(diff.length?'Note: LG\'s own table currently differs for '+diff.length+' team(s), usually because a newer final is still verifying.':'Matches LeagueGaming\'s official table captured '+etTime(live.official[0].captured_at)+'.'):'')+
-      ' Points: 2 per regulation win, as shown on LG; OT/SO values are shown as — until LG confirms them.';
+      ' Points: 2 per win (regulation or OT/SO), 1 per OT/SO loss, 0 per regulation loss, matching LeagueGaming\'s table. Ties: points, then regulation wins, then goal difference, then goals for.';
   }
   function renderLeaders(){
     const box=$('thLeaders'); if(!box)return;
