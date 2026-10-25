@@ -1,0 +1,15 @@
+/* Public navigation only; private tools retain their own guarded menus. */
+(()=>{'use strict';
+const markup="<a href=\"index.html\">Home</a>\n<div class=\"ecm-nav-group\"><button type=\"button\" class=\"ecm-nav-trigger\" aria-expanded=\"false\" aria-controls=\"ecm-menu-1\">Live <span aria-hidden=\"true\">\u2304</span></button><div class=\"ecm-nav-panel\" id=\"ecm-menu-1\" hidden><a href=\"esports-hub.html\">Live Hub</a><a href=\"game-center.html?channel=hitmen\">Hitmen Live</a><a href=\"multiview.html\">Multiview</a></div></div>\n<div class=\"ecm-nav-group\"><button type=\"button\" class=\"ecm-nav-trigger\" aria-expanded=\"false\" aria-controls=\"ecm-menu-2\">Leaderboards <span aria-hidden=\"true\">\u2304</span></button><div class=\"ecm-nav-panel\" id=\"ecm-menu-2\" hidden><a href=\"league-leaderboards.html?league=lgchl\">LGCHL \u00b7 Top 10</a><a href=\"league-leaderboards.html?league=lg3s\">LG3s \u00b7 Top 10</a><a href=\"league-leaderboard.html?league=lgchl&category=save_pct\">LGCHL goalies</a><a href=\"league-leaderboard.html?league=lg3s&category=save_pct\">LG3s goalies</a></div></div>\n<div class=\"ecm-nav-group\"><button type=\"button\" class=\"ecm-nav-trigger\" aria-expanded=\"false\" aria-controls=\"ecm-menu-3\">Media <span aria-hidden=\"true\">\u2304</span></button><div class=\"ecm-nav-panel\" id=\"ecm-menu-3\" hidden><a href=\"hitmen-media.html\">Hitmen Desk</a><a href=\"lgchl-media.html\">LGCHL Desk</a><a href=\"lg3s-media.html\">LG3s Desk</a></div></div>\n<a href=\"lgchl-media.html#lgRadioSec\">Hitman Radio</a>\n<a href=\"interest.html?program=hut\">Tournaments</a>";
+const nav=document.querySelector('#nav, .site-header .main-nav');if(!nav||document.body.classList.contains('management-protected'))return;
+nav.innerHTML=markup;nav.classList.add('ecm-public-nav');
+const buttons=[...nav.querySelectorAll('.ecm-nav-trigger')];
+function close(){buttons.forEach(b=>{b.setAttribute('aria-expanded','false');document.getElementById(b.getAttribute('aria-controls')).hidden=true;});}
+buttons.forEach(b=>b.addEventListener('click',()=>{const open=b.getAttribute('aria-expanded')!=='true';close();b.setAttribute('aria-expanded',String(open));document.getElementById(b.getAttribute('aria-controls')).hidden=!open;}));
+const toggle=document.querySelector('#menuBtn,.menu-toggle');
+function closeMenu(){close();nav.classList.remove('open');if(toggle){toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open menu');}}
+nav.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});
+document.addEventListener('click',e=>{if(!nav.contains(e.target))close();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const active=buttons.find(b=>b.getAttribute('aria-expanded')==='true');close();if(active){e.stopImmediatePropagation();active.focus();}else closeMenu();}},true);
+const file=location.pathname.split('/').pop()||'index.html';nav.querySelectorAll('a').forEach(a=>{const u=new URL(a.href);if(u.pathname.split('/').pop()===file&&(!u.search||u.search===location.search)&&!u.hash)a.setAttribute('aria-current','page');});
+})();

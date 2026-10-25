@@ -30,7 +30,7 @@
 <script src="lg3s-live-leaders.js?v=20261022-1" defer></script>
 <script src="lg3s-recent-scores.js?v=20261022-1" defer></script>
 <script src="lg3s-ticker.js?v=20261024-1" defer></script>
-</head>
+<link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script></head>
 <body class="lg3s">
 <header class="top band">
   <div class="top-in">
@@ -38,16 +38,12 @@
       <img class="crest" src="assets/brand/ecm-crest.webp" width="118" height="120" alt="">
       <div class="brand-txt"><b>Elitechel</b><span>Media</span></div>
     </a>
-    <nav class="nav" id="nav" aria-label="Main">
-      <a href="index.html">Home</a>
-      <a href="esports-hub.html">Live Hub</a>
-      <a href="hitmen-media.html">Hitmen</a>
-      <a href="lgchl-media.html">LG CHL</a>
-      <a href="lg3s-media.html" class="on" aria-current="page">LG3s</a>
-      <a href="lgchl-leaders.html">Stats</a>
-      <a href="interest.html?program=hut">HUT Tournament</a>
-      <a href="management.html">Management</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="Main"><a href="index.html">Home</a>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-1">Live <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-1" hidden><a href="esports-hub.html">Live Hub</a><a href="game-center.html?channel=hitmen">Hitmen Live</a><a href="multiview.html">Multiview</a></div></div>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-2">Leaderboards <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-2" hidden><a href="league-leaderboards.html?league=lgchl">LGCHL · Top 10</a><a href="league-leaderboards.html?league=lg3s">LG3s · Top 10</a><a href="league-leaderboard.html?league=lgchl&category=save_pct">LGCHL goalies</a><a href="league-leaderboard.html?league=lg3s&category=save_pct">LG3s goalies</a></div></div>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-3">Media <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-3" hidden><a href="hitmen-media.html">Hitmen Desk</a><a href="lgchl-media.html">LGCHL Desk</a><a href="lg3s-media.html">LG3s Desk</a></div></div>
+<a href="lgchl-media.html#lgRadioSec">Hitman Radio</a>
+<a href="interest.html?program=hut">Tournaments</a></nav>
     <a class="icon-btn search-btn" href="#bidding" aria-label="Jump to LG3s bidding board">⌕</a>
     <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
   </div>
