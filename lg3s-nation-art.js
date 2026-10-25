@@ -18,7 +18,7 @@
     const fin = o.final && Number.isFinite(+o.final.away) && Number.isFinite(+o.final.home) ? o.final : null;
     const side = (t, cls, won) => '<div class="lg3m-side ' + cls + (won ? ' is-win' : '') + '"><span class="lg3m-badge">' + (t.mark || '') + '</span><span class="lg3m-plate"><strong>' + esc(t.name) + '</strong>' + (t.label ? '<small>' + esc(t.label) + '</small>' : '') + '</span></div>';
     const center = fin
-      ? '<div class="lg3m-center lg3m-chip is-final"><span class="lg3m-score"><b>' + Number(fin.away) + '</b><i>–</i><b>' + Number(fin.home) + '</b></span><small>' + esc(fin.note || 'FINAL') + '</small></div>'
+      ? '<div class="lg3m-center lg3m-chip is-final"><span class="lg3m-score"><b>' + Number(fin.away) + '</b><i>–</i><b>' + Number(fin.home) + '</b></span><small>' + esc(fin.note || 'FINAL') + '</small>' + (fin.fine ? '<em class="lg3m-fine">' + esc(fin.fine) + '</em>' : '') + '</div>'
       : '<div class="lg3m-center lg3m-chip"><span class="lg3m-vs">VS</span></div>';
     return '<div class="lg3m lg3m-' + size + '" style="--ma:' + esc(css(o.away.name, size)) + ';--mh:' + esc(css(o.home.name, size)) + ';--ca:' + color(o.away.name) + ';--ca2:' + color(o.away.name, 1) + ';--ch:' + color(o.home.name) + ';--ch2:' + color(o.home.name, 1) + '">' +
       '<span class="lg3m-bg" aria-hidden="true"><i class="lg3m-a"></i><i class="lg3m-h"></i><em></em></span>' +
