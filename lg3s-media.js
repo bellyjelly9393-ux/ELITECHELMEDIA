@@ -82,7 +82,7 @@
   function renderNations() {
     $('thNations').innerHTML = data.teams.map(t => '<a href="#nation/' + Number(t.id) + '" class="th-nation-chip" title="' + esc(t.name) + ' nation page">' + teamMark(t,34) + '<span>' + esc(t.name) + '</span></a>').join('');
   }
-  const natBg=(n,size)=>{const A=window.LG3S_NATION_ART;const u=A&&A.css(n,size||'card');return u&&u!=='none'?' style="--nat:'+esc(u)+'"':'';};
+  const natBg=(n,size)=>{const A=window.LG3S_NATION_ART;const u=A&&A.css(n,size||'card');return u&&u!=='none'?' style="--nat:'+esc(u)+';--nc:'+A.color(n)+';--nc2:'+A.color(n,1)+'"':'';};
   const natCls=n=>window.LG3S_NATION_ART&&window.LG3S_NATION_ART.has(n)?' has-nat':'';
   function matchupHtml(row,a,h,size,meta){
     const A=window.LG3S_NATION_ART;
