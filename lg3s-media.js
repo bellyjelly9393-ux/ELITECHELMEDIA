@@ -13,7 +13,7 @@
   const teamMark = (t, size = 48) => '<img src="' + icon(t.id) + '" width="' + size + '" height="' + size + '" loading="lazy" alt="' + esc(t.name) + ' team crest">';
   const LIVE = Object.freeze({ base: 'https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/', key: 'sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP' });
   /* Approved-recap view (migration 20261024160000) is not applied yet; flip once it exists so the page doesn't 404. */
-  const RECAPS_LIVE = false;
+  const RECAPS_LIVE = true;
   const live = { ok: false, games: new Map(), standings: [], official: [], skaters: [], goalies: [], lines: [], recaps: new Map() };
   async function view(name, q) {
     const r = await fetch(LIVE.base + name + '?' + q, { headers: { apikey: LIVE.key, Authorization: 'Bearer ' + LIVE.key }, cache: 'no-store' });
@@ -103,10 +103,10 @@
     const clock=row._static?shortTime(row._static.time):etClock(row.scheduled_at);
     const tag=snap&&snap.tag?snap.tag:clock+' ET';
     const dr=drafts.get(Number(row.lg_game_id));
-    const preview=dr&&!row.is_verified?'<div class="th-game-foot"><span>THE MATCHUP · <b>PREVIEW</b></span><p>'+draftSnippet(dr.body_md)+'… <a class="th-recap-link" href="#game/'+Number(row.lg_game_id)+'">Read</a></p></div>':snap&&snap.preview?'<div class="th-game-foot"><span>THE MATCHUP</span><p>'+esc(snap.preview)+'</p></div>':'';
+    const preview=dr&&!row.is_verified?'<div class="th-game-foot"><span>THE MATCHUP · <b>PREVIEW</b></span><p>'+draftSnippet(dr.body_md)+'…</p></div>':snap&&snap.preview?'<div class="th-game-foot"><span>THE MATCHUP</span><p>'+esc(snap.preview)+'</p></div>':'';
     const verdict=p?'<div class="th-game-verdict"><span>ECM PICK · <b>'+esc(p.name)+'</b></span><span class="th-pick-label">EDITORIAL PREDICTION</span></div>':'';
     const recap=row.is_verified&&live.recaps.get(Number(row.lg_game_id));
-    const recapLink='<a class="th-recap-link" href="#game/'+Number(row.lg_game_id)+'">Match detail</a>'+(recap?'<a class="th-recap-link" href="#recap/'+Number(row.lg_game_id)+'">Approved recap</a>':'');
+    const recapLink='<a class="th-recap-link" href="#game/'+Number(row.lg_game_id)+'">'+(preview&&dr?'Read preview':'Match detail')+'</a>'+(recap?'<a class="th-recap-link" href="#recap/'+Number(row.lg_game_id)+'">Approved recap</a>':'');
     const scoreText=row.is_verified&&row.away_score!=null&&row.home_score!=null?(' final '+Number(row.away_score)+' to '+Number(row.home_score)):'';
     return '<div class="th-game-slot"><a class="'+classes+'" href="'+gameUrl(row.lg_game_id)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(a.name)+' at '+esc(h.name)+', '+esc(clock)+' Eastern'+scoreText+'">' +
       '<img class="th-game-wm" src="'+icon(h.id)+'" loading="lazy" alt="" aria-hidden="true">' +
@@ -239,7 +239,7 @@
   function recapPage(id){
     const recap=live.recaps.get(Number(id)), game=live.games.get(Number(id));
     if(!recap||!game||!game.is_verified) return;
-    const body=esc(recap.body_md).replace(/\n/g,'<br>');
+    const body=esc(recap.body_md).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').split(/\n{2,}/).map(x=>'<p>'+x.replace(/\n/g,'<br>')+'</p>').join('');
     openDetail(heroFor(game)+'<header class="th-detail-head"><div><p class="eyebrow">APPROVED RECAP · '+esc(nightTitle(nightKey(game.game_night_date)))+'</p><h3>'+esc(recap.title)+'</h3></div></header><div class="th-recap-body">'+body+'</div><p class="th-caption"><a href="'+gameUrl(id)+'" target="_blank" rel="noopener noreferrer">Official LG game centre ↗</a></p>');
   }
   /* ===== Leaderboards (verified box-score lines only) ===== */
