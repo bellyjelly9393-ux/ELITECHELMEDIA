@@ -204,10 +204,11 @@
             '<div class="lg3-sp-hero">' + crestImg(t.id, 'lg3-crest-xl') + '<div><h3>' + esc(t.name) + '</h3><p>' + (t.gp ? '#' + t.rank + ' IN LG3S' : 'LG3S SEASON 1') + (t.group ? ' · GROUP ' + esc(t.group) : '') + '</p></div></div>' +
             (t.gp ? '<dl class="lg3-sp-stats"><div><dt>RECORD</dt><dd>' + t.rec + '</dd></div><div><dt>PTS</dt><dd>' + ptsText(t) + '</dd></div><div><dt>GD</dt><dd>' + signed(t.gd) + '</dd></div><div><dt>GP</dt><dd>' + t.gp + '</dd></div></dl>' : '') +
             '<p class="lg3-sp-label">TOP PERFORMERS</p>' +
-            (top.length ? '<div class="lg3-sp-cards">' + top.map(p => {
+            (top.length ? '<div class="lg3-sp-cards">' + top.map((p, ti) => {
+              const NA = window.LG3S_NATION_ART, star = ti === 0 && (+p.p || 0) > 0, pv = NA ? ' style="--pa:' + esc(NA.css(t.name, 'card')) + ';--pc:' + NA.color(t.name) + '"' : '';
               const pos = positions.get(String(p.gamertag).toLowerCase());
-              return '<a class="lg3-pc" href="' + profile(p.lg_user_id) + '" target="_blank" rel="noopener noreferrer">' + (pos ? '<span class="lg3-pc-pos">' + esc(pos) + '</span>' : '') +
-                '<span class="lg3-pc-num">' + (+p.p || 0) + '</span><span class="lg3-pc-unit">PTS</span><b>' + esc(p.gamertag) + '</b><span class="lg3-pc-line">' + (+p.g || 0) + ' G · ' + (+p.a || 0) + ' A</span></a>';
+              return '<a class="lg3-pc' + (star ? ' is-star' : '') + '"' + pv + ' href="' + profile(p.lg_user_id) + '" target="_blank" rel="noopener noreferrer">' + (pos ? '<span class="lg3-pc-pos">' + esc(pos) + '</span>' : '') +
+                '<span class="lg3-pc-num">' + (+p.p || 0) + '</span><span class="lg3-pc-unit">PTS</span><b>' + esc(p.gamertag) + '</b><span class="lg3-pc-line"><i>' + (+p.g || 0) + '</i><small>G</small><i>' + (+p.a || 0) + '</i><small>A</small></span></a>';
             }).join('') + '</div>' : '<p class="lg3-wait">Player stats for ' + esc(t.name) + ' appear after the next game report.</p>');
         };
         const go = d => { idx = (idx + d + order.length) % order.length; draw(); };

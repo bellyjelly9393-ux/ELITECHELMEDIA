@@ -182,14 +182,16 @@
   function nationPage(id){
     const t=team(id);if(!t)return;
     const st=live.standings.find(r=>r.lg_team_id===t.id);
-    const games=data.games.filter(g=>g.away===t.id||g.home===t.id).map(g=>{const x=live.games.get(g.id),opp=team(g.away===t.id?g.home:g.away),home=g.home===t.id;
+    const liveG=live.ok?[...live.games.values()].filter(x=>x.away_lg_team_id===t.id||x.home_lg_team_id===t.id).sort((a,b)=>String(a.scheduled_at).localeCompare(String(b.scheduled_at))).filter((x,i,arr)=>x.status!=='scheduled'||arr.filter(y=>y.status==='scheduled').indexOf(x)<3).map(x=>({id:Number(x.lg_game_id),away:x.away_lg_team_id,home:x.home_lg_team_id,date:nightKey(x.game_night_date),_et:etClock(x.scheduled_at)+' ET'})):null;
+    const games=(liveG||data.games.filter(g=>g.away===t.id||g.home===t.id)).map(g=>{const x=live.games.get(g.id),opp=team(g.away===t.id?g.home:g.away),home=g.home===t.id;
       let res='—';if(x&&x.is_verified){const f=home?x.home_score:x.away_score,a=home?x.away_score:x.home_score;res=(f>a?'W ':'L ')+f+'–'+a;}else if(x&&x.status==='pending_verification')res='Verifying';
-      return '<tr><td>'+esc(g.date)+' '+shortTime(g.time)+'</td><td>'+(home?'vs ':'@ ')+esc(opp.name)+'</td><td class="num">'+res+'</td><td><a href="'+gameUrl(g.id)+'" target="_blank" rel="noopener noreferrer">LG ↗</a></td></tr>';}).join('');
+      return '<tr><td>'+esc(g.date)+' '+(g._et?esc(g._et):shortTime(g.time))+'</td><td>'+(home?'vs ':'@ ')+esc(opp.name)+'</td><td class="num">'+res+'</td><td><a href="'+gameUrl(g.id)+'" target="_blank" rel="noopener noreferrer">LG ↗</a></td></tr>';}).join('');
     const tot=new Map();live.lines.filter(l=>l.lg_team_id===t.id&&l.player_kind==='skater').forEach(l=>{const p=tot.get(l.lg_user_id)||{id:l.lg_user_id,n:l.gamertag,gp:0,g:0,a:0,p:0};p.gp++;p.g+=l.goals;p.a+=l.assists;p.p+=l.points;tot.set(l.lg_user_id,p);});
-    const sk=[...tot.values()].sort((a,b)=>b.p-a.p||b.g-a.g).map(p=>'<tr><td>'+playerLink(p.id,p.n)+'</td><td class="num">'+p.gp+'</td><td class="num">'+p.g+'</td><td class="num">'+p.a+'</td><td class="num">'+p.p+'</td></tr>').join('')||'<tr><td colspan="5">No verified games yet.</td></tr>';
+    const skl=[...tot.values()].sort((a,b)=>b.p-a.p||b.g-a.g);
+    const sk=skl.map((p,i)=>playerRow({name:playerLink(p.id,p.n),nation:t.name,star:i===0&&p.p>0,tag:i===0&&p.p>0?'TEAM LEADER':'',stats:[[p.gp,'GP'],[p.g,'G'],[p.a,'A'],[p.p,'PTS']]})).join('')||'<p class="th-caption">No verified games yet.</p>';
     const roster=data.players.filter(p=>p.t===t.id).map(p=>esc(p.n)).join(' · ');
     openDetail('<header class="th-detail-head th-nation-hero'+natCls(t.name)+'"'+natBg(t.name,'hero')+'>'+teamMark(t,72)+'<div><p class="eyebrow">GROUP '+esc(t.group)+' · NATION PAGE</p><h3>'+esc(t.name).toUpperCase()+'</h3><p>'+(st?st.w+'–'+st.l+(st.otw+st.otl?' ('+st.otw+' OTW, '+st.otl+' OTL)':'')+' · '+(st.pts??'—')+' PTS · GF '+st.gf+' / GA '+st.ga:'No verified results yet')+'</p></div></header>'+
-      '<h4>RESULTS & SCHEDULE</h4><div class="th-table-scroll"><table class="th-table"><tbody>'+games+'</tbody></table></div><h4>SKATERS · VERIFIED GAMES</h4><div class="th-table-scroll"><table class="th-table"><thead><tr><th>PLAYER</th><th>GP</th><th>G</th><th>A</th><th>P</th></tr></thead><tbody>'+sk+'</tbody></table></div>'+
+      '<h4>RESULTS & SCHEDULE</h4><div class="th-table-scroll"><table class="th-table"><tbody>'+games+'</tbody></table></div><h4>SKATERS · VERIFIED GAMES</h4><div class="lg3p-list">'+sk+'</div>'+
       '<h4>ROSTER (OCT 21 SNAPSHOT)</h4><p class="th-caption">'+roster+'</p><p class="th-caption"><a href="'+teamUrl(t.id)+'" target="_blank" rel="noopener noreferrer">Official LG team page ↗</a></p>');
   }
   function playerCard(uid){
@@ -202,12 +204,20 @@
     openDetail('<header class="th-detail-head"><div><p class="eyebrow">PLAYER CARD · '+esc(nations)+'</p><h3>'+esc(name)+'</h3><p>'+(sk.length?sk.length+' GP · '+sum(sk,'goals')+'G '+sum(sk,'assists')+'A '+sum(sk,'points')+'P':'')+(gl.length?(sk.length?' · ':'')+gl.length+' GP in goal · '+sum(gl,'saves')+' SV / '+sum(gl,'shots_against')+' SA':'')+(rp&&rp.v?' · Bid '+salary(rp.v):'')+'</p></div></header>'+
       '<h4>GAME LOG · VERIFIED</h4><div class="th-table-scroll"><table class="th-table"><tbody>'+rows+'</tbody></table></div><p class="th-caption"><a href="'+userUrl(uid)+'" target="_blank" rel="noopener noreferrer">Official LG profile ↗</a> · Lines are credited to the nation shown in each game\'s LG box score.</p>');
   }
+  function statFig(v,l){return '<span class="lg3p-fig"><b>'+v+'</b><small>'+l+'</small></span>';}
+  function playerRow(o){const A=window.LG3S_NATION_ART,n=o.nation||'',bg=A&&A.has(n)?A.css(n,'card'):'none';
+    return '<div class="lg3p-row'+(o.star?' is-star':'')+'" style="--pa:'+esc(bg)+';--pc:'+(A?A.color(n):'#9aa7b3')+';--pc2:'+(A?A.color(n,1):'#c9d3dc')+'"><span class="lg3p-id">'+o.name+(o.sub?'<small>'+esc(o.sub)+'</small>':'')+'</span><span class="lg3p-stats">'+o.stats.map(x=>statFig(x[0],x[1])).join('')+'</span>'+(o.tag?'<em class="lg3p-tag">'+esc(o.tag)+'</em>':'')+'</div>';}
   function gameRow(id){const x=live.games.get(Number(id));if(x)return x;const g=(data.games||[]).find(z=>Number(z.id)===Number(id));return g?{lg_game_id:g.id,away_lg_team_id:g.away,home_lg_team_id:g.home,_static:g}:null;}
   function heroFor(row){const a=teamOr(row.away_lg_team_id,row.away_nation),h=teamOr(row.home_lg_team_id,row.home_nation);const when=row._static?(row._static.date+' · '+shortTime(row._static.time)+' ET'):(nightTitle(nightKey(row.game_night_date||row.scheduled_at))+' · '+etClock(row.scheduled_at)+' ET');return matchupHtml(row,a,h,'hero','GAME '+String(row.lg_game_id).slice(-3)+' · '+when);}
   function gamePage(id){
     const row=gameRow(id);if(!row)return;
     const ls=live.lines.filter(l=>Number(l.lg_game_id)===Number(id));
-    const tbl=tid=>{const t=team(tid);const r=ls.filter(l=>l.lg_team_id===tid).map(l=>'<tr><td>'+playerLink(l.lg_user_id,l.gamertag)+'</td><td>'+(l.player_kind==='goalie'?'G':esc(l.position||''))+'</td><td class="num">'+(l.player_kind==='goalie'?l.saves+' SV / '+l.shots_against+' SA':l.goals+'G '+l.assists+'A '+l.points+'P')+'</td></tr>').join('');return r?'<h4>'+esc(t?t.name:'').toUpperCase()+' · VERIFIED BOX SCORE</h4><div class="th-table-scroll"><table class="th-table"><tbody>'+r+'</tbody></table></div>':'';};
+    const topP=Math.max(0,...ls.filter(l=>l.player_kind==='skater').map(l=>l.points));
+    const tbl=tid=>{const t=team(tid);const r=ls.filter(l=>l.lg_team_id===tid).map(l=>{const g=l.player_kind==='goalie';
+      const tag=g?(l.shots_against>0&&l.saves===l.shots_against?'SHUTOUT':''):(l.goals>=3?'HAT TRICK':(topP>0&&l.points===topP?'GAME HIGH':''));
+      const svp=l.shots_against>0?(l.saves/l.shots_against).toFixed(3).replace(/^0/,''):'—';
+      return playerRow({name:playerLink(l.lg_user_id,l.gamertag),sub:g?'GOALIE':(l.position||''),nation:t?t.name:'',star:!!tag,tag,stats:g?[[l.saves,'SV'],[l.shots_against,'SA'],[svp,'SV%']]:[[l.goals,'G'],[l.assists,'A'],[l.points,'PTS']]});}).join('');
+      return r?'<h4>'+esc(t?t.name:'').toUpperCase()+' · VERIFIED BOX SCORE</h4><div class="lg3p-list">'+r+'</div>':'';};
     const status=row.is_verified?'Official LG data · verified '+esc(etTime(row.verified_at)):(row.status==='pending_verification'?'Final posted · verifying':'Result pending');
     const dr=drafts.get(Number(id));const drHtml=dr&&!row.is_verified?'<h4>MATCHUP PREVIEW · DRAFT · PENDING APPROVAL</h4><div class="th-recap-body">'+esc(dr.body_md).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(^|\n)_(.+?)_(?=\n|$)/g,'$1<i>$2</i>').replace(/\n/g,'<br>')+'</div>':'';
     openDetail(heroFor(row)+'<p class="th-caption">'+status+'</p>'+drHtml+(row.is_verified?tbl(row.away_lg_team_id)+tbl(row.home_lg_team_id):'')+'<p class="th-caption"><a href="'+gameUrl(id)+'" target="_blank" rel="noopener noreferrer">Official LG game centre ↗</a>'+(live.recaps.get(Number(id))?' · <a href="#recap/'+Number(id)+'">Approved recap</a>':'')+'</p>');
