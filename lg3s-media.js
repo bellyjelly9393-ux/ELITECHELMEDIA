@@ -111,9 +111,9 @@
     const recap=row.is_verified&&live.recaps.get(Number(row.lg_game_id));
     const recapLink='<a class="th-recap-link" href="#game/'+Number(row.lg_game_id)+'">'+(preview&&dr?'Read preview':'Match detail')+'</a>'+(recap?'<a class="th-recap-link" href="#recap/'+Number(row.lg_game_id)+'">Approved recap</a>':'');
     const scoreText=row.is_verified&&row.away_score!=null&&row.home_score!=null?(' final '+Number(row.away_score)+' to '+Number(row.home_score)):'';
-    return '<div class="th-game-slot"><a class="'+classes+'" href="'+gameUrl(row.lg_game_id)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(a.name)+' at '+esc(h.name)+', '+esc(clock)+' Eastern'+scoreText+'">' +
+    return '<div class="th-game-slot"><a class="'+classes+'" href="#game/'+Number(row.lg_game_id)+'" aria-label="'+esc(a.name)+' at '+esc(h.name)+', '+esc(clock)+' Eastern'+scoreText+'">' +
       '<img class="th-game-wm" src="'+icon(h.id)+'" loading="lazy" alt="" aria-hidden="true">' +
-      '<div class="th-game-top"><span class="th-game-day">'+esc(tag)+'</span><strong>GAME '+esc(String(row.lg_game_id).slice(-3))+'</strong><span class="th-action">LG GAME CENTRE ↗</span></div>' +
+      '<div class="th-game-top"><span class="th-game-day">'+esc(tag)+'</span><strong>GAME '+esc(String(row.lg_game_id).slice(-3))+'</strong><span class="th-action">'+(recap?'RECAP ›':dr&&!row.is_verified?'PREVIEW ›':'GAME PAGE ›')+'</span></div>' +
       matchupHtml(row,a,h,'card',clock+' ET') +
       preview+scoreBlock(row,a,h)+verdict+'</a>'+recapLink+'</div>';
   }
@@ -219,7 +219,7 @@
     const name=(ls[ls.length-1]||{}).gamertag||(rp&&rp.n)||('LG user '+uid);
     const sk=ls.filter(l=>l.player_kind==='skater'),gl=ls.filter(l=>l.player_kind==='goalie');
     const sum=(a,k)=>a.reduce((n,x)=>n+(Number(x[k])||0),0);
-    const rows=ls.map(l=>{const t=team(l.lg_team_id),g=live.games.get(l.lg_game_id);return '<tr><td>'+esc(String(l.game_night_date).slice(5))+' · '+(t?esc(t.name):'')+'<br><b>'+(l.player_kind==='goalie'?'G · '+l.saves+' SV / '+l.shots_against+' SA':esc(l.position||'')+' · '+l.goals+'G '+l.assists+'A '+l.points+'P')+'</b></td><td class="num"><a href="'+gameUrl(l.lg_game_id)+'" target="_blank" rel="noopener noreferrer">'+(g?Number(g.away_score)+'–'+Number(g.home_score):'LG')+' ↗</a></td></tr>';}).join('')||'<tr><td colspan="2">No verified games yet.</td></tr>';
+    const rows=ls.map(l=>{const t=team(l.lg_team_id),g=live.games.get(l.lg_game_id);return '<tr><td>'+esc(String(l.game_night_date).slice(5))+' · '+(t?esc(t.name):'')+'<br><b>'+(l.player_kind==='goalie'?'G · '+l.saves+' SV / '+l.shots_against+' SA':esc(l.position||'')+' · '+l.goals+'G '+l.assists+'A '+l.points+'P')+'</b></td><td class="num"><a href="#game/'+Number(l.lg_game_id)+'">'+(g?Number(g.away_score)+'–'+Number(g.home_score):'LG')+' ↗</a></td></tr>';}).join('')||'<tr><td colspan="2">No verified games yet.</td></tr>';
     const nations=[...new Set(ls.map(l=>l.nation))].join(' · ')||(rp&&team(rp.t)?team(rp.t).name:'');
     openDetail('<header class="th-detail-head"><div><p class="eyebrow">PLAYER CARD · '+esc(nations)+'</p><h3>'+esc(name)+'</h3><p>'+(sk.length?sk.length+' GP · '+sum(sk,'goals')+'G '+sum(sk,'assists')+'A '+sum(sk,'points')+'P':'')+(gl.length?(sk.length?' · ':'')+gl.length+' GP in goal · '+sum(gl,'saves')+' SV / '+sum(gl,'shots_against')+' SA':'')+(rp&&rp.v?' · Bid '+salary(rp.v):'')+'</p></div></header>'+
       '<h4>GAME LOG · VERIFIED</h4><div class="th-table-scroll"><table class="th-table"><tbody>'+rows+'</tbody></table></div><p class="th-caption"><a href="'+userUrl(uid)+'" target="_blank" rel="noopener noreferrer">Official LG profile ↗</a> · Lines are credited to the nation shown in each game\'s LG box score.</p>');
@@ -240,7 +240,11 @@
       return r?'<h4>'+esc(t?t.name:'').toUpperCase()+' · VERIFIED BOX SCORE</h4><div class="lg3p-list">'+r+'</div>':'';};
     const status=row.is_verified?'Official LG data · verified '+esc(etTime(row.verified_at)):(row.status==='pending_verification'?'Final posted · verifying':'Result pending');
     const dr=drafts.get(Number(id));const drHtml=dr&&!row.is_verified?'<h4>MATCHUP PREVIEW · ECM</h4><div class="th-recap-body">'+esc(dr.body_md).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(^|\n)_(.+?)_(?=\n|$)/g,'$1<i>$2</i>').split(/\n{2,}/).map(x=>'<p>'+x+'</p>').join('')+'</div>':'';
-    openDetail(heroFor(row)+'<p class="th-caption">'+status+'</p>'+drHtml+(row.is_verified?tbl(row.away_lg_team_id)+tbl(row.home_lg_team_id):'')+'<p class="th-caption"><a href="'+gameUrl(id)+'" target="_blank" rel="noopener noreferrer">Official LG game centre ↗</a>'+(live.recaps.get(Number(id))?' · <a href="#recap/'+Number(id)+'">Approved recap</a>':'')+'</p>');
+    const mdP=t=>esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(^|\n)_(.+?)_(?=\n|$)/g,'$1<i>$2</i>').split(/\n{2,}/).map(x=>'<p>'+x.replace(/\n/g,'<br>')+'</p>').join('');
+    const rc=row.is_verified?live.recaps.get(Number(id)):null;
+    const ff=row.is_verified&&row.is_forfeit?'<h4>FORFEIT</h4><div class="th-recap-body"><p><b>Forfeit: illegal player.</b>'+({921552:1,921562:1}[Number(id)]?' <em class="lg3m-fine">the ctbli special</em>':'')+'</p><p>LeagueGaming records this game as a '+Number(row.away_score)+'-'+Number(row.home_score)+' forfeit result, and the standings count it that way.</p></div>':'';
+    const rcHtml=rc?'<h4>APPROVED RECAP · ECM</h4><div class="th-recap-body"><p><b>'+esc(rc.title)+'</b></p>'+mdP(rc.body_md)+'</div>':(row.is_verified&&!ff?'<p class="th-caption">ECM recap is in review.</p>':'');
+    openDetail(heroFor(row)+'<p class="th-caption">'+status+'</p>'+ff+rcHtml+drHtml+(row.is_verified?tbl(row.away_lg_team_id)+tbl(row.home_lg_team_id):'')+'<p class="th-caption th-source"><a href="'+gameUrl(id)+'" target="_blank" rel="noopener noreferrer">Source: LeagueGaming ↗</a></p>');
   }
   function recapPage(id){
     const recap=live.recaps.get(Number(id)), game=live.games.get(Number(id));
@@ -325,7 +329,7 @@
       '<h4>PER-GAME AVERAGES</h4><div class="lb-avg">'+avg.map(x=>statFig(x[0],x[1])).join('')+'</div>'+
       '<h4>GAME LOG · VERIFIED</h4><div class="lg3p-list">'+log+'</div><p class="th-caption"><a href="'+userUrl(uid)+'" target="_blank" rel="noopener noreferrer">Official LG profile ↗</a> · Lines are credited to the nation shown in each game\'s LG box score.</p>');
   }
-  function route(){const m=/^#(nation|player|recap|game|rankings)\/(\d+)$/.exec(location.hash);if(!m)return;const id=Number(m[2]);if(m[1]==='game')gamePage(id);else if(m[1]==='nation')nationPage(id);else if(m[1]==='player')playerPage(id);else if(m[1]==='rankings')rankingsPage(id);else recapPage(id);}
+  function route(){const m=/^#(nation|player|recap|game|rankings)\/(\d+)$/.exec(location.hash);if(!m)return;const id=Number(m[2]);if(m[1]==='game')gamePage(id);else if(m[1]==='nation')nationPage(id);else if(m[1]==='player')playerPage(id);else if(m[1]==='rankings')rankingsPage(id);else gamePage(id);}
   function renderPlayers(){
     const search=$('thPlayerSearch').value.trim().toLocaleLowerCase(),tid=$('thPlayerTeam').value,status=$('thPlayerStatus').value,pos=$('thPlayerPosition').value,sort=$('thPlayerSort').value;
     let players=data.players.filter(p=>(status==='all'||p.s===status)&&(tid==='all'||String(p.t)===tid)&&(pos==='all'||p.p===pos)&&(!search||p.n.toLocaleLowerCase().includes(search)||team(p.t).name.toLocaleLowerCase().includes(search)));
@@ -349,7 +353,7 @@
     chooseWeek();
     renderNations();renderGames();renderStandings();renderLeaders();renderLB();lbWire();
     window.addEventListener('hashchange',route);route();wireRankings();
-    const dc=$('thDetailClose');if(dc)dc.addEventListener('click',()=>{$('thDetail').close();history.replaceState(null,'',location.pathname+location.search);});
+    const dc=$('thDetailClose');if(dc)dc.addEventListener('click',()=>$('thDetail').close());const dd=$('thDetail');if(dd)dd.addEventListener('close',()=>{if(location.hash)history.replaceState(null,'',location.pathname+location.search);});
     $('thPlayerTeam').innerHTML='<option value="all">All twelve nations</option>'+data.teams.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(t=>'<option value="'+t.id+'">'+esc(t.name)+'</option>').join('');
     renderPlayers();
     const nightTabs=$('thNightTabs'); if(nightTabs) nightTabs.addEventListener('click',e=>{const w=e.target.closest('button[data-week]'); if(w){weekShift=Number(w.dataset.week);chooseWeek();renderGames();return;} const b=e.target.closest('button[data-date]'); if(!b) return; chosenDay=b.dataset.date; renderGames();});
