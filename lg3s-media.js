@@ -151,14 +151,15 @@
     }
     if(live.ok&&live.standings.length===12){
       const rows=live.standings.filter(r=>{const t=team(r.lg_team_id);return t&&t.group===group;}).sort((a,b)=>(b.pts??-1)-(a.pts??-1)||b.gd-a.gd||b.gf-a.gf||a.nation.localeCompare(b.nation));
-      return '<div class="th-standing-group"><header class="th-standing-title"><strong>GROUP '+group+'</strong><span>OFFICIAL LG RESULTS · VERIFIED</span></header><div class="th-table-scroll"><table class="th-table"><thead><tr><th>TEAM</th><th>GP</th><th>W</th><th>L</th><th>OTW</th><th>OTL</th><th>PTS</th><th>GF</th><th>GA</th><th>GD</th></tr></thead><tbody>'+rows.map(r=>{const t=team(r.lg_team_id);
-        return '<tr><td>'+nationLink(t)+'</td>'+['gp','w','l','otw','otl','pts','gf','ga','gd'].map(k=>'<td class="num">'+(r[k]==null?'—':Number(r[k]))+'</td>').join('')+'</tr>';}).join('')+'</tbody></table></div></div>';
+      const v=x=>x==null?'—':Number(x);
+      return '<div class="lg3g lg3g-'+group.toLowerCase()+'"><header class="lg3g-head"><h3>GROUP <em>'+group+'</em></h3></header><table class="lg3g-t"><caption class="sr-only">Group '+group+' verified standings</caption><thead><tr><th scope="col">#</th><th scope="col" class="lg3g-tm">TEAM</th><th scope="col">GP</th><th scope="col">W</th><th scope="col">L</th><th scope="col">OTW</th><th scope="col">OTL</th><th scope="col">PTS</th></tr></thead><tbody>'+rows.map((r,i)=>{const t=team(r.lg_team_id);
+        return '<tr><td><span class="lg3g-rk lg3g-rk'+(i+1)+'">'+(i+1)+'</span></td><td class="lg3g-tm"><a href="#nation/'+Number(t.id)+'">'+teamMark(t,30)+'<span>'+esc(t.name)+'</span></a></td>'+['gp','w','l','otw','otl'].map(k=>'<td>'+v(r[k])+'</td>').join('')+'<td class="lg3g-pts">'+v(r.pts)+'</td></tr>';}).join('')+'</tbody></table></div>';
     }
     return '<div class="th-standing-group"><header class="th-standing-title"><strong>GROUP '+group+'</strong><span>OFFICIAL PRESEASON STANDINGS</span></header><div class="th-table-scroll"><table class="th-table"><thead><tr><th>TEAM</th><th>GP</th><th>W</th><th>L</th><th>OTW</th><th>OTL</th><th>PTS</th><th>GF</th><th>GA</th><th>GD</th></tr></thead><tbody>'+teams.map(t=>
     '<tr><td><a class="th-team-link" href="'+teamUrl(t.id)+'" target="_blank" rel="noopener noreferrer">'+teamMark(t,32)+esc(t.name)+'</a></td>'+['gp','w','l','otw','otl','pts','gf','ga','gd'].map(k=>'<td class="num">'+Number(t[k])+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></div>';
   }
   function renderStandings(){
-    $('thStandings').innerHTML=standingsTable('A')+standingsTable('B');
+    $('thStandings').innerHTML=standingsTable('A')+standingsTable('B');$('thStandings').classList.toggle('lg3g-on',boardMode!=='forecast'&&live.ok&&live.standings.length===12);
     $('thStandingsNote').textContent=boardMode==='forecast'?
     'ECM forecast: straight-up predictions for the 18 Wednesday games (three per nation). This is not an official record, a betting market, or a simulation of goal scores. Teams tied on projected wins are not ranked by a fabricated tiebreaker.':
     (live.ok?standingsNote():'Official LeagueGaming Season 1 standings, captured October 21, 2026 before posted opening results. Live results are temporarily unavailable; this snapshot does not update automatically.');
