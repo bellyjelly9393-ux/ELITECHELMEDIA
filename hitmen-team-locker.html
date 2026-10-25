@@ -152,11 +152,11 @@
   function sync(){
     const state=window.VVHLBackend?.state||{};
     const privileged=['admin','commissioner'].includes(String(state.profile?.role||'').toLowerCase());
-    const teamManager=(state.memberships||[]).some(m=>String(m.team_id)==='412'&&m.active!==false&&['owner','gm','agm'].includes(String(m.role||'').toLowerCase()));
+    const teamManager=(state.memberships||[]).some(m=>String(m.team_id)==='b0bcbdda-da9d-419d-8f61-b34937966d49'&&m.active!==false&&['owner','gm','agm'].includes(String(m.role||'').toLowerCase()));
     entry.hidden=!(state.user&&(privileged||teamManager));
   }
-  window.addEventListener('vvhl:auth-changed',sync);
-  document.addEventListener('vvhl:auth-changed',sync);
+  window.addEventListener('vvhl-auth-change',sync);
+  document.addEventListener('vvhl-auth-change',sync);
   document.addEventListener('DOMContentLoaded',sync);
   sync();
 })();
