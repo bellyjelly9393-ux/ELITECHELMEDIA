@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<title>Transactions | LGCHL &amp; LG3S | Elitechel Media</title>
+<meta name="description" content="Elitechel Media transactions wire: verified LGCHL and LG3S trades and roster moves.">
+<link rel="canonical" href="https://wildmanhockey-elitechelmedia.app/transactions.html">
+<link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
+<link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="wildman-home.css?v=20261019">
+<link rel="stylesheet" href="transactions.css?v=20261025-tx1">
+<script src="transactions.js?v=20261025-tx1" defer></script>
+<link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script></head>
+<body class="tx">
+<header class="top band">
+  <div class="top-in">
+    <a class="brand" href="index.html" aria-label="Elitechel Media home">
+      <img class="crest" src="assets/brand/ecm-crest.webp" width="118" height="120" alt="">
+      <div class="brand-txt"><b>Elitechel</b><span>Media</span></div>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main"><a href="index.html">Home</a>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-1">Live <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-1" hidden><a href="esports-hub.html">Live Hub</a><a href="game-center.html?channel=hitmen">Hitmen Live</a><a href="multiview.html">Multiview</a></div></div>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-2">Leaderboards <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-2" hidden><a href="league-leaderboards.html?league=lgchl">LGCHL · Top 10</a><a href="league-leaderboards.html?league=lg3s">LG3s · Top 10</a><a href="league-leaderboard.html?league=lgchl&category=save_pct">LGCHL goalies</a><a href="league-leaderboard.html?league=lg3s&category=save_pct">LG3s goalies</a></div></div>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-3">Media <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-3" hidden><a href="hitmen-media.html">Hitmen Desk</a><a href="lgchl-media.html">LGCHL Desk</a><a href="lg3s-media.html">LG3s Desk</a></div></div>
+<a href="lgchl-media.html#lgRadioSec">Hitman Radio</a>
+<a href="interest.html?program=hut">Tournaments</a></nav>
+    <a class="icon-btn search-btn" href="#tx" aria-label="Jump to transactions">⌕</a>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </div>
+</header>
+<main class="tx-main" id="tx">
+ <section class="tx-hero band"><p class="tx-eyebrow">ELITECHEL MEDIA · THE WIRE</p><h1>TRANSACTIONS</h1><p class="tx-sub">Completed trades and roster moves, newest first. Only verified LeagueGaming data.</p></section>
+ <div class="tx-tabs" role="tablist" aria-label="League">
+  <button role="tab" id="tab-lgchl" aria-controls="pane" aria-selected="true" data-league="lgchl">LGCHL <small>S55</small></button>
+  <button role="tab" id="tab-lg3s" aria-controls="pane" aria-selected="false" data-league="lg3s">LG3S <small>S1</small></button>
+ </div>
+ <form class="tx-filters" id="txFilters" onsubmit="return false">
+  <label>Team<select id="fTeam"><option value="">All teams</option></select></label>
+  <label>From<input type="date" id="fFrom"></label>
+  <label>To<input type="date" id="fTo"></label>
+ </form>
+ <p class="tx-count" id="txCount" aria-live="polite"></p>
+ <section id="pane" role="tabpanel" aria-labelledby="tab-lgchl" class="tx-list"><p class="tx-wait">Loading…</p></section>
+</main>
+</body>
+</html>
