@@ -23,13 +23,13 @@
 <link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261021-lg3">
 <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
-<link rel="stylesheet" href="lg3s-media.css?v=20261024-lb1">
-<link rel="stylesheet" href="lg3s-matchup.css?v=20261024-lb1">
-<link rel="stylesheet" href="lg3s-broadcast-preview.css?v=20261024-lb1">
-<script src="lg3s-nation-maps.js?v=20261024-bg1" defer></script>
-<script src="lg3s-nation-art.js?v=20261024-lb1" defer></script>
-<script src="lg3s-media.js?v=20261024-lb1" defer></script>
-<script src="lg3s-broadcast-preview.js?v=20261024-lb1" defer></script>
+<link rel="stylesheet" href="lg3s-media.css?v=20261024-np2">
+<link rel="stylesheet" href="lg3s-matchup.css?v=20261024-np2">
+<link rel="stylesheet" href="lg3s-broadcast-preview.css?v=20261024-np2">
+<script src="lg3s-nation-maps.js?v=20261024-np2" defer></script>
+<script src="lg3s-nation-art.js?v=20261024-np2" defer></script>
+<script src="lg3s-media.js?v=20261024-np2" defer></script>
+<script src="lg3s-broadcast-preview.js?v=20261024-np2" defer></script>
 </head>
 <body class="lg3s">
 <header class="top band">
@@ -60,7 +60,7 @@
   <a class="lg3s-desk" href="lg3s-media.html" aria-current="page"><img src="assets/lg3s/art/lg3s-crest-64.webp" width="32" height="32" alt=""><span>LG3s Media</span></a>
 </div></div></nav>
 <nav class="sub-bar band th-sub" aria-label="LG3s Media sections"><div class="sub-in">
- <a href="#opening" aria-current="page">Season 1</a><a href="#scoreboard">Scores</a><a href="#upcoming">Upcoming</a><a href="#power">Rankings</a><a href="#leaders">Leaders</a><a href="#spotlight">Spotlight</a><a href="#keymatchups">Matchups</a><a href="#radio">Hitmen Radio</a><a href="#schedule">Full schedule</a><a href="#standings">Standings</a><a href="#leaderboards">Leaderboards</a><a href="#rosters">Player board</a><a href="#bidding">Bidding</a>
+ <a href="#opening" aria-current="page">Season 1</a><a href="#scoreboard">Scores</a><a href="#upcoming">Upcoming</a><a href="#threes">Threes Bot</a><a href="#power">Rankings</a><a href="#leaders">Leaders</a><a href="#spotlight">Spotlight</a><a href="#keymatchups">Matchups</a><a href="#radio">Hitmen Radio</a><a href="#schedule">Full schedule</a><a href="#standings">Standings</a><a href="#leaderboards">Leaderboards</a><a href="#rosters">Player board</a>
 </div></nav>
 <main id="opening" class="th-page">
 <figure class="th-banner" aria-label="Elitechel Media LG3s international hockey banner">
@@ -120,6 +120,8 @@
 </article>
 </div>
 </div></section>
+<section class="th-section band lg3t-sec" id="threes" aria-label="Threes Bot segments"><div class="th-wrap"><header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">THREES BOT · EDITOR-APPROVED ONLY</p><h2 class="sec-title">THE <em>THREES</em> DESK</h2></div><p class="th-section-intro">Segments go live here after an editor approves them. Drafts are never shown.</p></header><div class="lg3t-grid"><article class="lg3t-card" data-feature="daily_three"><span class="lg3t-n">01</span><h3>DAILY THREE</h3><p>Three things that mattered from last night’s verified finals.</p><span class="lg3t-soon">COMING SOON</span></article><article class="lg3t-card" data-feature="trio_power_rankings"><span class="lg3t-n">02</span><h3>TRIO POWER RANKINGS</h3><p>Weekly ranking of the best three-player units.</p><span class="lg3t-soon">COMING SOON</span></article><article class="lg3t-card" data-feature="duo_index"><span class="lg3t-n">03</span><h3>DUO INDEX</h3><p>Pairs that drive results, from verified box scores.</p><span class="lg3t-soon">COMING SOON</span></article><article class="lg3t-card" data-feature="roster_wire"><span class="lg3t-n">04</span><h3>ROSTER WIRE</h3><p>Roster moves and lineup notes.</p><span class="lg3t-soon">COMING SOON</span></article><article class="lg3t-card" data-feature="pick_your_3"><span class="lg3t-n">05</span><h3>PICK YOUR 3</h3><p>Pick three players for the night and see how they scored.</p><span class="lg3t-soon">COMING SOON</span></article></div></div></section>
+<section class="th-section band lb-sec" id="leaderboards"><div class="th-wrap"><header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · VERIFIED BOX SCORES ONLY</p><h2 class="sec-title">LEADER<em>BOARDS.</em></h2></div><p class="th-section-caption">Top 10 in every category we can verify. Tap any player for their full page. <a href="#rosters">Roster &amp; bid index ↓</a></p></header><div class="lb-chips" id="lbChips" role="toolbar" aria-label="Leaderboard category"></div><p class="lb-note" id="lbNote">Loading verified box scores…</p><div id="lbBody"></div></div></section>
 <section class="th-hero band">
   <div class="th-wrap th-hero-grid">
     <div class="th-copy">
@@ -164,7 +166,7 @@
 </div></section>
 <section class="th-section th-standings-section band" id="verified-leaders"><div class="th-wrap"> <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · OFFICIAL LG DATA · VERIFIED GAMES ONLY</p><h2 class="sec-title">THE <em>LEADERS.</em></h2></div><p class="th-section-caption">Goalies are credited to the nation they played for in each game, never by roster. Tap a name for the player card or a nation for its page.</p></header> <div class="th-standings-grids" id="thLeaders"><p class="th-caption">Loading verified leaderboards…</p></div> </div></section>
 <dialog class="th-detail" id="thDetail" aria-label="LG3s detail"><button type="button" class="th-detail-close" id="thDetailClose" aria-label="Close">×</button><div id="thDetailBody"></div></dialog>
-<section class="th-section band lb-sec" id="leaderboards"><div class="th-wrap"><header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · VERIFIED BOX SCORES ONLY</p><h2 class="sec-title">LEADER<em>BOARDS.</em></h2></div><p class="th-section-caption">Top 10 in every category we can verify. Tap any player for their full page. <a href="#rosters">Roster &amp; bid index ↓</a></p></header><div class="lb-chips" id="lbChips" role="toolbar" aria-label="Leaderboard category"></div><p class="lb-note" id="lbNote">Loading verified box scores…</p><div id="lbBody"></div></div></section>
+
 <section class="th-section th-roster-section band" id="rosters"><div class="th-wrap">
 <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · VERIFIED LG ROSTERS</p><h2 class="sec-title">THE PLAYER <em>INDEX.</em></h2></div><p class="th-section-caption">Browse all 12 national teams. Bid-value ranking is a preseason market board, not a points or performance leaderboard.</p></header>
 <div class="th-roster-stats" id="thRosterStats"><span>132 ACTIVE ROSTER SPOTS</span><span>113 TRAINING CAMP PLAYERS</span><span>12 NATIONAL TEAMS</span></div>
@@ -179,7 +181,7 @@
 <div class="th-table-footer"><p class="th-caption" id="thPlayerCount">Verified snapshot · October 21, 2026</p><button type="button" id="thPlayersMore" class="th-more-btn">SHOW MORE PLAYERS ↓</button></div>
 <p class="th-caption">The league's Season 1 scoring table has no published entries in this snapshot, so we aren't inventing points, goals, saves or win records. <a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_memberstats&leagueid=154&seasonid=1" target="_blank" rel="noopener noreferrer">Official player stats ↗</a></p>
 </div></section>
-<section class="th-section th-spotlight band" id="watch"><div class="th-wrap">
+<section hidden data-lg3s-legacy class="th-section th-spotlight band" id="watch"><div class="th-wrap">
 <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">ELITECHEL MEDIA · PRESEASON SCOUTING BOARD</p><h2 class="sec-title">WHO'S BUILT TO <em>CONTEND?</em></h2></div><p class="th-section-caption">Editorial watchlist, not an objective ranking. The bidding room reveals priorities, not chemistry.</p></header>
 <div class="th-features">
   <article class="th-feature th-feature-lead card">
@@ -215,7 +217,7 @@
   </article>
 </div>
 </div></section>
-<section class="th-section band" id="players"><div class="th-wrap">
+<section hidden data-lg3s-legacy class="th-section band" id="players"><div class="th-wrap">
 <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">BIDDING MARKET · MOST EXPENSIVE ACQUISITIONS</p><h2 class="sec-title">NAMES TO <em>KNOW</em></h2></div><p class="th-section-caption">Price measures interest and roster investment, not verified 3v3 results.</p></header>
 <div class="th-player-grid">
  <article class="th-player"><span>01 · ITALY</span><strong>KnifeVet22</strong><b>$8.25M</b><small>Highest winning bid recorded</small></article>
@@ -224,7 +226,7 @@
  <article class="th-player"><span>04 · GERMANY</span><strong>MythicI9I</strong><b>$7.00M</b><small>Germany's highest bid</small></article>
  <article class="th-player"><span>05 · GREAT BRITAIN</span><strong>Sceebzy</strong><b>$6.75M</b><small>Centre, confirmed on official roster</small></article>
 </div></div></section>
-<section class="th-section th-bid-section band" id="bidding"><div class="th-wrap">
+<section hidden data-lg3s-legacy class="th-section th-bid-section band" id="bidding"><div class="th-wrap">
 <header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">OFFICIAL BIDDING RECAP · OCT 19, 2026</p><h2 class="sec-title">THE BID <em>BOOK</em></h2></div><p class="th-section-caption">Winning bids, total bidding activity and the two costliest roster acquisitions for every nation.</p></header>
 <div class="th-table-scroll"><table class="th-table"><caption class="sr-only">LG3s Season 1 official bidding breakdown, all 12 nations</caption><thead><tr><th scope="col">NATION</th><th scope="col">SPENT</th><th scope="col">WON</th><th scope="col">BIDS</th><th scope="col">TOP ACQUISITIONS</th></tr></thead><tbody><tr><td><a class="th-team-link" href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league_page&page=team_page&teamid=532&leagueid=154&seasonid=1" target="_blank" rel="noopener noreferrer"><img src="assets/lg3s/team532.svg" width="32" height="32" loading="lazy" alt="Germany crest"> Germany</a></td><td class="num">$22.00M</td><td class="num">9</td><td class="num">59</td><td class="th-stars">MythicI9I <span>($7M)</span>, l91l Stamkos x <span>($5M)</span></td></tr>
 <tr><td><a class="th-team-link" href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league_page&page=team_page&teamid=341&leagueid=154&seasonid=1" target="_blank" rel="noopener noreferrer"><img src="assets/lg3s/team341.svg" width="32" height="32" loading="lazy" alt="Canada crest"> Canada</a></td><td class="num">$21.75M</td><td class="num">9</td><td class="num">40</td><td class="th-stars">I Parksy x I76I <span>($8M)</span>, ProdsznK <span>($7M)</span></td></tr>

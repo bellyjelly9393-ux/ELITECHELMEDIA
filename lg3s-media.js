@@ -12,6 +12,8 @@
   const shortTime = t => ({'20:00':'8:00 PM','20:35':'8:35 PM','21:10':'9:10 PM'})[t] || esc(t);
   const teamMark = (t, size = 48) => '<img src="' + icon(t.id) + '" width="' + size + '" height="' + size + '" loading="lazy" alt="' + esc(t.name) + ' team crest">';
   const LIVE = Object.freeze({ base: 'https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/', key: 'sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP' });
+  /* Approved-recap view (migration 20261024160000) is not applied yet; flip once it exists so the page doesn't 404. */
+  const RECAPS_LIVE = false;
   const live = { ok: false, games: new Map(), standings: [], official: [], skaters: [], goalies: [], lines: [], recaps: new Map() };
   async function view(name, q) {
     const r = await fetch(LIVE.base + name + '?' + q, { headers: { apikey: LIVE.key, Authorization: 'Bearer ' + LIVE.key }, cache: 'no-store' });
@@ -24,7 +26,7 @@
     const [o, sk, gl, ln, recaps] = await Promise.all([opt('lg3s_public_official_standings', 'select=*'),
       opt('lg3s_public_skater_leaders', 'select=*&order=p.desc,g.desc&limit=250'), opt('lg3s_public_goalie_leaders', 'select=*&order=sv_pct.desc.nullslast&limit=60'),
       opt('lg3s_public_player_lines', 'select=*&order=lg_game_id&limit=5000'),
-      opt('lg3s_public_recaps', 'select=id,lg_game_id,game_night_date,title,body_md')]);
+      RECAPS_LIVE ? opt('lg3s_public_recaps', 'select=id,lg_game_id,game_night_date,title,body_md') : Promise.resolve([])]);
     g.forEach(x => live.games.set(Number(x.lg_game_id), x));
     const recapMap = new Map();
     recaps.forEach(r => { if (r.lg_game_id != null) recapMap.set(Number(r.lg_game_id), r); });
@@ -98,8 +100,7 @@
     const classes='th-game th-game-v2'+(marquee?' th-game-feature':'');
     const clock=row._static?shortTime(row._static.time):etClock(row.scheduled_at);
     const tag=snap&&snap.tag?snap.tag:clock+' ET';
-    const dr=drafts.get(Number(row.lg_game_id));
-    const preview=dr&&!row.is_verified?'<div class="th-game-foot th-draft"><span>THE MATCHUP · <b>DRAFT · PENDING APPROVAL</b></span><p>'+draftSnippet(dr.body_md)+'…</p></div>':snap&&snap.preview?'<div class="th-game-foot"><span>THE MATCHUP</span><p>'+esc(snap.preview)+'</p></div>':'';
+    const preview=snap&&snap.preview?'<div class="th-game-foot"><span>THE MATCHUP</span><p>'+esc(snap.preview)+'</p></div>':'';
     const verdict=p?'<div class="th-game-verdict"><span>ECM PICK · <b>'+esc(p.name)+'</b></span><span class="th-pick-label">EDITORIAL PREDICTION</span></div>':'';
     const recap=row.is_verified&&live.recaps.get(Number(row.lg_game_id));
     const recapLink='<a class="th-recap-link" href="#game/'+Number(row.lg_game_id)+'">Match detail</a>'+(recap?'<a class="th-recap-link" href="#recap/'+Number(row.lg_game_id)+'">Approved recap</a>':'');
@@ -179,32 +180,29 @@
       '<div class="th-standing-group"><header class="th-standing-title"><strong>GOALIES</strong><span>SAVE % · CREDITED PER GAME</span></header><div class="th-table-scroll"><table class="th-table"><thead><tr><th>#</th><th>GOALIE</th><th>PLAYED FOR</th><th>GP</th><th>SA</th><th>GA</th><th>SV</th><th>SV%</th></tr></thead><tbody>'+gl+'</tbody></table></div></div>';
   }
   function openDetail(html){const d=$('thDetail');if(!d)return;$('thDetailBody').innerHTML=html;if(!d.open)d.showModal();}
-  function nationBg(t){
-    const v=(new URLSearchParams(location.search).get('bg')||'jersey').toLowerCase(),A=window.LG3S_NATION_ART,c1=A?A.color(t.name):'#9aa7b3',c2=A?A.color(t.name,1):'#fff',slug=A?A.slug(t.name):'',crest=icon(t.id);
-    const CODE={canada:'CAN',usa:'USA',sweden:'SWE',switzerland:'SUI',germany:'GER',italy:'ITA',poland:'POL',slovakia:'SVK',latvia:'LAT',japan:'JPN',kazakhstan:'KAZ','great-britain':'GBR'};
-    const defs='<defs><linearGradient id="nbg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+c1+'"/><stop offset="1" stop-color="'+c2+'"/></linearGradient><filter id="nbgl"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
-    let svg='';
-    if(v==='map'){const d=(window.LG3S_NATION_MAPS||{})[slug];svg='<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet">'+defs+(d?'<path d="'+d+'" fill="url(#nbg1)" fill-opacity=".14" stroke="'+c2+'" stroke-width="2.2" filter="url(#nbgl)"/><path d="'+d+'" fill="none" stroke="'+c1+'" stroke-width="1" stroke-opacity=".7" transform="translate(200 150) scale(.9) translate(-200 -150)"/><path d="'+d+'" fill="none" stroke="'+c1+'" stroke-width=".8" stroke-opacity=".45" transform="translate(200 150) scale(.78) translate(-200 -150)"/>':'')+'</svg>';}
-    else if(v==='code')svg='<svg viewBox="0 0 400 300">'+defs+'<text x="200" y="205" text-anchor="middle" transform="rotate(-12 200 150)" font-family="LG3S Teko,Impact" font-weight="700" font-size="200" fill="url(#nbg1)" stroke="#fff" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="6 3">'+(CODE[slug]||'')+'</text></svg>';
-    else if(v==='rink')svg='<svg viewBox="0 0 400 300">'+defs+'<g fill="none" stroke="'+c2+'" stroke-opacity=".55" stroke-width="3" filter="url(#nbgl)"><line x1="200" y1="0" x2="200" y2="300" stroke="'+c1+'" stroke-width="8"/><line x1="60" y1="0" x2="60" y2="300" stroke-width="6"/><line x1="340" y1="0" x2="340" y2="300" stroke-width="6"/><circle cx="200" cy="150" r="95"/><circle cx="200" cy="150" r="4" fill="'+c1+'"/></g><image href="'+crest+'" x="140" y="90" width="120" height="120" opacity=".8"/></svg>';
-    else if(v==='animal'&&A)return '<div class="lg3n-bgart is-animal" aria-hidden="true" style="background-image:url(assets/lg3s/nations/'+slug+'-animal.webp),'+A.css(t.name,'hero')+'"></div>';
-    else svg='<svg viewBox="0 0 400 300">'+defs+'<path d="M140 30 L170 20 Q200 40 230 20 L260 30 L340 70 L370 140 L320 160 L300 120 L300 290 L100 290 L100 120 L80 160 L30 140 L60 70 Z" fill="url(#nbg1)" fill-opacity=".55" stroke="#fff" stroke-opacity=".35" stroke-width="2"/><rect x="100" y="215" width="200" height="16" fill="'+c2+'" fill-opacity=".7"/><rect x="100" y="238" width="200" height="8" fill="'+c1+'" fill-opacity=".7"/><path d="M60 70 L30 140 L80 160 L92 136 Z" fill="'+c2+'" fill-opacity=".5"/><path d="M340 70 L370 140 L320 160 L308 136 Z" fill="'+c2+'" fill-opacity=".5"/><path d="M170 20 Q200 40 230 20 Q200 62 170 20Z" fill="#fff" fill-opacity=".5"/><image href="'+crest+'" x="150" y="85" width="100" height="100"/></svg>';
-    return '<div class="lg3n-bgart is-'+esc(v)+'" aria-hidden="true">'+svg+'</div>';
-  }
   function nationPage(id){
     const t=team(id);if(!t)return;
     const st=live.standings.find(r=>r.lg_team_id===t.id);
     const liveG=live.ok?[...live.games.values()].filter(x=>x.away_lg_team_id===t.id||x.home_lg_team_id===t.id).sort((a,b)=>String(a.scheduled_at).localeCompare(String(b.scheduled_at))).filter((x,i,arr)=>x.status!=='scheduled'||arr.filter(y=>y.status==='scheduled').indexOf(x)<3).map(x=>({id:Number(x.lg_game_id),away:x.away_lg_team_id,home:x.home_lg_team_id,date:nightKey(x.game_night_date),_et:etClock(x.scheduled_at)+' ET'})):null;
-    const games=(liveG||data.games.filter(g=>g.away===t.id||g.home===t.id)).map(g=>{const x=live.games.get(g.id),opp=team(g.away===t.id?g.home:g.away),home=g.home===t.id;
-      let res='—';if(x&&x.is_verified){const f=home?x.home_score:x.away_score,a=home?x.away_score:x.home_score;res=(f>a?'W ':'L ')+f+'–'+a;}else if(x&&x.status==='pending_verification')res='Verifying';
-      const win=res[0]==='W',sc=res.replace(/^[WL] /,'');
-      return '<div class="lg3p-row lg3n-g'+(win?' is-star':'')+'" style="--pa:'+esc(window.LG3S_NATION_ART?LG3S_NATION_ART.css(opp.name,'card'):'none')+';--pc:'+(window.LG3S_NATION_ART?LG3S_NATION_ART.color(t.name):'#9aa7b3')+';--pc2:'+(window.LG3S_NATION_ART?LG3S_NATION_ART.color(t.name,1):'#c9d3dc')+'"><span class="lg3p-id"><span>'+(home?'VS ':'@ ')+esc(opp.name).toUpperCase()+'</span><small>'+esc(g.date)+' · '+(g._et?esc(g._et):shortTime(g.time))+'</small></span><span class="lg3p-stats">'+(/^[WL] /.test(res)?statFig(res[0],'RESULT')+statFig(sc,'SCORE'):statFig(res==='—'?'—':'…',res==='—'?'UPCOMING':'VERIFYING'))+'<a class="lg3p-fig lg3n-link" href="#game/'+Number(g.id)+'"><b>›</b><small>DETAIL</small></a></span>'+(win?'<em class="lg3p-tag">WIN</em>':'')+'</div>';}).join('');
+    const NA=window.LG3S_NATION_ART,bnr=n=>NA?NA.css(n,'banner'):'none',nc=(n,i)=>NA?NA.color(n,i):(i?'#c9d3dc':'#9aa7b3');
+    const games=(liveG||data.games.filter(g=>g.away===t.id||g.home===t.id)).map(g=>{const x=live.games.get(g.id),opp=teamOr(g.away===t.id?g.home:g.away),home=g.home===t.id;
+      let r=null,f=null,a=null,state='upcoming';if(x&&x.is_verified&&x.home_score!=null){f=home?x.home_score:x.away_score;a=home?x.away_score:x.home_score;r=f>a?'W':'L';state='final';}else if(x&&x.status==='pending_verification')state='verifying';
+      const win=r==='W',when=g._et?g._et:shortTime(g.time)+' ET';
+      const tiles=state==='final'?statFig(r,'RESULT')+statFig(Number(f)+'-'+Number(a),'SCORE'):statFig(state==='verifying'?'…':esc(when.replace(/ ET$/,'')),state==='verifying'?'VERIFYING':'UPCOMING');
+      return '<div class="lg3r'+(win?' is-win':'')+(state!=='final'?' is-up':'')+'" style="--ob:'+esc(bnr(opp.name))+';--ofb:'+esc(NA?NA.css(opp.name,'card'):'none')+';--oc:'+nc(opp.name)+';--oc2:'+nc(opp.name,1)+'">'+
+        '<span class="lg3r-id"><strong>'+(home?'VS ':'@ ')+esc(opp.name).toUpperCase()+'</strong><small><img src="'+icon(opp.id)+'" width="14" height="15" alt="">'+esc(g.date)+' · '+esc(when)+'</small></span>'+
+        '<span class="lg3r-art" aria-hidden="true"></span><span class="lg3r-tiles">'+tiles+'<a class="lg3p-fig lg3r-link" href="#game/'+Number(g.id)+'" aria-label="Game detail, '+(home?'vs ':'at ')+esc(opp.name)+'"><b>›</b><small>DETAIL</small></a></span>'+(win?'<em class="lg3r-tab">WIN</em>':'')+'</div>';}).join('')||'<p class="th-caption">No games scheduled.</p>';
     const tot=new Map();live.lines.filter(l=>l.lg_team_id===t.id&&l.player_kind==='skater').forEach(l=>{const p=tot.get(l.lg_user_id)||{id:l.lg_user_id,n:l.gamertag,gp:0,g:0,a:0,p:0};p.gp++;p.g+=l.goals;p.a+=l.assists;p.p+=l.points;tot.set(l.lg_user_id,p);});
     const skl=[...tot.values()].sort((a,b)=>b.p-a.p||b.g-a.g);
     const sk=skl.map((p,i)=>playerRow({name:playerLink(p.id,p.n),nation:t.name,star:i===0&&p.p>0,tag:i===0&&p.p>0?'TEAM LEADER':'',stats:[[p.gp,'GP'],[p.g,'G'],[p.a,'A'],[p.p,'PTS']]})).join('')||'<p class="th-caption">No verified games yet.</p>';
     const roster=data.players.filter(p=>p.t===t.id).map(p=>esc(p.n)).join(' · ');
-    openDetail('<header class="th-detail-head th-nation-hero'+natCls(t.name)+'"'+natBg(t.name,'hero')+'>'+teamMark(t,72)+'<div><p class="eyebrow">GROUP '+esc(t.group)+' · NATION PAGE</p><h3>'+esc(t.name).toUpperCase()+'</h3><p>'+(st?st.w+'–'+st.l+(st.otw+st.otl?' ('+st.otw+' OTW, '+st.otl+' OTL)':'')+' · '+(st.pts??'—')+' PTS · GF '+st.gf+' / GA '+st.ga:'No verified results yet')+'</p></div></header>'+
-      '<h4>RESULTS & SCHEDULE</h4><div class="lg3n-sched">'+nationBg(t)+'<div class="lg3p-list">'+games+'</div></div><h4>SKATERS · VERIFIED GAMES</h4><div class="lg3p-list">'+sk+'</div>'+
+    const of=live.official.find(r=>r.lg_team_id===t.id);
+    /* Record comes from verified lg3s_games (same rows listed below). PTS: computed view, else LG official only when its GP equals ours. */
+    const pts=st?(st.pts!=null?Number(st.pts):of&&Number(of.gp)===Number(st.gp)?Number(of.pts):'—'):'—';
+    const rec=st?Number(st.w+st.otw)+'-'+Number(st.l+st.otl)+'-'+pts+' PTS'+(st.otw+st.otl?' · '+Number(st.otw)+' OTW / '+Number(st.otl)+' OTL':'')+' · GF '+Number(st.gf)+' / GA '+Number(st.ga):'No verified results yet';
+    openDetail('<header class="lg3h" style="--hb:'+esc(bnr(t.name))+';--hf:'+esc(NA?NA.css(t.name,'hero'):'none')+';--c1:'+nc(t.name)+';--c2:'+nc(t.name,1)+'"><span class="lg3h-art" aria-hidden="true"></span><span class="lg3h-streak" aria-hidden="true"></span>'+
+      '<span class="lg3h-crest">'+teamMark(t,84)+'</span><div class="lg3h-txt"><p class="lg3h-eye">GROUP '+esc(t.group||'—')+' · NATION PAGE</p><h3 class="lg3h-name" data-n="'+esc(t.name).toUpperCase()+'">'+esc(t.name).toUpperCase()+'</h3><p class="lg3h-rec">'+rec+'</p></div></header>'+
+      '<div class="lg3s-bar"><i aria-hidden="true"></i>RESULTS &amp; SCHEDULE</div><div class="lg3r-list">'+games+'</div><h4>SKATERS · VERIFIED GAMES</h4><div class="lg3p-list">'+sk+'</div>'+
       '<h4>ROSTER (OCT 21 SNAPSHOT)</h4><p class="th-caption">'+roster+'</p><p class="th-caption"><a href="'+teamUrl(t.id)+'" target="_blank" rel="noopener noreferrer">Official LG team page ↗</a></p>');
   }
   function playerCard(uid){
@@ -232,7 +230,7 @@
       return playerRow({name:playerLink(l.lg_user_id,l.gamertag),sub:g?'GOALIE':(l.position||''),nation:t?t.name:'',star:!!tag,tag,stats:g?[[l.saves,'SV'],[l.shots_against,'SA'],[svp,'SV%']]:[[l.goals,'G'],[l.assists,'A'],[l.points,'PTS']]});}).join('');
       return r?'<h4>'+esc(t?t.name:'').toUpperCase()+' · VERIFIED BOX SCORE</h4><div class="lg3p-list">'+r+'</div>':'';};
     const status=row.is_verified?'Official LG data · verified '+esc(etTime(row.verified_at)):(row.status==='pending_verification'?'Final posted · verifying':'Result pending');
-    const dr=drafts.get(Number(id));const drHtml=dr&&!row.is_verified?'<h4>MATCHUP PREVIEW · DRAFT · PENDING APPROVAL</h4><div class="th-recap-body">'+esc(dr.body_md).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(^|\n)_(.+?)_(?=\n|$)/g,'$1<i>$2</i>').replace(/\n/g,'<br>')+'</div>':'';
+    const drHtml='';
     openDetail(heroFor(row)+'<p class="th-caption">'+status+'</p>'+drHtml+(row.is_verified?tbl(row.away_lg_team_id)+tbl(row.home_lg_team_id):'')+'<p class="th-caption"><a href="'+gameUrl(id)+'" target="_blank" rel="noopener noreferrer">Official LG game centre ↗</a>'+(live.recaps.get(Number(id))?' · <a href="#recap/'+Number(id)+'">Approved recap</a>':'')+'</p>');
   }
   function recapPage(id){
@@ -324,7 +322,7 @@
     if(!Array.isArray(data.teams)||data.teams.length!==12||data.games.length!==30||data.players.length<200)throw Error('Incomplete league snapshot');
     tm=new Map(data.teams.map(t=>[t.id,t]));
     try{await loadLive();}catch(e){console.warn('LG3s verified results unavailable; showing static snapshot.',e);}
-    try{const r=await fetch('lg3s-week2-preview-drafts.json?v=20261024',{cache:'no-store'});if(r.ok){const j=await r.json();(j.drafts||[]).forEach(d=>drafts.set(Number(d.lg_game_id),d));}}catch(e){}
+    if(new URLSearchParams(location.search).has('legacy'))document.querySelectorAll('[data-lg3s-legacy]').forEach(e=>e.hidden=false);
     chooseWeek();
     renderNations();renderGames();renderStandings();renderLeaders();renderLB();lbWire();
     window.addEventListener('hashchange',route);route();

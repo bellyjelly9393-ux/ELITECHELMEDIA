@@ -194,3 +194,54 @@
 @media(prefers-reduced-motion:reduce){.lg3s .lb-hero,.lg3s .lb-med{transition:none}.lg3s .lb-hero:hover,.lg3s .lb-med:hover{transform:none}}
 .lg3s .lg3n-bgart.is-animal{opacity:.55}
 .lg3s .lg3n-bgart.is-code svg{opacity:.75}
+/* Nation page v2: broadcast header banner + results rows (from Seth's Oct 24 reference). */
+.lg3s .lg3h{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;gap:18px;margin:-4px -4px 14px;padding:22px 20px;min-height:190px;background:#07090d;border:1px solid rgba(255,255,255,.1);clip-path:polygon(0 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%)}
+.lg3s .lg3h-art{position:absolute;inset:0 0 0 38%;z-index:-2;background:var(--hb) center/cover no-repeat,var(--hf) center/cover no-repeat;-webkit-mask:linear-gradient(90deg,transparent,#000 30%);mask:linear-gradient(90deg,transparent,#000 30%)}
+.lg3s .lg3h::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,rgba(6,8,12,.97) 0 36%,rgba(6,8,12,.55) 52%,transparent 70%),linear-gradient(0deg,rgba(6,8,12,.7),transparent 40%)}
+.lg3s .lg3h::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c1));box-shadow:0 0 14px var(--c1)}
+.lg3s .lg3h-streak{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(115deg,transparent 30%,color-mix(in srgb,var(--c1) 55%,transparent) 31%,transparent 33%),linear-gradient(115deg,transparent 36%,color-mix(in srgb,var(--c2) 35%,transparent) 36.6%,transparent 38%),linear-gradient(65deg,transparent 4%,color-mix(in srgb,var(--c1) 30%,transparent) 5%,transparent 8%)}
+.lg3s .lg3h-crest{flex:none;filter:drop-shadow(0 0 12px color-mix(in srgb,var(--c1) 70%,transparent)) drop-shadow(0 4px 8px #000)}
+.lg3s .lg3h-crest img{display:block;width:84px;height:auto}
+.lg3s .lg3h-txt{min-width:0}
+.lg3s .lg3h-eye{margin:0 0 2px;font:700 12px/1 "LG3S Barlow",sans-serif;letter-spacing:.14em;color:#e8edf3}
+.lg3s .lg3h-name{margin:0;font:700 clamp(44px,9vw,92px)/.9 "LG3S Teko",Impact,sans-serif;letter-spacing:.01em;color:transparent;background:linear-gradient(180deg,#fff 0%,var(--c2) 30%,var(--c1) 52%,color-mix(in srgb,var(--c1) 50%,#000) 70%,var(--c2) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:1px rgba(255,255,255,.55);filter:drop-shadow(0 3px 0 #000) drop-shadow(0 0 10px color-mix(in srgb,var(--c1) 45%,transparent));overflow-wrap:anywhere}
+.lg3s .lg3h-rec{margin:6px 0 0;font:700 14px/1.2 "LG3S Barlow",sans-serif;letter-spacing:.08em;color:#f3f5f8;text-shadow:0 2px 6px #000}
+.lg3s .lg3s-bar{display:flex;align-items:center;gap:10px;margin:4px 0 10px;padding:9px 14px;font:700 20px/1 "LG3S Teko",Impact,sans-serif;letter-spacing:.06em;color:#fff;background:linear-gradient(90deg,#141a24,#0a0d12 70%,transparent);border-left:3px solid #e3262f;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+.lg3s .lg3s-bar i{width:20px;height:10px;background:linear-gradient(180deg,#2f5bd3 0 45%,transparent 45% 55%,#e3262f 55%)}
+.lg3s .lg3r-list{display:grid;gap:8px;margin-bottom:18px}
+.lg3s .lg3r{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(150px,1.1fr) minmax(80px,1.4fr) auto;align-items:stretch;min-height:74px;background:linear-gradient(90deg,#0c1016,#10151d);border:1px solid rgba(255,255,255,.1);border-left:4px solid var(--oc)}
+.lg3s .lg3r::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,transparent 28%,color-mix(in srgb,var(--oc) 40%,transparent) 29%,transparent 31%)}
+.lg3s .lg3r-id{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:8px 12px;min-width:0}
+.lg3s .lg3r-id strong{font:700 clamp(22px,3vw,30px)/1 "LG3S Teko",Impact,sans-serif;color:#fff;letter-spacing:.03em;overflow-wrap:anywhere}
+.lg3s .lg3r-id small{display:flex;align-items:center;gap:6px;font:600 11px/1 "LG3S Barlow",sans-serif;color:#b8c2ce;letter-spacing:.06em}
+.lg3s .lg3r-art{background:var(--ob) center 60%/cover no-repeat,var(--ofb) center/cover no-repeat;-webkit-mask:linear-gradient(90deg,transparent,#000 22%,#000 85%,transparent);mask:linear-gradient(90deg,transparent,#000 22%,#000 85%,transparent)}
+.lg3s .lg3r-tiles{display:flex;gap:6px;padding:8px 8px 8px 0}
+.lg3s .lg3r-tiles .lg3p-fig{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:62px;padding:4px 8px;background:#090c11;border:1px solid rgba(255,255,255,.18);text-decoration:none}
+.lg3s .lg3r-tiles .lg3p-fig b{font:700 28px/1 "LG3S Teko",Impact,sans-serif;color:#fff}
+.lg3s .lg3r-tiles .lg3p-fig small{font:700 9px/1 "LG3S Barlow",sans-serif;letter-spacing:.1em;color:#aeb8c4}
+.lg3s .lg3r.is-up .lg3p-fig b{font-size:20px}
+.lg3s .lg3r-link:hover,.lg3s .lg3r-link:focus-visible{border-color:#fff;outline:none}
+.lg3s .lg3r.is-win{border-color:#c9a24c;border-left-color:#f5cf6b;box-shadow:inset 0 0 0 1px rgba(245,207,107,.35),0 0 14px rgba(201,162,76,.25)}
+.lg3s .lg3r.is-win .lg3p-fig{border-color:#c9a24c}
+.lg3s .lg3r.is-win .lg3p-fig b{background:linear-gradient(180deg,#fff6d6,#f5cf6b 45%,#c08f2f 60%,#ffe7a3);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lg3s .lg3r-tab{position:absolute;top:0;right:8px;padding:3px 10px;font:800 10px/1 "LG3S Barlow",sans-serif;font-style:normal;letter-spacing:.12em;color:#1a1204;background:linear-gradient(180deg,#ffe7a3,#c9a24c);clip-path:polygon(0 0,100% 0,90% 100%,10% 100%)}
+@media(max-width:600px){
+.lg3s .lg3h{flex-direction:row;align-items:flex-end;min-height:170px;padding:16px 12px}
+.lg3s .lg3h-art{inset:0;opacity:.55}.lg3s .lg3h-crest img{width:58px}
+.lg3s .lg3h-rec{font-size:12px}
+.lg3s .lg3r{grid-template-columns:1fr auto;grid-template-rows:auto auto}
+.lg3s .lg3r-art{position:absolute;inset:0;z-index:-1;opacity:.35;-webkit-mask:linear-gradient(90deg,transparent 20%,#000);mask:linear-gradient(90deg,transparent 20%,#000)}
+.lg3s .lg3r-tiles .lg3p-fig{min-width:46px;padding:4px}
+.lg3s .lg3r-tiles .lg3p-fig b{font-size:22px}
+}
+/* Threes Bot desk: approved-only segments; coming-soon state until an editor approves. */
+.lg3s .lg3t-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.lg3s .lg3t-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;gap:6px;min-height:150px;padding:14px;background:linear-gradient(160deg,#141b27,#0a0d13 70%);border:1px solid rgba(255,255,255,.12);border-top:3px solid #e3262f;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
+.lg3s .lg3t-card:nth-child(even){border-top-color:#2f5bd3}
+.lg3s .lg3t-card::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,transparent 55%,rgba(227,38,47,.18) 56%,transparent 60%)}
+.lg3s .lg3t-n{font:700 12px/1 "LG3S Barlow",sans-serif;letter-spacing:.14em;color:#8e9aa8}
+.lg3s .lg3t-card h3{margin:0;font:700 24px/1 "LG3S Teko",Impact,sans-serif;letter-spacing:.03em;color:#fff}
+.lg3s .lg3t-card p{margin:0;font-size:13px;line-height:1.4;color:#b8c2ce}
+.lg3s .lg3t-soon{margin-top:auto;align-self:flex-start;padding:4px 9px;font:800 10px/1 "LG3S Barlow",sans-serif;letter-spacing:.14em;color:#0b0e13;background:linear-gradient(180deg,#fff,#c9d3dc)}
+@media(max-width:1000px){.lg3s .lg3t-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.lg3s .lg3t-grid{grid-template-columns:1fr}.lg3s .lg3t-card{min-height:0}}

@@ -50,10 +50,8 @@
   const pSkaters = api('lg3s_public_skater_leaders?select=lg_user_id,gamertag,lg_team_id,nation,gp,g,a,p,plus_minus&order=p.desc,g.desc&limit=120');
   const pGoalies = api('lg3s_public_goalie_leaders?select=lg_user_id,gamertag,nations_played_for,gp,sa,ga,sv,sv_pct,gaa_per_game&limit=60');
   const pRecords = api('lg3s_public_goalie_records?select=lg_user_id,gamertag,nations_played_for,gp,wins,gaa,sa,ga,sv&limit=60');
-  const pNews = api('lg3s_public_recaps?select=id,lg_game_id,game_night_date,title&order=game_night_date.desc&limit=4').catch(e => {
-    if (!/404/.test(String(e))) console.error('LG3s dashboard data:', e);
-    return null;
-  });
+  /* Approved-recap view (migration 20261024160000) is not applied yet; re-enable the lg3s_public_recaps fetch once it exists. */
+  const pNews = Promise.resolve(null);
   const settle = p => p.then(v => v, e => { console.error('LG3s dashboard data:', e); return null; });
 
   Promise.all([local, settle(pRecent), settle(pPending), settle(pUpcoming), settle(pStandings), settle(pSkaters), settle(pGoalies), settle(pRecords), settle(pNews)])

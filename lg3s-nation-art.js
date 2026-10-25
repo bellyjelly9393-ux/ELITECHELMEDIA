@@ -5,7 +5,7 @@
   const AVAILABLE = new Set(['canada','germany','great-britain','italy','japan','kazakhstan','latvia','poland','slovakia','sweden','switzerland','usa']);
   const ALIAS = { 'united-states': 'usa', 'us': 'usa', 'gb': 'great-britain', 'uk': 'great-britain', 'united-kingdom': 'great-britain' };
   const slug = n => { const s = String(n || '').toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, ''); return ALIAS[s] || s; };
-  function src(name, size) { const s = slug(name); return AVAILABLE.has(s) ? 'assets/lg3s/nations/' + s + '-' + (size === 'hero' ? 'hero' : 'card') + '.webp' : null; }
+  function src(name, size) { const s = slug(name); return AVAILABLE.has(s) ? 'assets/lg3s/nations/' + s + '-' + (size === 'hero' || size === 'banner' ? size : 'card') + '.webp' : null; }
   function css(name, size) { const u = src(name, size); return u ? 'url("' + u + '")' : 'none'; }
   const COLORS = { canada:['#e3262f','#ffffff'], usa:['#2f5bd3','#d8323c'], sweden:['#1e6fd6','#f6c600'], switzerland:['#e2231a','#ffffff'], kazakhstan:['#00a6d6','#f4c430'], germany:['#dd1d1d','#ffce00'], japan:['#d7263d','#ffffff'], italy:['#16a34a','#d8323c'], latvia:['#9e1b32','#ffffff'], poland:['#dc143c','#ffffff'], 'great-britain':['#1f4fbf','#d8323c'], slovakia:['#1f56c4','#e0313b'] };
   const color = (n, i) => (COLORS[slug(n)] || ['#9aa7b3', '#c9d3dc'])[i || 0];
