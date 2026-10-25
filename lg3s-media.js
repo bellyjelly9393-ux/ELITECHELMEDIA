@@ -27,6 +27,8 @@
       opt('lg3s_public_skater_leaders', 'select=*&order=p.desc,g.desc&limit=250'), opt('lg3s_public_goalie_leaders', 'select=*&order=sv_pct.desc.nullslast&limit=60'),
       opt('lg3s_public_player_lines', 'select=*&order=lg_game_id&limit=5000'),
       RECAPS_LIVE ? opt('lg3s_public_recaps', 'select=id,lg_game_id,game_night_date,title,body_md') : Promise.resolve([])]);
+    /* Editor-approved/published previews only (view filters status). */
+    (await opt('lg3s_public_previews', 'select=id,lg_game_id,title,body_md')).forEach(d => drafts.set(Number(d.lg_game_id), d));
     g.forEach(x => live.games.set(Number(x.lg_game_id), x));
     const recapMap = new Map();
     recaps.forEach(r => { if (r.lg_game_id != null) recapMap.set(Number(r.lg_game_id), r); });
@@ -100,7 +102,8 @@
     const classes='th-game th-game-v2'+(marquee?' th-game-feature':'');
     const clock=row._static?shortTime(row._static.time):etClock(row.scheduled_at);
     const tag=snap&&snap.tag?snap.tag:clock+' ET';
-    const preview=snap&&snap.preview?'<div class="th-game-foot"><span>THE MATCHUP</span><p>'+esc(snap.preview)+'</p></div>':'';
+    const dr=drafts.get(Number(row.lg_game_id));
+    const preview=dr&&!row.is_verified?'<div class="th-game-foot"><span>THE MATCHUP · <b>PREVIEW</b></span><p>'+draftSnippet(dr.body_md)+'… <a class="th-recap-link" href="#game/'+Number(row.lg_game_id)+'">Read</a></p></div>':snap&&snap.preview?'<div class="th-game-foot"><span>THE MATCHUP</span><p>'+esc(snap.preview)+'</p></div>':'';
     const verdict=p?'<div class="th-game-verdict"><span>ECM PICK · <b>'+esc(p.name)+'</b></span><span class="th-pick-label">EDITORIAL PREDICTION</span></div>':'';
     const recap=row.is_verified&&live.recaps.get(Number(row.lg_game_id));
     const recapLink='<a class="th-recap-link" href="#game/'+Number(row.lg_game_id)+'">Match detail</a>'+(recap?'<a class="th-recap-link" href="#recap/'+Number(row.lg_game_id)+'">Approved recap</a>':'');
@@ -199,7 +202,7 @@
     const of=live.official.find(r=>r.lg_team_id===t.id);
     /* Record comes from verified lg3s_games (same rows listed below). PTS: computed view, else LG official only when its GP equals ours. */
     const pts=st?(st.pts!=null?Number(st.pts):of&&Number(of.gp)===Number(st.gp)?Number(of.pts):'—'):'—';
-    const rec=st?Number(st.w+st.otw)+'-'+Number(st.l+st.otl)+'-'+pts+' PTS'+(st.otw+st.otl?' · '+Number(st.otw)+' OTW / '+Number(st.otl)+' OTL':'')+' · GF '+Number(st.gf)+' / GA '+Number(st.ga):'No verified results yet';
+    const rec=st?Number(st.w+st.otw)+'-'+Number(st.l)+'-'+pts+' PTS'+(st.otw+st.otl?' · '+Number(st.otw)+' OTW / '+Number(st.otl)+' OTL':'')+' · GF '+Number(st.gf)+' / GA '+Number(st.ga):'No verified results yet';
     openDetail('<header class="lg3h" style="--hb:'+esc(bnr(t.name))+';--hf:'+esc(NA?NA.css(t.name,'hero'):'none')+';--c1:'+nc(t.name)+';--c2:'+nc(t.name,1)+'"><span class="lg3h-art" aria-hidden="true"></span><span class="lg3h-streak" aria-hidden="true"></span>'+
       '<span class="lg3h-crest">'+teamMark(t,84)+'</span><div class="lg3h-txt"><p class="lg3h-eye">GROUP '+esc(t.group||'—')+' · NATION PAGE</p><h3 class="lg3h-name" data-n="'+esc(t.name).toUpperCase()+'">'+esc(t.name).toUpperCase()+'</h3><p class="lg3h-rec">'+rec+'</p></div></header>'+
       '<div class="lg3s-bar"><i aria-hidden="true"></i>RESULTS &amp; SCHEDULE</div><div class="lg3r-list">'+games+'</div><h4>SKATERS · VERIFIED GAMES</h4><div class="lg3p-list">'+sk+'</div>'+
@@ -230,7 +233,7 @@
       return playerRow({name:playerLink(l.lg_user_id,l.gamertag),sub:g?'GOALIE':(l.position||''),nation:t?t.name:'',star:!!tag,tag,stats:g?[[l.saves,'SV'],[l.shots_against,'SA'],[svp,'SV%']]:[[l.goals,'G'],[l.assists,'A'],[l.points,'PTS']]});}).join('');
       return r?'<h4>'+esc(t?t.name:'').toUpperCase()+' · VERIFIED BOX SCORE</h4><div class="lg3p-list">'+r+'</div>':'';};
     const status=row.is_verified?'Official LG data · verified '+esc(etTime(row.verified_at)):(row.status==='pending_verification'?'Final posted · verifying':'Result pending');
-    const drHtml='';
+    const dr=drafts.get(Number(id));const drHtml=dr&&!row.is_verified?'<h4>MATCHUP PREVIEW · ECM</h4><div class="th-recap-body">'+esc(dr.body_md).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(^|\n)_(.+?)_(?=\n|$)/g,'$1<i>$2</i>').split(/\n{2,}/).map(x=>'<p>'+x+'</p>').join('')+'</div>':'';
     openDetail(heroFor(row)+'<p class="th-caption">'+status+'</p>'+drHtml+(row.is_verified?tbl(row.away_lg_team_id)+tbl(row.home_lg_team_id):'')+'<p class="th-caption"><a href="'+gameUrl(id)+'" target="_blank" rel="noopener noreferrer">Official LG game centre ↗</a>'+(live.recaps.get(Number(id))?' · <a href="#recap/'+Number(id)+'">Approved recap</a>':'')+'</p>');
   }
   function recapPage(id){

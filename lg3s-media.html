@@ -30,7 +30,8 @@
 <script src="lg3s-nation-art.js?v=20261024-np2" defer></script>
 <script src="lg3s-media.js?v=20261024-np2" defer></script>
 <script src="lg3s-broadcast-preview.js?v=20261024-np2" defer></script>
-</head>
+<script src="lg3s-ticker.js?v=20261024-1" defer></script>
+<link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script></head>
 <body class="lg3s">
 <header class="top band">
   <div class="top-in">
@@ -38,16 +39,12 @@
       <img class="crest" src="assets/brand/ecm-crest.webp" width="118" height="120" alt="">
       <div class="brand-txt"><b>Elitechel</b><span>Media</span></div>
     </a>
-    <nav class="nav" id="nav" aria-label="Main">
-      <a href="index.html">Home</a>
-      <a href="esports-hub.html">Live Hub</a>
-      <a href="hitmen-media.html">Hitmen</a>
-      <a href="lgchl-media.html">LG CHL</a>
-      <a href="lg3s-media.html" class="on" aria-current="page">LG3s</a>
-      <a href="lgchl-leaders.html">Stats</a>
-      <a href="interest.html?program=hut">HUT Tournament</a>
-      <a href="management.html">Management</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="Main"><a href="index.html">Home</a>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-1">Live <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-1" hidden><a href="esports-hub.html">Live Hub</a><a href="game-center.html?channel=hitmen">Hitmen Live</a><a href="multiview.html">Multiview</a></div></div>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-2">Leaderboards <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-2" hidden><a href="league-leaderboards.html?league=lgchl">LGCHL · Top 10</a><a href="league-leaderboards.html?league=lg3s">LG3s · Top 10</a><a href="league-leaderboard.html?league=lgchl&category=save_pct">LGCHL goalies</a><a href="league-leaderboard.html?league=lg3s&category=save_pct">LG3s goalies</a></div></div>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-3">Media <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-3" hidden><a href="hitmen-media.html">Hitmen Desk</a><a href="lgchl-media.html">LGCHL Desk</a><a href="lg3s-media.html">LG3s Desk</a></div></div>
+<a href="lgchl-media.html#lgRadioSec">Hitman Radio</a>
+<a href="interest.html?program=hut">Tournaments</a></nav>
     <a class="icon-btn search-btn" href="#bidding" aria-label="Jump to LG3s bidding board">⌕</a>
     <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
   </div>
@@ -120,7 +117,7 @@
 </article>
 </div>
 </div></section>
-<section class="th-section band lg3t-sec" id="threes" aria-label="Threes Bot segments"><div class="th-wrap"><header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">THREES BOT · EDITOR-APPROVED ONLY</p><h2 class="sec-title">THE <em>THREES</em> DESK</h2></div><p class="th-section-intro">Segments go live here after an editor approves them. Drafts are never shown.</p></header><div class="lg3t-grid"><article class="lg3t-card" data-feature="daily_three"><span class="lg3t-n">01</span><h3>DAILY THREE</h3><p>Three things that mattered from last night’s verified finals.</p><span class="lg3t-soon">COMING SOON</span></article><article class="lg3t-card" data-feature="trio_power_rankings"><span class="lg3t-n">02</span><h3>TRIO POWER RANKINGS</h3><p>Weekly ranking of the best three-player units.</p><span class="lg3t-soon">COMING SOON</span></article><article class="lg3t-card" data-feature="duo_index"><span class="lg3t-n">03</span><h3>DUO INDEX</h3><p>Pairs that drive results, from verified box scores.</p><span class="lg3t-soon">COMING SOON</span></article><article class="lg3t-card" data-feature="roster_wire"><span class="lg3t-n">04</span><h3>ROSTER WIRE</h3><p>Roster moves and lineup notes.</p><span class="lg3t-soon">COMING SOON</span></article><article class="lg3t-card" data-feature="pick_your_3"><span class="lg3t-n">05</span><h3>PICK YOUR 3</h3><p>Pick three players for the night and see how they scored.</p><span class="lg3t-soon">COMING SOON</span></article></div></div></section>
+<section class="th-section band lg3x-sec" id="threes" aria-label="Threes Bot segments"><div class="th-wrap"><header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">THREES BOT · EDITOR-APPROVED ONLY</p><h2 class="sec-title">THE <em>THREES</em> DESK</h2></div><p class="th-section-intro">Segments go live here after an editor approves them. Drafts are never shown.</p></header><div class="lg3x-grid"><article class="lg3x-card" data-feature="daily_three"><span class="lg3x-n">01</span><h3>DAILY THREE</h3><p>Three things that mattered from last night’s verified finals.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="trio_power_rankings"><span class="lg3x-n">02</span><h3>TRIO POWER RANKINGS</h3><p>Weekly ranking of the best three-player units.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="duo_index"><span class="lg3x-n">03</span><h3>DUO INDEX</h3><p>Pairs that drive results, from verified box scores.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="roster_wire"><span class="lg3x-n">04</span><h3>ROSTER WIRE</h3><p>Roster moves and lineup notes.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="pick_your_3"><span class="lg3x-n">05</span><h3>PICK YOUR 3</h3><p>Pick three players for the night and see how they scored.</p><span class="lg3x-soon">COMING SOON</span></article></div></div></section>
 <section class="th-section band lb-sec" id="leaderboards"><div class="th-wrap"><header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · VERIFIED BOX SCORES ONLY</p><h2 class="sec-title">LEADER<em>BOARDS.</em></h2></div><p class="th-section-caption">Top 10 in every category we can verify. Tap any player for their full page. <a href="#rosters">Roster &amp; bid index ↓</a></p></header><div class="lb-chips" id="lbChips" role="toolbar" aria-label="Leaderboard category"></div><p class="lb-note" id="lbNote">Loading verified box scores…</p><div id="lbBody"></div></div></section>
 <section class="th-hero band">
   <div class="th-wrap th-hero-grid">

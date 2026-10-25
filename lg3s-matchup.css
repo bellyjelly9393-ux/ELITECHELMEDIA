@@ -235,13 +235,13 @@
 .lg3s .lg3r-tiles .lg3p-fig b{font-size:22px}
 }
 /* Threes Bot desk: approved-only segments; coming-soon state until an editor approves. */
-.lg3s .lg3t-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
-.lg3s .lg3t-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;gap:6px;min-height:150px;padding:14px;background:linear-gradient(160deg,#141b27,#0a0d13 70%);border:1px solid rgba(255,255,255,.12);border-top:3px solid #e3262f;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
-.lg3s .lg3t-card:nth-child(even){border-top-color:#2f5bd3}
-.lg3s .lg3t-card::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,transparent 55%,rgba(227,38,47,.18) 56%,transparent 60%)}
-.lg3s .lg3t-n{font:700 12px/1 "LG3S Barlow",sans-serif;letter-spacing:.14em;color:#8e9aa8}
-.lg3s .lg3t-card h3{margin:0;font:700 24px/1 "LG3S Teko",Impact,sans-serif;letter-spacing:.03em;color:#fff}
-.lg3s .lg3t-card p{margin:0;font-size:13px;line-height:1.4;color:#b8c2ce}
-.lg3s .lg3t-soon{margin-top:auto;align-self:flex-start;padding:4px 9px;font:800 10px/1 "LG3S Barlow",sans-serif;letter-spacing:.14em;color:#0b0e13;background:linear-gradient(180deg,#fff,#c9d3dc)}
-@media(max-width:1000px){.lg3s .lg3t-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:520px){.lg3s .lg3t-grid{grid-template-columns:1fr}.lg3s .lg3t-card{min-height:0}}
+.lg3s .lg3x-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.lg3s .lg3x-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;gap:6px;min-height:150px;padding:14px;background:linear-gradient(160deg,#141b27,#0a0d13 70%);border:1px solid rgba(255,255,255,.12);border-top:3px solid #e3262f;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
+.lg3s .lg3x-card:nth-child(even){border-top-color:#2f5bd3}
+.lg3s .lg3x-card::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,transparent 55%,rgba(227,38,47,.18) 56%,transparent 60%)}
+.lg3s .lg3x-n{font:700 12px/1 "LG3S Barlow",sans-serif;letter-spacing:.14em;color:#8e9aa8}
+.lg3s .lg3x-card h3{margin:0;font:700 24px/1 "LG3S Teko",Impact,sans-serif;letter-spacing:.03em;color:#fff}
+.lg3s .lg3x-card p{margin:0;font-size:13px;line-height:1.4;color:#b8c2ce}
+.lg3s .lg3x-soon{margin-top:auto;align-self:flex-start;padding:4px 9px;font:800 10px/1 "LG3S Barlow",sans-serif;letter-spacing:.14em;color:#0b0e13;background:linear-gradient(180deg,#fff,#c9d3dc)}
+@media(max-width:1000px){.lg3s .lg3x-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.lg3s .lg3x-grid{grid-template-columns:1fr}.lg3s .lg3x-card{min-height:0}}

@@ -26,3 +26,6 @@ When replacing an existing video/poster file in place, bump the `?v=` tag on its
 
 ## Double feature (e.g. Wednesdays: Tuesday nightly + weekly recap)
 Add a top-level `"featured": ["2026-10-20", "2026-10-21-recap"]` (left/top first). When 2+ listed ids exist and one of them is the newest episode, the section shows them side by side (stacked on phones) and the archive lists everything else. Once a newer episode is added the section falls back to the normal single player automatically; you can also just remove/replace `featured`.
+
+## Week-ahead preview / single featured episode
+`type: "preview"` is also supported (kind label "Week ahead preview"). A `featured` list with ONE id that is the newest episode shows it as a single featured card (title, description, `#ep-<id>` anchor) with everything else in the archive.

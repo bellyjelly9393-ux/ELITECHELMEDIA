@@ -1,0 +1,138 @@
+{
+ "validated_at": "2026-10-24T21:08:22-04:00",
+ "validator": "lg3s-drops-reviewed/validate.py",
+ "source_file": "lg3s-drops/schedules/lg3s-s1-week-02.json",
+ "references": [
+  "lg3s_games (Supabase lrgllzvwgvqagcpiyvfd) snapshot 2026-10-24",
+  "seth_upload3.xlsx Games sheet",
+  "seth_upload2.xlsx Team IDs",
+  "ea_clubs.json"
+ ],
+ "excluded_non_lg3s_clubs": {
+  "Czechia": 47705
+ },
+ "teams": [
+  {
+   "name": "Canada",
+   "lg_team_id": 341,
+   "group": "A",
+   "ea_club_id": 4526,
+   "ea_club_id_status": "workbook_sourced_unverified",
+   "review_status": "validated_lg_id_ea_verified_week1",
+   "flags": [],
+   "lg_team_id_in_db_schedule": true
+  },
+  {
+   "name": "USA",
+   "lg_team_id": 342,
+   "group": "B",
+   "ea_club_id": 22418,
+   "ea_club_id_status": "workbook_sourced_unverified",
+   "review_status": "validated_lg_id_ea_unverified",
+   "flags": [],
+   "lg_team_id_in_db_schedule": true
+  },
+  {
+   "name": "Sweden",
+   "lg_team_id": 343,
+   "group": "B",
+   "ea_club_id": 22440,
+   "ea_club_id_status": "workbook_sourced_unverified",
+   "review_status": "validated_lg_id_ea_unverified",
+   "flags": [],
+   "lg_team_id_in_db_schedule": true
+  },
+  {
+   "name": "Switzerland",
+   "lg_team_id": 404,
+   "group": "A",
+   "ea_club_id": 46452,
+   "ea_club_id_status": "workbook_sourced_unverified",
+   "review_status": "validated_lg_id_ea_unverified",
+   "flags": [],
+   "lg_team_id_in_db_schedule": true
+  },
+  {
+   "name": "Kazakhstan",
+   "lg_team_id": 531,
+   "group": "B",
+   "ea_club_id": 31561,
+   "ea_club_id_status": "workbook_sourced_unverified",
+   "review_status": "validated_lg_id_ea_unverified",
+   "flags": [],
+   "lg_team_id_in_db_schedule": true
+  },
+  {
+   "name": "Germany",
+   "lg_team_id": 532,
+   "group": "B",
+   "ea_club_id": 43644,
+   "ea_club_id_status": "workbook_sourced_unverified",
+   "review_status": "validated_lg_id_ea_unverified",
+   "flags": [],
+   "lg_team_id_in_db_schedule": true
+  },
+  {
+   "name": "Japan",
+   "lg_team_id": 591,
+   "group": "A",
+   "ea_club_id": 49675,
+   "ea_club_id_status": "workbook_sourced_unverified",
+   "review_status": "validated_lg_id_ea_unverified",
+   "flags": [],
+   "lg_team_id_in_db_schedule": true
+  },
+  {
+   "name": "Italy",
+   "lg_team_id": 822,
+   "group": "B",
+   "ea_club_id": 35644,
+   "ea_club_id_status": "workbook_sourced_unverified",
+   "review_status": "validated_lg_id_ea_unverified",
+   "flags": [],
+   "lg_team_id_in_db_schedule": true
+  },
+  {
+   "name": "Slovakia",
+   "lg_team_id": 1079,
+   "group": "A",
+   "ea_club_id": null,
+   "ea_club_id_status": "unknown",
+   "review_status": "lg_id_validated_ea_missing",
+   "flags": [
+    "EA club ID unknown: EA matching impossible for this team until Seth supplies a verified ID"
+   ],
+   "lg_team_id_in_db_schedule": true
+  },
+  {
+   "name": "Latvia",
+   "lg_team_id": 1439,
+   "group": "A",
+   "ea_club_id": 50403,
+   "ea_club_id_status": "workbook_sourced_unverified",
+   "review_status": "validated_lg_id_ea_unverified",
+   "flags": [],
+   "lg_team_id_in_db_schedule": true
+  },
+  {
+   "name": "Poland",
+   "lg_team_id": 1444,
+   "group": "B",
+   "ea_club_id": 49305,
+   "ea_club_id_status": "workbook_sourced_unverified",
+   "review_status": "validated_lg_id_ea_unverified",
+   "flags": [],
+   "lg_team_id_in_db_schedule": true
+  },
+  {
+   "name": "Great Britain",
+   "lg_team_id": 1446,
+   "group": "A",
+   "ea_club_id": 50648,
+   "ea_club_id_status": "workbook_sourced_unverified",
+   "review_status": "validated_lg_id_ea_unverified",
+   "flags": [],
+   "lg_team_id_in_db_schedule": true
+  }
+ ]
+}

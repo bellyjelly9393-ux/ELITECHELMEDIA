@@ -1,0 +1,50 @@
+{
+ "note": "Week-1 regression fixture: Canada (EA 4526) match list reduced to matchId/end-timestamp/score/DNF flag only (no player data). Source: Seth paste Oct 24 2026.",
+ "matches": [
+  {
+   "matchId": "2840124120396",
+   "ts": 1792805448,
+   "score": {
+    "4526": 8,
+    "22440": 2
+   },
+   "dnf": false
+  },
+  {
+   "matchId": "2836771760211",
+   "ts": 1792803973,
+   "score": {
+    "4526": 7,
+    "35644": 8
+   },
+   "dnf": false
+  },
+  {
+   "matchId": "2834696320310",
+   "ts": 1792802229,
+   "score": {
+    "4526": 5,
+    "49675": 2
+   },
+   "dnf": true
+  },
+  {
+   "matchId": "2834576490086",
+   "ts": 1792801034,
+   "score": {
+    "4526": 0,
+    "49675": 3
+   },
+   "dnf": true
+  },
+  {
+   "matchId": "2790576450015",
+   "ts": 1792718521,
+   "score": {
+    "4526": 7,
+    "50403": 3
+   },
+   "dnf": true
+  }
+ ]
+}

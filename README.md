@@ -1,5 +1,5 @@
-# VVHL Hub
+# elitechel media 
 
-Fresh rebuild of the Vroom Vroom Hockey League hub.
+competitive chel headquarters
 
-This repository is the source of truth for the VVHL website and deploys to Vercel.
+This repository is the source of truth for the elitechel media 

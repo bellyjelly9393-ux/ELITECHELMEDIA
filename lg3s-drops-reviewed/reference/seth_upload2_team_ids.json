@@ -1,0 +1,80 @@
+[
+ {
+  "name": "Canada",
+  "lg_team_id": 341,
+  "club_id": 4526,
+  "group": "A"
+ },
+ {
+  "name": "Germany",
+  "lg_team_id": 532,
+  "club_id": 43644,
+  "group": "B"
+ },
+ {
+  "name": "Great Britain",
+  "lg_team_id": 1446,
+  "club_id": 50648,
+  "group": "A"
+ },
+ {
+  "name": "Italy",
+  "lg_team_id": 822,
+  "club_id": 35644,
+  "group": "B"
+ },
+ {
+  "name": "Japan",
+  "lg_team_id": 591,
+  "club_id": 49675,
+  "group": "A"
+ },
+ {
+  "name": "Kazakhstan",
+  "lg_team_id": 531,
+  "club_id": 31561,
+  "group": "B"
+ },
+ {
+  "name": "Latvia",
+  "lg_team_id": 1439,
+  "club_id": 50403,
+  "group": "A"
+ },
+ {
+  "name": "Poland",
+  "lg_team_id": 1444,
+  "club_id": 49305,
+  "group": "B"
+ },
+ {
+  "name": "Slovakia",
+  "lg_team_id": 1079,
+  "club_id": null,
+  "group": "A"
+ },
+ {
+  "name": "Sweden",
+  "lg_team_id": 343,
+  "club_id": 22440,
+  "group": "B"
+ },
+ {
+  "name": "Switzerland",
+  "lg_team_id": 404,
+  "club_id": 46452,
+  "group": "A"
+ },
+ {
+  "name": "USA",
+  "lg_team_id": 342,
+  "club_id": 22418,
+  "group": "B"
+ },
+ {
+  "name": "Czechia",
+  "lg_team_id": null,
+  "club_id": 47705,
+  "group": null
+ }
+]

@@ -10,15 +10,18 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="hub.css" />
   <link rel="stylesheet" href="rosters.css" />
-</head>
+<link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script></head>
 <body>
   <div class="ice-glow ice-glow-a"></div><div class="ice-glow ice-glow-b"></div>
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="VVHL Hub home"><img class="brand-logo" src="assets/brand/vvhl-logo.png" alt=""><span class="brand-copy">VVHL TEAM<br><b>ROSTERS & CAP</b></span></a>
     <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
-    <nav class="main-nav" aria-label="Primary navigation">
-      <a href="index.html">VVHL 4s</a><a href="vv6l.html">VV6L 6s</a><a href="finals.html">Finals</a><a href="rosters.html">Rosters & Cap</a><a href="media.html">Media</a><a href="scouting.html">Scouting</a><a href="gm.html">GM Hub</a><a href="admin.html">Admin</a>
-    </nav>
+    <nav class="main-nav" aria-label="Primary navigation"><a href="index.html">Home</a>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-1">Live <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-1" hidden><a href="esports-hub.html">Live Hub</a><a href="game-center.html?channel=hitmen">Hitmen Live</a><a href="multiview.html">Multiview</a></div></div>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-2">Leaderboards <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-2" hidden><a href="league-leaderboards.html?league=lgchl">LGCHL · Top 10</a><a href="league-leaderboards.html?league=lg3s">LG3s · Top 10</a><a href="league-leaderboard.html?league=lgchl&category=save_pct">LGCHL goalies</a><a href="league-leaderboard.html?league=lg3s&category=save_pct">LG3s goalies</a></div></div>
+<div class="ecm-nav-group"><button type="button" class="ecm-nav-trigger" aria-expanded="false" aria-controls="ecm-menu-3">Media <span aria-hidden="true">⌄</span></button><div class="ecm-nav-panel" id="ecm-menu-3" hidden><a href="hitmen-media.html">Hitmen Desk</a><a href="lgchl-media.html">LGCHL Desk</a><a href="lg3s-media.html">LG3s Desk</a></div></div>
+<a href="lgchl-media.html#lgRadioSec">Hitman Radio</a>
+<a href="interest.html?program=hut">Tournaments</a></nav>
   </header>
 
   <main class="app-main">
@@ -128,7 +131,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
   <script src="backend.js"></script>
   <script src="player-data.js"></script>
-  <script src="network-shell.js?v=20261020-hl"></script><script src="script.js"></script>
+  <script src="network-shell.js?v=20261025-public"></script><script src="script.js"></script>
   <script src="rosters.js"></script>
   <script src="cloud-rosters.js"></script>
 </body>

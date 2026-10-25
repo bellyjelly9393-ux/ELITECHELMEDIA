@@ -25,7 +25,7 @@
     'esports-hub.html':'esports-hub.html','esports-team.html':'esports-hub.html','services.html':'esports-hub.html',
     'events.html':'events.html','event-format.html':'events.html','pro-series.html':'events.html','caps-gaming.html':'events.html',
     'game-center.html':'game-center.html','live-channel.html':'game-center.html','multiview.html':'game-center.html','vod-center.html':'game-center.html','reports.html':'game-center.html','game.html':'game-center.html','live-game.html':'game-center.html','postgame.html':'game-center.html',
-    
+
     'academy.html':'academy.html','academy-training.html':'academy.html',
     'signup.html':'interest.html','interest.html':'interest.html','lgchl-leaders.html':'lgchl-leaders.html',
     'management.html':'management.html',
@@ -64,9 +64,9 @@
             ['lgchl-media.html','LG CHL Desk','League news, stats and power rankings'],
             ['lgchl-media.html#lgRadioSec','Hitmen Radio','The Elitechel Media video show']
           ])}
-          ${simpleLink('lgchl-leaders.html','Stats')}
+          ${simpleLink('league-leaderboards.html?league=lgchl','Leaderboards')}
           ${simpleLink('interest.html?program=hut','HUT Tournament')}
-          ${simpleLink('management.html','Management')}
+
         </nav>
         <a class="wm-join-btn" href="interest.html?program=hut">Register Interest</a>
       `;
