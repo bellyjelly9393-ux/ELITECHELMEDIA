@@ -248,6 +248,20 @@
     const body=esc(recap.body_md).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').split(/\n{2,}/).map(x=>'<p>'+x.replace(/\n/g,'<br>')+'</p>').join('');
     openDetail(heroFor(game)+'<header class="th-detail-head"><div><p class="eyebrow">APPROVED RECAP · '+esc(nightTitle(nightKey(game.game_night_date)))+'</p><h3>'+esc(recap.title)+'</h3></div></header><div class="th-recap-body">'+body+'</div><p class="th-caption"><a href="'+gameUrl(id)+'" target="_blank" rel="noopener noreferrer">Official LG game centre ↗</a></p>');
   }
+  /* Published power rankings write-ups (view: approved/published, not superseded). */
+  async function rankingsPage(id){
+    let r=null;try{r=(await view('lg3s_public_power_rankings','select=id,week,title,body_md&id=eq.'+Number(id)))[0];}catch(e){console.warn('LG3s rankings',e);}
+    if(!r)return;
+    const body=esc(r.body_md).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').split(/\n{2,}/).map(x=>'<p>'+x.replace(/\n/g,'<br>')+'</p>').join('');
+    openDetail('<header class="th-detail-head"><div><p class="eyebrow">TRIO POWER RANKINGS · WEEK '+Number(r.week)+'</p><h3>'+esc(r.title)+'</h3></div></header><div class="th-recap-body">'+body+'</div>');
+  }
+  async function wireRankings(){
+    let r=[];try{r=await view('lg3s_public_power_rankings','select=id,week,title&order=week.desc,id.desc&limit=1');}catch(e){return;}
+    if(!r[0])return;const href='#rankings/'+Number(r[0].id);
+    const card=document.querySelector('.lg3x-card[data-feature="trio_power_rankings"]');
+    if(card){const soon=card.querySelector('.lg3x-soon');const a=document.createElement('a');a.className='lg3x-soon lg3x-live';a.href=href;a.textContent='READ WEEK '+Number(r[0].week)+' →';if(soon)soon.replaceWith(a);else card.appendChild(a);}
+    const ph=document.querySelector('#power .lg3-ph-link');if(ph){const a=document.createElement('a');a.className='lg3-ph-link';a.href=href;a.textContent='WRITE-UP →';ph.before(a);}
+  }
   /* ===== Leaderboards (verified box-score lines only) ===== */
   const LB_SK=[['p','POINTS','PTS'],['g','GOALS','G'],['a','ASSISTS','A'],['pm','PLUS / MINUS','+/-'],['sog','SHOTS','SOG'],['hit','HITS','HIT'],['tk','TAKEAWAYS','TK'],['blk','BLOCKS','BLK'],['int','INTERCEPTIONS','INT']];
   const LB_GL=[['w','WINS','W'],['svp','SAVE %','SV%',1],['gaa','GOALS AGAINST PER GAME','GA/GP',1,1],['sv','SAVES','SV'],['so','SHUTOUTS','SO']];
@@ -311,7 +325,7 @@
       '<h4>PER-GAME AVERAGES</h4><div class="lb-avg">'+avg.map(x=>statFig(x[0],x[1])).join('')+'</div>'+
       '<h4>GAME LOG · VERIFIED</h4><div class="lg3p-list">'+log+'</div><p class="th-caption"><a href="'+userUrl(uid)+'" target="_blank" rel="noopener noreferrer">Official LG profile ↗</a> · Lines are credited to the nation shown in each game\'s LG box score.</p>');
   }
-  function route(){const m=/^#(nation|player|recap|game)\/(\d+)$/.exec(location.hash);if(!m)return;const id=Number(m[2]);if(m[1]==='game')gamePage(id);else if(m[1]==='nation')nationPage(id);else if(m[1]==='player')playerPage(id);else recapPage(id);}
+  function route(){const m=/^#(nation|player|recap|game|rankings)\/(\d+)$/.exec(location.hash);if(!m)return;const id=Number(m[2]);if(m[1]==='game')gamePage(id);else if(m[1]==='nation')nationPage(id);else if(m[1]==='player')playerPage(id);else if(m[1]==='rankings')rankingsPage(id);else recapPage(id);}
   function renderPlayers(){
     const search=$('thPlayerSearch').value.trim().toLocaleLowerCase(),tid=$('thPlayerTeam').value,status=$('thPlayerStatus').value,pos=$('thPlayerPosition').value,sort=$('thPlayerSort').value;
     let players=data.players.filter(p=>(status==='all'||p.s===status)&&(tid==='all'||String(p.t)===tid)&&(pos==='all'||p.p===pos)&&(!search||p.n.toLocaleLowerCase().includes(search)||team(p.t).name.toLocaleLowerCase().includes(search)));
@@ -334,7 +348,7 @@
     if(new URLSearchParams(location.search).has('legacy'))document.querySelectorAll('[data-lg3s-legacy]').forEach(e=>e.hidden=false);
     chooseWeek();
     renderNations();renderGames();renderStandings();renderLeaders();renderLB();lbWire();
-    window.addEventListener('hashchange',route);route();
+    window.addEventListener('hashchange',route);route();wireRankings();
     const dc=$('thDetailClose');if(dc)dc.addEventListener('click',()=>{$('thDetail').close();history.replaceState(null,'',location.pathname+location.search);});
     $('thPlayerTeam').innerHTML='<option value="all">All twelve nations</option>'+data.teams.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(t=>'<option value="'+t.id+'">'+esc(t.name)+'</option>').join('');
     renderPlayers();
