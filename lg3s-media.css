@@ -357,3 +357,11 @@
 .lg3s .th-recap-link{align-self:flex-start;margin:8px 2px 0;font:600 13px/1 var(--f-ui);letter-spacing:.12em;text-transform:uppercase;color:#c5ced6}
 .lg3s .th-recap-link:hover{color:#f4f1ea}
 .lg3s .th-recap-body{font-size:15px;line-height:1.5;color:#d7dde2}
+
+/* Nation background art (LG3s only). Sides without art keep the neutral card. */
+.lg3s .th-game-v2 .th-teams>.th-side{position:relative;isolation:isolate;padding:10px 4px 8px;border-radius:2px;overflow:hidden}
+.lg3s .th-game-v2 .th-teams>.th-side.has-nat::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,8,10,.72),rgba(7,8,10,.9)),var(--nat) center 30%/cover no-repeat;opacity:.9;transition:opacity .2s}
+.lg3s .th-game-v2:hover .th-teams>.th-side.has-nat::before{opacity:1}
+.lg3s .th-nation-hero{position:relative;isolation:isolate;margin:-4px -4px 18px;padding:28px 22px;min-height:180px;align-items:flex-end;border-bottom:1px solid rgba(200,217,232,.14)}
+.lg3s .th-nation-hero.has-nat{background:linear-gradient(90deg,rgba(7,8,10,.94) 0%,rgba(7,8,10,.72) 55%,rgba(7,8,10,.45) 100%),linear-gradient(0deg,rgba(7,8,10,.95),transparent 60%),var(--nat) center 35%/cover no-repeat}
+.lg3s .th-nation-hero h3,.lg3s .th-nation-hero p{text-shadow:0 2px 10px rgba(0,0,0,.8)}

@@ -93,7 +93,7 @@
       const featured = marquee[0] || (upcoming && upcoming[0]) || null;
 
       const teamLine = id => { const t = rankOf.get(id); return t ? t.rec + ' · ' + ptsText(t) + ' PTS' : ''; };
-      const art = name => byName.has(name) ? 'url("assets/lg3s/art/nation-' + slug(name) + '.webp")' : 'none';
+      const art = (name, size) => (byName.has(name) && window.LG3S_NATION_ART) ? window.LG3S_NATION_ART.css(name, size || 'card') : 'none';
 
       guard('lg3Feature', 'The next featured matchup is unavailable right now.', () => {
         if (!featured) { wait('lg3Feature', 'The next featured matchup will appear once the schedule is posted.'); return; }
@@ -102,13 +102,7 @@
         $('lg3FeatureMeta').textContent = 'WEEK ' + weekOf(featured.game_night_date);
         $('lg3Feature').innerHTML =
           '<' + (url ? 'a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer"' : 'div') + ' class="lg3-fm" style="--a:' + art(a) + ';--h:' + art(h) + '">' +
-          '<span class="lg3-fm-bg" aria-hidden="true"><i></i><i></i></span>' +
-          '<span class="lg3-fm-row">' +
-          '<span class="lg3-fm-team">' + crestImg(featured.away_lg_team_id, 'lg3-crest-xl') + '<b>' + esc(a) + '</b><small>' + esc(teamLine(featured.away_lg_team_id)) + '</small></span>' +
-          '<span class="lg3-fm-vs">VS</span>' +
-          '<span class="lg3-fm-team">' + crestImg(featured.home_lg_team_id, 'lg3-crest-xl') + '<b>' + esc(h) + '</b><small>' + esc(teamLine(featured.home_lg_team_id)) + '</small></span>' +
-          '</span>' +
-          '<span class="lg3-fm-when">' + esc(day(featured.scheduled_at).toUpperCase()) + '<i aria-hidden="true">|</i>' + esc(time(featured.scheduled_at)) + ' ET</span>' +
+          (window.LG3S_NATION_ART && window.LG3S_NATION_ART.matchup ? window.LG3S_NATION_ART.matchup({ size: 'hero', away: { name: a, mark: crestImg(featured.away_lg_team_id, 'lg3-crest-xl'), label: teamLine(featured.away_lg_team_id) }, home: { name: h, mark: crestImg(featured.home_lg_team_id, 'lg3-crest-xl'), label: teamLine(featured.home_lg_team_id) }, final: null, meta: day(featured.scheduled_at).toUpperCase() + ' · ' + time(featured.scheduled_at) + ' ET' }) : '') +
           '<span class="lg3-fm-tag">LG3S INTERNATIONAL</span>' +
           (url ? '<span class="lg3-btn">GAME CENTRE <span aria-hidden="true">↗</span></span>' : '') +
           (url ? '</a>' : '</div>');
@@ -123,7 +117,7 @@
           $('lg3Nights').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.night === d)));
           const rows = pool.filter(g => g.game_night_date === d).sort((a, b) => String(a.scheduled_at).localeCompare(String(b.scheduled_at)));
           $('lg3Scores').innerHTML = rows.map(g => {
-            const line = (id, nation, score, win) => '<span class="lg3-line' + (win ? ' win' : '') + '">' + crestImg(id) + '<span>' + esc(nameOf(id, nation)) + '</span><b>' + score + '</b></span>';
+            const line = (id, nation, score, win) => { const bg = art(nameOf(id, nation)); return '<span class="lg3-line' + (win ? ' win' : '') + (bg !== 'none' ? ' has-nat" style="--nat:' + esc(bg) : '') + '">' + crestImg(id) + '<span>' + esc(nameOf(id, nation)) + '</span><b>' + score + '</b></span>'; };
             if (g.pending) {
               return '<div class="lg3-score is-pending">' + line(g.away_lg_team_id, g.away_nation, '—', false) + line(g.home_lg_team_id, g.home_nation, '—', false) + '<span class="lg3-fin">VERIFYING</span></div>';
             }
@@ -144,7 +138,8 @@
         if (!upcoming.length) { wait('lg3Upcoming', 'The next game night will appear once it is scheduled.'); return; }
         $('lg3Upcoming').innerHTML = upcoming.slice(0, 6).map(g => {
           const url = safeUrl(g.source_url), tag = url ? 'a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer"' : 'div';
-          return '<' + tag + ' class="lg3-game">' +
+          const sa = art(nameOf(g.away_lg_team_id, g.away_nation)), sh = art(nameOf(g.home_lg_team_id, g.home_nation));
+          return '<' + tag + ' class="lg3-game has-split" style="--ma:' + esc(sa) + ';--mh:' + esc(sh) + '">' +
             '<span class="lg3-match"><span class="lg3-line">' + crestImg(g.away_lg_team_id) + '<span>' + esc(nameOf(g.away_lg_team_id, g.away_nation)) + '</span></span>' +
             '<span class="lg3-line">' + crestImg(g.home_lg_team_id) + '<span>' + esc(nameOf(g.home_lg_team_id, g.home_nation)) + '</span></span></span>' +
             '<span class="lg3-when"><b>' + esc(day(g.scheduled_at)) + '</b><small>' + esc(time(g.scheduled_at)) + ' ET</small></span>' +
@@ -204,7 +199,7 @@
           const t = order[idx];
           const top = (Array.isArray(skaters) ? skaters : []).filter(p => +p.lg_team_id === t.id || p.nation === t.name).sort((x, y) => (+y.p || 0) - (+x.p || 0) || (+y.g || 0) - (+x.g || 0)).slice(0, 4);
           $('lg3SpotCount').textContent = (idx + 1) + '/' + order.length;
-          $('lg3Spotlight').style.setProperty('--art', art(t.name));
+          $('lg3Spotlight').style.setProperty('--art', art(t.name, 'hero'));
           $('lg3Spotlight').innerHTML =
             '<div class="lg3-sp-hero">' + crestImg(t.id, 'lg3-crest-xl') + '<div><h3>' + esc(t.name) + '</h3><p>' + (t.gp ? '#' + t.rank + ' IN LG3S' : 'LG3S SEASON 1') + (t.group ? ' · GROUP ' + esc(t.group) : '') + '</p></div></div>' +
             (t.gp ? '<dl class="lg3-sp-stats"><div><dt>RECORD</dt><dd>' + t.rec + '</dd></div><div><dt>PTS</dt><dd>' + ptsText(t) + '</dd></div><div><dt>GD</dt><dd>' + signed(t.gd) + '</dd></div><div><dt>GP</dt><dd>' + t.gp + '</dd></div></dl>' : '') +

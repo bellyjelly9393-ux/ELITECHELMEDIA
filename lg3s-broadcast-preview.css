@@ -465,3 +465,7 @@
   .lg3-broadcast .lg3-fm { min-height: 240px; }
   .lg3-broadcast .lg3-ph h2 { font-size: 18px; }
 }
+
+/* Nation art behind each side of a score card; neutral when no art exists. */
+.lg3-broadcast .lg3-line.has-nat{position:relative;isolation:isolate;padding:4px 6px;margin-inline:-6px}
+.lg3-broadcast .lg3-line.has-nat::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,9,11,.9),rgba(8,9,11,.68)),var(--nat) center 30%/cover no-repeat}
