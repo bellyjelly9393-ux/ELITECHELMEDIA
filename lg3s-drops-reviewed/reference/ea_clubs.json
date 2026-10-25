@@ -1,0 +1,18 @@
+{
+ "platform": "common-gen5",
+ "clubs": {
+  "Canada": 4526,
+  "USA": 22418,
+  "Sweden": 22440,
+  "Switzerland": 46452,
+  "Kazakhstan": 31561,
+  "Germany": 43644,
+  "Japan": 49675,
+  "Italy": 35644,
+  "Latvia": 50403,
+  "Poland": 49305,
+  "Great Britain": 50648,
+  "Czechia": 47705
+ },
+ "note": "from seth_upload.xlsx; Slovakia not provided"
+}
