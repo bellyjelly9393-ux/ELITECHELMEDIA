@@ -1,0 +1,27 @@
+{
+ "league": "LGCHL",
+ "season": 55,
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=trades&leagueid=39&seasonid=55",
+ "window": "2026-09-30 to 2026-10-24 (ET)",
+ "status": "awaiting_data",
+ "status_note": "Team columns not yet verified. LeagueGaming's public trades page returned 403 to a normal request on Oct 25, 2026; no repo source had S55 trades.",
+ "schema": {
+  "id": "stable string, e.g. lg trade id or date+index",
+  "date_et": "YYYY-MM-DD HH:MM (America/Toronto)",
+  "team1": {
+   "name": "verified name or null => 'Team TBD'",
+   "lg_team_id": "int or null"
+  },
+  "team2": "same as team1",
+  "team1_receives": [
+   "asset strings"
+  ],
+  "team2_receives": [
+   "asset strings"
+  ],
+  "notes": "ECM notes",
+  "lg_notes": "LG notes (protection removed, reversed, compensation)",
+  "source_url": "link"
+ },
+ "trades": []
+}
