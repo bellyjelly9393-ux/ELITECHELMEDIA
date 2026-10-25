@@ -37,7 +37,7 @@
   const realGame = g => NATIONS.has(g.away_nation) && NATIONS.has(g.home_nation);
   const ptsKey = t => t.pts == null ? t.w * 2 : t.pts;
   const ptsText = t => t.pts == null ? '—' : String(t.pts);
-  const recText = t => t.w + '-' + t.l + '-' + (t.pts == null ? '—' : String(t.otl));
+  const recText = t => (t.w + (t.otw || 0)) + '-' + t.l + '-' + (t.pts == null ? '—' : String(t.otl));
 
   const nowIso = new Date().toISOString();
   const GAME_COLS = 'lg_game_id,scheduled_at,game_night_date,away_lg_team_id,away_nation,home_lg_team_id,home_nation,';
@@ -76,12 +76,12 @@
         if (!team || !NATIONS.has(s.nation) && !NATIONS.has(team.name)) return null;
         return {
           id: s.lg_team_id, name: team.name, group: team.group,
-          gp: +s.gp || 0, w: +s.w || 0, l: +s.l || 0, otl: +s.otl || 0,
-          pts: s.pts == null ? null : +s.pts,
+          gp: +s.gp || 0, w: +s.w || 0, l: +s.l || 0, otw: +s.otw || 0, otl: +s.otl || 0,
+          pts: s.w == null || s.otw == null || s.otl == null ? null : 2 * (+s.w + +s.otw) + +s.otl,
           gf: +s.gf || 0, ga: +s.ga || 0, gd: +s.gd || 0
         };
       }).filter(Boolean)
-        .sort((a, b) => ptsKey(b) - ptsKey(a) || b.gd - a.gd || b.gf - a.gf || a.name.localeCompare(b.name))
+        .sort((a, b) => ptsKey(b) - ptsKey(a) || b.w - a.w || b.gd - a.gd || b.gf - a.gf || a.name.localeCompare(b.name))
         .map((t, i) => ({ ...t, rank: i + 1, rec: recText(t) }));
       const rankOf = new Map(table.map(t => [t.id, t]));
 
