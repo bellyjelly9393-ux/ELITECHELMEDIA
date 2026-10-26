@@ -1,0 +1,25 @@
+lg_game_id,lg_user_id,player,build,shots,s_pct,ga,save,gaa,poke_check_saves,desperate_saves,ba_sv,break_away_pct,pen_shot_pct,shutout_periods,side,side_basis,team
+917928,74270,Doc_Plonker,HYB,14,0.929,1,13,1.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Victoriaville Tigres
+917928,59812,PapaDimez,HYB,19,0.737,5,14,5.0,1,2,0,0,0,0,home,goals_allowed_matches_opponent_score,Kingston Frontenacs
+917929,21527,Fedorov91X,HYB,12,0.833,2,10,2.0,0,1,0,0,0,1,away,goals_allowed_matches_opponent_score,Sarnia Sting
+917929,78530,imrehabilitated,HYB,6,1.0,0,6,0.0,0,0,0,0,0,3,home,goals_allowed_matches_opponent_score,Saskatoon Blades
+917930,80795,r3tarz,HYB,23,0.826,4,19,4.0,0,1,0,0,0,1,away,goals_allowed_matches_opponent_score,Gatineau Olympiques
+917930,62253,Crawford 50x,HYB,13,0.615,5,8,5.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Tri City Americans
+917931,70523,BolSaKiee,BFY,17,0.765,4,13,4.0,2,1,0,0,0,1,away,goals_allowed_matches_opponent_score,Edmonton Oil Kings
+917931,64497,NABOKOVx1995,HYB,14,0.929,1,13,1.0,0,0,0,0,0,2,home,goals_allowed_matches_opponent_score,Chicoutimi Sagueneens
+917932,59023,Rabb1tx14,HYB,19,0.632,7,12,7.01,0,1,0,0,0,0,away,goals_allowed_matches_opponent_score,Cape Breton Eagles
+917932,77220,HAWK8TUAH,HYB,20,0.5,10,10,10.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Chilliwack Bruins
+917933,78288,Freedoms_A_Must1,HYB,12,0.667,4,8,3.36,0,0,0,0,0,0,away,goals_allowed_matches_opponent_score,Red Deer Rebels
+917933,57283,Its WannaBe,HYB,25,0.88,3,22,2.52,0,1,0,0,0,0,home,goals_allowed_matches_opponent_score,Drummondville Voltigeurs
+917934,74167,LegionBench,BFY,13,0.846,2,11,1.35,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Owen Sound Attack
+917934,73455,BigCheese_35,HYB,23,0.87,3,20,2.03,0,2,0,0,0,1,home,goals_allowed_matches_opponent_score,Kamloops Blazers
+917941,80604,XxPASTRNAK88,BFY,21,0.619,8,13,7.3,1,1,0,0,0,0,away,goals_allowed_matches_opponent_score,Calgary Hitmen
+917941,78407,EgregiousMonke,HYB,19,0.895,2,17,1.82,0,1,1,100.0,0,2,home,goals_allowed_matches_opponent_score,Saginaw Spirit
+917955,32449,Lett m3 c00k,HYB,34,0.647,12,22,12.02,1,1,0,0,0,0,away,goals_allowed_matches_opponent_score,Shawinigan Cataractes
+917955,76522,RAMER5440,HYB,11,0.818,2,9,2.0,0,1,0,0,0,2,home,goals_allowed_matches_opponent_score,Brampton Steelheads
+917960,67037,Vella,HYB,18,0.889,2,16,1.7,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Windsor Spitfires
+917960,80604,XxPASTRNAK88,BFY,19,0.842,3,16,2.55,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Calgary Hitmen
+917969,41413,oNitrate,HYB,17,0.588,7,10,7.0,0,1,1,100.0,0,1,away,goals_allowed_matches_opponent_score,North Bay Battalion
+917969,32449,Lett m3 c00k,HYB,11,0.636,4,7,4.0,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Shawinigan Cataractes
+918009,80795,r3tarz,HYB,8,0.625,3,5,3.0,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Gatineau Olympiques
+918009,80604,XxPASTRNAK88,BFY,22,0.773,5,17,5.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Calgary Hitmen
