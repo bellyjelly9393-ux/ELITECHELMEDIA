@@ -13,25 +13,176 @@ lg_game_id,lg_user_id,player,build,shots,s_pct,ga,save,gaa,poke_check_saves,desp
 917933,57283,Its WannaBe,HYB,25,0.88,3,22,2.52,0,1,0,0,0,0,home,goals_allowed_matches_opponent_score,Drummondville Voltigeurs
 917934,74167,LegionBench,BFY,13,0.846,2,11,1.35,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Owen Sound Attack
 917934,73455,BigCheese_35,HYB,23,0.87,3,20,2.03,0,2,0,0,0,1,home,goals_allowed_matches_opponent_score,Kamloops Blazers
+917935,79505,nothargi4200,BFY,6,0.833,1,5,1.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Victoria Royals
+917935,78792,Borat_Sagdiyev94,HYB,27,0.704,8,19,8.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Saint John Sea Dogs
 917936,37214,NigelFromTinder,BFY,22,0.818,4,18,4.0,0,1,0,0,0,1,away,goals_allowed_matches_opponent_score,Sudbury Wolves
 917936,48771,ItsBender14,HYB,11,0.818,2,9,2.0,0,0,0,0,0,2,home,goals_allowed_matches_opponent_score,Seattle Thunderbirds
+917937,74523,Dede_I29I,HYB,9,0.889,1,8,1.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Vancouver Giants
+917937,7669,xX Z3NO Xx,BFY,16,0.75,4,12,4.0,0,0,1,100.0,0,0,home,goals_allowed_matches_opponent_score,Ottawa 67's
+917938,15980,EVO Volcano,HYB,19,0.789,4,15,4.0,0,1,0,0,0,0,away,goals_allowed_matches_opponent_score,Niagara IceDogs
+917938,35541,stonedwallgoat,HYB,19,0.737,5,14,5.0,0,1,0,0,0,0,home,goals_allowed_matches_opponent_score,Portland Winterhawks
+917939,36288,iTzDeezTendy31,HYB,25,0.76,6,19,6.0,0,0,1,100.0,0,0,away,goals_allowed_matches_opponent_score,Swift Current Broncos
+917939,22870,Arizona4life1107,HYB,14,0.714,4,10,4.0,1,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Newfoundland Regiment
+917940,54633,Shrubbrother,HYB,17,0.941,1,16,0.84,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Charlottetown Islanders
+917940,79333,AcidChief397,HYB,18,0.611,7,11,5.91,0,1,1,100.0,0,0,home,goals_allowed_matches_opponent_score,Regina Pats
 917941,80604,XxPASTRNAK88,BFY,21,0.619,8,13,7.3,1,1,0,0,0,0,away,goals_allowed_matches_opponent_score,Calgary Hitmen
 917941,78407,EgregiousMonke,HYB,19,0.895,2,17,1.82,0,1,1,100.0,0,2,home,goals_allowed_matches_opponent_score,Saginaw Spirit
+917942,74944,CelebriniNHL,HYB,17,0.882,2,15,2.0,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Wenatchee Wild
+917942,43697,Lunaetiik,HYB,8,0.625,3,5,3.0,0,0,1,100.0,0,1,home,goals_allowed_matches_opponent_score,Rimouski Oceanic
+917943,62274,DEANO-716,HYB,18,0.778,4,14,4.06,0,3,0,0,0,0,away,goals_allowed_matches_opponent_score,Baie-Comeau Drakkar
+917943,73474,Fil x 8,HYB,12,0.833,2,10,2.03,0,0,0,0,0,2,home,goals_allowed_matches_opponent_score,Barrie Colts
+917944,14255,DUCAS I8I,HYB,16,0.938,1,15,1.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Moncton Wildcats
+917944,51074,Frizyal8er,HYB,13,0.769,3,10,3.0,0,1,0,0,0,1,home,goals_allowed_matches_opponent_score,Oshawa Generals
+917945,74104,Jaymo171717,HYB,10,0.8,2,8,2.0,0,0,1,100.0,0,2,away,goals_allowed_matches_opponent_score,Brantford Bulldogs
+917945,80008,zombi3_4_lif3,HYB,18,0.778,4,14,4.0,0,1,0,0,0,0,home,goals_allowed_matches_opponent_score,Sherbrooke Phoenix
+917946,75303,Ferland52,HYB,19,0.895,2,17,2.0,0,0,1,100.0,0,1,away,goals_allowed_matches_opponent_score,Quebec Remparts
+917946,75418,b-man192,HYB,17,0.647,6,11,6.0,0,0,1,100.0,0,0,home,goals_allowed_matches_opponent_score,Peterborough Petes
+917947,67037,Vella,HYB,15,0.933,1,14,1.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Windsor Spitfires
+917947,44589,xI Eris Ix,HYB,11,0.818,2,9,2.0,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Lethbridge Hurricanes
+917948,56501,l Stefano l,HYB,19,0.526,9,10,9.01,0,1,0,0,0,0,away,goals_allowed_matches_opponent_score,Everett Silvertips
+917948,73374,Cpt McCoral,HYB,16,0.938,1,15,1.0,1,0,1,100.0,0,2,home,goals_allowed_matches_opponent_score,Guelph Storm
+917949,52850,The16thgunner,HYB,20,0.85,3,17,2.14,0,1,0,0,0,1,away,goals_allowed_matches_opponent_score,Val-d'Or Foreurs
+917949,16254,Dissizznuts_88,HYB,24,0.833,4,20,2.85,0,1,0,0,0,1,home,goals_allowed_matches_opponent_score,London Knights
+917950,67180,Eclipse I90I,HYB,20,0.7,6,14,6.0,0,0,1,100.0,0,0,away,goals_allowed_matches_opponent_score,Kelowna Rockets
+917950,9713,Philliesgreat08,HYB,16,0.875,2,14,2.0,0,1,0,0,0,1,home,goals_allowed_matches_opponent_score,Sault Ste. Marie Greyhounds
+917951,21306,A_CapTa1N_A,HYB,16,0.938,1,15,1.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Kitchener Rangers
+917951,73430,Stormchaser0009,HYB,15,0.867,2,13,2.0,0,1,0,0,0,1,home,goals_allowed_matches_opponent_score,Moose Jaw Warriors
+917952,80588,YanSavage5293,HYB,29,0.69,9,20,9.0,0,0,0,0,0,0,away,goals_allowed_matches_opponent_score,Blainville-Boisbriand Armada
+917952,41413,oNitrate,HYB,14,0.714,4,10,4.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,North Bay Battalion
+917953,40426,spacejay7,HYB,24,0.917,2,22,1.79,0,2,0,0,0,2,away,goals_allowed_matches_opponent_score,Erie Otters
+917953,51589,Brevonious,HYB,18,0.833,3,15,2.68,0,1,2,100.0,0,1,home,goals_allowed_matches_opponent_score,Halifax Mooseheads
+917954,73404,mervnation,HYB,25,0.84,4,21,2.14,1,2,0,0,0,2,away,goals_allowed_matches_opponent_score,Brandon Wheat Kings
+917954,74201,Strachan73,HYB,17,0.706,5,12,2.68,0,1,0,0,0,1,home,goals_allowed_matches_opponent_score,Flint Firebirds
 917955,32449,Lett m3 c00k,HYB,34,0.647,12,22,12.02,1,1,0,0,0,0,away,goals_allowed_matches_opponent_score,Shawinigan Cataractes
 917955,76522,RAMER5440,HYB,11,0.818,2,9,2.0,0,1,0,0,0,2,home,goals_allowed_matches_opponent_score,Brampton Steelheads
+917956,65461,SweetDWilly21,HYB,18,0.833,3,15,3.0,0,0,1,100.0,0,1,away,goals_allowed_matches_opponent_score,Rouyn-Noranda Huskies
+917956,80443,dunzy9510,HYB,14,1.0,0,14,0.0,0,0,0,0,0,3,home,goals_allowed_matches_opponent_score,Spokane Chiefs
+917957,66649,XxVaughnX36,HYB,19,0.895,2,17,2.0,0,4,0,0,0,1,away,goals_allowed_matches_opponent_score,Medicine Hat Tigers
+917957,78425,Stolikerr,BFY,15,0.8,3,12,3.0,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Prince Albert Raiders
+917958,79421,west1ns,HYB,25,0.84,4,21,4.0,0,0,2,100.0,0,0,away,goals_allowed_matches_opponent_score,Prince George Cougars
+917958,78368,PeakzReturn,HYB,7,1.0,0,7,0.0,0,0,0,0,0,3,home,goals_allowed_matches_opponent_score,Penticton Vees
 917959,51589,Brevonious,HYB,20,0.9,2,18,2.0,0,1,0,0,0,1,away,goals_allowed_matches_opponent_score,Halifax Mooseheads
 917959,37214,NigelFromTinder,BFY,25,0.84,4,21,4.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Sudbury Wolves
 917960,67037,Vella,HYB,18,0.889,2,16,1.7,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Windsor Spitfires
 917960,80604,XxPASTRNAK88,BFY,19,0.842,3,16,2.55,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Calgary Hitmen
+917961,80443,dunzy9510,HYB,23,0.826,4,19,4.0,0,0,0,0,0,0,away,goals_allowed_matches_opponent_score,Spokane Chiefs
+917961,16254,Dissizznuts_88,HYB,16,0.625,6,10,6.0,0,1,0,0,0,0,home,goals_allowed_matches_opponent_score,London Knights
+917962,65461,SweetDWilly21,HYB,25,0.92,2,23,1.85,0,1,1,100.0,0,2,away,goals_allowed_matches_opponent_score,Rouyn-Noranda Huskies
+917962,21306,A_CapTa1N_A,HYB,8,0.875,1,7,0.93,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Kitchener Rangers
+917963,48771,ItsBender14,HYB,18,0.722,5,13,4.65,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Seattle Thunderbirds
+917963,59023,Rabb1tx14,HYB,15,0.733,4,11,3.72,0,0,1,100.0,0,1,home,goals_allowed_matches_opponent_score,Cape Breton Eagles
+917964,40426,spacejay7,HYB,14,0.929,1,13,1.0,0,1,0,0,0,2,away,goals_allowed_matches_opponent_score,Erie Otters
+917964,79421,west1ns,HYB,11,0.818,2,9,2.0,0,0,2,100.0,0,1,home,goals_allowed_matches_opponent_score,Prince George Cougars
+917965,64497,NABOKOVx1995,HYB,13,0.846,2,11,1.78,0,0,1,100.0,0,1,away,goals_allowed_matches_opponent_score,Chicoutimi Sagueneens
+917965,56501,l Stefano l,HYB,24,0.875,3,21,2.66,0,0,0,0,0,2,home,goals_allowed_matches_opponent_score,Everett Silvertips
 917966,59812,PapaDimez,HYB,11,0.727,3,8,3.0,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Kingston Frontenacs
 917966,74944,CelebriniNHL,HYB,36,0.75,9,27,9.0,0,1,1,100.0,0,0,home,goals_allowed_matches_opponent_score,Wenatchee Wild
+917967,21527,Fedorov91X,HYB,24,0.917,2,22,2.0,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Sarnia Sting
+917967,79505,nothargi4200,BFY,11,0.636,4,7,4.0,0,0,1,100.0,0,0,home,goals_allowed_matches_opponent_score,Victoria Royals
+917968,73455,BigCheese_35,HYB,26,0.846,4,22,3.45,0,2,1,100.0,0,0,away,goals_allowed_matches_opponent_score,Kamloops Blazers
+917968,80008,zombi3_4_lif3,HYB,22,0.864,3,19,2.59,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Sherbrooke Phoenix
 917969,41413,oNitrate,HYB,17,0.588,7,10,7.0,0,1,1,100.0,0,1,away,goals_allowed_matches_opponent_score,North Bay Battalion
 917969,32449,Lett m3 c00k,HYB,11,0.636,4,7,4.0,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Shawinigan Cataractes
+917970,73474,Fil x 8,HYB,18,0.667,6,12,6.0,0,0,1,100.0,0,0,away,goals_allowed_matches_opponent_score,Barrie Colts
+917970,54633,Shrubbrother,HYB,22,0.773,5,17,5.0,0,1,0,0,0,0,home,goals_allowed_matches_opponent_score,Charlottetown Islanders
+917971,78425,Stolikerr,BFY,13,0.769,3,10,2.58,0,1,0,0,0,1,away,goals_allowed_matches_opponent_score,Prince Albert Raiders
+917971,62274,DEANO-716,HYB,22,0.818,4,18,3.44,0,2,0,0,0,1,home,goals_allowed_matches_opponent_score,Baie-Comeau Drakkar
+917972,74523,Dede_I29I,HYB,9,0.667,3,6,2.67,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Vancouver Giants
+917972,74270,Doc_Plonker,HYB,19,0.895,2,17,1.78,0,2,0,0,0,1,home,goals_allowed_matches_opponent_score,Victoriaville Tigres
+917973,73374,Cpt McCoral,HYB,16,0.938,1,15,1.0,0,0,1,100.0,0,2,away,goals_allowed_matches_opponent_score,Guelph Storm
+917973,36288,iTzDeezTendy31,HYB,29,0.759,7,22,7.0,0,0,1,100.0,0,1,home,goals_allowed_matches_opponent_score,Swift Current Broncos
+917974,22870,Arizona4life1107,HYB,18,0.611,7,11,7.0,1,0,0,0,0,0,away,goals_allowed_matches_opponent_score,Newfoundland Regiment
+917974,15980,EVO Volcano,HYB,19,0.789,4,15,4.0,0,2,1,100.0,0,0,home,goals_allowed_matches_opponent_score,Niagara IceDogs
+917975,62253,Crawford 50x,HYB,9,0.889,1,8,1.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Tri City Americans
+917975,14255,DUCAS I8I,HYB,16,0.75,4,12,4.0,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Moncton Wildcats
+917976,9713,Philliesgreat08,HYB,21,0.857,3,18,3.01,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Sault Ste. Marie Greyhounds
+917976,80795,r3tarz,HYB,21,0.714,6,15,6.02,0,2,0,0,0,0,home,goals_allowed_matches_opponent_score,Gatineau Olympiques
+917977,78530,imrehabilitated,HYB,14,0.786,3,11,3.0,1,1,2,100.0,0,1,away,goals_allowed_matches_opponent_score,Saskatoon Blades
+917977,75303,Ferland52,HYB,16,0.938,1,15,1.0,0,0,0,0,0,2,home,goals_allowed_matches_opponent_score,Quebec Remparts
+917978,52850,The16thgunner,HYB,22,0.955,1,21,1.0,0,1,1,100.0,0,2,away,goals_allowed_matches_opponent_score,Val-d'Or Foreurs
+917978,73404,mervnation,HYB,16,0.875,2,14,2.0,0,0,0,0,0,2,home,goals_allowed_matches_opponent_score,Brandon Wheat Kings
+917979,57283,Its WannaBe,HYB,14,0.643,5,9,5.0,0,0,0,0,0,0,away,goals_allowed_matches_opponent_score,Drummondville Voltigeurs
+917979,79333,AcidChief397,HYB,23,0.739,6,17,6.0,0,1,0,0,0,1,home,goals_allowed_matches_opponent_score,Regina Pats
+917980,78792,Borat_Sagdiyev94,HYB,12,0.917,1,11,1.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Saint John Sea Dogs
+917980,44589,xI Eris Ix,HYB,22,0.773,5,17,5.0,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Lethbridge Hurricanes
+917981,76522,RAMER5440,HYB,14,0.643,5,9,5.0,0,0,1,100.0,0,1,away,goals_allowed_matches_opponent_score,Brampton Steelheads
+917981,70523,BolSaKiee,BFY,17,0.824,3,14,3.0,1,0,1,100.0,0,2,home,goals_allowed_matches_opponent_score,Edmonton Oil Kings
+917982,35541,stonedwallgoat,HYB,16,0.813,3,13,3.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Portland Winterhawks
+917982,43697,Lunaetiik,HYB,18,0.889,2,16,2.0,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Rimouski Oceanic
+917983,73430,Stormchaser0009,HYB,16,0.75,4,12,4.0,0,1,0,0,0,0,away,goals_allowed_matches_opponent_score,Moose Jaw Warriors
+917983,80588,YanSavage5293,HYB,26,0.923,2,24,2.0,0,1,1,100.0,0,2,home,goals_allowed_matches_opponent_score,Blainville-Boisbriand Armada
+917984,75418,b-man192,HYB,21,0.81,4,17,4.0,0,2,0,0,0,1,away,goals_allowed_matches_opponent_score,Peterborough Petes
+917984,66649,XxVaughnX36,HYB,25,0.76,6,19,6.0,0,5,4,100.0,0,1,home,goals_allowed_matches_opponent_score,Medicine Hat Tigers
+917985,78288,Freedoms_A_Must1,HYB,9,0.667,3,6,3.01,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Red Deer Rebels
+917985,74104,Jaymo171717,HYB,19,0.684,6,13,6.0,0,3,0,0,0,0,home,goals_allowed_matches_opponent_score,Brantford Bulldogs
+917986,7669,xX Z3NO Xx,HYB,16,0.813,3,13,3.0,0,0,2,100.0,0,1,away,goals_allowed_matches_opponent_score,Ottawa 67's
+917986,78368,PeakzReturn,HYB,14,0.857,2,12,2.0,0,1,0,0,0,2,home,goals_allowed_matches_opponent_score,Penticton Vees
+917987,78407,EgregiousMonke,HYB,14,0.929,1,13,1.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Saginaw Spirit
+917987,77220,HAWK8TUAH,HYB,17,0.824,3,14,3.0,0,0,1,100.0,0,0,home,goals_allowed_matches_opponent_score,Chilliwack Bruins
+917988,74167,LegionBench,BFY,15,0.8,3,12,3.0,0,1,0,0,0,1,away,goals_allowed_matches_opponent_score,Owen Sound Attack
+917988,67180,Eclipse I90I,HYB,17,0.765,4,13,4.0,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Kelowna Rockets
+917989,74201,Strachan73,HYB,11,0.909,1,10,1.0,0,1,0,0,0,2,away,goals_allowed_matches_opponent_score,Flint Firebirds
+917989,51074,Frizyal8er,HYB,22,0.773,5,17,5.0,0,1,2,100.0,0,1,home,goals_allowed_matches_opponent_score,Oshawa Generals
+917990,74944,CelebriniNHL,HYB,17,0.824,3,14,2.71,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Wenatchee Wild
+917990,78792,Borat_Sagdiyev94,HYB,19,0.789,4,15,3.61,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Saint John Sea Dogs
+917991,62253,Crawford 50x,HYB,9,0.889,1,8,1.0,0,1,0,0,0,2,away,goals_allowed_matches_opponent_score,Tri City Americans
+917991,65461,SweetDWilly21,HYB,36,0.833,6,30,6.0,0,1,0,0,0,1,home,goals_allowed_matches_opponent_score,Rouyn-Noranda Huskies
+917992,43697,Lunaetiik,HYB,18,0.833,3,15,2.89,0,0,1,100.0,0,1,away,goals_allowed_matches_opponent_score,Rimouski Oceanic
+917992,73374,Cpt McCoral,HYB,19,0.789,4,15,3.85,0,2,0,0,0,1,home,goals_allowed_matches_opponent_score,Guelph Storm
+917993,75418,b-man192,HYB,15,0.6,6,9,6.01,0,2,1,100.0,0,1,away,goals_allowed_matches_opponent_score,Peterborough Petes
+917993,78288,Freedoms_A_Must1,HYB,21,0.905,2,19,2.0,0,0,1,100.0,0,1,home,goals_allowed_matches_opponent_score,Red Deer Rebels
+917994,76522,RAMER5440,HYB,19,0.895,2,17,2.0,0,1,0,0,0,2,away,goals_allowed_matches_opponent_score,Brampton Steelheads
+917994,64497,NABOKOVx1995,HYB,19,0.947,1,18,1.0,0,0,0,0,0,2,home,goals_allowed_matches_opponent_score,Chicoutimi Sagueneens
+917995,59023,Rabb1tx14,HYB,21,0.667,7,14,7.0,0,1,0,0,0,0,away,goals_allowed_matches_opponent_score,Cape Breton Eagles
+917995,67180,Eclipse I90I,HYB,16,0.688,5,11,5.0,0,0,1,100.0,0,1,home,goals_allowed_matches_opponent_score,Kelowna Rockets
+917996,54633,Shrubbrother,HYB,23,0.739,6,17,6.0,0,0,0,0,0,0,away,goals_allowed_matches_opponent_score,Charlottetown Islanders
+917996,74167,LegionBench,BFY,14,0.786,3,11,3.0,0,1,0,0,0,1,home,goals_allowed_matches_opponent_score,Owen Sound Attack
+917997,79333,AcidChief397,HYB,23,0.957,1,22,1.0,0,1,0,0,0,2,away,goals_allowed_matches_opponent_score,Regina Pats
+917997,74201,Strachan73,HYB,16,1.0,0,16,0.0,0,0,0,0,0,3,home,goals_allowed_matches_opponent_score,Flint Firebirds
+917998,74104,Jaymo171717,HYB,12,0.667,4,8,4.0,0,1,2,100.0,0,0,away,goals_allowed_matches_opponent_score,Brantford Bulldogs
+917998,74523,Dede_I29I,HYB,21,0.714,6,15,6.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Vancouver Giants
+917999,78368,PeakzReturn,HYB,19,0.842,3,16,2.93,0,1,0,0,0,2,away,goals_allowed_matches_opponent_score,Penticton Vees
+917999,78407,EgregiousMonke,HYB,16,0.75,4,12,3.9,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Saginaw Spirit
+918000,14255,DUCAS I8I,HYB,7,1.0,0,7,0.0,0,0,0,0,0,3,away,goals_allowed_matches_opponent_score,Moncton Wildcats
+918000,21527,Fedorov91X,HYB,22,0.773,5,17,5.0,0,0,0,0,0,2,home,goals_allowed_matches_opponent_score,Sarnia Sting
+918001,51589,Brevonious,HYB,19,0.579,8,11,8.0,0,1,1,100.0,0,0,away,goals_allowed_matches_opponent_score,Halifax Mooseheads
+918001,7669,xX Z3NO Xx,HYB,23,0.87,3,20,3.0,0,1,1,100.0,0,2,home,goals_allowed_matches_opponent_score,Ottawa 67's
+918002,48771,ItsBender14,HYB,20,0.55,9,11,9.0,0,2,0,0,0,0,away,goals_allowed_matches_opponent_score,Seattle Thunderbirds
+918002,22870,Arizona4life1107,HYB,22,0.545,10,12,10.0,0,0,1,100.0,0,0,home,goals_allowed_matches_opponent_score,Newfoundland Regiment
+918003,80008,zombi3_4_lif3,HYB,32,0.813,6,26,6.0,1,3,0,0,0,0,away,goals_allowed_matches_opponent_score,Sherbrooke Phoenix
+918003,41413,oNitrate,HYB,22,0.909,2,20,2.0,0,1,1,100.0,0,1,home,goals_allowed_matches_opponent_score,North Bay Battalion
 918004,78425,Stolikerr,BFY,15,0.6,6,9,6.0,0,0,0,0,0,0,away,goals_allowed_matches_opponent_score,Prince Albert Raiders
 918004,37214,NigelFromTinder,BFY,15,0.8,3,12,3.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Sudbury Wolves
+918005,16254,Dissizznuts_88,HYB,23,0.87,3,20,2.81,0,1,0,0,0,1,away,goals_allowed_matches_opponent_score,London Knights
+918005,73455,BigCheese_35,HYB,16,0.875,2,14,1.88,0,0,0,0,0,1,home,goals_allowed_matches_opponent_score,Kamloops Blazers
 918006,73430,Stormchaser0009,HYB,23,0.739,6,17,6.03,0,2,1,100.0,0,0,away,goals_allowed_matches_opponent_score,Moose Jaw Warriors
 918006,59812,PapaDimez,HYB,16,0.875,2,14,2.01,1,0,1,100.0,0,1,home,goals_allowed_matches_opponent_score,Kingston Frontenacs
+918007,75303,Ferland52,HYB,21,0.857,3,18,3.01,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Quebec Remparts
+918007,67037,Vella,HYB,14,0.643,5,9,5.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Windsor Spitfires
 918008,35541,stonedwallgoat,HYB,15,0.667,5,10,5.0,0,0,1,100.0,0,0,away,goals_allowed_matches_opponent_score,Portland Winterhawks
 918008,32449,Lett m3 c00k,HYB,31,0.903,3,28,3.0,0,2,0,0,0,1,home,goals_allowed_matches_opponent_score,Shawinigan Cataractes
 918009,80795,r3tarz,HYB,8,0.625,3,5,3.0,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Gatineau Olympiques
 918009,80604,XxPASTRNAK88,BFY,22,0.773,5,17,5.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Calgary Hitmen
+918010,73474,Fil x 8,HYB,14,0.857,2,12,2.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Barrie Colts
+918010,70523,BolSaKiee,BFY,20,0.8,4,16,4.0,0,2,0,0,0,1,home,goals_allowed_matches_opponent_score,Edmonton Oil Kings
+918011,73404,mervnation,HYB,18,0.889,2,16,2.0,0,1,0,0,0,2,away,goals_allowed_matches_opponent_score,Brandon Wheat Kings
+918011,21306,A_CapTa1N_A,HYB,12,0.667,4,8,4.0,0,1,0,0,0,1,home,goals_allowed_matches_opponent_score,Kitchener Rangers
+918012,77220,HAWK8TUAH,HYB,24,0.75,6,18,6.0,0,0,0,0,0,0,away,goals_allowed_matches_opponent_score,Chilliwack Bruins
+918012,40426,spacejay7,HYB,16,0.875,2,14,2.0,0,0,1,100.0,0,1,home,goals_allowed_matches_opponent_score,Erie Otters
+918013,51074,Frizyal8er,HYB,18,0.778,4,14,4.0,0,0,2,100.0,0,0,away,goals_allowed_matches_opponent_score,Oshawa Generals
+918013,56501,l Stefano l,HYB,26,0.654,9,17,9.01,0,2,0,0,0,0,home,goals_allowed_matches_opponent_score,Everett Silvertips
+918014,44589,xI Eris Ix,HYB,15,0.733,4,11,4.0,0,0,1,100.0,0,1,away,goals_allowed_matches_opponent_score,Lethbridge Hurricanes
+918014,80588,YanSavage5293,HYB,19,0.737,5,14,5.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Blainville-Boisbriand Armada
+918015,36288,iTzDeezTendy31,HYB,11,0.727,3,8,3.0,0,0,0,0,0,1,away,goals_allowed_matches_opponent_score,Swift Current Broncos
+918015,62274,DEANO-716,HYB,16,0.688,5,11,5.0,0,2,0,0,0,0,home,goals_allowed_matches_opponent_score,Baie-Comeau Drakkar
+918016,78530,imrehabilitated,HYB,15,0.533,7,8,7.0,1,0,0,0,0,0,away,goals_allowed_matches_opponent_score,Saskatoon Blades
+918016,57283,Its WannaBe,HYB,20,0.9,2,18,2.0,0,0,1,100.0,0,2,home,goals_allowed_matches_opponent_score,Drummondville Voltigeurs
+918017,79505,nothargi4200,HYB,7,1.0,0,7,0.0,0,0,1,100.0,0,3,away,goals_allowed_matches_opponent_score,Victoria Royals
+918017,15980,EVO Volcano,HYB,20,0.9,2,18,1.78,0,2,0,0,0,2,home,goals_allowed_matches_opponent_score,Niagara IceDogs
+918018,79421,west1ns,HYB,12,0.833,2,10,2.0,0,0,0,0,0,2,away,goals_allowed_matches_opponent_score,Prince George Cougars
+918018,74270,Doc_Plonker,HYB,18,0.722,5,13,5.0,0,1,1,100.0,0,1,home,goals_allowed_matches_opponent_score,Victoriaville Tigres
+918019,9713,Philliesgreat08,HYB,18,0.889,2,16,2.0,0,1,0,0,0,2,away,goals_allowed_matches_opponent_score,Sault Ste. Marie Greyhounds
+918019,52850,The16thgunner,HYB,24,0.667,8,16,8.0,0,0,0,0,0,0,home,goals_allowed_matches_opponent_score,Val-d'Or Foreurs
+918020,66649,XxVaughnX36,HYB,16,0.75,4,12,5.53,0,1,2,100.0,0,0,away,table_order,Medicine Hat Tigers
+918020,79843,DoughboyRacen,HYB,10,0.7,3,7,9.0,0,1,0,0,0,0,home,table_order,Spokane Chiefs
+918020,80443,dunzy9510,HYB,13,0.923,1,12,0.95,0,0,0,0,0,2,home,table_order,Spokane Chiefs
