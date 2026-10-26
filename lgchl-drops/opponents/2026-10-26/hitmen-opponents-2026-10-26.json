@@ -8,7 +8,7 @@
   {
    "lg_team_id": 382,
    "name": "Shawinigan Cataractes",
-   "record_after_last_night": "18-18-4",
+   "record_after_last_night": "19-18-4",
    "last_night": [
     {
      "lg_game_id": 917955,
@@ -229,43 +229,153 @@
       }
      ],
      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917969"
+    },
+    {
+     "lg_game_id": 918008,
+     "played_at": "Sunday October 25th 2026, 10:10 PM",
+     "opponent": "Portland Winterhawks",
+     "home_or_away": "home",
+     "result": "W 5-3",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 1,
+      "2": 2,
+      "3": 2
+     },
+     "team_stats": {
+      "goals": 5,
+      "total_shots": 15,
+      "hits": 6,
+      "time_on_attack": "9:38",
+      "passing_pct": "74.2%",
+      "face_offs_won": 12,
+      "penalty_minutes": "2:00",
+      "power_plays": "0 / 1",
+      "power_play_minutes": "0:00",
+      "blocks": 3,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "Laprazs",
+       "build": "SNP",
+       "g": 2,
+       "a": 2,
+       "p": 4,
+       "plus_minus": 3,
+       "shots": "2/5",
+       "hits": 0,
+       "takeaways": 0,
+       "giveaways": 8,
+       "time_with_puck": "6:05"
+      },
+      {
+       "position": "C",
+       "player": "Jlm1410",
+       "build": "GRN",
+       "g": 2,
+       "a": 2,
+       "p": 4,
+       "plus_minus": 3,
+       "shots": "4/7",
+       "hits": 1,
+       "takeaways": 3,
+       "giveaways": 1,
+       "time_with_puck": "2:43"
+      },
+      {
+       "position": "RW",
+       "player": "x Alpakov",
+       "build": "DNG",
+       "g": 1,
+       "a": 4,
+       "p": 5,
+       "plus_minus": 3,
+       "shots": "5/11",
+       "hits": 3,
+       "takeaways": 3,
+       "giveaways": 7,
+       "time_with_puck": "4:52"
+      },
+      {
+       "position": "LD",
+       "player": "CFairman7",
+       "build": "PMD",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": 3,
+       "shots": "2/5",
+       "hits": 0,
+       "takeaways": 1,
+       "giveaways": 0,
+       "time_with_puck": "4:02"
+      },
+      {
+       "position": "RD",
+       "player": "Deno x 51",
+       "build": "PMD",
+       "g": 0,
+       "a": 1,
+       "p": 1,
+       "plus_minus": 3,
+       "shots": "0/4",
+       "hits": 2,
+       "takeaways": 2,
+       "giveaways": 6,
+       "time_with_puck": "4:32"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "Lett m3 c00k",
+       "build": "HYB",
+       "shots": 31,
+       "saves": 28,
+       "ga": 3,
+       "sv_pct": 0.903,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918008"
     }
    ],
    "usual_lineup": {
     "LW": [
      {
       "player": "Laprazs",
-      "games_last_night": 2
+      "games_last_night": 3
      }
     ],
     "C": [
      {
       "player": "Jlm1410",
-      "games_last_night": 2
+      "games_last_night": 3
      }
     ],
     "RW": [
      {
       "player": "x Alpakov",
-      "games_last_night": 2
+      "games_last_night": 3
      }
     ],
     "LD": [
      {
       "player": "CFairman7",
-      "games_last_night": 2
+      "games_last_night": 3
      }
     ],
     "RD": [
      {
       "player": "Deno x 51",
-      "games_last_night": 2
+      "games_last_night": 3
      }
     ],
     "G": [
      {
       "player": "Lett m3 c00k",
-      "games_last_night": 2
+      "games_last_night": 3
      }
     ]
    },
@@ -387,9 +497,7 @@
      }
     }
    },
-   "games_missing": [
-    918008
-   ],
+   "games_missing": [],
    "tonight": {
     "lg_game_id": 918034,
     "et": "9:00 PM",
@@ -406,7 +514,7 @@
   {
    "lg_team_id": 444,
    "name": "Kingston Frontenacs",
-   "record_after_last_night": "16-18-2",
+   "record_after_last_night": "18-18-2",
    "last_night": [
     {
      "lg_game_id": 917928,
@@ -517,43 +625,263 @@
       }
      ],
      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917928"
+    },
+    {
+     "lg_game_id": 917966,
+     "played_at": "Sunday October 25th 2026, 09:35 PM",
+     "opponent": "Wenatchee Wild",
+     "home_or_away": "away",
+     "result": "W 9-3",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 1,
+      "2": 5,
+      "3": 3
+     },
+     "team_stats": {
+      "goals": 9,
+      "total_shots": 36,
+      "hits": 3,
+      "time_on_attack": "10:06",
+      "passing_pct": "80%",
+      "face_offs_won": 20,
+      "penalty_minutes": "2:00",
+      "power_plays": "1 / 3",
+      "power_play_minutes": "0:00",
+      "blocks": 2,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "NHL JL 13",
+       "build": "PLY",
+       "g": 2,
+       "a": 2,
+       "p": 4,
+       "plus_minus": 5,
+       "shots": "10/20",
+       "hits": 1,
+       "takeaways": 2,
+       "giveaways": 3,
+       "time_with_puck": "4:04"
+      },
+      {
+       "position": "C",
+       "player": "GavoGotHim",
+       "build": "PLY",
+       "g": 2,
+       "a": 3,
+       "p": 5,
+       "plus_minus": 5,
+       "shots": "10/21",
+       "hits": 0,
+       "takeaways": 1,
+       "giveaways": 7,
+       "time_with_puck": "4:23"
+      },
+      {
+       "position": "RW",
+       "player": "SellyShotEm",
+       "build": "SNP",
+       "g": 4,
+       "a": 4,
+       "p": 8,
+       "plus_minus": 5,
+       "shots": "7/14",
+       "hits": 0,
+       "takeaways": 4,
+       "giveaways": 11,
+       "time_with_puck": "5:39"
+      },
+      {
+       "position": "LD",
+       "player": "Stealth2308",
+       "build": "TWD",
+       "g": 0,
+       "a": 4,
+       "p": 4,
+       "plus_minus": 5,
+       "shots": "4/9",
+       "hits": 2,
+       "takeaways": 6,
+       "giveaways": 4,
+       "time_with_puck": "3:41"
+      },
+      {
+       "position": "RD",
+       "player": "J_Carlos_96",
+       "build": "PMD",
+       "g": 1,
+       "a": 1,
+       "p": 2,
+       "plus_minus": 5,
+       "shots": "1/3",
+       "hits": 0,
+       "takeaways": 3,
+       "giveaways": 4,
+       "time_with_puck": "2:18"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "PapaDimez",
+       "build": "HYB",
+       "shots": 11,
+       "saves": 8,
+       "ga": 3,
+       "sv_pct": 0.727,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917966"
+    },
+    {
+     "lg_game_id": 918006,
+     "played_at": "Sunday October 25th 2026, 10:10 PM",
+     "opponent": "Moose Jaw Warriors",
+     "home_or_away": "home",
+     "result": "W 6-2",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 1,
+      "2": 2,
+      "3": 3
+     },
+     "team_stats": {
+      "goals": 6,
+      "total_shots": 23,
+      "hits": 1,
+      "time_on_attack": "8:26",
+      "passing_pct": "70.7%",
+      "face_offs_won": 19,
+      "penalty_minutes": "2:00",
+      "power_plays": "0 / 2",
+      "power_play_minutes": "0:00",
+      "blocks": 4,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "NHL JL 13",
+       "build": "PLY",
+       "g": 2,
+       "a": 1,
+       "p": 3,
+       "plus_minus": 4,
+       "shots": "6/12",
+       "hits": 0,
+       "takeaways": 1,
+       "giveaways": 6,
+       "time_with_puck": "2:39"
+      },
+      {
+       "position": "C",
+       "player": "GavoGotHim",
+       "build": "PLY",
+       "g": 1,
+       "a": 3,
+       "p": 4,
+       "plus_minus": 4,
+       "shots": "3/8",
+       "hits": 1,
+       "takeaways": 2,
+       "giveaways": 14,
+       "time_with_puck": "4:10"
+      },
+      {
+       "position": "RW",
+       "player": "SellyShotEm",
+       "build": "SNP",
+       "g": 2,
+       "a": 2,
+       "p": 4,
+       "plus_minus": 4,
+       "shots": "7/15",
+       "hits": 0,
+       "takeaways": 3,
+       "giveaways": 11,
+       "time_with_puck": "7:13"
+      },
+      {
+       "position": "LD",
+       "player": "Stealth2308",
+       "build": "TWD",
+       "g": 1,
+       "a": 1,
+       "p": 2,
+       "plus_minus": 4,
+       "shots": "3/7",
+       "hits": 0,
+       "takeaways": 6,
+       "giveaways": 6,
+       "time_with_puck": "2:40"
+      },
+      {
+       "position": "RD",
+       "player": "J_Carlos_96",
+       "build": "PMD",
+       "g": 0,
+       "a": 3,
+       "p": 3,
+       "plus_minus": 4,
+       "shots": "1/2",
+       "hits": 0,
+       "takeaways": 2,
+       "giveaways": 4,
+       "time_with_puck": "2:30"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "PapaDimez",
+       "build": "HYB",
+       "shots": 16,
+       "saves": 14,
+       "ga": 2,
+       "sv_pct": 0.875,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918006"
     }
    ],
    "usual_lineup": {
     "LW": [
      {
       "player": "NHL JL 13",
-      "games_last_night": 1
+      "games_last_night": 3
      }
     ],
     "C": [
      {
       "player": "GavoGotHim",
-      "games_last_night": 1
+      "games_last_night": 3
      }
     ],
     "RW": [
      {
       "player": "SellyShotEm",
-      "games_last_night": 1
+      "games_last_night": 3
      }
     ],
     "LD": [
      {
       "player": "Stealth2308",
-      "games_last_night": 1
+      "games_last_night": 3
      }
     ],
     "RD": [
      {
       "player": "J_Carlos_96",
-      "games_last_night": 1
+      "games_last_night": 3
      }
     ],
     "G": [
      {
       "player": "PapaDimez",
-      "games_last_night": 1
+      "games_last_night": 3
      }
     ]
    },
@@ -674,10 +1002,7 @@
      }
     }
    },
-   "games_missing": [
-    917966,
-    918006
-   ],
+   "games_missing": [],
    "tonight": {
     "lg_game_id": 918067,
     "et": "9:35 PM",
@@ -694,15 +1019,496 @@
   {
    "lg_team_id": 447,
    "name": "Sudbury Wolves",
-   "record_after_last_night": null,
-   "last_night": [],
-   "usual_lineup": {},
-   "players": {},
-   "games_missing": [
-    917936,
-    917959,
-    918004
+   "record_after_last_night": "26-12-2",
+   "last_night": [
+    {
+     "lg_game_id": 917936,
+     "played_at": "Sunday October 25th 2026, 09:00 PM",
+     "opponent": "Seattle Thunderbirds",
+     "home_or_away": "away",
+     "result": "L 2-4",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 0,
+      "2": 2,
+      "3": 0
+     },
+     "team_stats": {
+      "goals": 2,
+      "total_shots": 11,
+      "hits": 3,
+      "time_on_attack": "6:27",
+      "passing_pct": "69%",
+      "face_offs_won": 13,
+      "penalty_minutes": "2:00",
+      "power_plays": "0 / 0",
+      "power_play_minutes": "0:00",
+      "blocks": 8,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "Hatitosa",
+       "build": "TWF",
+       "g": 2,
+       "a": 0,
+       "p": 2,
+       "plus_minus": -2,
+       "shots": "3/6",
+       "hits": 0,
+       "takeaways": 2,
+       "giveaways": 6,
+       "time_with_puck": "3:20"
+      },
+      {
+       "position": "C",
+       "player": "Hergy9",
+       "build": "TWF",
+       "g": 0,
+       "a": 2,
+       "p": 2,
+       "plus_minus": -2,
+       "shots": "2/4",
+       "hits": 0,
+       "takeaways": 1,
+       "giveaways": 7,
+       "time_with_puck": "2:46"
+      },
+      {
+       "position": "RW",
+       "player": "Br0midas",
+       "build": "SNP",
+       "g": 0,
+       "a": 1,
+       "p": 1,
+       "plus_minus": -2,
+       "shots": "3/6",
+       "hits": 1,
+       "takeaways": 1,
+       "giveaways": 12,
+       "time_with_puck": "5:01"
+      },
+      {
+       "position": "LD",
+       "player": "Hate4Hire4739",
+       "build": "PMD",
+       "g": 0,
+       "a": 1,
+       "p": 1,
+       "plus_minus": -2,
+       "shots": "1/2",
+       "hits": 2,
+       "takeaways": 1,
+       "giveaways": 3,
+       "time_with_puck": "2:58"
+      },
+      {
+       "position": "RD",
+       "player": "GeeReeDoh",
+       "build": "TWD",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": -2,
+       "shots": "0/2",
+       "hits": 0,
+       "takeaways": 3,
+       "giveaways": 3,
+       "time_with_puck": "2:58"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "NigelFromTinder",
+       "build": "BFY",
+       "shots": 22,
+       "saves": 18,
+       "ga": 4,
+       "sv_pct": 0.818,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917936"
+    },
+    {
+     "lg_game_id": 917959,
+     "played_at": "Sunday October 25th 2026, 09:35 PM",
+     "opponent": "Halifax Mooseheads",
+     "home_or_away": "home",
+     "result": "L 2-4",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 0,
+      "2": 1,
+      "3": 1
+     },
+     "team_stats": {
+      "goals": 2,
+      "total_shots": 20,
+      "hits": 5,
+      "time_on_attack": "8:17",
+      "passing_pct": "73.6%",
+      "face_offs_won": 17,
+      "penalty_minutes": "6:00",
+      "power_plays": "0 / 2",
+      "power_play_minutes": "0:00",
+      "blocks": 3,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "Hatitosa",
+       "build": "TWF",
+       "g": 1,
+       "a": 1,
+       "p": 2,
+       "plus_minus": -1,
+       "shots": "5/12",
+       "hits": 2,
+       "takeaways": 3,
+       "giveaways": 17,
+       "time_with_puck": "4:08"
+      },
+      {
+       "position": "C",
+       "player": "Hergy9",
+       "build": "TWF",
+       "g": 0,
+       "a": 2,
+       "p": 2,
+       "plus_minus": -1,
+       "shots": "2/5",
+       "hits": 1,
+       "takeaways": 8,
+       "giveaways": 7,
+       "time_with_puck": "2:54"
+      },
+      {
+       "position": "RW",
+       "player": "Br0midas",
+       "build": "SNP",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": -1,
+       "shots": "6/14",
+       "hits": 1,
+       "takeaways": 0,
+       "giveaways": 10,
+       "time_with_puck": "5:07"
+      },
+      {
+       "position": "LD",
+       "player": "Hate4Hire4739",
+       "build": "PMD",
+       "g": 0,
+       "a": 1,
+       "p": 1,
+       "plus_minus": -1,
+       "shots": "2/4",
+       "hits": 1,
+       "takeaways": 2,
+       "giveaways": 2,
+       "time_with_puck": "3:10"
+      },
+      {
+       "position": "RD",
+       "player": "GeeReeDoh",
+       "build": "TWD",
+       "g": 1,
+       "a": 0,
+       "p": 1,
+       "plus_minus": -1,
+       "shots": "4/10",
+       "hits": 0,
+       "takeaways": 3,
+       "giveaways": 4,
+       "time_with_puck": "1:53"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "NigelFromTinder",
+       "build": "BFY",
+       "shots": 25,
+       "saves": 21,
+       "ga": 4,
+       "sv_pct": 0.84,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917959"
+    },
+    {
+     "lg_game_id": 918004,
+     "played_at": "Sunday October 25th 2026, 10:10 PM",
+     "opponent": "Prince Albert Raiders",
+     "home_or_away": "home",
+     "result": "W 6-3",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 1,
+      "2": 1,
+      "3": 4
+     },
+     "team_stats": {
+      "goals": 6,
+      "total_shots": 15,
+      "hits": 12,
+      "time_on_attack": "8:06",
+      "passing_pct": "68.5%",
+      "face_offs_won": 14,
+      "penalty_minutes": "2:00",
+      "power_plays": "1 / 1",
+      "power_play_minutes": "0:00",
+      "blocks": 2,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "Hatitosa",
+       "build": "TWF",
+       "g": 2,
+       "a": 2,
+       "p": 4,
+       "plus_minus": 2,
+       "shots": "5/11",
+       "hits": 6,
+       "takeaways": 3,
+       "giveaways": 4,
+       "time_with_puck": "3:34"
+      },
+      {
+       "position": "C",
+       "player": "Hergy9",
+       "build": "TWF",
+       "g": 1,
+       "a": 1,
+       "p": 2,
+       "plus_minus": 2,
+       "shots": "3/6",
+       "hits": 2,
+       "takeaways": 5,
+       "giveaways": 7,
+       "time_with_puck": "4:23"
+      },
+      {
+       "position": "RW",
+       "player": "Br0midas",
+       "build": "PWF",
+       "g": 3,
+       "a": 1,
+       "p": 4,
+       "plus_minus": 2,
+       "shots": "4/9",
+       "hits": 2,
+       "takeaways": 2,
+       "giveaways": 11,
+       "time_with_puck": "5:51"
+      },
+      {
+       "position": "LD",
+       "player": "Hate4Hire4739",
+       "build": "PMD",
+       "g": 0,
+       "a": 3,
+       "p": 3,
+       "plus_minus": 2,
+       "shots": "1/2",
+       "hits": 2,
+       "takeaways": 3,
+       "giveaways": 0,
+       "time_with_puck": "1:43"
+      },
+      {
+       "position": "RD",
+       "player": "GeeReeDoh",
+       "build": "TWD",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": 2,
+       "shots": "0/1",
+       "hits": 0,
+       "takeaways": 4,
+       "giveaways": 5,
+       "time_with_puck": "2:37"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "NigelFromTinder",
+       "build": "BFY",
+       "shots": 15,
+       "saves": 12,
+       "ga": 3,
+       "sv_pct": 0.8,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918004"
+    }
    ],
+   "usual_lineup": {
+    "LW": [
+     {
+      "player": "Hatitosa",
+      "games_last_night": 3
+     }
+    ],
+    "C": [
+     {
+      "player": "Hergy9",
+      "games_last_night": 3
+     }
+    ],
+    "RW": [
+     {
+      "player": "Br0midas",
+      "games_last_night": 3
+     }
+    ],
+    "LD": [
+     {
+      "player": "Hate4Hire4739",
+      "games_last_night": 3
+     }
+    ],
+    "RD": [
+     {
+      "player": "GeeReeDoh",
+      "games_last_night": 3
+     }
+    ],
+    "G": [
+     {
+      "player": "NigelFromTinder",
+      "games_last_night": 3
+     }
+    ]
+   },
+   "players": {
+    "Hatitosa": {
+     "lg_user_id": 37467,
+     "builds": [
+      "TWF"
+     ],
+     "season_55": {
+      "position": "LW",
+      "gp": 15,
+      "goals": 15,
+      "assists": 22,
+      "pts": 37,
+      "plus_minus": 11,
+      "shots": 74,
+      "hits": 11,
+      "takeaways": 38,
+      "giveaways": 136,
+      "twp_seconds": 276,
+      "pass_pct": 70.9
+     }
+    },
+    "Hergy9": {
+     "lg_user_id": 9592,
+     "builds": [
+      "TWF"
+     ],
+     "season_55": {
+      "position": "C",
+      "gp": 15,
+      "goals": 11,
+      "assists": 22,
+      "pts": 33,
+      "plus_minus": 11,
+      "shots": 43,
+      "hits": 16,
+      "takeaways": 48,
+      "giveaways": 83,
+      "twp_seconds": 231,
+      "pass_pct": 77.3
+     }
+    },
+    "Br0midas": {
+     "lg_user_id": 42123,
+     "builds": [
+      "PWF",
+      "SNP"
+     ],
+     "season_55": {
+      "position": "RW",
+      "gp": 14,
+      "goals": 14,
+      "assists": 33,
+      "pts": 47,
+      "plus_minus": 10,
+      "shots": 68,
+      "hits": 10,
+      "takeaways": 30,
+      "giveaways": 148,
+      "twp_seconds": 372,
+      "pass_pct": 62.9
+     }
+    },
+    "Hate4Hire4739": {
+     "lg_user_id": 75720,
+     "builds": [
+      "PMD"
+     ],
+     "season_55": {
+      "position": "LD",
+      "gp": 7,
+      "goals": 0,
+      "assists": 8,
+      "pts": 8,
+      "plus_minus": 4,
+      "shots": 4,
+      "hits": 12,
+      "takeaways": 18,
+      "giveaways": 28,
+      "twp_seconds": 177,
+      "pass_pct": 70.6
+     }
+    },
+    "GeeReeDoh": {
+     "lg_user_id": 11930,
+     "builds": [
+      "TWD"
+     ],
+     "season_55": {
+      "position": "RD",
+      "gp": 16,
+      "goals": 4,
+      "assists": 10,
+      "pts": 14,
+      "plus_minus": 12,
+      "shots": 29,
+      "hits": 0,
+      "takeaways": 40,
+      "giveaways": 70,
+      "twp_seconds": 206,
+      "pass_pct": 77.7
+     }
+    },
+    "NigelFromTinder": {
+     "lg_user_id": 37214,
+     "builds": [
+      "BFY"
+     ],
+     "season_55": {
+      "gp": 22,
+      "wins": 14,
+      "losses": 7,
+      "ot_losses": 1,
+      "save_pct": 0.831,
+      "gaa": 2.38,
+      "shutouts": 3
+     }
+    }
+   },
+   "games_missing": [],
    "tonight": {
     "lg_game_id": 918111,
     "et": "10:10 PM",
