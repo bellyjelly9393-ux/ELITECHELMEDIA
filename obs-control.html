@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="management.css">
   <link rel="stylesheet" href="network-v2.css">
   <link rel="stylesheet" href="obs-control.css?v=20261006-size1">
+  <link rel="stylesheet" href="obs-controller.css?v=20261026">
 </head>
 <body class="wildman-site management-protected obs-control-page">
 <header class="site-header">
@@ -299,6 +300,56 @@
         </div>
       </article>
     </section>
+    <section class="section-shell section-block" aria-labelledby="controllerHeading">
+      <article class="obs-source-card obs-controller" id="controllerPanel">
+        <div>
+          <div class="eyebrow">4 · CONTROLLER OVERLAY</div>
+          <h2 id="controllerHeading">Your inputs. On screen.</h2>
+          <p>Xbox-style controller display powered by <a href="https://keymap.io/controller-overlay/" target="_blank" rel="noopener noreferrer">Keymap</a>. Add it as a separate Browser Source above gameplay, then resize and position it in OBS.</p>
+        </div>
+        <p class="controller-warning"><strong>Playing on Xbox Series X?</strong> A controller connected only to your console cannot send inputs to this overlay. Live movement requires a controller visible to the streaming computer. A capture card carries video and audio, not controller inputs.</p>
+        <div class="obs-field-grid two">
+          <label>Appearance<select id="controllerBackground" class="select-field"><option value="transparent">Xbox · Transparent (recommended)</option><option value="dark">Xbox · Dark card</option><option value="green">Xbox · Green screen</option></select></label>
+          <label>Pressed button colour<input id="controllerAccent" type="color" value="#d9a63b"></label>
+        </div>
+        <div class="obs-actions">
+          <button type="button" id="controllerGold" class="small-btn">Elitechel Gold</button>
+          <button type="button" id="controllerExample" class="small-btn">Use Pink / Green Example</button>
+          <button type="button" id="controllerLoad" class="small-btn primary">Try Live Keymap Preview</button>
+        </div>
+        <p class="obs-preview-note">Appearance preview · sample A button highlight, not live controller input</p>
+        <div class="controller-preview" id="controllerAppearance">
+          <svg viewBox="0 0 600 400" role="img" aria-label="Xbox-style sample appearance, not live input">
+            <path fill="#121316" stroke="#888" stroke-width="3" d="M160 86 Q120 76 97 133 L51 282 Q36 335 74 348 Q111 365 157 298 L202 260 H398 L443 298 Q489 365 526 348 Q564 335 549 282 L503 133 Q480 76 440 86Z"/>
+            <g fill="#27292d" stroke="#aaa" stroke-width="2"><rect x="143" y="61" width="100" height="23" rx="9"/><rect x="357" y="61" width="100" height="23" rx="9"/><circle cx="175" cy="163" r="36"/><circle cx="365" cy="253" r="36"/><path d="M228 216h24v24h24v24h-24v24h-24v-24h-24v-24h24Z"/><circle cx="444" cy="159" r="18"/><circle cx="406" cy="197" r="18" class="controller-sample"/><circle cx="406" cy="121" r="18"/><circle cx="368" cy="159" r="18"/></g>
+            <g fill="#e8e8e8" text-anchor="middle" font-family="sans-serif" font-size="17"><text x="193" y="79">LT / LB</text><text x="407" y="79">RT / RB</text><text x="444" y="165">B</text><text x="406" y="127">Y</text><text x="368" y="165">X</text><text x="406" y="203" fill="#080808">A</text><text x="300" y="140">X</text><text x="266" y="186">View</text><text x="334" y="186">Menu</text></g>
+          </svg>
+        </div>
+        <div class="controller-preview" id="controllerLiveFrame" hidden>
+          <iframe id="controllerPreview" title="Keymap Xbox controller preview — requires a controller on this computer" allow="gamepad" referrerpolicy="no-referrer"></iframe>
+        </div>
+        <p class="obs-preview-note" id="controllerPreviewStatus" role="status">Preview not loaded. Loading it connects to Keymap. A loaded drawing does not confirm live input capture.</p>
+        <label for="controllerSourceUrl">Controller Browser Source URL</label>
+        <div class="obs-source-row">
+          <input id="controllerSourceUrl" class="field" readonly aria-label="Controller Browser Source URL">
+          <button id="controllerCopy" class="small-btn primary" type="button">Copy Controller URL</button>
+          <a id="controllerOpen" class="small-btn" target="_blank" rel="noopener noreferrer">Open Overlay</a>
+        </div>
+        <p id="controllerCopyStatus" class="obs-preview-note" role="status"></p>
+        <p>OBS size: <b>600 × 400</b>. Keep “Shutdown source when not visible” off. Press a controller button after OBS starts. Transparent needs no chroma key; green screen needs an OBS Chroma Key filter. Colour changes update the URL here; paste the new URL into OBS to apply them.</p>
+        <details>
+          <summary>Input connection options and troubleshooting</summary>
+          <ul>
+            <li><b>PC gameplay:</b> connect your controller to the streaming PC by USB or Bluetooth. Verify buttons and sticks in the standalone overlay, then in OBS. Browser and OBS detection can differ.</li>
+            <li><b>Console gameplay:</b> keep your existing capture feed. For real input display, a compatible input forwarding bridge or hardware adapter must expose the same inputs to the PC. No bridge is included here; verify console and controller compatibility before choosing one.</li>
+            <li><b>Remote Play:</b> a possible setup to investigate is a PC-connected controller driving a supported Xbox Remote Play client. This panel does not forward inputs or configure Remote Play; test the client, PC detection and OBS together before relying on it.</li>
+            <li><b>No suitable input path:</b> use a camera aimed at your hands/controller as an OBS video source. The drawing alone is only a visual preview.</li>
+            <li><b>Preview blocked or blank:</b> open the standalone overlay. Keymap is an external service and its availability, embedding policy and Gamepad API support can change. Try OBS “Refresh cache of current page”.</li>
+          </ul>
+          <p>Settings are stored in the URL. This panel does not publish scene changes, pair with an Xbox, or relay input between devices. <a href="https://keymap.io/controller-overlay/" target="_blank" rel="noopener noreferrer">Keymap setup and measurement limits</a>.</p>
+        </details>
+      </article>
+    </section>
   </div>
 </main>
 
@@ -311,5 +362,6 @@
 <script src="obs-config.js?v=20261005b"></script>
 <script src="obs-scenes.js?v=20261011-bobbleheads"></script>
 <script src="obs-control.js?v=20261006-size1"></script>
+<script src="obs-controller.js?v=20261026"></script>
 </body>
 </html>
