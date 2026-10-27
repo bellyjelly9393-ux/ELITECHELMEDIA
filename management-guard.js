@@ -26,7 +26,7 @@
     if (profileRole === "admin" || profileRole === "commissioner") return true;
 
     const page = (location.pathname.split("/").pop() || "").toLowerCase();
-    const hitmenPage = ["hitmen","calgary","war-room","hitmen-workspace.html","hitmen-management.html","hitmen-gm-ai.html","hitmen-locker-room.html","hitmen-team-locker.html","hitmen-player-locker.html","hitmen-opponents.html","hitmen-battle-plan.html","hitmen-card-vault.html"].includes(page);
+    const hitmenPage = ["hitmen","calgary","war-room","hitmen-workspace.html","hitmen-management.html","hitmen-gm-ai.html","hitmen-locker-room.html","hitmen-team-locker.html","hitmen-player-locker.html","hitmen-opponents.html","hitmen-battle-plan.html","hitmen-card-vault.html","postgame-desk.html"].includes(page);
 
     return (state.memberships || []).some((membership) => {
       const role = String(membership.role || "").toLowerCase();
@@ -46,7 +46,7 @@
     const lockedMessage = document.getElementById("managementLockedMessage");
     const accessStatus = document.getElementById("managementAccessStatus");
     const page = (location.pathname.split("/").pop() || "").toLowerCase();
-    const hitmenPage = ["hitmen","calgary","war-room","hitmen-workspace.html","hitmen-management.html","hitmen-gm-ai.html","hitmen-locker-room.html","hitmen-team-locker.html","hitmen-player-locker.html","hitmen-opponents.html","hitmen-battle-plan.html","hitmen-card-vault.html"].includes(page);
+    const hitmenPage = ["hitmen","calgary","war-room","hitmen-workspace.html","hitmen-management.html","hitmen-gm-ai.html","hitmen-locker-room.html","hitmen-team-locker.html","hitmen-player-locker.html","hitmen-opponents.html","hitmen-battle-plan.html","hitmen-card-vault.html","postgame-desk.html"].includes(page);
 
     protectedSections.forEach((section) => {
       section.hidden = !allowed;
