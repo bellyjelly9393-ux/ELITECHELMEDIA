@@ -170,7 +170,7 @@ const fixture=()=>{
     window.workerCalls=[];window.rpcCalls=[];window.workerJob=null;
     window.testRows.vod_review_segments=[];window.testRows.vod_game_publications=[];
     Object.assign(window.testRows.vod_review_sessions[0],{worker_status:'needs_periods',worker_job_id:null,
-      review_document:null,pending_worker_result:null,worker_result:{chunks:[],game_rollup:{}},status:'reviewing'});
+      review_document:null,pending_worker_result:null,skip_ranges:[],worker_result:{chunks:[],game_rollup:{}},status:'reviewing'});
   });
   await page.locator('#refreshVod').click();
   await page.waitForFunction(()=>document.querySelectorAll('#segmentList .segment-card').length===0);
