@@ -93,6 +93,9 @@ def infer_period_ranges(reads, duration, initial_period=1, confirm_reads=2, inte
         else:
             regression = None
             regression_streak = 0
+        if observed is None and candidate_at is not None and at - candidate_at <= interval * 3:
+            # An unreadable sample is not evidence against a pending transition.
+            continue
         if observed is None or observed == current:
             candidate = None
             streak = 0
@@ -164,7 +167,7 @@ def scan_recording_periods(source, duration, initial_period=1, interval=REPLAY_I
         subprocess.run([
             'ffmpeg', '-hide_banner', '-loglevel', 'error', '-nostdin', '-y',
             '-i', str(source),
-            '-vf', f'fps=1/{interval},crop=iw:ih*0.30:0:0,scale=1280:-1',
+            '-vf', f'fps=1/{interval},crop=iw:ih*0.30:0:0,scale=1920:-1,format=gray',
             '-q:v', '4', str(folder / 'top_%04d.jpg')
         ], check=True, timeout=180)
         subprocess.run([

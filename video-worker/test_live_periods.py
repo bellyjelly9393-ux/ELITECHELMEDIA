@@ -76,6 +76,17 @@ class LivePeriodTests(unittest.TestCase):
         scan=live_periods.infer_period_ranges(reads,60,initial_period=3)
         self.assertEqual(scan['ranges'][-1]['label'],'Overtime')
 
+    def test_unreadable_frame_between_transition_reads(self):
+        reads = [{'at': 120, 'period': 2}, {'at': 132, 'period': None},
+                 {'at': 144, 'period': 2}]
+        scan = live_periods.infer_period_ranges(reads, 240)
+        self.assertEqual(scan['current_period'], 2)
+
+    def test_stale_candidate_does_not_confirm_transition(self):
+        reads = [{'at': 120, 'period': 2}, {'at': 180, 'period': None},
+                 {'at': 192, 'period': 2}]
+        self.assertEqual(live_periods.infer_period_ranges(reads, 240)['current_period'], 1)
+
 
 if __name__=='__main__':
     unittest.main()
