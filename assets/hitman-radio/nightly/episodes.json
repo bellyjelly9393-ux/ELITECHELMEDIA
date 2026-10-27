@@ -1,8 +1,32 @@
 {
   "featured": [
-    "2026-10-25-preview"
+    "2026-10-27"
   ],
   "episodes": [
+    {
+      "id": "2026-10-27",
+      "date": "2026-10-27",
+      "type": "preview",
+      "label": "Mon recap + Tue preview · Oct 27",
+      "title": "Monday Recap + Tuesday Preview",
+      "headline": "Rouyn-Noranda wakes up, two ten-point nights, and tonight's picks",
+      "description": "Hitmen Radio recaps Monday's 93 games, from Rouyn-Noranda's 3-0 night to Medicine Hat's 12-1 rout of Halifax, then previews Tuesday's biggest games, the Hitmen's three, and Call Your Shot.",
+      "video": "assets/hitman-radio/nightly/2026-10-27.mp4?v=20261027",
+      "videoPhone": "assets/hitman-radio/nightly/2026-10-27-phone.mp4?v=20261027",
+      "poster": "assets/hitman-radio/nightly/2026-10-27-poster.png?v=20261027"
+    },
+    {
+      "id": "2026-10-25",
+      "date": "2026-10-25",
+      "type": "nightly",
+      "label": "Sunday · Oct 25",
+      "title": "Sunday Night Show",
+      "headline": "Fourteen goals for MeNoThatGood",
+      "description": "Hitmen Radio breaks down Sunday's 93 games: Cape Breton's MeNoThatGood scores 14 goals, including 8 in one game, and eight clubs go 3-0.",
+      "video": "assets/hitman-radio/nightly/2026-10-25.mp4?v=20261027",
+      "videoPhone": "assets/hitman-radio/nightly/2026-10-25-phone.mp4?v=20261027",
+      "poster": "assets/hitman-radio/nightly/2026-10-25-poster.png?v=20261027"
+    },
     {
       "id": "2026-10-25-preview",
       "date": "2026-10-25",
