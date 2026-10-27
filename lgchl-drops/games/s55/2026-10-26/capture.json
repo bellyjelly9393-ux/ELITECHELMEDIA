@@ -4,8 +4,8 @@
  "season": 55,
  "game_night": "2026-10-26",
  "games_scheduled": 93,
- "games_included": 45,
- "complete": false,
- "converted_at": "2026-10-27T13:07:50.078142+00:00",
+ "games_included": 93,
+ "complete": true,
+ "converted_at": "2026-10-27T13:38:17.957393+00:00",
  "source": "Public LG game pages and LG 'View EA Game' links, captured slowly with the LG Stats Client"
 }

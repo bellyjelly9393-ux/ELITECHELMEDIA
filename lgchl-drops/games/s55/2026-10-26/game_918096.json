@@ -1,0 +1,99 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918096,
+ "status": "FINAL",
+ "played_at_text": "Monday October 26th 2026, 10:10 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918096",
+ "captured_at": "2026-10-27T13:26:48.290785+00:00",
+ "away": {
+  "lg_team_id": 466,
+  "name": "Tigres",
+  "record": "21-19-4",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 0
+  },
+  "score": 0,
+  "full_name": "Victoriaville Tigres"
+ },
+ "home": {
+  "lg_team_id": 2983,
+  "name": "Bruins",
+  "record": "21-17-4",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 0
+  },
+  "score": 1,
+  "full_name": "Chilliwack Bruins"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 0,
+   "home": 1
+  },
+  "total_shots": {
+   "away": 0,
+   "home": 0
+  },
+  "hits": {
+   "away": 0,
+   "home": 0
+  },
+  "time_on_attack": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "passing_pct": {
+   "away": 0,
+   "home": 0
+  },
+  "face_offs_won": {
+   "away": 0,
+   "home": 0
+  },
+  "penalty_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "power_plays": {
+   "away": "0 / 0",
+   "home": "0 / 0"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 0,
+   "home": 0
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "unknown_0": [],
+  "unknown_1": []
+ },
+ "skaters": [],
+ "goalies": [],
+ "ea_parts": [],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "iCLassYxTTV",
+  "last_at": "Monday October 26th 2026, 10:34 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts are EA's raw data for each played segment.",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is included; LG and EA web data do not provide it."
+ ]
+}
