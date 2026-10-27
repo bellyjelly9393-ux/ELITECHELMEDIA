@@ -74,6 +74,7 @@ function fixture() {
     await page.route('**/*',route=>{
       const u=new URL(route.request().url()),name=u.pathname.slice(1);
       if(u.hostname!=='wildman.test')return route.fulfill({contentType:'application/javascript',body:''});
+      if(name==='empty')return route.fulfill({contentType:'text/html',body:'<!doctype html><html><body></body></html>'});
       if(name==='backend.js')return route.fulfill({contentType:'application/javascript',body:'('+fixture.toString()+')();'});
       if(['script.js','ui-polish.js'].includes(name))return route.fulfill({contentType:'application/javascript',body:''});
       const file=path.join(__dirname,name);
