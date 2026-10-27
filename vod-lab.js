@@ -355,20 +355,42 @@
     if(status)status.textContent=`Created ${ids.length} games. Open each game and press Analyze Game for automatic period detection.`;
   }
 
-  async function buildSegments(){
-    const r=currentReview(); if(!r)return;
+  let periodSaveInFlight=null;
+  function buildSegments(){
+    if(periodSaveInFlight)return periodSaveInFlight;
+    periodSaveInFlight=savePeriodTimes().catch(error=>{
+      const text=error.message||'Period times could not be saved. Try again.';
+      if($("periodTimesStatus"))$("periodTimesStatus").textContent=text;
+      setStatus(text,"error");return false;
+    }).finally(()=>{periodSaveInFlight=null;});
+    return periodSaveInFlight;
+  }
+  window.WildmanVODPeriodEditor={savePending:async()=>{
+    if(periodSaveInFlight){if(!await periodSaveInFlight)throw new Error($("periodTimesStatus")?.textContent||"Period times could not be saved.");return;}
+    if(periodFieldsDirty && !await buildSegments())throw new Error($("periodTimesStatus")?.textContent||"Period times could not be saved.");
+  }};
+  async function savePeriodTimes(){
+    const r=currentReview(); if(!r)return false;
     const note=$("periodTimesStatus"),say=(text,tone)=>{if(note)note.textContent=text;setStatus(text,tone);};
     const plan=model.planPeriods({p1:$("period1Start").value,p2:$("period2Start").value,p3:$("period3Start").value,overtimes:$("periodOtStarts").value,end:$("periodVodEnd").value,skips:$("periodSkips")?.value||""});
-    if(plan.errors.length)return say(plan.errors.join(" "),"error");
+    if(plan.errors.length){say(plan.errors.join(" "),"error");return false;}
     say("Saving period times…","");
     // One database step: keeps periods whose times did not change (and their approval), archives
     // changed ones as history, adds new ones and sets the game window to Period 1 → game end.
-    const {data,error}=await db().rpc("set_vod_period_windows",{target_review:r.id,expected_updated_at:r.updated_at,window_start:plan.window.start,window_end:plan.window.end,periods:plan.segments,skip_ranges:plan.skips});
-    if(error)return say(error.message||"Period times were not saved.","error");
+    // Worker polling updates updated_at too. Read the current version immediately before
+    // the atomic save; the RPC still protects approved periods and concurrent writes.
+    const {data:latest,error:readError}=await db().from("vod_review_sessions").select("id,updated_at").eq("id",r.id).single();
+    if(readError||!latest){say(readError?.message||"Could not reload the game before saving.","error");return false;}
+    if(currentReview()?.id!==r.id){say("Game selection changed. Save the selected game's times.","error");return false;}
+    const {data,error}=await db().rpc("set_vod_period_windows",{target_review:r.id,expected_updated_at:latest.updated_at,window_start:plan.window.start,window_end:plan.window.end,periods:plan.segments,skip_ranges:plan.skips});
+    if(error){say(error.message||"Period times were not saved.","error");return false;}
+    window.WildmanVODCache?.invalidate(r.id);
+    if(currentReview()?.id!==r.id)return false;
     periodFieldsDirty=false;
     await loadData(); state.selectedSegmentId="";renderAll();
     const changed=Number(data?.added||0)+Number(data?.archived||0);
     say(changed?"Period times saved. Press Analyze Game to analyze exactly these periods.":"Period times saved (no change).","success");
+    return true;
   }
   async function addCustomSegment(){
     const r=currentReview(); if(!r)return; const existing=state.segments.filter(s=>s.review_id===r.id&&s.segment_type==="custom"); const idx=Math.max(0,...existing.map(s=>s.segment_index))+1;

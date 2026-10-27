@@ -7,11 +7,11 @@ const root=__dirname;
 const fixture=()=>{
   const rows={vod_review_sessions:[{id:'game',team_id:'team',title:'Hitmen vs Test Opponent',opponent_label:'Test Opponent',game_date:'2026-10-01T20:00:00Z',vod_url:'https://www.twitch.tv/videos/123',source_start_seconds:1800,source_end_seconds:3260,duration_seconds:1460,status:'reviewing',worker_status:'ready_for_review',full_game_summary:'Reviewed synthetic game evidence',updated_at:'2026-10-01T21:00:00Z',worker_result:{chunks:[],game_rollup:{}}}],vod_review_segments:[1800,2200,2600].map((start,i)=>({id:'p'+(i+1),review_id:'game',team_id:'team',segment_type:'period',segment_index:i+1,label:'Period '+(i+1),start_seconds:start,end_seconds:i===2?3260:start+400,status:'needs_review',analysis_summary:'Synthetic period evidence',updated_at:'2026-10-01T21:00:00Z'})),vod_review_markers:[]};
   rows.vod_game_publications=[];window.testRows=rows;window.published=[];window.workerJob=null;window.workerCalls=[];window.rpcCalls=[];
-  function query(table){let filters=[],payload=null;const q={select(){return q},eq(k,v){filters.push(r=>r[k]===v);return q},neq(k,v){filters.push(r=>r[k]!==v);return q},is(k,v){filters.push(r=>r[k]==v);return q},in(k,v){filters.push(r=>v.includes(r[k]));return q},order(){return q},limit(){return q},update(v){payload=v;return q},then(resolve){let data=(rows[table]||[]).filter(r=>filters.every(f=>f(r)));if(payload)data.forEach(r=>Object.assign(r,payload));return Promise.resolve({data:JSON.parse(JSON.stringify(data)),error:null}).then(resolve)},maybeSingle(){return q.then(r=>({...r,data:r.data[0]||null}))}};return q;}
+  function query(table){let filters=[],payload=null;const q={select(){return q},eq(k,v){filters.push(r=>r[k]===v);return q},neq(k,v){filters.push(r=>r[k]!==v);return q},is(k,v){filters.push(r=>r[k]==v);return q},in(k,v){filters.push(r=>v.includes(r[k]));return q},order(){return q},limit(){return q},update(v){payload=v;return q},then(resolve){let data=(rows[table]||[]).filter(r=>filters.every(f=>f(r)));if(payload)data.forEach(r=>Object.assign(r,payload));return Promise.resolve({data:JSON.parse(JSON.stringify(data)),error:null}).then(resolve)},single(){return q.then(r=>({...r,data:r.data[0]||null}))},maybeSingle(){return q.then(r=>({...r,data:r.data[0]||null}))}};return q;}
   window.VVHLBackend={db:{from:query,auth:{getSession:async()=>({data:{session:{access_token:'fixture'}}})},rpc:async(name,args)=>{
     const r=rows.vod_review_sessions[0];window.rpcCalls.push({name,args});
     if(name==='vod_player_match_context')return {data:{candidates:[{id:'locker-one',gamertag:'TestGT',position:'C',lg_user_id:'123',played:true},{id:'locker-two',gamertag:'OtherGT',position:'G',played:false}],suggestions:[],matches:r.review_document?.player_matches||{}}};
-    if(name==='set_vod_period_windows'){Object.assign(r,{source_start_seconds:args.window_start,source_end_seconds:args.window_end,skip_ranges:args.skip_ranges});return {data:{added:0,archived:0,kept:args.periods.length}};}
+    if(name==='set_vod_period_windows'){if(window.periodSaveError)return {error:{message:window.periodSaveError}}; for(const p of args.periods){if(!rows.vod_review_segments.some(s=>!s.archived_at&&s.segment_type===p.segment_type&&s.segment_index===p.segment_index))rows.vod_review_segments.push({...p,id:'saved-'+p.segment_index,review_id:r.id,team_id:r.team_id,status:'queued'});} Object.assign(r,{source_start_seconds:args.window_start,source_end_seconds:args.window_end,skip_ranges:args.skip_ranges});return {data:{added:0,archived:0,kept:args.periods.length}};}
     if(name==='publish_vod_review'){
       window.published.push({name,args});r.review_document=args.report;r.status='complete';
       rows.vod_game_publications=[{review_id:r.id,team_id:r.team_id,active:true,report:args.report}];
@@ -165,6 +165,32 @@ const fixture=()=>{
   assert.deepEqual(sent.periods,[{label:'Period 1',start:0,end:400},{label:'Period 2',start:400,end:800},{label:'Period 3',start:800,end:1200},{label:'Period 3',start:1260,end:1460}]);
   assert.equal(sent.overtime_confirmed,false);
   await page.waitForFunction(()=>window.testRows.vod_review_sessions[0].worker_job_id==='job');
+  // Reproduce the reported failure: typed times, no separate Save click, empty saved periods.
+  await page.goto('https://wildman.test/vod-lab.html?review=game');
+  await page.locator('#segmentList .segment-card').first().waitFor();
+  await page.evaluate(()=>{window.testRows.vod_review_segments=[];window.testRows.vod_review_sessions[0].worker_status='needs_periods';});
+  await page.locator('#refreshVod').click();
+  await page.waitForFunction(()=>document.querySelectorAll('#segmentList .segment-card').length===0);
+  if(!await page.locator('#manualPeriodBuilder').evaluate(d=>d.open))await page.locator('#manualPeriodBuilder > summary').click();
+  await page.locator('#period1Start').fill('31:00');await page.locator('#period2Start').fill('37:00');await page.locator('#period3Start').fill('44:00');await page.locator('#periodVodEnd').fill('54:20');
+  await page.evaluate(()=>window.testRows.vod_review_sessions[0].updated_at='2026-10-27T18:00:00Z');
+  await page.locator('#vodAnalyzeGame').click();
+  await page.waitForFunction(()=>window.workerCalls.some(c=>c.path.endsWith('/analyze')));
+  assert.equal(await page.evaluate(()=>window.rpcCalls.find(c=>c.name==='set_vod_period_windows').args.expected_updated_at),'2026-10-27T18:00:00Z');
+  const autoSaved=JSON.parse(await page.evaluate(()=>window.workerCalls.find(c=>c.path.endsWith('/analyze')).body));
+  assert.equal(autoSaved.source_start_seconds,1860);
+  assert.deepEqual(autoSaved.periods,[{label:'Period 1',start:0,end:360},{label:'Period 2',start:360,end:780},{label:'Period 3',start:780,end:1400}]);
+  await page.waitForFunction(()=>!document.getElementById('vodAnalyzeGame').disabled);
+  await page.locator('#period2Start').fill('20:00');await page.locator('#vodAnalyzeGame').click();
+  await page.waitForFunction(()=>document.getElementById('vodPipelineStatus').textContent.includes('in order'));
+  assert.equal(await page.evaluate(()=>window.workerCalls.filter(c=>c.path.endsWith('/analyze')).length),1);
+  await page.locator('#period2Start').fill('37:00');
+  await page.evaluate(()=>window.periodSaveError='Management access is required');
+  await page.locator('#vodAnalyzeGame').click();
+  await page.waitForFunction(()=>document.getElementById('vodPipelineStatus').textContent.includes('Management access'));
+  assert.equal(await page.evaluate(()=>window.workerCalls.filter(c=>c.path.endsWith('/analyze')).length),1);
+  assert.equal(await page.locator('#period2Start').inputValue(),'37:00');
+  await page.evaluate(()=>window.periodSaveError=null);
   await page.screenshot({path:'/tmp/wildman-vod-review-desktop.png',fullPage:true});
   await page.setViewportSize({width:390,height:844});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true,'Mobile must not overflow');
