@@ -6,13 +6,20 @@ private matchmaking codes.
 
 ## Delivered
 
+- `lineups/2026-10-27/`: **TONIGHT (Tue Oct 27): lineups as listed on LG** for all three Hitmen
+  games: at Moncton Wildcats 9:00, vs London Knights 9:35, vs Ottawa 67's 10:10 ET. Team
+  ratings, each team's top line and top D pair (LG's Offense/Defense Break Down), first goalie
+  listed, and full lists in LG's order with OVR, salary and season numbers.
+  **Use this for tonight's scouting and battle plan.**
+- `games/s55/2026-10-26/`: LGCHL games from Monday Oct 26, 2026 (93 scheduled). Being
+  captured now; the three opponents' Oct 26 games come first. `capture.json` gives the count.
 - `games/s55/2026-10-25/`: LGCHL games from Sunday Oct 25, 2026 (93 scheduled; puck drops at
   9:00, 9:35 and 10:10 PM Eastern). **Partial:** `capture.json` says how many are included so
   far. More are added as LG allows.
-- `lineups/2026-10-26/`: **tonight's lineups as listed on LG** for all three Hitmen games
+- `lineups/2026-10-26/`: Monday Oct 26 lineups as listed on LG for all three Hitmen games
   (Shawinigan 9:00, Kingston 9:35, Sudbury 10:10 ET). Includes team ratings, each team's top
   line and top D pair (LG's Offense/Defense Break Down), first goalie listed, and full lists in
-  LG's order with OVR, salary and season numbers. **Use this for tonight's lineups.**
+  LG's order with OVR, salary and season numbers.
 - `opponents/2026-10-26/`: Calgary Hitmen's Monday Oct 26 opponents (Shawinigan, Kingston,
   Sudbury). Each opponent's lineup and results from Oct 25, with season 55 player totals.
   Lineups are who played last night, not a confirmed lineup for tonight.
