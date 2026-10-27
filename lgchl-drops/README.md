@@ -11,6 +11,9 @@ private matchmaking codes.
   ratings, each team's top line and top D pair (LG's Offense/Defense Break Down), first goalie
   listed, and full lists in LG's order with OVR, salary and season numbers.
   **Use this for tonight's scouting and battle plan.**
+- `opponents/2026-10-27/`: tonight's three opponents (Moncton, London, Ottawa): who each one
+  actually dressed in its three games on Mon Oct 26, results, team stats, builds and season 55
+  totals. Compare with `lineups/2026-10-27/`: last night's lines differ from tonight's LG lists.
 - `games/s55/2026-10-26/`: LGCHL games from Monday Oct 26, 2026 (93 scheduled). Being
   captured now; the three opponents' Oct 26 games come first. `capture.json` gives the count.
 - `games/s55/2026-10-25/`: LGCHL games from Sunday Oct 25, 2026 (93 scheduled; puck drops at

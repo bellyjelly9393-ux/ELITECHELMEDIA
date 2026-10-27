@@ -1,0 +1,1518 @@
+{
+ "schema": "lgchl-opponent-lineups-v1",
+ "date": "2026-10-27",
+ "team": "Calgary Hitmen",
+ "lg_team_id": 412,
+ "basis": "Opponents' Monday Oct 26 LG game sheets + season 55 player totals",
+ "opponents": [
+  {
+   "lg_team_id": 365,
+   "name": "Moncton Wildcats",
+   "record_after_last_night": "26-14-5",
+   "last_night": [
+    {
+     "lg_game_id": 918038,
+     "played_at": "Monday October 26th 2026, 09:00 PM",
+     "opponent": "Owen Sound Attack",
+     "home_or_away": "home",
+     "result": "W 5-4",
+     "lag_out": true,
+     "goals_by_period": {
+      "1": 2,
+      "2": 1,
+      "3": 1,
+      "4": 1
+     },
+     "team_stats": {
+      "goals": 5,
+      "total_shots": 23,
+      "hits": 12,
+      "time_on_attack": "8:59",
+      "passing_pct": "79.1%",
+      "face_offs_won": 14,
+      "penalty_minutes": "0:00",
+      "power_plays": "1 / 2",
+      "power_play_minutes": "0:00",
+      "blocks": 5,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "Burning Wolves",
+       "build": "PLY",
+       "g": 4,
+       "a": 0,
+       "p": 4,
+       "plus_minus": 0,
+       "shots": "8/16",
+       "hits": 1,
+       "takeaways": 0,
+       "giveaways": 10,
+       "time_with_puck": "3:09"
+      },
+      {
+       "position": "C",
+       "player": "SlipperyPuppy3",
+       "build": "PLY",
+       "g": 0,
+       "a": 4,
+       "p": 4,
+       "plus_minus": 0,
+       "shots": "2/3",
+       "hits": 2,
+       "takeaways": 0,
+       "giveaways": 2,
+       "time_with_puck": "4:03"
+      },
+      {
+       "position": "RW",
+       "player": "ToughCutsYT",
+       "build": "PLY",
+       "g": 1,
+       "a": 2,
+       "p": 3,
+       "plus_minus": 0,
+       "shots": "7/15",
+       "hits": 4,
+       "takeaways": 5,
+       "giveaways": 18,
+       "time_with_puck": "5:40"
+      },
+      {
+       "position": "LD",
+       "player": "IckyyVicky",
+       "build": "DD",
+       "g": 0,
+       "a": 1,
+       "p": 1,
+       "plus_minus": 0,
+       "shots": "1/2",
+       "hits": 5,
+       "takeaways": 3,
+       "giveaways": 1,
+       "time_with_puck": "3:37"
+      },
+      {
+       "position": "RD",
+       "player": "Creamy7268",
+       "build": "PMD",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": 0,
+       "shots": "1/3",
+       "hits": 0,
+       "takeaways": 4,
+       "giveaways": 1,
+       "time_with_puck": "3:37"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "DUCAS I8I",
+       "build": "HYB",
+       "shots": 19,
+       "saves": 15,
+       "ga": 4,
+       "sv_pct": 0.789,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918038"
+    },
+    {
+     "lg_game_id": 918056,
+     "played_at": "Monday October 26th 2026, 09:35 PM",
+     "opponent": "Seattle Thunderbirds",
+     "home_or_away": "away",
+     "result": "W 9-2",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 3,
+      "2": 3,
+      "3": 3
+     },
+     "team_stats": {
+      "goals": 9,
+      "total_shots": 32,
+      "hits": 13,
+      "time_on_attack": "11:37",
+      "passing_pct": "75.8%",
+      "face_offs_won": 13,
+      "penalty_minutes": "4:00",
+      "power_plays": "1 / 2",
+      "power_play_minutes": "0:00",
+      "blocks": 3,
+      "shorthanded_goals": 1
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "Burning Wolves",
+       "build": "PLY",
+       "g": 5,
+       "a": 2,
+       "p": 7,
+       "plus_minus": 6,
+       "shots": "11/24",
+       "hits": 1,
+       "takeaways": 6,
+       "giveaways": 4,
+       "time_with_puck": "4:12"
+      },
+      {
+       "position": "C",
+       "player": "SlipperyPuppy3",
+       "build": "PLY",
+       "g": 3,
+       "a": 5,
+       "p": 8,
+       "plus_minus": 6,
+       "shots": "8/22",
+       "hits": 5,
+       "takeaways": 1,
+       "giveaways": 8,
+       "time_with_puck": "2:31"
+      },
+      {
+       "position": "RW",
+       "player": "ToughCutsYT",
+       "build": "PLY",
+       "g": 1,
+       "a": 6,
+       "p": 7,
+       "plus_minus": 6,
+       "shots": "7/16",
+       "hits": 2,
+       "takeaways": 3,
+       "giveaways": 11,
+       "time_with_puck": "7:16"
+      },
+      {
+       "position": "LD",
+       "player": "IckyyVicky",
+       "build": "DD",
+       "g": 0,
+       "a": 2,
+       "p": 2,
+       "plus_minus": 6,
+       "shots": "1/2",
+       "hits": 4,
+       "takeaways": 1,
+       "giveaways": 2,
+       "time_with_puck": "5:09"
+      },
+      {
+       "position": "RD",
+       "player": "Creamy7268",
+       "build": "PMD",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": 5,
+       "shots": "1/3",
+       "hits": 1,
+       "takeaways": 5,
+       "giveaways": 3,
+       "time_with_puck": "1:44"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "DUCAS I8I",
+       "build": "HYB",
+       "shots": 20,
+       "saves": 18,
+       "ga": 2,
+       "sv_pct": 0.9,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918056"
+    },
+    {
+     "lg_game_id": 918083,
+     "played_at": "Monday October 26th 2026, 10:10 PM",
+     "opponent": "Peterborough Petes",
+     "home_or_away": "away",
+     "result": "W 3-1",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 1,
+      "2": 1,
+      "3": 1
+     },
+     "team_stats": {
+      "goals": 3,
+      "total_shots": 18,
+      "hits": 19,
+      "time_on_attack": "7:19",
+      "passing_pct": "73.3%",
+      "face_offs_won": 10,
+      "penalty_minutes": "2:00",
+      "power_plays": "0 / 2",
+      "power_play_minutes": "0:00",
+      "blocks": 5,
+      "shorthanded_goals": 1
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "Burning Wolves",
+       "build": "PLY",
+       "g": 1,
+       "a": 2,
+       "p": 3,
+       "plus_minus": 2,
+       "shots": "6/13",
+       "hits": 0,
+       "takeaways": 5,
+       "giveaways": 9,
+       "time_with_puck": "3:58"
+      },
+      {
+       "position": "C",
+       "player": "SlipperyPuppy3",
+       "build": "PLY",
+       "g": 1,
+       "a": 1,
+       "p": 2,
+       "plus_minus": 2,
+       "shots": "5/10",
+       "hits": 4,
+       "takeaways": 4,
+       "giveaways": 3,
+       "time_with_puck": "2:15"
+      },
+      {
+       "position": "RW",
+       "player": "ToughCutsYT",
+       "build": "PLY",
+       "g": 1,
+       "a": 2,
+       "p": 3,
+       "plus_minus": 2,
+       "shots": "4/10",
+       "hits": 8,
+       "takeaways": 1,
+       "giveaways": 12,
+       "time_with_puck": "5:36"
+      },
+      {
+       "position": "LD",
+       "player": "IckyyVicky",
+       "build": "DD",
+       "g": 0,
+       "a": 1,
+       "p": 1,
+       "plus_minus": 2,
+       "shots": "0/0",
+       "hits": 7,
+       "takeaways": 5,
+       "giveaways": 7,
+       "time_with_puck": "4:02"
+      },
+      {
+       "position": "RD",
+       "player": "Creamy7268",
+       "build": "PMD",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": 1,
+       "shots": "0/1",
+       "hits": 0,
+       "takeaways": 5,
+       "giveaways": 6,
+       "time_with_puck": "3:06"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "DUCAS I8I",
+       "build": "HYB",
+       "shots": 11,
+       "saves": 10,
+       "ga": 1,
+       "sv_pct": 0.909,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918083"
+    }
+   ],
+   "usual_lineup": {
+    "LW": [
+     {
+      "player": "Burning Wolves",
+      "games_last_night": 3
+     }
+    ],
+    "C": [
+     {
+      "player": "SlipperyPuppy3",
+      "games_last_night": 3
+     }
+    ],
+    "RW": [
+     {
+      "player": "ToughCutsYT",
+      "games_last_night": 3
+     }
+    ],
+    "LD": [
+     {
+      "player": "IckyyVicky",
+      "games_last_night": 3
+     }
+    ],
+    "RD": [
+     {
+      "player": "Creamy7268",
+      "games_last_night": 3
+     }
+    ],
+    "G": [
+     {
+      "player": "DUCAS I8I",
+      "games_last_night": 3
+     }
+    ]
+   },
+   "players": {
+    "Burning Wolves": {
+     "lg_user_id": 9590,
+     "builds": [
+      "PLY"
+     ],
+     "season_55": {
+      "position": "RW",
+      "gp": 13,
+      "goals": 14,
+      "assists": 25,
+      "pts": 39,
+      "plus_minus": 1,
+      "shots": 60,
+      "hits": 13,
+      "takeaways": 31,
+      "giveaways": 108,
+      "twp_seconds": 248,
+      "pass_pct": 75.2
+     }
+    },
+    "SlipperyPuppy3": {
+     "lg_user_id": 71528,
+     "builds": [
+      "PLY"
+     ],
+     "season_55": {
+      "position": "C",
+      "gp": 10,
+      "goals": 6,
+      "assists": 16,
+      "pts": 22,
+      "plus_minus": 1,
+      "shots": 31,
+      "hits": 18,
+      "takeaways": 24,
+      "giveaways": 39,
+      "twp_seconds": 194,
+      "pass_pct": 75.2
+     }
+    },
+    "ToughCutsYT": {
+     "lg_user_id": 19367,
+     "builds": [
+      "PLY"
+     ],
+     "season_55": {
+      "position": "RW",
+      "gp": 13,
+      "goals": 21,
+      "assists": 21,
+      "pts": 42,
+      "plus_minus": -2,
+      "shots": 63,
+      "hits": 43,
+      "takeaways": 35,
+      "giveaways": 152,
+      "twp_seconds": 365,
+      "pass_pct": 75.5
+     }
+    },
+    "IckyyVicky": {
+     "lg_user_id": 74456,
+     "builds": [
+      "DD"
+     ],
+     "season_55": {
+      "position": "LD",
+      "gp": 13,
+      "goals": 2,
+      "assists": 9,
+      "pts": 11,
+      "plus_minus": 3,
+      "shots": 22,
+      "hits": 32,
+      "takeaways": 54,
+      "giveaways": 49,
+      "twp_seconds": 217,
+      "pass_pct": 83.7
+     }
+    },
+    "Creamy7268": {
+     "lg_user_id": 71493,
+     "builds": [
+      "PMD"
+     ],
+     "season_55": {
+      "position": "RD",
+      "gp": 9,
+      "goals": 0,
+      "assists": 8,
+      "pts": 8,
+      "plus_minus": -6,
+      "shots": 5,
+      "hits": 24,
+      "takeaways": 24,
+      "giveaways": 20,
+      "twp_seconds": 175,
+      "pass_pct": 85.9
+     }
+    },
+    "DUCAS I8I": {
+     "lg_user_id": 14255,
+     "builds": [
+      "HYB"
+     ],
+     "season_55": {
+      "gp": 26,
+      "wins": 15,
+      "losses": 8,
+      "ot_losses": 3,
+      "save_pct": 0.821,
+      "gaa": 2.68,
+      "shutouts": 2
+     }
+    }
+   },
+   "games_missing": [],
+   "tonight": {
+    "lg_game_id": 918122,
+    "et": "9:00 PM",
+    "opponent_lg_team_id": 365,
+    "opponent": "Moncton Wildcats",
+    "hitmen_side": "away",
+    "last_night_games": [
+     918038,
+     918056,
+     918083
+    ]
+   }
+  },
+  {
+   "lg_team_id": 370,
+   "name": "London Knights",
+   "record_after_last_night": "20-17-4",
+   "last_night": [
+    {
+     "lg_game_id": 918022,
+     "played_at": "Monday October 26th 2026, 09:00 PM",
+     "opponent": "Portland Winterhawks",
+     "home_or_away": "home",
+     "result": "W 8-5",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 2,
+      "2": 1,
+      "3": 5
+     },
+     "team_stats": {
+      "goals": 8,
+      "total_shots": 25,
+      "hits": 4,
+      "time_on_attack": "11:04",
+      "passing_pct": "76.9%",
+      "face_offs_won": 16,
+      "penalty_minutes": "2:00",
+      "power_plays": "1 / 1",
+      "power_play_minutes": "0:00",
+      "blocks": 2,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "segzmachine",
+       "build": "DNG",
+       "g": 1,
+       "a": 2,
+       "p": 3,
+       "plus_minus": 3,
+       "shots": "4/9",
+       "hits": 3,
+       "takeaways": 0,
+       "giveaways": 14,
+       "time_with_puck": "6:52"
+      },
+      {
+       "position": "C",
+       "player": "BestFlicks",
+       "build": "TWF",
+       "g": 3,
+       "a": 1,
+       "p": 4,
+       "plus_minus": 3,
+       "shots": "4/9",
+       "hits": 0,
+       "takeaways": 5,
+       "giveaways": 2,
+       "time_with_puck": "3:53"
+      },
+      {
+       "position": "RW",
+       "player": "xTHx muffin dog",
+       "build": "SNP",
+       "g": 4,
+       "a": 2,
+       "p": 6,
+       "plus_minus": 3,
+       "shots": "13/27",
+       "hits": 0,
+       "takeaways": 2,
+       "giveaways": 6,
+       "time_with_puck": "4:06"
+      },
+      {
+       "position": "LD",
+       "player": "Patdemouch",
+       "build": "TWD",
+       "g": 0,
+       "a": 2,
+       "p": 2,
+       "plus_minus": 3,
+       "shots": "0/2",
+       "hits": 0,
+       "takeaways": 3,
+       "giveaways": 2,
+       "time_with_puck": "4:40"
+      },
+      {
+       "position": "RD",
+       "player": "ObliviousLAX",
+       "build": "PMD",
+       "g": 0,
+       "a": 3,
+       "p": 3,
+       "plus_minus": 3,
+       "shots": "2/4",
+       "hits": 1,
+       "takeaways": 4,
+       "giveaways": 2,
+       "time_with_puck": "2:38"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "Heavyarms97",
+       "build": "HYB",
+       "shots": 11,
+       "saves": 6,
+       "ga": 5,
+       "sv_pct": 0.545,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918022"
+    },
+    {
+     "lg_game_id": 918057,
+     "played_at": "Monday October 26th 2026, 09:35 PM",
+     "opponent": "Baie-Comeau Drakkar",
+     "home_or_away": "away",
+     "result": "W 5-3",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 2,
+      "2": 1,
+      "3": 2
+     },
+     "team_stats": {
+      "goals": 5,
+      "total_shots": 29,
+      "hits": 4,
+      "time_on_attack": "9:26",
+      "passing_pct": "69.4%",
+      "face_offs_won": 18,
+      "penalty_minutes": "0:00",
+      "power_plays": "0 / 0",
+      "power_play_minutes": "0:00",
+      "blocks": 3,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "segzmachine",
+       "build": "DNG",
+       "g": 0,
+       "a": 4,
+       "p": 4,
+       "plus_minus": 2,
+       "shots": "5/10",
+       "hits": 0,
+       "takeaways": 1,
+       "giveaways": 6,
+       "time_with_puck": "4:51"
+      },
+      {
+       "position": "C",
+       "player": "BestFlicks",
+       "build": "TWF",
+       "g": 2,
+       "a": 1,
+       "p": 3,
+       "plus_minus": 2,
+       "shots": "9/16",
+       "hits": 2,
+       "takeaways": 0,
+       "giveaways": 6,
+       "time_with_puck": "3:16"
+      },
+      {
+       "position": "RW",
+       "player": "xTHx muffin dog",
+       "build": "SNP",
+       "g": 3,
+       "a": 1,
+       "p": 4,
+       "plus_minus": 2,
+       "shots": "10/22",
+       "hits": 2,
+       "takeaways": 4,
+       "giveaways": 8,
+       "time_with_puck": "4:17"
+      },
+      {
+       "position": "LD",
+       "player": "Patdemouch",
+       "build": "TWD",
+       "g": 0,
+       "a": 3,
+       "p": 3,
+       "plus_minus": 2,
+       "shots": "0/1",
+       "hits": 0,
+       "takeaways": 1,
+       "giveaways": 5,
+       "time_with_puck": "3:57"
+      },
+      {
+       "position": "RD",
+       "player": "ObliviousLAX",
+       "build": "PMD",
+       "g": 0,
+       "a": 1,
+       "p": 1,
+       "plus_minus": 2,
+       "shots": "0/5",
+       "hits": 0,
+       "takeaways": 2,
+       "giveaways": 3,
+       "time_with_puck": "3:02"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "Heavyarms97",
+       "build": "HYB",
+       "shots": 26,
+       "saves": 23,
+       "ga": 3,
+       "sv_pct": 0.885,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918057"
+    },
+    {
+     "lg_game_id": 918094,
+     "played_at": "Monday October 26th 2026, 10:10 PM",
+     "opponent": "Medicine Hat Tigers",
+     "home_or_away": "away",
+     "result": "L 3-6",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 0,
+      "2": 2,
+      "3": 1
+     },
+     "team_stats": {
+      "goals": 3,
+      "total_shots": 20,
+      "hits": 8,
+      "time_on_attack": "8:40",
+      "passing_pct": "77.6%",
+      "face_offs_won": 13,
+      "penalty_minutes": "0:00",
+      "power_plays": "0 / 1",
+      "power_play_minutes": "0:00",
+      "blocks": 1,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "segzmachine",
+       "build": "DNG",
+       "g": 0,
+       "a": 2,
+       "p": 2,
+       "plus_minus": -3,
+       "shots": "5/13",
+       "hits": 1,
+       "takeaways": 5,
+       "giveaways": 4,
+       "time_with_puck": "5:40"
+      },
+      {
+       "position": "C",
+       "player": "BestFlicks",
+       "build": "TWF",
+       "g": 1,
+       "a": 0,
+       "p": 1,
+       "plus_minus": -3,
+       "shots": "6/12",
+       "hits": 3,
+       "takeaways": 2,
+       "giveaways": 5,
+       "time_with_puck": "3:56"
+      },
+      {
+       "position": "RW",
+       "player": "xTHx muffin dog",
+       "build": "SNP",
+       "g": 2,
+       "a": 1,
+       "p": 3,
+       "plus_minus": -3,
+       "shots": "6/16",
+       "hits": 4,
+       "takeaways": 4,
+       "giveaways": 13,
+       "time_with_puck": "4:53"
+      },
+      {
+       "position": "LD",
+       "player": "Patdemouch",
+       "build": "TWD",
+       "g": 0,
+       "a": 1,
+       "p": 1,
+       "plus_minus": -3,
+       "shots": "2/5",
+       "hits": 0,
+       "takeaways": 4,
+       "giveaways": 4,
+       "time_with_puck": "3:33"
+      },
+      {
+       "position": "RD",
+       "player": "ObliviousLAX",
+       "build": "PMD",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": -3,
+       "shots": "0/0",
+       "hits": 0,
+       "takeaways": 6,
+       "giveaways": 0,
+       "time_with_puck": "1:25"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "Heavyarms97",
+       "build": "HYB",
+       "shots": 17,
+       "saves": 11,
+       "ga": 6,
+       "sv_pct": 0.647,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918094"
+    }
+   ],
+   "usual_lineup": {
+    "LW": [
+     {
+      "player": "segzmachine",
+      "games_last_night": 3
+     }
+    ],
+    "C": [
+     {
+      "player": "BestFlicks",
+      "games_last_night": 3
+     }
+    ],
+    "RW": [
+     {
+      "player": "xTHx muffin dog",
+      "games_last_night": 3
+     }
+    ],
+    "LD": [
+     {
+      "player": "Patdemouch",
+      "games_last_night": 3
+     }
+    ],
+    "RD": [
+     {
+      "player": "ObliviousLAX",
+      "games_last_night": 3
+     }
+    ],
+    "G": [
+     {
+      "player": "Heavyarms97",
+      "games_last_night": 3
+     }
+    ]
+   },
+   "players": {
+    "segzmachine": {
+     "lg_user_id": 79100,
+     "builds": [
+      "DNG"
+     ],
+     "season_55": {
+      "position": "LW",
+      "gp": 12,
+      "goals": 6,
+      "assists": 20,
+      "pts": 26,
+      "plus_minus": -20,
+      "shots": 70,
+      "hits": 19,
+      "takeaways": 25,
+      "giveaways": 87,
+      "twp_seconds": 295,
+      "pass_pct": 72.1
+     }
+    },
+    "BestFlicks": {
+     "lg_user_id": 70440,
+     "builds": [
+      "TWF"
+     ],
+     "season_55": {
+      "position": "C",
+      "gp": 12,
+      "goals": 12,
+      "assists": 12,
+      "pts": 24,
+      "plus_minus": -14,
+      "shots": 69,
+      "hits": 29,
+      "takeaways": 31,
+      "giveaways": 120,
+      "twp_seconds": 285,
+      "pass_pct": 70.4
+     }
+    },
+    "xTHx muffin dog": {
+     "lg_user_id": 77590,
+     "builds": [
+      "SNP"
+     ],
+     "season_55": {
+      "position": "C",
+      "gp": 9,
+      "goals": 15,
+      "assists": 8,
+      "pts": 23,
+      "plus_minus": -7,
+      "shots": 76,
+      "hits": 18,
+      "takeaways": 21,
+      "giveaways": 110,
+      "twp_seconds": 317,
+      "pass_pct": 77.7
+     }
+    },
+    "Patdemouch": {
+     "lg_user_id": 78481,
+     "builds": [
+      "TWD"
+     ],
+     "season_55": {
+      "position": "LD",
+      "gp": 13,
+      "goals": 0,
+      "assists": 9,
+      "pts": 9,
+      "plus_minus": -6,
+      "shots": 2,
+      "hits": 0,
+      "takeaways": 41,
+      "giveaways": 48,
+      "twp_seconds": 215,
+      "pass_pct": 82.8
+     }
+    },
+    "ObliviousLAX": {
+     "lg_user_id": 23773,
+     "builds": [
+      "PMD"
+     ],
+     "season_55": {
+      "position": "RD",
+      "gp": 13,
+      "goals": 0,
+      "assists": 10,
+      "pts": 10,
+      "plus_minus": -5,
+      "shots": 20,
+      "hits": 4,
+      "takeaways": 54,
+      "giveaways": 29,
+      "twp_seconds": 200,
+      "pass_pct": 87.5
+     }
+    },
+    "Heavyarms97": {
+     "lg_user_id": 42428,
+     "builds": [
+      "HYB"
+     ],
+     "season_55": null
+    }
+   },
+   "games_missing": [],
+   "tonight": {
+    "lg_game_id": 918170,
+    "et": "9:35 PM",
+    "opponent_lg_team_id": 370,
+    "opponent": "London Knights",
+    "hitmen_side": "home",
+    "last_night_games": [
+     918022,
+     918057,
+     918094
+    ]
+   }
+  },
+  {
+   "lg_team_id": 446,
+   "name": "Ottawa 67's",
+   "record_after_last_night": "21-17-6",
+   "last_night": [
+    {
+     "lg_game_id": 918030,
+     "played_at": "Monday October 26th 2026, 09:00 PM",
+     "opponent": "Saint John Sea Dogs",
+     "home_or_away": "home",
+     "result": "W 2-1",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 1,
+      "2": 0,
+      "3": 1
+     },
+     "team_stats": {
+      "goals": 2,
+      "total_shots": 30,
+      "hits": 12,
+      "time_on_attack": "11:38",
+      "passing_pct": "82.9%",
+      "face_offs_won": 11,
+      "penalty_minutes": "0:00",
+      "power_plays": "0 / 3",
+      "power_play_minutes": "0:00",
+      "blocks": 3,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "Clarke_82",
+       "build": "SNP",
+       "g": 1,
+       "a": 1,
+       "p": 2,
+       "plus_minus": 1,
+       "shots": "13/27",
+       "hits": 2,
+       "takeaways": 0,
+       "giveaways": 4,
+       "time_with_puck": "5:28"
+      },
+      {
+       "position": "C",
+       "player": "Obama Lamb",
+       "build": "PLY",
+       "g": 0,
+       "a": 1,
+       "p": 1,
+       "plus_minus": 1,
+       "shots": "6/14",
+       "hits": 6,
+       "takeaways": 4,
+       "giveaways": 2,
+       "time_with_puck": "3:02"
+      },
+      {
+       "position": "RW",
+       "player": "TZ i46i",
+       "build": "PLY",
+       "g": 1,
+       "a": 1,
+       "p": 2,
+       "plus_minus": 1,
+       "shots": "4/8",
+       "hits": 2,
+       "takeaways": 2,
+       "giveaways": 17,
+       "time_with_puck": "5:42"
+      },
+      {
+       "position": "LD",
+       "player": "Puregenesis88",
+       "build": "PMD",
+       "g": 0,
+       "a": 1,
+       "p": 1,
+       "plus_minus": 1,
+       "shots": "0/0",
+       "hits": 0,
+       "takeaways": 2,
+       "giveaways": 2,
+       "time_with_puck": "3:33"
+      },
+      {
+       "position": "RD",
+       "player": "DarthMalak9237",
+       "build": "PMD",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": 1,
+       "shots": "2/5",
+       "hits": 2,
+       "takeaways": 8,
+       "giveaways": 6,
+       "time_with_puck": "3:12"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "xX Z3NO Xx",
+       "build": "HYB",
+       "shots": 7,
+       "saves": 6,
+       "ga": 1,
+       "sv_pct": 0.857,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918030"
+    },
+    {
+     "lg_game_id": 918079,
+     "played_at": "Monday October 26th 2026, 09:35 PM",
+     "opponent": "Moose Jaw Warriors",
+     "home_or_away": "away",
+     "result": "W 3-2",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 0,
+      "2": 0,
+      "3": 3
+     },
+     "team_stats": {
+      "goals": 3,
+      "total_shots": 17,
+      "hits": 7,
+      "time_on_attack": "10:35",
+      "passing_pct": "81.9%",
+      "face_offs_won": 9,
+      "penalty_minutes": "4:00",
+      "power_plays": "1 / 6",
+      "power_play_minutes": "0:00",
+      "blocks": 3,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "Clarke_82",
+       "build": "SNP",
+       "g": 0,
+       "a": 2,
+       "p": 2,
+       "plus_minus": 0,
+       "shots": "1/5",
+       "hits": 2,
+       "takeaways": 2,
+       "giveaways": 6,
+       "time_with_puck": "6:18"
+      },
+      {
+       "position": "C",
+       "player": "Obama Lamb",
+       "build": "PLY",
+       "g": 1,
+       "a": 1,
+       "p": 2,
+       "plus_minus": 0,
+       "shots": "5/11",
+       "hits": 3,
+       "takeaways": 3,
+       "giveaways": 5,
+       "time_with_puck": "2:12"
+      },
+      {
+       "position": "RW",
+       "player": "TZ i46i",
+       "build": "PLY",
+       "g": 1,
+       "a": 0,
+       "p": 1,
+       "plus_minus": 0,
+       "shots": "3/6",
+       "hits": 0,
+       "takeaways": 1,
+       "giveaways": 9,
+       "time_with_puck": "5:34"
+      },
+      {
+       "position": "LD",
+       "player": "Puregenesis88",
+       "build": "PMD",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": 0,
+       "shots": "1/5",
+       "hits": 0,
+       "takeaways": 3,
+       "giveaways": 4,
+       "time_with_puck": "3:09"
+      },
+      {
+       "position": "RD",
+       "player": "DarthMalak9237",
+       "build": "PMD",
+       "g": 1,
+       "a": 2,
+       "p": 3,
+       "plus_minus": 0,
+       "shots": "6/15",
+       "hits": 2,
+       "takeaways": 4,
+       "giveaways": 1,
+       "time_with_puck": "3:00"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "xX Z3NO Xx",
+       "build": "HYB",
+       "shots": 13,
+       "saves": 11,
+       "ga": 2,
+       "sv_pct": 0.846,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918079"
+    },
+    {
+     "lg_game_id": 918092,
+     "played_at": "Monday October 26th 2026, 10:10 PM",
+     "opponent": "Rouyn-Noranda Huskies",
+     "home_or_away": "away",
+     "result": "L 0-1",
+     "lag_out": false,
+     "goals_by_period": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+     },
+     "team_stats": {
+      "goals": 0,
+      "total_shots": 23,
+      "hits": 13,
+      "time_on_attack": "15:05",
+      "passing_pct": "74%",
+      "face_offs_won": 15,
+      "penalty_minutes": "0:00",
+      "power_plays": "0 / 1",
+      "power_play_minutes": "0:00",
+      "blocks": 5,
+      "shorthanded_goals": 0
+     },
+     "lineup": [
+      {
+       "position": "LW",
+       "player": "Clarke_82",
+       "build": "SNP",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": -1,
+       "shots": "8/18",
+       "hits": 2,
+       "takeaways": 3,
+       "giveaways": 15,
+       "time_with_puck": "5:27"
+      },
+      {
+       "position": "C",
+       "player": "Obama Lamb",
+       "build": "PLY",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": -1,
+       "shots": "6/12",
+       "hits": 8,
+       "takeaways": 3,
+       "giveaways": 14,
+       "time_with_puck": "4:17"
+      },
+      {
+       "position": "RW",
+       "player": "TZ i46i",
+       "build": "PLY",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": -1,
+       "shots": "3/6",
+       "hits": 0,
+       "takeaways": 1,
+       "giveaways": 8,
+       "time_with_puck": "9:41"
+      },
+      {
+       "position": "LD",
+       "player": "Puregenesis88",
+       "build": "PMD",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": -1,
+       "shots": "3/7",
+       "hits": 0,
+       "takeaways": 8,
+       "giveaways": 5,
+       "time_with_puck": "6:12"
+      },
+      {
+       "position": "RD",
+       "player": "DarthMalak9237",
+       "build": "PMD",
+       "g": 0,
+       "a": 0,
+       "p": 0,
+       "plus_minus": -1,
+       "shots": "2/6",
+       "hits": 3,
+       "takeaways": 4,
+       "giveaways": 8,
+       "time_with_puck": "4:47"
+      }
+     ],
+     "goalies": [
+      {
+       "player": "xX Z3NO Xx",
+       "build": "HYB",
+       "shots": 20,
+       "saves": 19,
+       "ga": 1,
+       "sv_pct": 0.95,
+       "side_basis": "goals_allowed_matches_opponent_score"
+      }
+     ],
+     "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918092"
+    }
+   ],
+   "usual_lineup": {
+    "LW": [
+     {
+      "player": "Clarke_82",
+      "games_last_night": 3
+     }
+    ],
+    "C": [
+     {
+      "player": "Obama Lamb",
+      "games_last_night": 3
+     }
+    ],
+    "RW": [
+     {
+      "player": "TZ i46i",
+      "games_last_night": 3
+     }
+    ],
+    "LD": [
+     {
+      "player": "Puregenesis88",
+      "games_last_night": 3
+     }
+    ],
+    "RD": [
+     {
+      "player": "DarthMalak9237",
+      "games_last_night": 3
+     }
+    ],
+    "G": [
+     {
+      "player": "xX Z3NO Xx",
+      "games_last_night": 3
+     }
+    ]
+   },
+   "players": {
+    "Clarke_82": {
+     "lg_user_id": 52146,
+     "builds": [
+      "SNP"
+     ],
+     "season_55": {
+      "position": "LW",
+      "gp": 13,
+      "goals": 16,
+      "assists": 19,
+      "pts": 35,
+      "plus_minus": -1,
+      "shots": 75,
+      "hits": 46,
+      "takeaways": 41,
+      "giveaways": 107,
+      "twp_seconds": 311,
+      "pass_pct": 79.2
+     }
+    },
+    "Obama Lamb": {
+     "lg_user_id": 16535,
+     "builds": [
+      "PLY"
+     ],
+     "season_55": {
+      "position": "C",
+      "gp": 13,
+      "goals": 13,
+      "assists": 18,
+      "pts": 31,
+      "plus_minus": -1,
+      "shots": 54,
+      "hits": 72,
+      "takeaways": 34,
+      "giveaways": 74,
+      "twp_seconds": 209,
+      "pass_pct": 76.5
+     }
+    },
+    "TZ i46i": {
+     "lg_user_id": 70957,
+     "builds": [
+      "PLY"
+     ],
+     "season_55": {
+      "position": "RW",
+      "gp": 13,
+      "goals": 14,
+      "assists": 21,
+      "pts": 35,
+      "plus_minus": -1,
+      "shots": 46,
+      "hits": 18,
+      "takeaways": 34,
+      "giveaways": 107,
+      "twp_seconds": 294,
+      "pass_pct": 75.9
+     }
+    },
+    "Puregenesis88": {
+     "lg_user_id": 14612,
+     "builds": [
+      "PMD"
+     ],
+     "season_55": {
+      "position": "LD",
+      "gp": 13,
+      "goals": 2,
+      "assists": 16,
+      "pts": 18,
+      "plus_minus": -13,
+      "shots": 16,
+      "hits": 6,
+      "takeaways": 53,
+      "giveaways": 84,
+      "twp_seconds": 281,
+      "pass_pct": 80.2
+     }
+    },
+    "DarthMalak9237": {
+     "lg_user_id": 43200,
+     "builds": [
+      "PMD"
+     ],
+     "season_55": {
+      "position": "RD",
+      "gp": 13,
+      "goals": 3,
+      "assists": 10,
+      "pts": 13,
+      "plus_minus": -15,
+      "shots": 21,
+      "hits": 56,
+      "takeaways": 47,
+      "giveaways": 24,
+      "twp_seconds": 177,
+      "pass_pct": 83.5
+     }
+    },
+    "xX Z3NO Xx": {
+     "lg_user_id": 7669,
+     "builds": [
+      "HYB"
+     ],
+     "season_55": {
+      "gp": 21,
+      "wins": 11,
+      "losses": 8,
+      "ot_losses": 2,
+      "save_pct": 0.776,
+      "gaa": 4.07,
+      "shutouts": 0
+     }
+    }
+   },
+   "games_missing": [],
+   "tonight": {
+    "lg_game_id": 918200,
+    "et": "10:10 PM",
+    "opponent_lg_team_id": 446,
+    "opponent": "Ottawa 67's",
+    "hitmen_side": "home",
+    "last_night_games": [
+     918030,
+     918079,
+     918092
+    ]
+   }
+  }
+ ]
+}
