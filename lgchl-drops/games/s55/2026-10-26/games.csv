@@ -1,10 +1,45 @@
 lg_game_id,played_at,status,away,away_score,home,home_score,lag_out,ea_parts,source_url
 918021,"Monday October 26th 2026, 09:00 PM",FINAL,Saginaw Spirit,1,Cape Breton Eagles,2,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918021
 918022,"Monday October 26th 2026, 09:00 PM",FINAL,Portland Winterhawks,5,London Knights,8,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918022
+918023,"Monday October 26th 2026, 09:00 PM",FINAL,Quebec Remparts,4,Sudbury Wolves,6,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918023
+918024,"Monday October 26th 2026, 09:00 PM",F/OT,Everett Silvertips,2,Flint Firebirds,3,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918024
+918025,"Monday October 26th 2026, 09:00 PM",FINAL,North Bay Battalion,5,Tri City Americans,4,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918025
+918026,"Monday October 26th 2026, 09:00 PM",F/OT,Brandon Wheat Kings,3,Charlottetown Islanders,4,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918026
+918027,"Monday October 26th 2026, 09:00 PM",FINAL,Prince George Cougars,6,Sarnia Sting,3,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918027
+918028,"Monday October 26th 2026, 09:00 PM",FINAL,Newfoundland Regiment,3,Brantford Bulldogs,7,True,2,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918028
+918029,"Monday October 26th 2026, 09:00 PM",FINAL,Kingston Frontenacs,1,Sherbrooke Phoenix,3,True,2,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918029
 918030,"Monday October 26th 2026, 09:00 PM",FINAL,Saint John Sea Dogs,1,Ottawa 67's,2,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918030
+918031,"Monday October 26th 2026, 09:00 PM",FINAL,Penticton Vees,2,Sault Ste. Marie Greyhounds,1,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918031
+918032,"Monday October 26th 2026, 09:00 PM",FINAL,Peterborough Petes,4,Edmonton Oil Kings,8,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918032
+918033,"Monday October 26th 2026, 09:00 PM",F/OT,Baie-Comeau Drakkar,3,Red Deer Rebels,2,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918033
+918034,"Monday October 26th 2026, 09:00 PM",FINAL,Calgary Hitmen,3,Shawinigan Cataractes,1,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918034
+918035,"Monday October 26th 2026, 09:00 PM",FINAL,Rimouski Oceanic,1,Oshawa Generals,0,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918035
+918036,"Monday October 26th 2026, 09:00 PM",FINAL,Kitchener Rangers,4,Saskatoon Blades,2,True,2,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918036
+918037,"Monday October 26th 2026, 09:00 PM",FINAL,Spokane Chiefs,5,Chicoutimi Sagueneens,1,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918037
 918038,"Monday October 26th 2026, 09:00 PM",F/OT,Owen Sound Attack,4,Moncton Wildcats,5,True,3,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918038
+918039,"Monday October 26th 2026, 09:00 PM",FINAL,Prince Albert Raiders,1,Erie Otters,5,True,2,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918039
+918040,"Monday October 26th 2026, 09:00 PM",FINAL,Gatineau Olympiques,0,Lethbridge Hurricanes,2,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918040
+918041,"Monday October 26th 2026, 09:00 PM",FINAL,Victoriaville Tigres,4,Niagara IceDogs,2,True,2,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918041
+918042,"Monday October 26th 2026, 09:00 PM",FINAL,Kamloops Blazers,1,Guelph Storm,6,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918042
+918043,"Monday October 26th 2026, 09:00 PM",FINAL,Brampton Steelheads,2,Moose Jaw Warriors,4,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918043
+918044,"Monday October 26th 2026, 09:00 PM",FINAL,Drummondville Voltigeurs,4,Wenatchee Wild,3,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918044
+918045,"Monday October 26th 2026, 09:00 PM",FINAL,Rouyn-Noranda Huskies,2,Seattle Thunderbirds,0,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918045
+918046,"Monday October 26th 2026, 09:00 PM",F/OT,Chilliwack Bruins,3,Val-d'Or Foreurs,4,True,2,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918046
+918047,"Monday October 26th 2026, 09:00 PM",F/OT,Swift Current Broncos,2,Windsor Spitfires,3,True,3,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918047
+918048,"Monday October 26th 2026, 09:00 PM",FINAL,Blainville-Boisbriand Armada,2,Barrie Colts,5,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918048
+918049,"Monday October 26th 2026, 09:00 PM",FINAL,Halifax Mooseheads,1,Medicine Hat Tigers,12,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918049
+918050,"Monday October 26th 2026, 09:00 PM",FINAL,Kelowna Rockets,4,Regina Pats,2,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918050
+918051,"Monday October 26th 2026, 09:00 PM",F/OT,Vancouver Giants,4,Victoria Royals,5,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918051
+918052,"Monday October 26th 2026, 09:35 PM",FINAL,Flint Firebirds,4,Shawinigan Cataractes,0,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918052
+918053,"Monday October 26th 2026, 09:35 PM",FINAL,Sarnia Sting,7,Swift Current Broncos,4,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918053
+918054,"Monday October 26th 2026, 09:35 PM",FINAL,Edmonton Oil Kings,5,Halifax Mooseheads,2,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918054
+918055,"Monday October 26th 2026, 09:35 PM",FINAL,Chilliwack Bruins,5,Brampton Steelheads,4,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918055
 918056,"Monday October 26th 2026, 09:35 PM",FINAL,Moncton Wildcats,9,Seattle Thunderbirds,2,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918056
 918057,"Monday October 26th 2026, 09:35 PM",FINAL,London Knights,5,Baie-Comeau Drakkar,3,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918057
+918058,"Monday October 26th 2026, 09:35 PM",FINAL,Niagara IceDogs,2,Saint John Sea Dogs,3,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918058
+918059,"Monday October 26th 2026, 09:35 PM",FINAL,Sherbrooke Phoenix,4,Kelowna Rockets,1,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918059
+918060,"Monday October 26th 2026, 09:35 PM",FINAL,Charlottetown Islanders,2,Vancouver Giants,6,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918060
+918061,"Monday October 26th 2026, 09:35 PM",FINAL,Kamloops Blazers,0,Gatineau Olympiques,4,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918061
 918079,"Monday October 26th 2026, 09:35 PM",FINAL,Ottawa 67's,3,Moose Jaw Warriors,2,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918079
 918083,"Monday October 26th 2026, 10:10 PM",FINAL,Moncton Wildcats,3,Peterborough Petes,1,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918083
 918092,"Monday October 26th 2026, 10:10 PM",F/OT,Ottawa 67's,0,Rouyn-Noranda Huskies,1,False,1,https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918092
