@@ -165,10 +165,13 @@ const fixture=()=>{
   assert.deepEqual(sent.periods,[{label:'Period 1',start:0,end:400},{label:'Period 2',start:400,end:800},{label:'Period 3',start:800,end:1200},{label:'Period 3',start:1260,end:1460}]);
   assert.equal(sent.overtime_confirmed,false);
   await page.waitForFunction(()=>window.testRows.vod_review_sessions[0].worker_job_id==='job');
-  // Reproduce the reported failure: typed times, no separate Save click, empty saved periods.
-  await page.goto('https://wildman.test/vod-lab.html?review=game');
-  await page.locator('#segmentList .segment-card').first().waitFor();
-  await page.evaluate(()=>{window.testRows.vod_review_segments=[];window.testRows.vod_review_sessions[0].worker_status='needs_periods';});
+  // Reproduce the reported failure without navigating during an in-flight fixture request.
+  await page.evaluate(()=>{
+    window.workerCalls=[];window.rpcCalls=[];window.workerJob=null;
+    window.testRows.vod_review_segments=[];window.testRows.vod_game_publications=[];
+    Object.assign(window.testRows.vod_review_sessions[0],{worker_status:'needs_periods',worker_job_id:null,
+      review_document:null,pending_worker_result:null,worker_result:{chunks:[],game_rollup:{}},status:'reviewing'});
+  });
   await page.locator('#refreshVod').click();
   await page.waitForFunction(()=>document.querySelectorAll('#segmentList .segment-card').length===0);
   if(!await page.locator('#manualPeriodBuilder').evaluate(d=>d.open))await page.locator('#manualPeriodBuilder > summary').click();
