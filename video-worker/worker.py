@@ -455,6 +455,16 @@ def probe(source):
     return duration
 
 
+def restart_context_requires_mapping(context):
+    """Only this game's restart instructions require manual reconstruction."""
+    for sentence in re.split(r'[.\n]+', str(context or '')):
+        if re.search(r'\b(separate from|no restart|without (?:a )?restart|no lag[- ]?out)\b', sentence, re.I):
+            continue
+        if re.search(r'lag[- ]?out|restart|replayed period', sentence, re.I):
+            return True
+    return False
+
+
 def detect_periods(source, duration):
     """Best-effort local OCR period detection. Returns [] when confidence is insufficient."""
     folder = ROOT / ('detect-' + uuid4().hex)
@@ -1546,7 +1556,7 @@ def process_streamed_replay(job_id):
               'restart_detected':metadata.get('scan_restart_detected'),
               'reads':[{k:r.get(k) for k in ('at','period','clock_seconds')}
                        for d in diagnostics for r in d.get('reads',[])]}), flush=True)
-        if metadata.get('scan_restart_detected') or re.search(r'lag[- ]?out|restart|replayed period', metadata.get('players', ''), re.I):
+        if metadata.get('scan_restart_detected') or restart_context_requires_mapping(metadata.get('players', '')):
             periods = []
         result['stage'] = 'needs_period_boundaries'
         if len(periods) < 3:

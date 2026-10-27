@@ -5,6 +5,12 @@ os.environ['DATA_DIR'] = tempfile.mkdtemp()
 import worker, replay
 
 class NeedsPeriodsFix(unittest.TestCase):
+    def test_other_game_restart_note_does_not_block_detection(self):
+        self.assertFalse(worker.restart_context_requires_mapping(
+            "These reviews are separate from Game 1's lag-out reconstruction."))
+        self.assertTrue(worker.restart_context_requires_mapping(
+            'Game 1 had a lag-out. Combine the restarted periods.'))
+
     def setUp(self):
         worker.ROOT = Path(os.environ['DATA_DIR']); worker.initialize()
     def insert(self, status, meta, result=None):
