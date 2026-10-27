@@ -80,9 +80,9 @@
     return body;
   }
 
-  async function currentReview(){
+  async function currentReview(force=false){
     const id=selectedReviewId(); if(!id)return null;
-    return window.WildmanVODCache.review(id);
+    return window.WildmanVODCache.review(id,{force});
   }
 
   function ensureScoutMode(review){
@@ -227,7 +227,8 @@
     if(busy)return;busy=true;
     const button=document.getElementById('vodAnalyzeGame');button.disabled=true;
     try{
-      const review=await currentReview();if(!review)throw new Error('Select a game first.');
+      await window.WildmanVODPeriodEditor?.savePending();
+      const review=await currentReview(true);if(!review)throw new Error('Select a game first.');
       ensureScoutMode(review);
       const {data:segments,error:segError}=await db().from('vod_review_segments').select('*').eq('review_id',review.id);
       if(segError)throw segError;
@@ -417,7 +418,10 @@
       if(savedState?.analysisComplete&&job.status!=='ready_for_review'){showDurable(savedState);}
       else if(job.status==='needs_periods'){
         if(selectedReviewId()===reviewId)document.getElementById('manualPeriodBuilder')?.setAttribute('open','');
-        setStatus('Automatic detection needs confirmation. Enter or correct the period times and any restart/OT mapping, save, then continue. No uncertain periods are analyzed.','warn');
+        const review=await currentReview();
+        if(selectedReviewId()!==reviewId)return;
+        const candidates=(job.result?.detected_periods||[]).map(p=>`${p.label}: ${fmtClock(Number(p.start)+sourceOffset(review))}–${fmtClock(Number(p.end)+sourceOffset(review))}`).join('; ');
+        setStatus((job.error||'Automatic detection needs confirmation.')+(candidates?' Candidate times in the full VOD (verify before using): '+candidates+'.':'')+' Enter or correct the period times, then press Analyze Game. Your edits will be saved first.','warn');
       }
       else if(job.status==='awaiting_ai')setStatus(job.result?.period_detection==='auto'?'Periods detected automatically ✓ Video is split and ready. AI scouting is the only remaining connection. No re-upload needed.':'Video validated and split into period-sized work. AI is not connected to Railway yet. No re-upload is needed once the AI connection is added.','warn');
       else if(job.status==='ready_for_review'){
