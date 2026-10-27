@@ -173,7 +173,7 @@ const fixture=()=>{
       review_document:null,pending_worker_result:null,skip_ranges:[],worker_result:{chunks:[],game_rollup:{}},status:'reviewing'});
   });
   await page.locator('#refreshVod').click();
-  await page.waitForFunction(()=>document.querySelectorAll('#segmentList .segment-card').length===0);
+  await page.waitForFunction(()=>document.querySelectorAll('#segmentList [data-segment-id]').length===0 && document.getElementById('segmentList').textContent.includes('Awaiting detection'));
   if(!await page.locator('#manualPeriodBuilder').evaluate(d=>d.open))await page.locator('#manualPeriodBuilder > summary').click();
   await page.locator('#period1Start').fill('31:00');await page.locator('#period2Start').fill('37:00');await page.locator('#period3Start').fill('44:00');await page.locator('#periodVodEnd').fill('54:20');
   await page.evaluate(()=>window.testRows.vod_review_sessions[0].updated_at='2026-10-27T18:00:00Z');
