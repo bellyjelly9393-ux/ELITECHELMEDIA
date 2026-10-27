@@ -1,0 +1,24 @@
+/* Elitechel compact 3D navigation: scoped so existing branding and masthead remain unchanged. */
+.ecm3d-destinations{--metal:#c7d3df;--light:#fff;position:relative;isolation:isolate;padding:16px 20px 20px;background:linear-gradient(180deg,#11151b,#090d13);border-top:1px solid #28313b;border-bottom:1px solid #323640}
+.ecm3d-inner{max-width:1250px;margin:0 auto}.ecm3d-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:0 0 13px}
+.ecm3d-head h2{margin:0;font-family:Anton,Impact,"Arial Narrow",sans-serif;font-size:clamp(17px,2vw,22px);font-weight:400;letter-spacing:1.5px;line-height:1.2;color:#e6e9ed}
+.ecm3d-head p{margin:0;color:#93a0ae;font-size:12px}
+.ecm3d-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;align-items:stretch}
+.ecm3d-compact .ecm3d-grid{grid-template-columns:repeat(4,minmax(0,150px));justify-content:center}
+.ecm3d-link{--accent:#d6a643;--edge:#846227;--hue:230,177,77;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-width:0;min-height:114px;padding:12px 8px 10px;border-radius:9px;text-decoration:none;color:#e7e9ee;text-align:center;background:linear-gradient(150deg,#252b32 0%,#0d1117 52%,#1b2028 100%);border:1px solid #53606e;box-shadow:inset 1px 1px 0 #eef4ff2e,inset -2px -2px 0 #0009,0 5px 0 #040609,0 8px 14px #0009;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.ecm3d-link.ecm3d-red{--accent:#ed324a;--edge:#8f1e35;--hue:237,50,74}.ecm3d-link.ecm3d-ice{--accent:#9dcced;--edge:#527e9d;--hue:157,204,237}
+.ecm3d-bezel{position:relative;display:grid;place-items:center;width:60px;height:60px;flex:none;padding:5px;clip-path:polygon(18% 0,82% 0,100% 18%,100% 82%,82% 100%,18% 100%,0 82%,0 18%);background:linear-gradient(145deg,#fff 0%,#98a8b9 13%,#282f39 30%,#0b0e13 55%,#8793a4 83%,#e9eff9 100%);box-shadow:0 2px 8px #000c}
+.ecm3d-bezel:before{content:"";position:absolute;inset:3px;clip-path:inherit;background:linear-gradient(144deg,var(--accent),#19202b 28%,#070a0f 67%,var(--edge) 100%)}
+.ecm3d-face{z-index:1;display:grid;place-items:center;width:48px;height:48px;clip-path:inherit;background:radial-gradient(circle at 29% 20%,#82919c54,transparent 46%),linear-gradient(152deg,#343d4b,#0b1018 62%,#20262d);box-shadow:inset 0 2px 4px #000b;color:var(--accent)}
+.ecm3d-symbol{width:34px;height:34px;filter:drop-shadow(1px 2px 0 #000) drop-shadow(0 0 5px rgba(var(--hue),.35))}
+.ecm3d-face img{max-width:39px;max-height:39px;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 2px 2px #000)}
+.ecm3d-label{font-family:Arial,sans-serif;font-size:12px;font-weight:900;line-height:1.2;letter-spacing:.25px;text-shadow:0 1px 2px #000;max-width:100%;overflow-wrap:break-word}
+.ecm3d-link:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:inset 1px 1px 0 #eef4ff4d,inset -2px -2px 0 #0009,0 8px 0 #040609,0 12px 22px #000c,0 0 18px rgba(var(--hue),.24)}
+.ecm3d-link:hover .ecm3d-symbol{filter:drop-shadow(1px 2px 0 #000) drop-shadow(0 0 8px rgba(var(--hue),.7))}
+.ecm3d-link:active{transform:translateY(3px);box-shadow:inset 2px 3px 6px #000,0 1px 0 #040609}
+.ecm3d-link:focus-visible{outline:3px solid #fff;outline-offset:3px;border-color:var(--accent)}
+.ecm3d-compact{padding-top:14px;padding-bottom:16px}.ecm3d-compact .ecm3d-head{justify-content:center;margin-bottom:10px}.ecm3d-compact .ecm3d-link{min-height:104px}.ecm3d-compact .ecm3d-bezel{width:52px;height:52px}.ecm3d-compact .ecm3d-face{width:42px;height:42px}.ecm3d-compact .ecm3d-symbol{width:30px;height:30px}
+@media(max-width:800px){.ecm3d-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.ecm3d-compact .ecm3d-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.ecm3d-destinations{padding:14px 12px 17px}}
+@media(max-width:470px){.ecm3d-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.ecm3d-compact .ecm3d-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.ecm3d-link{padding:9px 5px;min-height:104px}.ecm3d-label{font-size:11px}.ecm3d-bezel{width:51px;height:51px}.ecm3d-face{width:41px;height:41px}.ecm3d-symbol{width:29px;height:29px}}
+@media(hover:none){.ecm3d-link:hover{transform:none;box-shadow:inset 1px 1px 0 #eef4ff2e,inset -2px -2px 0 #0009,0 5px 0 #040609,0 8px 14px #0009}}
+@media(prefers-reduced-motion:reduce){.ecm3d-link{transition:none}.ecm3d-link:hover,.ecm3d-link:active{transform:none}}
