@@ -38,4 +38,3 @@ test('panel stays inside existing management gate and includes input limits',()=
  assert.match(html,/connected only to your console cannot send inputs/);
  assert.match(html,/allow="gamepad"/);
 });
-
