@@ -13,6 +13,8 @@ import subprocess
 import threading
 import time
 
+DETECTOR_VERSION = 2
+
 INTERVAL = max(8, int(os.getenv('LIVE_PERIOD_WATCH_SECONDS', '20')))
 CONFIRM_READS = max(2, int(os.getenv('LIVE_PERIOD_CONFIRM_READS', '2')))
 REPLAY_INTERVAL = max(6, int(os.getenv('REPLAY_PERIOD_SCAN_SECONDS', '12')))
@@ -62,6 +64,7 @@ def infer_period_ranges(reads, duration, initial_period=1, confirm_reads=2, inte
     candidate = None
     streak = 0
     candidate_at = None
+    candidate_reason = None
     previous_clock = None
     restart_detected = False
     regression = None
@@ -72,8 +75,17 @@ def infer_period_ranges(reads, duration, initial_period=1, confirm_reads=2, inte
         observed = item.get('period')
         clock = item.get('clock_seconds')
         reason = 'period_ocr'
-        if current == 0 and observed is None and clock is not None:
+        # A lobby/faceoff countdown is not evidence that Period 1 has begun.
+        # Without a period label, require a plausible opening game clock.
+        if current == 0 and observed is None and clock is not None and 14 * 60 <= clock <= 20 * 60:
             observed, reason = 1, 'game_clock'
+            if previous_clock is not None and clock >= previous_clock:
+                candidate = None
+                streak = 0
+        if (observed is None and candidate_reason == 'clock_reset' and candidate == current + 1
+                and clock is not None and previous_clock is not None
+                and 14 * 60 <= clock < previous_clock):
+            observed, reason = candidate, 'clock_reset'
         if (observed is None and previous_clock is not None and clock is not None
                 and 1 <= current < 3 and previous_clock <= 6 * 60 and clock >= 14 * 60
                 and clock - previous_clock >= 8 * 60):
@@ -103,24 +115,17 @@ def infer_period_ranges(reads, duration, initial_period=1, confirm_reads=2, inte
             streak = 0
             candidate_at = None
             continue
-        if reason == 'clock_reset':
-            boundary_at = max(0.0, at - interval / 2)
-            current = observed
-            boundaries.append({'period': current, 'at': round(boundary_at, 1), 'reason': reason})
-            candidate = None
-            streak = 0
-            candidate_at = None
-            continue
         if candidate == observed:
             streak += 1
         else:
             candidate = observed
             streak = 1
             candidate_at = at
+            candidate_reason = reason
         if streak >= max(1, int(confirm_reads)):
             boundary_at = max(0.0, float(candidate_at or at) - interval / 2)
             current = observed
-            boundaries.append({'period': current, 'at': round(boundary_at, 1), 'reason': reason})
+            boundaries.append({'period': current, 'at': round(boundary_at, 1), 'reason': candidate_reason})
             candidate = None
             streak = 0
             candidate_at = None
@@ -144,6 +149,32 @@ def infer_period_ranges(reads, duration, initial_period=1, confirm_reads=2, inte
         ranges.append({'label': label, 'period': period, 'start': round(start, 1), 'end': round(end, 1)})
     return {'ranges': ranges, 'current_period': max(1, current), 'boundaries': clean, 'confirmed': current >= 1,
             'restart_detected': restart_detected}
+
+
+def verified_overtime_periods(reads, interval=REPLAY_INTERVAL):
+    """Require three consecutive OT labels with a ticking clock, not a menu label.
+
+    Only evidence from one uninterrupted local scan qualifies. A slice boundary
+    can therefore require confirmation rather than silently accepting weak OT.
+    """
+    verified = set()
+    previous = None
+    streak = 0
+    for item in reads:
+        period, clock, at = item.get('period'), item.get('clock_seconds'), item.get('at')
+        if (not isinstance(period, int) or period < 4
+                or not isinstance(clock, (int, float)) or not 0 <= clock <= 1200
+                or not isinstance(at, (int, float))):
+            previous, streak = None, 0
+            continue
+        continuous = (previous is not None and previous['period'] == period
+                      and 0 < at - previous['at'] <= interval * 2
+                      and 0 < previous['clock_seconds'] - clock <= (at - previous['at']) * 6)
+        streak = streak + 1 if continuous else 1
+        if streak >= 3:
+            verified.add(period)
+        previous = item
+    return sorted(verified)
 
 
 def scan_recording_periods(source, duration, initial_period=1, interval=REPLAY_INTERVAL, confirmed=True):
@@ -209,6 +240,7 @@ def scan_recording_periods(source, duration, initial_period=1, interval=REPLAY_I
             })
 
         inferred = infer_period_ranges(reads, duration, initial_period, CONFIRM_READS, interval, confirmed)
+        inferred['verified_overtime_periods'] = verified_overtime_periods(reads, interval)
         inferred['reads'] = reads[-40:]
         inferred['interval_seconds'] = interval
         return inferred
@@ -350,3 +382,4 @@ class LivePeriodWatcher:
 
     def cleanup(self):
         shutil.rmtree(self.folder, ignore_errors=True)
+

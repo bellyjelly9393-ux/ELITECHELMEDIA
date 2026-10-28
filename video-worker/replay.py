@@ -396,6 +396,30 @@ def resolve(review, owner, create=False):
         if job_id:
             job = worker.get_job(job_id)
             meta = job['metadata']
+            # A new detector may repair an old paused scan. Re-scan only on an
+            # explicit Analyze click, once per version, and never replace AI work
+            # or manually supplied periods. Keep the old candidates as history.
+            import live_periods
+            if (create and job['status'] == 'needs_periods'
+                    and meta.get('source_kind') == 'twitch_replay'
+                    and meta.get('replay_phase') == 'scan_periods'
+                    and int(meta.get('period_detector_version') or 0) < live_periods.DETECTOR_VERSION
+                    and not meta.get('periods') and not meta.get('period_spec_hash')
+                    and not any(job['result'].get(k) for k in ('chunks', 'period_reports', 'game_rollup'))):
+                result = dict(job['result'])
+                history = list(result.get('previous_period_scans') or [])
+                history.append({k: result[k] for k in ('period_spans', 'detected_periods', 'replay_period_diagnostics') if k in result})
+                result['previous_period_scans'] = history
+                for key in ('period_spans', 'detected_periods', 'replay_period_diagnostics', 'failure_code'):
+                    result.pop(key, None)
+                for key in ('scan_current_period', 'scan_period_confirmed', 'scan_restart_detected',
+                            'scan_verified_overtime', 'active_replay_unit'):
+                    meta.pop(key, None)
+                meta.update(scan_unit_index=0, scan_period_confirmed=False,
+                            period_detector_version=live_periods.DETECTOR_VERSION)
+                result['stage'] = 'scanning_period_boundaries'
+                worker.update_metadata(job_id, meta, 'retrieving', result, '')
+                return worker.get_job(job_id)
             rollup = job['result'].get('game_rollup') or {}
             incomplete_report = job['status'] == 'ready_for_review' and not all(
                 isinstance(rollup.get(k), str) and rollup[k].strip() for k in (
@@ -717,4 +741,5 @@ def retrieve(job_id):
         for item in folder.glob('ytdlp.*'):
             if item.name != 'ytdlp-error.log' or success:
                 item.unlink(missing_ok=True)
+
 
