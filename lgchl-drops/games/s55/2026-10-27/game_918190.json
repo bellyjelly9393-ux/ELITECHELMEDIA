@@ -1,0 +1,583 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918190,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 10:10 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918190",
+ "captured_at": "2026-10-28T19:13:48.537Z",
+ "away": {
+  "lg_team_id": 444,
+  "name": "Frontenacs",
+  "record": "21-21-2",
+  "goals_by_period": {
+   "1": 2,
+   "2": 1,
+   "3": 2
+  },
+  "score": 5,
+  "full_name": "Kingston Frontenacs"
+ },
+ "home": {
+  "lg_team_id": 382,
+  "name": "Cataractes",
+  "record": "22-21-4",
+  "goals_by_period": {
+   "1": 2,
+   "2": 0,
+   "3": 1
+  },
+  "score": 3,
+  "full_name": "Shawinigan Cataractes"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 5,
+   "home": 3
+  },
+  "total_shots": {
+   "away": 16,
+   "home": 20
+  },
+  "hits": {
+   "away": 8,
+   "home": 9
+  },
+  "time_on_attack": {
+   "away": "8:28",
+   "home": "11:08"
+  },
+  "passing_pct": {
+   "away": "76.5%",
+   "home": "78.8%"
+  },
+  "face_offs_won": {
+   "away": 14,
+   "home": 12
+  },
+  "penalty_minutes": {
+   "away": "4:00",
+   "home": "2:00"
+  },
+  "power_plays": {
+   "away": "0 / 0",
+   "home": "0 / 1"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 1,
+   "home": 3
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 213,
+    "player": "DrxCheeks"
+   },
+   {
+    "position": "C",
+    "seconds": 114,
+    "player": "lMoreault_x_89l"
+   },
+   {
+    "position": "RW",
+    "seconds": 347,
+    "player": "willyknifemann"
+   },
+   {
+    "position": "RD",
+    "seconds": 642,
+    "player": "shape420"
+   },
+   {
+    "position": "LD",
+    "seconds": 399,
+    "player": "tthehorse"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 398,
+    "player": "FletchTapBcKDoor"
+   },
+   {
+    "position": "C",
+    "seconds": 223,
+    "player": "premierplayer"
+   },
+   {
+    "position": "RW",
+    "seconds": 375,
+    "player": "xPhiist"
+   },
+   {
+    "position": "RD",
+    "seconds": 207,
+    "player": "Pags1974"
+   },
+   {
+    "position": "LD",
+    "seconds": 184,
+    "player": "BigSaveNabokov"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Kingston Frontenacs",
+   "lg_user_id": 74282,
+   "player": "DrxCheeks",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    86,
+    94,
+    38
+   ],
+   "goals": 3,
+   "ast": 0,
+   "pts": 3,
+   "plus_minus": 2,
+   "time_on_ice": "74:14",
+   "time_on_ice_seconds": 4454,
+   "time_with_puck": "3:33",
+   "time_with_puck_seconds": 213,
+   "shots_on_goal_attempts": "5/11",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 0,
+   "pass_pct": 56.3,
+   "saucer_passes": 0,
+   "hits": 5,
+   "take_aways": 3,
+   "give_aways": 8,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Kingston Frontenacs",
+   "lg_user_id": 8692,
+   "player": "lMoreault_x_89l",
+   "position": "C",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    49,
+    32,
+    40
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 2,
+   "time_on_ice": "76:44",
+   "time_on_ice_seconds": 4604,
+   "time_with_puck": "1:54",
+   "time_with_puck_seconds": 114,
+   "shots_on_goal_attempts": "3/7",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 0,
+   "pass_pct": 75.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Kingston Frontenacs",
+   "lg_user_id": 80283,
+   "player": "willyknifemann",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    90,
+    100,
+    41
+   ],
+   "goals": 2,
+   "ast": 3,
+   "pts": 5,
+   "plus_minus": 2,
+   "time_on_ice": "74:45",
+   "time_on_ice_seconds": 4485,
+   "time_with_puck": "5:47",
+   "time_with_puck_seconds": 347,
+   "shots_on_goal_attempts": "3/7",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 0,
+   "pass_pct": 85.0,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 1,
+   "give_aways": 2,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Kingston Frontenacs",
+   "lg_user_id": 79200,
+   "player": "tthehorse",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    66,
+    24,
+    65
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 2,
+   "time_on_ice": "76:44",
+   "time_on_ice_seconds": 4604,
+   "time_with_puck": "6:39",
+   "time_with_puck_seconds": 399,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 91.7,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 5,
+   "give_aways": 4,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Kingston Frontenacs",
+   "lg_user_id": 79545,
+   "player": "shape420",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    64,
+    50,
+    55
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 2,
+   "time_on_ice": "76:44",
+   "time_on_ice_seconds": 4604,
+   "time_with_puck": "10:42",
+   "time_with_puck_seconds": 642,
+   "shots_on_goal_attempts": "3/8",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 8,
+   "deflections": 0,
+   "pass_pct": 78.9,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 76606,
+   "player": "FletchTapBcKDoor",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    64,
+    80,
+    38
+   ],
+   "goals": 2,
+   "ast": 1,
+   "pts": 3,
+   "plus_minus": -2,
+   "time_on_ice": "76:44",
+   "time_on_ice_seconds": 4604,
+   "time_with_puck": "6:38",
+   "time_with_puck_seconds": 398,
+   "shots_on_goal_attempts": "5/10",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 74.1,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 3,
+   "give_aways": 4,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 16685,
+   "player": "premierplayer",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    40,
+    37,
+    50
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": -2,
+   "time_on_ice": "76:44",
+   "time_on_ice_seconds": 4604,
+   "time_with_puck": "3:43",
+   "time_with_puck_seconds": 223,
+   "shots_on_goal_attempts": "2/4",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 83.3,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 5,
+   "give_aways": 6,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 25419,
+   "player": "xPhiist",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    43,
+    45,
+    35
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -2,
+   "time_on_ice": "74:45",
+   "time_on_ice_seconds": 4485,
+   "time_with_puck": "6:15",
+   "time_with_puck_seconds": 375,
+   "shots_on_goal_attempts": "9/18",
+   "shots_on_goal_attempts_on_goal": 9,
+   "shots_on_goal_attempts_attempts": 18,
+   "deflections": 0,
+   "pass_pct": 80.0,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 1,
+   "give_aways": 11,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 7126,
+   "player": "BigSaveNabokov",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    36,
+    12,
+    40
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -2,
+   "time_on_ice": "76:44",
+   "time_on_ice_seconds": 4604,
+   "time_with_puck": "3:04",
+   "time_with_puck_seconds": 184,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 83.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 3,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 58300,
+   "player": "Pags1974",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    38,
+    9,
+    44
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -2,
+   "time_on_ice": "76:44",
+   "time_on_ice_seconds": 4604,
+   "time_with_puck": "3:27",
+   "time_with_puck_seconds": 207,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 71.4,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 4,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 80871,
+   "player": "ShesterkinNHL",
+   "build": "BFY",
+   "lg_ratings": [
+    80,
+    72
+   ],
+   "shots": 20,
+   "s_pct": 0.85,
+   "ga": 3,
+   "save": 17,
+   "gaa": 2.35,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 2,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Kingston Frontenacs"
+  },
+  {
+   "lg_user_id": 50294,
+   "player": "hully17",
+   "build": "HYB",
+   "lg_ratings": [
+    43,
+    43
+   ],
+   "shots": 16,
+   "s_pct": 0.688,
+   "ga": 5,
+   "save": 11,
+   "gaa": 3.91,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 1,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Shawinigan Cataractes"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-1",
+   "submitted_by": "PapaDimez",
+   "submitted_at": "2026-10-27 10:50:18pm"
+  },
+  {
+   "part": 1,
+   "periods": "1-3",
+   "submitted_by": "PapaDimez",
+   "submitted_at": "2026-10-27 10:50:18pm"
+  }
+ ],
+ "lag_out": true,
+ "edits": {
+  "count": 1,
+  "last_by": "PapaDimez",
+  "last_at": "Tuesday October 27th 2026, 10:50 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

@@ -1,0 +1,580 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918177,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 10:10 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918177",
+ "captured_at": "2026-10-28T19:08:12.500Z",
+ "away": {
+  "lg_team_id": 398,
+  "name": "Winterhawks",
+  "record": "17-26-2",
+  "goals_by_period": {
+   "1": 0,
+   "2": 1,
+   "3": 1
+  },
+  "score": 2,
+  "full_name": "Portland Winterhawks"
+ },
+ "home": {
+  "lg_team_id": 466,
+  "name": "Tigres",
+  "record": "23-20-4",
+  "goals_by_period": {
+   "1": 1,
+   "2": 1,
+   "3": 1
+  },
+  "score": 3,
+  "full_name": "Victoriaville Tigres"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 2,
+   "home": 3
+  },
+  "total_shots": {
+   "away": 19,
+   "home": 16
+  },
+  "hits": {
+   "away": 5,
+   "home": 16
+  },
+  "time_on_attack": {
+   "away": "7:18",
+   "home": "11:20"
+  },
+  "passing_pct": {
+   "away": "79.2%",
+   "home": "72%"
+  },
+  "face_offs_won": {
+   "away": 10,
+   "home": 8
+  },
+  "penalty_minutes": {
+   "away": "4:00",
+   "home": "4:00"
+  },
+  "power_plays": {
+   "away": "0 / 2",
+   "home": "1 / 2"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 3,
+   "home": 2
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 248,
+    "player": "Shady x Baron"
+   },
+   {
+    "position": "C",
+    "seconds": 286,
+    "player": "latenightsnack23"
+   },
+   {
+    "position": "RW",
+    "seconds": 229,
+    "player": "iChels"
+   },
+   {
+    "position": "RD",
+    "seconds": 171,
+    "player": "SterlingArchie"
+   },
+   {
+    "position": "LD",
+    "seconds": 128,
+    "player": "o ENDURRANCE o"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 384,
+    "player": "SN1PINGKING"
+   },
+   {
+    "position": "C",
+    "seconds": 124,
+    "player": "DPie"
+   },
+   {
+    "position": "RW",
+    "seconds": 321,
+    "player": "TMAC19"
+   },
+   {
+    "position": "RD",
+    "seconds": 156,
+    "player": "Thebaldeagle69"
+   },
+   {
+    "position": "LD",
+    "seconds": 239,
+    "player": "UnhealthySCR"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Portland Winterhawks",
+   "lg_user_id": 24639,
+   "player": "Shady x Baron",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    52,
+    58,
+    48
+   ],
+   "goals": 2,
+   "ast": 0,
+   "pts": 2,
+   "plus_minus": 0,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:08",
+   "time_with_puck_seconds": 248,
+   "shots_on_goal_attempts": "4/9",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 9,
+   "deflections": 0,
+   "pass_pct": 77.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 2,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 2
+  },
+  {
+   "side": "away",
+   "team": "Portland Winterhawks",
+   "lg_user_id": 79019,
+   "player": "latenightsnack23",
+   "position": "C",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    34,
+    31,
+    40
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "58:23",
+   "time_on_ice_seconds": 3503,
+   "time_with_puck": "4:46",
+   "time_with_puck_seconds": 286,
+   "shots_on_goal_attempts": "2/4",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 85.7,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 3,
+   "give_aways": 12,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Portland Winterhawks",
+   "lg_user_id": 80907,
+   "player": "iChels",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    38,
+    36,
+    42
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:49",
+   "time_with_puck_seconds": 229,
+   "shots_on_goal_attempts": "7/13",
+   "shots_on_goal_attempts_on_goal": 7,
+   "shots_on_goal_attempts_attempts": 13,
+   "deflections": 1,
+   "pass_pct": 77.3,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Portland Winterhawks",
+   "lg_user_id": 7935,
+   "player": "o ENDURRANCE o",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    42,
+    19,
+    49
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:08",
+   "time_with_puck_seconds": 128,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 72.7,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Portland Winterhawks",
+   "lg_user_id": 76361,
+   "player": "SterlingArchie",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    42,
+    24,
+    48
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "58:01",
+   "time_on_ice_seconds": 3481,
+   "time_with_puck": "2:51",
+   "time_with_puck_seconds": 171,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 80.0,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 5,
+   "give_aways": 12,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoriaville Tigres",
+   "lg_user_id": 29167,
+   "player": "SN1PINGKING",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    63,
+    54,
+    43
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 0,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "6:24",
+   "time_with_puck_seconds": 384,
+   "shots_on_goal_attempts": "6/14",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 14,
+   "deflections": 0,
+   "pass_pct": 72.0,
+   "saucer_passes": 0,
+   "hits": 10,
+   "take_aways": 4,
+   "give_aways": 13,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Victoriaville Tigres",
+   "lg_user_id": 28427,
+   "player": "DPie",
+   "position": "C",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    38,
+    12,
+    44
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:04",
+   "time_with_puck_seconds": 124,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 80.0,
+   "saucer_passes": 1,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 2,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoriaville Tigres",
+   "lg_user_id": 58498,
+   "player": "TMAC19",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [
+    "GWG",
+    "ECU"
+   ],
+   "lg_ratings": [
+    90,
+    99,
+    39
+   ],
+   "goals": 2,
+   "ast": 1,
+   "pts": 3,
+   "plus_minus": 0,
+   "time_on_ice": "58:01",
+   "time_on_ice_seconds": 3481,
+   "time_with_puck": "5:21",
+   "time_with_puck_seconds": 321,
+   "shots_on_goal_attempts": "3/7",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 0,
+   "pass_pct": 67.7,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 3,
+   "give_aways": 8,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoriaville Tigres",
+   "lg_user_id": 25828,
+   "player": "UnhealthySCR",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    71,
+    33,
+    69
+   ],
+   "goals": 1,
+   "ast": 0,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "58:00",
+   "time_on_ice_seconds": 3480,
+   "time_with_puck": "3:59",
+   "time_with_puck_seconds": 239,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 70.6,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 4,
+   "give_aways": 8,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 2,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoriaville Tigres",
+   "lg_user_id": 31039,
+   "player": "Thebaldeagle69",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    66,
+    21,
+    64
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:36",
+   "time_with_puck_seconds": 156,
+   "shots_on_goal_attempts": "2/6",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 72.2,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 3,
+   "give_aways": 3,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 7284,
+   "player": "sicka moose",
+   "build": "HYB",
+   "lg_ratings": [
+    52,
+    54
+   ],
+   "shots": 16,
+   "s_pct": 0.813,
+   "ga": 3,
+   "save": 13,
+   "gaa": 3.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 2,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Portland Winterhawks"
+  },
+  {
+   "lg_user_id": 74270,
+   "player": "Doc_Plonker",
+   "build": "HYB",
+   "lg_ratings": [
+    82,
+    74
+   ],
+   "shots": 19,
+   "s_pct": 0.895,
+   "ga": 2,
+   "save": 17,
+   "gaa": 2.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 2,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Victoriaville Tigres"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "Crosby87ox",
+   "submitted_at": "2026-10-27 11:16:43pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "Crosby87ox",
+  "last_at": "Tuesday October 27th 2026, 11:16 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

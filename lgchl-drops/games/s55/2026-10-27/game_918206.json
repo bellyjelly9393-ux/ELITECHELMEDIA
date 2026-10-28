@@ -1,0 +1,583 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918206,
+ "status": "F/OT",
+ "played_at_text": "Tuesday October 27th 2026, 10:10 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918206",
+ "captured_at": "2026-10-28T19:20:39.156Z",
+ "away": {
+  "lg_team_id": 402,
+  "name": "Steelheads",
+  "record": "25-18-4",
+  "goals_by_period": {
+   "1": 2,
+   "2": 0,
+   "3": 1,
+   "4": 0
+  },
+  "score": 3,
+  "full_name": "Brampton Steelheads"
+ },
+ "home": {
+  "lg_team_id": 370,
+  "name": "Knights",
+  "record": "22-18-4",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 3,
+   "4": 1
+  },
+  "score": 4,
+  "full_name": "London Knights"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 3,
+   "home": 4
+  },
+  "total_shots": {
+   "away": 22,
+   "home": 17
+  },
+  "hits": {
+   "away": 11,
+   "home": 29
+  },
+  "time_on_attack": {
+   "away": "11:29",
+   "home": "9:42"
+  },
+  "passing_pct": {
+   "away": "72.4%",
+   "home": "73.9%"
+  },
+  "face_offs_won": {
+   "away": 18,
+   "home": 18
+  },
+  "penalty_minutes": {
+   "away": "2:00",
+   "home": "2:00"
+  },
+  "power_plays": {
+   "away": "1 / 1",
+   "home": "1 / 1"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 8,
+   "home": 4
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 472,
+    "player": "oVo Kappy"
+   },
+   {
+    "position": "C",
+    "seconds": 263,
+    "player": "Trey I67I"
+   },
+   {
+    "position": "RW",
+    "seconds": 324,
+    "player": "SoSRevolution"
+   },
+   {
+    "position": "RD",
+    "seconds": 204,
+    "player": "reddaddy69"
+   },
+   {
+    "position": "LD",
+    "seconds": 280,
+    "player": "TFL Holiday"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 261,
+    "player": "Kadokincaid"
+   },
+   {
+    "position": "C",
+    "seconds": 249,
+    "player": "Prophet I33I"
+   },
+   {
+    "position": "RW",
+    "seconds": 444,
+    "player": "iSHOOTSfromDEEPS"
+   },
+   {
+    "position": "RD",
+    "seconds": 240,
+    "player": "Konvar"
+   },
+   {
+    "position": "LD",
+    "seconds": 195,
+    "player": "Fakky359"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Brampton Steelheads",
+   "lg_user_id": 24672,
+   "player": "oVo Kappy",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    61,
+    67,
+    38
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": -1,
+   "time_on_ice": "76:20",
+   "time_on_ice_seconds": 4580,
+   "time_with_puck": "7:52",
+   "time_with_puck_seconds": 472,
+   "shots_on_goal_attempts": "6/14",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 14,
+   "deflections": 0,
+   "pass_pct": 70.4,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 0,
+   "give_aways": 8,
+   "blocked_shots": 2,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Brampton Steelheads",
+   "lg_user_id": 46265,
+   "player": "Trey I67I",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    54,
+    54,
+    45
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": -1,
+   "time_on_ice": "76:20",
+   "time_on_ice_seconds": 4580,
+   "time_with_puck": "4:23",
+   "time_with_puck_seconds": 263,
+   "shots_on_goal_attempts": "8/16",
+   "shots_on_goal_attempts_on_goal": 8,
+   "shots_on_goal_attempts_attempts": 16,
+   "deflections": 0,
+   "pass_pct": 68.8,
+   "saucer_passes": 0,
+   "hits": 6,
+   "take_aways": 1,
+   "give_aways": 8,
+   "blocked_shots": 3,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Brampton Steelheads",
+   "lg_user_id": 7697,
+   "player": "SoSRevolution",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    54,
+    60,
+    22
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": -1,
+   "time_on_ice": "76:20",
+   "time_on_ice_seconds": 4580,
+   "time_with_puck": "5:24",
+   "time_with_puck_seconds": 324,
+   "shots_on_goal_attempts": "6/13",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 13,
+   "deflections": 0,
+   "pass_pct": 38.9,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 23,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Brampton Steelheads",
+   "lg_user_id": 52427,
+   "player": "TFL Holiday",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    49,
+    19,
+    52
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "76:11",
+   "time_on_ice_seconds": 4571,
+   "time_with_puck": "4:40",
+   "time_with_puck_seconds": 280,
+   "shots_on_goal_attempts": "2/4",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 85.2,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 2,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Brampton Steelheads",
+   "lg_user_id": 79072,
+   "player": "reddaddy69",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    54,
+    46,
+    53
+   ],
+   "goals": 0,
+   "ast": 3,
+   "pts": 3,
+   "plus_minus": -1,
+   "time_on_ice": "76:20",
+   "time_on_ice_seconds": 4580,
+   "time_with_puck": "3:24",
+   "time_with_puck_seconds": 204,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 93.8,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 4,
+   "give_aways": 0,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "London Knights",
+   "lg_user_id": 77051,
+   "player": "Kadokincaid",
+   "position": "LW",
+   "build": "DNG",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    100,
+    100,
+    38
+   ],
+   "goals": 3,
+   "ast": 0,
+   "pts": 3,
+   "plus_minus": 1,
+   "time_on_ice": "76:20",
+   "time_on_ice_seconds": 4580,
+   "time_with_puck": "4:21",
+   "time_with_puck_seconds": 261,
+   "shots_on_goal_attempts": "7/14",
+   "shots_on_goal_attempts_on_goal": 7,
+   "shots_on_goal_attempts_attempts": 14,
+   "deflections": 1,
+   "pass_pct": 68.0,
+   "saucer_passes": 1,
+   "hits": 4,
+   "take_aways": 2,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "London Knights",
+   "lg_user_id": 73383,
+   "player": "Prophet I33I",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    57,
+    50,
+    52
+   ],
+   "goals": 0,
+   "ast": 3,
+   "pts": 3,
+   "plus_minus": 1,
+   "time_on_ice": "76:20",
+   "time_on_ice_seconds": 4580,
+   "time_with_puck": "4:09",
+   "time_with_puck_seconds": 249,
+   "shots_on_goal_attempts": "3/6",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 1,
+   "pass_pct": 86.4,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 5,
+   "give_aways": 3,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "London Knights",
+   "lg_user_id": 35886,
+   "player": "iSHOOTSfromDEEPS",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    64,
+    67,
+    32
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": 1,
+   "time_on_ice": "75:08",
+   "time_on_ice_seconds": 4508,
+   "time_with_puck": "7:24",
+   "time_with_puck_seconds": 444,
+   "shots_on_goal_attempts": "3/6",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 57.7,
+   "saucer_passes": 0,
+   "hits": 5,
+   "take_aways": 6,
+   "give_aways": 12,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "London Knights",
+   "lg_user_id": 73069,
+   "player": "Fakky359",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    59,
+    21,
+    60
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 1,
+   "time_on_ice": "76:20",
+   "time_on_ice_seconds": 4580,
+   "time_with_puck": "3:15",
+   "time_with_puck_seconds": 195,
+   "shots_on_goal_attempts": "1/4",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 76.5,
+   "saucer_passes": 0,
+   "hits": 11,
+   "take_aways": 2,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "London Knights",
+   "lg_user_id": 75108,
+   "player": "Konvar",
+   "position": "RD",
+   "build": "DD",
+   "badges": [],
+   "lg_ratings": [
+    65,
+    19,
+    71
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 1,
+   "time_on_ice": "76:20",
+   "time_on_ice_seconds": 4580,
+   "time_with_puck": "4:00",
+   "time_with_puck_seconds": 240,
+   "shots_on_goal_attempts": "3/12",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 12,
+   "deflections": 0,
+   "pass_pct": 84.0,
+   "saucer_passes": 2,
+   "hits": 8,
+   "take_aways": 3,
+   "give_aways": 1,
+   "blocked_shots": 2,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 79315,
+   "player": "XxGuentzel59xX",
+   "build": "HYB",
+   "lg_ratings": [
+    56,
+    54
+   ],
+   "shots": 17,
+   "s_pct": 0.765,
+   "ga": 4,
+   "save": 13,
+   "gaa": 3.15,
+   "poke_check_saves": 0,
+   "desperate_saves": 1,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 2,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Brampton Steelheads"
+  },
+  {
+   "lg_user_id": 16254,
+   "player": "Dissizznuts_88",
+   "build": "HYB",
+   "lg_ratings": [
+    78,
+    74
+   ],
+   "shots": 22,
+   "s_pct": 0.864,
+   "ga": 3,
+   "save": 19,
+   "gaa": 2.36,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "London Knights"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-4",
+   "submitted_by": "Fakky359",
+   "submitted_at": "2026-10-27 10:43:42pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "Fakky359",
+  "last_at": "Tuesday October 27th 2026, 10:43 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

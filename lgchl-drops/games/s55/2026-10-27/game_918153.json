@@ -1,0 +1,581 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918153,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918153",
+ "captured_at": "2026-10-28T18:04:40.525Z",
+ "away": {
+  "lg_team_id": 469,
+  "name": "Drakkar",
+  "record": "20-22-1",
+  "goals_by_period": {
+   "1": 0,
+   "2": 2,
+   "3": 2
+  },
+  "score": 4,
+  "full_name": "Baie-Comeau Drakkar"
+ },
+ "home": {
+  "lg_team_id": 414,
+  "name": "Pats",
+  "record": "10-36-0",
+  "goals_by_period": {
+   "1": 1,
+   "2": 1,
+   "3": 1
+  },
+  "score": 3,
+  "full_name": "Regina Pats"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 4,
+   "home": 3
+  },
+  "total_shots": {
+   "away": 20,
+   "home": 13
+  },
+  "hits": {
+   "away": 13,
+   "home": 5
+  },
+  "time_on_attack": {
+   "away": "11:59",
+   "home": "5:02"
+  },
+  "passing_pct": {
+   "away": "75.7%",
+   "home": "78.9%"
+  },
+  "face_offs_won": {
+   "away": 12,
+   "home": 14
+  },
+  "penalty_minutes": {
+   "away": "4:00",
+   "home": "2:00"
+  },
+  "power_plays": {
+   "away": "0 / 1",
+   "home": "0 / 2"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 4,
+   "home": 7
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 377,
+    "player": "PR7_Runtzxx"
+   },
+   {
+    "position": "C",
+    "seconds": 235,
+    "player": "bschmidy10"
+   },
+   {
+    "position": "RW",
+    "seconds": 401,
+    "player": "Slibby2k"
+   },
+   {
+    "position": "RD",
+    "seconds": 259,
+    "player": "Bilal-i96l"
+   },
+   {
+    "position": "LD",
+    "seconds": 124,
+    "player": "BigBobbyMac98"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 217,
+    "player": "REDWINGSGUY"
+   },
+   {
+    "position": "C",
+    "seconds": 182,
+    "player": "out_law_"
+   },
+   {
+    "position": "RW",
+    "seconds": 242,
+    "player": "Beaumeester022"
+   },
+   {
+    "position": "RD",
+    "seconds": 242,
+    "player": "Zigg Qc"
+   },
+   {
+    "position": "LD",
+    "seconds": 132,
+    "player": "kingsylosis"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Baie-Comeau Drakkar",
+   "lg_user_id": 48379,
+   "player": "PR7_Runtzxx",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    86,
+    92,
+    47
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "6:17",
+   "time_with_puck_seconds": 377,
+   "shots_on_goal_attempts": "4/10",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 61.5,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 7,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Baie-Comeau Drakkar",
+   "lg_user_id": 19339,
+   "player": "bschmidy10",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    62,
+    55,
+    38
+   ],
+   "goals": 2,
+   "ast": 0,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "58:01",
+   "time_on_ice_seconds": 3481,
+   "time_with_puck": "3:55",
+   "time_with_puck_seconds": 235,
+   "shots_on_goal_attempts": "6/15",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 15,
+   "deflections": 0,
+   "pass_pct": 71.4,
+   "saucer_passes": 0,
+   "hits": 5,
+   "take_aways": 0,
+   "give_aways": 4,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Baie-Comeau Drakkar",
+   "lg_user_id": 23501,
+   "player": "Slibby2k",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    86,
+    90,
+    53
+   ],
+   "goals": 1,
+   "ast": 3,
+   "pts": 4,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "6:41",
+   "time_with_puck_seconds": 401,
+   "shots_on_goal_attempts": "6/16",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 16,
+   "deflections": 0,
+   "pass_pct": 76.2,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 5,
+   "give_aways": 12,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Baie-Comeau Drakkar",
+   "lg_user_id": 80451,
+   "player": "BigBobbyMac98",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    67,
+    24,
+    66
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:04",
+   "time_with_puck_seconds": 124,
+   "shots_on_goal_attempts": "0/0",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 0,
+   "deflections": 0,
+   "pass_pct": 83.3,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 4,
+   "give_aways": 3,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Baie-Comeau Drakkar",
+   "lg_user_id": 47484,
+   "player": "Bilal-i96l",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    67,
+    26,
+    66
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 1,
+   "time_on_ice": "58:00",
+   "time_on_ice_seconds": 3480,
+   "time_with_puck": "4:19",
+   "time_with_puck_seconds": 259,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 85.7,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 2,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 4,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 2
+  },
+  {
+   "side": "home",
+   "team": "Regina Pats",
+   "lg_user_id": 57457,
+   "player": "REDWINGSGUY",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    42,
+    46,
+    31
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:37",
+   "time_with_puck_seconds": 217,
+   "shots_on_goal_attempts": "3/6",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 60.0,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 0,
+   "give_aways": 12,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Regina Pats",
+   "lg_user_id": 81166,
+   "player": "out_law_",
+   "position": "C",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    52,
+    58,
+    48
+   ],
+   "goals": 2,
+   "ast": 0,
+   "pts": 2,
+   "plus_minus": -1,
+   "time_on_ice": "58:00",
+   "time_on_ice_seconds": 3480,
+   "time_with_puck": "3:02",
+   "time_with_puck_seconds": 182,
+   "shots_on_goal_attempts": "5/11",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 0,
+   "pass_pct": 66.7,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 4,
+   "blocked_shots": 3,
+   "interceptions": 2,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Regina Pats",
+   "lg_user_id": 81085,
+   "player": "Beaumeester022",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    45,
+    50,
+    33
+   ],
+   "goals": 0,
+   "ast": 3,
+   "pts": 3,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:02",
+   "time_with_puck_seconds": 242,
+   "shots_on_goal_attempts": "1/4",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 89.5,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 9,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Regina Pats",
+   "lg_user_id": 81167,
+   "player": "kingsylosis",
+   "position": "LD",
+   "build": "DD",
+   "badges": [],
+   "lg_ratings": [
+    46,
+    17,
+    56
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:12",
+   "time_with_puck_seconds": 132,
+   "shots_on_goal_attempts": "0/0",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 0,
+   "deflections": 0,
+   "pass_pct": 86.4,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 8,
+   "give_aways": 2,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Regina Pats",
+   "lg_user_id": 76811,
+   "player": "Zigg Qc",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    43,
+    26,
+    48
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:02",
+   "time_with_puck_seconds": 242,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 88.5,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 3,
+   "give_aways": 9,
+   "blocked_shots": 3,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 54783,
+   "player": "TreeEE5",
+   "build": "HYB",
+   "lg_ratings": [
+    57,
+    46
+   ],
+   "shots": 13,
+   "s_pct": 0.769,
+   "ga": 3,
+   "save": 10,
+   "gaa": 3.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Baie-Comeau Drakkar"
+  },
+  {
+   "lg_user_id": 41502,
+   "player": "Semper Sells",
+   "build": "HYB",
+   "lg_ratings": [
+    57,
+    59
+   ],
+   "shots": 20,
+   "s_pct": 0.8,
+   "ga": 4,
+   "save": 16,
+   "gaa": 4.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 1,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Regina Pats"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "PR7_Runtzxx",
+   "submitted_at": "2026-10-27 10:08:31pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "PR7_Runtzxx",
+  "last_at": "Tuesday October 27th 2026, 10:08 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

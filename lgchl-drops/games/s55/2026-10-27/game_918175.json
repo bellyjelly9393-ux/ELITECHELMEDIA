@@ -1,0 +1,581 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918175,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918175",
+ "captured_at": "2026-10-28T19:07:20.822Z",
+ "away": {
+  "lg_team_id": 416,
+  "name": "Tigers",
+  "record": "29-12-2",
+  "goals_by_period": {
+   "1": 0,
+   "2": 3,
+   "3": 3
+  },
+  "score": 6,
+  "full_name": "Medicine Hat Tigers"
+ },
+ "home": {
+  "lg_team_id": 457,
+  "name": "Islanders",
+  "record": "19-20-6",
+  "goals_by_period": {
+   "1": 1,
+   "2": 3,
+   "3": 1
+  },
+  "score": 5,
+  "full_name": "Charlottetown Islanders"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 6,
+   "home": 5
+  },
+  "total_shots": {
+   "away": 16,
+   "home": 21
+  },
+  "hits": {
+   "away": 1,
+   "home": 2
+  },
+  "time_on_attack": {
+   "away": "8:05",
+   "home": "10:39"
+  },
+  "passing_pct": {
+   "away": "82.1%",
+   "home": "83.8%"
+  },
+  "face_offs_won": {
+   "away": 16,
+   "home": 12
+  },
+  "penalty_minutes": {
+   "away": "0:00",
+   "home": "2:00"
+  },
+  "power_plays": {
+   "away": "0 / 1",
+   "home": "0 / 0"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 4,
+   "home": 5
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 368,
+    "player": "Fb_DrtyGamin"
+   },
+   {
+    "position": "C",
+    "seconds": 120,
+    "player": "lLittleNicky12l"
+   },
+   {
+    "position": "RW",
+    "seconds": 239,
+    "player": "MJKOO7"
+   },
+   {
+    "position": "RD",
+    "seconds": 263,
+    "player": "Stayy Sidewayys"
+   },
+   {
+    "position": "LD",
+    "seconds": 141,
+    "player": "GibsVsWorld"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 293,
+    "player": "Dano702330"
+   },
+   {
+    "position": "C",
+    "seconds": 400,
+    "player": "itzGh0stt__"
+   },
+   {
+    "position": "RW",
+    "seconds": 353,
+    "player": "Harrd-Knock"
+   },
+   {
+    "position": "RD",
+    "seconds": 127,
+    "player": "Jmoneypreludesi"
+   },
+   {
+    "position": "LD",
+    "seconds": 156,
+    "player": "Blake1288"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Medicine Hat Tigers",
+   "lg_user_id": 35049,
+   "player": "Fb_DrtyGamin",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    100,
+    100,
+    33
+   ],
+   "goals": 4,
+   "ast": 1,
+   "pts": 5,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "6:08",
+   "time_with_puck_seconds": 368,
+   "shots_on_goal_attempts": "5/13",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 13,
+   "deflections": 0,
+   "pass_pct": 81.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 12,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Medicine Hat Tigers",
+   "lg_user_id": 80268,
+   "player": "lLittleNicky12l",
+   "position": "C",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    46,
+    29,
+    44
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:00",
+   "time_with_puck_seconds": 120,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 1,
+   "pass_pct": 70.6,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 3,
+   "give_aways": 3,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Medicine Hat Tigers",
+   "lg_user_id": 41859,
+   "player": "MJKOO7",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    90,
+    100,
+    39
+   ],
+   "goals": 2,
+   "ast": 3,
+   "pts": 5,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:59",
+   "time_with_puck_seconds": 239,
+   "shots_on_goal_attempts": "8/16",
+   "shots_on_goal_attempts_on_goal": 8,
+   "shots_on_goal_attempts_attempts": 16,
+   "deflections": 0,
+   "pass_pct": 83.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Medicine Hat Tigers",
+   "lg_user_id": 67437,
+   "player": "GibsVsWorld",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    58,
+    31,
+    53
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:21",
+   "time_with_puck_seconds": 141,
+   "shots_on_goal_attempts": "2/6",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 78.6,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 0,
+   "give_aways": 2,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Medicine Hat Tigers",
+   "lg_user_id": 16041,
+   "player": "Stayy Sidewayys",
+   "position": "RD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    68,
+    24,
+    71
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:23",
+   "time_with_puck_seconds": 263,
+   "shots_on_goal_attempts": "0/2",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 92.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 7,
+   "give_aways": 4,
+   "blocked_shots": 2,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Charlottetown Islanders",
+   "lg_user_id": 29819,
+   "player": "Dano702330",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    87,
+    100,
+    42
+   ],
+   "goals": 4,
+   "ast": 0,
+   "pts": 4,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:53",
+   "time_with_puck_seconds": 293,
+   "shots_on_goal_attempts": "7/16",
+   "shots_on_goal_attempts_on_goal": 7,
+   "shots_on_goal_attempts_attempts": 16,
+   "deflections": 0,
+   "pass_pct": 89.5,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 5,
+   "blocked_shots": 2,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Charlottetown Islanders",
+   "lg_user_id": 57545,
+   "player": "itzGh0stt__",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    64,
+    80,
+    37
+   ],
+   "goals": 1,
+   "ast": 4,
+   "pts": 5,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "6:40",
+   "time_with_puck_seconds": 400,
+   "shots_on_goal_attempts": "6/12",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 12,
+   "deflections": 2,
+   "pass_pct": 72.4,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 12,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Charlottetown Islanders",
+   "lg_user_id": 52509,
+   "player": "Harrd-Knock",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    58,
+    69,
+    34
+   ],
+   "goals": 0,
+   "ast": 3,
+   "pts": 3,
+   "plus_minus": -1,
+   "time_on_ice": "58:01",
+   "time_on_ice_seconds": 3481,
+   "time_with_puck": "5:53",
+   "time_with_puck_seconds": 353,
+   "shots_on_goal_attempts": "6/12",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 12,
+   "deflections": 0,
+   "pass_pct": 87.5,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 1,
+   "give_aways": 5,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Charlottetown Islanders",
+   "lg_user_id": 57392,
+   "player": "Blake1288",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    44,
+    19,
+    50
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:36",
+   "time_with_puck_seconds": 156,
+   "shots_on_goal_attempts": "1/5",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 82.6,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 4,
+   "blocked_shots": 3,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Charlottetown Islanders",
+   "lg_user_id": 40473,
+   "player": "Jmoneypreludesi",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    38,
+    14,
+    42
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:07",
+   "time_with_puck_seconds": 127,
+   "shots_on_goal_attempts": "0/4",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 92.9,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 0,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 29544,
+   "player": "BDANG",
+   "build": "HYB",
+   "lg_ratings": [
+    69,
+    60
+   ],
+   "shots": 21,
+   "s_pct": 0.762,
+   "ga": 5,
+   "save": 16,
+   "gaa": 5.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Medicine Hat Tigers"
+  },
+  {
+   "lg_user_id": 54633,
+   "player": "Shrubbrother",
+   "build": "HYB",
+   "lg_ratings": [
+    43,
+    42
+   ],
+   "shots": 16,
+   "s_pct": 0.625,
+   "ga": 6,
+   "save": 10,
+   "gaa": 6.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 2,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Charlottetown Islanders"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "Stayy Sidewayys",
+   "submitted_at": "2026-10-27 10:28:58pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "Stayy Sidewayys",
+  "last_at": "Tuesday October 27th 2026, 10:28 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

@@ -1,0 +1,579 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918170,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918170",
+ "captured_at": "2026-10-28T19:05:12.412Z",
+ "away": {
+  "lg_team_id": 370,
+  "name": "Knights",
+  "record": "21-18-4",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 0
+  },
+  "score": 0,
+  "full_name": "London Knights"
+ },
+ "home": {
+  "lg_team_id": 412,
+  "name": "Hitmen",
+  "record": "21-19-6",
+  "goals_by_period": {
+   "1": 5,
+   "2": 2,
+   "3": 3
+  },
+  "score": 10,
+  "full_name": "Calgary Hitmen"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 0,
+   "home": 10
+  },
+  "total_shots": {
+   "away": 7,
+   "home": 34
+  },
+  "hits": {
+   "away": 18,
+   "home": 6
+  },
+  "time_on_attack": {
+   "away": "4:33",
+   "home": "13:04"
+  },
+  "passing_pct": {
+   "away": "72.7%",
+   "home": "78.3%"
+  },
+  "face_offs_won": {
+   "away": 13,
+   "home": 12
+  },
+  "penalty_minutes": {
+   "away": "4:00",
+   "home": "0:00"
+  },
+  "power_plays": {
+   "away": "0 / 0",
+   "home": "1 / 2"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 3,
+   "home": 3
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 161,
+    "player": "Kadokincaid"
+   },
+   {
+    "position": "C",
+    "seconds": 133,
+    "player": "Prophet I33I"
+   },
+   {
+    "position": "RW",
+    "seconds": 306,
+    "player": "iSHOOTSfromDEEPS"
+   },
+   {
+    "position": "RD",
+    "seconds": 138,
+    "player": "Konvar"
+   },
+   {
+    "position": "LD",
+    "seconds": 148,
+    "player": "Fakky359"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 284,
+    "player": "gtcoop73"
+   },
+   {
+    "position": "C",
+    "seconds": 248,
+    "player": "l Setty l"
+   },
+   {
+    "position": "RW",
+    "seconds": 452,
+    "player": "l danks l"
+   },
+   {
+    "position": "RD",
+    "seconds": 274,
+    "player": "Koldex Bands"
+   },
+   {
+    "position": "LD",
+    "seconds": 184,
+    "player": "imona_plain"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "London Knights",
+   "lg_user_id": 77051,
+   "player": "Kadokincaid",
+   "position": "LW",
+   "build": "DNG",
+   "badges": [],
+   "lg_ratings": [
+    13,
+    14,
+    28
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -9,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:41",
+   "time_with_puck_seconds": 161,
+   "shots_on_goal_attempts": "4/7",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 1,
+   "pass_pct": 68.8,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 6,
+   "give_aways": 14,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "London Knights",
+   "lg_user_id": 73383,
+   "player": "Prophet I33I",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    10,
+    8,
+    31
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -9,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:13",
+   "time_with_puck_seconds": 133,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 90.9,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "London Knights",
+   "lg_user_id": 35886,
+   "player": "iSHOOTSfromDEEPS",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    15,
+    19,
+    20
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -9,
+   "time_on_ice": "57:32",
+   "time_on_ice_seconds": 3452,
+   "time_with_puck": "5:06",
+   "time_with_puck_seconds": 306,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 64.7,
+   "saucer_passes": 0,
+   "hits": 5,
+   "take_aways": 1,
+   "give_aways": 12,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "4:00",
+   "pims_seconds": 240,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "London Knights",
+   "lg_user_id": 73069,
+   "player": "Fakky359",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    20,
+    7,
+    31
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -9,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:28",
+   "time_with_puck_seconds": 148,
+   "shots_on_goal_attempts": "0/3",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 76.9,
+   "saucer_passes": 0,
+   "hits": 6,
+   "take_aways": 1,
+   "give_aways": 3,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "away",
+   "team": "London Knights",
+   "lg_user_id": 75108,
+   "player": "Konvar",
+   "position": "RD",
+   "build": "DD",
+   "badges": [],
+   "lg_ratings": [
+    28,
+    12,
+    42
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -9,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:18",
+   "time_with_puck_seconds": 138,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 76.5,
+   "saucer_passes": 0,
+   "hits": 5,
+   "take_aways": 7,
+   "give_aways": 6,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Calgary Hitmen",
+   "lg_user_id": 76399,
+   "player": "gtcoop73",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    100,
+    100,
+    64
+   ],
+   "goals": 5,
+   "ast": 3,
+   "pts": 8,
+   "plus_minus": 9,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:44",
+   "time_with_puck_seconds": 284,
+   "shots_on_goal_attempts": "8/16",
+   "shots_on_goal_attempts_on_goal": 8,
+   "shots_on_goal_attempts_attempts": 16,
+   "deflections": 0,
+   "pass_pct": 82.4,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 11,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 2,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Calgary Hitmen",
+   "lg_user_id": 73707,
+   "player": "l Setty l",
+   "position": "C",
+   "build": "GRN",
+   "badges": [],
+   "lg_ratings": [
+    98,
+    92,
+    62
+   ],
+   "goals": 2,
+   "ast": 3,
+   "pts": 5,
+   "plus_minus": 9,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:08",
+   "time_with_puck_seconds": 248,
+   "shots_on_goal_attempts": "8/14",
+   "shots_on_goal_attempts_on_goal": 8,
+   "shots_on_goal_attempts_attempts": 14,
+   "deflections": 2,
+   "pass_pct": 66.7,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 5,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Calgary Hitmen",
+   "lg_user_id": 10718,
+   "player": "l danks l",
+   "position": "RW",
+   "build": "DNG",
+   "badges": [],
+   "lg_ratings": [
+    100,
+    100,
+    54
+   ],
+   "goals": 3,
+   "ast": 4,
+   "pts": 7,
+   "plus_minus": 9,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "7:32",
+   "time_with_puck_seconds": 452,
+   "shots_on_goal_attempts": "11/23",
+   "shots_on_goal_attempts_on_goal": 11,
+   "shots_on_goal_attempts_attempts": 23,
+   "deflections": 1,
+   "pass_pct": 62.5,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 8,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Calgary Hitmen",
+   "lg_user_id": 17569,
+   "player": "imona_plain",
+   "position": "LD",
+   "build": "DD",
+   "badges": [],
+   "lg_ratings": [
+    89,
+    31,
+    83
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 9,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:04",
+   "time_with_puck_seconds": 184,
+   "shots_on_goal_attempts": "1/4",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 90.5,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 2,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Calgary Hitmen",
+   "lg_user_id": 79440,
+   "player": "Koldex Bands",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    89,
+    65,
+    76
+   ],
+   "goals": 0,
+   "ast": 5,
+   "pts": 5,
+   "plus_minus": 9,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:34",
+   "time_with_puck_seconds": 274,
+   "shots_on_goal_attempts": "1/4",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 83.3,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 4,
+   "give_aways": 10,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 16254,
+   "player": "Dissizznuts_88",
+   "build": "HYB",
+   "lg_ratings": [
+    64,
+    71
+   ],
+   "shots": 34,
+   "s_pct": 0.706,
+   "ga": 10,
+   "save": 24,
+   "gaa": 10.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 1,
+   "ba_sv": 2,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "London Knights"
+  },
+  {
+   "lg_user_id": 80604,
+   "player": "XxPASTRNAK88",
+   "build": "BFY",
+   "lg_ratings": [
+    100,
+    94
+   ],
+   "shots": 7,
+   "s_pct": 1.0,
+   "ga": 0,
+   "save": 7,
+   "gaa": 0.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 3,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Calgary Hitmen"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "imona_plain",
+   "submitted_at": "2026-10-27 10:12:09pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "imona_plain",
+  "last_at": "Tuesday October 27th 2026, 10:12 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

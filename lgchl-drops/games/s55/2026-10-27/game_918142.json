@@ -1,0 +1,581 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918142,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 09:00 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918142",
+ "captured_at": "2026-10-28T17:59:54.507Z",
+ "away": {
+  "lg_team_id": 375,
+  "name": "IceDogs",
+  "record": "20-24-1",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 1
+  },
+  "score": 1,
+  "full_name": "Niagara IceDogs"
+ },
+ "home": {
+  "lg_team_id": 382,
+  "name": "Cataractes",
+  "record": "21-20-4",
+  "goals_by_period": {
+   "1": 2,
+   "2": 0,
+   "3": 0
+  },
+  "score": 2,
+  "full_name": "Shawinigan Cataractes"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 1,
+   "home": 2
+  },
+  "total_shots": {
+   "away": 12,
+   "home": 16
+  },
+  "hits": {
+   "away": 10,
+   "home": 8
+  },
+  "time_on_attack": {
+   "away": "7:27",
+   "home": "8:31"
+  },
+  "passing_pct": {
+   "away": "67%",
+   "home": "69.5%"
+  },
+  "face_offs_won": {
+   "away": 6,
+   "home": 10
+  },
+  "penalty_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "power_plays": {
+   "away": "0 / 0",
+   "home": "0 / 0"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 2,
+   "home": 4
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 231,
+    "player": "sTKampe"
+   },
+   {
+    "position": "C",
+    "seconds": 153,
+    "player": "iillegall"
+   },
+   {
+    "position": "RW",
+    "seconds": 311,
+    "player": "Diamond_supply90"
+   },
+   {
+    "position": "RD",
+    "seconds": 315,
+    "player": "xWillander"
+   },
+   {
+    "position": "LD",
+    "seconds": 155,
+    "player": "jameswmjr"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 222,
+    "player": "FletchTapBcKDoor"
+   },
+   {
+    "position": "C",
+    "seconds": 270,
+    "player": "premierplayer"
+   },
+   {
+    "position": "RW",
+    "seconds": 366,
+    "player": "xPhiist"
+   },
+   {
+    "position": "RD",
+    "seconds": 140,
+    "player": "Pags1974"
+   },
+   {
+    "position": "LD",
+    "seconds": 196,
+    "player": "BigSaveNabokov"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Niagara IceDogs",
+   "lg_user_id": 51828,
+   "player": "sTKampe",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    23,
+    14,
+    28
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:51",
+   "time_with_puck_seconds": 231,
+   "shots_on_goal_attempts": "1/3",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 45.0,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 9,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Niagara IceDogs",
+   "lg_user_id": 76252,
+   "player": "iillegall",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    33,
+    28,
+    43
+   ],
+   "goals": 1,
+   "ast": 0,
+   "pts": 1,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:33",
+   "time_with_puck_seconds": 153,
+   "shots_on_goal_attempts": "2/4",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 81.3,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 3,
+   "give_aways": 8,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Niagara IceDogs",
+   "lg_user_id": 29789,
+   "player": "Diamond_supply90",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    38,
+    38,
+    35
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "5:11",
+   "time_with_puck_seconds": 311,
+   "shots_on_goal_attempts": "5/11",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 1,
+   "pass_pct": 61.1,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 9,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Niagara IceDogs",
+   "lg_user_id": 74601,
+   "player": "jameswmjr",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    42,
+    9,
+    50
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:35",
+   "time_with_puck_seconds": 155,
+   "shots_on_goal_attempts": "1/4",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 76.9,
+   "saucer_passes": 0,
+   "hits": 6,
+   "take_aways": 3,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Niagara IceDogs",
+   "lg_user_id": 52236,
+   "player": "xWillander",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    48,
+    26,
+    57
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "5:15",
+   "time_with_puck_seconds": 315,
+   "shots_on_goal_attempts": "0/3",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 81.0,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 6,
+   "give_aways": 7,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 76606,
+   "player": "FletchTapBcKDoor",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    88,
+    90,
+    53
+   ],
+   "goals": 2,
+   "ast": 0,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:42",
+   "time_with_puck_seconds": 222,
+   "shots_on_goal_attempts": "5/11",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 1,
+   "pass_pct": 92.3,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 3,
+   "give_aways": 8,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 16685,
+   "player": "premierplayer",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    62,
+    47,
+    53
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:30",
+   "time_with_puck_seconds": 270,
+   "shots_on_goal_attempts": "2/3",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 1,
+   "pass_pct": 60.9,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 4,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 25419,
+   "player": "xPhiist",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    51,
+    33,
+    38
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "6:06",
+   "time_with_puck_seconds": 366,
+   "shots_on_goal_attempts": "6/13",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 13,
+   "deflections": 0,
+   "pass_pct": 65.2,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 2,
+   "give_aways": 17,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 7126,
+   "player": "BigSaveNabokov",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    69,
+    12,
+    69
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:16",
+   "time_with_puck_seconds": 196,
+   "shots_on_goal_attempts": "1/4",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 63.2,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 6,
+   "blocked_shots": 2,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 58300,
+   "player": "Pags1974",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    72,
+    19,
+    72
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:20",
+   "time_with_puck_seconds": 140,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 75.0,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 4,
+   "give_aways": 1,
+   "blocked_shots": 0,
+   "interceptions": 4,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 40991,
+   "player": "l9lPLAYMAKERl9l",
+   "build": "HYB",
+   "lg_ratings": [
+    62,
+    64
+   ],
+   "shots": 16,
+   "s_pct": 0.875,
+   "ga": 2,
+   "save": 14,
+   "gaa": 2.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 1,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Niagara IceDogs"
+  },
+  {
+   "lg_user_id": 50294,
+   "player": "hully17",
+   "build": "HYB",
+   "lg_ratings": [
+    78,
+    68
+   ],
+   "shots": 12,
+   "s_pct": 0.917,
+   "ga": 1,
+   "save": 11,
+   "gaa": 1.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 2,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Shawinigan Cataractes"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "A Salty SaiIor",
+   "submitted_at": "2026-10-27 10:07:04pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "A Salty SaiIor",
+  "last_at": "Tuesday October 27th 2026, 10:07 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

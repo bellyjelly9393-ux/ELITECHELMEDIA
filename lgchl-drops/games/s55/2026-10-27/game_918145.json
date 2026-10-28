@@ -1,0 +1,585 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918145,
+ "status": "F/OT",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918145",
+ "captured_at": "2026-10-28T18:01:12.541Z",
+ "away": {
+  "lg_team_id": 408,
+  "name": "Spirit",
+  "record": "24-16-7",
+  "goals_by_period": {
+   "1": 0,
+   "2": 1,
+   "3": 2,
+   "4": 0,
+   "5": 0
+  },
+  "score": 3,
+  "full_name": "Saginaw Spirit"
+ },
+ "home": {
+  "lg_team_id": 467,
+  "name": "Remparts",
+  "record": "24-16-3",
+  "goals_by_period": {
+   "1": 0,
+   "2": 2,
+   "3": 1,
+   "4": 0,
+   "5": 1
+  },
+  "score": 4,
+  "full_name": "Quebec Remparts"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 3,
+   "home": 4
+  },
+  "total_shots": {
+   "away": 22,
+   "home": 24
+  },
+  "hits": {
+   "away": 8,
+   "home": 17
+  },
+  "time_on_attack": {
+   "away": "10:10",
+   "home": "10:00"
+  },
+  "passing_pct": {
+   "away": "80%",
+   "home": "72.1%"
+  },
+  "face_offs_won": {
+   "away": 15,
+   "home": 11
+  },
+  "penalty_minutes": {
+   "away": "4:00",
+   "home": "0:00"
+  },
+  "power_plays": {
+   "away": "0 / 0",
+   "home": "1 / 2"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 3,
+   "home": 3
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 388,
+    "player": "DailySpitz"
+   },
+   {
+    "position": "C",
+    "seconds": 324,
+    "player": "TeeKneeWeKnee"
+   },
+   {
+    "position": "RW",
+    "seconds": 397,
+    "player": "OpenSquash33810"
+   },
+   {
+    "position": "RD",
+    "seconds": 227,
+    "player": "Iconoclast8466"
+   },
+   {
+    "position": "LD",
+    "seconds": 420,
+    "player": "II BOH1CA II"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 388,
+    "player": "MaximeQc"
+   },
+   {
+    "position": "C",
+    "seconds": 311,
+    "player": "Wizzy LL"
+   },
+   {
+    "position": "RW",
+    "seconds": 174,
+    "player": "cyclone1189"
+   },
+   {
+    "position": "RD",
+    "seconds": 359,
+    "player": "OTTGANGG"
+   },
+   {
+    "position": "LD",
+    "seconds": 189,
+    "player": "Tekniks79"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Saginaw Spirit",
+   "lg_user_id": 8535,
+   "player": "DailySpitz",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    71,
+    85,
+    39
+   ],
+   "goals": 2,
+   "ast": 1,
+   "pts": 3,
+   "plus_minus": 0,
+   "time_on_ice": "81:46",
+   "time_on_ice_seconds": 4906,
+   "time_with_puck": "6:28",
+   "time_with_puck_seconds": 388,
+   "shots_on_goal_attempts": "8/17",
+   "shots_on_goal_attempts_on_goal": 8,
+   "shots_on_goal_attempts_attempts": 17,
+   "deflections": 0,
+   "pass_pct": 72.7,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 4,
+   "give_aways": 10,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Saginaw Spirit",
+   "lg_user_id": 79074,
+   "player": "TeeKneeWeKnee",
+   "position": "C",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    59,
+    63,
+    44
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": 0,
+   "time_on_ice": "79:47",
+   "time_on_ice_seconds": 4787,
+   "time_with_puck": "5:24",
+   "time_with_puck_seconds": 324,
+   "shots_on_goal_attempts": "3/10",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 76.5,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 3,
+   "give_aways": 10,
+   "blocked_shots": 2,
+   "interceptions": 3,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Saginaw Spirit",
+   "lg_user_id": 77372,
+   "player": "OpenSquash33810",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    50,
+    51,
+    34
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 0,
+   "time_on_ice": "81:44",
+   "time_on_ice_seconds": 4904,
+   "time_with_puck": "6:37",
+   "time_with_puck_seconds": 397,
+   "shots_on_goal_attempts": "5/10",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 85.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 15,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Saginaw Spirit",
+   "lg_user_id": 79758,
+   "player": "II BOH1CA II",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    47,
+    38,
+    46
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "81:46",
+   "time_on_ice_seconds": 4906,
+   "time_with_puck": "7:00",
+   "time_with_puck_seconds": 420,
+   "shots_on_goal_attempts": "3/6",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 89.7,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 4,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Saginaw Spirit",
+   "lg_user_id": 73021,
+   "player": "Iconoclast8466",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    46,
+    12,
+    49
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 0,
+   "time_on_ice": "81:46",
+   "time_on_ice_seconds": 4906,
+   "time_with_puck": "3:47",
+   "time_with_puck_seconds": 227,
+   "shots_on_goal_attempts": "0/0",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 0,
+   "deflections": 0,
+   "pass_pct": 78.9,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 3,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 5,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Quebec Remparts",
+   "lg_user_id": 60109,
+   "player": "MaximeQc",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    85,
+    100,
+    32
+   ],
+   "goals": 2,
+   "ast": 0,
+   "pts": 2,
+   "plus_minus": 0,
+   "time_on_ice": "81:46",
+   "time_on_ice_seconds": 4906,
+   "time_with_puck": "6:28",
+   "time_with_puck_seconds": 388,
+   "shots_on_goal_attempts": "6/13",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 13,
+   "deflections": 0,
+   "pass_pct": 56.0,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 5,
+   "give_aways": 16,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Quebec Remparts",
+   "lg_user_id": 19670,
+   "player": "Wizzy LL",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    71,
+    72,
+    45
+   ],
+   "goals": 2,
+   "ast": 2,
+   "pts": 4,
+   "plus_minus": 0,
+   "time_on_ice": "81:46",
+   "time_on_ice_seconds": 4906,
+   "time_with_puck": "5:11",
+   "time_with_puck_seconds": 311,
+   "shots_on_goal_attempts": "6/11",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 3,
+   "pass_pct": 71.0,
+   "saucer_passes": 0,
+   "hits": 7,
+   "take_aways": 5,
+   "give_aways": 10,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Quebec Remparts",
+   "lg_user_id": 30403,
+   "player": "cyclone1189",
+   "position": "RW",
+   "build": "DNG",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    48,
+    33,
+    48
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "81:46",
+   "time_on_ice_seconds": 4906,
+   "time_with_puck": "2:54",
+   "time_with_puck_seconds": 174,
+   "shots_on_goal_attempts": "7/14",
+   "shots_on_goal_attempts_on_goal": 7,
+   "shots_on_goal_attempts_attempts": 14,
+   "deflections": 0,
+   "pass_pct": 70.6,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 5,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Quebec Remparts",
+   "lg_user_id": 19023,
+   "player": "Tekniks79",
+   "position": "LD",
+   "build": "DD",
+   "badges": [],
+   "lg_ratings": [
+    61,
+    19,
+    63
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "81:46",
+   "time_on_ice_seconds": 4906,
+   "time_with_puck": "3:09",
+   "time_with_puck_seconds": 189,
+   "shots_on_goal_attempts": "0/3",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 81.0,
+   "saucer_passes": 0,
+   "hits": 7,
+   "take_aways": 3,
+   "give_aways": 2,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Quebec Remparts",
+   "lg_user_id": 76856,
+   "player": "OTTGANGG",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    67,
+    69,
+    59
+   ],
+   "goals": 0,
+   "ast": 4,
+   "pts": 4,
+   "plus_minus": 0,
+   "time_on_ice": "81:46",
+   "time_on_ice_seconds": 4906,
+   "time_with_puck": "5:59",
+   "time_with_puck_seconds": 359,
+   "shots_on_goal_attempts": "3/9",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 9,
+   "deflections": 0,
+   "pass_pct": 81.8,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 8,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 66906,
+   "player": "vlexx21",
+   "build": "HYB",
+   "lg_ratings": [
+    76,
+    76
+   ],
+   "shots": 24,
+   "s_pct": 0.833,
+   "ga": 4,
+   "save": 20,
+   "gaa": 2.94,
+   "poke_check_saves": 0,
+   "desperate_saves": 1,
+   "ba_sv": 1,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Saginaw Spirit"
+  },
+  {
+   "lg_user_id": 55526,
+   "player": "T0L_L4NGL01S95",
+   "build": "HYB",
+   "lg_ratings": [
+    79,
+    74
+   ],
+   "shots": 22,
+   "s_pct": 0.864,
+   "ga": 3,
+   "save": 19,
+   "gaa": 2.2,
+   "poke_check_saves": 0,
+   "desperate_saves": 1,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Quebec Remparts"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-4",
+   "submitted_by": "Ferland52",
+   "submitted_at": "2026-10-27 10:40:25pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "Ferland52",
+  "last_at": "Tuesday October 27th 2026, 10:40 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

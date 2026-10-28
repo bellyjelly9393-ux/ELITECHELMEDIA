@@ -6,18 +6,23 @@ private matchmaking codes.
 
 ## Delivered
 
-- `lineups/2026-10-27/`: **TONIGHT (Tue Oct 27): lineups as listed on LG** for all three Hitmen
+- `lineups/2026-10-27/`: **Tue Oct 27: lineups as listed on LG before puck drop** for all three Hitmen
   games: at Moncton Wildcats 9:00, vs London Knights 9:35, vs Ottawa 67's 10:10 ET. Team
   ratings, each team's top line and top D pair (LG's Offense/Defense Break Down), first goalie
   listed, and full lists in LG's order with OVR, salary and season numbers.
-  **Use this for tonight's scouting and battle plan.**
+  Who actually played is in `games/s55/2026-10-27/`.
 - `opponents/2026-10-27/`: tonight's three opponents (Moncton, London, Ottawa): who each one
   actually dressed in its three games on Mon Oct 26, results, team stats, builds and season 55
   totals. Compare with `lineups/2026-10-27/`: last night's lines differ from tonight's LG lists.
+- `games/s55/2026-10-27/`: LGCHL games from Tuesday Oct 27, 2026 (93 scheduled). **Complete: all 93 games.**
+  Read from the public LG game pages one at a time (25-second gaps). Same files and game JSON as
+  Monday, with one difference: `ea_parts` lists only the segments shown on the LG page (periods,
+  submitter, time), not EA's raw per-part player data. `capture.json` `flags` lists games whose LG
+  period goals do not add up to the final score, and `notes` covers three Kamloops games with no
+  player lines (forfeit-style) and team records on LG pages that do not always line up game to game.
 - `games/s55/2026-10-26/`: LGCHL games from Monday Oct 26, 2026 (93 scheduled). **Complete: all 93 games.**
 - `games/s55/2026-10-25/`: LGCHL games from Sunday Oct 25, 2026 (93 scheduled; puck drops at
-  9:00, 9:35 and 10:10 PM Eastern). **Partial:** `capture.json` says how many are included so
-  far. More are added as LG allows.
+  9:00, 9:35 and 10:10 PM Eastern). **Complete: all 93 games.**
 - `lineups/2026-10-26/`: Monday Oct 26 lineups as listed on LG for all three Hitmen games
   (Shawinigan 9:00, Kingston 9:35, Sudbury 10:10 ET). Includes team ratings, each team's top
   line and top D pair (LG's Offense/Defense Break Down), first goalie listed, and full lists in

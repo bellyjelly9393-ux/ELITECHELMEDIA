@@ -1,0 +1,583 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918164,
+ "status": "F/OT",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918164",
+ "captured_at": "2026-10-28T18:09:26.486Z",
+ "away": {
+  "lg_team_id": 445,
+  "name": "Petes",
+  "record": "17-25-3",
+  "goals_by_period": {
+   "1": 0,
+   "2": 1,
+   "3": 0,
+   "4": 0
+  },
+  "score": 1,
+  "full_name": "Peterborough Petes"
+ },
+ "home": {
+  "lg_team_id": 419,
+  "name": "Royals",
+  "record": "23-18-2",
+  "goals_by_period": {
+   "1": 1,
+   "2": 0,
+   "3": 0,
+   "4": 1
+  },
+  "score": 2,
+  "full_name": "Victoria Royals"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 1,
+   "home": 2
+  },
+  "total_shots": {
+   "away": 18,
+   "home": 20
+  },
+  "hits": {
+   "away": 9,
+   "home": 7
+  },
+  "time_on_attack": {
+   "away": "10:46",
+   "home": "9:23"
+  },
+  "passing_pct": {
+   "away": "71.9%",
+   "home": "77.2%"
+  },
+  "face_offs_won": {
+   "away": 16,
+   "home": 11
+  },
+  "penalty_minutes": {
+   "away": "6:00",
+   "home": "0:00"
+  },
+  "power_plays": {
+   "away": "0 / 0",
+   "home": "1 / 2"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 4,
+   "home": 7
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 315,
+    "player": "DODGEredneck69"
+   },
+   {
+    "position": "C",
+    "seconds": 259,
+    "player": "BoooBeee Orr"
+   },
+   {
+    "position": "RW",
+    "seconds": 426,
+    "player": "x Hutsonov x"
+   },
+   {
+    "position": "RD",
+    "seconds": 192,
+    "player": "xGrizzo-"
+   },
+   {
+    "position": "LD",
+    "seconds": 136,
+    "player": "Hoagytime"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 187,
+    "player": "burningbadger95"
+   },
+   {
+    "position": "C",
+    "seconds": 336,
+    "player": "NitroQc x 10"
+   },
+   {
+    "position": "RW",
+    "seconds": 315,
+    "player": "lightoutshooter"
+   },
+   {
+    "position": "RD",
+    "seconds": 315,
+    "player": "thisbreh"
+   },
+   {
+    "position": "LD",
+    "seconds": 328,
+    "player": "TBizzy_15"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Peterborough Petes",
+   "lg_user_id": 54977,
+   "player": "DODGEredneck69",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    39,
+    31,
+    39
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 0,
+   "time_on_ice": "71:50",
+   "time_on_ice_seconds": 4310,
+   "time_with_puck": "5:15",
+   "time_with_puck_seconds": 315,
+   "shots_on_goal_attempts": "6/15",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 15,
+   "deflections": 1,
+   "pass_pct": 62.5,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "away",
+   "team": "Peterborough Petes",
+   "lg_user_id": 27319,
+   "player": "BoooBeee Orr",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    40,
+    31,
+    48
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "73:18",
+   "time_on_ice_seconds": 4398,
+   "time_with_puck": "4:19",
+   "time_with_puck_seconds": 259,
+   "shots_on_goal_attempts": "2/4",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 1,
+   "pass_pct": 77.8,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 9,
+   "give_aways": 8,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Peterborough Petes",
+   "lg_user_id": 62057,
+   "player": "x Hutsonov x",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    47,
+    47,
+    28
+   ],
+   "goals": 1,
+   "ast": 0,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "70:40",
+   "time_on_ice_seconds": 4240,
+   "time_with_puck": "7:06",
+   "time_with_puck_seconds": 426,
+   "shots_on_goal_attempts": "4/8",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 8,
+   "deflections": 0,
+   "pass_pct": 52.2,
+   "saucer_passes": 0,
+   "hits": 5,
+   "take_aways": 2,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "4:00",
+   "pims_seconds": 240,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Peterborough Petes",
+   "lg_user_id": 58333,
+   "player": "Hoagytime",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    45,
+    9,
+    49
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 0,
+   "time_on_ice": "73:18",
+   "time_on_ice_seconds": 4398,
+   "time_with_puck": "2:16",
+   "time_with_puck_seconds": 136,
+   "shots_on_goal_attempts": "1/5",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 81.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 2,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 2
+  },
+  {
+   "side": "away",
+   "team": "Peterborough Petes",
+   "lg_user_id": 16857,
+   "player": "xGrizzo-",
+   "position": "RD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    54,
+    24,
+    60
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "73:18",
+   "time_on_ice_seconds": 4398,
+   "time_with_puck": "3:12",
+   "time_with_puck_seconds": 192,
+   "shots_on_goal_attempts": "2/6",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 90.9,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 1,
+   "blocked_shots": 3,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Victoria Royals",
+   "lg_user_id": 80392,
+   "player": "burningbadger95",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    56,
+    46,
+    42
+   ],
+   "goals": 1,
+   "ast": 0,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "73:18",
+   "time_on_ice_seconds": 4398,
+   "time_with_puck": "3:07",
+   "time_with_puck_seconds": 187,
+   "shots_on_goal_attempts": "8/17",
+   "shots_on_goal_attempts_on_goal": 8,
+   "shots_on_goal_attempts_attempts": 17,
+   "deflections": 2,
+   "pass_pct": 72.7,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 8,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoria Royals",
+   "lg_user_id": 55143,
+   "player": "NitroQc x 10",
+   "position": "C",
+   "build": "TWF",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    69,
+    65,
+    51
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": 0,
+   "time_on_ice": "73:18",
+   "time_on_ice_seconds": 4398,
+   "time_with_puck": "5:36",
+   "time_with_puck_seconds": 336,
+   "shots_on_goal_attempts": "3/5",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 1,
+   "pass_pct": 85.0,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 3,
+   "give_aways": 6,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoria Royals",
+   "lg_user_id": 72116,
+   "player": "lightoutshooter",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    53,
+    40,
+    43
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "73:18",
+   "time_on_ice_seconds": 4398,
+   "time_with_puck": "5:15",
+   "time_with_puck_seconds": 315,
+   "shots_on_goal_attempts": "6/16",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 16,
+   "deflections": 0,
+   "pass_pct": 82.4,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 9,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoria Royals",
+   "lg_user_id": 80560,
+   "player": "TBizzy_15",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    70,
+    19,
+    74
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 0,
+   "time_on_ice": "73:18",
+   "time_on_ice_seconds": 4398,
+   "time_with_puck": "5:28",
+   "time_with_puck_seconds": 328,
+   "shots_on_goal_attempts": "1/4",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 73.9,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 8,
+   "blocked_shots": 2,
+   "interceptions": 3,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 2,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoria Royals",
+   "lg_user_id": 33273,
+   "player": "thisbreh",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    69,
+    28,
+    72
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 0,
+   "time_on_ice": "73:18",
+   "time_on_ice_seconds": 4398,
+   "time_with_puck": "5:15",
+   "time_with_puck_seconds": 315,
+   "shots_on_goal_attempts": "1/5",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 75.9,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 6,
+   "blocked_shots": 3,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 75418,
+   "player": "b-man192",
+   "build": "HYB",
+   "lg_ratings": [
+    82,
+    83
+   ],
+   "shots": 20,
+   "s_pct": 0.9,
+   "ga": 2,
+   "save": 18,
+   "gaa": 1.64,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 2,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Peterborough Petes"
+  },
+  {
+   "lg_user_id": 72460,
+   "player": "ladiesigodown2",
+   "build": "HYB",
+   "lg_ratings": [
+    93,
+    89
+   ],
+   "shots": 18,
+   "s_pct": 0.944,
+   "ga": 1,
+   "save": 17,
+   "gaa": 0.82,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 2,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Victoria Royals"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-4",
+   "submitted_by": "TheMermanSGT87",
+   "submitted_at": "2026-10-27 10:30:04pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "TheMermanSGT87",
+  "last_at": "Tuesday October 27th 2026, 10:30 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

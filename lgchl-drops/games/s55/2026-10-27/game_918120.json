@@ -1,0 +1,587 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918120,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 09:00 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918120",
+ "captured_at": "2026-10-28T17:48:56.510Z",
+ "away": {
+  "lg_team_id": 419,
+  "name": "Royals",
+  "record": "22-18-2",
+  "goals_by_period": {
+   "1": 0,
+   "2": 1,
+   "3": 3
+  },
+  "score": 4,
+  "full_name": "Victoria Royals"
+ },
+ "home": {
+  "lg_team_id": 448,
+  "name": "Battalion",
+  "record": "31-12-1",
+  "goals_by_period": {
+   "1": 3,
+   "2": 2,
+   "3": 2
+  },
+  "score": 7,
+  "full_name": "North Bay Battalion"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 4,
+   "home": 7
+  },
+  "total_shots": {
+   "away": 14,
+   "home": 23
+  },
+  "hits": {
+   "away": 21,
+   "home": 24
+  },
+  "time_on_attack": {
+   "away": "6:35",
+   "home": "12:42"
+  },
+  "passing_pct": {
+   "away": "75%",
+   "home": "83.2%"
+  },
+  "face_offs_won": {
+   "away": 13,
+   "home": 9
+  },
+  "penalty_minutes": {
+   "away": "2:00",
+   "home": "0:00"
+  },
+  "power_plays": {
+   "away": "0 / 0",
+   "home": "0 / 1"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 5,
+   "home": 1
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 153,
+    "player": "burningbadger95"
+   },
+   {
+    "position": "C",
+    "seconds": 266,
+    "player": "NitroQc x 10"
+   },
+   {
+    "position": "RW",
+    "seconds": 314,
+    "player": "lightoutshooter"
+   },
+   {
+    "position": "RD",
+    "seconds": 268,
+    "player": "thisbreh"
+   },
+   {
+    "position": "LD",
+    "seconds": 228,
+    "player": "TBizzy_15"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 449,
+    "player": "sjul11"
+   },
+   {
+    "position": "C",
+    "seconds": 434,
+    "player": "Makleisgod"
+   },
+   {
+    "position": "RW",
+    "seconds": 251,
+    "player": "ovi_h84"
+   },
+   {
+    "position": "RD",
+    "seconds": 144,
+    "player": "Illgill89"
+   },
+   {
+    "position": "LD",
+    "seconds": 233,
+    "player": "R0bo"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Victoria Royals",
+   "lg_user_id": 80392,
+   "player": "burningbadger95",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    43,
+    53,
+    22
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": -3,
+   "time_on_ice": "67:24",
+   "time_on_ice_seconds": 4044,
+   "time_with_puck": "2:33",
+   "time_with_puck_seconds": 153,
+   "shots_on_goal_attempts": "4/8",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 8,
+   "deflections": 1,
+   "pass_pct": 55.6,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 4,
+   "give_aways": 8,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Victoria Royals",
+   "lg_user_id": 55143,
+   "player": "NitroQc x 10",
+   "position": "C",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    49,
+    61,
+    34
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": -3,
+   "time_on_ice": "69:23",
+   "time_on_ice_seconds": 4163,
+   "time_with_puck": "4:26",
+   "time_with_puck_seconds": 266,
+   "shots_on_goal_attempts": "3/6",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 1,
+   "pass_pct": 71.4,
+   "saucer_passes": 0,
+   "hits": 8,
+   "take_aways": 4,
+   "give_aways": 8,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "away",
+   "team": "Victoria Royals",
+   "lg_user_id": 72116,
+   "player": "lightoutshooter",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    56,
+    72,
+    36
+   ],
+   "goals": 2,
+   "ast": 1,
+   "pts": 3,
+   "plus_minus": -3,
+   "time_on_ice": "69:23",
+   "time_on_ice_seconds": 4163,
+   "time_with_puck": "5:14",
+   "time_with_puck_seconds": 314,
+   "shots_on_goal_attempts": "4/10",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 85.0,
+   "saucer_passes": 0,
+   "hits": 7,
+   "take_aways": 2,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Victoria Royals",
+   "lg_user_id": 80560,
+   "player": "TBizzy_15",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    37,
+    14,
+    46
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -3,
+   "time_on_ice": "69:23",
+   "time_on_ice_seconds": 4163,
+   "time_with_puck": "3:48",
+   "time_with_puck_seconds": 228,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 81.3,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 5,
+   "give_aways": 7,
+   "blocked_shots": 2,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Victoria Royals",
+   "lg_user_id": 33273,
+   "player": "thisbreh",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    38,
+    33,
+    43
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": -3,
+   "time_on_ice": "69:23",
+   "time_on_ice_seconds": 4163,
+   "time_with_puck": "4:28",
+   "time_with_puck_seconds": 268,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 76.0,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 3,
+   "give_aways": 2,
+   "blocked_shots": 2,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "North Bay Battalion",
+   "lg_user_id": 73447,
+   "player": "sjul11",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    66,
+    64,
+    18
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": 3,
+   "time_on_ice": "69:23",
+   "time_on_ice_seconds": 4163,
+   "time_with_puck": "7:29",
+   "time_with_puck_seconds": 449,
+   "shots_on_goal_attempts": "6/14",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 14,
+   "deflections": 0,
+   "pass_pct": 53.6,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 20,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "North Bay Battalion",
+   "lg_user_id": 73872,
+   "player": "Makleisgod",
+   "position": "C",
+   "build": "TWF",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    100,
+    100,
+    56
+   ],
+   "goals": 2,
+   "ast": 3,
+   "pts": 5,
+   "plus_minus": 3,
+   "time_on_ice": "69:23",
+   "time_on_ice_seconds": 4163,
+   "time_with_puck": "7:14",
+   "time_with_puck_seconds": 434,
+   "shots_on_goal_attempts": "6/11",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 1,
+   "pass_pct": 97.3,
+   "saucer_passes": 0,
+   "hits": 6,
+   "take_aways": 7,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "North Bay Battalion",
+   "lg_user_id": 52644,
+   "player": "ovi_h84",
+   "position": "RW",
+   "build": "DNG",
+   "badges": [],
+   "lg_ratings": [
+    100,
+    100,
+    42
+   ],
+   "goals": 3,
+   "ast": 3,
+   "pts": 6,
+   "plus_minus": 3,
+   "time_on_ice": "69:23",
+   "time_on_ice_seconds": 4163,
+   "time_with_puck": "4:11",
+   "time_with_puck_seconds": 251,
+   "shots_on_goal_attempts": "3/7",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 0,
+   "pass_pct": 78.6,
+   "saucer_passes": 0,
+   "hits": 8,
+   "take_aways": 3,
+   "give_aways": 10,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "North Bay Battalion",
+   "lg_user_id": 53170,
+   "player": "R0bo",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    76,
+    82,
+    65
+   ],
+   "goals": 1,
+   "ast": 4,
+   "pts": 5,
+   "plus_minus": 3,
+   "time_on_ice": "69:23",
+   "time_on_ice_seconds": 4163,
+   "time_with_puck": "3:53",
+   "time_with_puck_seconds": 233,
+   "shots_on_goal_attempts": "3/8",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 8,
+   "deflections": 0,
+   "pass_pct": 90.7,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 2,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "North Bay Battalion",
+   "lg_user_id": 25157,
+   "player": "Illgill89",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    65,
+    14,
+    63
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 3,
+   "time_on_ice": "69:23",
+   "time_on_ice_seconds": 4163,
+   "time_with_puck": "2:24",
+   "time_with_puck_seconds": 144,
+   "shots_on_goal_attempts": "3/7",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 0,
+   "pass_pct": 81.8,
+   "saucer_passes": 0,
+   "hits": 10,
+   "take_aways": 0,
+   "give_aways": 2,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 72460,
+   "player": "ladiesigodown2",
+   "build": "HYB",
+   "lg_ratings": [
+    58,
+    61
+   ],
+   "shots": 23,
+   "s_pct": 0.696,
+   "ga": 7,
+   "save": 16,
+   "gaa": 6.05,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 1,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Victoria Royals"
+  },
+  {
+   "lg_user_id": 73949,
+   "player": "Cage Hang",
+   "build": "BFY",
+   "lg_ratings": [
+    52,
+    40
+   ],
+   "shots": 14,
+   "s_pct": 0.714,
+   "ga": 4,
+   "save": 10,
+   "gaa": 3.46,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "North Bay Battalion"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "Brandflakes29",
+   "submitted_at": "2026-10-27 09:50:18pm"
+  },
+  {
+   "part": 1,
+   "periods": "1-1",
+   "submitted_by": "Brandflakes29",
+   "submitted_at": "2026-10-27 09:50:18pm"
+  }
+ ],
+ "lag_out": true,
+ "edits": {
+  "count": 1,
+  "last_by": "Brandflakes29",
+  "last_at": "Tuesday October 27th 2026, 09:50 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

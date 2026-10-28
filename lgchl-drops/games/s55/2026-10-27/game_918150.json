@@ -1,0 +1,585 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918150,
+ "status": "F/OT",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918150",
+ "captured_at": "2026-10-28T18:03:22.553Z",
+ "away": {
+  "lg_team_id": 382,
+  "name": "Cataractes",
+  "record": "22-20-4",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 1,
+   "4": 1
+  },
+  "score": 2,
+  "full_name": "Shawinigan Cataractes"
+ },
+ "home": {
+  "lg_team_id": 385,
+  "name": "Rebels",
+  "record": "25-16-6",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 1,
+   "4": 0
+  },
+  "score": 1,
+  "full_name": "Red Deer Rebels"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 2,
+   "home": 1
+  },
+  "total_shots": {
+   "away": 10,
+   "home": 17
+  },
+  "hits": {
+   "away": 16,
+   "home": 11
+  },
+  "time_on_attack": {
+   "away": "10:57",
+   "home": "11:45"
+  },
+  "passing_pct": {
+   "away": "68.7%",
+   "home": "78.8%"
+  },
+  "face_offs_won": {
+   "away": 11,
+   "home": 10
+  },
+  "penalty_minutes": {
+   "away": "2:00",
+   "home": "2:00"
+  },
+  "power_plays": {
+   "away": "0 / 1",
+   "home": "0 / 1"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 3,
+   "home": 4
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 352,
+    "player": "FletchTapBcKDoor"
+   },
+   {
+    "position": "C",
+    "seconds": 306,
+    "player": "premierplayer"
+   },
+   {
+    "position": "RW",
+    "seconds": 410,
+    "player": "xPhiist"
+   },
+   {
+    "position": "RD",
+    "seconds": 177,
+    "player": "Pags1974"
+   },
+   {
+    "position": "LD",
+    "seconds": 212,
+    "player": "BigSaveNabokov"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 239,
+    "player": "BROLLZ28"
+   },
+   {
+    "position": "C",
+    "seconds": 261,
+    "player": "sepoL1083"
+   },
+   {
+    "position": "RW",
+    "seconds": 382,
+    "player": "mr_couture._85073"
+   },
+   {
+    "position": "RD",
+    "seconds": 250,
+    "player": "Arma450"
+   },
+   {
+    "position": "LD",
+    "seconds": 339,
+    "player": "Nickiscool28"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 76606,
+   "player": "FletchTapBcKDoor",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    39,
+    18,
+    41
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 2,
+   "time_on_ice": "74:27",
+   "time_on_ice_seconds": 4467,
+   "time_with_puck": "5:52",
+   "time_with_puck_seconds": 352,
+   "shots_on_goal_attempts": "0/2",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 68.4,
+   "saucer_passes": 0,
+   "hits": 7,
+   "take_aways": 2,
+   "give_aways": 11,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 16685,
+   "player": "premierplayer",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    50,
+    40,
+    33
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "76:27",
+   "time_on_ice_seconds": 4587,
+   "time_with_puck": "5:06",
+   "time_with_puck_seconds": 306,
+   "shots_on_goal_attempts": "3/7",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 0,
+   "pass_pct": 58.1,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 3,
+   "give_aways": 12,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 25419,
+   "player": "xPhiist",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    84,
+    93,
+    46
+   ],
+   "goals": 2,
+   "ast": 0,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "76:27",
+   "time_on_ice_seconds": 4587,
+   "time_with_puck": "6:50",
+   "time_with_puck_seconds": 410,
+   "shots_on_goal_attempts": "4/10",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 65.2,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 8,
+   "give_aways": 23,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "away",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 7126,
+   "player": "BigSaveNabokov",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    68,
+    19,
+    73
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 1,
+   "time_on_ice": "76:27",
+   "time_on_ice_seconds": 4587,
+   "time_with_puck": "3:32",
+   "time_with_puck_seconds": 212,
+   "shots_on_goal_attempts": "0/0",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 0,
+   "deflections": 0,
+   "pass_pct": 75.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 6,
+   "give_aways": 6,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Shawinigan Cataractes",
+   "lg_user_id": 58300,
+   "player": "Pags1974",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    67,
+    14,
+    72
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 1,
+   "time_on_ice": "76:27",
+   "time_on_ice_seconds": 4587,
+   "time_with_puck": "2:57",
+   "time_with_puck_seconds": 177,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 81.8,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 2,
+   "give_aways": 2,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Red Deer Rebels",
+   "lg_user_id": 73999,
+   "player": "BROLLZ28",
+   "position": "LW",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    48,
+    43,
+    51
+   ],
+   "goals": 1,
+   "ast": 0,
+   "pts": 1,
+   "plus_minus": -1,
+   "time_on_ice": "76:27",
+   "time_on_ice_seconds": 4587,
+   "time_with_puck": "3:59",
+   "time_with_puck_seconds": 239,
+   "shots_on_goal_attempts": "5/9",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 9,
+   "deflections": 1,
+   "pass_pct": 73.5,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 9,
+   "give_aways": 7,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Red Deer Rebels",
+   "lg_user_id": 81172,
+   "player": "sepoL1083",
+   "position": "C",
+   "build": "TWF",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    30,
+    14,
+    49
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "76:27",
+   "time_on_ice_seconds": 4587,
+   "time_with_puck": "4:21",
+   "time_with_puck_seconds": 261,
+   "shots_on_goal_attempts": "2/4",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 77.5,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 5,
+   "give_aways": 10,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Red Deer Rebels",
+   "lg_user_id": 79798,
+   "player": "mr_couture._85073",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    41,
+    34,
+    39
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "76:27",
+   "time_on_ice_seconds": 4587,
+   "time_with_puck": "6:22",
+   "time_with_puck_seconds": 382,
+   "shots_on_goal_attempts": "7/16",
+   "shots_on_goal_attempts_on_goal": 7,
+   "shots_on_goal_attempts_attempts": 16,
+   "deflections": 0,
+   "pass_pct": 73.1,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 3,
+   "give_aways": 20,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Red Deer Rebels",
+   "lg_user_id": 67147,
+   "player": "Nickiscool28",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    51,
+    19,
+    57
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -2,
+   "time_on_ice": "74:27",
+   "time_on_ice_seconds": 4467,
+   "time_with_puck": "5:39",
+   "time_with_puck_seconds": 339,
+   "shots_on_goal_attempts": "1/4",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 85.7,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 7,
+   "give_aways": 2,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Red Deer Rebels",
+   "lg_user_id": 39163,
+   "player": "Arma450",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    50,
+    16,
+    56
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "76:27",
+   "time_on_ice_seconds": 4587,
+   "time_with_puck": "4:10",
+   "time_with_puck_seconds": 250,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 87.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 4,
+   "blocked_shots": 2,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 50294,
+   "player": "hully17",
+   "build": "HYB",
+   "lg_ratings": [
+    91,
+    88
+   ],
+   "shots": 17,
+   "s_pct": 0.941,
+   "ga": 1,
+   "save": 16,
+   "gaa": 0.78,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 2,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Shawinigan Cataractes"
+  },
+  {
+   "lg_user_id": 78288,
+   "player": "Freedoms_A_Must1",
+   "build": "HYB",
+   "lg_ratings": [
+    54,
+    51
+   ],
+   "shots": 10,
+   "s_pct": 0.8,
+   "ga": 2,
+   "save": 8,
+   "gaa": 1.57,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 2,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Red Deer Rebels"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-4",
+   "submitted_by": "A Salty SaiIor",
+   "submitted_at": "2026-10-27 10:08:17pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "A Salty SaiIor",
+  "last_at": "Tuesday October 27th 2026, 10:08 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

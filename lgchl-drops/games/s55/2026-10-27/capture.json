@@ -1,0 +1,43 @@
+{
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "game_night": "2026-10-27",
+ "games_scheduled": 93,
+ "games_included": 93,
+ "complete": true,
+ "converted_at": "2026-10-28T19:28:52.146400+00:00",
+ "source": "Public LG game pages, read one at a time with 25-second gaps in the user's own Chrome; LG game-page data only (no EA part detail)",
+ "flags": [
+  {
+   "lg_game_id": 918134,
+   "side": "away",
+   "note": "period goals on the LG page do not add up to the final score"
+  },
+  {
+   "lg_game_id": 918134,
+   "side": "home",
+   "note": "period goals on the LG page do not add up to the final score"
+  },
+  {
+   "lg_game_id": 918144,
+   "side": "home",
+   "note": "period goals on the LG page do not add up to the final score"
+  },
+  {
+   "lg_game_id": 918160,
+   "side": "away",
+   "note": "period goals on the LG page do not add up to the final score"
+  },
+  {
+   "lg_game_id": 918195,
+   "side": "home",
+   "note": "period goals on the LG page do not add up to the final score"
+  }
+ ],
+ "notes": [
+  "918144, 918160 and 918195 (all involving Kamloops) have a final score but no skater or goalie lines on LG; they look like forfeits.",
+  "Team records printed on LG game pages are not always consistent from one game to the next (example: Calgary 20-19-7 after 918122, 21-19-6 after a win in 918170). Count wins and losses from scores rather than from the record field.",
+  "First 56 games read 1:46-2:12 PM Oct 28; LG returned a Cloudflare check on 918170 and the capture stopped. It resumed at 3:05 PM after a normal page view passed LG's automatic check; no challenge was solved or bypassed."
+ ]
+}

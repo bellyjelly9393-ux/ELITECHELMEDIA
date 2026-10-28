@@ -1,0 +1,107 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918160,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918160",
+ "captured_at": "2026-10-28T18:07:42.473Z",
+ "away": {
+  "lg_team_id": 365,
+  "name": "Wildcats",
+  "record": "27-14-5",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 0
+  },
+  "score": 1,
+  "full_name": "Moncton Wildcats"
+ },
+ "home": {
+  "lg_team_id": 423,
+  "name": "Blazers",
+  "record": "18-20-6",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 0
+  },
+  "score": 0,
+  "full_name": "Kamloops Blazers"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 1,
+   "home": 0
+  },
+  "total_shots": {
+   "away": 0,
+   "home": 0
+  },
+  "hits": {
+   "away": 0,
+   "home": 0
+  },
+  "time_on_attack": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "passing_pct": {
+   "away": "0",
+   "home": "0"
+  },
+  "face_offs_won": {
+   "away": 0,
+   "home": 0
+  },
+  "penalty_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "power_plays": {
+   "away": "0 / 0",
+   "home": "0 / 0"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 0,
+   "home": 0
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [],
+  "home": []
+ },
+ "skaters": [],
+ "goalies": [],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-4",
+   "submitted_by": "Cxleton",
+   "submitted_at": "2026-10-27 10:05:54pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 2,
+  "last_by": "FuZe Danglzz",
+  "last_at": "Wednesday October 28th 2026, 02:07 AM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

@@ -1,0 +1,583 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918127,
+ "status": "F/OT",
+ "played_at_text": "Tuesday October 27th 2026, 09:00 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918127",
+ "captured_at": "2026-10-28T17:51:58.519Z",
+ "away": {
+  "lg_team_id": 415,
+  "name": "Oil Kings",
+  "record": "25-13-7",
+  "goals_by_period": {
+   "1": 0,
+   "2": 1,
+   "3": 3,
+   "4": 0,
+   "5": 0
+  },
+  "score": 4,
+  "full_name": "Edmonton Oil Kings"
+ },
+ "home": {
+  "lg_team_id": 452,
+  "name": "Storm",
+  "record": "25-15-6",
+  "goals_by_period": {
+   "1": 1,
+   "2": 2,
+   "3": 1,
+   "4": 0,
+   "5": 1
+  },
+  "score": 5,
+  "full_name": "Guelph Storm"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 4,
+   "home": 5
+  },
+  "total_shots": {
+   "away": 23,
+   "home": 27
+  },
+  "hits": {
+   "away": 19,
+   "home": 13
+  },
+  "time_on_attack": {
+   "away": "11:23",
+   "home": "12:54"
+  },
+  "passing_pct": {
+   "away": "75.7%",
+   "home": "75.6%"
+  },
+  "face_offs_won": {
+   "away": 16,
+   "home": 17
+  },
+  "penalty_minutes": {
+   "away": "2:00",
+   "home": "2:00"
+  },
+  "power_plays": {
+   "away": "1 / 1",
+   "home": "0 / 1"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 6,
+   "home": 5
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 317,
+    "player": "xzghost_official"
+   },
+   {
+    "position": "C",
+    "seconds": 517,
+    "player": "TacoPoulet"
+   },
+   {
+    "position": "RW",
+    "seconds": 280,
+    "player": "morganlynn1996_85689"
+   },
+   {
+    "position": "RD",
+    "seconds": 235,
+    "player": "Psych_Funk19"
+   },
+   {
+    "position": "LD",
+    "seconds": 269,
+    "player": "Anti Bouaiben"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 351,
+    "player": "Andrew_1up"
+   },
+   {
+    "position": "C",
+    "seconds": 264,
+    "player": "xHexbz88"
+   },
+   {
+    "position": "RW",
+    "seconds": 667,
+    "player": "ItsMartel"
+   },
+   {
+    "position": "RD",
+    "seconds": 244,
+    "player": "eXecuti0n80"
+   },
+   {
+    "position": "LD",
+    "seconds": 117,
+    "player": "I Damaster I"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Edmonton Oil Kings",
+   "lg_user_id": 80096,
+   "player": "xzghost_official",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    53,
+    57,
+    30
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": -2,
+   "time_on_ice": "82:12",
+   "time_on_ice_seconds": 4932,
+   "time_with_puck": "5:17",
+   "time_with_puck_seconds": 317,
+   "shots_on_goal_attempts": "5/11",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 0,
+   "pass_pct": 68.0,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 2,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Edmonton Oil Kings",
+   "lg_user_id": 81009,
+   "player": "TacoPoulet",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    67,
+    75,
+    54
+   ],
+   "goals": 2,
+   "ast": 1,
+   "pts": 3,
+   "plus_minus": -2,
+   "time_on_ice": "84:11",
+   "time_on_ice_seconds": 5051,
+   "time_with_puck": "8:37",
+   "time_with_puck_seconds": 517,
+   "shots_on_goal_attempts": "7/14",
+   "shots_on_goal_attempts_on_goal": 7,
+   "shots_on_goal_attempts_attempts": 14,
+   "deflections": 2,
+   "pass_pct": 79.4,
+   "saucer_passes": 1,
+   "hits": 5,
+   "take_aways": 5,
+   "give_aways": 12,
+   "blocked_shots": 5,
+   "interceptions": 3,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Edmonton Oil Kings",
+   "lg_user_id": 80026,
+   "player": "morganlynn1996_85689",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    60,
+    67,
+    35
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": -2,
+   "time_on_ice": "84:11",
+   "time_on_ice_seconds": 5051,
+   "time_with_puck": "4:40",
+   "time_with_puck_seconds": 280,
+   "shots_on_goal_attempts": "6/13",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 13,
+   "deflections": 0,
+   "pass_pct": 73.9,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 4,
+   "give_aways": 7,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Edmonton Oil Kings",
+   "lg_user_id": 78245,
+   "player": "Anti Bouaiben",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    46,
+    31,
+    45
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -2,
+   "time_on_ice": "84:11",
+   "time_on_ice_seconds": 5051,
+   "time_with_puck": "4:29",
+   "time_with_puck_seconds": 269,
+   "shots_on_goal_attempts": "3/11",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 0,
+   "pass_pct": 78.1,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 6,
+   "give_aways": 8,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "away",
+   "team": "Edmonton Oil Kings",
+   "lg_user_id": 31711,
+   "player": "Psych_Funk19",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    41,
+    33,
+    36
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": -2,
+   "time_on_ice": "84:11",
+   "time_on_ice_seconds": 5051,
+   "time_with_puck": "3:55",
+   "time_with_puck_seconds": 235,
+   "shots_on_goal_attempts": "1/3",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 76.7,
+   "saucer_passes": 2,
+   "hits": 4,
+   "take_aways": 2,
+   "give_aways": 7,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Guelph Storm",
+   "lg_user_id": 25809,
+   "player": "Andrew_1up",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    100,
+    100,
+    47
+   ],
+   "goals": 3,
+   "ast": 0,
+   "pts": 3,
+   "plus_minus": 2,
+   "time_on_ice": "84:11",
+   "time_on_ice_seconds": 5051,
+   "time_with_puck": "5:51",
+   "time_with_puck_seconds": 351,
+   "shots_on_goal_attempts": "10/22",
+   "shots_on_goal_attempts_on_goal": 10,
+   "shots_on_goal_attempts_attempts": 22,
+   "deflections": 0,
+   "pass_pct": 81.0,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 4,
+   "give_aways": 8,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Guelph Storm",
+   "lg_user_id": 38611,
+   "player": "xHexbz88",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    54,
+    45,
+    45
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 2,
+   "time_on_ice": "83:31",
+   "time_on_ice_seconds": 5011,
+   "time_with_puck": "4:24",
+   "time_with_puck_seconds": 264,
+   "shots_on_goal_attempts": "6/12",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 12,
+   "deflections": 1,
+   "pass_pct": 76.0,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 4,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Guelph Storm",
+   "lg_user_id": 38139,
+   "player": "ItsMartel",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    94,
+    100,
+    40
+   ],
+   "goals": 2,
+   "ast": 3,
+   "pts": 5,
+   "plus_minus": 2,
+   "time_on_ice": "84:11",
+   "time_on_ice_seconds": 5051,
+   "time_with_puck": "11:07",
+   "time_with_puck_seconds": 667,
+   "shots_on_goal_attempts": "6/15",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 15,
+   "deflections": 0,
+   "pass_pct": 61.1,
+   "saucer_passes": 0,
+   "hits": 9,
+   "take_aways": 2,
+   "give_aways": 29,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Guelph Storm",
+   "lg_user_id": 4629,
+   "player": "I Damaster I",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    61,
+    12,
+    65
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 2,
+   "time_on_ice": "84:11",
+   "time_on_ice_seconds": 5051,
+   "time_with_puck": "1:57",
+   "time_with_puck_seconds": 117,
+   "shots_on_goal_attempts": "3/8",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 8,
+   "deflections": 0,
+   "pass_pct": 81.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 1,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Guelph Storm",
+   "lg_user_id": 43329,
+   "player": "eXecuti0n80",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    66,
+    21,
+    71
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 2,
+   "time_on_ice": "84:11",
+   "time_on_ice_seconds": 5051,
+   "time_with_puck": "4:04",
+   "time_with_puck_seconds": 244,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 85.7,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 5,
+   "give_aways": 0,
+   "blocked_shots": 1,
+   "interceptions": 3,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 70523,
+   "player": "BolSaKiee",
+   "build": "BFY",
+   "lg_ratings": [
+    67,
+    66
+   ],
+   "shots": 27,
+   "s_pct": 0.815,
+   "ga": 5,
+   "save": 22,
+   "gaa": 3.56,
+   "poke_check_saves": 3,
+   "desperate_saves": 2,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Edmonton Oil Kings"
+  },
+  {
+   "lg_user_id": 77171,
+   "player": "Huskroo",
+   "build": "HYB",
+   "lg_ratings": [
+    79,
+    75
+   ],
+   "shots": 23,
+   "s_pct": 0.826,
+   "ga": 4,
+   "save": 19,
+   "gaa": 2.85,
+   "poke_check_saves": 0,
+   "desperate_saves": 1,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Guelph Storm"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-4",
+   "submitted_by": "Andrew_1up",
+   "submitted_at": "2026-10-27 10:08:49pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "Andrew_1up",
+  "last_at": "Tuesday October 27th 2026, 10:08 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

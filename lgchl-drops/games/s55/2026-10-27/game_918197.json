@@ -1,0 +1,585 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918197,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 10:10 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918197",
+ "captured_at": "2026-10-28T19:16:49.501Z",
+ "away": {
+  "lg_team_id": 419,
+  "name": "Royals",
+  "record": "24-18-2",
+  "goals_by_period": {
+   "1": 2,
+   "2": 7,
+   "3": 6
+  },
+  "score": 15,
+  "full_name": "Victoria Royals"
+ },
+ "home": {
+  "lg_team_id": 2982,
+  "name": "Regiment",
+  "record": "9-36-2",
+  "goals_by_period": {
+   "1": 0,
+   "2": 1,
+   "3": 1
+  },
+  "score": 2,
+  "full_name": "Newfoundland Regiment"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 15,
+   "home": 2
+  },
+  "total_shots": {
+   "away": 42,
+   "home": 15
+  },
+  "hits": {
+   "away": 15,
+   "home": 23
+  },
+  "time_on_attack": {
+   "away": "10:12",
+   "home": "6:09"
+  },
+  "passing_pct": {
+   "away": "74.6%",
+   "home": "74.4%"
+  },
+  "face_offs_won": {
+   "away": 27,
+   "home": 6
+  },
+  "penalty_minutes": {
+   "away": "0:00",
+   "home": "10:00"
+  },
+  "power_plays": {
+   "away": "2 / 5",
+   "home": "0 / 0"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 3,
+   "home": 7
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 1
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 257,
+    "player": "burningbadger95"
+   },
+   {
+    "position": "C",
+    "seconds": 370,
+    "player": "NitroQc x 10"
+   },
+   {
+    "position": "RW",
+    "seconds": 246,
+    "player": "lightoutshooter"
+   },
+   {
+    "position": "RD",
+    "seconds": 328,
+    "player": "thisbreh"
+   },
+   {
+    "position": "LD",
+    "seconds": 166,
+    "player": "TBizzy_15"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 176,
+    "player": "MrCoffeeDG"
+   },
+   {
+    "position": "C",
+    "seconds": 209,
+    "player": "Havik tmR"
+   },
+   {
+    "position": "RW",
+    "seconds": 264,
+    "player": "XxFlamabl3Xx284"
+   },
+   {
+    "position": "RD",
+    "seconds": 117,
+    "player": "rawzy78"
+   },
+   {
+    "position": "LD",
+    "seconds": 157,
+    "player": "WasabiiiSann"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Victoria Royals",
+   "lg_user_id": 80392,
+   "player": "burningbadger95",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    100,
+    100,
+    44
+   ],
+   "goals": 3,
+   "ast": 4,
+   "pts": 7,
+   "plus_minus": 11,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:17",
+   "time_with_puck_seconds": 257,
+   "shots_on_goal_attempts": "9/20",
+   "shots_on_goal_attempts_on_goal": 9,
+   "shots_on_goal_attempts_attempts": 20,
+   "deflections": 0,
+   "pass_pct": 70.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 0,
+   "give_aways": 9,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Victoria Royals",
+   "lg_user_id": 55143,
+   "player": "NitroQc x 10",
+   "position": "C",
+   "build": "TWF",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    100,
+    100,
+    53
+   ],
+   "goals": 3,
+   "ast": 9,
+   "pts": 12,
+   "plus_minus": 11,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "6:10",
+   "time_with_puck_seconds": 370,
+   "shots_on_goal_attempts": "9/17",
+   "shots_on_goal_attempts_on_goal": 9,
+   "shots_on_goal_attempts_attempts": 17,
+   "deflections": 2,
+   "pass_pct": 71.1,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 6,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Victoria Royals",
+   "lg_user_id": 72116,
+   "player": "lightoutshooter",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    100,
+    100,
+    48
+   ],
+   "goals": 7,
+   "ast": 2,
+   "pts": 9,
+   "plus_minus": 11,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:06",
+   "time_with_puck_seconds": 246,
+   "shots_on_goal_attempts": "11/22",
+   "shots_on_goal_attempts_on_goal": 11,
+   "shots_on_goal_attempts_attempts": 22,
+   "deflections": 0,
+   "pass_pct": 73.3,
+   "saucer_passes": 0,
+   "hits": 5,
+   "take_aways": 2,
+   "give_aways": 9,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Victoria Royals",
+   "lg_user_id": 80560,
+   "player": "TBizzy_15",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    85,
+    50,
+    81
+   ],
+   "goals": 0,
+   "ast": 3,
+   "pts": 3,
+   "plus_minus": 11,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:46",
+   "time_with_puck_seconds": 166,
+   "shots_on_goal_attempts": "3/9",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 9,
+   "deflections": 0,
+   "pass_pct": 75.0,
+   "saucer_passes": 0,
+   "hits": 7,
+   "take_aways": 2,
+   "give_aways": 1,
+   "blocked_shots": 2,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 2,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Victoria Royals",
+   "lg_user_id": 33273,
+   "player": "thisbreh",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    86,
+    100,
+    70
+   ],
+   "goals": 2,
+   "ast": 3,
+   "pts": 5,
+   "plus_minus": 11,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "5:28",
+   "time_with_puck_seconds": 328,
+   "shots_on_goal_attempts": "5/13",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 13,
+   "deflections": 0,
+   "pass_pct": 81.0,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 5,
+   "give_aways": 10,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Newfoundland Regiment",
+   "lg_user_id": 50006,
+   "player": "MrCoffeeDG",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    48,
+    62,
+    37
+   ],
+   "goals": 2,
+   "ast": 0,
+   "pts": 2,
+   "plus_minus": -11,
+   "time_on_ice": "58:01",
+   "time_on_ice_seconds": 3481,
+   "time_with_puck": "2:56",
+   "time_with_puck_seconds": 176,
+   "shots_on_goal_attempts": "7/16",
+   "shots_on_goal_attempts_on_goal": 7,
+   "shots_on_goal_attempts_attempts": 16,
+   "deflections": 0,
+   "pass_pct": 80.0,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 4,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Newfoundland Regiment",
+   "lg_user_id": 13449,
+   "player": "Havik tmR",
+   "position": "C",
+   "build": "TWF",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    14,
+    12,
+    16
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -12,
+   "time_on_ice": "55:56",
+   "time_on_ice_seconds": 3356,
+   "time_with_puck": "3:29",
+   "time_with_puck_seconds": 209,
+   "shots_on_goal_attempts": "2/4",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 50.0,
+   "saucer_passes": 0,
+   "hits": 7,
+   "take_aways": 3,
+   "give_aways": 10,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "4:00",
+   "pims_seconds": 240,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Newfoundland Regiment",
+   "lg_user_id": 77752,
+   "player": "XxFlamabl3Xx284",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    38,
+    48,
+    30
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": -11,
+   "time_on_ice": "59:52",
+   "time_on_ice_seconds": 3592,
+   "time_with_puck": "4:24",
+   "time_with_puck_seconds": 264,
+   "shots_on_goal_attempts": "6/11",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 1,
+   "pass_pct": 88.2,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 3,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Newfoundland Regiment",
+   "lg_user_id": 64205,
+   "player": "WasabiiiSann",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    27,
+    17,
+    33
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -12,
+   "time_on_ice": "59:12",
+   "time_on_ice_seconds": 3552,
+   "time_with_puck": "2:37",
+   "time_with_puck_seconds": 157,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 83.3,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 1,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 2
+  },
+  {
+   "side": "home",
+   "team": "Newfoundland Regiment",
+   "lg_user_id": 49210,
+   "player": "rawzy78",
+   "position": "RD",
+   "build": "PMD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    34,
+    5,
+    48
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -11,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "1:57",
+   "time_with_puck_seconds": 117,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 78.6,
+   "saucer_passes": 0,
+   "hits": 6,
+   "take_aways": 4,
+   "give_aways": 1,
+   "blocked_shots": 5,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 72460,
+   "player": "ladiesigodown2",
+   "build": "HYB",
+   "lg_ratings": [
+    72,
+    61
+   ],
+   "shots": 15,
+   "s_pct": 0.867,
+   "ga": 2,
+   "save": 13,
+   "gaa": 2.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 1,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Victoria Royals"
+  },
+  {
+   "lg_user_id": 22870,
+   "player": "Arizona4life1107",
+   "build": "HYB",
+   "lg_ratings": [
+    66,
+    71
+   ],
+   "shots": 42,
+   "s_pct": 0.643,
+   "ga": 15,
+   "save": 27,
+   "gaa": 15.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 1,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Newfoundland Regiment"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "TheMermanSGT87",
+   "submitted_at": "2026-10-27 11:18:31pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 2,
+  "last_by": "TheMermanSGT87",
+  "last_at": "Tuesday October 27th 2026, 11:18 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

@@ -1,0 +1,580 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918163,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918163",
+ "captured_at": "2026-10-28T18:09:00.497Z",
+ "away": {
+  "lg_team_id": 411,
+  "name": "Warriors",
+  "record": "16-26-3",
+  "goals_by_period": {
+   "1": 3,
+   "2": 0,
+   "3": 1
+  },
+  "score": 4,
+  "full_name": "Moose Jaw Warriors"
+ },
+ "home": {
+  "lg_team_id": 401,
+  "name": "Generals",
+  "record": "13-25-3",
+  "goals_by_period": {
+   "1": 0,
+   "2": 1,
+   "3": 2
+  },
+  "score": 3,
+  "full_name": "Oshawa Generals"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 4,
+   "home": 3
+  },
+  "total_shots": {
+   "away": 23,
+   "home": 25
+  },
+  "hits": {
+   "away": 11,
+   "home": 4
+  },
+  "time_on_attack": {
+   "away": "9:19",
+   "home": "10:00"
+  },
+  "passing_pct": {
+   "away": "64%",
+   "home": "73%"
+  },
+  "face_offs_won": {
+   "away": 16,
+   "home": 13
+  },
+  "penalty_minutes": {
+   "away": "4:00",
+   "home": "4:00"
+  },
+  "power_plays": {
+   "away": "0 / 2",
+   "home": "1 / 2"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 5,
+   "home": 5
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 290,
+    "player": "Kingovi83608"
+   },
+   {
+    "position": "C",
+    "seconds": 156,
+    "player": "jojos-wrld-"
+   },
+   {
+    "position": "RW",
+    "seconds": 224,
+    "player": "ndima99"
+   },
+   {
+    "position": "RD",
+    "seconds": 308,
+    "player": "DeAtHAlEx44"
+   },
+   {
+    "position": "LD",
+    "seconds": 114,
+    "player": "Dusty Nation09"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 382,
+    "player": "Philartmony"
+   },
+   {
+    "position": "C",
+    "seconds": 224,
+    "player": "kworker84"
+   },
+   {
+    "position": "RW",
+    "seconds": 323,
+    "player": "Burtxn l77l"
+   },
+   {
+    "position": "RD",
+    "seconds": 105,
+    "player": "C0UGAR 1986"
+   },
+   {
+    "position": "LD",
+    "seconds": 109,
+    "player": "KnightLax27"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Moose Jaw Warriors",
+   "lg_user_id": 77813,
+   "player": "Kingovi83608",
+   "position": "LW",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    70,
+    72,
+    22
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": 2,
+   "time_on_ice": "59:34",
+   "time_on_ice_seconds": 3574,
+   "time_with_puck": "4:50",
+   "time_with_puck_seconds": 290,
+   "shots_on_goal_attempts": "11/23",
+   "shots_on_goal_attempts_on_goal": 11,
+   "shots_on_goal_attempts_attempts": 23,
+   "deflections": 0,
+   "pass_pct": 33.3,
+   "saucer_passes": 0,
+   "hits": 6,
+   "take_aways": 3,
+   "give_aways": 17,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Moose Jaw Warriors",
+   "lg_user_id": 52608,
+   "player": "jojos-wrld-",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    48,
+    34,
+    33
+   ],
+   "goals": 1,
+   "ast": 0,
+   "pts": 1,
+   "plus_minus": 2,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:36",
+   "time_with_puck_seconds": 156,
+   "shots_on_goal_attempts": "4/11",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 1,
+   "pass_pct": 57.1,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 0,
+   "give_aways": 3,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 2,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Moose Jaw Warriors",
+   "lg_user_id": 60234,
+   "player": "ndima99",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [
+    "GWG",
+    "ECU"
+   ],
+   "lg_ratings": [
+    82,
+    90,
+    36
+   ],
+   "goals": 2,
+   "ast": 0,
+   "pts": 2,
+   "plus_minus": 2,
+   "time_on_ice": "59:58",
+   "time_on_ice_seconds": 3598,
+   "time_with_puck": "3:44",
+   "time_with_puck_seconds": 224,
+   "shots_on_goal_attempts": "5/10",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 63.2,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 5,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Moose Jaw Warriors",
+   "lg_user_id": 39767,
+   "player": "Dusty Nation09",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    64,
+    14,
+    64
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 2,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "1:54",
+   "time_with_puck_seconds": 114,
+   "shots_on_goal_attempts": "0/3",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 71.4,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 5,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Moose Jaw Warriors",
+   "lg_user_id": 79049,
+   "player": "DeAtHAlEx44",
+   "position": "RD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    79,
+    62,
+    78
+   ],
+   "goals": 0,
+   "ast": 4,
+   "pts": 4,
+   "plus_minus": 2,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "5:08",
+   "time_with_puck_seconds": 308,
+   "shots_on_goal_attempts": "1/3",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 83.3,
+   "saucer_passes": 0,
+   "hits": 5,
+   "take_aways": 7,
+   "give_aways": 9,
+   "blocked_shots": 3,
+   "interceptions": 3,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Oshawa Generals",
+   "lg_user_id": 42055,
+   "player": "Philartmony",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    60,
+    75,
+    22
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": -2,
+   "time_on_ice": "58:01",
+   "time_on_ice_seconds": 3481,
+   "time_with_puck": "6:22",
+   "time_with_puck_seconds": 382,
+   "shots_on_goal_attempts": "9/18",
+   "shots_on_goal_attempts_on_goal": 9,
+   "shots_on_goal_attempts_attempts": 18,
+   "deflections": 0,
+   "pass_pct": 58.3,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 4,
+   "give_aways": 13,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Oshawa Generals",
+   "lg_user_id": 38315,
+   "player": "kworker84",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    44,
+    44,
+    38
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": -2,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:44",
+   "time_with_puck_seconds": 224,
+   "shots_on_goal_attempts": "6/17",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 17,
+   "deflections": 0,
+   "pass_pct": 61.9,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 9,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Oshawa Generals",
+   "lg_user_id": 11502,
+   "player": "Burtxn l77l",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    54,
+    60,
+    42
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": -2,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "5:23",
+   "time_with_puck_seconds": 323,
+   "shots_on_goal_attempts": "7/17",
+   "shots_on_goal_attempts_on_goal": 7,
+   "shots_on_goal_attempts_attempts": 17,
+   "deflections": 0,
+   "pass_pct": 80.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 10,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 2,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Oshawa Generals",
+   "lg_user_id": 47199,
+   "player": "KnightLax27",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    44,
+    5,
+    53
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -2,
+   "time_on_ice": "58:01",
+   "time_on_ice_seconds": 3481,
+   "time_with_puck": "1:49",
+   "time_with_puck_seconds": 109,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 90.0,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 4,
+   "give_aways": 0,
+   "blocked_shots": 1,
+   "interceptions": 3,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Oshawa Generals",
+   "lg_user_id": 29918,
+   "player": "C0UGAR 1986",
+   "position": "RD",
+   "build": "DD",
+   "badges": [],
+   "lg_ratings": [
+    47,
+    24,
+    53
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": -2,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "1:45",
+   "time_with_puck_seconds": 105,
+   "shots_on_goal_attempts": "0/0",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 0,
+   "deflections": 0,
+   "pass_pct": 83.3,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 3,
+   "give_aways": 3,
+   "blocked_shots": 3,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 79031,
+   "player": "ewaddles07881",
+   "build": "HYB",
+   "lg_ratings": [
+    82,
+    74
+   ],
+   "shots": 25,
+   "s_pct": 0.88,
+   "ga": 3,
+   "save": 22,
+   "gaa": 3.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Moose Jaw Warriors"
+  },
+  {
+   "lg_user_id": 51074,
+   "player": "Frizyal8er",
+   "build": "HYB",
+   "lg_ratings": [
+    62,
+    64
+   ],
+   "shots": 23,
+   "s_pct": 0.826,
+   "ga": 4,
+   "save": 19,
+   "gaa": 4.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 1,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Oshawa Generals"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "LewIAmYourFather",
+   "submitted_at": "2026-10-27 10:35:50pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "LewIAmYourFather",
+  "last_at": "Tuesday October 27th 2026, 10:35 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

@@ -1,0 +1,581 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918131,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 09:00 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918131",
+ "captured_at": "2026-10-28T17:53:42.507Z",
+ "away": {
+  "lg_team_id": 379,
+  "name": "Blades",
+  "record": "15-24-6",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 0
+  },
+  "score": 0,
+  "full_name": "Saskatoon Blades"
+ },
+ "home": {
+  "lg_team_id": 453,
+  "name": "Attack",
+  "record": "24-16-6",
+  "goals_by_period": {
+   "1": 0,
+   "2": 2,
+   "3": 5
+  },
+  "score": 7,
+  "full_name": "Owen Sound Attack"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 0,
+   "home": 7
+  },
+  "total_shots": {
+   "away": 8,
+   "home": 19
+  },
+  "hits": {
+   "away": 7,
+   "home": 8
+  },
+  "time_on_attack": {
+   "away": "5:35",
+   "home": "11:37"
+  },
+  "passing_pct": {
+   "away": "76.2%",
+   "home": "77%"
+  },
+  "face_offs_won": {
+   "away": 13,
+   "home": 13
+  },
+  "penalty_minutes": {
+   "away": "4:00",
+   "home": "2:00"
+  },
+  "power_plays": {
+   "away": "0 / 1",
+   "home": "1 / 2"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 2,
+   "home": 2
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 2
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 171,
+    "player": "Lamport1"
+   },
+   {
+    "position": "C",
+    "seconds": 183,
+    "player": "Frishmania"
+   },
+   {
+    "position": "RW",
+    "seconds": 233,
+    "player": "Steven514"
+   },
+   {
+    "position": "RD",
+    "seconds": 245,
+    "player": "MrManuk"
+   },
+   {
+    "position": "LD",
+    "seconds": 120,
+    "player": "ElJuanSimone"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 235,
+    "player": "Showtime_Perkey"
+   },
+   {
+    "position": "C",
+    "seconds": 294,
+    "player": "Tychi66"
+   },
+   {
+    "position": "RW",
+    "seconds": 403,
+    "player": "WheelingCougars"
+   },
+   {
+    "position": "RD",
+    "seconds": 136,
+    "player": "BuffaloJones310"
+   },
+   {
+    "position": "LD",
+    "seconds": 237,
+    "player": "TimFairview"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Saskatoon Blades",
+   "lg_user_id": 43047,
+   "player": "Lamport1",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    16,
+    17,
+    36
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -6,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:51",
+   "time_with_puck_seconds": 171,
+   "shots_on_goal_attempts": "3/7",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 0,
+   "pass_pct": 71.4,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 2,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 2
+  },
+  {
+   "side": "away",
+   "team": "Saskatoon Blades",
+   "lg_user_id": 52638,
+   "player": "Frishmania",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    15,
+    15,
+    34
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -6,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:03",
+   "time_with_puck_seconds": 183,
+   "shots_on_goal_attempts": "3/5",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 2,
+   "pass_pct": 75.0,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 3,
+   "give_aways": 7,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "away",
+   "team": "Saskatoon Blades",
+   "lg_user_id": 54577,
+   "player": "Steven514",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    12,
+    12,
+    27
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -6,
+   "time_on_ice": "58:01",
+   "time_on_ice_seconds": 3481,
+   "time_with_puck": "3:53",
+   "time_with_puck_seconds": 233,
+   "shots_on_goal_attempts": "0/2",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 71.4,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 9,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Saskatoon Blades",
+   "lg_user_id": 29411,
+   "player": "ElJuanSimone",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    20,
+    5,
+    30
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -6,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:00",
+   "time_with_puck_seconds": 120,
+   "shots_on_goal_attempts": "0/2",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 71.4,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Saskatoon Blades",
+   "lg_user_id": 35949,
+   "player": "MrManuk",
+   "position": "RD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    29,
+    14,
+    44
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -6,
+   "time_on_ice": "58:03",
+   "time_on_ice_seconds": 3483,
+   "time_with_puck": "4:05",
+   "time_with_puck_seconds": 245,
+   "shots_on_goal_attempts": "1/3",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 88.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 6,
+   "give_aways": 3,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Owen Sound Attack",
+   "lg_user_id": 34993,
+   "player": "Showtime_Perkey",
+   "position": "LW",
+   "build": "DNG",
+   "badges": [],
+   "lg_ratings": [
+    87,
+    74,
+    58
+   ],
+   "goals": 1,
+   "ast": 3,
+   "pts": 4,
+   "plus_minus": 6,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:55",
+   "time_with_puck_seconds": 235,
+   "shots_on_goal_attempts": "3/7",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 0,
+   "pass_pct": 70.0,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 1,
+   "give_aways": 12,
+   "blocked_shots": 0,
+   "interceptions": 3,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 2,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Owen Sound Attack",
+   "lg_user_id": 29607,
+   "player": "Tychi66",
+   "position": "C",
+   "build": "PWF",
+   "badges": [],
+   "lg_ratings": [
+    71,
+    49,
+    52
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": 6,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:54",
+   "time_with_puck_seconds": 294,
+   "shots_on_goal_attempts": "5/10",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 1,
+   "pass_pct": 76.0,
+   "saucer_passes": 1,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 4,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Owen Sound Attack",
+   "lg_user_id": 49692,
+   "player": "WheelingCougars",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    100,
+    100,
+    52
+   ],
+   "goals": 4,
+   "ast": 1,
+   "pts": 5,
+   "plus_minus": 6,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "6:43",
+   "time_with_puck_seconds": 403,
+   "shots_on_goal_attempts": "6/13",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 13,
+   "deflections": 0,
+   "pass_pct": 84.2,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 0,
+   "give_aways": 9,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Owen Sound Attack",
+   "lg_user_id": 73572,
+   "player": "TimFairview",
+   "position": "LD",
+   "build": "DD",
+   "badges": [],
+   "lg_ratings": [
+    89,
+    79,
+    72
+   ],
+   "goals": 1,
+   "ast": 4,
+   "pts": 5,
+   "plus_minus": 6,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:57",
+   "time_with_puck_seconds": 237,
+   "shots_on_goal_attempts": "2/7",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 0,
+   "pass_pct": 77.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 3,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Owen Sound Attack",
+   "lg_user_id": 74547,
+   "player": "BuffaloJones310",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    86,
+    7,
+    86
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 4,
+   "time_on_ice": "59:01",
+   "time_on_ice_seconds": 3541,
+   "time_with_puck": "2:16",
+   "time_with_puck_seconds": 136,
+   "shots_on_goal_attempts": "0/3",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 78.6,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 6,
+   "give_aways": 2,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 78530,
+   "player": "imrehabilitated",
+   "build": "HYB",
+   "lg_ratings": [
+    42,
+    46
+   ],
+   "shots": 19,
+   "s_pct": 0.632,
+   "ga": 7,
+   "save": 12,
+   "gaa": 7.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 1,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Saskatoon Blades"
+  },
+  {
+   "lg_user_id": 29364,
+   "player": "jasonx1755",
+   "build": "HYB",
+   "lg_ratings": [
+    100,
+    97
+   ],
+   "shots": 8,
+   "s_pct": 1.0,
+   "ga": 0,
+   "save": 8,
+   "gaa": 0.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 3,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Owen Sound Attack"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "WheelingCougars",
+   "submitted_at": "2026-10-27 09:33:02pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "WheelingCougars",
+  "last_at": "Tuesday October 27th 2026, 09:33 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

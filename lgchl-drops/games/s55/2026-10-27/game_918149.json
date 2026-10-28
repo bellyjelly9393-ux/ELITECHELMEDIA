@@ -1,0 +1,589 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918149,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918149",
+ "captured_at": "2026-10-28T18:02:56.524Z",
+ "away": {
+  "lg_team_id": 306,
+  "name": "Bulldogs",
+  "record": "21-21-2",
+  "goals_by_period": {
+   "1": 1,
+   "2": 2,
+   "3": 2
+  },
+  "score": 5,
+  "full_name": "Brantford Bulldogs"
+ },
+ "home": {
+  "lg_team_id": 418,
+  "name": "Hurricanes",
+  "record": "21-18-7",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 0
+  },
+  "score": 0,
+  "full_name": "Lethbridge Hurricanes"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 5,
+   "home": 0
+  },
+  "total_shots": {
+   "away": 21,
+   "home": 15
+  },
+  "hits": {
+   "away": 3,
+   "home": 2
+  },
+  "time_on_attack": {
+   "away": "11:50",
+   "home": "6:50"
+  },
+  "passing_pct": {
+   "away": "65%",
+   "home": "64.4%"
+  },
+  "face_offs_won": {
+   "away": 9,
+   "home": 16
+  },
+  "penalty_minutes": {
+   "away": "4:00",
+   "home": "4:00"
+  },
+  "power_plays": {
+   "away": "0 / 2",
+   "home": "0 / 2"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 3,
+   "home": 2
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 328,
+    "player": "xodyxody"
+   },
+   {
+    "position": "C",
+    "seconds": 353,
+    "player": "KeenanTroy"
+   },
+   {
+    "position": "RW",
+    "seconds": 428,
+    "player": "FearUsDubuc"
+   },
+   {
+    "position": "RD",
+    "seconds": 195,
+    "player": "yyyyaaahhhh"
+   },
+   {
+    "position": "LD",
+    "seconds": 130,
+    "player": "SwizzDekes"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 220,
+    "player": "lllG1lll"
+   },
+   {
+    "position": "C",
+    "seconds": 211,
+    "player": "Grxffon"
+   },
+   {
+    "position": "RW",
+    "seconds": 163,
+    "player": "LilRiptGitch69"
+   },
+   {
+    "position": "RD",
+    "seconds": 129,
+    "player": "KREIDIE"
+   },
+   {
+    "position": "LD",
+    "seconds": 148,
+    "player": "That Battery"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Brantford Bulldogs",
+   "lg_user_id": 75135,
+   "player": "xodyxody",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    93,
+    86,
+    57
+   ],
+   "goals": 2,
+   "ast": 2,
+   "pts": 4,
+   "plus_minus": 5,
+   "time_on_ice": "59:21",
+   "time_on_ice_seconds": 3561,
+   "time_with_puck": "5:28",
+   "time_with_puck_seconds": 328,
+   "shots_on_goal_attempts": "5/10",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 70.4,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 2,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "4:00",
+   "pims_seconds": 240,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Brantford Bulldogs",
+   "lg_user_id": 47038,
+   "player": "KeenanTroy",
+   "position": "C",
+   "build": "PLY",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    100,
+    100,
+    34
+   ],
+   "goals": 3,
+   "ast": 0,
+   "pts": 3,
+   "plus_minus": 5,
+   "time_on_ice": "62:18",
+   "time_on_ice_seconds": 3738,
+   "time_with_puck": "5:53",
+   "time_with_puck_seconds": 353,
+   "shots_on_goal_attempts": "9/18",
+   "shots_on_goal_attempts_on_goal": 9,
+   "shots_on_goal_attempts_attempts": 18,
+   "deflections": 0,
+   "pass_pct": 50.0,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 1,
+   "give_aways": 13,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Brantford Bulldogs",
+   "lg_user_id": 57234,
+   "player": "FearUsDubuc",
+   "position": "RW",
+   "build": "DNG",
+   "badges": [],
+   "lg_ratings": [
+    86,
+    76,
+    54
+   ],
+   "goals": 0,
+   "ast": 4,
+   "pts": 4,
+   "plus_minus": 5,
+   "time_on_ice": "62:18",
+   "time_on_ice_seconds": 3738,
+   "time_with_puck": "7:08",
+   "time_with_puck_seconds": 428,
+   "shots_on_goal_attempts": "5/11",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 0,
+   "pass_pct": 75.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 10,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Brantford Bulldogs",
+   "lg_user_id": 73516,
+   "player": "SwizzDekes",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    80,
+    19,
+    75
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 5,
+   "time_on_ice": "62:18",
+   "time_on_ice_seconds": 3738,
+   "time_with_puck": "2:10",
+   "time_with_puck_seconds": 130,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 63.2,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 4,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Brantford Bulldogs",
+   "lg_user_id": 81178,
+   "player": "yyyyaaahhhh",
+   "position": "RD",
+   "build": "DD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    78,
+    19,
+    72
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 5,
+   "time_on_ice": "62:18",
+   "time_on_ice_seconds": 3738,
+   "time_with_puck": "3:15",
+   "time_with_puck_seconds": 195,
+   "shots_on_goal_attempts": "0/0",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 0,
+   "deflections": 0,
+   "pass_pct": 61.9,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 8,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Lethbridge Hurricanes",
+   "lg_user_id": 35065,
+   "player": "lllG1lll",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    21,
+    24,
+    17
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -5,
+   "time_on_ice": "58:47",
+   "time_on_ice_seconds": 3527,
+   "time_with_puck": "3:40",
+   "time_with_puck_seconds": 220,
+   "shots_on_goal_attempts": "5/13",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 13,
+   "deflections": 0,
+   "pass_pct": 58.8,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Lethbridge Hurricanes",
+   "lg_user_id": 44924,
+   "player": "Grxffon",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    26,
+    28,
+    31
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -5,
+   "time_on_ice": "60:19",
+   "time_on_ice_seconds": 3619,
+   "time_with_puck": "3:31",
+   "time_with_puck_seconds": 211,
+   "shots_on_goal_attempts": "3/6",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 2,
+   "pass_pct": 53.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 5,
+   "give_aways": 8,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Lethbridge Hurricanes",
+   "lg_user_id": 76747,
+   "player": "LilRiptGitch69",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    17,
+    14,
+    27
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -5,
+   "time_on_ice": "62:18",
+   "time_on_ice_seconds": 3738,
+   "time_with_puck": "2:43",
+   "time_with_puck_seconds": 163,
+   "shots_on_goal_attempts": "4/9",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 9,
+   "deflections": 0,
+   "pass_pct": 66.7,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Lethbridge Hurricanes",
+   "lg_user_id": 42939,
+   "player": "That Battery",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    29,
+    9,
+    38
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -5,
+   "time_on_ice": "62:18",
+   "time_on_ice_seconds": 3738,
+   "time_with_puck": "2:28",
+   "time_with_puck_seconds": 148,
+   "shots_on_goal_attempts": "1/5",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 83.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 2,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Lethbridge Hurricanes",
+   "lg_user_id": 76676,
+   "player": "KREIDIE",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    36,
+    7,
+    52
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -5,
+   "time_on_ice": "62:18",
+   "time_on_ice_seconds": 3738,
+   "time_with_puck": "2:09",
+   "time_with_puck_seconds": 129,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 66.7,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 6,
+   "give_aways": 7,
+   "blocked_shots": 2,
+   "interceptions": 3,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 80994,
+   "player": "jayric2",
+   "build": "HYB",
+   "lg_ratings": [
+    100,
+    100
+   ],
+   "shots": 15,
+   "s_pct": 1.0,
+   "ga": 0,
+   "save": 15,
+   "gaa": 0.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 2,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 3,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Brantford Bulldogs"
+  },
+  {
+   "lg_user_id": 42069,
+   "player": "KOLLER",
+   "build": "HYB",
+   "lg_ratings": [
+    55,
+    59
+   ],
+   "shots": 21,
+   "s_pct": 0.762,
+   "ga": 5,
+   "save": 16,
+   "gaa": 4.82,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 2,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Lethbridge Hurricanes"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-2",
+   "submitted_by": "Jaymo171717",
+   "submitted_at": "2026-10-27 10:19:36pm"
+  },
+  {
+   "part": 1,
+   "periods": "1-0",
+   "submitted_by": "Jaymo171717",
+   "submitted_at": "2026-10-27 10:19:36pm"
+  }
+ ],
+ "lag_out": true,
+ "edits": {
+  "count": 1,
+  "last_by": "Jaymo171717",
+  "last_at": "Tuesday October 27th 2026, 10:19 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

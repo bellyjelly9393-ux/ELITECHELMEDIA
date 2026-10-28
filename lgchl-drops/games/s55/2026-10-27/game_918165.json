@@ -1,0 +1,581 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918165,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918165",
+ "captured_at": "2026-10-28T18:09:52.582Z",
+ "away": {
+  "lg_team_id": 421,
+  "name": "Thunderbirds",
+  "record": "20-24-3",
+  "goals_by_period": {
+   "1": 0,
+   "2": 2,
+   "3": 2
+  },
+  "score": 4,
+  "full_name": "Seattle Thunderbirds"
+ },
+ "home": {
+  "lg_team_id": 444,
+  "name": "Frontenacs",
+  "record": "20-21-2",
+  "goals_by_period": {
+   "1": 1,
+   "2": 0,
+   "3": 2
+  },
+  "score": 3,
+  "full_name": "Kingston Frontenacs"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 4,
+   "home": 3
+  },
+  "total_shots": {
+   "away": 19,
+   "home": 14
+  },
+  "hits": {
+   "away": 9,
+   "home": 14
+  },
+  "time_on_attack": {
+   "away": "8:58",
+   "home": "7:00"
+  },
+  "passing_pct": {
+   "away": "79.8%",
+   "home": "69.9%"
+  },
+  "face_offs_won": {
+   "away": 9,
+   "home": 16
+  },
+  "penalty_minutes": {
+   "away": "0:00",
+   "home": "6:00"
+  },
+  "power_plays": {
+   "away": "0 / 4",
+   "home": "0 / 0"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 1,
+   "home": 2
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 161,
+    "player": "big_tony666"
+   },
+   {
+    "position": "C",
+    "seconds": 271,
+    "player": "GOJE7SGO"
+   },
+   {
+    "position": "RW",
+    "seconds": 259,
+    "player": "K U R B i O"
+   },
+   {
+    "position": "RD",
+    "seconds": 155,
+    "player": "FerdaLettuce"
+   },
+   {
+    "position": "LD",
+    "seconds": 338,
+    "player": "TrueCook44"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 223,
+    "player": "DrxCheeks"
+   },
+   {
+    "position": "C",
+    "seconds": 143,
+    "player": "lMoreault_x_89l"
+   },
+   {
+    "position": "RW",
+    "seconds": 232,
+    "player": "willyknifemann"
+   },
+   {
+    "position": "RD",
+    "seconds": 263,
+    "player": "shape420"
+   },
+   {
+    "position": "LD",
+    "seconds": 198,
+    "player": "tthehorse"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Seattle Thunderbirds",
+   "lg_user_id": 25402,
+   "player": "big_tony666",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    46,
+    24,
+    52
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:41",
+   "time_with_puck_seconds": 161,
+   "shots_on_goal_attempts": "3/10",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 84.2,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 3,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Seattle Thunderbirds",
+   "lg_user_id": 46614,
+   "player": "GOJE7SGO",
+   "position": "C",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    62,
+    54,
+    37
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:31",
+   "time_with_puck_seconds": 271,
+   "shots_on_goal_attempts": "4/10",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 68.4,
+   "saucer_passes": 0,
+   "hits": 8,
+   "take_aways": 3,
+   "give_aways": 11,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Seattle Thunderbirds",
+   "lg_user_id": 7447,
+   "player": "K U R B i O",
+   "position": "RW",
+   "build": "DNG",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    92,
+    100,
+    48
+   ],
+   "goals": 2,
+   "ast": 1,
+   "pts": 3,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:19",
+   "time_with_puck_seconds": 259,
+   "shots_on_goal_attempts": "6/15",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 15,
+   "deflections": 0,
+   "pass_pct": 71.4,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 4,
+   "give_aways": 5,
+   "blocked_shots": 0,
+   "interceptions": 3,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Seattle Thunderbirds",
+   "lg_user_id": 54320,
+   "player": "TrueCook44",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    68,
+    55,
+    61
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "5:38",
+   "time_with_puck_seconds": 338,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 87.9,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Seattle Thunderbirds",
+   "lg_user_id": 80075,
+   "player": "FerdaLettuce",
+   "position": "RD",
+   "build": "DD",
+   "badges": [],
+   "lg_ratings": [
+    68,
+    14,
+    69
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:35",
+   "time_with_puck_seconds": 155,
+   "shots_on_goal_attempts": "3/6",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 84.6,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 4,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 2,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Kingston Frontenacs",
+   "lg_user_id": 74282,
+   "player": "DrxCheeks",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    43,
+    45,
+    34
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:43",
+   "time_with_puck_seconds": 223,
+   "shots_on_goal_attempts": "2/6",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 66.7,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 2,
+   "give_aways": 10,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 2
+  },
+  {
+   "side": "home",
+   "team": "Kingston Frontenacs",
+   "lg_user_id": 8692,
+   "player": "lMoreault_x_89l",
+   "position": "C",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    47,
+    52,
+    40
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": -1,
+   "time_on_ice": "58:00",
+   "time_on_ice_seconds": 3480,
+   "time_with_puck": "2:23",
+   "time_with_puck_seconds": 143,
+   "shots_on_goal_attempts": "3/8",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 8,
+   "deflections": 0,
+   "pass_pct": 80.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 5,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Kingston Frontenacs",
+   "lg_user_id": 80283,
+   "player": "willyknifemann",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    50,
+    58,
+    36
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": -1,
+   "time_on_ice": "56:02",
+   "time_on_ice_seconds": 3362,
+   "time_with_puck": "3:52",
+   "time_with_puck_seconds": 232,
+   "shots_on_goal_attempts": "3/6",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 63.6,
+   "saucer_passes": 0,
+   "hits": 8,
+   "take_aways": 1,
+   "give_aways": 5,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Kingston Frontenacs",
+   "lg_user_id": 79200,
+   "player": "tthehorse",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    37,
+    12,
+    42
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:18",
+   "time_with_puck_seconds": 198,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 80.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 8,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Kingston Frontenacs",
+   "lg_user_id": 79545,
+   "player": "shape420",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    45,
+    36,
+    50
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -1,
+   "time_on_ice": "58:00",
+   "time_on_ice_seconds": 3480,
+   "time_with_puck": "4:23",
+   "time_with_puck_seconds": 263,
+   "shots_on_goal_attempts": "5/10",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 82.4,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 5,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 2
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 14628,
+   "player": "CANADIANxBACON1",
+   "build": "HYB",
+   "lg_ratings": [
+    58,
+    48
+   ],
+   "shots": 14,
+   "s_pct": 0.786,
+   "ga": 3,
+   "save": 11,
+   "gaa": 3.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Seattle Thunderbirds"
+  },
+  {
+   "lg_user_id": 41186,
+   "player": "XxpuckyxX3791",
+   "build": "HYB",
+   "lg_ratings": [
+    52,
+    53
+   ],
+   "shots": 19,
+   "s_pct": 0.789,
+   "ga": 4,
+   "save": 15,
+   "gaa": 4.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Kingston Frontenacs"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "K U R B i O",
+   "submitted_at": "2026-10-27 10:06:38pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "K U R B i O",
+  "last_at": "Tuesday October 27th 2026, 10:06 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

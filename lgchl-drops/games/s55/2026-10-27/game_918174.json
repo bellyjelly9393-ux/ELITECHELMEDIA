@@ -1,0 +1,583 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918174,
+ "status": "F/OT",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918174",
+ "captured_at": "2026-10-28T19:06:55.539Z",
+ "away": {
+  "lg_team_id": 2981,
+  "name": "Vees",
+  "record": "26-13-5",
+  "goals_by_period": {
+   "1": 1,
+   "2": 2,
+   "3": 1,
+   "4": 1
+  },
+  "score": 5,
+  "full_name": "Penticton Vees"
+ },
+ "home": {
+  "lg_team_id": 375,
+  "name": "IceDogs",
+  "record": "20-24-2",
+  "goals_by_period": {
+   "1": 1,
+   "2": 1,
+   "3": 2,
+   "4": 0
+  },
+  "score": 4,
+  "full_name": "Niagara IceDogs"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 5,
+   "home": 4
+  },
+  "total_shots": {
+   "away": 19,
+   "home": 19
+  },
+  "hits": {
+   "away": 4,
+   "home": 5
+  },
+  "time_on_attack": {
+   "away": "10:24",
+   "home": "7:18"
+  },
+  "passing_pct": {
+   "away": "71.6%",
+   "home": "71.8%"
+  },
+  "face_offs_won": {
+   "away": 13,
+   "home": 19
+  },
+  "penalty_minutes": {
+   "away": "8:00",
+   "home": "4:00"
+  },
+  "power_plays": {
+   "away": "0 / 2",
+   "home": "0 / 4"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 1,
+   "home": 6
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 365,
+    "player": "delucadx"
+   },
+   {
+    "position": "C",
+    "seconds": 186,
+    "player": "BigJay x89"
+   },
+   {
+    "position": "RW",
+    "seconds": 373,
+    "player": "Canadian__Impact"
+   },
+   {
+    "position": "RD",
+    "seconds": 250,
+    "player": "Pufski"
+   },
+   {
+    "position": "LD",
+    "seconds": 113,
+    "player": "GamingLobster0"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 258,
+    "player": "sTKampe"
+   },
+   {
+    "position": "C",
+    "seconds": 180,
+    "player": "iillegall"
+   },
+   {
+    "position": "RW",
+    "seconds": 248,
+    "player": "II_Prxvoke_II"
+   },
+   {
+    "position": "RD",
+    "seconds": 261,
+    "player": "xWillander"
+   },
+   {
+    "position": "LD",
+    "seconds": 179,
+    "player": "jameswmjr"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Penticton Vees",
+   "lg_user_id": 76721,
+   "player": "delucadx",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    93,
+    100,
+    43
+   ],
+   "goals": 2,
+   "ast": 1,
+   "pts": 3,
+   "plus_minus": 1,
+   "time_on_ice": "64:38",
+   "time_on_ice_seconds": 3878,
+   "time_with_puck": "6:05",
+   "time_with_puck_seconds": 365,
+   "shots_on_goal_attempts": "8/19",
+   "shots_on_goal_attempts_on_goal": 8,
+   "shots_on_goal_attempts_attempts": 19,
+   "deflections": 0,
+   "pass_pct": 68.2,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 6,
+   "give_aways": 10,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Penticton Vees",
+   "lg_user_id": 3028,
+   "player": "BigJay x89",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    57,
+    49,
+    47
+   ],
+   "goals": 2,
+   "ast": 1,
+   "pts": 3,
+   "plus_minus": 1,
+   "time_on_ice": "66:39",
+   "time_on_ice_seconds": 3999,
+   "time_with_puck": "3:06",
+   "time_with_puck_seconds": 186,
+   "shots_on_goal_attempts": "3/6",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 70.8,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 4,
+   "give_aways": 8,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 1
+  },
+  {
+   "side": "away",
+   "team": "Penticton Vees",
+   "lg_user_id": 44501,
+   "player": "Canadian__Impact",
+   "position": "RW",
+   "build": "DNG",
+   "badges": [],
+   "lg_ratings": [
+    58,
+    55,
+    34
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "64:39",
+   "time_on_ice_seconds": 3879,
+   "time_with_puck": "6:13",
+   "time_with_puck_seconds": 373,
+   "shots_on_goal_attempts": "3/10",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 65.4,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "away",
+   "team": "Penticton Vees",
+   "lg_user_id": 79718,
+   "player": "GamingLobster0",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    65,
+    29,
+    68
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "66:39",
+   "time_on_ice_seconds": 3999,
+   "time_with_puck": "1:53",
+   "time_with_puck_seconds": 113,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 76.2,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 6,
+   "give_aways": 2,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 2
+  },
+  {
+   "side": "away",
+   "team": "Penticton Vees",
+   "lg_user_id": 41114,
+   "player": "Pufski",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    63,
+    53,
+    59
+   ],
+   "goals": 0,
+   "ast": 3,
+   "pts": 3,
+   "plus_minus": 1,
+   "time_on_ice": "62:40",
+   "time_on_ice_seconds": 3760,
+   "time_with_puck": "4:10",
+   "time_with_puck_seconds": 250,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 77.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 5,
+   "blocked_shots": 0,
+   "interceptions": 3,
+   "pims": "4:00",
+   "pims_seconds": 240,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Niagara IceDogs",
+   "lg_user_id": 51828,
+   "player": "sTKampe",
+   "position": "LW",
+   "build": "DNG",
+   "badges": [],
+   "lg_ratings": [
+    41,
+    36,
+    40
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": -1,
+   "time_on_ice": "64:40",
+   "time_on_ice_seconds": 3880,
+   "time_with_puck": "4:18",
+   "time_with_puck_seconds": 258,
+   "shots_on_goal_attempts": "2/4",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 4,
+   "deflections": 0,
+   "pass_pct": 78.9,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 2,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Niagara IceDogs",
+   "lg_user_id": 76252,
+   "player": "iillegall",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    84,
+    100,
+    48
+   ],
+   "goals": 3,
+   "ast": 1,
+   "pts": 4,
+   "plus_minus": -1,
+   "time_on_ice": "66:39",
+   "time_on_ice_seconds": 3999,
+   "time_with_puck": "3:00",
+   "time_with_puck_seconds": 180,
+   "shots_on_goal_attempts": "8/17",
+   "shots_on_goal_attempts_on_goal": 8,
+   "shots_on_goal_attempts_attempts": 17,
+   "deflections": 0,
+   "pass_pct": 75.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 6,
+   "give_aways": 10,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Niagara IceDogs",
+   "lg_user_id": 20579,
+   "player": "II_Prxvoke_II",
+   "position": "RW",
+   "build": "DNG",
+   "badges": [],
+   "lg_ratings": [
+    52,
+    58,
+    25
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": -1,
+   "time_on_ice": "66:39",
+   "time_on_ice_seconds": 3999,
+   "time_with_puck": "4:08",
+   "time_with_puck_seconds": 248,
+   "shots_on_goal_attempts": "3/8",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 8,
+   "deflections": 0,
+   "pass_pct": 55.6,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 18,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 2,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Niagara IceDogs",
+   "lg_user_id": 74601,
+   "player": "jameswmjr",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    41,
+    9,
+    43
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "64:40",
+   "time_on_ice_seconds": 3880,
+   "time_with_puck": "2:59",
+   "time_with_puck_seconds": 179,
+   "shots_on_goal_attempts": "0/0",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 0,
+   "deflections": 0,
+   "pass_pct": 72.2,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 1,
+   "give_aways": 6,
+   "blocked_shots": 2,
+   "interceptions": 1,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Niagara IceDogs",
+   "lg_user_id": 52236,
+   "player": "xWillander",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    46,
+    26,
+    48
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -1,
+   "time_on_ice": "66:39",
+   "time_on_ice_seconds": 3999,
+   "time_with_puck": "4:21",
+   "time_with_puck_seconds": 261,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 73.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 7,
+   "blocked_shots": 2,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 78368,
+   "player": "PeakzReturn",
+   "build": "HYB",
+   "lg_ratings": [
+    61,
+    54
+   ],
+   "shots": 19,
+   "s_pct": 0.789,
+   "ga": 4,
+   "save": 15,
+   "gaa": 3.6,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Penticton Vees"
+  },
+  {
+   "lg_user_id": 40991,
+   "player": "l9lPLAYMAKERl9l",
+   "build": "HYB",
+   "lg_ratings": [
+    53,
+    51
+   ],
+   "shots": 19,
+   "s_pct": 0.737,
+   "ga": 5,
+   "save": 14,
+   "gaa": 4.5,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Niagara IceDogs"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-4",
+   "submitted_by": "Westy x88x",
+   "submitted_at": "2026-10-27 10:16:37pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "Westy x88x",
+  "last_at": "Tuesday October 27th 2026, 10:16 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

@@ -1,0 +1,581 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918148,
+ "status": "FINAL",
+ "played_at_text": "Tuesday October 27th 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918148",
+ "captured_at": "2026-10-28T18:02:30.528Z",
+ "away": {
+  "lg_team_id": 452,
+  "name": "Storm",
+  "record": "26-15-6",
+  "goals_by_period": {
+   "1": 3,
+   "2": 1,
+   "3": 2
+  },
+  "score": 6,
+  "full_name": "Guelph Storm"
+ },
+ "home": {
+  "lg_team_id": 466,
+  "name": "Tigres",
+  "record": "22-20-4",
+  "goals_by_period": {
+   "1": 2,
+   "2": 0,
+   "3": 0
+  },
+  "score": 2,
+  "full_name": "Victoriaville Tigres"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 6,
+   "home": 2
+  },
+  "total_shots": {
+   "away": 16,
+   "home": 15
+  },
+  "hits": {
+   "away": 5,
+   "home": 18
+  },
+  "time_on_attack": {
+   "away": "8:52",
+   "home": "9:00"
+  },
+  "passing_pct": {
+   "away": "76.1%",
+   "home": "77.9%"
+  },
+  "face_offs_won": {
+   "away": 14,
+   "home": 14
+  },
+  "penalty_minutes": {
+   "away": "6:00",
+   "home": "2:00"
+  },
+  "power_plays": {
+   "away": "1 / 1",
+   "home": "1 / 3"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 4,
+   "home": 3
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 262,
+    "player": "Andrew_1up"
+   },
+   {
+    "position": "C",
+    "seconds": 263,
+    "player": "xHexbz88"
+   },
+   {
+    "position": "RW",
+    "seconds": 398,
+    "player": "ItsMartel"
+   },
+   {
+    "position": "RD",
+    "seconds": 142,
+    "player": "eXecuti0n80"
+   },
+   {
+    "position": "LD",
+    "seconds": 108,
+    "player": "I Damaster I"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 378,
+    "player": "SN1PINGKING"
+   },
+   {
+    "position": "C",
+    "seconds": 125,
+    "player": "DPie"
+   },
+   {
+    "position": "RW",
+    "seconds": 204,
+    "player": "TMAC19"
+   },
+   {
+    "position": "RD",
+    "seconds": 136,
+    "player": "Thebaldeagle69"
+   },
+   {
+    "position": "LD",
+    "seconds": 237,
+    "player": "UnhealthySCR"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Guelph Storm",
+   "lg_user_id": 25809,
+   "player": "Andrew_1up",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    98,
+    100,
+    49
+   ],
+   "goals": 2,
+   "ast": 2,
+   "pts": 4,
+   "plus_minus": 4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:22",
+   "time_with_puck_seconds": 262,
+   "shots_on_goal_attempts": "3/10",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 81.0,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 3,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Guelph Storm",
+   "lg_user_id": 38611,
+   "player": "xHexbz88",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    75,
+    69,
+    43
+   ],
+   "goals": 1,
+   "ast": 3,
+   "pts": 4,
+   "plus_minus": 4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:23",
+   "time_with_puck_seconds": 263,
+   "shots_on_goal_attempts": "4/7",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 1,
+   "pass_pct": 60.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 8,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Guelph Storm",
+   "lg_user_id": 38139,
+   "player": "ItsMartel",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    87,
+    90,
+    45
+   ],
+   "goals": 2,
+   "ast": 2,
+   "pts": 4,
+   "plus_minus": 4,
+   "time_on_ice": "59:13",
+   "time_on_ice_seconds": 3553,
+   "time_with_puck": "6:38",
+   "time_with_puck_seconds": 398,
+   "shots_on_goal_attempts": "5/12",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 12,
+   "deflections": 0,
+   "pass_pct": 81.8,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 3,
+   "give_aways": 11,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Guelph Storm",
+   "lg_user_id": 4629,
+   "player": "I Damaster I",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    76,
+    36,
+    73
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": 4,
+   "time_on_ice": "56:02",
+   "time_on_ice_seconds": 3362,
+   "time_with_puck": "1:48",
+   "time_with_puck_seconds": 108,
+   "shots_on_goal_attempts": "1/3",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 78.9,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 3,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "4:00",
+   "pims_seconds": 240,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Guelph Storm",
+   "lg_user_id": 43329,
+   "player": "eXecuti0n80",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    69,
+    19,
+    66
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:22",
+   "time_with_puck_seconds": 142,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 88.2,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Victoriaville Tigres",
+   "lg_user_id": 29167,
+   "player": "SN1PINGKING",
+   "position": "LW",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    50,
+    62,
+    40
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": -4,
+   "time_on_ice": "59:19",
+   "time_on_ice_seconds": 3559,
+   "time_with_puck": "6:18",
+   "time_with_puck_seconds": 378,
+   "shots_on_goal_attempts": "6/16",
+   "shots_on_goal_attempts_on_goal": 6,
+   "shots_on_goal_attempts_attempts": 16,
+   "deflections": 0,
+   "pass_pct": 85.7,
+   "saucer_passes": 0,
+   "hits": 10,
+   "take_aways": 4,
+   "give_aways": 4,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoriaville Tigres",
+   "lg_user_id": 28427,
+   "player": "DPie",
+   "position": "C",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    25,
+    19,
+    42
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:05",
+   "time_with_puck_seconds": 125,
+   "shots_on_goal_attempts": "4/10",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 10,
+   "deflections": 0,
+   "pass_pct": 92.3,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 2,
+   "blocked_shots": 2,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoriaville Tigres",
+   "lg_user_id": 58498,
+   "player": "TMAC19",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    32,
+    33,
+    38
+   ],
+   "goals": 1,
+   "ast": 0,
+   "pts": 1,
+   "plus_minus": -4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:24",
+   "time_with_puck_seconds": 204,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 1,
+   "pass_pct": 82.4,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 8,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 2,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoriaville Tigres",
+   "lg_user_id": 25828,
+   "player": "UnhealthySCR",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    38,
+    24,
+    46
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:57",
+   "time_with_puck_seconds": 237,
+   "shots_on_goal_attempts": "1/3",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 75.0,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 3,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 3,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Victoriaville Tigres",
+   "lg_user_id": 31039,
+   "player": "Thebaldeagle69",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    26,
+    17,
+    28
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": -4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:16",
+   "time_with_puck_seconds": 136,
+   "shots_on_goal_attempts": "0/0",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 0,
+   "deflections": 0,
+   "pass_pct": 59.1,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 3,
+   "give_aways": 3,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 77171,
+   "player": "Huskroo",
+   "build": "HYB",
+   "lg_ratings": [
+    71,
+    61
+   ],
+   "shots": 15,
+   "s_pct": 0.867,
+   "ga": 2,
+   "save": 13,
+   "gaa": 2.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 2,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Guelph Storm"
+  },
+  {
+   "lg_user_id": 74270,
+   "player": "Doc_Plonker",
+   "build": "HYB",
+   "lg_ratings": [
+    41,
+    42
+   ],
+   "shots": 16,
+   "s_pct": 0.625,
+   "ga": 6,
+   "save": 10,
+   "gaa": 6.01,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Victoriaville Tigres"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "Andrew_1up",
+   "submitted_at": "2026-10-27 10:10:11pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "Andrew_1up",
+  "last_at": "Tuesday October 27th 2026, 10:10 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

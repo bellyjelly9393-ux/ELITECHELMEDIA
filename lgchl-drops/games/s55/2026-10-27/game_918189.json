@@ -1,0 +1,583 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918189,
+ "status": "F/OT",
+ "played_at_text": "Tuesday October 27th 2026, 10:10 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918189",
+ "captured_at": "2026-10-28T19:13:22.520Z",
+ "away": {
+  "lg_team_id": 409,
+  "name": "Wheat Kings",
+  "record": "20-23-5",
+  "goals_by_period": {
+   "1": 1,
+   "2": 0,
+   "3": 1,
+   "4": 0
+  },
+  "score": 2,
+  "full_name": "Brandon Wheat Kings"
+ },
+ "home": {
+  "lg_team_id": 451,
+  "name": "Sting",
+  "record": "25-13-8",
+  "goals_by_period": {
+   "1": 1,
+   "2": 0,
+   "3": 1,
+   "4": 1
+  },
+  "score": 3,
+  "full_name": "Sarnia Sting"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 2,
+   "home": 3
+  },
+  "total_shots": {
+   "away": 17,
+   "home": 17
+  },
+  "hits": {
+   "away": 12,
+   "home": 9
+  },
+  "time_on_attack": {
+   "away": "9:17",
+   "home": "8:06"
+  },
+  "passing_pct": {
+   "away": "64.1%",
+   "home": "65.1%"
+  },
+  "face_offs_won": {
+   "away": 12,
+   "home": 18
+  },
+  "penalty_minutes": {
+   "away": "4:00",
+   "home": "0:00"
+  },
+  "power_plays": {
+   "away": "0 / 0",
+   "home": "0 / 2"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 1,
+   "home": 6
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 340,
+    "player": "BigSadBruins"
+   },
+   {
+    "position": "C",
+    "seconds": 249,
+    "player": "meatloafsoup"
+   },
+   {
+    "position": "RW",
+    "seconds": 305,
+    "player": "LordBolingoli"
+   },
+   {
+    "position": "RD",
+    "seconds": 202,
+    "player": "sacredxlock"
+   },
+   {
+    "position": "LD",
+    "seconds": 124,
+    "player": "Dykie03"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 253,
+    "player": "ll SiZZLe ll"
+   },
+   {
+    "position": "C",
+    "seconds": 227,
+    "player": "OH xLidstrom"
+   },
+   {
+    "position": "RW",
+    "seconds": 338,
+    "player": "Mxlsyy"
+   },
+   {
+    "position": "RD",
+    "seconds": 228,
+    "player": "xThorrs-"
+   },
+   {
+    "position": "LD",
+    "seconds": 194,
+    "player": "H3 SprX"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Brandon Wheat Kings",
+   "lg_user_id": 79535,
+   "player": "BigSadBruins",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    36,
+    26,
+    43
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "65:18",
+   "time_on_ice_seconds": 3918,
+   "time_with_puck": "5:40",
+   "time_with_puck_seconds": 340,
+   "shots_on_goal_attempts": "3/9",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 9,
+   "deflections": 0,
+   "pass_pct": 66.7,
+   "saucer_passes": 0,
+   "hits": 9,
+   "take_aways": 5,
+   "give_aways": 11,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Brandon Wheat Kings",
+   "lg_user_id": 80978,
+   "player": "meatloafsoup",
+   "position": "C",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    25,
+    5,
+    54
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "67:17",
+   "time_on_ice_seconds": 4037,
+   "time_with_puck": "4:09",
+   "time_with_puck_seconds": 249,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 1,
+   "pass_pct": 70.4,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 8,
+   "give_aways": 4,
+   "blocked_shots": 0,
+   "interceptions": 4,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "away",
+   "team": "Brandon Wheat Kings",
+   "lg_user_id": 62074,
+   "player": "LordBolingoli",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    54,
+    62,
+    19
+   ],
+   "goals": 2,
+   "ast": 0,
+   "pts": 2,
+   "plus_minus": -1,
+   "time_on_ice": "65:18",
+   "time_on_ice_seconds": 3918,
+   "time_with_puck": "5:05",
+   "time_with_puck_seconds": 305,
+   "shots_on_goal_attempts": "4/9",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 9,
+   "deflections": 0,
+   "pass_pct": 52.6,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 0,
+   "give_aways": 13,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Brandon Wheat Kings",
+   "lg_user_id": 75647,
+   "player": "Dykie03",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    35,
+    5,
+    34
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "67:17",
+   "time_on_ice_seconds": 4037,
+   "time_with_puck": "2:04",
+   "time_with_puck_seconds": 124,
+   "shots_on_goal_attempts": "0/3",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 3,
+   "deflections": 0,
+   "pass_pct": 53.3,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 3,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "away",
+   "team": "Brandon Wheat Kings",
+   "lg_user_id": 80504,
+   "player": "sacredxlock",
+   "position": "RD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    42,
+    17,
+    42
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "67:17",
+   "time_on_ice_seconds": 4037,
+   "time_with_puck": "3:22",
+   "time_with_puck_seconds": 202,
+   "shots_on_goal_attempts": "4/8",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 8,
+   "deflections": 0,
+   "pass_pct": 71.4,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Sarnia Sting",
+   "lg_user_id": 9107,
+   "player": "ll SiZZLe ll",
+   "position": "LW",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    57,
+    48,
+    53
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "67:17",
+   "time_on_ice_seconds": 4037,
+   "time_with_puck": "4:13",
+   "time_with_puck_seconds": 253,
+   "shots_on_goal_attempts": "3/6",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 70.8,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 6,
+   "give_aways": 7,
+   "blocked_shots": 0,
+   "interceptions": 3,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Sarnia Sting",
+   "lg_user_id": 49384,
+   "player": "OH xLidstrom",
+   "position": "C",
+   "build": "PLY",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    42,
+    28,
+    30
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 1,
+   "time_on_ice": "67:17",
+   "time_on_ice_seconds": 4037,
+   "time_with_puck": "3:47",
+   "time_with_puck_seconds": 227,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 52.0,
+   "saucer_passes": 0,
+   "hits": 5,
+   "take_aways": 0,
+   "give_aways": 10,
+   "blocked_shots": 1,
+   "interceptions": 5,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Sarnia Sting",
+   "lg_user_id": 63186,
+   "player": "Mxlsyy",
+   "position": "RW",
+   "build": "TWF",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    78,
+    90,
+    28
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "67:17",
+   "time_on_ice_seconds": 4037,
+   "time_with_puck": "5:38",
+   "time_with_puck_seconds": 338,
+   "shots_on_goal_attempts": "8/17",
+   "shots_on_goal_attempts_on_goal": 8,
+   "shots_on_goal_attempts_attempts": 17,
+   "deflections": 0,
+   "pass_pct": 50.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 16,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Sarnia Sting",
+   "lg_user_id": 62110,
+   "player": "H3 SprX",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    69,
+    19,
+    76
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 1,
+   "time_on_ice": "67:17",
+   "time_on_ice_seconds": 4037,
+   "time_with_puck": "3:14",
+   "time_with_puck_seconds": 194,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 75.0,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 5,
+   "give_aways": 3,
+   "blocked_shots": 2,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Sarnia Sting",
+   "lg_user_id": 74191,
+   "player": "xThorrs-",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    67,
+    48,
+    66
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "67:17",
+   "time_on_ice_seconds": 4037,
+   "time_with_puck": "3:48",
+   "time_with_puck_seconds": 228,
+   "shots_on_goal_attempts": "4/8",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 8,
+   "deflections": 0,
+   "pass_pct": 72.0,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 3,
+   "give_aways": 8,
+   "blocked_shots": 3,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 49497,
+   "player": "Doozy Dingo",
+   "build": "HYB",
+   "lg_ratings": [
+    61,
+    59
+   ],
+   "shots": 17,
+   "s_pct": 0.824,
+   "ga": 3,
+   "save": 14,
+   "gaa": 2.68,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Brandon Wheat Kings"
+  },
+  {
+   "lg_user_id": 7805,
+   "player": "Viktomize",
+   "build": "HYB",
+   "lg_ratings": [
+    79,
+    75
+   ],
+   "shots": 17,
+   "s_pct": 0.882,
+   "ga": 2,
+   "save": 15,
+   "gaa": 1.78,
+   "poke_check_saves": 0,
+   "desperate_saves": 1,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 1,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Sarnia Sting"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-4",
+   "submitted_by": "xThorrs-",
+   "submitted_at": "2026-10-27 10:38:32pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "xThorrs-",
+  "last_at": "Tuesday October 27th 2026, 10:38 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}
