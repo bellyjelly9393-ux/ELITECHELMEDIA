@@ -4,6 +4,37 @@ import live_periods
 
 
 class LivePeriodTests(unittest.TestCase):
+    def test_gatineau_countdowns_do_not_create_false_p1_and_restart(self):
+        reads = [{'at': at, 'period': None, 'clock_seconds': clock}
+                 for at, clock in [(102, 4), (114, 31), (126, 17), (138, 5), (210, 1177)]]
+        reads += [{'at': 222, 'period': 1, 'clock_seconds': 1172},
+                  {'at': 234, 'period': 1, 'clock_seconds': None}]
+        scan = live_periods.infer_period_ranges(reads, 240, confirmed=False)
+        self.assertEqual([p['period'] for p in scan['ranges']], [1])
+        self.assertEqual(scan['ranges'][0]['start'], 204)
+        self.assertFalse(scan['restart_detected'])
+
+    def test_clock_spike_contradicted_by_p1_is_not_a_restart(self):
+        reads = [{'at': 12, 'period': 1, 'clock_seconds': 200},
+                 {'at': 24, 'period': None, 'clock_seconds': 1190},
+                 {'at': 36, 'period': 1, 'clock_seconds': 180},
+                 {'at': 48, 'period': 1, 'clock_seconds': 160}]
+        scan = live_periods.infer_period_ranges(reads, 60)
+        self.assertEqual(len(scan['ranges']), 1)
+        self.assertFalse(scan['restart_detected'])
+
+    def test_static_unlabelled_clock_cannot_start_game(self):
+        reads = [{'at': at, 'period': None, 'clock_seconds': 1200} for at in (12, 24, 36)]
+        self.assertFalse(live_periods.infer_period_ranges(reads, 60, confirmed=False)['confirmed'])
+
+    def test_ot_requires_running_clock_and_repeated_labels(self):
+        reads = [{'at': at, 'period': 4, 'clock_seconds': clock}
+                 for at, clock in [(12, 280), (24, 250), (36, 220)]]
+        self.assertEqual(live_periods.verified_overtime_periods(reads), [4])
+        self.assertEqual(live_periods.verified_overtime_periods(reads[:2]), [])
+        self.assertEqual(live_periods.verified_overtime_periods([dict(r, clock_seconds=300) for r in reads]), [])
+        self.assertEqual(live_periods.verified_overtime_periods([dict(r, period=None) for r in reads]), [])
+
     def test_parse_period_labels(self):
         self.assertEqual(live_periods.parse_period('1ST 18:42'), 1)
         self.assertEqual(live_periods.parse_period('2ND PERIOD'), 2)
@@ -79,3 +110,4 @@ class LivePeriodTests(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+

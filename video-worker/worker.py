@@ -1506,6 +1506,9 @@ def process_streamed_replay(job_id):
         update(job_id, 'processing', result)
 
         scan = live_periods.scan_recording_periods(source, duration, initial_period, confirmed=confirmed)
+        metadata['period_detector_version'] = live_periods.DETECTOR_VERSION
+        metadata['scan_verified_overtime'] = sorted(set(metadata.get('scan_verified_overtime') or [])
+                                                   | set(scan.get('verified_overtime_periods') or []))
         metadata['scan_restart_detected'] = bool(metadata.get('scan_restart_detected') or scan.get('restart_detected'))
         local_ranges = scan.get('ranges') or ([{
             'label': f'Period {initial_period}', 'period': initial_period,
@@ -1557,10 +1560,17 @@ def process_streamed_replay(job_id):
             )
             return
         if any(is_overtime(p['label']) for p in periods) and not metadata.get('overtime_confirmed'):
-            result['detected_periods'] = periods
-            update_metadata(job_id, metadata, 'needs_periods', result,
-                            'Confirm overtime and any restart mapping before AI analysis.')
-            return
+            verified = set(metadata.get('scan_verified_overtime') or [])
+            overtime_labels = {p['label'] for p in periods if is_overtime(p['label'])}
+            verified_labels = {f'Overtime {n - 3}' for n in verified}
+            if overtime_labels <= verified_labels:
+                metadata['overtime_confirmed'] = True
+                metadata['overtime_confirmation_source'] = 'scoreboard_clock'
+            else:
+                result['detected_periods'] = periods
+                update_metadata(job_id, metadata, 'needs_periods', result,
+                                'Overtime labels lack a confirmed running clock. Verify OT before AI analysis.')
+                return
         metadata['period_units'] = bounded_period_units(periods)
         metadata['period_unit_index'] = 0
         metadata['periods'] = periods
@@ -2076,7 +2086,8 @@ PERIOD_RANK = lambda label: int(label.split()[1]) + (3 if label.startswith('Over
 # Cursor and per-run state a period change (or a fresh pass) must not inherit.
 RUN_STATE_KEYS = ('completed_parts', 'pending_period_rollup', 'part_attempts', 'ai_rate_limit_retries',
                   'active_replay_unit', 'scan_units', 'scan_unit_index', 'scan_current_period',
-                  'scan_period_confirmed', 'scan_restart_detected', 'resume_marker', 'synthesis_only')
+                  'scan_period_confirmed', 'scan_restart_detected', 'scan_verified_overtime',
+                  'overtime_confirmation_source', 'resume_marker', 'synthesis_only')
 
 
 def period_spec_hash(start, end, periods, overtime):
@@ -2788,3 +2799,4 @@ if __name__ == '__main__':
     initialize()
     start_work_loop()
     ThreadingHTTPServer(('0.0.0.0', int(os.getenv('PORT', '8080'))), Handler).serve_forever()
+

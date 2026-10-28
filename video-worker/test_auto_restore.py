@@ -11,6 +11,30 @@ from test_worker_reliability import Base, BODY
 
 
 class AutoRestore(Base):
+    def test_old_unanalyzed_scan_rescans_once_and_preserves_candidates(self):
+        meta={'source_kind':'twitch_replay','vod_url':self.review['vod_url'],
+              'replay_phase':'scan_periods','scan_unit_index':5,'scan_restart_detected':True,
+              'scan_units':[{'start':0,'end':300}]}
+        job_id=self.insert('needs_periods',meta)
+        worker.update(job_id, 'needs_periods', {'detected_periods':[{'label':'Period 1','start':96,'end':204}]})
+        review=dict(self.review,worker_job_id=job_id)
+        job=replay.resolve(review,'caller',True)
+        self.assertEqual(job['status'],'retrieving')
+        self.assertEqual(job['metadata']['scan_unit_index'],0)
+        self.assertNotIn('scan_restart_detected',job['metadata'])
+        self.assertEqual(job['result']['previous_period_scans'][0]['detected_periods'][0]['start'],96)
+        worker.update(job_id,'needs_periods',job['result'])
+        self.assertEqual(replay.resolve(review,'caller',True)['status'],'needs_periods')
+
+    def test_old_scan_with_ai_evidence_is_not_reset(self):
+        job_id=self.insert('needs_periods',{'source_kind':'twitch_replay','replay_phase':'scan_periods',
+                                          'vod_url':self.review['vod_url']})
+        evidence={'chunks':[{'summary':'Keep this evidence'}]}
+        worker.update(job_id,'needs_periods',evidence)
+        job=replay.resolve(dict(self.review,worker_job_id=job_id),'caller',True)
+        self.assertEqual(job['status'],'needs_periods')
+        self.assertEqual(job['result'],evidence)
+
     def test_manual_restart_mapping_clears_the_previous_scan_warning(self):
         job_id=self.insert('needs_periods',{'source_kind':'twitch_replay','vod_url':self.review['vod_url'],
                                           'scan_restart_detected':True})
@@ -24,7 +48,7 @@ class AutoRestore(Base):
         worker.initialize()
         self.assertEqual(replay.resolve(self.review, 'caller')['id'], jobs[0]['id'])
 
-    def scan(self, labels, context=''):
+    def scan(self, labels, context='', verified_ot=None):
         spans = [{'label': label, 'start': i*300, 'end': (i+1)*300} for i,label in enumerate(labels)]
         duration = len(labels)*300
         meta = {'streamed_replay': True, 'replay_phase': 'scan_periods', 'scan_units': [{'start':0,'end':duration}],
@@ -32,7 +56,8 @@ class AutoRestore(Base):
         job_id = self.insert('queued',meta)
         folder=worker.ROOT/job_id;folder.mkdir();(folder/'source.mp4').write_bytes(b'fixture')
         with patch.object(worker,'probe',return_value=duration), patch.object(live_periods,'scan_recording_periods',
-                return_value={'ranges':spans,'current_period':3,'confirmed':True}), patch.object(worker,'analyze') as ai:
+                return_value={'ranges':spans,'current_period':3,'confirmed':True,
+                              'verified_overtime_periods':verified_ot or []}), patch.object(worker,'analyze') as ai:
             worker.process(job_id)
             ai.assert_not_called()  # scanning itself never incurs AI charges
         return worker.get_job(job_id)
@@ -55,6 +80,23 @@ class AutoRestore(Base):
         self.assertEqual(job['status'],'needs_periods')
         self.assertEqual(job['result']['detected_periods'][-1]['label'],'Overtime 1')
 
+    def test_verified_overtime_advances_without_manual_times(self):
+        job=self.scan(['Period 1','Period 2','Period 3','Overtime'], verified_ot=[4])
+        self.assertEqual(job['status'], 'retrieving')
+        self.assertEqual(job['metadata']['replay_phase'], 'analyze_periods')
+        self.assertTrue(job['metadata']['overtime_confirmed'])
+        self.assertEqual(job['metadata']['overtime_confirmation_source'], 'scoreboard_clock')
+        self.assertTrue(all(p['end']-p['start'] <= 370 for p in job['metadata']['period_units']))
+        self.assertEqual(job['metadata']['periods'][-1]['label'], 'Overtime 1')
+
+    def test_verified_ot_does_not_override_restart_conflict(self):
+        job=self.scan(['Period 1','Period 2','Period 3','Overtime'], 'lag-out restarted', [4])
+        self.assertEqual(job['status'], 'needs_periods')
+
+    def test_each_overtime_needs_its_own_evidence(self):
+        job=self.scan(['Period 1','Period 2','Period 3','Overtime 1','Overtime 2'], verified_ot=[4])
+        self.assertEqual(job['status'], 'needs_periods')
+
     def test_360p_and_380p_sources_produce_bounded_analysis_frames(self):
         for height in (360,380):
             with self.subTest(height=height):
@@ -70,3 +112,4 @@ class AutoRestore(Base):
 
 if __name__=='__main__':
     unittest.main()
+
