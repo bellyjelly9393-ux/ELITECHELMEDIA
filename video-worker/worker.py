@@ -13,6 +13,7 @@ import subprocess
 import threading
 import time
 import random
+import spend_budget
 import urllib.error
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -90,6 +91,10 @@ def initialize():
     ROOT.mkdir(parents=True, exist_ok=True)
     with connect() as db:
         db.execute('PRAGMA journal_mode=WAL')
+        db.execute('''CREATE TABLE IF NOT EXISTS ai_spend (
+          id TEXT PRIMARY KEY, scope TEXT NOT NULL, model TEXT NOT NULL,
+          microusd INTEGER NOT NULL, input_rate REAL NOT NULL, output_rate REAL NOT NULL)''')
+        db.execute('CREATE INDEX IF NOT EXISTS ai_spend_scope ON ai_spend(scope)')
         db.execute('''CREATE TABLE IF NOT EXISTS ai_usage (
           job_id TEXT NOT NULL, day TEXT NOT NULL, requests INTEGER NOT NULL DEFAULT 0,
           input_tokens INTEGER NOT NULL DEFAULT 0, output_tokens INTEGER NOT NULL DEFAULT 0,
@@ -236,6 +241,7 @@ def update_metadata(job_id, metadata, status=None, result=None, error=''):
 # Spend restrictions. Every AI request is counted before it is sent; once a job or
 # the day has used its allowance the job stops (saved work is kept) instead of paying on.
 AI_JOB_BUDGET = max(0, int(os.getenv('VOD_MAX_AI_REQUESTS_PER_JOB', '120')))
+AI_GAME_USD_LIMIT = os.getenv('VOD_MAX_AI_USD_PER_GAME', '').strip()
 AI_DAY_BUDGET = max(0, int(os.getenv('VOD_MAX_AI_REQUESTS_PER_DAY', '360')))
 SEQUENCE_REVIEW_EVERY = max(0, int(os.getenv('VOD_SEQUENCE_REVIEW_EVERY_CHUNKS', '3')))
 ALLOW_UNCONFIRMED_OVERTIME = os.getenv('VOD_ALLOW_UNCONFIRMED_OVERTIME', '') == '1'
@@ -841,6 +847,9 @@ def agent_platform_response(data):
 
 def probe_deep_model():
     """One tiny startup call so the logs show whether the deep brain can be reached (never logs keys)."""
+    if AI_GAME_USD_LIMIT:
+        print(f'VOD game budget: ${AI_GAME_USD_LIMIT}; unmetered startup AI probe disabled.', flush=True)
+        return
     model = os.getenv('VOD_MODEL_DEEP', '').strip()
     if not model.startswith(GEMINI_PREFIX) or not _env_any_case('GEMINI_DEEP_API_KEY'):
         return
@@ -885,12 +894,30 @@ def request_ai(request_payload, model=None, rate_limit_retries=2, escalate=True)
     if profile:
         request_payload['instructions'] = profile['instructions'] + '\n\nFor video analysis, the attached frames and reviewed observations are the evidence packet. Cite their recording timestamps instead of unavailable database E IDs. Return only the requested JSON schema; all findings remain provisional. Do not infer missing roster or season context.'
     direct = model.startswith(GEMINI_PREFIX)
+    budgeted = bool(AI_GAME_USD_LIMIT)
+    if budgeted:
+        escalate = False
+        try:
+            spend_budget.rates(model)
+        except ValueError as exc:
+            raise Problem(403, str(exc), 'ai_budget')
     if direct:
         gemini_key = gemini_api_key(model)
         if not gemini_key:
             raise Problem(503, f'{model} needs GEMINI_API_KEY set on the worker.', 'model_unavailable')
         agent = uses_agent_platform(model, gemini_key)
-        if agent:
+        if budgeted:
+            # Use the same native request for counting and generation. It exposes
+            # thinking usage and a combined output cap to the budget ledger.
+            if agent:
+                raise Problem(403, 'Dollar budgeting currently requires the Gemini AI Studio endpoint.', 'ai_budget')
+            provider, key = 'Gemini', gemini_key
+            endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/' + model[len(GEMINI_PREFIX):] + ':generateContent'
+            request_payload = agent_platform_request(request_payload)
+            request_payload['generationConfig']['thinkingConfig'] = {'thinkingLevel': 'LOW'}
+            request_payload['generationConfig']['maxOutputTokens'] = min(8800, request_payload['generationConfig']['maxOutputTokens'])
+            agent = True
+        elif agent:
             provider, key = 'Google Agent Platform', gemini_key
             endpoint = AGENT_PLATFORM_BASE + model[len(GEMINI_PREFIX):] + ':generateContent'
             request_payload = agent_platform_request(request_payload)
@@ -905,11 +932,33 @@ def request_ai(request_payload, model=None, rate_limit_retries=2, escalate=True)
             ai_budget_gate()
             headers = ({'x-goog-api-key': key, 'Content-Type': 'application/json'} if agent else
                        {'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'})
+            reservation = None
+            if budgeted:
+                try:
+                    job_id = getattr(_CTX, 'job_id', None)
+                    if not job_id:
+                        raise ValueError('No game identity is available for the spending cap.')
+                    job = get_job(job_id)
+                    scope = str(job['metadata'].get('review_id') or job_id)
+                    count = http_json(endpoint.replace(':generateContent', ':countTokens'), headers,
+                                      {'generateContentRequest': dict(request_payload, model='models/' + model[len(GEMINI_PREFIX):])})
+                    total = count.get('totalTokens')
+                    if not isinstance(total, int) or total < 0:
+                        raise ValueError('Provider did not return a valid input token count.')
+                    reservation = spend_budget.reserve(connect, scope, model, total,
+                                                       request_payload['generationConfig']['maxOutputTokens'], AI_GAME_USD_LIMIT)
+                except (ValueError, sqlite3.Error) as exc:
+                    raise Problem(403, str(exc), 'ai_budget')
             result = http_json(endpoint, headers, request_payload)
             if agent:
                 result = agent_platform_response(result)
             elif direct:
                 result = gemini_response(result)
+            if reservation:
+                try:
+                    spend_budget.settle(connect, reservation, result.get('usage'))
+                except (ValueError, sqlite3.Error) as exc:
+                    raise Problem(403, 'Cannot record AI spend; analysis paused. '+str(exc), 'ai_budget')
             ai_usage_record(result, truncated=result.get('status') != 'completed', model=model)
             if result.get('status') == 'completed':
                 return result
@@ -2458,6 +2507,8 @@ class Handler(BaseHTTPRequestHandler):
             return self.reply(200, {'status': 'ok', 'aiConfigured': ai_configured(),
                                     'maxUploadBytes': MAX_UPLOAD, 'liveIngestion': False,
                                     'reviewVersion': REVIEW_VERSION,
+                                    'aiBudgetUsdPerGame': AI_GAME_USD_LIMIT or None,
+                                    'modelRouting': model_routing(),
                                     'frameStepSeconds': FRAME_STEP,
                                     'retentionHours': RETENTION / 3600,
                                     'maxActiveJobs': MAX_ACTIVE_JOBS,
