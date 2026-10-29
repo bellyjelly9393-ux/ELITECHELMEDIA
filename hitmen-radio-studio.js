@@ -1,8 +1,7 @@
 /* Decorative playback indicator. Native player, episode loading and controls stay authoritative. */
 (function () {
   'use strict';
-  var studio = document.getElementById('hitmanNightly');
-  if (!studio) return;
+  document.querySelectorAll('#hitmanNightly, #lgRadioSec').forEach(function (studio) {
   var active = new Set();
   function update(event) {
     var media = event.target;
@@ -20,5 +19,6 @@
   // Capture also covers dynamically generated single and multi-feature players.
   ['playing', 'pause', 'waiting', 'stalled', 'ended', 'emptied', 'error'].forEach(function (name) {
     studio.addEventListener(name, update, true);
+  });
   });
 })();
