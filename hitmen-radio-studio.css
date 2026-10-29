@@ -1,5 +1,5 @@
 /* Homepage studio set. All decoration stays behind the existing media controls. */
-#hitmanNightly {
+:is(#hitmanNightly, #lgRadioSec) {
   isolation:isolate; --hrs-red:#c8102e; --hrs-steel:#9da2a9;
   padding-block:clamp(28px,4vw,56px) clamp(38px,5vw,68px);
   border-block:6px solid #24272c;
@@ -10,14 +10,14 @@
     linear-gradient(90deg,#070809 0%,transparent 15% 85%,#070809),
     repeating-linear-gradient(90deg,#111316 0 76px,#060708 77px 80px,#27292d 81px,#111316 82px);
 }
-#hitmanNightly::before {
+:is(#hitmanNightly, #lgRadioSec)::before {
   z-index:-1; inset:0; opacity:.65;
   background:
     radial-gradient(circle,#44474b 1px,transparent 1.7px) 0 0/7px 7px,
     linear-gradient(180deg,transparent 55%,#070809);
   mask-image:linear-gradient(90deg,#000,transparent 30% 70%,#000);
 }
-#hitmanNightly::after {
+:is(#hitmanNightly, #lgRadioSec)::after {
   content:"";position:absolute;z-index:-1;pointer-events:none;
   inset:14px clamp(8px,2vw,32px);border:1px solid #45484e;border-radius:6px;
   box-shadow:0 0 0 5px #0a0b0d,inset 0 0 0 5px #0a0b0d,inset 0 1px 0 #888b9033;
@@ -27,136 +27,141 @@
     radial-gradient(circle at 10px calc(100% - 10px),#090a0c 2px,#757980 3px,#23262a 4px,transparent 5px),
     radial-gradient(circle at calc(100% - 10px) calc(100% - 10px),#090a0c 2px,#757980 3px,#23262a 4px,transparent 5px);
 }
-#hitmanNightly .hrs-sign {
+:is(#hitmanNightly, #lgRadioSec) .hrs-sign {
   position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:16px;
   width:fit-content;max-width:100%;margin:0 auto clamp(24px,3vw,40px);padding:12px 24px;
   border:1px solid #555960;border-radius:4px;color:#f1f0ec;
   background:repeating-linear-gradient(0deg,#ffffff02 0 1px,transparent 1px 3px),linear-gradient(135deg,#34373c,#15171a 45%,#282b30);
   box-shadow:0 3px 0 #060708,0 8px 20px #000b,inset 0 1px 0 #ffffff30;
 }
-#hitmanNightly .hrs-name {font:400 clamp(26px,3.5vw,44px)/1 var(--f-head, sans-serif);letter-spacing:.06em;white-space:nowrap;text-shadow:0 2px 2px #000;}
-#hitmanNightly .hrs-name b {font-weight:inherit;color:#ff596f;text-shadow:0 0 12px #c8102e66;}
-#hitmanNightly .hrs-status {font:700 10px/1.4 var(--f-ui,sans-serif);letter-spacing:.16em;color:#c3c7ce;}
-#hitmanNightly .hrs-meter {display:flex;gap:3px;align-items:center;height:24px;}
-#hitmanNightly .hrs-meter i {display:block;width:3px;height:20px;background:#d34357;transform:scaleY(.15);border-radius:1px;}
-#hitmanNightly[data-playing="true"] .hrs-meter i {animation:hrs-wave .85s ease-in-out infinite alternate;}
-#hitmanNightly .hrs-meter i:nth-child(3n) {animation-delay:-.3s;animation-duration:.6s;}
-#hitmanNightly .hrs-meter i:nth-child(3n + 1) {animation-delay:-.65s;animation-duration:1.1s;}
-#hitmanNightly .hn-in,#hitmanNightly .hn-dual {padding:clamp(14px,2.5vw,30px);border:1px solid #41454b;border-radius:6px;background:linear-gradient(155deg,#292c31,#111316 35%,#181a1e);box-shadow:0 5px 0 #050607,0 7px 0 #32353a,0 25px 45px #0009,inset 0 1px 0 #ffffff20;}
-#hitmanNightly .hn-frame {padding:clamp(8px,1.2vw,14px);border:1px solid #62666c;border-radius:4px;background:linear-gradient(135deg,#555960,#202329 35%,#34383e 80%,#646970);box-shadow:0 8px 0 #08090b,0 12px 22px #0009,inset 0 1px 0 #ffffff55;backdrop-filter:none;-webkit-backdrop-filter:none;}
-#hitmanNightly .hn-frame::after {content:"";position:absolute;inset:auto 16px -5px;height:2px;background:#8f172b;pointer-events:none;box-shadow:0 2px 8px #c8102e40;}
-#hitmanNightly[data-playing="true"] .hn-frame::after {animation:hrs-led 3s ease-in-out infinite;}
-#hitmanNightly .hn-video {position:relative;border-radius:1px;outline:1px solid #08090b;box-shadow:0 0 0 3px #090a0c;}
-#hitmanNightly .hn-title {text-shadow:0 3px 0 #000;}
-#hitmanNightly .hn-title em {color:#c5c8ce;}
-#hitmanNightly .hn-copy p,#hitmanNightly .hn-desc {color:#bcc1c8;}
-#hitmanNightly .hrp {background:linear-gradient(145deg,#22252a,#111316);border-color:#4b4f55;border-radius:4px;box-shadow:0 4px 0 #070809,inset 0 1px 0 #ffffff18;}
-#hitmanNightly .hn-arch {padding:24px clamp(14px,2.5vw,30px);border:1px solid #30343a;border-radius:4px;background:radial-gradient(ellipse at 50% 100%,transparent 55%,#888b9010 55.5% 56%,transparent 56.5%),linear-gradient(180deg,#16181c,#0c0e10);box-shadow:inset 0 1px 0 #ffffff0c,0 8px 18px #0006;}
-#hitmanNightly .hn-week-lbl {color:#a3a9b2;}
-#hitmanNightly .hn-ep {border-radius:3px;background:linear-gradient(145deg,#25282d,#15171a);border-color:#3d4249;backdrop-filter:none;-webkit-backdrop-filter:none;}
-#hitmanNightly .hrs-wall {position:absolute;z-index:-1;inset:100px 2.5% auto;width:8%;height:340px;border:6px ridge #383c42;background:linear-gradient(#0a0b0d66,#0a0b0d88),url('assets/wildman/home/hitmen.webp') center/cover;filter:grayscale(1);box-shadow:0 10px 24px #000,inset 0 0 0 2px #08090b;pointer-events:none;}
-#hitmanNightly .hrs-wall-right {left:auto;right:2.5%;background-position:75% center;}
-@media(max-width:1799px) {#hitmanNightly .hrs-wall {display:none;}}
-#hitmanNightly :is(a,button,video):focus-visible {outline:2px solid #fff;outline-offset:4px;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-name {font:400 clamp(26px,3.5vw,44px)/1 var(--f-head, sans-serif);letter-spacing:.06em;white-space:nowrap;text-shadow:0 2px 2px #000;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-name b {font-weight:inherit;color:#ff596f;text-shadow:0 0 12px #c8102e66;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-status {font:700 10px/1.4 var(--f-ui,sans-serif);letter-spacing:.16em;color:#c3c7ce;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-meter {display:flex;gap:3px;align-items:center;height:24px;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-meter i {display:block;width:3px;height:20px;background:#d34357;transform:scaleY(.15);border-radius:1px;}
+:is(#hitmanNightly, #lgRadioSec)[data-playing="true"] .hrs-meter i {animation:hrs-wave .85s ease-in-out infinite alternate;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-meter i:nth-child(3n) {animation-delay:-.3s;animation-duration:.6s;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-meter i:nth-child(3n + 1) {animation-delay:-.65s;animation-duration:1.1s;}
+:is(#hitmanNightly, #lgRadioSec) .hn-in,:is(#hitmanNightly, #lgRadioSec) .hn-dual {padding:clamp(14px,2.5vw,30px);border:1px solid #41454b;border-radius:6px;background:linear-gradient(155deg,#292c31,#111316 35%,#181a1e);box-shadow:0 5px 0 #050607,0 7px 0 #32353a,0 25px 45px #0009,inset 0 1px 0 #ffffff20;}
+:is(#hitmanNightly, #lgRadioSec) .hn-frame {padding:clamp(8px,1.2vw,14px);border:1px solid #62666c;border-radius:4px;background:linear-gradient(135deg,#555960,#202329 35%,#34383e 80%,#646970);box-shadow:0 8px 0 #08090b,0 12px 22px #0009,inset 0 1px 0 #ffffff55;backdrop-filter:none;-webkit-backdrop-filter:none;}
+:is(#hitmanNightly, #lgRadioSec) .hn-frame::after {content:"";position:absolute;inset:auto 16px -5px;height:2px;background:#8f172b;pointer-events:none;box-shadow:0 2px 8px #c8102e40;}
+:is(#hitmanNightly, #lgRadioSec)[data-playing="true"] .hn-frame::after {animation:hrs-led 3s ease-in-out infinite;}
+:is(#hitmanNightly, #lgRadioSec) .hn-video {position:relative;border-radius:1px;outline:1px solid #08090b;box-shadow:0 0 0 3px #090a0c;}
+:is(#hitmanNightly, #lgRadioSec) .hn-title {text-shadow:0 3px 0 #000;}
+:is(#hitmanNightly, #lgRadioSec) .hn-title em {color:#c5c8ce;}
+:is(#hitmanNightly, #lgRadioSec) .hn-copy p,:is(#hitmanNightly, #lgRadioSec) .hn-desc {color:#bcc1c8;}
+:is(#hitmanNightly, #lgRadioSec) .hrp {background:linear-gradient(145deg,#22252a,#111316);border-color:#4b4f55;border-radius:4px;box-shadow:0 4px 0 #070809,inset 0 1px 0 #ffffff18;}
+:is(#hitmanNightly, #lgRadioSec) .hn-arch {padding:24px clamp(14px,2.5vw,30px);border:1px solid #30343a;border-radius:4px;background:radial-gradient(ellipse at 50% 100%,transparent 55%,#888b9010 55.5% 56%,transparent 56.5%),linear-gradient(180deg,#16181c,#0c0e10);box-shadow:inset 0 1px 0 #ffffff0c,0 8px 18px #0006;}
+:is(#hitmanNightly, #lgRadioSec) .hn-week-lbl {color:#a3a9b2;}
+:is(#hitmanNightly, #lgRadioSec) .hn-ep {border-radius:3px;background:linear-gradient(145deg,#25282d,#15171a);border-color:#3d4249;backdrop-filter:none;-webkit-backdrop-filter:none;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-wall {position:absolute;z-index:-1;inset:100px 2.5% auto;width:8%;height:340px;border:6px ridge #383c42;background:linear-gradient(#0a0b0d66,#0a0b0d88),url('assets/wildman/home/hitmen.webp') center/cover;filter:grayscale(1);box-shadow:0 10px 24px #000,inset 0 0 0 2px #08090b;pointer-events:none;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-wall-right {left:auto;right:2.5%;background-position:75% center;}
+@media(max-width:1799px) {:is(#hitmanNightly, #lgRadioSec) .hrs-wall {display:none;}}
+:is(#hitmanNightly, #lgRadioSec) :is(a,button,video):focus-visible {outline:2px solid #fff;outline-offset:4px;}
 @keyframes hrs-wave {from{transform:scaleY(.2)}to{transform:scaleY(1)}}
 @keyframes hrs-led {50%{opacity:.55}}
 @media(max-width:860px) {
-  #hitmanNightly .hrs-sign {gap:10px;padding:12px 16px;}
-  #hitmanNightly .hn-in,#hitmanNightly .hn-dual {min-width:0;}
-  #hitmanNightly .hn-card,#hitmanNightly .hn-frame,#hitmanNightly .hrp {min-width:0;}
-  #hitmanNightly .hn-ep {flex-basis:88%;min-width:0;}
-  #hitmanNightly .hn-ep span {min-width:0;overflow-wrap:anywhere;}
+  :is(#hitmanNightly, #lgRadioSec) .hrs-sign {gap:10px;padding:12px 16px;}
+  :is(#hitmanNightly, #lgRadioSec) .hn-in,:is(#hitmanNightly, #lgRadioSec) .hn-dual {min-width:0;}
+  :is(#hitmanNightly, #lgRadioSec) .hn-card,:is(#hitmanNightly, #lgRadioSec) .hn-frame,:is(#hitmanNightly, #lgRadioSec) .hrp {min-width:0;}
+  :is(#hitmanNightly, #lgRadioSec) .hn-ep {flex-basis:88%;min-width:0;}
+  :is(#hitmanNightly, #lgRadioSec) .hn-ep span {min-width:0;overflow-wrap:anywhere;}
 }
-@media(max-width:400px) {#hitmanNightly .hrs-status {flex-basis:100%;text-align:center;}}
+@media(max-width:400px) {:is(#hitmanNightly, #lgRadioSec) .hrs-status {flex-basis:100%;text-align:center;}}
 @media(prefers-reduced-motion:reduce) {
-  #hitmanNightly .hrs-meter i,#hitmanNightly .hn-frame::after {animation:none!important;}
-  #hitmanNightly[data-playing="true"] .hrs-meter i {transform:scaleY(.55);}
-  #hitmanNightly *,#hitmanNightly *::after {scroll-behavior:auto!important;transition:none!important;}
+  :is(#hitmanNightly, #lgRadioSec) .hrs-meter i,:is(#hitmanNightly, #lgRadioSec) .hn-frame::after {animation:none!important;}
+  :is(#hitmanNightly, #lgRadioSec)[data-playing="true"] .hrs-meter i {transform:scaleY(.55);}
+  :is(#hitmanNightly, #lgRadioSec) *,:is(#hitmanNightly, #lgRadioSec) *::after {scroll-behavior:auto!important;transition:none!important;}
 }
 
 /* Art-directed set: keep the working UI inside the mockup's recessed wall. */
-#hitmanNightly {
+:is(#hitmanNightly, #lgRadioSec) {
   --wrap:1320px;
   padding:clamp(100px,8.6vw,164px) max(16px,16.2%) clamp(65px,6.6vw,126px);
   border:0;
   background:#08090b url('assets/brand/hitmen-radio-studio.webp') center/100% 100% no-repeat;
   box-shadow:0 -2px 0 #62605a,0 2px 0 #08090b;
 }
-#hitmanNightly::before,#hitmanNightly::after,#hitmanNightly .hrs-wall {display:none;}
-#hitmanNightly .hrs-sign {
+:is(#hitmanNightly, #lgRadioSec)::before,:is(#hitmanNightly, #lgRadioSec)::after,:is(#hitmanNightly, #lgRadioSec) .hrs-wall {display:none;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-sign {
   position:absolute;top:1.2vw;left:50%;transform:translateX(-50%);
   width:36%;height:4.6vw;min-height:48px;max-height:88px;
   padding:0 10px;margin:0;justify-content:center;gap:14px;
   border:0;border-radius:0;background:none;box-shadow:none;
 }
-#hitmanNightly .hrs-name {font-size:clamp(24px,3.1vw,58px);letter-spacing:.035em;color:#e3e1dc;text-shadow:0 2px 0 #050505,0 -1px 0 #fff8,2px 4px 5px #000;}
-#hitmanNightly .hrs-name b {color:#ba1c2d;text-shadow:0 1px 0 #ef6063,0 3px 1px #290006,0 0 12px #c8102e33;}
-#hitmanNightly .hrs-status {position:absolute;bottom:-5px;left:0;right:0;text-align:center;font-size:9px;color:#b9b7b3;letter-spacing:.3em;}
-#hitmanNightly .hrs-meter {height:28px;gap:2px;}
-#hitmanNightly .hrs-meter i {height:26px;width:2px;background:#be2738;}
-#hitmanNightly .hn-in,#hitmanNightly .hn-dual {
+:is(#hitmanNightly, #lgRadioSec) .hrs-name {font-size:clamp(24px,3.1vw,58px);letter-spacing:.035em;color:#e3e1dc;text-shadow:0 2px 0 #050505,0 -1px 0 #fff8,2px 4px 5px #000;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-name b {color:#ba1c2d;text-shadow:0 1px 0 #ef6063,0 3px 1px #290006,0 0 12px #c8102e33;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-status {position:absolute;bottom:-5px;left:0;right:0;text-align:center;font-size:9px;color:#b9b7b3;letter-spacing:.3em;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-meter {height:28px;gap:2px;}
+:is(#hitmanNightly, #lgRadioSec) .hrs-meter i {height:26px;width:2px;background:#be2738;}
+:is(#hitmanNightly, #lgRadioSec) .hn-in,:is(#hitmanNightly, #lgRadioSec) .hn-dual {
   padding:0;border:0;border-radius:0;background:none;box-shadow:none;max-width:none;
 }
-#hitmanNightly .hn-dual-head {position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
-#hitmanNightly .hn-solo .hn-dual-grid.hrp-host {grid-template-columns:minmax(0,1.85fr) minmax(260px,.95fr);gap:22px;}
-#hitmanNightly .hn-frame {
+:is(#hitmanNightly, #lgRadioSec) .hn-dual-head {position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+:is(#hitmanNightly, #lgRadioSec) .hn-solo .hn-dual-grid.hrp-host {grid-template-columns:minmax(0,1.85fr) minmax(260px,.95fr);gap:22px;}
+:is(#hitmanNightly, #lgRadioSec) .hn-frame {
   padding:6px;border:5px ridge #57544e;border-radius:3px;
   background:linear-gradient(145deg,#76716a,#282726 30%,#43413f 75%,#8b857b);
   box-shadow:0 0 0 2px #080808,0 0 0 5px #3f3d39,0 10px 18px #000b,inset 0 0 0 2px #0a0a09;
 }
-#hitmanNightly .hn-frame::before {
+:is(#hitmanNightly, #lgRadioSec) .hn-frame::before {
   content:"";position:absolute;inset:-3px;pointer-events:none;
   background:radial-gradient(circle at 3px 3px,#060606 1px,#9c9689 2px,#242422 3px,transparent 4px),radial-gradient(circle at calc(100% - 3px) 3px,#060606 1px,#9c9689 2px,#242422 3px,transparent 4px);
 }
-#hitmanNightly .hn-card-copy {padding:10px 0 0;}
-#hitmanNightly .hn-kind {color:#df3b49;font-size:13px;letter-spacing:.2em;}
-#hitmanNightly .hn-kind::before {content:"";display:inline-block;width:16px;height:2px;background:#c8102e;margin:0 9px 4px 0;}
-#hitmanNightly .hn-card-title {font-size:clamp(24px,2.4vw,38px);text-shadow:0 2px 0 #000;}
-#hitmanNightly .hn-date {font-size:14px;background:none;border:0;padding:0;backdrop-filter:none;border-radius:0;color:#c0bcb7;}
-#hitmanNightly .hn-headline {font-size:18px;line-height:1.25;}
-#hitmanNightly .hn-desc {font-size:14px;line-height:1.5;}
-#hitmanNightly .hrp {
+:is(#hitmanNightly, #lgRadioSec) .hn-card-copy {padding:10px 0 0;}
+:is(#hitmanNightly, #lgRadioSec) .hn-kind {color:#df3b49;font-size:13px;letter-spacing:.2em;}
+:is(#hitmanNightly, #lgRadioSec) .hn-kind::before {content:"";display:inline-block;width:16px;height:2px;background:#c8102e;margin:0 9px 4px 0;}
+:is(#hitmanNightly, #lgRadioSec) .hn-card-title {font-size:clamp(24px,2.4vw,38px);text-shadow:0 2px 0 #000;}
+:is(#hitmanNightly, #lgRadioSec) .hn-date {font-size:14px;background:none;border:0;padding:0;backdrop-filter:none;border-radius:0;color:#c0bcb7;}
+:is(#hitmanNightly, #lgRadioSec) .hn-headline {font-size:18px;line-height:1.25;}
+:is(#hitmanNightly, #lgRadioSec) .hn-desc {font-size:14px;line-height:1.5;}
+:is(#hitmanNightly, #lgRadioSec) .hrp {
   padding:22px 20px;border:6px ridge #514e48;border-radius:3px;gap:14px;
   background:linear-gradient(120deg,#111213e6,#080909f2);
   box-shadow:0 0 0 2px #070707,0 0 0 4px #3f3c37,0 12px 24px #0009,inset 0 1px 0 #b6b1a228;
 }
-#hitmanNightly .hrp-kicker {font-size:10px;letter-spacing:.14em;}
-#hitmanNightly .hrp-title {font-size:clamp(28px,2.5vw,40px);padding-bottom:12px;border-bottom:1px solid #605b5066;}
-#hitmanNightly .hrp-sub {font-size:13px;}
-#hitmanNightly .hrp-opt {background:linear-gradient(135deg,#181a1a,#090a0b);border-color:#44413c;border-radius:3px;padding:14px 10px;font-size:15px;line-height:1.25;min-height:54px;}
-#hitmanNightly .hrp-opt>span:first-child::before {content:"○";font-family:sans-serif;font-size:20px;margin-right:9px;vertical-align:-1px;color:#bcbab6;}
-#hitmanNightly .hrp-opt[aria-pressed="true"]>span:first-child::before {content:"●";color:#e84a59;}
-#hitmanNightly .hrp-foot {font-size:11px;line-height:1.4;}
-#hitmanNightly .hn-arch {
+:is(#hitmanNightly, #lgRadioSec) .hrp-kicker {font-size:10px;letter-spacing:.14em;}
+:is(#hitmanNightly, #lgRadioSec) .hrp-title {font-size:clamp(28px,2.5vw,40px);padding-bottom:12px;border-bottom:1px solid #605b5066;}
+:is(#hitmanNightly, #lgRadioSec) .hrp-sub {font-size:13px;}
+:is(#hitmanNightly, #lgRadioSec) .hrp-opt {background:linear-gradient(135deg,#181a1a,#090a0b);border-color:#44413c;border-radius:3px;padding:14px 10px;font-size:15px;line-height:1.25;min-height:54px;}
+:is(#hitmanNightly, #lgRadioSec) .hrp-opt>span:first-child::before {content:"○";font-family:sans-serif;font-size:20px;margin-right:9px;vertical-align:-1px;color:#bcbab6;}
+:is(#hitmanNightly, #lgRadioSec) .hrp-opt[aria-pressed="true"]>span:first-child::before {content:"●";color:#e84a59;}
+:is(#hitmanNightly, #lgRadioSec) .hrp-foot {font-size:11px;line-height:1.4;}
+:is(#hitmanNightly, #lgRadioSec) .hn-arch {
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px;
   padding:18px 0 0;margin-top:22px;border:0;border-top:1px solid #6e685d66;border-radius:0;background:none;box-shadow:none;
 }
-#hitmanNightly .hn-arch[hidden] {display:none;}
-#hitmanNightly .hn-arch-title {grid-column:1/-1;font-size:17px;letter-spacing:.19em;margin:0 0 4px;}
-#hitmanNightly .hn-arch-title::before {content:"";display:inline-block;width:20px;height:2px;background:#c8102e;margin:0 10px 5px 0;}
-#hitmanNightly .hn-week {min-width:0;}
-#hitmanNightly .hn-week+.hn-week {margin:0;}
-#hitmanNightly .hn-week-lbl {font-size:11px;letter-spacing:.09em;color:#a9a39b;}
-#hitmanNightly .hn-row {display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding:0 0 8px;scrollbar-width:thin;scrollbar-color:#645e55 #111;}
-#hitmanNightly .hn-ep {flex:0 0 100%;min-width:0;min-height:100px;padding:8px;gap:8px;scroll-snap-align:start;background:linear-gradient(120deg,#131414e6,#080909e6);border:1px solid #5a554c;}
-#hitmanNightly .hn-ep img {width:38%;height:auto;aspect-ratio:16/9;border-radius:0;}
-#hitmanNightly .hn-ep span {min-width:0;overflow-wrap:anywhere;}
-#hitmanNightly .hn-ep b {font-size:14px;letter-spacing:.04em;line-height:1.2;}
-#hitmanNightly .hn-ep small {font-size:12px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
-#hitmanNightly .hn-more {grid-column:1/-1;justify-self:start;}
+:is(#hitmanNightly, #lgRadioSec) .hn-arch[hidden] {display:none;}
+:is(#hitmanNightly, #lgRadioSec) .hn-arch-title {grid-column:1/-1;font-size:17px;letter-spacing:.19em;margin:0 0 4px;}
+:is(#hitmanNightly, #lgRadioSec) .hn-arch-title::before {content:"";display:inline-block;width:20px;height:2px;background:#c8102e;margin:0 10px 5px 0;}
+:is(#hitmanNightly, #lgRadioSec) .hn-week {min-width:0;}
+:is(#hitmanNightly, #lgRadioSec) .hn-week+.hn-week {margin:0;}
+:is(#hitmanNightly, #lgRadioSec) .hn-week-lbl {font-size:11px;letter-spacing:.09em;color:#a9a39b;}
+:is(#hitmanNightly, #lgRadioSec) .hn-row {display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding:0 0 8px;scrollbar-width:thin;scrollbar-color:#645e55 #111;}
+:is(#hitmanNightly, #lgRadioSec) .hn-ep {flex:0 0 100%;min-width:0;min-height:100px;padding:8px;gap:8px;scroll-snap-align:start;background:linear-gradient(120deg,#131414e6,#080909e6);border:1px solid #5a554c;}
+:is(#hitmanNightly, #lgRadioSec) .hn-ep img {width:38%;height:auto;aspect-ratio:16/9;border-radius:0;}
+:is(#hitmanNightly, #lgRadioSec) .hn-ep span {min-width:0;overflow-wrap:anywhere;}
+:is(#hitmanNightly, #lgRadioSec) .hn-ep b {font-size:14px;letter-spacing:.04em;line-height:1.2;}
+:is(#hitmanNightly, #lgRadioSec) .hn-ep small {font-size:12px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+:is(#hitmanNightly, #lgRadioSec) .hn-more {grid-column:1/-1;justify-self:start;}
 @media(max-width:1100px) and (min-width:861px) {
-  #hitmanNightly {padding-inline:11%;}
-  #hitmanNightly .hn-solo .hn-dual-grid.hrp-host {grid-template-columns:minmax(0,1.5fr) minmax(230px,1fr);gap:16px;}
-  #hitmanNightly .hrp {padding:16px 12px;}
+  :is(#hitmanNightly, #lgRadioSec) {padding-inline:11%;}
+  :is(#hitmanNightly, #lgRadioSec) .hn-solo .hn-dual-grid.hrp-host {grid-template-columns:minmax(0,1.5fr) minmax(230px,1fr);gap:16px;}
+  :is(#hitmanNightly, #lgRadioSec) .hrp {padding:16px 12px;}
 }
 @media(max-width:860px) {
-  #hitmanNightly {padding:100px 24px 60px;background:linear-gradient(#08090b66,#08090bba 35%,#08090be8),url('assets/brand/hitmen-radio-studio.webp') center/auto 100% no-repeat;}
-  #hitmanNightly .hrs-sign {top:20px;width:calc(100% - 48px);height:52px;background:linear-gradient(145deg,#33312d,#131414);border:3px ridge #5c574f;box-shadow:0 5px 15px #000;}
-  #hitmanNightly .hrs-name {font-size:32px;}
-  #hitmanNightly .hrs-status {bottom:-17px;}
-  #hitmanNightly .hn-solo .hn-dual-grid.hrp-host {grid-template-columns:minmax(0,1fr);gap:26px;}
-  #hitmanNightly .hn-arch {grid-template-columns:minmax(0,1fr);gap:16px;}
-  #hitmanNightly .hn-ep {flex-basis:90%;}
-  #hitmanNightly .hrp-title {font-size:32px;}
-  #hitmanNightly .hn-card-title {font-size:29px;}
+  :is(#hitmanNightly, #lgRadioSec) {padding:100px 24px 60px;background:linear-gradient(#08090b66,#08090bba 35%,#08090be8),url('assets/brand/hitmen-radio-studio.webp') center/auto 100% no-repeat;}
+  :is(#hitmanNightly, #lgRadioSec) .hrs-sign {top:20px;width:calc(100% - 48px);height:52px;background:linear-gradient(145deg,#33312d,#131414);border:3px ridge #5c574f;box-shadow:0 5px 15px #000;}
+  :is(#hitmanNightly, #lgRadioSec) .hrs-name {font-size:32px;}
+  :is(#hitmanNightly, #lgRadioSec) .hrs-status {bottom:-17px;}
+  :is(#hitmanNightly, #lgRadioSec) .hn-solo .hn-dual-grid.hrp-host {grid-template-columns:minmax(0,1fr);gap:26px;}
+  :is(#hitmanNightly, #lgRadioSec) .hn-arch {grid-template-columns:minmax(0,1fr);gap:16px;}
+  :is(#hitmanNightly, #lgRadioSec) .hn-ep {flex-basis:90%;}
+  :is(#hitmanNightly, #lgRadioSec) .hrp-title {font-size:32px;}
+  :is(#hitmanNightly, #lgRadioSec) .hn-card-title {font-size:29px;}
 }
+
+/* LG Media retains its audio editions and full-width player without a poll. */
+#lgRadioSec .hn-solo .hn-dual-grid {max-width:none;}
+#lgRadioSec .hn-audio {padding-top:16px;border-top:1px solid #6e685d66;color:#c0bcb7;line-height:1.7;}
+#lgRadioSec .hn-audio a {display:inline-block;color:#efede8;}
