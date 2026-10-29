@@ -1,8 +1,20 @@
 {
   "featured": [
-    "2026-10-27"
+    "2026-10-28"
   ],
   "episodes": [
+    {
+      "id": "2026-10-28",
+      "date": "2026-10-28",
+      "type": "recap",
+      "label": "Week in review + Tue night · Oct 28",
+      "title": "Week in Review + Tuesday Night",
+      "headline": "Twenty-five Hitmen goals on Tuesday: ten against London, ten against Ottawa",
+      "description": "Hitmen Radio grades Monday's predictions in the Report Card, reviews the week around the LGCHL, breaks down Tuesday's games and closes in the Hitmen Locker Room.",
+      "video": "assets/hitman-radio/nightly/2026-10-28.mp4?v=20261028",
+      "videoPhone": "assets/hitman-radio/nightly/2026-10-28-phone.mp4?v=20261028",
+      "poster": "assets/hitman-radio/nightly/2026-10-28-poster.png?v=20261028"
+    },
     {
       "id": "2026-10-27",
       "date": "2026-10-27",
