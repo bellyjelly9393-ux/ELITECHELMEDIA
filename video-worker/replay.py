@@ -653,7 +653,13 @@ def retrieve(job_id):
         candidate = max(candidates, key=lambda p: p.stat().st_size)
         if candidate.stat().st_size <= 0:
             return False
-        worker.probe(candidate)
+        try:
+            worker.probe(candidate)
+        except worker.Problem as exc:
+            if exc.status != 422:
+                raise
+            print(f'VOD retrieval: {job_id} yt-dlp output failed video validation; trying next resolver.', flush=True)
+            return False
         final = folder / 'source.mp4'
         final.unlink(missing_ok=True)
         candidate.replace(final)
@@ -686,12 +692,19 @@ def retrieve(job_id):
         if streamlink_ok:
             if source.stat().st_size > worker.MAX_UPLOAD:
                 raise worker.Problem(413, 'Replay exceeds the configured clip-size limit.', 'clip_size_exceeded')
-            worker.probe(source)
-            final = folder / 'source.mp4'
-            final.unlink(missing_ok=True)
-            source.replace(final)
-            worker.probe(final)
-        else:
+            try:
+                worker.probe(source)
+            except worker.Problem as exc:
+                if exc.status != 422:
+                    raise
+                streamlink_ok = False
+                print(f'VOD retrieval: {job_id} Streamlink exited successfully but returned unreadable video; trying yt-dlp.', flush=True)
+            if streamlink_ok:
+                final = folder / 'source.mp4'
+                final.unlink(missing_ok=True)
+                source.replace(final)
+                worker.probe(final)
+        if not streamlink_ok:
             # Streamlink can be rejected by Twitch even for a VOD that is playable in a
             # normal browser. Use yt-dlp as a second independent Twitch resolver and
             # keep the same saved game-window cut so the full broadcast is never pulled.
@@ -707,7 +720,7 @@ def retrieve(job_id):
                 wait_for_ytdlp(ytdlp)
                 ytdlp_ok = ytdlp.returncode == 0 and finish_ytdlp()
             if not ytdlp_ok:
-                raise worker.Problem(422, 'Twitch blocked Streamlink and all yt-dlp replay fallbacks. Retrieval diagnostics were kept on the private worker volume for troubleshooting.')
+                raise worker.Problem(422, 'Could not retrieve a readable Twitch video slice using Streamlink or yt-dlp. Saved analysis is kept; retrieval diagnostics were retained for troubleshooting.')
         worker.update(job_id, 'queued')
     except Exception as exc:
         (folder / 'source.mp4').unlink(missing_ok=True)
