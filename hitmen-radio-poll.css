@@ -1,0 +1,39 @@
+/* Hitmen Radio — "Name That Line" poll. Broadcast look: black/graphite/steel/off-white, Hitmen red only as a single accent. */
+.hrp { position: relative; align-self: start; display: flex; flex-direction: column; gap: 12px; padding: 18px 18px 16px; border-radius: 12px;
+  background: linear-gradient(180deg, #17181b 0%, #0f1012 100%); border: 1px solid rgba(255,255,255,.10);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 24px 48px -24px rgba(0,0,0,.9); color: #e2e3e5; }
+.hrp-kicker { display: flex; align-items: center; gap: 8px; margin: 0; font-family: var(--f-ui); font-weight: 600; font-size: 13px; letter-spacing: .24em; text-transform: uppercase; color: #8c9096; }
+.hrp-kicker i { width: 7px; height: 7px; border-radius: 50%; background: #c8102e; flex: none; }
+.hrp-title { margin: 0; font-family: var(--f-head); font-weight: 400; font-size: clamp(28px, 2.6vw, 38px); line-height: .95; letter-spacing: .01em; text-transform: uppercase; color: #f2f3f4; }
+.hrp-sub { margin: 0 !important; font-size: 15px; line-height: 1.4; color: #b4b7bc; max-width: none !important; }
+.hrp-sub b { color: #e2e3e5; font-weight: 600; }
+.hrp-opts { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 8px; }
+.hrp-opt { --hrp-w: 0%; position: relative; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; overflow: hidden;
+  padding: 12px 14px 10px; border-radius: 6px; cursor: pointer; text-align: left; font: inherit;
+  font-family: var(--f-ui); font-size: 19px; letter-spacing: .06em; text-transform: uppercase; color: #f2f3f4;
+  background: #1e2023; border: 1px solid rgba(255,255,255,.12); box-shadow: inset 0 1px 0 rgba(255,255,255,.07); transition: background .2s, border-color .2s; }
+.hrp-opt::before { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--hrp-w); background: linear-gradient(90deg, #3a3d42, #2c2e32); transition: width .7s cubic-bezier(.2,.7,.2,1); }
+.hrp-opt > span { position: relative; }
+.hrp-opt:not(:disabled):hover, .hrp-opt:not(:disabled):focus-visible { background: #2a2c30; border-color: rgba(255,255,255,.28); outline: none; }
+.hrp-opt:disabled { cursor: default; }
+.hrp-pct { font-variant-numeric: tabular-nums; color: #b4b7bc; display: none; }
+.hrp-done .hrp-pct { display: inline; }
+.hrp-opt[aria-pressed="true"] { border-color: rgba(255,255,255,.34); box-shadow: inset 3px 0 0 #c8102e; }
+.hrp-opt[aria-pressed="true"] .hrp-pct { color: #f2f3f4; }
+.hrp-soon .hrp-opt { opacity: .78; }
+.hrp-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; margin-top: 4px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.08);
+  font-family: var(--f-ui); font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: #8c9096; }
+.hrp-foot b { color: #e2e3e5; font-weight: 600; }
+
+/* Classic layout (.hn-in): video left spanning both rows, copy + poll stacked on the right. */
+.hn-in > .hrp { grid-column: 2; }
+.hn-in:has(> .hrp) > .hn-frame { grid-row: span 2; }
+/* Featured solo layout: video card + poll side by side. */
+.hn-solo .hn-dual-grid.hrp-host { grid-template-columns: minmax(0, 1.75fr) minmax(280px, 1fr); max-width: none; }
+.hn-dual:not(.hn-solo) .hn-dual-grid.hrp-host > .hrp { grid-column: 1 / -1; }
+@media (max-width: 860px) {
+  .hn-in > .hrp { grid-column: auto; order: 1; }
+  .hn-in:has(> .hrp) > .hn-frame { grid-row: auto; }
+  .hn-solo .hn-dual-grid.hrp-host { grid-template-columns: minmax(0, 1fr); }
+  .hrp-opt { font-size: 17px; }
+}
