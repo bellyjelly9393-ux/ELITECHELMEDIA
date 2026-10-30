@@ -303,3 +303,14 @@
 @media(max-width:560px){.lg3m-hero{padding:30px 10px 16px;gap:6px}.lg3m-hero .lg3m-vs,.lg3m-hero .lg3m-score{font-size:clamp(40px,13vw,64px)}.lg3m-hero .lg3m-chip{padding:10px 12px 8px}.lg3m-hero .lg3m-side img{width:72px;height:72px}.lg3m-plate{padding:6px 8px 5px}}
 @media(max-width:560px){.lg3m-chip small{white-space:normal;display:block;max-width:76px;margin:0 auto;line-height:1.15;text-align:center}.lg3m-card .lg3m-chip{padding:6px 8px 5px}}
 @media(max-width:560px){.lg3m-chip .lg3m-fine{white-space:normal;max-width:70px;margin:2px auto 0;text-align:center}.lg3m-hero .lg3m-chip{padding:8px 8px 7px}}
+
+/* Threes Desk detail views: Daily Three items + Duo Index side notes */
+.lg3s .lg3d-list{display:grid;gap:12px;margin:14px 0}
+.lg3s .lg3d-item{padding:14px 16px;background:linear-gradient(160deg,#141b27,#0a0d13 70%);border:1px solid rgba(255,255,255,.12);border-left:3px solid #e3262f}
+.lg3s .lg3d-item.is-stat{border-left-color:#2f5bd3}
+.lg3s .lg3d-item.is-storyline{border-left-color:#16a34a}
+.lg3s .lg3d-item h4{margin:4px 0 8px;font:700 24px/1.05 "LG3S Teko",Impact,sans-serif;letter-spacing:.02em;color:#fff}
+.lg3s .lg3d-item p{margin:0 0 6px;line-height:1.5;color:#d3dae3}
+.lg3s .lg3d-item p.lg3d-big{font:800 22px/1.1 "LG3S Barlow",sans-serif;letter-spacing:.03em;color:#fff}
+.lg3s .lg3d-why{margin:-2px 0 12px}
+.lg3s .lg3d-nav{display:flex;justify-content:space-between;gap:12px;margin:10px 0 0;font-weight:700}

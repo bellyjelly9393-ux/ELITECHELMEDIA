@@ -266,6 +266,41 @@
     if(card){const soon=card.querySelector('.lg3x-soon');const a=document.createElement('a');a.className='lg3x-soon lg3x-live';a.href=href;a.textContent='READ WEEK '+Number(r[0].week)+' →';if(soon)soon.replaceWith(a);else card.appendChild(a);}
     const ph=document.querySelector('#power .lg3-ph-link');if(ph){const a=document.createElement('a');a.className='lg3-ph-link';a.href=href;a.textContent='WRITE-UP →';ph.before(a);}
   }
+  /* Published Threes Desk segments: Daily Three + Duo Index (view: status='published', not superseded). */
+  let threes=[];
+  const THREE_SLOT={performer:'PERFORMER OF THE NIGHT',stat:'THE NUMBER',storyline:'THE STORYLINE'};
+  const gdFmt=v=>{const n=Number(v);return Number.isFinite(n)?(n>0?'+':'')+n.toFixed(2):'—';};
+  const threeDate=r=>r&&(r.game_night_date||(r.output_json&&r.output_json.date))?nightTitle(nightKey(r.game_night_date||r.output_json.date)):'';
+  function threesPage(id){
+    const r=threes.find(x=>Number(x.id)===Number(id));if(!r||!r.output_json)return;const o=r.output_json;
+    if(r.feature==='daily_three'){
+      const nights=threes.filter(x=>x.feature==='daily_three').sort((a,b)=>String(a.game_night_date||'').localeCompare(String(b.game_night_date||''))||a.id-b.id);
+      const i=nights.findIndex(x=>x.id===r.id),prev=nights[i-1],next=nights[i+1];
+      const nav=(prev||next)?'<p class="lg3d-nav">'+(prev?'<a href="#threes/'+Number(prev.id)+'">← '+esc(threeDate(prev))+'</a>':'<span></span>')+(next?'<a href="#threes/'+Number(next.id)+'">'+esc(threeDate(next))+' →</a>':'')+'</p>':'';
+      const items=(o.items||[]).map(it=>{
+        const big=it.slot==='performer'?it.stat_line:it.slot==='stat'?it.stat_value:'';
+        const who=it.slot==='performer'?[it.player,it.team].filter(Boolean).join(' · '):it.slot==='stat'?(it.subject||''):(it.teams||[]).join(' · ');
+        return '<article class="lg3d-item is-'+esc(it.slot)+'"><p class="eyebrow">'+esc(THREE_SLOT[it.slot]||it.slot)+'</p><h4>'+esc(it.headline)+'</h4>'+(big?'<p class="lg3d-big">'+esc(big)+'</p>':'')+'<p>'+esc(it.blurb)+'</p>'+(who?'<p class="th-caption">'+esc(who)+'</p>':'')+'</article>';}).join('');
+      openDetail('<header class="th-detail-head"><div><p class="eyebrow">DAILY THREE · '+esc(threeDate(r))+'</p><h3>'+esc(o.tagline||r.title)+'</h3></div></header><div class="lg3d-list">'+items+'</div>'+nav);
+      return;
+    }
+    const rows=(o.top_duos||[]).map(d=>playerRow({name:esc((d.players||[]).join(' & ')),sub:'#'+Number(d.rank)+' · '+String(d.team||'').toUpperCase()+(d.nickname?' · '+d.nickname:''),nation:d.team||'',star:Number(d.rank)===1,tag:Number(d.rank)===1?'TOP DUO':'',
+      stats:[[esc(d.record_together),'W-L'],[esc(gdFmt(d.goal_diff_per_game)),'GD/GP'],[esc(d.points_per_game),'P/GP']]})+(d.breakdown?'<p class="th-caption lg3d-why">'+esc(d.breakdown)+'</p>':'')).join('');
+    const side=(lab,x)=>x&&x.players&&x.players.length?'<article class="lg3d-item"><p class="eyebrow">'+lab+'</p><h4>'+esc(x.players.join(' & '))+(x.team?' · '+esc(x.team):'')+'</h4><p>'+esc(x.note)+'</p></article>':'';
+    openDetail('<header class="th-detail-head"><div><p class="eyebrow">DUO INDEX · '+esc(o.week_label||('WEEK '+Number(r.week))).toUpperCase()+'</p><h3>The pairs that drive results</h3><p>Season to date · minimum 4 games together · verified box scores only</p></div></header><div class="lg3p-list">'+rows+'</div><div class="lg3d-list">'+side('ODD COUPLE',o.odd_couple)+side('NEEDS COUNSELING',o.needs_counseling)+'</div>');
+  }
+  async function wireThrees(){
+    try{threes=await view('lg3s_public_threes','select=id,feature,period_key,game_night_date,week,title,output_json&order=id.desc&limit=40');}catch(e){console.warn('LG3s threes',e);return;}
+    const pick=f=>threes.filter(x=>x.feature===f&&x.output_json).sort((a,b)=>String(b.game_night_date||'').localeCompare(String(a.game_night_date||''))||(Number(b.week)||0)-(Number(a.week)||0)||b.id-a.id)[0];
+    const wire=(f,r,label,teaser)=>{const card=document.querySelector('.lg3x-card[data-feature="'+f+'"]');if(!card||!r)return;
+      if(teaser){const p=card.querySelector('p');if(p)p.textContent=teaser;}
+      const soon=card.querySelector('.lg3x-soon');const a=document.createElement('a');a.className='lg3x-soon lg3x-live';a.href='#threes/'+Number(r.id);a.textContent=label;if(soon)soon.replaceWith(a);else card.appendChild(a);};
+    const d3=pick('daily_three'),duo=pick('duo_index');
+    if(d3)wire('daily_three',d3,'READ '+threeDate(d3)+' →',d3.output_json.tagline);
+    const top=duo&&(duo.output_json.top_duos||[])[0];
+    if(duo)wire('duo_index',duo,'READ WEEK '+Number(duo.week)+' →',top?'No. 1: '+(top.players||[]).join(' & ')+' ('+top.team+'), '+top.record_together+' together.':'');
+    if(/^#threes\//.test(location.hash))route();
+  }
   /* ===== Leaderboards (verified box-score lines only) ===== */
   const LB_SK=[['p','POINTS','PTS'],['g','GOALS','G'],['a','ASSISTS','A'],['pm','PLUS / MINUS','+/-'],['sog','SHOTS','SOG'],['hit','HITS','HIT'],['tk','TAKEAWAYS','TK'],['blk','BLOCKS','BLK'],['int','INTERCEPTIONS','INT']];
   const LB_GL=[['w','WINS','W'],['svp','SAVE %','SV%',1],['gaa','GOALS AGAINST PER GAME','GA/GP',1,1],['sv','SAVES','SV'],['so','SHUTOUTS','SO']];
@@ -329,7 +364,7 @@
       '<h4>PER-GAME AVERAGES</h4><div class="lb-avg">'+avg.map(x=>statFig(x[0],x[1])).join('')+'</div>'+
       '<h4>GAME LOG · VERIFIED</h4><div class="lg3p-list">'+log+'</div><p class="th-caption"><a href="'+userUrl(uid)+'" target="_blank" rel="noopener noreferrer">Official LG profile ↗</a> · Lines are credited to the nation shown in each game\'s LG box score.</p>');
   }
-  function route(){const m=/^#(nation|player|recap|game|rankings)\/(\d+)$/.exec(location.hash);if(!m)return;const id=Number(m[2]);if(m[1]==='game')gamePage(id);else if(m[1]==='nation')nationPage(id);else if(m[1]==='player')playerPage(id);else if(m[1]==='rankings')rankingsPage(id);else gamePage(id);}
+  function route(){const m=/^#(nation|player|recap|game|rankings|threes)\/(\d+)$/.exec(location.hash);if(!m)return;const id=Number(m[2]);if(m[1]==='threes')threesPage(id);else if(m[1]==='game')gamePage(id);else if(m[1]==='nation')nationPage(id);else if(m[1]==='player')playerPage(id);else if(m[1]==='rankings')rankingsPage(id);else gamePage(id);}
   function renderPlayers(){
     const search=$('thPlayerSearch').value.trim().toLocaleLowerCase(),tid=$('thPlayerTeam').value,status=$('thPlayerStatus').value,pos=$('thPlayerPosition').value,sort=$('thPlayerSort').value;
     let players=data.players.filter(p=>(status==='all'||p.s===status)&&(tid==='all'||String(p.t)===tid)&&(pos==='all'||p.p===pos)&&(!search||p.n.toLocaleLowerCase().includes(search)||team(p.t).name.toLocaleLowerCase().includes(search)));
@@ -352,7 +387,7 @@
     if(new URLSearchParams(location.search).has('legacy'))document.querySelectorAll('[data-lg3s-legacy]').forEach(e=>e.hidden=false);
     chooseWeek();
     renderNations();renderGames();renderStandings();renderLeaders();renderLB();lbWire();
-    window.addEventListener('hashchange',route);route();wireRankings();
+    window.addEventListener('hashchange',route);route();wireRankings();wireThrees();
     const dc=$('thDetailClose');if(dc)dc.addEventListener('click',()=>$('thDetail').close());const dd=$('thDetail');if(dd)dd.addEventListener('close',()=>{if(location.hash)history.replaceState(null,'',location.pathname+location.search);});
     $('thPlayerTeam').innerHTML='<option value="all">All twelve nations</option>'+data.teams.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(t=>'<option value="'+t.id+'">'+esc(t.name)+'</option>').join('');
     renderPlayers();
