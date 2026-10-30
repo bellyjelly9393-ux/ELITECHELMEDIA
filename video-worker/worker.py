@@ -478,7 +478,7 @@ def detect_periods(source, duration):
     try:
         command(['ffmpeg', '-hide_banner', '-loglevel', 'error', '-nostdin', '-y',
                  '-i', str(source), '-vf', 'fps=1/10,scale=1280:720:force_original_aspect_ratio=decrease',
-                 '-q:v', '5', str(folder / '%05d.jpg')], 180)
+                 '-pix_fmt', 'yuvj420p', '-color_range', 'pc', '-q:v', '5', str(folder / '%05d.jpg')], 180)
         samples = sorted(folder.glob('*.jpg'))
         if not samples:
             return []
@@ -546,7 +546,7 @@ def extract_frames(source, folder, start, end, frame_step=FRAME_STEP, max_size='
              '-protocol_whitelist', 'file', '-ss', str(start), '-i', str(source),
              '-t', str(end-start), '-map', '0:v:0', '-an',
              '-vf', f'fps=1/{frame_step},scale={max_size}:force_original_aspect_ratio=decrease',
-             '-frames:v', '60', '-q:v', '4', str(folder / '%04d.jpg')])
+             '-frames:v', '60', '-pix_fmt', 'yuvj420p', '-color_range', 'pc', '-q:v', '4', str(folder / '%04d.jpg')])
     frames = sorted(folder.glob('*.jpg'))
     if not frames:
         raise Problem(422, 'No readable video frames were found.')
