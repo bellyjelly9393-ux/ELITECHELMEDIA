@@ -196,13 +196,13 @@ def scan_recording_periods(source, duration, initial_period=1, interval=REPLAY_I
             'ffmpeg', '-hide_banner', '-loglevel', 'error', '-nostdin', '-y',
             '-i', str(source),
             '-vf', f'fps=1/{interval},crop=iw:ih*0.30:0:0,scale=1280:-1',
-            '-q:v', '4', str(folder / 'top_%04d.jpg')
+            '-pix_fmt', 'yuvj420p', '-color_range', 'pc', '-q:v', '4', str(folder / 'top_%04d.jpg')
         ], check=True, timeout=180)
         subprocess.run([
             'ffmpeg', '-hide_banner', '-loglevel', 'error', '-nostdin', '-y',
             '-i', str(source),
             '-vf', f'fps=1/{interval},scale=960:-1',
-            '-q:v', '5', str(folder / 'full_%04d.jpg')
+            '-pix_fmt', 'yuvj420p', '-color_range', 'pc', '-q:v', '5', str(folder / 'full_%04d.jpg')
         ], check=True, timeout=180)
 
         top_frames = sorted(folder.glob('top_*.jpg'))
@@ -293,7 +293,7 @@ class LivePeriodWatcher:
         subprocess.run([
             'ffmpeg', '-hide_banner', '-loglevel', 'error', '-nostdin', '-y',
             '-rw_timeout', '12000000',
-            '-i', self.stream_url, '-frames:v', '1', '-vf', crop, '-q:v', '4', str(out)
+            '-i', self.stream_url, '-frames:v', '1', '-vf', crop, '-pix_fmt', 'yuvj420p', '-color_range', 'pc', '-q:v', '4', str(out)
         ], check=True, timeout=20)
         return out
 
