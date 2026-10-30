@@ -549,7 +549,21 @@ def extract_frames(source, folder, start, end, frame_step=FRAME_STEP, max_size='
              '-frames:v', '60', '-pix_fmt', 'yuvj420p', '-color_range', 'pc', '-q:v', '4', str(folder / '%04d.jpg')])
     frames = sorted(folder.glob('*.jpg'))
     if not frames:
-        raise Problem(422, 'No readable video frames were found.')
+        # MPEG-TS slices can have no seekable keyframe after the requested start.
+        # Decode from the beginning, normalize PTS, then trim in local clip time.
+        # This also recovers very short tails that the normal fps rounding drops.
+        print(f'VOD frames: empty fast seek; decoding local range {start:.3f}-{end:.3f}s.', flush=True)
+        command(['ffmpeg', '-hide_banner', '-loglevel', 'error', '-nostdin', '-y',
+                 '-protocol_whitelist', 'file', '-i', str(source), '-map', '0:v:0', '-an',
+                 '-vf', f'setpts=PTS-STARTPTS,trim=start={start}:end={end},setpts=PTS-STARTPTS,'
+                        f'fps=1/{frame_step}:round=up,scale={max_size}:force_original_aspect_ratio=decrease',
+                 '-frames:v', '60', '-pix_fmt', 'yuvj420p', '-color_range', 'pc',
+                 '-q:v', '4', str(folder / '%04d.jpg')])
+        frames = sorted(folder.glob('*.jpg'))
+    if not frames:
+        print(f'VOD frames: sequential decode also empty for local range {start:.3f}-{end:.3f}s.', flush=True)
+        raise Problem(422, 'No readable video frames were found in this recording range. Saved analysis is kept.',
+                      'no_video_frames')
     return frames
 
 
