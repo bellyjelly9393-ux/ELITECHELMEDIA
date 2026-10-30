@@ -444,8 +444,18 @@ def reclaim_replay_media(required_free=None, exclude_job_id=None):
 def command(args, timeout=300):
     try:
         return subprocess.run(args, capture_output=True, check=True, timeout=timeout).stdout
-    except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
-        raise Problem(422, 'Video processing failed. Check that this is a valid MP4 or MOV recording.')
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
+        tool = Path(str(args[0])).name
+        raw = getattr(exc, 'stderr', None) or getattr(exc, 'output', None) or b''
+        detail = raw.decode('utf-8', 'replace') if isinstance(raw, bytes) else str(raw)
+        # Log bounded diagnostics, never full command arguments or signed URLs.
+        detail = re.sub(r'https?://[^\s]+', '[redacted URL]', detail)
+        detail = re.sub(r'(?i)(authorization|auth-token|api[_-]?key|token)([=: ]+)[^\s]+',
+                        r'\1\2[redacted]', detail)
+        kind = 'timed out' if isinstance(exc, subprocess.TimeoutExpired) else 'failed'
+        print(f'VOD media command: {tool} {kind}: {detail[-1600:]}', flush=True)
+        raise Problem(422, f'Video processing {kind} during {tool}. Retry this part; saved analysis is kept.',
+                      'media_processing_failed') from exc
 
 
 def probe(source):
