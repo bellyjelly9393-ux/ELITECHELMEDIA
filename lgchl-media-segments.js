@@ -32,19 +32,19 @@
     box.innerHTML = keys.map(k => {
       const sorted = groups.get(k).slice().filter(t => Number.isFinite(Number(t.conference_rank)) && Number.isFinite(Number(t.pts)))
         .sort((a, b) => Number(a.conference_rank) - Number(b.conference_rank));
-      const cutoff = sorted.find(t => Number(t.conference_rank) === 4);
-      const chasing = sorted.find(t => Number(t.conference_rank) === 5);
-      const rows = sorted.slice(0, 6);
+      const cutoff = sorted.find(t => Number(t.conference_rank) === 8);
+      const chasing = sorted.find(t => Number(t.conference_rank) === 9);
+      const rows = sorted.slice(0, 10);
       const gap = cutoff && chasing ? Number(cutoff.pts) - Number(chasing.pts) : null;
-      const note = gap === null ? 'Cutoff comparison unavailable until fourth and fifth place are verified.'
-        : gap === 0 ? 'Fourth and fifth are tied on points. Tiebreakers are not verified.'
-        : 'Fifth place trails fourth by ' + gap + ' point' + (gap === 1 ? '' : 's') + '.';
+      const note = gap === null ? 'Cutoff comparison unavailable until eighth and ninth place are verified.'
+        : gap === 0 ? 'Eighth and ninth are tied on points. Tiebreakers are not verified.'
+        : 'Fifth place trails eighth by ' + gap + ' point' + (gap === 1 ? '' : 's') + '.';
       return '<article class="card tinted lg-race lg-playoff-race" data-logo="' + logo((cutoff || rows[0] || {}).lg_team_id) + '">' +
         '<div class="lg-playoff-race-head"><p class="lg-race-tag">' + esc(k) + '</p><span class="lg-playoff-label">CUTOFF WATCH</span></div>' +
         '<ol class="lg-race-list num">' + rows.map(t => {
           const rank = Number(t.conference_rank);
-          const state = rank === 4 ? ' lg-cutoff-team' : rank === 5 ? ' lg-chasing-team' : '';
-          const label = rank === 4 ? '4TH' : rank === 5 ? '5TH' : '';
+          const state = rank === 8 ? ' lg-cutoff-team' : rank === 9 ? ' lg-chasing-team' : '';
+          const label = rank === 8 ? '8TH' : rank === 9 ? '9TH' : '';
           return '<li class="' + state.trim() + '"><span class="lg-race-rk">' + rank + '</span><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(t.nickname || t.name) + '</b><span class="lg-race-pts">' + esc(t.pts) + '</span><small>' + label + '</small></li>';
         }).join('') + '</ol>' +
         '<p class="lg-race-line">' + esc(note) + '</p>' +
