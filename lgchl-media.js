@@ -41,7 +41,7 @@
   async function main() {
     const now = Date.now();
     const [standingsR, gamesR, histR] = await Promise.allSettled([
-      read('lgchl_standings_current', { select: 'lg_team_id,name,abbr,nickname,league,conference,gp,w,l,otl,pts,gf,ga,gd,streak,last10,conference_rank,standings_at' }),
+      read('lgchl_standings_current', { select: 'lg_team_id,name,abbr,nickname,league,conference,division,division_rank,gp,w,l,otl,pts,gf,ga,gd,streak,last10,conference_rank,standings_at' }),
       read('lgchl_games_board', {
         select: 'lg_game_id,week,game_at,status,league,away_lg_team_id,away_abbr,away_nick,away_score,away_conf_rank,home_lg_team_id,home_abbr,home_nick,home_score,home_conf_rank,big_game,big_reasons,source_url,fetched_at',
         season: 'eq.55', and: '(game_at.gte.' + iso(now - 9 * DAY) + ',game_at.lte.' + iso(now + 10 * DAY) + ')', order: 'game_at.asc', limit: '1000'
