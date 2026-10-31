@@ -38,7 +38,7 @@
       const gap = cutoff && chasing ? Number(cutoff.pts) - Number(chasing.pts) : null;
       const note = gap === null ? 'Cutoff comparison unavailable until eighth and ninth place are verified.'
         : gap === 0 ? 'Eighth and ninth are tied on points. Tiebreakers are not verified.'
-        : 'Fifth place trails eighth by ' + gap + ' point' + (gap === 1 ? '' : 's') + '.';
+        : 'Ninth place trails eighth by ' + gap + ' point' + (gap === 1 ? '' : 's') + '.';
       return '<article class="card tinted lg-race lg-playoff-race" data-logo="' + logo((cutoff || rows[0] || {}).lg_team_id) + '">' +
         '<div class="lg-playoff-race-head"><p class="lg-race-tag">' + esc(k) + '</p><span class="lg-playoff-label">CUTOFF WATCH</span></div>' +
         '<ol class="lg-race-list num">' + rows.map(t => {
