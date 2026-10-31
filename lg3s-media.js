@@ -284,6 +284,21 @@
       openDetail('<header class="th-detail-head"><div><p class="eyebrow">DAILY THREE · '+esc(threeDate(r))+'</p><h3>'+esc(o.tagline||r.title)+'</h3></div></header><div class="lg3d-list">'+items+'</div>'+nav);
       return;
     }
+    if(r.feature==='roster_wire'){
+      const mv=(o.moves||[]).slice().sort((a,b)=>(b.is_big_move?1:0)-(a.is_big_move?1:0)||(a.type==='released'?1:0)-(b.type==='released'?1:0));
+      const path=m=>m.type==='released'?'Released by '+(m.from_team||'—'):[m.from_team,m.to_team].filter(Boolean).join(' → ');
+      const items=mv.map(m=>'<article class="lg3d-item'+(m.is_big_move?' is-big':'')+'"><p class="eyebrow">'+esc(String(m.type||'').toUpperCase())+(m.impact?' · '+esc(String(m.impact).toUpperCase()):'')+'</p><h4>'+esc(m.ticker)+'</h4><p class="lg3w-route">'+esc((m.players||[]).join(', '))+' · '+esc(path(m))+'</p><p>'+esc(m.hot_take)+'</p>'+(m.winner&&m.winner!=='TBD'?'<p class="th-caption">Early winner: '+esc(m.winner)+'</p>':'')+'</article>').join('');
+      openDetail('<header class="th-detail-head"><div><p class="eyebrow">ROSTER WIRE · '+esc(String(o.updated_label||'').toUpperCase())+'</p><h3>'+(mv.length?Number(mv.length)+' roster moves since the last check':'A quiet wire')+'</h3><p>Compared with the previous roster check. Moves happened somewhere between the two checks.</p></div></header>'+(mv.length?'<div class="lg3d-list">'+items+'</div>':'<p>'+esc(o.quiet_note)+'</p>'));
+      return;
+    }
+    if(r.feature==='pick3_preview'){
+      const ps=o.players||[],teams=[...new Set(ps.map(p=>p.team))].sort();
+      const rows=ps.map(p=>'<div class="lg3k-row" data-team="'+esc(p.team)+'" data-value="'+(p.is_value_pick?1:0)+'">'+playerRow({name:esc(p.player),sub:String(p.team||'').toUpperCase(),nation:p.team||'',star:!!p.is_value_pick,tag:p.is_value_pick?'VALUE PICK':'',stats:[['$'+Number(p.price),'PRICE']]})+(p.note?'<p class="th-caption lg3d-why">'+esc(p.note)+'</p>':'')+'</div>').join('');
+      openDetail('<header class="th-detail-head"><div><p class="eyebrow">PICK YOUR 3 · '+esc(String(o.week_label||'').toUpperCase())+' PRICES</p><h3>Three skaters. $30. One per team.</h3><p>'+esc(o.intro)+'</p><p class="th-caption">Scoring: goal 3 · assist 2 · shot on goal 0.5 · hit 0.25 · team win 1 · hat trick +3. Prices run $4 to $15.</p></div></header>'+
+        '<p class="lg3k-filter"><label>Show <select id="lg3kF"><option value="">All '+Number(ps.length)+' skaters</option><option value="__value">Value picks</option>'+teams.map(t=>'<option>'+esc(t)+'</option>').join('')+'</select></label></p><div class="lg3p-list lg3k-list">'+rows+'</div>');
+      const f=$('lg3kF');if(f)f.addEventListener('change',()=>{const v=f.value;document.querySelectorAll('#thDetailBody .lg3k-row').forEach(el=>{el.hidden=!!v&&(v==='__value'?el.dataset.value!=='1':el.dataset.team!==v);});});
+      return;
+    }
     const rows=(o.top_duos||[]).map(d=>playerRow({name:esc((d.players||[]).join(' & ')),sub:'#'+Number(d.rank)+' · '+String(d.team||'').toUpperCase()+(d.nickname?' · '+d.nickname:''),nation:d.team||'',star:Number(d.rank)===1,tag:Number(d.rank)===1?'TOP DUO':'',
       stats:[[esc(d.record_together),'W-L'],[esc(gdFmt(d.goal_diff_per_game)),'GD/GP'],[esc(d.points_per_game),'P/GP']]})+(d.breakdown?'<p class="th-caption lg3d-why">'+esc(d.breakdown)+'</p>':'')).join('');
     const side=(lab,x)=>x&&x.players&&x.players.length?'<article class="lg3d-item"><p class="eyebrow">'+lab+'</p><h4>'+esc(x.players.join(' & '))+(x.team?' · '+esc(x.team):'')+'</h4><p>'+esc(x.note)+'</p></article>':'';
@@ -299,6 +314,9 @@
     if(d3)wire('daily_three',d3,'READ '+threeDate(d3)+' →',d3.output_json.tagline);
     const top=duo&&(duo.output_json.top_duos||[])[0];
     if(duo)wire('duo_index',duo,'READ WEEK '+Number(duo.week)+' →',top?'No. 1: '+(top.players||[]).join(' & ')+' ('+top.team+'), '+top.record_together+' together.':'');
+    const rw=pick('roster_wire'),p3=pick('pick3_preview');
+    if(rw){const m=rw.output_json.moves||[],big=m.find(x=>x.is_big_move)||m[0];wire('roster_wire',rw,'READ '+String(rw.output_json.updated_label||'').toUpperCase()+' →',m.length?m.length+' moves on the wire. '+(big?big.ticker+'.':''):rw.output_json.quiet_note);}
+    if(p3)wire('pick_your_3',p3,String(p3.output_json.week_label||'').toUpperCase()+' PRICES →','Three skaters, $30, one per team. '+String(p3.output_json.week_label||'')+' prices are live.');
     if(/^#threes\//.test(location.hash))route();
   }
   /* ===== Leaderboards (verified box-score lines only) ===== */
