@@ -339,3 +339,17 @@
 .lg-potn-list b { color: var(--bc-offwhite, #F2F3F4); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .lg-potn-list small { grid-column: 3; color: var(--bc-muted, #8C9096); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .lg-potn-v { grid-column: 4; grid-row: 1 / 3; font-family: var(--f-head); color: var(--bc-offwhite, #F2F3F4); white-space: nowrap; }
+
+/* Playoff race UI: subdued steel panels, readable live text, clear fourth/fifth comparison. */
+.lg-playoff-race{background:linear-gradient(155deg,#24282d 0%,#15191e 35%,#0c1014 100%);border:1px solid #515963;box-shadow:inset 0 1px 0 #747a8155,inset 0 -12px 25px #0008,0 12px 25px #0007;border-radius:5px}
+.lg-playoff-race-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.lg-playoff-label{font:700 12px/1.2 system-ui,sans-serif;letter-spacing:.08em;color:#e2e6eb;background:#303942;border:1px solid #67717a;padding:6px 9px;border-radius:3px}
+.lg-playoff-race .lg-race-list li{grid-template-columns:24px 32px minmax(0,1fr) 46px 40px;min-height:43px;gap:7px}
+.lg-playoff-race .lg-race-list b{font:600 15px/1.3 system-ui,sans-serif;color:#f4f5f7}
+.lg-playoff-race .lg-race-list small{font:700 12px/1.2 system-ui,sans-serif;letter-spacing:0;color:#cbd2d9}
+.lg-playoff-race .lg-race-pts{font-size:24px;color:#fff}
+.lg-playoff-race .lg-cutoff-team{background:linear-gradient(90deg,#56616d35,transparent);border-left:3px solid #c5cbd1;padding-left:6px}
+.lg-playoff-race .lg-chasing-team{background:linear-gradient(90deg,#9a493020,transparent);border-left:3px solid #b96b55;padding-left:6px}
+.lg-playoff-race .lg-race-line{font:600 15px/1.5 system-ui,sans-serif;color:#e4e8eb}
+.lg-playoff-disclaimer{font:400 12px/1.5 system-ui,sans-serif;color:#aeb8c1;margin:0}
+@media(max-width:600px){.lg-playoff-race{padding:16px}.lg-playoff-race .lg-race-list b{font-size:15px}.lg-playoff-race .lg-race-pts{font-size:23px}}
