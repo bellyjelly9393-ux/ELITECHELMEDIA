@@ -12,46 +12,49 @@
   const empty = t => '<p class="empty">' + esc(t) + '</p>';
   const show = (id, on) => { const el = $(id); if (el) el.hidden = !on; };
 
-  /* ---------- Playoff Race Watch: conference cutoff, no invented clinching rules ---------- */
+  /* ---------- Season 55 division play-in race ---------- */
+  // Season 55: division places 1-3 qualify directly; places 4-5 play a Sunday best-of-three.
+  // Never substitute conference_rank for division rank.
   function renderRaces(standings) {
     const box = $('lgRaces');
     if (!box) return;
     if (!Array.isArray(standings) || !standings.length) {
-      box.innerHTML = empty('Standings are unavailable. Playoff positions cannot be verified.');
+      box.innerHTML = empty('Standings unavailable. Division play-in matchups cannot be calculated.');
+      return;
+    }
+    const hasDivision = standings.every(t => t && typeof t.division === 'string' && t.division.trim() &&
+      Number.isFinite(Number(t.division_rank)) && Number(t.division_rank) > 0);
+    if (!hasDivision) {
+      box.innerHTML = '<article class="card tinted lg-race lg-playoff-race">' +
+        '<p class="lg-race-tag">Season 55 · Playoff format</p>' +
+        '<h3>Division Play-In Watch</h3>' +
+        '<p class="lg-race-line">Top three in each division advance directly. Fourth and fifth play a best-of-three on Sunday; the winner advances as the fourth qualifier.</p>' +
+        '<p class="lg-playoff-disclaimer">Division standings are not available in the current public feed. Matchups will appear when division assignments and ranks are connected. Conference ranks are not used as a substitute.</p></article>';
       return;
     }
     const groups = new Map();
     standings.forEach(t => {
-      if (!t || !t.league || !t.conference) return;
-      const k = t.league + ' · ' + t.conference;
+      const k = [t.league || '', t.conference || '', t.division].filter(Boolean).join(' · ');
       if (!groups.has(k)) groups.set(k, []);
       groups.get(k).push(t);
     });
-    const order = ['OHL', 'WHL', 'QMJHL'];
-    const keys = [...groups.keys()].sort((a, b) => order.indexOf(a.split(' · ')[0]) - order.indexOf(b.split(' · ')[0]) || a.localeCompare(b));
+    const keys = [...groups.keys()].sort();
     box.innerHTML = keys.map(k => {
-      const sorted = groups.get(k).slice().filter(t => Number.isFinite(Number(t.conference_rank)) && Number.isFinite(Number(t.pts)))
-        .sort((a, b) => Number(a.conference_rank) - Number(b.conference_rank));
-      const cutoff = sorted.find(t => Number(t.conference_rank) === 8);
-      const chasing = sorted.find(t => Number(t.conference_rank) === 9);
-      const rows = sorted.slice(0, 10);
-      const gap = cutoff && chasing ? Number(cutoff.pts) - Number(chasing.pts) : null;
-      const note = gap === null ? 'Cutoff comparison unavailable until eighth and ninth place are verified.'
-        : gap === 0 ? 'Eighth and ninth are tied on points. Tiebreakers are not verified.'
-        : 'Ninth place trails eighth by ' + gap + ' point' + (gap === 1 ? '' : 's') + '.';
-      return '<article class="card tinted lg-race lg-playoff-race" data-logo="' + logo((cutoff || rows[0] || {}).lg_team_id) + '">' +
-        '<div class="lg-playoff-race-head"><p class="lg-race-tag">' + esc(k) + '</p><span class="lg-playoff-label">CUTOFF WATCH</span></div>' +
+      const rows = groups.get(k).slice().sort((a,b) => Number(a.division_rank)-Number(b.division_rank)).slice(0,5);
+      const fourth = rows.find(t => Number(t.division_rank) === 4);
+      const fifth = rows.find(t => Number(t.division_rank) === 5);
+      const gap = fourth && fifth && Number.isFinite(Number(fourth.pts)) && Number.isFinite(Number(fifth.pts)) ?
+        Number(fourth.pts)-Number(fifth.pts) : null;
+      return '<article class="card tinted lg-race lg-playoff-race">' +
+        '<div class="lg-playoff-race-head"><p class="lg-race-tag">' + esc(k) + '</p><span class="lg-playoff-label">SUNDAY · BEST OF 3</span></div>' +
         '<ol class="lg-race-list num">' + rows.map(t => {
-          const rank = Number(t.conference_rank);
-          const state = rank === 8 ? ' lg-cutoff-team' : rank === 9 ? ' lg-chasing-team' : '';
-          const label = rank === 8 ? '8TH' : rank === 9 ? '9TH' : '';
-          return '<li class="' + state.trim() + '"><span class="lg-race-rk">' + rank + '</span><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(t.nickname || t.name) + '</b><span class="lg-race-pts">' + esc(t.pts) + '</span><small>' + label + '</small></li>';
+          const rank = Number(t.division_rank);
+          const state = rank === 4 ? 'lg-cutoff-team' : rank === 5 ? 'lg-chasing-team' : '';
+          return '<li class="' + state + '"><span class="lg-race-rk">' + rank + '</span><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(t.nickname || t.name) + '</b><span class="lg-race-pts">' + esc(t.pts ?? '—') + '</span><small>' + (rank <= 3 ? 'DIRECT' : 'PLAY-IN') + '</small></li>';
         }).join('') + '</ol>' +
-        '<p class="lg-race-line">' + esc(note) + '</p>' +
-        '<p class="lg-playoff-disclaimer">Standings positions only · Not a clinching or elimination prediction</p></article>';
+        '<p class="lg-race-line">' + (gap === null ? 'Play-in points gap unavailable.' : 'Fourth and fifth are separated by ' + Math.abs(gap) + ' point' + (Math.abs(gap) === 1 ? '' : 's') + '.') + '</p>' +
+        '<p class="lg-playoff-disclaimer">Play-in winner advances as the fourth division qualifier.</p></article>';
     }).join('');
-    if (!keys.length) box.innerHTML = empty('Conference standings unavailable.');
-    tint(box);
   }
 
   /* ---------- Heaters & Skids: the players playing unreal, and the ones in trouble ---------- */
