@@ -102,7 +102,31 @@ async function main(){
   // PGlite role/session changes must never interleave across HTTP requests.
   queue=queue.then(run,run).catch(error=>{console.error('Test request failed:',error.name);if(!res.headersSent)reply(res,error.status||500,{error:error.status?error.message:'Test request failed'});else res.end();});
  });
- server.listen(Number(process.env.PORT||8080),'0.0.0.0');
+ server.listen(Number(process.env.PORT||8080),'0.0.0.0',()=>{
+  if(process.env.RUN_INITIAL_TESTS!=='1')return;
+  // Loopback-only automated tests work without a public Railway domain.
+  const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+  const local=async(suffix,body)=>{
+   const r=await fetch('http://127.0.0.1:'+Number(process.env.PORT||8080)+suffix,{method:body?'POST':'GET',headers:{Authorization:'Bearer '+process.env.TEST_ACCESS_TOKEN,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
+   const data=await r.json();if(!r.ok&&r.status!==409)throw Error('Local test HTTP '+r.status);return data;
+  };
+  (async()=>{
+   let healthy=false;for(let n=0;n<90;n++){try{await workerFetch('/health');healthy=true;break;}catch{await pause(1000);}}
+   if(!healthy)throw Error('Private worker startup timed out');
+   for(const g of games){const started=await local('/api/games/'+g.lg_game_id+'/start',{});console.log('IDENTITY_TEST_STARTED',JSON.stringify({lg_game_id:g.lg_game_id,job_id:started.job_id}));}
+   const terminal=new Set(['ready_for_review','failed','expired','needs_periods','awaiting_ai']),previous=new Map();
+   for(let n=0;n<240;n++){
+    let done=true;for(const g of games){
+     const d=await local('/api/games/'+g.lg_game_id),a=d.identity_audit;
+     const snapshot={lg_game_id:g.lg_game_id,status:d.job?.status||d.status,error:d.job?.error||'',expected_players:a?.expected_players,attributed_players:a?.attributed_players,unresolved_names:a?.unresolved_name_count,stage:d.job?.result?.stage};
+     const key=JSON.stringify(snapshot);if(previous.get(g.lg_game_id)!==key){console.log('IDENTITY_TEST_STATUS',key);previous.set(g.lg_game_id,key);}
+     if(!terminal.has(snapshot.status))done=false;
+    }
+    if(done)return;await pause(30000);
+   }
+   console.log('IDENTITY_TEST_MONITOR_TIMEOUT');
+  })().catch(error=>console.error('IDENTITY_TEST_MONITOR_ERROR',error.message));
+ });
  for(const sig of ['SIGTERM','SIGINT'])process.on(sig,()=>{worker.kill();server.close();db.close().finally(()=>process.exit(0));});
 }
 module.exports={checkIsolation,authorized,reconcile,initialize,games};
