@@ -1,8 +1,19 @@
 {
   "featured": [
-    "2026-10-28"
+    "2026-11-01-recap"
   ],
   "episodes": [
+    {
+      "id": "2026-11-01-recap",
+      "date": "2026-11-01",
+      "type": "recap",
+      "label": "Week 5 recap · Nov 1",
+      "title": "Hitmen Radio — Week 5 Recap",
+      "headline": "Week 5 in review: the report card, the big results and the playoff picture",
+      "description": "Week 5 in review: the report card, the week's big results, players of the week and the playoff picture.",
+      "video": "assets/hitman-radio/nightly/2026-11-01-recap.mp4?v=20261101",
+      "poster": "assets/hitman-radio/nightly/2026-11-01-recap-poster.png?v=20261101"
+    },
     {
       "id": "2026-10-28",
       "date": "2026-10-28",
