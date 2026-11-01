@@ -8,7 +8,7 @@ source = (root / 'test-vod-lg-identity.cjs').read_text(encoding='utf-8')
 schema = source[source.index('create role authenticated;'):source.index('select set_config(')]
 schema = schema.replace('${id(1)}', 'a0000000-0000-4000-8000-000000000001').replace('${id(2)}', 'a0000000-0000-4000-8000-000000000002')
 assert '${' not in schema
-(dest / 'schema.sql').write_text(schema, encoding='utf-8')
+(dest / 'schema.sql').write_text(schema.rstrip() + '\n', encoding='utf-8')
 games = json.loads((dest / 'reviews.json').read_text(encoding='utf-8'))
 for game in games:
     capture = root / 'lgchl-drops/games/s55/2026-10-25' / ('game_' + str(game['lg_game_id']) + '.json')

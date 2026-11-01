@@ -717,4 +717,3 @@ def retrieve(job_id):
         for item in folder.glob('ytdlp.*'):
             if item.name != 'ytdlp-error.log' or success:
                 item.unlink(missing_ok=True)
-

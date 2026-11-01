@@ -1,0 +1,18 @@
+{
+  "schema": "vod-user-alias-attestation-v1",
+  "confirmed_names": ["Kells", "Bad News Kells"],
+  "confirmation_source": "User states these identify the same Hitmen player and that the identity was verified in the VOD player marker.",
+  "recorded_date": "2026-11-01",
+  "supporting_marker_context": {
+    "review_id": "53623df7-9c52-4763-9cea-2de70c0ccc35",
+    "title": "Hitmen vs Ottawa - Game 3 - Oct 27",
+    "vod_url": "https://www.twitch.tv/videos/2912714919",
+    "bad_news_kells_marker_seconds": [3034, 3046],
+    "kells_marker_seconds": [2196, 2378, 2651, 3103],
+    "original_marker_source": "AI-generated markers, subsequently referenced by the user's human verification; existence of an AI marker alone is not verification."
+  },
+  "lg_user_id_candidate": "73707",
+  "lg_id_context": "LG Client exact registered-account lookup l Setty l returns 73707; captured LG-linked Xbox tag l Setty l currently returns Bad News Kells as a character candidate.",
+  "remaining_gate": "Confirm actual Ottawa game participation for LG 73707 before inserting these aliases into a test game's verified roster. This attestation confirms the alias relationship; it does not manufacture a missing game sheet.",
+  "production_modified": false
+}

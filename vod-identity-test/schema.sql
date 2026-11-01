@@ -15,4 +15,3 @@ create role authenticated;create role anon;create schema auth;create schema priv
    grant select on all tables in schema public to authenticated;
    grant insert,update on public.vod_review_sessions,public.vod_game_publications,public.team_player_game_reports to authenticated;
    grant update on public.hitmen_schedule_games to authenticated;
-   
