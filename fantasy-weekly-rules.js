@@ -36,14 +36,17 @@
     if(typ==='position_spotlight'&&!sixSlots.includes(bonus.position))err.push('Spotlight position must be a sixes position.');
     if(typ!=='none'&&(!Number.isFinite(num(bonus.target))||num(bonus.target)<=0))err.push('Bonus requires a published positive target.');
     if(typ==='sleeper_surge'&&(!Number.isFinite(num(bonus.multiplier))||num(bonus.multiplier)<1))err.push('Sleeper bonus requires a valid projection multiplier.');
+    if(typ!=='none'&&(!Number.isInteger(num(bonus.min_games))||num(bonus.min_games)<1||num(bonus.min_games)>10))err.push('Bonus games threshold must be 1-10.');
     if(!Array.isArray(w.pool))return {ok:false,errors:err};
     var seen=new Set(),byPos={};w.pool.forEach(function(p){
-      if(!p||!id(p.id)||seen.has(id(p.id)))err.push('Duplicate or empty pool player ID.');
-      seen.add(id(p&&p.id));
-      if(!p||!p.name||!p.team||!p.category||!p.position)err.push('Player identity/category/position missing.');
-      if(!Number.isInteger(num(p&&p.price))||num(p&&p.price)<1)err.push('Invalid player price.');
+      if(!p||typeof p!=='object'){err.push('Invalid pool player.');return;}
+      if(!id(p.id)||seen.has(id(p.id)))err.push('Duplicate or empty pool player ID.');
+      seen.add(id(p.id));
+      if(!p.name||!p.team||!p.category||!p.position)err.push('Player identity/category/position missing.');
+      if(!Number.isInteger(num(p.price))||num(p.price)<1||num(p.price)>w.cap)err.push('Invalid or unaffordable player price.');
       if(w.format==='4') {
         if(!p.nation)err.push('LG3S player has no nation.');
+        if((p.position==='G')!==(p.category==='goalie'))err.push('Fours goalie must have position G.');
         if(!['superstar','upcomer','goalie'].concat(wildcardCategories).includes(p.category))err.push('Invalid fours category.');
       } else {
         if(!sixSlots.includes(p.position))err.push('Invalid sixes position.');
@@ -53,6 +56,9 @@
       byPos[p.position]=(byPos[p.position]||0)+1;
     });
     if(w.format==='6')sixSlots.forEach(function(s){if(!byPos[s])err.push('No eligible players for '+s);});
+    if(typ==='bounce_back'&&!w.pool.some(function(p){return p&&p.category==='bounceback';}))err.push('Bounce-Back week has no eligible candidates.');
+    if(typ==='heater'&&!w.pool.some(function(p){return p&&p.category==='heater';}))err.push('Heater week has no eligible candidates.');
+    if(typ==='sleeper_surge'&&!w.pool.some(function(p){return p&&['sleeper','underrated'].includes(p.category)&&num(p.projected_week_points)>0;}))err.push('Sleeper week has no published projections.');
     return {ok:!err.length,errors:err};
   }
   function pickMap(w){var m=new Map();(w.pool||[]).forEach(function(p){m.set(id(p.id),p);});return m;}
@@ -106,7 +112,7 @@
       var player=map.get(id(picks[slot])),stats=verifiedStats&&verifiedStats[id(player.id)];
       return {slot:slot,player:player,stats:stats};
     });
-    if(all.some(function(x){return !x.stats||x.stats.verified!==true||!Number.isFinite(num(x.stats.points))||!Number.isInteger(num(x.stats.games))||num(x.stats.games)<0;}))
+    if(all.some(function(x){return !x.stats||x.stats.verified!==true||x.stats.points==null||x.stats.points===''||x.stats.games==null||x.stats.games===''||!Number.isFinite(num(x.stats.points))||!Number.isInteger(num(x.stats.games))||num(x.stats.games)<0;}))
       return {ok:false,status:'pending',reason:'At least one selected player lacks finalized verified-week statistics.'};
     var base=all.reduce(function(n,x){return n+num(x.stats.points);},0),b=w.bonus||{type:'none'},awarded=null;
     all.some(function(x){if(qualified(w,x.player,x.stats,x.slot)){awarded=x.player.name;return true;}return false;});
