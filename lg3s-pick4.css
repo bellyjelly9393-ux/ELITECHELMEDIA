@@ -1,0 +1,73 @@
+/* LG3s Pick Your 4 (#pick4). Matches the Threes Desk look: dark panels, Teko headings, red/gold accents. */
+.lg3s .p4-sec .sec-title em{color:#f5cf6b;font-style:normal}
+.lg3s .p4-prize{margin:0 0 12px;padding:12px 14px;border:1px solid rgba(245,207,107,.45);border-left:4px solid #f5cf6b;background:linear-gradient(100deg,rgba(245,207,107,.16),rgba(10,13,19,.6) 60%);color:#f3ead2;font-size:14px;line-height:1.5}
+.lg3s .p4-prize b{color:#ffe7a3;letter-spacing:.02em}
+.lg3s .p4-status{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 12px;padding:10px 14px;background:#0b0f16;border:1px solid rgba(255,255,255,.12);font:700 13px/1.3 "LG3S Barlow",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#c9d3dc}
+.lg3s .p4-status b{color:#fff}
+.lg3s .p4-status [data-p4-count]{color:#ffe28a}
+.lg3s .p4-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.lg3s .p4-tabs button,.lg3s .p4-cats button{min-height:40px;padding:8px 14px;font:700 13px/1 "LG3S Barlow",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#c9d3dc;background:#0d1219;border:1px solid rgba(255,255,255,.18);cursor:pointer}
+.lg3s .p4-tabs button[aria-selected="true"],.lg3s .p4-cats button[aria-selected="true"]{color:#111;background:linear-gradient(180deg,#ffe28a,#d6a734);border-color:#d6a734}
+.lg3s .p4-cats button small{opacity:.7;font-weight:600}
+.lg3s .p4-panel{padding:14px;background:linear-gradient(160deg,#121925,#090c12 70%);border:1px solid rgba(255,255,255,.12)}
+.lg3s .p4-empty,.lg3s .p4-note,.lg3s .p4-muted{color:#aeb9c6;font-size:14px}
+.lg3s .p4-signin{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;padding:12px;border:1px dashed rgba(255,255,255,.25)}
+.lg3s .p4-signin p{margin:0;color:#dfe6ee;font-size:14px}
+.lg3s .p4-auth{margin:0 0 10px;color:#c9d3dc;font-size:14px}
+.lg3s .p4-link{background:none;border:0;color:#ffe28a;text-decoration:underline;cursor:pointer;font:inherit;padding:0}
+.lg3s .p4-btn{min-height:44px;padding:10px 18px;font:800 14px/1 "LG3S Barlow",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#111;background:linear-gradient(180deg,#ffe28a,#d6a734);border:0;cursor:pointer}
+.lg3s .p4-btn:disabled{opacity:.45;cursor:not-allowed}
+.lg3s .p4-discord{color:#fff;background:#5865f2}
+.lg3s .p4-banner{margin:0 0 12px;padding:10px 12px;background:rgba(22,163,74,.14);border-left:4px solid #16a34a;color:#e7f7ec;font-size:14px}
+.lg3s .p4-lineup{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 12px}
+.lg3s .p4-slot{position:relative;display:flex;flex-direction:column;gap:3px;min-height:96px;padding:10px 12px;background:#0b0f16;border:1px solid rgba(255,255,255,.14);border-top:3px solid #3a4555;cursor:pointer}
+.lg3s .p4-slot.is-filled{border-top-color:#e3262f}
+.lg3s .p4-slot.is-active{outline:2px solid #ffe28a;outline-offset:-2px}
+.lg3s .p4-slot-k{font:700 11px/1 "LG3S Barlow",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#8e9aa8}
+.lg3s .p4-slot b{font:600 24px/1 "LG3S Teko",Impact,sans-serif;letter-spacing:.02em;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lg3s .p4-slot .p4-pick-me{color:#ffe28a}
+.lg3s .p4-slot small{color:#b8c2ce;font-size:12px}
+.lg3s .p4-pts{margin-top:auto;font:700 22px/1 "LG3S Teko",Impact,sans-serif;color:#ffe28a}
+.lg3s .p4-pts small{margin-left:6px;font:700 10px/1 "LG3S Barlow",sans-serif;letter-spacing:.12em;color:#aeb9c6}
+.lg3s .p4-x{position:absolute;top:6px;right:8px;width:24px;height:24px;display:grid;place-items:center;font-size:18px;color:#c9d3dc;background:rgba(255,255,255,.08)}
+.lg3s .p4-dot{display:inline-block;width:8px;height:8px;margin-right:6px;border-radius:50%;background:var(--c);vertical-align:middle}
+.lg3s .p4-bar{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 16px;margin:0 0 6px}
+.lg3s .p4-cap{flex:1 1 220px;display:flex;flex-direction:column;gap:6px;color:#dfe6ee;font-size:14px}
+.lg3s .p4-cap i{display:block;height:8px;background:#1b2330;position:relative}
+.lg3s .p4-cap i::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--p);background:linear-gradient(90deg,#16a34a,#f5cf6b)}
+.lg3s .p4-cap.is-over{color:#ff9a9f}.lg3s .p4-cap.is-over i::after{background:#e3262f}
+.lg3s .p4-name{display:flex;flex-direction:column;gap:4px;font:700 11px/1 "LG3S Barlow",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8e9aa8}
+.lg3s .p4-name input,.lg3s .p4-filters input,.lg3s .p4-filters select{min-height:40px;padding:8px 10px;font:600 15px/1.2 "LG3S Barlow",sans-serif;color:#fff;background:#0d1219;border:1px solid rgba(255,255,255,.22)}
+.lg3s .p4-msg{min-height:20px;margin:0 0 12px;color:#ffe28a;font-size:14px}
+.lg3s .p4-tools{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin:0 0 10px}
+.lg3s .p4-cats,.lg3s .p4-filters{display:flex;flex-wrap:wrap;gap:6px}
+.lg3s .p4-pool{display:grid;gap:6px;max-height:560px;overflow:auto;padding-right:2px}
+.lg3s .p4-row{display:grid;grid-template-columns:minmax(0,1fr) 70px 70px 62px;align-items:center;gap:8px;width:100%;padding:8px 10px;text-align:left;color:#dfe6ee;background:#0b0f16;border:1px solid rgba(255,255,255,.1);cursor:pointer}
+.lg3s .p4-row:hover{border-color:rgba(255,226,138,.6)}
+.lg3s .p4-row.is-sel{border-color:#ffe28a;background:rgba(245,207,107,.12)}
+.lg3s .p4-row.is-clash{opacity:.5}
+.lg3s .p4-who{display:flex;flex-direction:column;gap:2px;min-width:0}
+.lg3s .p4-who b{font:600 21px/1 "LG3S Teko",Impact,sans-serif;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lg3s .p4-who small{color:#aeb9c6;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lg3s .p4-fig{display:flex;flex-direction:column;align-items:center}
+.lg3s .p4-fig b{font:600 22px/1 "LG3S Teko",Impact,sans-serif;color:#fff}
+.lg3s .p4-fig small{font:700 9px/1 "LG3S Barlow",sans-serif;letter-spacing:.12em;color:#8e9aa8}
+.lg3s .p4-price{justify-self:end;padding:4px 8px;font:600 22px/1 "LG3S Teko",Impact,sans-serif;color:#111;background:linear-gradient(180deg,#ffe28a,#d6a734)}
+.lg3s .p4-table-wrap{overflow-x:auto}
+.lg3s .p4-table{width:100%;border-collapse:collapse;font-size:14px;color:#dfe6ee}
+.lg3s .p4-table th,.lg3s .p4-table td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.1);text-align:left;vertical-align:top}
+.lg3s .p4-table th{font:700 11px/1.2 "LG3S Barlow",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8e9aa8}
+.lg3s .p4-table tr.is-prize td{background:rgba(245,207,107,.1)}
+.lg3s .p4-chip{display:inline-flex;align-items:center;gap:4px;margin:0 6px 4px 0;padding:2px 8px;background:#121925;border:1px solid rgba(255,255,255,.12);font-size:13px;white-space:nowrap}
+.lg3s .p4-chip b{color:#ffe28a}
+.lg3s .p4-rules h3{margin:4px 0 8px;font:600 24px/1 "LG3S Teko",Impact,sans-serif;letter-spacing:.03em;color:#fff}
+.lg3s .p4-rules ul{margin:0 0 14px;padding-left:18px;color:#dfe6ee;line-height:1.55}
+.lg3s .p4-rules p{color:#c9d3dc}
+@media(max-width:900px){.lg3s .p4-lineup{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){
+  .lg3s .p4-row{grid-template-columns:minmax(0,1fr) 54px 58px}
+  .lg3s .p4-row .p4-fig:nth-of-type(3){display:none}
+  .lg3s .p4-slot b{font-size:20px}
+  .lg3s .p4-tabs button,.lg3s .p4-cats button{padding:8px 10px;letter-spacing:.06em}
+}
+.lg3s .p4-hot{font-size:15px}

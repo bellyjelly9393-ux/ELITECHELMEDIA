@@ -24,13 +24,16 @@
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261021-lg3">
 <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
 <link rel="stylesheet" href="lg3s-media.css?v=20261025-vsfit">
-<link rel="stylesheet" href="lg3s-matchup.css?v=20261031-wire">
+<link rel="stylesheet" href="lg3s-matchup.css?v=20261101-p4">
 <link rel="stylesheet" href="lg3s-broadcast-preview.css?v=20261025-vsfit">
+<link rel="stylesheet" href="lg3s-pick4.css?v=20261101-p4">
 <script src="lg3s-nation-maps.js?v=20261025-vsfit" defer></script>
 <script src="lg3s-nation-art.js?v=20261025-vsfit" defer></script>
-<script src="lg3s-media.js?v=20261031-wire" defer></script>
+<script src="lg3s-media.js?v=20261101-p4" defer></script>
 <script src="lg3s-broadcast-preview.js?v=20261025-vsfit" defer></script>
 <script src="lg3s-ticker.js?v=20261025-vsfit" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js" defer></script>
+<script src="lg3s-pick4.js?v=20261101-p4" defer></script>
 <link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script></head>
 <body class="lg3s">
 <header class="top band">
@@ -117,7 +120,33 @@
 </article>
 </div>
 </div></section>
-<section class="th-section band lg3x-sec" id="threes" aria-label="Threes Bot segments"><div class="th-wrap"><header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">THREES BOT · EDITOR-APPROVED ONLY</p><h2 class="sec-title">THE <em>THREES</em> DESK</h2></div><p class="th-section-intro">Segments go live here after an editor approves them. Drafts are never shown.</p></header><div class="lg3x-grid"><article class="lg3x-card" data-feature="daily_three"><span class="lg3x-n">01</span><h3>DAILY THREE</h3><p>Three things that mattered from last night’s verified finals.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="trio_power_rankings"><span class="lg3x-n">02</span><h3>TRIO POWER RANKINGS</h3><p>Weekly ranking of the best three-player units.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="duo_index"><span class="lg3x-n">03</span><h3>DUO INDEX</h3><p>Pairs that drive results, from verified box scores.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="roster_wire"><span class="lg3x-n">04</span><h3>ROSTER WIRE</h3><p>Roster moves and lineup notes.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="pick_your_3"><span class="lg3x-n">05</span><h3>PICK YOUR 3</h3><p>Pick three players for the night and see how they scored.</p><span class="lg3x-soon">COMING SOON</span></article></div></div></section>
+<section class="th-section band lg3x-sec" id="threes" aria-label="Threes Bot segments"><div class="th-wrap"><header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">THREES BOT · EDITOR-APPROVED ONLY</p><h2 class="sec-title">THE <em>THREES</em> DESK</h2></div><p class="th-section-intro">Segments go live here after an editor approves them. Drafts are never shown.</p></header><div class="lg3x-grid"><article class="lg3x-card" data-feature="daily_three"><span class="lg3x-n">01</span><h3>DAILY THREE</h3><p>Three things that mattered from last night’s verified finals.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="trio_power_rankings"><span class="lg3x-n">02</span><h3>TRIO POWER RANKINGS</h3><p>Weekly ranking of the best three-player units.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="duo_index"><span class="lg3x-n">03</span><h3>DUO INDEX</h3><p>Pairs that drive results, from verified box scores.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="roster_wire"><span class="lg3x-n">04</span><h3>ROSTER WIRE</h3><p>Roster moves and lineup notes.</p><span class="lg3x-soon">COMING SOON</span></article><article class="lg3x-card" data-feature="pick_your_4"><span class="lg3x-n">05</span><h3>PICK YOUR 4</h3><p>A Superstar, a Breakout, a Diamond in the Rough and a Goalie, under the cap. Season prizes.</p><a class="lg3x-soon lg3x-live" href="#pick4">PLAY NOW →</a></article></div></div></section>
+<section class="th-section band p4-sec" id="pick4" aria-labelledby="p4Title"><div class="th-wrap">
+<header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">WEEKLY FANTASY · SIGN IN WITH DISCORD</p><h2 class="sec-title" id="p4Title">PICK YOUR <em>4</em></h2></div><p class="th-section-intro">Pick a Superstar, a Breakout Player, a Diamond in the Rough and a Goalie, from four different nations, under the weekly salary cap. Lock in before the first puck drop. Points update as games are verified.</p></header>
+<div class="p4-prize p4-prize-top"><b>Play for prizes.</b> The top 2 on the overall season board win a prize at the end of the season. The more people who play, the bigger the prizes get.</div>
+<div class="p4-status" data-p4-status><span>Loading…</span></div>
+<div class="p4-tabs" role="tablist"><button type="button" role="tab" data-p4-tab="picks" aria-selected="true">My picks</button><button type="button" role="tab" data-p4-tab="week" aria-selected="false">This week</button><button type="button" role="tab" data-p4-tab="season" aria-selected="false">Season board</button><button type="button" role="tab" data-p4-tab="rules" aria-selected="false">How it works</button></div>
+<div class="p4-panel" data-p4-panel="picks"><p class="p4-empty">Loading the player pool…</p></div>
+<div class="p4-panel" data-p4-panel="week" hidden></div>
+<div class="p4-panel" data-p4-panel="season" hidden></div>
+<div class="p4-panel p4-rules" data-p4-panel="rules" hidden>
+<h3>The four picks</h3><ul>
+<li><b>Superstar:</b> the 25 skaters with the best fantasy points per game (season and last three games blended).</li>
+<li><b>Breakout Player:</b> the next tier, the skaters ready to take over a night.</li>
+<li><b>Diamond in the Rough:</b> the bargain bin, every skater priced $8 or less. Under the radar, and where weeks are won.</li>
+<li><b>Goalie:</b> any goalie.</li>
+<li>🔥 marks a player whose last three games are at least 15% above his season average.</li></ul>
+<h3>The rules</h3><ul>
+<li>One player from each category, four different nations.</li>
+<li>Prices run $4 to $15 and are set from each player's stats. Your four picks must fit under the weekly cap.</li>
+<li>Picks lock at the first puck drop of the week. You can change them as often as you like until then.</li>
+<li>Players dress one night a week, usually for three games. Your picks score for whatever games they play that week.</li>
+<li>Other lineups are hidden until the lock, then revealed on the weekly board.</li></ul>
+<h3>Scoring</h3><table class="p4-table"><tbody>
+<tr><th>Skaters</th><td>Goal 3 · Assist 2 · Shot on goal 0.5 · Hit 0.25 · Hat trick +3 · Team win +1</td></tr>
+<tr><th>Goalies</th><td>Save 1 · Goal against −0.5 · Win +4 · Shutout +5</td></tr></tbody></table>
+<p>Only verified games count. Your weekly total adds to the season board, and the top 2 at the end of the season win a prize.</p></div>
+</div></section>
 <section class="th-section band lb-sec" id="leaderboards"><div class="th-wrap"><header class="th-section-head"><div><span class="sec-rule"></span><p class="eyebrow">SEASON 1 · VERIFIED BOX SCORES ONLY</p><h2 class="sec-title">LEADER<em>BOARDS.</em></h2></div><p class="th-section-caption">Top 10 in every category we can verify. Tap any player for their full page.</p></header><div class="lb-chips" id="lbChips" role="toolbar" aria-label="Leaderboard category"></div><p class="lb-note" id="lbNote">Loading verified box scores…</p><div id="lbBody"></div></div></section>
 <section class="th-hero band">
   <div class="th-wrap th-hero-grid">

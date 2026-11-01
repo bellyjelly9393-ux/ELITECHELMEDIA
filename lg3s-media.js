@@ -314,9 +314,8 @@
     if(d3)wire('daily_three',d3,'READ '+threeDate(d3)+' →',d3.output_json.tagline);
     const top=duo&&(duo.output_json.top_duos||[])[0];
     if(duo)wire('duo_index',duo,'READ WEEK '+Number(duo.week)+' →',top?'No. 1: '+(top.players||[]).join(' & ')+' ('+top.team+'), '+top.record_together+' together.':'');
-    const rw=pick('roster_wire'),p3=pick('pick3_preview');
+    const rw=pick('roster_wire');
     if(rw){const m=rw.output_json.moves||[],big=m.find(x=>x.is_big_move)||m[0];wire('roster_wire',rw,'READ '+String(rw.output_json.updated_label||'').toUpperCase()+' →',m.length?m.length+' moves on the wire. '+(big?big.ticker+'.':''):rw.output_json.quiet_note);}
-    if(p3)wire('pick_your_3',p3,String(p3.output_json.week_label||'').toUpperCase()+' PRICES →','Three skaters, $30, one per team. '+String(p3.output_json.week_label||'')+' prices are live.');
     if(/^#threes\//.test(location.hash))route();
   }
   /* ===== Leaderboards (verified box-score lines only) ===== */
