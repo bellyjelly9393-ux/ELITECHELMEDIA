@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08090b">
+<title>3D Player Cards | Elitechel Media</title>
+<meta name="description" content="Interactive 3D hockey player cards using verified LGCHL and LG3s league statistics. Customize a personal CHEL character preview.">
+<link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
+<link rel="stylesheet" href="player-cards.css?v=20261101">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js" defer></script>
+<script src="player-cards.js?v=20261101" defer></script>
+<script src="player-cards-account.js?v=20261101" defer></script>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><img src="assets/brand/ecm-crest.webp" width="54" height="54" alt=""><span><strong>ELITECHEL</strong><small>MEDIA</small></span></a>
+  <nav aria-label="Player card navigation"><a href="index.html">Home</a><a href="league-leaderboards.html?league=lg3s">Leaderboards</a><a href="lg3s-media.html">LG3s Desk</a><a href="lgchl-media.html">LGCHL Desk</a><a href="#myCollection">My Collection</a></nav>
+</header>
+<main>
+ <div class="heading"><span class="eyebrow">ELITECHEL MEDIA / PLAYER HEADQUARTERS</span><h1>THE PLAYER CARD STUDIO</h1><p>Real league stats. Your CHEL character. A card built like a piece of championship hardware.</p></div>
+ <section class="account-panel" id="accountPanel" aria-label="EliteChel account">
+  <div><span class="eyebrow">ELITECHEL FOUNDERS BETA</span><h2>YOUR CARDS. YOUR ACCOUNT.</h2>
+  <p id="accountStatus" role="status" aria-live="polite">Checking Discord sign-in…</p></div>
+  <div class="account-actions"><span class="account-who" id="accountName">Guest</span>
+   <button type="button" id="discordSignin">Sign in with Discord</button>
+   <button type="button" id="discordSignout" hidden>Sign out</button>
+   <a href="#myCollection">View My Collection ↓</a>
+  </div>
+ </section>
+ <div class="studio">
+  <section class="controls" aria-labelledby="custom-heading">
+   <h2 id="custom-heading">Build your card <span class="version">Preview v1</span></h2>
+   <p class="hint">Choose a player from the public league feed, then personalize the look. Nothing is published to other visitors.</p>
+   <label>League<select id="league"><option value="lg3s">LG3s · Season 1</option><option value="lgchl">LGCHL · Season 55</option></select></label>
+   <label>Find a player<input id="filter" type="search" placeholder="Search gamertag or team…" maxlength="90"></label>
+   <label>Player<select id="player"><option value="">Loading players…</option></select></label>
+   <p id="feedStatus" class="status" role="status" aria-live="polite">Loading public statistics…</p>
+   <div class="divider"></div>
+   <h3>Personalize the preview</h3>
+   <label>CHEL character screenshot <span class="sub">Optional PNG, JPG or WebP (max 8 MB)</span><input id="portraitFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
+   <div class="inline"><label>CHEL Overall <span class="sub">Self-reported</span><input id="overall" type="number" min="1" max="99" inputmode="numeric" placeholder="--"></label><label>Jersey number <span class="sub">Optional</span><input id="jersey" type="number" min="0" max="99" inputmode="numeric" placeholder="--"></label></div>
+   <label>Card finish<select id="finish"><option value="crimson">Crimson Steel</option><option value="gold">Championship Gold</option><option value="ice">Ice Chrome</option></select></label>
+   <div class="actions"><button type="button" id="save">Save on this device</button><button type="button" id="saveToCollection" disabled>Save to My Collection</button><button type="button" id="export">Export PNG</button><button type="button" class="secondary" id="reset">Reset personal edits</button></div>
+   <p class="footnote">Verified league stats are always read-only. CHEL overall is self-reported. Saving to My Collection stores your player choice, finish, overall and jersey on your private account. Your uploaded character image remains on this device only. Export a PNG to keep it; account-based image sync is not available yet.</p>
+  </section>
+  <section class="stage" aria-labelledby="preview-heading">
+   <div class="stage-head"><h2 id="preview-heading">3D CARD PREVIEW</h2><span>Move your pointer over the card</span></div>
+   <div class="perspective"><article id="card" class="trading-card" data-finish="crimson" aria-label="Hockey player card preview">
+      <div class="surface">
+        <div class="cardtop"><div class="ovr"><strong id="cardOvr">--</strong><span>CHEL OVR</span></div><div class="edition">ELITE<span>CHEL</span><small>PLAYER SERIES</small></div></div>
+        <div class="portrait"><img id="portrait" alt="Player-provided CHEL character screenshot" hidden><div id="silhouette" class="silhouette" aria-hidden="true">
+          <svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="hockey-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c0c6d1"/><stop offset=".45" stop-color="#485466"/><stop offset="1" stop-color="#151b24"/></linearGradient></defs><path fill="url(#hockey-metal)" stroke="#dfecfa" stroke-width="3" d="M120 13C69 13 56 53 62 99l18 25-13 18-47 20-17 84h234l-17-84-48-20-12-18 18-25C184 54 170 13 120 13Z"/><path fill="#0b121c" d="M82 64c24-18 52-18 76 0l-8 29-30 20-30-20Z"/><path stroke="#e5eaf1" stroke-width="6" fill="none" d="m66 76 108 0m-102 22 96 0m-48-49v65M28 186l92 26 91-26"/><path stroke="#e92b44" stroke-width="12" d="M38 215h164"/></svg>
+        </div><div class="portrait-shine"></div></div>
+        <div class="card-belt"><span id="cardPosition">PLAYER</span><strong id="cardName">SELECT PLAYER</strong><span id="cardJersey"></span></div>
+        <div class="card-team" id="cardTeam">LG VERIFIED STATS</div>
+        <div class="statstrip"><div><strong id="stat1">--</strong><span id="lab1">GP</span></div><div><strong id="stat2">--</strong><span id="lab2">G</span></div><div><strong id="stat3">--</strong><span id="lab3">A</span></div><div><strong id="stat4">--</strong><span id="lab4">PTS</span></div></div>
+        <div class="cardfoot"><span>ELITECHEL MEDIA</span><span>LG LEAGUE DATA · USER-CUSTOM OVR</span></div>
+      </div>
+   </article></div>
+   <p class="preview-note">Card artwork is a concept treatment. Actual character images appear when a player uploads their own game screenshot.</p>
+  </section>
+ </div>
+ <section class="collection-panel" id="myCollection" aria-label="Your personal card collection">
+  <div><span class="eyebrow">PLAYER HEADQUARTERS</span><h2>MY CARD COLLECTION</h2>
+  <p class="hint">Your saved players and card finishes. Use the week-by-week collection coming later for fantasy picks.</p></div>
+  <div id="collectionList" class="collection-grid"><p class="hint">Sign in to see your cards.</p></div>
+ </section>
+</main>
+</body>
+</html>
