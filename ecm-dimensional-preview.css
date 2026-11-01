@@ -1,0 +1,30 @@
+/* Elite Chel Media | dimensional broadcast redesign | preview branch only */
+:root{--ecm-gold:#e6b34e;--ecm-red:#d72c29;--ecm-edge:#6b727d}
+body{background:radial-gradient(ellipse at 50% 0%,#2a1716 0%,#0b0d12 48%,#06070a 100%);color:#f4f5f6}
+.top{position:relative;z-index:50;background:linear-gradient(180deg,#35383d 0%,#15171c 22%,#080a0d 72%,#1d2025 100%);border-top:2px solid #bd8c40;border-bottom:3px solid #07080a;box-shadow:0 2px 0 #b78237,0 8px 22px #000c,inset 0 1px 0 #ffffff55}
+.top-in{min-height:86px}.top .nav a,.ecm-nav-trigger{font-weight:800;text-transform:uppercase;letter-spacing:.045em;text-shadow:0 2px 2px #000}
+.top .nav a:hover,.top .nav a:focus-visible{color:#ffcf71}
+.ecm-banner{position:relative;isolation:isolate;border-bottom:3px solid #b78137;box-shadow:0 12px 26px #000a}
+.ecm-banner-art:after{content:"";pointer-events:none;position:absolute;inset:0;box-shadow:inset 0 0 80px #0009,inset 0 -20px 36px #0008}
+.ecm-banner-cta{background:linear-gradient(180deg,#252930,#0b0c10);border-top:1px solid #b58b48;box-shadow:inset 0 2px #ffffff22}
+.btn,.watch-btn,.desk-go,.hn-cta{border-radius:3px!important;transition:transform .18s ease,filter .18s ease,box-shadow .18s ease}
+.btn:hover,.watch-btn:hover,.hn-cta:hover{transform:translateY(-2px);filter:brightness(1.13)}
+.btn-gold,.watch-btn{background:linear-gradient(180deg,#ffdc82 0%,#e2a944 46%,#8b5418 100%);border:1px solid #ffe6a0;color:#17110b;box-shadow:inset 0 2px #fff7,0 3px 0 #58350f,0 9px 15px #0009;text-shadow:0 1px #fff5}
+.btn-line{border:1px solid #9299a4;background:linear-gradient(180deg,#333840,#101216);box-shadow:inset 0 1px #fff3,0 4px 0 #08090b,0 9px 16px #0007}
+.desks-band{padding-top:26px;padding-bottom:26px;background:linear-gradient(180deg,#191b20,#080a0e)}
+.desks{gap:14px}.desk,.card,.leaders,.hn-frame{border-radius:4px!important;border:1px solid #8b7350!important;box-shadow:inset 0 1px 0 #ffffff55,inset 0 -3px 0 #000b,0 4px 0 #0a0b0d,0 12px 23px #000a!important;overflow:hidden}
+.desk{background:linear-gradient(145deg,#343941,#0c0e13 65%);transform:translateZ(0);transition:transform .2s ease,box-shadow .2s ease}
+.desk:hover{transform:translateY(-5px);box-shadow:inset 0 1px #fff7,0 7px 0 #090a0c,0 19px 28px #000c!important}
+.desk:before{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;border-top:3px solid #e7b75a;border-left:2px solid #7d858e}
+.desk-t,.sec-title,.hn-title{letter-spacing:.015em;text-shadow:0 2px 0 #000,0 4px 7px #000a}
+.hn,.live,.stories,.league,.opp{position:relative;border-top:1px solid #68502d;border-bottom:2px solid #08090c;box-shadow:inset 0 2px #ffffff0c}
+.hn{background:radial-gradient(ellipse at top,#30201a,#090b10 70%)}
+.hn-frame{background:#050608;padding:5px}
+.hn-cta{box-shadow:inset 0 1px #fff4,0 4px 0 #0a0a0c,0 8px 14px #0008}
+.tile,.next,.leaders,.feature-slot{background:linear-gradient(155deg,#30343b,#111318 45%,#08090d)}
+.stories,.league{background:linear-gradient(180deg,#171a20,#090b0e)}
+.stories-in,.league-in{gap:22px}
+.sec-rule{background:linear-gradient(90deg,#f2cb78,#a52a22)}
+a:focus-visible,button:focus-visible{outline:3px solid #ffcf65;outline-offset:4px}
+@media(max-width:760px){.top-in{min-height:66px}.desks-band{padding:16px 12px}.desks{gap:12px}.desk{min-height:170px}.ecm-banner-cta{padding:14px}.hn,.stories,.league{padding-top:24px;padding-bottom:24px}.desk-t{font-size:clamp(20px,5vw,30px)}}
+@media(prefers-reduced-motion:reduce){.desk,.btn,.watch-btn,.hn-cta{transition:none}.desk:hover,.btn:hover,.watch-btn:hover,.hn-cta:hover{transform:none}}
