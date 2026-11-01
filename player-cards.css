@@ -22,3 +22,30 @@ h2,h3{font-family:Anton,Impact,sans-serif;letter-spacing:1px;font-weight:400}h2{
 @media(max-width:480px){main{padding:22px 12px}.top nav a:nth-child(3),.top nav a:nth-child(4){display:none}.trading-card{width:min(100%,312px)}.ovr strong{font-size:46px}.card-belt strong{font-size:22px}.stage-head span{display:none}.heading h1{font-size:36px}}
 @media(hover:none){.trading-card{transform:none}.trading-card:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}.trading-card,.trading-card:hover{transform:none}}
+
+
+/* Signed-in card beta: profile access and private card collection. */
+.account-panel,.collection-panel{
+ border:1px solid #505563;background:linear-gradient(132deg,#1b222c,#0c1018 66%,#17151a);
+ box-shadow:inset 0 1px #e5b64d4a,0 14px 30px #0006;border-radius:9px;
+ padding:20px 24px;margin:0 0 24px;
+}
+.account-panel{display:flex;gap:18px;align-items:center;justify-content:space-between}
+.account-panel h2,.collection-panel h2{margin:5px 0 8px;font-size:23px}
+.account-panel p{color:#b9c7d6;font-size:13px;line-height:1.5;margin:0}
+.account-actions{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap}
+.account-who{color:#f3dbac;font-size:13px;font-weight:bold}
+.account-actions button{border:1px solid #ee5265;border-radius:5px;padding:11px 14px;background:#921c2e;color:#fff;font-weight:800;cursor:pointer}
+.account-actions a{color:#f4d78a;font-size:12px;font-weight:700}
+.account-actions [hidden]{display:none!important}
+.actions button:disabled,.account-actions button:disabled{opacity:.45;cursor:not-allowed}
+.collection-panel{margin:26px 0}
+.collection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:20px}
+.account-card{display:flex;justify-content:space-between;gap:10px;align-items:center;
+ text-decoration:none;background:linear-gradient(130deg,#292329,#131923);border:1px solid #77717b;
+ border-left:3px solid #dbab4c;border-radius:7px;padding:16px;min-height:84px}
+.account-card b{display:block;overflow-wrap:anywhere;font-family:Anton,Impact,sans-serif;font-size:19px}
+.account-card small{display:block;font-size:11px;color:#b8c6d4;margin-top:6px}
+.account-card-arrow{white-space:nowrap;font-size:12px;color:#ebc679}
+.account-card:focus-visible,.account-actions a:focus-visible{outline:2px solid #f6d27a;outline-offset:2px}
+@media(max-width:700px){.account-panel{align-items:stretch;flex-direction:column;padding:16px}.account-actions{justify-content:flex-start}.collection-panel{padding:16px}}
