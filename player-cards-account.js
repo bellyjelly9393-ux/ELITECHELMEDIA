@@ -89,7 +89,7 @@
     var b=byId('saveToCollection');b.disabled=true;notice('Saving card to your account…');
     var payload={user_id:me.id,league:window.ecmCardStudio.getLeague(),
       lg_user_id:Number(p.id),player_kind:p.kind,gamertag_snapshot:p.tag.slice(0,80),
-      finish:f,self_reported_overall:overall,jersey_number:jersey};
+      finish:f,self_reported_overall:overall,jersey_number:jersey,updated_at:new Date().toISOString()};
     var res=await db.from('elitechel_player_cards').upsert(payload,
       {onConflict:'user_id,league,lg_user_id,player_kind'});
     b.disabled=false;
