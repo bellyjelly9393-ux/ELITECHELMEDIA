@@ -1,0 +1,86 @@
+[
+  {
+    "lg_game_id": 918009,
+    "title": "Hitmen vs Gatineau · Game 3 · Oct 25",
+    "test_review_id": "a1000000-0000-4000-8000-000000918009",
+    "vod_url": "https://www.twitch.tv/videos/2910969606",
+    "source_start_seconds": 4280,
+    "source_end_seconds": 5554,
+    "periods": [
+      {
+        "label": "Period 1",
+        "start": 0,
+        "end": 444
+      },
+      {
+        "label": "Period 2",
+        "start": 444,
+        "end": 888
+      },
+      {
+        "label": "Period 3",
+        "start": 888,
+        "end": 1274
+      }
+    ],
+    "period_evidence": "Copied existing approved period boundaries; new analysis does not confer approval.",
+    "source_review_id": "27c5c9ff-8178-4c6b-9366-17ebd5c6488a",
+    "baseline_names": [
+      "HENNY",
+      "FITS",
+      "GULLY",
+      "BACKES",
+      "JOSE LECUM",
+      "El Jaacho",
+      "Tee",
+      "Buck Tee"
+    ]
+  },
+  {
+    "lg_game_id": 917960,
+    "title": "Hitmen vs Windsor · Game 2 · Oct 25",
+    "test_review_id": "a1000000-0000-4000-8000-000000917960",
+    "vod_url": "https://www.twitch.tv/videos/2910969606",
+    "source_start_seconds": 2445,
+    "source_end_seconds": 4076,
+    "periods": [
+      {
+        "label": "Period 1",
+        "start": 0,
+        "end": 372
+      },
+      {
+        "label": "Period 2",
+        "start": 372,
+        "end": 876
+      },
+      {
+        "label": "Period 3",
+        "start": 876,
+        "end": 1380
+      },
+      {
+        "label": "Overtime 1",
+        "start": 1380,
+        "end": 1631
+      }
+    ],
+    "period_evidence": "Copied existing approved period boundaries; new analysis does not confer approval.",
+    "source_review_id": "1c4cab11-846e-4757-89d6-209832274ef6",
+    "baseline_names": [
+      "HENNY",
+      "BACKES",
+      "FITS",
+      "GULLY",
+      "Jose Lecum",
+      "Whiteout181",
+      "WHEELS",
+      "SAVER",
+      "MULAN",
+      "Dish",
+      "Turnstile",
+      "Crafty",
+      "DeaconDish21"
+    ]
+  }
+]

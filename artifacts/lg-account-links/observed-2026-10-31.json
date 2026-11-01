@@ -1,0 +1,21 @@
+{
+  "schema": "lg-platform-account-evidence-v1",
+  "league": "LGCHL",
+  "season": 55,
+  "scope": "Hitmen and scheduled opponents, current week and remaining season",
+  "records": [
+    {
+      "lg_user_id": "73707",
+      "registered_name": "l Setty l",
+      "platform": "xbox",
+      "account_gamertag": "l Setty l",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=73707&leagueid=39&seasonid=55",
+      "observed_at": "2026-10-31T16:47:36.480Z",
+      "source": "LG Stats Client Developer Starter - live LG profile",
+      "evidence": "Career Info: Xbox GamerTag: l Setty l",
+      "status": "account_link_observed",
+      "game_participation_verified": false
+    }
+  ],
+  "published": false
+}

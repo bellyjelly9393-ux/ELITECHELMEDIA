@@ -7,7 +7,16 @@ on:
       - 'vod-*'
       - 'hitmen-player-locker*'
       - 'api/chelscout-deepthink.js'
+      - 'api/chelstats-player.js'
       - 'test-vod-*'
+      - 'test-fixtures/vod-hitmen-identity-reference.json'
+      - 'docs/sql/vod_lg_identity.sql'
+      - 'lib/vod-lineup-preflight.cjs'
+      - 'scripts/vod-lineup-preflight.cjs'
+      - 'lib/lg-platform-capture-dom.js'
+      - 'scripts/capture-lg-platform-accounts.py'
+      - 'scripts/export-lg-account-capture.py'
+      - 'tests/test_vod_account_export.py'
       - 'api/vod-archive.js'
       - 'api/_s3presign.js'
       - 'test-deep-scout.cjs'
@@ -29,8 +38,19 @@ jobs:
       - run: node --test test-vod-review.cjs test-deep-scout.cjs
       - run: node --test test-vod-archive.mjs
       - run: node test-grok.cjs && node test-grok-code.cjs
-      - run: npm install --prefix /tmp/vod-browser playwright@1.56.1
+      - run: npm install --prefix /tmp/vod-browser playwright@1.56.1 jsdom@26.1.0 @electric-sql/pglite@0.3.14
       - run: /tmp/vod-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: LG identity and publication regression checks
+        env:
+          NODE_PATH: /tmp/vod-browser/node_modules
+        run: |
+          node test-vod-lg-identity.cjs
+          node --test test-vod-lineup-preflight.cjs
+          node --test test-vod-chel-account.cjs
+          node --test test-vod-lg-capture.cjs
+          python -B tests/test_vod_account_export.py
+          node test-vod-player-matching.cjs
+          node test-vod-restore.cjs
       - name: Management workflow browser checks
         env:
           NODE_PATH: /tmp/vod-browser/node_modules

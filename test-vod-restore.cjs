@@ -64,6 +64,8 @@ const wait=async(test)=>{for(let i=0;i<150;i++){if(test())return;await new Promi
    await wait(()=>rows.vod_review_segments[i].status==='complete');
   }
   await wait(()=>!w.document.getElementById('publishVodReport').disabled);
+  w.document.getElementById('loadVodPlayerMatches').click();
+  await wait(()=>w.document.getElementById('vodPlayerMatchStatus').textContent.includes('confirmed by'));
   w.document.getElementById('publishVodReport').click();
   await wait(()=>w.published.length===1);
   assert.equal(w.published[0].name,'publish_vod_review');

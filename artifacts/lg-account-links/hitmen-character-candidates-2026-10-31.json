@@ -1,0 +1,367 @@
+{
+  "schema": "chel-character-candidates-v1",
+  "league": "LGCHL",
+  "season": 55,
+  "scope": "17 players observed in the live Hitmen roster view; both explicitly linked accounts retained where listed",
+  "records": [
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "73707"
+      ],
+      "lg_user_id": "73707",
+      "lg_platform": "xbox",
+      "lg_account_gamertag": "l Setty l",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=73707&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:30.749009+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "l Setty l",
+      "character_name_candidate": "Bad News Kells",
+      "ea_blaze_id_candidate": "186209497",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "76399"
+      ],
+      "lg_user_id": "76399",
+      "lg_platform": "xbox",
+      "lg_account_gamertag": "gtcoop73",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=76399&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:32.928056+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "gtcoop73",
+      "character_name_candidate": "- Coop",
+      "ea_blaze_id_candidate": "246408210",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "58225"
+      ],
+      "lg_user_id": "58225",
+      "lg_platform": "xbox",
+      "lg_account_gamertag": "offtheyrk",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=58225&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:34.776754+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "offtheyrk",
+      "character_name_candidate": "- Tron",
+      "ea_blaze_id_candidate": "1727326976",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "74341"
+      ],
+      "lg_user_id": "74341",
+      "lg_platform": "xbox",
+      "lg_account_gamertag": "SmokoLi",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=74341&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:36.732048+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "SmokoLi",
+      "character_name_candidate": "Dominican Papi",
+      "ea_blaze_id_candidate": "1005315499898",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "66913"
+      ],
+      "lg_user_id": "66913",
+      "lg_platform": "playstation",
+      "lg_account_gamertag": "thenny32",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=66913&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:38.580289+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "thenny32",
+      "character_name_candidate": "-- henny",
+      "ea_blaze_id_candidate": "1717350605",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "79521"
+      ],
+      "lg_user_id": "79521",
+      "lg_platform": "xbox",
+      "lg_account_gamertag": "l Gully I",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79521&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:40.456680+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "l Gully I",
+      "character_name_candidate": "- Gully",
+      "ea_blaze_id_candidate": "416182943",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "49944"
+      ],
+      "lg_user_id": "49944",
+      "lg_platform": "xbox",
+      "lg_account_gamertag": "IIII metro",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=49944&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:42.971756+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "IIII metro",
+      "character_name_candidate": "- m\u0113\u0162r\u00f3",
+      "ea_blaze_id_candidate": "862448853",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "10718"
+      ],
+      "lg_user_id": "10718",
+      "lg_platform": "xbox",
+      "lg_account_gamertag": "l Danks l",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=10718&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:44.823138+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "l Danks l",
+      "character_name_candidate": "- Danks",
+      "ea_blaze_id_candidate": "211044909",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "77137"
+      ],
+      "lg_user_id": "77137",
+      "lg_platform": "playstation",
+      "lg_account_gamertag": "WhiteoutI8I",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=77137&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:46.680036+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "WhiteoutI8I",
+      "character_name_candidate": "- Jose Lecum",
+      "ea_blaze_id_candidate": "1007446013800",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "17569"
+      ],
+      "lg_user_id": "17569",
+      "lg_platform": "playstation",
+      "lg_account_gamertag": "imona_plain",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=17569&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:48.554962+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "ImOnA_Plain",
+      "character_name_candidate": "- Country's Own Alan Jackson",
+      "ea_blaze_id_candidate": "1693869836",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "77094"
+      ],
+      "lg_user_id": "77094",
+      "lg_platform": "playstation",
+      "lg_account_gamertag": "WhyKayWins",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=77094&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:50.400320+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "WhyKayWins",
+      "character_name_candidate": "\u01a0\u01a0 \u01a0 KAY \u01a0",
+      "ea_blaze_id_candidate": "1004740153086",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "66249"
+      ],
+      "lg_user_id": "66249",
+      "lg_platform": "playstation",
+      "lg_account_gamertag": "XFITSKY",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=66249&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:52.815715+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "XFITSKY",
+      "character_name_candidate": "J Fits",
+      "ea_blaze_id_candidate": "1718755008",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "80054"
+      ],
+      "lg_user_id": "80054",
+      "lg_platform": "playstation",
+      "lg_account_gamertag": "Call1-800gambler",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=80054&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:54.714571+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "Call1-800gambler",
+      "character_name_candidate": "David Backes",
+      "ea_blaze_id_candidate": "1005686901375",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "79440"
+      ],
+      "lg_user_id": "79440",
+      "lg_platform": "xbox",
+      "lg_account_gamertag": "Koldex Bands",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79440&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:56.559830+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "Koldex Bands",
+      "character_name_candidate": "- Koldy",
+      "ea_blaze_id_candidate": "1004356295766",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "81072"
+      ],
+      "lg_user_id": "81072",
+      "lg_platform": "xbox",
+      "lg_account_gamertag": "McKenna l72I",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=81072&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:46:58.549989+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "McKenna l72I",
+      "character_name_candidate": "Jordan NHL",
+      "ea_blaze_id_candidate": "1994556856",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "80604"
+      ],
+      "lg_user_id": "80604",
+      "lg_platform": "xbox",
+      "lg_account_gamertag": "XxPASTRNAK88",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=80604&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:47:00.415232+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "XxPASTRNAK88",
+      "character_name_candidate": "-G-A-M-E- -S-A-V-E-R-",
+      "ea_blaze_id_candidate": "1981561188",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "12262"
+      ],
+      "lg_user_id": "12262",
+      "lg_platform": "playstation",
+      "lg_account_gamertag": "Kudolken",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=12262&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:47:02.698089+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "returned_username": "Kudolken",
+      "character_name_candidate": "- KUDOLKEN",
+      "ea_blaze_id_candidate": "1699018067",
+      "provider_platform": null,
+      "status": "suggestion_only"
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "12262"
+      ],
+      "lg_user_id": "12262",
+      "lg_platform": "xbox",
+      "lg_account_gamertag": "I Crease Fire I",
+      "lg_source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=12262&leagueid=39&seasonid=55",
+      "source": "chelstats",
+      "fetched_at": "2026-10-31T17:47:04.767856+00:00",
+      "verification": "current_profile_candidate_only",
+      "game_identity_verified": false,
+      "status": "unresolved",
+      "reason": "Unsupported profile response"
+    }
+  ],
+  "character_name_collisions": [],
+  "published": false
+}

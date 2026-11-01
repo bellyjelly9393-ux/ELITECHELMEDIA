@@ -578,7 +578,10 @@
     }
     const section=(title,value)=>`<section><h4>${esc(title)}</h4><p>${esc(value||"Insufficient reviewed evidence.")}</p></section>`;
     const openLayers=new Set([...$("gameReviewLayers").querySelectorAll("details[open]")].map(d=>d.dataset.layer));
-    $("gameReviewLayers").innerHTML=`<p class="analysis-note">${problems.length?esc(problems.join(" ")):"All periods approved. Review the three report layers before publishing."}</p><details data-layer="team"><summary>Team Systems Report</summary>${section("Game overall",scoreLabel(doc.game_rating))}${section("Result",doc.result)}${section("Process",doc.process||doc.summary)}<div class="period-review-content">${model.systems.map(k=>section(k.replaceAll("_"," "),doc.team_systems?.[k])).join("")}</div>${doc.tactical_report?section("Tactical evidence",doc.tactical_report):""}</details><details data-layer="units"><summary>Line / D-pair Reports</summary>${doc.units.length?doc.units.map(u=>section(`${u.label} · ${u.players.join(" / ")}`,[u.summary,u.strengths,u.concerns,u.adjustments,scoreLabel(u.rating)].filter(Boolean).join("\n"))).join(""):section("Unit evidence","No verified line or defense-pair report yet. Lineup names alone do not establish chemistry.")}</details><details data-layer="players"><summary>Individual Player Reports</summary>${doc.players.length?doc.players.map(p=>section(p.player,[p.strengths,p.concerns,p.habits,p.coach_note,scoreLabel(p.rating)].filter(Boolean).join("\n"))+`<p class="evidence-links">${(p.evidence_timestamps||[]).map(t=>timestampLink(t,fmtTime(t))).join(" · ")}</p>`).join(""):section("Player evidence",doc.player_report)}</details>`;
+    const publishedReport=currentPublication()?.report;
+    const displayPlayers=publishedReport?.identity_version===2?publishedReport.canonical_players:doc.players;
+    const unresolved=publishedReport?.unresolved_identities||[];
+    $("gameReviewLayers").innerHTML=`<p class="analysis-note">${problems.length?esc(problems.join(" ")):"All periods approved. Review the three report layers before publishing."}</p><details data-layer="team"><summary>Team Systems Report</summary>${section("Game overall",scoreLabel(doc.game_rating))}${section("Result",doc.result)}${section("Process",doc.process||doc.summary)}<div class="period-review-content">${model.systems.map(k=>section(k.replaceAll("_"," "),doc.team_systems?.[k])).join("")}</div>${doc.tactical_report?section("Tactical evidence",doc.tactical_report):""}</details><details data-layer="units"><summary>Line / D-pair Reports</summary>${doc.units.length?doc.units.map(u=>section(`${u.label} · ${u.players.join(" / ")}`,[u.summary,u.strengths,u.concerns,u.adjustments,scoreLabel(u.rating)].filter(Boolean).join("\n"))).join(""):section("Unit evidence","No verified line or defense-pair report yet. Lineup names alone do not establish chemistry.")}</details><details data-layer="players"><summary>Individual Player Reports</summary>${(displayPlayers||[]).length?displayPlayers.map(p=>section(p.lg_user_id?`${p.player} · LG ${p.lg_user_id}`:p.player,[p.strengths,p.concerns,p.habits,p.coach_note,scoreLabel(p.rating)].filter(Boolean).join("\n"))+`<p class="evidence-links">${(p.evidence_timestamps||[]).map(t=>timestampLink(t,fmtTime(t))).join(" · ")}</p>`).join(""):section("Player evidence",publishedReport?.identity_version===2?"No verified player reports. Review unresolved identities.":doc.player_report)}${unresolved.length?section('Unresolved identities',unresolved.map(p=>`${p.source_name}: ${p.reason}`).join('\n')):''}</details>`;
     $("gameReviewLayers").querySelectorAll("details").forEach(d=>{d.open=openLayers.has(d.dataset.layer);});
     $("publishVodReport").disabled=problems.length>0;
     renderPlayerMatches();
@@ -608,54 +611,59 @@
     $("saveVodPlayerMatches").disabled=!loaded||publishing||model.periodErrors(currentReview(),reviewSegments(),{approved:true}).length>0;
     if(!loaded){box.innerHTML="";$("vodPlayerMatchStatus").textContent="Load the game’s players to match names or review saved matches.";return;}
     const {candidates,matches,suggestions}=playerMatching;
-    const groups=[["Played this game · official box score",candidates.filter(p=>p.played)],
-      ["Listed in this game’s lineup",candidates.filter(p=>!p.played&&p.lineup)],
-      ["Other team players · confirm participation",candidates.filter(p=>!p.played&&!p.lineup)]];
+    const groups=[["Verified game roster · LG identity",candidates]];
     const names=[...new Set(reportDocument().players.map(p=>p.player))];
     box.innerHTML=names.map((name,i)=>{
-      const key=playerNameKey(name),exact=candidates.filter(p=>playerNameKey(p.gamertag)===key);
-      const value=matches[key]??(exact.length===1?exact[0].id:"");
+      const key=playerNameKey(name);
+      const value=matches[key]??""; // A matching name alone is not verified identity.
       const hints=suggestions.filter(s=>playerNameKey(s.name)===key).map(s=>s.gamertag);
       const chel=candidates.filter(p=>p.chelName&&playerNameKey(p.chelName)===key).map(p=>p.gamertag);
       const hint=[...new Set([...hints,...chel])];
-      return `<label class="vod-player-match-row" for="vodMatch${i}"><span><strong>${esc(name)}</strong><small>${hint.length?'Suggested: '+esc(hint.join(' / '))+' · confirm below':value==='ignore'?'Excluded from team stalls':value?'Linked to one player':'Needs a match'}</small></span><select id="vodMatch${i}" class="select-field" data-vod-player-name="${esc(key)}"><option value="">Leave unmatched</option><option value="ignore" ${value==='ignore'?'selected':''}>Opponent / exclude from team stalls</option>${groups.filter(([,players])=>players.length).map(([label,players])=>`<optgroup label="${esc(label)}">${players.map(p=>`<option value="${esc(p.id)}" ${value===p.id?'selected':''}>${esc(p.gamertag)} · ${esc(p.position||'?')}${p.chelName?' · CHEL: '+esc(p.chelName):''}${p.lg_user_id?' · LG '+esc(p.lg_user_id):''}</option>`).join('')}</optgroup>`).join('')}</select></label>`;
+      return `<label class="vod-player-match-row" for="vodMatch${i}"><span><strong>${esc(name)}</strong><small>${hint.length?'Suggested: '+esc(hint.join(' / '))+' · confirm below':value==='ignore'?'Excluded from team stalls':value?'Linked to one player':'Needs a match'}</small></span><select id="vodMatch${i}" class="select-field" data-vod-player-name="${esc(key)}"><option value="">Leave unmatched</option><option value="ignore" ${value==='ignore'?'selected':''}>Opponent / exclude from team stalls</option>${groups.filter(([,players])=>players.length).map(([label,players])=>`<optgroup label="${esc(label)}">${players.map(p=>`<option value="${esc(p.id)}" ${value===p.id?'selected':''}>${esc(p.gamertag)} · ${esc(p.position||'?')}${p.chelName?' · CHEL: '+esc(p.chelName):''}${p.lg_user_id?' · LG '+esc(p.lg_user_id):''}</option>`).join('')}</optgroup>`).join('')}</select><input class="text-input" data-alias-evidence="${esc(key)}" placeholder="Evidence: lineup source, VOD timestamp and identity proof" aria-label="Alias verification evidence for ${esc(name)}" value="${esc(playerMatching.evidence[key]||'')}"><select class="select-field" data-alias-kind="${esc(key)}" aria-label="Alias type for ${esc(name)}">${['gamertag','chel_character','broadcast'].map(k=>`<option value="${k}" ${playerMatching.kinds[key]===k?'selected':''}>${k.replaceAll('_',' ')}</option>`).join('')}</select></label>`;
     }).join('');
-    box.querySelectorAll('select').forEach(el=>el.addEventListener('change',()=>{
-      // Empty is retained explicitly: it clears a prior manual match on publish.
+    box.querySelectorAll('[data-alias-evidence]').forEach(el=>el.addEventListener('input',()=>{playerMatching.evidence[el.dataset.aliasEvidence]=el.value;}));
+    box.querySelectorAll('[data-alias-kind]').forEach(el=>el.addEventListener('change',()=>{playerMatching.kinds[el.dataset.aliasKind]=el.value;}));
+    box.querySelectorAll('[data-vod-player-name]').forEach(el=>el.addEventListener('change',()=>{
+      // Empty is retained explicitly: it withholds this name from routing on publish.
       playerMatching.matches[el.dataset.vodPlayerName]=el.value;
-      $("vodPlayerMatchStatus").textContent="Unsaved matches. Save to update the existing reports.";
+      $("vodPlayerMatchStatus").textContent="Unsaved alias choices. Evidence is required before creating new reports.";
     }));
   }
   async function loadPlayerMatches(){
     const r=currentReview();if(!r)return;
+    playerMatching=null;
     $("loadVodPlayerMatches").disabled=true;$("vodPlayerMatchStatus").textContent="Loading game participants…";
     try{
       const {data,error}=await db().rpc('vod_player_match_context',{target_review:r.id});if(error)throw error;
       if(currentReview()?.id!==r.id)return;
-      playerMatching={reviewId:r.id,candidates:data.candidates||[],suggestions:data.suggestions||[],matches:data.matches||{}};
+      if(data.identity_version!==2)throw new Error('The verified LG identity schema is required before routing players.');
+      playerMatching={reviewId:r.id,originalMatches:{...(data.matches||{})},evidence:{},kinds:{},candidates:data.candidates||[],suggestions:data.suggestions||[],matches:data.matches||{}};
       renderPlayerMatches();
       const count=playerMatching.candidates.filter(p=>p.played).length;
-      $("vodPlayerMatchStatus").textContent=count?`${count} players confirmed by this game’s box score. Other roster players are listed separately.`:'No official box-score participants are linked yet. Verify participation before choosing a roster player.';
+      $("vodPlayerMatchStatus").textContent=count?`${count} players confirmed by this game’s verified roster. Only verified game participants are available.`:'No verified game roster is available. Management must verify game participation and LG IDs first.';
     }catch(e){if(currentReview()?.id===r.id)$("vodPlayerMatchStatus").textContent=e.message||'Could not load players.';}
     finally{$("loadVodPlayerMatches").disabled=false;}
   }
   async function lookupChelNames(){
     const context=playerMatching;if(!context||context.reviewId!==state.selectedReviewId)return;
-    const played=context.candidates.filter(p=>p.played||p.lineup);
-    const candidates=played.length?played:context.candidates;
+    const candidates=context.candidates.filter(p=>p.account_gamertag&&['xbox','playstation'].includes(p.account_platform));
+    const missing=context.candidates.length-candidates.length;
     $("lookupVodChelNames").disabled=true;$("vodPlayerMatchStatus").textContent="Checking ChelStats player names…";
-    let found=0,failed=0;
+    let found=0,failed=0,unconfirmedPlatform=0;
     // Bounded concurrency avoids sending a whole roster at once.
     const queue=[...candidates];
     await Promise.all([0,1,2].map(async()=>{while(queue.length){
       const p=queue.shift();
-      try{const response=await fetch('/api/chelstats-player?identity=1&username='+encodeURIComponent(p.gamertag),{signal:AbortSignal.timeout(20000)});
+      p.chelName=null;p.chelProfileEvidence=null;
+      try{const response=await fetch('/api/chelstats-player?identity=1&username='+encodeURIComponent(p.account_gamertag)+'&expected_platform='+encodeURIComponent(p.account_platform),{signal:AbortSignal.timeout(20000)});
         if(!response.ok)throw new Error('Lookup unavailable');const data=await response.json();
-        if(data.profile?.chelName){p.chelName=data.profile.chelName;found++;}
+        const platformMatches=data.profile?.platform===p.account_platform;
+        const candidateOnly=!data.profile?.platform&&data.verification==='current_profile_suggestion_platform_unconfirmed';
+        if(data.profile?.chelName&&(platformMatches||candidateOnly)&&playerNameKey(data.profile.username)===playerNameKey(p.account_gamertag)){p.chelName=data.profile.chelName;p.chelProfileEvidence={source:data.source,fetched_at:data.fetched_at,blazeId:data.profile.blazeId,platform:data.profile.platform,platform_confirmed:platformMatches,username:data.profile.username};found++;if(candidateOnly)unconfirmedPlatform++;}
       }catch{failed++;}
     }}));
     if(playerMatching!==context||state.selectedReviewId!==context.reviewId)return;
-    renderPlayerMatches();$("vodPlayerMatchStatus").textContent=`${found} CHEL names found${failed?` · ${failed} lookups unavailable`:''}. Current profile names are suggestions; confirm against this game’s footage.`;
+    renderPlayerMatches();$("vodPlayerMatchStatus").textContent=`${found} CHEL names found${failed?` · ${failed} lookups unavailable`:''}${missing?` · ${missing} players need an LG-verified Xbox/PS account link`:''}${unconfirmedPlatform?` · ${unconfirmedPlatform} suggestions lack provider platform confirmation`:''}. Current profile names are suggestions; confirm against this game’s footage.`;
   }
 
   async function publishReport(){
@@ -665,9 +673,17 @@
     $("publishVodReport").disabled=true;
     $("saveVodPlayerMatches").disabled=true;
     try{
+      if(playerMatching?.reviewId!==r.id)throw new Error('Load the verified game roster before publishing.');
+      for(const [name,locker] of Object.entries(playerMatching.matches)){
+        if(!locker||locker==='ignore'||locker===playerMatching.originalMatches[name])continue;
+        const evidence=(playerMatching.evidence[name]||'').trim();
+        if(evidence.length<12)throw new Error('Enter verification evidence for '+name+'. Names alone do not establish identity.');
+        const verified=await db().rpc('vod_verify_player_alias',{target_review:r.id,source_name:name,target_locker:locker,alias_kind:playerMatching.kinds[name]||'gamertag',source_evidence:evidence});
+        if(verified.error)throw verified.error;
+      }
       const {data,error}=await db().rpc("publish_vod_review",{target_review:r.id,expected_updated_at:r.updated_at,report:editedDocument()});
       if(error)throw error;
-      await loadData();if(currentReview()?.id!==r.id)return;$("vodPlayerMatchStatus").textContent="Saved. Confirmed names update the existing player reports.";$("publishVodStatus").textContent=`Published approved report · ${data?.player_reports||0} player reports updated.${data?.unmatched_players?.length?' Unmatched player names need correction: '+data.unmatched_players.join(', '):''}`;
+      await loadData();if(currentReview()?.id!==r.id)return;$("vodPlayerMatchStatus").textContent="Saved. Verified LG identities received new player reports.";$("publishVodStatus").textContent=`Published approved report · ${data?.player_reports||0} player reports created.${data?.unmatched_players?.length?' Unmatched player names need correction: '+data.unmatched_players.join(', '):''}`;
     }catch(error){$("publishVodStatus").textContent=error.message||"Publishing failed. Drafts remain private.";}
     finally{publishing=false;$("publishVodReport").disabled=model.periodErrors(currentReview(),reviewSegments(),{approved:true}).length>0;renderPlayerMatches();}
   }

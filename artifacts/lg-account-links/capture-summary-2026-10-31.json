@@ -1,0 +1,18 @@
+{
+  "status": "complete",
+  "counts": {
+    "games": 27,
+    "team_pages": 28,
+    "scoped_roster_candidates": 872,
+    "players_with_account_evidence": 870,
+    "account_links": 985,
+    "issues": 117,
+    "console_owner_conflicts": 0
+  },
+  "profiles_checked": 872,
+  "multiple_linked_accounts": 115,
+  "no_account_fields": 2,
+  "database_unchanged": true,
+  "games_from": "2026-10-25",
+  "games_through": "2026-11-10"
+}

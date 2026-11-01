@@ -10,7 +10,7 @@ const fixture=()=>{
   function query(table){let filters=[],payload=null;const q={select(){return q},eq(k,v){filters.push(r=>r[k]===v);return q},neq(k,v){filters.push(r=>r[k]!==v);return q},is(k,v){filters.push(r=>r[k]==v);return q},in(k,v){filters.push(r=>v.includes(r[k]));return q},order(){return q},limit(){return q},update(v){payload=v;return q},then(resolve){let data=(rows[table]||[]).filter(r=>filters.every(f=>f(r)));if(payload)data.forEach(r=>Object.assign(r,payload));return Promise.resolve({data:JSON.parse(JSON.stringify(data)),error:null}).then(resolve)},single(){return q.then(r=>({...r,data:r.data[0]||null}))},maybeSingle(){return q.then(r=>({...r,data:r.data[0]||null}))}};return q;}
   window.VVHLBackend={db:{from:query,auth:{getSession:async()=>({data:{session:{access_token:'fixture'}}})},rpc:async(name,args)=>{
     const r=rows.vod_review_sessions[0];window.rpcCalls.push({name,args});
-    if(name==='vod_player_match_context')return {data:{candidates:[{id:'locker-one',gamertag:'TestGT',position:'C',lg_user_id:'123',played:true},{id:'locker-two',gamertag:'OtherGT',position:'G',played:false}],suggestions:[],matches:r.review_document?.player_matches||{}}};
+    if(name==='vod_player_match_context')return {data:{identity_version:2,candidates:[{id:'locker-one',gamertag:'TestGT',position:'C',lg_user_id:'123',played:true,account_gamertag:'ConsoleGT',account_platform:'xbox'}],suggestions:[],matches:{testgt:'locker-one',...(r.review_document?.player_matches||{})}}};
     if(name==='set_vod_period_windows'){if(window.periodSaveError)return {error:{message:window.periodSaveError}}; for(const p of args.periods){if(!rows.vod_review_segments.some(s=>!s.archived_at&&s.segment_type===p.segment_type&&s.segment_index===p.segment_index))rows.vod_review_segments.push({...p,id:'saved-'+p.segment_index,review_id:r.id,team_id:r.team_id,status:'queued'});} Object.assign(r,{source_start_seconds:args.window_start,source_end_seconds:args.window_end,skip_ranges:args.skip_ranges});return {data:{added:0,archived:0,kept:args.periods.length}};}
     if(name==='publish_vod_review'){
       window.published.push({name,args});r.review_document=args.report;r.status='complete';
@@ -44,7 +44,7 @@ const fixture=()=>{
     return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(data)});
    }
    if(u.hostname!=='wildman.test')return route.fulfill({status:200,contentType:'application/json',body:'{}'});
-   if(name==='api/chelstats-player')return route.fulfill({contentType:'application/json',body:JSON.stringify({profile:{chelName:'Synthetic CHEL'}})});
+   if(name==='api/chelstats-player')return route.fulfill({contentType:'application/json',body:JSON.stringify({source:'chelstats',profile:{username:'ConsoleGT',platform:'xbox',chelName:'Synthetic CHEL'}})});
    if(name==='backend.js')return route.fulfill({contentType:'application/javascript',body:`(${fixture.toString()})();`});
    if(['management-guard.js','script.js'].includes(name))return route.fulfill({contentType:'application/javascript',body:''});
    const filename=path.join(root,name);
@@ -72,6 +72,8 @@ const fixture=()=>{
    await page.waitForFunction(()=>document.getElementById('vodStatus').textContent.includes('approved'));
   }
   assert.equal(await page.locator('#publishVodReport').isEnabled(),true);
+  await page.locator('#loadVodPlayerMatches').click();
+  await page.waitForFunction(()=>document.getElementById('vodPlayerMatchStatus').textContent.includes('confirmed by'));
   await page.locator('#publishVodReport').click();
   await page.waitForFunction(()=>window.published.length===1);
   assert.equal(await page.evaluate(()=>window.published[0].name),'publish_vod_review');
@@ -94,6 +96,7 @@ const fixture=()=>{
   assert.equal(await page.locator('[data-vod-player-name="synthetic chel"]').inputValue(),'','External hints must not silently select an identity');
   await page.locator('[data-vod-player-name="synthetic chel"]').selectOption('locker-one');
   await page.locator('[data-vod-player-name="opponent name"]').selectOption('ignore');
+  await page.locator('[data-alias-evidence="synthetic chel"]').fill('Synthetic verified footage at 00:30');
   await page.locator('#saveVodPlayerMatches').click();
   await page.waitForFunction(()=>window.published.length===2);
   assert.equal(await page.evaluate(()=>window.published[1].args.report.player_matches['synthetic chel']),'locker-one');

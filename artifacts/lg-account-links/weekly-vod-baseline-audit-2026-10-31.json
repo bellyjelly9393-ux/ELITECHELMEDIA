@@ -1,0 +1,243 @@
+{
+  "scope": "Read-only saved-review audit; not a fresh video analysis or proof of complete player coverage.",
+  "captured_date": "2026-10-31",
+  "reviews": [
+    {
+      "id": "d480beb3-3ae5-49b2-9ba8-f347573cea68",
+      "title": "Hitmen · VOD 2910969606 · Game 1 lag-out reconstruction",
+      "worker_status": "needs_periods",
+      "schedule_game_id": null,
+      "source_window": [
+        0,
+        2337
+      ],
+      "players": [],
+      "legacy_multiple_names_per_locker": [],
+      "canonical_players_present": false,
+      "segment_count": 0
+    },
+    {
+      "id": "27c5c9ff-8178-4c6b-9366-17ebd5c6488a",
+      "title": "Hitmen vs Gatineau · Game 3 · Oct 25",
+      "worker_status": "ready_for_review",
+      "schedule_game_id": null,
+      "source_window": [
+        4280,
+        5554
+      ],
+      "players": [
+        {
+          "player": "HENNY",
+          "position": "LD",
+          "lg_user_id": null
+        },
+        {
+          "player": "FITS",
+          "position": "RD",
+          "lg_user_id": null
+        },
+        {
+          "player": "GULLY",
+          "position": "C",
+          "lg_user_id": null
+        },
+        {
+          "player": "BACKES",
+          "position": "RW",
+          "lg_user_id": null
+        },
+        {
+          "player": "JOSE LECUM",
+          "position": "LW",
+          "lg_user_id": null
+        },
+        {
+          "player": "El Jaacho",
+          "position": "RW",
+          "lg_user_id": null
+        },
+        {
+          "player": "Tee",
+          "position": "LW",
+          "lg_user_id": null
+        },
+        {
+          "player": "Buck Tee",
+          "position": "",
+          "lg_user_id": null
+        }
+      ],
+      "legacy_multiple_names_per_locker": [],
+      "canonical_players_present": false,
+      "segment_count": 3
+    },
+    {
+      "id": "1c4cab11-846e-4757-89d6-209832274ef6",
+      "title": "Hitmen vs Windsor · Game 2 · Oct 25",
+      "worker_status": "ready_for_review",
+      "schedule_game_id": null,
+      "source_window": [
+        2445,
+        4076
+      ],
+      "players": [
+        {
+          "player": "HENNY",
+          "position": "C",
+          "lg_user_id": null
+        },
+        {
+          "player": "BACKES",
+          "position": "RD",
+          "lg_user_id": null
+        },
+        {
+          "player": "FITS",
+          "position": "LD",
+          "lg_user_id": null
+        },
+        {
+          "player": "GULLY",
+          "position": "LW",
+          "lg_user_id": null
+        },
+        {
+          "player": "Jose Lecum",
+          "position": "LW",
+          "lg_user_id": null
+        },
+        {
+          "player": "Whiteout181",
+          "position": "RW",
+          "lg_user_id": null
+        },
+        {
+          "player": "WHEELS",
+          "position": "RW",
+          "lg_user_id": null
+        },
+        {
+          "player": "SAVER",
+          "position": "G",
+          "lg_user_id": null
+        },
+        {
+          "player": "MULAN",
+          "position": "",
+          "lg_user_id": null
+        },
+        {
+          "player": "Dish",
+          "position": "",
+          "lg_user_id": null
+        },
+        {
+          "player": "Turnstile",
+          "position": "",
+          "lg_user_id": null
+        },
+        {
+          "player": "Crafty",
+          "position": "RW",
+          "lg_user_id": null
+        },
+        {
+          "player": "DeaconDish21",
+          "position": "LW",
+          "lg_user_id": null
+        }
+      ],
+      "legacy_multiple_names_per_locker": [
+        {
+          "locker_id": "db4b70a5-30c3-47cf-96ea-a650565a3e45",
+          "names": [
+            "jose lecum",
+            "whiteout181"
+          ]
+        }
+      ],
+      "canonical_players_present": false,
+      "segment_count": 4
+    },
+    {
+      "id": "b4fd7f87-b751-4d26-96bc-e9f7b83a7850",
+      "title": "Hitmen vs London · Game 2 · Oct 27",
+      "worker_status": "ready_for_review",
+      "schedule_game_id": null,
+      "source_window": [
+        372,
+        1748
+      ],
+      "players": [
+        {
+          "player": "ALAN JACKSON",
+          "position": "LD",
+          "lg_user_id": null
+        },
+        {
+          "player": "KOLDY",
+          "position": "RD",
+          "lg_user_id": null
+        },
+        {
+          "player": "KELLS",
+          "position": "C",
+          "lg_user_id": null
+        },
+        {
+          "player": "COOP",
+          "position": "LW",
+          "lg_user_id": null
+        },
+        {
+          "player": "DANKS",
+          "position": "RW",
+          "lg_user_id": null
+        }
+      ],
+      "legacy_multiple_names_per_locker": [],
+      "canonical_players_present": false,
+      "segment_count": 3
+    },
+    {
+      "id": "53623df7-9c52-4763-9cea-2de70c0ccc35",
+      "title": "Hitmen vs Ottawa · Game 3 · Oct 27",
+      "worker_status": "ready_for_review",
+      "schedule_game_id": null,
+      "source_window": [
+        2133,
+        3572
+      ],
+      "players": [
+        {
+          "player": "Alan Jackson",
+          "position": "LD",
+          "lg_user_id": null
+        },
+        {
+          "player": "Koldy",
+          "position": "RD",
+          "lg_user_id": null
+        },
+        {
+          "player": "Kells",
+          "position": "C",
+          "lg_user_id": null
+        },
+        {
+          "player": "Danks",
+          "position": "RW",
+          "lg_user_id": null
+        },
+        {
+          "player": "Setty",
+          "position": "F",
+          "lg_user_id": null
+        }
+      ],
+      "legacy_multiple_names_per_locker": [],
+      "canonical_players_present": false,
+      "segment_count": 3
+    }
+  ]
+}

@@ -15,7 +15,7 @@ const {PGlite}=require('@electric-sql/pglite');
  grant select,insert,update on public.vod_review_sessions to authenticated;
  insert into public.vod_review_sessions values('33333333-3333-4333-8333-333333333333','44444444-4444-4444-8444-444444444444','22222222-2222-4222-8222-222222222222','processing','{}',null);`);
  const result={period_reports:[{label:'Period 1'},{label:'Period 2'},{label:'Period 3'}],chunks:[{label:'Period 1',start:0,end:300,review:{player_evaluations:[{player:'Test Player',evidence_timestamps:[30]}],observations:[{player:'Test Player',source:'gameplay'}]}}]};
- const fixed=fs.readFileSync('docs/sql/vod_structured_report_routing.sql','utf8');
+ const fixed=fs.readFileSync('docs/sql/vod_structured_report_routing.sql','utf8').replace(/\r\n/g,'\n');
  const original=fixed.replace("  -- Structured period reports use the approved publication workflow; do not route drafts.\n  if jsonb_typeof(new.worker_result->'period_reports')='array' then\n    if jsonb_array_length(new.worker_result->'period_reports')>=3 then return new; end if;\n  end if;\n",'');
  assert.notEqual(original,fixed);
  await db.exec(original+`;create trigger route_vod_player_reports_after_result after update of worker_result,worker_status on public.vod_review_sessions for each row execute function public.route_vod_player_reports();set role authenticated;`);

@@ -1,0 +1,268 @@
+[
+  {
+    "lg_game_id": 918009,
+    "title": "Hitmen vs Gatineau \u00b7 Game 3 \u00b7 Oct 25",
+    "test_review_id": "a1000000-0000-4000-8000-000000918009",
+    "vod_url": "https://www.twitch.tv/videos/2910969606",
+    "source_start_seconds": 4280,
+    "source_end_seconds": 5554,
+    "periods": [
+      {
+        "label": "Period 1",
+        "start": 0,
+        "end": 444
+      },
+      {
+        "label": "Period 2",
+        "start": 444,
+        "end": 888
+      },
+      {
+        "label": "Period 3",
+        "start": 888,
+        "end": 1274
+      }
+    ],
+    "period_evidence": "Copied existing approved period boundaries; new analysis does not confer approval.",
+    "source_review_id": "27c5c9ff-8178-4c6b-9366-17ebd5c6488a",
+    "baseline_names": [
+      "HENNY",
+      "FITS",
+      "GULLY",
+      "BACKES",
+      "JOSE LECUM",
+      "El Jaacho",
+      "Tee",
+      "Buck Tee"
+    ],
+    "lineup_source": {
+      "url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918009",
+      "captured_at": "2026-10-26T19:14:53.543498+00:00",
+      "client_capture": "lgchl-drops/games/s55/2026-10-25/game_918009.json"
+    },
+    "players": [
+      {
+        "player": "YaDayz-_-",
+        "side": "away",
+        "team": "Gatineau Olympiques",
+        "lg_user_id": 40771,
+        "position": "LW"
+      },
+      {
+        "player": "Buckteeyt",
+        "side": "away",
+        "team": "Gatineau Olympiques",
+        "lg_user_id": 62903,
+        "position": "C"
+      },
+      {
+        "player": "El Jaacho",
+        "side": "away",
+        "team": "Gatineau Olympiques",
+        "lg_user_id": 72699,
+        "position": "RW"
+      },
+      {
+        "player": "invoidable",
+        "side": "away",
+        "team": "Gatineau Olympiques",
+        "lg_user_id": 79982,
+        "position": "LD"
+      },
+      {
+        "player": "sevinski",
+        "side": "away",
+        "team": "Gatineau Olympiques",
+        "lg_user_id": 46102,
+        "position": "RD"
+      },
+      {
+        "player": "thenny32",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 66913,
+        "position": "LW"
+      },
+      {
+        "player": "Gullyrr",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 79521,
+        "position": "C"
+      },
+      {
+        "player": "WhiteoutI8I",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 77137,
+        "position": "RW"
+      },
+      {
+        "player": "XFITSKY",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 66249,
+        "position": "LD"
+      },
+      {
+        "player": "Call1-800gambler",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 80054,
+        "position": "RD"
+      },
+      {
+        "player": "r3tarz",
+        "side": "away",
+        "team": "Gatineau Olympiques",
+        "lg_user_id": 80795,
+        "position": "G"
+      },
+      {
+        "player": "XxPASTRNAK88",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 80604,
+        "position": "G"
+      }
+    ]
+  },
+  {
+    "lg_game_id": 917960,
+    "title": "Hitmen vs Windsor \u00b7 Game 2 \u00b7 Oct 25",
+    "test_review_id": "a1000000-0000-4000-8000-000000917960",
+    "vod_url": "https://www.twitch.tv/videos/2910969606",
+    "source_start_seconds": 2445,
+    "source_end_seconds": 4076,
+    "periods": [
+      {
+        "label": "Period 1",
+        "start": 0,
+        "end": 372
+      },
+      {
+        "label": "Period 2",
+        "start": 372,
+        "end": 876
+      },
+      {
+        "label": "Period 3",
+        "start": 876,
+        "end": 1380
+      },
+      {
+        "label": "Overtime 1",
+        "start": 1380,
+        "end": 1631
+      }
+    ],
+    "period_evidence": "Copied existing approved period boundaries; new analysis does not confer approval.",
+    "source_review_id": "1c4cab11-846e-4757-89d6-209832274ef6",
+    "baseline_names": [
+      "HENNY",
+      "BACKES",
+      "FITS",
+      "GULLY",
+      "Jose Lecum",
+      "Whiteout181",
+      "WHEELS",
+      "SAVER",
+      "MULAN",
+      "Dish",
+      "Turnstile",
+      "Crafty",
+      "DeaconDish21"
+    ],
+    "lineup_source": {
+      "url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917960",
+      "captured_at": "2026-10-26T19:12:11.817159+00:00",
+      "client_capture": "lgchl-drops/games/s55/2026-10-25/game_917960.json"
+    },
+    "players": [
+      {
+        "player": "DeaconDish21",
+        "side": "away",
+        "team": "Windsor Spitfires",
+        "lg_user_id": 70616,
+        "position": "LW"
+      },
+      {
+        "player": "Warhawk289",
+        "side": "away",
+        "team": "Windsor Spitfires",
+        "lg_user_id": 38687,
+        "position": "C"
+      },
+      {
+        "player": "Crafty_Mitts-97",
+        "side": "away",
+        "team": "Windsor Spitfires",
+        "lg_user_id": 44326,
+        "position": "RW"
+      },
+      {
+        "player": "bostonsniper4t4",
+        "side": "away",
+        "team": "Windsor Spitfires",
+        "lg_user_id": 51577,
+        "position": "LD"
+      },
+      {
+        "player": "Lane__55",
+        "side": "away",
+        "team": "Windsor Spitfires",
+        "lg_user_id": 69665,
+        "position": "RD"
+      },
+      {
+        "player": "WhiteoutI8I",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 77137,
+        "position": "LW"
+      },
+      {
+        "player": "thenny32",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 66913,
+        "position": "C"
+      },
+      {
+        "player": "Gullyrr",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 79521,
+        "position": "RW"
+      },
+      {
+        "player": "XFITSKY",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 66249,
+        "position": "LD"
+      },
+      {
+        "player": "Call1-800gambler",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 80054,
+        "position": "RD"
+      },
+      {
+        "player": "Vella",
+        "side": "away",
+        "team": "Windsor Spitfires",
+        "lg_user_id": 67037,
+        "position": "G"
+      },
+      {
+        "player": "XxPASTRNAK88",
+        "side": "home",
+        "team": "Calgary Hitmen",
+        "lg_user_id": 80604,
+        "position": "G"
+      }
+    ]
+  }
+]

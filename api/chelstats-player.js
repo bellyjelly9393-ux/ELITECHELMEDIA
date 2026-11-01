@@ -29,6 +29,13 @@ function firstDefined(source, keys) {
   return null;
 }
 
+function platformKey(value) {
+  const key = String(value || '').trim().toLowerCase();
+  if (['xbox', 'xbox series x', 'xbox series x|s', 'xbox-series-xs', 'xbsx'].includes(key)) return 'xbox';
+  if (['playstation', 'playstation 5', 'ps5'].includes(key)) return 'playstation';
+  return null;
+}
+
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
@@ -38,6 +45,10 @@ export default async function handler(req, res) {
   const username = String(req.query.username || "").trim();
   const teamname = String(req.query.teamname || "").trim();
   const consoleName = String(req.query.console || "common-gen5").trim();
+  const expectedPlatform = String(req.query.expected_platform || '').trim();
+  if (expectedPlatform && !['xbox', 'playstation'].includes(expectedPlatform)) {
+    return res.status(400).json({ error: 'Expected platform must be xbox or playstation' });
+  }
 
   if (!username || username.length > 80 || teamname.length > 120 || consoleName.length > 40) {
     return res.status(400).json({ error: "A valid username is required" });
@@ -99,11 +110,20 @@ export default async function handler(req, res) {
       if (confirmedUsername.toLowerCase() !== username.toLowerCase()) {
         return res.status(404).json({ error: "No exact gamertag identity was returned by ChelStats" });
       }
-      const chelName = firstDefined(identityProfile, ["skplayername"]) || raw.identity?.displayName || null;
+      const platform = platformKey(firstDefined(identityProfile, ["Platform", "platform"]) || raw.identity?.platform);
+      if (expectedPlatform && platform && platform !== expectedPlatform) {
+        return res.status(409).json({ error: 'Returned account platform does not match the verified LG account' });
+      }
+      // An arbitrary displayName can be an account label; only the explicit character field is used.
+      const chelName = firstDefined(identityProfile, ["skplayername"]) || null;
+      const blaze = firstDefined(identityProfile, ['blazeId']);
+      const blazeId = typeof blaze === 'string' && /^[1-9][0-9]*$/.test(blaze) ? blaze
+        : typeof blaze === 'number' && Number.isSafeInteger(blaze) && blaze > 0 ? String(blaze) : null;
       res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=900");
-      return res.status(200).json({ source: "chelstats", profile: {
-        username: confirmedUsername, chelName,
-        platform: firstDefined(identityProfile, ["Platform", "platform"]) || raw.identity?.platform || null
+      return res.status(200).json({ source: "chelstats", fetched_at: new Date().toISOString(), verification: expectedPlatform && !platform ? 'current_profile_suggestion_platform_unconfirmed' : 'current_profile_suggestion', profile: {
+        username: confirmedUsername, chelName, blazeId, platform,
+        platform_verified: Boolean(expectedPlatform && platform === expectedPlatform),
+        historical_game_identity_verified: false
       }});
     }
     if (!node) {

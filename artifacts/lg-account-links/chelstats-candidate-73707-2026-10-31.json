@@ -1,0 +1,21 @@
+{
+  "lg_user_id": "73707",
+  "canonical_key": [
+    "LGCHL",
+    55,
+    "73707"
+  ],
+  "lg_verified_platform": "xbox",
+  "lg_verified_gamertag": "l Setty l",
+  "source": "chelstats",
+  "requested_username": "l Setty l",
+  "returned_username": "l Setty l",
+  "character_name_candidate": "Bad News Kells",
+  "ea_blaze_id_candidate": "186209497",
+  "returned_platform": null,
+  "observed_at": "2026-10-31T16:57:59.401036+00:00",
+  "verification": "current_profile_candidate_only",
+  "game_identity_verified": false,
+  "kells_alias_verified": false,
+  "published": false
+}

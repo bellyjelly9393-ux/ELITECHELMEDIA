@@ -1,0 +1,10 @@
+{
+  "source": "User-supplied Pasted markdown.md, recovered from the referenced Hitmen VOD Analysis chat attachment",
+  "vod_url": "https://www.twitch.tv/videos/2912714919",
+  "note": "Names and excerpts are test-case references, not verified identity mappings. The attachment supplies no league, season, lineup or LG user IDs.",
+  "players": [
+    {"player": "Kells", "excerpt": "Low defensive-zone triangle support and interior setup play", "lg_user_id": null},
+    {"player": "Bad News Kells", "excerpt": "Period 2: Play of the Period highlight package spotlights Bad News Kells completing a hat trick.", "lg_user_id": null},
+    {"player": "Setty", "excerpt": "Sharp net-front finishing instincts on rush sequences [827.0].", "lg_user_id": null}
+  ]
+}

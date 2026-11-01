@@ -1,0 +1,225 @@
+{
+  "league": "LGCHL",
+  "season": 55,
+  "team": "Calgary Hitmen",
+  "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+  "observed_at": "2026-10-31T16:49:24.517Z",
+  "players": [
+    {
+      "lg_user_id": "73707",
+      "registered_name": "l Setty l",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "73707"
+      ],
+      "account_link": {
+        "lg_user_id": "73707",
+        "registered_name": "l Setty l",
+        "platform": "xbox",
+        "account_gamertag": "l Setty l",
+        "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=73707&leagueid=39&seasonid=55",
+        "observed_at": "2026-10-31T16:47:36.480Z",
+        "source": "LG Stats Client Developer Starter - live LG profile",
+        "evidence": "Career Info: Xbox GamerTag: l Setty l",
+        "status": "account_link_observed",
+        "game_participation_verified": false
+      },
+      "account_status": "observed",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "76399",
+      "registered_name": "gtcoop73",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "76399"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "58225",
+      "registered_name": "offtheyrk",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "58225"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "74341",
+      "registered_name": "SmokoLi",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "74341"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "66913",
+      "registered_name": "thenny32",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "66913"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "79521",
+      "registered_name": "Gullyrr",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "79521"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "49944",
+      "registered_name": "IIII metro",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "49944"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "10718",
+      "registered_name": "l danks l",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "10718"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "77137",
+      "registered_name": "WhiteoutI8I",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "77137"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "17569",
+      "registered_name": "imona_plain",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "17569"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "77094",
+      "registered_name": "WhyKayWins",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "77094"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "66249",
+      "registered_name": "XFITSKY",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "66249"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "80054",
+      "registered_name": "Call1-800gambler",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "80054"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "79440",
+      "registered_name": "Koldex Bands",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "79440"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "81072",
+      "registered_name": "matt_0_5",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "81072"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "12262",
+      "registered_name": "Kudolken",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "12262"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    },
+    {
+      "lg_user_id": "80604",
+      "registered_name": "XxPASTRNAK88",
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "80604"
+      ],
+      "account_link": null,
+      "account_status": "awaiting_profile_capture",
+      "participation_status": "season_roster_only"
+    }
+  ],
+  "published": false
+}

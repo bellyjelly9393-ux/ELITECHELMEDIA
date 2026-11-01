@@ -154,14 +154,14 @@
             <div class="eyebrow">MANAGEMENT REVIEW</div><h3>Game Report</h3>
             <div id="gameReviewLayers"></div>
             <details id="pendingAnalysisDraft" hidden><summary>New Analysis Draft · saved separately</summary><p data-pending-intro>These suggestions do not replace approved reports. Approve the required periods before they can supplement the final report.</p><p id="pendingAnalysisContent" style="white-space:pre-wrap"></p></details>
-            <div class="vod-actions"><button id="publishVodReport" class="small-btn primary" type="button">Publish / Refresh Scouting Reports</button><span id="publishVodStatus" role="status"></span></div>
+            <div class="vod-actions"><button id="publishVodReport" class="small-btn primary" type="button">Create Scouting Reports</button><span id="publishVodStatus" role="status"></span></div>
             <section id="vodPlayerMatching" class="vod-player-matching" aria-label="Match player names">
               <h3>Match player names</h3>
-              <p class="analysis-note">Link names read from gameplay to a gamertag. Multiple names for one player update a single stall report. Opponent names can be excluded.</p>
+              <p class="analysis-note">Link names only with explicit evidence to an LG ID on this game’s verified roster. Verified aliases share one new stall report per player. Existing reports are protected. Uncertain names remain unresolved.</p>
               <div class="vod-actions"><button id="loadVodPlayerMatches" class="small-btn" type="button">Load players for this game</button><button id="lookupVodChelNames" class="small-btn" type="button" disabled>Look up CHEL names</button></div>
               <p id="vodPlayerMatchStatus" role="status"></p>
               <div id="vodPlayerMatchRows"></div>
-              <button id="saveVodPlayerMatches" class="small-btn primary" type="button" disabled>Save matches &amp; update reports</button>
+              <button id="saveVodPlayerMatches" class="small-btn primary" type="button" disabled>Verify aliases &amp; create reports</button>
             </section>
             <div class="analysis-note">
               <strong>Final management check:</strong>
@@ -194,7 +194,7 @@
 <script src="script.js?v=20261003-durable"></script>
 <script src="vod-review-cache.js?v=20261012-auto-restore"></script>
 <script src="vod-review-model.js?v=20261008-period-times"></script>
-<script src="vod-lab.js?v=20261027-save-analyze"></script>
+<script src="vod-lab.js?v=20261031-lg-identity"></script>
 <script src="vod-pipeline.js?v=20261027-save-analyze"></script>
 <script src="vod-pipeline-polish.js?v=20261012-auto-restore"></script>
 </body>

@@ -1,0 +1,2148 @@
+{
+  "schema": "lg-reviewed-account-evidence-v1",
+  "league": "LGCHL",
+  "season": 55,
+  "from_date": "2026-10-25",
+  "capture_status": "running",
+  "updated_at": "2026-10-31T17:08:08.328419+00:00",
+  "games": [
+    {
+      "date_text": "Sun Oct 25 09:00pm",
+      "day": 25,
+      "lg_game_id": "917941",
+      "month": "Oct",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917941&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "408",
+          "name": "Saginaw Spirit",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:00pm",
+      "date": "2026-10-25"
+    },
+    {
+      "date_text": "Sun Oct 25 09:35pm",
+      "day": 25,
+      "lg_game_id": "917960",
+      "month": "Oct",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=917960&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "381",
+          "name": "Windsor Spitfires",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=381&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:35pm",
+      "date": "2026-10-25"
+    },
+    {
+      "date_text": "Sun Oct 25 10:10pm",
+      "day": 25,
+      "lg_game_id": "918009",
+      "month": "Oct",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918009&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "461",
+          "name": "Gatineau Olympiques",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=461&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "10:10pm",
+      "date": "2026-10-25"
+    },
+    {
+      "date_text": "Mon Oct 26 09:00pm",
+      "day": 26,
+      "lg_game_id": "918034",
+      "month": "Oct",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918034&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "382",
+          "name": "Shawinigan Cataractes",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=382&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:00pm",
+      "date": "2026-10-26"
+    },
+    {
+      "date_text": "Mon Oct 26 09:35pm",
+      "day": 26,
+      "lg_game_id": "918067",
+      "month": "Oct",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918067&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "444",
+          "name": "Kingston Frontenacs",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=444&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:35pm",
+      "date": "2026-10-26"
+    },
+    {
+      "date_text": "Mon Oct 26 10:10pm",
+      "day": 26,
+      "lg_game_id": "918111",
+      "month": "Oct",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918111&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "447",
+          "name": "Sudbury Wolves",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=447&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "10:10pm",
+      "date": "2026-10-26"
+    },
+    {
+      "date_text": "Tue Oct 27 09:00pm",
+      "day": 27,
+      "lg_game_id": "918122",
+      "month": "Oct",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918122&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "365",
+          "name": "Moncton Wildcats",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=365&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:00pm",
+      "date": "2026-10-27"
+    },
+    {
+      "date_text": "Tue Oct 27 09:35pm",
+      "day": 27,
+      "lg_game_id": "918170",
+      "month": "Oct",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918170&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "370",
+          "name": "London Knights",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=370&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:35pm",
+      "date": "2026-10-27"
+    },
+    {
+      "date_text": "Tue Oct 27 10:10pm",
+      "day": 27,
+      "lg_game_id": "918200",
+      "month": "Oct",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918200&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "446",
+          "name": "Ottawa 67's",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=446&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "10:10pm",
+      "date": "2026-10-27"
+    },
+    {
+      "date_text": "Sun Nov 01 09:00pm",
+      "day": 1,
+      "lg_game_id": "918226",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918226&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "398",
+          "name": "Portland Winterhawks",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=398&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:00pm",
+      "date": "2026-11-01"
+    },
+    {
+      "date_text": "Sun Nov 01 09:35pm",
+      "day": 1,
+      "lg_game_id": "918268",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918268&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "399",
+          "name": "Tri City Americans",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=399&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:35pm",
+      "date": "2026-11-01"
+    },
+    {
+      "date_text": "Sun Nov 01 10:10pm",
+      "day": 1,
+      "lg_game_id": "918299",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918299&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "421",
+          "name": "Seattle Thunderbirds",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=421&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "10:10pm",
+      "date": "2026-11-01"
+    },
+    {
+      "date_text": "Mon Nov 02 09:00pm",
+      "day": 2,
+      "lg_game_id": "918328",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918328&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "420",
+          "name": "Spokane Chiefs",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=420&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:00pm",
+      "date": "2026-11-02"
+    },
+    {
+      "date_text": "Mon Nov 02 09:35pm",
+      "day": 2,
+      "lg_game_id": "918354",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918354&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "422",
+          "name": "Prince George Cougars",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=422&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:35pm",
+      "date": "2026-11-02"
+    },
+    {
+      "date_text": "Mon Nov 02 10:10pm",
+      "day": 2,
+      "lg_game_id": "918389",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918389&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "419",
+          "name": "Victoria Royals",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=419&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "10:10pm",
+      "date": "2026-11-02"
+    },
+    {
+      "date_text": "Tue Nov 03 09:00pm",
+      "day": 3,
+      "lg_game_id": "918422",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918422&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "400",
+          "name": "Kelowna Rockets",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=400&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:00pm",
+      "date": "2026-11-03"
+    },
+    {
+      "date_text": "Tue Nov 03 09:35pm",
+      "day": 3,
+      "lg_game_id": "918444",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918444&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "386",
+          "name": "Vancouver Giants",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=386&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:35pm",
+      "date": "2026-11-03"
+    },
+    {
+      "date_text": "Tue Nov 03 10:10pm",
+      "day": 3,
+      "lg_game_id": "918480",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918480&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "380",
+          "name": "Everett Silvertips",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=380&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "10:10pm",
+      "date": "2026-11-03"
+    },
+    {
+      "date_text": "Sun Nov 08 09:00pm",
+      "day": 8,
+      "lg_game_id": "918506",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918506&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "418",
+          "name": "Lethbridge Hurricanes",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=418&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:00pm",
+      "date": "2026-11-08"
+    },
+    {
+      "date_text": "Sun Nov 08 09:35pm",
+      "day": 8,
+      "lg_game_id": "918541",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918541&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "2983",
+          "name": "Chilliwack Bruins",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=2983&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:35pm",
+      "date": "2026-11-08"
+    },
+    {
+      "date_text": "Sun Nov 08 10:10pm",
+      "day": 8,
+      "lg_game_id": "918575",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918575&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "415",
+          "name": "Edmonton Oil Kings",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=415&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "10:10pm",
+      "date": "2026-11-08"
+    },
+    {
+      "date_text": "Mon Nov 09 09:00pm",
+      "day": 9,
+      "lg_game_id": "918599",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918599&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "416",
+          "name": "Medicine Hat Tigers",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=416&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:00pm",
+      "date": "2026-11-09"
+    },
+    {
+      "date_text": "Mon Nov 09 09:35pm",
+      "day": 9,
+      "lg_game_id": "918630",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918630&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "385",
+          "name": "Red Deer Rebels",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=385&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:35pm",
+      "date": "2026-11-09"
+    },
+    {
+      "date_text": "Mon Nov 09 10:10pm",
+      "day": 9,
+      "lg_game_id": "918663",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918663&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "413",
+          "name": "Prince Albert Raiders",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=413&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "10:10pm",
+      "date": "2026-11-09"
+    },
+    {
+      "date_text": "Tue Nov 10 09:00pm",
+      "day": 10,
+      "lg_game_id": "918697",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918697&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "377",
+          "name": "Swift Current Broncos",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=377&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:00pm",
+      "date": "2026-11-10"
+    },
+    {
+      "date_text": "Tue Nov 10 09:35pm",
+      "day": 10,
+      "lg_game_id": "918724",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918724&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "379",
+          "name": "Saskatoon Blades",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=379&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "09:35pm",
+      "date": "2026-11-10"
+    },
+    {
+      "date_text": "Tue Nov 10 10:10pm",
+      "day": 10,
+      "lg_game_id": "918754",
+      "month": "Nov",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918754&leagueid=39&seasonid=55",
+      "teams": [
+        {
+          "lg_team_id": "412",
+          "name": "Calgary Hitmen",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55"
+        },
+        {
+          "lg_team_id": "411",
+          "name": "Moose Jaw Warriors",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=411&leagueid=39&seasonid=55"
+        }
+      ],
+      "time_text": "10:10pm",
+      "date": "2026-11-10"
+    }
+  ],
+  "players": [
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "73707"
+      ],
+      "lg_user_id": "73707",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "l Setty l",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "l Setty l",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=73707&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:02:10.121763+00:00",
+          "evidence": "Xbox GamerTag: l Setty l",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "76399"
+      ],
+      "lg_user_id": "76399",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "gtcoop73",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "gtcoop73",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=76399&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:02:17.486931+00:00",
+          "evidence": "Xbox GamerTag: gtcoop73",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "58225"
+      ],
+      "lg_user_id": "58225",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "offtheyrk",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "offtheyrk",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=58225&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:02:24.071994+00:00",
+          "evidence": "Xbox GamerTag: offtheyrk",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "6982"
+      ],
+      "lg_user_id": "6982",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "I GuiDice I",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "I GuiDice I",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=6982&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:02:31.852500+00:00",
+          "evidence": "Xbox GamerTag: I GuiDice I",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "30184"
+      ],
+      "lg_user_id": "30184",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "RickardsRed77",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "RickardsRed77",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=30184&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:02:39.420642+00:00",
+          "evidence": "PSN GamerTag: RickardsRed77",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "11664"
+      ],
+      "lg_user_id": "11664",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "YetisCarnage",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "YetisCarnage",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=11664&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:02:46.868253+00:00",
+          "evidence": "Xbox GamerTag: YetisCarnage",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "74341"
+      ],
+      "lg_user_id": "74341",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "SmokoLi",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "SmokoLi",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=74341&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:02:54.066183+00:00",
+          "evidence": "Xbox GamerTag: SmokoLi",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "66913"
+      ],
+      "lg_user_id": "66913",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "thenny32",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "thenny32",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=66913&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:03:00.595900+00:00",
+          "evidence": "PSN GamerTag: thenny32",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "79492"
+      ],
+      "lg_user_id": "79492",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "Fribzz9146",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "Fribzz9146",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79492&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:03:07.296856+00:00",
+          "evidence": "Xbox GamerTag: Fribzz9146",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "16186"
+      ],
+      "lg_user_id": "16186",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "JaguarJeff13",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "JaguarJeff13",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=16186&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:03:17.026431+00:00",
+          "evidence": "Xbox GamerTag: JaguarJeff13",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "79521"
+      ],
+      "lg_user_id": "79521",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "Gullyrr",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "l Gully I",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79521&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:03:24.347794+00:00",
+          "evidence": "Xbox GamerTag: l Gully I",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "49944"
+      ],
+      "lg_user_id": "49944",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "IIII metro",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "IIII metro",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=49944&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:03:33.470327+00:00",
+          "evidence": "Xbox GamerTag: IIII metro",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "10718"
+      ],
+      "lg_user_id": "10718",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "l danks l",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "l Danks l",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=10718&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:03:40.403504+00:00",
+          "evidence": "Xbox GamerTag: l Danks l",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "77137"
+      ],
+      "lg_user_id": "77137",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "WhiteoutI8I",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "WhiteoutI8I",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=77137&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:03:47.827419+00:00",
+          "evidence": "PSN GamerTag: WhiteoutI8I",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "9150"
+      ],
+      "lg_user_id": "9150",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "Diabolic Viper",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "Diabolic Viper",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=9150&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:04:00.049156+00:00",
+          "evidence": "Xbox GamerTag: Diabolic Viper",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "55685"
+      ],
+      "lg_user_id": "55685",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "fred_7517",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "fred_7517",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=55685&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:04:13.851999+00:00",
+          "evidence": "PSN GamerTag: fred_7517",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "70642"
+      ],
+      "lg_user_id": "70642",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "otter88891",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "otter88891",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=70642&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:04:22.369747+00:00",
+          "evidence": "Xbox GamerTag: otter88891",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "17569"
+      ],
+      "lg_user_id": "17569",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "imona_plain",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "imona_plain",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=17569&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:04:30.888235+00:00",
+          "evidence": "PSN GamerTag: imona_plain",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "77094"
+      ],
+      "lg_user_id": "77094",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "WhyKayWins",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "WhyKayWins",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=77094&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:04:39.615138+00:00",
+          "evidence": "PSN GamerTag: WhyKayWins",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "66249"
+      ],
+      "lg_user_id": "66249",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "XFITSKY",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "XFITSKY",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=66249&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:04:49.399081+00:00",
+          "evidence": "PSN GamerTag: XFITSKY",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "77805"
+      ],
+      "lg_user_id": "77805",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "BODFUSION",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "BODFUSION",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=77805&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:04:58.624117+00:00",
+          "evidence": "Xbox GamerTag: BODFUSION",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "79374"
+      ],
+      "lg_user_id": "79374",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "milehighninja",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "K ii n g Goose",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79374&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:05:05.118998+00:00",
+          "evidence": "Xbox GamerTag: K ii n g Goose",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "80063"
+      ],
+      "lg_user_id": "80063",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "SchmeeveTv",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "SchmeeveTv",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=80063&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:05:13.742231+00:00",
+          "evidence": "Xbox GamerTag: SchmeeveTv",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "80054"
+      ],
+      "lg_user_id": "80054",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "Call1-800gambler",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "Call1-800gambler",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=80054&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:05:20.622117+00:00",
+          "evidence": "PSN GamerTag: Call1-800gambler",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "79440"
+      ],
+      "lg_user_id": "79440",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "Koldex Bands",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "Koldex Bands",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79440&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:05:29.771296+00:00",
+          "evidence": "Xbox GamerTag: Koldex Bands",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "81072"
+      ],
+      "lg_user_id": "81072",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "matt_0_5",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "McKenna l72I",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=81072&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:05:37.328529+00:00",
+          "evidence": "Xbox GamerTag: McKenna l72I",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "73673"
+      ],
+      "lg_user_id": "73673",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "Jokerbat462",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "Jokerbat462",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=73673&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:06:32.571062+00:00",
+          "evidence": "PSN GamerTag: Jokerbat462",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "38908"
+      ],
+      "lg_user_id": "38908",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "Play_game1100",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "Play_game1100",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=38908&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:06:36.355115+00:00",
+          "evidence": "PSN GamerTag: Play_game1100",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "80604"
+      ],
+      "lg_user_id": "80604",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "XxPASTRNAK88",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "XxPASTRNAK88",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=80604&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:06:45.714775+00:00",
+          "evidence": "Xbox GamerTag: XxPASTRNAK88",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "11207"
+      ],
+      "lg_user_id": "11207",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "Dice Feiner",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "Dice Feiner",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=11207&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:06:49.477975+00:00",
+          "evidence": "Xbox GamerTag: Dice Feiner",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "70577"
+      ],
+      "lg_user_id": "70577",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "hxmiltonnn",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "hxmiltonnn",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=70577&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:06:57.008994+00:00",
+          "evidence": "PSN GamerTag: hxmiltonnn",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "8535"
+      ],
+      "lg_user_id": "8535",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "DailySpitz",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "DailySpitz",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=8535&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:01.076221+00:00",
+          "evidence": "Xbox GamerTag: DailySpitz",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "71973"
+      ],
+      "lg_user_id": "71973",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "Hypo Savvy",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "Hypo Savvy",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=71973&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:04.771836+00:00",
+          "evidence": "Xbox GamerTag: Hypo Savvy",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "42401"
+      ],
+      "lg_user_id": "42401",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "I Richy 19 I",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "I Richy 19 I",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=42401&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:08.503211+00:00",
+          "evidence": "Xbox GamerTag: I Richy 19 I",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "76858"
+      ],
+      "lg_user_id": "76858",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "CryptiK_x91x",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "CryptiK_x91x",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=76858&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:12.282848+00:00",
+          "evidence": "PSN GamerTag: CryptiK_x91x",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "16282"
+      ],
+      "lg_user_id": "16282",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "Pitch x 20",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "Pitch x 20",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=16282&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:16.031644+00:00",
+          "evidence": "Xbox GamerTag: Pitch x 20",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "79074"
+      ],
+      "lg_user_id": "79074",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "TeeKneeWeKnee",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "TeeKneeWeKnee",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79074&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:19.552856+00:00",
+          "evidence": "Xbox GamerTag: TeeKneeWeKnee",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "8079"
+      ],
+      "lg_user_id": "8079",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "GiveMeDaPuck",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "GiveMeDaPuck",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=8079&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:23.561174+00:00",
+          "evidence": "Xbox GamerTag: GiveMeDaPuck",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "75552"
+      ],
+      "lg_user_id": "75552",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "Donreg92",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "Donreg92",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=75552&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:27.302380+00:00",
+          "evidence": "PSN GamerTag: Donreg92",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "80200"
+      ],
+      "lg_user_id": "80200",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "R3dNckV1k1ng",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "R3dNckV1k1ng",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=80200&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:31.071791+00:00",
+          "evidence": "Xbox GamerTag: R3dNckV1k1ng",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "62295"
+      ],
+      "lg_user_id": "62295",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "Mr_grind09",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "Mr_grind09",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=62295&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:34.871030+00:00",
+          "evidence": "PSN GamerTag: Mr_grind09",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "77372"
+      ],
+      "lg_user_id": "77372",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "OpenSquash33810",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "OpenSquash33810",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=77372&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:38.396370+00:00",
+          "evidence": "Xbox GamerTag: OpenSquash33810",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "77325"
+      ],
+      "lg_user_id": "77325",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "RubA5E5",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "RubA5E5",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=77325&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:41.929688+00:00",
+          "evidence": "Xbox GamerTag: RubA5E5",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "78121"
+      ],
+      "lg_user_id": "78121",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "Lechunks817",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "Lechunks817",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=78121&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:45.701868+00:00",
+          "evidence": "Xbox GamerTag: Lechunks817",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "79497"
+      ],
+      "lg_user_id": "79497",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "LG LEGEND9860",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "LG LEGEND9860",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79497&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:49.186331+00:00",
+          "evidence": "Xbox GamerTag: LG LEGEND9860",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "75066"
+      ],
+      "lg_user_id": "75066",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "Wickedsnipes6",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "Wickedsnipes6",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=75066&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:07:57.054087+00:00",
+          "evidence": "PSN GamerTag: Wickedsnipes6",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "4493"
+      ],
+      "lg_user_id": "4493",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "RAMPAGEx91",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "xbox",
+          "account_gamertag": "RAMPAGEx91",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=4493&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:08:04.560892+00:00",
+          "evidence": "Xbox GamerTag: RAMPAGEx91",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "42780"
+      ],
+      "lg_user_id": "42780",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "Ariapan_2",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "Ariapan_2",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=42780&leagueid=39&seasonid=55",
+          "observed_at": "2026-10-31T17:08:08.328419+00:00",
+          "evidence": "PSN GamerTag: Ariapan_2",
+          "status": "account_link_observed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "14271"
+      ],
+      "lg_user_id": "14271",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "Bauer l 43 l",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "Bauer4373",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=14271&leagueid=39&seasonid=55",
+          "observed_at": null,
+          "evidence": "PSN GamerTag: Bauer4373",
+          "status": "multiple_linked_accounts_game_platform_unconfirmed"
+        },
+        {
+          "platform": "xbox",
+          "account_gamertag": "Bauer l 43 l",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=14271&leagueid=39&seasonid=55",
+          "observed_at": null,
+          "evidence": "Xbox GamerTag: Bauer l 43 l",
+          "status": "multiple_linked_accounts_game_platform_unconfirmed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "12262"
+      ],
+      "lg_user_id": "12262",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "Kudolken",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "Kudolken",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=12262&leagueid=39&seasonid=55",
+          "observed_at": null,
+          "evidence": "PSN GamerTag: Kudolken",
+          "status": "multiple_linked_accounts_game_platform_unconfirmed"
+        },
+        {
+          "platform": "xbox",
+          "account_gamertag": "I Crease Fire I",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=12262&leagueid=39&seasonid=55",
+          "observed_at": null,
+          "evidence": "Xbox GamerTag: I Crease Fire I",
+          "status": "multiple_linked_accounts_game_platform_unconfirmed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "29604"
+      ],
+      "lg_user_id": "29604",
+      "listed_rosters": [
+        {
+          "lg_team_id": "412",
+          "registered_name": "DrxppedOff2217",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=412&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "Wavey2k-_-",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=29604&leagueid=39&seasonid=55",
+          "observed_at": null,
+          "evidence": "PSN GamerTag: Wavey2k-_-",
+          "status": "multiple_linked_accounts_game_platform_unconfirmed"
+        },
+        {
+          "platform": "xbox",
+          "account_gamertag": "Clapzy4L",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=29604&leagueid=39&seasonid=55",
+          "observed_at": null,
+          "evidence": "Xbox GamerTag: Clapzy4L",
+          "status": "multiple_linked_accounts_game_platform_unconfirmed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "37674"
+      ],
+      "lg_user_id": "37674",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "VitalDayz",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "VitalDayz",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=37674&leagueid=39&seasonid=55",
+          "observed_at": null,
+          "evidence": "PSN GamerTag: VitalDayz",
+          "status": "multiple_linked_accounts_game_platform_unconfirmed"
+        },
+        {
+          "platform": "xbox",
+          "account_gamertag": "VitalDayzzz",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=37674&leagueid=39&seasonid=55",
+          "observed_at": null,
+          "evidence": "Xbox GamerTag: VitalDayzzz",
+          "status": "multiple_linked_accounts_game_platform_unconfirmed"
+        }
+      ],
+      "game_participation_verified": false
+    },
+    {
+      "canonical_key": [
+        "LGCHL",
+        55,
+        "79758"
+      ],
+      "lg_user_id": "79758",
+      "listed_rosters": [
+        {
+          "lg_team_id": "408",
+          "registered_name": "II BOH1CA II",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_page&teamid=408&leagueid=39&seasonid=55",
+          "membership_status": "listed_candidate_only"
+        }
+      ],
+      "accounts": [
+        {
+          "platform": "playstation",
+          "account_gamertag": "II_BOH1CA_II",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79758&leagueid=39&seasonid=55",
+          "observed_at": null,
+          "evidence": "PSN GamerTag: II_BOH1CA_II",
+          "status": "multiple_linked_accounts_game_platform_unconfirmed"
+        },
+        {
+          "platform": "xbox",
+          "account_gamertag": "II BOH1CA II",
+          "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79758&leagueid=39&seasonid=55",
+          "observed_at": null,
+          "evidence": "Xbox GamerTag: II BOH1CA II",
+          "status": "multiple_linked_accounts_game_platform_unconfirmed"
+        }
+      ],
+      "game_participation_verified": false
+    }
+  ],
+  "issues": [
+    {
+      "lg_user_id": "14271",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=14271&leagueid=39&seasonid=55",
+      "reason": "missing_or_multiple_platform_accounts",
+      "accounts": [
+        {
+          "account_gamertag": "Bauer4373",
+          "evidence": "PSN GamerTag: Bauer4373",
+          "platform": "playstation"
+        },
+        {
+          "account_gamertag": "Bauer l 43 l",
+          "evidence": "Xbox GamerTag: Bauer l 43 l",
+          "platform": "xbox"
+        }
+      ]
+    },
+    {
+      "lg_user_id": "12262",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=12262&leagueid=39&seasonid=55",
+      "reason": "missing_or_multiple_platform_accounts",
+      "accounts": [
+        {
+          "account_gamertag": "Kudolken",
+          "evidence": "PSN GamerTag: Kudolken",
+          "platform": "playstation"
+        },
+        {
+          "account_gamertag": "I Crease Fire I",
+          "evidence": "Xbox GamerTag: I Crease Fire I",
+          "platform": "xbox"
+        }
+      ]
+    },
+    {
+      "lg_user_id": "29604",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=29604&leagueid=39&seasonid=55",
+      "reason": "missing_or_multiple_platform_accounts",
+      "accounts": [
+        {
+          "account_gamertag": "Wavey2k-_-",
+          "evidence": "PSN GamerTag: Wavey2k-_-",
+          "platform": "playstation"
+        },
+        {
+          "account_gamertag": "Clapzy4L",
+          "evidence": "Xbox GamerTag: Clapzy4L",
+          "platform": "xbox"
+        }
+      ]
+    },
+    {
+      "lg_user_id": "37674",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=37674&leagueid=39&seasonid=55",
+      "reason": "missing_or_multiple_platform_accounts",
+      "accounts": [
+        {
+          "account_gamertag": "VitalDayz",
+          "evidence": "PSN GamerTag: VitalDayz",
+          "platform": "playstation"
+        },
+        {
+          "account_gamertag": "VitalDayzzz",
+          "evidence": "Xbox GamerTag: VitalDayzzz",
+          "platform": "xbox"
+        }
+      ]
+    },
+    {
+      "lg_user_id": "79758",
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79758&leagueid=39&seasonid=55",
+      "reason": "missing_or_multiple_platform_accounts",
+      "accounts": [
+        {
+          "account_gamertag": "II_BOH1CA_II",
+          "evidence": "PSN GamerTag: II_BOH1CA_II",
+          "platform": "playstation"
+        },
+        {
+          "account_gamertag": "II BOH1CA II",
+          "evidence": "Xbox GamerTag: II BOH1CA II",
+          "platform": "xbox"
+        }
+      ]
+    }
+  ],
+  "database_unchanged": true,
+  "counts": {
+    "games": 27,
+    "team_pages": 28,
+    "scoped_roster_candidates": 872,
+    "players_with_account_evidence": 53,
+    "account_links": 58,
+    "issues": 5
+  },
+  "published": false,
+  "note": "Explicit LG profile labels establish listed account links. They do not verify a game lineup, the account used in a game, or a CHEL/broadcast alias."
+}
