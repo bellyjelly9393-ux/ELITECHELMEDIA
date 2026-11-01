@@ -28,3 +28,23 @@ body{background:radial-gradient(ellipse at 50% 0%,#2a1716 0%,#0b0d12 48%,#06070a
 a:focus-visible,button:focus-visible{outline:3px solid #ffcf65;outline-offset:4px}
 @media(max-width:760px){.top-in{min-height:66px}.desks-band{padding:16px 12px}.desks{gap:12px}.desk{min-height:170px}.ecm-banner-cta{padding:14px}.hn,.stories,.league{padding-top:24px;padding-bottom:24px}.desk-t{font-size:clamp(20px,5vw,30px)}}
 @media(prefers-reduced-motion:reduce){.desk,.btn,.watch-btn,.hn-cta{transition:none}.desk:hover,.btn:hover,.watch-btn:hover,.hn-cta:hover{transform:none}}
+
+/* The rebuilt front door replaces the original static hero and duplicate desk cards. */
+.ecm-banner,.desks-band{display:none!important}
+.ecm-rebuild{max-width:1540px;margin:0 auto;padding:20px clamp(12px,3vw,40px) 35px;background:radial-gradient(ellipse at 50% 0,#48221b,#0c0d11 68%)}
+.ecm-rebuild-hero{min-height:440px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(220px,.8fr);align-items:center;position:relative;overflow:hidden;padding:clamp(24px,5vw,70px);border:3px solid #8e6938;background:linear-gradient(110deg,#050608ed 10%,#16191ecc 65%,#280e0eaa),url('assets/brand/ecm-hero-banner.webp') center/cover;box-shadow:inset 0 3px #ffdd8a8a,inset 0 -8px #000,0 6px 0 #07080b,0 19px 32px #000d}
+.ecm-rebuild-hero:before{content:"";position:absolute;inset:9px;border:1px solid #b3a38a55;pointer-events:none}
+.ecm-rebuild-copy{position:relative;z-index:2}.ecm-rebuild-eyebrow{color:#ffc468;font-size:14px;font-weight:900;letter-spacing:.22em}
+.ecm-rebuild h1{font-family:Anton,Impact,sans-serif;font-size:clamp(42px,5.8vw,91px);line-height:1.04;letter-spacing:.015em;margin:18px 0;text-shadow:0 5px 1px #000,0 8px 18px #000}
+.ecm-rebuild h1 span{display:block;color:#e9ebee;font-size:.55em;letter-spacing:.09em}.ecm-rebuild h1 strong{display:block;color:#fff;background:linear-gradient(#fff,#aeb2ba 62%,#fff);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ecm-rebuild-copy>p:not(.ecm-rebuild-eyebrow){font-size:clamp(17px,2vw,24px);font-weight:700}.ecm-rebuild-copy>p b{color:#f04539;padding:0 10px}
+.ecm-rebuild-button{display:inline-flex;align-items:center;gap:25px;margin-top:25px;padding:17px 25px;background:linear-gradient(#ff5946,#c81718 50%,#7d0d12);border:2px solid #ffba78;color:white;font-weight:900;letter-spacing:.04em;text-decoration:none;box-shadow:inset 0 2px #ffffff66,0 5px 0 #4d090b,0 11px 18px #000b}
+.ecm-rebuild-crest{width:min(100%,340px);height:auto;justify-self:center;filter:drop-shadow(0 16px 2px #000a) drop-shadow(0 0 22px #f42c2840)}
+.ecm-rebuild-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;margin-top:24px}
+.ecm-rebuild-door{position:relative;display:flex;flex-direction:column;align-items:flex-start;min-height:290px;padding:23px;background:linear-gradient(145deg,#343b45,#13161d 28%,#07090e 85%);border:2px solid #98733f;color:#f5f5f5;text-decoration:none;box-shadow:inset 0 3px #fff5,inset 4px 0 #ffffff17,inset 0 -6px #000,0 6px 0 #06070a,0 16px 22px #000a;transition:transform .18s}
+.ecm-rebuild-door:hover{transform:translateY(-5px);border-color:#ffd17b}.ecm-rebuild-number{font-size:12px;letter-spacing:.15em;color:#eec477;font-weight:900}
+.ecm-rebuild-door img{height:110px;width:160px;object-fit:contain;align-self:center;margin:12px 0 3px;filter:drop-shadow(0 8px 7px #000)}
+.ecm-rebuild-type{align-self:center;display:flex;align-items:center;justify-content:center;height:125px;font:900 82px Anton,Impact,sans-serif;font-style:italic;text-shadow:5px 6px #000,-2px -2px #ddd}.ecm-rebuild-type span{color:#e8322d}
+.ecm-rebuild-mic{align-self:center;display:grid;place-items:center;height:125px;font-size:98px;color:#e8ae4d;text-shadow:0 8px #000}
+.ecm-rebuild-door h2{font:900 clamp(24px,2.5vw,35px) Anton,Impact,sans-serif;margin:0}.ecm-rebuild-door p{font-size:15px;color:#d3d6db;margin:7px 0 18px}.ecm-rebuild-link{margin-top:auto;font-size:13px;font-weight:900;color:#ffca72;letter-spacing:.06em}
+@media(max-width:760px){.ecm-rebuild{padding:12px 12px 28px}.ecm-rebuild-hero{grid-template-columns:1fr;min-height:390px;padding:24px}.ecm-rebuild-crest{position:absolute;right:-35px;bottom:6px;width:180px;opacity:.42}.ecm-rebuild-copy{z-index:3}.ecm-rebuild-grid{grid-template-columns:1fr;gap:14px}.ecm-rebuild-door{min-height:215px}.ecm-rebuild-door img,.ecm-rebuild-type,.ecm-rebuild-mic{height:80px;font-size:60px;margin:6px 0}.ecm-rebuild-door img{width:125px}.ecm-rebuild h1{font-size:clamp(38px,10vw,64px)}}
