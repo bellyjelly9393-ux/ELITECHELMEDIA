@@ -8,15 +8,26 @@
 <meta name="description" content="Interactive 3D hockey player cards using verified LGCHL and LG3s league statistics. Customize a personal CHEL character preview.">
 <link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
 <link rel="stylesheet" href="player-cards.css?v=20261027">
-<script src="player-cards.js?v=20261027" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js" defer></script>
+<script src="player-cards.js?v=20261101" defer></script>
+<script src="player-cards-account.js?v=20261101" defer></script>
 </head>
 <body>
 <header class="top">
   <a class="brand" href="index.html"><img src="assets/brand/ecm-crest.webp" width="54" height="54" alt=""><span><strong>ELITECHEL</strong><small>MEDIA</small></span></a>
-  <nav aria-label="Player card navigation"><a href="index.html">Home</a><a href="league-leaderboards.html?league=lg3s">Leaderboards</a><a href="lg3s-media.html">LG3s Desk</a><a href="lgchl-media.html">LGCHL Desk</a></nav>
+  <nav aria-label="Player card navigation"><a href="index.html">Home</a><a href="league-leaderboards.html?league=lg3s">Leaderboards</a><a href="lg3s-media.html">LG3s Desk</a><a href="lgchl-media.html">LGCHL Desk</a><a href="#myCollection">My Collection</a></nav>
 </header>
 <main>
  <div class="heading"><span class="eyebrow">ELITECHEL MEDIA / PLAYER HEADQUARTERS</span><h1>THE PLAYER CARD STUDIO</h1><p>Real league stats. Your CHEL character. A card built like a piece of championship hardware.</p></div>
+ <section class="account-panel" id="accountPanel" aria-label="EliteChel account">
+  <div><span class="eyebrow">ELITECHEL FOUNDERS BETA</span><h2>YOUR CARDS. YOUR ACCOUNT.</h2>
+  <p id="accountStatus" role="status" aria-live="polite">Checking Discord sign-in…</p></div>
+  <div class="account-actions"><span class="account-who" id="accountName">Guest</span>
+   <button type="button" id="discordSignin">Sign in with Discord</button>
+   <button type="button" id="discordSignout" hidden>Sign out</button>
+   <a href="#myCollection">View My Collection ↓</a>
+  </div>
+ </section>
  <div class="studio">
   <section class="controls" aria-labelledby="custom-heading">
    <h2 id="custom-heading">Build your card <span class="version">Preview v1</span></h2>
@@ -30,8 +41,8 @@
    <label>CHEL character screenshot <span class="sub">Optional PNG, JPG or WebP (max 8 MB)</span><input id="portraitFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
    <div class="inline"><label>CHEL Overall <span class="sub">Self-reported</span><input id="overall" type="number" min="1" max="99" inputmode="numeric" placeholder="--"></label><label>Jersey number <span class="sub">Optional</span><input id="jersey" type="number" min="0" max="99" inputmode="numeric" placeholder="--"></label></div>
    <label>Card finish<select id="finish"><option value="crimson">Crimson Steel</option><option value="gold">Championship Gold</option><option value="ice">Ice Chrome</option></select></label>
-   <div class="actions"><button type="button" id="save">Save on this device</button><button type="button" id="export">Export PNG</button><button type="button" class="secondary" id="reset">Reset personal edits</button></div>
-   <p class="footnote">CHEL OVR and artwork are player-supplied, not official EA or league ratings. Official stats stay read-only. Personalized edits are stored only in this browser, not on public player profiles.</p>
+   <div class="actions"><button type="button" id="save">Save on this device</button><button type="button" id="saveToCollection" disabled>Save to My Collection</button><button type="button" id="export">Export PNG</button><button type="button" class="secondary" id="reset">Reset personal edits</button></div>
+   <p class="footnote">Verified league stats are always read-only. CHEL overall is self-reported. Saving to My Collection stores your player choice, finish, overall and jersey on your private account. Your uploaded character image remains on this device only. Export a PNG to keep it; account-based image sync is not available yet.</p>
   </section>
   <section class="stage" aria-labelledby="preview-heading">
    <div class="stage-head"><h2 id="preview-heading">3D CARD PREVIEW</h2><span>Move your pointer over the card</span></div>
@@ -50,6 +61,11 @@
    <p class="preview-note">Card artwork is a concept treatment. Actual character images appear when a player uploads their own game screenshot.</p>
   </section>
  </div>
+ <section class="collection-panel" id="myCollection" aria-label="Your personal card collection">
+  <div><span class="eyebrow">PLAYER HEADQUARTERS</span><h2>MY CARD COLLECTION</h2>
+  <p class="hint">Your saved players and card finishes. Use the week-by-week collection coming later for fantasy picks.</p></div>
+  <div id="collectionList" class="collection-grid"><p class="hint">Sign in to see your cards.</p></div>
+ </section>
 </main>
 </body>
 </html>
