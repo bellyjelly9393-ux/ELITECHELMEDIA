@@ -20,13 +20,17 @@ alter table public.elitechel_player_cards enable row level security;
 revoke all on public.elitechel_player_cards from anon,authenticated;
 grant select, insert, update, delete on public.elitechel_player_cards to authenticated;
 grant usage, select on sequence public.elitechel_player_cards_id_seq to authenticated;
+drop policy if exists elitechel_cards_select on public.elitechel_player_cards;
 create policy elitechel_cards_select on public.elitechel_player_cards
  for select to authenticated using ((select auth.uid()) = user_id);
+drop policy if exists elitechel_cards_insert on public.elitechel_player_cards;
 create policy elitechel_cards_insert on public.elitechel_player_cards
  for insert to authenticated with check ((select auth.uid()) = user_id);
+drop policy if exists elitechel_cards_update on public.elitechel_player_cards;
 create policy elitechel_cards_update on public.elitechel_player_cards
  for update to authenticated using ((select auth.uid()) = user_id)
  with check ((select auth.uid()) = user_id);
+drop policy if exists elitechel_cards_delete on public.elitechel_player_cards;
 create policy elitechel_cards_delete on public.elitechel_player_cards
  for delete to authenticated using ((select auth.uid()) = user_id);
 comment on table public.elitechel_player_cards is
