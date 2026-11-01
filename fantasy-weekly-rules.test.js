@@ -36,6 +36,15 @@ function run(){
  t('Sixes RD spotlight below target +0',function(){return api.scoreEntry(Object.assign({},sB,{finalized:true}),sPick,Object.assign({},sScores,{D3:{points:11,games:2,verified:true}})).bonus===0;});
  t('Unknown twist rejected',function(){return !api.validateWeek(Object.assign({},sA,{bonus:{type:'unknown',points:4,target:10}})).ok;});
  t('Oversized bonus rejected',function(){return !api.validateWeek(Object.assign({},sA,{bonus:{type:'heater',points:100,target:10}})).ok;});
+ t('Missing weekly score stays pending',function(){
+  return api.scoreEntry(Object.assign({},fA,{finalized:true}),fPick,Object.assign({},fScores,{S1:{points:null,games:2,verified:true}})).status==='pending';
+ });
+ t('Twist with no eligible candidate rejected',function(){
+  return !api.validateWeek(Object.assign({},fA,{pool:fA.pool.filter(function(p){return p.category!=='bounceback';})})).ok;
+ });
+ t('Invalid bonus games minimum rejected',function(){
+  return !api.validateWeek(Object.assign({},fA,{bonus:{type:'bounce_back',points:5,target:16,min_games:-3}})).ok;
+ });
  return {passed:cases.filter(function(c){return c.pass;}).length,total:cases.length,failures:cases.filter(function(c){return !c.pass;}),cases:cases};
 }
 root.EliteChelFantasyRuleTests={run:run};
