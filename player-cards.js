@@ -5,7 +5,7 @@ const API='https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/';
 const KEY='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
-let league=params.get('league')==='lgchl'?'lgchl':'lg3s';
+let league=params.get('league')==='lg3s'?'lg3s':'lgchl';
 let all=[],visible=[],current=null,req=0;
 let portraitData='';
 const blank='--';
@@ -26,7 +26,7 @@ $('feedStatus').textContent=all.length+' public player-stat records loaded. Game
 }catch(e){if(i!==req)return;all=[];$('player').innerHTML='';$('player').add(new Option('No player records available',''));$('feedStatus').textContent='League feed unavailable. No example statistics are displayed.';current=null;render();console.warn('Player card read-only feed:',e.message);}}
 function filter(){const q=$('filter').value.trim().toLowerCase();const chosen=$('player').value;visible=all.filter(p=>!q||p.tag.toLowerCase().includes(q)||p.team.toLowerCase().includes(q)).slice(0,500);$('player').innerHTML='';if(!visible.length){$('player').add(new Option('No matching players',''));current=null;render();return;}for(const p of visible){$('player').add(new Option(p.tag+' · '+(p.team||league.toUpperCase())+' · '+p.kind,p.kind+':'+p.id));}if(visible.some(p=>p.kind+':'+p.id===chosen))$('player').value=chosen;}
 function loadPersonal(){portraitData='';$('portraitFile').value='';$('overall').value='';$('jersey').value='';$('finish').value='crimson';if(!current)return;try{const s=localStorage.getItem(key());if(s){const p=JSON.parse(s);$('overall').value=p.ovr||'';$('jersey').value=p.jersey??'';$('finish').value=['crimson','gold','ice'].includes(p.finish)?p.finish:'crimson';portraitData=p.portrait||'';}}catch(e){console.warn('Local card preferences unavailable:',e.message);}}
-function select(){const value=$('player').value;current=all.find(p=>p.kind+':'+p.id===value)||null;loadPersonal();render();}
+function select(){const value=$('player').value;current=all.find(p=>p.kind+':'+p.id===value)||null;loadPersonal();render();window.dispatchEvent(new Event('ecm:card-selected'));}
 function render(){const p=current;$('cardName').textContent=p?p.tag:'SELECT PLAYER';$('cardTeam').textContent=p?(p.team||'TEAM UNAVAILABLE').toUpperCase():'LG VERIFIED STATS';$('cardPosition').textContent=p?(p.pos||p.kind).toUpperCase():'PLAYER';$('cardJersey').textContent=$('jersey').value?'#'+$('jersey').value:'';$('cardOvr').textContent=$('overall').value||blank;$('card').dataset.finish=$('finish').value;
 const portrait=$('portrait');portrait.hidden=!portraitData;portrait.src=portraitData||'';$('silhouette').hidden=!!portraitData;
 const values=p?(p.kind==='goalie'?[fmt(p.gp),fmt(p.wins),pc(p.sv),fixed(p.gaa)]:[fmt(p.gp),fmt(p.goals),fmt(p.assists),fmt(p.points)]):[blank,blank,blank,blank];
@@ -56,5 +56,16 @@ $('player').addEventListener('change',()=>{select();if(current){const u=new URL(
 for(const id of ['overall','jersey','finish'])$(id).addEventListener('input',()=>{const field=$(id);if(id==='overall'&&field.value)field.value=Math.max(1,Math.min(99,Number(field.value)||1));if(id==='jersey'&&field.value)field.value=Math.max(0,Math.min(99,Number(field.value)||0));render();});
 $('portraitFile').addEventListener('change',e=>upload(e.target.files?.[0]));
 $('save').addEventListener('click',save);$('reset').addEventListener('click',clear);$('export').addEventListener('click',exportPNG);
+window.ecmCardStudio={
+ getSelected:()=>current,
+ getLeague:()=>league,
+ applyAccountCustomization:(c)=>{
+   if(!current || !c)return;
+   $('overall').value=c.overall===null||c.overall===undefined?'':String(c.overall);
+   $('jersey').value=c.jersey===null||c.jersey===undefined?'':String(c.jersey);
+   $('finish').value=['crimson','gold','ice'].includes(c.finish)?c.finish:'crimson';
+   render();
+ }
+};
 load();
 })();
