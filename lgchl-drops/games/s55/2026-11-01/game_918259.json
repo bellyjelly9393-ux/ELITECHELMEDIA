@@ -1,0 +1,533 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918259,
+ "status": "FINAL",
+ "played_at_text": "Sunday November 01st 2026, 09:35 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918259",
+ "captured_at": "2026-11-02T17:00:55.838Z",
+ "away": {
+  "lg_team_id": 2983,
+  "name": "Bruins",
+  "record": "23-19-5",
+  "goals_by_period": {
+   "1": 3,
+   "2": 1,
+   "3": 1
+  },
+  "score": 5,
+  "full_name": "Chilliwack Bruins"
+ },
+ "home": {
+  "lg_team_id": 380,
+  "name": "Silvertips",
+  "record": "11-30-4",
+  "goals_by_period": {
+   "1": 0,
+   "2": 0,
+   "3": 1
+  },
+  "score": 1,
+  "full_name": "Everett Silvertips"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 5,
+   "home": 1
+  },
+  "total_shots": {
+   "away": 16,
+   "home": 9
+  },
+  "hits": {
+   "away": 5,
+   "home": 7
+  },
+  "time_on_attack": {
+   "away": "11:27",
+   "home": "6:34"
+  },
+  "passing_pct": {
+   "away": "82%",
+   "home": "74.7%"
+  },
+  "face_offs_won": {
+   "away": 10,
+   "home": 10
+  },
+  "penalty_minutes": {
+   "away": "0:00",
+   "home": "4:00"
+  },
+  "power_plays": {
+   "away": "0 / 2",
+   "home": "0 / 0"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 2,
+   "home": 6
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [],
+  "home": []
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Chilliwack Bruins",
+   "lg_user_id": 73503,
+   "player": "Lil Dekey",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    89,
+    84,
+    61
+   ],
+   "goals": 1,
+   "ast": 4,
+   "pts": 5,
+   "plus_minus": 4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:24",
+   "time_with_puck_seconds": 264,
+   "shots_on_goal_attempts": "3/6",
+   "shots_on_goal_attempts_on_goal": 3,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 80.6,
+   "saucer_passes": 0,
+   "hits": 3,
+   "take_aways": 6,
+   "give_aways": 6,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Chilliwack Bruins",
+   "lg_user_id": 23358,
+   "player": "RaYzR--23",
+   "position": "C",
+   "build": "PLY",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    89,
+    83,
+    63
+   ],
+   "goals": 2,
+   "ast": 0,
+   "pts": 2,
+   "plus_minus": 4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "5:13",
+   "time_with_puck_seconds": 313,
+   "shots_on_goal_attempts": "4/7",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 7,
+   "deflections": 2,
+   "pass_pct": 78.3,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 6,
+   "blocked_shots": 2,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Chilliwack Bruins",
+   "lg_user_id": 7697,
+   "player": "SoSRevolution",
+   "position": "RW",
+   "build": "PLY",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    82,
+    74,
+    49
+   ],
+   "goals": 2,
+   "ast": 1,
+   "pts": 3,
+   "plus_minus": 4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:58",
+   "time_with_puck_seconds": 298,
+   "shots_on_goal_attempts": "5/13",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 13,
+   "deflections": 0,
+   "pass_pct": 73.7,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 11,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Chilliwack Bruins",
+   "lg_user_id": 75179,
+   "player": "mannyxrare",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    76,
+    21,
+    72
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:45",
+   "time_with_puck_seconds": 225,
+   "shots_on_goal_attempts": "0/2",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 92.9,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 2,
+   "give_aways": 0,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Chilliwack Bruins",
+   "lg_user_id": 40380,
+   "player": "iTzOutLawDemo-",
+   "position": "RD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    75,
+    24,
+    69
+   ],
+   "goals": 0,
+   "ast": 1,
+   "pts": 1,
+   "plus_minus": 4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:15",
+   "time_with_puck_seconds": 195,
+   "shots_on_goal_attempts": "2/6",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 6,
+   "deflections": 0,
+   "pass_pct": 80.0,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 0,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Everett Silvertips",
+   "lg_user_id": 76430,
+   "player": "lil Jayyxzi",
+   "position": "LW",
+   "build": "SNP",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    17,
+    14,
+    23
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:44",
+   "time_with_puck_seconds": 224,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 57.7,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 4,
+   "give_aways": 9,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Everett Silvertips",
+   "lg_user_id": 74509,
+   "player": "Pristine Life",
+   "position": "C",
+   "build": "PLY",
+   "badges": [],
+   "lg_ratings": [
+    16,
+    8,
+    39
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:07",
+   "time_with_puck_seconds": 187,
+   "shots_on_goal_attempts": "0/0",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 0,
+   "deflections": 0,
+   "pass_pct": 86.7,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 1,
+   "give_aways": 6,
+   "blocked_shots": 2,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Everett Silvertips",
+   "lg_user_id": 76650,
+   "player": "luvstrattz",
+   "position": "RW",
+   "build": "SNP",
+   "badges": [],
+   "lg_ratings": [
+    40,
+    51,
+    26
+   ],
+   "goals": 1,
+   "ast": 0,
+   "pts": 1,
+   "plus_minus": -4,
+   "time_on_ice": "58:00",
+   "time_on_ice_seconds": 3480,
+   "time_with_puck": "6:48",
+   "time_with_puck_seconds": 408,
+   "shots_on_goal_attempts": "5/11",
+   "shots_on_goal_attempts_on_goal": 5,
+   "shots_on_goal_attempts_attempts": 11,
+   "deflections": 0,
+   "pass_pct": 76.2,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 0,
+   "give_aways": 10,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Everett Silvertips",
+   "lg_user_id": 43372,
+   "player": "untamedkid69",
+   "position": "LD",
+   "build": "TWD",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    38,
+    7,
+    52
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -4,
+   "time_on_ice": "58:01",
+   "time_on_ice_seconds": 3481,
+   "time_with_puck": "1:31",
+   "time_with_puck_seconds": 91,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 81.3,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 3,
+   "give_aways": 4,
+   "blocked_shots": 3,
+   "interceptions": 4,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Everett Silvertips",
+   "lg_user_id": 54951,
+   "player": "STLxPsykoTokerx",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    33,
+    5,
+    44
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -4,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:06",
+   "time_with_puck_seconds": 126,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 81.3,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 2,
+   "give_aways": 1,
+   "blocked_shots": 1,
+   "interceptions": 3,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 2
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 77220,
+   "player": "HAWK8TUAH",
+   "build": "HYB",
+   "lg_ratings": [
+    70,
+    58
+   ],
+   "shots": 9,
+   "s_pct": 0.889,
+   "ga": 1,
+   "save": 8,
+   "gaa": 1.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 2,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Chilliwack Bruins"
+  },
+  {
+   "lg_user_id": 56501,
+   "player": "l Stefano l",
+   "build": "HYB",
+   "lg_ratings": [
+    41,
+    43
+   ],
+   "shots": 16,
+   "s_pct": 0.688,
+   "ga": 5,
+   "save": 11,
+   "gaa": 5.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 1,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Everett Silvertips"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "iTzOutLawDemo-",
+   "submitted_at": "2026-11-01 10:00:06pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "iTzOutLawDemo-",
+  "last_at": "Sunday November 01st 2026, 10:00 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}

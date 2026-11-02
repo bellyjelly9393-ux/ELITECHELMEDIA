@@ -6,6 +6,17 @@ private matchmaking codes.
 
 ## Delivered
 
+- `lineups/2026-11-02/`: **Mon Nov 2: lineups as listed on LG before puck drop** for all three Hitmen
+  games: vs Spokane Chiefs 9:00, at Prince George Cougars 9:35, at Victoria Royals 10:10 ET. Team
+  ratings, top line and top D pair (LG's Offense/Defense Break Down), first goalie listed, and full
+  lists in LG's order with OVR, salary and season numbers.
+- `leaders/2026-11-02/`: season 55 leaderboards after Sunday Nov 1, from every row of LG's member stats
+  (1,388 skaters, 182 goalies): points, goals, assists, +/-, hits, GWG, takeaways, interceptions, blocks,
+  D-men points; goalie wins, save % and GAA (10+ GP), shutouts.
+- `games/s55/2026-11-01/`: LGCHL games from Sunday Nov 1, 2026 (93 scheduled). **Partial: 78 of 93 (918207–918284; 918285–918299 not yet pulled)**
+  (918207-918243). The pull stopped at a Cloudflare check; the rest will be added. Same format as the
+  October nights (LG game-page data, no EA part detail).
+
 - `lineups/2026-10-27/`: **Tue Oct 27: lineups as listed on LG before puck drop** for all three Hitmen
   games: at Moncton Wildcats 9:00, vs London Knights 9:35, vs Ottawa 67's 10:10 ET. Team
   ratings, each team's top line and top D pair (LG's Offense/Defense Break Down), first goalie
