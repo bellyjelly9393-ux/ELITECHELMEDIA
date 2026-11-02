@@ -30,7 +30,7 @@
         : esc(lead.nickname || lead.name) + ' lead by ' + gap + ' points.';
       return '<article class="card tinted lg-race" data-logo="' + logo(lead.lg_team_id) + '">' + wm(lead.lg_team_id) +
         '<p class="lg-race-tag">' + esc(k) + '</p>' +
-        '<ol class="lg-race-list num">' + rows.map((t, i) => '<li><span class="lg-race-rk">' + (i + 1) + '</span><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(t.nickname || t.name) + '</b><span class="lg-race-pts">' + esc(t.pts) + '</span><small>' + (i ? (Number(t.pts) === Number(lead.pts) ? 'level' : '−' + (Number(lead.pts) - Number(t.pts))) : 'PTS') + '</small></li>').join('') + '</ol>' +
+        '<ol class="lg-race-list num">' + rows.map((t, i) => '<li style="--team-logo:url(\'' + logo(t.lg_team_id) + '\')"><span class="lg-race-rk">' + (i + 1) + '</span><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(t.nickname || t.name) + '</b><span class="lg-race-pts">' + esc(t.pts) + '</span><small>' + (i ? (Number(t.pts) === Number(lead.pts) ? 'level' : '−' + (Number(lead.pts) - Number(t.pts))) : 'PTS') + '</small></li>').join('') + '</ol>' +
         '<p class="lg-race-line">' + line + '</p></article>';
     }).join('');
     tint(box);
@@ -165,6 +165,17 @@
     const goals = list.filter(p => p.player_kind === 'skater').reduce((a, p) => a + Number(p.goals || 0), 0);
     return { night, list, skaters, goalies, goals, finals: Number(list[0]?.night_finals || 0), finalGoals: Number(list[0]?.night_final_goals || 0) };
   }
+  // Verified jersey cutouts can be added by team ID. No fabricated uniforms.
+  const jerseyAssets = window.LGCHL_JERSEY_ASSETS || {};
+  function honour(p, teams, rank) {
+    const goalie = p.player_kind === 'goalie', team = teams.get(Number(p.lg_team_id));
+    const crest = logo(p.lg_team_id), jersey = jerseyAssets[Number(p.lg_team_id)];
+    const tag = goalie ? 'Goalie of the night' : ['First star', 'Second star', 'Third star'][rank - 1];
+    const details = '<div class="lg-stall-stats" style="--team-logo:url(\'' + crest + '\')"><small>' + tag + '</small><h3>' + esc(p.gamertag) + '</h3><p>' + esc(p.position || (goalie ? 'G' : '')) + ' · ' + esc(team ? team.name : 'LGCHL') + '</p><strong>' + (goalie ? svOf(p).toFixed(3).replace(/^0/, '') + ' SV%' : esc(p.points) + ' PTS') + '</strong><p>' + (goalie ? esc(p.saves) + ' SAVES · ' + esc(p.goals_against) + ' GA' : esc(p.goals) + ' G · ' + esc(p.assists) + ' A · ' + sgn(p.plus_minus)) + ' · ' + esc(p.gp) + ' GP</p></div>';
+    return '<article class="' + (goalie ? 'lg-goalie-honour' : 'lg-stall') + '" data-rank="' + rank + '"><div class="lg-stall-scene"><div class="lg-stall-name" title="' + esc(p.gamertag) + '">' + esc(p.gamertag) + '</div>' +
+      (jersey ? '<img class="lg-stall-jersey" src="' + esc(jersey) + '" alt="' + esc(team?.name || '') + ' jersey" loading="lazy">' : '<img class="lg-stall-crest" src="' + crest + '" alt="' + esc(team?.name || '') + '" loading="lazy">') +
+      (goalie ? '<img class="lg-goalie-gear" src="assets/wildman/stalls/goalie-kit.svg" alt="Goalie pads, mask, blocker, catching glove and stick" loading="lazy">' : '<div class="lg-stall-stars" aria-label="' + tag + '">' + '★'.repeat(4-rank) + '</div>') + '</div>' + details + '</article>';
+  }
   async function renderNight(teams) {
     const box = $('lgNightPlayers'); if (!box) return;
     let rows = [];
@@ -180,8 +191,8 @@
     const multi = n.skaters.filter(p => Number(p.points) >= 2 * Math.max(1, Number(p.gp))).length;
     const leadersBy = k => n.skaters.slice().sort((a, b) => Number(b[k]) - Number(a[k]) || skaterOrder(a, b)).slice(0, 5);
     const rowsHtml = (arr, k, label) => '<ol class="lg-potn-list num">' + arr.map((p, i) => '<li><span class="lg-potn-rk">' + (i + 1) + '</span><img src="' + logo(p.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(p.gamertag) + '</b><small>' + esc((teams.get(Number(p.lg_team_id)) || {}).name || 'LGCHL') + '</small><span class="lg-potn-v">' + esc(p[k]) + ' ' + label + '</span></li>').join('') + '</ol>';
-    box.innerHTML = stars.map((p, i) => playerCard(p, teams, ['First star', 'Second star', 'Third star'][i])).join('') +
-      (g ? playerCard(g, teams, 'Goalie of the night') : '') +
+    box.innerHTML = '<div class="lg-honours">' + stars.map((p, i) => honour(p, teams, i + 1)).join('') + '</div>' +
+      (g ? honour(g, teams, 0) : '') +
       '<article class="card lg-card lg-potn-board"><p class="lg-potn-tag">Top sticks · points</p>' + rowsHtml(leadersBy('points'), 'points', 'PTS') + '</article>' +
       '<article class="card lg-card lg-potn-board"><p class="lg-potn-tag">Top sticks · goals</p>' + rowsHtml(leadersBy('goals'), 'goals', 'G') +
       '<p class="lg-line num">' + multi + ' skater' + (multi === 1 ? '' : 's') + ' averaged two points a game or better.</p></article>';

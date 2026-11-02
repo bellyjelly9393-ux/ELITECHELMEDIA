@@ -142,10 +142,18 @@
     const body = $('lgPower');
     if (!ranked || !ranked.length) { body.innerHTML = '<tr><td colspan="7" class="empty">Standings are unavailable right now.</td></tr>'; return; }
     if (week) $('lgPowerEyebrow').textContent = 'Elitechel power index · after Week ' + week;
-    body.innerHTML = ranked.slice(0, 15).map(t => {
+    const podium = $('lgPowerPodium');
+    if (podium) podium.innerHTML = [ranked[1], ranked[0], ranked[2]].filter(Boolean).map(t =>
+      '<a class="lg-podium-team place-' + t.rank + '" href="lgchl-power.html" data-logo="' + logo(t.lg_team_id) + '">' + wm(t.lg_team_id) +
+      '<span class="lg-podium-rank">' + t.rank + '</span><img src="' + logo(t.lg_team_id) + '" alt="" width="100" height="100">' +
+      '<h3>' + esc(t.nickname || t.name) + '</h3><small>' + esc(t.league) + ' · ' + esc(record(t)) + '</small>' +
+      '<b class="lg-podium-score">' + t.score.toFixed(1) + '<span>POWER INDEX</span></b>' +
+      '<span class="lg-podium-move">' + (t.move == null || t.move === 0 ? '— No change' : (t.move > 0 ? '▲ ' : '▼ ') + Math.abs(t.move) + ' spots') + '</span></a>').join('');
+    if(podium) tint(podium);
+    body.innerHTML = ranked.slice(3, 10).map(t => {
       const m = t.move, mv = m == null ? '<td class="lg-mv eq">—</td>' : m > 0 ? '<td class="lg-mv up">▲' + m + '</td>' : m < 0 ? '<td class="lg-mv dn">▼' + Math.abs(m) + '</td>' : '<td class="lg-mv eq">—</td>';
       return '<tr><td class="lg-rk">' + t.rank + '</td>' + mv +
-        '<td><div class="lg-team"><img src="' + logo(t.lg_team_id) + '" alt=""><div><b>' + esc(t.nickname || t.name) + '</b><small>' + esc(t.abbr) + ' · ' + esc(t.league) + '</small></div></div></td>' +
+        '<td style="--team-logo:url(\'' + logo(t.lg_team_id) + '\')"><div class="lg-team"><img src="' + logo(t.lg_team_id) + '" alt=""><div><b>' + esc(t.nickname || t.name) + '</b><small>' + esc(t.abbr) + ' · ' + esc(t.league) + '</small></div></div></td>' +
         '<td>' + esc(record(t)) + '</td><td class="r">' + sgn(t.gd) + '</td><td>' + esc(t.last10) + '</td>' +
         '<td class="r"><div class="lg-score-cell"><b>' + t.score.toFixed(1) + '</b><div class="lg-bar"><i style="width:' + Math.min(100, t.score).toFixed(1) + '%"></i></div></div></td></tr>';
     }).join('');
