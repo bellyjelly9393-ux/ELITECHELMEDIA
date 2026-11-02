@@ -4,14 +4,24 @@
  "season": 55,
  "game_night": "2026-11-01",
  "games_scheduled": 93,
- "games_included": 37,
+ "games_included": 78,
  "complete": false,
- "converted_at": "2026-11-02T14:18:53.042671+00:00",
+ "converted_at": "2026-11-02T17:51:19.248863+00:00",
  "source": "Public LG game pages, read one at a time with 20-25 second gaps in the user's own Chrome; LG game-page data only (no EA part detail)",
  "flags": [
   {
    "lg_game_id": 918214,
    "side": "away",
+   "note": "period goals on the LG page do not add up to the final score"
+  },
+  {
+   "lg_game_id": 918245,
+   "side": "away",
+   "note": "period goals on the LG page do not add up to the final score"
+  },
+  {
+   "lg_game_id": 918269,
+   "side": "home",
    "note": "period goals on the LG page do not add up to the final score"
   }
  ]
