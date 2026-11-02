@@ -10,7 +10,7 @@
   const W = 1200, H = 1312, SEASON = 55;
   const ASSET_DIR = 'assets/three-stars';
   const IMG_EXTS = ['png', 'webp'];
-  const LAYOUT_KEY = 'ecm-three-stars-layout-v1';
+  const LAYOUT_KEY = 'ecm-three-stars-layout-v2';
   const TEXT_KEY = 'ecm-three-stars-text-v1';
 
   // Podium order on the graphic: left = 3rd, centre = 1st, right = 2nd.
@@ -481,6 +481,49 @@
     ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
   }
 
+  /* ---------------- layout ----------------
+   * Where each piece goes, and which pieces the background art already contains ("baked").
+   * The built-in lockers use BUILTIN_LAYOUT; real art is described by assets/three-stars/layout.json,
+   * so new art only needs new numbers, not code. All coordinates are on the 1200×1312 canvas.
+   */
+  const BUILTIN_LAYOUT = {
+    baked: { header: false, nameplateFrames: false, cardFrames: false, benchStars: false },
+    kicker: { y: 66, size: 30 },
+    slots: {
+      3: { plate: { cx: 268, y: 244, w: 246, h: 50 }, jersey: { cx: 268, top: 312, w: 330, h: 400 }, card: { x: 46, y: 930, w: 352, h: 320 } },
+      1: { plate: { cx: 600, y: 244, w: 262, h: 50 }, jersey: { cx: 600, top: 312, w: 330, h: 400 }, card: { x: 414, y: 918, w: 372, h: 338 } },
+      2: { plate: { cx: 932, y: 244, w: 246, h: 50 }, jersey: { cx: 932, top: 312, w: 330, h: 400 }, card: { x: 802, y: 930, w: 352, h: 320 } },
+    },
+  };
+  let artLayoutPromise = null;
+  function artLayout() {
+    if (!artLayoutPromise) {
+      artLayoutPromise = fetch(`${ASSET_DIR}/layout.json`, { cache: 'no-store' })
+        .then((r) => (r.ok ? r.json() : null)).catch(() => null)
+        .then((j) => (j ? {
+          baked: { ...BUILTIN_LAYOUT.baked, ...(j.baked || {}) },
+          kicker: { ...BUILTIN_LAYOUT.kicker, ...(j.kicker || {}) },
+          slots: Object.fromEntries([1, 2, 3].map((r) => [r, {
+            plate: { ...BUILTIN_LAYOUT.slots[r].plate, ...(j.slots?.[r]?.plate || {}) },
+            jersey: { ...BUILTIN_LAYOUT.slots[r].jersey, ...(j.slots?.[r]?.jersey || {}) },
+            card: { ...BUILTIN_LAYOUT.slots[r].card, ...(j.slots?.[r]?.card || {}) },
+          }])),
+        } : null));
+    }
+    return artLayoutPromise;
+  }
+
+  function drawKicker(L) {
+    const kicker = ($('tsKicker').value || kickerFor($('tsNight').value)).toUpperCase();
+    if (!kicker) return;
+    ctx.save();
+    ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    ctx.font = `600 ${L.kicker.size}px "TS Barlow", sans-serif`; setSpacing(Math.round(L.kicker.size / 5));
+    ctx.shadowColor = 'rgba(0,0,0,.9)'; ctx.shadowBlur = 8;
+    ctx.fillStyle = '#ecebe6'; ctx.fillText(kicker, W / 2 + 3, L.kicker.y);
+    ctx.restore(); setSpacing(0);
+  }
+
   function drawHeader(crest) {
     // top bar shade so text reads on any background
     const shade = ctx.createLinearGradient(0, 0, 0, 200);
@@ -488,12 +531,6 @@
     ctx.fillStyle = shade; ctx.fillRect(0, 0, W, 200);
 
     if (crest) ctx.drawImage(crest, 52, 22, 156, 159);
-
-    const kicker = ($('tsKicker').value || kickerFor($('tsNight').value)).toUpperCase();
-    ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
-    ctx.font = '600 30px "TS Barlow", sans-serif'; setSpacing(6);
-    ctx.fillStyle = '#ecebe6'; ctx.fillText(kicker, W / 2 + 3, 66);
-    setSpacing(0);
 
     const t1 = ($('tsTitle1').value || '').toUpperCase().trim();
     const t2 = ($('tsTitle2').value || 'THREE STARS').toUpperCase().trim();
@@ -528,100 +565,103 @@
     }
   }
 
-  function drawNameplate(cx, s, rank) {
+  function drawNameplate(P, s, rank, L) {
     const name = (s.gamertag || 'PLAYER').toUpperCase();
-    const w = rank === 1 ? 262 : 246, h = 50, x = cx - w / 2, y = 244;
+    const { cx, y, w, h } = P, x = cx - w / 2;
     ctx.save();
-    ctx.shadowColor = rank === 1 ? 'rgba(255,200,90,.6)' : 'rgba(0,0,0,.6)'; ctx.shadowBlur = 16;
-    roundRect(x, y, w, h, 4); ctx.fillStyle = '#0b0a09'; ctx.fill(); ctx.shadowBlur = 0;
-    ctx.lineWidth = 2.5; ctx.strokeStyle = rank === 1 ? goldGradient(y, y + h) : silverGradient(y, y + h); ctx.stroke();
-    roundRect(x + 5, y + 5, w - 10, h - 10, 3); ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255,255,255,.14)'; ctx.stroke();
-    const starsW = rank === 1 ? 3 : rank === 2 ? 2 : 1;
-    const starArea = starsW * 24 + 8;
-    const fs = fitFont(name, 800, '"TS Shoulders", sans-serif', 34, w - starArea - 28, 16);
+    if (!L.baked.nameplateFrames) {
+      ctx.shadowColor = rank === 1 ? 'rgba(255,200,90,.6)' : 'rgba(0,0,0,.6)'; ctx.shadowBlur = 16;
+      roundRect(x, y, w, h, 4); ctx.fillStyle = '#0b0a09'; ctx.fill(); ctx.shadowBlur = 0;
+      ctx.lineWidth = 2.5; ctx.strokeStyle = rank === 1 ? goldGradient(y, y + h) : silverGradient(y, y + h); ctx.stroke();
+      roundRect(x + 5, y + 5, w - 10, h - 10, 3); ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255,255,255,.14)'; ctx.stroke();
+    }
+    const starsN = L.baked.benchStars ? 0 : (rank === 1 ? 3 : rank === 2 ? 2 : 1);
+    const starArea = starsN ? starsN * 24 + 8 : 0;
+    const fs = fitFont(name, 800, '"TS Shoulders", sans-serif', Math.round(h * 0.72), w - starArea - 24, 14);
     ctx.font = `800 ${fs}px "TS Shoulders", sans-serif`; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-    const nameW = ctx.measureText(name).width, total = nameW + starArea, sx = cx - total / 2;
-    ctx.fillStyle = '#f4f2ec'; ctx.fillText(name, sx, y + h / 2 + 2);
+    const nameW = ctx.measureText(name).width, sx = cx - (nameW + starArea) / 2;
+    ctx.shadowColor = 'rgba(0,0,0,.8)'; ctx.shadowBlur = 6;
+    ctx.fillStyle = '#f4f2ec'; ctx.fillText(name, sx, y + h / 2 + 2); ctx.shadowBlur = 0;
     ctx.fillStyle = goldGradient(y + 12, y + h - 12);
-    for (let i = 0; i < starsW; i++) { star(sx + nameW + 20 + i * 24, y + h / 2, 10); ctx.fill(); }
+    for (let i = 0; i < starsN; i++) { star(sx + nameW + 20 + i * 24, y + h / 2, 10); ctx.fill(); }
     ctx.restore();
   }
 
-  function drawJerseyPlaceholder(cx, top, s) {
+  function drawJerseyPlaceholder(J, s) {
+    const k = Math.min(J.w / 330, J.h / 400);
     ctx.save();
-    ctx.translate(cx, top);
-    ctx.strokeStyle = 'rgba(232,194,110,.55)'; ctx.setLineDash([10, 8]); ctx.lineWidth = 3;
-    // hanger
-    ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, 22); ctx.moveTo(-70, 52); ctx.lineTo(0, 22); ctx.lineTo(70, 52); ctx.stroke();
-    // generic jersey outline
+    ctx.translate(J.cx, J.top + 18 * k); ctx.scale(k, k);
+    ctx.strokeStyle = 'rgba(232,194,110,.6)'; ctx.setLineDash([10, 8]); ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.moveTo(-55, 40); ctx.lineTo(-140, 80); ctx.lineTo(-165, 230); ctx.lineTo(-115, 240); ctx.lineTo(-105, 150);
     ctx.lineTo(-108, 330); ctx.lineTo(108, 330); ctx.lineTo(105, 150); ctx.lineTo(115, 240); ctx.lineTo(165, 230);
     ctx.lineTo(140, 80); ctx.lineTo(55, 40); ctx.quadraticCurveTo(0, 78, -55, 40); ctx.closePath(); ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle = 'rgba(244,240,230,.8)'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.shadowColor = 'rgba(0,0,0,.9)'; ctx.shadowBlur = 6;
+    ctx.fillStyle = 'rgba(244,240,230,.9)'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.font = '700 22px "TS Barlow", sans-serif';
     ctx.fillText('ADD JERSEY', 0, 180);
-    ctx.font = '600 17px "TS Barlow", sans-serif'; ctx.fillStyle = 'rgba(232,194,110,.9)';
+    ctx.font = '600 17px "TS Barlow", sans-serif'; ctx.fillStyle = 'rgba(240,205,130,.95)';
     ctx.fillText(s.teamId ? `jerseys/team${s.teamId}.png` : 'pick a team', 0, 210);
     ctx.restore();
   }
 
-  function drawJersey(cx, img, rank) {
+  function drawJersey(J, img, rank) {
     const n = state.nudges[rank] || DEFAULT_NUDGE;
-    const boxW = 330 * n.scale, boxH = 400 * n.scale;
+    const boxW = J.w * n.scale, boxH = J.h * n.scale;
     const s = Math.min(boxW / img.width, boxH / img.height);
     const w = img.width * s, h = img.height * s;
     ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.65)'; ctx.shadowBlur = 26; ctx.shadowOffsetY = 12;
-    ctx.drawImage(img, cx - w / 2 + n.dx, 312 + n.dy, w, h);
+    ctx.drawImage(img, J.cx - w / 2 + n.dx, J.top + n.dy, w, h);
     ctx.restore();
   }
 
-  function drawCard(slot, s, logo) {
-    const first = slot.rank === 1, cx0 = slot.card;
-    const w = first ? 372 : 352, h = first ? 338 : 320;
-    const x = cx0 - w / 2, y = first ? 918 : 930;
+  function drawCard(slot, C, s, logo, L) {
+    const first = slot.rank === 1;
+    const { x, y, w, h } = C, cx0 = x + w / 2;
     ctx.save();
-    ctx.shadowColor = first ? 'rgba(255,196,80,.55)' : 'rgba(255,196,80,.25)'; ctx.shadowBlur = first ? 34 : 20;
-    roundRect(x, y, w, h, 6);
-    const panel = ctx.createLinearGradient(0, y, 0, y + h);
-    panel.addColorStop(0, 'rgba(14,12,10,.96)'); panel.addColorStop(1, 'rgba(4,4,4,.97)');
-    ctx.fillStyle = panel; ctx.fill(); ctx.shadowBlur = 0;
-    ctx.lineWidth = first ? 4 : 3; ctx.strokeStyle = goldGradient(y, y + h); ctx.stroke();
-    roundRect(x + 8, y + 8, w - 16, h - 16, 4); ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(241,196,90,.35)'; ctx.stroke();
+    if (!L.baked.cardFrames) {
+      ctx.shadowColor = first ? 'rgba(255,196,80,.55)' : 'rgba(255,196,80,.25)'; ctx.shadowBlur = first ? 34 : 20;
+      roundRect(x, y, w, h, 6);
+      const panel = ctx.createLinearGradient(0, y, 0, y + h);
+      panel.addColorStop(0, 'rgba(14,12,10,.96)'); panel.addColorStop(1, 'rgba(4,4,4,.97)');
+      ctx.fillStyle = panel; ctx.fill(); ctx.shadowBlur = 0;
+      ctx.lineWidth = first ? 4 : 3; ctx.strokeStyle = goldGradient(y, y + h); ctx.stroke();
+      roundRect(x + 8, y + 8, w - 16, h - 16, 4); ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(241,196,90,.35)'; ctx.stroke();
+    }
 
     ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
     // label
     ctx.font = '700 30px "TS Barlow", sans-serif'; setSpacing(5);
     ctx.fillStyle = first ? goldGradient(y + 20, y + 52) : (slot.rank === 2 ? silverGradient(y + 20, y + 52) : '#e2a35b');
-    ctx.fillText(slot.label, cx0 + 2, y + 50); setSpacing(0);
+    ctx.fillText(slot.label, cx0 + 2, y + 48); setSpacing(0);
     const line = (yy) => {
       const g = ctx.createLinearGradient(x + 20, 0, x + w - 20, 0);
       g.addColorStop(0, 'rgba(241,196,90,0)'); g.addColorStop(0.5, 'rgba(241,196,90,.8)'); g.addColorStop(1, 'rgba(241,196,90,0)');
       ctx.fillStyle = g; ctx.fillRect(x + 20, yy, w - 40, 1.5);
     };
-    line(y + 64);
+    line(y + 62);
 
-    // name + team
+    // name + team + position
     const name = (s.gamertag || 'PLAYER').toUpperCase();
     const ns = fitFont(name, 800, '"TS Shoulders", sans-serif', 50, w - 40, 22);
-    ctx.font = `800 ${ns}px "TS Shoulders", sans-serif`; ctx.fillStyle = '#f7f5f0'; ctx.fillText(name, cx0, y + 112);
+    ctx.font = `800 ${ns}px "TS Shoulders", sans-serif`; ctx.fillStyle = '#f7f5f0'; ctx.fillText(name, cx0, y + 106);
     const team = (teamName(s.teamId, s.teamName) || 'TEAM').toUpperCase();
     const ts = fitFont(team, 600, '"TS Barlow", sans-serif', 28, w - 40, 14);
-    ctx.font = `600 ${ts}px "TS Barlow", sans-serif`; ctx.fillStyle = '#9fd3e6'; ctx.fillText(team, cx0, y + 146);
-    line(y + 160);
-    ctx.font = '700 26px "TS Barlow", sans-serif'; ctx.fillStyle = '#f2f0ea'; ctx.fillText((s.position || '').toUpperCase(), cx0, y + 190);
+    ctx.font = `600 ${ts}px "TS Barlow", sans-serif`; ctx.fillStyle = '#9fd3e6'; ctx.fillText(team, cx0, y + 138);
+    line(y + 152);
+    ctx.font = '700 24px "TS Barlow", sans-serif'; ctx.fillStyle = '#f2f0ea'; ctx.fillText((s.position || '').toUpperCase(), cx0, y + 176);
 
     // logo watermark + points
     const pts = (Number(s.g) || 0) + (Number(s.a) || 0);
     if (logo) {
       ctx.save(); ctx.globalAlpha = 0.42; if ('filter' in ctx) ctx.filter = 'grayscale(1) brightness(1.1)';
-      ctx.drawImage(logo, x + 26, y + h - 136, 74, 74); ctx.restore();
+      ctx.drawImage(logo, x + 26, y + h - 132, 72, 72); ctx.restore();
     }
     const ptsText = `${pts} PTS`;
-    const ps = fitFont(ptsText, 400, '"TS Anton", Impact, sans-serif', first ? 80 : 72, w - (logo ? 140 : 50), 30);
+    const ps = fitFont(ptsText, 400, '"TS Anton", Impact, sans-serif', first ? 70 : 64, w - (logo ? 140 : 50), 30);
     ctx.font = `400 ${ps}px "TS Anton", Impact, sans-serif`;
-    const pb = y + h - 66;
+    const pb = y + h - 56;
     ctx.fillStyle = goldGradient(pb - ps * 0.8, pb);
     ctx.shadowColor = 'rgba(0,0,0,.8)'; ctx.shadowBlur = 8;
     ctx.fillText(ptsText, cx0 + (logo ? 44 : 0), pb); ctx.shadowBlur = 0;
@@ -630,9 +670,9 @@
     const parts = [`${s.gp} GP`, `${s.g} G`, `${s.a} A`, signed(Number(s.pm) || 0)];
     ctx.font = '700 27px "TS Barlow", sans-serif';
     const sep = 26, widths = parts.map((p) => ctx.measureText(p).width);
-    let total = widths.reduce((a, b) => a + b, 0) + sep * (parts.length - 1);
-    let scale = Math.min(1, (w - 36) / total);
-    ctx.save(); ctx.translate(cx0, y + h - 22); ctx.scale(scale, scale);
+    const total = widths.reduce((a, b) => a + b, 0) + sep * (parts.length - 1);
+    const scale = Math.min(1, (w - 36) / total);
+    ctx.save(); ctx.translate(cx0, y + h - 20); ctx.scale(scale, scale);
     let cx = -total / 2;
     parts.forEach((p, i) => {
       ctx.textAlign = 'left'; ctx.fillStyle = '#f4f2ec'; ctx.fillText(p, cx, 0); cx += widths[i];
@@ -654,23 +694,27 @@
       jerseys[rank] = state.jerseyOverride[rank] || (s.teamId ? await firstImage(jerseyBase(s.teamId)) : null);
       logos[rank] = s.teamId ? await loadImage(logoSrc(s.teamId)) : null;
     }));
+    const bg = state.bgOverride || savedBg;
+    const L = (bg && await artLayout()) || BUILTIN_LAYOUT;
     if (seq !== drawSeq) return; // a newer draw started
 
     ctx.clearRect(0, 0, W, H);
-    const bg = state.bgOverride || savedBg;
     if (bg) drawCover(bg); else drawBuiltInBackground();
-    drawHeader(crest);
+    if (!L.baked.header) drawHeader(crest);
+    drawKicker(L);
     SLOTS.forEach((slot) => {
-      const s = state.stars[slot.rank];
-      if (jerseys[slot.rank]) drawJersey(slot.cx, jerseys[slot.rank], slot.rank);
-      else drawJerseyPlaceholder(slot.cx, 330, s);
-      drawNameplate(slot.cx, s, slot.rank);
-      drawCard(slot, s, logos[slot.rank]);
+      const s = state.stars[slot.rank], S = L.slots[slot.rank];
+      if (jerseys[slot.rank]) drawJersey(S.jersey, jerseys[slot.rank], slot.rank);
+      else drawJerseyPlaceholder(S.jersey, s);
+      drawNameplate(S.plate, s, slot.rank, L);
+      drawCard(slot, S.card, s, logos[slot.rank], L);
     });
 
+    document.querySelectorAll('[data-title-field]').forEach((el) => { el.hidden = L.baked.header; });
     const missing = [1, 2, 3].filter((r) => state.stars[r].teamId && !jerseys[r]).map((r) => `team${state.stars[r].teamId}`);
     const note = [];
     if (!bg) note.push('Using the built-in lockers until assets/three-stars/background.png is added.');
+    if (L.baked.header && scope() === 'week') note.push('The title "TONIGHT\'S THREE STARS" is part of the background art; add a week version of the art for week posts.');
     if (missing.length) note.push(`Missing jerseys: ${missing.join(', ')}.`);
     $('tsAssetNote').textContent = note.join(' ');
   }
