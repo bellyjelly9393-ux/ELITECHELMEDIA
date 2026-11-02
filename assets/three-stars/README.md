@@ -8,13 +8,9 @@ is picked up automatically; no code changes needed.
 `assets/three-stars/background.png` (or `.webp`)
 
 - 1200 × 1312 px (same shape as the original graphic). Other sizes are scaled to cover.
-- The locker room only: **empty stalls, no jerseys, no text, no stat boxes, no logos.**
-  Title, nameplates and stat cards are drawn live on top.
-- Keep the top ~200 px and the bottom ~380 px (y 930 to 1312) fairly dark and plain; that is where
-  the title and stat cards sit.
-- Stall centres the layout expects: x = 268 (third star), 600 (first star), 932 (second star).
-  Nameplates sit at y ≈ 244–294, jerseys hang from y ≈ 312 down to ≈ 712.
-  If your stalls land elsewhere, use "Line up jerseys with the stalls" in the tool.
+- Either plain empty stalls (the generator draws the title, nameplates and card frames itself), or
+  art with those already painted in, like the current one. `layout.json` says which.
+- Leave the nameplates and stat-card frames empty and the stalls bare (hangers are fine).
 
 ## layout.json (what's in the art, and where)
 
