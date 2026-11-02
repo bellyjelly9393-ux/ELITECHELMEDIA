@@ -1,0 +1,63 @@
+id,abbr,name,league,conf
+447,SBY,Sudbury Wolves,OHL,Eastern
+448,NBB,North Bay Battalion,OHL,Eastern
+449,BAR,Barrie Colts,OHL,Eastern
+402,BRM,Brampton Steelheads,OHL,Eastern
+446,OTT,Ottawa 67's,OHL,Eastern
+306,BFD,Brantford Bulldogs,OHL,Eastern
+375,NIA,Niagara IceDogs,OHL,Eastern
+445,PBO,Peterborough Petes,OHL,Eastern
+444,KGN,Kingston Frontenacs,OHL,Eastern
+401,OSH,Oshawa Generals,OHL,Eastern
+451,SAR,Sarnia Sting,OHL,Western
+450,SSM,Sault Ste. Marie Greyhounds,OHL,Western
+408,SAG,Saginaw Spirit,OHL,Western
+514,FLT,Flint Firebirds,OHL,Western
+452,GUE,Guelph Storm,OHL,Western
+453,OSA,Owen Sound Attack,OHL,Western
+383,ERI,Erie Otters,OHL,Western
+370,LDN,London Knights,OHL,Western
+454,KIT,Kitchener Rangers,OHL,Western
+381,WSR,Windsor Spitfires,OHL,Western
+465,RIM,Rimouski Oceanic,QMJHL,Eastern
+364,HFX,Halifax Mooseheads,QMJHL,Eastern
+365,MON,Moncton Wildcats,QMJHL,Eastern
+468,CHI,Chicoutimi Sagueneens,QMJHL,Eastern
+455,CBE,Cape Breton Eagles,QMJHL,Eastern
+457,CHA,Charlottetown Islanders,QMJHL,Eastern
+467,QUE,Quebec Remparts,QMJHL,Eastern
+397,SJS,Saint John Sea Dogs,QMJHL,Eastern
+469,BAC,Baie-Comeau Drakkar,QMJHL,Eastern
+2982,NFD,Newfoundland Regiment,QMJHL,Eastern
+463,SHE,Sherbrooke Phoenix,QMJHL,Western
+459,DRU,Drummondville Voltigeurs,QMJHL,Western
+458,BLB,Blainville-Boisbriand Armada,QMJHL,Western
+460,VDO,Val-d'Or Foreurs,QMJHL,Western
+382,SHA,Shawinigan Cataractes,QMJHL,Western
+466,VVL,Victoriaville Tigres,QMJHL,Western
+461,GAT,Gatineau Olympiques,QMJHL,Western
+462,RNH,Rouyn-Noranda Huskies,QMJHL,Western
+413,PAR,Prince Albert Raiders,WHL,Eastern
+416,MHT,Medicine Hat Tigers,WHL,Eastern
+415,EDM,Edmonton Oil Kings,WHL,Eastern
+2983,CHW,Chilliwack Bruins,WHL,Eastern
+385,RDR,Red Deer Rebels,WHL,Eastern
+377,SCB,Swift Current Broncos,WHL,Eastern
+418,LET,Lethbridge Hurricanes,WHL,Eastern
+412,CGY,Calgary Hitmen,WHL,Eastern
+409,BDN,Brandon Wheat Kings,WHL,Eastern
+411,MJW,Moose Jaw Warriors,WHL,Eastern
+379,SAS,Saskatoon Blades,WHL,Eastern
+414,REG,Regina Pats,WHL,Eastern
+420,SPO,Spokane Chiefs,WHL,Western
+2981,PEN,Penticton Vees,WHL,Western
+422,PGC,Prince George Cougars,WHL,Western
+399,TCA,Tri City Americans,WHL,Western
+419,VIC,Victoria Royals,WHL,Western
+423,KAM,Kamloops Blazers,WHL,Western
+400,KEL,Kelowna Rockets,WHL,Western
+2604,WEN,Wenatchee Wild,WHL,Western
+421,SEA,Seattle Thunderbirds,WHL,Western
+398,POR,Portland Winterhawks,WHL,Western
+386,VAN,Vancouver Giants,WHL,Western
+380,EVT,Everett Silvertips,WHL,Western
