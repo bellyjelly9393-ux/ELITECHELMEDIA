@@ -48,7 +48,7 @@
     const st = streak(t.streak);
     return '<li class="card tinted lg-pr-row" data-logo="' + logo(t.lg_team_id) + '">' + wm(t.lg_team_id) +
       '<div class="lg-pr-rk"><b>' + t.rank + '</b>' + moveHtml(t) + '</div>' +
-      '<div class="lg-team"><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><div><b>' + esc(t.name) + '</b><small>' + esc(t.abbr) + ' · ' + esc(t.league) + ' ' + esc(t.conference || '') + (t.conference_rank ? ' · ' + ordinal(t.conference_rank) : '') + '</small></div></div>' +
+      '<div class="lg-team" style="--team-logo:url(\'' + logo(t.lg_team_id) + '\')"><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><div><b>' + esc(t.name) + '</b><small>' + esc(t.abbr) + ' · ' + esc(t.league) + ' ' + esc(t.conference || '') + (t.conference_rank ? ' · ' + ordinal(t.conference_rank) : '') + '</small></div></div>' +
       '<dl class="lg-pr-stats num">' +
         '<div><dt>Record</dt><dd>' + esc(record(t)) + '</dd></div>' +
         '<div><dt>PTS</dt><dd>' + esc(t.pts) + '</dd></div>' +

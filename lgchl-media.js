@@ -148,7 +148,7 @@
       '<span class="lg-podium-rank">' + t.rank + '</span><img src="' + logo(t.lg_team_id) + '" alt="" width="100" height="100">' +
       '<h3>' + esc(t.nickname || t.name) + '</h3><small>' + esc(t.league) + ' · ' + esc(record(t)) + '</small>' +
       '<b class="lg-podium-score">' + t.score.toFixed(1) + '<span>POWER INDEX</span></b>' +
-      '<span class="lg-podium-move">' + (t.move == null || t.move === 0 ? '— No change' : (t.move > 0 ? '▲ ' : '▼ ') + Math.abs(t.move) + ' spots') + '</span></a>').join('');
+      '<span class="lg-podium-move">' + (t.move == null ? '—' : t.move === 0 ? '— No change' : (t.move > 0 ? '▲ ' : '▼ ') + Math.abs(t.move) + ' spots') + '</span></a>').join('');
     if(podium) tint(podium);
     body.innerHTML = ranked.slice(3, 10).map(t => {
       const m = t.move, mv = m == null ? '<td class="lg-mv eq">—</td>' : m > 0 ? '<td class="lg-mv up">▲' + m + '</td>' : m < 0 ? '<td class="lg-mv dn">▼' + Math.abs(m) + '</td>' : '<td class="lg-mv eq">—</td>';
