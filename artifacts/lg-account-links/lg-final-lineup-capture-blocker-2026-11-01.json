@@ -1,12 +1,16 @@
 {
   "source": "LG Stats Client Developer Starter",
-  "requested_lg_game_ids": ["918170", "918200"],
+  "requested_lg_game_ids": [
+    "918170",
+    "918200"
+  ],
   "scope": "Calgary Hitmen vs London and Ottawa, October 27, season 55",
-  "status": "source_requires_review",
+  "status": "resolved_after_user_verification",
   "source_issue": "LG verification challenge encountered in the client's main page",
-  "game_lineups_captured": 0,
+  "game_lineups_captured": 2,
   "source_database_unchanged": true,
   "action_taken": "Stopped without bypassing the challenge or manufacturing participation evidence",
-  "next_step": "Human verification in the LG client, followed by a new read-only capture of the final game sheets",
-  "user_kells_alias_attestation": "Preserved in user-confirmed-kells-alias-2026-11-01.json; actual game LG participation remains unverified"
+  "next_step": "Apply confirmed aliases only to those verified game contexts.",
+  "user_kells_alias_attestation": "Participation gate cleared for LG 73707 in both games; Kells and Bad News Kells consolidate in isolated identity checks.",
+  "resolution": "User completed verification; both final LG game sheets captured with 12 participants each; source database unchanged."
 }

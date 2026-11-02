@@ -11,6 +11,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--client-dir', type=Path, required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
+    parser.add_argument('--pause-for-verification', action='store_true', help='Leave the client open for the user to complete LG verification manually')
     args = parser.parse_args()
     args.client_dir = args.client_dir.resolve()
     args.output_dir = args.output_dir.resolve()
@@ -55,17 +56,24 @@ def main():
             self.timeout.start(60000)
             self.page.load(QUrl('https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid='+self.current+'&leagueid=39&seasonid=55'))
         def loaded(self, ok):
-            if state['status']!='running':return
+            if state['status'] not in ('running','waiting_for_user_verification'):return
             # A blocked third-party frame can make Qt report loadFinished(False)
             # while the LG game sheet is readable. Validate the main DOM itself;
             # challenges and incomplete game sheets still stop without retry.
             QTimer.singleShot(1800,lambda:self.page.runJavaScript(script,self.received))
         def received(self, data):
             self.timeout.stop()
+            if isinstance(data,dict) and data.get('blocked') and args.pause_for_verification:
+                state['status']='waiting_for_user_verification'
+                state['database_unchanged']=digest()==before
+                (args.output_dir/'lineups.json').write_text(json.dumps(state,indent=2),encoding='utf-8')
+                print('LG verification requires the user. No automated retry or challenge interaction.',flush=True)
+                return
             if not isinstance(data,dict) or data.get('blocked') or data.get('error'):
                 state['source_issue']=data
                 return self.finish('source_requires_review')
             if data.get('lg_game_id')!=self.current:return self.finish('game_identity_mismatch')
+            state['status']='running'
             data['observed_at']=datetime.now(timezone.utc).isoformat()
             state['games'].append(data)
             print(json.dumps({'game':self.current,'participants':len(data['players'])}),flush=True)

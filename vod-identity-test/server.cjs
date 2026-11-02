@@ -23,10 +23,10 @@ async function reconcile(db,game,result){
   if(identity.status!=='resolved'){unresolved.push({source:row,identity});continue;}
   const key=JSON.stringify(identity.canonical_key);
   const item=reports.get(key)||{canonical_key:identity.canonical_key,lg_user_id:identity.lg_user_id,source_names:[],observations:[]};
-  if(!item.source_names.includes(name))item.source_names.push(name);
+  if(!item.source_names.some(n=>n.trim().toLowerCase()===name.trim().toLowerCase()))item.source_names.push(name);
   item.observations.push(row);reports.set(key,item);
  }
- const observed=new Set([...reports].filter(([,v])=>v.observations.some(o=>Array.isArray(o.evidence_timestamps)&&o.evidence_timestamps.some(t=>typeof t==='number'&&Number.isFinite(t)))).map(([k])=>k));
+ const observed=new Set([...reports].filter(([,v])=>v.observations.some(o=>!o.identity_only&&Array.isArray(o.evidence_timestamps)&&o.evidence_timestamps.some(t=>typeof t==='number'&&Number.isFinite(t)))).map(([k])=>k));
  return {expected_players:game.players.length,attributed_players:observed.size,resolved_player_rows:reports.size,unresolved_name_count:new Set(unresolved.map(p=>String(p.source.player||'').trim().toLowerCase())).size,
   canonical_reports:[...reports.values()],unresolved,
   coverage:game.players.map(p=>({...p,canonical_key:['LGCHL',55,String(p.lg_user_id)],evidence_status:observed.has(JSON.stringify(['LGCHL',55,String(p.lg_user_id)]))?'attributed_report':'no_attributed_observation'})),
@@ -48,6 +48,10 @@ async function initialize(db){
    const proof='LG client final game sheet '+g.lineup_source.url+'; '+p.team+' '+p.position;
    await db.query("insert into public.vod_verified_game_players(schedule_game_id,team_id,league,season,lg_user_id,locker_id,evidence,verified_by) values($1,$2,'LGCHL',55,$3,$4,$5,$6) on conflict do nothing",[gameKey(g.lg_game_id),TEAM,String(p.lg_user_id),locker(p.lg_user_id),proof,MANAGER]);
    await db.query("select public.vod_verify_player_alias($1,$2,$3,'gamertag',$4)",[g.test_review_id,p.player,locker(p.lg_user_id),proof]);
+  }
+  for(const a of g.verified_aliases||[]){
+   if(!g.players.some(p=>String(p.lg_user_id)===String(a.lg_user_id)))throw Error('Alias attestation lacks a verified participant');
+   await db.query('select public.vod_verify_player_alias($1,$2,$3,$4,$5)',[g.test_review_id,a.name,locker(a.lg_user_id),a.kind,a.evidence]);
   }
  }
  // All resolver/alias operations below execute as the RLS-constrained test manager.
@@ -74,7 +78,7 @@ async function main(){
    }
    if(url.pathname==='/'&&req.method==='GET'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'"});return res.end(fs.readFileSync(path.join(__dirname,'index.html')));}
    if(!authorized(req.headers.authorization,process.env.TEST_ACCESS_TOKEN))return reply(res,401,{error:'Test access required'});
-   if(url.pathname==='/api/games'&&req.method==='GET')return reply(res,200,{games,scope:'Two games with final LG client captures; no production report writes.'});
+   if(url.pathname==='/api/games'&&req.method==='GET')return reply(res,200,{games,scope:'Four verified game contexts: two fresh VOD tests and two saved-evidence identity checks. No production report writes.'});
    const m=url.pathname.match(/^\/api\/games\/(\d+)(?:\/(start|aliases|resume))?$/),g=m&&games.find(g=>String(g.lg_game_id)===m[1]);
    if(!g)return reply(res,404,{error:'Test game not found'});
    let body={};if(req.method==='POST'){
@@ -99,7 +103,7 @@ async function main(){
     return reply(res,202,seeded);
    }
    if(!m[2]&&req.method==='GET'){
-    if(!jobs.length)return reply(res,200,{game:g,status:'not_started'});
+    if(!jobs.length)return reply(res,200,{game:g,status:g.identity_replay?'saved_evidence_identity_check':'not_started',identity_audit:g.identity_replay?await reconcile(db,g,g.identity_replay):undefined});
     const job=await workerFetch('/test/jobs/'+jobs[0].job_id);
     return reply(res,200,{game:g,job,identity_audit:await reconcile(db,g,job.result)});
    }
@@ -119,10 +123,11 @@ async function main(){
   (async()=>{
    let healthy=false;for(let n=0;n<90;n++){try{await workerFetch('/health');healthy=true;break;}catch{await pause(1000);}}
    if(!healthy)throw Error('Private worker startup timed out');
-   for(const g of games){const started=await local('/api/games/'+g.lg_game_id+'/start',{});console.log('IDENTITY_TEST_STARTED',JSON.stringify({lg_game_id:g.lg_game_id,job_id:started.job_id}));}
+   const freshGames=games.filter(g=>!g.identity_replay);
+   for(const g of freshGames){const started=await local('/api/games/'+g.lg_game_id+'/start',{});console.log('IDENTITY_TEST_STARTED',JSON.stringify({lg_game_id:g.lg_game_id,job_id:started.job_id}));}
    const terminal=new Set(['ready_for_review','failed','expired','needs_periods','awaiting_ai']),previous=new Map();
    for(let n=0;n<240;n++){
-    let done=true;for(const g of games){
+    let done=true;for(const g of freshGames){
      const d=await local('/api/games/'+g.lg_game_id),a=d.identity_audit;
      const snapshot={lg_game_id:g.lg_game_id,status:d.job?.status||d.status,error:d.job?.error||'',expected_players:a?.expected_players,attributed_players:a?.attributed_players,unresolved_names:a?.unresolved_name_count,stage:d.job?.result?.stage};
      const key=JSON.stringify(snapshot);if(previous.get(g.lg_game_id)!==key){console.log('IDENTITY_TEST_STATUS',key);previous.set(g.lg_game_id,key);}

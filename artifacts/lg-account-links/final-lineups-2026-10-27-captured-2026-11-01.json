@@ -1,0 +1,242 @@
+{
+  "status": "complete",
+  "games": [
+    {
+      "league": "LGCHL",
+      "lg_game_id": "918170",
+      "players": [
+        {
+          "lg_team_id": "370",
+          "lg_user_id": "77051",
+          "player": "Kadokincaid",
+          "position": "LW",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=77051&leagueid=39&seasonid=55",
+          "team": "London Knights"
+        },
+        {
+          "lg_team_id": "370",
+          "lg_user_id": "73383",
+          "player": "Prophet I33I",
+          "position": "C",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=73383&leagueid=39&seasonid=55",
+          "team": "London Knights"
+        },
+        {
+          "lg_team_id": "370",
+          "lg_user_id": "35886",
+          "player": "iSHOOTSfromDEEPS",
+          "position": "RW",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=35886&leagueid=39&seasonid=55",
+          "team": "London Knights"
+        },
+        {
+          "lg_team_id": "370",
+          "lg_user_id": "73069",
+          "player": "Fakky359",
+          "position": "LD",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=73069&leagueid=39&seasonid=55",
+          "team": "London Knights"
+        },
+        {
+          "lg_team_id": "370",
+          "lg_user_id": "75108",
+          "player": "Konvar",
+          "position": "RD",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=75108&leagueid=39&seasonid=55",
+          "team": "London Knights"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "76399",
+          "player": "gtcoop73",
+          "position": "LW",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=76399&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "73707",
+          "player": "l Setty l",
+          "position": "C",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=73707&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "10718",
+          "player": "l danks l",
+          "position": "RW",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=10718&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "17569",
+          "player": "imona_plain",
+          "position": "LD",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=17569&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "79440",
+          "player": "Koldex Bands",
+          "position": "RD",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79440&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        },
+        {
+          "lg_team_id": "370",
+          "lg_user_id": "16254",
+          "player": "Dissizznuts_88",
+          "position": "G",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=16254&leagueid=39&seasonid=55",
+          "team": "London Knights"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "80604",
+          "player": "XxPASTRNAK88",
+          "position": "G",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=80604&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        }
+      ],
+      "schema": "lg-final-game-lineup-v1",
+      "season": 55,
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918170&leagueid=39&seasonid=55",
+      "observed_at": "2026-11-02T01:24:16.762661+00:00"
+    },
+    {
+      "league": "LGCHL",
+      "lg_game_id": "918200",
+      "players": [
+        {
+          "lg_team_id": "446",
+          "lg_user_id": "80700",
+          "player": "purge_ace1117",
+          "position": "LW",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=80700&leagueid=39&seasonid=55",
+          "team": "Ottawa 67's"
+        },
+        {
+          "lg_team_id": "446",
+          "lg_user_id": "67445",
+          "player": "Mr_Exc1tm3nt205",
+          "position": "C",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=67445&leagueid=39&seasonid=55",
+          "team": "Ottawa 67's"
+        },
+        {
+          "lg_team_id": "446",
+          "lg_user_id": "65206",
+          "player": "YourBoyBuck",
+          "position": "RW",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=65206&leagueid=39&seasonid=55",
+          "team": "Ottawa 67's"
+        },
+        {
+          "lg_team_id": "446",
+          "lg_user_id": "71627",
+          "player": "I_have",
+          "position": "LD",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=71627&leagueid=39&seasonid=55",
+          "team": "Ottawa 67's"
+        },
+        {
+          "lg_team_id": "446",
+          "lg_user_id": "72701",
+          "player": "BranFerg17",
+          "position": "RD",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=72701&leagueid=39&seasonid=55",
+          "team": "Ottawa 67's"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "76399",
+          "player": "gtcoop73",
+          "position": "LW",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=76399&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "73707",
+          "player": "l Setty l",
+          "position": "C",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=73707&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "10718",
+          "player": "l danks l",
+          "position": "RW",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=10718&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "17569",
+          "player": "imona_plain",
+          "position": "LD",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=17569&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "79440",
+          "player": "Koldex Bands",
+          "position": "RD",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79440&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        },
+        {
+          "lg_team_id": "446",
+          "lg_user_id": "79050",
+          "player": "aidan_ge.",
+          "position": "G",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=79050&leagueid=39&seasonid=55",
+          "team": "Ottawa 67's"
+        },
+        {
+          "lg_team_id": "412",
+          "lg_user_id": "80604",
+          "player": "XxPASTRNAK88",
+          "position": "G",
+          "source": "LG final-game player statistics row",
+          "source_profile_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=team_user&userid=80604&leagueid=39&seasonid=55",
+          "team": "Calgary Hitmen"
+        }
+      ],
+      "schema": "lg-final-game-lineup-v1",
+      "season": 55,
+      "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918200&leagueid=39&seasonid=55",
+      "observed_at": "2026-11-02T01:24:28.072282+00:00"
+    }
+  ],
+  "database_unchanged": true
+}

@@ -1,7 +1,7 @@
 [
   {
     "lg_game_id": 918009,
-    "title": "Hitmen vs Gatineau · Game 3 · Oct 25",
+    "title": "Hitmen vs Gatineau \u00b7 Game 3 \u00b7 Oct 25",
     "test_review_id": "a1000000-0000-4000-8000-000000918009",
     "vod_url": "https://www.twitch.tv/videos/2910969606",
     "source_start_seconds": 4280,
@@ -38,7 +38,7 @@
   },
   {
     "lg_game_id": 917960,
-    "title": "Hitmen vs Windsor · Game 2 · Oct 25",
+    "title": "Hitmen vs Windsor \u00b7 Game 2 \u00b7 Oct 25",
     "test_review_id": "a1000000-0000-4000-8000-000000917960",
     "vod_url": "https://www.twitch.tv/videos/2910969606",
     "source_start_seconds": 2445,
@@ -81,6 +81,523 @@
       "Turnstile",
       "Crafty",
       "DeaconDish21"
+    ]
+  },
+  {
+    "lg_game_id": 918170,
+    "title": "Hitmen vs London \u00b7 Game 2 \u00b7 Oct 27",
+    "test_review_id": "a1000000-0000-4000-8000-000000918170",
+    "vod_url": "https://www.twitch.tv/videos/2912714919",
+    "source_start_seconds": 372,
+    "source_end_seconds": 1748,
+    "periods": [
+      {
+        "label": "Period 1",
+        "start": 0,
+        "end": 516
+      },
+      {
+        "label": "Period 2",
+        "start": 516,
+        "end": 922
+      },
+      {
+        "label": "Period 3",
+        "start": 922,
+        "end": 1376
+      }
+    ],
+    "source_review_id": "b4fd7f87-b751-4d26-96bc-e9f7b83a7850",
+    "lineup_capture": "artifacts/lg-account-links/final-lineups-2026-10-27-captured-2026-11-01.json",
+    "identity_replay": {
+      "source": "Read-only identity reconciliation of saved evidence, not fresh video analysis or a new performance assessment",
+      "game_rollup": {
+        "player_reports": [
+          {
+            "player": "ALAN JACKSON",
+            "position": "LD",
+            "evidence_timestamps": [
+              27,
+              118,
+              166,
+              208,
+              263,
+              522.75,
+              634,
+              682,
+              767,
+              827,
+              929.75,
+              937,
+              1044.75,
+              1185,
+              1297.25
+            ]
+          },
+          {
+            "player": "KOLDY",
+            "position": "RD",
+            "evidence_timestamps": [
+              640,
+              833,
+              1282
+            ]
+          },
+          {
+            "player": "KELLS",
+            "position": "C",
+            "evidence_timestamps": [
+              9.25,
+              370.25,
+              520.75,
+              531,
+              652,
+              925,
+              1058,
+              1173,
+              1276,
+              1288
+            ]
+          },
+          {
+            "player": "COOP",
+            "position": "LW",
+            "evidence_timestamps": [
+              293,
+              445,
+              555,
+              1003
+            ]
+          },
+          {
+            "player": "DANKS",
+            "position": "RW",
+            "evidence_timestamps": [
+              257,
+              949,
+              1046
+            ]
+          }
+        ]
+      },
+      "period_reports": [
+        {
+          "label": "Period 1",
+          "report": {
+            "player_reports": [
+              {
+                "player": "ALAN JACKSON",
+                "position": "LD",
+                "evidence_timestamps": [
+                  27,
+                  118,
+                  166,
+                  208,
+                  263,
+                  354,
+                  427
+                ]
+              },
+              {
+                "player": "COOP",
+                "position": "LW",
+                "evidence_timestamps": [
+                  293,
+                  445
+                ]
+              },
+              {
+                "player": "DANKS",
+                "position": "RW",
+                "evidence_timestamps": [
+                  257
+                ]
+              },
+              {
+                "player": "KELLS",
+                "position": "C",
+                "evidence_timestamps": [
+                  9.25,
+                  370.25
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "label": "Period 2",
+          "report": {
+            "player_reports": [
+              {
+                "player": "ALAN JACKSON",
+                "position": "LD",
+                "evidence_timestamps": [
+                  522.75,
+                  634,
+                  682,
+                  767,
+                  827
+                ]
+              },
+              {
+                "player": "KOLDY",
+                "position": "RD",
+                "evidence_timestamps": [
+                  640,
+                  833
+                ]
+              },
+              {
+                "player": "COOP",
+                "position": "LW",
+                "evidence_timestamps": [
+                  555
+                ]
+              },
+              {
+                "player": "KELLS",
+                "position": "C",
+                "evidence_timestamps": [
+                  520.75,
+                  531,
+                  652
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "label": "Period 3",
+          "report": {
+            "player_reports": [
+              {
+                "player": "Kells",
+                "position": "C",
+                "evidence_timestamps": [
+                  925,
+                  1058,
+                  1173,
+                  1276,
+                  1288
+                ]
+              },
+              {
+                "player": "Alan Jackson",
+                "position": "LD",
+                "evidence_timestamps": [
+                  929.75,
+                  937,
+                  1044.75,
+                  1185,
+                  1297.25
+                ]
+              },
+              {
+                "player": "Koldex Bands",
+                "position": "RD",
+                "evidence_timestamps": [
+                  1301
+                ]
+              },
+              {
+                "player": "Danks",
+                "position": "LW",
+                "evidence_timestamps": [
+                  949,
+                  1046
+                ]
+              },
+              {
+                "player": "Coop",
+                "position": "RW",
+                "evidence_timestamps": [
+                  1003
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "verified_aliases": [
+      {
+        "name": "Kells",
+        "lg_user_id": "73707",
+        "kind": "broadcast",
+        "evidence": "User-confirmed Kells / Bad News Kells relationship in VOD player marker; LG Client final game 918170 confirms LG 73707 l Setty l at C. Game-specific identity test only."
+      },
+      {
+        "name": "Bad News Kells",
+        "lg_user_id": "73707",
+        "kind": "broadcast",
+        "evidence": "User-confirmed Kells / Bad News Kells relationship in VOD player marker; LG Client final game 918170 confirms LG 73707 l Setty l at C. Game-specific identity test only."
+      }
+    ]
+  },
+  {
+    "lg_game_id": 918200,
+    "title": "Hitmen vs Ottawa \u00b7 Game 3 \u00b7 Oct 27",
+    "test_review_id": "a1000000-0000-4000-8000-000000918200",
+    "vod_url": "https://www.twitch.tv/videos/2912714919",
+    "source_start_seconds": 2133,
+    "source_end_seconds": 3572,
+    "periods": [
+      {
+        "label": "Period 1",
+        "start": 0,
+        "end": 522
+      },
+      {
+        "label": "Period 2",
+        "start": 522,
+        "end": 961
+      },
+      {
+        "label": "Period 3",
+        "start": 961,
+        "end": 1439
+      }
+    ],
+    "source_review_id": "53623df7-9c52-4763-9cea-2de70c0ccc35",
+    "lineup_capture": "artifacts/lg-account-links/final-lineups-2026-10-27-captured-2026-11-01.json",
+    "identity_replay": {
+      "source": "Read-only identity reconciliation of saved evidence, not fresh video analysis or a new performance assessment",
+      "game_rollup": {
+        "player_reports": [
+          {
+            "player": "Alan Jackson",
+            "position": "LD",
+            "evidence_timestamps": [
+              75,
+              226,
+              360,
+              379,
+              531.75,
+              573,
+              803,
+              857,
+              870,
+              976,
+              1082.75,
+              1163,
+              1242,
+              1272
+            ]
+          },
+          {
+            "player": "Koldy",
+            "position": "RD",
+            "evidence_timestamps": [
+              615,
+              682,
+              730,
+              882,
+              1036,
+              1081.25,
+              1103,
+              1266,
+              1290
+            ]
+          },
+          {
+            "player": "Kells",
+            "position": "C",
+            "evidence_timestamps": [
+              46.75,
+              122.75,
+              518,
+              970,
+              1109,
+              1193,
+              1224
+            ]
+          },
+          {
+            "player": "Danks",
+            "position": "RW",
+            "evidence_timestamps": [
+              166,
+              184,
+              451,
+              637.25,
+              640,
+              670,
+              1200,
+              1212
+            ]
+          },
+          {
+            "player": "Setty",
+            "position": "F",
+            "evidence_timestamps": [
+              827
+            ]
+          }
+        ]
+      },
+      "period_reports": [
+        {
+          "label": "Period 1",
+          "report": {
+            "player_reports": [
+              {
+                "player": "Kells",
+                "position": "C",
+                "evidence_timestamps": [
+                  46.75,
+                  122.75,
+                  518
+                ]
+              },
+              {
+                "player": "Danks",
+                "position": "RW",
+                "evidence_timestamps": [
+                  166,
+                  184,
+                  451
+                ]
+              },
+              {
+                "player": "Alan Jackson",
+                "position": "LD",
+                "evidence_timestamps": [
+                  75,
+                  226,
+                  360,
+                  379,
+                  403
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "label": "Period 2",
+          "report": {
+            "player_reports": [
+              {
+                "player": "Alan Jackson",
+                "position": "LD",
+                "evidence_timestamps": [
+                  531.75,
+                  573,
+                  803,
+                  857,
+                  870
+                ]
+              },
+              {
+                "player": "Koldy",
+                "position": "RD",
+                "evidence_timestamps": [
+                  615,
+                  682,
+                  730,
+                  882
+                ]
+              },
+              {
+                "player": "Danks",
+                "position": "RW",
+                "evidence_timestamps": [
+                  637.25,
+                  640,
+                  670
+                ]
+              },
+              {
+                "player": "Setty",
+                "position": "F",
+                "evidence_timestamps": [
+                  827
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "label": "Period 3",
+          "report": {
+            "player_reports": [
+              {
+                "player": "ALAN JACKSON",
+                "position": "LD",
+                "evidence_timestamps": [
+                  976,
+                  1082.75,
+                  1163,
+                  1242
+                ]
+              },
+              {
+                "player": "KOLDY",
+                "position": "RD",
+                "evidence_timestamps": [
+                  1036,
+                  1081.25,
+                  1103,
+                  1266,
+                  1290
+                ]
+              },
+              {
+                "player": "KELLS",
+                "position": "C",
+                "evidence_timestamps": [
+                  970,
+                  1109,
+                  1193,
+                  1224
+                ]
+              },
+              {
+                "player": "DANKS",
+                "position": "F",
+                "evidence_timestamps": [
+                  1200,
+                  1212
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "label": "User-confirmed identity markers",
+          "report": {
+            "player_reports": [
+              {
+                "player": "Bad News Kells",
+                "evidence_timestamps": [
+                  3034,
+                  3046
+                ],
+                "identity_only": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "verified_aliases": [
+      {
+        "name": "Kells",
+        "lg_user_id": "73707",
+        "kind": "broadcast",
+        "evidence": "User-confirmed Kells / Bad News Kells relationship in VOD player marker; LG Client final game 918200 confirms LG 73707 l Setty l at C. Game-specific identity test only."
+      },
+      {
+        "name": "Bad News Kells",
+        "lg_user_id": "73707",
+        "kind": "broadcast",
+        "evidence": "User-confirmed Kells / Bad News Kells relationship in VOD player marker; LG Client final game 918200 confirms LG 73707 l Setty l at C. Game-specific identity test only."
+      },
+      {
+        "name": "Setty",
+        "lg_user_id": "73707",
+        "kind": "broadcast",
+        "evidence": "User explicitly confirms the separate Setty label in the Ottawa report is the same player as Kells and Bad News Kells. Final LG game 918200 sheet confirms LG 73707 l Setty l at C."
+      }
     ]
   }
 ]
