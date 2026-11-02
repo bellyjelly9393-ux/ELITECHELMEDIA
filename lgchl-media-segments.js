@@ -30,7 +30,7 @@
         : esc(lead.nickname || lead.name) + ' lead by ' + gap + ' points.';
       return '<article class="card tinted lg-race" data-logo="' + logo(lead.lg_team_id) + '">' + wm(lead.lg_team_id) +
         '<p class="lg-race-tag">' + esc(k) + '</p>' +
-        '<ol class="lg-race-list num">' + rows.map((t, i) => '<li data-logo="'+logo(t.lg_team_id)+'" style="--team-logo:url(\'' + logo(t.lg_team_id) + '\')"><span class="lg-race-rk">' + (i + 1) + '</span><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(t.nickname || t.name) + '</b><span class="lg-race-pts">' + esc(t.pts) + '</span><small>' + (i ? (Number(t.pts) === Number(lead.pts) ? 'level' : '−' + (Number(lead.pts) - Number(t.pts))) : 'PTS') + '</small></li>').join('') + '</ol>' +
+        '<div class="lg-race-columns"><span>Rank</span><span>Team</span><span>PTS</span><span>Gap</span></div><ol class="lg-race-list num">' + rows.map((t, i) => '<li data-logo="'+logo(t.lg_team_id)+'" style="--team-logo:url(\'' + logo(t.lg_team_id) + '\')"><span class="lg-race-rk">' + (i + 1) + '</span><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(t.nickname || t.name) + '</b><span class="lg-race-pts">' + esc(t.pts) + '</span><small>' + (i ? (Number(t.pts) === Number(lead.pts) ? 'level' : '−' + (Number(lead.pts) - Number(t.pts))) : 'PTS') + '</small></li>').join('') + '</ol>' +
         '<p class="lg-race-line">' + line + '</p></article>';
     }).join('');
     tint(box);
@@ -42,7 +42,7 @@
     if (!hot || !cold) return;
     let rows = [], recent = false;
     try {
-      const r = await read('lgchl_public_trending_players', { select: 'gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots', player_kind: 'eq.skater', gp: 'gte.2', limit: '2000' });
+      const r = await read('lgchl_public_trending_players', { select: 'gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots,through_at', player_kind: 'eq.skater', gp: 'gte.2', limit: '2000' });
       if (r.length >= 40) { rows = r; recent = true; }
     } catch { /* recent form not available yet */ }
     if (!recent) {
@@ -51,7 +51,9 @@
       } catch { show('lgStreakSec', false); return; }
     }
     const capture=await window.LGCHLFresh?.night();
-    if(capture){rows=capture.players.filter(p=>p.player_kind==='skater');recent=true;}
+    const lastForm=rows.map(p=>p.through_at||p.fetched_at).filter(Boolean).sort().pop();
+    const capturedForm=capture&&(!lastForm||Date.parse(capture.captured_at)>Date.parse(lastForm));
+    if(capturedForm){rows=capture.players.filter(p=>p.player_kind==='skater');recent=true;}
     rows = rows.filter(p => Number(p.gp) > 0 && Number(p.shots) > 0);
     if (!rows.length) { show('lgStreakSec', false); return; }
     const pick = (list, n, maxD) => {
@@ -76,7 +78,7 @@
         '<div class="lg-card-head"><img src="' + logo(p.lg_team_id) + '" alt="" loading="lazy"><div><b>' + esc(p.gamertag) + '</b><small>' + esc(p.position || '') + ' · ' + esc(team ? team.name : (p.team_name || 'LGCHL')) + '</small></div></div>' +
         '<p class="lg-line num">' + esc(p.goals) + ' G · ' + esc(p.assists) + ' A · ' + esc(p.points) + ' PTS · ' + (win ? sgn(p.plus_minus) : ppg + ' P/GP') + ' · ' + esc(p.gp) + ' GP</p></article>';
     };
-    $('lgStreakEyebrow').textContent = capture ? 'Nov 1 · '+capture.games_included+'/'+capture.games_scheduled+' game sheets · provisional form' : recent ? 'Players · last two game nights' : 'Players · season so far · 6+ GP';
+    $('lgStreakEyebrow').textContent = capturedForm ? 'Nov 1 · '+capture.games_included+'/'+capture.games_scheduled+' game sheets · provisional form' : recent ? 'Players · last two game nights' : 'Players · season so far · 6+ GP';
     hot.innerHTML = heaters.map(p => card(p, true)).join('');
     cold.innerHTML = skids.map(p => card(p, false)).join('');
     tint(hot); tint(cold);
@@ -125,17 +127,17 @@
     const upcoming = (games || []).filter(g => g.status !== 'final').map(g => Number(g.week)).filter(Boolean);
     const nextWeek = upcoming.length ? Math.min(...upcoming) : null;
     const [wk, tr] = await Promise.allSettled([
-      read('lgchl_public_week_players', { select: 'week,week_complete,player_kind,gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots,saves,shots_against,goals_against', order: 'points.desc,goals.desc,gamertag.asc', limit: '400' }),
-      read('lgchl_public_trending_players', { select: 'player_kind,gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots,since_at', player_kind: 'eq.skater', order: 'points.desc,goals.desc,gp.asc,gamertag.asc', limit: '6' })
+      read('lgchl_public_week_players', { select: 'week,week_complete,player_kind,gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots,saves,shots_against,goals_against,through_at', order: 'points.desc,goals.desc,gamertag.asc', limit: '400' }),
+      read('lgchl_public_trending_players', { select: 'player_kind,gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots,since_at,through_at', player_kind: 'eq.skater', order: 'points.desc,goals.desc,gp.asc,gamertag.asc', limit: '6' })
     ]);
     const capture=await window.LGCHLFresh?.night();
     // Players of the Week: top 3 skaters + best goalie (min 25 shots faced).
     let week = wk.status === 'fulfilled' ? wk.value : [];
     const weekAt=week.map(p=>p.through_at).filter(Boolean).sort().pop();
-    const capturedWeek=capture&&(!weekAt||Date.parse(weekAt)<Date.parse(capture.night+'T00:00:00Z'));
+    const capturedWeek=capture&&(!weekAt||Date.parse(weekAt)<Date.parse(capture.captured_at));
     const captureWeek=(games||[]).find(g=>g.game_at&&new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto'}).format(new Date(g.game_at))===capture?.night)?.week;
     if(capturedWeek)week=capture.players.map(p=>({...p,week:captureWeek||'—',week_complete:false}));
-    const skaters = week.filter(p => p.player_kind === 'skater' && Number(p.points) > 0).slice(0, 3);
+    const skaters = week.filter(p => p.player_kind === 'skater' && Number(p.points) > 0).sort(skaterOrder).slice(0, 3);
     const goalie = week.filter(p => p.player_kind === 'goalie' && Number(p.shots_against) >= 25)
       .sort((a, b) => Number(b.saves) / Number(b.shots_against) - Number(a.saves) / Number(a.shots_against))[0];
     if (skaters.length) {
@@ -147,9 +149,11 @@
       $('lgWeekPlayers').innerHTML = '<article class="card lg-card lg-soon"><span class="wm wm-lg lg-wm-league" aria-hidden="true"></span><p class="lg-potw-tag">Coming up</p><h3>' + (nextWeek ? 'Week ' + nextWeek + ' stars' : 'This week\'s stars') + ' drop after Tuesday\'s games</h3><p>The top three skaters and the goalie of the week, straight from the game-week totals.</p></article>';
     }
     // Trending now.
-    const trend = capture ? capture.players.filter(p=>p.player_kind==='skater').sort((a,b)=>b.points-a.points||b.goals-a.goals).slice(0,6) : tr.status === 'fulfilled' ? tr.value.filter(p => Number(p.points) > 0) : [];
+    const trendAt=tr.status==='fulfilled'?tr.value.map(p=>p.through_at).filter(Boolean).sort().pop():null;
+    const capturedTrend=capture&&(!trendAt||Date.parse(trendAt)<Date.parse(capture.captured_at));
+    const trend = capturedTrend ? capture.players.filter(p=>p.player_kind==='skater').sort((a,b)=>b.points-a.points||b.goals-a.goals).slice(0,6) : tr.status === 'fulfilled' ? tr.value.filter(p => Number(p.points) > 0) : [];
     if (trend.length) {
-      $('lgTrendNote').textContent = capture ? 'November 1 scoring · '+capture.games_included+'/'+capture.games_scheduled+' game sheets · provisional.' : 'Most points over the last two game nights' + (tr.value[0] && tr.value[0].since_at ? ' (LG totals since ' + F.day.format(new Date(tr.value[0].since_at)) + ')' : '') + '.';
+      $('lgTrendNote').textContent = capturedTrend ? 'November 1 scoring · '+capture.games_included+'/'+capture.games_scheduled+' game sheets · provisional.' : 'Most points over the last two game nights' + (tr.value[0] && tr.value[0].since_at ? ' (LG totals since ' + F.day.format(new Date(tr.value[0].since_at)) + ')' : '') + '.';
       $('lgTrendingRecords').innerHTML = trend.map(p => playerCard(p, teams, null)).join('');
     } else {
       $('lgTrendNote').textContent = 'The hottest sticks over the last two game nights.';

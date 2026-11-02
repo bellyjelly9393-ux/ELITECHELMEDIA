@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="lgchl-writeups.css?v=20261021-1">
 <script src="lgchl-writeups.js?v=20261021-1" defer></script>
 <script src="hitman-nightly.js?v=20261025-p" defer></script>
-<link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script><link rel="stylesheet" href="lgchl-studio.css?v=20261102-2">
+<link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script><link rel="stylesheet" href="lgchl-studio.css?v=20261102-3">
 </head>
 <body>
 <header class="top band">
@@ -87,7 +87,7 @@
       <div class="card lg-panel">
         <span class="wm wm-lg lg-wm-league" aria-hidden="true"></span>
         <div class="lg-panel-head">
-          <div><p class="eyebrow" id="lgPowerEyebrow">Elitechel power index</p><h2 class="lg-panel-title">Power rankings</h2></div>
+          <div><p class="eyebrow" id="lgPowerEyebrow">Elitechel power index</p><h2 class="lg-panel-title">Power <em>rankings</em></h2></div>
           <span class="lg-ev lg-ev-v">Formula-based</span>
         </div>
         <div class="lg-podium" id="lgPowerPodium" aria-label="Top three power rankings"></div><div class="lg-tbl-box lg-ranking-list"><table class="lg-tbl num"><thead><tr><th>#</th><th>Move</th><th>Team</th><th>Record</th><th class="r">GD</th><th>Last 10</th><th class="r">Score</th></tr></thead><tbody id="lgPower"><tr><td colspan="7" class="empty">Loading standings…</td></tr></tbody></table></div>
@@ -97,12 +97,12 @@
       <div class="card lg-panel" id="lgStatsSec">
         <span class="wm wm-lg lg-wm-ecm" aria-hidden="true"></span>
         <div class="lg-panel-head">
-          <div><p class="eyebrow">Season 55 regular season</p><h2 class="lg-panel-title">Stat desk</h2></div>
+          <div><p class="eyebrow">Season 55 regular season</p><h2 class="lg-panel-title">Stat <em>desk</em></h2></div>
           <div class="lg-tabs" role="group" aria-label="Leaderboard">
             <button type="button" data-metric="points" aria-pressed="true">Points</button>
             <button type="button" data-metric="goals" aria-pressed="false">Goals</button>
             <button type="button" data-metric="assists" aria-pressed="false">Assists</button>
-            <button type="button" data-metric="save_pct" aria-pressed="false">Save %</button>
+            <button type="button" data-metric="save_pct" aria-pressed="false">SV%</button>
           </div>
         </div>
         <div class="lg-tbl-box"><table class="lg-tbl num"><thead id="lgLeadersHead"><tr><th>#</th><th>Player</th><th class="r">G</th><th class="r">A</th><th class="r">PTS</th><th class="r">+/-</th></tr></thead><tbody id="lgLeaders"><tr><td colspan="6" class="empty">Loading leaders…</td></tr></tbody></table></div>
@@ -126,6 +126,7 @@
   <!-- Hitmen Radio video player: shared component (hitman-nightly.js/css + assets/hitman-radio/nightly/episodes.json). Keep id="lgRadioSec": Discord links point to it. -->
   <section class="hn band" id="lgRadioSec" aria-labelledby="lgRadioTitle" data-manifest="assets/hitman-radio/nightly/episodes.json?v=20261101p">
     <div class="hrs-sign" aria-label="Hitmen Radio studio"><span class="hrs-name">HITMEN <b>RADIO</b></span><span class="hrs-meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="hrs-status" data-hrs-status>READY TO PLAY</span></div>
+    <div class="lg-radio-visual"><img src="assets/lgchl/studio/radio-booth.webp" alt="Elitechel Media and LGCHL rinkside radio booth" width="1620" height="972" loading="lazy"><p id="lgRadioSceneTitle">ELITECHEL MEDIA · HITMEN RADIO</p></div>
     <div class="hn-in">
       <div class="hn-frame">
         <video class="hn-video" controls playsinline preload="metadata" width="1280" height="720" aria-label="Hitmen Radio nightly show video">
@@ -221,7 +222,7 @@
         <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Players · this season vs last</p><h2 class="sec-title" id="lgBoTitle">Breakout <em>watch</em></h2></div>
         <p class="lg-note" id="lgBoRule">Biggest jump in points per game, LGCHL S54 to S55.</p>
       </div>
-      <div class="lg-card-grid" id="lgBreakout"><p class="empty">Loading breakout watch…</p></div>
+      <div class="lg-art-stick" aria-hidden="true"><img src="assets/lgchl/studio/breakout-scenery-source.webp" loading="lazy" alt=""></div><div class="lg-card-grid" id="lgBreakout"><p class="empty">Loading breakout watch…</p></div>
       <p class="lg-fine" id="lgBoNote"></p>
     </div>
   </section>
@@ -302,11 +303,12 @@
   </div>
 </footer>
 <noscript><p class="band empty">Enable JavaScript to load LGCHL scores, standings and leaders.</p></noscript>
+<script src="lgchl-studio.js?v=20261102-3" defer></script>
 <script src="lgchl-fresh-data.js?v=20261102-2"></script>
 <script src="media-desk.js?v=20261011-1"></script>
 <script src="lgchl-media-config.js?v=20261016-2"></script>
 <script src="lgchl-media-public.js?v=20261017-clean1"></script>
-<script src="lgchl-media-segments.js?v=20261102-2-20261102-1-20261019-potn1"></script>
-<script src="lgchl-player-badges.js?v=20261018-1"></script><script src="lgchl-player-profile.js?v=20261018-2"></script><script src="lgchl-media.js?v=20261102-2-20261102-1-20261019-potn1"></script>
+<script src="lgchl-media-segments.js?v=20261102-3-20261102-2-20261102-1-20261019-potn1"></script>
+<script src="lgchl-player-badges.js?v=20261018-1"></script><script src="lgchl-player-profile.js?v=20261018-2"></script><script src="lgchl-media.js?v=20261102-3-20261102-2-20261102-1-20261019-potn1"></script>
 </body>
 </html>

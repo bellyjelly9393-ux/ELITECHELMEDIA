@@ -85,6 +85,7 @@
     if (SEG) { SEG.renderRaces(standings); SEG.renderPlayerStreaks(teams).catch(() => {}); SEG.renderUpsets(games, ranked); }
     renderBreakout(hist, teams);
     renderMovers(hist, teams);
+    if(hist?.mode==='snapshot')$('lgMoveSec').querySelector('.lg-note').textContent='Archived October 16 comparison · updated season history pending.';
     // Matchup player spotlights use the same public season leaders as the board.
     let matchupPlayers = await read('wm_lgchl_s55_player_leaders', { select: SKATER_COLS, player_kind: 'eq.skater', order: 'points.desc.nullslast', points: 'not.is.null', limit: '250' }).catch(() => []);
     const freshPlayers=await window.LGCHLFresh?.board('points',matchupPlayers);if(freshPlayers)matchupPlayers=freshPlayers.rows;
@@ -149,9 +150,9 @@
     if (podium) podium.innerHTML = [ranked[1], ranked[0], ranked[2]].filter(Boolean).map(t =>
       '<a class="lg-podium-team place-' + t.rank + '" href="lgchl-power.html" data-logo="' + logo(t.lg_team_id) + '">' + wm(t.lg_team_id) +
       '<span class="lg-podium-rank">' + t.rank + '</span><img src="' + logo(t.lg_team_id) + '" alt="" width="100" height="100">' +
-      '<h3>' + esc(t.nickname || t.name) + '</h3><small>' + esc(t.league) + ' · ' + esc(record(t)) + '</small>' +
+      '<h3>' + esc(t.nickname || t.name) + '</h3><small>' + esc(record(t)) + '</small>' +
       '<b class="lg-podium-score">' + t.score.toFixed(1) + '<span>POWER INDEX</span></b>' +
-      '<span class="lg-podium-move">' + (t.move == null ? '—' : t.move === 0 ? '— No change' : (t.move > 0 ? '▲ ' : '▼ ') + Math.abs(t.move) + ' spots') + '</span></a>').join('');
+      '<span class="lg-podium-move">' + (t.move == null ? '—' : t.move === 0 ? '—' : (t.move > 0 ? '▲ ' : '▼ ') + Math.abs(t.move)) + '</span></a>').join('');
     if(podium) tint(podium);
     body.innerHTML = ranked.slice(3, 10).map(t => {
       const m = t.move, mv = m == null ? '<td class="lg-mv eq">—</td>' : m > 0 ? '<td class="lg-mv up">▲' + m + '</td>' : m < 0 ? '<td class="lg-mv dn">▼' + Math.abs(m) + '</td>' : '<td class="lg-mv eq">—</td>';
@@ -271,7 +272,7 @@
         '<p class="lg-line num">' + esc(b.points) + ' PTS in ' + esc(b.gp) + ' GP · ' + esc(b.goals) + ' G · ' + sgn(b.plus_minus) + '</p>' +
         (b.note ? '<p class="lg-card-note">' + esc(b.note) + '</p>' : '') + '</article>';
     }).join('') || '<p class="empty">No players meet the breakout thresholds yet.</p>';
-    $('lgBoNote').textContent = 'Early season: these are paces, not finished seasons.';
+    $('lgBoNote').textContent = hist.mode==='snapshot' ? 'Archived comparison · October 16, 2026. Updated season-history import pending.' : 'Early season: these are paces, not finished seasons.';
   }
 
   function renderMovers(hist, teams) {
@@ -337,7 +338,7 @@
       const side = (id, ab, rk) => '<div><img src="' + logo(id) + '" alt=""><b>' + esc(ab) + '</b><small>' + (rk ? ordinal(rk) + ' in conf.' : '') + '</small></div>';
       return '<article class="card tinted lg-card" data-logo="' + logo(g.home_lg_team_id) + '">' + wm(g.home_lg_team_id) +
         '<div class="lg-mu-teams">' + side(g.away_lg_team_id, g.away_abbr, g.away_conf_rank) + '<span class="lg-mu-at">@</span>' + side(g.home_lg_team_id, g.home_abbr, g.home_conf_rank) + '</div>' +
-        '<h3 class="lg-match-title">' + esc(preview.title) + '</h3>' + preview.paragraphs.map(([label,text]) => '<p class="lg-why"><b>'+esc(label)+'</b> '+esc(text)+'</p>').join('') + '<div class="lg-mu-when num">' + esc(F.day.format(new Date(g.game_at))) + ' · ' + esc(F.time.format(new Date(g.game_at))) + ' ET · ' + esc(g.league) + '</div></article>';
+        '<h3 class="lg-match-title">' + esc(preview.title) + '</h3><details class="lg-match-details"><summary>Matchup breakdown</summary>' + preview.paragraphs.map(([label,text]) => '<p class="lg-why"><b>'+esc(label)+'</b> '+esc(text)+'</p>').join('') + '</details><div class="lg-mu-when num">' + esc(F.day.format(new Date(g.game_at))) + ' · ' + esc(F.time.format(new Date(g.game_at))) + ' ET · ' + esc(g.league) + '</div></article>';
     }).join('');
   }
 
