@@ -16,3 +16,14 @@ The new LG final-lineup reader was checked against an existing final client capt
 **Updated results:** Windsor recovery completed successfully with Periods 1–3 and Overtime 1 saved, 9/12 players with attributed evidence, zero unresolved names in the structured game/period evidence, and all original four saved chunks preserved. Gatineau remains completed at 8/12 using the corrected period-inclusive accounting.
 
 The user completed LG verification. Both October 27 final game sheets were then captured with twelve participants and unchanged source statistics. Both explicitly list `l Setty l`, LG 73707, at C. The test contexts now apply the user-confirmed Kells/Bad News Kells relationship to that verified participant. A saved-evidence Ottawa identity check consolidates Kells, KELLS and Bad News Kells into one canonical report. These are identity checks against retained evidence, not new video analyses or performance assessments. The user subsequently confirmed that Setty is also this same player. The Ottawa identity check now consolidates Kells, Bad News Kells and Setty under LG 73707, with original observations retained.
+
+Final deployment `0170d8eb-7f19-45b7-83cf-c18fba50e070`, commit `f5131c8b5b9555c3fccd932459ef49284e0ad46d`, is live on the same protected test address. Live API checks and desktop (1400 px) / mobile (390 px) browser checks passed: four game contexts, twelve Ottawa roster rows, exactly one LG 73707 canonical report with the three confirmed aliases, and no browser page errors. The interface labels the London/Ottawa entries as saved-evidence identity checks and does not automatically start new AI jobs for them. Identity-only marker citations do not inflate performance coverage.
+
+Files changed in this follow-up:
+
+- `vod-identity-test/worker/worker.py`, `report_schema.py`, `test_bootstrap.py`, `test_short_frames.py`: short-tail decoding, punctuation preservation, failed-job-only recovery, generated-video and saved-evidence protection tests.
+- `vod-identity-test/server.cjs`, `test.cjs`, `prepare.py`, `reviews.json`, `games.json`, `index.html`, Dockerfile and README: period-inclusive evidence accounting, user-confirmed aliases, four verified game contexts, clear test modes and readable desktop/mobile results.
+- `lib/lg-final-lineup-dom.js`, `scripts/capture-lg-final-lineups.py`, `test-vod-lg-final-lineup.cjs`, `.github/workflows/vod-review.yml`: read-only final-game participant verification, manual verification pause and five parser regressions.
+- Account-link artifacts and the identity-fix summary: final rosters, user attestation, resolved source blocker, completed video outcomes and deployment evidence.
+
+No new confirmation is needed for the three Ottawa aliases. Remaining work before production is human review of scouting accuracy, missing attributed observations and full production-schema integration validation. No production deployment or report replacement was performed.

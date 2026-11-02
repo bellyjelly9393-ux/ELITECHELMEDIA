@@ -5,9 +5,9 @@
   "environment_id": "35ff72b1-d0cd-4ba1-b074-7831a2d1745f",
   "service": "vod-lg-identity-test",
   "service_id": "43d867d2-e277-4e2c-86b6-911f55c453ba",
-  "deployment_id": "34434170-a13d-4cce-a761-e9259cee8929",
+  "deployment_id": "0170d8eb-7f19-45b7-83cf-c18fba50e070",
   "deployment_status": "SUCCESS",
-  "commit": "c6c126e8342f245d21b2da08be9ee3ae642cf7c8",
+  "commit": "f5131c8b5b9555c3fccd932459ef49284e0ad46d",
   "branch": "feature/lg-player-identity-resolver",
   "storage": "Separate 5000 MB test volume; isolated PGlite identity database and worker SQLite",
   "production_database_configured": false,
@@ -15,8 +15,56 @@
   "url": "https://vod-lg-identity-test-vod-restore-test.up.railway.app",
   "public_domain_status": "Created after explicit user approval. Live checks confirmed unauthenticated API returns 401 and the authenticated API exposes only isolated test rosters. No private access code is stored in this file.",
   "fresh_test_jobs": [
-    {"lg_game_id": 918009, "opponent": "Gatineau", "job_id": "4166e7aa-dba6-4ad0-8148-8b6576f031c0", "expected_players": 12, "initial_status": "retrieving"},
-    {"lg_game_id": 917960, "opponent": "Windsor", "job_id": "bdaa5dd3-480d-4ef4-a1af-37dabafc1061", "expected_players": 12, "initial_status": "retrieving"}
+    {
+      "lg_game_id": 918009,
+      "opponent": "Gatineau",
+      "job_id": "4166e7aa-dba6-4ad0-8148-8b6576f031c0",
+      "expected_players": 12,
+      "initial_status": "retrieving",
+      "final_status": "ready_for_review",
+      "attributed_players": 8,
+      "saved_period_reports": 3
+    },
+    {
+      "lg_game_id": 917960,
+      "opponent": "Windsor",
+      "job_id": "bdaa5dd3-480d-4ef4-a1af-37dabafc1061",
+      "expected_players": 12,
+      "initial_status": "retrieving",
+      "final_status": "ready_for_review",
+      "attributed_players": 9,
+      "saved_period_reports": 4
+    }
   ],
-  "limitations": "Full production Supabase schema not deployed or certified. Actual video accuracy and coverage await completed fresh analyses. No production data or original reports changed."
+  "limitations": "Fresh video tests completed; attributed evidence is not proof of complete hockey accuracy. Four Gatineau players and three Windsor players still lack attributed observations. Full production Supabase schema is not deployed or certified. No production or original scouting-report writes.",
+  "previous_deployment_ids": [
+    "34434170-a13d-4cce-a761-e9259cee8929",
+    "211e2021-bac1-4393-a760-b24f197d5d32"
+  ],
+  "browser_checks": {
+    "desktop_width": 1400,
+    "mobile_width": 390,
+    "passed": true,
+    "page_errors": 0,
+    "verified": "Four game contexts, twelve Ottawa participants, exactly one LG 73707 report containing Kells, Bad News Kells and Setty"
+  },
+  "windsor_original_chunks_preserved": true,
+  "identity_checks": {
+    "games": [
+      918170,
+      918200
+    ],
+    "source": "Saved identity evidence plus newly verified LG final game lineups; not fresh video analyses",
+    "ottawa_canonical_key": [
+      "LGCHL",
+      55,
+      "73707"
+    ],
+    "ottawa_confirmed_aliases": [
+      "Kells",
+      "Bad News Kells",
+      "Setty"
+    ],
+    "ottawa_canonical_report_count": 1
+  }
 }
