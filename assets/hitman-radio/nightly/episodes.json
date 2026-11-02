@@ -1,8 +1,19 @@
 {
   "featured": [
-    "2026-11-01-recap"
+    "2026-11-01-preview"
   ],
   "episodes": [
+    {
+      "id": "2026-11-01-preview",
+      "date": "2026-11-01",
+      "type": "preview",
+      "label": "Week 6 preview · Nov 1",
+      "title": "Seth Kelley's Hitmen Radio — Week 6 Preview",
+      "headline": "Week 6 preview: the final push for the playoffs, Erie at Barrie Monday and bold predictions",
+      "description": "Seth Kelley's Hitmen Radio from EliteChel Media: the playoff race final push (six teams per conference; 1 and 2 get a bye, 3 vs 6 and 4 vs 5), Erie at Barrie Monday, the key Week 6 matchups, the WHL vs OHL vs QMJHL cross-league scoreboard, bold predictions and a first look at EliteChel Fantasy, coming soon.",
+      "video": "assets/hitman-radio/nightly/2026-11-01-preview.mp4?v=20261101p",
+      "poster": "assets/hitman-radio/nightly/2026-11-01-preview-poster.png?v=20261101p"
+    },
     {
       "id": "2026-11-01-recap",
       "date": "2026-11-01",
