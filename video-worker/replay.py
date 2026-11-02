@@ -213,6 +213,37 @@ def replay_url(value):
     return 'https://www.twitch.tv/videos/' + match.group(1)
 
 
+def verified_lineup_for_review(review, authorization):
+    """Return exactly six footage-confirmed team slots; never infer players from prose."""
+    import os
+    review_id = norm_id(review.get('id'))
+    base = os.environ['SUPABASE_URL'].rstrip('/')
+    headers = {'Authorization': authorization, 'apikey': os.environ['SUPABASE_PUBLISHABLE_KEY']}
+    url = (base + '/rest/v1/labs_vod_verified_lineup?review_id=eq.' + review_id
+           + '&select=team_id,position,display_name,lg_user_id')
+    try:
+        rows = worker.http_json(url, headers)
+    except (urllib.error.URLError, ValueError):
+        raise worker.Problem(503, 'Could not verify the canonical player lineup for this VOD.')
+    required = ('LW', 'C', 'RW', 'LD', 'RD', 'G')
+    if not isinstance(rows, list) or len(rows) != 6:
+        return ''
+    slots = {}
+    for row in rows:
+        if not isinstance(row, dict) or row.get('team_id') != review.get('team_id'):
+            return ''
+        slot = row.get('position')
+        name = str(row.get('display_name') or '').strip()
+        if slot not in required or slot in slots or not (2 <= len(name) <= 24):
+            return ''
+        if any(ch in name for ch in ',;\\n\\r'):
+            return ''
+        slots[slot] = name
+    if set(slots) != set(required):
+        return ''
+    return 'Calgary lineup: ' + ', '.join(slot + ' ' + slots[slot] for slot in required)
+
+
 def read_review(review_id, authorization):
     try:
         UUID(review_id)
@@ -228,6 +259,9 @@ def read_review(review_id, authorization):
     if not rows:
         raise worker.Problem(404, 'Review not found or management access is missing.')
     review = rows[0]
+    # Enforce the six verified slots for the private worker's report prompt.
+    # Original scouting_context and every preexisting VOD artifact remain unchanged.
+    review['_verified_lineup'] = verified_lineup_for_review(review, authorization)
     if review.get('media_queue_id'):
         try:
             queue_id = str(UUID(review['media_queue_id']))
@@ -289,7 +323,7 @@ def insert_review_job(db, review, owner, status='needs_periods'):
     review_id = norm_id(review['id'])
     metadata = {
         'review_id': review_id, 'game_id': review_id, 'title': str(review.get('title') or '')[:200],
-        'vod_url': url, 'players': str(review.get('scouting_context') or '')[:2000],
+        'vod_url': url, 'players': str(review.get('_verified_lineup') or review.get('scouting_context') or '')[:2000],
         'game_format': str(review.get('game_format') or '6s')[:20],
         'vod_offset_seconds': start, 'source_start_seconds': start, 'source_end_seconds': end,
         'periods': [], 'source_kind': 'twitch_replay'
@@ -345,7 +379,7 @@ def refresh_saved_report(review, owner):
         'review_id': review_id, 'game_id': review_id,
         'title': str(review.get('title') or '')[:200],
         'vod_url': str(review.get('vod_url') or '')[:2000],
-        'players': str(review.get('scouting_context') or '')[:2000],
+        'players': str(review.get('_verified_lineup') or review.get('scouting_context') or '')[:2000],
         'game_format': str(review.get('game_format') or '6s')[:20],
         'vod_offset_seconds': start, 'source_start_seconds': start,
         'source_end_seconds': end, 'source_kind': 'saved_evidence',
