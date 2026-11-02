@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#09070c">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Private Elitechel Media Three Stars graphic generator.">
+  <title>Three Stars Generator | Elitechel Media</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="hub.css">
+  <link rel="stylesheet" href="wildman.css">
+  <link rel="stylesheet" href="management.css">
+  <link rel="stylesheet" href="network-v2.css?v=20260920a">
+  <link rel="stylesheet" href="three-stars.css?v=20261102a">
+</head>
+<body class="wildman-site management-protected admin-protected wm-page-management ts-page">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Elitechel Media home">
+      <span class="wm-brand-mark">E</span>
+      <span class="brand-copy wm-brand-copy">ELITECHEL MEDIA<br><b>THREE STARS</b></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Public Site</a>
+      <a href="management.html">Management</a>
+      <a href="lgchl-media.html">LG CHL Desk</a>
+      <a class="active-nav" href="three-stars.html">Three Stars</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main class="ts-main">
+    <section class="ts-head">
+      <div class="eyebrow">PRIVATE · LGCHL MEDIA DESK</div>
+      <h1>Three Stars <span>Generator</span></h1>
+      <p>Pick a game night, approve the top three, export the graphic. Background, jerseys and text are separate layers, so nothing gets rebuilt by hand.</p>
+    </section>
+
+    <section id="accountPanel" class="panel account-panel">
+      <div><div class="eyebrow">ELITECHEL ACCOUNT</div><h3>Loading account…</h3></div>
+    </section>
+    <div id="adminLockedMessage" class="wm-card" style="margin-top:16px">
+      <b>Admin sign-in required.</b>
+      <p>Only Elitechel accounts with the Admin role can open this tool.</p>
+    </div>
+
+    <div class="ts-layout" data-admin-content hidden>
+      <div class="ts-controls">
+
+        <section class="ts-block">
+          <div class="ts-block-head"><span class="ts-step">01</span><h2>Game night</h2></div>
+          <div class="ts-row">
+            <label class="ts-field"><span>Night (ET)</span><input id="tsNight" type="date"></label>
+            <label class="ts-field"><span>Stars from</span>
+              <select id="tsScope"><option value="night">That night only</option><option value="week">Whole week (Sun–Tue)</option></select>
+            </label>
+            <button id="tsLoad" class="ts-btn ts-btn-gold" type="button">Suggest top 3</button>
+          </div>
+          <p id="tsStatus" class="ts-status" role="status">Pick a night, then suggest. Nothing loads until you press the button.</p>
+          <div id="tsSuggest" class="ts-suggest" hidden>
+            <table>
+              <thead><tr><th>#</th><th>Player</th><th>Team</th><th>Pos</th><th>GP</th><th>G</th><th>A</th><th>P</th><th>+/-</th><th>Use as</th></tr></thead>
+              <tbody id="tsSuggestBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="ts-block">
+          <div class="ts-block-head"><span class="ts-step">02</span><h2>The stars</h2></div>
+          <p class="ts-hint">Everything is editable. Points are goals + assists.</p>
+          <div id="tsStars" class="ts-stars"></div>
+        </section>
+
+        <section class="ts-block">
+          <div class="ts-block-head"><span class="ts-step">03</span><h2>Text</h2></div>
+          <div class="ts-grid2">
+            <label class="ts-field"><span>Title, first word</span><input id="tsTitle1" type="text" maxlength="20" value="TONIGHT'S"></label>
+            <label class="ts-field"><span>Title, gold part</span><input id="tsTitle2" type="text" maxlength="24" value="THREE STARS"></label>
+            <label class="ts-field"><span>Top line</span><input id="tsKicker" type="text" maxlength="40" placeholder="GAME NIGHT • TUE OCT 27"></label>
+            <label class="ts-field"><span>League tag</span><input id="tsLeague" type="text" maxlength="16" value="LGCHL"></label>
+          </div>
+        </section>
+
+        <section class="ts-block">
+          <div class="ts-block-head"><span class="ts-step">04</span><h2>Art layers</h2></div>
+          <p class="ts-hint">Saved art loads automatically from <code>assets/three-stars/</code>. Use these to try a file once without committing it.</p>
+          <div class="ts-grid2">
+            <label class="ts-field"><span>Background (one-off)</span><input id="tsBgFile" type="file" accept="image/*"></label>
+            <label class="ts-field"><span>Show background</span>
+              <select id="tsBgMode"><option value="auto">Saved art (fallback: built-in lockers)</option><option value="builtin">Built-in lockers</option></select>
+            </label>
+          </div>
+          <details class="ts-details">
+            <summary>Line up jerseys with the stalls</summary>
+            <p class="ts-hint">Move and size each stall's jersey to fit your background. Saved on this browser.</p>
+            <div id="tsNudges" class="ts-nudges"></div>
+            <button id="tsNudgeReset" class="ts-btn" type="button">Reset positions</button>
+          </details>
+        </section>
+      </div>
+
+      <aside class="ts-preview">
+        <div class="ts-canvas-wrap"><canvas id="tsCanvas" width="1200" height="1312" aria-label="Three Stars graphic preview"></canvas></div>
+        <div class="ts-actions">
+          <button id="tsDownload" class="ts-btn ts-btn-gold" type="button">Download PNG</button>
+          <button id="tsCopy" class="ts-btn" type="button">Copy image</button>
+        </div>
+        <p id="tsAssetNote" class="ts-status"></p>
+      </aside>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+  <script src="backend.js"></script>
+  <script src="admin-guard.js"></script>
+  <script src="script.js"></script>
+  <script src="three-stars.js?v=20261102a"></script>
+</body>
+</html>

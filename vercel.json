@@ -41,6 +41,10 @@
       "destination": "/operator-assistant.html"
     },
     {
+      "source": "/three-stars",
+      "destination": "/three-stars.html"
+    },
+    {
       "source": "/postgame-desk",
       "destination": "/postgame-desk.html"
     },
