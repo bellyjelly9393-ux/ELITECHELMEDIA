@@ -33,15 +33,11 @@
     : t.move > 0 ? '<span class="lg-mv up">▲' + t.move + '</span>' : '<span class="lg-mv dn">▼' + Math.abs(t.move) + '</span>';
 
   function podium(rows) {
-    return rows.slice(0, 3).map(t => {
-      const st = streak(t.streak);
-      return '<article class="card tinted lg-pr-pod" data-logo="' + logo(t.lg_team_id) + '">' + wm(t.lg_team_id) +
-        '<div class="lg-pr-pod-rank"><b>' + t.rank + '</b>' + moveHtml(t) + '</div>' +
-        '<div class="lg-feat-head"><img src="' + logo(t.lg_team_id) + '" width="100" height="100" alt="' + esc(t.name) + ' logo"><div><small>' + esc(t.league) + ' · ' + esc(t.conference) + '</small><b>' + esc(t.name) + '</b></div></div>' +
-        '<div class="lg-tiles num"><div class="lg-tile"><small>Record</small><b>' + esc(record(t)) + '</b></div><div class="lg-tile"><small>Points</small><b>' + esc(t.pts) + '</b></div>' +
-        '<div class="lg-tile"><small>Goal diff</small><b>' + sgn(t.gd) + '</b></div><div class="lg-tile"><small>Streak</small><b>' + esc(st ? st.label : '—') + '</b></div></div>' +
-        '<div class="lg-pr-score"><span>Index</span><b>' + t.score.toFixed(1) + '</b><div class="lg-bar"><i style="width:' + Math.min(100, t.score).toFixed(1) + '%"></i></div></div></article>';
-    }).join('');
+    const top=rows.slice(0,3);
+    return '<div class="lg-podium">'+[1,0,2].filter(i=>top[i]).map(i=>{
+      const t=top[i];
+      return '<a class="lg-podium-team place-'+(i+1)+'" href="#lgPrList"><img src="'+logo(t.lg_team_id)+'" alt="'+esc(t.name)+' logo"><span class="lg-podium-rank">'+t.rank+'</span><h3>'+esc(t.nickname||t.name)+'</h3><small>'+esc(record(t))+'</small><b class="lg-podium-score">'+t.score.toFixed(1)+'</b><span class="lg-podium-move">'+(t.move==null?'—':t.move>0?'▲ '+t.move:t.move<0?'▼ '+Math.abs(t.move):'—')+'</span></a>';
+    }).join('')+'</div>';
   }
 
   function row(t) {

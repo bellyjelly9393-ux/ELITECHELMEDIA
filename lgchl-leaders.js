@@ -57,12 +57,12 @@
   const query={select:'gamertag,position,player_kind,lg_team_id,team_name,gp,points,goals,assists,shots,hits,blocked_shots,takeaways,save_pct,gaa,fetched_at,lg_user_id',player_kind:'eq.'+(goalie(metric)?'goalie':'skater'),[metric]:'not.is.null',order:metric+'.'+(metric==='gaa'?'asc':'desc')+'.nullslast,gp.desc,gamertag.asc',limit:String(LIMIT)};
   if(goalie(metric))query.gp='gte.8';
   try{
-   let rows;try{rows=await read('wm_lgchl_s55_player_leaders',query);}catch{const legacy={...query,select:query.select.replace(',lg_user_id','')};rows=await read('wm_lgchl_s55_player_leaders',legacy);}if(token!==state.request)return;
+   let rows;try{rows=await read('wm_lgchl_s55_player_leaders',query);}catch{const legacy={...query,select:query.select.replace(',lg_user_id','')};rows=await read('wm_lgchl_s55_player_leaders',legacy);}const fresh=await window.LGCHLFresh?.board(metric,rows);if(fresh)rows=fresh.rows;if(token!==state.request)return;
    const sorted=rows.filter(p=>numeric(p[metric])).sort((a,b)=>(Number(a[metric])-Number(b[metric]))*(metric==='gaa'?1:-1)||Number(b.gp||0)-Number(a.gp||0)||String(a.gamertag).localeCompare(String(b.gamertag))).slice(0,LIMIT);
    let rank=0,previous=null;
    state.rows=sorted.map((p,i)=>{const value=Number(p[metric]);if(i===0||value!==previous)rank=i+1;previous=value;return {...p,rank};});
    const times=state.rows.map(p=>p.fetched_at).filter(Boolean).sort();
-   $('lgLastUpdated').textContent='LGCHL Season 55 regular season · '+metrics[metric]+' · '+state.rows.length+' qualifying players loaded.';
+   $('lgLastUpdated').textContent=fresh?.capture ? fresh.capture.as_of+' · verified top '+state.rows.length+' '+metrics[metric].toLowerCase()+' capture · full season import pending.' : 'LGCHL Season 55 regular season · '+metrics[metric]+' · '+state.rows.length+' qualifying players loaded.';
    $('lgPlayerSource').textContent='';
    window.WMLgPlayerBadges?.load(state.rows,read).then(()=>{if(token===state.request)window.WMLgPlayerBadges?.refresh($('lgPlayerBoard'));});
   }catch{

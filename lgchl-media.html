@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="lgchl-writeups.css?v=20261021-1">
 <script src="lgchl-writeups.js?v=20261021-1" defer></script>
 <script src="hitman-nightly.js?v=20261025-p" defer></script>
-<link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script><link rel="stylesheet" href="lgchl-studio.css?v=20261102-1">
+<link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script><link rel="stylesheet" href="lgchl-studio.css?v=20261102-2">
 </head>
 <body>
 <header class="top band">
@@ -66,6 +66,7 @@
 </nav>
 
 <main class="lg-page" id="top">
+<div class="lg-brand-bar"><img src="assets/brand/ecm-crest.webp" alt="Elitechel Media"><div><small>LEAGUE COVERAGE · SEASON 55</small><b>LGCHL <em>MEDIA DESK</em></b></div><img src="assets/wildman/home/lgchl-logo.webp" alt="LGCHL"></div>
   <section class="lg-hero band" aria-labelledby="lgLeadTitle">
     <div class="lg-hero-in">
       <div class="lg-hero-copy">
@@ -81,16 +82,6 @@
       <aside class="card tinted lg-feat" id="lgFeat" aria-label="Featured team by the numbers" hidden></aside>
     </div>
   </section>
-  <section class="lg-sec band lg-potn" id="lgNightSec" aria-labelledby="lgNightTitle">
-    <div class="lg-in">
-      <div class="lg-head">
-        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow" id="lgNightEyebrow">Game night</p><h2 class="sec-title" id="lgNightTitle">Tonight’s <em>Three Stars</em></h2></div>
-        <p class="lg-note">Three stars, the top sticks and the goalie of the night.</p>
-      </div>
-      <div class="lg-card-grid" id="lgNightPlayers"><p class="empty">Loading…</p></div>
-      <p class="lg-fine" id="lgNightCoverage"></p>
-    </div>
-  </section>
   <section class="lg-sec band" id="lgPowerSec" aria-label="Power rankings and leaders">
     <div class="lg-in lg-two">
       <div class="card lg-panel">
@@ -99,14 +90,14 @@
           <div><p class="eyebrow" id="lgPowerEyebrow">Elitechel power index</p><h2 class="lg-panel-title">Power rankings</h2></div>
           <span class="lg-ev lg-ev-v">Formula-based</span>
         </div>
-        <div class="lg-podium" id="lgPowerPodium" aria-label="Top three power rankings"></div><div class="lg-tbl-box"><table class="lg-tbl num"><thead><tr><th>#</th><th>Move</th><th>Team</th><th>Record</th><th class="r">GD</th><th>Last 10</th><th class="r">Score</th></tr></thead><tbody id="lgPower"><tr><td colspan="7" class="empty">Loading standings…</td></tr></tbody></table></div>
+        <div class="lg-podium" id="lgPowerPodium" aria-label="Top three power rankings"></div><div class="lg-tbl-box lg-ranking-list"><table class="lg-tbl num"><thead><tr><th>#</th><th>Move</th><th>Team</th><th>Record</th><th class="r">GD</th><th>Last 10</th><th class="r">Score</th></tr></thead><tbody id="lgPower"><tr><td colspan="7" class="empty">Loading standings…</td></tr></tbody></table></div>
         <div class="lg-leader-links lg-pr-more"><a id="lgPowerAll" href="lgchl-power.html">FULL POWER RANKINGS · ALL TEAMS →</a></div>
         <p class="lg-fine" id="lgPowerNote">Score = 70% points percentage + 20% goal differential per game + 10% goals per game. Minimum 5 GP. No subjective boosts, for any team.</p>
       </div>
       <div class="card lg-panel" id="lgStatsSec">
         <span class="wm wm-lg lg-wm-ecm" aria-hidden="true"></span>
         <div class="lg-panel-head">
-          <div><p class="eyebrow">Season 55 regular season</p><h2 class="lg-panel-title">Top 10 league leaders</h2></div>
+          <div><p class="eyebrow">Season 55 regular season</p><h2 class="lg-panel-title">Stat desk</h2></div>
           <div class="lg-tabs" role="group" aria-label="Leaderboard">
             <button type="button" data-metric="points" aria-pressed="true">Points</button>
             <button type="button" data-metric="goals" aria-pressed="false">Goals</button>
@@ -119,6 +110,16 @@
         <p class="lg-fine" id="lgLeadersNote">Top 10 players; tied totals share a rank.</p>
         <div class="lg-leader-links"><a id="lgFullLeaders" href="lgchl-leaders.html?metric=points#lgPlayerBoard">VIEW TOP 250 →</a><a id="lgFindPlayer" href="lgchl-leaders.html?metric=points&amp;search=1#lgPlayerSearch">SEARCH PLAYERS →</a></div>
       </div>
+    </div>
+  </section>
+  <section class="lg-sec band lg-potn" id="lgNightSec" aria-labelledby="lgNightTitle">
+    <div class="lg-in">
+      <div class="lg-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow" id="lgNightEyebrow">Game night</p><h2 class="sec-title" id="lgNightTitle">Tonight’s <em>Three Stars</em></h2></div>
+        <p class="lg-note">Three stars, the top sticks and the goalie of the night.</p>
+      </div>
+      <div class="lg-card-grid" id="lgNightPlayers"><p class="empty">Loading…</p></div>
+      <p class="lg-fine" id="lgNightCoverage"></p>
     </div>
   </section>
 
@@ -165,7 +166,7 @@
         <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">LGCHL · Season 55</p><h2 class="sec-title" id="lgScoresTitle">Last night's <em>finals</em></h2></div>
         <p class="lg-note num" id="lgScoresNote">Loading the official LG schedule…</p>
       </div>
-      <div class="lg-arena-board"><img src="assets/lgchl/studio/jumbotron.webp" alt="Black and gold arena jumbotron" width="1800" height="1000" loading="lazy"><div class="lg-arena-label">THE FINAL BUZZER <span>ELITECHEL MEDIA × LGCHL</span></div></div><div class="lg-score-grid" id="lgScores" aria-live="polite"></div>
+      <div class="lg-arena-board"><img src="assets/lgchl/studio/jumbotron.webp" alt="Black and gold arena jumbotron" width="1800" height="1000" loading="lazy"><div class="lg-arena-label">THE FINAL BUZZER <span>ELITECHEL MEDIA × LGCHL</span></div><div class="lg-jumbo-summary" aria-hidden="true">THE FINAL BUZZER</div></div><div class="lg-score-grid" id="lgScores" aria-live="polite"></div>
     </div>
   </section>
 
@@ -184,8 +185,8 @@
   <section class="lg-sec band" id="lgRaceSec" aria-labelledby="lgRaceTitle">
     <div class="lg-in">
       <div class="lg-head">
-        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Six conferences · top four</p><h2 class="sec-title" id="lgRaceTitle">The <em>races</em></h2></div>
-        <p class="lg-note">Every conference at a glance: who's on top and how close the chase is.</p>
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Six conferences · playoff race</p><h2 class="sec-title" id="lgRaceTitle">The <em>races</em></h2></div>
+        <p class="lg-note">Top four qualify. Fourth and fifth meet in a best-of-three play-in.</p>
       </div>
       <div class="lg-race-grid" id="lgRaces"><p class="empty">Loading standings…</p></div>
     </div>
@@ -301,10 +302,11 @@
   </div>
 </footer>
 <noscript><p class="band empty">Enable JavaScript to load LGCHL scores, standings and leaders.</p></noscript>
+<script src="lgchl-fresh-data.js?v=20261102-2"></script>
 <script src="media-desk.js?v=20261011-1"></script>
 <script src="lgchl-media-config.js?v=20261016-2"></script>
 <script src="lgchl-media-public.js?v=20261017-clean1"></script>
-<script src="lgchl-media-segments.js?v=20261102-1-20261019-potn1"></script>
-<script src="lgchl-player-badges.js?v=20261018-1"></script><script src="lgchl-player-profile.js?v=20261018-2"></script><script src="lgchl-media.js?v=20261102-1-20261019-potn1"></script>
+<script src="lgchl-media-segments.js?v=20261102-2-20261102-1-20261019-potn1"></script>
+<script src="lgchl-player-badges.js?v=20261018-1"></script><script src="lgchl-player-profile.js?v=20261018-2"></script><script src="lgchl-media.js?v=20261102-2-20261102-1-20261019-potn1"></script>
 </body>
 </html>

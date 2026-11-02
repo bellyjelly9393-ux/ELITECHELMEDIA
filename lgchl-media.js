@@ -86,7 +86,8 @@
     renderBreakout(hist, teams);
     renderMovers(hist, teams);
     // Matchup player spotlights use the same public season leaders as the board.
-    const matchupPlayers = await read('wm_lgchl_s55_player_leaders', { select: SKATER_COLS, player_kind: 'eq.skater', order: 'points.desc.nullslast', points: 'not.is.null', limit: '250' }).catch(() => []);
+    let matchupPlayers = await read('wm_lgchl_s55_player_leaders', { select: SKATER_COLS, player_kind: 'eq.skater', order: 'points.desc.nullslast', points: 'not.is.null', limit: '250' }).catch(() => []);
+    const freshPlayers=await window.LGCHLFresh?.board('points',matchupPlayers);if(freshPlayers)matchupPlayers=freshPlayers.rows;
     renderMatchups(games, now, teams, matchupPlayers);
     if (SEG && SEG.renderNight) await SEG.renderNight(teams).catch(() => {});
     if (SEG) await SEG.renderForm(teams, games).catch(() => {});
@@ -106,7 +107,7 @@
     const climbers = ranked.filter(t => t.rank <= 12 && t.move > 0).sort((a, b) => b.move - a.move || a.rank - b.rank);
     const t = climbers[0] || ranked[0];
     const st = streak(t.streak);
-    kicker.innerHTML = '<span class="lg-ev">' + (climbers[0] ? 'Team on the rise' : 'Top of the index') + (week ? ' · after Week ' + esc(week) : '') + '</span>';
+    kicker.innerHTML = '<span class="lg-ev">' + (climbers[0] ? 'Team on the rise' : 'Top of the index') + (week ? ' · Week ' + esc(week) : '') + '</span>';
     $('lgLeadTitle').innerHTML = climbers[0]
       ? esc(t.nickname || t.name) + ' climb <em>' + t.move + ' spot' + (t.move === 1 ? '' : 's') + '</em>'
       : esc(t.nickname || t.name) + ' lead <em>the index</em>';
@@ -116,6 +117,7 @@
     $('lgLeadDek').innerHTML = dek;
     const mv = t.move > 0 ? '<b class="up">' + t.rank + ' ▲' + t.move + '</b>' : t.move < 0 ? '<b class="dn">' + t.rank + ' ▼' + Math.abs(t.move) + '</b>' : '<b>' + t.rank + '</b>';
     feat.dataset.logo = logo(t.lg_team_id);
+    document.querySelector('.lg-hero').style.setProperty('--hero-team', 'url(\''+logo(t.lg_team_id)+'\')');
     feat.innerHTML = wm(t.lg_team_id) +
       '<div class="lg-feat-head"><img src="' + logo(t.lg_team_id) + '" width="100" height="100" alt="' + esc(t.name) + ' logo"><div><small>' + esc(t.league) + ' · ' + esc(t.conference) + '</small><b>' + esc(t.name) + '</b></div></div>' +
       '<div class="lg-tiles num"><div class="lg-tile"><small>Last 10</small><b>' + esc(t.last10) + '</b></div><div class="lg-tile"><small>Streak</small><b>' + esc(st ? st.label : '—') + '</b></div><div class="lg-tile"><small>Power rank</small>' + mv + '</div><div class="lg-tile"><small>Goal diff</small><b>' + sgn(t.gd) + '</b></div></div>' +
@@ -127,6 +129,7 @@
   function renderScores(lastNight, lastFinal) {
     const box = $('lgScores'), note = $('lgScoresNote');
     if (!lastNight.length) { note.textContent = 'No finals in the last nine days.'; box.innerHTML = unavailable('Recent scores'); return; }
+    const summary=document.querySelector('.lg-jumbo-summary');if(summary)summary.innerHTML='<b>'+lastNight.length+' FINALS</b><small>'+esc(F.day.format(new Date(lastFinal)))+'</small>';
     note.textContent = lastNight.length + ' finals · ' + F.longDay.format(new Date(lastFinal)) + ' · widest margins shown';
     const top = [...lastNight].sort((a, b) => Math.abs(b.home_score - b.away_score) - Math.abs(a.home_score - a.away_score) || (b.home_score + b.away_score) - (a.home_score + a.away_score)).slice(0, 6);
     box.innerHTML = top.map(g => {
@@ -141,7 +144,7 @@
   function renderPower(ranked, week, standings) {
     const body = $('lgPower');
     if (!ranked || !ranked.length) { body.innerHTML = '<tr><td colspan="7" class="empty">Standings are unavailable right now.</td></tr>'; return; }
-    if (week) $('lgPowerEyebrow').textContent = 'Elitechel power index · after Week ' + week;
+    if (week) $('lgPowerEyebrow').textContent = 'Elitechel power index · Week ' + week;
     const podium = $('lgPowerPodium');
     if (podium) podium.innerHTML = [ranked[1], ranked[0], ranked[2]].filter(Boolean).map(t =>
       '<a class="lg-podium-team place-' + t.rank + '" href="lgchl-power.html" data-logo="' + logo(t.lg_team_id) + '">' + wm(t.lg_team_id) +
@@ -178,10 +181,11 @@
       const params = { select: SKATER_COLS, player_kind: 'eq.' + (goalie ? 'goalie' : 'skater'), order: metric + '.desc.nullslast,gp.desc,gamertag.asc', [metric]:'not.is.null', limit: '10' };
       if (goalie) params.gp = 'gte.8';
       let rows;try{rows=await read('wm_lgchl_s55_player_leaders',params);}catch{rows=await read('wm_lgchl_s55_player_leaders',{...params,select:SKATER_COLS.replace(',lg_user_id','')});}
+      const fresh=await window.LGCHLFresh?.board(metric,rows);if(fresh)rows=fresh.rows.slice(0,10);
       if(request!==leaderRequest)return null;
       body.innerHTML = rows.map((p, i) => {
         const rank=1+rows.filter(x=>Number(x[metric])>Number(p[metric])).length;
-        const who = '<td><div class="lg-team"><img src="' + logo(p.lg_team_id) + '" alt=""><div><button type="button" class="lg-player-open" data-lg-profile="' + encodeURIComponent(JSON.stringify({p,rank,metric})) + '">' + esc(p.gamertag) + '</button><small>' + esc(goalie ? 'G' : p.position) + ' · ' + esc(p.team_name || '') + '</small></div></div></td>';
+        const who = '<td style="--team-logo:url(\'' + logo(p.lg_team_id) + '\')"><div class="lg-team"><img src="' + logo(p.lg_team_id) + '" alt=""><div><button type="button" class="lg-player-open" data-lg-profile="' + encodeURIComponent(JSON.stringify({p,rank,metric})) + '">' + esc(p.gamertag) + '</button><small>' + esc(goalie ? 'G' : p.position) + ' · ' + esc(p.team_name || '') + '</small></div></div></td>';
         return goalie
           ? '<tr><td class="lg-rk">' + rank + '</td>' + who + '<td class="r">' + esc(p.gp) + '</td><td class="r lg-pts">' + rate(p.save_pct,3).replace(/^0/, '') + '</td><td class="r">' + rate(p.gaa,2) + '</td></tr>'
           : '<tr><td class="lg-rk">' + rank + '</td>' + who + '<td class="r">' + esc(p.goals) + '</td><td class="r">' + esc(p.assists) + '</td><td class="r lg-pts">' + esc(p.points) + '</td><td class="r">' + sgn(p.plus_minus) + '</td></tr>';
@@ -189,7 +193,7 @@
       window.WMLgPlayerBadges?.refresh(body);
       window.WMLgPlayerBadges?.load(rows,read).then(()=>{if(request===leaderRequest)window.WMLgPlayerBadges?.refresh(body);});
       const at = rows.map(r => r.fetched_at).filter(Boolean).sort().pop();
-      $('lgLeadersNote').textContent = (goalie ? 'Goalies with 8+ GP. ' : '') + 'Top 10 players; tied totals share a rank. Search up to 250 on the full board.';
+      $('lgLeadersNote').textContent = fresh?.capture ? fresh.capture.as_of + ' · verified LG leaderboard capture' + (goalie ? ' · 10+ GP' : '') + '. Full season import is catching up.' : (goalie ? 'Goalies with 8+ GP. ' : '') + 'Top 10 players; tied totals share a rank. Search up to 250 on the full board.';
       return rows;
     } catch {
       if(request!==leaderRequest)return null;
@@ -200,7 +204,8 @@
   async function loadGoalies() {
     const box = $('lgGoalies');
     try {
-      const rows = await read('wm_lgchl_s55_player_leaders', { select: 'gamertag,team_name,gp,save_pct,gaa,fetched_at', player_kind: 'eq.goalie', gp: 'gte.8', order: 'save_pct.desc', limit: '3' });
+      let rows = await read('wm_lgchl_s55_player_leaders', { select: 'gamertag,team_name,gp,save_pct,gaa,fetched_at', player_kind: 'eq.goalie', gp: 'gte.8', order: 'save_pct.desc', limit: '3' });
+      const fresh=await window.LGCHLFresh?.board('save_pct',rows);if(fresh)rows=fresh.rows.slice(0,3);
       box.innerHTML = rows.map((g, i) => '<div><small>Save % · 8+ GP · ' + ordinal(i + 1) + '</small><b>' + esc(g.gamertag) + '</b><span class="num">' + rate(g.save_pct,3).replace(/^0/, '') + '</span> <small>' + esc(g.team_name || '') + ' · ' + rate(g.gaa,2) + ' GAA</small></div>').join('');
     } catch { box.innerHTML = ''; }
   }

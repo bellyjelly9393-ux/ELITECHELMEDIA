@@ -22,7 +22,7 @@
     const order = ['OHL', 'WHL', 'QMJHL'];
     const keys = [...groups.keys()].sort((a, b) => order.indexOf(a.split(' · ')[0]) - order.indexOf(b.split(' · ')[0]) || a.localeCompare(b));
     box.innerHTML = keys.map(k => {
-      const rows = groups.get(k).slice().sort((a, b) => Number(a.conference_rank) - Number(b.conference_rank)).slice(0, 4);
+      const rows = groups.get(k).slice().sort((a, b) => Number(a.conference_rank) - Number(b.conference_rank)).slice(0, 5);
       const lead = rows[0], second = rows[1];
       const gap = second ? Number(lead.pts) - Number(second.pts) : null;
       const line = gap == null ? '' : gap === 0 ? esc(lead.nickname || lead.name) + ' and ' + esc(second.nickname || second.name) + ' are level at the top.'
@@ -30,7 +30,7 @@
         : esc(lead.nickname || lead.name) + ' lead by ' + gap + ' points.';
       return '<article class="card tinted lg-race" data-logo="' + logo(lead.lg_team_id) + '">' + wm(lead.lg_team_id) +
         '<p class="lg-race-tag">' + esc(k) + '</p>' +
-        '<ol class="lg-race-list num">' + rows.map((t, i) => '<li style="--team-logo:url(\'' + logo(t.lg_team_id) + '\')"><span class="lg-race-rk">' + (i + 1) + '</span><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(t.nickname || t.name) + '</b><span class="lg-race-pts">' + esc(t.pts) + '</span><small>' + (i ? (Number(t.pts) === Number(lead.pts) ? 'level' : '−' + (Number(lead.pts) - Number(t.pts))) : 'PTS') + '</small></li>').join('') + '</ol>' +
+        '<ol class="lg-race-list num">' + rows.map((t, i) => '<li data-logo="'+logo(t.lg_team_id)+'" style="--team-logo:url(\'' + logo(t.lg_team_id) + '\')"><span class="lg-race-rk">' + (i + 1) + '</span><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(t.nickname || t.name) + '</b><span class="lg-race-pts">' + esc(t.pts) + '</span><small>' + (i ? (Number(t.pts) === Number(lead.pts) ? 'level' : '−' + (Number(lead.pts) - Number(t.pts))) : 'PTS') + '</small></li>').join('') + '</ol>' +
         '<p class="lg-race-line">' + line + '</p></article>';
     }).join('');
     tint(box);
@@ -50,6 +50,8 @@
         rows = await read('wm_lgchl_s55_player_leaders', { select: 'gamertag,position,lg_team_id,team_name,gp,goals,assists,points,plus_minus,shots', player_kind: 'eq.skater', gp: 'gte.6', shots: 'gt.0', limit: '2000' });
       } catch { show('lgStreakSec', false); return; }
     }
+    const capture=await window.LGCHLFresh?.night();
+    if(capture){rows=capture.players.filter(p=>p.player_kind==='skater');recent=true;}
     rows = rows.filter(p => Number(p.gp) > 0 && Number(p.shots) > 0);
     if (!rows.length) { show('lgStreakSec', false); return; }
     const pick = (list, n, maxD) => {
@@ -74,7 +76,7 @@
         '<div class="lg-card-head"><img src="' + logo(p.lg_team_id) + '" alt="" loading="lazy"><div><b>' + esc(p.gamertag) + '</b><small>' + esc(p.position || '') + ' · ' + esc(team ? team.name : (p.team_name || 'LGCHL')) + '</small></div></div>' +
         '<p class="lg-line num">' + esc(p.goals) + ' G · ' + esc(p.assists) + ' A · ' + esc(p.points) + ' PTS · ' + (win ? sgn(p.plus_minus) : ppg + ' P/GP') + ' · ' + esc(p.gp) + ' GP</p></article>';
     };
-    $('lgStreakEyebrow').textContent = recent ? 'Players · last two game nights' : 'Players · season so far · 6+ GP';
+    $('lgStreakEyebrow').textContent = capture ? 'Nov 1 · '+capture.games_included+'/'+capture.games_scheduled+' game sheets · provisional form' : recent ? 'Players · last two game nights' : 'Players · season so far · 6+ GP';
     hot.innerHTML = heaters.map(p => card(p, true)).join('');
     cold.innerHTML = skids.map(p => card(p, false)).join('');
     tint(hot); tint(cold);
@@ -126,23 +128,28 @@
       read('lgchl_public_week_players', { select: 'week,week_complete,player_kind,gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots,saves,shots_against,goals_against', order: 'points.desc,goals.desc,gamertag.asc', limit: '400' }),
       read('lgchl_public_trending_players', { select: 'player_kind,gamertag,position,lg_team_id,gp,goals,assists,points,plus_minus,shots,since_at', player_kind: 'eq.skater', order: 'points.desc,goals.desc,gp.asc,gamertag.asc', limit: '6' })
     ]);
+    const capture=await window.LGCHLFresh?.night();
     // Players of the Week: top 3 skaters + best goalie (min 25 shots faced).
-    const week = wk.status === 'fulfilled' ? wk.value : [];
+    let week = wk.status === 'fulfilled' ? wk.value : [];
+    const weekAt=week.map(p=>p.through_at).filter(Boolean).sort().pop();
+    const capturedWeek=capture&&(!weekAt||Date.parse(weekAt)<Date.parse(capture.night+'T00:00:00Z'));
+    const captureWeek=(games||[]).find(g=>g.game_at&&new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto'}).format(new Date(g.game_at))===capture?.night)?.week;
+    if(capturedWeek)week=capture.players.map(p=>({...p,week:captureWeek||'—',week_complete:false}));
     const skaters = week.filter(p => p.player_kind === 'skater' && Number(p.points) > 0).slice(0, 3);
     const goalie = week.filter(p => p.player_kind === 'goalie' && Number(p.shots_against) >= 25)
       .sort((a, b) => Number(b.saves) / Number(b.shots_against) - Number(a.saves) / Number(a.shots_against))[0];
     if (skaters.length) {
       const w = skaters[0].week, done = skaters[0].week_complete !== false;
-      $('lgWeekPlayersNote').textContent = 'Week ' + w + (done ? ' · the league\'s top performers, game week totals.' : ' so far · the league\'s top performers, updated after every game night.');
+      $('lgWeekPlayersNote').textContent = capturedWeek ? 'Week '+(captureWeek||'—')+' · November 1 · '+capture.games_included+'/'+capture.games_scheduled+' game sheets · provisional leaders.' : 'Week ' + w + (done ? ' · the league\'s top performers, game week totals.' : ' so far · the league\'s top performers, updated after every game night.');
       $('lgWeekPlayers').innerHTML = skaters.map((p, i) => playerCard(p, teams, ['First star', 'Second star', 'Third star'][i])).join('') + (goalie ? playerCard(goalie, teams, 'Goalie of the week') : '');
     } else {
       $('lgWeekPlayersNote').textContent = 'Three stars and a goalie of the week, every week.';
       $('lgWeekPlayers').innerHTML = '<article class="card lg-card lg-soon"><span class="wm wm-lg lg-wm-league" aria-hidden="true"></span><p class="lg-potw-tag">Coming up</p><h3>' + (nextWeek ? 'Week ' + nextWeek + ' stars' : 'This week\'s stars') + ' drop after Tuesday\'s games</h3><p>The top three skaters and the goalie of the week, straight from the game-week totals.</p></article>';
     }
     // Trending now.
-    const trend = tr.status === 'fulfilled' ? tr.value.filter(p => Number(p.points) > 0) : [];
+    const trend = capture ? capture.players.filter(p=>p.player_kind==='skater').sort((a,b)=>b.points-a.points||b.goals-a.goals).slice(0,6) : tr.status === 'fulfilled' ? tr.value.filter(p => Number(p.points) > 0) : [];
     if (trend.length) {
-      $('lgTrendNote').textContent = 'Most points over the last two game nights' + (tr.value[0] && tr.value[0].since_at ? ' (LG totals since ' + F.day.format(new Date(tr.value[0].since_at)) + ')' : '') + '.';
+      $('lgTrendNote').textContent = capture ? 'November 1 scoring · '+capture.games_included+'/'+capture.games_scheduled+' game sheets · provisional.' : 'Most points over the last two game nights' + (tr.value[0] && tr.value[0].since_at ? ' (LG totals since ' + F.day.format(new Date(tr.value[0].since_at)) + ')' : '') + '.';
       $('lgTrendingRecords').innerHTML = trend.map(p => playerCard(p, teams, null)).join('');
     } else {
       $('lgTrendNote').textContent = 'The hottest sticks over the last two game nights.';
@@ -166,7 +173,7 @@
     return { night, list, skaters, goalies, goals, finals: Number(list[0]?.night_finals || 0), finalGoals: Number(list[0]?.night_final_goals || 0) };
   }
   // Verified jersey cutouts can be added by team ID. No fabricated uniforms.
-  const jerseyAssets = window.LGCHL_JERSEY_ASSETS || {};
+  const jerseyAssets = {448:'assets/lgchl/jerseys/team448.webp',447:'assets/lgchl/jerseys/team447.webp',449:'assets/lgchl/jerseys/team449.webp',455:'assets/lgchl/jerseys/team455.webp',...(window.LGCHL_JERSEY_ASSETS || {})};
   function honour(p, teams, rank) {
     const goalie = p.player_kind === 'goalie', team = teams.get(Number(p.lg_team_id));
     const crest = logo(p.lg_team_id), jersey = jerseyAssets[Number(p.lg_team_id)];
@@ -174,12 +181,16 @@
     const details = '<div class="lg-stall-stats" style="--team-logo:url(\'' + crest + '\')"><small>' + tag + '</small><h3>' + esc(p.gamertag) + '</h3><p>' + esc(p.position || (goalie ? 'G' : '')) + ' · ' + esc(team ? team.name : 'LGCHL') + '</p><strong>' + (goalie ? svOf(p).toFixed(3).replace(/^0/, '') + ' SV%' : esc(p.points) + ' PTS') + '</strong><p>' + (goalie ? esc(p.saves) + ' SAVES · ' + esc(p.goals_against) + ' GA' : esc(p.goals) + ' G · ' + esc(p.assists) + ' A · ' + sgn(p.plus_minus)) + ' · ' + esc(p.gp) + ' GP</p></div>';
     return '<article class="' + (goalie ? 'lg-goalie-honour' : 'lg-stall') + '" data-rank="' + rank + '"><div class="lg-stall-scene"><div class="lg-stall-name" title="' + esc(p.gamertag) + '">' + esc(p.gamertag) + '</div>' +
       (jersey ? '<img class="lg-stall-jersey" src="' + esc(jersey) + '" alt="' + esc(team?.name || '') + ' jersey" loading="lazy">' : '<img class="lg-stall-crest" src="' + crest + '" alt="' + esc(team?.name || '') + '" loading="lazy">') +
-      (goalie ? '<img class="lg-goalie-gear" src="assets/wildman/stalls/goalie-kit.svg" alt="Goalie pads, mask, blocker, catching glove and stick" loading="lazy">' : '<div class="lg-stall-stars" aria-label="' + tag + '">' + '★'.repeat(4-rank) + '</div>') + '</div>' + details + '</article>';
+      (goalie ? '<img class="lg-goalie-gear" src="assets/lgchl/studio/goalie-equipment-v2.webp" alt="Goalie pads, mask, blocker, catching glove and stick" loading="lazy">' : '<div class="lg-stall-stars" aria-label="' + tag + '">' + '★'.repeat(4-rank) + '</div>') + '</div>' + details + '</article>';
   }
   async function renderNight(teams) {
     const box = $('lgNightPlayers'); if (!box) return;
     let rows = [];
     try { rows = await read('lgchl_public_night_players', { select: NIGHT_COLS, order: 'night.desc', limit: '3000' }); } catch { rows = []; }
+    const capture=await window.LGCHLFresh?.night();
+    const newest=rows.map(r=>r.night).sort().pop();
+    const partial=capture&&(!newest||capture.night>newest) ? capture : null;
+    if(partial)rows=partial.players;
     if (!rows.length) {
       box.innerHTML = '<article class="card lg-card lg-soon"><span class="wm wm-lg lg-wm-league" aria-hidden="true"></span><p class="lg-potn-tag">Coming up</p><h3>Players of the Night drop after the next game night</h3><p>Three stars, the top sticks and the goalie of the night, from the LG season totals before and after each night.</p></article>';
       $('lgNightCoverage').textContent = ''; return;
@@ -187,6 +198,8 @@
     const n = pickNight(rows);
     const day = F && F.day ? F.day.format(new Date(n.night + 'T16:00:00Z')) : n.night;
     $('lgNightEyebrow').textContent = 'Game night · ' + day;
+    $('lgNightTitle').innerHTML=partial ? 'Nightly <em>standouts</em>' : 'Tonight’s <em>Three Stars</em>';
+    if(partial)$('lgNightTitle').closest('.lg-head').querySelector('.lg-note').textContent='Provisional leaders · '+partial.games_included+' of '+partial.games_scheduled+' game sheets verified.';
     const stars = n.skaters.slice(0, 3), g = n.goalies[0];
     const multi = n.skaters.filter(p => Number(p.points) >= 2 * Math.max(1, Number(p.gp))).length;
     const leadersBy = k => n.skaters.slice().sort((a, b) => Number(b[k]) - Number(a[k]) || skaterOrder(a, b)).slice(0, 5);
@@ -197,7 +210,7 @@
       '<article class="card lg-card lg-potn-board"><p class="lg-potn-tag">Top sticks · goals</p>' + rowsHtml(leadersBy('goals'), 'goals', 'G') +
       '<p class="lg-line num">' + multi + ' skater' + (multi === 1 ? '' : 's') + ' averaged two points a game or better.</p></article>';
     const pct = n.finalGoals ? Math.round(100 * n.goals / n.finalGoals) : null;
-    $('lgNightCoverage').textContent = 'From LG season totals saved before and after the night: ' + n.goals + ' of ' + n.finalGoals + ' goals in ' + n.finals + ' finals accounted for' + (pct != null ? ' (' + pct + '%)' : '') +
+    $('lgNightCoverage').textContent = partial ? 'November 1 · '+partial.games_included+' of '+partial.games_scheduled+' official LG game sheets captured. Rankings are provisional until the remaining game sheets are imported. These are captured game totals, not season-stat estimates.' : 'From LG season totals saved before and after the night: ' + n.goals + ' of ' + n.finalGoals + ' goals in ' + n.finals + ' finals accounted for' + (pct != null ? ' (' + pct + '%)' : '') +
       '. Players without a saved pre-night total are not ranked. Goalie of the night needs ' + GOTN_MIN_SHOTS + '+ shots faced.';
     tint(box);
   }
