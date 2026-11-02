@@ -7,7 +7,7 @@
  const metrics={points:'Points',goals:'Goals',assists:'Assists',shots:'Shots',hits:'Hits',blocked_shots:'Blocked shots',takeaways:'Takeaways',save_pct:'Save percentage',gaa:'Goals-against average'};
  const params=new URLSearchParams(location.search);
  const initialMetric=Object.hasOwn(metrics,params.get('metric'))?params.get('metric'):'points';
- const state={metric:initialMetric,rows:[],query:(params.get('q')||'').slice(0,100),page:1,request:0,loading:false,failed:false};
+ const state={metric:initialMetric,rows:[],query:(params.get('q')||'').slice(0,100),page:1,request:0,loading:false,failed:false,capture:null};
  const numeric=v=>v!==null&&v!==undefined&&String(v).trim()!==''&&Number.isFinite(Number(v));
  const format=v=>numeric(v)?Number(v).toLocaleString('en-US'):'—';
  const goalie=m=>m==='save_pct'||m==='gaa';
@@ -41,9 +41,9 @@
   const filtered=state.rows.filter(p=>!state.query.trim()||normalize(p.gamertag).includes(normalize(state.query.trim()))||normalize(p.team_name).includes(normalize(state.query.trim())));
   const pages=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE));state.page=Math.min(state.page,pages);
   const start=(state.page-1)*PAGE_SIZE,shown=filtered.slice(start,start+PAGE_SIZE);
-  $('lgLeaders').innerHTML=shown.length?table(shown,state.metric,metrics[state.metric]+' league leaderboard'):'<p class="lg-player-empty">'+(state.failed?'Statistics are unavailable. Use Refresh to retry.':state.query.trim()?'No player or team matches within this metric’s top 250. Try another metric or clear the search.':'No qualifying imported players for this metric.')+'</p>';
+  $('lgLeaders').innerHTML=shown.length?table(shown,state.metric,metrics[state.metric]+' league leaderboard'):'<p class="lg-player-empty">'+(state.failed?'Statistics are unavailable. Use Refresh to retry.':state.query.trim()?(state.capture?'No matches within this verified top '+state.rows.length+' capture.':'No player or team matches within this metric’s top 250. Try another metric or clear the search.'):'No qualifying imported players for this metric.')+'</p>';
   $('lgLeaders').setAttribute('aria-busy',String(state.loading));
-  $('lgPlayerStatus').textContent=state.loading?'Loading '+metrics[state.metric].toLowerCase()+' leaders…':state.failed?'Statistics are unavailable.':filtered.length?'Showing '+(start+1)+'–'+(start+shown.length)+' of '+filtered.length+(state.query.trim()?' matches in the top '+state.rows.length:' players')+' · '+metrics[state.metric]+(goalie(state.metric)?' · goalies with 8+ GP':' · skaters'):'No qualifying results.';
+  $('lgPlayerStatus').textContent=state.loading?'Loading '+metrics[state.metric].toLowerCase()+' leaders…':state.failed?'Statistics are unavailable.':filtered.length?'Showing '+(start+1)+'–'+(start+shown.length)+' of '+filtered.length+(state.query.trim()?' matches in the '+(state.capture?'verified top ':'top ')+state.rows.length:' players')+' · '+metrics[state.metric]+(goalie(state.metric)?' · goalies with 8+ GP':' · skaters'):'No qualifying results.';
   $('lgPrevPage').disabled=state.loading||state.page<=1;
   $('lgNextPage').disabled=state.loading||state.page>=pages;
   $('lgPageStatus').textContent='Page '+state.page+' of '+pages;
@@ -57,7 +57,7 @@
   const query={select:'gamertag,position,player_kind,lg_team_id,team_name,gp,points,goals,assists,shots,hits,blocked_shots,takeaways,save_pct,gaa,fetched_at,lg_user_id',player_kind:'eq.'+(goalie(metric)?'goalie':'skater'),[metric]:'not.is.null',order:metric+'.'+(metric==='gaa'?'asc':'desc')+'.nullslast,gp.desc,gamertag.asc',limit:String(LIMIT)};
   if(goalie(metric))query.gp='gte.8';
   try{
-   let rows;try{rows=await read('wm_lgchl_s55_player_leaders',query);}catch{const legacy={...query,select:query.select.replace(',lg_user_id','')};rows=await read('wm_lgchl_s55_player_leaders',legacy);}const fresh=await window.LGCHLFresh?.board(metric,rows);if(fresh)rows=fresh.rows;if(token!==state.request)return;
+   let rows;try{rows=await read('wm_lgchl_s55_player_leaders',query);}catch{const legacy={...query,select:query.select.replace(',lg_user_id','')};rows=await read('wm_lgchl_s55_player_leaders',legacy);}const fresh=await window.LGCHLFresh?.board(metric,rows);if(fresh)rows=fresh.rows;state.capture=fresh?.capture||null;if(token!==state.request)return;
    const sorted=rows.filter(p=>numeric(p[metric])).sort((a,b)=>(Number(a[metric])-Number(b[metric]))*(metric==='gaa'?1:-1)||Number(b.gp||0)-Number(a.gp||0)||String(a.gamertag).localeCompare(String(b.gamertag))).slice(0,LIMIT);
    let rank=0,previous=null;
    state.rows=sorted.map((p,i)=>{const value=Number(p[metric]);if(i===0||value!==previous)rank=i+1;previous=value;return {...p,rank};});

@@ -100,6 +100,7 @@
       loadLeaders(b.dataset.metric);
     }));
     tint(document);
+    if(/^#lg[A-Za-z0-9]+$/.test(location.hash))document.getElementById(location.hash.slice(1))?.scrollIntoView({block:"start"});
   }
 
   function renderHero(ranked, week) {
@@ -183,6 +184,7 @@
       if (goalie) params.gp = 'gte.8';
       let rows;try{rows=await read('wm_lgchl_s55_player_leaders',params);}catch{rows=await read('wm_lgchl_s55_player_leaders',{...params,select:SKATER_COLS.replace(',lg_user_id','')});}
       const fresh=await window.LGCHLFresh?.board(metric,rows);if(fresh)rows=fresh.rows.slice(0,10);
+      $('lgFullLeaders').textContent=fresh?.capture?'VIEW UPDATED LEADERBOARDS →':'VIEW TOP 250 →';
       if(request!==leaderRequest)return null;
       body.innerHTML = rows.map((p, i) => {
         const rank=1+rows.filter(x=>Number(x[metric])>Number(p[metric])).length;
