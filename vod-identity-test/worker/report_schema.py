@@ -46,12 +46,12 @@ Existing closer looks and replayed footage are the same play, not additional evi
 '''
 
 # A gamertag may contain spaces ('l Setty l'); it ends at a comma, semicolon, line break or sentence stop.
-LINEUP_SLOT = re.compile(r'(?:^|[\s,;:(])(LW|RW|LD|RD|C|G)\s*[:=-]?\s+((?:[^,;\n.]|\.(?=\S)){1,24}?)\s*(?=[,;\n]|\.(?:\s|$)|$)')
+LINEUP_SLOT = re.compile(r'(?:^|[\s,;:(])(LW|RW|LD|RD|C|G)(?:\s*[:=]\s*|\s+)((?:[^,;\n.]|\.(?=\S)){1,24}?)\s*(?=[,;\n]|\.(?:\s|$)|$)')
 
 
 def lineup_roster(text):
     """[(position, gamertag)] from lineup text such as 'LW a, C b, RW c, LD d, RD e, G f'."""
-    return [(m.group(1), m.group(2).strip().rstrip('.-')) for m in LINEUP_SLOT.finditer(str(text or '')) if m.group(2).strip()]
+    return [(m.group(1), m.group(2).strip()) for m in LINEUP_SLOT.finditer(str(text or '')) if m.group(2).strip()]
 
 
 def lineup_units(roster):

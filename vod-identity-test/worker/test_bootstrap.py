@@ -45,6 +45,20 @@ class Handler(worker.Handler):
         if path.startswith('/test/jobs/') and self.command == 'GET':
             job = worker.get_job(path.rsplit('/', 1)[-1])
             return self.reply(200, {key: job[key] for key in ('id', 'status', 'result', 'error')})
+        if path.startswith('/test/jobs/') and path.endswith('/resume') and self.command == 'POST':
+            self.body()
+            job_id = path.split('/')[-2]
+            with worker.WRITE_LOCK:
+                job = worker.get_job(job_id)
+                if job['status'] != 'failed':
+                    raise worker.Problem(409, 'Only a failed test job can resume; completed reports are preserved')
+                meta = dict(job['metadata'])
+                meta.pop('ai_rate_limit_retries', None)
+                meta.pop('part_attempts', None)
+                worker.start_run(job_id, meta)
+                status = worker.replay_resume_status(job_id, meta)
+                worker.update_metadata(job_id, meta, status, job['result'], '')
+            return self.reply(202, {'job_id': job_id, 'status': status, 'saved_evidence_preserved': True})
         raise worker.Problem(404, 'Not found')
 
 if __name__ == '__main__':

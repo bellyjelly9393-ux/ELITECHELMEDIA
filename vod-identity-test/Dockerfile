@@ -7,6 +7,7 @@ RUN npm ci --omit=dev
 COPY vod-identity-test/ ./
 COPY docs/sql/vod_lg_identity.sql ./identity.sql
 COPY docs/sql/vod_approval_workflow.sql ./approval.sql
+RUN python3 -B -m unittest discover -s worker -p test_short_frames.py -v
 RUN useradd --create-home worker && mkdir -p /data && chown worker:worker /data
 ENV DATA_DIR=/data PORT=8080 PYTHONUNBUFFERED=1
 EXPOSE 8080

@@ -14,7 +14,8 @@ function checkIsolation(env){
 }
 function authorized(header,key){const a=Buffer.from(header||''),b=Buffer.from('Bearer '+key);return a.length===b.length&&timingSafeEqual(a,b);}
 async function reconcile(db,game,result){
- const rows=result?.game_rollup?.player_reports||[];
+ const rows=[...(result?.game_rollup?.player_reports||[]).map(p=>({...p,source_scope:'game_rollup'})),
+  ...(result?.period_reports||[]).flatMap(p=>(p.report?.player_reports||[]).map(row=>({...row,source_scope:p.label})))];
  const reports=new Map(),unresolved=[];
  for(const row of rows){
   const name=typeof row.player==='string'?row.player:'';
@@ -26,10 +27,10 @@ async function reconcile(db,game,result){
   item.observations.push(row);reports.set(key,item);
  }
  const observed=new Set([...reports].filter(([,v])=>v.observations.some(o=>Array.isArray(o.evidence_timestamps)&&o.evidence_timestamps.some(t=>typeof t==='number'&&Number.isFinite(t)))).map(([k])=>k));
- return {expected_players:game.players.length,attributed_players:observed.size,resolved_player_rows:reports.size,unresolved_name_count:unresolved.length,
+ return {expected_players:game.players.length,attributed_players:observed.size,resolved_player_rows:reports.size,unresolved_name_count:new Set(unresolved.map(p=>String(p.source.player||'').trim().toLowerCase())).size,
   canonical_reports:[...reports.values()],unresolved,
   coverage:game.players.map(p=>({...p,canonical_key:['LGCHL',55,String(p.lg_user_id)],evidence_status:observed.has(JSON.stringify(['LGCHL',55,String(p.lg_user_id)]))?'attributed_report':'no_attributed_observation'})),
-  limitation:'Roster presence is not a performance assessment. Unresolved names are retained. Only final rollup reports are counted; raw period/chunk evidence remains in worker_result.'};
+  limitation:'Roster presence is not a performance assessment. Coverage includes cited game and period reports, with their scopes preserved; a repeated citation is not a new independent play. Raw chunk evidence remains in worker_result. Unresolved names are retained.'};
 }
 async function initialize(db){
  if(!(await db.query("select to_regclass('public.test_jobs') as t")).rows[0].t){
@@ -74,7 +75,7 @@ async function main(){
    if(url.pathname==='/'&&req.method==='GET'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'"});return res.end(fs.readFileSync(path.join(__dirname,'index.html')));}
    if(!authorized(req.headers.authorization,process.env.TEST_ACCESS_TOKEN))return reply(res,401,{error:'Test access required'});
    if(url.pathname==='/api/games'&&req.method==='GET')return reply(res,200,{games,scope:'Two games with final LG client captures; no production report writes.'});
-   const m=url.pathname.match(/^\/api\/games\/(\d+)(?:\/(start|aliases))?$/),g=m&&games.find(g=>String(g.lg_game_id)===m[1]);
+   const m=url.pathname.match(/^\/api\/games\/(\d+)(?:\/(start|aliases|resume))?$/),g=m&&games.find(g=>String(g.lg_game_id)===m[1]);
    if(!g)return reply(res,404,{error:'Test game not found'});
    let body={};if(req.method==='POST'){
     let raw='';for await(const chunk of req){raw+=chunk;if(Buffer.byteLength(raw)>16000)return reply(res,413,{error:'Request too large'});}body=JSON.parse(raw||'{}');
@@ -85,6 +86,11 @@ async function main(){
     await db.query('select public.vod_verify_player_alias($1,$2,$3,$4,$5)',[g.test_review_id,body.name,locker(p.lg_user_id),body.kind,body.evidence]);return reply(res,201,{verified_for_test_game:true});
    }
    const jobs=(await db.query('select job_id from public.test_jobs where lg_game_id=$1',[g.lg_game_id])).rows;
+   if(m[2]==='resume'&&req.method==='POST'){
+    if(!jobs.length)return reply(res,409,{error:'No existing test job to resume'});
+    const resumed=await workerFetch('/test/jobs/'+jobs[0].job_id+'/resume',{});
+    return reply(res,202,resumed);
+   }
    if(m[2]==='start'&&req.method==='POST'){
     if(jobs.length)return reply(res,409,{error:'This test already has a job. Existing results are preserved.',job_id:jobs[0].job_id});
     const lineup=g.players.map(p=>`${p.position} ${p.player}`).join('\n');

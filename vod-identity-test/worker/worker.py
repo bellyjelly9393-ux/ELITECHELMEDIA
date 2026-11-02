@@ -530,8 +530,17 @@ def extract_frames(source, folder, start, end, frame_step=FRAME_STEP, max_size='
              '-protocol_whitelist', 'file', '-ss', str(start), '-i', str(source),
              '-t', str(end-start), '-map', '0:v:0', '-an',
              '-vf', f'fps=1/{frame_step},scale={max_size}:force_original_aspect_ratio=decrease',
-             '-frames:v', '60', '-q:v', '4', str(folder / '%04d.jpg')])
+             '-frames:v', '60', '-pix_fmt', 'yuvj420p', '-q:v', '4', str(folder / '%04d.jpg')])
     frames = sorted(folder.glob('*.jpg'))
+    if not frames and 0 < end - start < frame_step:
+        # A valid two-second tail can be shorter than the six-second FPS
+        # sampler's first output point. Decode one in-window frame instead.
+        command(['ffmpeg', '-hide_banner', '-loglevel', 'error', '-nostdin', '-y',
+                 '-protocol_whitelist', 'file', '-ss', str(start), '-i', str(source),
+                 '-t', str(end-start), '-map', '0:v:0', '-an',
+                 '-vf', f'scale={max_size}:force_original_aspect_ratio=decrease',
+                 '-frames:v', '1', '-pix_fmt', 'yuvj420p', '-q:v', '4', str(folder / '%04d.jpg')])
+        frames = sorted(folder.glob('*.jpg'))
     if not frames:
         raise Problem(422, 'No readable video frames were found.')
     return frames
