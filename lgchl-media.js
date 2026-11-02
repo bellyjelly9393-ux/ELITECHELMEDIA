@@ -1,7 +1,7 @@
 /* LGCHL Media desk (lgchl-media.html).
    Public data only: the same publishable-key REST reads as the other media desks (media-desk.js),
    against public read-only views: lgchl_standings_current, lgchl_standings_snapshots,
-   lgchl_games_board and wm_lgchl_s55_player_leaders. Breakout Watch and player movement prefer the narrow public history views, with
+   lgchl_games_board and wm_lgchl_s55_player_leaders. Breakout Watch prefers the narrow public history views, with
    the supplied, explicitly dated snapshot retained while the approved import is unavailable. No private tables,
    no service keys, no Hitmen scouting data. Every sentence is generated from those numbers. */
 (() => {
@@ -84,8 +84,6 @@
     const SEG = window.LGCHLSegments;
     if (SEG) { SEG.renderRaces(standings); SEG.renderPlayerStreaks(teams).catch(() => {}); SEG.renderUpsets(games, ranked); }
     renderBreakout(hist, teams);
-    renderMovers(hist, teams);
-    if(hist?.mode==='snapshot')$('lgMoveSec').querySelector('.lg-note').textContent='Archived October 16 comparison · updated season history pending.';
     // Matchup player spotlights use the same public season leaders as the board.
     let matchupPlayers = await read('wm_lgchl_s55_player_leaders', { select: SKATER_COLS, player_kind: 'eq.skater', order: 'points.desc.nullslast', points: 'not.is.null', limit: '250' }).catch(() => []);
     const freshPlayers=await window.LGCHLFresh?.board('points',matchupPlayers);if(freshPlayers)matchupPlayers=freshPlayers.rows;
@@ -275,21 +273,6 @@
         (b.note ? '<p class="lg-card-note">' + esc(b.note) + '</p>' : '') + '</article>';
     }).join('') || '<p class="empty">No players meet the breakout thresholds yet.</p>';
     $('lgBoNote').textContent = hist.mode==='snapshot' ? 'Archived comparison · October 16, 2026. Updated season-history import pending.' : 'Early season: these are paces, not finished seasons.';
-  }
-
-  function renderMovers(hist, teams) {
-    const box = $('lgMovers');
-    if (!hist || !hist.movers) { box.innerHTML = unavailable('Player movement'); return; }
-    const cls = v => v > 0 ? 'pos' : v < 0 ? 'neg' : '';
-    box.innerHTML = hist.movers.slice(0, 4).map(m => {
-      const team = teams.get(Number(m.lg_team_id));
-      return '<article class="card tinted lg-card" data-logo="' + logo(m.lg_team_id) + '">' + wm(m.lg_team_id) +
-        '<div class="lg-card-head"><img src="' + logo(m.lg_team_id) + '" alt=""><div><b>' + esc(m.gamertag) + '</b><small>' + esc(m.position) + ' · now ' + esc(team ? team.name : 'LGCHL') + '</small></div></div>' +
-        '<table class="lg-mvt num"><thead><tr><th></th><th class="r">GP</th><th class="r">PTS</th><th class="r">P/GP</th><th class="r">+/-</th></tr></thead><tbody>' +
-        '<tr><td>' + esc(m.from_league) + ' · S' + esc(m.from_season) + '</td><td class="r">' + esc(m.from_gp) + '</td><td class="r">' + esc(m.from_points) + '</td><td class="r">' + m.from_ppg.toFixed(2) + '</td><td class="r ' + cls(m.from_plus_minus) + '">' + sgn(m.from_plus_minus) + '</td></tr>' +
-        '<tr class="now"><td>LGCHL · S55</td><td class="r">' + esc(m.gp) + '</td><td class="r">' + esc(m.points) + '</td><td class="r">' + m.ppg.toFixed(2) + '</td><td class="r ' + cls(m.plus_minus) + '">' + sgn(m.plus_minus) + '</td></tr></tbody></table>' +
-        (m.note ? '<p class="lg-card-note">' + esc(m.note) + '</p>' : '') + '</article>';
-    }).join('') || '<p class="empty">No AHL-to-LGCHL moves to show yet.</p>';
   }
 
   // Editorial interpretation stays separate from measured season totals and recorded finals.
