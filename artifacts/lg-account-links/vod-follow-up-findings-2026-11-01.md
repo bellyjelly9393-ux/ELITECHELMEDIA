@@ -8,3 +8,7 @@ Original test responses were saved separately in the workstation's `.local-tmp/v
 - **Recovery protection:** the new private route resumes only failed test jobs and retains saved evidence. Completed Gatineau results are protected. No fresh analysis reset is required to recover Windsor's saved first part.
 
 Checks passed before deployment: three Python tests using actual generated video and a disposable SQLite job database, plus two PGlite deployment tests including period-evidence retention, alias consolidation, ambiguity and cross-game isolation. Full-game coverage, historical alias verification and production rollout remain separate checks.
+
+The correction was deployed successfully in isolated deployment `211e2021-bac1-4393-a760-b24f197d5d32`, commit `90423f53b2add3e58050e21e1223d50a7458a0ba`. Live Gatineau coverage is now 8/12. Windsor resumed its failed job with all four original saved chunks preserved, then saved the short-tail fifth chunk and advanced through its first two period reports. Final Windsor results are pending at this checkpoint.
+
+The new LG final-lineup reader was checked against an existing final client capture and five malformed/synthetic regression cases. It validates game ID, league/season, explicit final status, exact player IDs, explicit team IDs (including goalie logo IDs), both teams and all twelve participants. Live London/Ottawa capture stopped at LG's verification challenge; no source statistics were modified. Human verification is needed before those actual game lineups can support the recorded Kells alias confirmation.

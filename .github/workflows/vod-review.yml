@@ -16,6 +16,8 @@ on:
       - 'lib/lg-platform-capture-dom.js'
       - 'scripts/capture-lg-platform-accounts.py'
       - 'scripts/export-lg-account-capture.py'
+      - 'lib/lg-final-lineup-dom.js'
+      - 'scripts/capture-lg-final-lineups.py'
       - 'tests/test_vod_account_export.py'
       - 'api/vod-archive.js'
       - 'api/_s3presign.js'
@@ -48,6 +50,7 @@ jobs:
           node --test test-vod-lineup-preflight.cjs
           node --test test-vod-chel-account.cjs
           node --test test-vod-lg-capture.cjs
+          node --test test-vod-lg-final-lineup.cjs
           python -B tests/test_vod_account_export.py
           node test-vod-player-matching.cjs
           node test-vod-restore.cjs
