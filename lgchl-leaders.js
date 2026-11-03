@@ -3,7 +3,7 @@
  'use strict';
  const D=window.WMDesk;if(!D)return;
  D.menu();
- const {$,esc,read}=D,CGY=412,LIMIT=250,PAGE_SIZE=25;
+ const {$,esc,read}=D,CGY=412,PAGE_SIZE=25;
  const metrics={points:'Points',goals:'Goals',assists:'Assists',shots:'Shots',hits:'Hits',blocked_shots:'Blocked shots',takeaways:'Takeaways',save_pct:'Save percentage',gaa:'Goals-against average'};
  const params=new URLSearchParams(location.search);
  const initialMetric=Object.hasOwn(metrics,params.get('metric'))?params.get('metric'):'points';
@@ -27,7 +27,7 @@
  }
  function cell(p,key,metric){
   if(key==='player')return '<button type="button" class="lg-player-open" data-lg-profile="'+encodeURIComponent(JSON.stringify({p,rank:p.rank,metric}))+'">'+esc(p.gamertag)+'</button><small>'+esc(p.position||'Position unavailable')+' · '+esc(p.team_name||'Team unavailable')+'</small>';
-  if(key==='rank')return String(p.rank);
+  if(key==='rank')return p.rank==null?'—':String(p.rank);
   if(key==='save_pct')return numeric(p[key])?(Number(p[key])*100).toFixed(1)+'%':'—';
   if(key==='gaa')return rate(p[key],2);
   return esc(format(p[key]));
@@ -41,28 +41,54 @@
   const filtered=state.rows.filter(p=>!state.query.trim()||normalize(p.gamertag).includes(normalize(state.query.trim()))||normalize(p.team_name).includes(normalize(state.query.trim())));
   const pages=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE));state.page=Math.min(state.page,pages);
   const start=(state.page-1)*PAGE_SIZE,shown=filtered.slice(start,start+PAGE_SIZE);
-  $('lgLeaders').innerHTML=shown.length?table(shown,state.metric,metrics[state.metric]+' league leaderboard'):'<p class="lg-player-empty">'+(state.failed?'Statistics are unavailable. Use Refresh to retry.':state.query.trim()?(state.capture?'No matches within this verified top '+state.rows.length+' capture.':'No player or team matches within this metric’s top 250. Try another metric or clear the search.'):'No qualifying imported players for this metric.')+'</p>';
+  $('lgLeaders').innerHTML=shown.length?table(shown,state.metric,metrics[state.metric]+' league leaderboard'):'<p class="lg-player-empty">'+(state.failed?'Statistics are unavailable. Use Refresh to retry.':state.query.trim()?(state.capture?'No matches in the available verified capture.':'No player or team matches. Try another metric or clear the search.'):'No qualifying imported players for this metric.')+'</p>';
   $('lgLeaders').setAttribute('aria-busy',String(state.loading));
-  $('lgPlayerStatus').textContent=state.loading?'Loading '+metrics[state.metric].toLowerCase()+' leaders…':state.failed?'Statistics are unavailable.':filtered.length?'Showing '+(start+1)+'–'+(start+shown.length)+' of '+filtered.length+(state.query.trim()?' matches in the '+(state.capture?'verified top ':'top ')+state.rows.length:' players')+' · '+metrics[state.metric]+(goalie(state.metric)?' · goalies with 8+ GP':' · skaters'):'No qualifying results.';
+  $('lgPlayerStatus').textContent=state.loading?'Loading '+metrics[state.metric].toLowerCase()+' leaders…':state.failed?'Statistics are unavailable.':filtered.length?'Showing '+(start+1)+'–'+(start+shown.length)+' of '+filtered.length+(state.query.trim()?' matching players':' players')+' · '+metrics[state.metric]+(goalie(state.metric)?' · goalies with 8+ GP':' · skaters'):'No qualifying results.';
   $('lgPrevPage').disabled=state.loading||state.page<=1;
   $('lgNextPage').disabled=state.loading||state.page>=pages;
   $('lgPageStatus').textContent='Page '+state.page+' of '+pages;
   $('lgClearSearch').hidden=!state.query;
   const calgary=state.rows.filter(p=>Number(p.lg_team_id)===CGY);
-  $('lgHitmen').innerHTML=state.loading?'<p>Loading Calgary statistics…</p>':state.failed?'<p>Calgary statistics are unavailable.</p>':calgary.length?table(calgary,state.metric,'Calgary players on the league board'):'<p>No Calgary players within this metric’s top 250'+(goalie(state.metric)?' qualifying goalies':'')+'.</p>';
+  $('lgHitmen').innerHTML=state.loading?'<p>Loading Calgary statistics…</p>':state.failed?'<p>Calgary statistics are unavailable.</p>':calgary.length?table(calgary,state.metric,'Calgary players on the league board'):'<p>No Calgary players in the loaded '+(goalie(state.metric)?'goalie':'skater')+' records.</p>';
  }
  async function players(){
   const token=++state.request,metric=$('lgMetric').value;
   state.metric=metric;state.page=1;state.rows=[];state.loading=true;state.failed=false;updateUrl();render();$('lgReload').disabled=true;
-  const query={select:'gamertag,position,player_kind,lg_team_id,team_name,gp,points,goals,assists,shots,hits,blocked_shots,takeaways,save_pct,gaa,fetched_at,lg_user_id',player_kind:'eq.'+(goalie(metric)?'goalie':'skater'),[metric]:'not.is.null',order:metric+'.'+(metric==='gaa'?'asc':'desc')+'.nullslast,gp.desc,gamertag.asc',limit:String(LIMIT)};
-  if(goalie(metric))query.gp='gte.8';
+  // Load every public player record, not just the top 250 for one statistic.
+  // PostgREST caps responses at 1,000 rows, so paginate deterministically.
+  const select='gamertag,position,player_kind,lg_team_id,team_name,gp,points,goals,assists,shots,hits,blocked_shots,takeaways,save_pct,gaa,fetched_at,lg_user_id';
+  const kind=goalie(metric)?'goalie':'skater';
+  async function allPlayers(){
+   const all=[],batchSize=1000;
+   for(let offset=0;offset<10000;offset+=batchSize){
+    const query={select,player_kind:'eq.'+kind,order:'lg_user_id.asc,gp.desc,fetched_at.desc',limit:String(batchSize),offset:String(offset)};
+    let batch;
+    try{batch=await read('wm_lgchl_s55_player_leaders',query);}
+    catch(e){if(offset!==0)throw e;batch=await read('wm_lgchl_s55_player_leaders',{...query,select:select.replace(',lg_user_id',''),order:'gamertag.asc,gp.desc,fetched_at.desc'});}
+    all.push(...batch);
+    if(batch.length<batchSize)return all;
+   }
+   throw new Error('Player pagination exceeded safe limit');
+  }
   try{
-   let rows;try{rows=await read('wm_lgchl_s55_player_leaders',query);}catch{const legacy={...query,select:query.select.replace(',lg_user_id','')};rows=await read('wm_lgchl_s55_player_leaders',legacy);}const fresh=await window.LGCHLFresh?.board(metric,rows);if(fresh)rows=fresh.rows;state.capture=fresh?.capture||null;if(token!==state.request)return;
-   const sorted=rows.filter(p=>numeric(p[metric])).sort((a,b)=>(Number(a[metric])-Number(b[metric]))*(metric==='gaa'?1:-1)||Number(b.gp||0)-Number(a.gp||0)||String(a.gamertag).localeCompare(String(b.gamertag))).slice(0,LIMIT);
+   const rows=await allPlayers();if(token!==state.request)return;
+   // Same LG ID can have multiple rows. Keep the most complete, newest row per role.
+   const unique=new Map();
+   for(const p of rows){
+    const id=p.lg_user_id!=null?'id:'+p.lg_user_id:'tag:'+String(p.gamertag||'').toLowerCase();
+    const previous=unique.get(id);
+    if(!previous||Number(p.gp||0)>Number(previous.gp||0)||
+       (Number(p.gp||0)===Number(previous.gp||0)&&String(p.fetched_at||'')>String(previous.fetched_at||'')))unique.set(id,p);
+   }
+   const sorted=[...unique.values()].sort((a,b)=>{
+    const av=numeric(a[metric])?Number(a[metric]):null,bv=numeric(b[metric])?Number(b[metric]):null;
+    if(av===null&&bv!==null)return 1;if(bv===null&&av!==null)return -1;
+    return (av===null?0:(av-bv)*(metric==='gaa'?1:-1))||Number(b.gp||0)-Number(a.gp||0)||String(a.gamertag).localeCompare(String(b.gamertag));
+   });
    let rank=0,previous=null;
-   state.rows=sorted.map((p,i)=>{const value=Number(p[metric]);if(i===0||value!==previous)rank=i+1;previous=value;return {...p,rank};});
+   state.rows=sorted.map((p,i)=>{const value=numeric(p[metric])?Number(p[metric]):null;if(value!==null&&(i===0||value!==previous))rank=i+1;previous=value;return {...p,rank:value===null?null:rank};});
    const times=state.rows.map(p=>p.fetched_at).filter(Boolean).sort();
-   $('lgLastUpdated').textContent=fresh?.capture ? fresh.capture.as_of+' · verified top '+state.rows.length+' '+metrics[metric].toLowerCase()+' capture · full season import pending.' : 'LGCHL Season 55 regular season · '+metrics[metric]+' · '+state.rows.length+' qualifying players loaded.';
+   $('lgLastUpdated').textContent='LGCHL Season 55 regular season · '+metrics[metric]+' · '+state.rows.length+' players loaded (all available '+kind+' records).';
    $('lgPlayerSource').textContent='';
    window.WMLgPlayerBadges?.load(state.rows,read).then(()=>{if(token===state.request)window.WMLgPlayerBadges?.refresh($('lgPlayerBoard'));});
   }catch{
