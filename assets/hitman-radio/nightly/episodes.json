@@ -1,8 +1,20 @@
 {
   "featured": [
-    "2026-11-01-preview"
+    "2026-11-02-review-preview"
   ],
   "episodes": [
+    {
+      "id": "2026-11-02-review-preview",
+      "date": "2026-11-02",
+      "type": "preview",
+      "label": "Sunday review + Monday preview · Nov 2",
+      "title": "Hitmen Radio: Sunday Night Review + Monday Preview",
+      "headline": "Sunday night review and Monday preview: report card, three stars, the WHL East race and tonight's predictions",
+      "description": "Seth Kelley's Hitmen Radio from EliteChel Media: the Sunday report card, around the league, three stars of the night, the stat that shouldn't exist, the WHL East race, the Hitmen locker room, the hardest Monday on the calendar and tonight's predictions.",
+      "duration": "16:11",
+      "video": "assets/hitman-radio/nightly/2026-11-02-review-preview.mp4?v=20261102",
+      "poster": "assets/hitman-radio/nightly/2026-11-02-review-preview-poster.png?v=20261102"
+    },
     {
       "id": "2026-11-01-preview",
       "date": "2026-11-01",
