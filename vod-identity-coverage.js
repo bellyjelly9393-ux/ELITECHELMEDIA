@@ -65,7 +65,7 @@
     box.textContent = 'Checking confirmed lineup and VOD evidence…';
     try {
       const {data, error} = await db().from('labs_vod_player_report_status')
-        .select('review_id,team_id,lg_user_id,display_name,participation_status,verified_marker_count,named_in_analysis,report_state')
+        .select('review_id,team_id,lg_user_id,display_name,participation_status,verified_marker_count,named_in_analysis,report_state,position')
         .eq('review_id', reviewId).eq('team_id', teamId).order('display_name');
       if (error) throw error;
       if (seq !== activeRequest) return;
