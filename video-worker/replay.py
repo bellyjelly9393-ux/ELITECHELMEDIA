@@ -236,7 +236,7 @@ def verified_lineup_for_review(review, authorization):
         name = str(row.get('display_name') or '').strip()
         if slot not in required or slot in slots or not (2 <= len(name) <= 24):
             return ''
-        if any(ch in name for ch in ',;\\n\\r'):
+        if ',' in name or ';' in name or len(name.splitlines()) != 1:
             return ''
         slots[slot] = name
     if set(slots) != set(required):
