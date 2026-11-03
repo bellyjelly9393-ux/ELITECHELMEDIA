@@ -13,5 +13,5 @@
 .hs-white .hs-flip,.hs-white .hs-hint{display:none!important}
 .wr-locker-page .reference-locker-pane:has(.hs-white){aspect-ratio:1/1!important}
 .wr-locker-page .locker-stall.hs-upgraded>.hs-stall.hs-white{aspect-ratio:1/1!important}
-.wr-locker-page .reference-locker-pane:has(.hs-white)~.reference-flip-controls{display:none!important}
-.wr-locker-page .reference-locker-pane:has(.hs-white)~.reference-flip-caption{display:none!important}
+.wr-locker-page .reference-locker-pane:has(.hs-white) .reference-flip-controls{display:none!important}
+.wr-locker-page .reference-locker-pane:has(.hs-white) .reference-flip-caption{display:none!important}
