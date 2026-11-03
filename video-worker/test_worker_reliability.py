@@ -242,6 +242,13 @@ class AuditFixes(Base):
             self.assertNotIn(gone, job['metadata'])
         self.assertEqual(worker.mark_saved_parts(dict(job['metadata']), job['result']), set())
 
+    def test_fresh_reanalysis_uses_current_confirmed_lg_lineup(self):
+        verified = 'Calgary lineup: LW offtheyrk, C thenny32, RW SmokoLi, LD WhyKayWins, RD matt_0_5, G Kudolken'
+        self.review['_verified_lineup'] = verified
+        job_id = self.streamed()
+        self.assertEqual(self.call('POST', f'/jobs/{job_id}/reanalyze', {})[0], 202)
+        self.assertEqual(worker.get_job(job_id)['metadata']['players'], verified)
+
     def test_refresh_report_merges_metadata_and_refuses_a_running_job(self):
         self.review['worker_result'] = {'chunks': [{'label': 'Period 1', 'review': {'summary': 's'}}]}
         other = dict(self.review, id=str(uuid4()))
