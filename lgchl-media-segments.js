@@ -12,28 +12,41 @@
   const empty = t => '<p class="empty">' + esc(t) + '</p>';
   const show = (id, on) => { const el = $(id); if (el) el.hidden = !on; };
 
-  /* ---------- The Races: every conference, top four and the gap ---------- */
-  function renderRaces(standings) {
+  /* The Races: exact LG race order, not a recalculated points leaderboard.
+     Captured separately because division leaders and tied teams can differ from
+     the generic standings view. Preserve LG ranks and marks without inference. */
+  async function renderRaces() {
     const box = $('lgRaces');
     if (!box) return;
-    if (!standings || !standings.length) { box.innerHTML = empty('Standings are unavailable right now.'); return; }
-    const groups = new Map();
-    standings.forEach(t => { const k = t.league + ' · ' + t.conference; if (!groups.has(k)) groups.set(k, []); groups.get(k).push(t); });
-    const order = ['OHL', 'WHL', 'QMJHL'];
-    const keys = [...groups.keys()].sort((a, b) => order.indexOf(a.split(' · ')[0]) - order.indexOf(b.split(' · ')[0]) || a.localeCompare(b));
-    box.innerHTML = keys.map(k => {
-      const rows = groups.get(k).slice().sort((a, b) => Number(a.conference_rank) - Number(b.conference_rank)).slice(0, 5);
-      const lead = rows[0], second = rows[1];
-      const gap = second ? Number(lead.pts) - Number(second.pts) : null;
-      const line = gap == null ? '' : gap === 0 ? esc(lead.nickname || lead.name) + ' and ' + esc(second.nickname || second.name) + ' are level at the top.'
-        : gap <= 2 ? esc(second.nickname || second.name) + ' sit ' + gap + ' point' + (gap === 1 ? '' : 's') + ' off first. Tight at the top.'
-        : esc(lead.nickname || lead.name) + ' lead by ' + gap + ' points.';
-      return '<article class="card tinted lg-race" data-logo="' + logo(lead.lg_team_id) + '">' + wm(lead.lg_team_id) +
-        '<p class="lg-race-tag">' + esc(k) + '</p>' +
-        '<div class="lg-race-columns"><span>Rank</span><span>Team</span><span>PTS</span><span>Gap</span></div><ol class="lg-race-list num">' + rows.map((t, i) => '<li data-logo="'+logo(t.lg_team_id)+'" style="--team-logo:url(\'' + logo(t.lg_team_id) + '\')"><span class="lg-race-rk">' + (i + 1) + '</span><img src="' + logo(t.lg_team_id) + '" alt="" loading="lazy"><b>' + esc(t.nickname || t.name) + '</b><span class="lg-race-pts">' + esc(t.pts) + '</span><small>' + (i ? (Number(t.pts) === Number(lead.pts) ? 'level' : '−' + (Number(lead.pts) - Number(t.pts))) : 'PTS') + '</small></li>').join('') + '</ol>' +
-        '<p class="lg-race-line">' + line + '</p></article>';
-    }).join('');
-    tint(box);
+    try {
+      const response = await fetch('data/lgchl/races-current.json', {cache:'no-cache'});
+      if (!response.ok) throw Error('Race capture unavailable');
+      const capture = await response.json();
+      const names = ['OHL Eastern','OHL Western','WHL Eastern','WHL Western','QMJHL Eastern','QMJHL Western'];
+      const ids = new Set();
+      if (capture.season !== 55 || !Number.isFinite(Date.parse(capture.captured_at)) || !Array.isArray(capture.groups) || capture.groups.length !== 6) throw Error('Invalid race capture');
+      for (const name of names) {
+        const group = capture.groups.find(g=>g.group===name);
+        if (!group || !Array.isArray(group.rows) || !group.rows.length) throw Error('Missing race group');
+        group.rows.forEach((t,i)=>{
+          if (t.rank!==i+1 || !Number.isSafeInteger(t.lg_team_id) || t.lg_team_id<=0 || ids.has(t.lg_team_id) || !Number.isInteger(t.gp) || t.gp<0 || !Number.isInteger(t.pts) || t.pts<0 || !/^\d+-\d+-\d+$/.test(t.record) || !t.name || !/^[*PZYXWE]*$/.test(t.marks || '')) throw Error('Invalid race row');
+          ids.add(t.lg_team_id);
+        });
+      }
+      if (ids.size !== 62) throw Error('Incomplete race capture');
+      const stamp = new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(capture.captured_at));
+      box.innerHTML = names.map(name=>{
+        const group = capture.groups.find(g=>g.group===name), lead=group.rows[0];
+        return '<article class="card tinted lg-race" data-logo="'+logo(lead.lg_team_id)+'">'+wm(lead.lg_team_id)+
+          '<p class="lg-race-tag">'+esc(name)+'</p>'+
+          '<div class="lg-race-columns"><span>Seed</span><span>Team · W-L-OTL</span><span>PTS</span><span>GP</span></div><ol class="lg-race-list num">'+group.rows.map(t=>
+            '<li data-race-rank="'+t.rank+'" data-lg-team="'+t.lg_team_id+'" data-logo="'+logo(t.lg_team_id)+'" style="--team-logo:url(\''+logo(t.lg_team_id)+'\')"><span class="lg-race-rk">'+t.rank+'</span><img src="'+logo(t.lg_team_id)+'" alt="" loading="lazy"><b>'+esc(t.name)+(t.marks?' <span class="lg-race-mark">'+esc(t.marks)+'</span>':'')+'<span class="lg-race-record">'+esc(t.record)+'</span></b><span class="lg-race-pts">'+t.pts+'</span><small>'+t.gp+'</small></li>').join('')+'</ol>'+
+          '<p class="lg-race-line">Seeds 1–2: bye · Wildcard: 3 vs. 6 and 4 vs. 5</p></article>';
+      }).join('')+'<p class="lg-race-source lg-fine">LG Season 55 race snapshot · '+esc(stamp)+' ET. Seed order and markers copied from LG. <a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=standing&amp;leagueid=39&amp;seasonid=55" target="_blank" rel="noopener noreferrer">Official standings ↗</a></p>';
+      tint(box);
+    } catch {
+      box.innerHTML = empty('The official LG race snapshot could not be loaded. No estimated playoff seeding is displayed.');
+    }
   }
 
   /* ---------- Heaters & Skids: the players playing unreal, and the ones in trouble ---------- */
@@ -221,3 +234,4 @@
 
   window.LGCHLSegments = { renderRaces, renderPlayerStreaks, renderUpsets, renderForm, renderNight, pickNight };
 })();
+
