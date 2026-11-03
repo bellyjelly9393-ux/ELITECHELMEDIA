@@ -91,7 +91,7 @@
       '<div class="lg-hockey-card-art"><img src="' + logo(p.lg_team_id) + '" alt="' + team + '"><span>' + position + '</span></div>' +
       '<h3>' + name + '</h3><p>' + team + '</p><div class="lg-hockey-card-stats">' +
       (isGoalie ? stat('GP',fmt(p.gp)) + stat('SV%',numeric(p.save_pct)?(n(p.save_pct)*100).toFixed(1)+'%':'—') + stat('GAA',rate(p.gaa)) : stat('G',fmt(p.goals)) + stat('A',fmt(p.assists)) + stat('PTS',fmt(p.points))) + '</div>' +
-      (cardUrl ? '<a class="lg-profile-full-link" href="' + cardUrl + '">Customize your hockey card →</a>' : '') + '</section>';
+      (cardUrl ? '<a class="lg-profile-full-link" href="' + cardUrl + '">View your hockey card →</a>' : '') + '<p style="margin:12px 0 0;font-size:13px"><a href="elite-chel-cards.html" style="color:#f2c873;text-decoration:underline">How do Elite Chel Cards, ratings and upgrades work?</a></p></section>';
     return '<div class="lg-profile-watermark" aria-hidden="true"><img src="' + logo(p.lg_team_id) + '" alt="" loading="lazy"></div>' +
       '<div class="lg-profile-body">' +
        '<div class="lg-profile-hero">' +
