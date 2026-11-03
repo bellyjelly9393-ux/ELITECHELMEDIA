@@ -59,8 +59,8 @@ WITH raw AS (
  FROM pct
 )
 SELECT rating_position,count(*) eligible_players,
- round(min(measured_index)*100,1) min_index,
- round(avg(measured_index)*100,1) mean_index,
- round(max(measured_index)*100,1) max_index,
+ round((min(measured_index)*100)::numeric,1) min_index,
+ round((avg(measured_index)*100)::numeric,1) mean_index,
+ round((max(measured_index)*100)::numeric,1) max_index,
  count(*) FILTER(WHERE measured_index IS NULL) missing_index
 FROM score GROUP BY rating_position ORDER BY rating_position;
