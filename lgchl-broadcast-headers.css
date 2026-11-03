@@ -1,0 +1,30 @@
+/* LGCHL broadcast header preview: scoped to lgchl-media.html only. */
+.lg-page{--broadcast-red:#b91f29;--broadcast-gold:#c79a45;--broadcast-steel:#c9cdd2}
+.lg-brand-bar{position:relative;isolation:isolate;overflow:hidden;min-height:clamp(112px,17vw,220px);padding:clamp(16px,3vw,36px);border:2px solid #6b7078;border-top:4px solid #c7cbd0;border-bottom:4px solid #8a151c;box-shadow:inset 0 0 0 1px #111,0 14px 28px #0009;background:linear-gradient(120deg,#050608d9 0%,#161b22ed 38%,#07090bd9 100%),repeating-linear-gradient(135deg,#222b35 0 2px,#0b0d11 2px 9px)}
+.lg-brand-bar:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,transparent 0 26%,#bb202b 26.3% 27.2%,transparent 27.5% 76%,#b91f29 76.3% 77.2%,transparent 77.5%),linear-gradient(0deg,#27333b 0 3px,transparent 3px 100%);opacity:.8}
+.lg-brand-bar:after{content:"";position:absolute;left:25%;right:25%;bottom:0;height:5px;background:linear-gradient(90deg,transparent,#c89c4b,transparent)}
+.lg-brand-bar>img{position:relative;z-index:1;max-height:clamp(65px,10vw,125px);width:auto;object-fit:contain;filter:drop-shadow(0 3px 5px #000)}
+.lg-brand-bar>div{text-align:center;position:relative;z-index:1}
+.lg-brand-bar small{display:block;color:#e5e5e5;letter-spacing:.22em;font-weight:800;text-shadow:0 2px 3px #000}
+.lg-brand-bar b{display:block;color:#f0f2f4;font-family:Anton,Teko,Impact,sans-serif;font-size:clamp(26px,5.6vw,78px);line-height:1.08;letter-spacing:.025em;text-transform:uppercase;text-shadow:0 2px #545a63,0 4px #171a1e,0 8px 12px #000}
+.lg-brand-bar em{font-style:normal;color:#f0f0f0;background:linear-gradient(180deg,#e54148,#93151d);padding:0 .2em;box-decoration-break:clone}
+.lg-panel-head,.lg-head{position:relative;isolation:isolate;overflow:hidden;padding:14px 18px!important;border:1px solid #4b525b;border-top:2px solid #aab0b8;border-bottom:3px solid #9f1c26;background:linear-gradient(110deg,#101319 0%,#20252d 55%,#0b0d11 100%);box-shadow:inset 0 1px #ffffff18,0 5px 12px #0006}
+.lg-panel-head:before,.lg-head:before{content:"";position:absolute;right:10%;top:-30%;height:180%;width:7px;background:#a71d28;transform:skew(-25deg);opacity:.7;pointer-events:none}
+.lg-panel-title,.lg-head .sec-title{font-family:Anton,Teko,Impact,sans-serif!important;text-transform:uppercase;letter-spacing:.035em;color:#e7e9eb!important;text-shadow:0 2px 0 #555b64,0 4px 5px #000}
+.lg-panel-title em,.lg-head .sec-title em{color:#d6a953!important;font-style:normal}
+.lg-panel-head .eyebrow,.lg-head .eyebrow{color:#b9c0c9;letter-spacing:.15em}
+@media(max-width:650px){.lg-brand-bar{gap:8px;padding:12px 8px;min-height:110px}.lg-brand-bar>img{max-width:17%;max-height:75px}.lg-brand-bar small{font-size:8px;letter-spacing:.1em}.lg-brand-bar b{font-size:clamp(22px,5vw,35px)}.lg-panel-head,.lg-head{padding:10px 12px!important}}
+
+/* Studio set: decorative layers behind real, interactive statistics. */
+.lg-page{background-color:#090c12;background-image:linear-gradient(90deg,#050608ee 0%,#0b0d13c9 19%,#0c0e13d4 80%,#050608ee 100%),url("assets/wildman/home/arena.webp");background-position:center top,center top;background-size:cover,cover;background-repeat:no-repeat;background-attachment:scroll,fixed}
+.lg-page::before{opacity:.035!important;pointer-events:none}
+.lg-page #lgPowerSec{position:relative;isolation:isolate}
+.lg-page #lgPowerSec::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#080a0df5 0%,transparent 16%,transparent 84%,#080a0df5 100%),repeating-linear-gradient(0deg,transparent 0 116px,#bc222b33 117px 119px,transparent 120px 240px);border-inline:3px solid #621b23}
+.lg-page #lgStatsSec{position:relative;isolation:isolate;overflow:hidden;border:2px solid #72777f;border-top:3px solid #c5c9ce;border-bottom:4px solid #a52a2e;box-shadow:inset 0 0 0 2px #11161d,0 10px 35px #000b;background:linear-gradient(150deg,#101319f5,#07090df9 60%,#11141af5)}
+.lg-page #lgStatsSec::before{content:"";position:absolute;inset:0 0 auto;height:210px;z-index:-1;pointer-events:none;opacity:.45;background:radial-gradient(ellipse at 80% 15%,#d6e5f02c,transparent 38%),linear-gradient(110deg,transparent 0 58%,#9f1a25a8 58.3% 59.4%,transparent 59.8%),url("assets/wildman/home/arena.webp") center 43%/cover no-repeat;mask-image:linear-gradient(#000 0%,transparent 100%)}
+.lg-page #lgStatsSec::after{content:"";position:absolute;inset:6px;z-index:-1;border:1px solid #ffffff14;pointer-events:none}
+.lg-page #lgStatsSec .lg-panel-head{min-height:125px;align-items:center;background:linear-gradient(90deg,#101319ed 0%,#101319e8 65%,#10131944 100%);border-bottom-color:#ba2934}
+.lg-page #lgStatsSec .lg-tabs,.lg-page #lgStatsSec .lg-tbl-box,.lg-page #lgStatsSec .lg-goalies,.lg-page #lgStatsSec .lg-fine,.lg-page #lgStatsSec .lg-leader-links{position:relative;z-index:1}
+.lg-page #lgStatsSec .lg-tbl-box{background:#080b10ed;border:1px solid #5b626c;box-shadow:0 6px 16px #0008}
+@media(max-width:900px){.lg-page{background-attachment:scroll,scroll;background-position:center top}.lg-page #lgStatsSec .lg-panel-head{min-height:100px}}
+@media(max-width:650px){.lg-page #lgStatsSec{border-width:1px;border-top-width:2px}.lg-page #lgStatsSec::before{height:150px;opacity:.25}.lg-page #lgStatsSec .lg-panel-head{min-height:80px}.lg-page #lgPowerSec::before{border-inline:0}}
