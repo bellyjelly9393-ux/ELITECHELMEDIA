@@ -2829,6 +2829,13 @@ class Handler(BaseHTTPRequestHandler):
                 if job['status'] not in ('ready_for_review', 'failed', 'awaiting_ai'):
                     raise Problem(409, 'Wait for the current analysis to finish before starting a fresh scout pass.')
                 meta = dict(job['metadata'])
+                # The fresh video pass must use the current confirmed lineup too.
+                # This read is authenticated with the caller's JWT and never changes VOD evidence.
+                if meta.get('review_id') and meta.get('source_kind') == 'twitch_replay':
+                    from replay import read_review
+                    linked_review = read_review(meta['review_id'], self.headers.get('Authorization'))
+                    if linked_review.get('_verified_lineup'):
+                        meta['players'] = linked_review['_verified_lineup']
                 # A fresh pass must not inherit saved parts, a pending period report or a finished
                 # scan cursor, otherwise it reports empty periods without looking at the video.
                 for key in RUN_STATE_KEYS:
