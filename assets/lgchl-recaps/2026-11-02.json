@@ -1,0 +1,2488 @@
+{
+ "date": "2026-11-02",
+ "title": "EliteChel Media | LGCHL Night in Review",
+ "subtitle": "Monday, November 2, 2026 · Season 55, Week 6",
+ "intro": "<p>There were 93 games scheduled across three slots (9:00, 9:35 and 10:10 PM ET). 92 are final and in the box-score drop. <strong>The missing game is London Knights at North Bay Battalion (10:10 PM, Game 918376).</strong> It was still listed as scheduled with no score, and there's no capture for it.</p><blockquote><strong>Data note:</strong> All stats come from Seth's parsed LG game-page drop for Nov 2 (<code>games/s55/2026-11-02</code>), pre-night standings (after Sunday Nov 1, 51 GP each) and the league transactions file. Player lines are full-game totals, so goal order within a period isn't known, and no play-by-play exists. Period splits are skipped where the capture flags them as not adding up (Games 918303 and 918391). Game 918303 (Moncton 1, Victoriaville 0) has no player or shot data at all. Records shown are pre-night standings plus tonight's results (PTS = 2×W + OTL).</blockquote>",
+ "threeStars": "<p class=\"rc-num\">1. <strong>OMG_Magro</strong> (Tri City Americans, LW): <strong>14G 3A in 3 games, +12.</strong> That includes a 7-goal, 8-point night in a 10-2 win over Medicine Hat. Tri City went 3-0-0 with 19 goals.</p><p class=\"rc-num\">2. <strong>pickmasta</strong> (Victoria Royals, LD): <strong>5G 12A, 17 points from the blue line, +17.</strong> He had a 3G 3A night at Moose Jaw and a 1G 5A night against Calgary. Victoria went 3-0-0, outscoring opponents 20-4.</p><p class=\"rc-num\">3. <strong>NigelFromTinder</strong> (Sudbury Wolves, G): <strong>45 saves on 49 (.918), 4 goals against in 3 starts.</strong> Sudbury went 2-0-1, beating Windsor 2-1 and Erie 8-1, with a 2-1 overtime loss to Kitchener.</p><p><em>Honourable mentions:</em></p><ul><li><strong>redz_shifterr</strong> (VIC): 7G 8A, +16</li><li><strong>jdowning21.</strong> (TC): 1G 14A</li><li><strong>DirtyDangler82</strong> (BRA): 7G 7A, including 5G 4A against Windsor</li><li><strong>DemidoV_93_ch</strong> (SAR): 6G 9A</li><li><strong>Sauceshow</strong> (QUE): 3G 5A in a 9-3 win over Val-d'Or, on the same day the league wire announced he'd been assigned to Quebec at 2:50 PM</li></ul><p><em>Perfect nights (3-0-0):</em> Victoria, Tri City, Sarnia, Vancouver, Guelph, Prince George, Moncton, Kitchener, Drummondville, Halifax, Penticton.</p><p><em>Shutouts with stats:</em> XxPASTRNAK88 (CGY 1-0 SPO), nothargi4200 twice (VIC 7-0 LET, VIC 7-0 MJ), plus Portland 3-0 Regina, Oshawa 4-0 Flint, Gatineau 7-0 Cape Breton and Rimouski 8-0 Shawinigan. Moncton 1-0 Victoriaville has no stats on the LG page.</p>",
+ "hitmen": {
+  "html": "<p>Calgary entered Monday at 23-20-8, seventh in the WHL Eastern race. It leaves at <strong>24-22-8 (56 pts)</strong> with six goals for and eight against. The night went in three acts: a goaltending masterpiece, a one-goal heartbreaker and a firefight with the hottest team in the league.</p><p><strong>Night totals:</strong></p><ul><li><strong>Gullyrr:</strong> 3G 3A, with a point in all three games</li><li><strong>WhiteoutI8I:</strong> 3G 2A, including the winner against Spokane</li><li><strong>Koldex Bands:</strong> 4A</li><li><strong>slang07:</strong> 2A</li><li><strong>imona_plain:</strong> 1A</li><li><strong>XxPASTRNAK88:</strong> 33 saves on 41, with the shutout of the conference-leading Chiefs</li></ul><p><strong>The takeaway:</strong> In the first two games Calgary allowed two goals in 120 minutes, which shows the defensive structure travels. The concern is support. The Hitmen scored twice in those two games and went 0-for-4 on the power play, then gave up three in the third period at Victoria after tying it 3-3. The Gullyrr–WhiteoutI8I pairing is producing. Finding a third scoring source is the job before Tuesday.</p>",
+  "games": [
+   {
+    "title": "Hitmen Watch: XxPASTRNAK88 Shuts Out the Conference's Best",
+    "matchup": "Spokane Chiefs 0 @ Calgary Hitmen 1",
+    "game": "918328",
+    "html": "<p>Spokane came into Monday the way front-runners do: 36-13-2, 74 points, top of the WHL Western race. They left Calgary with nothing to show for it. Not a goal, not a point, not a crack in <strong>XxPASTRNAK88</strong>, who stopped all 11 shots for a 1-0 shutout.</p><p>It was a patient, suffocating game, and Calgary set the terms. The Hitmen had the puck in the attacking zone for 13:06 to Spokane's 6:18 and outshot the Chiefs 18-11. Spokane won the faceoff battle 12-4, but every possession it won at the dot seemed to end in the wrong zone. Through forty minutes the scoreboard was still blank. <strong>PRKz_Jugg</strong> was holding Spokane together at the other end and finished with 17 saves on 18.</p><p>The only goal came in the third period. <strong>WhiteoutI8I</strong> scored it with his only shot of the night, assisted by <strong>Gullyrr</strong> and <strong>Koldex Bands</strong>. Gullyrr was the engine all game, with 8 shots on goal from the middle of the ice. Calgary went 0-for-2 on the power play and didn't need it.</p><p>Calgary moves to 24-20-8 and owns the scalp of the night. Spokane ended the night 1-2-0 (37-15-2).</p>",
+    "stars": [
+     {
+      "n": 1,
+      "player": "XxPASTRNAK88",
+      "team": "Calgary Hitmen, G",
+      "line": "11 saves on 11, shutout"
+     },
+     {
+      "n": 2,
+      "player": "WhiteoutI8I",
+      "team": "Calgary Hitmen, RW",
+      "line": "game-winning goal on 1 SOG, +1, 3 hits"
+     },
+     {
+      "n": 3,
+      "player": "Gullyrr",
+      "team": "Calgary Hitmen, C",
+      "line": "1A, 8 SOG, +1"
+     }
+    ]
+   },
+   {
+    "title": "Hitmen Watch: Two Shots From xZainer89 Swing a Coin-Flip in Prince George",
+    "matchup": "Calgary Hitmen 1 @ Prince George Cougars 2",
+    "game": "918354",
+    "html": "<p>On paper it was a draw. Shots were 13-13. Calgary had more of the puck (10:11 attack time to 7:50) and won the faceoff circle 15-5. But <strong>xZainer89</strong> scored twice, and a game this tight only needs one player to break it.</p><p>The Cougars struck first, with xZainer89 scoring the only goal of the first period. The second period was a trade: <strong>Gullyrr</strong> scored Calgary's goal, set up by <strong>WhiteoutI8I</strong> and <strong>Koldex Bands</strong>, and xZainer89 scored his second. The 2-1 score then survived a scoreless third. <strong>Rshawzie</strong> closed the door with 12 saves on 13. Calgary's 0-for-2 power play is the line to circle: it was the chance to turn a coin-flip into a win, and it didn't land.</p><p>The Cougars played the more physical game, out-hitting Calgary 15-9, with <strong>Tibbytwo</strong> alone throwing 12 hits from the blue line alongside his assist. <strong>XxPASTRNAK88</strong> was solid again with 11 saves on 13, but the Hitmen managed just one goal of support.</p><p>Prince George went 3-0-0 on the night and sits 33-20-1. Calgary slipped to 24-21-8 at that point.</p>",
+    "stars": [
+     {
+      "n": 1,
+      "player": "xZainer89",
+      "team": "Prince George Cougars, LW",
+      "line": "2G (including the winner), 5 SOG, +1"
+     },
+     {
+      "n": 2,
+      "player": "Tibbytwo",
+      "team": "Prince George Cougars, RD",
+      "line": "1A, 12 hits, +1"
+     },
+     {
+      "n": 3,
+      "player": "Gullyrr",
+      "team": "Calgary Hitmen, C",
+      "line": "1G, 4 SOG, 6 hits"
+     }
+    ]
+   },
+   {
+    "title": "Hitmen Watch: Calgary Trades Punches With the Night's Juggernaut, and Loses the Last Exchange",
+    "matchup": "Calgary Hitmen 4 @ Victoria Royals 6",
+    "game": "918389",
+    "html": "<p>Victoria spent Monday night erasing opponents. The Royals beat Lethbridge 7-0 and Moose Jaw 7-0, and nobody scored on <strong>nothargi4200</strong> until Calgary showed up in the 10:10 slot. The Hitmen scored four times on him in one game, and it still wasn't enough.</p><p>Through two periods this was a real fight, tied 3-3. <strong>Gullyrr</strong> (2G 2A) and <strong>WhiteoutI8I</strong> (2G 1A) kept answering, Calgary converted its only power play (1-for-1), and nothargi4200 finished with 8 saves on 12. Then the third period went Victoria's way, 3-1. The Royals' top unit simply would not be denied. <strong>pickmasta</strong> ran the game from the left point with 1G and 5A. <strong>ProximalAbyss41</strong> had 2G and 3A. <strong>redz_shifterr</strong> scored a hat trick and added an assist on 7 shots. All three finished +3.</p><p>Calgary was outshot 17-12 and outhit 9-3, and spent 6:48 in the attacking zone to Victoria's 10:14. <strong>XxPASTRNAK88</strong> made 11 saves on 17 in his third start of the night. <strong>Koldex Bands</strong> (2A) and <strong>slang07</strong> (2A) helped drive the offence.</p><p>Victoria finished the night 3-0-0 (31-21-2, 64 pts). Calgary ends the night at 24-22-8 (56 pts).</p>",
+    "stars": [
+     {
+      "n": 1,
+      "player": "pickmasta",
+      "team": "Victoria Royals, LD",
+      "line": "1G 5A, +3, 6 hits"
+     },
+     {
+      "n": 2,
+      "player": "redz_shifterr",
+      "team": "Victoria Royals, RW",
+      "line": "3G 1A, 7 SOG, +3"
+     },
+     {
+      "n": 3,
+      "player": "Gullyrr",
+      "team": "Calgary Hitmen, C",
+      "line": "2G 2A in a losing effort"
+     }
+    ]
+   }
+  ],
+  "title": "Hitmen Watch: Calgary Goes 1-2-0"
+ },
+ "slots": [
+  {
+   "slot": "09:00pm ET",
+   "games": [
+    {
+     "title": "Flood Gates: Huskies 7, Drakkar 2",
+     "matchup": "Baie-Comeau Drakkar 2 @ Rouyn-Noranda Huskies 7",
+     "game": "918300",
+     "html": "<p>JBev93 drove it, finishing at 4G 1A as Rouyn-Noranda Huskies beat Baie-Comeau Drakkar 7-2. Shots were 34-12 in their favour. The tone was set early: up 1 after the first, up 3 after two. Also on the board for Huskies: Duggan4204 (3G 1A), stonemaniac (0G 4A), B1GSMOK1E6381 (0G 3A). In goal, rutters717 stopped 10 of 12. Drakkar got Slibby2k (1G 1A), BigSchmant (1G 0A), while WhackedBike1 made 27 saves on 34 in the losing net. Night in full: Huskies went 2-1-0 tonight and sit 20-29-5 (45 pts); Drakkar went 0-3-0 tonight and sit 24-28-2 (50 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "JBev93",
+       "team": "Rouyn-Noranda Huskies, C",
+       "line": "4G 1A, 12 SOG, +4, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "Duggan4204",
+       "team": "Rouyn-Noranda Huskies, RW",
+       "line": "3G 1A, 8 SOG, +4, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "stonemaniac",
+       "team": "Rouyn-Noranda Huskies, LW",
+       "line": "0G 4A, 5 SOG, +4, 3 hits"
+      }
+     ]
+    },
+    {
+     "title": "Voltigeurs Win It After Sixty",
+     "matchup": "Drummondville Voltigeurs 3 @ Cape Breton Eagles 2 (OT)",
+     "game": "918301",
+     "html": "<p>ShadowGrimace drove it, finishing at 2G 0A as Drummondville Voltigeurs beat Cape Breton Eagles 3-2 in overtime. Shots were 22-15 in their favour. It was tied through regulation, and one overtime goal decided it. Also on the board for Voltigeurs: Local Booz (1G 2A), Local Skuzzy (0G 2A), Spicy-Big-Dad-9 (0G 1A). In goal, FINSeRe stopped 13 of 15. Eagles got iChels (1G 0A), FuZe Danglzz (1G 0A), while DuncanTheWalrus made 19 saves on 22 in the losing net. Night in full: Voltigeurs went 3-0-0 tonight and sit 36-13-5 (77 pts); Eagles went 1-1-1 tonight and sit 30-21-3 (63 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Local Booz",
+       "team": "Drummondville Voltigeurs, LW",
+       "line": "1G 2A, 7 SOG, +1, 5 hits"
+      },
+      {
+       "n": 2,
+       "player": "ShadowGrimace",
+       "team": "Drummondville Voltigeurs, C",
+       "line": "2G 0A, 4 SOG, +0, 4 hits"
+      },
+      {
+       "n": 3,
+       "player": "Local Skuzzy",
+       "team": "Drummondville Voltigeurs, RW",
+       "line": "0G 2A, 8 SOG, +1, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Islanders Win It After Sixty",
+     "matchup": "Charlottetown Islanders 4 @ Sherbrooke Phoenix 3 (OT)",
+     "game": "918302",
+     "html": "<p>alexander1032 drove it, finishing at 2G 0A as Charlottetown Islanders beat Sherbrooke Phoenix 4-3 in overtime. Shots were 34-35 against them, so they won on finishing, not volume. Sixty minutes couldn't separate them, so it went to overtime. Also on the board for Islanders: PDubss- (1G 2A), FreshCodyDaGoat (1G 1A), BaronVonBass (0G 3A). In goal, blackbelt5693 stopped 32 of 35. Phoenix got FireBolt9188 (2G 1A), Trumpz_Right_Ear (1G 0A), while zombi3_4_lif3 made 30 saves on 34 in the losing net. Night in full: Islanders went 2-1-0 tonight and sit 25-22-7 (57 pts); Phoenix went 1-1-1 tonight and sit 31-15-8 (70 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "FireBolt9188",
+       "team": "Sherbrooke Phoenix, LW",
+       "line": "2G 1A, 12 SOG, -1, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "BaronVonBass",
+       "team": "Charlottetown Islanders, LW",
+       "line": "0G 3A, 16 SOG, +1, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "PDubss-",
+       "team": "Charlottetown Islanders, LD",
+       "line": "1G 2A, 1 SOG, +1, 3 hits"
+      }
+     ]
+    },
+    {
+     "title": "Wildcats 1, Tigres 0: Result Only",
+     "matchup": "Moncton Wildcats 1 @ Victoriaville Tigres 0",
+     "game": "918303",
+     "starsNote": "Not available (no player stats on the LG page).",
+     "html": "<p>The LG page has a 1-0 final for Moncton Wildcats, but no skater lines, goalie lines or shots (all zeros). With nothing to go on, there's no recap or stars for this one. Wildcats went 3-0-0 tonight and sit 35-14-5 (75 pts); Tigres went 0-2-1 tonight and sit 26-23-5 (57 pts).</p>",
+     "stars": []
+    },
+    {
+     "title": "Mooseheads Squeeze Past Cataractes",
+     "matchup": "Shawinigan Cataractes 3 @ Halifax Mooseheads 4",
+     "game": "918304",
+     "html": "<p>Shobaay drove it, finishing at 2G 0A as Halifax Mooseheads beat Shawinigan Cataractes 4-3. Shots were 8-20 against them, so they won on finishing, not volume. They led after one (2-1) and never gave it back. Also on the board for Mooseheads: speed000racer. (1G 2A), xKillhouse (1G 1A), Thebrindlebeast (0G 2A). In goal, Brevonious stopped 17 of 20. Cataractes got Weins x (1G 2A), OWENWILSONSNO5E (1G 1A), while hully17 made 4 saves on 8 in the losing net. Night in full: Mooseheads went 3-0-0 tonight and sit 33-16-5 (71 pts); Cataractes went 0-2-1 tonight and sit 25-24-5 (55 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "speed000racer.",
+       "team": "Halifax Mooseheads, RW",
+       "line": "1G 2A, 5 SOG, +1, 4 hits"
+      },
+      {
+       "n": 2,
+       "player": "Weins x",
+       "team": "Shawinigan Cataractes, RW",
+       "line": "1G 2A, 5 SOG, -1, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "Jlm1410",
+       "team": "Shawinigan Cataractes, C",
+       "line": "0G 3A, 6 SOG, -1, 4 hits"
+      }
+     ]
+    },
+    {
+     "title": "Armada Take Care of Business",
+     "matchup": "Chicoutimi Sagueneens 2 @ Blainville-Boisbriand Armada 5",
+     "game": "918305",
+     "html": "<p>Dxspzi drove it, finishing at 3G 2A as Blainville-Boisbriand Armada beat Chicoutimi Sagueneens 5-2. Shots were 16-16 even. The middle frame was the hinge: they went into the third up 1. Also on the board for Armada: darkdany (1G 3A), xIKIEILJO (1G 1A), harkov (0G 1A). In goal, Hellesic stopped 14 of 16. Sagueneens got NotreDame830 (1G 1A), l Saad x 20 l (1G 0A), while Fire ghoost7445 made 11 saves on 16 in the losing net. Night in full: Armada went 1-1-1 tonight and sit 28-23-3 (59 pts); Sagueneens went 2-1-0 tonight and sit 30-20-4 (64 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Dxspzi",
+       "team": "Blainville-Boisbriand Armada, RW",
+       "line": "3G 2A, 3 SOG, +3, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "darkdany",
+       "team": "Blainville-Boisbriand Armada, C",
+       "line": "1G 3A, 6 SOG, +3, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "xIKIEILJO",
+       "team": "Blainville-Boisbriand Armada, LW",
+       "line": "1G 1A, 1 SOG, +3, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Foreurs Pull Clear of Oceanic",
+     "matchup": "Rimouski Oceanic 1 @ Val-d'Or Foreurs 3",
+     "game": "918306",
+     "html": "<p>stl710goon drove it, finishing at 2G 0A as Val-d'Or Foreurs beat Rimouski Oceanic 3-1. Shots were 13-11 in their favour. The first period was level, but a 2-goal cushion after two told you where it was headed. Also on the board for Foreurs: Staguts (1G 2A), joebroni_ (0G 1A), ilostmymoose (0G 1A). In goal, The16thgunner stopped 10 of 11. Oceanic got jxythegoat. (1G 0A), Bedard x I98I (0G 1A), while Lunaetiik made 10 saves on 13 in the losing net. Night in full: Foreurs went 1-2-0 tonight and sit 26-21-7 (59 pts); Oceanic went 2-1-0 tonight and sit 39-14-1 (79 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Staguts",
+       "team": "Val-d'Or Foreurs, RW",
+       "line": "1G 2A, 2 SOG, +1, 7 hits"
+      },
+      {
+       "n": 2,
+       "player": "stl710goon",
+       "team": "Val-d'Or Foreurs, C",
+       "line": "2G 0A, 6 SOG, +1, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "ilostmymoose",
+       "team": "Val-d'Or Foreurs, RD",
+       "line": "0G 1A, 1 SOG, +1, 5 hits"
+      }
+     ]
+    },
+    {
+     "title": "Dogs Hold On by a Thread",
+     "matchup": "Gatineau Olympiques 2 @ Saint John Sea Dogs 3",
+     "game": "918307",
+     "html": "<p>A home win for Saint John Sea Dogs, 3-2 over Gatineau Olympiques, and the scoresheet spreads the credit around. Shots were 20-8 in their favour. Forty minutes settled nothing; the game was tied going into the third. Also on the board for Dogs: lI Demonic II (1G 0A), PrOdIgYx8 (0G 3A), EricHMusic (0G 2A). In goal, pemm stopped 6 of 8. Olympiques got El Jaacho (1G 1A), YaDayz-_- (1G 0A), while FiLthY FORCE made 17 saves on 20 in the losing net. Night in full: Dogs went 2-1-0 tonight and sit 22-26-6 (50 pts); Olympiques went 1-2-0 tonight and sit 23-27-4 (50 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "xW3RMZx",
+       "team": "Saint John Sea Dogs, C",
+       "line": "2G 0A, 8 SOG, +1, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "PrOdIgYx8",
+       "team": "Saint John Sea Dogs, RW",
+       "line": "0G 3A, 1 SOG, +1, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "EricHMusic",
+       "team": "Saint John Sea Dogs, RD",
+       "line": "0G 2A, 0 SOG, +1, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Regiment Take Care of Business",
+     "matchup": "Newfoundland Regiment 6 @ Quebec Remparts 3",
+     "game": "918308",
+     "html": "<p>A road win for Newfoundland Regiment, 6-3 over Quebec Remparts, and the scoresheet spreads the credit around. Shots were 17-22 against them, so they won on finishing, not volume. The first period was level, but a 3-goal cushion after two told you where it was headed. Also on the board for Regiment: YummierScarab46 (1G 4A), rawzy78 (1G 3A), AttackingCOWBOY (1G 1A). In goal, AppaJuicee stopped 19 of 22. Remparts got CokeColaJedi87 (2G 1A), Max1973-2002 (1G 2A), while Ferland52 made 11 saves on 17 in the losing net. Night in full: Regiment went 1-2-0 tonight and sit 10-42-2 (22 pts); Remparts went 2-1-0 tonight and sit 27-24-3 (57 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "superchimp99",
+       "team": "Newfoundland Regiment, C",
+       "line": "3G 1A, 4 SOG, +4, 13 hits"
+      },
+      {
+       "n": 2,
+       "player": "YummierScarab46",
+       "team": "Newfoundland Regiment, LW",
+       "line": "1G 4A, 3 SOG, +4, 11 hits"
+      },
+      {
+       "n": 3,
+       "player": "rawzy78",
+       "team": "Newfoundland Regiment, RW",
+       "line": "1G 3A, 6 SOG, +4, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Colts Take Care of Business",
+     "matchup": "Erie Otters 1 @ Barrie Colts 4",
+     "game": "918309",
+     "html": "<p>A home win for Barrie Colts, 4-1 over Erie Otters, and the scoresheet spreads the credit around. Shots were 33-11 in their favour. They led after one (1-0) and never gave it back. Also on the board for Colts: McMiller75 (1G 2A), Shawn1593 (1G 1A), FellaFactory (0G 1A). In goal, Trixinity1 stopped 10 of 11. Otters got peteypipes00500 (1G 0A), v9xavr (0G 1A), while spacejay7 made 29 saves on 33 in the losing net. Night in full: Colts went 2-1-0 tonight and sit 38-14-2 (78 pts); Otters went 1-2-0 tonight and sit 29-20-5 (63 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Pboolin",
+       "team": "Barrie Colts, C",
+       "line": "2G 2A, 5 SOG, +2, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "McMiller75",
+       "team": "Barrie Colts, LW",
+       "line": "1G 2A, 8 SOG, +2, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "Shawn1593",
+       "team": "Barrie Colts, RW",
+       "line": "1G 1A, 9 SOG, +2, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Flood Gates: Attack 6, Battalion 1",
+     "matchup": "Owen Sound Attack 6 @ North Bay Battalion 1",
+     "game": "918310",
+     "html": "<p>Habsyyy11 drove it, finishing at 2G 1A as Owen Sound Attack beat North Bay Battalion 6-1. Shots were 23-12 in their favour. They led after one (3-0) and never gave it back. Also on the board for Attack: RUSH_CHELL (2G 0A), Springdogg (1G 4A), Tbush10 (1G 2A). In goal, jasonx1755 stopped 11 of 12. Battalion got sjul11 (1G 0A), Makleisgod (0G 1A), while oNitrate made 17 saves on 23 in the losing net. Night in full: Attack went 2-1-0 tonight and sit 27-21-6 (60 pts); Battalion went 0-2-0 tonight and sit 34-17-2 (70 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Springdogg",
+       "team": "Owen Sound Attack, LW",
+       "line": "1G 4A, 5 SOG, +5, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "Habsyyy11",
+       "team": "Owen Sound Attack, C",
+       "line": "2G 1A, 4 SOG, +5, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "Tbush10",
+       "team": "Owen Sound Attack, RD",
+       "line": "1G 2A, 3 SOG, +5, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Spitfires Take Care of Business",
+     "matchup": "Windsor Spitfires 6 @ Ottawa 67's 3",
+     "game": "918311",
+     "html": "<p>A road win for Windsor Spitfires, 6-3 over Ottawa 67's, and the scoresheet spreads the credit around. Shots were 18-17 in their favour. They led after one (2-0) and never gave it back. Also on the board for Spitfires: MickeyPizzazz (2G 2A), MrPiezrus (1G 5A), King Hamer (0G 1A). In goal, Na9y420 stopped 14 of 17. 67's got l bxwzrk l (2G 0A), Mr_Exc1tm3nt205 (1G 1A), while xX Z3NO Xx made 12 saves on 18 in the losing net. Night in full: Spitfires went 1-2-0 tonight and sit 23-23-8 (54 pts); 67's went 0-3-0 tonight and sit 24-24-6 (54 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "MrPiezrus",
+       "team": "Windsor Spitfires, RW",
+       "line": "1G 5A, 6 SOG, +2, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "NEON_ANGEL27",
+       "team": "Windsor Spitfires, C",
+       "line": "3G 1A, 5 SOG, +2, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "MickeyPizzazz",
+       "team": "Windsor Spitfires, LW",
+       "line": "2G 2A, 4 SOG, +2, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Storm Pull Clear of Frontenacs",
+     "matchup": "Guelph Storm 7 @ Kingston Frontenacs 4",
+     "game": "918312",
+     "html": "<p>Guelph Storm 7, Kingston Frontenacs 4. Leading the way: Beauregard03 (4G 3A). Shots were 19-20 against them, so they won on finishing, not volume. They led after one (2-1) and never gave it back. Also on the board for Storm: Thomas l18l (2G 4A), I2sweat97 (1G 5A), Alpha-33x (0G 2A). In goal, Huskroo stopped 16 of 20. Frontenacs got ROMAN95 (2G 1A), Lemmiwinks17 (1G 1A), while VeryBadAtChel-X- made 12 saves on 19 in the losing net. Night in full: Storm went 3-0-0 tonight and sit 31-17-6 (68 pts); Frontenacs went 1-1-1 tonight and sit 27-24-3 (57 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Beauregard03",
+       "team": "Guelph Storm, RW",
+       "line": "4G 3A, 6 SOG, +3, 8 hits"
+      },
+      {
+       "n": 2,
+       "player": "Thomas l18l",
+       "team": "Guelph Storm, LW",
+       "line": "2G 4A, 9 SOG, +3, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "I2sweat97",
+       "team": "Guelph Storm, C",
+       "line": "1G 5A, 1 SOG, +3, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Rangers Win It After Sixty",
+     "matchup": "Kitchener Rangers 2 @ Sudbury Wolves 1 (OT)",
+     "game": "918313",
+     "html": "<p>Not Raed drove it, finishing at 1G 1A as Kitchener Rangers beat Sudbury Wolves 2-1 in overtime. Shots were 26-9 in their favour. The tone was set early: up 1 after the first, up 1 after two. Also on the board for Rangers: TimFairview (1G 0A), BowlerFett (0G 1A). In goal, A_CapTa1N_A stopped 8 of 9. Wolves got S a u c e x91 (1G 0A), Hergy9 (0G 1A), while NigelFromTinder made 24 saves on 26 in the losing net. Night in full: Rangers went 3-0-0 tonight and sit 25-20-9 (59 pts); Wolves went 2-0-1 tonight and sit 36-14-4 (76 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Not Raed",
+       "team": "Kitchener Rangers, RW",
+       "line": "1G 1A, 4 SOG, +1, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "TimFairview",
+       "team": "Kitchener Rangers, LD",
+       "line": "1G 0A, 3 SOG, +1, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "BowlerFett",
+       "team": "Kitchener Rangers, C",
+       "line": "0G 1A, 4 SOG, +1, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Bulldogs Run Away From Firebirds",
+     "matchup": "Brantford Bulldogs 5 @ Flint Firebirds 1",
+     "game": "918314",
+     "html": "<p>vybin0095 drove it, finishing at 3G 0A as Brantford Bulldogs beat Flint Firebirds 5-1. Shots were 21-23 against them, so they won on finishing, not volume. The first period was level, but a 1-goal cushion after two told you where it was headed. Also on the board for Bulldogs: DirtyDangler82 (2G 2A), EDGEx22 (0G 3A), SwizzDekes (0G 1A). In goal, jayric2 stopped 22 of 23. Firebirds got Saintshockey688 (1G 0A), BosomeMustache (0G 1A), while BuzzFerda69 made 16 saves on 21 in the losing net. Night in full: Bulldogs went 2-0-1 tonight and sit 30-21-3 (63 pts); Firebirds went 1-2-0 tonight and sit 30-18-6 (66 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "DirtyDangler82",
+       "team": "Brantford Bulldogs, RW",
+       "line": "2G 2A, 5 SOG, +3, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "vybin0095",
+       "team": "Brantford Bulldogs, LW",
+       "line": "3G 0A, 6 SOG, +3, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "EDGEx22",
+       "team": "Brantford Bulldogs, C",
+       "line": "0G 3A, 5 SOG, +3, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Flood Gates: Petes 6, Knights 1",
+     "matchup": "London Knights 1 @ Peterborough Petes 6",
+     "game": "918315",
+     "html": "<p>DODGEredneck69 drove it, finishing at 3G 2A as Peterborough Petes beat London Knights 6-1. Shots were 27-17 in their favour. They led after one (1-0) and never gave it back. Also on the board for Petes: Redemption16676 (2G 2A), x Hutsonov x (1G 3A), BucketOfPucks (0G 2A). In goal, HOMELANDER2434 stopped 16 of 17. Knights got xTHx muffin dog (1G 0A), segzmachine (0G 1A), while Dissizznuts_88 made 21 saves on 27 in the losing net. Night in full: Petes went 2-1-0 tonight and sit 22-27-5 (49 pts); Knights went 1-1-0 tonight and sit 24-24-5 (53 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "DODGEredneck69",
+       "team": "Peterborough Petes, LW",
+       "line": "3G 2A, 5 SOG, +5, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "Redemption16676",
+       "team": "Peterborough Petes, C",
+       "line": "2G 2A, 7 SOG, +5, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "x Hutsonov x",
+       "team": "Peterborough Petes, RW",
+       "line": "1G 3A, 7 SOG, +5, 3 hits"
+      }
+     ]
+    },
+    {
+     "title": "Steelheads Run Away From Spirit",
+     "matchup": "Brampton Steelheads 6 @ Saginaw Spirit 2",
+     "game": "918316",
+     "html": "<p>A road win for Brampton Steelheads, 6-2 over Saginaw Spirit, and the scoresheet spreads the credit around. Shots were 21-12 in their favour. It was level after two periods, and the third decided it. Also on the board for Steelheads: x-Mando-x- (2G 2A), x-TagarnaK-x (1G 2A), Doobs Da Merc (0G 2A). In goal, RAMER5440 stopped 10 of 12. Spirit got Wickedsnipes6 (1G 1A), I Richy 19 I (1G 0A), while LG LEGEND9860 made 15 saves on 21 in the losing net. Night in full: Steelheads went 1-2-0 tonight and sit 29-20-5 (63 pts); Spirit went 0-3-0 tonight and sit 27-20-7 (61 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "PartyDrew",
+       "team": "Brampton Steelheads, LW",
+       "line": "3G 2A, 6 SOG, +3, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "x-Mando-x-",
+       "team": "Brampton Steelheads, C",
+       "line": "2G 2A, 7 SOG, +3, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "x-TagarnaK-x",
+       "team": "Brampton Steelheads, RW",
+       "line": "1G 2A, 5 SOG, +3, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "IceDogs Pull Clear of Greyhounds",
+     "matchup": "Niagara IceDogs 5 @ Sault Ste. Marie Greyhounds 3",
+     "game": "918317",
+     "html": "<p>A road win for Niagara IceDogs, 5-3 over Sault Ste. Marie Greyhounds, and the scoresheet spreads the credit around. Shots were 25-11 in their favour. The tone was set early: up 3 after the first, up 2 after two. Also on the board for IceDogs: II_Prxvoke_II (2G 1A), xGrogu- (1G 4A), xWillander (0G 1A). In goal, l9lPLAYMAKERl9l stopped 8 of 11. Greyhounds got CoachCheek (2G 1A), xxcrosbyqc (1G 1A), while xxguesswhox made 20 saves on 25 in the losing net. Night in full: IceDogs went 1-2-0 tonight and sit 24-28-2 (50 pts); Greyhounds went 2-1-0 tonight and sit 33-18-3 (69 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "xGrogu-",
+       "team": "Niagara IceDogs, RW",
+       "line": "1G 4A, 5 SOG, +2, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "iillegall",
+       "team": "Niagara IceDogs, C",
+       "line": "2G 2A, 7 SOG, +2, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "II_Prxvoke_II",
+       "team": "Niagara IceDogs, LW",
+       "line": "2G 1A, 8 SOG, +2, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Sarnia's Third Period Buries Burtxn's Four-Goal Night",
+     "matchup": "Oshawa Generals 4 @ Sarnia Sting 8",
+     "game": "918318",
+     "html": "<p><strong>Burtxn l77l</strong> scored four goals for Oshawa, and the Generals still lost by four. That tells you about the third period at Sarnia.</p><p>It was 4-3 Oshawa after two periods, a back-and-forth game in which the Generals scored three in the second and looked like they might steal one. Then Sarnia scored five unanswered in the third. <strong>Mxlsyy</strong> (4G 2A) and <strong>DemidoV_93_ch</strong> (3G 3A) did most of the damage, each on five shots, with <strong>morbid_chaos15</strong> adding 1G 3A. Sarnia outshot Oshawa 21-13 and owned the attacking zone 12:02 to 5:47. By the end, the Generals were just trying to get the puck out.</p><p>Burtxn l77l's four goals all came from the right wing on seven shots, and <strong>pulse4k</strong> assisted on two of them. In the end Oshawa ran out of answers and out of legs. <strong>Frizyal8er</strong> allowed 8 goals on 21 shots. <strong>Butcher73_Qc</strong> made 9 saves on 13 and needed the third period to bail him out.</p><p>Sarnia went 3-0-0 on the night and sits 29-16-9 (67 pts). Oshawa went 1-2-0 and sits 19-31-4 (42 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Mxlsyy",
+       "team": "Sarnia Sting, RW",
+       "line": "4G 2A, 5 SOG, +4"
+      },
+      {
+       "n": 2,
+       "player": "DemidoV_93_ch",
+       "team": "Sarnia Sting, C",
+       "line": "3G 3A, +4"
+      },
+      {
+       "n": 3,
+       "player": "Burtxn l77l",
+       "team": "Oshawa Generals, RW",
+       "line": "4G, 7 SOG"
+      }
+     ]
+    },
+    {
+     "title": "Flood Gates: Kings 8, Wild 3",
+     "matchup": "Wenatchee Wild 3 @ Edmonton Oil Kings 8",
+     "game": "918319",
+     "html": "<p>Edmonton Oil Kings 8, Wenatchee Wild 3. Leading the way: CroatKing11 (4G 1A). Shots were 15-14 in their favour. The tone was set early: up 2 after the first, up 5 after two. Also on the board for Kings: B_Real1337 (2G 6A), mrmagoo (1G 4A), That1Had2Hurt2 (1G 1A). In goal, x11-Ninja stopped 11 of 14. Wild got Anchors_82 (1G 2A), Celly902 (1G 1A), while CelebriniNHL made 7 saves on 15 in the losing net. Night in full: Kings went 1-2-0 tonight and sit 30-17-7 (67 pts); Wild went 1-2-0 tonight and sit 24-28-2 (50 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "B_Real1337",
+       "team": "Edmonton Oil Kings, RW",
+       "line": "2G 6A, 4 SOG, +6, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "CroatKing11",
+       "team": "Edmonton Oil Kings, LW",
+       "line": "4G 1A, 5 SOG, +6, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "mrmagoo",
+       "team": "Edmonton Oil Kings, C",
+       "line": "1G 4A, 1 SOG, +6, 5 hits"
+      }
+     ]
+    },
+    {
+     "title": "Victoria Opens a Historic Night With a 7-0 Rout",
+     "matchup": "Lethbridge Hurricanes 0 @ Victoria Royals 7",
+     "game": "918320",
+     "html": "<p>Lethbridge got six shots on goal. All game. <strong>nothargi4200</strong> stopped every one of them. At the other end Victoria scored seven, and the Royals' night of demolition was under way.</p><p>It was 4-0 after the first period, 6-0 after the second and 7-0 at the end. Victoria held the attacking zone for 13:06 to Lethbridge's 5:10 and outshot the Hurricanes 18-6. The usual suspects did the damage. <strong>redz_shifterr</strong> had a hat trick plus three assists. <strong>pickmasta</strong> had 1G 4A from the back end. <strong>amissingpiece</strong> scored twice and <strong>ProximalAbyss41</strong> had 1G 2A. All five Victoria skaters finished +7.</p><p><strong>KOLLER</strong> made 11 saves on 18 for Lethbridge. The Hurricanes rebounded later in the night with a 5-2 win over Wenatchee, but this game was never close.</p><p>Victoria went 3-0-0 on the night, with 20 goals for and 4 against, and sits 31-21-2 (64 pts). Lethbridge went 1-2-0 and sits 26-21-7 (59 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "redz_shifterr",
+       "team": "Victoria Royals, RW",
+       "line": "3G 3A, 6 SOG, +7"
+      },
+      {
+       "n": 2,
+       "player": "pickmasta",
+       "team": "Victoria Royals, LD",
+       "line": "1G 4A, +7"
+      },
+      {
+       "n": 3,
+       "player": "nothargi4200",
+       "team": "Victoria Royals, G",
+       "line": "6 saves on 6, shutout"
+      }
+     ]
+    },
+    {
+     "title": "One-Goal Margin, Silvertips Edition",
+     "matchup": "Everett Silvertips 3 @ Moose Jaw Warriors 2",
+     "game": "918321",
+     "html": "<p>Everett Silvertips 3, Moose Jaw Warriors 2. Leading the way: Validnorf (3G 0A). Shots were 15-21 against them, so they won on finishing, not volume. They led after one (1-0) and never gave it back. Also on the board for Silvertips: BoooBeee Orr (0G 3A), smithde23 (0G 1A). In goal, BiggsRippit stopped 19 of 21. Warriors got I Scribbzy I (1G 1A), Chhhew (1G 1A), while RYDS0204 made 12 saves on 15 in the losing net. Night in full: Silvertips went 1-2-0 tonight and sit 12-38-4 (28 pts); Warriors went 0-2-1 tonight and sit 21-29-4 (46 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Validnorf",
+       "team": "Everett Silvertips, LW",
+       "line": "3G 0A, 7 SOG, +1, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "BoooBeee Orr",
+       "team": "Everett Silvertips, RW",
+       "line": "0G 3A, 2 SOG, +1, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "Chhhew",
+       "team": "Moose Jaw Warriors, C",
+       "line": "1G 1A, 6 SOG, -1, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Locked Down: Winterhawks Blank Pats",
+     "matchup": "Regina Pats 0 @ Portland Winterhawks 3",
+     "game": "918322",
+     "html": "<p>A home win for Portland Winterhawks, 3-0 over Regina Pats, and the scoresheet spreads the credit around. Shots were 22-21 in their favour. They led after one (2-0) and never gave it back. Also on the board for Winterhawks: cabcavlax1 (1G 1A), GBR Dingurz (0G 2A). In goal, Lett m3 c00k stopped 21 of 21 for the shutout. Pats never solved it; AcidChief397 made 19 saves on 22 at the other end. Night in full: Winterhawks went 2-1-0 tonight and sit 23-29-2 (48 pts); Pats went 0-3-0 tonight and sit 10-44-0 (20 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "desiredsno3",
+       "team": "Portland Winterhawks, LW",
+       "line": "2G 1A, 8 SOG, +3, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "Lett m3 c00k",
+       "team": "Portland Winterhawks, G",
+       "line": "21 saves on 21 (1.000) SHUTOUT"
+      },
+      {
+       "n": 3,
+       "player": "GBR Dingurz",
+       "team": "Portland Winterhawks, RW",
+       "line": "0G 2A, 6 SOG, +3, 5 hits"
+      }
+     ]
+    },
+    {
+     "title": "Americans Find the Overtime Door",
+     "matchup": "Prince Albert Raiders 2 @ Tri City Americans 3 (OT)",
+     "game": "918323",
+     "html": "<p>A home overtime win for Tri City Americans, 3-2 over Prince Albert Raiders, and the scoresheet spreads the credit around. Shots were 14-17 against them, so they won on finishing, not volume. After forty minutes the eventual winners were still down 1. The third period rewrote it. Also on the board for Americans: jdowning21. (0G 2A), brunsy38 (0G 2A), LupusArctos95 (0G 1A). In goal, Crawford 50x stopped 15 of 17. Raiders got Nxsclr (1G 1A), K inG x NeymaR (1G 0A), while Stolikerr made 11 saves on 14 in the losing net. Night in full: Americans went 3-0-0 tonight and sit 31-19-4 (66 pts); Raiders went 2-0-1 tonight and sit 37-15-2 (76 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "OMG_Magro",
+       "team": "Tri City Americans, LW",
+       "line": "3G 0A, 5 SOG, +0, 4 hits"
+      },
+      {
+       "n": 2,
+       "player": "Nxsclr",
+       "team": "Prince Albert Raiders, C",
+       "line": "1G 1A, 4 SOG, +0, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "jdowning21.",
+       "team": "Tri City Americans, RW",
+       "line": "0G 2A, 6 SOG, +0, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Cougars Pull Clear of Bruins",
+     "matchup": "Chilliwack Bruins 2 @ Prince George Cougars 5",
+     "game": "918324",
+     "html": "<p>Prince George Cougars 5, Chilliwack Bruins 2. Leading the way: WassI19I (2G 2A). Shots were 22-16 in their favour. The middle frame was the hinge: they went into the third up 1. Also on the board for Cougars: ItzAverage- (2G 1A), xZainer89 (1G 3A), WHYAMISORAW (0G 1A). In goal, Rshawzie stopped 14 of 16. Bruins got Im-Rukia (1G 0A), KIINNER12 (1G 0A), while disgraziiatooo made 17 saves on 22 in the losing net. Night in full: Cougars went 3-0-0 tonight and sit 33-20-1 (67 pts); Bruins went 1-1-1 tonight and sit 25-22-7 (57 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "WassI19I",
+       "team": "Prince George Cougars, C",
+       "line": "2G 2A, 4 SOG, +2, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "ItzAverage-",
+       "team": "Prince George Cougars, RW",
+       "line": "2G 1A, 10 SOG, +2, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "xZainer89",
+       "team": "Prince George Cougars, LW",
+       "line": "1G 3A, 4 SOG, +2, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "One-Goal Margin, Rebels Edition",
+     "matchup": "Red Deer Rebels 4 @ Seattle Thunderbirds 3",
+     "game": "918325",
+     "html": "<p>A road win for Red Deer Rebels, 4-3 over Seattle Thunderbirds, and the scoresheet spreads the credit around. Shots were 22-17 in their favour. They led after one (1-0) and never gave it back. Also on the board for Rebels: sportsfreakxxii (1G 3A), majorbigmeat (1G 2A), KrunchyKow (0G 1A). In goal, Freedoms_A_Must1 stopped 14 of 17. Thunderbirds got T E A L x 17 (2G 1A), xd1abetesx (1G 2A), while Murbayn made 18 saves on 22 in the losing net. Night in full: Rebels went 2-1-0 tonight and sit 28-20-6 (62 pts); Thunderbirds went 1-2-0 tonight and sit 21-29-4 (46 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "sportsfreakxxii",
+       "team": "Red Deer Rebels, RW",
+       "line": "1G 3A, 4 SOG, +1, 3 hits"
+      },
+      {
+       "n": 2,
+       "player": "Tatious",
+       "team": "Red Deer Rebels, LW",
+       "line": "2G 1A, 8 SOG, +1, 4 hits"
+      },
+      {
+       "n": 3,
+       "player": "majorbigmeat",
+       "team": "Red Deer Rebels, C",
+       "line": "1G 2A, 6 SOG, +1, 7 hits"
+      }
+     ]
+    },
+    {
+     "title": "Four Goals From JP_029, and Medicine Hat Wins in Overtime",
+     "matchup": "Kelowna Rockets 4 @ Medicine Hat Tigers 5 (OT)",
+     "game": "918326",
+     "html": "<p>This was a shootout between two snipers, with nothing settled until overtime. <strong>JP_029</strong> scored four for Medicine Hat on 10 shots. <strong>lz0423</strong> scored three for Kelowna and added an assist. For sixty minutes they traded goals, and the scoreboard moved in lockstep: 1-1 after one, 2-2 after two, 4-4 after three. Medicine Hat scored the only goal in overtime.</p><p>The Tigers got the edge in the dirty areas. They threw 17 hits to Kelowna's 3, outshot the Rockets 25-18, and scored the game's only power-play goal (1-for-1). <strong>Rogey_87</strong> set up five goals from the right point, and <strong>Bybdouce</strong> had 1G 2A. For Kelowna, <strong>XXZERO92X</strong> had 3 assists and <strong>xKLx Legacy24</strong> added 1G 1A.</p><p><strong>Eclipse I90I</strong> gave Kelowna a chance with 20 saves on 25. <strong>XxVaughnX36</strong> made 14 saves on 18 for the win. This came earlier in the night, before his rough outing against Tri City.</p><p>Medicine Hat went 2-1-0 on the night and sits 34-18-2 (70 pts). Kelowna went 1-0-2, two overtime losses and a win, and sits 26-24-4 (56 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "JP_029",
+       "team": "Medicine Hat Tigers, RW",
+       "line": "4G, 10 SOG, 5 hits"
+      },
+      {
+       "n": 2,
+       "player": "lz0423",
+       "team": "Kelowna Rockets, LW",
+       "line": "3G 1A, 7 SOG"
+      },
+      {
+       "n": 3,
+       "player": "Rogey_87",
+       "team": "Medicine Hat Tigers, RD",
+       "line": "5A"
+      }
+     ]
+    },
+    {
+     "title": "Kings Find the Overtime Door",
+     "matchup": "Kamloops Blazers 1 @ Brandon Wheat Kings 2 (OT)",
+     "game": "918327",
+     "html": "<p>A home overtime win for Brandon Wheat Kings, 2-1 over Kamloops Blazers, and the scoresheet spreads the credit around. Shots were 19-14 in their favour. After forty minutes the eventual winners were still down 1. The third period rewrote it. Also on the board for Kings: Burgercountry09 (0G 2A), jhorne35 (0G 1A), D1ggy420 (0G 1A). In goal, Doozy Dingo stopped 13 of 14. Blazers got GwyloBear (1G 0A), deegoal89 (0G 1A), while BigCheese_35 made 17 saves on 19 in the losing net. Night in full: Kings went 1-2-0 tonight and sit 24-25-5 (53 pts); Blazers went 0-2-1 tonight and sit 23-23-8 (54 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "A_Bomb2713",
+       "team": "Brandon Wheat Kings, LD",
+       "line": "2G 0A, 4 SOG, +2, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "Burgercountry09",
+       "team": "Brandon Wheat Kings, RW",
+       "line": "0G 2A, 2 SOG, +2, 7 hits"
+      },
+      {
+       "n": 3,
+       "player": "GwyloBear",
+       "team": "Kamloops Blazers, LW",
+       "line": "1G 0A, 7 SOG, -2, 3 hits"
+      }
+     ]
+    },
+    {
+     "title": "Hitmen Watch: XxPASTRNAK88 Shuts Out the Conference's Best",
+     "matchup": "Spokane Chiefs 0 @ Calgary Hitmen 1",
+     "game": "918328",
+     "html": "<p>Spokane came into Monday the way front-runners do: 36-13-2, 74 points, top of the WHL Western race. They left Calgary with nothing to show for it. Not a goal, not a point, not a crack in <strong>XxPASTRNAK88</strong>, who stopped all 11 shots for a 1-0 shutout.</p><p>It was a patient, suffocating game, and Calgary set the terms. The Hitmen had the puck in the attacking zone for 13:06 to Spokane's 6:18 and outshot the Chiefs 18-11. Spokane won the faceoff battle 12-4, but every possession it won at the dot seemed to end in the wrong zone. Through forty minutes the scoreboard was still blank. <strong>PRKz_Jugg</strong> was holding Spokane together at the other end and finished with 17 saves on 18.</p><p>The only goal came in the third period. <strong>WhiteoutI8I</strong> scored it with his only shot of the night, assisted by <strong>Gullyrr</strong> and <strong>Koldex Bands</strong>. Gullyrr was the engine all game, with 8 shots on goal from the middle of the ice. Calgary went 0-for-2 on the power play and didn't need it.</p><p>Calgary moves to 24-20-8 and owns the scalp of the night. Spokane ended the night 1-2-0 (37-15-2).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "XxPASTRNAK88",
+       "team": "Calgary Hitmen, G",
+       "line": "11 saves on 11, shutout"
+      },
+      {
+       "n": 2,
+       "player": "WhiteoutI8I",
+       "team": "Calgary Hitmen, RW",
+       "line": "game-winning goal on 1 SOG, +1, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "Gullyrr",
+       "team": "Calgary Hitmen, C",
+       "line": "1A, 8 SOG, +1"
+      }
+     ]
+    },
+    {
+     "title": "Giants Find the Overtime Door",
+     "matchup": "Vancouver Giants 3 @ Swift Current Broncos 2 (OT)",
+     "game": "918329",
+     "html": "<p>Vancouver Giants 3, Swift Current Broncos 2 (OT). Leading the way: envy._._._._. (3G 0A). Shots were 21-12 in their favour. It was tied through regulation, and one overtime goal decided it. Also on the board for Giants: xSullylab- (0G 3A), Kelatoz (0G 2A), Greene_870897 (0G 1A). In goal, Dede_I29I stopped 10 of 12. Broncos got EyeSin_ (1G 0A), GullibleMaple5 (1G 0A), while Triniboi2003 made 18 saves on 21 in the losing net. Night in full: Giants went 3-0-0 tonight and sit 23-27-4 (50 pts); Broncos went 2-0-1 tonight and sit 26-23-5 (57 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "envy._._._._.",
+       "team": "Vancouver Giants, RW",
+       "line": "3G 0A, 9 SOG, +2, 3 hits"
+      },
+      {
+       "n": 2,
+       "player": "xSullylab-",
+       "team": "Vancouver Giants, LW",
+       "line": "0G 3A, 5 SOG, +2, 5 hits"
+      },
+      {
+       "n": 3,
+       "player": "Kelatoz",
+       "team": "Vancouver Giants, RD",
+       "line": "0G 2A, 3 SOG, +2, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Vees Pull Clear of Blades",
+     "matchup": "Penticton Vees 5 @ Saskatoon Blades 3",
+     "game": "918330",
+     "html": "<p>Penticton Vees 5, Saskatoon Blades 3. Leading the way: delucadx (2G 0A). Shots were 22-14 in their favour. It was level after two periods, and the third decided it. Also on the board for Vees: BigJay x89 (1G 2A), Canadian__Impact (1G 2A), Pufski (0G 3A). In goal, PeakzReturn stopped 11 of 14. Blades got noluck0934 (2G 0A), Steven514 (1G 0A), while imrehabilitated made 17 saves on 22 in the losing net. Night in full: Vees went 3-0-0 tonight and sit 34-15-5 (73 pts); Blades went 1-2-0 tonight and sit 19-28-7 (45 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "BigJay x89",
+       "team": "Penticton Vees, C",
+       "line": "1G 2A, 7 SOG, +3, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "delucadx",
+       "team": "Penticton Vees, LW",
+       "line": "2G 0A, 8 SOG, +3, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "Canadian__Impact",
+       "team": "Penticton Vees, RW",
+       "line": "1G 2A, 2 SOG, +3, 0 hits"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slot": "09:35pm ET",
+   "games": [
+    {
+     "title": "Sagueneens Take Care of Business",
+     "matchup": "Victoriaville Tigres 2 @ Chicoutimi Sagueneens 4",
+     "game": "918331",
+     "html": "<p>A home win for Chicoutimi Sagueneens, 4-2 over Victoriaville Tigres, and the scoresheet spreads the credit around. Shots were 25-14 in their favour. The middle frame was the hinge: they went into the third up 1. Also on the board for Sagueneens: R xYATESx77 (1G 2A), NotreDame830 (1G 1A), Styles007Qc (0G 3A). In goal, Fire ghoost7445 stopped 12 of 14. Tigres got Hellcatxx (1G 1A), xGonyou (1G 0A), while wyd_stepsis12 made 21 saves on 25 in the losing net. Night in full: Sagueneens went 2-1-0 tonight and sit 30-20-4 (64 pts); Tigres went 0-2-1 tonight and sit 26-23-5 (57 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "R xYATESx77",
+       "team": "Chicoutimi Sagueneens, LW",
+       "line": "1G 2A, 6 SOG, +2, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "l Saad x 20 l",
+       "team": "Chicoutimi Sagueneens, C",
+       "line": "2G 0A, 9 SOG, +2, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "Styles007Qc",
+       "team": "Chicoutimi Sagueneens, RD",
+       "line": "0G 3A, 2 SOG, +2, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Mooseheads Pull Clear of Armada",
+     "matchup": "Halifax Mooseheads 4 @ Blainville-Boisbriand Armada 2",
+     "game": "918332",
+     "html": "<p>A road win for Halifax Mooseheads, 4-2 over Blainville-Boisbriand Armada, and the scoresheet spreads the credit around. Shots were 20-26 against them, so they won on finishing, not volume. Forty minutes settled nothing; the game was tied going into the third. Also on the board for Mooseheads: Shobaay (1G 1A), xKillhouse (1G 1A), Thebrindlebeast (1G 0A). In goal, Brevonious stopped 24 of 26. Armada got xIKIEILJO (1G 0A), darkdany (1G 0A), while Hellesic made 16 saves on 20 in the losing net. Night in full: Mooseheads went 3-0-0 tonight and sit 33-16-5 (71 pts); Armada went 1-1-1 tonight and sit 28-23-3 (59 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "speed000racer.",
+       "team": "Halifax Mooseheads, RW",
+       "line": "1G 2A, 7 SOG, +3, 4 hits"
+      },
+      {
+       "n": 2,
+       "player": "Shobaay",
+       "team": "Halifax Mooseheads, LW",
+       "line": "1G 1A, 4 SOG, +3, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "xKillhouse",
+       "team": "Halifax Mooseheads, C",
+       "line": "1G 1A, 4 SOG, +3, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Voltigeurs Squeeze Past Islanders",
+     "matchup": "Charlottetown Islanders 1 @ Drummondville Voltigeurs 2",
+     "game": "918333",
+     "html": "<p>Drummondville Voltigeurs 2, Charlottetown Islanders 1. Leading the way: Local Booz (1G 1A). Shots were 23-13 in their favour. The middle frame was the hinge: they went into the third up 1. Also on the board for Voltigeurs: Local Skuzzy (1G 0A), ShadowGrimace (0G 1A). In goal, FINSeRe stopped 12 of 13. Islanders got alexander1032 (1G 0A), BaronVonBass (0G 1A), while blackbelt5693 made 21 saves on 23 in the losing net. Night in full: Voltigeurs went 3-0-0 tonight and sit 36-13-5 (77 pts); Islanders went 2-1-0 tonight and sit 25-22-7 (57 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Local Booz",
+       "team": "Drummondville Voltigeurs, LW",
+       "line": "1G 1A, 4 SOG, +1, 6 hits"
+      },
+      {
+       "n": 2,
+       "player": "Local Skuzzy",
+       "team": "Drummondville Voltigeurs, RW",
+       "line": "1G 0A, 7 SOG, +1, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "PDubss-",
+       "team": "Charlottetown Islanders, LD",
+       "line": "0G 1A, 1 SOG, -1, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Dogs Hold On by a Thread",
+     "matchup": "Saint John Sea Dogs 2 @ Sherbrooke Phoenix 1",
+     "game": "918334",
+     "html": "<p>PrOdIgYx8 drove it, finishing at 1G 1A as Saint John Sea Dogs beat Sherbrooke Phoenix 2-1. Shots were 20-21 against them, so they won on finishing, not volume. The middle frame was the hinge: they went into the third up 1. Also on the board for Dogs: lI Demonic II (1G 0A), xW3RMZx (0G 1A). In goal, pemm stopped 20 of 21. Phoenix got MikeTysonzTiger- (1G 0A), FireBolt9188 (0G 1A), while zombi3_4_lif3 made 18 saves on 20 in the losing net. Night in full: Dogs went 2-1-0 tonight and sit 22-26-6 (50 pts); Phoenix went 1-1-1 tonight and sit 31-15-8 (70 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "PrOdIgYx8",
+       "team": "Saint John Sea Dogs, RW",
+       "line": "1G 1A, 4 SOG, +0, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "lI Demonic II",
+       "team": "Saint John Sea Dogs, LW",
+       "line": "1G 0A, 7 SOG, +0, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "pemm",
+       "team": "Saint John Sea Dogs, G",
+       "line": "20 saves on 21 (0.952)"
+      }
+     ]
+    },
+    {
+     "title": "One-Goal Margin, Huskies Edition",
+     "matchup": "Rouyn-Noranda Huskies 2 @ Newfoundland Regiment 1",
+     "game": "918335",
+     "html": "<p>A road win for Rouyn-Noranda Huskies, 2-1 over Newfoundland Regiment, and the scoresheet spreads the credit around. Shots were 19-7 in their favour. They led after one (1-0) and never gave it back. Also on the board for Huskies: stonemaniac (1G 0A), JBev93 (0G 2A), B1GSMOK1E6381 (0G 1A). In goal, rutters717 stopped 6 of 7. Regiment got YummierScarab46 (1G 0A), superchimp99 (0G 1A), while AppaJuicee made 17 saves on 19 in the losing net. Night in full: Huskies went 2-1-0 tonight and sit 20-29-5 (45 pts); Regiment went 1-2-0 tonight and sit 10-42-2 (22 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Duggan4204",
+       "team": "Rouyn-Noranda Huskies, RW",
+       "line": "1G 1A, 5 SOG, +0, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "JBev93",
+       "team": "Rouyn-Noranda Huskies, C",
+       "line": "0G 2A, 2 SOG, +0, 4 hits"
+      },
+      {
+       "n": 3,
+       "player": "stonemaniac",
+       "team": "Rouyn-Noranda Huskies, LW",
+       "line": "1G 0A, 3 SOG, +0, 12 hits"
+      }
+     ]
+    },
+    {
+     "title": "Wildcats Take Care of Business",
+     "matchup": "Val-d'Or Foreurs 3 @ Moncton Wildcats 6",
+     "game": "918336",
+     "html": "<p>A home win for Moncton Wildcats, 6-3 over Val-d'Or Foreurs, and the scoresheet spreads the credit around. Shots were 23-8 in their favour. The tone was set early: up 1 after the first, up 3 after two. Also on the board for Wildcats: patag00niia (2G 2A), qrxssy (1G 1A), KingTriton235 (0G 2A). In goal, DUCAS I8I stopped 5 of 8. Foreurs got Sinkableloki501 (1G 2A), stl710goon (1G 2A), while The16thgunner made 17 saves on 23 in the losing net. Night in full: Wildcats went 3-0-0 tonight and sit 35-14-5 (75 pts); Foreurs went 1-2-0 tonight and sit 26-21-7 (59 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "OG-NorthernWreck",
+       "team": "Moncton Wildcats, RW",
+       "line": "3G 1A, 9 SOG, +1, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "patag00niia",
+       "team": "Moncton Wildcats, LW",
+       "line": "2G 2A, 7 SOG, +1, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "stl710goon",
+       "team": "Val-d'Or Foreurs, C",
+       "line": "1G 2A, 2 SOG, -1, 3 hits"
+      }
+     ]
+    },
+    {
+     "title": "Remparts Squeeze Past Olympiques",
+     "matchup": "Quebec Remparts 3 @ Gatineau Olympiques 2",
+     "game": "918337",
+     "html": "<p>A road win for Quebec Remparts, 3-2 over Gatineau Olympiques, and the scoresheet spreads the credit around. Shots were 14-10 in their favour. The middle frame was the hinge: they went into the third up 1. Also on the board for Remparts: Max1973-2002 (0G 2A), CokeColaJedi87 (0G 2A), xFrankxLegiTx (0G 2A). In goal, Ferland52 stopped 8 of 10. Olympiques got Buckteeyt (1G 0A), Kenabik (1G 0A), while FiLthY FORCE made 11 saves on 14 in the losing net. Night in full: Remparts went 2-1-0 tonight and sit 27-24-3 (57 pts); Olympiques went 1-2-0 tonight and sit 23-27-4 (50 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Sauceshow",
+       "team": "Quebec Remparts, RW",
+       "line": "3G 0A, 3 SOG, +1, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "CokeColaJedi87",
+       "team": "Quebec Remparts, C",
+       "line": "0G 2A, 3 SOG, +1, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "Buckteeyt",
+       "team": "Gatineau Olympiques, C",
+       "line": "1G 0A, 6 SOG, -1, 5 hits"
+      }
+     ]
+    },
+    {
+     "title": "Bonus Hockey, Bonus Point: Eagles Edge Cataractes",
+     "matchup": "Cape Breton Eagles 2 @ Shawinigan Cataractes 1 (OT)",
+     "game": "918338",
+     "html": "<p>A road overtime win for Cape Breton Eagles, 2-1 over Shawinigan Cataractes, and the scoresheet spreads the credit around. Shots were 16-12 in their favour. Sixty minutes couldn't separate them, so it went to overtime. Also on the board for Eagles: FuZe Danglzz (1G 1A), iChels (0G 1A), Jimbo_Slice093 (0G 1A). In goal, DuncanTheWalrus stopped 11 of 12. Cataractes got OWENWILSONSNO5E (1G 0A), Weins x (0G 1A), while hully17 made 14 saves on 16 in the losing net. Night in full: Eagles went 1-1-1 tonight and sit 30-21-3 (63 pts); Cataractes went 0-2-1 tonight and sit 25-24-5 (55 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "FuZe Danglzz",
+       "team": "Cape Breton Eagles, RD",
+       "line": "1G 1A, 3 SOG, +1, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "Iam3xotic",
+       "team": "Cape Breton Eagles, C",
+       "line": "1G 1A, 2 SOG, +1, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "OWENWILSONSNO5E",
+       "team": "Shawinigan Cataractes, LW",
+       "line": "1G 0A, 3 SOG, -1, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Oceanic Pull Clear of Drakkar",
+     "matchup": "Rimouski Oceanic 3 @ Baie-Comeau Drakkar 1",
+     "game": "918339",
+     "html": "<p>Bedard x I98I drove it, finishing at 2G 0A as Rimouski Oceanic beat Baie-Comeau Drakkar 3-1. Shots were 9-12 against them, so they won on finishing, not volume. The middle frame was the hinge: they went into the third up 1. Also on the board for Oceanic: xTugnutt (1G 0A), jxythegoat. (0G 3A), Bensxn24 (0G 2A). In goal, Lunaetiik stopped 11 of 12. Drakkar got Slibby2k (1G 0A), BigSchmant (0G 1A), while WhackedBike1 made 6 saves on 9 in the losing net. Night in full: Oceanic went 2-1-0 tonight and sit 39-14-1 (79 pts); Drakkar went 0-3-0 tonight and sit 24-28-2 (50 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Bedard x I98I",
+       "team": "Rimouski Oceanic, LW",
+       "line": "2G 0A, 2 SOG, +2, 3 hits"
+      },
+      {
+       "n": 2,
+       "player": "jxythegoat.",
+       "team": "Rimouski Oceanic, RW",
+       "line": "0G 3A, 2 SOG, +2, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "Bensxn24",
+       "team": "Rimouski Oceanic, RD",
+       "line": "0G 2A, 0 SOG, +2, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Erie Lets a Lead Slip, Then Takes It Back in Overtime",
+     "matchup": "Kingston Frontenacs 4 @ Erie Otters 5 (OT)",
+     "game": "918340",
+     "html": "<p>Erie had this one wrapped up. The Otters scored three times in the second period to lead 4-1 after forty minutes. Then Kingston scored three in the third. That tied it 4-4 and sent the game to overtime.</p><p>Erie won it there, and its two stars deserve equal billing. <strong>ItzChrixx</strong> scored a hat trick on four shots. <strong>v9xavr</strong> didn't score at all but had four assists and threw 15 hits, a power forward's night from start to finish. <strong>peteypipes00500</strong> added 2G 1A on 8 shots.</p><p>Kingston's rally had fuel: <strong>ROMAN95</strong> scored twice, and <strong>Lemmiwinks17</strong> (1G 2A) and <strong>ENB Jigy Wit It</strong> (1G 1A) carried the rest. But the Frontenacs went 0-for-4 on the power play. In a game decided in overtime, one more conversion would have changed everything. They outshot Erie 22-18. <strong>spacejay7</strong> made 18 saves on 22 for the win. <strong>VeryBadAtChel-X-</strong>, despite the gamertag, made 13 saves on 18.</p><p>Erie went 1-2-0 on the night and sits 29-20-5 (63 pts). Kingston went 1-1-1 and sits 27-24-3 (57 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "ItzChrixx",
+       "team": "Erie Otters, C",
+       "line": "3G on 4 SOG"
+      },
+      {
+       "n": 2,
+       "player": "v9xavr",
+       "team": "Erie Otters, LW",
+       "line": "4A, 15 hits, +1"
+      },
+      {
+       "n": 3,
+       "player": "peteypipes00500",
+       "team": "Erie Otters, RW",
+       "line": "2G 1A, 8 SOG"
+      }
+     ]
+    },
+    {
+     "title": "Storm Pull Clear of 67's",
+     "matchup": "Guelph Storm 4 @ Ottawa 67's 2",
+     "game": "918341",
+     "html": "<p>Beauregard03 drove it, finishing at 2G 1A as Guelph Storm beat Ottawa 67's 4-2. Shots were 11-15 against them, so they won on finishing, not volume. They led after one (3-0) and never gave it back. Also on the board for Storm: I2sweat97 (1G 3A), Thomas l18l (1G 1A), Alpha-33x (0G 2A). In goal, Huskroo stopped 13 of 15. 67's got l bxwzrk l (2G 0A), DarthMalak9237 (0G 2A), while xX Z3NO Xx made 7 saves on 11 in the losing net. Night in full: Storm went 3-0-0 tonight and sit 31-17-6 (68 pts); 67's went 0-3-0 tonight and sit 24-24-6 (54 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Beauregard03",
+       "team": "Guelph Storm, RW",
+       "line": "2G 1A, 3 SOG, +2, 4 hits"
+      },
+      {
+       "n": 2,
+       "player": "I2sweat97",
+       "team": "Guelph Storm, C",
+       "line": "1G 3A, 2 SOG, +2, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "Thomas l18l",
+       "team": "Guelph Storm, LW",
+       "line": "1G 1A, 4 SOG, +2, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Rangers Pull Clear of Battalion",
+     "matchup": "North Bay Battalion 1 @ Kitchener Rangers 3",
+     "game": "918342",
+     "html": "<p>II MunKey II drove it, finishing at 1G 1A as Kitchener Rangers beat North Bay Battalion 3-1. Shots were 34-13 in their favour. The first period was level, but a 1-goal cushion after two told you where it was headed. Also on the board for Rangers: BowlerFett (1G 1A), TimFairview (1G 1A), Not Raed (0G 1A). In goal, A_CapTa1N_A stopped 12 of 13. Battalion got sjul11 (1G 0A), Brandflakes29 (0G 1A), while oNitrate made 31 saves on 34 in the losing net. Night in full: Rangers went 3-0-0 tonight and sit 25-20-9 (59 pts); Battalion went 0-2-0 tonight and sit 34-17-2 (70 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "II MunKey II",
+       "team": "Kitchener Rangers, LW",
+       "line": "1G 1A, 11 SOG, +2, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "BowlerFett",
+       "team": "Kitchener Rangers, C",
+       "line": "1G 1A, 7 SOG, +2, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "TimFairview",
+       "team": "Kitchener Rangers, LD",
+       "line": "1G 1A, 5 SOG, +2, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "One-Goal Margin, Knights Edition",
+     "matchup": "Niagara IceDogs 3 @ London Knights 4",
+     "game": "918343",
+     "html": "<p>xTHx muffin dog drove it, finishing at 3G 1A as London Knights beat Niagara IceDogs 4-3. Shots were 12-21 against them, so they won on finishing, not volume. They led after one (2-0) and never gave it back. Also on the board for Knights: BestFlicks (1G 1A), ObliviousLAX (0G 2A), Mi Scusi7385 (0G 1A). In goal, Dissizznuts_88 stopped 18 of 21. IceDogs got iillegall (2G 0A), II_Prxvoke_II (1G 0A), while l9lPLAYMAKERl9l made 8 saves on 12 in the losing net. Night in full: Knights went 1-1-0 tonight and sit 24-24-5 (53 pts); IceDogs went 1-2-0 tonight and sit 24-28-2 (50 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "xTHx muffin dog",
+       "team": "London Knights, RW",
+       "line": "3G 1A, 6 SOG, +2, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "iillegall",
+       "team": "Niagara IceDogs, C",
+       "line": "2G 0A, 5 SOG, -2, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "Kevus23",
+       "team": "Niagara IceDogs, RD",
+       "line": "0G 3A, 2 SOG, -2, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "One-Goal Margin, Wolves Edition",
+     "matchup": "Sudbury Wolves 2 @ Windsor Spitfires 1",
+     "game": "918344",
+     "html": "<p>Sudbury Wolves 2, Windsor Spitfires 1. Leading the way: Codelock (2G 0A). Shots were 19-12 in their favour. The tone was set early: up 1 after the first, up 1 after two. Also on the board for Wolves: Hergy9 (0G 1A), S a u c e x91 (0G 1A), PettyWap2108 (0G 1A). In goal, NigelFromTinder stopped 11 of 12. Spitfires got MrPiezrus (1G 0A), MickeyPizzazz (0G 1A), while Na9y420 made 17 saves on 19 in the losing net. Night in full: Wolves went 2-0-1 tonight and sit 36-14-4 (76 pts); Spitfires went 1-2-0 tonight and sit 23-23-8 (54 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Codelock",
+       "team": "Sudbury Wolves, LW",
+       "line": "2G 0A, 5 SOG, +1, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "Hergy9",
+       "team": "Sudbury Wolves, C",
+       "line": "0G 1A, 6 SOG, +1, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "Im Ruddy",
+       "team": "Sudbury Wolves, RD",
+       "line": "0G 1A, 1 SOG, +1, 6 hits"
+      }
+     ]
+    },
+    {
+     "title": "Greyhounds Find the Overtime Door",
+     "matchup": "Sault Ste. Marie Greyhounds 2 @ Brantford Bulldogs 1 (OT)",
+     "game": "918345",
+     "html": "<p>xxcrosbyqc drove it, finishing at 2G 0A as Sault Ste. Marie Greyhounds beat Brantford Bulldogs 2-1 in overtime. Shots were 14-18 against them, so they won on finishing, not volume. Sixty minutes couldn't separate them, so it went to overtime. Also on the board for Greyhounds: CoachCheek (0G 1A), ii yettii (0G 1A), Hobo 0n Welfare (0G 1A). In goal, raph_dubois16 stopped 17 of 18. Bulldogs got vybin0095 (1G 0A), DirtyDangler82 (0G 1A), while jayric2 made 12 saves on 14 in the losing net. Night in full: Greyhounds went 2-1-0 tonight and sit 33-18-3 (69 pts); Bulldogs went 2-0-1 tonight and sit 30-21-3 (63 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "xxcrosbyqc",
+       "team": "Sault Ste. Marie Greyhounds, C",
+       "line": "2G 0A, 3 SOG, +1, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "vybin0095",
+       "team": "Brantford Bulldogs, LW",
+       "line": "1G 0A, 6 SOG, -1, 4 hits"
+      },
+      {
+       "n": 3,
+       "player": "raph_dubois16",
+       "team": "Sault Ste. Marie Greyhounds, G",
+       "line": "17 saves on 18 (0.944)"
+      }
+     ]
+    },
+    {
+     "title": "Attack Pull Clear of Steelheads",
+     "matchup": "Owen Sound Attack 6 @ Brampton Steelheads 4",
+     "game": "918346",
+     "html": "<p>A road win for Owen Sound Attack, 6-4 over Brampton Steelheads, and the scoresheet spreads the credit around. Shots were 14-13 in their favour. The middle frame was the hinge: they went into the third up 1. Also on the board for Attack: Springdogg (2G 1A), RUSH_CHELL (1G 4A), TwoToke_Smokin21 (0G 4A). In goal, jasonx1755 stopped 9 of 13. Steelheads got x-TagarnaK-x (2G 2A), x-Mando-x- (1G 2A), while RAMER5440 made 8 saves on 14 in the losing net. Night in full: Attack went 2-1-0 tonight and sit 27-21-6 (60 pts); Steelheads went 1-2-0 tonight and sit 29-20-5 (63 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "RUSH_CHELL",
+       "team": "Owen Sound Attack, RW",
+       "line": "1G 4A, 3 SOG, +2, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "Habsyyy11",
+       "team": "Owen Sound Attack, C",
+       "line": "3G 0A, 5 SOG, +2, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "x-TagarnaK-x",
+       "team": "Brampton Steelheads, RW",
+       "line": "2G 2A, 3 SOG, -2, 3 hits"
+      }
+     ]
+    },
+    {
+     "title": "Locked Down: Generals Blank Firebirds",
+     "matchup": "Flint Firebirds 0 @ Oshawa Generals 4",
+     "game": "918347",
+     "html": "<p>Oshawa Generals 4, Flint Firebirds 0. Leading the way: pulse4k (2G 0A). Shots were 21-20 in their favour. The tone was set early: up 1 after the first, up 2 after two. Also on the board for Generals: Burtxn l77l (1G 2A), xodyxody (1G 1A), BROLLZ28 (0G 3A). In goal, Frizyal8er stopped 20 of 20 for the shutout. Firebirds never solved it; BuzzFerda69 made 17 saves on 21 at the other end. Night in full: Generals went 1-2-0 tonight and sit 19-31-4 (42 pts); Firebirds went 1-2-0 tonight and sit 30-18-6 (66 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Burtxn l77l",
+       "team": "Oshawa Generals, RW",
+       "line": "1G 2A, 8 SOG, +2, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "Frizyal8er",
+       "team": "Oshawa Generals, G",
+       "line": "20 saves on 20 (1.000) SHUTOUT"
+      },
+      {
+       "n": 3,
+       "player": "pulse4k",
+       "team": "Oshawa Generals, RD",
+       "line": "2G 0A, 2 SOG, +2, 3 hits"
+      }
+     ]
+    },
+    {
+     "title": "Sting Pull Clear of Petes",
+     "matchup": "Peterborough Petes 2 @ Sarnia Sting 4",
+     "game": "918348",
+     "html": "<p>Sarnia Sting 4, Peterborough Petes 2. Leading the way: morbid_chaos15 (3G 0A). Shots were 17-19 against them, so they won on finishing, not volume. The tone was set early: up 3 after the first, up 3 after two. Also on the board for Sting: Mxlsyy (1G 1A), DemidoV_93_ch (0G 4A), H3 SprX (0G 1A). In goal, Butcher73_Qc stopped 17 of 19. Petes got DODGEredneck69 (1G 1A), x Hutsonov x (1G 1A), while HOMELANDER2434 made 13 saves on 17 in the losing net. Night in full: Sting went 3-0-0 tonight and sit 29-16-9 (67 pts); Petes went 2-1-0 tonight and sit 22-27-5 (49 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "morbid_chaos15",
+       "team": "Sarnia Sting, LW",
+       "line": "3G 0A, 5 SOG, +2, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "DemidoV_93_ch",
+       "team": "Sarnia Sting, C",
+       "line": "0G 4A, 2 SOG, +2, 5 hits"
+      },
+      {
+       "n": 3,
+       "player": "Mxlsyy",
+       "team": "Sarnia Sting, RW",
+       "line": "1G 1A, 5 SOG, +2, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Colts Take Care of Business",
+     "matchup": "Saginaw Spirit 5 @ Barrie Colts 7",
+     "game": "918349",
+     "html": "<p>McMiller75 drove it, finishing at 5G 1A as Barrie Colts beat Saginaw Spirit 7-5. Shots were 25-16 in their favour. They led after one (4-0) and never gave it back. Also on the board for Colts: Pboolin (1G 4A), Shawn1593 (1G 3A), FellaFactory (0G 3A). In goal, Trixinity1 stopped 11 of 16. Spirit got I Richy 19 I (3G 1A), Pitch x 20 (1G 3A), while LG LEGEND9860 made 18 saves on 25 in the losing net. Night in full: Colts went 2-1-0 tonight and sit 38-14-2 (78 pts); Spirit went 0-3-0 tonight and sit 27-20-7 (61 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "McMiller75",
+       "team": "Barrie Colts, LW",
+       "line": "5G 1A, 9 SOG, +1, 3 hits"
+      },
+      {
+       "n": 2,
+       "player": "Pboolin",
+       "team": "Barrie Colts, C",
+       "line": "1G 4A, 8 SOG, +1, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "I Richy 19 I",
+       "team": "Saginaw Spirit, LW",
+       "line": "3G 1A, 4 SOG, -1, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Blades Run Away From Winterhawks",
+     "matchup": "Saskatoon Blades 6 @ Portland Winterhawks 2",
+     "game": "918350",
+     "html": "<p>noluck0934 drove it, finishing at 3G 2A as Saskatoon Blades beat Portland Winterhawks 6-2. Shots were 17-22 against them, so they won on finishing, not volume. The first period was level, but a 2-goal cushion after two told you where it was headed. Also on the board for Blades: Steven514 (2G 2A), MaximeQc (1G 4A), patrickisonfire (0G 1A). In goal, imrehabilitated stopped 20 of 22. Winterhawks got cabcavlax1 (1G 1A), GBR Dingurz (1G 1A), while Lett m3 c00k made 11 saves on 17 in the losing net. Night in full: Blades went 1-2-0 tonight and sit 19-28-7 (45 pts); Winterhawks went 2-1-0 tonight and sit 23-29-2 (48 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "noluck0934",
+       "team": "Saskatoon Blades, C",
+       "line": "3G 2A, 4 SOG, +4, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "MaximeQc",
+       "team": "Saskatoon Blades, LW",
+       "line": "1G 4A, 2 SOG, +4, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "Steven514",
+       "team": "Saskatoon Blades, RW",
+       "line": "2G 2A, 8 SOG, +4, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Broncos Run Away From Silvertips",
+     "matchup": "Swift Current Broncos 6 @ Everett Silvertips 2",
+     "game": "918351",
+     "html": "<p>geocustom drove it, finishing at 3G 3A as Swift Current Broncos beat Everett Silvertips 6-2. Shots were 18-13 in their favour. The middle frame was the hinge: they went into the third up 3. Also on the board for Broncos: soibelrhxc (2G 0A), EyeSin_ (1G 3A), Mayor_35 (0G 2A). In goal, Triniboi2003 stopped 11 of 13. Silvertips got ATG_72 (1G 1A), BoooBeee Orr (1G 1A), while BiggsRippit made 12 saves on 18 in the losing net. Night in full: Broncos went 2-0-1 tonight and sit 26-23-5 (57 pts); Silvertips went 1-2-0 tonight and sit 12-38-4 (28 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "geocustom",
+       "team": "Swift Current Broncos, RW",
+       "line": "3G 3A, 4 SOG, +4, 3 hits"
+      },
+      {
+       "n": 2,
+       "player": "EyeSin_",
+       "team": "Swift Current Broncos, C",
+       "line": "1G 3A, 2 SOG, +4, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "soibelrhxc",
+       "team": "Swift Current Broncos, LW",
+       "line": "2G 0A, 4 SOG, +4, 4 hits"
+      }
+     ]
+    },
+    {
+     "title": "Rockets Run Away From Hurricanes",
+     "matchup": "Lethbridge Hurricanes 1 @ Kelowna Rockets 7",
+     "game": "918352",
+     "html": "<p>Kelowna Rockets 7, Lethbridge Hurricanes 1. Leading the way: lz0423 (3G 3A). Shots were 29-7 in their favour. The tone was set early: up 3 after the first, up 3 after two. Also on the board for Rockets: xKLx Legacy24 (2G 3A), Magsin EH (1G 5A), XXZERO92X (1G 2A). In goal, Eclipse I90I stopped 6 of 7. Hurricanes got lllG1lll (1G 0A), feldube (0G 1A), while xI Eris Ix made 22 saves on 29 in the losing net. Night in full: Rockets went 1-0-2 tonight and sit 26-24-4 (56 pts); Hurricanes went 1-2-0 tonight and sit 26-21-7 (59 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "lz0423",
+       "team": "Kelowna Rockets, LW",
+       "line": "3G 3A, 6 SOG, +5, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "Magsin EH",
+       "team": "Kelowna Rockets, C",
+       "line": "1G 5A, 7 SOG, +5, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "xKLx Legacy24",
+       "team": "Kelowna Rockets, RW",
+       "line": "2G 3A, 5 SOG, +5, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Vees Hold On by a Thread",
+     "matchup": "Edmonton Oil Kings 2 @ Penticton Vees 3",
+     "game": "918353",
+     "html": "<p>delucadx drove it, finishing at 2G 1A as Penticton Vees beat Edmonton Oil Kings 3-2. Shots were 24-18 in their favour. The tone was set early: up 1 after the first, up 1 after two. Also on the board for Vees: GamingLobster0 (1G 0A), Canadian__Impact (0G 3A), BigJay x89 (0G 1A). In goal, PeakzReturn stopped 16 of 18. Kings got mrmagoo (1G 0A), MillaTime11029 (1G 0A), while x11-Ninja made 21 saves on 24 in the losing net. Night in full: Vees went 3-0-0 tonight and sit 34-15-5 (73 pts); Kings went 1-2-0 tonight and sit 30-17-7 (67 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "delucadx",
+       "team": "Penticton Vees, LW",
+       "line": "2G 1A, 7 SOG, +0, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "Canadian__Impact",
+       "team": "Penticton Vees, RW",
+       "line": "0G 3A, 7 SOG, +0, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "B_Real1337",
+       "team": "Edmonton Oil Kings, RW",
+       "line": "0G 2A, 6 SOG, +0, 3 hits"
+      }
+     ]
+    },
+    {
+     "title": "Hitmen Watch: Two Shots From xZainer89 Swing a Coin-Flip in Prince George",
+     "matchup": "Calgary Hitmen 1 @ Prince George Cougars 2",
+     "game": "918354",
+     "html": "<p>On paper it was a draw. Shots were 13-13. Calgary had more of the puck (10:11 attack time to 7:50) and won the faceoff circle 15-5. But <strong>xZainer89</strong> scored twice, and a game this tight only needs one player to break it.</p><p>The Cougars struck first, with xZainer89 scoring the only goal of the first period. The second period was a trade: <strong>Gullyrr</strong> scored Calgary's goal, set up by <strong>WhiteoutI8I</strong> and <strong>Koldex Bands</strong>, and xZainer89 scored his second. The 2-1 score then survived a scoreless third. <strong>Rshawzie</strong> closed the door with 12 saves on 13. Calgary's 0-for-2 power play is the line to circle: it was the chance to turn a coin-flip into a win, and it didn't land.</p><p>The Cougars played the more physical game, out-hitting Calgary 15-9, with <strong>Tibbytwo</strong> alone throwing 12 hits from the blue line alongside his assist. <strong>XxPASTRNAK88</strong> was solid again with 11 saves on 13, but the Hitmen managed just one goal of support.</p><p>Prince George went 3-0-0 on the night and sits 33-20-1. Calgary slipped to 24-21-8 at that point.</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "xZainer89",
+       "team": "Prince George Cougars, LW",
+       "line": "2G (including the winner), 5 SOG, +1"
+      },
+      {
+       "n": 2,
+       "player": "Tibbytwo",
+       "team": "Prince George Cougars, RD",
+       "line": "1A, 12 hits, +1"
+      },
+      {
+       "n": 3,
+       "player": "Gullyrr",
+       "team": "Calgary Hitmen, C",
+       "line": "1G, 4 SOG, 6 hits"
+      }
+     ]
+    },
+    {
+     "title": "Wild Pull Clear of Kings",
+     "matchup": "Brandon Wheat Kings 1 @ Wenatchee Wild 3",
+     "game": "918355",
+     "html": "<p>A home win for Wenatchee Wild, 3-1 over Brandon Wheat Kings, and the scoresheet spreads the credit around. Shots were 20-17 in their favour. The middle frame was the hinge: they went into the third up 2. Also on the board for Wild: Brofitz1218 (1G 0A), Anchors_82 (0G 1A), Sinksmasher (0G 1A). In goal, CelebriniNHL stopped 16 of 17. Kings got jhorne35 (1G 0A), Burgercountry09 (0G 1A), while Doozy Dingo made 17 saves on 20 in the losing net. Night in full: Wild went 1-2-0 tonight and sit 24-28-2 (50 pts); Kings went 1-2-0 tonight and sit 24-25-5 (53 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "ZeroDilemmaZ",
+       "team": "Wenatchee Wild, RW",
+       "line": "2G 0A, 5 SOG, +1, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "Brofitz1218",
+       "team": "Wenatchee Wild, RD",
+       "line": "1G 0A, 2 SOG, +1, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "CelebriniNHL",
+       "team": "Wenatchee Wild, G",
+       "line": "16 saves on 17 (0.941)"
+      }
+     ]
+    },
+    {
+     "title": "Same Score, Second Victim: Victoria 7, Moose Jaw 0",
+     "matchup": "Victoria Royals 7 @ Moose Jaw Warriors 0",
+     "game": "918356",
+     "html": "<p>An hour after shutting out Lethbridge 7-0, the Royals did it again in Moose Jaw.</p><p>This time <strong>pickmasta</strong> took over, scoring a hat trick from the left point and adding three assists, six points at +7. <strong>ProximalAbyss41</strong> had 2G 3A and <strong>redz_shifterr</strong> had 1G 4A. Victoria led 3-0 after one, 4-0 after two, and scored three more in the third for good measure. The Royals outshot Moose Jaw 20-10, won 18 of 24 faceoffs and kept the puck in the Warriors' zone for 13:28.</p><p><strong>nothargi4200</strong> made 10 saves for his second shutout of the night, and Victoria's goaltender had now gone two full games without allowing a goal. The streak ended only against Calgary in the 10:10 slot. <strong>RYDS0204</strong> made 13 saves on 20 for Moose Jaw, and the Warriors' only power play came up empty.</p><p>Victoria went 3-0-0 on the night and sits 31-21-2 (64 pts). Moose Jaw went 0-2-1 and sits 21-29-4 (46 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "pickmasta",
+       "team": "Victoria Royals, LD",
+       "line": "3G 3A, 6 SOG, +7"
+      },
+      {
+       "n": 2,
+       "player": "ProximalAbyss41",
+       "team": "Victoria Royals, C",
+       "line": "2G 3A, +7"
+      },
+      {
+       "n": 3,
+       "player": "nothargi4200",
+       "team": "Victoria Royals, G",
+       "line": "10 saves on 10, shutout"
+      }
+     ]
+    },
+    {
+     "title": "Rebels Take Care of Business",
+     "matchup": "Spokane Chiefs 3 @ Red Deer Rebels 5",
+     "game": "918357",
+     "html": "<p>A home win for Red Deer Rebels, 5-3 over Spokane Chiefs, and the scoresheet spreads the credit around. Shots were 20-13 in their favour. It was level after two periods, and the third decided it. Also on the board for Rebels: Tatious (2G 3A), Babayaka4420 (0G 1A), KrunchyKow (0G 1A). In goal, Freedoms_A_Must1 stopped 10 of 13. Chiefs got Saddzy- (2G 1A), skope77 (1G 0A), while PRKz_Jugg made 15 saves on 20 in the losing net. Night in full: Rebels went 2-1-0 tonight and sit 28-20-6 (62 pts); Chiefs went 1-2-0 tonight and sit 37-15-2 (76 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Tatious",
+       "team": "Red Deer Rebels, LW",
+       "line": "2G 3A, 7 SOG, +2, 3 hits"
+      },
+      {
+       "n": 2,
+       "player": "sportsfreakxxii",
+       "team": "Red Deer Rebels, RW",
+       "line": "3G 0A, 5 SOG, +2, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "Saddzy-",
+       "team": "Spokane Chiefs, LW",
+       "line": "2G 1A, 4 SOG, -2, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Seven. OMG_Magro Scores Seven.",
+     "matchup": "Medicine Hat Tigers 2 @ Tri City Americans 10",
+     "game": "918358",
+     "html": "<p>Some nights a sniper gets hot. Other nights the net just keeps opening for him. <strong>OMG_Magro</strong> scored seven goals against Medicine Hat, on 11 shots, and added an assist for an eight-point night at +8. It's the kind of line you read twice to make sure it's real.</p><p>Tri City was relentless from the opening faceoff: 3-0 after one, 7-0 after two, and three more in the third. The Tigers didn't score until the third period, when <strong>Bybdouce</strong> scored both of their goals. By then the game had long since become a highlight reel. <strong>jdowning21.</strong> was the playmaker, with 1G and 7A, while <strong>LupusArctos95</strong> (2G 3A) and <strong>brunsy38</strong> (5A) piled on. Tri City outshot Medicine Hat 24-16 and held the attacking zone for 11:32 to 7:41.</p><p>Medicine Hat tried to hit its way back in, winning the hits battle 19-6, but you can't check a puck that's already behind your goalie. <strong>XxVaughnX36</strong> faced 24 shots and allowed 10. <strong>Crawford 50x</strong> made 14 saves on 16 at the other end.</p><p>This was the centrepiece of a perfect night for the Americans: 3-0-0 with 19 goals, now 31-19-4 (66 pts). Medicine Hat went 2-1-0 and sits 34-18-2 (70 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "OMG_Magro",
+       "team": "Tri City Americans, LW",
+       "line": "7G 1A, 11 SOG, +8"
+      },
+      {
+       "n": 2,
+       "player": "jdowning21.",
+       "team": "Tri City Americans, RW",
+       "line": "1G 7A, +8"
+      },
+      {
+       "n": 3,
+       "player": "LupusArctos95",
+       "team": "Tri City Americans, C",
+       "line": "2G 3A, 6 SOG, +8"
+      }
+     ]
+    },
+    {
+     "title": "Bonus Hockey, Bonus Point: Giants Edge Bruins",
+     "matchup": "Vancouver Giants 4 @ Chilliwack Bruins 3 (OT)",
+     "game": "918359",
+     "html": "<p>A road overtime win for Vancouver Giants, 4-3 over Chilliwack Bruins, and the scoresheet spreads the credit around. Shots were 17-28 against them, so they won on finishing, not volume. After forty minutes the eventual winners were still down 1. The third period rewrote it. Also on the board for Giants: envy._._._._. (2G 1A), Kelatoz (0G 1A). In goal, Dede_I29I stopped 25 of 28. Bruins got iCLassYxTTV (1G 2A), KIINNER12 (1G 1A), while disgraziiatooo made 13 saves on 17 in the losing net. Night in full: Giants went 3-0-0 tonight and sit 23-27-4 (50 pts); Bruins went 1-1-1 tonight and sit 25-22-7 (57 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "xSullylab-",
+       "team": "Vancouver Giants, LW",
+       "line": "2G 2A, 5 SOG, +0, 4 hits"
+      },
+      {
+       "n": 2,
+       "player": "iCLassYxTTV",
+       "team": "Chilliwack Bruins, LW",
+       "line": "1G 2A, 3 SOG, +0, 7 hits"
+      },
+      {
+       "n": 3,
+       "player": "envy._._._._.",
+       "team": "Vancouver Giants, RW",
+       "line": "2G 1A, 3 SOG, +0, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Thunderbirds Pull Clear of Pats",
+     "matchup": "Seattle Thunderbirds 6 @ Regina Pats 4",
+     "game": "918360",
+     "html": "<p>Seattle Thunderbirds 6, Regina Pats 4. Leading the way: Curts6 (4G 0A). Shots were 30-19 in their favour. The tone was set early: up 1 after the first, up 1 after two. Also on the board for Thunderbirds: T E A L x 17 (1G 4A), xd1abetesx (1G 2A), xSalda- (0G 4A). In goal, Murbayn stopped 15 of 19. Pats got Spartan24warrior (2G 0A), Gage0906 (1G 2A), while AcidChief397 made 24 saves on 30 in the losing net. Night in full: Thunderbirds went 1-2-0 tonight and sit 21-29-4 (46 pts); Pats went 0-3-0 tonight and sit 10-44-0 (20 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "T E A L x 17",
+       "team": "Seattle Thunderbirds, RW",
+       "line": "1G 4A, 16 SOG, +2, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "Curts6",
+       "team": "Seattle Thunderbirds, LW",
+       "line": "4G 0A, 6 SOG, +2, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "xSalda-",
+       "team": "Seattle Thunderbirds, LD",
+       "line": "0G 4A, 0 SOG, +2, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Raiders Take Care of Business",
+     "matchup": "Kamloops Blazers 2 @ Prince Albert Raiders 4",
+     "game": "918361",
+     "html": "<p>Prince Albert Raiders 4, Kamloops Blazers 2. Leading the way: Nxsclr (2G 1A). Shots were 21-10 in their favour. The tone was set early: up 3 after the first, up 3 after two. Also on the board for Raiders: K inG x NeymaR (1G 2A), JJBrewer16 (1G 2A), ItsThibs (0G 2A). In goal, Stolikerr stopped 8 of 10. Blazers got GwyloBear (2G 0A), ReliableMoose (0G 2A), while BigCheese_35 made 17 saves on 21 in the losing net. Night in full: Raiders went 2-0-1 tonight and sit 37-15-2 (76 pts); Blazers went 0-2-1 tonight and sit 23-23-8 (54 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Nxsclr",
+       "team": "Prince Albert Raiders, C",
+       "line": "2G 1A, 4 SOG, +2, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "K inG x NeymaR",
+       "team": "Prince Albert Raiders, RW",
+       "line": "1G 2A, 7 SOG, +2, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "JJBrewer16",
+       "team": "Prince Albert Raiders, LD",
+       "line": "1G 2A, 2 SOG, +2, 3 hits"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slot": "10:10pm ET",
+   "games": [
+    {
+     "title": "Voltigeurs Take Care of Business",
+     "matchup": "Saint John Sea Dogs 3 @ Drummondville Voltigeurs 5",
+     "game": "918362",
+     "html": "<p>Local Booz drove it, finishing at 3G 1A as Drummondville Voltigeurs beat Saint John Sea Dogs 5-3. Shots were 16-17 against them, so they won on finishing, not volume. It was level after two periods, and the third decided it. Also on the board for Voltigeurs: Local Skuzzy (1G 2A), ShadowGrimace (1G 1A), Spicy-Big-Dad-9 (0G 1A). In goal, FINSeRe stopped 14 of 17. Dogs got lI Demonic II (2G 0A), xW3RMZx (1G 0A), while pemm made 11 saves on 16 in the losing net. Night in full: Voltigeurs went 3-0-0 tonight and sit 36-13-5 (77 pts); Dogs went 2-1-0 tonight and sit 22-26-6 (50 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Local Booz",
+       "team": "Drummondville Voltigeurs, LW",
+       "line": "3G 1A, 8 SOG, +1, 6 hits"
+      },
+      {
+       "n": 2,
+       "player": "Local Skuzzy",
+       "team": "Drummondville Voltigeurs, RW",
+       "line": "1G 2A, 4 SOG, +1, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "lI Demonic II",
+       "team": "Saint John Sea Dogs, LW",
+       "line": "2G 0A, 6 SOG, -1, 5 hits"
+      }
+     ]
+    },
+    {
+     "title": "Sauceshow's Debut: Signed at 2:50, Eight Points by Bedtime",
+     "matchup": "Quebec Remparts 9 @ Val-d'Or Foreurs 3",
+     "game": "918363",
+     "html": "<p>At 2:50 PM on Monday, the league wire carried one line: <em>Sauceshow has been randomly assigned to the Remparts.</em> By the end of the 10:10 slot, <strong>Sauceshow</strong> had 3 goals and 5 assists in a 9-3 rout of Val-d'Or, and Quebec's newest player was the talk of the night.</p><p>The Remparts were up 4-1 after one period and 8-1 after two. <strong>Max1973-2002</strong> matched Sauceshow's hat trick and added 4 assists for seven points. <strong>CokeColaJedi87</strong> had 2G 2A. Defencemen <strong>xFrankxLegiTx</strong> (3A) and <strong>NitrousMorencyy</strong> (1G 3A) kept the puck moving. Quebec had the attacking zone for 13:32 to Val-d'Or's 5:26 and outshot the Foreurs 24-15.</p><p>Val-d'Or made something of a third period that was already lost, winning it 2-1, and its power play went 2-for-3. <strong>Staguts</strong> scored twice and <strong>Sinkableloki501</strong> had a goal and an assist. <strong>The16thgunner</strong> faced 24 shots and allowed 9. <strong>Ferland52</strong> made 12 saves on 15 for the win.</p><p>Quebec went 2-1-0 on the night and sits 27-24-3 (57 pts). Val-d'Or went 1-2-0 and sits 26-21-7 (59 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Sauceshow",
+       "team": "Quebec Remparts, RW",
+       "line": "3G 5A, 5 SOG, +8"
+      },
+      {
+       "n": 2,
+       "player": "Max1973-2002",
+       "team": "Quebec Remparts, LW",
+       "line": "3G 4A, 7 SOG, +8"
+      },
+      {
+       "n": 3,
+       "player": "CokeColaJedi87",
+       "team": "Quebec Remparts, C",
+       "line": "2G 2A, 5 hits, +7"
+      }
+     ]
+    },
+    {
+     "title": "Moncton Climbs Out of a Hole, Then Wins It in Overtime",
+     "matchup": "Blainville-Boisbriand Armada 5 @ Moncton Wildcats 6 (OT)",
+     "game": "918364",
+     "html": "<p>After forty minutes, Moncton's perfect night was in trouble. Blainville-Boisbriand scored three unanswered goals in the second period and led 5-2. The Wildcats had already won twice. Now they had twenty minutes to save the sweep.</p><p>They needed all of it. Moncton scored three in the third to tie it 5-5 and force overtime, then scored the only goal of OT. Two wingers carried the comeback, and their lines are almost identical: <strong>patag00niia</strong> had 3G 2A and <strong>OG-NorthernWreck</strong> had 3G 2A, each with 6 shots. Centre <strong>qrxssy</strong> set up both of them and finished with six assists.</p><p>Blainville-Boisbriand earned better than one point. <strong>darkdany</strong> (2G 3A), <strong>Dxspzi</strong> (2G 2A) and <strong>xIKIEILJO</strong> (1G 3A) built that second-period lead. But Moncton ground the game down, controlling the attacking zone 10:35 to 5:13 and outshooting the Armada 22-16. <strong>DUCAS I8I</strong> made 11 saves on 16 for the win. <strong>Hellesic</strong> stopped 16 of 22 at the other end.</p><p>Moncton went 3-0-0 on the night and sits 35-14-5 (75 pts). Blainville-Boisbriand went 1-1-1 and sits 28-23-3 (59 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "qrxssy",
+       "team": "Moncton Wildcats, C",
+       "line": "6A"
+      },
+      {
+       "n": 2,
+       "player": "OG-NorthernWreck",
+       "team": "Moncton Wildcats, RW",
+       "line": "3G 2A, 6 SOG"
+      },
+      {
+       "n": 3,
+       "player": "patag00niia",
+       "team": "Moncton Wildcats, LW",
+       "line": "3G 2A, 6 SOG"
+      }
+     ]
+    },
+    {
+     "title": "Islanders Find the Overtime Door",
+     "matchup": "Victoriaville Tigres 3 @ Charlottetown Islanders 4 (OT)",
+     "game": "918365",
+     "html": "<p>Charlottetown Islanders 4, Victoriaville Tigres 3 (OT). Leading the way: alexander1032 (2G 1A). Shots were 24-8 in their favour. It took a comeback: the Islanders trailed 1 after two periods and rallied in the third. Also on the board for Islanders: BaronVonBass (1G 1A), PDubss- (1G 1A), FreshCodyDaGoat (0G 3A). In goal, blackbelt5693 stopped 5 of 8. Tigres got Hellcatxx (1G 1A), UnhealthySCR (1G 1A), while wyd_stepsis12 made 20 saves on 24 in the losing net. Night in full: Islanders went 2-1-0 tonight and sit 25-22-7 (57 pts); Tigres went 0-2-1 tonight and sit 26-23-5 (57 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "alexander1032",
+       "team": "Charlottetown Islanders, RW",
+       "line": "2G 1A, 5 SOG, +0, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "FreshCodyDaGoat",
+       "team": "Charlottetown Islanders, C",
+       "line": "0G 3A, 9 SOG, +0, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "PDubss-",
+       "team": "Charlottetown Islanders, LD",
+       "line": "1G 1A, 2 SOG, +0, 3 hits"
+      }
+     ]
+    },
+    {
+     "title": "Phoenix Take Care of Business",
+     "matchup": "Sherbrooke Phoenix 3 @ Baie-Comeau Drakkar 1",
+     "game": "918366",
+     "html": "<p>Sherbrooke Phoenix 3, Baie-Comeau Drakkar 1. Leading the way: Trumpz_Right_Ear (2G 0A). Shots were 21-18 in their favour. They led after one (2-0) and never gave it back. Also on the board for Phoenix: FireBolt9188 (1G 0A), MikeTysonzTiger- (0G 1A), KnightLax27 (0G 1A). In goal, zombi3_4_lif3 stopped 17 of 18. Drakkar got Slibby2k (1G 0A), BigSchmant (0G 1A), while WhackedBike1 made 18 saves on 21 in the losing net. Night in full: Phoenix went 1-1-1 tonight and sit 31-15-8 (70 pts); Drakkar went 0-3-0 tonight and sit 24-28-2 (50 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Trumpz_Right_Ear",
+       "team": "Sherbrooke Phoenix, RW",
+       "line": "2G 0A, 11 SOG, +2, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "KnightLax27",
+       "team": "Sherbrooke Phoenix, LD",
+       "line": "0G 1A, 1 SOG, +2, 4 hits"
+      },
+      {
+       "n": 3,
+       "player": "FireBolt9188",
+       "team": "Sherbrooke Phoenix, LW",
+       "line": "1G 0A, 2 SOG, +2, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Locked Down: Oceanic Blank Cataractes",
+     "matchup": "Shawinigan Cataractes 0 @ Rimouski Oceanic 8",
+     "game": "918367",
+     "html": "<p>jxythegoat. drove it, finishing at 3G 4A as Rimouski Oceanic beat Shawinigan Cataractes 8-0. Shots were 21-8 in their favour. They led after one (3-0) and never gave it back. Also on the board for Oceanic: Bedard x I98I (3G 2A), xTugnutt (1G 3A), Lebkee (1G 3A). In goal, Lunaetiik stopped 8 of 8 for the shutout. Cataractes never solved it; hully17 made 13 saves on 21 at the other end. Night in full: Oceanic went 2-1-0 tonight and sit 39-14-1 (79 pts); Cataractes went 0-2-1 tonight and sit 25-24-5 (55 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "jxythegoat.",
+       "team": "Rimouski Oceanic, C",
+       "line": "3G 4A, 4 SOG, +7, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "Bedard x I98I",
+       "team": "Rimouski Oceanic, RW",
+       "line": "3G 2A, 6 SOG, +5, 5 hits"
+      },
+      {
+       "n": 3,
+       "player": "xTugnutt",
+       "team": "Rimouski Oceanic, LW",
+       "line": "1G 3A, 7 SOG, +7, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Locked Down: Olympiques Blank Eagles",
+     "matchup": "Gatineau Olympiques 7 @ Cape Breton Eagles 0",
+     "game": "918368",
+     "html": "<p>Gatineau Olympiques 7, Cape Breton Eagles 0. Leading the way: YaDayz-_- (3G 3A). Shots were 17-7 in their favour. They led after one (2-0) and never gave it back. Also on the board for Olympiques: Buckteeyt (2G 1A), El Jaacho (1G 5A), Kenabik (1G 0A). In goal, FiLthY FORCE stopped 7 of 7 for the shutout. Eagles never solved it; DuncanTheWalrus made 10 saves on 17 at the other end. Night in full: Olympiques went 1-2-0 tonight and sit 23-27-4 (50 pts); Eagles went 1-1-1 tonight and sit 30-21-3 (63 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "YaDayz-_-",
+       "team": "Gatineau Olympiques, LW",
+       "line": "3G 3A, 6 SOG, +7, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "El Jaacho",
+       "team": "Gatineau Olympiques, RW",
+       "line": "1G 5A, 1 SOG, +6, 4 hits"
+      },
+      {
+       "n": 3,
+       "player": "Buckteeyt",
+       "team": "Gatineau Olympiques, C",
+       "line": "2G 1A, 7 SOG, +7, 6 hits"
+      }
+     ]
+    },
+    {
+     "title": "Sagueneens Run Away From Regiment",
+     "matchup": "Newfoundland Regiment 2 @ Chicoutimi Sagueneens 7",
+     "game": "918369",
+     "html": "<p>NotreDame830 drove it, finishing at 5G 0A as Chicoutimi Sagueneens beat Newfoundland Regiment 7-2. Shots were 26-14 in their favour. Forty minutes settled nothing; the game was tied going into the third. Also on the board for Sagueneens: l Saad x 20 l (1G 3A), R xYATESx77 (1G 1A), Heise Goat (0G 3A). In goal, Fire ghoost7445 stopped 12 of 14. Regiment got YummierScarab46 (2G 0A), superchimp99 (0G 2A), while AppaJuicee made 19 saves on 26 in the losing net. Night in full: Sagueneens went 2-1-0 tonight and sit 30-20-4 (64 pts); Regiment went 1-2-0 tonight and sit 10-42-2 (22 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "NotreDame830",
+       "team": "Chicoutimi Sagueneens, RW",
+       "line": "5G 0A, 9 SOG, +3, 3 hits"
+      },
+      {
+       "n": 2,
+       "player": "l Saad x 20 l",
+       "team": "Chicoutimi Sagueneens, C",
+       "line": "1G 3A, 7 SOG, +3, 7 hits"
+      },
+      {
+       "n": 3,
+       "player": "Heise Goat",
+       "team": "Chicoutimi Sagueneens, LD",
+       "line": "0G 3A, 3 SOG, +3, 6 hits"
+      }
+     ]
+    },
+    {
+     "title": "Mooseheads Hold On by a Thread",
+     "matchup": "Rouyn-Noranda Huskies 1 @ Halifax Mooseheads 2",
+     "game": "918370",
+     "html": "<p>A home win for Halifax Mooseheads, 2-1 over Rouyn-Noranda Huskies, and the scoresheet spreads the credit around. Shots were 9-21 against them, so they won on finishing, not volume. The tone was set early: up 2 after the first, up 1 after two. Also on the board for Mooseheads: xKillhouse (1G 0A), Shobaay (0G 1A), xBjorn_16 (0G 1A). In goal, Brevonious stopped 20 of 21. Huskies got Duggan4204 (1G 0A), stonemaniac (0G 1A), while rutters717 made 7 saves on 9 in the losing net. Night in full: Mooseheads went 3-0-0 tonight and sit 33-16-5 (71 pts); Huskies went 2-1-0 tonight and sit 20-29-5 (45 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "speed000racer.",
+       "team": "Halifax Mooseheads, RW",
+       "line": "1G 1A, 7 SOG, +1, 5 hits"
+      },
+      {
+       "n": 2,
+       "player": "Brevonious",
+       "team": "Halifax Mooseheads, G",
+       "line": "20 saves on 21 (0.952)"
+      },
+      {
+       "n": 3,
+       "player": "xKillhouse",
+       "team": "Halifax Mooseheads, C",
+       "line": "1G 0A, 1 SOG, +1, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Flood Gates: Sting 6, IceDogs 1",
+     "matchup": "Sarnia Sting 6 @ Niagara IceDogs 1",
+     "game": "918371",
+     "html": "<p>A road win for Sarnia Sting, 6-1 over Niagara IceDogs, and the scoresheet spreads the credit around. Shots were 28-9 in their favour. The tone was set early: up 2 after the first, up 4 after two. Also on the board for Sting: Mxlsyy (3G 2A), H3 SprX (0G 2A), morbid_chaos15 (0G 1A). In goal, Butcher73_Qc stopped 8 of 9. IceDogs got iillegall (1G 0A), Kevus23 (0G 1A), while l9lPLAYMAKERl9l made 22 saves on 28 in the losing net. Night in full: Sting went 3-0-0 tonight and sit 29-16-9 (67 pts); IceDogs went 1-2-0 tonight and sit 24-28-2 (50 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "DemidoV_93_ch",
+       "team": "Sarnia Sting, C",
+       "line": "3G 2A, 8 SOG, +4, 7 hits"
+      },
+      {
+       "n": 2,
+       "player": "Mxlsyy",
+       "team": "Sarnia Sting, RW",
+       "line": "3G 2A, 7 SOG, +4, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "H3 SprX",
+       "team": "Sarnia Sting, LD",
+       "line": "0G 2A, 0 SOG, +4, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Rangers Pull Clear of Colts",
+     "matchup": "Barrie Colts 4 @ Kitchener Rangers 6",
+     "game": "918372",
+     "html": "<p>II MunKey II drove it, finishing at 4G 0A as Kitchener Rangers beat Barrie Colts 6-4. Shots were 16-10 in their favour. They led after one (2-0) and never gave it back. Also on the board for Rangers: BowlerFett (2G 3A), TimFairview (0G 4A), Not Raed (0G 2A). In goal, A_CapTa1N_A stopped 6 of 10. Colts got McMiller75 (2G 2A), Shawn1593 (1G 3A), while Trixinity1 made 10 saves on 16 in the losing net. Night in full: Rangers went 3-0-0 tonight and sit 25-20-9 (59 pts); Colts went 2-1-0 tonight and sit 38-14-2 (78 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "II MunKey II",
+       "team": "Kitchener Rangers, LW",
+       "line": "4G 0A, 4 SOG, +3, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "BowlerFett",
+       "team": "Kitchener Rangers, C",
+       "line": "2G 3A, 3 SOG, +3, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "TimFairview",
+       "team": "Kitchener Rangers, LD",
+       "line": "0G 4A, 1 SOG, +3, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Greyhounds Pull Clear of Steelheads",
+     "matchup": "Brampton Steelheads 1 @ Sault Ste. Marie Greyhounds 4",
+     "game": "918373",
+     "html": "<p>Sault Ste. Marie Greyhounds 4, Brampton Steelheads 1. Leading the way: ii yettii (2G 1A). Shots were 16-19 against them, so they won on finishing, not volume. The tone was set early: up 2 after the first, up 3 after two. Also on the board for Greyhounds: CoachCheek (1G 2A), xxcrosbyqc (1G 0A), SupremeBannock (0G 2A). In goal, raph_dubois16 stopped 18 of 19. Steelheads got x-TagarnaK-x (1G 0A), PartyDrew (0G 1A), while RAMER5440 made 12 saves on 16 in the losing net. Night in full: Greyhounds went 2-1-0 tonight and sit 33-18-3 (69 pts); Steelheads went 1-2-0 tonight and sit 29-20-5 (63 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "ii yettii",
+       "team": "Sault Ste. Marie Greyhounds, RW",
+       "line": "2G 1A, 3 SOG, +2, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "CoachCheek",
+       "team": "Sault Ste. Marie Greyhounds, LW",
+       "line": "1G 2A, 5 SOG, +2, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "SupremeBannock",
+       "team": "Sault Ste. Marie Greyhounds, RD",
+       "line": "0G 2A, 0 SOG, +2, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Flood Gates: Wolves 8, Otters 1",
+     "matchup": "Erie Otters 1 @ Sudbury Wolves 8",
+     "game": "918374",
+     "html": "<p>Sudbury Wolves 8, Erie Otters 1. Leading the way: Hergy9 (5G 2A). Shots were 24-11 in their favour. They led after one (1-0) and never gave it back. Also on the board for Wolves: Codelock (1G 3A), S a u c e x91 (1G 3A), PettyWap2108 (1G 1A). In goal, NigelFromTinder stopped 10 of 11. Otters got v9xavr (1G 0A), peteypipes00500 (0G 1A), while spacejay7 made 16 saves on 24 in the losing net. Night in full: Wolves went 2-0-1 tonight and sit 36-14-4 (76 pts); Otters went 1-2-0 tonight and sit 29-20-5 (63 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Hergy9",
+       "team": "Sudbury Wolves, C",
+       "line": "5G 2A, 9 SOG, +5, 3 hits"
+      },
+      {
+       "n": 2,
+       "player": "Codelock",
+       "team": "Sudbury Wolves, LW",
+       "line": "1G 3A, 9 SOG, +5, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "S a u c e x91",
+       "team": "Sudbury Wolves, RW",
+       "line": "1G 3A, 3 SOG, +5, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Storm Hold On by a Thread",
+     "matchup": "Oshawa Generals 3 @ Guelph Storm 4",
+     "game": "918375",
+     "html": "<p>Beauregard03 drove it, finishing at 2G 2A as Guelph Storm beat Oshawa Generals 4-3. Shots were 19-11 in their favour. After forty minutes the eventual winners were still down 2. The third period rewrote it. Also on the board for Storm: Thomas l18l (1G 2A), I2sweat97 (1G 2A), Alpha-33x (0G 1A). In goal, Huskroo stopped 8 of 11. Generals got xodyxody (1G 2A), BROLLZ28 (1G 1A), while Frizyal8er made 15 saves on 19 in the losing net. Night in full: Storm went 3-0-0 tonight and sit 31-17-6 (68 pts); Generals went 1-2-0 tonight and sit 19-31-4 (42 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "Beauregard03",
+       "team": "Guelph Storm, RW",
+       "line": "2G 2A, 4 SOG, +1, 4 hits"
+      },
+      {
+       "n": 2,
+       "player": "xodyxody",
+       "team": "Oshawa Generals, LW",
+       "line": "1G 2A, 7 SOG, -1, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "I2sweat97",
+       "team": "Guelph Storm, C",
+       "line": "1G 2A, 3 SOG, +1, 3 hits"
+      }
+     ]
+    },
+    {
+     "title": "London Knights at North Bay Battalion: No Final Posted",
+     "html": "<p><em>Game 918376</em></p><p>This is the one game missing from the drop. It was still listed as scheduled with no score, and there's no box score in the capture (92 of 93 games included). It will get a recap once a final is posted.</p>",
+     "stars": []
+    },
+    {
+     "title": "Flood Gates: Firebirds 6, 67's 2",
+     "matchup": "Ottawa 67's 2 @ Flint Firebirds 6",
+     "game": "918377",
+     "html": "<p>Flint Firebirds 6, Ottawa 67's 2. Leading the way: Saintshockey688 (3G 1A). Shots were 34-18 in their favour. They led after one (1-0) and never gave it back. Also on the board for Firebirds: BosomeMustache (2G 3A), HellaciousDragon (1G 4A). In goal, BuzzFerda69 stopped 16 of 18. 67's got l bxwzrk l (2G 0A), purge_ace1117 (0G 1A), while xX Z3NO Xx made 28 saves on 34 in the losing net. Night in full: Firebirds went 1-2-0 tonight and sit 30-18-6 (66 pts); 67's went 0-3-0 tonight and sit 24-24-6 (54 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "BosomeMustache",
+       "team": "Flint Firebirds, RW",
+       "line": "2G 3A, 9 SOG, +2, 11 hits"
+      },
+      {
+       "n": 2,
+       "player": "HellaciousDragon",
+       "team": "Flint Firebirds, C",
+       "line": "1G 4A, 12 SOG, +2, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "Saintshockey688",
+       "team": "Flint Firebirds, LW",
+       "line": "3G 1A, 10 SOG, +2, 3 hits"
+      }
+     ]
+    },
+    {
+     "title": "Frontenacs Squeeze Past Attack",
+     "matchup": "Kingston Frontenacs 2 @ Owen Sound Attack 1",
+     "game": "918378",
+     "html": "<p>ENB Jigy Wit It drove it, finishing at 2G 0A as Kingston Frontenacs beat Owen Sound Attack 2-1. Shots were 13-19 against them, so they won on finishing, not volume. It was level after two periods, and the third decided it. Also on the board for Frontenacs: ROMAN95 (0G 2A), Lemmiwinks17 (0G 2A). In goal, VeryBadAtChel-X- stopped 18 of 19. Attack got Habsyyy11 (1G 0A), TwoToke_Smokin21 (0G 1A), while jasonx1755 made 11 saves on 13 in the losing net. Night in full: Frontenacs went 1-1-1 tonight and sit 27-24-3 (57 pts); Attack went 2-1-0 tonight and sit 27-21-6 (60 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "ENB Jigy Wit It",
+       "team": "Kingston Frontenacs, RW",
+       "line": "2G 0A, 6 SOG, +1, 7 hits"
+      },
+      {
+       "n": 2,
+       "player": "Lemmiwinks17",
+       "team": "Kingston Frontenacs, C",
+       "line": "0G 2A, 2 SOG, +1, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "ROMAN95",
+       "team": "Kingston Frontenacs, LW",
+       "line": "0G 2A, 3 SOG, +1, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Peterborough Survives an Eleven-Goal Shootout in Saginaw",
+     "matchup": "Peterborough Petes 6 @ Saginaw Spirit 5",
+     "game": "918379",
+     "html": "<p>Eleven goals, three hat tricks and a power-play battle all the way. Peterborough won it 6-5, and it was every bit as chaotic as that sounds.</p><p>The Petes jumped out 3-1 in the first period, Saginaw pulled within 4-3 after two, and the teams split the third 2-2. Peterborough had two hat tricks of its own. <strong>x Hutsonov x</strong> had 3G 2A on 9 shots with 7 hits. <strong>Redemption16676</strong> had 3G 2A on 8 shots. <strong>DODGEredneck69</strong> set up five goals. The Petes dominated the faceoff circle 26-8, outshot Saginaw 26-14 and went 2-for-3 on the power play.</p><p>Saginaw kept answering. <strong>I Richy 19 I</strong> scored a hat trick, <strong>Pitch x 20</strong> had 2G 2A, and <strong>Mr_grind09</strong> had five assists. <strong>LG LEGEND9860</strong> made 20 saves on 26 to keep it close. <strong>HOMELANDER2434</strong> made 9 saves on 14 for the win. With shot totals that lopsided, the score should not have been this close.</p><p>Peterborough went 2-1-0 on the night and sits 22-27-5 (49 pts). Saginaw went 0-3-0 and sits 27-20-7 (61 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "x Hutsonov x",
+       "team": "Peterborough Petes, RW",
+       "line": "3G 2A, 9 SOG, 7 hits"
+      },
+      {
+       "n": 2,
+       "player": "Redemption16676",
+       "team": "Peterborough Petes, C",
+       "line": "3G 2A, 8 SOG"
+      },
+      {
+       "n": 3,
+       "player": "I Richy 19 I",
+       "team": "Saginaw Spirit, LW",
+       "line": "3G 1A, 6 SOG"
+      }
+     ]
+    },
+    {
+     "title": "DirtyDangler82 Lives Up to the Name",
+     "matchup": "Windsor Spitfires 1 @ Brantford Bulldogs 9",
+     "game": "918380",
+     "html": "<p>Some gamertags are a promise. <strong>DirtyDangler82</strong> kept his against Windsor: five goals and four assists, nine points on nine shots, +7. Brantford won 9-1, and the score flatters nobody but the Bulldogs.</p><p>The game came in two bursts. Brantford scored four in the first period, then neither team scored in the second. Windsor's possession held up surprisingly well, with 10:52 in the attacking zone to Brantford's 9:32. Then the third period: five more Brantford goals to one for Windsor. That split says everything about this game. The Spitfires had the puck, but Brantford got the scoring chances, outshooting them 24-11.</p><p><strong>vybin0095</strong> added four goals and two assists. <strong>Mr H Biden</strong> had five assists from the right point and <strong>EDGEx22</strong> had four. <strong>MickeyPizzazz</strong> scored Windsor's only goal. <strong>Na9y420</strong> faced 24 shots and allowed 9. <strong>jayric2</strong> made 10 saves on 11.</p><p>Brantford finished the night 2-0-1 and sits 30-21-3 (63 pts). Windsor went 1-2-0 and sits 23-23-8 (54 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "DirtyDangler82",
+       "team": "Brantford Bulldogs, RW",
+       "line": "5G 4A, 9 SOG, +7"
+      },
+      {
+       "n": 2,
+       "player": "vybin0095",
+       "team": "Brantford Bulldogs, LW",
+       "line": "4G 2A, 8 SOG, +7"
+      },
+      {
+       "n": 3,
+       "player": "Mr H Biden",
+       "team": "Brantford Bulldogs, RD",
+       "line": "5A, +7"
+      }
+     ]
+    },
+    {
+     "title": "Chiefs Pull Clear of Kings",
+     "matchup": "Brandon Wheat Kings 1 @ Spokane Chiefs 3",
+     "game": "918381",
+     "html": "<p>skope77 drove it, finishing at 1G 1A as Spokane Chiefs beat Brandon Wheat Kings 3-1. Shots were 19-18 in their favour. They led after one (1-0) and never gave it back. Also on the board for Chiefs: Saddzy- (1G 0A), milkymits (1G 0A), Unh0lyxSn1pe (0G 2A). In goal, PRKz_Jugg stopped 17 of 18. Kings got BigSadBruins (1G 0A), jhorne35 (0G 1A), while Doozy Dingo made 16 saves on 19 in the losing net. Night in full: Chiefs went 1-2-0 tonight and sit 37-15-2 (76 pts); Kings went 1-2-0 tonight and sit 24-25-5 (53 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "skope77",
+       "team": "Spokane Chiefs, RW",
+       "line": "1G 1A, 3 SOG, +3, 0 hits"
+      },
+      {
+       "n": 2,
+       "player": "Unh0lyxSn1pe",
+       "team": "Spokane Chiefs, RD",
+       "line": "0G 2A, 3 SOG, +3, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "milkymits",
+       "team": "Spokane Chiefs, C",
+       "line": "1G 0A, 1 SOG, +3, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Vees Win It After Sixty",
+     "matchup": "Moose Jaw Warriors 2 @ Penticton Vees 3 (OT)",
+     "game": "918382",
+     "html": "<p>Penticton Vees 3, Moose Jaw Warriors 2 (OT). Leading the way: delucadx (3G 0A). Shots were 28-12 in their favour. It took a comeback: the Vees trailed 1 after two periods and rallied in the third. Also on the board for Vees: Canadian__Impact (0G 3A), BigJay x89 (0G 1A), GamingLobster0 (0G 1A). In goal, PeakzReturn stopped 10 of 12. Warriors got I Scribbzy I (2G 0A), AksCookieMonster (0G 2A), while RYDS0204 made 25 saves on 28 in the losing net. Night in full: Vees went 3-0-0 tonight and sit 34-15-5 (73 pts); Warriors went 0-2-1 tonight and sit 21-29-4 (46 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "delucadx",
+       "team": "Penticton Vees, LW",
+       "line": "3G 0A, 9 SOG, +1, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "Canadian__Impact",
+       "team": "Penticton Vees, RW",
+       "line": "0G 3A, 6 SOG, +1, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "I Scribbzy I",
+       "team": "Moose Jaw Warriors, LW",
+       "line": "2G 0A, 3 SOG, -1, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Winterhawks Pull Clear of Kings",
+     "matchup": "Portland Winterhawks 3 @ Edmonton Oil Kings 1",
+     "game": "918383",
+     "html": "<p>A road win for Portland Winterhawks, 3-1 over Edmonton Oil Kings, and the scoresheet spreads the credit around. Shots were 9-18 against them, so they won on finishing, not volume. The middle frame was the hinge: they went into the third up 1. Also on the board for Winterhawks: GBR Dingurz (1G 0A), l Rebel 2 l (0G 2A). In goal, Lett m3 c00k stopped 17 of 18. Kings got B_Real1337 (1G 0A), CroatKing11 (0G 1A), while x11-Ninja made 6 saves on 9 in the losing net. Night in full: Winterhawks went 2-1-0 tonight and sit 23-29-2 (48 pts); Kings went 1-2-0 tonight and sit 30-17-7 (67 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "desiredsno3",
+       "team": "Portland Winterhawks, LW",
+       "line": "2G 0A, 3 SOG, +1, 4 hits"
+      },
+      {
+       "n": 2,
+       "player": "l Rebel 2 l",
+       "team": "Portland Winterhawks, LD",
+       "line": "0G 2A, 1 SOG, +1, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "GBR Dingurz",
+       "team": "Portland Winterhawks, RW",
+       "line": "1G 0A, 3 SOG, +1, 4 hits"
+      }
+     ]
+    },
+    {
+     "title": "Cougars Take Care of Business",
+     "matchup": "Prince George Cougars 6 @ Regina Pats 4",
+     "game": "918384",
+     "html": "<p>Prince George Cougars 6, Regina Pats 4. Leading the way: WassI19I (4G 2A). Shots were 23-22 in their favour. They led after one (2-1) and never gave it back. Also on the board for Cougars: xZainer89 (1G 4A), ItzAverage- (1G 2A), WHYAMISORAW (0G 2A). In goal, Rshawzie stopped 18 of 22. Pats got Gage0906 (3G 0A), Jessejen (1G 1A), while AcidChief397 made 17 saves on 23 in the losing net. Night in full: Cougars went 3-0-0 tonight and sit 33-20-1 (67 pts); Pats went 0-3-0 tonight and sit 10-44-0 (20 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "WassI19I",
+       "team": "Prince George Cougars, C",
+       "line": "4G 2A, 9 SOG, +3, 4 hits"
+      },
+      {
+       "n": 2,
+       "player": "xZainer89",
+       "team": "Prince George Cougars, LW",
+       "line": "1G 4A, 4 SOG, +3, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "Gage0906",
+       "team": "Regina Pats, LW",
+       "line": "3G 0A, 10 SOG, -3, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Broncos Win It After Sixty",
+     "matchup": "Kelowna Rockets 3 @ Swift Current Broncos 4 (OT)",
+     "game": "918385",
+     "html": "<p>A home overtime win for Swift Current Broncos, 4-3 over Kelowna Rockets, and the scoresheet spreads the credit around. Shots were 21-15 in their favour. The middle frame was the hinge: they went into the third up 1. Also on the board for Broncos: geocustom (1G 2A), EyeSin_ (0G 3A). In goal, Triniboi2003 stopped 12 of 15. Rockets got Magsin EH (1G 2A), xKLx Legacy24 (1G 1A), while Eclipse I90I made 17 saves on 21 in the losing net. Night in full: Broncos went 2-0-1 tonight and sit 26-23-5 (57 pts); Rockets went 1-0-2 tonight and sit 26-24-4 (56 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "soibelrhxc",
+       "team": "Swift Current Broncos, LW",
+       "line": "3G 1A, 8 SOG, +2, 5 hits"
+      },
+      {
+       "n": 2,
+       "player": "geocustom",
+       "team": "Swift Current Broncos, RW",
+       "line": "1G 2A, 5 SOG, +2, 2 hits"
+      },
+      {
+       "n": 3,
+       "player": "Magsin EH",
+       "team": "Kelowna Rockets, C",
+       "line": "1G 2A, 2 SOG, -2, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Americans Run Away From Blades",
+     "matchup": "Tri City Americans 6 @ Saskatoon Blades 2",
+     "game": "918386",
+     "html": "<p>A road win for Tri City Americans, 6-2 over Saskatoon Blades, and the scoresheet spreads the credit around. Shots were 16-31 against them, so they won on finishing, not volume. The first period was level, but a 1-goal cushion after two told you where it was headed. Also on the board for Americans: LupusArctos95 (2G 2A), jdowning21. (0G 5A), brunsy38 (0G 2A). In goal, Crawford 50x stopped 29 of 31. Blades got noluck0934 (1G 1A), Steven514 (1G 0A), while imrehabilitated made 10 saves on 16 in the losing net. Night in full: Americans went 3-0-0 tonight and sit 31-19-4 (66 pts); Blades went 1-2-0 tonight and sit 19-28-7 (45 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "OMG_Magro",
+       "team": "Tri City Americans, LW",
+       "line": "4G 2A, 7 SOG, +4, 7 hits"
+      },
+      {
+       "n": 2,
+       "player": "LupusArctos95",
+       "team": "Tri City Americans, C",
+       "line": "2G 2A, 4 SOG, +4, 1 hit"
+      },
+      {
+       "n": 3,
+       "player": "jdowning21.",
+       "team": "Tri City Americans, RW",
+       "line": "0G 5A, 3 SOG, +4, 0 hits"
+      }
+     ]
+    },
+    {
+     "title": "Tigers Take Care of Business",
+     "matchup": "Seattle Thunderbirds 4 @ Medicine Hat Tigers 7",
+     "game": "918387",
+     "html": "<p>Medicine Hat Tigers 7, Seattle Thunderbirds 4. Leading the way: JP_029 (4G 0A). Shots were 24-13 in their favour. The first period was level, but a 1-goal cushion after two told you where it was headed. Also on the board for Tigers: lLittleNicky12l (2G 1A), Bybdouce (1G 2A), Rogey_87 (0G 2A). In goal, XxVaughnX36 stopped 9 of 13. Thunderbirds got T E A L x 17 (2G 1A), Curts6 (1G 1A), while Murbayn made 17 saves on 24 in the losing net. Night in full: Tigers went 2-1-0 tonight and sit 34-18-2 (70 pts); Thunderbirds went 1-2-0 tonight and sit 21-29-4 (46 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "JP_029",
+       "team": "Medicine Hat Tigers, RW",
+       "line": "4G 0A, 8 SOG, +4, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "Bybdouce",
+       "team": "Medicine Hat Tigers, LW",
+       "line": "1G 2A, 6 SOG, +4, 7 hits"
+      },
+      {
+       "n": 3,
+       "player": "lLittleNicky12l",
+       "team": "Medicine Hat Tigers, C",
+       "line": "2G 1A, 2 SOG, +4, 1 hit"
+      }
+     ]
+    },
+    {
+     "title": "Bruins Run Away From Blazers",
+     "matchup": "Chilliwack Bruins 6 @ Kamloops Blazers 1",
+     "game": "918388",
+     "html": "<p>A road win for Chilliwack Bruins, 6-1 over Kamloops Blazers, and the scoresheet spreads the credit around. Shots were 20-6 in their favour. The tone was set early: up 5 after the first, up 5 after two. Also on the board for Bruins: iCLassYxTTV (2G 4A), Im-Rukia (1G 3A), DANNYZJ7854 (0G 1A). In goal, disgraziiatooo stopped 5 of 6. Blazers got deegoal89 (1G 0A), ReliableMoose (0G 1A), while BigCheese_35 made 14 saves on 20 in the losing net. Night in full: Bruins went 1-1-1 tonight and sit 25-22-7 (57 pts); Blazers went 0-2-1 tonight and sit 23-23-8 (54 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "iCLassYxTTV",
+       "team": "Chilliwack Bruins, LW",
+       "line": "2G 4A, 7 SOG, +4, 7 hits"
+      },
+      {
+       "n": 2,
+       "player": "KIINNER12",
+       "team": "Chilliwack Bruins, RW",
+       "line": "3G 2A, 6 SOG, +4, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "Im-Rukia",
+       "team": "Chilliwack Bruins, C",
+       "line": "1G 3A, 2 SOG, +4, 4 hits"
+      }
+     ]
+    },
+    {
+     "title": "Hitmen Watch: Calgary Trades Punches With the Night's Juggernaut, and Loses the Last Exchange",
+     "matchup": "Calgary Hitmen 4 @ Victoria Royals 6",
+     "game": "918389",
+     "html": "<p>Victoria spent Monday night erasing opponents. The Royals beat Lethbridge 7-0 and Moose Jaw 7-0, and nobody scored on <strong>nothargi4200</strong> until Calgary showed up in the 10:10 slot. The Hitmen scored four times on him in one game, and it still wasn't enough.</p><p>Through two periods this was a real fight, tied 3-3. <strong>Gullyrr</strong> (2G 2A) and <strong>WhiteoutI8I</strong> (2G 1A) kept answering, Calgary converted its only power play (1-for-1), and nothargi4200 finished with 8 saves on 12. Then the third period went Victoria's way, 3-1. The Royals' top unit simply would not be denied. <strong>pickmasta</strong> ran the game from the left point with 1G and 5A. <strong>ProximalAbyss41</strong> had 2G and 3A. <strong>redz_shifterr</strong> scored a hat trick and added an assist on 7 shots. All three finished +3.</p><p>Calgary was outshot 17-12 and outhit 9-3, and spent 6:48 in the attacking zone to Victoria's 10:14. <strong>XxPASTRNAK88</strong> made 11 saves on 17 in his third start of the night. <strong>Koldex Bands</strong> (2A) and <strong>slang07</strong> (2A) helped drive the offence.</p><p>Victoria finished the night 3-0-0 (31-21-2, 64 pts). Calgary ends the night at 24-22-8 (56 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "pickmasta",
+       "team": "Victoria Royals, LD",
+       "line": "1G 5A, +3, 6 hits"
+      },
+      {
+       "n": 2,
+       "player": "redz_shifterr",
+       "team": "Victoria Royals, RW",
+       "line": "3G 1A, 7 SOG, +3"
+      },
+      {
+       "n": 3,
+       "player": "Gullyrr",
+       "team": "Calgary Hitmen, C",
+       "line": "2G 2A in a losing effort"
+      }
+     ]
+    },
+    {
+     "title": "Flood Gates: Raiders 8, Silvertips 2",
+     "matchup": "Everett Silvertips 2 @ Prince Albert Raiders 8",
+     "game": "918390",
+     "html": "<p>A home win for Prince Albert Raiders, 8-2 over Everett Silvertips, and the scoresheet spreads the credit around. Shots were 24-16 in their favour. The first period was level, but a 2-goal cushion after two told you where it was headed. Also on the board for Raiders: Nxsclr (2G 4A), ItsThibs (2G 0A), XRay Banz (1G 1A). In goal, Stolikerr stopped 14 of 16. Silvertips got BoooBeee Orr (1G 1A), Validnorf (1G 0A), while BiggsRippit made 16 saves on 24 in the losing net. Night in full: Raiders went 2-0-1 tonight and sit 37-15-2 (76 pts); Silvertips went 1-2-0 tonight and sit 12-38-4 (28 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "K inG x NeymaR",
+       "team": "Prince Albert Raiders, RW",
+       "line": "3G 3A, 8 SOG, +7, 1 hit"
+      },
+      {
+       "n": 2,
+       "player": "Nxsclr",
+       "team": "Prince Albert Raiders, C",
+       "line": "2G 4A, 9 SOG, +7, 0 hits"
+      },
+      {
+       "n": 3,
+       "player": "JJBrewer16",
+       "team": "Prince Albert Raiders, LD",
+       "line": "0G 5A, 2 SOG, +7, 9 hits"
+      }
+     ]
+    },
+    {
+     "title": "Giants Run Away From Rebels",
+     "matchup": "Red Deer Rebels 2 @ Vancouver Giants 7",
+     "game": "918391",
+     "html": "<p>Vancouver Giants 7, Red Deer Rebels 2. Leading the way: xSullylab- (3G 2A). Shots were 18-23 against them, so they won on finishing, not volume. The period-by-period split on the LG page doesn't add up to the final for this game, so this recap doesn't go period by period. Also on the board for Giants: Greene_870897 (2G 2A), envy._._._._. (1G 4A), Kelatoz (1G 1A). In goal, Dede_I29I stopped 21 of 23. Rebels got sportsfreakxxii (1G 1A), majorbigmeat (1G 0A), while Freedoms_A_Must1 made 11 saves on 18 in the losing net. Night in full: Giants went 3-0-0 tonight and sit 23-27-4 (50 pts); Rebels went 2-1-0 tonight and sit 28-20-6 (62 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "xSullylab-",
+       "team": "Vancouver Giants, LW",
+       "line": "3G 2A, 5 SOG, +4, 2 hits"
+      },
+      {
+       "n": 2,
+       "player": "envy._._._._.",
+       "team": "Vancouver Giants, RW",
+       "line": "1G 4A, 5 SOG, +4, 6 hits"
+      },
+      {
+       "n": 3,
+       "player": "Greene_870897",
+       "team": "Vancouver Giants, C",
+       "line": "2G 2A, 5 SOG, +4, 2 hits"
+      }
+     ]
+    },
+    {
+     "title": "Hurricanes Pull Clear of Wild",
+     "matchup": "Wenatchee Wild 2 @ Lethbridge Hurricanes 5",
+     "game": "918392",
+     "html": "<p>Lethbridge Hurricanes 5, Wenatchee Wild 2. Leading the way: HECK215 (3G 0A). Shots were 23-11 in their favour. The first period was level, but a 2-goal cushion after two told you where it was headed. Also on the board for Hurricanes: XxHERCULExX x66 (2G 1A), lllG1lll (0G 4A), NotSoIRISHmick1 (0G 4A). In goal, xI Eris Ix stopped 9 of 11. Wild got Anchors_82 (2G 0A), Sinksmasher (0G 1A), while CelebriniNHL made 18 saves on 23 in the losing net. Night in full: Hurricanes went 1-2-0 tonight and sit 26-21-7 (59 pts); Wild went 1-2-0 tonight and sit 24-28-2 (50 pts).</p>",
+     "stars": [
+      {
+       "n": 1,
+       "player": "HECK215",
+       "team": "Lethbridge Hurricanes, RW",
+       "line": "3G 0A, 8 SOG, +2, 3 hits"
+      },
+      {
+       "n": 2,
+       "player": "XxHERCULExX x66",
+       "team": "Lethbridge Hurricanes, C",
+       "line": "2G 1A, 4 SOG, +2, 3 hits"
+      },
+      {
+       "n": 3,
+       "player": "lllG1lll",
+       "team": "Lethbridge Hurricanes, LW",
+       "line": "0G 4A, 6 SOG, +2, 0 hits"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "threeStarsTitle": "League Three Stars of the Night"
+}

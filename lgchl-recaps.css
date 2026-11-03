@@ -1,0 +1,35 @@
+/* LGCHL Night in Review (lgchl-recaps.js). Reuses .wu-text / .wu-weeks styling. Classes prefixed rc-. */
+.rc-body { display: grid; gap: 14px; }
+.rc-top { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 860px) { .rc-top { grid-template-columns: 1fr; } }
+.rc-block { background: linear-gradient(160deg, rgba(30,33,38,.94), rgba(9,10,12,.96)); border: 1px solid var(--line, #2a2d33); padding: 16px 0 4px; }
+.rc-kicker { display: flex; align-items: center; gap: 10px; font-family: var(--f-ui); font-weight: 600; font-size: 16px; letter-spacing: .18em; text-transform: uppercase; color: #c9d1da; margin: 0 20px 12px; }
+.rc-kicker img { width: 34px; height: 34px; object-fit: contain; }
+.rc-num { padding-left: 4px; }
+.rc-intro > summary, .rc-game > summary { list-style: none; cursor: pointer; }
+.rc-intro > summary::-webkit-details-marker, .rc-game > summary::-webkit-details-marker { display: none; }
+.rc-intro { padding: 0; }
+.rc-intro > summary { padding: 12px 20px; font-family: var(--f-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--mute, #a9a7a0); font-size: 15px; }
+.rc-h { font-family: var(--f-display, inherit); font-size: clamp(24px, 2.8vw, 34px); color: var(--bone, #ece8df); margin: 10px 0 0; text-transform: uppercase; }
+.rc-filter { display: flex; flex-wrap: wrap; gap: 8px; }
+.rc-filter button { font-family: var(--f-ui); font-weight: 600; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute, #a9a7a0); background: linear-gradient(180deg, #1a1d22, #0d0f12); border: 1px solid var(--line, #2a2d33); padding: 7px 12px; cursor: pointer; }
+.rc-filter button[aria-pressed="true"] { color: var(--bone, #ece8df); border-color: #6f7884; box-shadow: inset 0 -2px 0 #a9b3bf; }
+.rc-slot-h { font-family: var(--f-ui); letter-spacing: .18em; text-transform: uppercase; color: #a9b3bf; font-size: 15px; margin: 8px 0; border-bottom: 1px solid rgba(255,255,255,.08); padding-bottom: 6px; }
+.rc-list { display: grid; gap: 6px; }
+.rc-block .rc-list { margin: 0 20px 14px; }
+.rc-game { background: rgba(12,13,16,.9); border: 1px solid var(--line, #2a2d33); position: relative; scroll-margin-top: 110px; }
+.rc-game > summary { padding: 12px 44px 12px 16px; display: grid; gap: 2px; }
+.rc-game > summary::after { content: "+"; position: absolute; right: 16px; top: 12px; font-size: 24px; color: #a9b3bf; }
+.rc-game[open] > summary::after { content: "\2013"; }
+.rc-match { font-family: var(--f-ui); font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute, #a9a7a0); }
+.rc-title { font-family: var(--f-display, inherit); font-size: clamp(19px, 2vw, 24px); line-height: 1.15; color: var(--bone, #ece8df); }
+.rc-game .wu-text { padding: 0 16px 16px; }
+.rc-stars { list-style: none; padding: 0 !important; margin: 0; display: grid; gap: 6px; }
+.rc-stars li { display: grid; grid-template-columns: 54px 74px auto 1fr; gap: 4px 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.rc-star { color: #ece8df; letter-spacing: 1px; font-size: 14px; }
+.rc-ord { font-family: var(--f-ui); text-transform: uppercase; letter-spacing: .12em; font-size: 13px; color: #a9b3bf; }
+.rc-team { color: var(--mute, #a9a7a0); font-size: 14px; }
+.rc-line { grid-column: 3 / -1; color: #d6d3cc; font-size: 15px; }
+.rc-note { color: var(--mute, #a9a7a0); font-style: italic; }
+@media (max-width: 520px) { .rc-stars li { grid-template-columns: 48px 1fr; } .rc-stars li .rc-team, .rc-stars li .rc-line { grid-column: 1 / -1; } .rc-ord { display: none; } }
+#lgRecaps { scroll-margin-top: 110px; }

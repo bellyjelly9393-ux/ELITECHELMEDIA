@@ -17,6 +17,8 @@
 <script src="hitmen-radio-studio.js?v=20261029-lg1" defer></script>
 <link rel="stylesheet" href="lgchl-writeups.css?v=20261021-1">
 <script src="lgchl-writeups.js?v=20261021-1" defer></script>
+<link rel="stylesheet" href="lgchl-recaps.css?v=20261103-1">
+<script src="lgchl-recaps.js?v=20261103-1" defer></script>
 <script src="hitman-nightly.js?v=20261025-p" defer></script>
 <link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script><link rel="stylesheet" href="lgchl-studio.css?v=20261102-officialraces1">
 </head>
@@ -147,6 +149,18 @@
     </div>
     <div class="hn-arch" data-hn-archive hidden></div>
     <p class="hn-audio" id="lgAudioEditions"><b>Audio editions</b><a href="assets/hitman-radio/episode-01.mp3">Episode 1 · 19 min 31 sec (MP3)</a><a href="assets/hitman-radio/episode-01.mp3" download="Hitmen-Radio-Episode-01.mp3">Download</a></p>
+  </section>
+
+  <!-- LGCHL Night in Review: data-driven from assets/lgchl-recaps/index.json (lgchl-recaps.js). Build a night with tools/lgchl-recaps-build.py <date>.md. -->
+  <section class="lg-sec band" id="lgRecaps" aria-labelledby="lgRecapsTitle" data-recaps="assets/lgchl-recaps/index.json">
+    <div class="lg-in">
+      <div class="lg-head">
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">LG Media · EliteChel Media</p><h2 class="sec-title" id="lgRecapsTitle">Night in <em>review</em></h2></div>
+        <p class="lg-note">League Three Stars, Hitmen Watch and every game recap from the night.</p>
+      </div>
+      <div class="wu-weeks rc-nights" role="group" aria-label="Choose a night"></div>
+      <div class="rc-body" aria-live="polite"><p class="empty">Loading recaps…</p></div>
+    </div>
   </section>
 
   <!-- Written write-ups: data-driven from assets/lgchl-writeups/writeups.json (lgchl-writeups.js). Add a week to the top of "weeks" to publish. -->
