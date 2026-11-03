@@ -6,6 +6,15 @@ const assert=require('node:assert/strict');
 const root=__dirname;
 const fixture=()=>{
   const rows={vod_review_sessions:[{id:'game',team_id:'team',title:'Hitmen vs Test Opponent',opponent_label:'Test Opponent',game_date:'2026-10-01T20:00:00Z',vod_url:'https://www.twitch.tv/videos/123',source_start_seconds:1800,source_end_seconds:3260,duration_seconds:1460,status:'reviewing',worker_status:'ready_for_review',full_game_summary:'Reviewed synthetic game evidence',updated_at:'2026-10-01T21:00:00Z',worker_result:{chunks:[],game_rollup:{}}}],vod_review_segments:[1800,2200,2600].map((start,i)=>({id:'p'+(i+1),review_id:'game',team_id:'team',segment_type:'period',segment_index:i+1,label:'Period '+(i+1),start_seconds:start,end_seconds:i===2?3260:start+400,status:'needs_review',analysis_summary:'Synthetic period evidence',updated_at:'2026-10-01T21:00:00Z'})),vod_review_markers:[]};
+  rows.labs_vod_player_report_status=[
+    {review_id:'game',team_id:'team',lg_user_id:74341,display_name:'SmokoLi',position:'RW',participation_status:'confirmed_played',verified_marker_count:0,named_in_analysis:true,report_state:'report_missing'},
+    {review_id:'game',team_id:'team',lg_user_id:58225,display_name:'offtheyrk',position:'LW',participation_status:'confirmed_played',verified_marker_count:2,named_in_analysis:true,report_state:'report_exists'},
+    {review_id:'game',team_id:'team',lg_user_id:66913,display_name:'thenny32',position:'C',participation_status:'confirmed_played',verified_marker_count:5,named_in_analysis:true,report_state:'report_exists'},
+    {review_id:'game',team_id:'team',lg_user_id:77094,display_name:'WhyKayWins',position:'LD',participation_status:'confirmed_played',verified_marker_count:2,named_in_analysis:true,report_state:'report_exists'},
+    {review_id:'game',team_id:'team',lg_user_id:81072,display_name:'matt_0_5',position:'RD',participation_status:'confirmed_played',verified_marker_count:2,named_in_analysis:true,report_state:'report_exists'},
+    {review_id:'game',team_id:'team',lg_user_id:12262,display_name:'Kudolken',position:'G',participation_status:'confirmed_played',verified_marker_count:1,named_in_analysis:true,report_state:'report_exists'}
+  ];
+  rows.labs_player_aliases=[];
   rows.vod_game_publications=[];window.testRows=rows;window.published=[];window.workerJob=null;window.workerCalls=[];window.rpcCalls=[];
   function query(table){let filters=[],payload=null;const q={select(){return q},eq(k,v){filters.push(r=>r[k]===v);return q},neq(k,v){filters.push(r=>r[k]!==v);return q},is(k,v){filters.push(r=>r[k]==v);return q},in(k,v){filters.push(r=>v.includes(r[k]));return q},order(){return q},limit(){return q},update(v){payload=v;return q},then(resolve){let data=(rows[table]||[]).filter(r=>filters.every(f=>f(r)));if(payload)data.forEach(r=>Object.assign(r,payload));return Promise.resolve({data:JSON.parse(JSON.stringify(data)),error:null}).then(resolve)},single(){return q.then(r=>({...r,data:r.data[0]||null}))},maybeSingle(){return q.then(r=>({...r,data:r.data[0]||null}))}};return q;}
   window.VVHLBackend={db:{from:query,auth:{getSession:async()=>({data:{session:{access_token:'fixture'}}})},rpc:async(name,args)=>{
@@ -54,6 +63,14 @@ const fixture=()=>{
   await page.goto('https://wildman.test/vod-lab.html?review=game');
   await page.locator('#segmentList .segment-card').first().waitFor();
   assert.equal(await page.locator('#segmentList .segment-card').count(),3);
+  await page.locator('#vodCoveragePanel .vod-identity-row').first().waitFor();
+  assert.equal(await page.locator('#vodCoveragePanel .vod-identity-row').count(),6);
+  const ctStatus=await page.locator('#vodCoveragePanel .vod-identity-row').filter({hasText:'SmokoLi'}).innerText();
+  assert.match(ctStatus,/RW/);
+  assert.match(ctStatus,/LG 74341/);
+  assert.match(ctStatus,/Named in analysis · no individual markers/);
+  assert.match(ctStatus,/Report missing/);
+
   assert.equal(await page.locator('#vodPipelineAdvanced').getAttribute('open'),null);
   assert.equal(await page.locator('#periodEditFields').isVisible(),false);
   assert.equal(await page.locator('#publishVodReport').isDisabled(),true);
