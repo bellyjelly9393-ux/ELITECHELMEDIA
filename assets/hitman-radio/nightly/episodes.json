@@ -1,8 +1,20 @@
 {
   "featured": [
-    "2026-11-02-review-preview"
+    "2026-11-03-monday-night-review"
   ],
   "episodes": [
+    {
+      "id": "2026-11-03-monday-night-review",
+      "date": "2026-11-03",
+      "type": "recap",
+      "label": "Monday night review · Nov 3",
+      "title": "Hitmen Radio: Monday Night Review",
+      "headline": "Monday night review: the night's LGCHL results, standouts and what it means for the Hitmen",
+      "description": "Seth Kelley's Hitmen Radio from EliteChel Media: the Monday Night Review covering the Nov 2 LGCHL games.",
+      "duration": "6:15",
+      "video": "assets/hitman-radio/nightly/2026-11-03-monday-night-review.mp4?v=20261103",
+      "poster": "assets/hitman-radio/nightly/2026-11-03-monday-night-review-poster.jpg?v=20261103"
+    },
     {
       "id": "2026-11-02-review-preview",
       "date": "2026-11-02",
