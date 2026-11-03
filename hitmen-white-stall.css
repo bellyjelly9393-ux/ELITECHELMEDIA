@@ -1,0 +1,17 @@
+/* Reusable white Hitmen jersey stall preview. Load after existing stall CSS.
+   Roster identity, player reports, permissions and locker layout are unchanged. */
+.hs-stall.hs-white{aspect-ratio:1/1!important}
+.hs-white .hs-img{object-fit:cover}
+.hs-white .hs-plate{position:absolute;inset:0;z-index:2;pointer-events:none}
+.hs-white .hs-plate>*{top:18.15%!important;text-shadow:0 .35cqw .5cqw #000,0 0 1.2cqw rgba(189,12,35,.5)!important;color:#f7f5f3!important}
+.hs-white .hs-plate .hs-num.l{left:32.8%!important;font-size:6.2cqw!important;letter-spacing:-.045em}
+.hs-white .hs-plate .hs-name{left:61.2%!important;font-size:4.3cqw!important;letter-spacing:.035em}
+.hs-white .hs-plate .hs-num.r{display:none!important}
+/* Jersey reference uses sleeve stars and stripes rather than printed numbers. */
+.hs-white .hs-sleeve,.hs-white .hs-helmet,.hs-white .hs-bname,.hs-white .hs-bnum{display:none!important}
+/* Matching white-jersey back art is not available; don't reveal the old black back. */
+.hs-white .hs-flip,.hs-white .hs-hint{display:none!important}
+.wr-locker-page .reference-locker-pane:has(.hs-white){aspect-ratio:1/1!important}
+.wr-locker-page .locker-stall.hs-upgraded>.hs-stall.hs-white{aspect-ratio:1/1!important}
+.wr-locker-page .reference-locker-pane:has(.hs-white) .reference-flip-controls{display:none!important}
+.wr-locker-page .reference-locker-pane:has(.hs-white) .reference-flip-caption{display:none!important}
