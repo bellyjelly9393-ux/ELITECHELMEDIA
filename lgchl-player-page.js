@@ -30,7 +30,10 @@
         order:'fetched_at.desc',
         limit:'5'
       });
-      const player=list.find(p=>Number(p.lg_user_id)===id && p.player_kind===kind);
+      let player=list.find(p=>Number(p.lg_user_id)===id && p.player_kind===kind);
+      const fresh=await window.LGCHLFresh?.board(metric,[]);
+      const captured=fresh?.rows?.find(p=>Number(p.lg_user_id)===id && p.player_kind===kind);
+      if(captured && (!player?.fetched_at || Date.parse(fresh.capture.captured_at)>Date.parse(player.fetched_at)))player={...captured,fetched_at:fresh.capture.captured_at};
       if(!player){
         error('No current Season 55 profile was found for this player. Check the Top 250 for the latest listing.');
         return;
@@ -50,3 +53,4 @@
     }
   })();
 })();
+

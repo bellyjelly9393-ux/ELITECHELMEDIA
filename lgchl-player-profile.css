@@ -38,3 +38,11 @@
 .lg-profile-back:hover{text-decoration:underline}
 .lg-profile-page-error{padding:30px;border:1px solid #555c64;background:#151a21;border-radius:6px;color:#cfd6df}
 @media(max-width:570px){.lg-profile-watermark{width:88%;height:300px;inset:5px -75px auto auto;opacity:.075}.lg-profile-page-shell{padding:20px 16px}.lg-profile-page-header{margin-bottom:14px}}
+
+
+/* Shared collectible presentation on quick views and full player pages. */
+.lg-hockey-card{position:relative;isolation:isolate;max-width:380px;margin:26px auto;padding:16px;background:linear-gradient(140deg,#24272c,#090b0f 65%);border:6px ridge #d2a64e;box-shadow:0 12px 30px #000b,inset 0 0 0 2px #21190d;clip-path:polygon(4% 0,96% 0,100% 3%,100% 97%,96% 100%,4% 100%,0 97%,0 3%)}
+.lg-hockey-card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#e3c786;font:700 11px/1.3 Arial,sans-serif;letter-spacing:.08em}.lg-hockey-card-top img{width:46px;height:46px;object-fit:contain}
+.lg-hockey-card-art{position:relative;display:grid;place-items:center;min-height:190px;margin:14px 0;background:radial-gradient(ellipse,#183f7370,transparent 70%),repeating-linear-gradient(125deg,transparent 0 15px,#ffffff04 16px 17px);border:1px solid #8c723e;box-shadow:inset 0 -3px #2966b9}.lg-hockey-card-art img{width:140px;height:140px;object-fit:contain;filter:drop-shadow(0 9px 6px #000b)}.lg-hockey-card-art>span{position:absolute;bottom:10px;left:12px;color:#e7c366;font-weight:800}
+.lg-hockey-card>h3{margin:8px 0;text-align:center;color:#f8e5b2;font:700 clamp(24px,4vw,34px)/1.15 Teko,Arial,sans-serif;overflow-wrap:anywhere}.lg-hockey-card>p{margin:0 0 16px;text-align:center;color:#d0d6df;font-size:13px}
+.lg-hockey-card-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.lg-hockey-card-stats .lg-profile-stat{padding:12px 6px;text-align:center;border-radius:0;border-color:#68552e;background:#080a0d}.lg-hockey-card .lg-profile-full-link{display:block;margin:16px 0 0;text-align:center;font-size:13px}

@@ -137,7 +137,7 @@
       const line = (id, ab, sc, w) => '<div class="lg-sc-line' + (w ? ' w' : '') + '"><img src="' + logo(id) + '" alt=""><span>' + esc(ab) + '</span><b class="num">' + esc(sc) + '</b></div>';
       return '<article class="card tinted lg-sc" data-logo="' + logo(win) + '">' + wm(win) +
         line(g.away_lg_team_id, g.away_abbr, g.away_score, awayWin) + line(g.home_lg_team_id, g.home_abbr, g.home_score, !awayWin) +
-        '<div class="lg-sc-foot"><span>Final · ' + esc(g.league) + '</span>' + (g.source_url ? '<a href="' + esc(g.source_url) + '" target="_blank" rel="noopener noreferrer">Box score ↗</a>' : '') + '</div></article>';
+        '<div class="lg-sc-foot"><span>Final · ' + esc(g.league) + '</span><a href="lgchl-game.html?id=' + Number(g.lg_game_id) + '">Recap &amp; clips →</a>' + (g.source_url ? '<a href="' + esc(g.source_url) + '" target="_blank" rel="noopener noreferrer">Box score ↗</a>' : '') + '</div></article>';
     }).join('');
   }
 
@@ -329,3 +329,4 @@
 
   main().catch(() => { const k = $('lgLeadKicker'); if (k) k.innerHTML = ev('na', 'League data is unavailable right now'); });
 })();
+
