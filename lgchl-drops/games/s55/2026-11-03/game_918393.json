@@ -1,0 +1,583 @@
+{
+ "schema": "lg-game-capture-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "lg_game_id": 918393,
+ "status": "FINAL",
+ "played_at_text": "Tuesday November 03rd 2026, 09:00 PM",
+ "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918393",
+ "captured_at": "2026-11-04T04:34:09.510Z",
+ "away": {
+  "lg_team_id": 458,
+  "name": "Armada",
+  "record": "28-23-3",
+  "goals_by_period": {
+   "1": 1,
+   "2": 0,
+   "3": 0
+  },
+  "score": 1,
+  "full_name": "Blainville-Boisbriand Armada"
+ },
+ "home": {
+  "lg_team_id": 457,
+  "name": "Islanders",
+  "record": "23-21-7",
+  "goals_by_period": {
+   "1": 1,
+   "2": 1,
+   "3": 1
+  },
+  "score": 3,
+  "full_name": "Charlottetown Islanders"
+ },
+ "team_stats": {
+  "goals": {
+   "away": 1,
+   "home": 3
+  },
+  "total_shots": {
+   "away": 15,
+   "home": 18
+  },
+  "hits": {
+   "away": 10,
+   "home": 3
+  },
+  "time_on_attack": {
+   "away": "10:13",
+   "home": "7:55"
+  },
+  "passing_pct": {
+   "away": "78.7%",
+   "home": "82.3%"
+  },
+  "face_offs_won": {
+   "away": 8,
+   "home": 21
+  },
+  "penalty_minutes": {
+   "away": "2:00",
+   "home": "2:00"
+  },
+  "power_plays": {
+   "away": "0 / 1",
+   "home": "1 / 1"
+  },
+  "power_play_minutes": {
+   "away": "0:00",
+   "home": "0:00"
+  },
+  "blocks": {
+   "away": 5,
+   "home": 2
+  },
+  "shorthanded_goals": {
+   "away": 0,
+   "home": 0
+  }
+ },
+ "possession_seconds_by_position": {
+  "away": [
+   {
+    "position": "LW",
+    "seconds": 332,
+    "player": "Big Boutchyy"
+   },
+   {
+    "position": "C",
+    "seconds": 193,
+    "player": "S4D_RyZ2"
+   },
+   {
+    "position": "RW",
+    "seconds": 287,
+    "player": "IceSn1px"
+   },
+   {
+    "position": "RD",
+    "seconds": 162,
+    "player": "Oceebee"
+   },
+   {
+    "position": "LD",
+    "seconds": 199,
+    "player": "RougeCore"
+   }
+  ],
+  "home": [
+   {
+    "position": "LW",
+    "seconds": 248,
+    "player": "httr2199"
+   },
+   {
+    "position": "C",
+    "seconds": 176,
+    "player": "LIL_Dawso"
+   },
+   {
+    "position": "RW",
+    "seconds": 267,
+    "player": "SoulinHockey"
+   },
+   {
+    "position": "RD",
+    "seconds": 249,
+    "player": "Chillzman"
+   },
+   {
+    "position": "LD",
+    "seconds": 175,
+    "player": "Pickleboy1988"
+   }
+  ]
+ },
+ "skaters": [
+  {
+   "side": "away",
+   "team": "Blainville-Boisbriand Armada",
+   "lg_user_id": 61240,
+   "player": "Big Boutchyy",
+   "position": "LW",
+   "build": "DNG",
+   "badges": [],
+   "lg_ratings": [
+    48,
+    52,
+    51
+   ],
+   "goals": 1,
+   "ast": 0,
+   "pts": 1,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "5:32",
+   "time_with_puck_seconds": 332,
+   "shots_on_goal_attempts": "8/17",
+   "shots_on_goal_attempts_on_goal": 8,
+   "shots_on_goal_attempts_attempts": 17,
+   "deflections": 0,
+   "pass_pct": 65.2,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 6,
+   "give_aways": 5,
+   "blocked_shots": 1,
+   "interceptions": 2,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Blainville-Boisbriand Armada",
+   "lg_user_id": 52683,
+   "player": "S4D_RyZ2",
+   "position": "C",
+   "build": "TWF",
+   "badges": [],
+   "lg_ratings": [
+    20,
+    8,
+    41
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:13",
+   "time_with_puck_seconds": 193,
+   "shots_on_goal_attempts": "0/0",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 0,
+   "deflections": 0,
+   "pass_pct": 88.9,
+   "saucer_passes": 0,
+   "hits": 4,
+   "take_aways": 1,
+   "give_aways": 4,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Blainville-Boisbriand Armada",
+   "lg_user_id": 81174,
+   "player": "IceSn1px",
+   "position": "RW",
+   "build": "DNG",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    27,
+    21,
+    35
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:47",
+   "time_with_puck_seconds": 287,
+   "shots_on_goal_attempts": "4/9",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 9,
+   "deflections": 0,
+   "pass_pct": 72.7,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 0,
+   "give_aways": 12,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Blainville-Boisbriand Armada",
+   "lg_user_id": 65554,
+   "player": "RougeCore",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    43,
+    9,
+    54
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "3:19",
+   "time_with_puck_seconds": 199,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 86.4,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 4,
+   "give_aways": 2,
+   "blocked_shots": 2,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "away",
+   "team": "Blainville-Boisbriand Armada",
+   "lg_user_id": 21158,
+   "player": "Oceebee",
+   "position": "RD",
+   "build": "TWD",
+   "badges": [],
+   "lg_ratings": [
+    41,
+    7,
+    51
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": -1,
+   "time_on_ice": "58:34",
+   "time_on_ice_seconds": 3514,
+   "time_with_puck": "2:42",
+   "time_with_puck_seconds": 162,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 87.0,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 4,
+   "give_aways": 2,
+   "blocked_shots": 1,
+   "interceptions": 0,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Charlottetown Islanders",
+   "lg_user_id": 80130,
+   "player": "httr2199",
+   "position": "LW",
+   "build": "PWF",
+   "badges": [
+    "ECU"
+   ],
+   "lg_ratings": [
+    56,
+    36,
+    49
+   ],
+   "goals": 1,
+   "ast": 0,
+   "pts": 1,
+   "plus_minus": 1,
+   "time_on_ice": "58:01",
+   "time_on_ice_seconds": 3481,
+   "time_with_puck": "4:08",
+   "time_with_puck_seconds": 248,
+   "shots_on_goal_attempts": "2/5",
+   "shots_on_goal_attempts_on_goal": 2,
+   "shots_on_goal_attempts_attempts": 5,
+   "deflections": 0,
+   "pass_pct": 81.5,
+   "saucer_passes": 0,
+   "hits": 1,
+   "take_aways": 1,
+   "give_aways": 11,
+   "blocked_shots": 0,
+   "interceptions": 3,
+   "pims": "2:00",
+   "pims_seconds": 120,
+   "penalties_drawn": 1,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Charlottetown Islanders",
+   "lg_user_id": 76626,
+   "player": "LIL_Dawso",
+   "position": "C",
+   "build": "TWF",
+   "badges": [
+    "GWG"
+   ],
+   "lg_ratings": [
+    85,
+    85,
+    48
+   ],
+   "goals": 1,
+   "ast": 1,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:56",
+   "time_with_puck_seconds": 176,
+   "shots_on_goal_attempts": "4/8",
+   "shots_on_goal_attempts_on_goal": 4,
+   "shots_on_goal_attempts_attempts": 8,
+   "deflections": 0,
+   "pass_pct": 88.2,
+   "saucer_passes": 0,
+   "hits": 2,
+   "take_aways": 1,
+   "give_aways": 0,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Charlottetown Islanders",
+   "lg_user_id": 58615,
+   "player": "SoulinHockey",
+   "position": "RW",
+   "build": "GRN",
+   "badges": [],
+   "lg_ratings": [
+    75,
+    70,
+    39
+   ],
+   "goals": 1,
+   "ast": 2,
+   "pts": 3,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:27",
+   "time_with_puck_seconds": 267,
+   "shots_on_goal_attempts": "8/19",
+   "shots_on_goal_attempts_on_goal": 8,
+   "shots_on_goal_attempts_attempts": 19,
+   "deflections": 1,
+   "pass_pct": 62.5,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 2,
+   "give_aways": 12,
+   "blocked_shots": 0,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 0
+  },
+  {
+   "side": "home",
+   "team": "Charlottetown Islanders",
+   "lg_user_id": 32453,
+   "player": "Pickleboy1988",
+   "position": "LD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    72,
+    9,
+    72
+   ],
+   "goals": 0,
+   "ast": 0,
+   "pts": 0,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "2:55",
+   "time_with_puck_seconds": 175,
+   "shots_on_goal_attempts": "0/1",
+   "shots_on_goal_attempts_on_goal": 0,
+   "shots_on_goal_attempts_attempts": 1,
+   "deflections": 0,
+   "pass_pct": 90.0,
+   "saucer_passes": 2,
+   "hits": 0,
+   "take_aways": 5,
+   "give_aways": 2,
+   "blocked_shots": 0,
+   "interceptions": 1,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  },
+  {
+   "side": "home",
+   "team": "Charlottetown Islanders",
+   "lg_user_id": 44860,
+   "player": "Chillzman",
+   "position": "RD",
+   "build": "PMD",
+   "badges": [],
+   "lg_ratings": [
+    73,
+    33,
+    68
+   ],
+   "goals": 0,
+   "ast": 2,
+   "pts": 2,
+   "plus_minus": 1,
+   "time_on_ice": "60:00",
+   "time_on_ice_seconds": 3600,
+   "time_with_puck": "4:09",
+   "time_with_puck_seconds": 249,
+   "shots_on_goal_attempts": "1/2",
+   "shots_on_goal_attempts_on_goal": 1,
+   "shots_on_goal_attempts_attempts": 2,
+   "deflections": 0,
+   "pass_pct": 78.8,
+   "saucer_passes": 0,
+   "hits": 0,
+   "take_aways": 3,
+   "give_aways": 6,
+   "blocked_shots": 2,
+   "interceptions": 0,
+   "pims": "0:00",
+   "pims_seconds": 0,
+   "penalties_drawn": 0,
+   "pk_clears": 1
+  }
+ ],
+ "goalies": [
+  {
+   "lg_user_id": 75300,
+   "player": "R3DLIT3",
+   "build": "HYB",
+   "lg_ratings": [
+    57,
+    60
+   ],
+   "shots": 18,
+   "s_pct": 0.833,
+   "ga": 3,
+   "save": 15,
+   "gaa": 3.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 0,
+   "break_away_pct": 0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 0,
+   "side": "away",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Blainville-Boisbriand Armada"
+  },
+  {
+   "lg_user_id": 33400,
+   "player": "blackbelt5693",
+   "build": "HYB",
+   "lg_ratings": [
+    87,
+    78
+   ],
+   "shots": 15,
+   "s_pct": 0.933,
+   "ga": 1,
+   "save": 14,
+   "gaa": 1.0,
+   "poke_check_saves": 0,
+   "desperate_saves": 0,
+   "ba_sv": 1,
+   "break_away_pct": 100.0,
+   "pen_shot_pct": 0,
+   "shutout_periods": 2,
+   "side": "home",
+   "side_basis": "goals_allowed_matches_opponent_score",
+   "team": "Charlottetown Islanders"
+  }
+ ],
+ "ea_parts": [
+  {
+   "part": 0,
+   "periods": "1-3",
+   "submitted_by": "blackbelt5693",
+   "submitted_at": "2026-11-03 09:29:19pm"
+  }
+ ],
+ "lag_out": false,
+ "edits": {
+  "count": 1,
+  "last_by": "blackbelt5693",
+  "last_at": "Tuesday November 03rd 2026, 09:29 PM"
+ },
+ "notes": [
+  "LG game page is the official record; EA parts here list only the segments shown on the LG page (periods, submitter, time).",
+  "Player stat lines are whole-game totals; only team goals are split by period.",
+  "No play-by-play (Action Tracker) is available in LG's or EA's web data.",
+  "EA raw part data (View EA Game pages) was not captured for this night; ea_parts carries the LG page's segment list only."
+ ]
+}
