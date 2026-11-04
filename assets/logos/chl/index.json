@@ -1,0 +1,323 @@
+{
+ "note": "CHL team logos, 96px PNG, from Wikipedia/Wikimedia infoboxes. Used by lgchl-recaps.js and tools/lgchl-recaps-build.py. Missing teams fall back to text initials.",
+ "teams": {
+  "Baie-Comeau Drakkar": {
+   "slug": "baie-comeau-drakkar",
+   "logo": "assets/logos/chl/baie-comeau-drakkar.png",
+   "source": "https://en.wikipedia.org/wiki/File:Baie-Comeau_Drakkar.svg"
+  },
+  "Barrie Colts": {
+   "slug": "barrie-colts",
+   "logo": "assets/logos/chl/barrie-colts.png",
+   "source": "https://en.wikipedia.org/wiki/File:Barrie_Colts_PNG_logo_2026.png"
+  },
+  "Blainville-Boisbriand Armada": {
+   "slug": "blainville-boisbriand-armada",
+   "logo": "assets/logos/chl/blainville-boisbriand-armada.png",
+   "source": "https://en.wikipedia.org/wiki/File:Blainville-Boisbriand_Armada_logo.svg"
+  },
+  "Brampton Steelheads": {
+   "slug": "brampton-steelheads",
+   "logo": "assets/logos/chl/brampton-steelheads.png",
+   "source": "https://en.wikipedia.org/wiki/File:Brampton_Steelheads_logo.jpeg"
+  },
+  "Brandon Wheat Kings": {
+   "slug": "brandon-wheat-kings",
+   "logo": "assets/logos/chl/brandon-wheat-kings.png",
+   "source": "https://en.wikipedia.org/wiki/File:Brandon_Wheat_Kings_logo.svg"
+  },
+  "Brantford Bulldogs": {
+   "slug": "brantford-bulldogs",
+   "logo": "assets/logos/chl/brantford-bulldogs.png",
+   "source": "https://en.wikipedia.org/wiki/File:Hamilton_Bulldogs_logo.svg"
+  },
+  "Calgary Hitmen": {
+   "slug": "calgary-hitmen",
+   "logo": "assets/logos/chl/calgary-hitmen.png",
+   "source": "https://en.wikipedia.org/wiki/File:Calgary_Hitmen_logo.svg"
+  },
+  "Cape Breton Eagles": {
+   "slug": "cape-breton-eagles",
+   "logo": "assets/logos/chl/cape-breton-eagles.png",
+   "source": "https://en.wikipedia.org/wiki/File:Cape_Breton_Eagles.svg"
+  },
+  "Charlottetown Islanders": {
+   "slug": "charlottetown-islanders",
+   "logo": "assets/logos/chl/charlottetown-islanders.png",
+   "source": "https://en.wikipedia.org/wiki/File:CharlottetownIslanders.PNG"
+  },
+  "Chicoutimi Sagueneens": {
+   "slug": "chicoutimi-sagueneens",
+   "logo": "assets/logos/chl/chicoutimi-sagueneens.png",
+   "source": "https://en.wikipedia.org/wiki/File:Chicoutimi_Saguen%C3%A9ens.svg"
+  },
+  "Chilliwack Bruins": {
+   "slug": "chilliwack-bruins",
+   "logo": "assets/logos/chl/chilliwack-bruins.png",
+   "source": "https://en.wikipedia.org/wiki/File:Chilliwack_Bruins_Logo.svg"
+  },
+  "Drummondville Voltigeurs": {
+   "slug": "drummondville-voltigeurs",
+   "logo": "assets/logos/chl/drummondville-voltigeurs.png",
+   "source": "https://en.wikipedia.org/wiki/File:Drummondville_Voltigeurs.svg"
+  },
+  "Edmonton Oil Kings": {
+   "slug": "edmonton-oil-kings",
+   "logo": "assets/logos/chl/edmonton-oil-kings.png",
+   "source": "https://en.wikipedia.org/wiki/File:Edmonton_Oil_Kings_logo.svg"
+  },
+  "Erie Otters": {
+   "slug": "erie-otters",
+   "logo": "assets/logos/chl/erie-otters.png",
+   "source": "https://en.wikipedia.org/wiki/File:Erie_Otters_2026_logo.png"
+  },
+  "Everett Silvertips": {
+   "slug": "everett-silvertips",
+   "logo": "assets/logos/chl/everett-silvertips.png",
+   "source": "https://en.wikipedia.org/wiki/File:Everett_Silvertips_logo.svg"
+  },
+  "Flint Firebirds": {
+   "slug": "flint-firebirds",
+   "logo": "assets/logos/chl/flint-firebirds.png",
+   "source": "https://en.wikipedia.org/wiki/File:Flint_Firebirds_logo.svg"
+  },
+  "Gatineau Olympiques": {
+   "slug": "gatineau-olympiques",
+   "logo": "assets/logos/chl/gatineau-olympiques.png",
+   "source": "https://en.wikipedia.org/wiki/File:Gatineau_Olympiques_logo.svg"
+  },
+  "Guelph Storm": {
+   "slug": "guelph-storm",
+   "logo": "assets/logos/chl/guelph-storm.png",
+   "source": "https://en.wikipedia.org/wiki/File:Guelph_Storm_logo.svg"
+  },
+  "Halifax Mooseheads": {
+   "slug": "halifax-mooseheads",
+   "logo": "assets/logos/chl/halifax-mooseheads.png",
+   "source": "https://en.wikipedia.org/wiki/File:Halifax_Mooseheads.svg"
+  },
+  "Kamloops Blazers": {
+   "slug": "kamloops-blazers",
+   "logo": "assets/logos/chl/kamloops-blazers.png",
+   "source": "https://en.wikipedia.org/wiki/File:Kamloops_Blazers_logo.svg"
+  },
+  "Kelowna Rockets": {
+   "slug": "kelowna-rockets",
+   "logo": "assets/logos/chl/kelowna-rockets.png",
+   "source": "https://en.wikipedia.org/wiki/File:Kelowna_Rockets_logo.svg"
+  },
+  "Kingston Frontenacs": {
+   "slug": "kingston-frontenacs",
+   "logo": "assets/logos/chl/kingston-frontenacs.png",
+   "source": "https://commons.wikimedia.org/wiki/File:Kingston_Frontenacs.png"
+  },
+  "Kitchener Rangers": {
+   "slug": "kitchener-rangers",
+   "logo": "assets/logos/chl/kitchener-rangers.png",
+   "source": "https://en.wikipedia.org/wiki/File:Kitchener_Rangers_logo.svg"
+  },
+  "Lethbridge Hurricanes": {
+   "slug": "lethbridge-hurricanes",
+   "logo": "assets/logos/chl/lethbridge-hurricanes.png",
+   "source": "https://en.wikipedia.org/wiki/File:Lethbridge_Hurricanes_logo.svg"
+  },
+  "London Knights": {
+   "slug": "london-knights",
+   "logo": "assets/logos/chl/london-knights.png",
+   "source": "https://en.wikipedia.org/wiki/File:London_Knights_logo.svg"
+  },
+  "Medicine Hat Tigers": {
+   "slug": "medicine-hat-tigers",
+   "logo": "assets/logos/chl/medicine-hat-tigers.png",
+   "source": "https://en.wikipedia.org/wiki/File:Medicine_Hat_Tigers_Logo.svg"
+  },
+  "Moncton Wildcats": {
+   "slug": "moncton-wildcats",
+   "logo": "assets/logos/chl/moncton-wildcats.png",
+   "source": "https://en.wikipedia.org/wiki/File:Moncton_Wildcats.svg"
+  },
+  "Moose Jaw Warriors": {
+   "slug": "moose-jaw-warriors",
+   "logo": "assets/logos/chl/moose-jaw-warriors.png",
+   "source": "https://en.wikipedia.org/wiki/File:Moose_Jaw_Warriors.svg"
+  },
+  "Newfoundland Regiment": {
+   "slug": "newfoundland-regiment",
+   "logo": "assets/logos/chl/newfoundland-regiment.png",
+   "source": "https://en.wikipedia.org/wiki/File:QMJHL_Newfoundland_Regiment.svg"
+  },
+  "Niagara IceDogs": {
+   "slug": "niagara-icedogs",
+   "logo": "assets/logos/chl/niagara-icedogs.png",
+   "source": "https://en.wikipedia.org/wiki/File:Niagara_IceDogs_logo.svg"
+  },
+  "North Bay Battalion": {
+   "slug": "north-bay-battalion",
+   "logo": "assets/logos/chl/north-bay-battalion.png",
+   "source": "https://en.wikipedia.org/wiki/File:North_Bay_Battalion_logo.svg"
+  },
+  "Oshawa Generals": {
+   "slug": "oshawa-generals",
+   "logo": "assets/logos/chl/oshawa-generals.png",
+   "source": "https://commons.wikimedia.org/wiki/File:Oshawa_Generals_Logo.svg"
+  },
+  "Ottawa 67's": {
+   "slug": "ottawa-67s",
+   "logo": "assets/logos/chl/ottawa-67s.png",
+   "source": "https://commons.wikimedia.org/wiki/File:Ottawa_67s.png"
+  },
+  "Owen Sound Attack": {
+   "slug": "owen-sound-attack",
+   "logo": "assets/logos/chl/owen-sound-attack.png",
+   "source": "https://en.wikipedia.org/wiki/File:Owen_Sound_Attack_logo.svg"
+  },
+  "Penticton Vees": {
+   "slug": "penticton-vees",
+   "logo": "assets/logos/chl/penticton-vees.png",
+   "source": "https://en.wikipedia.org/wiki/File:Penticton_Vees_logo_2022.png"
+  },
+  "Peterborough Petes": {
+   "slug": "peterborough-petes",
+   "logo": "assets/logos/chl/peterborough-petes.png",
+   "source": "https://commons.wikimedia.org/wiki/File:Peterborough_Petes.png"
+  },
+  "Portland Winterhawks": {
+   "slug": "portland-winterhawks",
+   "logo": "assets/logos/chl/portland-winterhawks.png",
+   "source": "https://en.wikipedia.org/wiki/File:Portland_Winterhawks_logo_2021.svg"
+  },
+  "Prince Albert Raiders": {
+   "slug": "prince-albert-raiders",
+   "logo": "assets/logos/chl/prince-albert-raiders.png",
+   "source": "https://en.wikipedia.org/wiki/File:Prince_Albert_Raiders_logo.svg"
+  },
+  "Prince George Cougars": {
+   "slug": "prince-george-cougars",
+   "logo": "assets/logos/chl/prince-george-cougars.png",
+   "source": "https://en.wikipedia.org/wiki/File:Prince_George_Cougars_logo_2015.png"
+  },
+  "Quebec Remparts": {
+   "slug": "quebec-remparts",
+   "logo": "assets/logos/chl/quebec-remparts.png",
+   "source": "https://en.wikipedia.org/wiki/File:Quebec_Remparts.svg"
+  },
+  "Red Deer Rebels": {
+   "slug": "red-deer-rebels",
+   "logo": "assets/logos/chl/red-deer-rebels.png",
+   "source": "https://en.wikipedia.org/wiki/File:Red_Deer_Rebels_logo.svg"
+  },
+  "Regina Pats": {
+   "slug": "regina-pats",
+   "logo": "assets/logos/chl/regina-pats.png",
+   "source": "https://en.wikipedia.org/wiki/File:Regina_Pats_logo.svg"
+  },
+  "Rimouski Oceanic": {
+   "slug": "rimouski-oceanic",
+   "logo": "assets/logos/chl/rimouski-oceanic.png",
+   "source": "https://en.wikipedia.org/wiki/File:Rimouski_Oc%C3%A9anic.svg"
+  },
+  "Rouyn-Noranda Huskies": {
+   "slug": "rouyn-noranda-huskies",
+   "logo": "assets/logos/chl/rouyn-noranda-huskies.png",
+   "source": "https://en.wikipedia.org/wiki/File:Rouyn-Noranda_Huskies.svg"
+  },
+  "Saginaw Spirit": {
+   "slug": "saginaw-spirit",
+   "logo": "assets/logos/chl/saginaw-spirit.png",
+   "source": "https://en.wikipedia.org/wiki/File:Saginaw_Spirit_Logo.svg"
+  },
+  "Saint John Sea Dogs": {
+   "slug": "saint-john-sea-dogs",
+   "logo": "assets/logos/chl/saint-john-sea-dogs.png",
+   "source": "https://en.wikipedia.org/wiki/File:Saint_John_Sea_Dogs_primary_logo_2025.png"
+  },
+  "Sarnia Sting": {
+   "slug": "sarnia-sting",
+   "logo": "assets/logos/chl/sarnia-sting.png",
+   "source": "https://en.wikipedia.org/wiki/File:Sarnia_Sting_Official_Logo.svg"
+  },
+  "Saskatoon Blades": {
+   "slug": "saskatoon-blades",
+   "logo": "assets/logos/chl/saskatoon-blades.png",
+   "source": "https://en.wikipedia.org/wiki/File:Saskatoon_Blades_logo.svg"
+  },
+  "Sault Ste. Marie Greyhounds": {
+   "slug": "sault-ste-marie-greyhounds",
+   "logo": "assets/logos/chl/sault-ste-marie-greyhounds.png",
+   "source": "https://en.wikipedia.org/wiki/File:Sault_Ste._Marie_Greyhounds_logo.svg"
+  },
+  "Seattle Thunderbirds": {
+   "slug": "seattle-thunderbirds",
+   "logo": "assets/logos/chl/seattle-thunderbirds.png",
+   "source": "https://en.wikipedia.org/wiki/File:Seattle_Thunderbirds_logo.svg"
+  },
+  "Shawinigan Cataractes": {
+   "slug": "shawinigan-cataractes",
+   "logo": "assets/logos/chl/shawinigan-cataractes.png",
+   "source": "https://en.wikipedia.org/wiki/File:Shawinigan_Cataractes_Logo.svg"
+  },
+  "Sherbrooke Phoenix": {
+   "slug": "sherbrooke-phoenix",
+   "logo": "assets/logos/chl/sherbrooke-phoenix.png",
+   "source": "https://en.wikipedia.org/wiki/File:Sherbrooke_Phoenix_logo.png"
+  },
+  "Spokane Chiefs": {
+   "slug": "spokane-chiefs",
+   "logo": "assets/logos/chl/spokane-chiefs.png",
+   "source": "https://en.wikipedia.org/wiki/File:Spokane_Chiefs_logo.svg"
+  },
+  "Sudbury Wolves": {
+   "slug": "sudbury-wolves",
+   "logo": "assets/logos/chl/sudbury-wolves.png",
+   "source": "https://en.wikipedia.org/wiki/File:Sudbury_Wolves_PNG_logo_2026.png"
+  },
+  "Swift Current Broncos": {
+   "slug": "swift-current-broncos",
+   "logo": "assets/logos/chl/swift-current-broncos.png",
+   "source": "https://en.wikipedia.org/wiki/File:Swift_Current_Broncos.svg"
+  },
+  "Tri City Americans": {
+   "slug": "tri-city-americans",
+   "logo": "assets/logos/chl/tri-city-americans.png",
+   "source": "https://en.wikipedia.org/wiki/File:Tri-City_Americans_logo.svg"
+  },
+  "Val-d'Or Foreurs": {
+   "slug": "val-dor-foreurs",
+   "logo": "assets/logos/chl/val-dor-foreurs.png",
+   "source": "https://en.wikipedia.org/wiki/File:Val-d%27Or_Foreurs_logo_1993-2007.svg"
+  },
+  "Vancouver Giants": {
+   "slug": "vancouver-giants",
+   "logo": "assets/logos/chl/vancouver-giants.png",
+   "source": "https://en.wikipedia.org/wiki/File:Vancouver_Giants_Logo.svg"
+  },
+  "Victoria Royals": {
+   "slug": "victoria-royals",
+   "logo": "assets/logos/chl/victoria-royals.png",
+   "source": "https://en.wikipedia.org/wiki/File:Victoria_Royals_logo.svg"
+  },
+  "Victoriaville Tigres": {
+   "slug": "victoriaville-tigres",
+   "logo": "assets/logos/chl/victoriaville-tigres.png",
+   "source": "https://en.wikipedia.org/wiki/File:Victoriaville_Tigres.svg"
+  },
+  "Wenatchee Wild": {
+   "slug": "wenatchee-wild",
+   "logo": "assets/logos/chl/wenatchee-wild.png",
+   "source": "https://en.wikipedia.org/wiki/File:Wenatchee_Wild_Logo2018.png"
+  },
+  "Windsor Spitfires": {
+   "slug": "windsor-spitfires",
+   "logo": "assets/logos/chl/windsor-spitfires.png",
+   "source": "https://en.wikipedia.org/wiki/File:Windsor_Spitfires_Logo.svg"
+  }
+ },
+ "aliases": {
+  "Tri-City Americans": "Tri City Americans",
+  "Québec Remparts": "Quebec Remparts",
+  "Chicoutimi Saguenéens": "Chicoutimi Sagueneens",
+  "Rimouski Océanic": "Rimouski Oceanic",
+  "Ottawa 67s": "Ottawa 67's",
+  "Hamilton Bulldogs": "Brantford Bulldogs"
+ }
+}

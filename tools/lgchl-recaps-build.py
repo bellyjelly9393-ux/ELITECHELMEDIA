@@ -30,6 +30,21 @@ def stars(lines):
         m = re.match(r'-\s*(?:⭐+\s*)?(\d)(?:st|nd|rd) Star:\s*\*\*(.+?)\*\*\s*\((.+?)\):\s*(.*)', clean(l) if False else l.strip())
         if m: st.append({'n': int(m.group(1)), 'player': m.group(2), 'team': m.group(3), 'line': clean(m.group(4))})
     return st
+LOGO_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'assets', 'logos', 'chl')
+def _logos():
+    try: j = json.load(open(os.path.join(LOGO_DIR, 'index.json'), encoding='utf-8'))
+    except (OSError, ValueError): return {}, {}
+    return j.get('teams', {}), j.get('aliases', {})
+LOGOS, ALIASES = _logos()
+def slug(t): return re.sub(r'[^a-z0-9]+', '-', t.lower().replace("'", '')).strip('-')
+def team(name, score=None):
+    """{name, slug, logo|None, score}. logo is only set when the PNG exists; the page falls back to initials."""
+    name = ALIASES.get(name.strip(), name.strip()); e = LOGOS.get(name, {}); sl = e.get('slug') or slug(name)
+    logo = e.get('logo') if e.get('logo') and os.path.exists(os.path.join(LOGO_DIR, sl + '.png')) else None
+    t = {'name': name, 'slug': sl, 'logo': logo}
+    if score is not None: t['score'] = int(score)
+    return t
+MATCH = re.compile(r'^(.+?) (\d+) @ (.+?) (\d+)(?: \((\w+)\))?$')
 def game(title, lines):
     g = {'title': clean(title)}
     body, sl, inst = [], [], False
@@ -42,11 +57,19 @@ def game(title, lines):
             continue
         (sl if inst else body).append(l)
     g['html'] = block(body); g['stars'] = stars(sl)
+    m = MATCH.match(g.get('matchup', ''))
+    if m:
+        g['away'] = team(m.group(1), m.group(2)); g['home'] = team(m.group(3), m.group(4))
+        if m.group(5): g['decision'] = m.group(5)
+    for x in g['stars']:
+        t = team(x['team'].split(',')[0]); x['teamSlug'] = t['slug']; x['logo'] = t['logo']
+    # A game with no matchup/game id has no final posted (e.g. 918376): it is dropped from the page.
+    g['final'] = bool(g.get('game') and m)
     return g
 def main(p):
     txt = open(p, encoding='utf-8').read().split('\n')
     date = os.path.basename(p)[:10]
-    d = {'date': date, 'title': '', 'subtitle': '', 'intro': '', 'threeStars': '', 'hitmen': {'html': '', 'games': []}, 'slots': []}
+    d = {'date': date, 'hitmenLogo': team('Calgary Hitmen')['logo'], 'title': '', 'subtitle': '', 'intro': '', 'threeStars': '', 'hitmen': {'html': '', 'games': []}, 'slots': []}
     h1 = None; buf = []; sub = None; cur_slot = None
     secs = []  # (level, title, lines)
     for l in txt:
@@ -61,13 +84,16 @@ def main(p):
         if lvl == 1:
             low = tc.lower()
             mode = 'stars' if 'three stars' in low else 'hitmen' if low.startswith('hitmen watch') else 'games' if 'recap' in low else 'other'
-            if mode == 'stars': d['threeStarsTitle'] = tc; d['threeStars'] = block(ls)
+            if mode == 'stars':
+                d['threeStarsTitle'] = tc; d['threeStars'] = block(ls)
+                d['threeStarsTeams'] = [team(m.group(1)) for m in (re.match(r'\s*\d\. \*\*.+?\*\*\s*\(([^,()]+)', clean(l)) for l in ls) if m]
             elif mode == 'hitmen': d['hitmen']['title'] = tc; d['hitmen']['html'] = block(ls)
             continue
         if lvl == 2 and mode == 'games':
             cur_slot = {'slot': re.sub(r'\s*Slot$', '', tc), 'games': []}; d['slots'].append(cur_slot); continue
         if lvl == 3:
             g = game(t, ls)
+            if not g['final']: d.setdefault('noFinal', []).append(g['title']); continue
             if mode == 'hitmen': d['hitmen']['games'].append(g)
             elif cur_slot is not None: cur_slot['games'].append(g)
     out = os.path.join(os.path.dirname(__file__), '..', 'assets', 'lgchl-recaps')

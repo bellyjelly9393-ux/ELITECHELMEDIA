@@ -1,5 +1,6 @@
 {
  "date": "2026-11-02",
+ "hitmenLogo": "assets/logos/chl/calgary-hitmen.png",
  "title": "EliteChel Media | LGCHL Night in Review",
  "subtitle": "Monday, November 2, 2026 · Season 55, Week 6",
  "intro": "<p>There were 93 games scheduled across three slots (9:00, 9:35 and 10:10 PM ET). 92 are final and in the box-score drop. <strong>The missing game is London Knights at North Bay Battalion (10:10 PM, Game 918376).</strong> It was still listed as scheduled with no score, and there's no capture for it.</p><blockquote><strong>Data note:</strong> All stats come from Seth's parsed LG game-page drop for Nov 2 (<code>games/s55/2026-11-02</code>), pre-night standings (after Sunday Nov 1, 51 GP each) and the league transactions file. Player lines are full-game totals, so goal order within a period isn't known, and no play-by-play exists. Period splits are skipped where the capture flags them as not adding up (Games 918303 and 918391). Game 918303 (Moncton 1, Victoriaville 0) has no player or shot data at all. Records shown are pre-night standings plus tonight's results (PTS = 2×W + OTL).</blockquote>",
@@ -17,21 +18,40 @@
       "n": 1,
       "player": "XxPASTRNAK88",
       "team": "Calgary Hitmen, G",
-      "line": "11 saves on 11, shutout"
+      "line": "11 saves on 11, shutout",
+      "teamSlug": "calgary-hitmen",
+      "logo": "assets/logos/chl/calgary-hitmen.png"
      },
      {
       "n": 2,
       "player": "WhiteoutI8I",
       "team": "Calgary Hitmen, RW",
-      "line": "game-winning goal on 1 SOG, +1, 3 hits"
+      "line": "game-winning goal on 1 SOG, +1, 3 hits",
+      "teamSlug": "calgary-hitmen",
+      "logo": "assets/logos/chl/calgary-hitmen.png"
      },
      {
       "n": 3,
       "player": "Gullyrr",
       "team": "Calgary Hitmen, C",
-      "line": "1A, 8 SOG, +1"
+      "line": "1A, 8 SOG, +1",
+      "teamSlug": "calgary-hitmen",
+      "logo": "assets/logos/chl/calgary-hitmen.png"
      }
-    ]
+    ],
+    "away": {
+     "name": "Spokane Chiefs",
+     "slug": "spokane-chiefs",
+     "logo": "assets/logos/chl/spokane-chiefs.png",
+     "score": 0
+    },
+    "home": {
+     "name": "Calgary Hitmen",
+     "slug": "calgary-hitmen",
+     "logo": "assets/logos/chl/calgary-hitmen.png",
+     "score": 1
+    },
+    "final": true
    },
    {
     "title": "Hitmen Watch: Two Shots From xZainer89 Swing a Coin-Flip in Prince George",
@@ -43,21 +63,40 @@
       "n": 1,
       "player": "xZainer89",
       "team": "Prince George Cougars, LW",
-      "line": "2G (including the winner), 5 SOG, +1"
+      "line": "2G (including the winner), 5 SOG, +1",
+      "teamSlug": "prince-george-cougars",
+      "logo": "assets/logos/chl/prince-george-cougars.png"
      },
      {
       "n": 2,
       "player": "Tibbytwo",
       "team": "Prince George Cougars, RD",
-      "line": "1A, 12 hits, +1"
+      "line": "1A, 12 hits, +1",
+      "teamSlug": "prince-george-cougars",
+      "logo": "assets/logos/chl/prince-george-cougars.png"
      },
      {
       "n": 3,
       "player": "Gullyrr",
       "team": "Calgary Hitmen, C",
-      "line": "1G, 4 SOG, 6 hits"
+      "line": "1G, 4 SOG, 6 hits",
+      "teamSlug": "calgary-hitmen",
+      "logo": "assets/logos/chl/calgary-hitmen.png"
      }
-    ]
+    ],
+    "away": {
+     "name": "Calgary Hitmen",
+     "slug": "calgary-hitmen",
+     "logo": "assets/logos/chl/calgary-hitmen.png",
+     "score": 1
+    },
+    "home": {
+     "name": "Prince George Cougars",
+     "slug": "prince-george-cougars",
+     "logo": "assets/logos/chl/prince-george-cougars.png",
+     "score": 2
+    },
+    "final": true
    },
    {
     "title": "Hitmen Watch: Calgary Trades Punches With the Night's Juggernaut, and Loses the Last Exchange",
@@ -69,21 +108,40 @@
       "n": 1,
       "player": "pickmasta",
       "team": "Victoria Royals, LD",
-      "line": "1G 5A, +3, 6 hits"
+      "line": "1G 5A, +3, 6 hits",
+      "teamSlug": "victoria-royals",
+      "logo": "assets/logos/chl/victoria-royals.png"
      },
      {
       "n": 2,
       "player": "redz_shifterr",
       "team": "Victoria Royals, RW",
-      "line": "3G 1A, 7 SOG, +3"
+      "line": "3G 1A, 7 SOG, +3",
+      "teamSlug": "victoria-royals",
+      "logo": "assets/logos/chl/victoria-royals.png"
      },
      {
       "n": 3,
       "player": "Gullyrr",
       "team": "Calgary Hitmen, C",
-      "line": "2G 2A in a losing effort"
+      "line": "2G 2A in a losing effort",
+      "teamSlug": "calgary-hitmen",
+      "logo": "assets/logos/chl/calgary-hitmen.png"
      }
-    ]
+    ],
+    "away": {
+     "name": "Calgary Hitmen",
+     "slug": "calgary-hitmen",
+     "logo": "assets/logos/chl/calgary-hitmen.png",
+     "score": 4
+    },
+    "home": {
+     "name": "Victoria Royals",
+     "slug": "victoria-royals",
+     "logo": "assets/logos/chl/victoria-royals.png",
+     "score": 6
+    },
+    "final": true
    }
   ],
   "title": "Hitmen Watch: Calgary Goes 1-2-0"
@@ -102,21 +160,40 @@
        "n": 1,
        "player": "JBev93",
        "team": "Rouyn-Noranda Huskies, C",
-       "line": "4G 1A, 12 SOG, +4, 1 hit"
+       "line": "4G 1A, 12 SOG, +4, 1 hit",
+       "teamSlug": "rouyn-noranda-huskies",
+       "logo": "assets/logos/chl/rouyn-noranda-huskies.png"
       },
       {
        "n": 2,
        "player": "Duggan4204",
        "team": "Rouyn-Noranda Huskies, RW",
-       "line": "3G 1A, 8 SOG, +4, 3 hits"
+       "line": "3G 1A, 8 SOG, +4, 3 hits",
+       "teamSlug": "rouyn-noranda-huskies",
+       "logo": "assets/logos/chl/rouyn-noranda-huskies.png"
       },
       {
        "n": 3,
        "player": "stonemaniac",
        "team": "Rouyn-Noranda Huskies, LW",
-       "line": "0G 4A, 5 SOG, +4, 3 hits"
+       "line": "0G 4A, 5 SOG, +4, 3 hits",
+       "teamSlug": "rouyn-noranda-huskies",
+       "logo": "assets/logos/chl/rouyn-noranda-huskies.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Baie-Comeau Drakkar",
+      "slug": "baie-comeau-drakkar",
+      "logo": "assets/logos/chl/baie-comeau-drakkar.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Rouyn-Noranda Huskies",
+      "slug": "rouyn-noranda-huskies",
+      "logo": "assets/logos/chl/rouyn-noranda-huskies.png",
+      "score": 7
+     },
+     "final": true
     },
     {
      "title": "Voltigeurs Win It After Sixty",
@@ -128,21 +205,41 @@
        "n": 1,
        "player": "Local Booz",
        "team": "Drummondville Voltigeurs, LW",
-       "line": "1G 2A, 7 SOG, +1, 5 hits"
+       "line": "1G 2A, 7 SOG, +1, 5 hits",
+       "teamSlug": "drummondville-voltigeurs",
+       "logo": "assets/logos/chl/drummondville-voltigeurs.png"
       },
       {
        "n": 2,
        "player": "ShadowGrimace",
        "team": "Drummondville Voltigeurs, C",
-       "line": "2G 0A, 4 SOG, +0, 4 hits"
+       "line": "2G 0A, 4 SOG, +0, 4 hits",
+       "teamSlug": "drummondville-voltigeurs",
+       "logo": "assets/logos/chl/drummondville-voltigeurs.png"
       },
       {
        "n": 3,
        "player": "Local Skuzzy",
        "team": "Drummondville Voltigeurs, RW",
-       "line": "0G 2A, 8 SOG, +1, 1 hit"
+       "line": "0G 2A, 8 SOG, +1, 1 hit",
+       "teamSlug": "drummondville-voltigeurs",
+       "logo": "assets/logos/chl/drummondville-voltigeurs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Drummondville Voltigeurs",
+      "slug": "drummondville-voltigeurs",
+      "logo": "assets/logos/chl/drummondville-voltigeurs.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Cape Breton Eagles",
+      "slug": "cape-breton-eagles",
+      "logo": "assets/logos/chl/cape-breton-eagles.png",
+      "score": 2
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Islanders Win It After Sixty",
@@ -154,21 +251,41 @@
        "n": 1,
        "player": "FireBolt9188",
        "team": "Sherbrooke Phoenix, LW",
-       "line": "2G 1A, 12 SOG, -1, 2 hits"
+       "line": "2G 1A, 12 SOG, -1, 2 hits",
+       "teamSlug": "sherbrooke-phoenix",
+       "logo": "assets/logos/chl/sherbrooke-phoenix.png"
       },
       {
        "n": 2,
        "player": "BaronVonBass",
        "team": "Charlottetown Islanders, LW",
-       "line": "0G 3A, 16 SOG, +1, 2 hits"
+       "line": "0G 3A, 16 SOG, +1, 2 hits",
+       "teamSlug": "charlottetown-islanders",
+       "logo": "assets/logos/chl/charlottetown-islanders.png"
       },
       {
        "n": 3,
        "player": "PDubss-",
        "team": "Charlottetown Islanders, LD",
-       "line": "1G 2A, 1 SOG, +1, 3 hits"
+       "line": "1G 2A, 1 SOG, +1, 3 hits",
+       "teamSlug": "charlottetown-islanders",
+       "logo": "assets/logos/chl/charlottetown-islanders.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Charlottetown Islanders",
+      "slug": "charlottetown-islanders",
+      "logo": "assets/logos/chl/charlottetown-islanders.png",
+      "score": 4
+     },
+     "home": {
+      "name": "Sherbrooke Phoenix",
+      "slug": "sherbrooke-phoenix",
+      "logo": "assets/logos/chl/sherbrooke-phoenix.png",
+      "score": 3
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Wildcats 1, Tigres 0: Result Only",
@@ -176,7 +293,20 @@
      "game": "918303",
      "starsNote": "Not available (no player stats on the LG page).",
      "html": "<p>The LG page has a 1-0 final for Moncton Wildcats, but no skater lines, goalie lines or shots (all zeros). With nothing to go on, there's no recap or stars for this one. Wildcats went 3-0-0 tonight and sit 35-14-5 (75 pts); Tigres went 0-2-1 tonight and sit 26-23-5 (57 pts).</p>",
-     "stars": []
+     "stars": [],
+     "away": {
+      "name": "Moncton Wildcats",
+      "slug": "moncton-wildcats",
+      "logo": "assets/logos/chl/moncton-wildcats.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Victoriaville Tigres",
+      "slug": "victoriaville-tigres",
+      "logo": "assets/logos/chl/victoriaville-tigres.png",
+      "score": 0
+     },
+     "final": true
     },
     {
      "title": "Mooseheads Squeeze Past Cataractes",
@@ -188,21 +318,40 @@
        "n": 1,
        "player": "speed000racer.",
        "team": "Halifax Mooseheads, RW",
-       "line": "1G 2A, 5 SOG, +1, 4 hits"
+       "line": "1G 2A, 5 SOG, +1, 4 hits",
+       "teamSlug": "halifax-mooseheads",
+       "logo": "assets/logos/chl/halifax-mooseheads.png"
       },
       {
        "n": 2,
        "player": "Weins x",
        "team": "Shawinigan Cataractes, RW",
-       "line": "1G 2A, 5 SOG, -1, 1 hit"
+       "line": "1G 2A, 5 SOG, -1, 1 hit",
+       "teamSlug": "shawinigan-cataractes",
+       "logo": "assets/logos/chl/shawinigan-cataractes.png"
       },
       {
        "n": 3,
        "player": "Jlm1410",
        "team": "Shawinigan Cataractes, C",
-       "line": "0G 3A, 6 SOG, -1, 4 hits"
+       "line": "0G 3A, 6 SOG, -1, 4 hits",
+       "teamSlug": "shawinigan-cataractes",
+       "logo": "assets/logos/chl/shawinigan-cataractes.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Shawinigan Cataractes",
+      "slug": "shawinigan-cataractes",
+      "logo": "assets/logos/chl/shawinigan-cataractes.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Halifax Mooseheads",
+      "slug": "halifax-mooseheads",
+      "logo": "assets/logos/chl/halifax-mooseheads.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "Armada Take Care of Business",
@@ -214,21 +363,40 @@
        "n": 1,
        "player": "Dxspzi",
        "team": "Blainville-Boisbriand Armada, RW",
-       "line": "3G 2A, 3 SOG, +3, 2 hits"
+       "line": "3G 2A, 3 SOG, +3, 2 hits",
+       "teamSlug": "blainville-boisbriand-armada",
+       "logo": "assets/logos/chl/blainville-boisbriand-armada.png"
       },
       {
        "n": 2,
        "player": "darkdany",
        "team": "Blainville-Boisbriand Armada, C",
-       "line": "1G 3A, 6 SOG, +3, 0 hits"
+       "line": "1G 3A, 6 SOG, +3, 0 hits",
+       "teamSlug": "blainville-boisbriand-armada",
+       "logo": "assets/logos/chl/blainville-boisbriand-armada.png"
       },
       {
        "n": 3,
        "player": "xIKIEILJO",
        "team": "Blainville-Boisbriand Armada, LW",
-       "line": "1G 1A, 1 SOG, +3, 0 hits"
+       "line": "1G 1A, 1 SOG, +3, 0 hits",
+       "teamSlug": "blainville-boisbriand-armada",
+       "logo": "assets/logos/chl/blainville-boisbriand-armada.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Chicoutimi Sagueneens",
+      "slug": "chicoutimi-sagueneens",
+      "logo": "assets/logos/chl/chicoutimi-sagueneens.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Blainville-Boisbriand Armada",
+      "slug": "blainville-boisbriand-armada",
+      "logo": "assets/logos/chl/blainville-boisbriand-armada.png",
+      "score": 5
+     },
+     "final": true
     },
     {
      "title": "Foreurs Pull Clear of Oceanic",
@@ -240,21 +408,40 @@
        "n": 1,
        "player": "Staguts",
        "team": "Val-d'Or Foreurs, RW",
-       "line": "1G 2A, 2 SOG, +1, 7 hits"
+       "line": "1G 2A, 2 SOG, +1, 7 hits",
+       "teamSlug": "val-dor-foreurs",
+       "logo": "assets/logos/chl/val-dor-foreurs.png"
       },
       {
        "n": 2,
        "player": "stl710goon",
        "team": "Val-d'Or Foreurs, C",
-       "line": "2G 0A, 6 SOG, +1, 2 hits"
+       "line": "2G 0A, 6 SOG, +1, 2 hits",
+       "teamSlug": "val-dor-foreurs",
+       "logo": "assets/logos/chl/val-dor-foreurs.png"
       },
       {
        "n": 3,
        "player": "ilostmymoose",
        "team": "Val-d'Or Foreurs, RD",
-       "line": "0G 1A, 1 SOG, +1, 5 hits"
+       "line": "0G 1A, 1 SOG, +1, 5 hits",
+       "teamSlug": "val-dor-foreurs",
+       "logo": "assets/logos/chl/val-dor-foreurs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Rimouski Oceanic",
+      "slug": "rimouski-oceanic",
+      "logo": "assets/logos/chl/rimouski-oceanic.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Val-d'Or Foreurs",
+      "slug": "val-dor-foreurs",
+      "logo": "assets/logos/chl/val-dor-foreurs.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "Dogs Hold On by a Thread",
@@ -266,21 +453,40 @@
        "n": 1,
        "player": "xW3RMZx",
        "team": "Saint John Sea Dogs, C",
-       "line": "2G 0A, 8 SOG, +1, 0 hits"
+       "line": "2G 0A, 8 SOG, +1, 0 hits",
+       "teamSlug": "saint-john-sea-dogs",
+       "logo": "assets/logos/chl/saint-john-sea-dogs.png"
       },
       {
        "n": 2,
        "player": "PrOdIgYx8",
        "team": "Saint John Sea Dogs, RW",
-       "line": "0G 3A, 1 SOG, +1, 3 hits"
+       "line": "0G 3A, 1 SOG, +1, 3 hits",
+       "teamSlug": "saint-john-sea-dogs",
+       "logo": "assets/logos/chl/saint-john-sea-dogs.png"
       },
       {
        "n": 3,
        "player": "EricHMusic",
        "team": "Saint John Sea Dogs, RD",
-       "line": "0G 2A, 0 SOG, +1, 0 hits"
+       "line": "0G 2A, 0 SOG, +1, 0 hits",
+       "teamSlug": "saint-john-sea-dogs",
+       "logo": "assets/logos/chl/saint-john-sea-dogs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Gatineau Olympiques",
+      "slug": "gatineau-olympiques",
+      "logo": "assets/logos/chl/gatineau-olympiques.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Saint John Sea Dogs",
+      "slug": "saint-john-sea-dogs",
+      "logo": "assets/logos/chl/saint-john-sea-dogs.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "Regiment Take Care of Business",
@@ -292,21 +498,40 @@
        "n": 1,
        "player": "superchimp99",
        "team": "Newfoundland Regiment, C",
-       "line": "3G 1A, 4 SOG, +4, 13 hits"
+       "line": "3G 1A, 4 SOG, +4, 13 hits",
+       "teamSlug": "newfoundland-regiment",
+       "logo": "assets/logos/chl/newfoundland-regiment.png"
       },
       {
        "n": 2,
        "player": "YummierScarab46",
        "team": "Newfoundland Regiment, LW",
-       "line": "1G 4A, 3 SOG, +4, 11 hits"
+       "line": "1G 4A, 3 SOG, +4, 11 hits",
+       "teamSlug": "newfoundland-regiment",
+       "logo": "assets/logos/chl/newfoundland-regiment.png"
       },
       {
        "n": 3,
        "player": "rawzy78",
        "team": "Newfoundland Regiment, RW",
-       "line": "1G 3A, 6 SOG, +4, 2 hits"
+       "line": "1G 3A, 6 SOG, +4, 2 hits",
+       "teamSlug": "newfoundland-regiment",
+       "logo": "assets/logos/chl/newfoundland-regiment.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Newfoundland Regiment",
+      "slug": "newfoundland-regiment",
+      "logo": "assets/logos/chl/newfoundland-regiment.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Quebec Remparts",
+      "slug": "quebec-remparts",
+      "logo": "assets/logos/chl/quebec-remparts.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "Colts Take Care of Business",
@@ -318,21 +543,40 @@
        "n": 1,
        "player": "Pboolin",
        "team": "Barrie Colts, C",
-       "line": "2G 2A, 5 SOG, +2, 1 hit"
+       "line": "2G 2A, 5 SOG, +2, 1 hit",
+       "teamSlug": "barrie-colts",
+       "logo": "assets/logos/chl/barrie-colts.png"
       },
       {
        "n": 2,
        "player": "McMiller75",
        "team": "Barrie Colts, LW",
-       "line": "1G 2A, 8 SOG, +2, 2 hits"
+       "line": "1G 2A, 8 SOG, +2, 2 hits",
+       "teamSlug": "barrie-colts",
+       "logo": "assets/logos/chl/barrie-colts.png"
       },
       {
        "n": 3,
        "player": "Shawn1593",
        "team": "Barrie Colts, RW",
-       "line": "1G 1A, 9 SOG, +2, 2 hits"
+       "line": "1G 1A, 9 SOG, +2, 2 hits",
+       "teamSlug": "barrie-colts",
+       "logo": "assets/logos/chl/barrie-colts.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Erie Otters",
+      "slug": "erie-otters",
+      "logo": "assets/logos/chl/erie-otters.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Barrie Colts",
+      "slug": "barrie-colts",
+      "logo": "assets/logos/chl/barrie-colts.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "Flood Gates: Attack 6, Battalion 1",
@@ -344,21 +588,40 @@
        "n": 1,
        "player": "Springdogg",
        "team": "Owen Sound Attack, LW",
-       "line": "1G 4A, 5 SOG, +5, 0 hits"
+       "line": "1G 4A, 5 SOG, +5, 0 hits",
+       "teamSlug": "owen-sound-attack",
+       "logo": "assets/logos/chl/owen-sound-attack.png"
       },
       {
        "n": 2,
        "player": "Habsyyy11",
        "team": "Owen Sound Attack, C",
-       "line": "2G 1A, 4 SOG, +5, 0 hits"
+       "line": "2G 1A, 4 SOG, +5, 0 hits",
+       "teamSlug": "owen-sound-attack",
+       "logo": "assets/logos/chl/owen-sound-attack.png"
       },
       {
        "n": 3,
        "player": "Tbush10",
        "team": "Owen Sound Attack, RD",
-       "line": "1G 2A, 3 SOG, +5, 2 hits"
+       "line": "1G 2A, 3 SOG, +5, 2 hits",
+       "teamSlug": "owen-sound-attack",
+       "logo": "assets/logos/chl/owen-sound-attack.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Owen Sound Attack",
+      "slug": "owen-sound-attack",
+      "logo": "assets/logos/chl/owen-sound-attack.png",
+      "score": 6
+     },
+     "home": {
+      "name": "North Bay Battalion",
+      "slug": "north-bay-battalion",
+      "logo": "assets/logos/chl/north-bay-battalion.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "Spitfires Take Care of Business",
@@ -370,21 +633,40 @@
        "n": 1,
        "player": "MrPiezrus",
        "team": "Windsor Spitfires, RW",
-       "line": "1G 5A, 6 SOG, +2, 2 hits"
+       "line": "1G 5A, 6 SOG, +2, 2 hits",
+       "teamSlug": "windsor-spitfires",
+       "logo": "assets/logos/chl/windsor-spitfires.png"
       },
       {
        "n": 2,
        "player": "NEON_ANGEL27",
        "team": "Windsor Spitfires, C",
-       "line": "3G 1A, 5 SOG, +2, 2 hits"
+       "line": "3G 1A, 5 SOG, +2, 2 hits",
+       "teamSlug": "windsor-spitfires",
+       "logo": "assets/logos/chl/windsor-spitfires.png"
       },
       {
        "n": 3,
        "player": "MickeyPizzazz",
        "team": "Windsor Spitfires, LW",
-       "line": "2G 2A, 4 SOG, +2, 1 hit"
+       "line": "2G 2A, 4 SOG, +2, 1 hit",
+       "teamSlug": "windsor-spitfires",
+       "logo": "assets/logos/chl/windsor-spitfires.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Windsor Spitfires",
+      "slug": "windsor-spitfires",
+      "logo": "assets/logos/chl/windsor-spitfires.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Ottawa 67's",
+      "slug": "ottawa-67s",
+      "logo": "assets/logos/chl/ottawa-67s.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "Storm Pull Clear of Frontenacs",
@@ -396,21 +678,40 @@
        "n": 1,
        "player": "Beauregard03",
        "team": "Guelph Storm, RW",
-       "line": "4G 3A, 6 SOG, +3, 8 hits"
+       "line": "4G 3A, 6 SOG, +3, 8 hits",
+       "teamSlug": "guelph-storm",
+       "logo": "assets/logos/chl/guelph-storm.png"
       },
       {
        "n": 2,
        "player": "Thomas l18l",
        "team": "Guelph Storm, LW",
-       "line": "2G 4A, 9 SOG, +3, 0 hits"
+       "line": "2G 4A, 9 SOG, +3, 0 hits",
+       "teamSlug": "guelph-storm",
+       "logo": "assets/logos/chl/guelph-storm.png"
       },
       {
        "n": 3,
        "player": "I2sweat97",
        "team": "Guelph Storm, C",
-       "line": "1G 5A, 1 SOG, +3, 1 hit"
+       "line": "1G 5A, 1 SOG, +3, 1 hit",
+       "teamSlug": "guelph-storm",
+       "logo": "assets/logos/chl/guelph-storm.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Guelph Storm",
+      "slug": "guelph-storm",
+      "logo": "assets/logos/chl/guelph-storm.png",
+      "score": 7
+     },
+     "home": {
+      "name": "Kingston Frontenacs",
+      "slug": "kingston-frontenacs",
+      "logo": "assets/logos/chl/kingston-frontenacs.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "Rangers Win It After Sixty",
@@ -422,21 +723,41 @@
        "n": 1,
        "player": "Not Raed",
        "team": "Kitchener Rangers, RW",
-       "line": "1G 1A, 4 SOG, +1, 0 hits"
+       "line": "1G 1A, 4 SOG, +1, 0 hits",
+       "teamSlug": "kitchener-rangers",
+       "logo": "assets/logos/chl/kitchener-rangers.png"
       },
       {
        "n": 2,
        "player": "TimFairview",
        "team": "Kitchener Rangers, LD",
-       "line": "1G 0A, 3 SOG, +1, 0 hits"
+       "line": "1G 0A, 3 SOG, +1, 0 hits",
+       "teamSlug": "kitchener-rangers",
+       "logo": "assets/logos/chl/kitchener-rangers.png"
       },
       {
        "n": 3,
        "player": "BowlerFett",
        "team": "Kitchener Rangers, C",
-       "line": "0G 1A, 4 SOG, +1, 0 hits"
+       "line": "0G 1A, 4 SOG, +1, 0 hits",
+       "teamSlug": "kitchener-rangers",
+       "logo": "assets/logos/chl/kitchener-rangers.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Kitchener Rangers",
+      "slug": "kitchener-rangers",
+      "logo": "assets/logos/chl/kitchener-rangers.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Sudbury Wolves",
+      "slug": "sudbury-wolves",
+      "logo": "assets/logos/chl/sudbury-wolves.png",
+      "score": 1
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Bulldogs Run Away From Firebirds",
@@ -448,21 +769,40 @@
        "n": 1,
        "player": "DirtyDangler82",
        "team": "Brantford Bulldogs, RW",
-       "line": "2G 2A, 5 SOG, +3, 1 hit"
+       "line": "2G 2A, 5 SOG, +3, 1 hit",
+       "teamSlug": "brantford-bulldogs",
+       "logo": "assets/logos/chl/brantford-bulldogs.png"
       },
       {
        "n": 2,
        "player": "vybin0095",
        "team": "Brantford Bulldogs, LW",
-       "line": "3G 0A, 6 SOG, +3, 2 hits"
+       "line": "3G 0A, 6 SOG, +3, 2 hits",
+       "teamSlug": "brantford-bulldogs",
+       "logo": "assets/logos/chl/brantford-bulldogs.png"
       },
       {
        "n": 3,
        "player": "EDGEx22",
        "team": "Brantford Bulldogs, C",
-       "line": "0G 3A, 5 SOG, +3, 1 hit"
+       "line": "0G 3A, 5 SOG, +3, 1 hit",
+       "teamSlug": "brantford-bulldogs",
+       "logo": "assets/logos/chl/brantford-bulldogs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Brantford Bulldogs",
+      "slug": "brantford-bulldogs",
+      "logo": "assets/logos/chl/brantford-bulldogs.png",
+      "score": 5
+     },
+     "home": {
+      "name": "Flint Firebirds",
+      "slug": "flint-firebirds",
+      "logo": "assets/logos/chl/flint-firebirds.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "Flood Gates: Petes 6, Knights 1",
@@ -474,21 +814,40 @@
        "n": 1,
        "player": "DODGEredneck69",
        "team": "Peterborough Petes, LW",
-       "line": "3G 2A, 5 SOG, +5, 2 hits"
+       "line": "3G 2A, 5 SOG, +5, 2 hits",
+       "teamSlug": "peterborough-petes",
+       "logo": "assets/logos/chl/peterborough-petes.png"
       },
       {
        "n": 2,
        "player": "Redemption16676",
        "team": "Peterborough Petes, C",
-       "line": "2G 2A, 7 SOG, +5, 1 hit"
+       "line": "2G 2A, 7 SOG, +5, 1 hit",
+       "teamSlug": "peterborough-petes",
+       "logo": "assets/logos/chl/peterborough-petes.png"
       },
       {
        "n": 3,
        "player": "x Hutsonov x",
        "team": "Peterborough Petes, RW",
-       "line": "1G 3A, 7 SOG, +5, 3 hits"
+       "line": "1G 3A, 7 SOG, +5, 3 hits",
+       "teamSlug": "peterborough-petes",
+       "logo": "assets/logos/chl/peterborough-petes.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "London Knights",
+      "slug": "london-knights",
+      "logo": "assets/logos/chl/london-knights.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Peterborough Petes",
+      "slug": "peterborough-petes",
+      "logo": "assets/logos/chl/peterborough-petes.png",
+      "score": 6
+     },
+     "final": true
     },
     {
      "title": "Steelheads Run Away From Spirit",
@@ -500,21 +859,40 @@
        "n": 1,
        "player": "PartyDrew",
        "team": "Brampton Steelheads, LW",
-       "line": "3G 2A, 6 SOG, +3, 1 hit"
+       "line": "3G 2A, 6 SOG, +3, 1 hit",
+       "teamSlug": "brampton-steelheads",
+       "logo": "assets/logos/chl/brampton-steelheads.png"
       },
       {
        "n": 2,
        "player": "x-Mando-x-",
        "team": "Brampton Steelheads, C",
-       "line": "2G 2A, 7 SOG, +3, 0 hits"
+       "line": "2G 2A, 7 SOG, +3, 0 hits",
+       "teamSlug": "brampton-steelheads",
+       "logo": "assets/logos/chl/brampton-steelheads.png"
       },
       {
        "n": 3,
        "player": "x-TagarnaK-x",
        "team": "Brampton Steelheads, RW",
-       "line": "1G 2A, 5 SOG, +3, 1 hit"
+       "line": "1G 2A, 5 SOG, +3, 1 hit",
+       "teamSlug": "brampton-steelheads",
+       "logo": "assets/logos/chl/brampton-steelheads.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Brampton Steelheads",
+      "slug": "brampton-steelheads",
+      "logo": "assets/logos/chl/brampton-steelheads.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Saginaw Spirit",
+      "slug": "saginaw-spirit",
+      "logo": "assets/logos/chl/saginaw-spirit.png",
+      "score": 2
+     },
+     "final": true
     },
     {
      "title": "IceDogs Pull Clear of Greyhounds",
@@ -526,21 +904,40 @@
        "n": 1,
        "player": "xGrogu-",
        "team": "Niagara IceDogs, RW",
-       "line": "1G 4A, 5 SOG, +2, 0 hits"
+       "line": "1G 4A, 5 SOG, +2, 0 hits",
+       "teamSlug": "niagara-icedogs",
+       "logo": "assets/logos/chl/niagara-icedogs.png"
       },
       {
        "n": 2,
        "player": "iillegall",
        "team": "Niagara IceDogs, C",
-       "line": "2G 2A, 7 SOG, +2, 0 hits"
+       "line": "2G 2A, 7 SOG, +2, 0 hits",
+       "teamSlug": "niagara-icedogs",
+       "logo": "assets/logos/chl/niagara-icedogs.png"
       },
       {
        "n": 3,
        "player": "II_Prxvoke_II",
        "team": "Niagara IceDogs, LW",
-       "line": "2G 1A, 8 SOG, +2, 0 hits"
+       "line": "2G 1A, 8 SOG, +2, 0 hits",
+       "teamSlug": "niagara-icedogs",
+       "logo": "assets/logos/chl/niagara-icedogs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Niagara IceDogs",
+      "slug": "niagara-icedogs",
+      "logo": "assets/logos/chl/niagara-icedogs.png",
+      "score": 5
+     },
+     "home": {
+      "name": "Sault Ste. Marie Greyhounds",
+      "slug": "sault-ste-marie-greyhounds",
+      "logo": "assets/logos/chl/sault-ste-marie-greyhounds.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "Sarnia's Third Period Buries Burtxn's Four-Goal Night",
@@ -552,21 +949,40 @@
        "n": 1,
        "player": "Mxlsyy",
        "team": "Sarnia Sting, RW",
-       "line": "4G 2A, 5 SOG, +4"
+       "line": "4G 2A, 5 SOG, +4",
+       "teamSlug": "sarnia-sting",
+       "logo": "assets/logos/chl/sarnia-sting.png"
       },
       {
        "n": 2,
        "player": "DemidoV_93_ch",
        "team": "Sarnia Sting, C",
-       "line": "3G 3A, +4"
+       "line": "3G 3A, +4",
+       "teamSlug": "sarnia-sting",
+       "logo": "assets/logos/chl/sarnia-sting.png"
       },
       {
        "n": 3,
        "player": "Burtxn l77l",
        "team": "Oshawa Generals, RW",
-       "line": "4G, 7 SOG"
+       "line": "4G, 7 SOG",
+       "teamSlug": "oshawa-generals",
+       "logo": "assets/logos/chl/oshawa-generals.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Oshawa Generals",
+      "slug": "oshawa-generals",
+      "logo": "assets/logos/chl/oshawa-generals.png",
+      "score": 4
+     },
+     "home": {
+      "name": "Sarnia Sting",
+      "slug": "sarnia-sting",
+      "logo": "assets/logos/chl/sarnia-sting.png",
+      "score": 8
+     },
+     "final": true
     },
     {
      "title": "Flood Gates: Kings 8, Wild 3",
@@ -578,21 +994,40 @@
        "n": 1,
        "player": "B_Real1337",
        "team": "Edmonton Oil Kings, RW",
-       "line": "2G 6A, 4 SOG, +6, 0 hits"
+       "line": "2G 6A, 4 SOG, +6, 0 hits",
+       "teamSlug": "edmonton-oil-kings",
+       "logo": "assets/logos/chl/edmonton-oil-kings.png"
       },
       {
        "n": 2,
        "player": "CroatKing11",
        "team": "Edmonton Oil Kings, LW",
-       "line": "4G 1A, 5 SOG, +6, 2 hits"
+       "line": "4G 1A, 5 SOG, +6, 2 hits",
+       "teamSlug": "edmonton-oil-kings",
+       "logo": "assets/logos/chl/edmonton-oil-kings.png"
       },
       {
        "n": 3,
        "player": "mrmagoo",
        "team": "Edmonton Oil Kings, C",
-       "line": "1G 4A, 1 SOG, +6, 5 hits"
+       "line": "1G 4A, 1 SOG, +6, 5 hits",
+       "teamSlug": "edmonton-oil-kings",
+       "logo": "assets/logos/chl/edmonton-oil-kings.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Wenatchee Wild",
+      "slug": "wenatchee-wild",
+      "logo": "assets/logos/chl/wenatchee-wild.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Edmonton Oil Kings",
+      "slug": "edmonton-oil-kings",
+      "logo": "assets/logos/chl/edmonton-oil-kings.png",
+      "score": 8
+     },
+     "final": true
     },
     {
      "title": "Victoria Opens a Historic Night With a 7-0 Rout",
@@ -604,21 +1039,40 @@
        "n": 1,
        "player": "redz_shifterr",
        "team": "Victoria Royals, RW",
-       "line": "3G 3A, 6 SOG, +7"
+       "line": "3G 3A, 6 SOG, +7",
+       "teamSlug": "victoria-royals",
+       "logo": "assets/logos/chl/victoria-royals.png"
       },
       {
        "n": 2,
        "player": "pickmasta",
        "team": "Victoria Royals, LD",
-       "line": "1G 4A, +7"
+       "line": "1G 4A, +7",
+       "teamSlug": "victoria-royals",
+       "logo": "assets/logos/chl/victoria-royals.png"
       },
       {
        "n": 3,
        "player": "nothargi4200",
        "team": "Victoria Royals, G",
-       "line": "6 saves on 6, shutout"
+       "line": "6 saves on 6, shutout",
+       "teamSlug": "victoria-royals",
+       "logo": "assets/logos/chl/victoria-royals.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Lethbridge Hurricanes",
+      "slug": "lethbridge-hurricanes",
+      "logo": "assets/logos/chl/lethbridge-hurricanes.png",
+      "score": 0
+     },
+     "home": {
+      "name": "Victoria Royals",
+      "slug": "victoria-royals",
+      "logo": "assets/logos/chl/victoria-royals.png",
+      "score": 7
+     },
+     "final": true
     },
     {
      "title": "One-Goal Margin, Silvertips Edition",
@@ -630,21 +1084,40 @@
        "n": 1,
        "player": "Validnorf",
        "team": "Everett Silvertips, LW",
-       "line": "3G 0A, 7 SOG, +1, 1 hit"
+       "line": "3G 0A, 7 SOG, +1, 1 hit",
+       "teamSlug": "everett-silvertips",
+       "logo": "assets/logos/chl/everett-silvertips.png"
       },
       {
        "n": 2,
        "player": "BoooBeee Orr",
        "team": "Everett Silvertips, RW",
-       "line": "0G 3A, 2 SOG, +1, 1 hit"
+       "line": "0G 3A, 2 SOG, +1, 1 hit",
+       "teamSlug": "everett-silvertips",
+       "logo": "assets/logos/chl/everett-silvertips.png"
       },
       {
        "n": 3,
        "player": "Chhhew",
        "team": "Moose Jaw Warriors, C",
-       "line": "1G 1A, 6 SOG, -1, 0 hits"
+       "line": "1G 1A, 6 SOG, -1, 0 hits",
+       "teamSlug": "moose-jaw-warriors",
+       "logo": "assets/logos/chl/moose-jaw-warriors.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Everett Silvertips",
+      "slug": "everett-silvertips",
+      "logo": "assets/logos/chl/everett-silvertips.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Moose Jaw Warriors",
+      "slug": "moose-jaw-warriors",
+      "logo": "assets/logos/chl/moose-jaw-warriors.png",
+      "score": 2
+     },
+     "final": true
     },
     {
      "title": "Locked Down: Winterhawks Blank Pats",
@@ -656,21 +1129,40 @@
        "n": 1,
        "player": "desiredsno3",
        "team": "Portland Winterhawks, LW",
-       "line": "2G 1A, 8 SOG, +3, 0 hits"
+       "line": "2G 1A, 8 SOG, +3, 0 hits",
+       "teamSlug": "portland-winterhawks",
+       "logo": "assets/logos/chl/portland-winterhawks.png"
       },
       {
        "n": 2,
        "player": "Lett m3 c00k",
        "team": "Portland Winterhawks, G",
-       "line": "21 saves on 21 (1.000) SHUTOUT"
+       "line": "21 saves on 21 (1.000) SHUTOUT",
+       "teamSlug": "portland-winterhawks",
+       "logo": "assets/logos/chl/portland-winterhawks.png"
       },
       {
        "n": 3,
        "player": "GBR Dingurz",
        "team": "Portland Winterhawks, RW",
-       "line": "0G 2A, 6 SOG, +3, 5 hits"
+       "line": "0G 2A, 6 SOG, +3, 5 hits",
+       "teamSlug": "portland-winterhawks",
+       "logo": "assets/logos/chl/portland-winterhawks.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Regina Pats",
+      "slug": "regina-pats",
+      "logo": "assets/logos/chl/regina-pats.png",
+      "score": 0
+     },
+     "home": {
+      "name": "Portland Winterhawks",
+      "slug": "portland-winterhawks",
+      "logo": "assets/logos/chl/portland-winterhawks.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "Americans Find the Overtime Door",
@@ -682,21 +1174,41 @@
        "n": 1,
        "player": "OMG_Magro",
        "team": "Tri City Americans, LW",
-       "line": "3G 0A, 5 SOG, +0, 4 hits"
+       "line": "3G 0A, 5 SOG, +0, 4 hits",
+       "teamSlug": "tri-city-americans",
+       "logo": "assets/logos/chl/tri-city-americans.png"
       },
       {
        "n": 2,
        "player": "Nxsclr",
        "team": "Prince Albert Raiders, C",
-       "line": "1G 1A, 4 SOG, +0, 0 hits"
+       "line": "1G 1A, 4 SOG, +0, 0 hits",
+       "teamSlug": "prince-albert-raiders",
+       "logo": "assets/logos/chl/prince-albert-raiders.png"
       },
       {
        "n": 3,
        "player": "jdowning21.",
        "team": "Tri City Americans, RW",
-       "line": "0G 2A, 6 SOG, +0, 0 hits"
+       "line": "0G 2A, 6 SOG, +0, 0 hits",
+       "teamSlug": "tri-city-americans",
+       "logo": "assets/logos/chl/tri-city-americans.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Prince Albert Raiders",
+      "slug": "prince-albert-raiders",
+      "logo": "assets/logos/chl/prince-albert-raiders.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Tri City Americans",
+      "slug": "tri-city-americans",
+      "logo": "assets/logos/chl/tri-city-americans.png",
+      "score": 3
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Cougars Pull Clear of Bruins",
@@ -708,21 +1220,40 @@
        "n": 1,
        "player": "WassI19I",
        "team": "Prince George Cougars, C",
-       "line": "2G 2A, 4 SOG, +2, 0 hits"
+       "line": "2G 2A, 4 SOG, +2, 0 hits",
+       "teamSlug": "prince-george-cougars",
+       "logo": "assets/logos/chl/prince-george-cougars.png"
       },
       {
        "n": 2,
        "player": "ItzAverage-",
        "team": "Prince George Cougars, RW",
-       "line": "2G 1A, 10 SOG, +2, 1 hit"
+       "line": "2G 1A, 10 SOG, +2, 1 hit",
+       "teamSlug": "prince-george-cougars",
+       "logo": "assets/logos/chl/prince-george-cougars.png"
       },
       {
        "n": 3,
        "player": "xZainer89",
        "team": "Prince George Cougars, LW",
-       "line": "1G 3A, 4 SOG, +2, 1 hit"
+       "line": "1G 3A, 4 SOG, +2, 1 hit",
+       "teamSlug": "prince-george-cougars",
+       "logo": "assets/logos/chl/prince-george-cougars.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Chilliwack Bruins",
+      "slug": "chilliwack-bruins",
+      "logo": "assets/logos/chl/chilliwack-bruins.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Prince George Cougars",
+      "slug": "prince-george-cougars",
+      "logo": "assets/logos/chl/prince-george-cougars.png",
+      "score": 5
+     },
+     "final": true
     },
     {
      "title": "One-Goal Margin, Rebels Edition",
@@ -734,21 +1265,40 @@
        "n": 1,
        "player": "sportsfreakxxii",
        "team": "Red Deer Rebels, RW",
-       "line": "1G 3A, 4 SOG, +1, 3 hits"
+       "line": "1G 3A, 4 SOG, +1, 3 hits",
+       "teamSlug": "red-deer-rebels",
+       "logo": "assets/logos/chl/red-deer-rebels.png"
       },
       {
        "n": 2,
        "player": "Tatious",
        "team": "Red Deer Rebels, LW",
-       "line": "2G 1A, 8 SOG, +1, 4 hits"
+       "line": "2G 1A, 8 SOG, +1, 4 hits",
+       "teamSlug": "red-deer-rebels",
+       "logo": "assets/logos/chl/red-deer-rebels.png"
       },
       {
        "n": 3,
        "player": "majorbigmeat",
        "team": "Red Deer Rebels, C",
-       "line": "1G 2A, 6 SOG, +1, 7 hits"
+       "line": "1G 2A, 6 SOG, +1, 7 hits",
+       "teamSlug": "red-deer-rebels",
+       "logo": "assets/logos/chl/red-deer-rebels.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Red Deer Rebels",
+      "slug": "red-deer-rebels",
+      "logo": "assets/logos/chl/red-deer-rebels.png",
+      "score": 4
+     },
+     "home": {
+      "name": "Seattle Thunderbirds",
+      "slug": "seattle-thunderbirds",
+      "logo": "assets/logos/chl/seattle-thunderbirds.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "Four Goals From JP_029, and Medicine Hat Wins in Overtime",
@@ -760,21 +1310,41 @@
        "n": 1,
        "player": "JP_029",
        "team": "Medicine Hat Tigers, RW",
-       "line": "4G, 10 SOG, 5 hits"
+       "line": "4G, 10 SOG, 5 hits",
+       "teamSlug": "medicine-hat-tigers",
+       "logo": "assets/logos/chl/medicine-hat-tigers.png"
       },
       {
        "n": 2,
        "player": "lz0423",
        "team": "Kelowna Rockets, LW",
-       "line": "3G 1A, 7 SOG"
+       "line": "3G 1A, 7 SOG",
+       "teamSlug": "kelowna-rockets",
+       "logo": "assets/logos/chl/kelowna-rockets.png"
       },
       {
        "n": 3,
        "player": "Rogey_87",
        "team": "Medicine Hat Tigers, RD",
-       "line": "5A"
+       "line": "5A",
+       "teamSlug": "medicine-hat-tigers",
+       "logo": "assets/logos/chl/medicine-hat-tigers.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Kelowna Rockets",
+      "slug": "kelowna-rockets",
+      "logo": "assets/logos/chl/kelowna-rockets.png",
+      "score": 4
+     },
+     "home": {
+      "name": "Medicine Hat Tigers",
+      "slug": "medicine-hat-tigers",
+      "logo": "assets/logos/chl/medicine-hat-tigers.png",
+      "score": 5
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Kings Find the Overtime Door",
@@ -786,21 +1356,41 @@
        "n": 1,
        "player": "A_Bomb2713",
        "team": "Brandon Wheat Kings, LD",
-       "line": "2G 0A, 4 SOG, +2, 0 hits"
+       "line": "2G 0A, 4 SOG, +2, 0 hits",
+       "teamSlug": "brandon-wheat-kings",
+       "logo": "assets/logos/chl/brandon-wheat-kings.png"
       },
       {
        "n": 2,
        "player": "Burgercountry09",
        "team": "Brandon Wheat Kings, RW",
-       "line": "0G 2A, 2 SOG, +2, 7 hits"
+       "line": "0G 2A, 2 SOG, +2, 7 hits",
+       "teamSlug": "brandon-wheat-kings",
+       "logo": "assets/logos/chl/brandon-wheat-kings.png"
       },
       {
        "n": 3,
        "player": "GwyloBear",
        "team": "Kamloops Blazers, LW",
-       "line": "1G 0A, 7 SOG, -2, 3 hits"
+       "line": "1G 0A, 7 SOG, -2, 3 hits",
+       "teamSlug": "kamloops-blazers",
+       "logo": "assets/logos/chl/kamloops-blazers.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Kamloops Blazers",
+      "slug": "kamloops-blazers",
+      "logo": "assets/logos/chl/kamloops-blazers.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Brandon Wheat Kings",
+      "slug": "brandon-wheat-kings",
+      "logo": "assets/logos/chl/brandon-wheat-kings.png",
+      "score": 2
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Hitmen Watch: XxPASTRNAK88 Shuts Out the Conference's Best",
@@ -812,21 +1402,40 @@
        "n": 1,
        "player": "XxPASTRNAK88",
        "team": "Calgary Hitmen, G",
-       "line": "11 saves on 11, shutout"
+       "line": "11 saves on 11, shutout",
+       "teamSlug": "calgary-hitmen",
+       "logo": "assets/logos/chl/calgary-hitmen.png"
       },
       {
        "n": 2,
        "player": "WhiteoutI8I",
        "team": "Calgary Hitmen, RW",
-       "line": "game-winning goal on 1 SOG, +1, 3 hits"
+       "line": "game-winning goal on 1 SOG, +1, 3 hits",
+       "teamSlug": "calgary-hitmen",
+       "logo": "assets/logos/chl/calgary-hitmen.png"
       },
       {
        "n": 3,
        "player": "Gullyrr",
        "team": "Calgary Hitmen, C",
-       "line": "1A, 8 SOG, +1"
+       "line": "1A, 8 SOG, +1",
+       "teamSlug": "calgary-hitmen",
+       "logo": "assets/logos/chl/calgary-hitmen.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Spokane Chiefs",
+      "slug": "spokane-chiefs",
+      "logo": "assets/logos/chl/spokane-chiefs.png",
+      "score": 0
+     },
+     "home": {
+      "name": "Calgary Hitmen",
+      "slug": "calgary-hitmen",
+      "logo": "assets/logos/chl/calgary-hitmen.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "Giants Find the Overtime Door",
@@ -838,21 +1447,41 @@
        "n": 1,
        "player": "envy._._._._.",
        "team": "Vancouver Giants, RW",
-       "line": "3G 0A, 9 SOG, +2, 3 hits"
+       "line": "3G 0A, 9 SOG, +2, 3 hits",
+       "teamSlug": "vancouver-giants",
+       "logo": "assets/logos/chl/vancouver-giants.png"
       },
       {
        "n": 2,
        "player": "xSullylab-",
        "team": "Vancouver Giants, LW",
-       "line": "0G 3A, 5 SOG, +2, 5 hits"
+       "line": "0G 3A, 5 SOG, +2, 5 hits",
+       "teamSlug": "vancouver-giants",
+       "logo": "assets/logos/chl/vancouver-giants.png"
       },
       {
        "n": 3,
        "player": "Kelatoz",
        "team": "Vancouver Giants, RD",
-       "line": "0G 2A, 3 SOG, +2, 2 hits"
+       "line": "0G 2A, 3 SOG, +2, 2 hits",
+       "teamSlug": "vancouver-giants",
+       "logo": "assets/logos/chl/vancouver-giants.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Vancouver Giants",
+      "slug": "vancouver-giants",
+      "logo": "assets/logos/chl/vancouver-giants.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Swift Current Broncos",
+      "slug": "swift-current-broncos",
+      "logo": "assets/logos/chl/swift-current-broncos.png",
+      "score": 2
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Vees Pull Clear of Blades",
@@ -864,21 +1493,40 @@
        "n": 1,
        "player": "BigJay x89",
        "team": "Penticton Vees, C",
-       "line": "1G 2A, 7 SOG, +3, 1 hit"
+       "line": "1G 2A, 7 SOG, +3, 1 hit",
+       "teamSlug": "penticton-vees",
+       "logo": "assets/logos/chl/penticton-vees.png"
       },
       {
        "n": 2,
        "player": "delucadx",
        "team": "Penticton Vees, LW",
-       "line": "2G 0A, 8 SOG, +3, 1 hit"
+       "line": "2G 0A, 8 SOG, +3, 1 hit",
+       "teamSlug": "penticton-vees",
+       "logo": "assets/logos/chl/penticton-vees.png"
       },
       {
        "n": 3,
        "player": "Canadian__Impact",
        "team": "Penticton Vees, RW",
-       "line": "1G 2A, 2 SOG, +3, 0 hits"
+       "line": "1G 2A, 2 SOG, +3, 0 hits",
+       "teamSlug": "penticton-vees",
+       "logo": "assets/logos/chl/penticton-vees.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Penticton Vees",
+      "slug": "penticton-vees",
+      "logo": "assets/logos/chl/penticton-vees.png",
+      "score": 5
+     },
+     "home": {
+      "name": "Saskatoon Blades",
+      "slug": "saskatoon-blades",
+      "logo": "assets/logos/chl/saskatoon-blades.png",
+      "score": 3
+     },
+     "final": true
     }
    ]
   },
@@ -895,21 +1543,40 @@
        "n": 1,
        "player": "R xYATESx77",
        "team": "Chicoutimi Sagueneens, LW",
-       "line": "1G 2A, 6 SOG, +2, 2 hits"
+       "line": "1G 2A, 6 SOG, +2, 2 hits",
+       "teamSlug": "chicoutimi-sagueneens",
+       "logo": "assets/logos/chl/chicoutimi-sagueneens.png"
       },
       {
        "n": 2,
        "player": "l Saad x 20 l",
        "team": "Chicoutimi Sagueneens, C",
-       "line": "2G 0A, 9 SOG, +2, 3 hits"
+       "line": "2G 0A, 9 SOG, +2, 3 hits",
+       "teamSlug": "chicoutimi-sagueneens",
+       "logo": "assets/logos/chl/chicoutimi-sagueneens.png"
       },
       {
        "n": 3,
        "player": "Styles007Qc",
        "team": "Chicoutimi Sagueneens, RD",
-       "line": "0G 3A, 2 SOG, +2, 2 hits"
+       "line": "0G 3A, 2 SOG, +2, 2 hits",
+       "teamSlug": "chicoutimi-sagueneens",
+       "logo": "assets/logos/chl/chicoutimi-sagueneens.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Victoriaville Tigres",
+      "slug": "victoriaville-tigres",
+      "logo": "assets/logos/chl/victoriaville-tigres.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Chicoutimi Sagueneens",
+      "slug": "chicoutimi-sagueneens",
+      "logo": "assets/logos/chl/chicoutimi-sagueneens.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "Mooseheads Pull Clear of Armada",
@@ -921,21 +1588,40 @@
        "n": 1,
        "player": "speed000racer.",
        "team": "Halifax Mooseheads, RW",
-       "line": "1G 2A, 7 SOG, +3, 4 hits"
+       "line": "1G 2A, 7 SOG, +3, 4 hits",
+       "teamSlug": "halifax-mooseheads",
+       "logo": "assets/logos/chl/halifax-mooseheads.png"
       },
       {
        "n": 2,
        "player": "Shobaay",
        "team": "Halifax Mooseheads, LW",
-       "line": "1G 1A, 4 SOG, +3, 3 hits"
+       "line": "1G 1A, 4 SOG, +3, 3 hits",
+       "teamSlug": "halifax-mooseheads",
+       "logo": "assets/logos/chl/halifax-mooseheads.png"
       },
       {
        "n": 3,
        "player": "xKillhouse",
        "team": "Halifax Mooseheads, C",
-       "line": "1G 1A, 4 SOG, +3, 1 hit"
+       "line": "1G 1A, 4 SOG, +3, 1 hit",
+       "teamSlug": "halifax-mooseheads",
+       "logo": "assets/logos/chl/halifax-mooseheads.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Halifax Mooseheads",
+      "slug": "halifax-mooseheads",
+      "logo": "assets/logos/chl/halifax-mooseheads.png",
+      "score": 4
+     },
+     "home": {
+      "name": "Blainville-Boisbriand Armada",
+      "slug": "blainville-boisbriand-armada",
+      "logo": "assets/logos/chl/blainville-boisbriand-armada.png",
+      "score": 2
+     },
+     "final": true
     },
     {
      "title": "Voltigeurs Squeeze Past Islanders",
@@ -947,21 +1633,40 @@
        "n": 1,
        "player": "Local Booz",
        "team": "Drummondville Voltigeurs, LW",
-       "line": "1G 1A, 4 SOG, +1, 6 hits"
+       "line": "1G 1A, 4 SOG, +1, 6 hits",
+       "teamSlug": "drummondville-voltigeurs",
+       "logo": "assets/logos/chl/drummondville-voltigeurs.png"
       },
       {
        "n": 2,
        "player": "Local Skuzzy",
        "team": "Drummondville Voltigeurs, RW",
-       "line": "1G 0A, 7 SOG, +1, 0 hits"
+       "line": "1G 0A, 7 SOG, +1, 0 hits",
+       "teamSlug": "drummondville-voltigeurs",
+       "logo": "assets/logos/chl/drummondville-voltigeurs.png"
       },
       {
        "n": 3,
        "player": "PDubss-",
        "team": "Charlottetown Islanders, LD",
-       "line": "0G 1A, 1 SOG, -1, 0 hits"
+       "line": "0G 1A, 1 SOG, -1, 0 hits",
+       "teamSlug": "charlottetown-islanders",
+       "logo": "assets/logos/chl/charlottetown-islanders.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Charlottetown Islanders",
+      "slug": "charlottetown-islanders",
+      "logo": "assets/logos/chl/charlottetown-islanders.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Drummondville Voltigeurs",
+      "slug": "drummondville-voltigeurs",
+      "logo": "assets/logos/chl/drummondville-voltigeurs.png",
+      "score": 2
+     },
+     "final": true
     },
     {
      "title": "Dogs Hold On by a Thread",
@@ -973,21 +1678,40 @@
        "n": 1,
        "player": "PrOdIgYx8",
        "team": "Saint John Sea Dogs, RW",
-       "line": "1G 1A, 4 SOG, +0, 2 hits"
+       "line": "1G 1A, 4 SOG, +0, 2 hits",
+       "teamSlug": "saint-john-sea-dogs",
+       "logo": "assets/logos/chl/saint-john-sea-dogs.png"
       },
       {
        "n": 2,
        "player": "lI Demonic II",
        "team": "Saint John Sea Dogs, LW",
-       "line": "1G 0A, 7 SOG, +0, 3 hits"
+       "line": "1G 0A, 7 SOG, +0, 3 hits",
+       "teamSlug": "saint-john-sea-dogs",
+       "logo": "assets/logos/chl/saint-john-sea-dogs.png"
       },
       {
        "n": 3,
        "player": "pemm",
        "team": "Saint John Sea Dogs, G",
-       "line": "20 saves on 21 (0.952)"
+       "line": "20 saves on 21 (0.952)",
+       "teamSlug": "saint-john-sea-dogs",
+       "logo": "assets/logos/chl/saint-john-sea-dogs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Saint John Sea Dogs",
+      "slug": "saint-john-sea-dogs",
+      "logo": "assets/logos/chl/saint-john-sea-dogs.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Sherbrooke Phoenix",
+      "slug": "sherbrooke-phoenix",
+      "logo": "assets/logos/chl/sherbrooke-phoenix.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "One-Goal Margin, Huskies Edition",
@@ -999,21 +1723,40 @@
        "n": 1,
        "player": "Duggan4204",
        "team": "Rouyn-Noranda Huskies, RW",
-       "line": "1G 1A, 5 SOG, +0, 2 hits"
+       "line": "1G 1A, 5 SOG, +0, 2 hits",
+       "teamSlug": "rouyn-noranda-huskies",
+       "logo": "assets/logos/chl/rouyn-noranda-huskies.png"
       },
       {
        "n": 2,
        "player": "JBev93",
        "team": "Rouyn-Noranda Huskies, C",
-       "line": "0G 2A, 2 SOG, +0, 4 hits"
+       "line": "0G 2A, 2 SOG, +0, 4 hits",
+       "teamSlug": "rouyn-noranda-huskies",
+       "logo": "assets/logos/chl/rouyn-noranda-huskies.png"
       },
       {
        "n": 3,
        "player": "stonemaniac",
        "team": "Rouyn-Noranda Huskies, LW",
-       "line": "1G 0A, 3 SOG, +0, 12 hits"
+       "line": "1G 0A, 3 SOG, +0, 12 hits",
+       "teamSlug": "rouyn-noranda-huskies",
+       "logo": "assets/logos/chl/rouyn-noranda-huskies.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Rouyn-Noranda Huskies",
+      "slug": "rouyn-noranda-huskies",
+      "logo": "assets/logos/chl/rouyn-noranda-huskies.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Newfoundland Regiment",
+      "slug": "newfoundland-regiment",
+      "logo": "assets/logos/chl/newfoundland-regiment.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "Wildcats Take Care of Business",
@@ -1025,21 +1768,40 @@
        "n": 1,
        "player": "OG-NorthernWreck",
        "team": "Moncton Wildcats, RW",
-       "line": "3G 1A, 9 SOG, +1, 0 hits"
+       "line": "3G 1A, 9 SOG, +1, 0 hits",
+       "teamSlug": "moncton-wildcats",
+       "logo": "assets/logos/chl/moncton-wildcats.png"
       },
       {
        "n": 2,
        "player": "patag00niia",
        "team": "Moncton Wildcats, LW",
-       "line": "2G 2A, 7 SOG, +1, 2 hits"
+       "line": "2G 2A, 7 SOG, +1, 2 hits",
+       "teamSlug": "moncton-wildcats",
+       "logo": "assets/logos/chl/moncton-wildcats.png"
       },
       {
        "n": 3,
        "player": "stl710goon",
        "team": "Val-d'Or Foreurs, C",
-       "line": "1G 2A, 2 SOG, -1, 3 hits"
+       "line": "1G 2A, 2 SOG, -1, 3 hits",
+       "teamSlug": "val-dor-foreurs",
+       "logo": "assets/logos/chl/val-dor-foreurs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Val-d'Or Foreurs",
+      "slug": "val-dor-foreurs",
+      "logo": "assets/logos/chl/val-dor-foreurs.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Moncton Wildcats",
+      "slug": "moncton-wildcats",
+      "logo": "assets/logos/chl/moncton-wildcats.png",
+      "score": 6
+     },
+     "final": true
     },
     {
      "title": "Remparts Squeeze Past Olympiques",
@@ -1051,21 +1813,40 @@
        "n": 1,
        "player": "Sauceshow",
        "team": "Quebec Remparts, RW",
-       "line": "3G 0A, 3 SOG, +1, 1 hit"
+       "line": "3G 0A, 3 SOG, +1, 1 hit",
+       "teamSlug": "quebec-remparts",
+       "logo": "assets/logos/chl/quebec-remparts.png"
       },
       {
        "n": 2,
        "player": "CokeColaJedi87",
        "team": "Quebec Remparts, C",
-       "line": "0G 2A, 3 SOG, +1, 3 hits"
+       "line": "0G 2A, 3 SOG, +1, 3 hits",
+       "teamSlug": "quebec-remparts",
+       "logo": "assets/logos/chl/quebec-remparts.png"
       },
       {
        "n": 3,
        "player": "Buckteeyt",
        "team": "Gatineau Olympiques, C",
-       "line": "1G 0A, 6 SOG, -1, 5 hits"
+       "line": "1G 0A, 6 SOG, -1, 5 hits",
+       "teamSlug": "gatineau-olympiques",
+       "logo": "assets/logos/chl/gatineau-olympiques.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Quebec Remparts",
+      "slug": "quebec-remparts",
+      "logo": "assets/logos/chl/quebec-remparts.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Gatineau Olympiques",
+      "slug": "gatineau-olympiques",
+      "logo": "assets/logos/chl/gatineau-olympiques.png",
+      "score": 2
+     },
+     "final": true
     },
     {
      "title": "Bonus Hockey, Bonus Point: Eagles Edge Cataractes",
@@ -1077,21 +1858,41 @@
        "n": 1,
        "player": "FuZe Danglzz",
        "team": "Cape Breton Eagles, RD",
-       "line": "1G 1A, 3 SOG, +1, 2 hits"
+       "line": "1G 1A, 3 SOG, +1, 2 hits",
+       "teamSlug": "cape-breton-eagles",
+       "logo": "assets/logos/chl/cape-breton-eagles.png"
       },
       {
        "n": 2,
        "player": "Iam3xotic",
        "team": "Cape Breton Eagles, C",
-       "line": "1G 1A, 2 SOG, +1, 1 hit"
+       "line": "1G 1A, 2 SOG, +1, 1 hit",
+       "teamSlug": "cape-breton-eagles",
+       "logo": "assets/logos/chl/cape-breton-eagles.png"
       },
       {
        "n": 3,
        "player": "OWENWILSONSNO5E",
        "team": "Shawinigan Cataractes, LW",
-       "line": "1G 0A, 3 SOG, -1, 2 hits"
+       "line": "1G 0A, 3 SOG, -1, 2 hits",
+       "teamSlug": "shawinigan-cataractes",
+       "logo": "assets/logos/chl/shawinigan-cataractes.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Cape Breton Eagles",
+      "slug": "cape-breton-eagles",
+      "logo": "assets/logos/chl/cape-breton-eagles.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Shawinigan Cataractes",
+      "slug": "shawinigan-cataractes",
+      "logo": "assets/logos/chl/shawinigan-cataractes.png",
+      "score": 1
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Oceanic Pull Clear of Drakkar",
@@ -1103,21 +1904,40 @@
        "n": 1,
        "player": "Bedard x I98I",
        "team": "Rimouski Oceanic, LW",
-       "line": "2G 0A, 2 SOG, +2, 3 hits"
+       "line": "2G 0A, 2 SOG, +2, 3 hits",
+       "teamSlug": "rimouski-oceanic",
+       "logo": "assets/logos/chl/rimouski-oceanic.png"
       },
       {
        "n": 2,
        "player": "jxythegoat.",
        "team": "Rimouski Oceanic, RW",
-       "line": "0G 3A, 2 SOG, +2, 1 hit"
+       "line": "0G 3A, 2 SOG, +2, 1 hit",
+       "teamSlug": "rimouski-oceanic",
+       "logo": "assets/logos/chl/rimouski-oceanic.png"
       },
       {
        "n": 3,
        "player": "Bensxn24",
        "team": "Rimouski Oceanic, RD",
-       "line": "0G 2A, 0 SOG, +2, 1 hit"
+       "line": "0G 2A, 0 SOG, +2, 1 hit",
+       "teamSlug": "rimouski-oceanic",
+       "logo": "assets/logos/chl/rimouski-oceanic.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Rimouski Oceanic",
+      "slug": "rimouski-oceanic",
+      "logo": "assets/logos/chl/rimouski-oceanic.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Baie-Comeau Drakkar",
+      "slug": "baie-comeau-drakkar",
+      "logo": "assets/logos/chl/baie-comeau-drakkar.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "Erie Lets a Lead Slip, Then Takes It Back in Overtime",
@@ -1129,21 +1949,41 @@
        "n": 1,
        "player": "ItzChrixx",
        "team": "Erie Otters, C",
-       "line": "3G on 4 SOG"
+       "line": "3G on 4 SOG",
+       "teamSlug": "erie-otters",
+       "logo": "assets/logos/chl/erie-otters.png"
       },
       {
        "n": 2,
        "player": "v9xavr",
        "team": "Erie Otters, LW",
-       "line": "4A, 15 hits, +1"
+       "line": "4A, 15 hits, +1",
+       "teamSlug": "erie-otters",
+       "logo": "assets/logos/chl/erie-otters.png"
       },
       {
        "n": 3,
        "player": "peteypipes00500",
        "team": "Erie Otters, RW",
-       "line": "2G 1A, 8 SOG"
+       "line": "2G 1A, 8 SOG",
+       "teamSlug": "erie-otters",
+       "logo": "assets/logos/chl/erie-otters.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Kingston Frontenacs",
+      "slug": "kingston-frontenacs",
+      "logo": "assets/logos/chl/kingston-frontenacs.png",
+      "score": 4
+     },
+     "home": {
+      "name": "Erie Otters",
+      "slug": "erie-otters",
+      "logo": "assets/logos/chl/erie-otters.png",
+      "score": 5
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Storm Pull Clear of 67's",
@@ -1155,21 +1995,40 @@
        "n": 1,
        "player": "Beauregard03",
        "team": "Guelph Storm, RW",
-       "line": "2G 1A, 3 SOG, +2, 4 hits"
+       "line": "2G 1A, 3 SOG, +2, 4 hits",
+       "teamSlug": "guelph-storm",
+       "logo": "assets/logos/chl/guelph-storm.png"
       },
       {
        "n": 2,
        "player": "I2sweat97",
        "team": "Guelph Storm, C",
-       "line": "1G 3A, 2 SOG, +2, 3 hits"
+       "line": "1G 3A, 2 SOG, +2, 3 hits",
+       "teamSlug": "guelph-storm",
+       "logo": "assets/logos/chl/guelph-storm.png"
       },
       {
        "n": 3,
        "player": "Thomas l18l",
        "team": "Guelph Storm, LW",
-       "line": "1G 1A, 4 SOG, +2, 1 hit"
+       "line": "1G 1A, 4 SOG, +2, 1 hit",
+       "teamSlug": "guelph-storm",
+       "logo": "assets/logos/chl/guelph-storm.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Guelph Storm",
+      "slug": "guelph-storm",
+      "logo": "assets/logos/chl/guelph-storm.png",
+      "score": 4
+     },
+     "home": {
+      "name": "Ottawa 67's",
+      "slug": "ottawa-67s",
+      "logo": "assets/logos/chl/ottawa-67s.png",
+      "score": 2
+     },
+     "final": true
     },
     {
      "title": "Rangers Pull Clear of Battalion",
@@ -1181,21 +2040,40 @@
        "n": 1,
        "player": "II MunKey II",
        "team": "Kitchener Rangers, LW",
-       "line": "1G 1A, 11 SOG, +2, 2 hits"
+       "line": "1G 1A, 11 SOG, +2, 2 hits",
+       "teamSlug": "kitchener-rangers",
+       "logo": "assets/logos/chl/kitchener-rangers.png"
       },
       {
        "n": 2,
        "player": "BowlerFett",
        "team": "Kitchener Rangers, C",
-       "line": "1G 1A, 7 SOG, +2, 0 hits"
+       "line": "1G 1A, 7 SOG, +2, 0 hits",
+       "teamSlug": "kitchener-rangers",
+       "logo": "assets/logos/chl/kitchener-rangers.png"
       },
       {
        "n": 3,
        "player": "TimFairview",
        "team": "Kitchener Rangers, LD",
-       "line": "1G 1A, 5 SOG, +2, 0 hits"
+       "line": "1G 1A, 5 SOG, +2, 0 hits",
+       "teamSlug": "kitchener-rangers",
+       "logo": "assets/logos/chl/kitchener-rangers.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "North Bay Battalion",
+      "slug": "north-bay-battalion",
+      "logo": "assets/logos/chl/north-bay-battalion.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Kitchener Rangers",
+      "slug": "kitchener-rangers",
+      "logo": "assets/logos/chl/kitchener-rangers.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "One-Goal Margin, Knights Edition",
@@ -1207,21 +2085,40 @@
        "n": 1,
        "player": "xTHx muffin dog",
        "team": "London Knights, RW",
-       "line": "3G 1A, 6 SOG, +2, 1 hit"
+       "line": "3G 1A, 6 SOG, +2, 1 hit",
+       "teamSlug": "london-knights",
+       "logo": "assets/logos/chl/london-knights.png"
       },
       {
        "n": 2,
        "player": "iillegall",
        "team": "Niagara IceDogs, C",
-       "line": "2G 0A, 5 SOG, -2, 2 hits"
+       "line": "2G 0A, 5 SOG, -2, 2 hits",
+       "teamSlug": "niagara-icedogs",
+       "logo": "assets/logos/chl/niagara-icedogs.png"
       },
       {
        "n": 3,
        "player": "Kevus23",
        "team": "Niagara IceDogs, RD",
-       "line": "0G 3A, 2 SOG, -2, 1 hit"
+       "line": "0G 3A, 2 SOG, -2, 1 hit",
+       "teamSlug": "niagara-icedogs",
+       "logo": "assets/logos/chl/niagara-icedogs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Niagara IceDogs",
+      "slug": "niagara-icedogs",
+      "logo": "assets/logos/chl/niagara-icedogs.png",
+      "score": 3
+     },
+     "home": {
+      "name": "London Knights",
+      "slug": "london-knights",
+      "logo": "assets/logos/chl/london-knights.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "One-Goal Margin, Wolves Edition",
@@ -1233,21 +2130,40 @@
        "n": 1,
        "player": "Codelock",
        "team": "Sudbury Wolves, LW",
-       "line": "2G 0A, 5 SOG, +1, 2 hits"
+       "line": "2G 0A, 5 SOG, +1, 2 hits",
+       "teamSlug": "sudbury-wolves",
+       "logo": "assets/logos/chl/sudbury-wolves.png"
       },
       {
        "n": 2,
        "player": "Hergy9",
        "team": "Sudbury Wolves, C",
-       "line": "0G 1A, 6 SOG, +1, 1 hit"
+       "line": "0G 1A, 6 SOG, +1, 1 hit",
+       "teamSlug": "sudbury-wolves",
+       "logo": "assets/logos/chl/sudbury-wolves.png"
       },
       {
        "n": 3,
        "player": "Im Ruddy",
        "team": "Sudbury Wolves, RD",
-       "line": "0G 1A, 1 SOG, +1, 6 hits"
+       "line": "0G 1A, 1 SOG, +1, 6 hits",
+       "teamSlug": "sudbury-wolves",
+       "logo": "assets/logos/chl/sudbury-wolves.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Sudbury Wolves",
+      "slug": "sudbury-wolves",
+      "logo": "assets/logos/chl/sudbury-wolves.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Windsor Spitfires",
+      "slug": "windsor-spitfires",
+      "logo": "assets/logos/chl/windsor-spitfires.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "Greyhounds Find the Overtime Door",
@@ -1259,21 +2175,41 @@
        "n": 1,
        "player": "xxcrosbyqc",
        "team": "Sault Ste. Marie Greyhounds, C",
-       "line": "2G 0A, 3 SOG, +1, 0 hits"
+       "line": "2G 0A, 3 SOG, +1, 0 hits",
+       "teamSlug": "sault-ste-marie-greyhounds",
+       "logo": "assets/logos/chl/sault-ste-marie-greyhounds.png"
       },
       {
        "n": 2,
        "player": "vybin0095",
        "team": "Brantford Bulldogs, LW",
-       "line": "1G 0A, 6 SOG, -1, 4 hits"
+       "line": "1G 0A, 6 SOG, -1, 4 hits",
+       "teamSlug": "brantford-bulldogs",
+       "logo": "assets/logos/chl/brantford-bulldogs.png"
       },
       {
        "n": 3,
        "player": "raph_dubois16",
        "team": "Sault Ste. Marie Greyhounds, G",
-       "line": "17 saves on 18 (0.944)"
+       "line": "17 saves on 18 (0.944)",
+       "teamSlug": "sault-ste-marie-greyhounds",
+       "logo": "assets/logos/chl/sault-ste-marie-greyhounds.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Sault Ste. Marie Greyhounds",
+      "slug": "sault-ste-marie-greyhounds",
+      "logo": "assets/logos/chl/sault-ste-marie-greyhounds.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Brantford Bulldogs",
+      "slug": "brantford-bulldogs",
+      "logo": "assets/logos/chl/brantford-bulldogs.png",
+      "score": 1
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Attack Pull Clear of Steelheads",
@@ -1285,21 +2221,40 @@
        "n": 1,
        "player": "RUSH_CHELL",
        "team": "Owen Sound Attack, RW",
-       "line": "1G 4A, 3 SOG, +2, 1 hit"
+       "line": "1G 4A, 3 SOG, +2, 1 hit",
+       "teamSlug": "owen-sound-attack",
+       "logo": "assets/logos/chl/owen-sound-attack.png"
       },
       {
        "n": 2,
        "player": "Habsyyy11",
        "team": "Owen Sound Attack, C",
-       "line": "3G 0A, 5 SOG, +2, 0 hits"
+       "line": "3G 0A, 5 SOG, +2, 0 hits",
+       "teamSlug": "owen-sound-attack",
+       "logo": "assets/logos/chl/owen-sound-attack.png"
       },
       {
        "n": 3,
        "player": "x-TagarnaK-x",
        "team": "Brampton Steelheads, RW",
-       "line": "2G 2A, 3 SOG, -2, 3 hits"
+       "line": "2G 2A, 3 SOG, -2, 3 hits",
+       "teamSlug": "brampton-steelheads",
+       "logo": "assets/logos/chl/brampton-steelheads.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Owen Sound Attack",
+      "slug": "owen-sound-attack",
+      "logo": "assets/logos/chl/owen-sound-attack.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Brampton Steelheads",
+      "slug": "brampton-steelheads",
+      "logo": "assets/logos/chl/brampton-steelheads.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "Locked Down: Generals Blank Firebirds",
@@ -1311,21 +2266,40 @@
        "n": 1,
        "player": "Burtxn l77l",
        "team": "Oshawa Generals, RW",
-       "line": "1G 2A, 8 SOG, +2, 0 hits"
+       "line": "1G 2A, 8 SOG, +2, 0 hits",
+       "teamSlug": "oshawa-generals",
+       "logo": "assets/logos/chl/oshawa-generals.png"
       },
       {
        "n": 2,
        "player": "Frizyal8er",
        "team": "Oshawa Generals, G",
-       "line": "20 saves on 20 (1.000) SHUTOUT"
+       "line": "20 saves on 20 (1.000) SHUTOUT",
+       "teamSlug": "oshawa-generals",
+       "logo": "assets/logos/chl/oshawa-generals.png"
       },
       {
        "n": 3,
        "player": "pulse4k",
        "team": "Oshawa Generals, RD",
-       "line": "2G 0A, 2 SOG, +2, 3 hits"
+       "line": "2G 0A, 2 SOG, +2, 3 hits",
+       "teamSlug": "oshawa-generals",
+       "logo": "assets/logos/chl/oshawa-generals.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Flint Firebirds",
+      "slug": "flint-firebirds",
+      "logo": "assets/logos/chl/flint-firebirds.png",
+      "score": 0
+     },
+     "home": {
+      "name": "Oshawa Generals",
+      "slug": "oshawa-generals",
+      "logo": "assets/logos/chl/oshawa-generals.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "Sting Pull Clear of Petes",
@@ -1337,21 +2311,40 @@
        "n": 1,
        "player": "morbid_chaos15",
        "team": "Sarnia Sting, LW",
-       "line": "3G 0A, 5 SOG, +2, 1 hit"
+       "line": "3G 0A, 5 SOG, +2, 1 hit",
+       "teamSlug": "sarnia-sting",
+       "logo": "assets/logos/chl/sarnia-sting.png"
       },
       {
        "n": 2,
        "player": "DemidoV_93_ch",
        "team": "Sarnia Sting, C",
-       "line": "0G 4A, 2 SOG, +2, 5 hits"
+       "line": "0G 4A, 2 SOG, +2, 5 hits",
+       "teamSlug": "sarnia-sting",
+       "logo": "assets/logos/chl/sarnia-sting.png"
       },
       {
        "n": 3,
        "player": "Mxlsyy",
        "team": "Sarnia Sting, RW",
-       "line": "1G 1A, 5 SOG, +2, 0 hits"
+       "line": "1G 1A, 5 SOG, +2, 0 hits",
+       "teamSlug": "sarnia-sting",
+       "logo": "assets/logos/chl/sarnia-sting.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Peterborough Petes",
+      "slug": "peterborough-petes",
+      "logo": "assets/logos/chl/peterborough-petes.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Sarnia Sting",
+      "slug": "sarnia-sting",
+      "logo": "assets/logos/chl/sarnia-sting.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "Colts Take Care of Business",
@@ -1363,21 +2356,40 @@
        "n": 1,
        "player": "McMiller75",
        "team": "Barrie Colts, LW",
-       "line": "5G 1A, 9 SOG, +1, 3 hits"
+       "line": "5G 1A, 9 SOG, +1, 3 hits",
+       "teamSlug": "barrie-colts",
+       "logo": "assets/logos/chl/barrie-colts.png"
       },
       {
        "n": 2,
        "player": "Pboolin",
        "team": "Barrie Colts, C",
-       "line": "1G 4A, 8 SOG, +1, 0 hits"
+       "line": "1G 4A, 8 SOG, +1, 0 hits",
+       "teamSlug": "barrie-colts",
+       "logo": "assets/logos/chl/barrie-colts.png"
       },
       {
        "n": 3,
        "player": "I Richy 19 I",
        "team": "Saginaw Spirit, LW",
-       "line": "3G 1A, 4 SOG, -1, 1 hit"
+       "line": "3G 1A, 4 SOG, -1, 1 hit",
+       "teamSlug": "saginaw-spirit",
+       "logo": "assets/logos/chl/saginaw-spirit.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Saginaw Spirit",
+      "slug": "saginaw-spirit",
+      "logo": "assets/logos/chl/saginaw-spirit.png",
+      "score": 5
+     },
+     "home": {
+      "name": "Barrie Colts",
+      "slug": "barrie-colts",
+      "logo": "assets/logos/chl/barrie-colts.png",
+      "score": 7
+     },
+     "final": true
     },
     {
      "title": "Blades Run Away From Winterhawks",
@@ -1389,21 +2401,40 @@
        "n": 1,
        "player": "noluck0934",
        "team": "Saskatoon Blades, C",
-       "line": "3G 2A, 4 SOG, +4, 0 hits"
+       "line": "3G 2A, 4 SOG, +4, 0 hits",
+       "teamSlug": "saskatoon-blades",
+       "logo": "assets/logos/chl/saskatoon-blades.png"
       },
       {
        "n": 2,
        "player": "MaximeQc",
        "team": "Saskatoon Blades, LW",
-       "line": "1G 4A, 2 SOG, +4, 2 hits"
+       "line": "1G 4A, 2 SOG, +4, 2 hits",
+       "teamSlug": "saskatoon-blades",
+       "logo": "assets/logos/chl/saskatoon-blades.png"
       },
       {
        "n": 3,
        "player": "Steven514",
        "team": "Saskatoon Blades, RW",
-       "line": "2G 2A, 8 SOG, +4, 1 hit"
+       "line": "2G 2A, 8 SOG, +4, 1 hit",
+       "teamSlug": "saskatoon-blades",
+       "logo": "assets/logos/chl/saskatoon-blades.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Saskatoon Blades",
+      "slug": "saskatoon-blades",
+      "logo": "assets/logos/chl/saskatoon-blades.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Portland Winterhawks",
+      "slug": "portland-winterhawks",
+      "logo": "assets/logos/chl/portland-winterhawks.png",
+      "score": 2
+     },
+     "final": true
     },
     {
      "title": "Broncos Run Away From Silvertips",
@@ -1415,21 +2446,40 @@
        "n": 1,
        "player": "geocustom",
        "team": "Swift Current Broncos, RW",
-       "line": "3G 3A, 4 SOG, +4, 3 hits"
+       "line": "3G 3A, 4 SOG, +4, 3 hits",
+       "teamSlug": "swift-current-broncos",
+       "logo": "assets/logos/chl/swift-current-broncos.png"
       },
       {
        "n": 2,
        "player": "EyeSin_",
        "team": "Swift Current Broncos, C",
-       "line": "1G 3A, 2 SOG, +4, 3 hits"
+       "line": "1G 3A, 2 SOG, +4, 3 hits",
+       "teamSlug": "swift-current-broncos",
+       "logo": "assets/logos/chl/swift-current-broncos.png"
       },
       {
        "n": 3,
        "player": "soibelrhxc",
        "team": "Swift Current Broncos, LW",
-       "line": "2G 0A, 4 SOG, +4, 4 hits"
+       "line": "2G 0A, 4 SOG, +4, 4 hits",
+       "teamSlug": "swift-current-broncos",
+       "logo": "assets/logos/chl/swift-current-broncos.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Swift Current Broncos",
+      "slug": "swift-current-broncos",
+      "logo": "assets/logos/chl/swift-current-broncos.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Everett Silvertips",
+      "slug": "everett-silvertips",
+      "logo": "assets/logos/chl/everett-silvertips.png",
+      "score": 2
+     },
+     "final": true
     },
     {
      "title": "Rockets Run Away From Hurricanes",
@@ -1441,21 +2491,40 @@
        "n": 1,
        "player": "lz0423",
        "team": "Kelowna Rockets, LW",
-       "line": "3G 3A, 6 SOG, +5, 0 hits"
+       "line": "3G 3A, 6 SOG, +5, 0 hits",
+       "teamSlug": "kelowna-rockets",
+       "logo": "assets/logos/chl/kelowna-rockets.png"
       },
       {
        "n": 2,
        "player": "Magsin EH",
        "team": "Kelowna Rockets, C",
-       "line": "1G 5A, 7 SOG, +5, 0 hits"
+       "line": "1G 5A, 7 SOG, +5, 0 hits",
+       "teamSlug": "kelowna-rockets",
+       "logo": "assets/logos/chl/kelowna-rockets.png"
       },
       {
        "n": 3,
        "player": "xKLx Legacy24",
        "team": "Kelowna Rockets, RW",
-       "line": "2G 3A, 5 SOG, +5, 1 hit"
+       "line": "2G 3A, 5 SOG, +5, 1 hit",
+       "teamSlug": "kelowna-rockets",
+       "logo": "assets/logos/chl/kelowna-rockets.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Lethbridge Hurricanes",
+      "slug": "lethbridge-hurricanes",
+      "logo": "assets/logos/chl/lethbridge-hurricanes.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Kelowna Rockets",
+      "slug": "kelowna-rockets",
+      "logo": "assets/logos/chl/kelowna-rockets.png",
+      "score": 7
+     },
+     "final": true
     },
     {
      "title": "Vees Hold On by a Thread",
@@ -1467,21 +2536,40 @@
        "n": 1,
        "player": "delucadx",
        "team": "Penticton Vees, LW",
-       "line": "2G 1A, 7 SOG, +0, 1 hit"
+       "line": "2G 1A, 7 SOG, +0, 1 hit",
+       "teamSlug": "penticton-vees",
+       "logo": "assets/logos/chl/penticton-vees.png"
       },
       {
        "n": 2,
        "player": "Canadian__Impact",
        "team": "Penticton Vees, RW",
-       "line": "0G 3A, 7 SOG, +0, 0 hits"
+       "line": "0G 3A, 7 SOG, +0, 0 hits",
+       "teamSlug": "penticton-vees",
+       "logo": "assets/logos/chl/penticton-vees.png"
       },
       {
        "n": 3,
        "player": "B_Real1337",
        "team": "Edmonton Oil Kings, RW",
-       "line": "0G 2A, 6 SOG, +0, 3 hits"
+       "line": "0G 2A, 6 SOG, +0, 3 hits",
+       "teamSlug": "edmonton-oil-kings",
+       "logo": "assets/logos/chl/edmonton-oil-kings.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Edmonton Oil Kings",
+      "slug": "edmonton-oil-kings",
+      "logo": "assets/logos/chl/edmonton-oil-kings.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Penticton Vees",
+      "slug": "penticton-vees",
+      "logo": "assets/logos/chl/penticton-vees.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "Hitmen Watch: Two Shots From xZainer89 Swing a Coin-Flip in Prince George",
@@ -1493,21 +2581,40 @@
        "n": 1,
        "player": "xZainer89",
        "team": "Prince George Cougars, LW",
-       "line": "2G (including the winner), 5 SOG, +1"
+       "line": "2G (including the winner), 5 SOG, +1",
+       "teamSlug": "prince-george-cougars",
+       "logo": "assets/logos/chl/prince-george-cougars.png"
       },
       {
        "n": 2,
        "player": "Tibbytwo",
        "team": "Prince George Cougars, RD",
-       "line": "1A, 12 hits, +1"
+       "line": "1A, 12 hits, +1",
+       "teamSlug": "prince-george-cougars",
+       "logo": "assets/logos/chl/prince-george-cougars.png"
       },
       {
        "n": 3,
        "player": "Gullyrr",
        "team": "Calgary Hitmen, C",
-       "line": "1G, 4 SOG, 6 hits"
+       "line": "1G, 4 SOG, 6 hits",
+       "teamSlug": "calgary-hitmen",
+       "logo": "assets/logos/chl/calgary-hitmen.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Calgary Hitmen",
+      "slug": "calgary-hitmen",
+      "logo": "assets/logos/chl/calgary-hitmen.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Prince George Cougars",
+      "slug": "prince-george-cougars",
+      "logo": "assets/logos/chl/prince-george-cougars.png",
+      "score": 2
+     },
+     "final": true
     },
     {
      "title": "Wild Pull Clear of Kings",
@@ -1519,21 +2626,40 @@
        "n": 1,
        "player": "ZeroDilemmaZ",
        "team": "Wenatchee Wild, RW",
-       "line": "2G 0A, 5 SOG, +1, 0 hits"
+       "line": "2G 0A, 5 SOG, +1, 0 hits",
+       "teamSlug": "wenatchee-wild",
+       "logo": "assets/logos/chl/wenatchee-wild.png"
       },
       {
        "n": 2,
        "player": "Brofitz1218",
        "team": "Wenatchee Wild, RD",
-       "line": "1G 0A, 2 SOG, +1, 0 hits"
+       "line": "1G 0A, 2 SOG, +1, 0 hits",
+       "teamSlug": "wenatchee-wild",
+       "logo": "assets/logos/chl/wenatchee-wild.png"
       },
       {
        "n": 3,
        "player": "CelebriniNHL",
        "team": "Wenatchee Wild, G",
-       "line": "16 saves on 17 (0.941)"
+       "line": "16 saves on 17 (0.941)",
+       "teamSlug": "wenatchee-wild",
+       "logo": "assets/logos/chl/wenatchee-wild.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Brandon Wheat Kings",
+      "slug": "brandon-wheat-kings",
+      "logo": "assets/logos/chl/brandon-wheat-kings.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Wenatchee Wild",
+      "slug": "wenatchee-wild",
+      "logo": "assets/logos/chl/wenatchee-wild.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "Same Score, Second Victim: Victoria 7, Moose Jaw 0",
@@ -1545,21 +2671,40 @@
        "n": 1,
        "player": "pickmasta",
        "team": "Victoria Royals, LD",
-       "line": "3G 3A, 6 SOG, +7"
+       "line": "3G 3A, 6 SOG, +7",
+       "teamSlug": "victoria-royals",
+       "logo": "assets/logos/chl/victoria-royals.png"
       },
       {
        "n": 2,
        "player": "ProximalAbyss41",
        "team": "Victoria Royals, C",
-       "line": "2G 3A, +7"
+       "line": "2G 3A, +7",
+       "teamSlug": "victoria-royals",
+       "logo": "assets/logos/chl/victoria-royals.png"
       },
       {
        "n": 3,
        "player": "nothargi4200",
        "team": "Victoria Royals, G",
-       "line": "10 saves on 10, shutout"
+       "line": "10 saves on 10, shutout",
+       "teamSlug": "victoria-royals",
+       "logo": "assets/logos/chl/victoria-royals.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Victoria Royals",
+      "slug": "victoria-royals",
+      "logo": "assets/logos/chl/victoria-royals.png",
+      "score": 7
+     },
+     "home": {
+      "name": "Moose Jaw Warriors",
+      "slug": "moose-jaw-warriors",
+      "logo": "assets/logos/chl/moose-jaw-warriors.png",
+      "score": 0
+     },
+     "final": true
     },
     {
      "title": "Rebels Take Care of Business",
@@ -1571,21 +2716,40 @@
        "n": 1,
        "player": "Tatious",
        "team": "Red Deer Rebels, LW",
-       "line": "2G 3A, 7 SOG, +2, 3 hits"
+       "line": "2G 3A, 7 SOG, +2, 3 hits",
+       "teamSlug": "red-deer-rebels",
+       "logo": "assets/logos/chl/red-deer-rebels.png"
       },
       {
        "n": 2,
        "player": "sportsfreakxxii",
        "team": "Red Deer Rebels, RW",
-       "line": "3G 0A, 5 SOG, +2, 1 hit"
+       "line": "3G 0A, 5 SOG, +2, 1 hit",
+       "teamSlug": "red-deer-rebels",
+       "logo": "assets/logos/chl/red-deer-rebels.png"
       },
       {
        "n": 3,
        "player": "Saddzy-",
        "team": "Spokane Chiefs, LW",
-       "line": "2G 1A, 4 SOG, -2, 0 hits"
+       "line": "2G 1A, 4 SOG, -2, 0 hits",
+       "teamSlug": "spokane-chiefs",
+       "logo": "assets/logos/chl/spokane-chiefs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Spokane Chiefs",
+      "slug": "spokane-chiefs",
+      "logo": "assets/logos/chl/spokane-chiefs.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Red Deer Rebels",
+      "slug": "red-deer-rebels",
+      "logo": "assets/logos/chl/red-deer-rebels.png",
+      "score": 5
+     },
+     "final": true
     },
     {
      "title": "Seven. OMG_Magro Scores Seven.",
@@ -1597,21 +2761,40 @@
        "n": 1,
        "player": "OMG_Magro",
        "team": "Tri City Americans, LW",
-       "line": "7G 1A, 11 SOG, +8"
+       "line": "7G 1A, 11 SOG, +8",
+       "teamSlug": "tri-city-americans",
+       "logo": "assets/logos/chl/tri-city-americans.png"
       },
       {
        "n": 2,
        "player": "jdowning21.",
        "team": "Tri City Americans, RW",
-       "line": "1G 7A, +8"
+       "line": "1G 7A, +8",
+       "teamSlug": "tri-city-americans",
+       "logo": "assets/logos/chl/tri-city-americans.png"
       },
       {
        "n": 3,
        "player": "LupusArctos95",
        "team": "Tri City Americans, C",
-       "line": "2G 3A, 6 SOG, +8"
+       "line": "2G 3A, 6 SOG, +8",
+       "teamSlug": "tri-city-americans",
+       "logo": "assets/logos/chl/tri-city-americans.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Medicine Hat Tigers",
+      "slug": "medicine-hat-tigers",
+      "logo": "assets/logos/chl/medicine-hat-tigers.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Tri City Americans",
+      "slug": "tri-city-americans",
+      "logo": "assets/logos/chl/tri-city-americans.png",
+      "score": 10
+     },
+     "final": true
     },
     {
      "title": "Bonus Hockey, Bonus Point: Giants Edge Bruins",
@@ -1623,21 +2806,41 @@
        "n": 1,
        "player": "xSullylab-",
        "team": "Vancouver Giants, LW",
-       "line": "2G 2A, 5 SOG, +0, 4 hits"
+       "line": "2G 2A, 5 SOG, +0, 4 hits",
+       "teamSlug": "vancouver-giants",
+       "logo": "assets/logos/chl/vancouver-giants.png"
       },
       {
        "n": 2,
        "player": "iCLassYxTTV",
        "team": "Chilliwack Bruins, LW",
-       "line": "1G 2A, 3 SOG, +0, 7 hits"
+       "line": "1G 2A, 3 SOG, +0, 7 hits",
+       "teamSlug": "chilliwack-bruins",
+       "logo": "assets/logos/chl/chilliwack-bruins.png"
       },
       {
        "n": 3,
        "player": "envy._._._._.",
        "team": "Vancouver Giants, RW",
-       "line": "2G 1A, 3 SOG, +0, 2 hits"
+       "line": "2G 1A, 3 SOG, +0, 2 hits",
+       "teamSlug": "vancouver-giants",
+       "logo": "assets/logos/chl/vancouver-giants.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Vancouver Giants",
+      "slug": "vancouver-giants",
+      "logo": "assets/logos/chl/vancouver-giants.png",
+      "score": 4
+     },
+     "home": {
+      "name": "Chilliwack Bruins",
+      "slug": "chilliwack-bruins",
+      "logo": "assets/logos/chl/chilliwack-bruins.png",
+      "score": 3
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Thunderbirds Pull Clear of Pats",
@@ -1649,21 +2852,40 @@
        "n": 1,
        "player": "T E A L x 17",
        "team": "Seattle Thunderbirds, RW",
-       "line": "1G 4A, 16 SOG, +2, 2 hits"
+       "line": "1G 4A, 16 SOG, +2, 2 hits",
+       "teamSlug": "seattle-thunderbirds",
+       "logo": "assets/logos/chl/seattle-thunderbirds.png"
       },
       {
        "n": 2,
        "player": "Curts6",
        "team": "Seattle Thunderbirds, LW",
-       "line": "4G 0A, 6 SOG, +2, 0 hits"
+       "line": "4G 0A, 6 SOG, +2, 0 hits",
+       "teamSlug": "seattle-thunderbirds",
+       "logo": "assets/logos/chl/seattle-thunderbirds.png"
       },
       {
        "n": 3,
        "player": "xSalda-",
        "team": "Seattle Thunderbirds, LD",
-       "line": "0G 4A, 0 SOG, +2, 2 hits"
+       "line": "0G 4A, 0 SOG, +2, 2 hits",
+       "teamSlug": "seattle-thunderbirds",
+       "logo": "assets/logos/chl/seattle-thunderbirds.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Seattle Thunderbirds",
+      "slug": "seattle-thunderbirds",
+      "logo": "assets/logos/chl/seattle-thunderbirds.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Regina Pats",
+      "slug": "regina-pats",
+      "logo": "assets/logos/chl/regina-pats.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "Raiders Take Care of Business",
@@ -1675,21 +2897,40 @@
        "n": 1,
        "player": "Nxsclr",
        "team": "Prince Albert Raiders, C",
-       "line": "2G 1A, 4 SOG, +2, 2 hits"
+       "line": "2G 1A, 4 SOG, +2, 2 hits",
+       "teamSlug": "prince-albert-raiders",
+       "logo": "assets/logos/chl/prince-albert-raiders.png"
       },
       {
        "n": 2,
        "player": "K inG x NeymaR",
        "team": "Prince Albert Raiders, RW",
-       "line": "1G 2A, 7 SOG, +2, 2 hits"
+       "line": "1G 2A, 7 SOG, +2, 2 hits",
+       "teamSlug": "prince-albert-raiders",
+       "logo": "assets/logos/chl/prince-albert-raiders.png"
       },
       {
        "n": 3,
        "player": "JJBrewer16",
        "team": "Prince Albert Raiders, LD",
-       "line": "1G 2A, 2 SOG, +2, 3 hits"
+       "line": "1G 2A, 2 SOG, +2, 3 hits",
+       "teamSlug": "prince-albert-raiders",
+       "logo": "assets/logos/chl/prince-albert-raiders.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Kamloops Blazers",
+      "slug": "kamloops-blazers",
+      "logo": "assets/logos/chl/kamloops-blazers.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Prince Albert Raiders",
+      "slug": "prince-albert-raiders",
+      "logo": "assets/logos/chl/prince-albert-raiders.png",
+      "score": 4
+     },
+     "final": true
     }
    ]
   },
@@ -1706,21 +2947,40 @@
        "n": 1,
        "player": "Local Booz",
        "team": "Drummondville Voltigeurs, LW",
-       "line": "3G 1A, 8 SOG, +1, 6 hits"
+       "line": "3G 1A, 8 SOG, +1, 6 hits",
+       "teamSlug": "drummondville-voltigeurs",
+       "logo": "assets/logos/chl/drummondville-voltigeurs.png"
       },
       {
        "n": 2,
        "player": "Local Skuzzy",
        "team": "Drummondville Voltigeurs, RW",
-       "line": "1G 2A, 4 SOG, +1, 0 hits"
+       "line": "1G 2A, 4 SOG, +1, 0 hits",
+       "teamSlug": "drummondville-voltigeurs",
+       "logo": "assets/logos/chl/drummondville-voltigeurs.png"
       },
       {
        "n": 3,
        "player": "lI Demonic II",
        "team": "Saint John Sea Dogs, LW",
-       "line": "2G 0A, 6 SOG, -1, 5 hits"
+       "line": "2G 0A, 6 SOG, -1, 5 hits",
+       "teamSlug": "saint-john-sea-dogs",
+       "logo": "assets/logos/chl/saint-john-sea-dogs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Saint John Sea Dogs",
+      "slug": "saint-john-sea-dogs",
+      "logo": "assets/logos/chl/saint-john-sea-dogs.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Drummondville Voltigeurs",
+      "slug": "drummondville-voltigeurs",
+      "logo": "assets/logos/chl/drummondville-voltigeurs.png",
+      "score": 5
+     },
+     "final": true
     },
     {
      "title": "Sauceshow's Debut: Signed at 2:50, Eight Points by Bedtime",
@@ -1732,21 +2992,40 @@
        "n": 1,
        "player": "Sauceshow",
        "team": "Quebec Remparts, RW",
-       "line": "3G 5A, 5 SOG, +8"
+       "line": "3G 5A, 5 SOG, +8",
+       "teamSlug": "quebec-remparts",
+       "logo": "assets/logos/chl/quebec-remparts.png"
       },
       {
        "n": 2,
        "player": "Max1973-2002",
        "team": "Quebec Remparts, LW",
-       "line": "3G 4A, 7 SOG, +8"
+       "line": "3G 4A, 7 SOG, +8",
+       "teamSlug": "quebec-remparts",
+       "logo": "assets/logos/chl/quebec-remparts.png"
       },
       {
        "n": 3,
        "player": "CokeColaJedi87",
        "team": "Quebec Remparts, C",
-       "line": "2G 2A, 5 hits, +7"
+       "line": "2G 2A, 5 hits, +7",
+       "teamSlug": "quebec-remparts",
+       "logo": "assets/logos/chl/quebec-remparts.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Quebec Remparts",
+      "slug": "quebec-remparts",
+      "logo": "assets/logos/chl/quebec-remparts.png",
+      "score": 9
+     },
+     "home": {
+      "name": "Val-d'Or Foreurs",
+      "slug": "val-dor-foreurs",
+      "logo": "assets/logos/chl/val-dor-foreurs.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "Moncton Climbs Out of a Hole, Then Wins It in Overtime",
@@ -1758,21 +3037,41 @@
        "n": 1,
        "player": "qrxssy",
        "team": "Moncton Wildcats, C",
-       "line": "6A"
+       "line": "6A",
+       "teamSlug": "moncton-wildcats",
+       "logo": "assets/logos/chl/moncton-wildcats.png"
       },
       {
        "n": 2,
        "player": "OG-NorthernWreck",
        "team": "Moncton Wildcats, RW",
-       "line": "3G 2A, 6 SOG"
+       "line": "3G 2A, 6 SOG",
+       "teamSlug": "moncton-wildcats",
+       "logo": "assets/logos/chl/moncton-wildcats.png"
       },
       {
        "n": 3,
        "player": "patag00niia",
        "team": "Moncton Wildcats, LW",
-       "line": "3G 2A, 6 SOG"
+       "line": "3G 2A, 6 SOG",
+       "teamSlug": "moncton-wildcats",
+       "logo": "assets/logos/chl/moncton-wildcats.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Blainville-Boisbriand Armada",
+      "slug": "blainville-boisbriand-armada",
+      "logo": "assets/logos/chl/blainville-boisbriand-armada.png",
+      "score": 5
+     },
+     "home": {
+      "name": "Moncton Wildcats",
+      "slug": "moncton-wildcats",
+      "logo": "assets/logos/chl/moncton-wildcats.png",
+      "score": 6
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Islanders Find the Overtime Door",
@@ -1784,21 +3083,41 @@
        "n": 1,
        "player": "alexander1032",
        "team": "Charlottetown Islanders, RW",
-       "line": "2G 1A, 5 SOG, +0, 0 hits"
+       "line": "2G 1A, 5 SOG, +0, 0 hits",
+       "teamSlug": "charlottetown-islanders",
+       "logo": "assets/logos/chl/charlottetown-islanders.png"
       },
       {
        "n": 2,
        "player": "FreshCodyDaGoat",
        "team": "Charlottetown Islanders, C",
-       "line": "0G 3A, 9 SOG, +0, 0 hits"
+       "line": "0G 3A, 9 SOG, +0, 0 hits",
+       "teamSlug": "charlottetown-islanders",
+       "logo": "assets/logos/chl/charlottetown-islanders.png"
       },
       {
        "n": 3,
        "player": "PDubss-",
        "team": "Charlottetown Islanders, LD",
-       "line": "1G 1A, 2 SOG, +0, 3 hits"
+       "line": "1G 1A, 2 SOG, +0, 3 hits",
+       "teamSlug": "charlottetown-islanders",
+       "logo": "assets/logos/chl/charlottetown-islanders.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Victoriaville Tigres",
+      "slug": "victoriaville-tigres",
+      "logo": "assets/logos/chl/victoriaville-tigres.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Charlottetown Islanders",
+      "slug": "charlottetown-islanders",
+      "logo": "assets/logos/chl/charlottetown-islanders.png",
+      "score": 4
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Phoenix Take Care of Business",
@@ -1810,21 +3129,40 @@
        "n": 1,
        "player": "Trumpz_Right_Ear",
        "team": "Sherbrooke Phoenix, RW",
-       "line": "2G 0A, 11 SOG, +2, 0 hits"
+       "line": "2G 0A, 11 SOG, +2, 0 hits",
+       "teamSlug": "sherbrooke-phoenix",
+       "logo": "assets/logos/chl/sherbrooke-phoenix.png"
       },
       {
        "n": 2,
        "player": "KnightLax27",
        "team": "Sherbrooke Phoenix, LD",
-       "line": "0G 1A, 1 SOG, +2, 4 hits"
+       "line": "0G 1A, 1 SOG, +2, 4 hits",
+       "teamSlug": "sherbrooke-phoenix",
+       "logo": "assets/logos/chl/sherbrooke-phoenix.png"
       },
       {
        "n": 3,
        "player": "FireBolt9188",
        "team": "Sherbrooke Phoenix, LW",
-       "line": "1G 0A, 2 SOG, +2, 0 hits"
+       "line": "1G 0A, 2 SOG, +2, 0 hits",
+       "teamSlug": "sherbrooke-phoenix",
+       "logo": "assets/logos/chl/sherbrooke-phoenix.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Sherbrooke Phoenix",
+      "slug": "sherbrooke-phoenix",
+      "logo": "assets/logos/chl/sherbrooke-phoenix.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Baie-Comeau Drakkar",
+      "slug": "baie-comeau-drakkar",
+      "logo": "assets/logos/chl/baie-comeau-drakkar.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "Locked Down: Oceanic Blank Cataractes",
@@ -1836,21 +3174,40 @@
        "n": 1,
        "player": "jxythegoat.",
        "team": "Rimouski Oceanic, C",
-       "line": "3G 4A, 4 SOG, +7, 1 hit"
+       "line": "3G 4A, 4 SOG, +7, 1 hit",
+       "teamSlug": "rimouski-oceanic",
+       "logo": "assets/logos/chl/rimouski-oceanic.png"
       },
       {
        "n": 2,
        "player": "Bedard x I98I",
        "team": "Rimouski Oceanic, RW",
-       "line": "3G 2A, 6 SOG, +5, 5 hits"
+       "line": "3G 2A, 6 SOG, +5, 5 hits",
+       "teamSlug": "rimouski-oceanic",
+       "logo": "assets/logos/chl/rimouski-oceanic.png"
       },
       {
        "n": 3,
        "player": "xTugnutt",
        "team": "Rimouski Oceanic, LW",
-       "line": "1G 3A, 7 SOG, +7, 0 hits"
+       "line": "1G 3A, 7 SOG, +7, 0 hits",
+       "teamSlug": "rimouski-oceanic",
+       "logo": "assets/logos/chl/rimouski-oceanic.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Shawinigan Cataractes",
+      "slug": "shawinigan-cataractes",
+      "logo": "assets/logos/chl/shawinigan-cataractes.png",
+      "score": 0
+     },
+     "home": {
+      "name": "Rimouski Oceanic",
+      "slug": "rimouski-oceanic",
+      "logo": "assets/logos/chl/rimouski-oceanic.png",
+      "score": 8
+     },
+     "final": true
     },
     {
      "title": "Locked Down: Olympiques Blank Eagles",
@@ -1862,21 +3219,40 @@
        "n": 1,
        "player": "YaDayz-_-",
        "team": "Gatineau Olympiques, LW",
-       "line": "3G 3A, 6 SOG, +7, 1 hit"
+       "line": "3G 3A, 6 SOG, +7, 1 hit",
+       "teamSlug": "gatineau-olympiques",
+       "logo": "assets/logos/chl/gatineau-olympiques.png"
       },
       {
        "n": 2,
        "player": "El Jaacho",
        "team": "Gatineau Olympiques, RW",
-       "line": "1G 5A, 1 SOG, +6, 4 hits"
+       "line": "1G 5A, 1 SOG, +6, 4 hits",
+       "teamSlug": "gatineau-olympiques",
+       "logo": "assets/logos/chl/gatineau-olympiques.png"
       },
       {
        "n": 3,
        "player": "Buckteeyt",
        "team": "Gatineau Olympiques, C",
-       "line": "2G 1A, 7 SOG, +7, 6 hits"
+       "line": "2G 1A, 7 SOG, +7, 6 hits",
+       "teamSlug": "gatineau-olympiques",
+       "logo": "assets/logos/chl/gatineau-olympiques.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Gatineau Olympiques",
+      "slug": "gatineau-olympiques",
+      "logo": "assets/logos/chl/gatineau-olympiques.png",
+      "score": 7
+     },
+     "home": {
+      "name": "Cape Breton Eagles",
+      "slug": "cape-breton-eagles",
+      "logo": "assets/logos/chl/cape-breton-eagles.png",
+      "score": 0
+     },
+     "final": true
     },
     {
      "title": "Sagueneens Run Away From Regiment",
@@ -1888,21 +3264,40 @@
        "n": 1,
        "player": "NotreDame830",
        "team": "Chicoutimi Sagueneens, RW",
-       "line": "5G 0A, 9 SOG, +3, 3 hits"
+       "line": "5G 0A, 9 SOG, +3, 3 hits",
+       "teamSlug": "chicoutimi-sagueneens",
+       "logo": "assets/logos/chl/chicoutimi-sagueneens.png"
       },
       {
        "n": 2,
        "player": "l Saad x 20 l",
        "team": "Chicoutimi Sagueneens, C",
-       "line": "1G 3A, 7 SOG, +3, 7 hits"
+       "line": "1G 3A, 7 SOG, +3, 7 hits",
+       "teamSlug": "chicoutimi-sagueneens",
+       "logo": "assets/logos/chl/chicoutimi-sagueneens.png"
       },
       {
        "n": 3,
        "player": "Heise Goat",
        "team": "Chicoutimi Sagueneens, LD",
-       "line": "0G 3A, 3 SOG, +3, 6 hits"
+       "line": "0G 3A, 3 SOG, +3, 6 hits",
+       "teamSlug": "chicoutimi-sagueneens",
+       "logo": "assets/logos/chl/chicoutimi-sagueneens.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Newfoundland Regiment",
+      "slug": "newfoundland-regiment",
+      "logo": "assets/logos/chl/newfoundland-regiment.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Chicoutimi Sagueneens",
+      "slug": "chicoutimi-sagueneens",
+      "logo": "assets/logos/chl/chicoutimi-sagueneens.png",
+      "score": 7
+     },
+     "final": true
     },
     {
      "title": "Mooseheads Hold On by a Thread",
@@ -1914,21 +3309,40 @@
        "n": 1,
        "player": "speed000racer.",
        "team": "Halifax Mooseheads, RW",
-       "line": "1G 1A, 7 SOG, +1, 5 hits"
+       "line": "1G 1A, 7 SOG, +1, 5 hits",
+       "teamSlug": "halifax-mooseheads",
+       "logo": "assets/logos/chl/halifax-mooseheads.png"
       },
       {
        "n": 2,
        "player": "Brevonious",
        "team": "Halifax Mooseheads, G",
-       "line": "20 saves on 21 (0.952)"
+       "line": "20 saves on 21 (0.952)",
+       "teamSlug": "halifax-mooseheads",
+       "logo": "assets/logos/chl/halifax-mooseheads.png"
       },
       {
        "n": 3,
        "player": "xKillhouse",
        "team": "Halifax Mooseheads, C",
-       "line": "1G 0A, 1 SOG, +1, 1 hit"
+       "line": "1G 0A, 1 SOG, +1, 1 hit",
+       "teamSlug": "halifax-mooseheads",
+       "logo": "assets/logos/chl/halifax-mooseheads.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Rouyn-Noranda Huskies",
+      "slug": "rouyn-noranda-huskies",
+      "logo": "assets/logos/chl/rouyn-noranda-huskies.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Halifax Mooseheads",
+      "slug": "halifax-mooseheads",
+      "logo": "assets/logos/chl/halifax-mooseheads.png",
+      "score": 2
+     },
+     "final": true
     },
     {
      "title": "Flood Gates: Sting 6, IceDogs 1",
@@ -1940,21 +3354,40 @@
        "n": 1,
        "player": "DemidoV_93_ch",
        "team": "Sarnia Sting, C",
-       "line": "3G 2A, 8 SOG, +4, 7 hits"
+       "line": "3G 2A, 8 SOG, +4, 7 hits",
+       "teamSlug": "sarnia-sting",
+       "logo": "assets/logos/chl/sarnia-sting.png"
       },
       {
        "n": 2,
        "player": "Mxlsyy",
        "team": "Sarnia Sting, RW",
-       "line": "3G 2A, 7 SOG, +4, 1 hit"
+       "line": "3G 2A, 7 SOG, +4, 1 hit",
+       "teamSlug": "sarnia-sting",
+       "logo": "assets/logos/chl/sarnia-sting.png"
       },
       {
        "n": 3,
        "player": "H3 SprX",
        "team": "Sarnia Sting, LD",
-       "line": "0G 2A, 0 SOG, +4, 2 hits"
+       "line": "0G 2A, 0 SOG, +4, 2 hits",
+       "teamSlug": "sarnia-sting",
+       "logo": "assets/logos/chl/sarnia-sting.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Sarnia Sting",
+      "slug": "sarnia-sting",
+      "logo": "assets/logos/chl/sarnia-sting.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Niagara IceDogs",
+      "slug": "niagara-icedogs",
+      "logo": "assets/logos/chl/niagara-icedogs.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "Rangers Pull Clear of Colts",
@@ -1966,21 +3399,40 @@
        "n": 1,
        "player": "II MunKey II",
        "team": "Kitchener Rangers, LW",
-       "line": "4G 0A, 4 SOG, +3, 0 hits"
+       "line": "4G 0A, 4 SOG, +3, 0 hits",
+       "teamSlug": "kitchener-rangers",
+       "logo": "assets/logos/chl/kitchener-rangers.png"
       },
       {
        "n": 2,
        "player": "BowlerFett",
        "team": "Kitchener Rangers, C",
-       "line": "2G 3A, 3 SOG, +3, 2 hits"
+       "line": "2G 3A, 3 SOG, +3, 2 hits",
+       "teamSlug": "kitchener-rangers",
+       "logo": "assets/logos/chl/kitchener-rangers.png"
       },
       {
        "n": 3,
        "player": "TimFairview",
        "team": "Kitchener Rangers, LD",
-       "line": "0G 4A, 1 SOG, +3, 0 hits"
+       "line": "0G 4A, 1 SOG, +3, 0 hits",
+       "teamSlug": "kitchener-rangers",
+       "logo": "assets/logos/chl/kitchener-rangers.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Barrie Colts",
+      "slug": "barrie-colts",
+      "logo": "assets/logos/chl/barrie-colts.png",
+      "score": 4
+     },
+     "home": {
+      "name": "Kitchener Rangers",
+      "slug": "kitchener-rangers",
+      "logo": "assets/logos/chl/kitchener-rangers.png",
+      "score": 6
+     },
+     "final": true
     },
     {
      "title": "Greyhounds Pull Clear of Steelheads",
@@ -1992,21 +3444,40 @@
        "n": 1,
        "player": "ii yettii",
        "team": "Sault Ste. Marie Greyhounds, RW",
-       "line": "2G 1A, 3 SOG, +2, 1 hit"
+       "line": "2G 1A, 3 SOG, +2, 1 hit",
+       "teamSlug": "sault-ste-marie-greyhounds",
+       "logo": "assets/logos/chl/sault-ste-marie-greyhounds.png"
       },
       {
        "n": 2,
        "player": "CoachCheek",
        "team": "Sault Ste. Marie Greyhounds, LW",
-       "line": "1G 2A, 5 SOG, +2, 0 hits"
+       "line": "1G 2A, 5 SOG, +2, 0 hits",
+       "teamSlug": "sault-ste-marie-greyhounds",
+       "logo": "assets/logos/chl/sault-ste-marie-greyhounds.png"
       },
       {
        "n": 3,
        "player": "SupremeBannock",
        "team": "Sault Ste. Marie Greyhounds, RD",
-       "line": "0G 2A, 0 SOG, +2, 2 hits"
+       "line": "0G 2A, 0 SOG, +2, 2 hits",
+       "teamSlug": "sault-ste-marie-greyhounds",
+       "logo": "assets/logos/chl/sault-ste-marie-greyhounds.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Brampton Steelheads",
+      "slug": "brampton-steelheads",
+      "logo": "assets/logos/chl/brampton-steelheads.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Sault Ste. Marie Greyhounds",
+      "slug": "sault-ste-marie-greyhounds",
+      "logo": "assets/logos/chl/sault-ste-marie-greyhounds.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "Flood Gates: Wolves 8, Otters 1",
@@ -2018,21 +3489,40 @@
        "n": 1,
        "player": "Hergy9",
        "team": "Sudbury Wolves, C",
-       "line": "5G 2A, 9 SOG, +5, 3 hits"
+       "line": "5G 2A, 9 SOG, +5, 3 hits",
+       "teamSlug": "sudbury-wolves",
+       "logo": "assets/logos/chl/sudbury-wolves.png"
       },
       {
        "n": 2,
        "player": "Codelock",
        "team": "Sudbury Wolves, LW",
-       "line": "1G 3A, 9 SOG, +5, 3 hits"
+       "line": "1G 3A, 9 SOG, +5, 3 hits",
+       "teamSlug": "sudbury-wolves",
+       "logo": "assets/logos/chl/sudbury-wolves.png"
       },
       {
        "n": 3,
        "player": "S a u c e x91",
        "team": "Sudbury Wolves, RW",
-       "line": "1G 3A, 3 SOG, +5, 1 hit"
+       "line": "1G 3A, 3 SOG, +5, 1 hit",
+       "teamSlug": "sudbury-wolves",
+       "logo": "assets/logos/chl/sudbury-wolves.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Erie Otters",
+      "slug": "erie-otters",
+      "logo": "assets/logos/chl/erie-otters.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Sudbury Wolves",
+      "slug": "sudbury-wolves",
+      "logo": "assets/logos/chl/sudbury-wolves.png",
+      "score": 8
+     },
+     "final": true
     },
     {
      "title": "Storm Hold On by a Thread",
@@ -2044,26 +3534,40 @@
        "n": 1,
        "player": "Beauregard03",
        "team": "Guelph Storm, RW",
-       "line": "2G 2A, 4 SOG, +1, 4 hits"
+       "line": "2G 2A, 4 SOG, +1, 4 hits",
+       "teamSlug": "guelph-storm",
+       "logo": "assets/logos/chl/guelph-storm.png"
       },
       {
        "n": 2,
        "player": "xodyxody",
        "team": "Oshawa Generals, LW",
-       "line": "1G 2A, 7 SOG, -1, 0 hits"
+       "line": "1G 2A, 7 SOG, -1, 0 hits",
+       "teamSlug": "oshawa-generals",
+       "logo": "assets/logos/chl/oshawa-generals.png"
       },
       {
        "n": 3,
        "player": "I2sweat97",
        "team": "Guelph Storm, C",
-       "line": "1G 2A, 3 SOG, +1, 3 hits"
+       "line": "1G 2A, 3 SOG, +1, 3 hits",
+       "teamSlug": "guelph-storm",
+       "logo": "assets/logos/chl/guelph-storm.png"
       }
-     ]
-    },
-    {
-     "title": "London Knights at North Bay Battalion: No Final Posted",
-     "html": "<p><em>Game 918376</em></p><p>This is the one game missing from the drop. It was still listed as scheduled with no score, and there's no box score in the capture (92 of 93 games included). It will get a recap once a final is posted.</p>",
-     "stars": []
+     ],
+     "away": {
+      "name": "Oshawa Generals",
+      "slug": "oshawa-generals",
+      "logo": "assets/logos/chl/oshawa-generals.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Guelph Storm",
+      "slug": "guelph-storm",
+      "logo": "assets/logos/chl/guelph-storm.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "Flood Gates: Firebirds 6, 67's 2",
@@ -2075,21 +3579,40 @@
        "n": 1,
        "player": "BosomeMustache",
        "team": "Flint Firebirds, RW",
-       "line": "2G 3A, 9 SOG, +2, 11 hits"
+       "line": "2G 3A, 9 SOG, +2, 11 hits",
+       "teamSlug": "flint-firebirds",
+       "logo": "assets/logos/chl/flint-firebirds.png"
       },
       {
        "n": 2,
        "player": "HellaciousDragon",
        "team": "Flint Firebirds, C",
-       "line": "1G 4A, 12 SOG, +2, 0 hits"
+       "line": "1G 4A, 12 SOG, +2, 0 hits",
+       "teamSlug": "flint-firebirds",
+       "logo": "assets/logos/chl/flint-firebirds.png"
       },
       {
        "n": 3,
        "player": "Saintshockey688",
        "team": "Flint Firebirds, LW",
-       "line": "3G 1A, 10 SOG, +2, 3 hits"
+       "line": "3G 1A, 10 SOG, +2, 3 hits",
+       "teamSlug": "flint-firebirds",
+       "logo": "assets/logos/chl/flint-firebirds.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Ottawa 67's",
+      "slug": "ottawa-67s",
+      "logo": "assets/logos/chl/ottawa-67s.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Flint Firebirds",
+      "slug": "flint-firebirds",
+      "logo": "assets/logos/chl/flint-firebirds.png",
+      "score": 6
+     },
+     "final": true
     },
     {
      "title": "Frontenacs Squeeze Past Attack",
@@ -2101,21 +3624,40 @@
        "n": 1,
        "player": "ENB Jigy Wit It",
        "team": "Kingston Frontenacs, RW",
-       "line": "2G 0A, 6 SOG, +1, 7 hits"
+       "line": "2G 0A, 6 SOG, +1, 7 hits",
+       "teamSlug": "kingston-frontenacs",
+       "logo": "assets/logos/chl/kingston-frontenacs.png"
       },
       {
        "n": 2,
        "player": "Lemmiwinks17",
        "team": "Kingston Frontenacs, C",
-       "line": "0G 2A, 2 SOG, +1, 0 hits"
+       "line": "0G 2A, 2 SOG, +1, 0 hits",
+       "teamSlug": "kingston-frontenacs",
+       "logo": "assets/logos/chl/kingston-frontenacs.png"
       },
       {
        "n": 3,
        "player": "ROMAN95",
        "team": "Kingston Frontenacs, LW",
-       "line": "0G 2A, 3 SOG, +1, 0 hits"
+       "line": "0G 2A, 3 SOG, +1, 0 hits",
+       "teamSlug": "kingston-frontenacs",
+       "logo": "assets/logos/chl/kingston-frontenacs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Kingston Frontenacs",
+      "slug": "kingston-frontenacs",
+      "logo": "assets/logos/chl/kingston-frontenacs.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Owen Sound Attack",
+      "slug": "owen-sound-attack",
+      "logo": "assets/logos/chl/owen-sound-attack.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "Peterborough Survives an Eleven-Goal Shootout in Saginaw",
@@ -2127,21 +3669,40 @@
        "n": 1,
        "player": "x Hutsonov x",
        "team": "Peterborough Petes, RW",
-       "line": "3G 2A, 9 SOG, 7 hits"
+       "line": "3G 2A, 9 SOG, 7 hits",
+       "teamSlug": "peterborough-petes",
+       "logo": "assets/logos/chl/peterborough-petes.png"
       },
       {
        "n": 2,
        "player": "Redemption16676",
        "team": "Peterborough Petes, C",
-       "line": "3G 2A, 8 SOG"
+       "line": "3G 2A, 8 SOG",
+       "teamSlug": "peterborough-petes",
+       "logo": "assets/logos/chl/peterborough-petes.png"
       },
       {
        "n": 3,
        "player": "I Richy 19 I",
        "team": "Saginaw Spirit, LW",
-       "line": "3G 1A, 6 SOG"
+       "line": "3G 1A, 6 SOG",
+       "teamSlug": "saginaw-spirit",
+       "logo": "assets/logos/chl/saginaw-spirit.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Peterborough Petes",
+      "slug": "peterborough-petes",
+      "logo": "assets/logos/chl/peterborough-petes.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Saginaw Spirit",
+      "slug": "saginaw-spirit",
+      "logo": "assets/logos/chl/saginaw-spirit.png",
+      "score": 5
+     },
+     "final": true
     },
     {
      "title": "DirtyDangler82 Lives Up to the Name",
@@ -2153,21 +3714,40 @@
        "n": 1,
        "player": "DirtyDangler82",
        "team": "Brantford Bulldogs, RW",
-       "line": "5G 4A, 9 SOG, +7"
+       "line": "5G 4A, 9 SOG, +7",
+       "teamSlug": "brantford-bulldogs",
+       "logo": "assets/logos/chl/brantford-bulldogs.png"
       },
       {
        "n": 2,
        "player": "vybin0095",
        "team": "Brantford Bulldogs, LW",
-       "line": "4G 2A, 8 SOG, +7"
+       "line": "4G 2A, 8 SOG, +7",
+       "teamSlug": "brantford-bulldogs",
+       "logo": "assets/logos/chl/brantford-bulldogs.png"
       },
       {
        "n": 3,
        "player": "Mr H Biden",
        "team": "Brantford Bulldogs, RD",
-       "line": "5A, +7"
+       "line": "5A, +7",
+       "teamSlug": "brantford-bulldogs",
+       "logo": "assets/logos/chl/brantford-bulldogs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Windsor Spitfires",
+      "slug": "windsor-spitfires",
+      "logo": "assets/logos/chl/windsor-spitfires.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Brantford Bulldogs",
+      "slug": "brantford-bulldogs",
+      "logo": "assets/logos/chl/brantford-bulldogs.png",
+      "score": 9
+     },
+     "final": true
     },
     {
      "title": "Chiefs Pull Clear of Kings",
@@ -2179,21 +3759,40 @@
        "n": 1,
        "player": "skope77",
        "team": "Spokane Chiefs, RW",
-       "line": "1G 1A, 3 SOG, +3, 0 hits"
+       "line": "1G 1A, 3 SOG, +3, 0 hits",
+       "teamSlug": "spokane-chiefs",
+       "logo": "assets/logos/chl/spokane-chiefs.png"
       },
       {
        "n": 2,
        "player": "Unh0lyxSn1pe",
        "team": "Spokane Chiefs, RD",
-       "line": "0G 2A, 3 SOG, +3, 3 hits"
+       "line": "0G 2A, 3 SOG, +3, 3 hits",
+       "teamSlug": "spokane-chiefs",
+       "logo": "assets/logos/chl/spokane-chiefs.png"
       },
       {
        "n": 3,
        "player": "milkymits",
        "team": "Spokane Chiefs, C",
-       "line": "1G 0A, 1 SOG, +3, 1 hit"
+       "line": "1G 0A, 1 SOG, +3, 1 hit",
+       "teamSlug": "spokane-chiefs",
+       "logo": "assets/logos/chl/spokane-chiefs.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Brandon Wheat Kings",
+      "slug": "brandon-wheat-kings",
+      "logo": "assets/logos/chl/brandon-wheat-kings.png",
+      "score": 1
+     },
+     "home": {
+      "name": "Spokane Chiefs",
+      "slug": "spokane-chiefs",
+      "logo": "assets/logos/chl/spokane-chiefs.png",
+      "score": 3
+     },
+     "final": true
     },
     {
      "title": "Vees Win It After Sixty",
@@ -2205,21 +3804,41 @@
        "n": 1,
        "player": "delucadx",
        "team": "Penticton Vees, LW",
-       "line": "3G 0A, 9 SOG, +1, 2 hits"
+       "line": "3G 0A, 9 SOG, +1, 2 hits",
+       "teamSlug": "penticton-vees",
+       "logo": "assets/logos/chl/penticton-vees.png"
       },
       {
        "n": 2,
        "player": "Canadian__Impact",
        "team": "Penticton Vees, RW",
-       "line": "0G 3A, 6 SOG, +1, 1 hit"
+       "line": "0G 3A, 6 SOG, +1, 1 hit",
+       "teamSlug": "penticton-vees",
+       "logo": "assets/logos/chl/penticton-vees.png"
       },
       {
        "n": 3,
        "player": "I Scribbzy I",
        "team": "Moose Jaw Warriors, LW",
-       "line": "2G 0A, 3 SOG, -1, 0 hits"
+       "line": "2G 0A, 3 SOG, -1, 0 hits",
+       "teamSlug": "moose-jaw-warriors",
+       "logo": "assets/logos/chl/moose-jaw-warriors.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Moose Jaw Warriors",
+      "slug": "moose-jaw-warriors",
+      "logo": "assets/logos/chl/moose-jaw-warriors.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Penticton Vees",
+      "slug": "penticton-vees",
+      "logo": "assets/logos/chl/penticton-vees.png",
+      "score": 3
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Winterhawks Pull Clear of Kings",
@@ -2231,21 +3850,40 @@
        "n": 1,
        "player": "desiredsno3",
        "team": "Portland Winterhawks, LW",
-       "line": "2G 0A, 3 SOG, +1, 4 hits"
+       "line": "2G 0A, 3 SOG, +1, 4 hits",
+       "teamSlug": "portland-winterhawks",
+       "logo": "assets/logos/chl/portland-winterhawks.png"
       },
       {
        "n": 2,
        "player": "l Rebel 2 l",
        "team": "Portland Winterhawks, LD",
-       "line": "0G 2A, 1 SOG, +1, 1 hit"
+       "line": "0G 2A, 1 SOG, +1, 1 hit",
+       "teamSlug": "portland-winterhawks",
+       "logo": "assets/logos/chl/portland-winterhawks.png"
       },
       {
        "n": 3,
        "player": "GBR Dingurz",
        "team": "Portland Winterhawks, RW",
-       "line": "1G 0A, 3 SOG, +1, 4 hits"
+       "line": "1G 0A, 3 SOG, +1, 4 hits",
+       "teamSlug": "portland-winterhawks",
+       "logo": "assets/logos/chl/portland-winterhawks.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Portland Winterhawks",
+      "slug": "portland-winterhawks",
+      "logo": "assets/logos/chl/portland-winterhawks.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Edmonton Oil Kings",
+      "slug": "edmonton-oil-kings",
+      "logo": "assets/logos/chl/edmonton-oil-kings.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "Cougars Take Care of Business",
@@ -2257,21 +3895,40 @@
        "n": 1,
        "player": "WassI19I",
        "team": "Prince George Cougars, C",
-       "line": "4G 2A, 9 SOG, +3, 4 hits"
+       "line": "4G 2A, 9 SOG, +3, 4 hits",
+       "teamSlug": "prince-george-cougars",
+       "logo": "assets/logos/chl/prince-george-cougars.png"
       },
       {
        "n": 2,
        "player": "xZainer89",
        "team": "Prince George Cougars, LW",
-       "line": "1G 4A, 4 SOG, +3, 2 hits"
+       "line": "1G 4A, 4 SOG, +3, 2 hits",
+       "teamSlug": "prince-george-cougars",
+       "logo": "assets/logos/chl/prince-george-cougars.png"
       },
       {
        "n": 3,
        "player": "Gage0906",
        "team": "Regina Pats, LW",
-       "line": "3G 0A, 10 SOG, -3, 1 hit"
+       "line": "3G 0A, 10 SOG, -3, 1 hit",
+       "teamSlug": "regina-pats",
+       "logo": "assets/logos/chl/regina-pats.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Prince George Cougars",
+      "slug": "prince-george-cougars",
+      "logo": "assets/logos/chl/prince-george-cougars.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Regina Pats",
+      "slug": "regina-pats",
+      "logo": "assets/logos/chl/regina-pats.png",
+      "score": 4
+     },
+     "final": true
     },
     {
      "title": "Broncos Win It After Sixty",
@@ -2283,21 +3940,41 @@
        "n": 1,
        "player": "soibelrhxc",
        "team": "Swift Current Broncos, LW",
-       "line": "3G 1A, 8 SOG, +2, 5 hits"
+       "line": "3G 1A, 8 SOG, +2, 5 hits",
+       "teamSlug": "swift-current-broncos",
+       "logo": "assets/logos/chl/swift-current-broncos.png"
       },
       {
        "n": 2,
        "player": "geocustom",
        "team": "Swift Current Broncos, RW",
-       "line": "1G 2A, 5 SOG, +2, 2 hits"
+       "line": "1G 2A, 5 SOG, +2, 2 hits",
+       "teamSlug": "swift-current-broncos",
+       "logo": "assets/logos/chl/swift-current-broncos.png"
       },
       {
        "n": 3,
        "player": "Magsin EH",
        "team": "Kelowna Rockets, C",
-       "line": "1G 2A, 2 SOG, -2, 2 hits"
+       "line": "1G 2A, 2 SOG, -2, 2 hits",
+       "teamSlug": "kelowna-rockets",
+       "logo": "assets/logos/chl/kelowna-rockets.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Kelowna Rockets",
+      "slug": "kelowna-rockets",
+      "logo": "assets/logos/chl/kelowna-rockets.png",
+      "score": 3
+     },
+     "home": {
+      "name": "Swift Current Broncos",
+      "slug": "swift-current-broncos",
+      "logo": "assets/logos/chl/swift-current-broncos.png",
+      "score": 4
+     },
+     "decision": "OT",
+     "final": true
     },
     {
      "title": "Americans Run Away From Blades",
@@ -2309,21 +3986,40 @@
        "n": 1,
        "player": "OMG_Magro",
        "team": "Tri City Americans, LW",
-       "line": "4G 2A, 7 SOG, +4, 7 hits"
+       "line": "4G 2A, 7 SOG, +4, 7 hits",
+       "teamSlug": "tri-city-americans",
+       "logo": "assets/logos/chl/tri-city-americans.png"
       },
       {
        "n": 2,
        "player": "LupusArctos95",
        "team": "Tri City Americans, C",
-       "line": "2G 2A, 4 SOG, +4, 1 hit"
+       "line": "2G 2A, 4 SOG, +4, 1 hit",
+       "teamSlug": "tri-city-americans",
+       "logo": "assets/logos/chl/tri-city-americans.png"
       },
       {
        "n": 3,
        "player": "jdowning21.",
        "team": "Tri City Americans, RW",
-       "line": "0G 5A, 3 SOG, +4, 0 hits"
+       "line": "0G 5A, 3 SOG, +4, 0 hits",
+       "teamSlug": "tri-city-americans",
+       "logo": "assets/logos/chl/tri-city-americans.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Tri City Americans",
+      "slug": "tri-city-americans",
+      "logo": "assets/logos/chl/tri-city-americans.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Saskatoon Blades",
+      "slug": "saskatoon-blades",
+      "logo": "assets/logos/chl/saskatoon-blades.png",
+      "score": 2
+     },
+     "final": true
     },
     {
      "title": "Tigers Take Care of Business",
@@ -2335,21 +4031,40 @@
        "n": 1,
        "player": "JP_029",
        "team": "Medicine Hat Tigers, RW",
-       "line": "4G 0A, 8 SOG, +4, 1 hit"
+       "line": "4G 0A, 8 SOG, +4, 1 hit",
+       "teamSlug": "medicine-hat-tigers",
+       "logo": "assets/logos/chl/medicine-hat-tigers.png"
       },
       {
        "n": 2,
        "player": "Bybdouce",
        "team": "Medicine Hat Tigers, LW",
-       "line": "1G 2A, 6 SOG, +4, 7 hits"
+       "line": "1G 2A, 6 SOG, +4, 7 hits",
+       "teamSlug": "medicine-hat-tigers",
+       "logo": "assets/logos/chl/medicine-hat-tigers.png"
       },
       {
        "n": 3,
        "player": "lLittleNicky12l",
        "team": "Medicine Hat Tigers, C",
-       "line": "2G 1A, 2 SOG, +4, 1 hit"
+       "line": "2G 1A, 2 SOG, +4, 1 hit",
+       "teamSlug": "medicine-hat-tigers",
+       "logo": "assets/logos/chl/medicine-hat-tigers.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Seattle Thunderbirds",
+      "slug": "seattle-thunderbirds",
+      "logo": "assets/logos/chl/seattle-thunderbirds.png",
+      "score": 4
+     },
+     "home": {
+      "name": "Medicine Hat Tigers",
+      "slug": "medicine-hat-tigers",
+      "logo": "assets/logos/chl/medicine-hat-tigers.png",
+      "score": 7
+     },
+     "final": true
     },
     {
      "title": "Bruins Run Away From Blazers",
@@ -2361,21 +4076,40 @@
        "n": 1,
        "player": "iCLassYxTTV",
        "team": "Chilliwack Bruins, LW",
-       "line": "2G 4A, 7 SOG, +4, 7 hits"
+       "line": "2G 4A, 7 SOG, +4, 7 hits",
+       "teamSlug": "chilliwack-bruins",
+       "logo": "assets/logos/chl/chilliwack-bruins.png"
       },
       {
        "n": 2,
        "player": "KIINNER12",
        "team": "Chilliwack Bruins, RW",
-       "line": "3G 2A, 6 SOG, +4, 0 hits"
+       "line": "3G 2A, 6 SOG, +4, 0 hits",
+       "teamSlug": "chilliwack-bruins",
+       "logo": "assets/logos/chl/chilliwack-bruins.png"
       },
       {
        "n": 3,
        "player": "Im-Rukia",
        "team": "Chilliwack Bruins, C",
-       "line": "1G 3A, 2 SOG, +4, 4 hits"
+       "line": "1G 3A, 2 SOG, +4, 4 hits",
+       "teamSlug": "chilliwack-bruins",
+       "logo": "assets/logos/chl/chilliwack-bruins.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Chilliwack Bruins",
+      "slug": "chilliwack-bruins",
+      "logo": "assets/logos/chl/chilliwack-bruins.png",
+      "score": 6
+     },
+     "home": {
+      "name": "Kamloops Blazers",
+      "slug": "kamloops-blazers",
+      "logo": "assets/logos/chl/kamloops-blazers.png",
+      "score": 1
+     },
+     "final": true
     },
     {
      "title": "Hitmen Watch: Calgary Trades Punches With the Night's Juggernaut, and Loses the Last Exchange",
@@ -2387,21 +4121,40 @@
        "n": 1,
        "player": "pickmasta",
        "team": "Victoria Royals, LD",
-       "line": "1G 5A, +3, 6 hits"
+       "line": "1G 5A, +3, 6 hits",
+       "teamSlug": "victoria-royals",
+       "logo": "assets/logos/chl/victoria-royals.png"
       },
       {
        "n": 2,
        "player": "redz_shifterr",
        "team": "Victoria Royals, RW",
-       "line": "3G 1A, 7 SOG, +3"
+       "line": "3G 1A, 7 SOG, +3",
+       "teamSlug": "victoria-royals",
+       "logo": "assets/logos/chl/victoria-royals.png"
       },
       {
        "n": 3,
        "player": "Gullyrr",
        "team": "Calgary Hitmen, C",
-       "line": "2G 2A in a losing effort"
+       "line": "2G 2A in a losing effort",
+       "teamSlug": "calgary-hitmen",
+       "logo": "assets/logos/chl/calgary-hitmen.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Calgary Hitmen",
+      "slug": "calgary-hitmen",
+      "logo": "assets/logos/chl/calgary-hitmen.png",
+      "score": 4
+     },
+     "home": {
+      "name": "Victoria Royals",
+      "slug": "victoria-royals",
+      "logo": "assets/logos/chl/victoria-royals.png",
+      "score": 6
+     },
+     "final": true
     },
     {
      "title": "Flood Gates: Raiders 8, Silvertips 2",
@@ -2413,21 +4166,40 @@
        "n": 1,
        "player": "K inG x NeymaR",
        "team": "Prince Albert Raiders, RW",
-       "line": "3G 3A, 8 SOG, +7, 1 hit"
+       "line": "3G 3A, 8 SOG, +7, 1 hit",
+       "teamSlug": "prince-albert-raiders",
+       "logo": "assets/logos/chl/prince-albert-raiders.png"
       },
       {
        "n": 2,
        "player": "Nxsclr",
        "team": "Prince Albert Raiders, C",
-       "line": "2G 4A, 9 SOG, +7, 0 hits"
+       "line": "2G 4A, 9 SOG, +7, 0 hits",
+       "teamSlug": "prince-albert-raiders",
+       "logo": "assets/logos/chl/prince-albert-raiders.png"
       },
       {
        "n": 3,
        "player": "JJBrewer16",
        "team": "Prince Albert Raiders, LD",
-       "line": "0G 5A, 2 SOG, +7, 9 hits"
+       "line": "0G 5A, 2 SOG, +7, 9 hits",
+       "teamSlug": "prince-albert-raiders",
+       "logo": "assets/logos/chl/prince-albert-raiders.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Everett Silvertips",
+      "slug": "everett-silvertips",
+      "logo": "assets/logos/chl/everett-silvertips.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Prince Albert Raiders",
+      "slug": "prince-albert-raiders",
+      "logo": "assets/logos/chl/prince-albert-raiders.png",
+      "score": 8
+     },
+     "final": true
     },
     {
      "title": "Giants Run Away From Rebels",
@@ -2439,21 +4211,40 @@
        "n": 1,
        "player": "xSullylab-",
        "team": "Vancouver Giants, LW",
-       "line": "3G 2A, 5 SOG, +4, 2 hits"
+       "line": "3G 2A, 5 SOG, +4, 2 hits",
+       "teamSlug": "vancouver-giants",
+       "logo": "assets/logos/chl/vancouver-giants.png"
       },
       {
        "n": 2,
        "player": "envy._._._._.",
        "team": "Vancouver Giants, RW",
-       "line": "1G 4A, 5 SOG, +4, 6 hits"
+       "line": "1G 4A, 5 SOG, +4, 6 hits",
+       "teamSlug": "vancouver-giants",
+       "logo": "assets/logos/chl/vancouver-giants.png"
       },
       {
        "n": 3,
        "player": "Greene_870897",
        "team": "Vancouver Giants, C",
-       "line": "2G 2A, 5 SOG, +4, 2 hits"
+       "line": "2G 2A, 5 SOG, +4, 2 hits",
+       "teamSlug": "vancouver-giants",
+       "logo": "assets/logos/chl/vancouver-giants.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Red Deer Rebels",
+      "slug": "red-deer-rebels",
+      "logo": "assets/logos/chl/red-deer-rebels.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Vancouver Giants",
+      "slug": "vancouver-giants",
+      "logo": "assets/logos/chl/vancouver-giants.png",
+      "score": 7
+     },
+     "final": true
     },
     {
      "title": "Hurricanes Pull Clear of Wild",
@@ -2465,24 +4256,63 @@
        "n": 1,
        "player": "HECK215",
        "team": "Lethbridge Hurricanes, RW",
-       "line": "3G 0A, 8 SOG, +2, 3 hits"
+       "line": "3G 0A, 8 SOG, +2, 3 hits",
+       "teamSlug": "lethbridge-hurricanes",
+       "logo": "assets/logos/chl/lethbridge-hurricanes.png"
       },
       {
        "n": 2,
        "player": "XxHERCULExX x66",
        "team": "Lethbridge Hurricanes, C",
-       "line": "2G 1A, 4 SOG, +2, 3 hits"
+       "line": "2G 1A, 4 SOG, +2, 3 hits",
+       "teamSlug": "lethbridge-hurricanes",
+       "logo": "assets/logos/chl/lethbridge-hurricanes.png"
       },
       {
        "n": 3,
        "player": "lllG1lll",
        "team": "Lethbridge Hurricanes, LW",
-       "line": "0G 4A, 6 SOG, +2, 0 hits"
+       "line": "0G 4A, 6 SOG, +2, 0 hits",
+       "teamSlug": "lethbridge-hurricanes",
+       "logo": "assets/logos/chl/lethbridge-hurricanes.png"
       }
-     ]
+     ],
+     "away": {
+      "name": "Wenatchee Wild",
+      "slug": "wenatchee-wild",
+      "logo": "assets/logos/chl/wenatchee-wild.png",
+      "score": 2
+     },
+     "home": {
+      "name": "Lethbridge Hurricanes",
+      "slug": "lethbridge-hurricanes",
+      "logo": "assets/logos/chl/lethbridge-hurricanes.png",
+      "score": 5
+     },
+     "final": true
     }
    ]
   }
  ],
- "threeStarsTitle": "League Three Stars of the Night"
+ "threeStarsTitle": "League Three Stars of the Night",
+ "threeStarsTeams": [
+  {
+   "name": "Tri City Americans",
+   "slug": "tri-city-americans",
+   "logo": "assets/logos/chl/tri-city-americans.png"
+  },
+  {
+   "name": "Victoria Royals",
+   "slug": "victoria-royals",
+   "logo": "assets/logos/chl/victoria-royals.png"
+  },
+  {
+   "name": "Sudbury Wolves",
+   "slug": "sudbury-wolves",
+   "logo": "assets/logos/chl/sudbury-wolves.png"
+  }
+ ],
+ "noFinal": [
+  "London Knights at North Bay Battalion: No Final Posted"
+ ]
 }
