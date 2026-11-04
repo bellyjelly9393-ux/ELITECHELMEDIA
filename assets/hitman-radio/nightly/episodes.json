@@ -1,8 +1,20 @@
 {
   "featured": [
-    "2026-11-03-monday-night-review"
+    "2026-11-04-tuesday-night-week6-review"
   ],
   "episodes": [
+    {
+      "id": "2026-11-04-tuesday-night-week6-review",
+      "date": "2026-11-04",
+      "type": "recap",
+      "label": "Tuesday night · Week 6 in review · Nov 4",
+      "title": "Hitmen Radio: Tuesday Night, Week 6 in Review",
+      "headline": "Tuesday night: Week 6 in review across the LGCHL and what it means for the Hitmen",
+      "description": "Seth Kelley's Hitmen Radio from EliteChel Media: Tuesday Night, Week 6 in Review.",
+      "duration": "23:49",
+      "video": "assets/hitman-radio/nightly/2026-11-04-tuesday-night-week6-review.mp4?v=20261104",
+      "poster": "assets/hitman-radio/nightly/2026-11-04-tuesday-night-week6-review-poster.jpg?v=20261104"
+    },
     {
       "id": "2026-11-03-monday-night-review",
       "date": "2026-11-03",
