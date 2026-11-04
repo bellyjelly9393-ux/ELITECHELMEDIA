@@ -41,3 +41,6 @@
 
 
 .lg-race-record{display:block;font:400 14px/1.5 var(--f-body);letter-spacing:.05em;color:#c4c9d2}.lg-race-mark{font-size:14px;color:#e8c77c}.lg-race-source{grid-column:1/-1}.lg-race-source a{color:#ebc875;text-decoration:underline}
+
+/* Source-matched jersey cutouts hang below the existing rail, above the bench. */
+.lg-stall-jersey{top:28%;left:7%;width:86%;height:40%;object-position:center top}
