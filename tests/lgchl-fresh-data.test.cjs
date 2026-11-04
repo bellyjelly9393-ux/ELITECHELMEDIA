@@ -3,7 +3,7 @@ const root=path.resolve(__dirname,'..');const read=p=>JSON.parse(fs.readFileSync
 test('newer verified capture replaces stale leaderboard rows; a newer live feed wins',async()=>{
  const context={window:{},fetch:async p=>({ok:true,json:async()=>read(p)}),Date};vm.createContext(context);vm.runInContext(fs.readFileSync(path.join(root,'lgchl-fresh-data.js'),'utf8'),context);
  const fresh=await context.window.LGCHLFresh.board('points',[{gamertag:'older',fetched_at:'2026-10-28T10:00:00Z'}]);assert(fresh.capture);assert.equal(fresh.rows[0].gamertag,'bilodxau');assert.equal(fresh.rows.find(x=>x.gamertag==='xKUUZ').points,68);
- const rows=[{gamertag:'newer',fetched_at:'2026-11-03T10:00:00Z'}];const newer=await context.window.LGCHLFresh.board('points',rows);assert.equal(newer.capture,null);assert.equal(newer.rows,rows);
+ const rows=[{gamertag:'newer',fetched_at:'2026-11-05T10:00:00Z'}];const newer=await context.window.LGCHLFresh.board('points',rows);assert.equal(newer.capture,null);assert.equal(newer.rows,rows);
  const unavailable=await context.window.LGCHLFresh.board('shots',rows);assert.equal(unavailable.rows,rows);
 });
 test('night capture aggregates preserve source identity and report coverage honestly',()=>{

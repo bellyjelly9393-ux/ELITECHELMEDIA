@@ -1,6 +1,6 @@
 {
   "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=standing&leagueid=39&seasonid=55",
-  "captured_at": "2026-11-03T00:32:27.740Z",
+  "captured_at": "2026-11-04T07:26:17.561Z",
   "season": 55,
   "groups": [
     {
@@ -11,108 +11,108 @@
           "rank": 1,
           "marks": "*",
           "name": "Raiders",
-          "gp": 51,
-          "pts": 71,
-          "record": "35-15-1"
+          "gp": 57,
+          "pts": 78,
+          "record": "38-17-2"
         },
         {
           "lg_team_id": 416,
           "rank": 2,
           "marks": "*",
           "name": "Tigers",
-          "gp": 51,
-          "pts": 66,
-          "record": "32-17-2"
+          "gp": 57,
+          "pts": 76,
+          "record": "37-18-2"
         },
         {
           "lg_team_id": 415,
           "rank": 3,
           "marks": "",
           "name": "Oil Kings",
-          "gp": 51,
-          "pts": 65,
-          "record": "29-15-7"
+          "gp": 57,
+          "pts": 73,
+          "record": "33-17-7"
         },
         {
           "lg_team_id": 385,
           "rank": 4,
           "marks": "",
           "name": "Rebels",
-          "gp": 51,
-          "pts": 58,
-          "record": "26-19-6"
+          "gp": 57,
+          "pts": 68,
+          "record": "31-20-6"
         },
         {
           "lg_team_id": 418,
           "rank": 5,
           "marks": "",
           "name": "Hurricanes",
-          "gp": 51,
-          "pts": 57,
-          "record": "25-19-7"
-        },
-        {
-          "lg_team_id": 2983,
-          "rank": 6,
-          "marks": "",
-          "name": "Bruins",
-          "gp": 51,
-          "pts": 54,
-          "record": "24-21-6"
-        },
-        {
-          "lg_team_id": 412,
-          "rank": 7,
-          "marks": "",
-          "name": "Hitmen",
-          "gp": 51,
-          "pts": 54,
-          "record": "23-20-8"
+          "gp": 57,
+          "pts": 63,
+          "record": "28-22-7"
         },
         {
           "lg_team_id": 377,
-          "rank": 8,
+          "rank": 6,
           "marks": "",
           "name": "Broncos",
-          "gp": 51,
-          "pts": 52,
-          "record": "24-23-4"
+          "gp": 57,
+          "pts": 61,
+          "record": "28-24-5"
+        },
+        {
+          "lg_team_id": 2983,
+          "rank": 7,
+          "marks": "",
+          "name": "Bruins",
+          "gp": 57,
+          "pts": 61,
+          "record": "27-23-7"
+        },
+        {
+          "lg_team_id": 412,
+          "rank": 8,
+          "marks": "",
+          "name": "Hitmen",
+          "gp": 57,
+          "pts": 60,
+          "record": "26-23-8"
         },
         {
           "lg_team_id": 409,
           "rank": 9,
           "marks": "",
           "name": "Wheat Kings",
-          "gp": 51,
-          "pts": 51,
-          "record": "23-23-5"
+          "gp": 57,
+          "pts": 56,
+          "record": "25-26-6"
         },
         {
           "lg_team_id": 411,
           "rank": 10,
           "marks": "",
           "name": "Warriors",
-          "gp": 51,
-          "pts": 45,
-          "record": "21-27-3"
+          "gp": 57,
+          "pts": 48,
+          "record": "22-31-4"
         },
         {
           "lg_team_id": 379,
           "rank": 11,
           "marks": "",
           "name": "Blades",
-          "gp": 51,
-          "pts": 43,
-          "record": "18-26-7"
+          "gp": 57,
+          "pts": 48,
+          "record": "20-29-8"
         },
         {
           "lg_team_id": 414,
           "rank": 12,
           "marks": "E",
           "name": "Pats",
-          "gp": 51,
+          "gp": 57,
           "pts": 20,
-          "record": "10-41-0"
+          "record": "10-47-0"
         }
       ]
     },
@@ -122,110 +122,110 @@
         {
           "lg_team_id": 420,
           "rank": 1,
-          "marks": "*",
+          "marks": "W*",
           "name": "Chiefs",
-          "gp": 51,
-          "pts": 74,
-          "record": "36-13-2"
+          "gp": 57,
+          "pts": 82,
+          "record": "40-15-2"
         },
         {
           "lg_team_id": 2981,
           "rank": 2,
           "marks": "*",
           "name": "Vees",
-          "gp": 51,
-          "pts": 67,
-          "record": "31-15-5"
-        },
-        {
-          "lg_team_id": 422,
-          "rank": 3,
-          "marks": "",
-          "name": "Cougars",
-          "gp": 51,
-          "pts": 61,
-          "record": "30-20-1"
+          "gp": 57,
+          "pts": 75,
+          "record": "35-17-5"
         },
         {
           "lg_team_id": 399,
-          "rank": 4,
+          "rank": 3,
           "marks": "",
           "name": "Americans",
-          "gp": 51,
-          "pts": 60,
-          "record": "28-19-4"
+          "gp": 57,
+          "pts": 72,
+          "record": "34-19-4"
+        },
+        {
+          "lg_team_id": 422,
+          "rank": 4,
+          "marks": "",
+          "name": "Cougars",
+          "gp": 57,
+          "pts": 71,
+          "record": "35-21-1"
         },
         {
           "lg_team_id": 419,
           "rank": 5,
           "marks": "",
           "name": "Royals",
-          "gp": 51,
-          "pts": 58,
-          "record": "28-21-2"
-        },
-        {
-          "lg_team_id": 423,
-          "rank": 6,
-          "marks": "",
-          "name": "Blazers",
-          "gp": 51,
-          "pts": 53,
-          "record": "23-21-7"
+          "gp": 57,
+          "pts": 65,
+          "record": "31-23-3"
         },
         {
           "lg_team_id": 400,
-          "rank": 7,
+          "rank": 6,
           "marks": "",
           "name": "Rockets",
-          "gp": 51,
-          "pts": 52,
-          "record": "25-24-2"
+          "gp": 57,
+          "pts": 62,
+          "record": "29-24-4"
         },
         {
-          "lg_team_id": 2604,
-          "rank": 8,
+          "lg_team_id": 423,
+          "rank": 7,
           "marks": "",
-          "name": "Wild",
-          "gp": 51,
-          "pts": 48,
-          "record": "23-26-2"
-        },
-        {
-          "lg_team_id": 398,
-          "rank": 9,
-          "marks": "",
-          "name": "Winterhawks",
-          "gp": 51,
-          "pts": 44,
-          "record": "21-28-2"
-        },
-        {
-          "lg_team_id": 421,
-          "rank": 10,
-          "marks": "",
-          "name": "Thunderbirds",
-          "gp": 51,
-          "pts": 44,
-          "record": "20-27-4"
+          "name": "Blazers",
+          "gp": 57,
+          "pts": 57,
+          "record": "24-24-9"
         },
         {
           "lg_team_id": 386,
-          "rank": 11,
+          "rank": 8,
           "marks": "",
           "name": "Giants",
-          "gp": 51,
-          "pts": 44,
-          "record": "20-27-4"
+          "gp": 57,
+          "pts": 53,
+          "record": "24-28-5"
+        },
+        {
+          "lg_team_id": 2604,
+          "rank": 9,
+          "marks": "",
+          "name": "Wild",
+          "gp": 57,
+          "pts": 50,
+          "record": "24-31-2"
+        },
+        {
+          "lg_team_id": 398,
+          "rank": 10,
+          "marks": "",
+          "name": "Winterhawks",
+          "gp": 57,
+          "pts": 50,
+          "record": "23-30-4"
+        },
+        {
+          "lg_team_id": 421,
+          "rank": 11,
+          "marks": "",
+          "name": "Thunderbirds",
+          "gp": 57,
+          "pts": 49,
+          "record": "22-30-5"
         },
         {
           "lg_team_id": 380,
           "rank": 12,
-          "marks": "",
+          "marks": "E",
           "name": "Silvertips",
-          "gp": 51,
-          "pts": 26,
-          "record": "11-36-4"
+          "gp": 57,
+          "pts": 28,
+          "record": "12-41-4"
         }
       ]
     },
@@ -235,92 +235,92 @@
         {
           "lg_team_id": 449,
           "rank": 1,
-          "marks": "*",
+          "marks": "W*",
           "name": "Colts",
-          "gp": 51,
-          "pts": 74,
-          "record": "36-13-2"
+          "gp": 57,
+          "pts": 83,
+          "record": "40-14-3"
         },
         {
           "lg_team_id": 306,
           "rank": 2,
           "marks": "*",
           "name": "Bulldogs",
-          "gp": 51,
-          "pts": 58,
-          "record": "28-21-2"
+          "gp": 57,
+          "pts": 68,
+          "record": "32-21-4"
         },
         {
           "lg_team_id": 447,
           "rank": 3,
-          "marks": "",
+          "marks": "W",
           "name": "Wolves",
-          "gp": 51,
-          "pts": 71,
-          "record": "34-14-3"
+          "gp": 57,
+          "pts": 76,
+          "record": "36-17-4"
         },
         {
           "lg_team_id": 448,
           "rank": 4,
           "marks": "",
           "name": "Battalion",
-          "gp": 51,
-          "pts": 70,
-          "record": "34-15-2"
+          "gp": 57,
+          "pts": 73,
+          "record": "35-19-3"
         },
         {
           "lg_team_id": 402,
           "rank": 5,
           "marks": "",
           "name": "Steelheads",
-          "gp": 51,
-          "pts": 61,
-          "record": "28-18-5"
+          "gp": 57,
+          "pts": 68,
+          "record": "31-20-6"
         },
         {
           "lg_team_id": 444,
           "rank": 6,
           "marks": "",
           "name": "Frontenacs",
-          "gp": 51,
-          "pts": 54,
-          "record": "26-23-2"
+          "gp": 57,
+          "pts": 61,
+          "record": "29-25-3"
         },
         {
           "lg_team_id": 446,
           "rank": 7,
           "marks": "",
           "name": "67's",
-          "gp": 51,
-          "pts": 54,
-          "record": "24-21-6"
+          "gp": 57,
+          "pts": 57,
+          "record": "25-25-7"
         },
         {
           "lg_team_id": 375,
           "rank": 8,
           "marks": "",
           "name": "IceDogs",
-          "gp": 51,
-          "pts": 48,
-          "record": "23-26-2"
+          "gp": 57,
+          "pts": 55,
+          "record": "26-28-3"
         },
         {
           "lg_team_id": 445,
           "rank": 9,
           "marks": "",
           "name": "Petes",
-          "gp": 51,
-          "pts": 45,
-          "record": "20-26-5"
+          "gp": 57,
+          "pts": 53,
+          "record": "24-28-5"
         },
         {
           "lg_team_id": 401,
           "rank": 10,
-          "marks": "",
+          "marks": "E",
           "name": "Generals",
-          "gp": 51,
-          "pts": 40,
-          "record": "18-29-4"
+          "gp": 57,
+          "pts": 42,
+          "record": "19-34-4"
         }
       ]
     },
@@ -332,90 +332,90 @@
           "rank": 1,
           "marks": "*",
           "name": "Greyhounds",
-          "gp": 51,
-          "pts": 65,
-          "record": "31-17-3"
+          "gp": 57,
+          "pts": 75,
+          "record": "36-18-3"
         },
         {
           "lg_team_id": 452,
           "rank": 2,
           "marks": "*",
           "name": "Storm",
-          "gp": 51,
-          "pts": 62,
-          "record": "28-17-6"
-        },
-        {
-          "lg_team_id": 514,
-          "rank": 3,
-          "marks": "",
-          "name": "Firebirds",
-          "gp": 51,
-          "pts": 64,
-          "record": "29-16-6"
-        },
-        {
-          "lg_team_id": 383,
-          "rank": 4,
-          "marks": "",
-          "name": "Otters",
-          "gp": 51,
-          "pts": 61,
-          "record": "28-18-5"
-        },
-        {
-          "lg_team_id": 408,
-          "rank": 5,
-          "marks": "",
-          "name": "Spirit",
-          "gp": 51,
-          "pts": 61,
-          "record": "27-17-7"
+          "gp": 57,
+          "pts": 68,
+          "record": "31-20-6"
         },
         {
           "lg_team_id": 451,
-          "rank": 6,
+          "rank": 3,
           "marks": "",
           "name": "Sting",
-          "gp": 51,
-          "pts": 61,
-          "record": "26-16-9"
+          "gp": 57,
+          "pts": 73,
+          "record": "32-16-9"
+        },
+        {
+          "lg_team_id": 514,
+          "rank": 4,
+          "marks": "",
+          "name": "Firebirds",
+          "gp": 57,
+          "pts": 68,
+          "record": "31-20-6"
+        },
+        {
+          "lg_team_id": 383,
+          "rank": 5,
+          "marks": "",
+          "name": "Otters",
+          "gp": 57,
+          "pts": 67,
+          "record": "31-21-5"
+        },
+        {
+          "lg_team_id": 408,
+          "rank": 6,
+          "marks": "",
+          "name": "Spirit",
+          "gp": 57,
+          "pts": 67,
+          "record": "30-20-7"
         },
         {
           "lg_team_id": 453,
           "rank": 7,
           "marks": "",
           "name": "Attack",
-          "gp": 51,
-          "pts": 56,
-          "record": "25-20-6"
+          "gp": 57,
+          "pts": 62,
+          "record": "28-23-6"
         },
         {
           "lg_team_id": 454,
           "rank": 8,
           "marks": "",
           "name": "Rangers",
-          "gp": 51,
-          "pts": 53,
-          "record": "22-20-9"
+          "gp": 57,
+          "pts": 61,
+          "record": "26-22-9"
         },
         {
           "lg_team_id": 381,
           "rank": 9,
           "marks": "",
           "name": "Spitfires",
-          "gp": 51,
-          "pts": 52,
-          "record": "22-21-8"
+          "gp": 57,
+          "pts": 58,
+          "record": "24-23-10"
         },
         {
           "lg_team_id": 370,
           "rank": 10,
           "marks": "",
           "name": "Knights",
-          "gp": 51,
-          "pts": 51,
-          "record": "23-23-5"
+          "gp": 57,
+          "pts": 57,
+          "record": "26-26-5"
         }
       ]
     },
@@ -425,92 +425,92 @@
         {
           "lg_team_id": 465,
           "rank": 1,
-          "marks": "*",
+          "marks": "W*",
           "name": "Oceanic",
-          "gp": 51,
-          "pts": 75,
-          "record": "37-13-1"
-        },
-        {
-          "lg_team_id": 365,
-          "rank": 2,
-          "marks": "",
-          "name": "Wildcats",
-          "gp": 51,
-          "pts": 69,
-          "record": "32-14-5"
+          "gp": 57,
+          "pts": 85,
+          "record": "42-14-1"
         },
         {
           "lg_team_id": 364,
-          "rank": 3,
-          "marks": "",
+          "rank": 2,
+          "marks": "W",
           "name": "Mooseheads",
-          "gp": 51,
-          "pts": 65,
-          "record": "30-16-5"
+          "gp": 57,
+          "pts": 77,
+          "record": "36-16-5"
+        },
+        {
+          "lg_team_id": 365,
+          "rank": 3,
+          "marks": "W",
+          "name": "Wildcats",
+          "gp": 57,
+          "pts": 77,
+          "record": "36-16-5"
         },
         {
           "lg_team_id": 455,
           "rank": 4,
           "marks": "",
           "name": "Eagles",
-          "gp": 51,
-          "pts": 60,
-          "record": "29-20-2"
+          "gp": 57,
+          "pts": 69,
+          "record": "33-21-3"
         },
         {
           "lg_team_id": 468,
           "rank": 5,
           "marks": "",
           "name": "Sagueneens",
-          "gp": 51,
-          "pts": 60,
-          "record": "28-19-4"
-        },
-        {
-          "lg_team_id": 467,
-          "rank": 6,
-          "marks": "",
-          "name": "Remparts",
-          "gp": 51,
-          "pts": 53,
-          "record": "25-23-3"
+          "gp": 57,
+          "pts": 66,
+          "record": "31-22-4"
         },
         {
           "lg_team_id": 457,
-          "rank": 7,
+          "rank": 6,
           "marks": "",
           "name": "Islanders",
-          "gp": 51,
-          "pts": 53,
-          "record": "23-21-7"
+          "gp": 57,
+          "pts": 62,
+          "record": "27-22-8"
+        },
+        {
+          "lg_team_id": 467,
+          "rank": 7,
+          "marks": "",
+          "name": "Remparts",
+          "gp": 57,
+          "pts": 57,
+          "record": "27-27-3"
         },
         {
           "lg_team_id": 469,
           "rank": 8,
           "marks": "",
           "name": "Drakkar",
-          "gp": 51,
-          "pts": 50,
-          "record": "24-25-2"
+          "gp": 57,
+          "pts": 56,
+          "record": "27-28-2"
         },
         {
           "lg_team_id": 397,
           "rank": 9,
           "marks": "",
           "name": "Sea Dogs",
-          "gp": 51,
-          "pts": 46,
-          "record": "20-25-6"
+          "gp": 57,
+          "pts": 50,
+          "record": "22-29-6"
         },
         {
           "lg_team_id": 2982,
           "rank": 10,
           "marks": "E",
           "name": "Regiment",
-          "gp": 51,
-          "pts": 20,
-          "record": "9-40-2"
+          "gp": 57,
+          "pts": 26,
+          "record": "12-43-2"
         }
       ]
     },
@@ -520,74 +520,74 @@
         {
           "lg_team_id": 459,
           "rank": 1,
-          "marks": "*",
+          "marks": "W*",
           "name": "Voltigeurs",
-          "gp": 51,
-          "pts": 71,
-          "record": "33-13-5"
+          "gp": 57,
+          "pts": 77,
+          "record": "36-16-5"
         },
         {
           "lg_team_id": 463,
           "rank": 2,
-          "marks": "",
+          "marks": "W",
           "name": "Phoenix",
-          "gp": 51,
-          "pts": 67,
-          "record": "30-14-7"
+          "gp": 57,
+          "pts": 75,
+          "record": "33-15-9"
         },
         {
           "lg_team_id": 460,
           "rank": 3,
           "marks": "",
           "name": "Foreurs",
-          "gp": 51,
-          "pts": 57,
-          "record": "25-19-7"
+          "gp": 57,
+          "pts": 64,
+          "record": "28-21-8"
         },
         {
           "lg_team_id": 458,
           "rank": 4,
           "marks": "",
           "name": "Armada",
-          "gp": 51,
-          "pts": 56,
-          "record": "27-22-2"
-        },
-        {
-          "lg_team_id": 466,
-          "rank": 5,
-          "marks": "",
-          "name": "Tigres",
-          "gp": 51,
-          "pts": 56,
-          "record": "26-21-4"
+          "gp": 57,
+          "pts": 61,
+          "record": "29-25-3"
         },
         {
           "lg_team_id": 382,
-          "rank": 6,
+          "rank": 5,
           "marks": "",
           "name": "Cataractes",
-          "gp": 51,
-          "pts": 54,
-          "record": "25-22-4"
+          "gp": 57,
+          "pts": 59,
+          "record": "27-25-5"
+        },
+        {
+          "lg_team_id": 466,
+          "rank": 6,
+          "marks": "",
+          "name": "Tigres",
+          "gp": 57,
+          "pts": 58,
+          "record": "26-25-6"
         },
         {
           "lg_team_id": 461,
           "rank": 7,
           "marks": "",
           "name": "Olympiques",
-          "gp": 51,
-          "pts": 48,
-          "record": "22-25-4"
+          "gp": 57,
+          "pts": 50,
+          "record": "23-30-4"
         },
         {
           "lg_team_id": 462,
           "rank": 8,
           "marks": "",
           "name": "Huskies",
-          "gp": 51,
-          "pts": 41,
-          "record": "18-28-5"
+          "gp": 57,
+          "pts": 49,
+          "record": "22-30-5"
         }
       ]
     }
