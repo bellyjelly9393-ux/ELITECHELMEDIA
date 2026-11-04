@@ -13,7 +13,9 @@ private matchmaking codes.
 - `leaders/2026-11-02/`: season 55 leaderboards after Sunday Nov 1, from every row of LG's member stats
   (1,388 skaters, 182 goalies): points, goals, assists, +/-, hits, GWG, takeaways, interceptions, blocks,
   D-men points; goalie wins, save % and GAA (10+ GP), shutouts.
-- `games/s55/2026-11-01/`: LGCHL games from Sunday Nov 1, 2026 (93 scheduled). **Partial: 78 of 93 (918207–918284; 918285–918299 not yet pulled)**
+- `standings/2026-11-02/`: all 62 teams after Sunday Nov 1 (51 GP each) with LG's playoff-race order. Checked against the saved game results: GP, W, L+OTL, GF and GA match for every team. Also loaded into `lgchl_standings_snapshots`.
+- `transactions/2026-11-02/`: league news roster moves (waivers, claims, assignments, eliminations; strike/warning/ban entries left out) and trades completed Oct 29-31. LG lists trade sides as gamertags only, so players are not tied to teams.
+- `games/s55/2026-11-01/`: LGCHL games from Sunday Nov 1, 2026 (93 scheduled). **Complete: 93 of 93**
   (918207-918243). The pull stopped at a Cloudflare check; the rest will be added. Same format as the
   October nights (LG game-page data, no EA part detail).
 

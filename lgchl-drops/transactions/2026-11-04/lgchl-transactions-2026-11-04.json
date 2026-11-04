@@ -1,0 +1,565 @@
+{
+ "schema": "lgchl-transactions-v1",
+ "league": "LGCHL",
+ "season": 55,
+ "window": "LG league News entries after 2026-11-02 11:39pm (the previous capture) through 2026-11-04 12:58am; duplicate lines are listed once",
+ "news_entries": [
+  {
+   "at": "2026-11-04 12:58am",
+   "text": "The Generals have claimed kingsylosis off of waivers"
+  },
+  {
+   "at": "2026-11-04 12:58am",
+   "text": "out_law_ has cleared waivers and is reporting to the Pioneers"
+  },
+  {
+   "at": "2026-11-04 12:05am",
+   "text": "pat_lafontaine16 has been taken off the Injured Reserve list"
+  },
+  {
+   "at": "2026-11-04 12:05am",
+   "text": "TSNGURR has been taken off the Injured Reserve list"
+  },
+  {
+   "at": "2026-11-04 12:05am",
+   "text": "xShredd has been taken off the Injured Reserve list"
+  },
+  {
+   "at": "2026-11-04 12:05am",
+   "text": "littlepinguu has been taken off the Injured Reserve list"
+  },
+  {
+   "at": "2026-11-04 12:05am",
+   "text": "Xxx rj xxx has been taken off the Injured Reserve list"
+  },
+  {
+   "at": "2026-11-04 12:05am",
+   "text": "IcyTk has been taken off the Injured Reserve list"
+  },
+  {
+   "at": "2026-11-04 12:05am",
+   "text": "Illgill89 has been taken off the Injured Reserve list"
+  },
+  {
+   "at": "2026-11-04 12:05am",
+   "text": "XxPasTrnack88 has been taken off the Injured Reserve list"
+  },
+  {
+   "at": "2026-11-03 11:43pm",
+   "text": "Jimbo_Slice093 has made the following manual changes to EyeSin_'s account: position - RW to C"
+  },
+  {
+   "at": "2026-11-03 11:43pm",
+   "text": "Jimbo_Slice093 has made the following manual changes to MrNoOvO's account: position - C to LW"
+  },
+  {
+   "at": "2026-11-03 11:28pm",
+   "text": "Loki x6x has made the following manual changes to BLACK_DAWN66's account: levelid - Training Camp to Regular Level"
+  },
+  {
+   "at": "2026-11-03 11:13pm",
+   "text": "Trxtterr has been removed from the LGCHL"
+  },
+  {
+   "at": "2026-11-03 11:07pm",
+   "text": "Peacork has cleared Training Camp"
+  },
+  {
+   "at": "2026-11-03 11:01pm",
+   "text": "EPIKsandwich has cleared Training Camp"
+  },
+  {
+   "at": "2026-11-03 10:56pm",
+   "text": "Sauceshow has cleared Training Camp"
+  },
+  {
+   "at": "2026-11-03 10:46pm",
+   "text": "The Halifax Mooseheads have clinched a WildCard spot"
+  },
+  {
+   "at": "2026-11-03 10:38pm",
+   "text": "The Oshawa Generals have been eliminated from the playoffs"
+  },
+  {
+   "at": "2026-11-03 10:33pm",
+   "text": "meanmuggin411 has cleared Training Camp"
+  },
+  {
+   "at": "2026-11-03 10:33pm",
+   "text": "The Pats have placed Semper Sells on waivers"
+  },
+  {
+   "at": "2026-11-03 10:33pm",
+   "text": "The Moncton Wildcats have clinched a WildCard spot"
+  },
+  {
+   "at": "2026-11-03 10:04pm",
+   "text": "The Sudbury Wolves have clinched a WildCard spot"
+  },
+  {
+   "at": "2026-11-03 10:01pm",
+   "text": "The Sherbrooke Phoenix have clinched a WildCard spot"
+  },
+  {
+   "at": "2026-11-03 09:38pm",
+   "text": "The Rimouski Oceanic have clinched a WildCard spot"
+  },
+  {
+   "at": "2026-11-03 09:31pm",
+   "text": "The Spokane Chiefs have clinched a WildCard spot"
+  },
+  {
+   "at": "2026-11-03 09:29pm",
+   "text": "The Barrie Colts have clinched a WildCard spot"
+  },
+  {
+   "at": "2026-11-03 06:47pm",
+   "text": "LAINGx15 has made the following manual changes to jt_frm1's account: levelid - Regular Level to Training Camp"
+  },
+  {
+   "at": "2026-11-03 05:01pm",
+   "text": "leader69 has been randomly assigned to the Cataractes"
+  },
+  {
+   "at": "2026-11-03 04:53pm",
+   "text": "The Pats have sent out_law_ to the Pioneers"
+  },
+  {
+   "at": "2026-11-03 04:53pm",
+   "text": "The Pats have placed out_law_ on waivers"
+  },
+  {
+   "at": "2026-11-03 04:52pm",
+   "text": "Legend x716x has cleared Training Camp"
+  },
+  {
+   "at": "2026-11-03 04:52pm",
+   "text": "The Pats have sent kingsylosis to the Bulldogs"
+  },
+  {
+   "at": "2026-11-03 04:52pm",
+   "text": "The Pats have placed kingsylosis on waivers"
+  },
+  {
+   "at": "2026-11-03 04:18pm",
+   "text": "Dissizznuts_88 has cleared waivers and is reporting to the Pioneers"
+  },
+  {
+   "at": "2026-11-03 03:29pm",
+   "text": "noluck0934 has connected a new psn: x-_-2Saucy4u-_-x"
+  },
+  {
+   "at": "2026-11-03 02:26pm",
+   "text": "zEDMz changed their username from EDMonFIRE"
+  },
+  {
+   "at": "2026-11-03 02:24pm",
+   "text": "azocapital has been randomly assigned to the Firebirds"
+  },
+  {
+   "at": "2026-11-03 02:08pm",
+   "text": "Legend x716x has been randomly assigned to the Pats"
+  },
+  {
+   "at": "2026-11-03 08:15am",
+   "text": "The Knights have placed Dissizznuts_88 on waivers"
+  },
+  {
+   "at": "2026-11-03 07:47am",
+   "text": "The Knights have claimed nothargi4200 off of waivers"
+  },
+  {
+   "at": "2026-11-03 07:11am",
+   "text": "Newellski has been issued a 2:00 PIM in Season 55 of the LGCHL"
+  },
+  {
+   "at": "2026-11-03 07:09am",
+   "text": "xTugnutt has been issued a 2:00 PIM in Season 55 of the LGCHL"
+  },
+  {
+   "at": "2026-11-03 06:07am",
+   "text": "feldube has cleared waivers and is reporting to the Mavericks"
+  },
+  {
+   "at": "2026-11-03 05:33am",
+   "text": "LabattSmood has cleared waivers and is reporting to the Huskies"
+  },
+  {
+   "at": "2026-11-03 04:13am",
+   "text": "Harrd-Knock has cleared waivers and is reporting to the Falcons"
+  },
+  {
+   "at": "2026-11-03 02:07am",
+   "text": "Ms Jaleel has cleared waivers and is reporting to the Huskies"
+  },
+  {
+   "at": "2026-11-03 12:54am",
+   "text": "Chicagoxx2000 has been removed from the LGCHL"
+  },
+  {
+   "at": "2026-11-02 11:45pm",
+   "text": "The Royals have placed nothargi4200 on waivers"
+  }
+ ],
+ "news_disciplinary_entries_omitted": 116,
+ "trades_note": "No new trades on LG's Trades page since the previous capture; the latest trade is still 2026-10-31 11:33 pm. The list below is unchanged.",
+ "trades": [
+  {
+   "at": "2026-10-31 11:07 pm",
+   "status": "Completed",
+   "side_1": "Br0midas, CelebriniNHL",
+   "side_2": "Wpg General, kyle091655, Cxleton ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 11:33 pm",
+   "status": "Completed",
+   "side_1": "SoSRevolution, teddy2442, bgustafson41, TroySandy92",
+   "side_2": "Butterov, iTzOutLawDemo- ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 11:14 pm",
+   "status": "Completed",
+   "side_1": "l8l Poke l1l, Cxleton",
+   "side_2": "Il-Lasagna-lI, Diamond_supply90 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 09:44 pm",
+   "status": "Completed",
+   "side_1": "vCollinski, Juul-Mint_",
+   "side_2": "wwalter13, lxbiz ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 09:29 pm",
+   "status": "Completed",
+   "side_1": "feldube, W McCauley 4",
+   "side_2": "Bad at NHL, qqbiotchh, That Battery ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 09:11 pm",
+   "status": "Completed",
+   "side_1": "J-RODmiami, xZainer89",
+   "side_2": "SpadsYo, OMGizmo ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 07:33 pm",
+   "status": "Completed",
+   "side_1": "Hellcatxx, Shaneomac381",
+   "side_2": "daltondiamond, Crosby87ox",
+   "notes": "-Team would have 1 Goalies, less then the min of (2)"
+  },
+  {
+   "at": "2026-10-31 05:10 pm",
+   "status": "Completed",
+   "side_1": "Kevus23, Juul-Mint_",
+   "side_2": "l Rez Wrld l, Diamond_supply90 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 05:17 pm",
+   "status": "Completed",
+   "side_1": "l lilprune l, RYDS0204, Mamametore, Creamy7268",
+   "side_2": "Heatmiser47, SaucePOUT1NE, lxbiz ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 05:14 pm",
+   "status": "Completed",
+   "side_1": "DaNewfiePro, Landshark3808",
+   "side_2": "x Vancouver, Validnorf ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 04:48 pm",
+   "status": "Completed",
+   "side_1": "Drasik13, W McCauley 4",
+   "side_2": "LordBolingoli, D1ggy420 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 03:13 pm",
+   "status": "Completed",
+   "side_1": "Kooksy l27l, Audacity81, SargeNPrawns, Swizz Wrld",
+   "side_2": "KarlssonIsGod, FireBolt9188 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 02:21 pm",
+   "status": "Completed",
+   "side_1": "Drasik13, Bumpregion, milkymits",
+   "side_2": "Lucid_NegliGentZ, SPLIFNRUM, RTeddy87, W McCauley 4 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 12:31 pm",
+   "status": "Completed",
+   "side_1": "Stevens-I4I-, johnon9ping, xThorrs-",
+   "side_2": "xKess81, DemidoV_93_ch, mgb2092 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 11:36 am",
+   "status": "Completed",
+   "side_1": "TheeMcVicz, Juul-Mint_",
+   "side_2": "The 2nd Walrus, xZainer89 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 11:25 am",
+   "status": "Completed",
+   "side_1": "Celly902, Sinksmasher, NHL_Basket_Filla, Anchors_82, Cxleton",
+   "side_2": "GwyloBear, Leetch-_-, Zaoix, Misax77, deegoal89, CelebriniNHL",
+   "notes": "Sinksmasher protection to be removed for this trade"
+  },
+  {
+   "at": "2026-10-31 10:26 am",
+   "status": "Completed",
+   "side_1": "MeNoThatGood, mgb2092",
+   "side_2": "xNHLYork91x, Veilleux17, MaximeQc, Ferland52 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-30 06:25 pm",
+   "status": "Completed",
+   "side_1": "vZaire-, R xYATESx77",
+   "side_2": "Justcause17, chunkydunks21, Westy x88x ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-31 01:55 am",
+   "status": "Completed",
+   "side_1": "BuffaloBros, blackbelt5693",
+   "side_2": "fred_spence, Leafsfanforever, micleross ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-30 11:59 pm",
+   "status": "Completed",
+   "side_1": "l Glad l, Awking97, feeshgrubbin, Hatitosa",
+   "side_2": "PettyWap2108, mgb2092 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-30 11:06 pm",
+   "status": "Completed",
+   "side_1": "Rivalcodeman025, DemidoV_93_ch, Rick96049018",
+   "side_2": "TSNGURR, mgb2092 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-30 10:19 pm",
+   "status": "Completed",
+   "side_1": "MellowMike99, Rick96049018",
+   "side_2": "geocustom, REINHARTxNHL ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-30 08:47 pm",
+   "status": "Completed",
+   "side_1": "PDubss-, KevoLong, mgb2092",
+   "side_2": "Cxuture-, NumbNutz1230, JosephLovesU10, blackbelt5693 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-30 06:58 pm",
+   "status": "Completed",
+   "side_1": "JD9B, Hatitosa",
+   "side_2": "bradenp7, lukevader22, FalconeFlame",
+   "notes": "Player below min avail"
+  },
+  {
+   "at": "2026-10-30 01:30 pm",
+   "status": "Completed",
+   "side_1": "Suzuki_-14-, breault szn, Landshark3808",
+   "side_2": "MrNoOvO, akaAdaptt, lxbiz",
+   "notes": "-Team would have 1 Goalies, less then the min of (2)"
+  },
+  {
+   "at": "2026-10-30 02:10 pm",
+   "status": "Completed",
+   "side_1": "Big_Cam1644, Leafsfanforever, WWuSamm, MikeTysonzTiger-",
+   "side_2": "KnightLax27, Swayman x 18170, micleross ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-30 12:07 pm",
+   "status": "Completed",
+   "side_1": "general_bass19, Hatitosa",
+   "side_2": "I Mart l, Ferland52 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-30 11:16 am",
+   "status": "Completed",
+   "side_1": "rondochel, Ferland52",
+   "side_2": "Lx_Math_x87, Deeborov, PRiME80nj ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-30 10:51 am",
+   "status": "Completed",
+   "side_1": "untamedkid69, xZackPF, Kingkayne19, Saintshockey688",
+   "side_2": "Rbobby1420, McSwassy91, l Stefano l ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 09:58 pm",
+   "status": "Completed",
+   "side_1": "Redemption16676, l Stefano l",
+   "side_2": "BoooBeee Orr, VentBK14, smithde23, Foxl14I ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 09:35 pm",
+   "status": "Completed",
+   "side_1": "CHIPcote57, scorezyy, GFLR, xKillhouse",
+   "side_2": "GetsxBusy, Margo I, malekxx94, JBask, Rick96049018 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 10:47 pm",
+   "status": "Completed",
+   "side_1": "sTKampe, Diamond_supply90",
+   "side_2": "l Rez Wrld l, Il-Lasagna-lI, DarthMalak9237 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-30 12:26 am",
+   "status": "Completed",
+   "side_1": "stonedwallgoat, Floweri30i, W McCauley 4",
+   "side_2": "l9lPLAYMAKERl9l, Diamond_supply90 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 11:47 pm",
+   "status": "Completed",
+   "side_1": "Villy x31, Shaneomac381",
+   "side_2": "CrispyChrill, Westy x88x ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 06:04 pm",
+   "status": "Completed",
+   "side_1": "STLxPsykoTokerx, Pristine Life, Rayz x92, iTzOutLawDemo-",
+   "side_2": "Butterov, l KingSnips71 l, mannyxrare, l Stefano l",
+   "notes": "Pristine is protected so need to remove his protected status"
+  },
+  {
+   "at": "2026-10-29 08:53 pm",
+   "status": "Completed",
+   "side_1": "quadzilla69, D1ggy420",
+   "side_2": "SpongeBomb752, goosekevin, l Stefano l ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 09:55 pm",
+   "status": "Completed",
+   "side_1": "zeusgonewild24, xBroNz3x, W McCauley 4",
+   "side_2": "Floweri30i, iCLassYxTTV ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 09:20 pm",
+   "status": "Completed",
+   "side_1": "Paradis x 29, Jxseph x 34, D1ggy420",
+   "side_2": "TGannyboi, Diamond_supply90 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 08:10 pm",
+   "status": "Completed",
+   "side_1": "KingMilot19, Juul-Mint_",
+   "side_2": "ItzNoggin_, Westy x88x ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 03:49 pm",
+   "status": "Completed",
+   "side_1": "feeshgrubbin, vinvsr, Newellski",
+   "side_2": "battalion99, Hatitosa ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 03:18 pm",
+   "status": "Completed",
+   "side_1": "iDidIt4TheNooky, P4QT03, Fraser Muntn, Lane__55",
+   "side_2": "MrPiezrus, TroySandy92",
+   "notes": "https://imgur.com/a/4WqvkMq"
+  },
+  {
+   "at": "2026-10-29 02:53 pm",
+   "status": "Completed",
+   "side_1": "Kinglorge124, A Salty SaiIor",
+   "side_2": "Cage Hang, Newellski ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 02:43 pm",
+   "status": "Completed",
+   "side_1": "bradenp7, lukevader22, Hatitosa",
+   "side_2": "JD9B, FalconeFlame ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 02:30 pm",
+   "status": "Completed",
+   "side_1": "Saucy Costello, Fakky359",
+   "side_2": "rareedition28, Crosby87ox ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 12:52 pm",
+   "status": "Completed",
+   "side_1": "Blitzburgh_31, Cxleton",
+   "side_2": "l8l Poke l1l, brodyh3129, W McCauley 4 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 12:05 pm",
+   "status": "Completed",
+   "side_1": "BuffaloJones310, Tbush10",
+   "side_2": "archerm_88, xBlaknite ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 11:57 am",
+   "status": "Completed",
+   "side_1": "Stag_Arms-USA, W McCauley 4",
+   "side_2": "Arizona4life1107, feldube, FalconeFlame ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 09:19 am",
+   "status": "Completed",
+   "side_1": "A11ST4R 94, JD9B, feldube, Rick96049018",
+   "side_2": "malekxx94, FalconeFlame ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 08:21 am",
+   "status": "Completed",
+   "side_1": "I 2k Clampz, Super__Goalie_",
+   "side_2": "Patrickcree1741, dtd_steven, K U R B i O",
+   "notes": "Please remove protection from 2k Clampz."
+  },
+  {
+   "at": "2026-10-29 08:43 am",
+   "status": "Completed",
+   "side_1": "Lou-Sainiss, sepoL1083, Super__Goalie_",
+   "side_2": "zHitmans, J4Yy-_-y, Rick96049018 ##",
+   "notes": ""
+  },
+  {
+   "at": "2026-10-29 08:24 am",
+   "status": "Completed",
+   "side_1": "chicklesgaming2., Nxva_Deleted",
+   "side_2": "eshep71, Rick96049018 ##",
+   "notes": ""
+  }
+ ]
+}

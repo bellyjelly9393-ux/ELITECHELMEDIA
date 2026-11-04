@@ -1,0 +1,1823 @@
+{
+ "schema": "lgchl-leaders-v1",
+ "league": "LGCHL",
+ "league_id": 39,
+ "season": 55,
+ "as_of": "after Tue Nov 3, 2026 games",
+ "captured_at": "2026-11-04T07:27:23.194Z",
+ "players_listed": {
+  "skaters": 1424,
+  "goalies": 192
+ },
+ "source": "LG season 55 member stats (all rows of the skater and goalie tables)",
+ "boards": {
+  "pts": {
+   "label": "Points",
+   "rows": [
+    {
+     "player": "bilodxau",
+     "team": "RIM",
+     "pos": "RW",
+     "gp": 19,
+     "value": 102,
+     "g": 58,
+     "a": 44,
+     "pts": 102,
+     "plus_minus": 80
+    },
+    {
+     "player": "oettysznn",
+     "team": "BAR",
+     "pos": "RW",
+     "gp": 19,
+     "value": 88,
+     "g": 50,
+     "a": 38,
+     "pts": 88,
+     "plus_minus": 52
+    },
+    {
+     "player": "Local Booz",
+     "team": "DRU",
+     "pos": "LW",
+     "gp": 19,
+     "value": 85,
+     "g": 50,
+     "a": 35,
+     "pts": 85,
+     "plus_minus": 49
+    },
+    {
+     "player": "jxythegoat.",
+     "team": "RIM",
+     "pos": "C",
+     "gp": 19,
+     "value": 82,
+     "g": 22,
+     "a": 60,
+     "pts": 82,
+     "plus_minus": 73
+    },
+    {
+     "player": "Nash--61",
+     "team": "TCA",
+     "pos": "RW",
+     "gp": 19,
+     "value": 76,
+     "g": 23,
+     "a": 53,
+     "pts": 76,
+     "plus_minus": 43
+    },
+    {
+     "player": "DirtyDangler82",
+     "team": "BFD",
+     "pos": "RW",
+     "gp": 19,
+     "value": 74,
+     "g": 43,
+     "a": 31,
+     "pts": 74,
+     "plus_minus": 15
+    },
+    {
+     "player": "Borzy0430",
+     "team": "MHT",
+     "pos": "LW",
+     "gp": 19,
+     "value": 73,
+     "g": 41,
+     "a": 32,
+     "pts": 73,
+     "plus_minus": 36
+    },
+    {
+     "player": "I Hxntz I",
+     "team": "TCA",
+     "pos": "LW",
+     "gp": 19,
+     "value": 73,
+     "g": 40,
+     "a": 33,
+     "pts": 73,
+     "plus_minus": 43
+    },
+    {
+     "player": "I2sweat97",
+     "team": "GUE",
+     "pos": "C",
+     "gp": 19,
+     "value": 71,
+     "g": 24,
+     "a": 47,
+     "pts": 71,
+     "plus_minus": 37
+    },
+    {
+     "player": "zXn-flizxq",
+     "team": "BAR",
+     "pos": "C",
+     "gp": 16,
+     "value": 69,
+     "g": 35,
+     "a": 34,
+     "pts": 69,
+     "plus_minus": 48
+    },
+    {
+     "player": "chasepidgeon.",
+     "team": "MHT",
+     "pos": "RW",
+     "gp": 19,
+     "value": 69,
+     "g": 34,
+     "a": 35,
+     "pts": 69,
+     "plus_minus": 36
+    },
+    {
+     "player": "xKUUZ",
+     "team": "SPO",
+     "pos": "LW",
+     "gp": 17,
+     "value": 68,
+     "g": 31,
+     "a": 37,
+     "pts": 68,
+     "plus_minus": 40
+    },
+    {
+     "player": "xBPx 91",
+     "team": "BFD",
+     "pos": "RW",
+     "gp": 19,
+     "value": 68,
+     "g": 30,
+     "a": 38,
+     "pts": 68,
+     "plus_minus": 14
+    },
+    {
+     "player": "Local Skuzzy",
+     "team": "DRU",
+     "pos": "RW",
+     "gp": 19,
+     "value": 68,
+     "g": 28,
+     "a": 40,
+     "pts": 68,
+     "plus_minus": 49
+    },
+    {
+     "player": "K inG x NeymaR",
+     "team": "PAR",
+     "pos": "RW",
+     "gp": 19,
+     "value": 67,
+     "g": 37,
+     "a": 30,
+     "pts": 67,
+     "plus_minus": 46
+    },
+    {
+     "player": "ToughCutsYT",
+     "team": "MON",
+     "pos": "RW",
+     "gp": 19,
+     "value": 66,
+     "g": 29,
+     "a": 37,
+     "pts": 66,
+     "plus_minus": 12
+    },
+    {
+     "player": "malekxx94",
+     "team": "HFX",
+     "pos": "LW",
+     "gp": 19,
+     "value": 66,
+     "g": 34,
+     "a": 32,
+     "pts": 66,
+     "plus_minus": -12
+    },
+    {
+     "player": "MJ l19l",
+     "team": "SSM",
+     "pos": "RW",
+     "gp": 18,
+     "value": 65,
+     "g": 31,
+     "a": 34,
+     "pts": 65,
+     "plus_minus": 20
+    },
+    {
+     "player": "Super__Goalie_",
+     "team": "RDR",
+     "pos": "RW",
+     "gp": 19,
+     "value": 65,
+     "g": 35,
+     "a": 30,
+     "pts": 65,
+     "plus_minus": 17
+    },
+    {
+     "player": "vybin0095",
+     "team": "BFD",
+     "pos": "LW",
+     "gp": 19,
+     "value": 65,
+     "g": 36,
+     "a": 29,
+     "pts": 65,
+     "plus_minus": -4
+    }
+   ]
+  },
+  "g": {
+   "label": "Goals",
+   "rows": [
+    {
+     "player": "bilodxau",
+     "team": "RIM",
+     "pos": "RW",
+     "gp": 19,
+     "value": 58,
+     "g": 58,
+     "a": 44,
+     "pts": 102,
+     "plus_minus": 80
+    },
+    {
+     "player": "oettysznn",
+     "team": "BAR",
+     "pos": "RW",
+     "gp": 19,
+     "value": 50,
+     "g": 50,
+     "a": 38,
+     "pts": 88,
+     "plus_minus": 52
+    },
+    {
+     "player": "Local Booz",
+     "team": "DRU",
+     "pos": "LW",
+     "gp": 19,
+     "value": 50,
+     "g": 50,
+     "a": 35,
+     "pts": 85,
+     "plus_minus": 49
+    },
+    {
+     "player": "DirtyDangler82",
+     "team": "BFD",
+     "pos": "RW",
+     "gp": 19,
+     "value": 43,
+     "g": 43,
+     "a": 31,
+     "pts": 74,
+     "plus_minus": 15
+    },
+    {
+     "player": "K-Parks88",
+     "team": "FLT",
+     "pos": "LW",
+     "gp": 18,
+     "value": 41,
+     "g": 41,
+     "a": 23,
+     "pts": 64,
+     "plus_minus": 4
+    },
+    {
+     "player": "Borzy0430",
+     "team": "MHT",
+     "pos": "LW",
+     "gp": 19,
+     "value": 41,
+     "g": 41,
+     "a": 32,
+     "pts": 73,
+     "plus_minus": 36
+    },
+    {
+     "player": "I Hxntz I",
+     "team": "TCA",
+     "pos": "LW",
+     "gp": 19,
+     "value": 40,
+     "g": 40,
+     "a": 33,
+     "pts": 73,
+     "plus_minus": 43
+    },
+    {
+     "player": "MeNoThatGood",
+     "team": "QUE",
+     "pos": "RW",
+     "gp": 19,
+     "value": 40,
+     "g": 40,
+     "a": 21,
+     "pts": 61,
+     "plus_minus": -19
+    },
+    {
+     "player": "FellDownAWell04",
+     "team": "SBY",
+     "pos": "C",
+     "gp": 19,
+     "value": 39,
+     "g": 39,
+     "a": 23,
+     "pts": 62,
+     "plus_minus": 12
+    },
+    {
+     "player": "Hypo Savvy",
+     "team": "SAG",
+     "pos": "LW",
+     "gp": 19,
+     "value": 39,
+     "g": 39,
+     "a": 19,
+     "pts": 58,
+     "plus_minus": 34
+    },
+    {
+     "player": "Bybdouce",
+     "team": "MHT",
+     "pos": "LW",
+     "gp": 18,
+     "value": 38,
+     "g": 38,
+     "a": 21,
+     "pts": 59,
+     "plus_minus": 22
+    },
+    {
+     "player": "K inG x NeymaR",
+     "team": "PAR",
+     "pos": "RW",
+     "gp": 19,
+     "value": 37,
+     "g": 37,
+     "a": 30,
+     "pts": 67,
+     "plus_minus": 46
+    },
+    {
+     "player": "vybin0095",
+     "team": "BFD",
+     "pos": "LW",
+     "gp": 19,
+     "value": 36,
+     "g": 36,
+     "a": 29,
+     "pts": 65,
+     "plus_minus": -4
+    },
+    {
+     "player": "zXn-flizxq",
+     "team": "BAR",
+     "pos": "C",
+     "gp": 16,
+     "value": 35,
+     "g": 35,
+     "a": 34,
+     "pts": 69,
+     "plus_minus": 48
+    },
+    {
+     "player": "D333slau09",
+     "team": "NBB",
+     "pos": "LW",
+     "gp": 17,
+     "value": 35,
+     "g": 35,
+     "a": 18,
+     "pts": 53,
+     "plus_minus": 24
+    }
+   ]
+  },
+  "a": {
+   "label": "Assists",
+   "rows": [
+    {
+     "player": "jxythegoat.",
+     "team": "RIM",
+     "pos": "C",
+     "gp": 19,
+     "value": 60,
+     "g": 22,
+     "a": 60,
+     "pts": 82,
+     "plus_minus": 73
+    },
+    {
+     "player": "Nash--61",
+     "team": "TCA",
+     "pos": "RW",
+     "gp": 19,
+     "value": 53,
+     "g": 23,
+     "a": 53,
+     "pts": 76,
+     "plus_minus": 43
+    },
+    {
+     "player": "I2sweat97",
+     "team": "GUE",
+     "pos": "C",
+     "gp": 19,
+     "value": 47,
+     "g": 24,
+     "a": 47,
+     "pts": 71,
+     "plus_minus": 37
+    },
+    {
+     "player": "bilodxau",
+     "team": "RIM",
+     "pos": "RW",
+     "gp": 19,
+     "value": 44,
+     "g": 58,
+     "a": 44,
+     "pts": 102,
+     "plus_minus": 80
+    },
+    {
+     "player": "cornball73386",
+     "team": "CBE",
+     "pos": "LW",
+     "gp": 19,
+     "value": 43,
+     "g": 18,
+     "a": 43,
+     "pts": 61,
+     "plus_minus": -3
+    },
+    {
+     "player": "LIowkey",
+     "team": "NBB",
+     "pos": "RW",
+     "gp": 16,
+     "value": 41,
+     "g": 22,
+     "a": 41,
+     "pts": 63,
+     "plus_minus": 32
+    },
+    {
+     "player": "jxppyy",
+     "team": "BAR",
+     "pos": "LW",
+     "gp": 16,
+     "value": 41,
+     "g": 20,
+     "a": 41,
+     "pts": 61,
+     "plus_minus": 46
+    },
+    {
+     "player": "Beauregard03",
+     "team": "GUE",
+     "pos": "RW",
+     "gp": 19,
+     "value": 41,
+     "g": 19,
+     "a": 41,
+     "pts": 60,
+     "plus_minus": 24
+    },
+    {
+     "player": "Local Skuzzy",
+     "team": "DRU",
+     "pos": "RW",
+     "gp": 19,
+     "value": 40,
+     "g": 28,
+     "a": 40,
+     "pts": 68,
+     "plus_minus": 49
+    },
+    {
+     "player": "Axdoul i9i",
+     "team": "BLB",
+     "pos": "RW",
+     "gp": 19,
+     "value": 40,
+     "g": 15,
+     "a": 40,
+     "pts": 55,
+     "plus_minus": 13
+    },
+    {
+     "player": "CGio59",
+     "team": "FLT",
+     "pos": "RW",
+     "gp": 18,
+     "value": 38,
+     "g": 22,
+     "a": 38,
+     "pts": 60,
+     "plus_minus": 3
+    },
+    {
+     "player": "oettysznn",
+     "team": "BAR",
+     "pos": "RW",
+     "gp": 19,
+     "value": 38,
+     "g": 50,
+     "a": 38,
+     "pts": 88,
+     "plus_minus": 52
+    },
+    {
+     "player": "xBPx 91",
+     "team": "BFD",
+     "pos": "RW",
+     "gp": 19,
+     "value": 38,
+     "g": 30,
+     "a": 38,
+     "pts": 68,
+     "plus_minus": 14
+    },
+    {
+     "player": "Bxbbzz",
+     "team": "SCB",
+     "pos": "RW",
+     "gp": 19,
+     "value": 38,
+     "g": 16,
+     "a": 38,
+     "pts": 54,
+     "plus_minus": 11
+    },
+    {
+     "player": "Kxprizovvv",
+     "team": "SAR",
+     "pos": "C",
+     "gp": 19,
+     "value": 38,
+     "g": 16,
+     "a": 38,
+     "pts": 54,
+     "plus_minus": 32
+    }
+   ]
+  },
+  "pm": {
+   "label": "Plus/minus",
+   "rows": [
+    {
+     "player": "bilodxau",
+     "team": "RIM",
+     "pos": "RW",
+     "gp": 19,
+     "value": 80,
+     "g": 58,
+     "a": 44,
+     "pts": 102,
+     "plus_minus": 80
+    },
+    {
+     "player": "jxythegoat.",
+     "team": "RIM",
+     "pos": "C",
+     "gp": 19,
+     "value": 73,
+     "g": 22,
+     "a": 60,
+     "pts": 82,
+     "plus_minus": 73
+    },
+    {
+     "player": "WHITE CASTLE286",
+     "team": "RIM",
+     "pos": "LD",
+     "gp": 18,
+     "value": 60,
+     "g": 2,
+     "a": 25,
+     "pts": 27,
+     "plus_minus": 60
+    },
+    {
+     "player": "Landshark3808",
+     "team": "RIM",
+     "pos": "RD",
+     "gp": 17,
+     "value": 59,
+     "g": 1,
+     "a": 28,
+     "pts": 29,
+     "plus_minus": 59
+    },
+    {
+     "player": "Heat Daddyy",
+     "team": "DRU",
+     "pos": "RD",
+     "gp": 19,
+     "value": 53,
+     "g": 3,
+     "a": 24,
+     "pts": 27,
+     "plus_minus": 53
+    },
+    {
+     "player": "oettysznn",
+     "team": "BAR",
+     "pos": "RW",
+     "gp": 19,
+     "value": 52,
+     "g": 50,
+     "a": 38,
+     "pts": 88,
+     "plus_minus": 52
+    },
+    {
+     "player": "redz_shifterr",
+     "team": "VIC",
+     "pos": "RW",
+     "gp": 18,
+     "value": 50,
+     "g": 28,
+     "a": 29,
+     "pts": 57,
+     "plus_minus": 50
+    },
+    {
+     "player": "Cynical0625",
+     "team": "VIC",
+     "pos": "LD",
+     "gp": 18,
+     "value": 50,
+     "g": 1,
+     "a": 15,
+     "pts": 16,
+     "plus_minus": 50
+    },
+    {
+     "player": "ProximalAbyss41",
+     "team": "VIC",
+     "pos": "RW",
+     "gp": 18,
+     "value": 49,
+     "g": 21,
+     "a": 35,
+     "pts": 56,
+     "plus_minus": 49
+    },
+    {
+     "player": "pickmasta",
+     "team": "VIC",
+     "pos": "LD",
+     "gp": 18,
+     "value": 49,
+     "g": 8,
+     "a": 37,
+     "pts": 45,
+     "plus_minus": 49
+    }
+   ]
+  },
+  "hits": {
+   "label": "Hits",
+   "rows": [
+    {
+     "player": "BosomeMustache",
+     "team": "FLT",
+     "pos": "RW",
+     "gp": 19,
+     "value": 214,
+     "g": 16,
+     "a": 32,
+     "pts": 48,
+     "plus_minus": 7
+    },
+    {
+     "player": "superchimp99",
+     "team": "NFD",
+     "pos": "C",
+     "gp": 15,
+     "value": 197,
+     "g": 13,
+     "a": 24,
+     "pts": 37,
+     "plus_minus": -19
+    },
+    {
+     "player": "Swizz Wrld",
+     "team": "SSM",
+     "pos": "LW",
+     "gp": 19,
+     "value": 193,
+     "g": 22,
+     "a": 23,
+     "pts": 45,
+     "plus_minus": 24
+    },
+    {
+     "player": "TazzFalcon",
+     "team": "WEN",
+     "pos": "C",
+     "gp": 18,
+     "value": 178,
+     "g": 11,
+     "a": 12,
+     "pts": 23,
+     "plus_minus": -13
+    },
+    {
+     "player": "Tibbytwo",
+     "team": "PGC",
+     "pos": "RD",
+     "gp": 19,
+     "value": 173,
+     "g": 2,
+     "a": 11,
+     "pts": 13,
+     "plus_minus": 8
+    },
+    {
+     "player": "YummierScarab46",
+     "team": "NFD",
+     "pos": "C",
+     "gp": 15,
+     "value": 169,
+     "g": 10,
+     "a": 15,
+     "pts": 25,
+     "plus_minus": -9
+    },
+    {
+     "player": "stonemaniac",
+     "team": "RNH",
+     "pos": "LW",
+     "gp": 19,
+     "value": 143,
+     "g": 14,
+     "a": 20,
+     "pts": 34,
+     "plus_minus": 13
+    },
+    {
+     "player": "MegajerX",
+     "team": "ERI",
+     "pos": "C",
+     "gp": 18,
+     "value": 141,
+     "g": 10,
+     "a": 22,
+     "pts": 32,
+     "plus_minus": -17
+    },
+    {
+     "player": "BigSadBruins",
+     "team": "BDN",
+     "pos": "LW",
+     "gp": 19,
+     "value": 141,
+     "g": 18,
+     "a": 17,
+     "pts": 35,
+     "plus_minus": -15
+    },
+    {
+     "player": "mrmagoo",
+     "team": "EDM",
+     "pos": "C",
+     "gp": 19,
+     "value": 133,
+     "g": 13,
+     "a": 25,
+     "pts": 38,
+     "plus_minus": 7
+    }
+   ]
+  },
+  "gwg": {
+   "label": "Game-winning goals",
+   "rows": [
+    {
+     "player": "delucadx",
+     "team": "PEN",
+     "pos": "LW",
+     "gp": 17,
+     "value": 9,
+     "g": 29,
+     "a": 14,
+     "pts": 43,
+     "plus_minus": 15
+    },
+    {
+     "player": "Local Booz",
+     "team": "DRU",
+     "pos": "LW",
+     "gp": 19,
+     "value": 9,
+     "g": 50,
+     "a": 35,
+     "pts": 85,
+     "plus_minus": 49
+    },
+    {
+     "player": "Duggan4204",
+     "team": "RNH",
+     "pos": "RW",
+     "gp": 19,
+     "value": 9,
+     "g": 22,
+     "a": 19,
+     "pts": 41,
+     "plus_minus": 13
+    },
+    {
+     "player": "bilodxau",
+     "team": "RIM",
+     "pos": "RW",
+     "gp": 19,
+     "value": 8,
+     "g": 58,
+     "a": 44,
+     "pts": 102,
+     "plus_minus": 80
+    },
+    {
+     "player": "I Hxntz I",
+     "team": "TCA",
+     "pos": "LW",
+     "gp": 19,
+     "value": 7,
+     "g": 40,
+     "a": 33,
+     "pts": 73,
+     "plus_minus": 43
+    },
+    {
+     "player": "Super__Goalie_",
+     "team": "RDR",
+     "pos": "RW",
+     "gp": 19,
+     "value": 7,
+     "g": 35,
+     "a": 30,
+     "pts": 65,
+     "plus_minus": 17
+    },
+    {
+     "player": "speed000racer.",
+     "team": "HFX",
+     "pos": "RW",
+     "gp": 19,
+     "value": 7,
+     "g": 32,
+     "a": 30,
+     "pts": 62,
+     "plus_minus": 19
+    },
+    {
+     "player": "STL Jorge",
+     "team": "SPO",
+     "pos": "RW",
+     "gp": 19,
+     "value": 7,
+     "g": 27,
+     "a": 25,
+     "pts": 52,
+     "plus_minus": 24
+    },
+    {
+     "player": "CaptainFrat591",
+     "team": "PAR",
+     "pos": "C",
+     "gp": 19,
+     "value": 7,
+     "g": 21,
+     "a": 31,
+     "pts": 52,
+     "plus_minus": 23
+    },
+    {
+     "player": "Philartmony",
+     "team": "RDR",
+     "pos": "LW",
+     "gp": 19,
+     "value": 7,
+     "g": 21,
+     "a": 30,
+     "pts": 51,
+     "plus_minus": 2
+    }
+   ]
+  },
+  "ta": {
+   "label": "Takeaways",
+   "rows": [
+    {
+     "player": "FuZe Danglzz",
+     "team": "CBE",
+     "pos": "RD",
+     "gp": 18,
+     "value": 108,
+     "g": 5,
+     "a": 21,
+     "pts": 26,
+     "plus_minus": -3
+    },
+    {
+     "player": "Landshark3808",
+     "team": "RIM",
+     "pos": "RD",
+     "gp": 17,
+     "value": 103,
+     "g": 1,
+     "a": 28,
+     "pts": 29,
+     "plus_minus": 59
+    },
+    {
+     "player": "RapidCalf217667",
+     "team": "SSM",
+     "pos": "LD",
+     "gp": 19,
+     "value": 94,
+     "g": 0,
+     "a": 22,
+     "pts": 22,
+     "plus_minus": 20
+    },
+    {
+     "player": "ImSoTricky84",
+     "team": "KIT",
+     "pos": "LD",
+     "gp": 19,
+     "value": 93,
+     "g": 2,
+     "a": 17,
+     "pts": 19,
+     "plus_minus": -5
+    },
+    {
+     "player": "Scarffiie",
+     "team": "NIA",
+     "pos": "RD",
+     "gp": 19,
+     "value": 92,
+     "g": 3,
+     "a": 22,
+     "pts": 25,
+     "plus_minus": 3
+    },
+    {
+     "player": "AngelicLlama306",
+     "team": "ERI",
+     "pos": "LD",
+     "gp": 19,
+     "value": 92,
+     "g": 0,
+     "a": 19,
+     "pts": 19,
+     "plus_minus": 22
+    },
+    {
+     "player": "twoP3RC3NTmilk",
+     "team": "LET",
+     "pos": "LD",
+     "gp": 19,
+     "value": 92,
+     "g": 0,
+     "a": 10,
+     "pts": 10,
+     "plus_minus": -34
+    },
+    {
+     "player": "pickmasta",
+     "team": "VIC",
+     "pos": "LD",
+     "gp": 18,
+     "value": 90,
+     "g": 8,
+     "a": 37,
+     "pts": 45,
+     "plus_minus": 49
+    },
+    {
+     "player": "WhyKayWins",
+     "team": "CGY",
+     "pos": "LD",
+     "gp": 19,
+     "value": 89,
+     "g": 2,
+     "a": 34,
+     "pts": 36,
+     "plus_minus": 30
+    },
+    {
+     "player": "L51lzeus",
+     "team": "PEN",
+     "pos": "RD",
+     "gp": 19,
+     "value": 86,
+     "g": 5,
+     "a": 16,
+     "pts": 21,
+     "plus_minus": 6
+    }
+   ]
+  },
+  "int": {
+   "label": "Interceptions",
+   "rows": [
+    {
+     "player": "FuZe Danglzz",
+     "team": "CBE",
+     "pos": "RD",
+     "gp": 18,
+     "value": 45,
+     "g": 5,
+     "a": 21,
+     "pts": 26,
+     "plus_minus": -3
+    },
+    {
+     "player": "JWedgy",
+     "team": "BLB",
+     "pos": "RD",
+     "gp": 19,
+     "value": 45,
+     "g": 3,
+     "a": 20,
+     "pts": 23,
+     "plus_minus": 13
+    },
+    {
+     "player": "Pufski",
+     "team": "PEN",
+     "pos": "RD",
+     "gp": 17,
+     "value": 44,
+     "g": 4,
+     "a": 23,
+     "pts": 27,
+     "plus_minus": 15
+    },
+    {
+     "player": "Yhasis",
+     "team": "PEN",
+     "pos": "LD",
+     "gp": 19,
+     "value": 41,
+     "g": 2,
+     "a": 24,
+     "pts": 26,
+     "plus_minus": 27
+    },
+    {
+     "player": "AngelicLlama306",
+     "team": "ERI",
+     "pos": "LD",
+     "gp": 19,
+     "value": 41,
+     "g": 0,
+     "a": 19,
+     "pts": 19,
+     "plus_minus": 22
+    },
+    {
+     "player": "Kelatoz",
+     "team": "VAN",
+     "pos": "LD",
+     "gp": 17,
+     "value": 40,
+     "g": 1,
+     "a": 19,
+     "pts": 20,
+     "plus_minus": -6
+    },
+    {
+     "player": "DODGEredneck69",
+     "team": "PBO",
+     "pos": "LW",
+     "gp": 19,
+     "value": 39,
+     "g": 20,
+     "a": 32,
+     "pts": 52,
+     "plus_minus": 12
+    },
+    {
+     "player": "Shaneomac381",
+     "team": "HFX",
+     "pos": "LW",
+     "gp": 19,
+     "value": 39,
+     "g": 29,
+     "a": 18,
+     "pts": 47,
+     "plus_minus": 7
+    },
+    {
+     "player": "meatloafsoup",
+     "team": "BDN",
+     "pos": "C",
+     "gp": 19,
+     "value": 38,
+     "g": 14,
+     "a": 21,
+     "pts": 35,
+     "plus_minus": -14
+    },
+    {
+     "player": "Styles007Qc",
+     "team": "CHI",
+     "pos": "RD",
+     "gp": 19,
+     "value": 38,
+     "g": 0,
+     "a": 18,
+     "pts": 18,
+     "plus_minus": 6
+    }
+   ]
+  },
+  "b": {
+   "label": "Blocked shots",
+   "rows": [
+    {
+     "player": "FuZe Danglzz",
+     "team": "CBE",
+     "pos": "RD",
+     "gp": 18,
+     "value": 43,
+     "g": 5,
+     "a": 21,
+     "pts": 26,
+     "plus_minus": -3
+    },
+    {
+     "player": "A DefiantTurtle",
+     "team": "SPO",
+     "pos": "RD",
+     "gp": 19,
+     "value": 43,
+     "g": 1,
+     "a": 23,
+     "pts": 24,
+     "plus_minus": 36
+    },
+    {
+     "player": "Unh0lyxSn1pe",
+     "team": "SPO",
+     "pos": "RD",
+     "gp": 19,
+     "value": 41,
+     "g": 1,
+     "a": 15,
+     "pts": 16,
+     "plus_minus": 2
+    },
+    {
+     "player": "ultimate0joe",
+     "team": "REG",
+     "pos": "RD",
+     "gp": 18,
+     "value": 40,
+     "g": 1,
+     "a": 14,
+     "pts": 15,
+     "plus_minus": -35
+    },
+    {
+     "player": "CrabRangoon23",
+     "team": "BDN",
+     "pos": "RD",
+     "gp": 19,
+     "value": 40,
+     "g": 2,
+     "a": 14,
+     "pts": 16,
+     "plus_minus": 1
+    },
+    {
+     "player": "EazyBreezy_91",
+     "team": "SJS",
+     "pos": "RD",
+     "gp": 19,
+     "value": 40,
+     "g": 2,
+     "a": 12,
+     "pts": 14,
+     "plus_minus": 3
+    },
+    {
+     "player": "Styles007Qc",
+     "team": "CHI",
+     "pos": "RD",
+     "gp": 19,
+     "value": 38,
+     "g": 0,
+     "a": 18,
+     "pts": 18,
+     "plus_minus": 6
+    },
+    {
+     "player": "Evildoink666",
+     "team": "OSH",
+     "pos": "LD",
+     "gp": 19,
+     "value": 38,
+     "g": 0,
+     "a": 12,
+     "pts": 12,
+     "plus_minus": -35
+    },
+    {
+     "player": "imona_plain",
+     "team": "CGY",
+     "pos": "LD",
+     "gp": 19,
+     "value": 38,
+     "g": 1,
+     "a": 9,
+     "pts": 10,
+     "plus_minus": 11
+    },
+    {
+     "player": "JWedgy",
+     "team": "BLB",
+     "pos": "RD",
+     "gp": 19,
+     "value": 37,
+     "g": 3,
+     "a": 20,
+     "pts": 23,
+     "plus_minus": 13
+    }
+   ]
+  },
+  "d_pts": {
+   "label": "Defencemen: points",
+   "rows": [
+    {
+     "player": "pickmasta",
+     "team": "VIC",
+     "pos": "LD",
+     "gp": 18,
+     "value": 45,
+     "g": 8,
+     "a": 37,
+     "pts": 45,
+     "plus_minus": 49
+    },
+    {
+     "player": "aCanadianGamer",
+     "team": "BRM",
+     "pos": "LD",
+     "gp": 18,
+     "value": 36,
+     "g": 6,
+     "a": 30,
+     "pts": 36,
+     "plus_minus": 33
+    },
+    {
+     "player": "WhyKayWins",
+     "team": "CGY",
+     "pos": "LD",
+     "gp": 19,
+     "value": 36,
+     "g": 2,
+     "a": 34,
+     "pts": 36,
+     "plus_minus": 30
+    },
+    {
+     "player": "Spicy-Big-Dad-9",
+     "team": "DRU",
+     "pos": "LD",
+     "gp": 19,
+     "value": 35,
+     "g": 2,
+     "a": 33,
+     "pts": 35,
+     "plus_minus": 48
+    },
+    {
+     "player": "FellaFactory",
+     "team": "BAR",
+     "pos": "LD",
+     "gp": 16,
+     "value": 34,
+     "g": 2,
+     "a": 32,
+     "pts": 34,
+     "plus_minus": 44
+    },
+    {
+     "player": "JJBrewer16",
+     "team": "PAR",
+     "pos": "LD",
+     "gp": 19,
+     "value": 34,
+     "g": 4,
+     "a": 30,
+     "pts": 34,
+     "plus_minus": 44
+    },
+    {
+     "player": "Gunnar5tahl6480",
+     "team": "TCA",
+     "pos": "RD",
+     "gp": 19,
+     "value": 33,
+     "g": 5,
+     "a": 28,
+     "pts": 33,
+     "plus_minus": 42
+    },
+    {
+     "player": "Tbush10",
+     "team": "OSA",
+     "pos": "RD",
+     "gp": 16,
+     "value": 32,
+     "g": 2,
+     "a": 30,
+     "pts": 32,
+     "plus_minus": 4
+    },
+    {
+     "player": "RaphieMm4",
+     "team": "ERI",
+     "pos": "RD",
+     "gp": 19,
+     "value": 31,
+     "g": 5,
+     "a": 26,
+     "pts": 31,
+     "plus_minus": 9
+    },
+    {
+     "player": "caucasiansensation",
+     "team": "TCA",
+     "pos": "LD",
+     "gp": 19,
+     "value": 30,
+     "g": 1,
+     "a": 29,
+     "pts": 30,
+     "plus_minus": 43
+    }
+   ]
+  },
+  "pm_low": {
+   "label": "Plus/minus (lowest)",
+   "rows": [
+    {
+     "player": "OPGMshadow",
+     "team": "REG",
+     "pos": "LW",
+     "gp": 19,
+     "plus_minus": -65
+    },
+    {
+     "player": "Gage0906",
+     "team": "REG",
+     "pos": "C",
+     "gp": 19,
+     "plus_minus": -65
+    },
+    {
+     "player": "LeBig74358",
+     "team": "NFD",
+     "pos": "LD",
+     "gp": 16,
+     "plus_minus": -65
+    },
+    {
+     "player": "Spartan24warrior",
+     "team": "REG",
+     "pos": "RW",
+     "gp": 19,
+     "plus_minus": -58
+    },
+    {
+     "player": "EK Metal",
+     "team": "REG",
+     "pos": "RW",
+     "gp": 19,
+     "plus_minus": -55
+    }
+   ]
+  },
+  "g_w": {
+   "label": "Goalies: wins",
+   "rows": [
+    {
+     "player": "Stolikerr",
+     "team": "PAR",
+     "gp": 38,
+     "w": 28,
+     "l": 8,
+     "otl": 2,
+     "save_pct": 0.832,
+     "gaa": 2.32,
+     "so": 3
+    },
+    {
+     "player": "dunzy9510",
+     "team": "SPO",
+     "gp": 38,
+     "w": 27,
+     "l": 9,
+     "otl": 2,
+     "save_pct": 0.866,
+     "gaa": 2.09,
+     "so": 3
+    },
+    {
+     "player": "Rshawzie",
+     "team": "PGC",
+     "gp": 31,
+     "w": 24,
+     "l": 7,
+     "otl": 0,
+     "save_pct": 0.83,
+     "gaa": 2.79,
+     "so": 2
+    },
+    {
+     "player": "Lunaetiik",
+     "team": "RIM",
+     "gp": 36,
+     "w": 24,
+     "l": 11,
+     "otl": 1,
+     "save_pct": 0.851,
+     "gaa": 2.15,
+     "so": 5
+    },
+    {
+     "player": "zombi3_4_lif3",
+     "team": "SHE",
+     "gp": 38,
+     "w": 23,
+     "l": 10,
+     "otl": 5,
+     "save_pct": 0.867,
+     "gaa": 2.19,
+     "so": 3
+    },
+    {
+     "player": "terryeh23",
+     "team": "TCA",
+     "gp": 30,
+     "w": 22,
+     "l": 7,
+     "otl": 1,
+     "save_pct": 0.815,
+     "gaa": 2.59,
+     "so": 1
+    },
+    {
+     "player": "XxGuentzel59xX",
+     "team": "BRM",
+     "gp": 37,
+     "w": 22,
+     "l": 11,
+     "otl": 4,
+     "save_pct": 0.812,
+     "gaa": 2.94,
+     "so": 3
+    },
+    {
+     "player": "Trixinity1",
+     "team": "BAR",
+     "gp": 26,
+     "w": 21,
+     "l": 3,
+     "otl": 2,
+     "save_pct": 0.824,
+     "gaa": 2.5,
+     "so": 2
+    },
+    {
+     "player": "PeakzReturn",
+     "team": "PEN",
+     "gp": 29,
+     "w": 21,
+     "l": 7,
+     "otl": 1,
+     "save_pct": 0.854,
+     "gaa": 2.44,
+     "so": 3
+    },
+    {
+     "player": "Philliesgreat08",
+     "team": "SSM",
+     "gp": 31,
+     "w": 21,
+     "l": 9,
+     "otl": 1,
+     "save_pct": 0.852,
+     "gaa": 2.32,
+     "so": 1
+    }
+   ]
+  },
+  "g_sv": {
+   "label": "Goalies: save % (10+ GP)",
+   "rows": [
+    {
+     "player": "vlexx21",
+     "team": "SAG",
+     "gp": 22,
+     "w": 14,
+     "l": 4,
+     "otl": 4,
+     "save_pct": 0.869,
+     "gaa": 2.16,
+     "so": 1
+    },
+    {
+     "player": "zombi3_4_lif3",
+     "team": "SHE",
+     "gp": 38,
+     "w": 23,
+     "l": 10,
+     "otl": 5,
+     "save_pct": 0.867,
+     "gaa": 2.19,
+     "so": 3
+    },
+    {
+     "player": "dunzy9510",
+     "team": "SPO",
+     "gp": 38,
+     "w": 27,
+     "l": 9,
+     "otl": 2,
+     "save_pct": 0.866,
+     "gaa": 2.09,
+     "so": 3
+    },
+    {
+     "player": "NABOKOVx1995",
+     "team": "CHI",
+     "gp": 22,
+     "w": 14,
+     "l": 6,
+     "otl": 2,
+     "save_pct": 0.858,
+     "gaa": 2.39,
+     "so": 1
+    },
+    {
+     "player": "pemm",
+     "team": "SJS",
+     "gp": 31,
+     "w": 17,
+     "l": 10,
+     "otl": 4,
+     "save_pct": 0.855,
+     "gaa": 2.33,
+     "so": 3
+    },
+    {
+     "player": "PeakzReturn",
+     "team": "PEN",
+     "gp": 29,
+     "w": 21,
+     "l": 7,
+     "otl": 1,
+     "save_pct": 0.854,
+     "gaa": 2.44,
+     "so": 3
+    },
+    {
+     "player": "Philliesgreat08",
+     "team": "SSM",
+     "gp": 31,
+     "w": 21,
+     "l": 9,
+     "otl": 1,
+     "save_pct": 0.852,
+     "gaa": 2.32,
+     "so": 1
+    },
+    {
+     "player": "Lunaetiik",
+     "team": "RIM",
+     "gp": 36,
+     "w": 24,
+     "l": 11,
+     "otl": 1,
+     "save_pct": 0.851,
+     "gaa": 2.15,
+     "so": 5
+    },
+    {
+     "player": "Ted Teddy Bear",
+     "team": "HFX",
+     "gp": 24,
+     "w": 15,
+     "l": 7,
+     "otl": 2,
+     "save_pct": 0.851,
+     "gaa": 2.44,
+     "so": 1
+    },
+    {
+     "player": "Fil x 8",
+     "team": "BAR",
+     "gp": 10,
+     "w": 7,
+     "l": 2,
+     "otl": 1,
+     "save_pct": 0.85,
+     "gaa": 2.22,
+     "so": 2
+    }
+   ]
+  },
+  "g_gaa": {
+   "label": "Goalies: GAA (10+ GP)",
+   "rows": [
+    {
+     "player": "dunzy9510",
+     "team": "SPO",
+     "gp": 38,
+     "w": 27,
+     "l": 9,
+     "otl": 2,
+     "save_pct": 0.866,
+     "gaa": 2.09,
+     "so": 3
+    },
+    {
+     "player": "Lunaetiik",
+     "team": "RIM",
+     "gp": 36,
+     "w": 24,
+     "l": 11,
+     "otl": 1,
+     "save_pct": 0.851,
+     "gaa": 2.15,
+     "so": 5
+    },
+    {
+     "player": "vlexx21",
+     "team": "SAG",
+     "gp": 22,
+     "w": 14,
+     "l": 4,
+     "otl": 4,
+     "save_pct": 0.869,
+     "gaa": 2.16,
+     "so": 1
+    },
+    {
+     "player": "PRKz_Jugg",
+     "team": "SPO",
+     "gp": 16,
+     "w": 11,
+     "l": 5,
+     "otl": 0,
+     "save_pct": 0.845,
+     "gaa": 2.17,
+     "so": 1
+    },
+    {
+     "player": "zombi3_4_lif3",
+     "team": "SHE",
+     "gp": 38,
+     "w": 23,
+     "l": 10,
+     "otl": 5,
+     "save_pct": 0.867,
+     "gaa": 2.19,
+     "so": 3
+    },
+    {
+     "player": "Fil x 8",
+     "team": "BAR",
+     "gp": 10,
+     "w": 7,
+     "l": 2,
+     "otl": 1,
+     "save_pct": 0.85,
+     "gaa": 2.22,
+     "so": 2
+    },
+    {
+     "player": "bxuerrr",
+     "team": "RIM",
+     "gp": 12,
+     "w": 12,
+     "l": 3,
+     "otl": 0,
+     "save_pct": 0.837,
+     "gaa": 2.22,
+     "so": 1
+    },
+    {
+     "player": "EgregiousMonke",
+     "team": "SAG",
+     "gp": 22,
+     "w": 13,
+     "l": 7,
+     "otl": 2,
+     "save_pct": 0.838,
+     "gaa": 2.28,
+     "so": 2
+    },
+    {
+     "player": "Philliesgreat08",
+     "team": "SSM",
+     "gp": 31,
+     "w": 21,
+     "l": 9,
+     "otl": 1,
+     "save_pct": 0.852,
+     "gaa": 2.32,
+     "so": 1
+    },
+    {
+     "player": "Stolikerr",
+     "team": "PAR",
+     "gp": 38,
+     "w": 28,
+     "l": 8,
+     "otl": 2,
+     "save_pct": 0.832,
+     "gaa": 2.32,
+     "so": 3
+    }
+   ]
+  },
+  "g_so": {
+   "label": "Goalies: shutouts",
+   "rows": [
+    {
+     "player": "Lunaetiik",
+     "team": "RIM",
+     "gp": 36,
+     "so": 5
+    },
+    {
+     "player": "nothargi4200",
+     "team": "VIC",
+     "gp": 25,
+     "so": 5
+    },
+    {
+     "player": "NigelFromTinder",
+     "team": "SBY",
+     "gp": 31,
+     "so": 4
+    },
+    {
+     "player": "PapaDimez",
+     "team": "KGN",
+     "gp": 31,
+     "so": 4
+    },
+    {
+     "player": "KOLLER",
+     "team": "LET",
+     "gp": 28,
+     "so": 4
+    },
+    {
+     "player": "ladiesigodown2",
+     "team": "VIC",
+     "gp": 28,
+     "so": 4
+    },
+    {
+     "player": "zombi3_4_lif3",
+     "team": "SHE",
+     "gp": 38,
+     "so": 3
+    },
+    {
+     "player": "dunzy9510",
+     "team": "SPO",
+     "gp": 38,
+     "so": 3
+    }
+   ]
+  }
+ }
+}
