@@ -191,16 +191,26 @@
     return { night, list, skaters, goalies, goals, finals: Number(list[0]?.night_finals || 0), finalGoals: Number(list[0]?.night_final_goals || 0) };
   }
   // Verified jersey cutouts can be added by team ID. No fabricated uniforms.
-  const jerseyAssets = {448:'assets/lgchl/jerseys/team448.webp',447:'assets/lgchl/jerseys/team447.webp',449:'assets/lgchl/jerseys/team449.webp',455:'assets/lgchl/jerseys/team455.webp',...(window.LGCHL_JERSEY_ASSETS || {})};
+  const jerseyAssets = {448:'assets/lgchl/jerseys/team448.webp',447:'assets/lgchl/jerseys/team447.webp',449:'assets/lgchl/jerseys/team449.webp',455:'assets/lgchl/jerseys/team455.webp',399:'assets/lgchl/jerseys/team399.webp',419:'assets/lgchl/jerseys/team419.webp',2604:'assets/lgchl/jerseys/team2604.webp',375:'assets/lgchl/jerseys/team375.webp',...(window.LGCHL_JERSEY_ASSETS || {})};
   function honour(p, teams, rank) {
     const goalie = p.player_kind === 'goalie', team = teams.get(Number(p.lg_team_id));
     const crest = logo(p.lg_team_id), jersey = jerseyAssets[Number(p.lg_team_id)];
     const tag = goalie ? 'Goalie of the night' : ['First star', 'Second star', 'Third star'][rank - 1];
     const details = '<div class="lg-stall-stats" style="--team-logo:url(\'' + crest + '\')"><small>' + tag + '</small><h3>' + esc(p.gamertag) + '</h3><p>' + esc(p.position || (goalie ? 'G' : '')) + ' · ' + esc(team ? team.name : 'LGCHL') + '</p><strong>' + (goalie ? svOf(p).toFixed(3).replace(/^0/, '') + ' SV%' : esc(p.points) + ' PTS') + '</strong><p>' + (goalie ? esc(p.saves) + ' SAVES · ' + esc(p.goals_against) + ' GA' : esc(p.goals) + ' G · ' + esc(p.assists) + ' A · ' + sgn(p.plus_minus)) + ' · ' + esc(p.gp) + ' GP</p></div>';
     return '<article class="' + (goalie ? 'lg-goalie-honour' : 'lg-stall') + '" data-rank="' + rank + '"><div class="lg-stall-scene"><div class="lg-stall-name" title="' + esc(p.gamertag) + '">' + esc(p.gamertag) + '</div>' +
-      (jersey ? '<img class="lg-stall-jersey" src="' + esc(jersey) + '" alt="' + esc(team?.name || '') + ' jersey" loading="lazy">' : '<img class="lg-stall-crest" src="' + crest + '" alt="' + esc(team?.name || '') + '" loading="lazy">') +
+      (jersey ? '<img class="lg-stall-jersey" src="' + esc(jersey) + '" alt="' + esc(team?.name || '') + ' jersey" data-crest="' + crest + '" data-team="' + esc(team?.name || 'LGCHL') + '" loading="lazy">' : '<img class="lg-stall-crest" src="' + crest + '" alt="' + esc(team?.name || '') + '" loading="lazy">') +
       (goalie ? '<img class="lg-goalie-gear" src="assets/lgchl/studio/goalie-equipment-v2.webp" alt="Goalie pads, mask, blocker, catching glove and stick" loading="lazy">' : '<div class="lg-stall-stars" aria-label="' + tag + '">' + '★'.repeat(4-rank) + '</div>') + '</div>' + details + '</article>';
   }
+  const nightPlayers = $('lgNightPlayers');
+  nightPlayers?.addEventListener?.('error', event => {
+    const image = event.target;
+    if (!image?.classList?.contains('lg-stall-jersey') || !image.dataset.crest) return;
+    const crest = image.dataset.crest;
+    image.className = 'lg-stall-crest';
+    image.alt = image.dataset.team;
+    delete image.dataset.crest;
+    image.src = crest;
+  }, true);
   async function renderNight(teams) {
     const box = $('lgNightPlayers'); if (!box) return;
     let rows = [];
