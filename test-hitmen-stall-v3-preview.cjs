@@ -133,13 +133,13 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       await page.waitForFunction(()=>document.getElementById('playerTitle')?.textContent==='Fixture Active');
       const scene=page.locator('#stallScene .v3-stage');
       assert.equal(await scene.count(),1,'V3 side-by-side scene present');
-      assert.equal(await scene.locator('.v3-stall-panel').count(),2,'Two separate jersey panels');
-      assert.equal(await scene.locator('.v3-stall-panel.front').count(),1,'Front jersey present');
-      assert.equal(await scene.locator('.v3-stall-panel.back').count(),1,'Back jersey present');
-      for (const im of await scene.locator('.v3-photo').all()) {
-        await im.evaluate(img=>img.decode());
-        assert.ok(await im.evaluate(img=>img.naturalWidth>0),'Jersey photos load');
-      }
+      assert.equal(await scene.locator('.v3-master-photo').count(),1,'Approved photographic locker layer exists');
+      await scene.locator('.v3-master-photo').evaluate(img=>img.decode());
+      assert.ok(await scene.locator('.v3-master-photo').evaluate(img=>img.naturalWidth>=1086),'Correct high-resolution locker source loads');
+      assert.equal(await scene.locator('[data-v3="frontSleeve"]').count(),2,'Editable front jersey sleeve numbers');
+      assert.equal(await scene.locator('[data-v3="backSleeve"]').count(),2,'Editable back jersey sleeve numbers');
+      assert.equal(await scene.locator('[data-v3="jerseyName"]').count(),1,'Independent back jersey name layer');
+      assert.equal(await scene.locator('[data-v3="jerseyNumber"]').count(),1,'Independent back jersey number layer');
       assert.equal(await scene.locator('[data-v3="plateName"]').textContent(),'FIXTURE ACTIVE');
       assert.equal(await scene.locator('[data-v3="jerseyNumber"]').textContent(),'19');
       assert.equal(await page.locator('#profileGoals').innerText(),'1','Uses fixture report stats, no invented stats');
