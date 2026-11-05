@@ -5,6 +5,7 @@ const {esc,read}=D,$=id=>document.getElementById(id),params=new URLSearchParams(
 const raw=params.get('team'),team=raw===null?412:Number(raw);
 const valid=n=>Number.isSafeInteger(Number(n))&&Number(n)>0;
 if(!valid(team)){$('roomName').textContent='Team not found';['roomRecord','roomPlayers','roomFinals','roomUpcoming'].forEach(id=>$(id).textContent='Choose a team from league coverage.');$('roomPlayers').setAttribute('aria-busy','false');return;}
+document.body.classList.toggle('hitmen-room',team===412);
 const logo=id=>'assets/lgchl/s55/team'+Number(id)+'.png';
 const jerseyAssets={412:'assets/lgchl/jerseys/team412.webp',448:'assets/lgchl/jerseys/team448.webp',447:'assets/lgchl/jerseys/team447.webp',449:'assets/lgchl/jerseys/team449.webp',455:'assets/lgchl/jerseys/team455.webp',399:'assets/lgchl/jerseys/team399.webp',419:'assets/lgchl/jerseys/team419.webp',2604:'assets/lgchl/jerseys/team2604.webp',375:'assets/lgchl/jerseys/team375.webp'};
 const jersey=id=>jerseyAssets[Number(id)]||logo(id);
@@ -51,3 +52,4 @@ async function games(){
 }
 standings();roster();games();
 })();
+
