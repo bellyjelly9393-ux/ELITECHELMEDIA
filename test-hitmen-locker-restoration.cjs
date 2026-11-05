@@ -12,7 +12,7 @@ const TC='33333333-3333-4333-8333-333333333333';
 const root=process.cwd();
 const config=JSON.parse(fs.readFileSync('vercel.json','utf8'));
 assert.ok(!(config.redirects||[]).some(r=>r.source==='/hitmen-team-locker.html'),'Keep the existing full Lineup Lab reachable from its locker-room tool URL');
-const scripts=new Set(['management-guard.js','media-desk.js','hitmen-locker-shell.js','hitmen-team-locker.js','hitmen-stall-scene.js','hitmen-stall-upgrade.js','vod-review-model.js','hitmen-player-locker.js']);
+const scripts=new Set(['hitmen-team-locker-v3-preview.js','hitmen-stall-v3-preview.js','management-guard.js','media-desk.js','hitmen-locker-shell.js','hitmen-team-locker.js','hitmen-stall-scene.js','hitmen-stall-upgrade.js','vod-review-model.js','hitmen-player-locker.js']);
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff':'font/woff','.woff2':'font/woff2'};
 const server=http.createServer((req,res)=>{
   const url=new URL(req.url,'http://localhost');
@@ -115,7 +115,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
   await new Promise(r=>server.listen(0,'127.0.0.1',r));
   const origin='http://127.0.0.1:'+server.address().port;
   const browser=await chromium.launch({headless:true});
-  const screenshots=path.join(root,'artifacts/locker-stalls');
+  const screenshots=path.join(root,'artifacts/locker-stalls-live-v3');
   fs.mkdirSync(screenshots,{recursive:true});
   const errors=[];
   async function pageFor(width,options){
@@ -131,26 +131,31 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       const {page,context}=await pageFor(width);
       await page.goto(origin+'/hitmen-locker.html');
       assert.equal(new URL(page.url()).pathname,'/hitmen-locker.html');
+      assert.equal(await page.locator('body.v3-locker-live').count(),1,'Canonical team locker uses V3 design');
       assert.equal(await page.locator('header.top').count(),1,'Shared Headquarters header');
       assert.equal(await page.locator('nav.sub-bar a[aria-current="page"]').textContent(),'Locker Room');
       assert.equal(await page.locator('script[src*="hitmen-rooms.js"]').count(),0,'Use original full locker controller');
-      await page.waitForSelector('#lockerRoster .hs-stall');
-      assert.equal(await page.locator('#lockerRoster .hs-stall').count(),2,'Active roster photo stalls');
-      assert.equal(await page.locator('#lockerTcRoster .hs-stall').count(),2,'Both TC roster classes have stalls');
+      await page.waitForSelector('#lockerRoster .v3-room-jersey');
+      assert.equal(await page.locator('#lockerRoster .v3-room-jersey').count(),2,'Active roster photo stalls');
+      assert.equal(await page.locator('#lockerTcRoster .v3-room-jersey').count(),2,'Both TC roster classes have stalls');
       assert.equal(await page.locator('#lockerRosterCount').innerText(),'2');
       assert.equal(await page.locator('#lockerTcCount').innerText(),'2');
       assert.equal(await page.locator('.locker-stall').filter({hasText:'Fixture Archived'}).count(),0);
+      assert.match(await page.locator('.v3-roster-notice').innerText(),/ROSTER UPDATED/,'Current roster revision visible');
       assert.equal(await page.locator('#lockerRoster a').first().getAttribute('href'),'hitmen-stall.html?player='+OWN);
-      await page.locator('#lockerRoster .hs-img').first().scrollIntoViewIfNeeded();
-      await page.locator('#lockerRoster .hs-img').first().evaluate(img=>img.decode());
-      assert.ok(await page.locator('#lockerRoster .hs-img').first().evaluate(img=>img.naturalWidth>0),'Original stall art loads');
+      await page.locator('#lockerRoster .v3-master-photo').first().scrollIntoViewIfNeeded();
+      await page.locator('#lockerRoster .v3-master-photo').first().evaluate(img=>img.decode());
+      assert.ok(await page.locator('#lockerRoster .v3-master-photo').first().evaluate(img=>img.naturalWidth>0),'Approved double jersey artwork loads');
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Team room fits '+width);
       await page.locator('#hnRoomTitle').scrollIntoViewIfNeeded();
       await page.screenshot({path:path.join(screenshots,'team-'+width+'.png')});
       if([390,1440].includes(width))console.log('LOCKER_VISUAL team '+width+' '+(await page.screenshot({type:'jpeg',quality:50})).toString('base64'));
       await page.locator('#lockerRoster a').first().click();
       await page.waitForFunction(()=>document.getElementById('playerTitle').textContent==='Fixture Active');
-      await page.locator('#stallScene .hs-img').first().evaluate(img=>img.decode());
+      assert.equal(await page.locator('body.v3-live').count(),1,'Canonical My Stall uses V3 live design');
+      assert.equal(await page.locator('#stallScene .v3-master-photo').count(),1,'My Stall has two jerseys in approved master');
+      assert.match(await page.locator('.v3-preview-note').last().innerText(),/NOT saved/,'Equipment persistence is not misrepresented');
+      await page.locator('#stallScene .v3-master-photo').first().evaluate(img=>img.decode());
       await page.waitForSelector('#playerWeeklyReport [data-week-report]');
       assert.equal(await page.locator('#playerWeeklyReport [data-week-report]').count(),3,'Three weeks are navigable');
       assert.ok((await page.locator('#playerWeeklyReport').innerText()).includes('Week 3 test report'),'Newest weekly report displays first');
@@ -167,17 +172,19 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       assert.equal(await page.locator('#playerLineReports details').count(),2,'Older line history remains available');
       await page.locator('#playerLineReports details').last().locator('summary').click();
       assert.ok((await page.locator('#playerLineReports details').last().innerText()).includes('Older group context'),'Historic line report expands');
-      assert.equal(await page.locator('#stallScene .hs-name').innerText(),'FIXTURE ACTIVE');
-      assert.equal(await page.locator('#stallScene .hs-bnum').innerText(),'19');
-      await page.locator('#jerseyBackBtn').click();
-      assert.ok(await page.locator('#stallScene .hs-stall').evaluate(el=>el.classList.contains('is-back')),'Jersey flips');
+      assert.equal(await page.locator('#stallScene [data-v3="jerseyName"]').innerText(),'FIXTURE ACTIVE');
+      assert.equal(await page.locator('#stallScene [data-v3="jerseyNumber"]').innerText(),'19');
+      assert.equal(await page.locator('#stallScene .v3-master-photo').count(),1,'Live stall renders approved photographic double jersey');
+      assert.equal(await page.locator('#stallScene [data-v3="frontSleeve"]').count(),2,'Both front sleeve numbers are mounted');
+      assert.equal(await page.locator('#stallScene [data-v3="backSleeve"]').count(),2,'Both back sleeve numbers are mounted');
+      assert.equal(await page.locator('#stallScene .hs-stall').count(),0,'Legacy single jersey removed from live route');
       await page.locator('[data-stall-tab="settings"]').click();
       await page.locator('#jerseyNameInput').fill('UPDATED FIXTURE');
       await page.locator('#jerseyNumberInput').fill('27');
       await page.locator('#saveJersey').click();
       await page.waitForFunction(()=>document.getElementById('jerseySaveStatus').textContent.includes('Saved'));
-      assert.equal(await page.locator('#stallScene .hs-name').innerText(),'UPDATED FIXTURE');
-      assert.equal(await page.locator('#stallScene .hs-bnum').innerText(),'27');
+      assert.equal(await page.locator('#stallScene [data-v3="jerseyName"]').innerText(),'UPDATED FIXTURE');
+      assert.equal(await page.locator('#stallScene [data-v3="jerseyNumber"]').innerText(),'27');
       assert.equal(await page.locator('.hitmen-app-sidebar').count(),0,'No duplicate legacy sidebar');
       assert.equal(await page.locator('.sub-in a[aria-current="page"]').textContent(),'My Stall');
       assert.equal(await page.evaluate(()=>window.lockerFixture.writes.length),1,'One isolated customization write');
@@ -194,7 +201,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
     assert.equal(rooms.filter(p=>p==='hitmen-hq.html').length,1,'One merged headquarters destination');
     assert.equal(await shared.page.locator('#hitmen-live-session').count(),1,'Game-night War Room controls stay in Headquarters');
     await shared.page.goto(origin+'/hitmen-locker.html');
-    await shared.page.waitForSelector('#lockerRoster .hs-stall');
+    await shared.page.waitForSelector('#lockerRoster .v3-room-jersey');
     assert.deepEqual(await shared.page.locator('.sub-in a').evaluateAll(links=>links.map(a=>a.getAttribute('href'))),rooms,'Same room navigation as Headquarters');
     const readsBefore=await shared.page.evaluate(()=>window.lockerFixture.reads.length);
     await shared.page.evaluate(()=>{window.VVHLBackend.state.user=null;window.dispatchEvent(new Event('vvhl-auth-change'));});
@@ -216,7 +223,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
     }
     const owned=await pageFor(390,{role:'player'});
     await owned.page.goto(origin+'/hitmen-team-locker.html');
-    await owned.page.waitForSelector('#lockerRoster .hs-stall');
+    await owned.page.waitForSelector('#lockerRoster .v3-room-jersey');
     assert.equal(await owned.page.locator('#lockerRoster a').count(),1,'Player can open own stall only');
     await owned.page.goto(origin+'/hitmen-stall.html?player='+OTHER);
     await owned.page.waitForFunction(()=>document.getElementById('playerTitle').textContent==='Fixture Active');
@@ -233,6 +240,6 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       }
     }
     assert.deepEqual(errors,[],'No browser runtime errors');
-    console.log('PASS: restored aliases, canonical IDs and legacy links, active/TC photo stalls, jersey flips/customization, private access, 360/390/768/1440 layouts');
+    console.log('PASS: canonical V3 live routes, legacy alias bookmarks, active/TC double jerseys, jersey edits and reports, protected player access, 360/390/768/1440 layouts');
   }finally{await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exit(1)});
