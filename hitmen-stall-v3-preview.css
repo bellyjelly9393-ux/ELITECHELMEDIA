@@ -290,3 +290,113 @@ body.v3-preview {--v3-red:#fd2057;--v3-gold:#e6c16c;--v3-steel:#8c9098; backgrou
   .v3-preview .reference-dashboard-row .stall-dashboard-card{padding:14px 13px!important}
   .v3-preview .reference-dashboard-row .stall-card-title h2{font-size:22px!important}
 }
+
+/* V3 MATCHUP TYPOGRAPHY + STRUCTURAL FRAME PASS.
+   Match LGCHL Media's actual --f-head/--f-ui/--f-slash/--f-body font system.
+   Separate jersey-print typography is untouched so name/number positions stay correct. */
+.v3-preview{
+  --v3-display:var(--f-head,"Anton",Impact,sans-serif);
+  --v3-score:var(--f-ui,"Teko","Arial Narrow",sans-serif);
+  --v3-accent:var(--f-slash,"Kanit",Impact,sans-serif);
+  --v3-reading:var(--f-body,"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif);
+  font-family:var(--v3-reading);
+}
+.v3-preview .v3-banner .v3-team strong,
+.v3-preview .v3-banner .v3-warroom,
+.v3-preview .v3-titlebar h1,
+.v3-preview .reference-player-head h1,
+.v3-preview .stall-card-title h2,
+.v3-preview .stall-card-title h3,
+.v3-preview .player-panel-head h2,
+.v3-preview .v3-development-card .v3-trend,
+.v3-preview .v3-tools h2 {
+  font-family:var(--v3-display)!important;
+  font-style:normal!important;
+  font-weight:400!important;
+  text-transform:uppercase;
+}
+.v3-preview .v3-titlebar .slashes{
+  font-family:var(--v3-accent)!important;
+  font-style:italic;
+  font-weight:900;
+}
+.v3-preview .v3-titlebar .sub,
+.v3-preview .v3-titlebar .season,
+.v3-preview .v3-banner .v3-team small,
+.v3-preview .stall-profile-topline,
+.v3-preview .stall-profile-meta,
+.v3-preview .stall-profile-tabs button,
+.v3-preview .stall-profile-stats small,
+.v3-preview .stall-card-title span,
+.v3-preview .v3-development-card .v3-trend-sub,
+.v3-preview .v3-tools button,
+.v3-preview .v3-tools a,
+.v3-preview .v3-recent-table th,
+.v3-preview .reference-edit{
+  font-family:var(--v3-score)!important;
+  font-style:normal!important;
+  font-weight:600!important;
+}
+.v3-preview .stall-profile-stats>div strong,
+.v3-preview .v3-recent-table td:nth-child(n+3){
+  font-family:var(--v3-display)!important;
+  font-style:normal!important;
+  font-weight:400!important;
+  font-variant-numeric:tabular-nums;
+}
+.v3-preview .v3-recent-table td,
+.v3-preview .stall-bio-card dl,
+.v3-preview .reference-dashboard-row .stall-dashboard-card p{
+  font-family:var(--v3-reading)!important;
+}
+.v3-preview .v3-recent-table th{
+  font-size:clamp(13px,1.3vw,17px)!important;
+  line-height:1.05;
+}
+.v3-preview .v3-tools button,
+.v3-preview .v3-tools a{
+  font-size:clamp(16px,1.6vw,20px)!important;
+  line-height:1;
+  padding-top:12px;
+  padding-bottom:9px;
+}
+
+/* Reference is cut metal with substantial rims; not a neon card border. */
+.v3-preview .stall-profile-stats>div{
+  box-sizing:border-box;
+  border:6px ridge #958e9a!important;
+  box-shadow:inset 2px 2px 1px #d7d4dd50,inset -3px -3px 2px #030305,0 7px 0 #09080a,0 13px 21px #000d!important;
+}
+.v3-preview .reference-dashboard-row .stall-dashboard-card,
+.v3-preview .reference-secondary .player-panel,
+.v3-preview .stall-bio-card{
+  box-sizing:border-box;
+  border:6px ridge #857e8c!important;
+  box-shadow:inset 2px 2px 1px #e0d8e155,inset -4px -4px 1px #000d,0 7px 0 #09080b,0 13px 20px #000e!important;
+}
+.v3-preview .reference-player-head{
+  border:6px ridge #8e8490!important;
+}
+.v3-preview .v3-tools{
+  border:6px ridge #928695!important;
+}
+.v3-preview .stall-profile-tabs button{
+  border:4px ridge #8b8490!important;
+}
+.v3-preview .v3-tools button,.v3-preview .v3-tools a,
+.v3-preview .reference-edit{
+  border-width:4px!important;
+}
+@media(max-width:580px){
+  .v3-preview .stall-profile-stats>div,
+  .v3-preview .reference-dashboard-row .stall-dashboard-card,
+  .v3-preview .reference-secondary .player-panel,
+  .v3-preview .stall-bio-card,
+  .v3-preview .reference-player-head,
+  .v3-preview .v3-tools{border-width:5px!important}
+  .v3-preview .stall-profile-tabs button{border-width:3px!important}
+  .v3-preview .v3-tools button,.v3-preview .v3-tools a,
+  .v3-preview .reference-edit{border-width:3px!important}
+  .v3-preview .v3-recent-table th{font-size:13px!important}
+  .v3-preview .v3-tools button,.v3-preview .v3-tools a{font-size:17px!important}
+}
