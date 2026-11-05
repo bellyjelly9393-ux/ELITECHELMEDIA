@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#08090b">
-<meta name="robots" content="noindex">
+<meta name="robots" content="noindex,nofollow">
 <title>Locker Room | Calgary Hitmen War Room</title>
 <meta name="description" content="Every Calgary stall, training camp and line performance.">
 <link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="hitmen-team-locker.css">
-<link rel="stylesheet" href="hitmen-stall-scene.css?v=2">
-<link rel="stylesheet" href="hitmen-stall-upgrade.css?v=2">
 <link rel="stylesheet" href="wildman-home.css?v=20261011-5">
 <link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
 <link rel="stylesheet" href="hitmen-hq.css?v=20261018-roster">
 <link rel="stylesheet" href="hitmen-locker-integration.css?v=20261015-1">
+<link rel="stylesheet" href="hitmen-stall-v3-preview.css?v=20261105-match-font-frame-1">
+<link rel="stylesheet" href="hitmen-locker-v3-preview.css?v=20261105-room-1">
 </head>
-<body data-room="locker" class="wr-locker-page">
+<body data-room="locker" class="wr-locker-page v3-preview v3-locker-room v3-locker-live">
 <header class="top band">
   <div class="top-in">
     <a class="brand" href="index.html" aria-label="Elitechel Media home">
@@ -84,6 +84,13 @@
 
   <div id="hqApp" data-management-content hidden>
     <section class="wr-sec blood band"><div id="roomBody" class="wr-in">
+    <div class="v3-banner" id="lockerV3Banner" aria-label="Elite Chel Media Calgary Hitmen locker room">
+      <div class="v3-team"><img src="assets/lgchl/s55/team412.png" alt="" width="62" height="62"><div><small>CALGARY</small><strong>HITMEN</strong></div></div>
+      <img class="v3-crest" src="assets/brand/ecm-crest.webp" alt="Elite Chel Media" width="160" height="110">
+      <div class="v3-warroom"><b>HITMEN</b>WAR ROOM</div>
+    </div>
+    <div class="v3-titlebar"><h1>LOCKER ROOM</h1><span class="slashes" aria-hidden="true">//</span><span class="sub">TEAM STALLS / PLAYER OPERATIONS</span><span class="season">SEASON 55</span></div>
+    <p class="v3-roster-notice" role="status"><b>ROSTER UPDATED · NOV 5</b><span>Manager-confirmed Season 55 roster: 17 active players and 15 training-camp players. Existing locker customizations and historical reports are preserved. New player identity links and jersey numbers will be verified as supplied.</span></p>
     <section class="locker-section wr-room-section" aria-labelledby="hnRoomTitle">
       <div class="band-head">
         <div><span class="eyebrow opp-eye">Active roster stalls</span><h2 id="hnRoomTitle" class="sec-title">The room</h2></div>
@@ -122,9 +129,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script src="backend.js"></script>
 <script src="media-desk.js?v=20261011-1"></script>
-<script src="hitmen-team-locker.js?v=20261015-integrated"></script>
-<script src="hitmen-stall-scene.js?v=2"></script>
-<script src="hitmen-stall-upgrade.js?v=2"></script>
+<script src="hitmen-team-locker-v3-preview.js?v=20261105-live-1"></script>
 <script src="hitmen-locker-shell.js?v=20261015-1"></script>
 </body>
 </html>
