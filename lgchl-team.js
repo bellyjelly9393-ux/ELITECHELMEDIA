@@ -16,11 +16,13 @@ let players=[];
 function render(){
  const q=$('roomSearch').value.toLocaleLowerCase().trim();
  const rows=players.filter(p=>String(p.gamertag||'').toLocaleLowerCase().includes(q));
- $('roomPlayers').innerHTML=rows.map(p=>{
+ const card=p=>{
  const goalie=p.player_kind==='goalie',url='lgchl-player.html?id='+Number(p.lg_user_id)+'&kind='+(goalie?'goalie':'skater');
  const stats=goalie?[['GP',fmt(p.gp)],['SV%',p.save_pct==null?'—':rate(Number(p.save_pct)*100,1)+'%'],['GAA',rate(p.gaa,2)]]:[['G',fmt(p.goals)],['A',fmt(p.assists)],['PTS',fmt(p.points)]];
- return '<a class="stall" href="'+url+'"><strong class="nameplate">'+esc(p.gamertag)+'</strong><div class="jersey-stage"><img src="'+jersey(team)+'" alt="'+(jerseyAssets[team]||team===412?'Team jersey':'Team crest')+'" loading="lazy"></div><div class="stall-info"><p>'+esc(p.position||(goalie?'G':'Skater'))+' · '+fmt(p.gp)+' GP</p><div class="stats">'+stats.map(([k,v])=>'<span>'+k+'<b>'+esc(v)+'</b></span>').join('')+'</div><span class="open-card">OPEN PLAYER CARD →</span></div></a>';
- }).join('')||'<p class="note">'+(q?'No matching players.':'No public player stats are listed for this team yet.')+'</p>';
+ return (valid(p.lg_user_id)?'<a class="stall" href="'+url+'">':'<article class="stall">')+'<strong class="nameplate">'+esc(p.gamertag)+'</strong><div class="jersey-stage"><img src="'+jersey(team)+'" alt="'+(jerseyAssets[team]||team===412?'Team jersey':'Team crest')+'" loading="lazy"></div><div class="stall-info"><p>'+esc(p.position||(goalie?'G':'Skater'))+(p.management_role?' · '+esc(p.management_role):'')+' · '+fmt(p.gp)+' GP</p><div class="stats">'+stats.map(([k,v])=>'<span>'+k+'<b>'+esc(v)+'</b></span>').join('')+'</div><span class="open-card">'+(valid(p.lg_user_id)?'OPEN PLAYER CARD →':'PLAYER CARD UNAVAILABLE')+'</span></div>'+(valid(p.lg_user_id)?'</a>':'</article>');
+ };
+ const content=rows.map(card).join('');
+ $('roomPlayers').innerHTML=content||'<p class="note">'+(q?'No matching players.':'No public player stats are listed for this team yet.')+'</p>';
  $('roomPlayers').setAttribute('aria-busy','false');
 }
 $('roomLogo').src=logo(team);
@@ -36,11 +38,22 @@ async function standings(){
  }catch{$('roomRecord').textContent='Team standings are unavailable.';if(team!==412)$('roomName').textContent='LGCHL team '+team;}
 }
 async function roster(){
- try{const rows=await read('wm_lgchl_s55_player_leaders',{select:'lg_user_id,gamertag,player_kind,position,lg_team_id,gp,goals,assists,points,save_pct,gaa,fetched_at',lg_team_id:'eq.'+team,order:'gamertag.asc',limit:'1000'});
- const unique=new Map();for(const p of rows){if(!valid(p.lg_user_id)||!['goalie','skater'].includes(p.player_kind))continue;const key=p.lg_user_id+':'+p.player_kind,old=unique.get(key);if(!old||Number(p.gp)>Number(old.gp)||(Number(p.gp)===Number(old.gp)&&String(p.fetched_at)>String(old.fetched_at)))unique.set(key,p);}
- players=[...unique.values()].sort((a,b)=>(a.player_kind==='goalie')-(b.player_kind==='goalie')||String(a.gamertag).localeCompare(String(b.gamertag)));render();
- }catch{$('roomPlayers').textContent='Player cards are unavailable. Please try again later.';$('roomPlayers').setAttribute('aria-busy','false');}
+ try{
+ const response=await fetch('assets/lgchl/rosters/main-rosters-s55.json?v=20261105');
+ if(!response.ok)throw Error('Roster unavailable');
+ const snapshot=await response.json(),entry=snapshot.teams[String(team)];
+ if(snapshot.season!==55||!entry||!Array.isArray(entry.players))throw Error('Roster unavailable');
+ const main=entry.players.filter(p=>p.roster_class==='active_roster'&&valid(p.lg_user_id));
+ let rows=[];
+ try{if(main.length)rows=await read('wm_lgchl_s55_player_leaders',{select:'lg_user_id,player_kind,gp,goals,assists,points,save_pct,gaa,fetched_at',lg_user_id:'in.('+main.map(p=>Number(p.lg_user_id)).join(',')+')',limit:'1000'});}catch{/* Roster membership remains visible when stats are unavailable. */}
+ const unique=new Map();for(const p of rows){const key=p.lg_user_id+':'+p.player_kind,old=unique.get(key);if(!old||String(p.fetched_at)>String(old.fetched_at))unique.set(key,p);}
+ players=main.map(p=>({...unique.get(p.lg_user_id+':'+p.player_kind),...p}));
+ $('playersTitle').textContent='Main roster · '+players.length;
+ $('rosterNote').textContent='Main-roster players only · LG roster snapshot: '+snapshot.as_of+'. Imported Season 55 totals may include previous teams; — means unavailable.';
+ render();
+ }catch{$('roomPlayers').textContent='Current main roster is unavailable. Please try again later.';$('roomPlayers').setAttribute('aria-busy','false');}
 }
+
 function game(g,final){
  const label=(g.away_nick||g.away_abbr||'Away')+' vs '+(g.home_nick||g.home_abbr||'Home');
  return '<a class="game-row" href="lgchl-game.html?id='+Number(g.lg_game_id)+'"><strong>'+esc(label)+(final?' · '+fmt(g.away_score)+'–'+fmt(g.home_score):'')+'</strong><small>'+esc(date(g.game_at))+' · '+(final?'Final':'Scheduled')+' · Open Game Centre →</small></a>';
@@ -52,4 +65,5 @@ async function games(){
 }
 standings();roster();games();
 })();
+
 
