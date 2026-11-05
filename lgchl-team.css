@@ -20,3 +20,9 @@
 @media(min-width:701px) and (max-width:1000px){.hitmen-room .stalls{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.hitmen-room .stalls{grid-template-columns:minmax(0,1fr);gap:22px;padding-inline:0;max-width:460px;margin-inline:auto}.hitmen-room .nameplate{min-height:0}.hitmen-room .room-hero{padding:22px 12px;gap:14px}.hitmen-room h1{letter-spacing:1px}.room-toolbar label,.section-heading label{max-width:100%}nav{gap:16px}}
 @media(prefers-reduced-motion:reduce){.hitmen-room .stall{transition:none}}
+/* Keep statistics above the bench and clear of the jersey hem. */
+.hitmen-room .jersey-stage{top:22%;height:35%}
+.hitmen-room .stall-info{top:58%}
+.hitmen-room .stall-info p{margin-bottom:3px}
+.hitmen-room .stats{padding-block:3px}
+.hitmen-room .open-card{margin-top:4px;padding-block:4px}
