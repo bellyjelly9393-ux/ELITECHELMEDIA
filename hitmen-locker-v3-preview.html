@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<meta name="robots" content="noindex,nofollow">
+<title>Locker Room V3 Preview | Calgary Hitmen War Room</title>
+<meta name="description" content="Every Calgary stall, training camp and line performance.">
+<link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="hitmen-team-locker.css">
+<link rel="stylesheet" href="wildman-home.css?v=20261011-5">
+<link rel="stylesheet" href="wildman-media-desk.css?v=20261011-2">
+<link rel="stylesheet" href="hitmen-hq.css?v=20261018-roster">
+<link rel="stylesheet" href="hitmen-locker-integration.css?v=20261015-1">
+<link rel="stylesheet" href="hitmen-stall-v3-preview.css?v=20261105-match-font-frame-1">
+<link rel="stylesheet" href="hitmen-locker-v3-preview.css?v=20261105-room-1">
+</head>
+<body data-room="locker" class="wr-locker-page v3-preview v3-locker-room">
+<header class="top band">
+  <div class="top-in">
+    <a class="brand" href="index.html" aria-label="Elitechel Media home">
+      <img class="crest" src="assets/brand/ecm-crest.webp" width="118" height="120" alt="">
+      <div class="brand-txt"><b>Elitechel</b><span>Media</span></div>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="esports-hub.html">Live Hub</a>
+      <a href="hitmen-media.html">Hitmen</a>
+      <a href="lgchl-media.html">LG CHL</a>
+      <a href="lgchl-leaders.html">Stats</a>
+      <a href="interest.html?program=hut">HUT Tournament</a>
+      <a href="management.html" class="on" aria-current="page">Management</a>
+    </nav>
+    <a class="icon-btn search-btn" href="hitmen-opponents.html" aria-label="Opponent scouting"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </div>
+</header>
+
+<div class="wr-bar band">
+  <div class="wr-bar-in">
+    <div class="wr-id">
+      <img src="assets/lgchl/s55/team412.png" width="54" height="54" alt="Calgary Hitmen">
+      <div><b>Calgary Hitmen <em>War Room</em></b><small>LGCHL Season 55 · WHL Eastern</small></div>
+    </div>
+    <div class="wr-who">
+      <span class="lock"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="10" height="7" rx="1"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg><span>Private team access</span></span>
+      <span class="who" id="hqWho" hidden><b id="hqWhoName"></b><small id="hqWhoRole"></small></span>
+    </div>
+  </div>
+</div>
+<nav class="sub-bar band" aria-label="War Room rooms">
+  <div class="sub-in">
+    <a href="hitmen-hq.html">Headquarters</a>
+    <a href="hitmen-scouting.html">Scouting</a>
+    <a href="hitmen-lineup.html">Lineup Lab</a>
+    <a href="hitmen-locker-v3-preview.html" aria-current="page">Locker Room</a>
+    <a href="hitmen-stall-v3-preview.html">My Stall</a>
+    <a href="vod-lab.html?team=calgary-hitmen" class="vod">VOD Control Center</a>
+    <a href="hitmen-media.html">Media</a>
+    <a href="obs-control.html">OBS Controls</a>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="art-banner red" style="--art:url('assets/war-room/war-room-header-960.webp')" aria-labelledby="roomH1">
+    <h1 id="roomH1" class="sr-only">Calgary Hitmen War Room Locker Room</h1>
+    <picture>
+      <source media="(max-width: 900px)" srcset="assets/war-room/war-room-header-960.webp">
+      <img src="assets/war-room/war-room-header.webp" width="1672" height="941" alt="" fetchpriority="high" decoding="async">
+    </picture>
+  </section>
+
+  <!-- Sign-in gate: the same access rule as the existing War Room pages. -->
+  <section class="wr-sec band locker-access-shell" id="hqGate">
+    <div class="hq-gate">
+      <span class="sec-rule" aria-hidden="true"></span>
+      <h2 class="sec-title">Team <em>sign-in</em></h2>
+      <p id="managementLockedMessage">Checking your access…</p>
+      <section id="accountPanel" class="card"><div><div class="eyebrow">Secure access</div><h3>Loading account…</h3></div></section>
+    </div>
+  </section>
+
+  <div id="hqApp" data-management-content hidden>
+    <section class="wr-sec blood band"><div id="roomBody" class="wr-in">
+    <div class="v3-banner" id="lockerV3Banner" aria-label="Elite Chel Media Calgary Hitmen locker room">
+      <div class="v3-team"><img src="assets/lgchl/s55/team412.png" alt="" width="62" height="62"><div><small>CALGARY</small><strong>HITMEN</strong></div></div>
+      <img class="v3-crest" src="assets/brand/ecm-crest.webp" alt="Elite Chel Media" width="160" height="110">
+      <div class="v3-warroom"><b>HITMEN</b>WAR ROOM</div>
+    </div>
+    <div class="v3-titlebar"><h1>LOCKER ROOM</h1><span class="slashes" aria-hidden="true">//</span><span class="sub">TEAM STALLS / PLAYER OPERATIONS</span><span class="season">SEASON 55</span></div>
+    <p class="v3-roster-notice" role="status"><b>ROSTER UPDATED · NOV 5</b><span>Manager-confirmed Season 55 roster: 17 active players and 15 training-camp players. Existing locker customizations and historical reports are preserved. New player identity links and jersey numbers will be verified as supplied.</span></p>
+    <section class="locker-section wr-room-section" aria-labelledby="hnRoomTitle">
+      <div class="band-head">
+        <div><span class="eyebrow opp-eye">Active roster stalls</span><h2 id="hnRoomTitle" class="sec-title">The room</h2></div>
+        <dl class="hn-meta">
+          <div><dt>Active roster</dt><dd id="lockerRosterCount">&mdash;</dd></div>
+          <div><dt>TC players</dt><dd id="lockerTcCount">&mdash;</dd></div>
+          <div><dt>Player reports</dt><dd id="lockerReportCount">&mdash;</dd></div>
+        </dl>
+      </div>
+      <p class="src">Your team space for weekly performance, player reports, lineup chemistry and development. Open your own stall for stats, scouting feedback and your kit.</p>
+      <div id="lockerRoster" class="locker-stall-grid hn-stalls"></div>
+    </section>
+
+    <section class="locker-section wr-room-section" aria-labelledby="hnTcTitle">
+      <div class="band-head"><div><span class="eyebrow opp-eye">Training camp</span><h2 id="hnTcTitle" class="sec-title">TC stalls</h2></div></div>
+      <p class="src">TC players live in the same room so management can evaluate them or call them into a lineup without losing context.</p>
+      <div id="lockerTcRoster" class="locker-stall-grid hn-stalls"></div>
+    </section>
+
+    <section class="locker-section wr-room-section" aria-labelledby="hnLineTitle">
+      <div class="band-head"><div><span class="eyebrow opp-eye">This week</span><h2 id="hnLineTitle" class="sec-title">Line performance</h2></div></div>
+      <p class="src">How each saved unit performed together across the week.</p>
+      <div id="lockerLineReports" class="locker-line-grid hn-lines"></div>
+    </section>
+    </div></section>
+  </div>
+</main>
+
+<footer class="band">
+  <div class="foot">
+    <span class="foot-brand"><img src="assets/lgchl/s55/team412.png" width="96" height="96" loading="lazy" alt="Calgary Hitmen logo"><span>Calgary Hitmen War Room · private</span></span>
+    <nav class="foot-nav" aria-label="Footer"><a href="hitmen-hq.html">Headquarters</a><a href="hitmen-scouting.html">Scouting</a><a href="hitmen-lineup.html">Lineup Lab</a><a href="hitmen-locker.html">Locker Room</a><a href="hitmen-media.html">Hitmen Media</a></nav>
+    <span>Data: official LeagueGaming imports and War Room saves · Times Eastern</span>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="backend.js"></script>
+<script src="media-desk.js?v=20261011-1"></script>
+<script src="hitmen-team-locker-v3-preview.js?v=20261105-room-1"></script>
+<script src="hitmen-locker-shell.js?v=20261015-1"></script>
+</body>
+</html>

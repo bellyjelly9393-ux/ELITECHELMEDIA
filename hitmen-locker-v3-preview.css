@@ -1,0 +1,136 @@
+/* Calgary Hitmen War Room Locker Grid V3 — isolated preview.
+ * Renders the same approved two-jersey visual master as My Stall.
+ * Existing Supabase auth, roster filters and per-player links are unchanged. */
+body.v3-locker-room { background:#050508; }
+.v3-locker-room #roomBody { max-width:1190px!important; margin-inline:auto; width:100%; padding:0 17px 42px!important; }
+.v3-locker-room #roomBody .v3-banner { margin:0 -17px; }
+.v3-locker-room #roomBody .v3-titlebar { margin:0 -17px 26px; }
+.v3-locker-room #roomBody .v3-roster-notice {
+ display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+ padding:14px 18px;margin:0 0 25px;
+ border:3px ridge #816c57;background:linear-gradient(165deg,#291a13,#100e10 38%,#0b0c10 100%);
+ box-shadow:inset 0 2px #ffffff2c,0 8px 14px #000a;
+ color:#e6d5bf;font:500 15px/1.35 var(--f-body),Arial,sans-serif;
+}
+.v3-locker-room .v3-roster-notice b { font:600 17px/1 var(--f-ui),Arial,sans-serif; letter-spacing:.08em; color:#ffce72; }
+.v3-locker-room .locker-section .band-head{ align-items:flex-end;gap:20px; }
+.v3-locker-room .locker-section .band-head .eyebrow{ color:#d5ba8a; }
+.v3-locker-room .locker-section .band-head h2{ font:400 clamp(31px,4.4vw,49px)/.94 var(--f-head),Impact,sans-serif;letter-spacing:.02em;text-shadow:0 3px 3px #000; }
+.v3-locker-room .locker-section .src { max-width:850px;font:500 16px/1.55 var(--f-body),Arial,sans-serif; color:#c1b6bc; }
+.v3-locker-room .hn-meta{gap:8px!important;}
+.v3-locker-room .hn-meta>div{
+ min-width:94px;padding:9px 13px 7px;min-height:67px;
+ border:3px ridge #706a75;background:linear-gradient(155deg,#342c36 0%,#0f0e13 18%,#08080c 80%,#312832 100%);
+ box-shadow:inset 0 1px #ffffff34,0 5px 8px #0009;
+}
+.v3-locker-room .hn-meta dt{font:600 15px/1 var(--f-ui),Arial,sans-serif;color:#bfb2bd;}
+.v3-locker-room .hn-meta dd{font:400 31px/1 var(--f-head),Impact,sans-serif;color:#fff;}
+.v3-locker-room .locker-stall-grid {
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:19px!important;align-items:stretch;
+}
+.v3-locker-room .locker-stall-grid>.locker-stall{
+ display:flex!important;flex-direction:column;
+ width:100%;max-width:none;min-width:0;margin:0;
+ border:6px ridge #8e8795!important;border-radius:0!important;
+ background:linear-gradient(165deg,#42353d,#100d13 8%,#050609 82%,#332530)!important;
+ box-shadow:inset 2px 2px 1px #eee6f044,inset -3px -3px #000c,0 7px 0 #040407,0 14px 22px #000b!important;
+ overflow:hidden;position:relative;
+ color:#f4f1f3;text-decoration:none;
+ transition:transform .16s ease,border-color .16s ease;
+}
+.v3-locker-room .locker-stall-grid>a.locker-stall:hover{transform:translateY(-3px);border-color:#ef6c8e!important;}
+.v3-locker-room .locker-stall-grid>.locker-stall:focus-visible{outline:3px solid #ffe5a1;outline-offset:3px;}
+.v3-locker-room .locker-stall .stall-nameplate-v2{
+ order:0;display:flex!important;align-items:center;justify-content:center;gap:10px;
+ padding:10px 12px 8px!important;min-height:49px;
+ background:linear-gradient(180deg,#343139,#111115 33%,#07080b 100%)!important;
+ border:0!important;border-bottom:4px ridge #77717d!important;
+ box-shadow:inset 0 1px #e7e5ec44!important;
+}
+.v3-locker-room .stall-nameplate-v2 strong{
+ flex:1;min-width:0;margin:0;overflow:hidden;text-overflow:ellipsis;
+ font:400 clamp(17px,2vw,23px)/1 var(--f-head),Impact,sans-serif!important;
+ letter-spacing:.015em;text-align:center;white-space:nowrap;color:#f7f4f6;
+}
+.v3-locker-room .stall-name-num{
+ font:400 clamp(20px,2.1vw,28px)/1 var(--f-head),Impact,sans-serif!important;
+ color:#f4c26e!important;min-width:23px;text-align:center;
+}
+.v3-locker-room .stall-interior.stall-preview-scene{
+ order:1;position:relative;display:block!important;height:auto!important;aspect-ratio:auto!important;
+ padding:0!important;margin:0!important;border:0!important;overflow:visible!important;
+ background:#110910!important;box-shadow:none!important;
+}
+.v3-locker-room .locker-stall .v3-stage.v3-room-jersey{
+ position:relative!important;inset:auto!important;display:block;
+ width:100%!important;height:auto!important;min-height:0!important;
+ aspect-ratio:1086/639!important;container-type:inline-size;
+ border:0!important;border-radius:0!important;
+ background:#0b0a0d;box-shadow:none!important;overflow:hidden;
+}
+.v3-locker-room .locker-stall .v3-room-jersey:before,.v3-locker-room .locker-stall .v3-room-jersey:after{display:none!important;}
+.v3-locker-room .locker-stall .v3-master-photo{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:fill!important;display:block}
+.v3-locker-room .locker-stall .v3-master-scene .v3-plate{z-index:6!important;}
+.v3-locker-room .locker-stall .v3-plate strong{letter-spacing:0!important;white-space:nowrap;text-overflow:clip!important;font-size:3.0cqw!important;}
+.v3-locker-room .locker-stall .v3-plate .number{font-size:3.3cqw!important;}
+.v3-locker-room .locker-stall .v3-master-backname{
+ white-space:nowrap!important;overflow:hidden!important;max-width:13.5%;line-height:1.05!important;
+ font-family:"Barlow Semi Condensed",var(--f-body),Arial,sans-serif!important;
+ font-weight:700!important;letter-spacing:0!important;
+}
+.v3-locker-room .locker-stall .v3-master-backnumber{font:400 12.2cqw/1 var(--f-head),Impact,sans-serif!important;}
+.v3-locker-room .locker-stall .v3-master-sleeve{font:400 3.6cqw/1 var(--f-head),Impact,sans-serif!important;}
+.v3-locker-room .locker-stall .v3-master-helmetnum{font:400 2.4cqw/1 var(--f-head),Impact,sans-serif!important;}
+.v3-locker-room .locker-stall .stall-footer-v2{
+ order:2;display:grid!important;align-content:center;gap:4px!important;
+ min-height:87px!important;padding:12px 14px!important;margin:0!important;
+ border:0!important;border-top:4px ridge #7c707f!important;border-radius:0!important;
+ background:linear-gradient(165deg,#2b202a,#0b0a0e 31%,#0a0a0d 80%,#241823)!important;
+ box-shadow:inset 0 1px #ffffff1b!important;
+}
+.v3-locker-room .stall-footer-v2 small{
+ font:600 15px/1.1 var(--f-ui),Arial,sans-serif!important;color:#bdb2bd!important;
+ letter-spacing:.04em!important;
+}
+.v3-locker-room .stall-footer-v2 b{
+ color:#f1c672!important;font:600 18px/1 var(--f-ui),Arial,sans-serif!important;letter-spacing:.06em!important;
+}
+.v3-locker-room .hn-tc-tag{
+ position:absolute;top:50px;left:12px;z-index:7;
+ border:2px ridge #bca05e;background:#120d0c;color:#f7d18b;
+ padding:4px 8px;font:600 16px/1 var(--f-ui),Arial,sans-serif;
+}
+.v3-locker-room .wr-room-section + .wr-room-section{
+ margin-top:24px;padding-top:33px;border-top:4px ridge #514b55;
+}
+.v3-locker-room .locker-line-grid {gap:17px!important;}
+.v3-locker-room .locker-line-grid>.line-report-card,
+.v3-locker-room .locker-empty{
+ border:5px ridge #807985!important;
+ background:linear-gradient(156deg,#2e2731,#0c0a0e 14%,#08090c 82%,#2a232e)!important;
+ border-radius:0!important;box-shadow:inset 1px 1px #ffffff2c,0 7px 0 #050408,0 12px 21px #0009;
+}
+.v3-locker-room .line-report-card h3{font:400 29px/1 var(--f-head),Impact,sans-serif!important;}
+.v3-locker-room .line-report-card .eyebrow,.v3-locker-room .line-report-card .line-meta span{font-family:var(--f-ui),Arial,sans-serif!important;}
+.v3-locker-room .v3-room-jersey .v3-master-sleeve,
+.v3-locker-room .v3-room-jersey .v3-master-helmetnum{pointer-events:none}
+@media (max-width:850px){
+ .v3-locker-room .locker-stall-grid{gap:12px!important;}
+ .v3-locker-room .hn-meta>div{min-width:82px;padding:7px 10px;}
+}
+@media (max-width:650px){
+ .v3-locker-room #roomBody{padding:0 10px 32px!important;}
+ .v3-locker-room #roomBody .v3-banner{margin:0 -10px!important;}
+ .v3-locker-room #roomBody .v3-titlebar{margin:0 -10px 18px!important;}
+ .v3-locker-room .locker-stall-grid{grid-template-columns:minmax(0,1fr)!important;gap:15px!important;}
+ .v3-locker-room .locker-stall-grid>.locker-stall{border-width:5px!important;}
+ .v3-locker-room .locker-stall .stall-footer-v2{min-height:75px!important;}
+ .v3-locker-room .locker-section .band-head{align-items:flex-start;}
+ .v3-locker-room .hn-meta{width:100%;justify-content:flex-start;gap:6px!important;}
+ .v3-locker-room .hn-meta>div{min-width:85px;}
+ .v3-locker-room .v3-roster-notice{font-size:13px;padding:12px;}
+}
+@media(prefers-reduced-motion:reduce){
+ .v3-locker-room .locker-stall-grid>a.locker-stall{transition:none!important;}
+}
