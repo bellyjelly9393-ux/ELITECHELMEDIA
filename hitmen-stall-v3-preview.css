@@ -126,3 +126,46 @@ body.v3-preview {--v3-red:#fd2057;--v3-gold:#e6c16c;--v3-steel:#8c9098; backgrou
 .v3-preview .v3-recent-table tr:nth-child(even){background:#ffffff0a}
 .v3-preview .v3-recent-table td:nth-child(2){max-width:14ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:580px){.v3-preview .v3-recent-table th,.v3-preview .v3-recent-table td{padding:8px 3px}}
+
+/* Master-photo layer: the locker is one realistic photographed environment,
+   while all player-specific printing is independent semantic DOM. */
+.v3-preview .v3-master-scene{aspect-ratio:1086 / 639;border:0;background:#080609;box-shadow:0 7px 18px #000}
+.v3-preview .v3-master-scene:before,.v3-preview .v3-master-scene:after{display:none!important}
+.v3-preview .v3-master-photo{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:fill;pointer-events:none}
+.v3-preview .v3-master-scene .v3-plate{
+  position:absolute;z-index:6;left:34%;right:33%;top:3.35%;height:7.6%;
+  border:0;clip-path:none;background:transparent;box-shadow:none;padding:0;
+  display:flex;align-items:center;gap:3%;justify-content:center;white-space:nowrap;
+}
+.v3-preview .v3-master-scene .v3-plate:after{display:none}
+.v3-preview .v3-master-scene .v3-plate strong{font:900 italic 3.4cqw/1 "Anton","Teko",Impact,sans-serif;letter-spacing:.02em;text-shadow:0 2px 5px #000;max-width:70%;overflow:hidden;text-overflow:clip}
+.v3-preview .v3-master-scene .v3-plate .sep{color:#f73065;font:900 3.2cqw Arial}
+.v3-preview .v3-master-scene .v3-plate .number{font:900 italic 3.8cqw "Anton",Impact,sans-serif}
+.v3-master-backname,.v3-master-backnumber,.v3-master-sleeve,.v3-master-helmetnum{
+ position:absolute;z-index:5;color:#fff;text-align:center;pointer-events:none;white-space:nowrap;
+ font-family:"Anton","Teko",Impact,sans-serif;font-style:normal;letter-spacing:.01em;
+ text-shadow:0 .24cqw .42cqw #000,0 .5cqw .8cqw #0009
+}
+.v3-master-backname{
+ left:58.0%;top:43.5%;width:13.5%;font:900 2.55cqw/1.05 "Barlow Condensed","Anton",Impact,sans-serif;
+ background:#09080bc9;padding:.2% 0;overflow:hidden;text-overflow:clip;letter-spacing:.04em
+}
+.v3-master-backnumber{
+ left:57.2%;top:47.7%;width:15.1%;font:900 13.4cqw/.95 "Anton","Teko",Impact,sans-serif;
+ letter-spacing:-.05em;-webkit-text-stroke:.44cqw #f22b62;paint-order:stroke fill;
+}
+.v3-master-sleeve{top:48.3%;font:900 4.4cqw/1 "Anton",Impact,sans-serif;-webkit-text-stroke:.28cqw #f5316c;paint-order:stroke fill}
+.v3-master-sleeve.a{left:21.6%;width:5%}.v3-master-sleeve.b{left:43%;width:5%}
+.v3-master-sleeve.c{left:52.0%;width:5%}.v3-master-sleeve.d{left:73%;width:5%}
+.v3-master-helmetnum{left:31%;top:18.4%;width:3.8%;font:900 2.7cqw/1 "Anton",Impact,sans-serif;-webkit-text-stroke:.12cqw #ee3561;paint-order:stroke fill}
+.v3-preview .v3-master-scene .v3-gear.helmet{left:27.3%;top:13.6%;width:13%;height:14%;right:auto}
+.v3-preview .v3-master-scene .v3-gear.gloves{left:62%;top:15%;width:15%;height:12%;right:auto}
+.v3-preview .v3-master-scene .v3-gear.skateleft{left:9%;top:39%;width:10%;height:25%;right:auto;transform:none}
+.v3-preview .v3-master-scene .v3-gear.has-photo{border:0;border-radius:4px;background-color:transparent;box-shadow:none}
+@media(max-width:580px){
+ .v3-preview #stallScene{aspect-ratio:1086/639}
+ .v3-preview .v3-master-scene .v3-plate strong{font-size:3.1cqw}
+ .v3-master-backname{font-size:2.35cqw}
+ .v3-master-backnumber{font-size:12.5cqw}
+ .v3-master-sleeve{font-size:4.2cqw}
+}
