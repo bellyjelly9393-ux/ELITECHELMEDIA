@@ -9,20 +9,22 @@ const active = () => {
   const app=E("hqApp")||document.querySelector("[data-locker-content]");
   return Boolean(app && !app.hidden);
 };
-const scene = () => '<div class="v3-stage" role="group" aria-label="Calgary Hitmen double jersey locker. Front jersey left, back jersey right.">'+
-  '<div class="v3-backplate"></div><span class="v3-led upper"></span><span class="v3-led shelf"></span><span class="v3-led base"></span>'+
-  '<div class="v3-handrail top"></div><div class="v3-inner-shelf"></div><div class="v3-divider"></div>'+
+/* The photographic shell comes from the approved master image, not the old mismatched stall.
+   Metal, illumination, two jerseys and physical gear remain a coherent artwork layer.
+   Editable name/number fields and user gear slots are independent elements above it. */
+const scene = () => '<div class="v3-stage v3-master-scene" role="group" aria-label="Calgary Hitmen double jersey locker. Front jersey on the left, back jersey on the right.">'+
+  '<img class="v3-master-photo" src="assets/hitmen-v3/locker-photo-master.webp" alt="" draggable="false" decoding="async">'+
   '<div class="v3-plate"><strong data-v3="plateName">PLAYER</strong><span class="sep" aria-hidden="true">/</span><span class="number" data-v3="plateNumber">--</span></div>'+
-  '<div class="v3-gear helmet">HITMEN</div><div class="v3-gear gloves">CCM</div>'+
-  '<div class="v3-stall-panel front"><span class="v3-hanger"></span>'+blank('hitmen-stall-front.webp')+
-    '<div class="v3-render" aria-hidden="true"><span class="v3-sleeve left" data-v3="frontSleeve">05</span><span class="v3-sleeve right" data-v3="frontSleeve">05</span></div></div>'+
-  '<div class="v3-stall-panel back"><span class="v3-hanger"></span>'+blank('hitmen-stall-back.webp')+
-    '<div class="v3-render" aria-hidden="true"><span class="v3-backname" data-v3="jerseyName">PLAYER</span><span class="v3-backnumber" data-v3="jerseyNumber">--</span>'+
-    '<span class="v3-sleeve left" data-v3="backSleeve">05</span><span class="v3-sleeve right" data-v3="backSleeve">05</span></div></div>'+
-  '<div class="v3-gear skateleft" aria-hidden="true">CCM</div><div class="v3-gear skateright" aria-hidden="true">CCM</div>'+
-  '<div class="v3-gear bag" aria-hidden="true">CALGARY HITMEN</div>'+
-  '<div class="v3-handrail bottom"></div><div class="v3-frame-bottom"></div>'+
-  '<span class="v3-asset-note">VISUAL PROTOTYPE · ORIGINAL PHOTO JERSEYS</span>'+
+  '<span class="v3-master-backname" data-v3="jerseyName" aria-hidden="true">PLAYER</span>'+
+  '<span class="v3-master-backnumber" data-v3="jerseyNumber" aria-hidden="true">--</span>'+
+  '<span class="v3-master-sleeve a" data-v3="frontSleeve" aria-hidden="true">--</span>'+
+  '<span class="v3-master-sleeve b" data-v3="frontSleeve" aria-hidden="true">--</span>'+
+  '<span class="v3-master-sleeve c" data-v3="backSleeve" aria-hidden="true">--</span>'+
+  '<span class="v3-master-sleeve d" data-v3="backSleeve" aria-hidden="true">--</span>'+
+  '<span class="v3-master-helmetnum" data-v3="helmetNumber" aria-hidden="true">--</span>'+
+  '<span class="v3-gear helmet" aria-hidden="true"></span>'+
+  '<span class="v3-gear gloves" aria-hidden="true"></span>'+
+  '<span class="v3-gear skateleft" aria-hidden="true"></span>'+
   '</div>';
 const stateFor = (opts={}) => ({
  name:String(opts.name ?? "").toUpperCase().replace(/\s+/g," ").trim().slice(0,18)||"PLAYER",
@@ -39,7 +41,7 @@ function paint(host,opts={}) {
  if (!stage) return;
  const data=stateFor(opts);
  stage.querySelectorAll('[data-v3="plateName"],[data-v3="jerseyName"]').forEach(el => {el.textContent=data.name;fit(el,12)});
- stage.querySelectorAll('[data-v3="plateNumber"],[data-v3="jerseyNumber"],[data-v3="frontSleeve"],[data-v3="backSleeve"]').forEach(el => el.textContent=data.number);
+ stage.querySelectorAll('[data-v3="plateNumber"],[data-v3="jerseyNumber"],[data-v3="frontSleeve"],[data-v3="backSleeve"],[data-v3="helmetNumber"]').forEach(el => el.textContent=data.number);
  stage.setAttribute("aria-label", "Calgary Hitmen locker. Jersey name "+data.name+", number "+data.number+". Front jersey left and back jersey right.");
  const pictureName=E("v3HeroName");if(pictureName)pictureName.textContent=data.name;
  const bigNum=E("v3HeroNumber");if(bigNum)bigNum.textContent=data.number;
