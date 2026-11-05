@@ -143,6 +143,8 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       assert.equal(await scene.locator('[data-v3="plateName"]').textContent(),'FIXTURE ACTIVE');
       assert.equal(await scene.locator('[data-v3="jerseyNumber"]').textContent(),'19');
       assert.equal(await page.locator('#profileGoals').innerText(),'1','Uses fixture report stats, no invented stats');
+      assert.ok(await page.locator('.v3-recent-table').count()===1,'Recent stats uses individual game data');
+      assert.match(await page.locator('.v3-recent-table').innerText(),/Fixture Opponent/);
       assert.equal(await page.locator('.v3-development-card').count(),1,'Neutral pending development panel');
       assert.match(await page.locator('.v3-development-card').innerText(),/NOT YET RATED/);
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth + 2),'No horizontal overflow at '+width);
