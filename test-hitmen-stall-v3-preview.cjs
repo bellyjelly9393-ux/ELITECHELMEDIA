@@ -167,6 +167,12 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       assert.equal(await page.evaluate(()=>window.lockerFixture.writes.length),1,'Authorized save uses existing data write exactly once');
       await page.locator('[data-stall-tab="overview"]').click();
       const hero=page.locator('#stall');await hero.scrollIntoViewIfNeeded();
+      /* The local 1-pixel white upload is a test fixture, never show it in design screenshots. */
+      await page.evaluate(()=>{
+        document.querySelectorAll('#stallScene .v3-gear.has-photo').forEach(el=>{
+          el.style.backgroundImage='';el.classList.remove('has-photo');
+        });
+      });
       await page.evaluate(()=>window.scrollTo({top:0,left:0,behavior:'instant'}));
       await page.waitForTimeout(100);
       await page.screenshot({path:path.join(screenshots,'v3-'+width+'.png'),fullPage:true});
