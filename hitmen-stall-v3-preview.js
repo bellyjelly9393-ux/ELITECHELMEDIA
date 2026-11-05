@@ -119,6 +119,11 @@ function buildFrame() {
    E("v3EquipmentMessage").textContent="Screenshot displayed in the "+target+" slot locally. No data saved.";
   });
  }
+ /* Preserve the existing player bio and fields, but move them below the visual dashboard.
+    The approved reference shows the statistical modules immediately beneath the primary strip. */
+ const bio=body.querySelector(".reference-bio-card");
+ const reports=body.querySelector(".reference-secondary");
+ if(bio&&reports)reports.appendChild(bio);
  const caption=document.createElement("p");caption.className="v3-preview-note";
  caption.textContent="Design preview, not production. Source image assets are the existing team stall photographs. Jerseys and equipment require final visual QA against the approved master.";
  const toolsBar=body.querySelector(".v3-tools");
