@@ -21,7 +21,7 @@ function render(){
  const card=p=>{
  const goalie=p.player_kind==='goalie',url='lgchl-player.html?id='+Number(p.lg_user_id)+'&kind='+(goalie?'goalie':'skater');
  const stats=goalie?[['GP',fmt(p.gp)],['SV%',p.save_pct==null?'—':rate(Number(p.save_pct)*100,1)+'%'],['GAA',rate(p.gaa,2)]]:[['G',fmt(p.goals)],['A',fmt(p.assists)],['PTS',fmt(p.points)]];
- const uniform=jerseyAssets[team]?'<img class="club-jersey" src="'+jersey(team)+'" alt="Verified club jersey" loading="lazy">':'<div class="concept-kit" role="img" aria-label="Non-official jersey concept with team crest"><img class="concept-crest" src="'+logo(team)+'" alt="" loading="lazy"></div><small class="concept-tag">CREST CONCEPT · ART PENDING</small>';
+ const uniform=jerseyAssets[team]?'<img class="club-jersey" src="'+jersey(team)+'" alt="Verified club jersey" loading="lazy">':'<div class="concept-kit" role="img" aria-label="Non-official jersey concept with team crest"><img class="concept-crest" src="'+logo(team)+'" alt="" loading="lazy"></div><small class="concept-tag">REFERENCE FOUND · CUTOUT PENDING</small>';
  return (valid(p.lg_user_id)?'<a class="stall" href="'+url+'">':'<article class="stall">')+'<strong class="nameplate">'+esc(p.gamertag)+'</strong><div class="jersey-stage">'+uniform+'</div><div class="stall-info"><p>'+esc(p.position||(goalie?'G':'Skater'))+(p.management_role?' · '+esc(p.management_role):'')+' · '+fmt(p.gp)+' GP</p><div class="stats">'+stats.map(([k,v])=>'<span>'+k+'<b>'+esc(v)+'</b></span>').join('')+'</div><span class="open-card">'+(valid(p.lg_user_id)?'OPEN PLAYER CARD →':'PLAYER CARD UNAVAILABLE')+'</span></div>'+(valid(p.lg_user_id)?'</a>':'</article>');
  };
  const content=rows.map(card).join('');
@@ -55,7 +55,7 @@ async function roster(){
  const unique=new Map();for(const p of rows){const key=p.lg_user_id+':'+p.player_kind,old=unique.get(key);if(!old||String(p.fetched_at)>String(old.fetched_at))unique.set(key,p);}
  players=main.map(p=>({...unique.get(p.lg_user_id+':'+p.player_kind),...p}));
  $('playersTitle').textContent='Main roster · '+players.length;
- $('rosterNote').textContent='Main-roster players only · LG roster snapshot: '+snapshot.as_of+'. Verified jersey images display where available; other clubs use clearly marked crest concepts until uniform art is confirmed. Imported Season 55 totals may include previous teams; — means unavailable.';
+ $('rosterNote').textContent='Main-roster players only · LG roster snapshot: '+snapshot.as_of+'. The 62-team jersey reference collection is sourced. Finished locker cutouts display where available; remaining jerseys use marked crest concepts while their references are cleaned and reviewed. Imported Season 55 totals may include previous teams; — means unavailable.';
  render();
  }catch{$('roomPlayers').textContent='Current main roster is unavailable. Please try again later.';$('roomPlayers').setAttribute('aria-busy','false');}
 }
