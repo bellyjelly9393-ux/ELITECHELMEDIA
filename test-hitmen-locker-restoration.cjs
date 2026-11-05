@@ -188,7 +188,18 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       assert.equal(await page.locator('.hitmen-app-sidebar').count(),0,'No duplicate legacy sidebar');
       assert.equal(await page.locator('.sub-in a[aria-current="page"]').textContent(),'My Stall');
       assert.equal(await page.evaluate(()=>window.lockerFixture.writes.length),1,'One isolated customization write');
-      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Player stall fits '+width);
+      const mobileFit=await page.evaluate(()=>({
+        viewport:innerWidth,documentWidth:document.documentElement.scrollWidth,
+        protruding:Array.from(document.querySelectorAll('body *')).filter(el=>{
+          const r=el.getBoundingClientRect(),st=getComputedStyle(el);
+          return st.display!=='none' && r.width>0 && r.right>innerWidth+2;
+        }).sort((a,b)=>b.getBoundingClientRect().right-a.getBoundingClientRect().right).slice(0,12).map(el=>{
+          const r=el.getBoundingClientRect();
+          return {tag:el.tagName,id:el.id,cls:String(el.className).slice(0,85),left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width)};
+        })
+      }));
+      if(mobileFit.documentWidth>width+1)console.error('LIVE_V3_OVERFLOW',width,JSON.stringify(mobileFit));
+      assert.ok(mobileFit.documentWidth<=width+1,'Player stall fits '+width);
       await page.locator('[data-stall-tab="overview"]').click();
       await page.locator('#stall').scrollIntoViewIfNeeded();
       await page.screenshot({path:path.join(screenshots,'player-'+width+'.png')});
