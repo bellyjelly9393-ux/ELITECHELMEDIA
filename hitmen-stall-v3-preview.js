@@ -13,7 +13,7 @@ const active = () => {
    Metal, illumination, two jerseys and physical gear remain a coherent artwork layer.
    Editable name/number fields and user gear slots are independent elements above it. */
 const scene = () => '<div class="v3-stage v3-master-scene" role="group" aria-label="Calgary Hitmen double jersey locker. Front jersey on the left, back jersey on the right.">'+
-  '<img class="v3-master-photo" src="assets/hitmen-v3/locker-photo-master.webp" alt="" draggable="false" decoding="async">'+
+  '<img class="v3-master-photo" src="assets/hitmen-v3/locker-photo-master.webp?v=20261105-mobile-jersey-1" alt="" draggable="false" decoding="async">'+
   '<div class="v3-plate"><strong data-v3="plateName">PLAYER</strong><span class="sep" aria-hidden="true">/</span><span class="number" data-v3="plateNumber">--</span></div>'+
   '<span class="v3-master-backname" data-v3="jerseyName" aria-hidden="true">PLAYER</span>'+
   '<span class="v3-master-backnumber" data-v3="jerseyNumber" aria-hidden="true">--</span>'+
