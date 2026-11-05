@@ -42,7 +42,7 @@ function stall(l){
  const displayName=esc((l.jersey_name||l.gamertag).toUpperCase()),displayNum=esc(l.jersey_number||'');
  const roleLabel=l.management_role?esc(l.management_role.toUpperCase()):(tc?'TC':'ROSTER');
  const mine=Boolean(ST().user&&l.user_id===ST().user.id);
- const shellStart=playerView()&&!mine?'<div class="locker-stall locker-preview-v3 '+(tc?'is-tc':'')+'">':'<a class="locker-stall locker-preview-v3 '+(tc?'is-tc':'')+'" href="'+(document.body.classList.contains('wr-locker-page')?'hitmen-stall-v3-preview.html':'hitmen-player-locker.html')+'?player='+encodeURIComponent(l.id)+'">';
+ const shellStart=playerView()&&!mine?'<div class="locker-stall locker-preview-v3 '+(tc?'is-tc':'')+'">':'<a class="locker-stall locker-preview-v3 '+(tc?'is-tc':'')+'" href="'+(document.body.classList.contains('v3-locker-live')?'hitmen-stall.html':document.body.classList.contains('wr-locker-page')?'hitmen-stall-v3-preview.html':'hitmen-player-locker.html')+'?player='+encodeURIComponent(l.id)+'">';
  const shellEnd=playerView()&&!mine?'</div>':'</a>';
  const footer=playerView()
    ?'<small><span class="stall-position">'+esc(l.position||'—')+'</span> · '+roleLabel+'</small><b>'+(mine?'OPEN MY STALL →':'TEAMMATE')+'</b>'
