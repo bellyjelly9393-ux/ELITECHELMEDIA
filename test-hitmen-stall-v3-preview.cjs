@@ -151,6 +151,25 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       assert.match(await page.locator('.v3-recent-table').innerText(),/Fixture Opponent/);
       assert.equal(await page.locator('.v3-development-card').count(),1,'Neutral pending development panel');
       assert.match(await page.locator('.v3-development-card').innerText(),/NOT YET RATED/);
+      await page.evaluate(()=>document.fonts.ready);
+      const visualTokens=await page.evaluate(()=>{
+        const font=s=>getComputedStyle(document.querySelector(s)).fontFamily;
+        const edge=s=>parseFloat(getComputedStyle(document.querySelector(s)).borderTopWidth);
+        return {
+          headline:font('.reference-player-head h1'),
+          scoreboard:font('.stall-profile-stats > div strong'),
+          label:font('.stall-profile-stats > div small'),
+          matchup:font('.stall-profile-tabs button'),
+          frame:edge('.reference-dashboard-row .stall-dashboard-card'),
+          statFrame:edge('.stall-profile-stats > div')
+        };
+      });
+      assert.match(visualTokens.headline,/Anton/i,'LGCHL match headline font');
+      assert.match(visualTokens.scoreboard,/Anton/i,'LGCHL match scoreboard numbers font');
+      assert.match(visualTokens.label,/Teko/i,'LGCHL match labels font');
+      assert.match(visualTokens.matchup,/Teko/i,'LGCHL matchup navigation font');
+      assert.ok(visualTokens.frame >= (width<=580?5:6),'Inset report frames have substantial metal borders');
+      assert.ok(visualTokens.statFrame >= (width<=580?5:6),'Stat boxes have substantial metal borders');
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth + 2),'No horizontal overflow at '+width);
       if(width===390){
         const tiles=await page.locator('.stall-tab-panel[data-stall-panel="overview"] .reference-stat-strip > div').evaluateAll(nodes=>nodes.map(n=>Math.round(n.getBoundingClientRect().width)));
