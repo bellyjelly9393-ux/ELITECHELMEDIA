@@ -233,7 +233,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       await context.close();
     }
     const owned=await pageFor(390,{role:'player'});
-    await owned.page.goto(origin+'/hitmen-team-locker.html');
+    await owned.page.goto(origin+'/hitmen-locker.html');
     await owned.page.waitForSelector('#lockerRoster .v3-room-jersey');
     assert.equal(await owned.page.locator('#lockerRoster a').count(),1,'Player can open own stall only');
     await owned.page.goto(origin+'/hitmen-stall.html?player='+OTHER);
