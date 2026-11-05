@@ -152,6 +152,13 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       assert.equal(await page.locator('.v3-development-card').count(),1,'Neutral pending development panel');
       assert.match(await page.locator('.v3-development-card').innerText(),/NOT YET RATED/);
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth + 2),'No horizontal overflow at '+width);
+      if(width===390){
+        const tiles=await page.locator('.stall-tab-panel[data-stall-panel="overview"] .reference-stat-strip > div').evaluateAll(nodes=>nodes.map(n=>Math.round(n.getBoundingClientRect().width)));
+        assert.equal(tiles.length,5,'Five season stat panels on mobile');
+        assert.ok(Math.abs(tiles[0]-tiles[1])<2&&Math.abs(tiles[1]-tiles[2])<2,'First mobile stat row is even');
+        assert.ok(tiles[3]>tiles[0]&&Math.abs(tiles[3]-tiles[4])<2,'Final mobile stat row fills width evenly');
+      }
+
       await page.locator('[data-stall-tab="settings"]').click();
       await page.locator('#jerseyNameInput').fill('SETTY');
       await page.locator('#jerseyNumberInput').fill('05');
