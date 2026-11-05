@@ -115,7 +115,7 @@ function buildFrame() {
    const node=document.querySelector(".v3-gear."+target);if(!node)return;
    if(oldUrl)URL.revokeObjectURL(oldUrl);oldUrl=URL.createObjectURL(file);
    node.style.backgroundImage='url("'+oldUrl+'")';node.style.backgroundSize="contain";node.style.backgroundPosition="center";
-   node.style.backgroundRepeat="no-repeat";node.textContent="";
+   node.style.backgroundRepeat="no-repeat";node.textContent="";node.classList.add("has-photo");
    E("v3EquipmentMessage").textContent="Screenshot displayed in the "+target+" slot locally. No data saved.";
   });
  }
