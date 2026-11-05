@@ -570,3 +570,39 @@ body.v3-preview {--v3-red:#fd2057;--v3-gold:#e6c16c;--v3-steel:#8c9098; backgrou
   .v3-preview .v3-banner .v3-warroom {font-size:clamp(16px,4.45vw,21px)!important;line-height:.92!important}
   .v3-preview .v3-banner .v3-crest {max-height:62px!important}
 }
+
+
+/* Contrast validation after real Playwright screenshots.
+   Dark text-shadow applied to a transparent gradient was obscuring the
+   number faces. Make tackle twill opaque and remove overlaying dark shadows
+   from metallic text; use drop shadows *behind* the visible glyphs instead. */
+.v3-preview .v3-master-scene .v3-master-backnumber,
+.v3-locker-room .locker-stall .v3-master-scene .v3-master-backnumber,
+.v3-preview .v3-master-scene .v3-master-sleeve,
+.v3-locker-room .locker-stall .v3-master-scene .v3-master-sleeve {
+  background:none!important;
+  background-image:none!important;
+  -webkit-background-clip:border-box!important;
+  background-clip:border-box!important;
+  color:#f0f2f5!important;
+  -webkit-text-fill-color:#f0f2f5!important;
+  text-shadow:none!important;
+  -webkit-text-stroke:.15cqw #d52d5e!important;
+  filter:drop-shadow(0 .04cqw .045cqw #ecb2bf8c) drop-shadow(.08cqw .13cqw .07cqw #010102f5)!important;
+}
+.v3-preview .v3-master-scene .v3-master-sleeve,
+.v3-locker-room .locker-stall .v3-master-scene .v3-master-sleeve {
+  -webkit-text-stroke:.095cqw #d52d5e!important;
+}
+.v3-preview .stall-profile-stats>div strong {
+  text-shadow:none!important;
+  color:#c8cbd1!important;
+  -webkit-text-fill-color:transparent!important;
+  filter:drop-shadow(0 1px 0 #f8f9fa85) drop-shadow(1px 3px 1px #000e)!important;
+}
+.v3-preview .v3-banner .v3-team strong,
+.v3-preview .v3-banner .v3-warroom,
+.v3-preview .v3-banner .v3-warroom b {
+  text-shadow:none!important;
+  filter:drop-shadow(0 2px 1px #010102) drop-shadow(0 0 7px #ef345d38)!important;
+}
