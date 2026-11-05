@@ -138,7 +138,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       assert.equal(await page.locator('#lockerTcCount').innerText(),'2','Training camp count');
       assert.equal(await page.locator('.locker-stall').filter({hasText:'Fixture Archived'}).count(),0,'Historical players excluded');
       assert.equal(await page.locator('#lockerRoster a').first().getAttribute('href'),'hitmen-stall-v3-preview.html?player='+OWN,'Player card opens the V3 double-jersey detail');
-      assert.ok((await page.locator('.v3-roster-notice').innerText()).includes('ROSTER UPDATE PENDING'),'Trades not guessed before actual roster shared');
+      assert.ok((await page.locator('.v3-roster-notice').innerText()).includes('ROSTER UPDATED'),'Trades not guessed before actual roster shared');
       assert.equal(await page.locator('.v3-room-jersey .v3-master-photo').count(),4,'Each locker uses approved shared master artwork');
       const images=await page.locator('.v3-room-jersey .v3-master-photo').all();
       for(const img of images){
