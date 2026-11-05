@@ -1,0 +1,11 @@
+/* Personal stall presentation. Existing authorization and data controller retained. */
+(()=>{'use strict';
+const host=document.getElementById('stallScene');
+const update=(el,{name='',number=''}={})=>{el.querySelectorAll('[data-jersey-name]').forEach(n=>n.textContent=String(name).toUpperCase());el.querySelectorAll('[data-jersey-number]').forEach(n=>n.textContent=String(number).replace(/\D/g,'').slice(0,2));};
+window.HitmenStall={mount(el,opts){el.innerHTML='<div class="premium-locker hs-stall"><img class="premium-room" src="assets/my-stall/environment.webp" alt="Calgary concept locker with steel framing, illuminated shelves and hockey equipment"><div class="premium-nameplate"><strong data-jersey-name></strong><i>/</i><b data-jersey-number></b></div><div class="premium-jerseys"><img src="assets/my-stall/jersey-pair.webp" alt="Matching custom Hitmen concept jerseys, front and back"><div class="premium-back-print"><strong data-jersey-name></strong><b data-jersey-number></b></div></div></div>';update(el,opts);},update,setBack(){},fitAll(){}};
+const tabs=[...document.querySelectorAll('[data-stall-tab]')];
+tabs.forEach((btn,i)=>{btn.setAttribute('role','tab');btn.id='premium-tab-'+btn.dataset.stallTab;btn.setAttribute('aria-controls','premium-panel-'+btn.dataset.stallTab);btn.addEventListener('click',()=>{tabs.forEach(t=>{t.setAttribute('aria-selected',String(t===btn));t.tabIndex=t===btn?0:-1;});history.replaceState(null,'','#'+btn.dataset.stallTab);});btn.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const j=e.key==='Home'?0:e.key==='End'?tabs.length-1:(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;tabs[j].focus();tabs[j].click();});});
+document.querySelector('.stall-profile-tabs')?.setAttribute('role','tablist');
+document.querySelectorAll('[data-stall-panel]').forEach(p=>{p.id='premium-panel-'+p.dataset.stallPanel;p.setAttribute('role','tabpanel');p.setAttribute('aria-labelledby','premium-tab-'+p.dataset.stallPanel);});
+window.addEventListener('DOMContentLoaded',()=>{(tabs.find(t=>'#'+t.dataset.stallTab===location.hash)||tabs[0])?.click();});
+})();
