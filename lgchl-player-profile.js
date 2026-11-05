@@ -88,7 +88,7 @@
     const cardUrl = url ? 'player-cards.html?league=lgchl&id=' + Number(p.lg_user_id) + '&kind=' + (isGoalie ? 'goalie' : 'skater') : '';
     const card = '<section class="lg-hockey-card" aria-label="' + name + ' hockey card">' +
       '<div class="lg-hockey-card-top"><img src="assets/brand/ecm-crest.webp" alt="Elitechel Media"><span>PLAYER SERIES · S55</span><img src="assets/wildman/home/lgchl-logo.webp" alt="LGCHL"></div>' +
-      '<div class="lg-hockey-card-art"><img src="' + logo(p.lg_team_id) + '" alt="' + team + '"><span>' + position + '</span></div>' +
+      '<div class="lg-hockey-card-art"><img src="' + (Number(p.lg_team_id)===412?'assets/war-room/jersey-home.webp':logo(p.lg_team_id)) + '" alt="' + team + '"><span>' + position + '</span></div>' +
       '<h3>' + name + '</h3><p>' + team + '</p><div class="lg-hockey-card-stats">' +
       (isGoalie ? stat('GP',fmt(p.gp)) + stat('SV%',numeric(p.save_pct)?(n(p.save_pct)*100).toFixed(1)+'%':'—') + stat('GAA',rate(p.gaa)) : stat('G',fmt(p.goals)) + stat('A',fmt(p.assists)) + stat('PTS',fmt(p.points))) + '</div>' +
       (cardUrl ? '<a class="lg-profile-full-link" href="' + cardUrl + '">View your hockey card →</a>' : '') + '<p style="margin:12px 0 0;font-size:13px"><a href="elite-chel-cards.html" style="color:#f2c873;text-decoration:underline">How do Elite Chel Cards, ratings and upgrades work?</a></p></section>';
@@ -99,7 +99,7 @@
         '<div class="lg-profile-identity"><small>ELITECHEL MEDIA · LGCHL SEASON 55</small><h2 id="lgProfileTitle">' + name + '</h2>' +
          '<p>' + team + ' · ' + position + '</p>' + badge + (earned ? '<div class="lg-player-badges">' + earned + '</div>' : '') + '</div>' +
        '</div>' +
-       card + '<div class="lg-profile-stat-grid">' + stats + '</div>' +
+       (Number.isSafeInteger(Number(p.lg_team_id))&&Number(p.lg_team_id)>0?'<a class="lg-profile-full-link" href="lgchl-team.html?team='+Number(p.lg_team_id)+'">Open team locker room →</a>':'') + card + '<div class="lg-profile-stat-grid">' + stats + '</div>' +
        '<section class="lg-profile-story" aria-labelledby="lgProfileStoryTitle"><small>THE SEASON STORY</small>' +
          '<h3 id="lgProfileStoryTitle">Season 55 at a glance</h3><p>' + esc(story(p, metric, rank)) + '</p>' +
        '</section>' +
