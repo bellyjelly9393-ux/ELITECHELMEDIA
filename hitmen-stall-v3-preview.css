@@ -117,3 +117,12 @@ body.v3-preview {--v3-red:#fd2057;--v3-gold:#e6c16c;--v3-steel:#8c9098; backgrou
 .v3-preview .v3-gear.skateleft:not(.has-photo),
 .v3-preview .v3-gear.skateright:not(.has-photo){opacity:0;pointer-events:none}
 .v3-preview .v3-gear.has-photo{opacity:1;color:transparent;background-color:transparent;border:0;box-shadow:none;pointer-events:none;filter:drop-shadow(0 .6cqw .8cqw #000)}
+
+/* Game-by-game panel: the source is existing approved game report markup. */
+.v3-preview .v3-recent-table{width:100%;border-collapse:collapse;table-layout:auto;font:700 clamp(11px,1.08vw,14px)/1.35 "Barlow Condensed",Arial,sans-serif;color:#f2f1f2}
+.v3-preview .v3-recent-table th{font-weight:900;text-align:left;font-size:11px;letter-spacing:.035em;color:#eee;border-bottom:2px solid #786e76;padding:6px 4px}
+.v3-preview .v3-recent-table th:nth-child(n+3),.v3-preview .v3-recent-table td:nth-child(n+3){text-align:right;font-variant-numeric:tabular-nums}
+.v3-preview .v3-recent-table td{padding:10px 4px;border-bottom:1px solid #39363e;color:#f7f4f6}
+.v3-preview .v3-recent-table tr:nth-child(even){background:#ffffff0a}
+.v3-preview .v3-recent-table td:nth-child(2){max-width:14ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:580px){.v3-preview .v3-recent-table th,.v3-preview .v3-recent-table td{padding:8px 3px}}
