@@ -15,6 +15,8 @@
   const logo = id => Number.isSafeInteger(Number(id)) && Number(id) > 0
     ? 'assets/lgchl/s55/team' + Number(id) + '.png'
     : 'assets/wildman/home/lgchl-logo.webp';
+  const jerseyAssets={448:'assets/lgchl/jerseys/team448.webp',447:'assets/lgchl/jerseys/team447.webp',449:'assets/lgchl/jerseys/team449.webp',455:'assets/lgchl/jerseys/team455.webp',399:'assets/lgchl/jerseys/team399.webp',419:'assets/lgchl/jerseys/team419.webp',2604:'assets/lgchl/jerseys/team2604.webp',375:'assets/lgchl/jerseys/team375.webp'};
+  const cardArt=id=>jerseyAssets[Number(id)]||(Number(id)===412?'assets/war-room/jersey-home.webp':logo(id));
   const stamp = v => v && Number.isFinite(Date.parse(v))
     ? new Intl.DateTimeFormat('en-CA', {month:'short', day:'numeric', year:'numeric', timeZone:'America/Toronto'}).format(new Date(v))
     : 'Date unavailable';
@@ -88,7 +90,7 @@
     const cardUrl = url ? 'player-cards.html?league=lgchl&id=' + Number(p.lg_user_id) + '&kind=' + (isGoalie ? 'goalie' : 'skater') : '';
     const card = '<section class="lg-hockey-card" aria-label="' + name + ' hockey card">' +
       '<div class="lg-hockey-card-top"><img src="assets/brand/ecm-crest.webp" alt="Elitechel Media"><span>PLAYER SERIES · S55</span><img src="assets/wildman/home/lgchl-logo.webp" alt="LGCHL"></div>' +
-      '<div class="lg-hockey-card-art"><img src="' + (Number(p.lg_team_id)===412?'assets/war-room/jersey-home.webp':logo(p.lg_team_id)) + '" alt="' + team + '"><span>' + position + '</span></div>' +
+      '<div class="lg-hockey-card-art"><img src="' + cardArt(p.lg_team_id) + '" onerror="this.onerror=null;this.src=\''+logo(p.lg_team_id)+'\'" alt="' + team + '"><span>' + position + '</span></div>' +
       '<h3>' + name + '</h3><p>' + team + '</p><div class="lg-hockey-card-stats">' +
       (isGoalie ? stat('GP',fmt(p.gp)) + stat('SV%',numeric(p.save_pct)?(n(p.save_pct)*100).toFixed(1)+'%':'—') + stat('GAA',rate(p.gaa)) : stat('G',fmt(p.goals)) + stat('A',fmt(p.assists)) + stat('PTS',fmt(p.points))) + '</div>' +
       (cardUrl ? '<a class="lg-profile-full-link" href="' + cardUrl + '">View your hockey card →</a>' : '') + '<p style="margin:12px 0 0;font-size:13px"><a href="elite-chel-cards.html" style="color:#f2c873;text-decoration:underline">How do Elite Chel Cards, ratings and upgrades work?</a></p></section>';

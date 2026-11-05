@@ -6,7 +6,8 @@ const raw=params.get('team'),team=raw===null?412:Number(raw);
 const valid=n=>Number.isSafeInteger(Number(n))&&Number(n)>0;
 if(!valid(team)){$('roomName').textContent='Team not found';['roomRecord','roomPlayers','roomFinals','roomUpcoming'].forEach(id=>$(id).textContent='Choose a team from league coverage.');$('roomPlayers').setAttribute('aria-busy','false');return;}
 const logo=id=>'assets/lgchl/s55/team'+Number(id)+'.png';
-const jersey=id=>Number(id)===412?'assets/war-room/jersey-home.webp':logo(id);
+const jerseyAssets={448:'assets/lgchl/jerseys/team448.webp',447:'assets/lgchl/jerseys/team447.webp',449:'assets/lgchl/jerseys/team449.webp',455:'assets/lgchl/jerseys/team455.webp',399:'assets/lgchl/jerseys/team399.webp',419:'assets/lgchl/jerseys/team419.webp',2604:'assets/lgchl/jerseys/team2604.webp',375:'assets/lgchl/jerseys/team375.webp'};
+const jersey=id=>jerseyAssets[Number(id)]||(Number(id)===412?'assets/war-room/jersey-home.webp':logo(id));
 const fmt=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))?Number(v).toLocaleString('en-US'):'—';
 const rate=(v,d)=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))?Number(v).toFixed(d):'—';
 const date=v=>Number.isFinite(Date.parse(v))?new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(v))+' ET':'Time unavailable';
@@ -17,12 +18,12 @@ function render(){
  $('roomPlayers').innerHTML=rows.map(p=>{
  const goalie=p.player_kind==='goalie',url='lgchl-player.html?id='+Number(p.lg_user_id)+'&kind='+(goalie?'goalie':'skater');
  const stats=goalie?[['GP',fmt(p.gp)],['SV%',p.save_pct==null?'—':rate(Number(p.save_pct)*100,1)+'%'],['GAA',rate(p.gaa,2)]]:[['G',fmt(p.goals)],['A',fmt(p.assists)],['PTS',fmt(p.points)]];
- return '<a class="stall" href="'+url+'"><strong class="nameplate">'+esc(p.gamertag)+'</strong><div class="jersey-stage"><img src="'+jersey(team)+'" alt="'+(team===412?'Calgary Hitmen jersey':'Team crest')+'" loading="lazy"></div><div class="stall-info"><p>'+esc(p.position||(goalie?'G':'Skater'))+' · '+fmt(p.gp)+' GP</p><div class="stats">'+stats.map(([k,v])=>'<span>'+k+'<b>'+esc(v)+'</b></span>').join('')+'</div><span class="open-card">OPEN PLAYER CARD →</span></div></a>';
+ return '<a class="stall" href="'+url+'"><strong class="nameplate">'+esc(p.gamertag)+'</strong><div class="jersey-stage"><img src="'+jersey(team)+'" alt="'+(jerseyAssets[team]||team===412?'Team jersey':'Team crest')+'" loading="lazy"></div><div class="stall-info"><p>'+esc(p.position||(goalie?'G':'Skater'))+' · '+fmt(p.gp)+' GP</p><div class="stats">'+stats.map(([k,v])=>'<span>'+k+'<b>'+esc(v)+'</b></span>').join('')+'</div><span class="open-card">OPEN PLAYER CARD →</span></div></a>';
  }).join('')||'<p class="note">'+(q?'No matching players.':'No public player stats are listed for this team yet.')+'</p>';
  $('roomPlayers').setAttribute('aria-busy','false');
 }
 $('roomLogo').src=logo(team);
-document.addEventListener('error',e=>{if(e.target.tagName==='IMG'){e.target.hidden=true;}},true);
+document.addEventListener('error',e=>{const image=e.target;if(image.tagName!=='IMG')return;if(image.closest('.jersey-stage')&&!image.dataset.fallback){image.dataset.fallback='true';image.src=logo(team);image.alt='Team crest';}else{image.hidden=true;}},true);
 $('roomSearch').addEventListener('input',render);
 $('roomTeam').addEventListener('change',()=>{location.href='lgchl-team.html?team='+Number($('roomTeam').value);});
 async function standings(){
