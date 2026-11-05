@@ -175,3 +175,118 @@ body.v3-preview {--v3-red:#fd2057;--v3-gold:#e6c16c;--v3-steel:#8c9098; backgrou
 .v3-preview .v3-master-backnumber{top:48.4%;font-size:12.7cqw}
 .v3-preview .v3-master-sleeve{font-size:3.8cqw}
 @media(max-width:580px){.v3-preview .v3-master-backnumber{font-size:12.2cqw}.v3-preview .v3-master-sleeve{font-size:3.6cqw}}
+
+/* V3 DASHBOARD FINISH PASS — approved physical metallic panel language.
+   Visual treatment only; existing tabs, stats, permissions and report data remain unchanged. */
+.v3-preview .reference-player-head{
+  border:3px ridge #90848e!important;
+  background:linear-gradient(160deg,#393238 0%,#101014 9%,#08080b 66%,#28212a 97%)!important;
+  box-shadow:inset 0 2px 0 #e6e0ec44,inset 0 -2px 0 #030305,0 5px 0 #08070a,0 10px 21px #000e!important;
+}
+.v3-preview .stall-profile-tabs button{
+  border-width:3px!important;
+  border-style:ridge!important;
+  border-color:#8a858d!important;
+  background:linear-gradient(176deg,#65616a 0%,#29272e 7%,#101015 36%,#0a090d 78%,#48424d 100%)!important;
+  box-shadow:inset 0 2px 1px #ffffff32,inset 0 -3px 1px #050406,0 5px 4px #000!important;
+}
+.v3-preview .stall-profile-tabs button.active{
+  border-color:#ff6489!important;
+  background:linear-gradient(175deg,#ff648d 0%,#bd183f 35%,#550c25 80%,#0d070a 100%)!important;
+  box-shadow:inset 0 2px #ffe6ee90,inset 0 -3px #220109,0 0 14px #e9246377!important;
+}
+.v3-preview .stall-profile-stats>div{
+  border:4px ridge #98909d!important;
+  min-height:116px;
+  padding:13px 4px 19px!important;
+  clip-path:polygon(16px 0,calc(100% - 14px) 0,100% 14px,100% calc(100% - 15px),calc(100% - 16px) 100%,14px 100%,0 calc(100% - 13px),0 15px)!important;
+  background:
+    linear-gradient(156deg,#7d7783 0%,transparent 14%,transparent 82%,#3e3541 100%),
+    linear-gradient(160deg,#2a252d 0%,#101015 17%,#0a090e 58%,#201b22 100%)!important;
+  box-shadow:inset 2px 2px #ffffff3a,inset -4px -5px #000e,0 7px 0 #08060a,0 10px 19px #000d!important;
+  position:relative;
+}
+.v3-preview .stall-profile-stats>div:before{
+  content:"";position:absolute;inset:5px;
+  clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 11px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 11px),0 12px);
+  border:1px solid #5a535e;box-shadow:inset 1px 1px #ddd5e02e;
+  pointer-events:none;
+}
+.v3-preview .stall-profile-stats>div:after{
+  bottom:3px!important;left:13%!important;right:13%!important;height:4px!important;
+  background:linear-gradient(90deg,#85203a,#ff3b78,#ef3564,#7a1430)!important;
+  box-shadow:0 0 10px #ff1c5faa!important;
+}
+.v3-preview .stall-profile-stats>div strong{
+  position:relative;z-index:1;font-size:clamp(36px,5vw,58px)!important;
+  font-style:italic;letter-spacing:.01em;text-shadow:0 2px 1px #000,0 5px 9px #000c!important;
+}
+.v3-preview .stall-profile-stats>div small{
+  position:relative;z-index:1;font-size:clamp(12px,1.35vw,16px)!important;line-height:1.1;
+  letter-spacing:.09em;text-shadow:0 2px #000!important;
+}
+.v3-preview .reference-dashboard-row .stall-dashboard-card,
+.v3-preview .reference-secondary .player-panel{
+  border:4px ridge #817986!important;
+  clip-path:polygon(15px 0,calc(100% - 13px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 14px) 100%,13px 100%,0 calc(100% - 13px),0 15px);
+  background:
+    linear-gradient(151deg,#4b444f 0%,transparent 10%,transparent 89%,#2a232f 100%),
+    linear-gradient(162deg,#1a171d 0%,#0b0b10 26%,#08090d 76%,#19141b 100%)!important;
+  box-shadow:inset 2px 2px #e4dce733,inset -3px -3px #000e,0 7px 0 #060508,0 12px 17px #000d!important;
+}
+.v3-preview .reference-dashboard-row .stall-dashboard-card:before{
+  content:"";position:absolute;inset:6px;z-index:0;
+  border:1px solid #625965;clip-path:polygon(12px 0,calc(100% - 11px) 0,100% 11px,100% calc(100% - 11px),calc(100% - 11px) 100%,11px 100%,0 calc(100% - 11px),0 12px);
+  pointer-events:none;opacity:.5;
+}
+.v3-preview .reference-dashboard-row .stall-dashboard-card:after{
+  bottom:2px!important;left:15%!important;right:15%!important;height:3px!important;
+  background:linear-gradient(90deg,transparent,#ff2b66,#ff4a7f,transparent)!important;
+  box-shadow:0 0 10px #f21e5766!important;
+}
+.v3-preview .reference-dashboard-row .stall-dashboard-card>*,
+.v3-preview .reference-secondary .player-panel>*{position:relative;z-index:1}
+.v3-preview .reference-dashboard-row .stall-card-title{
+  margin:-3px -3px 11px!important;padding:8px 7px 9px 9px!important;
+  border:0!important;border-bottom:2px solid #695764!important;
+  background:linear-gradient(172deg,#343037 0%,#151219 42%,#0a0b0e 100%)!important;
+  box-shadow:inset 0 2px #c9c1ca27,inset 0 -2px #030205;
+}
+.v3-preview .reference-dashboard-row .stall-card-title h2,
+.v3-preview .reference-dashboard-row .stall-card-title h3{
+  font-size:clamp(20px,2.2vw,27px)!important;
+  text-shadow:1px 3px 1px #000!important;
+}
+.v3-preview .reference-dashboard-row .stall-card-title span{
+  color:#d9c8d2!important;letter-spacing:.06em;
+}
+.v3-preview .v3-tools{
+  border:4px ridge #8b808d!important;
+  background:linear-gradient(175deg,#49404b 0%,#17131b 14%,#08090b 64%,#2c222d 100%)!important;
+  clip-path:polygon(19px 0,calc(100% - 17px) 0,100% 18px,100% calc(100% - 16px),calc(100% - 18px) 100%,18px 100%,0 calc(100% - 17px),0 20px);
+  box-shadow:inset 2px 2px #ffffff3a,inset -3px -3px #000b,0 9px 0 #050407,0 14px 21px #000c;
+}
+.v3-preview .v3-tools button,.v3-preview .v3-tools a{
+  border:3px ridge #d4ab63!important;
+  background:linear-gradient(173deg,#5b4629 0%,#2b2118 16%,#130e0d 56%,#45321c 100%)!important;
+  box-shadow:inset 0 1px #ffedb38c,inset 0 -3px #080606,0 4px 9px #000e!important;
+}
+/* Fill the final mobile stat row evenly: 3 across, then 2 equal-size tiles.
+   No blank third cell that makes the locker dashboard appear unfinished. */
+@media(max-width:580px){
+  .v3-preview .stall-tab-panel.active .reference-stat-strip{
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+    gap:7px!important;
+  }
+  .v3-preview .stall-tab-panel.active .reference-stat-strip>div{
+    grid-column:span 2;
+    min-width:0;min-height:99px;padding:9px 3px 16px!important;
+  }
+  .v3-preview .stall-tab-panel.active .reference-stat-strip>div:nth-child(n+4){
+    grid-column:span 3;
+  }
+  .v3-preview .stall-profile-stats>div strong{font-size:36px!important}
+  .v3-preview .stall-profile-stats>div small{font-size:10px!important;letter-spacing:.035em}
+  .v3-preview .reference-dashboard-row .stall-dashboard-card{padding:14px 13px!important}
+  .v3-preview .reference-dashboard-row .stall-card-title h2{font-size:22px!important}
+}
