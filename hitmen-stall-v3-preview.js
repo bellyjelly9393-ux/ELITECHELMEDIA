@@ -124,6 +124,37 @@ function buildFrame() {
  const bio=body.querySelector(".reference-bio-card");
  const reports=body.querySelector(".reference-secondary");
  if(bio&&reports)reports.appendChild(bio);
+ /* Render recent individual results from the game's existing, approved report DOM.
+    No new network request, no guessed player identity and no fabricated stat rows. */
+ function renderRecentGameLines(){
+   const recent=body.querySelector(".recent-stat-list");
+   const reportRoot=E("playerGameReports");
+   if(!recent||!reportRoot)return;
+   const reports=Array.from(reportRoot.querySelectorAll(".player-report")).slice(0,3);
+   if(!reports.length)return;
+   const isGoalie=String(E("profileBioPosition")?.textContent||"").trim().toUpperCase()==="G";
+   const wanted=isGoalie?["SV","SA","GA","SV%"]:["G","A","PTS"];
+   const rows=reports.map(report=>{
+     const heading=report.querySelector(".player-report-head");
+     const date=heading?.querySelector("small")?.textContent?.trim()||"—";
+     const opponent=heading?.querySelector("h3")?.textContent?.split(" · ")[0]?.trim()||"Opponent";
+     const stats={};
+     report.querySelectorAll(".player-report-statline span").forEach(span=>{
+       const label=span.querySelector("small")?.textContent?.trim();
+       if(label) stats[label]=span.querySelector("b")?.textContent?.trim()||"—";
+     });
+     return [date,opponent,...wanted.map(label=>stats[label]??"—")];
+   });
+   const ths=["DATE","OPPONENT",...wanted];
+   recent.innerHTML='<table class="v3-recent-table" aria-label="Recent individual game statistics"><thead><tr>'+
+      ths.map(value=>'<th scope="col">'+x(value)+'</th>').join("")+'</tr></thead><tbody>'+
+      rows.map(row=>'<tr>'+row.map(value=>'<td>'+x(value)+'</td>').join("")+'</tr>').join("")+'</tbody></table>';
+ }
+ const gameReportRoot=E("playerGameReports");
+ if(gameReportRoot){
+   new MutationObserver(renderRecentGameLines).observe(gameReportRoot,{childList:true});
+   renderRecentGameLines();
+ }
  const caption=document.createElement("p");caption.className="v3-preview-note";
  caption.textContent="Design preview, not production. Source image assets are the existing team stall photographs. Jerseys and equipment require final visual QA against the approved master.";
  const toolsBar=body.querySelector(".v3-tools");
