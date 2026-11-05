@@ -426,3 +426,147 @@ body.v3-preview {--v3-red:#fd2057;--v3-gold:#e6c16c;--v3-steel:#8c9098; backgrou
     max-width:100%!important;
   }
 }
+
+
+/* NOV 5 VISUAL REFERENCE: authentic tackle-twill numbers + raised graphite statistics.
+   The font assets already exist on the site. This is a responsive cosmetic layer only. */
+.v3-preview .v3-master-scene .v3-master-backnumber,
+.v3-locker-room .locker-stall .v3-master-scene .v3-master-backnumber {
+  top:49.1%!important;
+  left:57.2%!important;
+  width:15.1%!important;
+  font-family:var(--f-head,"Anton",Impact,sans-serif)!important;
+  font-size:10.9cqw!important;
+  font-weight:900!important;
+  line-height:1!important;
+  letter-spacing:-.018em!important;
+  -webkit-text-stroke:.15cqw #c2254e!important;
+  paint-order:stroke fill!important;
+  background:repeating-linear-gradient(0deg,#dddde2 0 .07cqw,#f6f7f8 .07cqw .17cqw,#c4c6ce .17cqw .22cqw)!important;
+  background-clip:text!important;
+  -webkit-background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  text-shadow:.065cqw .095cqw .085cqw #0b090df0!important;
+  filter:drop-shadow(.08cqw .13cqw .075cqw #000c)!important;
+  transform:scaleX(.96) rotate(-.6deg)!important;
+  transform-origin:50% 15%!important;
+}
+.v3-preview .v3-master-scene .v3-master-sleeve,
+.v3-locker-room .locker-stall .v3-master-scene .v3-master-sleeve {
+  font-family:var(--f-head,"Anton",Impact,sans-serif)!important;
+  font-size:3.15cqw!important;
+  font-weight:900!important;
+  line-height:1!important;
+  -webkit-text-stroke:.10cqw #c32a53!important;
+  paint-order:stroke fill!important;
+  background:linear-gradient(160deg,#fff,#c3c5ca 56%,#f1f1f3)!important;
+  background-clip:text!important;
+  -webkit-background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  text-shadow:.05cqw .07cqw .06cqw #10070cb3!important;
+  filter:drop-shadow(.035cqw .075cqw .05cqw #0009)!important;
+}
+.v3-preview .stall-profile-stats>div strong {
+  font-family:var(--f-head,"Anton",Impact,sans-serif)!important;
+  font-size:clamp(42px,5.4vw,65px)!important;
+  font-weight:900!important;
+  line-height:.96!important;
+  letter-spacing:.01em!important;
+  font-style:normal!important;
+  background:linear-gradient(179deg,#fcfdff 0%,#d7dae0 19%,#979ba5 37%,#f1f3f7 48%,#777b87 70%,#bfc1c9 85%,#5b5e6a 100%)!important;
+  background-clip:text!important;
+  -webkit-background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:.045em #343743!important;
+  paint-order:stroke fill!important;
+  text-shadow:0 2px 0 #09090d,0 4px 3px #000c!important;
+  filter:drop-shadow(0 1px 0 #f8f9fd6e) drop-shadow(1px 3px 1px #000c)!important;
+}
+@media(max-width:580px) {
+  .v3-preview .v3-master-scene .v3-master-backnumber,
+  .v3-locker-room .locker-stall .v3-master-scene .v3-master-backnumber {font-size:10.7cqw!important}
+  .v3-preview .v3-master-scene .v3-master-sleeve,
+  .v3-locker-room .locker-stall .v3-master-scene .v3-master-sleeve {font-size:3.05cqw!important}
+  .v3-preview .stall-profile-stats>div strong {font-size:clamp(36px,9.5vw,46px)!important}
+}
+
+/* WAR ROOM BANNER: original faded arena / crossed-stick etching beneath genuine logos.
+   Keep labels readable and the centre crest unmodified. */
+.v3-preview .v3-banner {
+  min-height:140px!important;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(5,6,9,.76) 0%,rgba(5,6,9,.37) 23%,rgba(5,6,9,.46) 52%,rgba(5,6,9,.35) 78%,rgba(5,6,9,.76) 100%),
+    url("assets/hitmen-v3/warroom-banner-etching.svg") center center/cover no-repeat,
+    linear-gradient(160deg,#100c12,#040406 48%,#240914)!important;
+  border-block:3px ridge #78717c!important;
+  box-shadow:inset 0 2px #f7e6ed38,inset 0 -4px #090509,0 8px 16px #000b!important;
+}
+.v3-preview .v3-banner .v3-team,
+.v3-preview .v3-banner .v3-warroom,
+.v3-preview .v3-banner .v3-crest {position:relative;z-index:1}
+.v3-preview .v3-banner .v3-team strong {
+  font-family:var(--f-slash,"Kanit",Impact,sans-serif)!important;
+  font-weight:900!important;
+  font-style:italic!important;
+  font-size:clamp(25px,3.45vw,45px)!important;
+  letter-spacing:-.035em!important;
+  line-height:.95!important;
+  background:linear-gradient(180deg,#ffd3dc 0%,#ff718f 19%,#fb275c 49%,#a20e31 95%)!important;
+  background-clip:text!important;
+  -webkit-background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:.02em #650a23!important;
+  paint-order:stroke fill!important;
+  filter:drop-shadow(1px 3px 1px #000e);
+  text-shadow:1px 3px 1px #090408!important;
+}
+.v3-preview .v3-banner .v3-team small {
+  font-family:var(--f-ui,"Teko",Arial,sans-serif)!important;
+  font-weight:600!important;
+  font-size:clamp(15px,1.4vw,19px)!important;
+  letter-spacing:.22em!important;
+  line-height:.9!important;
+  color:#dfd7db!important;
+  text-shadow:0 2px 2px #000;
+}
+.v3-preview .v3-banner .v3-warroom {
+  font-family:var(--f-slash,"Kanit",Impact,sans-serif)!important;
+  font-style:italic!important;
+  font-weight:900!important;
+  font-size:clamp(28px,3.35vw,46px)!important;
+  line-height:.91!important;
+  letter-spacing:-.048em!important;
+  white-space:nowrap;
+  background:linear-gradient(180deg,#ffb6c7 0%,#ff3e76 31%,#de1548 69%,#690b29 100%)!important;
+  background-clip:text!important;
+  -webkit-background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  text-shadow:1px 3px 1px #000b!important;
+  filter:drop-shadow(0 3px 2px #050407);
+}
+.v3-preview .v3-banner .v3-warroom b {
+  font-family:var(--f-head,"Anton",Impact,sans-serif)!important;
+  font-weight:400!important;
+  font-style:normal!important;
+  font-size:.95em!important;
+  line-height:1!important;
+  letter-spacing:.032em!important;
+  background:linear-gradient(180deg,#fcfcfd,#b3b5bf 36%,#f9f9fa 52%,#898e99 100%)!important;
+  background-clip:text!important;
+  -webkit-background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  text-shadow:1px 3px #050507!important;
+}
+.v3-preview .v3-banner .v3-crest {
+  max-height:117px!important;
+  filter:drop-shadow(0 0 7px #e72b5a82) drop-shadow(0 5px 4px #000e)!important;
+}
+@media(max-width:580px) {
+  .v3-preview .v3-banner {min-height:82px!important;padding:7px 7px!important;gap:5px!important}
+  .v3-preview .v3-banner .v3-team img {width:32px!important;height:32px!important}
+  .v3-preview .v3-banner .v3-team strong {font-size:clamp(15px,4.65vw,21px)!important;line-height:1!important}
+  .v3-preview .v3-banner .v3-team small {font-size:10px!important;letter-spacing:.13em!important}
+  .v3-preview .v3-banner .v3-warroom {font-size:clamp(16px,4.45vw,21px)!important;line-height:.92!important}
+  .v3-preview .v3-banner .v3-crest {max-height:62px!important}
+}
