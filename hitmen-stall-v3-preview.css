@@ -405,21 +405,21 @@ body.v3-preview {--v3-red:#fd2057;--v3-gold:#e6c16c;--v3-steel:#8c9098; backgrou
    overflow from the banner/title and inset panel widths. Constrain the
    actual layout boxes rather than clipping or hiding jersey artwork. */
 @media(max-width:580px){
-  .v3-preview #roomBody{
+  .v3-preview:not(.v3-locker-room) #roomBody{
     width:calc(100% - 20px)!important;
     max-width:calc(100vw - 40px)!important;
     padding-inline:0!important;
     box-sizing:border-box!important;
   }
-  .v3-preview .v3-banner,.v3-preview .v3-titlebar{
+  .v3-preview:not(.v3-locker-room) .v3-banner,.v3-preview:not(.v3-locker-room) .v3-titlebar{
     width:100%!important;
     max-width:100%!important;
     margin-inline:0!important;
     box-sizing:border-box!important;
   }
-  .v3-preview .reference-hero,
-  .v3-preview .reference-locker-pane,
-  .v3-preview .reference-player-pane{
+  .v3-preview:not(.v3-locker-room) .reference-hero,
+  .v3-preview:not(.v3-locker-room) .reference-locker-pane,
+  .v3-preview:not(.v3-locker-room) .reference-player-pane{
     box-sizing:border-box!important;
     min-width:0!important;
     width:100%!important;
