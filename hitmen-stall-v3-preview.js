@@ -102,7 +102,7 @@ function buildFrame() {
  if(settings){
   const upload=document.createElement("fieldset");upload.className="v3-equipment-upload";
   upload.style.cssText="margin:16px 0;padding:15px;border:1px solid #716366;background:#101015;color:#eee";
-  upload.innerHTML='<legend style="font-weight:800;color:#e5c272">EQUIPMENT PHOTO · PREVIEW ONLY</legend>'+
+  upload.innerHTML='<legend style="font-weight:800;color:#e5c272">EQUIPMENT PHOTO · LOCAL PREVIEW ONLY</legend>'+
    '<label for="v3EquipmentTarget">Gear slot</label> <select id="v3EquipmentTarget"><option value="helmet">Helmet</option><option value="gloves">Gloves</option><option value="skateleft">Skate</option></select>'+
    '<label for="v3EquipmentFile">Screenshot</label> <input id="v3EquipmentFile" type="file" accept="image/jpeg,image/png,image/webp">'+
    '<p id="v3EquipmentMessage">This local preview never uploads or saves equipment.</p>';
@@ -158,7 +158,7 @@ function buildFrame() {
    renderRecentGameLines();
  }
  const caption=document.createElement("p");caption.className="v3-preview-note";
- caption.textContent="Design preview, not production. Source image assets are the existing team stall photographs. Jerseys and equipment require final visual QA against the approved master.";
+ caption.textContent=document.body.classList.contains("v3-live")?"Equipment photo selections are local visual previews only and are NOT saved to your locker. Team statistics and reports are sourced from the existing War Room.":"Design preview, not production. Equipment images selected here are not stored or shared. Final visual approval is required.";
  const toolsBar=body.querySelector(".v3-tools");
  if(toolsBar)toolsBar.insertAdjacentElement("afterend",caption);
 }
