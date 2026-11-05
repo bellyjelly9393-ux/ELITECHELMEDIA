@@ -9,6 +9,7 @@ on:
       - 'hitmen-locker*'
       - 'media-desk.js'
       - 'test-hitmen-locker-restoration.cjs'
+      - 'test-hitmen-stall-v3-preview.cjs'
       - '.github/workflows/hitmen-locker-restoration.yml'
 permissions:
   contents: read
@@ -26,6 +27,7 @@ jobs:
           node --check hitmen-player-locker.js
           node --check hitmen-stall-scene.js
           node --check hitmen-stall-upgrade.js
+          node --check hitmen-stall-v3-preview.js
           node --check hitmen-locker-shell.js
           node --check hitmen-stall-request.js
           node --test test-calgary-roster.mjs test-opponent-refresh.mjs test-vod-review.cjs test-deep-scout.cjs test-hitmen-tonight-prep.cjs
@@ -34,9 +36,13 @@ jobs:
       - name: Restored locker navigation, photo stalls, player access and mobile
         env:
           NODE_PATH: /tmp/locker-browser/node_modules
-        run: node test-hitmen-locker-restoration.cjs
+        run: |
+          node test-hitmen-locker-restoration.cjs
+          node test-hitmen-stall-v3-preview.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: hitmen-locker-screenshots
-          path: artifacts/locker-stalls/
+          path: |
+            artifacts/locker-stalls/
+            artifacts/locker-stalls-v3/
