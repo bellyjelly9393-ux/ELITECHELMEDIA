@@ -169,3 +169,9 @@ body.v3-preview {--v3-red:#fd2057;--v3-gold:#e6c16c;--v3-steel:#8c9098; backgrou
  .v3-master-backnumber{font-size:12.5cqw}
  .v3-master-sleeve{font-size:4.2cqw}
 }
+
+/* Fine positioning after 1152px reference screenshot comparison. */
+.v3-preview .v3-master-backname{top:41.7%;font-size:2.45cqw}
+.v3-preview .v3-master-backnumber{top:48.4%;font-size:12.7cqw}
+.v3-preview .v3-master-sleeve{font-size:3.8cqw}
+@media(max-width:580px){.v3-preview .v3-master-backnumber{font-size:12.2cqw}.v3-preview .v3-master-sleeve{font-size:3.6cqw}}
