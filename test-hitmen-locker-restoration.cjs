@@ -154,6 +154,34 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       await page.waitForFunction(()=>document.getElementById('playerTitle').textContent==='Fixture Active');
       assert.equal(await page.locator('body.v3-live').count(),1,'Canonical My Stall uses V3 live design');
       assert.equal(await page.locator('#stallScene .v3-master-photo').count(),1,'My Stall has two jerseys in approved master');
+      await page.evaluate(()=>document.fonts.ready);
+      const newFinish=await page.evaluate(()=>{
+        const banner=document.querySelector('.v3-banner');
+        const teamName=banner?.querySelector('.v3-team strong');
+        const label=banner?.querySelector('.v3-warroom');
+        const number=document.querySelector('#stallScene .v3-master-backnumber');
+        const sleeve=document.querySelector('#stallScene .v3-master-sleeve');
+        const stage=document.querySelector('#stallScene .v3-master-scene');
+        const stat=document.querySelector('.stall-profile-stats>div strong');
+        return {
+          bannerBackground:banner?getComputedStyle(banner).backgroundImage:'',
+          teamFont:teamName?getComputedStyle(teamName).fontFamily:'',
+          roomFont:label?getComputedStyle(label).fontFamily:'',
+          backNumberSize:number?parseFloat(getComputedStyle(number).fontSize):0,
+          sleeveNumberSize:sleeve?parseFloat(getComputedStyle(sleeve).fontSize):0,
+          stageWidth:stage?.getBoundingClientRect().width||0,
+          statBackground:stat?getComputedStyle(stat).backgroundImage:'',
+          statFont:stat?getComputedStyle(stat).fontFamily:'',
+        };
+      });
+      assert.match(newFinish.bannerBackground,/warroom-banner-etching\.svg/,'Faded arena graphic under brand header');
+      assert.match(newFinish.teamFont,/Kanit/i,'Hitmen wordmark uses sharp varsity accent font');
+      assert.match(newFinish.roomFont,/Kanit/i,'War Room heading uses Hitmen accent font');
+      assert.ok(newFinish.backNumberSize>0&&newFinish.backNumberSize<=newFinish.stageWidth*.12,'Back number scaled to jersey fabric');
+      assert.ok(newFinish.sleeveNumberSize>0&&newFinish.sleeveNumberSize<=newFinish.stageWidth*.04,'Sleeve numbers no longer float off the jerseys');
+      assert.match(newFinish.statFont,/Anton/i,'Bold original scoreboard family retained');
+      assert.match(newFinish.statBackground,/gradient/,'Statistics have graphite-metallic text finish');
+
       assert.match(await page.locator('.v3-preview-note').last().innerText(),/NOT saved/,'Equipment persistence is not misrepresented');
       await page.locator('#stallScene .v3-master-photo').first().evaluate(img=>img.decode());
       await page.waitForSelector('#playerWeeklyReport [data-week-report]');
