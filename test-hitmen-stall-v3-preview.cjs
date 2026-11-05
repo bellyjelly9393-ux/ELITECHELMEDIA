@@ -133,6 +133,10 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       await page.waitForFunction(()=>document.getElementById('playerTitle')?.textContent==='Fixture Active');
       const scene=page.locator('#stallScene .v3-stage');
       assert.equal(await scene.count(),1,'V3 side-by-side scene present');
+
+      const master=scene.locator('.v3-master-photo');
+      assert.equal(await master.getAttribute('src'),'assets/hitmen-v3/locker-photo-master.webp?v=20261105-mobile-jersey-1','All viewports load the approved locker art, never legacy jersey files');
+      assert.equal(await page.locator('nav.sub-bar a[aria-current="page"]').getAttribute('href'),'hitmen-stall-v3-preview.html','My Stall navigation stays in V3 preview instead of returning to legacy single jersey');
       assert.equal(await scene.locator('.v3-master-photo').count(),1,'Approved photographic locker layer exists');
       await scene.locator('.v3-master-photo').evaluate(img=>img.decode());
       assert.ok(await scene.locator('.v3-master-photo').evaluate(img=>img.naturalWidth>=1086),'Correct high-resolution locker source loads');
@@ -176,6 +180,14 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       await page.evaluate(()=>window.scrollTo({top:0,left:0,behavior:'instant'}));
       await page.waitForTimeout(100);
       await page.screenshot({path:path.join(screenshots,'v3-'+width+'.png'),fullPage:true});
+
+      if(width===390){
+        await page.locator('nav.sub-bar a[aria-current="page"]').click();
+        await page.waitForURL('**/hitmen-stall-v3-preview.html');
+        await page.waitForFunction(()=>document.querySelector('#stallScene .v3-master-photo')?.naturalWidth>=1086);
+        assert.ok(await page.locator('#stallScene .v3-master-photo').count()===1,'Mobile My Stall navigation retains the double-jersey master');
+        assert.equal(await page.locator('#stallScene .hs-stall').count(),0,'Mobile navigation must not fall back to old single jersey');
+      }
       await context.close();
     }
     // Private content must not load for anonymous / unrelated members.
