@@ -191,7 +191,7 @@
     return { night, list, skaters, goalies, goals, finals: Number(list[0]?.night_finals || 0), finalGoals: Number(list[0]?.night_final_goals || 0) };
   }
   // Verified jersey cutouts can be added by team ID. No fabricated uniforms.
-  const jerseyAssets = {448:'assets/lgchl/jerseys/team448.webp',447:'assets/lgchl/jerseys/team447.webp',449:'assets/lgchl/jerseys/team449.webp',455:'assets/lgchl/jerseys/team455.webp',399:'assets/lgchl/jerseys/team399.webp',419:'assets/lgchl/jerseys/team419.webp',2604:'assets/lgchl/jerseys/team2604.webp',375:'assets/lgchl/jerseys/team375.webp',...(window.LGCHL_JERSEY_ASSETS || {})};
+  const jerseyAssets = {448:'assets/lgchl/jerseys/team448.webp',447:'assets/lgchl/jerseys/team447.webp',449:'assets/lgchl/jerseys/team449.webp',455:'assets/lgchl/jerseys/team455.webp',399:'assets/lgchl/jerseys/team399.webp',419:'assets/lgchl/jerseys/team419.webp',2604:'assets/lgchl/jerseys/team2604.webp',375:'assets/lgchl/jerseys/team375.webp',402:'assets/lgchl/jerseys/team402.webp',450:'assets/lgchl/jerseys/team450.webp',381:'assets/lgchl/jerseys/team381.webp',457:'assets/lgchl/jerseys/team457.webp',463:'assets/lgchl/jerseys/team463.webp',413:'assets/lgchl/jerseys/team413.webp',423:'assets/lgchl/jerseys/team423.webp',401:'assets/lgchl/jerseys/team401.webp',408:'assets/lgchl/jerseys/team408.webp',454:'assets/lgchl/jerseys/team454.webp',2982:'assets/lgchl/jerseys/team2982.webp',2981:'assets/lgchl/jerseys/team2981.webp',418:'assets/lgchl/jerseys/team418.webp',...(window.LGCHL_JERSEY_ASSETS || {})};
   function honour(p, teams, rank) {
     const goalie = p.player_kind === 'goalie', team = teams.get(Number(p.lg_team_id));
     const crest = logo(p.lg_team_id), jersey = jerseyAssets[Number(p.lg_team_id)];
