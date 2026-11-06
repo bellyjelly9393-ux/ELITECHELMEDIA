@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0d12">
+<meta name="robots" content="noindex,nofollow">
+<title>EliteChel Fantasy | Weekly Twist Lab Preview</title>
+<link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
+<link rel="stylesheet" href="fantasy-twist-preview.css?v=20261101">
+<script defer src="fantasy-weekly-rules.js?v=20261101"></script>
+<script defer src="fantasy-weekly-demo-data.js?v=20261101"></script>
+<script defer src="fantasy-twist-preview.js?v=20261101"></script>
+</head>
+<body>
+<header class="mast">
+<a class="brand" href="index.html"><img src="assets/brand/ecm-crest.webp" alt="" width="54" height="54"><span>ELITECHEL <strong>FANTASY LAB</strong></span></a>
+<span class="beta">INTERNAL DEMO • FICTIONAL PLAYERS • NO LIVE PICKS</span>
+</header>
+<main>
+<div class="hero"><div class="eyebrow">ELITECHEL RIVALS / FANTASY ENGINE</div>
+<h1>PICK SMART. <em>EXPECT THE UNEXPECTED.</em></h1>
+<p>Curated players. Individual prices. A salary cap. A weekly twist that may be completely different for fours and sixes. Some weeks, there is no bonus at all.</p></div>
+<section class="controls" aria-label="Preview settings">
+<div><label for="format">Competition</label>
+<select id="format"><option value="4">LG3S · Pick Your 4</option><option value="6">LGCHL · Pick Your 6</option></select></div>
+<div><label for="round">Sample round</label><select id="round"><option value="a">Round A · First Reveal</option><option value="b">Round B · Different Rules</option></select></div>
+<div class="status"><span class="status-led"></span>Preview only · Rules frozen for the displayed round</div>
+</section>
+<div class="layout">
+<section class="mainpanel" aria-labelledby="lineup-title">
+<div class="panelheading"><span class="eyebrow">BUILD YOUR FANTASY TEAM</span><h2 id="lineup-title">Pick Your 4</h2>
+<p id="formatExplain">One Superstar, one Up & Comer, one Wildcard and one Goalie.</p></div>
+<div class="capwrap"><div class="capnums"><span>SALARY USED</span><strong id="capText">$0M / $36M</strong></div>
+<div class="captrack" role="progressbar" aria-valuemin="0" aria-valuemax="36" aria-valuenow="0" aria-label="Fantasy salary cap" id="capTrack"><i id="capFill"></i></div></div>
+<div id="lineup" class="lineup" aria-label="Your fantasy lineup"></div>
+<div class="result"><strong id="lineupState">Checking lineup…</strong><span id="lineupDetail"></span></div>
+</section>
+<aside class="sidebar">
+<section class="twist" aria-labelledby="twistTitle"><div class="eyebrow">THIS ROUND'S REVEAL</div>
+<h2 id="twistTitle">Mystery Week</h2><div class="twist-label" id="twistPoints">BONUS RULE</div>
+<p id="twistDesc"></p><div class="ruleTag" id="twistTarget"></div>
+<p class="fine">The weekly rule is published before picks open and does not change after selection begins. No automatic reroll.</p>
+</section>
+<section class="policy"><div class="eyebrow">FAIR PLAY</div><h2>THE RULES</h2>
+<div id="rulesList" aria-label="Format rules"></div>
+<p class="fine">Categories and salaries are editorially reviewed using verified statistics. Any real scoring uses verified game results only.</p>
+</section>
+</aside>
+</div>
+<section class="playerpanel" aria-labelledby="pool-title"><div class="panelheading"><div class="eyebrow">CURATED PLAYER POOL</div><h2 id="pool-title">Choose a player</h2>
+<p id="poolMessage">Select a lineup slot above, then choose a card below.</p></div>
+<div class="filters"><label for="slot">Fill slot</label><select id="slot"></select></div>
+<div id="playerPool" class="playerpool"></div></section>
+<div class="footerNote"><strong>THIS IS A WORKING RULES PREVIEW, NOT THE LIVE FANTASY COMPETITION.</strong>
+All player names, teams and salaries on this page are fictional. There is no submission, account write, prize, or real fantasy score.
+The production contest requires editor-approved real pools and verified scoring.</div>
+</main>
+</body>
+</html>
