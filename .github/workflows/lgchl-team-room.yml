@@ -1,0 +1,36 @@
+name: LGCHL public team lockers
+on:
+  pull_request:
+    paths:
+      - 'lgchl-team.html'
+      - 'lgchl-team.js'
+      - 'lgchl-team.css'
+      - 'lgchl-locker-chooser.js'
+      - 'lgchl-locker-chooser.css'
+      - 'public-navigation.js'
+      - 'lgchl-media.html'
+      - 'lgchl-player.html'
+      - 'assets/lgchl/jerseys/**'
+      - 'assets/lgchl/rosters/**'
+      - 'test-public-team-rosters.cjs'
+      - 'test-lgchl-locker-chooser.cjs'
+      - '.github/workflows/lgchl-team-room.yml'
+permissions:
+  contents: read
+jobs:
+  public-team-rooms:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Public roster, links and jersey fallback regressions
+        run: |
+          node --check lgchl-team.js
+          node --check lgchl-locker-chooser.js
+          node --check public-navigation.js
+          node test-public-team-rosters.cjs
+          node test-lgchl-locker-chooser.cjs

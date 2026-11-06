@@ -1,0 +1,35 @@
+/* Public locker pull-down. Broadcast neutrals only: black, graphite, steel, off-white. */
+.lg-locker-chooser{position:relative;min-width:0}
+.lg-locker-trigger{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:48px;padding:10px 14px;color:#f2f3f4;background:linear-gradient(180deg,#2a2c30,#121316);border:1px solid #3e4146;border-radius:2px;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 8px 18px rgba(0,0,0,.45);font:inherit;text-align:left;cursor:pointer}
+.lg-locker-value{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lg-locker-chevron{width:8px;height:8px;border-right:2px solid #f2f3f4;border-bottom:2px solid #f2f3f4;transform:translateY(-2px) rotate(45deg);flex:none}
+.lg-locker-chooser.is-open .lg-locker-chevron{transform:translateY(2px) rotate(225deg)}
+.lg-locker-panel{display:flex;flex-direction:column;overflow:hidden;background:rgba(13,14,16,.96);border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 24px 50px rgba(0,0,0,.72);backdrop-filter:blur(14px) saturate(.7)}
+.lg-locker-panel[hidden]{display:none!important}
+.lg-locker-meta{margin:0;padding:10px 14px 0;color:#8c9096;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.lg-locker-search{display:block;padding:8px}
+.lg-locker-search input{width:100%;min-height:48px;padding:12px;color:#f2f3f4;background:#0d0e10;border:1px solid #2a2c30;border-radius:2px;font:inherit;font-size:16px}
+.lg-locker-search input::placeholder{color:#8c9096}
+.lg-locker-list{overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.lg-locker-league{position:sticky;top:0;z-index:1;padding:8px 14px;color:#b4b7bc;background:#151619;border-top:1px solid rgba(255,255,255,.06);font-size:11px;font-weight:700;letter-spacing:.16em}
+.lg-locker-option{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:10px 14px;color:#f2f3f4;text-decoration:none;text-transform:none;letter-spacing:0;font-weight:600;line-height:1.3}
+.lg-locker-option.is-active,.lg-locker-option:hover{background:#2a2c30;color:#f2f3f4}
+.lg-locker-option[aria-current="page"]{box-shadow:inset 3px 0 #f2f3f4}
+.lg-locker-here{color:#b4b7bc;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.lg-locker-empty{margin:0;padding:16px 14px 18px;color:#b4b7bc}
+.lg-locker-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.lg-locker-trigger:focus-visible,.lg-locker-search input:focus-visible,.lg-locker-option:focus-visible{outline:2px solid #f2f3f4;outline-offset:-2px}
+.lg-locker-native-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.lg-locker-chooser.is-inline .lg-locker-panel{position:static;width:100%;max-height:min(52dvh,420px);box-shadow:none}
+.ecm-public-nav .ecm-locker-nav{position:relative}
+.ecm-public-nav .lg-locker-trigger,.sub-in .lg-locker-trigger{background:transparent;border:0;box-shadow:none;border-radius:0;color:inherit}
+.ecm-public-nav .lg-locker-trigger{min-height:48px;padding:8px 12px;font:inherit;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.ecm-public-nav .lg-locker-fallback{display:flex;align-items:center;min-height:48px;padding:8px 12px}
+.sub-in .lg-locker-mount{position:relative;display:flex;flex:0 0 auto}
+.sub-in .lg-locker-trigger,.sub-in .lg-locker-fallback{min-height:46px;padding:4px 16px 0;color:#cfccc5;font-weight:600;font-size:20px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.sub-in .lg-locker-trigger:hover,.sub-in .lg-locker-fallback:hover{color:#f2f3f4}
+@media (max-width:1080px){
+.ecm-public-nav .ecm-locker-nav,.ecm-public-nav .lg-locker-chooser,.ecm-public-nav .lg-locker-trigger{width:100%}
+.ecm-public-nav .lg-locker-trigger{font-size:20px;text-align:left}
+}
+@media (prefers-reduced-motion:reduce){.lg-locker-chevron{transition:none}}

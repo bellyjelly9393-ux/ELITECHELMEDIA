@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 600" role="img" aria-label="Generic hockey jersey outline">
+<defs>
+ <linearGradient id="cloth" x1="0" x2="1"><stop stop-color="#11141b"/><stop offset=".24" stop-color="#30343e"/><stop offset=".56" stop-color="#242a34"/><stop offset=".82" stop-color="#141820"/><stop offset="1" stop-color="#080b10"/></linearGradient>
+ <linearGradient id="sleeve" x1="0" x2="1"><stop stop-color="#0b1018"/><stop offset=".5" stop-color="#333744"/><stop offset="1" stop-color="#10141c"/></linearGradient>
+ <linearGradient id="hem" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#4e5765"/><stop offset=".35" stop-color="#1c232d"/><stop offset=".7" stop-color="#10151e"/><stop offset="1" stop-color="#080b10"/></linearGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="9"/></filter>
+</defs>
+<path d="M120 532q150 28 300 0" stroke="#000" stroke-width="24" opacity=".4" filter="url(#shadow)" fill="none"/>
+<path d="M176 88q94-34 188 0l74 49 65 185-89 39-52-92v261q-92 20-184 0V269l-52 92-89-39 65-185z" fill="url(#cloth)" stroke="#07090d" stroke-width="12" stroke-linejoin="round"/>
+<path d="M176 88l-74 49-65 185 89 39 52-92zM364 88l74 49 65 185-89 39-52-92z" fill="url(#sleeve)" stroke="#0b0c10" stroke-width="8" stroke-linejoin="round"/>
+<path d="M43 312l82 38 18-32-82-40zM497 312l-82 38-18-32 82-40z" fill="url(#hem)" stroke="#59606c" stroke-width="3"/>
+<path d="M178 494q92 19 184 0v35q-92 20-184 0z" fill="url(#hem)" stroke="#535d68" stroke-width="3"/>
+<path d="M198 97q72 21 144 0l-28 73h-88z" fill="#11151c" stroke="#636b74" stroke-width="6"/>
+<path d="M215 94q55 27 110 0l-28 37h-54z" fill="#070a0f"/>
+<path d="M178 108q20 38 24 75m160-75q-20 38-24 75M178 466q92 18 184 0" fill="none" stroke="#717b87" stroke-width="3" opacity=".45"/>
+<path d="M194 185v258m152-258v258" stroke="#fff" stroke-width="2" opacity=".07"/>
+</svg>
