@@ -1,0 +1,22 @@
+{
+  "_about": "Where the generator draws on background.png (1200x1312 canvas). 'baked' = already in the art, so the generator skips drawing it. Slots: 1 = first star (centre), 2 = second (right), 3 = third (left).",
+  "baked": { "header": true, "nameplateFrames": true, "cardFrames": true, "benchStars": true },
+  "kicker": { "y": 1292, "size": 22 },
+  "slots": {
+    "3": {
+      "plate":  { "cx": 269, "y": 250, "w": 226, "h": 38 },
+      "jersey": { "cx": 269, "top": 380, "w": 310, "h": 330 },
+      "card":   { "x": 40, "y": 945, "w": 362, "h": 302 }
+    },
+    "1": {
+      "plate":  { "cx": 598, "y": 250, "w": 244, "h": 38 },
+      "jersey": { "cx": 598, "top": 380, "w": 310, "h": 330 },
+      "card":   { "x": 412, "y": 945, "w": 373, "h": 302 }
+    },
+    "2": {
+      "plate":  { "cx": 930, "y": 250, "w": 226, "h": 38 },
+      "jersey": { "cx": 930, "top": 380, "w": 310, "h": 330 },
+      "card":   { "x": 796, "y": 945, "w": 363, "h": 302 }
+    }
+  }
+}
