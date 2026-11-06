@@ -1,10 +1,14 @@
 name: VOD management review
 on:
   push:
-    branches: [main, fix/vod-management-review, fix/vod-evidence-reconciliation, feature/grok-scouting-coding]
+    branches: [main, fix/vod-management-review, fix/vod-evidence-reconciliation, feature/grok-scouting-coding, fix/hitmen-postgame-schedule]
   pull_request:
     paths:
       - 'vod-*'
+      - 'postgame-desk.html'
+      - 'hitmen-postgame-*.js'
+      - 'management-guard.js'
+      - 'test-hitmen-postgame.cjs'
       - 'hitmen-player-locker*'
       - 'api/chelscout-deepthink.js'
       - 'test-vod-*'
@@ -36,5 +40,6 @@ jobs:
           NODE_PATH: /tmp/vod-browser/node_modules
         run: |
           export CHROMIUM_PATH="$(node -p 'require("playwright").chromium.executablePath()')"
+          node test-hitmen-postgame.cjs
           node test-vod-browser.cjs
           node test-grok-browser.cjs

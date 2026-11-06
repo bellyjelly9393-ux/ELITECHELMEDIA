@@ -1,7 +1,7 @@
 (() => {
   const db=()=>window.VVHLBackend?.db;
   const reviewId=()=>document.querySelector('.vod-row.active')?.dataset?.vodId||'';
-  let timer=null;
+  let timer=null, refreshEpoch=0;
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
   function chooseQueryReview(){
@@ -19,18 +19,33 @@
   }
 
   async function refresh(){
-    install();const id=reviewId();if(!id||!db())return;
+    install();const id=reviewId(),token=++refreshEpoch;
+    const link=document.getElementById('vodHandoffBtn');if(link)link.style.display='none';
+    if(!id||!db())return;
     try{
-      const r=await window.WildmanVODCache?window.WildmanVODCache.review(id):(await db().from('vod_review_sessions').select('id,esports_game_id,full_game_summary,recurring_patterns,strengths,corrections').eq('id',id).maybeSingle()).data;if(!r)return;
+      const r=window.WildmanVODCache?await window.WildmanVODCache.review(id):(await db().from('vod_review_sessions').select('id,schedule_game_id,esports_game_id,full_game_summary,recurring_patterns,strengths,corrections').eq('id',id).maybeSingle()).data;if(!r||token!==refreshEpoch||id!==reviewId())return;
       const title=document.getElementById('vodHandoffTitle'),text=document.getElementById('vodHandoffText'),btn=document.getElementById('vodHandoffBtn');
+      if(r.schedule_game_id){
+        const {data:posts,error}=await db().from('media_posts').select('id,published')
+          .eq('post_type','recap').eq('source_metrics->>team','Calgary Hitmen')
+          .eq('source_metrics->>schedule_game_id',r.schedule_game_id)
+          .order('published',{ascending:false}).limit(1);
+        if(error)throw error;if(token!==refreshEpoch||id!==reviewId())return;
+        const post=posts?.[0];
+        title.textContent=post?.published?'Hitmen recap published ✓':post?'Hitmen recap draft connected':'Hitmen schedule connected';
+        text.textContent='This VOD is linked to its Calgary Hitmen game. Open the Postgame Desk to review the recap; period evidence stays saved in VOD Lab.';
+        btn.href='postgame-desk.html?schedule='+encodeURIComponent(r.schedule_game_id);
+        btn.textContent='Open Hitmen Postgame Desk';btn.style.display='inline-flex';btn.classList.remove('primary');return;
+      }
       if(!r.esports_game_id){
         title.textContent='Internal team review';text.textContent='This review stays inside the team workspace. Use Copy Write-Up Packet for scouting/coaching notes.';btn.style.display='none';return;
       }
       const [{data:segs},{data:report}]=await Promise.all([
-        db().from('vod_review_segments').select('status').eq('review_id',r.id).in('segment_type',['period','overtime']),
+        db().from('vod_review_segments').select('status,analysis_summary').eq('review_id',r.id).is('archived_at',null).in('segment_type',['period','overtime']),
         db().from('esports_game_reports').select('id,status').eq('game_id',r.esports_game_id).maybeSingle()
       ]);
-      const rows=segs||[],verified=rows.length>0&&rows.every(s=>s.status==='complete'),rollup=Boolean(r.full_game_summary||r.recurring_patterns||r.strengths||r.corrections);
+      if(token!==refreshEpoch||id!==reviewId())return;
+      const rows=segs||[],verified=rows.length>0&&rows.every(s=>s.status==='complete'&&String(s.analysis_summary||'').trim()),rollup=Boolean(r.full_game_summary||r.recurring_patterns||r.strengths||r.corrections);
       if(report?.status==='published'){
         title.textContent='Postgame published ✓';text.textContent='The film review is linked to the published tournament report.';
       }else if(report){
@@ -42,6 +57,7 @@
       }
       btn.href=`postgame-desk.html?game=${encodeURIComponent(r.esports_game_id)}`;btn.textContent=report?'Open Postgame Draft':'Build Postgame Draft';btn.style.display='inline-flex';btn.classList.toggle('primary',verified&&rollup&&!report);
     }catch(e){
+      if(token!==refreshEpoch||id!==reviewId())return;
       const t=document.getElementById('vodHandoffTitle'),x=document.getElementById('vodHandoffText');if(t)t.textContent='Postgame link unavailable';if(x)x.textContent=e.message||'Could not check the postgame handoff.';
     }
   }
