@@ -23,7 +23,7 @@ function create({input,room}){
   selected=index;target.classList.add('is-found');target.setAttribute('aria-current','true');
   results.hidden=true;
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  target.focus({preventScroll:true});target.scrollIntoView({behavior:reduced?'auto':'smooth',block:'center',inline:'nearest'});
+  target.focus({preventScroll:true});target.scrollIntoView({behavior:reduced?'auto':'smooth',block:'center',inline:document.body.classList.contains('hitmen-concept')?'center':'nearest'});
   status.textContent=p.gamertag+' · Stall '+(index+1)+' of '+players.length+'. Press Enter or tap the stall to open the public player card.';
   buttons();
   // Future room scenes can consume this stable public identity and roster-order index.
@@ -52,8 +52,8 @@ function create({input,room}){
  clear.addEventListener('click',()=>{input.value='';search();input.focus();});
  prev.addEventListener('click',()=>choose(selected-1));next.addEventListener('click',()=>choose(selected+1));
  return {
-  setPlayers(rows){players=rows.slice();selected=-1;input.disabled=!players.length;search();buttons();},
-  unavailable(){players=[];selected=-1;input.disabled=true;clear.disabled=true;results.replaceChildren();results.hidden=true;buttons();status.textContent='The verified main roster is unavailable. Reload the page to try again.';},
+  setPlayers(rows){players=rows.slice();selected=-1;input.disabled=!players.length;search();buttons();room.dispatchEvent(new CustomEvent('hitmen-stalls-ready',{bubbles:true}));},
+  unavailable(){players=[];selected=-1;input.disabled=true;clear.disabled=true;results.replaceChildren();results.hidden=true;buttons();status.textContent='The verified main roster is unavailable. Reload the page to try again.';room.dispatchEvent(new CustomEvent('hitmen-stalls-ready',{bubbles:true}));},
   focusStall(id){return choose(players.findIndex(p=>Number(p.lg_user_id)===Number(id)));}
  };
 }

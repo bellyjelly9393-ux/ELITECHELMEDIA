@@ -6,6 +6,8 @@ on:
       - 'lgchl-team.js'
       - 'lgchl-team.css'
       - 'hitmen-find-stall.js'
+      - 'hitmen-room-concept.js'
+      - 'hitmen-room-concept.css'
       - 'test-hitmen-find-stall.cjs'
       - 'lgchl-locker-chooser.js'
       - 'lgchl-locker-chooser.css'
@@ -33,6 +35,7 @@ jobs:
         run: |
           node --check lgchl-team.js
           node --check hitmen-find-stall.js
+          node --check hitmen-room-concept.js
           node --check test-hitmen-find-stall.cjs
           node --check lgchl-locker-chooser.js
           node --check public-navigation.js

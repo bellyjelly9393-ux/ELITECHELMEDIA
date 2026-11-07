@@ -16,7 +16,7 @@ Search tolerates case, spaces, punctuation and Unicode compatibility forms. It d
 
 Calgary search lists matching players without removing or rebuilding the 17 room stalls. Selection focuses and scrolls to the existing stall keyed by LG user ID, adds a red outline/glow and marks it current. Enter/click on that stall opens its existing public player card with the original skater/goalie kind. Previous/next buttons follow the existing roster display order and stop at either end. Other clubs retain their existing filter behavior, team chooser, cards, stats and games.
 
-The room remains the existing responsive grid; there is no new panoramic scene or 3D engine. Smooth scrolling is disabled when reduced motion is requested. Controls have visible labels, 44px minimum targets, focus outlines and a live status. Search supports Enter, Arrow Down, Escape; results support Up/Down, Tab, Enter and Escape.
+The default room remains the existing responsive grid. An opt-in dark modern arena concept is available at `lgchl-team.html?team=412&room=concept`, using the same public stalls in a horizontal room scene, with red lighting, a ceiling sign, branded floor, left/right controls and touch scrolling. It uses CSS layers and no 3D engine. Smooth scrolling is disabled when reduced motion is requested. Controls have visible labels, 44px minimum targets, focus outlines and a live status. Search supports Enter, Arrow Down, Escape; results support Up/Down, Tab, Enter and Escape.
 
 Future left/right scenes can call `window.HitmenPublicRoom.focusStall(lgUserId)` (returns false for IDs absent from the roster). The room emits a bubbling `hitmen-stall-selected` event with `{lg_user_id, index, stallId}`. Stall number/index means current public display order, not an invented real-world locker assignment. Existing public cards are reused; no private reports, accounts, availability, scouting or locker tables are read.
 
@@ -32,3 +32,14 @@ Future left/right scenes can call `window.HitmenPublicRoom.focusStall(lgUserId)`
 The existing GitHub workflow now syntax-checks the new files when relevant files change. The browser suite is included as an explicit local check; CI does not install/run Playwright automatically. To rerun, install Playwright/Chromium and run `node test-hitmen-find-stall.cjs`; optional environment variables `PLAYWRIGHT_MODULE`, `BROWSER_EXECUTABLE`, `SCREENSHOT_DIR` and `LIVE_SITE` select an existing installation, capture screenshots, or inspect the live public page read-only.
 
 Review/apply the accompanying Git patch in the repository. The code remains local because pushing to a hosting-connected repository may trigger deployment; no remote publication was attempted.
+
+
+## Room concept added after visual direction was chosen
+
+The selected direction is **dark modern arena with red lighting**. `hitmen-room-concept.js` and `.css` provide the opt-in preview, while the existing grid and all other teams retain their default layout. The scene reuses the existing Hitmen locker bay, jersey and crest artwork; there are no new invented player names, numbers or private data. Default camera position is around player 9 so a desktop view shows a full bank of lockers. Phone view centres one locker with adjacent stalls visible at the edges.
+
+Find My Stall now centres the selected stall horizontally inside the concept. Left/right controls, Home/End and Arrow Left/Right share its public identity hook. Touch/native horizontal scrolling updates the position indicator. `hitmen-stalls-ready` announces when the existing stalls finish rendering, including empty/error outcomes. Reduced motion is respected.
+
+Additional browser checks passed at 1440px and 390px: all 17 stalls retained; scene arrow boundaries; Home/End; search-to-centred-stall geometry; horizontal-scroll location tracking; no page overflow or browser errors. The original roster-layout suite still passes. No physical mobile device was tested.
+
+`Calgary-Hitmen-Room-Concept.html` is a self-contained offline review copy, with artwork and the saved 17-player roster embedded. It was opened from disk and tested for search, selection and zero network dependencies. Live statistics are explicitly disconnected in this review copy; public player-card and navigation links lead to the existing website. The repo's opt-in concept uses the existing live public data flow. No push, merge or deployment was performed.
