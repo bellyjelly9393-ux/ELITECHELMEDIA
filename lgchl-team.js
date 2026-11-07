@@ -7,7 +7,12 @@ const valid=n=>Number.isSafeInteger(Number(n))&&Number(n)>0;
 if(!valid(team)){$('roomName').textContent='Team not found';['roomRecord','roomPlayers','roomFinals','roomUpcoming'].forEach(id=>$(id).textContent='Choose a team from league coverage.');$('roomPlayers').setAttribute('aria-busy','false');return;}
 document.body.classList.toggle('league-room',true);
 document.body.classList.toggle('hitmen-room',team===412);
-const logo=id=>'assets/lgchl/s55/team'+Number(id)+'.png';
+if(document.body?.dataset)document.body.dataset.league=window.LGLockerChooser?.LEAGUE?.[team]||'LGCHL';
+const roomArt=document.querySelector?.('.ec-roster-art-crest');if(roomArt)roomArt.src='assets/lgchl/s55/team'+team+'.png';
+const teamFeature=document.getElementById('roomTeamFeature');if(teamFeature)teamFeature.hidden=team!==412;
+const logo=id=>Number(id)===412?'assets/logos/chl/calgary-hitmen.png':'assets/lgchl/s55/team'+Number(id)+'.png';
+const featuredLogo=logo(team);
+if(roomArt)roomArt.src=featuredLogo;
 const jerseyAssets={412:'assets/lgchl/jerseys/team412.webp',448:'assets/lgchl/jerseys/team448.webp',447:'assets/lgchl/jerseys/team447.webp',449:'assets/lgchl/jerseys/team449.webp',455:'assets/lgchl/jerseys/team455.webp',399:'assets/lgchl/jerseys/team399.webp',419:'assets/lgchl/jerseys/team419.webp',2604:'assets/lgchl/jerseys/team2604.webp',375:'assets/lgchl/jerseys/team375.webp',402:'assets/lgchl/jerseys/team402.webp',450:'assets/lgchl/jerseys/team450.webp',381:'assets/lgchl/jerseys/team381.webp',457:'assets/lgchl/jerseys/team457.webp',463:'assets/lgchl/jerseys/team463.webp',413:'assets/lgchl/jerseys/team413.webp',423:'assets/lgchl/jerseys/team423.webp',401:'assets/lgchl/jerseys/team401.webp',408:'assets/lgchl/jerseys/team408.webp',454:'assets/lgchl/jerseys/team454.webp',2982:'assets/lgchl/jerseys/team2982.webp',2981:'assets/lgchl/jerseys/team2981.webp',418:'assets/lgchl/jerseys/team418.webp',306:'assets/lgchl/jerseys/team306.webp',370:'assets/lgchl/jerseys/team370.webp',379:'assets/lgchl/jerseys/team379.webp',380:'assets/lgchl/jerseys/team380.webp',383:'assets/lgchl/jerseys/team383.webp',386:'assets/lgchl/jerseys/team386.webp',420:'assets/lgchl/jerseys/team420.webp',452:'assets/lgchl/jerseys/team452.webp',444:'assets/lgchl/jerseys/team444.webp',453:'assets/lgchl/jerseys/team453.webp',451:'assets/lgchl/jerseys/team451.webp',446:'assets/lgchl/jerseys/team446.webp',445:'assets/lgchl/jerseys/team445.webp',468:'assets/lgchl/jerseys/team468.webp',461:'assets/lgchl/jerseys/team461.webp',469:'assets/lgchl/jerseys/team469.webp',465:'assets/lgchl/jerseys/team465.webp',365:'assets/lgchl/jerseys/team365.webp',377:'assets/lgchl/jerseys/team377.webp',385:'assets/lgchl/jerseys/team385.webp',398:'assets/lgchl/jerseys/team398.webp',400:'assets/lgchl/jerseys/team400.webp',409:'assets/lgchl/jerseys/team409.webp',414:'assets/lgchl/jerseys/team414.webp',415:'assets/lgchl/jerseys/team415.webp',416:'assets/lgchl/jerseys/team416.webp',422:'assets/lgchl/jerseys/team422.webp',458:'assets/lgchl/jerseys/team458.webp',462:'assets/lgchl/jerseys/team462.webp',364:'assets/lgchl/jerseys/team364.webp',382:'assets/lgchl/jerseys/team382.webp',459:'assets/lgchl/jerseys/team459.webp',514:'assets/lgchl/jerseys/team514.webp',460:'assets/lgchl/jerseys/team460.webp',466:'assets/lgchl/jerseys/team466.webp',411:'assets/lgchl/jerseys/team411.webp',397:'assets/lgchl/jerseys/team397.webp',2983:'assets/lgchl/jerseys/team2983.webp',467:'assets/lgchl/jerseys/team467.webp',421:'assets/lgchl/jerseys/team421.webp'};
 const jersey=id=>jerseyAssets[Number(id)]||logo(id);
 if(typeof D.teamColor==='function')D.teamColor(logo(team)).then(c=>{if(c)document.body.style?.setProperty?.('--tc',c);}).catch(()=>{});
@@ -29,7 +34,7 @@ function render(){
  $('roomPlayers').setAttribute('aria-busy','false');
 }
 $('roomLogo').src=logo(team);
-document.addEventListener('error',e=>{const image=e.target;if(image.tagName!=='IMG')return;if(image.closest('.jersey-stage')&&!image.dataset.fallback){image.dataset.fallback='true';image.src=logo(team);image.alt='Team crest';}else{image.hidden=true;}},true);
+document.addEventListener('error',e=>{const image=e.target;if(image.tagName!=='IMG')return;if(image.closest('.jersey-stage')&&!image.dataset.fallback){image.dataset.fallback='true';image.src=logo(team);image.alt='Team crest';}else if(team===412&&(image.id==='roomLogo'||image.classList.contains('ec-roster-art-crest')||image.classList.contains('ec-feature-mark'))&&!image.dataset.fallback){image.dataset.fallback='true';image.src='assets/lgchl/s55/team412.png';}else{image.hidden=true;}},true);
 $('roomSearch').addEventListener('input',render);
 $('roomTeam').addEventListener('change',()=>{location.href='lgchl-team.html?team='+Number($('roomTeam').value);});
 async function standings(){
@@ -48,6 +53,7 @@ async function roster(){
  const clubs=Object.entries(snapshot.teams).filter(([id,c])=>valid(id)&&c&&typeof c.name==='string').map(([id,c])=>({id:Number(id),name:c.name})).sort((a,b)=>a.name.localeCompare(b.name));
  $('roomTeam').innerHTML=clubs.map(c=>'<option value="'+c.id+'"'+(c.id===team?' selected':'')+'>'+esc(c.name)+'</option>').join('');
  $('roomName').textContent=entry.name;
+ $('roomLogo').alt=entry.name+' crest';
  document.title=entry.name+' Team Room | Elite Chel Media';
  const main=entry.players.filter(p=>p.roster_class==='active_roster'&&valid(p.lg_user_id));
  let rows=[];
@@ -55,17 +61,24 @@ async function roster(){
  const unique=new Map();for(const p of rows){const key=p.lg_user_id+':'+p.player_kind,old=unique.get(key);if(!old||String(p.fetched_at)>String(old.fetched_at))unique.set(key,p);}
  players=main.map(p=>({...unique.get(p.lg_user_id+':'+p.player_kind),...p}));
  $('playersTitle').textContent='Main roster · '+players.length;
- $('rosterNote').textContent='Main-roster players only · LG roster snapshot: '+snapshot.as_of+'. The 62-team jersey reference collection is sourced. Finished locker cutouts display where available; remaining jerseys use marked crest concepts while their references are cleaned and reviewed. Imported Season 55 totals may include previous teams; — means unavailable.';
+ $('rosterNote').textContent='Main roster only · Saved snapshot: '+snapshot.as_of+'. Imported Season 55 totals may include previous teams. — means unavailable.';
  render();
  }catch{$('roomPlayers').textContent='Current main roster is unavailable. Please try again later.';$('roomPlayers').setAttribute('aria-busy','false');}
 }
 
 function game(g,final){
- const label=(g.away_nick||g.away_abbr||'Away')+' vs '+(g.home_nick||g.home_abbr||'Home');
- return '<a class="game-row" href="lgchl-game.html?id='+Number(g.lg_game_id)+'"><strong>'+esc(label)+(final?' · '+fmt(g.away_score)+'–'+fmt(g.home_score):'')+'</strong><small>'+esc(date(g.game_at))+' · '+(final?'Final':'Scheduled')+' · Open Game Centre →</small></a>';
+ const awayName=String(g.away_nick||g.away_abbr||'Away'),homeName=String(g.home_nick||g.home_abbr||'Home');
+ const awayId=Number(g.away_lg_team_id),homeId=Number(g.home_lg_team_id);
+ const image=(id,name)=>valid(id)?'<img src="'+logo(id)+'" alt="" loading="lazy" width="40" height="40" onerror="this.hidden=true">':'<span class="ec-team-fallback" aria-hidden="true">'+esc(name.trim().slice(0,2).toUpperCase())+'</span>';
+ const away='<span class="ec-game-team is-away">'+image(awayId,awayName)+'<span class="ec-team-name">'+esc(awayName)+'</span></span>';
+ const home='<span class="ec-game-team is-home">'+image(homeId,homeName)+'<span class="ec-team-name">'+esc(homeName)+'</span></span>';
+ const result=final?fmt(g.away_score)+' – '+fmt(g.home_score):'VS';
+ return '<a class="game-row" href="lgchl-game.html?id='+Number(g.lg_game_id)+'" aria-label="'+esc(awayName+' versus '+homeName+(final?' final '+result:' scheduled'))+'">'+
+ '<span class="ec-game-scoreline">'+away+'<strong class="ec-game-value">'+esc(result)+'</strong>'+home+'</span>'+
+ '<span class="ec-game-row-status"><span>'+esc(date(g.game_at))+'</span><span class="ec-game-status">'+(final?'Final':'Scheduled')+'</span><span class="ec-game-cta">Game Centre →</span></span></a>';
 }
 async function games(){
- const base={select:'lg_game_id,game_at,status,away_nick,away_abbr,home_nick,home_abbr,away_score,home_score',season:'eq.55',or:'(away_lg_team_id.eq.'+team+',home_lg_team_id.eq.'+team+')',limit:'6'};
+ const base={select:'lg_game_id,game_at,status,away_lg_team_id,home_lg_team_id,away_nick,away_abbr,home_nick,home_abbr,away_score,home_score',season:'eq.55',or:'(away_lg_team_id.eq.'+team+',home_lg_team_id.eq.'+team+')',limit:'6'};
  const results=await Promise.allSettled([read('lgchl_games_board',{...base,status:'eq.final',order:'game_at.desc'}),read('lgchl_games_board',{...base,status:'neq.final',game_at:'gte.'+new Date().toISOString(),order:'game_at.asc'})]);
  results.forEach((r,i)=>{const el=$(i?'roomUpcoming':'roomFinals');el.innerHTML=r.status==='fulfilled'?r.value.filter(g=>valid(g.lg_game_id)&&(!i?String(g.status).toLowerCase()==='final':String(g.status).toLowerCase()==='scheduled')).map(g=>game(g,!i)).join('')||'<p class="note">'+(i?'No upcoming games are listed.':'No final results are listed.')+'</p>':'<p class="note">Games are unavailable. Please try again later.</p>';});
 }

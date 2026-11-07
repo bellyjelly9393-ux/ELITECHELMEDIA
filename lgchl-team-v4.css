@@ -1,0 +1,115 @@
+/* Elite Chel Media: V4 public team rooms. Single scoped presentation layer.
+   Underlying lgchl-team.css owns the working stall geometry; this file owns the
+   environmental shell, broadcast framing, responsive layout, and matchup cards. */
+@font-face{font-family:ECAnton;src:url("assets/fonts/Anton.woff") format("woff");font-display:swap}
+@font-face{font-family:ECTeko;src:url("assets/fonts/Teko.woff") format("woff");font-display:swap}
+.ec-room-page{--ec-metal:#c7a15a;--ec-hilight:#ffe3a5;--ec-ink:#080a0e;--ec-panel:#111824;--ec-red:#d42334;--ec-stage-photo:url("assets/wildman/home/arena.webp");font:14px/1.5 Arial,Helvetica,sans-serif;color:#f6f2e9;background:radial-gradient(ellipse at 50% 0,#192942 0%,#06090e 55%,#020305 100%);min-width:0}
+.ec-room-page.hitmen-room{--ec-stage-photo:url("assets/lgchl/lockers/s55-saddledome-teamroom.webp");--ec-red:#e3243f}
+.ec-room-page[data-league="OHL"]{--ec-red:#4194e4;--ec-metal:#a1b2c5}
+.ec-room-page[data-league="QMJHL"]{--ec-red:#77c5de;--ec-metal:#b4cfd5}
+.ec-room-page *{box-sizing:border-box}
+.ec-room-page :is(a,button,input,select):focus-visible{outline:3px solid #a9d8ff;outline-offset:3px}
+.ec-room-page a{color:#f2d390}
+.ec-room-page .ec-global-header{max-width:none;min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;padding:8px max(20px,calc((100vw - 1370px)/2));border-bottom:3px solid #d7a64d;box-shadow:inset 0 -1px #fff3bd47,0 5px 18px #000b;background:linear-gradient(110deg,#131923,#050608 50%,#151d2b)}
+.ec-global-header .brand{display:flex;align-items:center;gap:7px;color:#faf5e9;text-decoration:none;font:900 italic 23px/1 ECAnton,Impact,sans-serif;letter-spacing:.045em;white-space:nowrap}
+.ec-global-header .brand img{width:82px;height:68px;object-fit:contain;filter:drop-shadow(0 4px 3px #000)}
+.ec-global-header .brand b{color:#e7b751}
+.ec-global-header nav{display:flex;gap:clamp(10px,2.4vw,28px);align-items:center;flex-wrap:wrap}
+.ec-global-header nav a{color:#e6e7ec;text-decoration:none;font:700 13px/1.3 Arial,sans-serif;letter-spacing:.015em;padding:7px 1px;border-bottom:2px solid transparent}
+.ec-global-header nav a:hover{color:#ffdc91;border-bottom-color:#edbd58}
+.ec-room-page .ec-room-shell{max-width:1360px;margin:auto;padding:0 24px 35px}
+.ec-room-page .ec-room-hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(130px,1.2fr) minmax(0,1fr);align-items:center;min-height:278px;margin:0;isolation:isolate;overflow:hidden;border:4px solid #3d2632;border-top:4px solid #b53846;border-bottom:5px solid #aa3b4d;background:#10090e url("assets/wildman/home/arena.webp") center/cover no-repeat;box-shadow:inset 0 0 40px #000,0 11px 30px #000c}
+.ec-room-page .ec-room-hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,#07060ff0 0%,#07060fb8 22%,#05050b0b 48%,#09070d9c 78%,#07060fea 100%),var(--ec-stage-photo) center/100% 100% no-repeat}
+.ec-room-page .ec-room-hero::after{content:"";position:absolute;inset:auto 0 0;height:5px;background:linear-gradient(90deg,#38131f,#ec6270 20%,#ffa85c 54%,#b92038 86%,#200c12);box-shadow:0 0 14px #fd5268}
+.ec-hero-team{display:flex;align-items:center;gap:13px;z-index:1;padding:18px 6px 18px 25px;min-width:0}
+.ec-hero-team img{width:clamp(70px,9vw,126px);height:clamp(80px,10vw,139px);object-fit:contain;flex:none;filter:drop-shadow(0 6px 7px #000)}
+.ec-hero-kicker,.ec-hero-title p{margin:0;color:#e9ba76;font:800 11px/1.4 Arial,sans-serif;letter-spacing:.18em}
+.ec-hero-team h1{margin:3px 0 7px;font:900 italic clamp(28px,3.3vw,51px)/.98 ECAnton,Impact,sans-serif;letter-spacing:.015em;text-transform:uppercase;color:#f4f2ef;text-shadow:0 3px 0 #5e3b40,0 7px 13px #000;overflow-wrap:break-word}
+.ec-room-record{display:block;max-width:300px;margin:0;padding:5px 0;color:#dad6d1;font-size:11px;line-height:1.5}
+.ec-hero-center{z-index:1;display:flex;align-items:flex-start;justify-content:center;align-self:start;padding-top:20px}
+.ec-hero-center img{width:86px;height:86px;object-fit:contain;filter:drop-shadow(0 4px 5px #000)}
+.ec-room-page.hitmen-room .ec-hero-center img{visibility:hidden}
+.ec-hero-title{z-index:1;padding:18px 24px 18px 7px;text-align:right}
+.ec-hero-title h2{margin:4px 0 8px;font:900 italic clamp(36px,4.8vw,67px)/.95 ECAnton,Impact,sans-serif;letter-spacing:.015em;color:#f8f6f0;text-shadow:0 4px 2px #4f303c,0 9px 14px #000}
+.ec-hero-title h2 em{display:block;color:#f43252;font-style:normal}
+.ec-hero-title span{display:block;font-size:10px;letter-spacing:.09em;color:#dedde1}
+.ec-room-page .ec-room-tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px;padding:6px;margin:0 0 22px;border:3px ridge #ab874c;background:linear-gradient(#273442,#070a10);box-shadow:inset 0 2px #ffffff17,0 9px 14px #000b}
+.ec-room-tabs a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:43px;padding:7px 4px;color:#f1f1ed;text-decoration:none;text-transform:uppercase;font:800 clamp(11px,1.2vw,15px)/1.2 ECTeko,Impact,Arial,sans-serif;letter-spacing:.04em;border:1px solid #4a5c6c;border-top-color:#97a0aa;border-bottom:3px solid #080d13;box-shadow:inset 0 1px #fff4;background:linear-gradient(#273442,#0b111a)}
+.ec-room-tabs a.is-selected,.ec-room-tabs a:hover{color:#fff2d3;border-color:#e8b65c;background:linear-gradient(#9e6b27,#33200e);box-shadow:inset 0 2px #f9e2ad89,0 0 8px #d58b3e55}
+.ec-room-stage{position:relative;isolation:isolate;border:6px solid #4e4a42;border-top:8px ridge #d0a969;border-bottom:10px ridge #534026;background:linear-gradient(90deg,#170e0c,#0d0b0e 6%,#111115 48%,#0d0a0c 94%,#170e0c);box-shadow:inset 0 0 0 3px #0c0c0c,inset 0 14px 28px #000e,0 20px 38px #000d}
+.ec-room-stage::before{content:"";position:absolute;inset:0 0 auto;height:12px;background:linear-gradient(#f5d49c,#51361c 55%,#110d0a);box-shadow:0 6px 14px #000c;pointer-events:none;z-index:2}
+.ec-stage-led{position:absolute;top:0;left:5%;right:5%;height:3px;z-index:3;background:linear-gradient(90deg,transparent,#f04256 15%,#ffbf80 50%,#ec3b4a 85%,transparent);box-shadow:0 0 15px #d33147}
+.ec-room-top-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(285px,.78fr);gap:20px;padding:28px 24px 14px;align-items:stretch}
+.ec-roster-intro,.ec-team-tools{min-width:0;padding:17px 20px;border:3px solid #6c6260;border-top:4px solid #baa078;border-bottom:5px solid #201610;background:linear-gradient(120deg,#1c232c,#0a0b10);box-shadow:inset 0 1px #fffbcb35,inset 0 0 18px #0008,0 9px 15px #000c}
+.ec-roster-intro{display:flex;flex-direction:column;justify-content:center;background:linear-gradient(105deg,#151921,#060609aa),url("assets/wildman/home/arena.webp") center 56%/cover}
+.ec-overline,.ec-roster-intro .ec-overline{margin:0;color:#ecc37e;font:800 11px/1.2 Arial,sans-serif;letter-spacing:.2em}
+.ec-roster-intro h2{margin:6px 0 8px;color:#fff;font:900 italic clamp(29px,3.8vw,46px)/1 ECAnton,Impact,sans-serif;letter-spacing:.025em;text-shadow:0 3px #3e3d44,0 6px 8px #000;text-transform:uppercase}
+.ec-roster-intro p:last-child{max-width:520px;margin:0;color:#cfcfd1;font-size:12px;line-height:1.45}
+.ec-team-tools h2{margin:0 0 10px;padding-bottom:8px;border-bottom:2px solid #93754b;color:#f6c974;font:900 italic 22px ECAnton,Impact,sans-serif}
+.ec-team-tools label{display:grid;gap:4px;color:#e5e4e2;font-size:12px;margin:0 0 10px}
+.ec-team-tools input,.ec-team-tools select,.ec-team-tools .lg-locker-trigger{min-width:0;width:100%;min-height:40px;padding:8px 10px;border:2px solid #566272;border-bottom:3px solid #050709;border-radius:2px;background:linear-gradient(#202d3c,#0a1119);box-shadow:inset 0 1px #ffffff30,0 4px 7px #0008;color:#fff;font-size:14px}
+.ec-team-tools .room-team-slot{min-width:0;gap:4px}
+.ec-roster-note{padding:0 25px 12px;margin:0;color:#acaeba;font:11px/1.5 Arial,sans-serif;max-width:1100px}
+.ec-room-beam{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:center;padding:10px 23px;min-height:48px;margin:0 12px;border:3px ridge #715434;background:linear-gradient(#2b2a2c,#0c1015 45%,#070808);box-shadow:inset 0 2px #d3c09d3b,0 7px 8px #000a}
+.ec-room-beam span{color:#d8b989;font-size:10px;font-weight:900;letter-spacing:.13em}
+.ec-room-beam strong{font:900 italic clamp(19px,2.4vw,32px)/1 ECAnton,Impact,sans-serif;color:#f6efe8;text-shadow:0 3px 5px #000}
+.ec-locker-theatre{position:relative;min-width:0;padding:6px 14px 0}
+.ec-locker-wall{position:relative;overflow:hidden;padding:18px 10px 12px;border-inline:5px solid #3b2520;border-top:2px solid #4f3832;background:linear-gradient(90deg,#100c10e5,#130e11c0 10%,#100b0fd5 90%,#08080eeb),url("assets/wildman/home/arena.webp") center/cover;box-shadow:inset 0 0 55px #000,inset 0 4px 13px #000,0 6px 18px #000c}
+.ec-locker-wall::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,#3f26221c 0 3px,transparent 3px 12px),linear-gradient(180deg,#7a24302d,transparent 22%);opacity:.7}
+.ec-room-page.league-room #roomPlayers.stalls{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-width:none;margin:0;padding:0;border:0;background:none}
+.ec-room-page.league-room #roomPlayers .stall{position:relative;min-width:0;aspect-ratio:.88/1;overflow:hidden;margin:0;border:2px solid #7e5536;border-top-color:#edc88b;border-bottom:4px solid #26170f;border-radius:1px;transform:none;box-shadow:inset 0 0 0 1px #120f0f,0 6px 5px #000b,0 10px 13px #000a;background:#120b08 url("assets/lgchl/lockers/hitmen-bay.webp") center/100% 100% no-repeat}
+.ec-room-page.league-room #roomPlayers .stall:hover{transform:translateY(-2px);filter:brightness(1.11);border-color:#fed18e;z-index:2}
+.ec-room-page.league-room #roomPlayers .stall:focus-visible{outline-offset:1px;z-index:3}
+.ec-room-page.league-room #roomPlayers .nameplate{inset:2.4% 16% auto;height:5%;font-size:clamp(9px,4cqw,16px);line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:normal}
+.ec-room-page.league-room #roomPlayers .jersey-stage{top:21%;height:36%}
+.ec-room-page.league-room #roomPlayers .stall-info{top:59%;left:11%;right:11%}
+.ec-room-page.league-room #roomPlayers .stall-info p{font-size:clamp(8px,2.7cqw,11px);margin:0 0 2px}
+.ec-room-page.league-room #roomPlayers .stats{padding:3px 1px;gap:0;background:linear-gradient(#30343b,#090a0c);border:1px solid #9d8462;box-shadow:inset 0 1px #ffffff27,0 3px 5px #000}
+.ec-room-page.league-room #roomPlayers .stats span{font-size:clamp(9px,2.8cqw,12px)}
+.ec-room-page.league-room #roomPlayers .stats b{font-size:clamp(16px,5.3cqw,24px);font-variant-numeric:tabular-nums}
+.ec-room-page.league-room #roomPlayers .open-card{margin-top:3px;padding:4px 2px;font-size:clamp(8px,2.8cqw,12px);border:1px solid #bc8c55;background:linear-gradient(#312215,#090806);box-shadow:0 3px 5px #000a}
+.ec-room-page #roomPlayers::after{display:none!important}
+.ec-locker-floor{height:35px;margin:0 10px;background:linear-gradient(180deg,#4c2c21 0,#171013 18%,#090809 40%,#1b1c24 55%,#030405 100%);border-top:4px solid #976b48;box-shadow:inset 0 3px #070607,0 8px 15px #000}
+.ec-locker-floor::after{content:"";display:block;height:6px;background:linear-gradient(90deg,transparent,#bc303c55,#f9a96d88,#bc303c55,transparent);filter:blur(3px)}
+.ec-room-kickplate{display:flex;justify-content:space-between;gap:12px;padding:7px 24px;color:#c7a778;font:900 10px/1.3 Arial,sans-serif;letter-spacing:.13em;border-top:1px solid #64462e;background:linear-gradient(#141218,#060609)}
+.ec-team-feature{position:relative;display:flex;gap:22px;align-items:center;min-height:155px;margin:17px 0 0;padding:22px 30px;overflow:hidden;border:5px ridge #a9854f;background:linear-gradient(90deg,#07060bea,#09070cc5 39%,#0705093e),var(--ec-stage-photo) center 63%/cover no-repeat;box-shadow:inset 0 0 25px #000,0 13px 24px #000d}
+.ec-team-feature[hidden]{display:none!important}
+.ec-team-feature .ec-feature-crest{width:95px;height:95px;object-fit:contain;filter:drop-shadow(0 5px 5px #000)}
+.ec-team-feature p{margin:0 0 5px;font-size:11px;letter-spacing:.17em;font-weight:900;color:#ffd68a}
+.ec-team-feature h2{margin:0;font:900 italic clamp(26px,4.4vw,56px)/1 ECAnton,Impact,sans-serif;color:#fff;text-shadow:0 3px #8d4544,0 7px 12px #000}
+.ec-matchup-deck{margin-top:24px;padding:0 0 2px;border:5px ridge #9e7b49;background:linear-gradient(#222b37,#080b10 18%,#0b121c);box-shadow:inset 0 0 0 2px #08090b,0 16px 28px #000d}
+.ec-matchup-deck-header{display:flex;align-items:end;justify-content:space-between;gap:16px;padding:15px 22px 13px;border-bottom:4px ridge #8c643c;background:linear-gradient(115deg,#1c2430,#0a0b12)}
+.ec-matchup-deck-header h2{margin:3px 0 0;font:900 italic clamp(26px,3.6vw,42px)/1 ECAnton,Impact,sans-serif;text-shadow:0 3px #515761,0 5px 7px #000;color:#faf4e9}
+.ec-matchup-deck-header>span{color:#b8bdc9;font-size:11px;font-weight:800;letter-spacing:.17em}
+.ec-room-page .room-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0;padding:16px}
+.ec-room-page .ec-matchup-panel{min-width:0;border:4px solid #545d69;border-top-color:#bfc5d0;border-bottom-color:#2c211c;background:linear-gradient(#192330,#080c13);box-shadow:inset 0 0 0 1px #131820,0 9px 19px #000b;padding:0}
+.ec-matchup-panel>header{display:flex;gap:14px;align-items:center;padding:12px 17px;background:linear-gradient(#273543,#0e1520);border-bottom:3px solid #af8746}
+.ec-panel-icon{width:40px;height:40px;display:grid;place-items:center;font-size:27px;color:#ffd27c;text-shadow:0 3px 5px #000}
+.ec-matchup-panel header p{font-size:11px;color:#e1b879;letter-spacing:.13em;margin:0 0 2px;font-weight:900}
+.ec-matchup-panel header h3{font:900 italic 26px/1 ECAnton,Impact,sans-serif;margin:0;color:#fff;text-shadow:0 3px #414e62,0 5px 6px #000}
+.ec-game-list{padding:10px}
+.ec-game-list>.note{padding:15px}
+.ec-room-page .game-row{display:block;color:#eaeef1;text-decoration:none;padding:11px 12px;margin:0 0 9px;border:1px solid #485567;border-top:2px solid #8190a1;border-bottom:3px solid #131720;background:linear-gradient(155deg,#1d2836,#0e141c 72%);box-shadow:inset 0 1px #ffffff1e,0 5px 8px #0008;transition:transform .15s,background .15s}
+.ec-room-page .game-row:last-child{margin-bottom:0}
+.ec-room-page .game-row:hover{transform:translateY(-2px);border-color:#ddad5d;background:linear-gradient(#283950,#111b2a)}
+.ec-game-scoreline{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:8px}
+.ec-game-team{display:flex;align-items:center;gap:8px;min-width:0;font-size:13px;font-weight:850;line-height:1.22}
+.ec-game-team.is-home{flex-direction:row-reverse;text-align:right}
+.ec-game-team img{width:40px;height:40px;object-fit:contain;flex:none;filter:drop-shadow(0 3px 4px #000)}
+.ec-game-team .ec-team-fallback{width:40px;height:40px;border:1px solid #526171;display:grid;place-items:center;background:#111821;color:#e4d4ad;font-weight:900;flex:none}
+.ec-game-team .ec-team-name{overflow-wrap:anywhere}
+.ec-game-value{min-width:70px;text-align:center;font:900 26px/1 ECAnton,Impact,sans-serif;color:#f8f5ec;text-shadow:0 2px #000;white-space:nowrap}
+.ec-game-row-status{margin:7px 0 0;padding-top:7px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid #4c5866;font:11px/1.25 Arial,sans-serif;color:#bbc6d3}
+.ec-game-status{font-weight:900;color:#f0c87e;letter-spacing:.12em;text-transform:uppercase}
+.ec-game-cta{color:#f6ce7c;font-weight:900;white-space:nowrap}
+.ec-room-page .room-footer{padding:18px 24px;margin-top:18px;border:3px solid #647181;border-top-color:#e0b972;background:linear-gradient(#1d2834,#0a0e16);box-shadow:inset 0 1px #ffffff29,0 9px 14px #0009}
+.ec-room-page .room-footer h2{margin:0 0 7px;font:900 italic 22px ECAnton,Impact,sans-serif}
+.ec-room-page .room-footer>div{display:flex;gap:18px;flex-wrap:wrap}
+.ec-room-page .room-footer .note{font-size:11px}
+.ec-room-page .ec-room-footer{max-width:none;margin:0;padding:18px max(24px,calc((100vw - 1320px)/2));display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;align-items:center;border-top:3px solid #daa857;background:linear-gradient(#182332,#080a0f);font-size:11px}
+.ec-room-footer .brand-footer{font:900 italic 22px ECAnton,Impact,sans-serif;color:#f1c775;text-decoration:none}
+@media(max-width:1100px){.ec-room-page.league-room #roomPlayers.stalls{grid-template-columns:repeat(4,minmax(0,1fr))}.ec-room-hero{min-height:240px}.ec-hero-team img{width:85px}.ec-hero-team h1{font-size:33px}}
+@media(max-width:850px){.ec-global-header{justify-content:center!important}.ec-room-page .ec-room-shell{padding:0 14px 25px}.ec-room-page .ec-room-top-grid{grid-template-columns:1fr}.ec-room-page.league-room #roomPlayers.stalls{grid-template-columns:repeat(3,minmax(0,1fr))}.ec-room-page .ec-room-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.ec-room-page .ec-room-hero{min-height:235px;grid-template-columns:1fr 1fr}.ec-hero-center{display:none}.ec-room-page .ec-room-hero::before{background:linear-gradient(90deg,#06060df0,#08071366,#080610c9),var(--ec-stage-photo) center/cover no-repeat}.ec-matchup-deck .room-columns{grid-template-columns:1fr}}
+@media(max-width:540px){.ec-room-page .ec-global-header{padding:9px 14px}.ec-global-header .brand img{width:60px;height:60px}.ec-global-header .brand{font-size:19px}.ec-global-header nav{justify-content:center;gap:8px 15px}.ec-global-header nav a{font-size:11px}.ec-room-page .ec-room-hero{min-height:218px;grid-template-columns:1fr 1fr;gap:3px}.ec-hero-team{display:block;padding:12px 5px 10px 11px}.ec-hero-team img{width:68px;height:68px}.ec-hero-team h1{font-size:clamp(22px,5.5vw,32px)}.ec-hero-kicker{font-size:9px;letter-spacing:.1em}.ec-room-record{font-size:9px}.ec-hero-title{padding:12px 10px 10px 0}.ec-hero-title h2{font-size:clamp(26px,7vw,38px)}.ec-hero-title p{font-size:9px;letter-spacing:.1em}.ec-hero-title span{font-size:8px}.ec-room-page .ec-room-hero::before{background:linear-gradient(90deg,#06060df0 0%,#070711a2 30%,#06060c96 70%,#08060de8 100%),var(--ec-stage-photo) center/cover no-repeat}.ec-room-page .ec-room-tabs{padding:3px;margin-bottom:14px}.ec-room-tabs a{min-height:38px;font-size:13px}.ec-room-top-grid{padding:22px 9px 8px;gap:9px}.ec-roster-intro,.ec-team-tools{padding:12px}.ec-roster-note{padding:0 13px 10px}.ec-room-beam{margin:0 5px;padding:9px}.ec-room-beam span{font-size:8px}.ec-room-beam strong{font-size:20px}.ec-locker-theatre{padding:3px 5px 0}.ec-locker-wall{padding:8px 5px}.ec-room-page.league-room #roomPlayers.stalls{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.ec-room-page.league-room #roomPlayers .stall{aspect-ratio:.78/1;border-width:1px;border-bottom-width:3px}.ec-room-page.league-room #roomPlayers .nameplate{font-size:clamp(9px,4.4cqw,14px)}.ec-room-page.league-room #roomPlayers .stats b{font-size:clamp(14px,6cqw,21px)}.ec-locker-floor{margin:0 3px;height:22px}.ec-room-kickplate{padding:7px;font-size:8px}.ec-team-feature{min-height:118px;padding:12px 10px;gap:10px}.ec-team-feature .ec-feature-crest{width:60px;height:60px}.ec-team-feature h2{font-size:24px}.ec-matchup-deck{margin-top:15px}.ec-matchup-deck-header{padding:13px}.ec-matchup-deck-header h2{font-size:29px}.ec-matchup-deck-header>span{display:none}.ec-matchup-deck .room-columns{padding:7px;gap:9px}.ec-matchup-panel>header{padding:9px}.ec-game-list{padding:6px}.ec-room-page .game-row{padding:9px 6px}.ec-game-team{display:grid;justify-items:center;text-align:center!important;gap:4px;font-size:10px}.ec-game-team.is-home{display:grid}.ec-game-team img{height:32px;width:32px}.ec-game-team .ec-team-fallback{width:32px;height:32px}.ec-game-value{min-width:58px;font-size:22px}.ec-game-row-status{font-size:9px}.ec-room-page .ec-room-footer{padding:14px}}
+@media(max-width:330px){.ec-room-page.league-room #roomPlayers.stalls{grid-template-columns:1fr}.ec-room-page.league-room #roomPlayers .stall{aspect-ratio:1/1.35}}
+@media(prefers-reduced-motion:reduce){.ec-room-page .game-row,.ec-room-page .stall{transition:none!important}}
