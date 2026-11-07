@@ -1,0 +1,7 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');const rating=require('../player-card-rating.js');
+test('concept weights total 100 for every supported role',()=>{for(const w of Object.values(rating.weights))assert.equal(Object.values(w).reduce((a,b)=>a+b,0),100);});
+test('centers, both wings, defense and goalie roles resolve separately',()=>{for(const [pos,role] of [['C','C'],['LW','W'],['RW','W'],['LD','D'],['RD','D'],['G','G']])assert.equal(rating.assess({pos,kind:pos==='G'?'goalie':'skater'}).role,role);});
+test('small samples cannot become unofficial elite ratings',()=>{const r=rating.assess({pos:'RW',kind:'skater',gp:1,points:999});assert.equal(r.overall,null);assert.equal(r.approved,false);assert.deepEqual(r.factorsUsed,[]);});
+test('missing role or metrics stay unavailable',()=>{assert.equal(rating.assess({pos:''}).role,null);assert.deepEqual(rating.assess(null).weights,{});assert.equal(rating.assess({kind:'goalie',sv:null}).overall,null);});
+test('version is stable and carries no active scoring claim',()=>{assert.equal(rating.version,'eco-concept-20261103');assert.equal(rating.assess({pos:'C'}).version,rating.version);});
+test('renderer and integration files parse',()=>{for(const p of ['player-cards.js','player-card-studio-v2.js','player-card-renderer.js','player-cards-account.js'])new Function(fs.readFileSync(require('node:path').join(__dirname,'..',p),'utf8'));});

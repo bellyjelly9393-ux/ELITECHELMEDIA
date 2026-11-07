@@ -37,8 +37,8 @@
    <h2 id="custom-heading">☷ PLAYER CARD BUILDER</h2>
    <p class="hint">Choose a player from the public league feed, then personalize the look. Nothing is published to other visitors.</p>
    <h3 class="section-title"><b>1</b> PLAYER IDENTITY</h3><label>League<select id="league"><option value="lg3s">LG3s · Season 1</option><option value="lgchl">LGCHL · Season 55</option></select></label>
-   <label>Find a player<input id="filter" type="search" placeholder="Search gamertag or team…" maxlength="90"></label>
-   <label>Player<select id="player"><option value="">Loading players…</option></select></label>
+   <label>Find a player<input id="filter" type="search" aria-controls="searchResults" aria-expanded="false" autocomplete="off" placeholder="Search gamertag or team…" maxlength="90"></label>
+   <div id="searchResults" role="listbox" aria-label="Matching player records" hidden></div><label>Player<select id="player"><option value="">Loading players…</option></select></label>
    <p id="feedStatus" class="status" role="status" aria-live="polite">Loading public statistics…</p>
    <div class="divider"></div>
    <h3 class="section-title"><b>2</b> PLAYER PHOTO</h3>
@@ -60,7 +60,7 @@
      <select id="edition"><option value="season">Season Series · OVR pending</option><option value="base">Base</option><option value="silver">Silver</option><option value="gold">Gold</option><option value="platinum">Platinum</option><option value="signature">Signature</option><option value="playoff">Playoff</option></select>
    </label>
    <label>Card finish<select id="finish"><option value="crimson">Crimson Steel</option><option value="gold">Championship Gold</option><option value="ice" selected>Ice Chrome</option></select></label>
-   <p class="hint">Background and edition are independent. For the cleanest player cutout, use a transparent PNG or WebP. Regular game screenshots retain their original scenery, softened around the edges.</p>
+   <p class="hint">Background and edition are independent. For the cleanest player cutout, use a transparent PNG or WebP. Regular game screenshots retain their original scenery.</p>
    <button type="button" id="generate" class="generate">ϟ GENERATE CARD</button><p id="renderStatus" class="status" role="status" aria-live="polite"></p><div class="actions"><button type="button" id="save">Save on this device</button><button type="button" id="saveToCollection" disabled>Save to My Collection</button><button type="button" id="export">Export PNG</button><button type="button" class="secondary" id="reset">Reset personal edits</button></div>
    <p class="footnote">League stats remain read-only, and CHEL overall is still self-reported, not a season-calculated rating. Save on this device keeps your background, edition preview, finish, and image locally. My Collection syncs only player, finish, overall, and jersey; background, edition, and uploaded image do not yet sync across devices. Export PNG to keep the complete artwork.</p>
   </section>
@@ -79,7 +79,7 @@
         <div class="cardfoot"><span>ELITECHEL MEDIA</span><span>LEAGUE STATS · CUSTOM OVR</span></div>
       </div>
    </article></div>
-   <p class="preview-note">Card artwork is a concept treatment. Actual character images appear when a player uploads their own game screenshot.</p>
+   <p id="savedSnapshotStatus" class="preview-note"></p><p class="preview-note">Card artwork is a concept treatment. Actual character images appear when a player uploads their own game screenshot.</p>
   </section>
  </div>
 <section class="studio-explain" aria-label="Rating and progression"><article><h3>▥ AUTOMATIC OVERALL (OVR)</h3><p>Automatic OVR awaits approval and validated inputs. Your custom OVR is cosmetic; official statistics stay read-only.</p><a href="elite-chel-cards.html">Explore the proposed model →</a></article><article><h3>◎ RATING FACTORS</h3><p id="ratingFactors">Position-specific weights are proposed.</p><details><summary>Explain my overall</summary><p id="ratingDetail">No automatic OVR has been assigned.</p></details></article><article><h3>▱ CARD PROGRESSION</h3><p>Explore cosmetic editions. Earned upgrades, XP and unlocks are planned.</p><small>VISUAL PREVIEWS · NO EARNED UNLOCKS</small></article></section>
