@@ -79,3 +79,64 @@
 @media(max-width:560px){.ec-room-page .ec-global-header{display:block}.ec-global-header nav{margin-top:13px;justify-content:flex-start}.ec-global-header nav a{font-size:12px}.ec-room-page .room-hero.ec-room-hero{gap:14px;padding:16px 12px;align-items:center;min-height:165px}.ec-room-page .ec-room-hero>img{width:75px;height:90px}.ec-room-page .ec-room-hero h1{font-size:clamp(27px,6vw,40px)}.ec-room-page .ec-room-hero h2{font-size:16px}.ec-room-page .ec-room-subtitle{font-size:9px;letter-spacing:.1em}.ec-room-page .ec-room-tabs{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:9px}.ec-room-tabs a{min-height:38px;font-size:11px}.ec-room-page .ec-roster-intro{padding:13px;grid-template-columns:1fr 40%;min-height:120px}.ec-roster-art-crest{width:42px!important;height:42px!important}.ec-roster-art strong{font-size:16px}.ec-room-page.league-room .stalls{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.ec-room-page.league-room .stall{min-width:0;aspect-ratio:.88/1}.ec-room-page .ec-locker-theatre{padding:10px 7px}.ec-room-page .ec-playoff-watermark{letter-spacing:.14em;font-size:12px}.ec-room-page .stalls::after{grid-column:span 2;min-height:145px}.ec-room-page .room-columns{grid-template-columns:1fr}.ec-room-page .ec-room-footer{flex-wrap:wrap;gap:8px;padding:18px}}
 @media(max-width:350px){.ec-room-page.league-room .stalls{grid-template-columns:1fr}.ec-room-page .stalls::after{grid-column:span 1}}
 @media(prefers-reduced-motion:reduce){.ec-room-page.league-room .stall{transition:none}}
+/* Season 55 visual fidelity pass: the LGCHL page's established broadcast frame,
+   genuine club crests, photograph-led Calgary hero and dimensional panels.
+   Calgary photo © AceYYC, CC BY-SA 4.0: see visible page footer credit. */
+.ec-room-page{--ec-sharp:#ffe0a4;--ec-bevel:url("assets/lgchl/studio/broadcast-frame-v2.webp");--ec-stage-photo:url("assets/wildman/home/arena.webp");background:radial-gradient(ellipse at top,#12253b 0%,#040608 66%)}
+.ec-room-page.hitmen-room{--ec-stage-photo:url("https://upload.wikimedia.org/wikipedia/commons/d/d2/2020_Calgary_Saddledome_night.jpg");--ec-accent:#d82d34;--ec-ice:#a9caff}
+.ec-room-page .ec-global-header{position:relative;z-index:6;border-bottom:3px solid #d8b05c;background:linear-gradient(110deg,#111924,#06090e 65%,#141c28);box-shadow:inset 0 -1px #fff7ce45,0 6px 0 #0b1015,0 12px 22px #000c}
+.ec-room-page .ec-global-header .brand{display:flex;gap:8px}
+.ec-room-page .ec-global-header .brand img{width:94px;height:81px;object-fit:contain;filter:drop-shadow(0 4px 3px #000) drop-shadow(0 0 9px #f4be5349)}
+.ec-room-page .ec-global-header .brand .ec-brand-text{font:900 italic 22px/1 Impact,'Arial Narrow',sans-serif;color:#f7eee1;text-shadow:0 2px #050506,0 4px 8px #000;letter-spacing:.07em}
+.ec-room-page .ec-global-header nav a{border-bottom:3px solid transparent;padding:9px 2px}
+.ec-room-page .ec-global-header nav a:hover{border-color:var(--ec-gold)}
+.ec-room-page .room-hero.ec-room-hero{min-height:278px;border:10px solid transparent;border-image:var(--ec-bevel) 90 / 10px / 0 stretch;
+background:radial-gradient(ellipse at 58% 34%,#19355934,transparent 61%),linear-gradient(90deg,#05060bf5 0%,#06080fdc 36%,#07091367 68%,#06080b22 100%),var(--ec-stage-photo) 60% 48%/cover no-repeat;
+box-shadow:inset 0 1px #fff8dd2a,inset 0 0 40px #000b,0 14px 28px #000e}
+.ec-room-page.hitmen-room .room-hero.ec-room-hero{background:linear-gradient(90deg,#04050bf5 0%,#04070ce9 31%,#05070cc0 50%,#05060a12 100%),var(--ec-stage-photo) 70% 52%/cover no-repeat}
+.ec-room-page .ec-room-hero>img{width:clamp(120px,18vw,214px);height:clamp(120px,18vw,214px);filter:drop-shadow(0 6px 0 #070707) drop-shadow(0 13px 12px #000) drop-shadow(0 0 9px #a02c2678)}
+.ec-room-page .ec-room-hero h1{background:linear-gradient(180deg,#fff 10%,#f5f0e7 39%,#b0bac4 58%,#5c6672 77%,#f9edc3 100%);background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 3px #040509) drop-shadow(0 5px 7px #000);font-size:clamp(42px,6vw,82px)}
+.ec-room-page .ec-room-hero h2{display:inline-block;padding:3px 16px 5px;background:linear-gradient(90deg,#36090c,#b72028 48%,#260708);border-block:1px solid #f14651a8;color:#fff}
+.ec-room-page .ec-room-record{display:inline-block;padding:8px 12px;background:linear-gradient(90deg,#080b10e0,#111d29cc);border:1px solid #8d744f;color:#f3dfb3;font-weight:800}
+.ec-room-page .ec-room-tabs{border:10px solid transparent;border-image:var(--ec-bevel) 90 / 10px / 0 stretch;background:linear-gradient(180deg,#202934,#080b12);margin-bottom:26px;box-shadow:0 8px 15px #000b}
+.ec-room-page .ec-room-tabs a{border:2px solid #57616d;border-top:3px solid #81919c;border-bottom:4px solid #0b0d11;background:linear-gradient(#273240,#0e141e 48%,#050910);box-shadow:inset 0 1px #ffffff2c,0 5px 6px #000a}
+.ec-room-page .ec-room-tabs a.is-selected{border-color:#c49647;border-top-color:#fff1c1;border-bottom-color:#53330f;background:linear-gradient(180deg,#e6c164,#81531c 52%,#261607);text-shadow:0 1px 2px #000;box-shadow:inset 0 2px #fff2be80,0 3px 12px #ad71288f}
+.ec-room-page .ec-roster-intro,.ec-room-page .ec-team-tools,.ec-room-page .room-columns section,.ec-room-page .room-footer{border:14px solid transparent;border-image:var(--ec-bevel) 90 / 14px / 0 stretch;border-radius:0;box-shadow:inset 0 2px #fff8df27,inset 0 -7px 12px #0008,0 13px 24px #000d}
+.ec-room-page .ec-roster-intro{min-height:165px;background:linear-gradient(115deg,#151b22 0%,#090b0f 55%,#101821)}
+.ec-room-page .ec-roster-intro h2{font-size:clamp(27px,3.2vw,39px);text-shadow:0 2px #7c848c,0 5px 8px #000}
+.ec-room-page .ec-roster-art{border:3px solid #997644;border-top-color:#efc578;border-bottom-color:#49301a;background:linear-gradient(90deg,#0a0c11f0,#111e29b0 55%,#070b1180),var(--ec-stage-photo) center/cover;box-shadow:inset 0 0 18px #000c,0 5px 10px #000a}
+.ec-room-page.hitmen-room .ec-roster-art{background:linear-gradient(90deg,#05070ee9,#080b11b0 58%,#05080d38),var(--ec-stage-photo) 66% 62%/cover}
+.ec-roster-art-crest{width:72px!important;height:72px!important;filter:drop-shadow(0 3px #000) drop-shadow(0 0 7px #ba3434bd)!important}
+.ec-room-page .ec-team-tools{background:linear-gradient(150deg,#253342 0%,#0f141e 45%,#070a0e 100%)}
+.ec-room-page .ec-team-tools h2{padding:8px 0;color:#ffdf85;font-size:19px;text-shadow:0 2px #000}
+.ec-room-page .ec-team-tools input,.ec-room-page .ec-team-tools select,.ec-room-page .ec-team-tools .lg-locker-trigger{border:2px solid #637084;border-bottom:4px solid #050608;background:linear-gradient(#1f2936,#0b1018);color:#fff;box-shadow:inset 0 2px #ffffff1d,0 5px 9px #000c;font-size:14px}
+.ec-room-page .ec-locker-theatre{border:15px solid transparent;border-image:var(--ec-bevel) 90 / 15px / 0 stretch;
+background:radial-gradient(ellipse at 50% 17%,#234f7d3f,transparent 52%),linear-gradient(180deg,#050609d4,#071019bc 48%,#040609f4),url("assets/wildman/home/arena.webp") center 35%/cover fixed;background-color:#05070c;box-shadow:inset 0 0 48px #000,0 20px 40px #000e}
+.ec-room-page .ec-playoff-watermark{margin:0 3px 13px;padding:11px 8px;color:#ffe4aa;background:linear-gradient(90deg,#020305a0,#1c2d41e0 35%,#1c2d41e0 65%,#020305a0);border-block:1px solid #6f5431;box-shadow:inset 0 1px #ffffff31,0 4px 12px #000;text-shadow:0 2px #000,0 0 10px #e8b95b4d}
+.ec-room-page.league-room .stalls{gap:10px}
+.ec-room-page.league-room .stall{aspect-ratio:1.03/1;border:5px ridge #b68a4d!important;border-top-color:#ead0a1!important;border-bottom-color:#5d3c1e!important;box-shadow:inset 0 0 0 2px #0d1015,inset 0 -8px 15px #000c,0 10px 9px #000b,0 16px 15px #0008;background-size:100% 100%}
+.ec-room-page.league-room .stall:hover{box-shadow:inset 0 0 0 2px #f8d17e,0 10px 18px #000,0 0 17px #e5a73a8e;transform:translateY(-3px);filter:brightness(1.1)}
+.ec-room-page.league-room .nameplate{font-weight:900;text-shadow:0 1px #fff9}
+.ec-room-page.league-room .stats{border:2px solid #9f8966;box-shadow:inset 0 1px #ffffff2b,0 4px 5px #000c;background:linear-gradient(#30333a,#08090d 73%)}
+.ec-room-page.league-room .open-card{border:2px solid #986e39;border-top-color:#e5be80;background:linear-gradient(#302015,#100c0b);box-shadow:inset 0 1px #ffe7af33,0 4px 7px #000}
+.ec-room-page .stalls::after{display:none!important}
+.ec-room-page .ec-feature-panel{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:flex-start;grid-column:span 3;min-height:200px;padding:22px 28px;overflow:hidden;border:12px solid transparent;border-image:var(--ec-bevel) 90 / 12px / 0 stretch;background:linear-gradient(95deg,#05070bea 0%,#05070bce 48%,#080b1038 100%),var(--ec-stage-photo) 65% center/cover;box-shadow:inset 0 0 32px #000,0 12px 15px #000d}
+.ec-room-page.hitmen-room .ec-feature-panel{background:linear-gradient(95deg,#05070bf0 0%,#05070bd6 39%,#06080e26 100%),var(--ec-stage-photo) center 52%/cover}
+.ec-feature-panel:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#c8323a 0 1.5%,transparent 2.5% 96%,#e0b64d 97% 99%,transparent 100%);pointer-events:none}
+.ec-feature-panel .ec-feature-mark{width:92px;height:92px;margin-right:22px;object-fit:contain;filter:drop-shadow(0 4px 7px #000);flex:none}
+.ec-feature-panel .ec-feature-copy{display:grid;gap:7px;text-shadow:0 3px 8px #000;max-width:66%}
+.ec-feature-copy small{font-size:12px;color:#eec477;font-weight:900;letter-spacing:.26em}
+.ec-feature-copy strong{font:900 italic clamp(26px,3.6vw,54px)/.98 Impact,'Arial Narrow',Arial,sans-serif;color:#fff4e9;text-shadow:0 3px #585c66,0 6px 10px #000}
+.ec-room-page .room-columns section{background:linear-gradient(160deg,#263445 0%,#111925 38%,#080b12 100%)}
+.ec-room-page .room-columns h2{font-size:29px;text-shadow:0 2px #6c7378,0 4px 6px #000}
+.ec-room-page .game-row{display:block;padding:14px 8px;border-top:1px solid #536072;transition:background .15s}
+.ec-room-page .game-row:hover{background:#45617a30}
+.ec-room-page .room-footer{background:linear-gradient(#263443,#111924)}
+.ec-room-page .ec-room-footer{border-top:5px ridge #d5a95a;box-shadow:inset 0 1px #fff9d23d}
+.ec-room-page .ec-saddledome-credit{flex:1 1 100%;font-size:11px;color:#aab5c1;text-align:center}
+.ec-room-page .ec-saddledome-credit a{color:#d9c5a0}
+.ec-room-page:not(.hitmen-room) .ec-saddledome-credit{display:none}
+@media(max-width:950px){.ec-room-page .ec-global-header .brand img{width:74px;height:72px}.ec-room-page .ec-room-hero h1{font-size:clamp(32px,6.4vw,68px)}.ec-room-page .ec-feature-panel{min-height:160px}.ec-room-page .ec-feature-mark{width:66px;height:66px}}
+@media(max-width:800px){.ec-room-page .ec-locker-theatre{background-attachment:scroll}.ec-room-page .ec-room-hero>img{width:110px;height:110px}.ec-room-page .ec-feature-panel{grid-column:span 3}}
+@media(max-width:560px){.ec-room-page .ec-global-header .brand img{width:69px;height:67px}.ec-room-page .room-hero.ec-room-hero{min-height:190px;padding:15px 12px;background-position:center!important}.ec-room-page.hitmen-room .room-hero.ec-room-hero{background:linear-gradient(90deg,#05070bf5,#05070bbe 60%,#03040a80),var(--ec-stage-photo) 65% center/cover no-repeat}.ec-room-page .ec-room-hero>img{width:73px;height:82px}.ec-room-page .ec-room-hero h1{font-size:clamp(26px,7vw,44px)}.ec-room-page .ec-roster-intro,.ec-room-page .ec-team-tools,.ec-room-page .room-columns section,.ec-room-page .room-footer{border-width:9px;border-image:var(--ec-bevel) 90 / 9px / 0 stretch}.ec-room-page .ec-locker-theatre{border-width:8px;border-image:var(--ec-bevel) 90 / 8px / 0 stretch}.ec-room-page.league-room .stall{aspect-ratio:.88/1;border-width:3px!important}.ec-room-page .ec-feature-panel{grid-column:span 2;min-height:152px;padding:12px;border-width:7px;border-image:var(--ec-bevel) 90 / 7px / 0 stretch}.ec-room-page .ec-feature-mark{width:52px;height:52px;margin-right:10px}.ec-feature-panel .ec-feature-copy{max-width:75%}.ec-feature-copy small{font-size:10px;letter-spacing:.1em}.ec-feature-copy strong{font-size:clamp(20px,5vw,31px)}}
+@media(max-width:350px){.ec-room-page .ec-feature-panel{grid-column:span 1}}
