@@ -40,3 +40,17 @@
 .league-room .jersey-stage .concept-crest{position:absolute;top:43%;left:50%;inset:auto;transform:translate(-50%,-50%);width:29%;height:29%;max-width:29%;min-width:0;min-height:0;object-fit:contain;filter:drop-shadow(0 2px 3px #0009)}
 .league-room .jersey-stage .concept-tag{position:absolute;bottom:-1%;left:3%;right:3%;padding:2px 4px;text-align:center;font-size:clamp(8px,2.3cqw,11px);line-height:1.25;letter-spacing:.35px;color:#e8ddd0;background:#060709c7;border:1px solid #74624a8c;pointer-events:none}
 .league-room .jersey-stage img.club-jersey{height:100%;width:100%;max-width:100%;object-fit:contain}
+
+/* Find My Stall: public Calgary room; existing grid remains the room map. */
+.stall-finder{margin:16px 0 22px;padding:18px;border:1px solid #766153;background:linear-gradient(#211b17,#0d0d0d)}
+.stall-finder .note:first-child{margin-top:0}
+.stall-finder nav{margin-top:14px;gap:12px}
+.stall-control,.stall-finder li button{min-height:44px;padding:12px 16px;border:1px solid #aa6941;border-radius:3px;background:#211b17;color:#f2dfcf;font:inherit;cursor:pointer;text-align:left;overflow-wrap:anywhere}
+.stall-control:disabled{opacity:.5;cursor:default}
+.stall-finder button:focus-visible{outline:3px solid #83bdff;outline-offset:3px}
+.stall-finder ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:10px}
+.stall-finder [hidden]{display:none}
+.stall-finder li button{width:100%}
+.hitmen-room .stall.is-found{outline:4px solid #ff766c;outline-offset:-4px;box-shadow:inset 0 0 50px #d9262670,0 0 24px #d9262680;z-index:1;scroll-margin-block:24px}
+.hitmen-room .stall.is-found .open-card{border-color:#ff766c;background:#541b1b;color:#fff}
+@media(max-width:600px){.stall-finder{padding:14px}.stall-finder nav{display:grid;grid-template-columns:1fr 1fr}.stall-control{font-size:14px;padding:12px 10px}}

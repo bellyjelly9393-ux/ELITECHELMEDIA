@@ -5,6 +5,8 @@ on:
       - 'lgchl-team.html'
       - 'lgchl-team.js'
       - 'lgchl-team.css'
+      - 'hitmen-find-stall.js'
+      - 'test-hitmen-find-stall.cjs'
       - 'lgchl-locker-chooser.js'
       - 'lgchl-locker-chooser.css'
       - 'public-navigation.js'
@@ -30,6 +32,8 @@ jobs:
       - name: Public roster, links and jersey fallback regressions
         run: |
           node --check lgchl-team.js
+          node --check hitmen-find-stall.js
+          node --check test-hitmen-find-stall.cjs
           node --check lgchl-locker-chooser.js
           node --check public-navigation.js
           node test-public-team-rosters.cjs
