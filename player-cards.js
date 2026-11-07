@@ -8,6 +8,11 @@ const params=new URLSearchParams(location.search);
 let league=params.get('league')==='lg3s'?'lg3s':'lgchl';
 let all=[],visible=[],current=null,req=0;
 let portraitData='';
+const BACKGROUNDS=['arena','heat','city','locker','playoff','classic'];
+const EDITIONS=['base','silver','gold','platinum','signature','playoff'];
+function getBackground(){const selected=document.querySelector('input[name="cardBackground"]:checked');return selected&&BACKGROUNDS.includes(selected.value)?selected.value:'arena';}
+function setBackground(value){const valid=BACKGROUNDS.includes(value)?value:'arena';document.querySelectorAll('input[name="cardBackground"]').forEach(r=>{r.checked=r.value===valid;});}
+function getEdition(){return EDITIONS.includes($('edition').value)?$('edition').value:'base';}
 const blank='--';
 const asNum=v=>(v!==null&&v!==undefined&&String(v).trim()!==''&&Number.isFinite(Number(v)))?Number(v):null;
 const fmt=v=>asNum(v)===null?blank:String(asNum(v));
@@ -25,35 +30,73 @@ filter();const id=params.get('id'),kind=params.get('kind');const requested=all.f
 $('feedStatus').textContent=all.length+' public player-stat records loaded. Game statistics are read-only.';
 }catch(e){if(i!==req)return;all=[];$('player').innerHTML='';$('player').add(new Option('No player records available',''));$('feedStatus').textContent='League feed unavailable. No example statistics are displayed.';current=null;render();console.warn('Player card read-only feed:',e.message);}}
 function filter(){const q=$('filter').value.trim().toLowerCase();const chosen=$('player').value;visible=all.filter(p=>!q||p.tag.toLowerCase().includes(q)||p.team.toLowerCase().includes(q)).slice(0,500);$('player').innerHTML='';if(!visible.length){$('player').add(new Option('No matching players',''));current=null;render();return;}for(const p of visible){$('player').add(new Option(p.tag+' · '+(p.team||league.toUpperCase())+' · '+p.kind,p.kind+':'+p.id));}if(visible.some(p=>p.kind+':'+p.id===chosen))$('player').value=chosen;}
-function loadPersonal(){portraitData='';$('portraitFile').value='';$('overall').value='';$('jersey').value='';$('finish').value=league==='lgchl'?'gold':'crimson';if(!current)return;try{const s=localStorage.getItem(key());if(s){const p=JSON.parse(s);$('overall').value=p.ovr||'';$('jersey').value=p.jersey??'';$('finish').value=['crimson','gold','ice'].includes(p.finish)?p.finish:'crimson';portraitData=p.portrait||'';}}catch(e){console.warn('Local card preferences unavailable:',e.message);}}
+function loadPersonal(){portraitData='';$('portraitFile').value='';$('overall').value='';$('jersey').value='';$('finish').value=league==='lgchl'?'gold':'crimson';$('edition').value='base';setBackground('arena');if(!current)return;try{const s=localStorage.getItem(key());if(s){const p=JSON.parse(s);$('overall').value=p.ovr||'';$('jersey').value=p.jersey??'';$('finish').value=['crimson','gold','ice'].includes(p.finish)?p.finish:'crimson';portraitData=p.portrait||'';setBackground(p.background);$('edition').value=EDITIONS.includes(p.edition)?p.edition:'base';}}catch(e){console.warn('Local card preferences unavailable:',e.message);}}
 function select(){const value=$('player').value;current=all.find(p=>p.kind+':'+p.id===value)||null;loadPersonal();render();window.dispatchEvent(new Event('ecm:card-selected'));}
-function render(){const p=current;$('cardName').textContent=p?p.tag:'SELECT PLAYER';$('cardTeam').textContent=p?(p.team||'TEAM UNAVAILABLE').toUpperCase():'LG VERIFIED STATS';$('cardPosition').textContent=p?(p.pos||p.kind).toUpperCase():'PLAYER';$('cardJersey').textContent=$('jersey').value?'#'+$('jersey').value:'';$('cardOvr').textContent=$('overall').value||blank;$('card').dataset.finish=$('finish').value;
+function render(){const p=current;$('cardName').textContent=p?p.tag:'SELECT PLAYER';$('cardTeam').textContent=p?(p.team||'TEAM UNAVAILABLE').toUpperCase():'LG VERIFIED STATS';$('cardPosition').textContent=p?(p.pos||p.kind).toUpperCase():'PLAYER';$('cardJersey').textContent=$('jersey').value?'#'+$('jersey').value:'';$('cardOvr').textContent=$('overall').value||blank;$('card').dataset.finish=$('finish').value;$('card').dataset.background=getBackground();$('card').dataset.edition=getEdition();$('cardEditionLabel').textContent=getEdition().toUpperCase()+' EDITION';
 const portrait=$('portrait');portrait.hidden=!portraitData;portrait.src=portraitData||'';$('silhouette').hidden=!!portraitData;
 const values=p?(p.kind==='goalie'?[fmt(p.gp),fmt(p.wins),pc(p.sv),fixed(p.gaa)]:[fmt(p.gp),fmt(p.goals),fmt(p.assists),fmt(p.points)]):[blank,blank,blank,blank];
 const labels=p?.kind==='goalie'?['GP','W','SV%','GAA']:['GP','G','A','PTS'];values.forEach((v,i)=>{$('stat'+(i+1)).textContent=v;$('lab'+(i+1)).textContent=labels[i];});}
-function save(){if(!current){$('feedStatus').textContent='Select a player before saving.';return;}const payload={ovr:$('overall').value,jersey:$('jersey').value,finish:$('finish').value,portrait:portraitData};try{localStorage.setItem(key(),JSON.stringify(payload));$('feedStatus').textContent='Private preview saved on this device. Other visitors cannot see your changes.';}catch(e){$('feedStatus').textContent='Browser storage is full or disabled. Export your PNG to keep your card.';}}
+function save(){if(!current){$('feedStatus').textContent='Select a player before saving.';return;}const payload={ovr:$('overall').value,jersey:$('jersey').value,finish:$('finish').value,background:getBackground(),edition:getEdition(),portrait:portraitData};try{localStorage.setItem(key(),JSON.stringify(payload));$('feedStatus').textContent='Private preview saved on this device. Other visitors cannot see your changes.';}catch(e){$('feedStatus').textContent='Browser storage is full or disabled. Export your PNG to keep your card.';}}
 function clear(){if(!current)return;try{localStorage.removeItem(key());}catch(e){}loadPersonal();render();$('feedStatus').textContent='Personal edits cleared for this card.';}
 async function upload(file){if(!file)return;if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>8*1024*1024){$('feedStatus').textContent='Choose a PNG, JPG or WebP under 8 MB.';return;}
 try{const img=new Image(),url=URL.createObjectURL(file);await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url;});const c=document.createElement('canvas');const maxW=640,maxH=770,scale=Math.min(maxW/img.naturalWidth,maxH/img.naturalHeight,1);c.width=Math.max(1,Math.round(img.naturalWidth*scale));c.height=Math.max(1,Math.round(img.naturalHeight*scale));c.getContext('2d').drawImage(img,0,0,c.width,c.height);portraitData=c.toDataURL('image/webp',.80);URL.revokeObjectURL(url);render();$('feedStatus').textContent='CHEL character loaded for local preview. Select Save on this device to retain it.';}catch(e){$('feedStatus').textContent='Could not load this character image.';console.warn(e);}}
 function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
 function fit(ctx,text,max,width){let size=max;ctx.font='bold '+size+'px Impact,Arial';while(ctx.measureText(text).width>width&&size>24){size-=2;ctx.font='bold '+size+'px Impact,Arial';}return size;}
+/* Export artwork uses local canvas shapes. No remote background images or CORS dependencies. */
+function paintScene(x,W,H,theme){
+ x.save();rr(x,42,42,W-84,H-84,20);x.clip();
+ const fill=(colors)=>{const g=x.createLinearGradient(0,42,W,H);colors.forEach((c,i)=>g.addColorStop(i/(colors.length-1),c));x.fillStyle=g;x.fillRect(42,42,W-84,H-84);};
+ const glow=(cx,cy,r,color)=>{const g=x.createRadialGradient(cx,cy,3,cx,cy,r);g.addColorStop(0,color);g.addColorStop(1,'#00000000');x.fillStyle=g;x.fillRect(cx-r,cy-r,r*2,r*2);};
+ if(theme==='arena'){
+  fill(['#111e36','#235475','#62a5c3']);glow(W*.52,95,190,'#e5f6ffca');
+  x.fillStyle='#c2e7ee3b';x.fillRect(43,590,W-86,265);
+  x.lineWidth=3;x.strokeStyle='#e9f9ff5c';for(let i=0;i<6;i++){x.beginPath();x.moveTo(55,620+i*34);x.lineTo(W-55,620+i*34);x.stroke();}
+  x.strokeStyle='#ff47605a';x.beginPath();x.arc(W/2,800,145,0,Math.PI*2);x.stroke();
+ }else if(theme==='heat'){
+  fill(['#170a1a','#6f1429','#b13b1b']);glow(210,690,310,'#ff48128e');glow(540,330,330,'#ffa53f73');
+  x.fillStyle='#ffc76e47';for(let i=0;i<16;i++){const y=90+i*45;x.fillRect(80+(i*83)%480,y,5+(i%4)*3,20+(i%3)*9);}
+ }else if(theme==='city'){
+  fill(['#0c1630','#433055','#a65356']);glow(495,185,220,'#ffd1a155');
+  x.fillStyle='#101526';for(let i=0;i<15;i++){const left=50+i*43,top=390+(i*89)%240;x.fillRect(left,top,36,H-top);}
+  x.fillStyle='#f1c48e88';for(let i=0;i<55;i++){const left=62+(i*37)%580,top=425+(i*47)%330;x.fillRect(left,top,3,5);}
+ }else if(theme==='locker'){
+  fill(['#1e1c26','#5b3137','#17151e']);for(let i=0;i<5;i++){const xx=40+i*135;x.fillStyle='#0d1019b9';x.fillRect(xx,65,122,755);x.strokeStyle='#ad6b4c7f';x.lineWidth=5;x.strokeRect(xx+7,80,108,695);}
+  x.strokeStyle='#dee1e47a';x.lineWidth=4;for(let i=0;i<5;i++){x.beginPath();x.arc(105+i*135,260,14,0,Math.PI);x.stroke();}
+ }else if(theme==='playoff'){
+  fill(['#0c1839','#293f75','#101229']);glow(W/2,320,350,'#b9e7ff9a');
+  x.strokeStyle='#d9f5ff65';for(let i=0;i<26;i++){const a=i*2*Math.PI/26;x.beginPath();x.moveTo(W/2+65*Math.cos(a),340+65*Math.sin(a));x.lineTo(W/2+650*Math.cos(a),340+650*Math.sin(a));x.stroke();}
+  x.strokeStyle='#f3f7ff75';x.lineWidth=5;x.beginPath();x.arc(W/2,330,155,0,Math.PI*2);x.stroke();
+ }else{
+  fill(['#39495c','#101722','#293443']);x.fillStyle='#e5efff0d';
+  for(let i=-H;i<W+H;i+=35){x.beginPath();x.moveTo(i,42);x.lineTo(i+H,H);x.lineTo(i+H+8,H);x.lineTo(i+8,42);x.fill();}
+ }
+ const shade=x.createLinearGradient(0,42,0,H-42);shade.addColorStop(0,'#050910bc');shade.addColorStop(.26,'#09101b1a');shade.addColorStop(.65,'#05091029');shade.addColorStop(1,'#050910d4');x.fillStyle=shade;x.fillRect(42,42,W-84,H-84);
+ x.restore();
+}
 async function exportPNG(){if(!current){$('feedStatus').textContent='Choose a player before exporting.';return;}const W=700,H=980,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d'),finish=$('finish').value,accent=finish==='gold'?'#efb331':finish==='ice'?'#80d5f1':'#ea2845';
-const bg=x.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#f6f8ff');bg.addColorStop(.09,accent);bg.addColorStop(.18,'#090e17');bg.addColorStop(.72,'#18202c');bg.addColorStop(.94,accent);bg.addColorStop(1,'#e4e7f0');x.fillStyle=bg;rr(x,8,8,W-16,H-16,39);x.fill();
+const editionColor={base:'#bbc5d2',silver:'#f1f7ff',gold:'#f9c54e',platinum:'#fb83de',signature:'#7fceff',playoff:'#ff6571'}[getEdition()];
+const bg=x.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#f6f8ff');bg.addColorStop(.09,editionColor);bg.addColorStop(.18,'#090e17');bg.addColorStop(.72,'#18202c');bg.addColorStop(.94,editionColor);bg.addColorStop(1,'#e4e7f0');x.fillStyle=bg;rr(x,8,8,W-16,H-16,39);x.fill();
 const core=x.createLinearGradient(0,0,W,H);core.addColorStop(0,'#263548');core.addColorStop(.45,'#0b1420');core.addColorStop(1,'#0a0c12');x.fillStyle=core;rr(x,23,23,W-46,H-46,26);x.fill();x.lineWidth=4;x.strokeStyle=accent;x.stroke();x.lineWidth=2;x.strokeStyle='#b7c0ca';rr(x,38,38,W-76,H-76,20);x.stroke();
-x.textBaseline='alphabetic';x.fillStyle='#fff';x.font='bold 108px Impact,Arial';x.fillText($('overall').value||'--',62,150);x.font='bold 23px Arial';x.fillText('CHEL OVR',61,187);
-x.textAlign='right';x.font='bold 44px Impact,Arial';x.fillText('ELITECHEL',W-60,102);x.fillStyle=accent;x.fillText('MEDIA',W-60,145);x.textAlign='left';
-if(portraitData){const img=new Image();try{await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=portraitData;});const box={x:110,y:210,w:480,h:510};const scale=Math.min(box.w/img.naturalWidth,box.h/img.naturalHeight);const w=img.naturalWidth*scale,h=img.naturalHeight*scale;x.drawImage(img,box.x+(box.w-w)/2,box.y+(box.h-h)/2,w,h);}catch(e){}}else{
+paintScene(x,W,H,getBackground());
+ x.textBaseline='alphabetic';x.fillStyle='#fff';x.font='bold 108px Impact,Arial';x.fillText($('overall').value||'--',62,150);x.font='bold 23px Arial';x.fillText('CHEL OVR',61,187);
+x.textAlign='right';x.font='bold 44px Impact,Arial';x.fillText('ELITECHEL',W-60,102);x.fillStyle=accent;x.fillText('MEDIA',W-60,145);x.fillStyle=editionColor;x.font='bold 20px Arial';x.fillText(getEdition().toUpperCase()+' EDITION',W-60,182);x.textAlign='left';
+if(portraitData){const img=new Image();try{await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=portraitData;});const box={x:110,y:210,w:480,h:510};const scale=Math.min(box.w/img.naturalWidth,box.h/img.naturalHeight);const w=img.naturalWidth*scale,h=img.naturalHeight*scale;/* Soft edges let the chosen scene show behind opaque screenshots. Transparent PNGs remain best. */
+const layer=document.createElement('canvas');layer.width=box.w;layer.height=box.h;const lc=layer.getContext('2d');
+lc.drawImage(img,(box.w-w)/2,(box.h-h)/2,w,h);lc.globalCompositeOperation='destination-in';
+const mask=lc.createRadialGradient(box.w/2,box.h/2,box.w*.24,box.w/2,box.h/2,box.w*.62);mask.addColorStop(0,'#000');mask.addColorStop(.75,'#000');mask.addColorStop(1,'#0000');
+lc.fillStyle=mask;lc.fillRect(0,0,box.w,box.h);x.drawImage(layer,box.x,box.y);}catch(e){}}else{
 x.strokeStyle='#8a94a5';x.lineWidth=15;x.beginPath();x.arc(350,372,95,0,Math.PI*2);x.stroke();x.fillStyle='#344053';x.beginPath();x.ellipse(350,640,180,175,0,Math.PI,Math.PI*2);x.fill();x.fillStyle=accent;x.fillRect(190,670,320,20);
 }
 const belt=x.createLinearGradient(0,700,W,775);belt.addColorStop(0,'#192635');belt.addColorStop(.5,'#080c11');belt.addColorStop(1,accent);x.fillStyle=belt;rr(x,40,719,W-80,95,12);x.fill();x.strokeStyle=accent;x.lineWidth=3;x.stroke();
 const name=current.tag.toUpperCase();fit(x,name,58,555);x.textAlign='center';x.fillStyle='#fff';x.fillText(name,350,782);x.font='bold 22px Arial';x.fillStyle='#c5cdd5';x.fillText((current.team||'TEAM UNAVAILABLE').toUpperCase(),350,850);
 const values=[1,2,3,4].map(i=>$('stat'+i).textContent),labels=[1,2,3,4].map(i=>$('lab'+i).textContent);for(let i=0;i<4;i++){x.textAlign='center';const center=105+i*163;x.font='bold 45px Impact,Arial';x.fillStyle='#fff';x.fillText(values[i],center,911);x.font='bold 17px Arial';x.fillStyle='#aab7ca';x.fillText(labels[i],center,936);}
-x.textAlign='center';x.font='13px Arial';x.fillText('VERIFIED LEAGUE STATS  /  CUSTOM OVR AND ARTWORK',350,955);
+x.textAlign='center';x.font='13px Arial';x.fillText('LEAGUE STATS / SELF-REPORTED OVR / '+getEdition().toUpperCase()+' EDITION',350,955);
 c.toBlob(blob=>{if(!blob){$('feedStatus').textContent='PNG export failed.';return;}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Elitechel-'+league+'-'+current.tag.replace(/[^a-z0-9_-]+/gi,'-')+'.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);$('feedStatus').textContent='PNG exported. CHEL overall remains player-supplied, not verified by LG.';},'image/png');}
 $('league').addEventListener('change',()=>{league=$('league').value;const u=new URL(location.href);u.searchParams.set('league',league);u.searchParams.delete('id');u.searchParams.delete('kind');history.replaceState(null,'',u);$('filter').value='';load();});
 $('filter').addEventListener('input',()=>{filter();if(visible.length)select();});
 $('player').addEventListener('change',()=>{select();if(current){const u=new URL(location.href);u.searchParams.set('league',league);u.searchParams.set('id',current.id);u.searchParams.set('kind',current.kind);history.replaceState(null,'',u);}});
-for(const id of ['overall','jersey','finish'])$(id).addEventListener('input',()=>{const field=$(id);if(id==='overall'&&field.value)field.value=Math.max(1,Math.min(99,Number(field.value)||1));if(id==='jersey'&&field.value)field.value=Math.max(0,Math.min(99,Number(field.value)||0));render();});
+for(const id of ['overall','jersey','finish','edition'])$(id).addEventListener('input',()=>{const field=$(id);if(id==='overall'&&field.value)field.value=Math.max(1,Math.min(99,Number(field.value)||1));if(id==='jersey'&&field.value)field.value=Math.max(0,Math.min(99,Number(field.value)||0));render();});
+document.querySelectorAll('input[name="cardBackground"]').forEach(input=>input.addEventListener('change',render));
 $('portraitFile').addEventListener('change',e=>upload(e.target.files?.[0]));
 $('save').addEventListener('click',save);$('reset').addEventListener('click',clear);$('export').addEventListener('click',exportPNG);
 window.ecmCardStudio={
