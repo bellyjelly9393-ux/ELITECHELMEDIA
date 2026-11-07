@@ -9,8 +9,7 @@ document.body.classList.toggle('league-room',true);
 document.body.classList.toggle('hitmen-room',team===412);
 if(document.body?.dataset)document.body.dataset.league=window.LGLockerChooser?.LEAGUE?.[team]||'LGCHL';
 const roomArt=document.querySelector?.('.ec-roster-art-crest');if(roomArt)roomArt.src='assets/lgchl/s55/team'+team+'.png';
-const featureLabel=team===412?'HOME ICE · AT THE SADDLEDOME':'LGCHL · SEASON 55 PLAYOFFS';
-document.getElementById('roomPlayers')?.setAttribute('data-feature-label',featureLabel);
+const teamFeature=document.getElementById('roomTeamFeature');if(teamFeature)teamFeature.hidden=team!==412;
 const logo=id=>Number(id)===412?'assets/logos/chl/calgary-hitmen.png':'assets/lgchl/s55/team'+Number(id)+'.png';
 const featuredLogo=logo(team);
 if(roomArt)roomArt.src=featuredLogo;
@@ -31,8 +30,7 @@ function render(){
  return (valid(p.lg_user_id)?'<a class="stall" href="'+url+'">':'<article class="stall">')+'<strong class="nameplate">'+esc(p.gamertag)+'</strong><div class="jersey-stage">'+uniform+'</div><div class="stall-info"><p>'+esc(p.position||(goalie?'G':'Skater'))+(p.management_role?' · '+esc(p.management_role):'')+' · '+fmt(p.gp)+' GP</p><div class="stats">'+stats.map(([k,v])=>'<span>'+k+'<b>'+esc(v)+'</b></span>').join('')+'</div><span class="open-card">'+(valid(p.lg_user_id)?'OPEN PLAYER CARD →':'PLAYER CARD UNAVAILABLE')+'</span></div>'+(valid(p.lg_user_id)?'</a>':'</article>');
  };
  const content=rows.map(card).join('');
- const feature=(!q && rows.length)?'<aside class="ec-feature-panel" aria-label="Team room visual"><img class="ec-feature-mark" src="'+logo(team)+'" alt="" loading="lazy"><div class="ec-feature-copy"><small>LGCHL · SEASON 55</small><strong>'+(team===412?'HOME ICE · AT THE SADDLEDOME':'PLAYOFF EDITION · TEAM ROOM')+'</strong></div></aside>':'';
- $('roomPlayers').innerHTML=content?(content+feature):'<p class="note">'+(q?'No matching players.':'No public player stats are listed for this team yet.')+'</p>';
+ $('roomPlayers').innerHTML=content||'<p class="note">'+(q?'No matching players.':'No public player stats are listed for this team yet.')+'</p>';
  $('roomPlayers').setAttribute('aria-busy','false');
 }
 $('roomLogo').src=logo(team);
@@ -63,17 +61,24 @@ async function roster(){
  const unique=new Map();for(const p of rows){const key=p.lg_user_id+':'+p.player_kind,old=unique.get(key);if(!old||String(p.fetched_at)>String(old.fetched_at))unique.set(key,p);}
  players=main.map(p=>({...unique.get(p.lg_user_id+':'+p.player_kind),...p}));
  $('playersTitle').textContent='Main roster · '+players.length;
- $('rosterNote').textContent='Main-roster players only · LG roster snapshot: '+snapshot.as_of+'. The 62-team jersey reference collection is sourced. Finished locker cutouts display where available; remaining jerseys use marked crest concepts while their references are cleaned and reviewed. Imported Season 55 totals may include previous teams; — means unavailable.';
+ $('rosterNote').textContent='Main roster only · Saved snapshot: '+snapshot.as_of+'. Imported Season 55 totals may include previous teams. — means unavailable.';
  render();
  }catch{$('roomPlayers').textContent='Current main roster is unavailable. Please try again later.';$('roomPlayers').setAttribute('aria-busy','false');}
 }
 
 function game(g,final){
- const label=(g.away_nick||g.away_abbr||'Away')+' vs '+(g.home_nick||g.home_abbr||'Home');
- return '<a class="game-row" href="lgchl-game.html?id='+Number(g.lg_game_id)+'"><strong>'+esc(label)+(final?' · '+fmt(g.away_score)+'–'+fmt(g.home_score):'')+'</strong><small>'+esc(date(g.game_at))+' · '+(final?'Final':'Scheduled')+' · Open Game Centre →</small></a>';
+ const awayName=String(g.away_nick||g.away_abbr||'Away'),homeName=String(g.home_nick||g.home_abbr||'Home');
+ const awayId=Number(g.away_lg_team_id),homeId=Number(g.home_lg_team_id);
+ const image=(id,name)=>valid(id)?'<img src="'+logo(id)+'" alt="" loading="lazy" width="40" height="40" onerror="this.hidden=true">':'<span class="ec-team-fallback" aria-hidden="true">'+esc(name.trim().slice(0,2).toUpperCase())+'</span>';
+ const away='<span class="ec-game-team is-away">'+image(awayId,awayName)+'<span class="ec-team-name">'+esc(awayName)+'</span></span>';
+ const home='<span class="ec-game-team is-home">'+image(homeId,homeName)+'<span class="ec-team-name">'+esc(homeName)+'</span></span>';
+ const result=final?fmt(g.away_score)+' – '+fmt(g.home_score):'VS';
+ return '<a class="game-row" href="lgchl-game.html?id='+Number(g.lg_game_id)+'" aria-label="'+esc(awayName+' versus '+homeName+(final?' final '+result:' scheduled'))+'">'+
+ '<span class="ec-game-scoreline">'+away+'<strong class="ec-game-value">'+esc(result)+'</strong>'+home+'</span>'+
+ '<span class="ec-game-row-status"><span>'+esc(date(g.game_at))+'</span><span class="ec-game-status">'+(final?'Final':'Scheduled')+'</span><span class="ec-game-cta">Game Centre →</span></span></a>';
 }
 async function games(){
- const base={select:'lg_game_id,game_at,status,away_nick,away_abbr,home_nick,home_abbr,away_score,home_score',season:'eq.55',or:'(away_lg_team_id.eq.'+team+',home_lg_team_id.eq.'+team+')',limit:'6'};
+ const base={select:'lg_game_id,game_at,status,away_lg_team_id,home_lg_team_id,away_nick,away_abbr,home_nick,home_abbr,away_score,home_score',season:'eq.55',or:'(away_lg_team_id.eq.'+team+',home_lg_team_id.eq.'+team+')',limit:'6'};
  const results=await Promise.allSettled([read('lgchl_games_board',{...base,status:'eq.final',order:'game_at.desc'}),read('lgchl_games_board',{...base,status:'neq.final',game_at:'gte.'+new Date().toISOString(),order:'game_at.asc'})]);
  results.forEach((r,i)=>{const el=$(i?'roomUpcoming':'roomFinals');el.innerHTML=r.status==='fulfilled'?r.value.filter(g=>valid(g.lg_game_id)&&(!i?String(g.status).toLowerCase()==='final':String(g.status).toLowerCase()==='scheduled')).map(g=>game(g,!i)).join('')||'<p class="note">'+(i?'No upcoming games are listed.':'No final results are listed.')+'</p>':'<p class="note">Games are unavailable. Please try again later.</p>';});
 }
