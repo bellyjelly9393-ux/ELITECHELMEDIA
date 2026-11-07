@@ -52,6 +52,7 @@ async function roster(){
  const clubs=Object.entries(snapshot.teams).filter(([id,c])=>valid(id)&&c&&typeof c.name==='string').map(([id,c])=>({id:Number(id),name:c.name})).sort((a,b)=>a.name.localeCompare(b.name));
  $('roomTeam').innerHTML=clubs.map(c=>'<option value="'+c.id+'"'+(c.id===team?' selected':'')+'>'+esc(c.name)+'</option>').join('');
  $('roomName').textContent=entry.name;
+ $('roomLogo').alt=entry.name+' crest';
  document.title=entry.name+' Team Room | Elite Chel Media';
  const main=entry.players.filter(p=>p.roster_class==='active_roster'&&valid(p.lg_user_id));
  let rows=[];
