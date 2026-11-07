@@ -4,7 +4,7 @@
 @font-face{font-family:ECAnton;src:url("assets/fonts/Anton.woff") format("woff");font-display:swap}
 @font-face{font-family:ECTeko;src:url("assets/fonts/Teko.woff") format("woff");font-display:swap}
 .ec-room-page{--ec-metal:#c7a15a;--ec-hilight:#ffe3a5;--ec-ink:#080a0e;--ec-panel:#111824;--ec-red:#d42334;--ec-stage-photo:url("assets/wildman/home/arena.webp");font:14px/1.5 Arial,Helvetica,sans-serif;color:#f6f2e9;background:radial-gradient(ellipse at 50% 0,#192942 0%,#06090e 55%,#020305 100%);min-width:0}
-.ec-room-page.hitmen-room{--ec-stage-photo:url("assets/lgchl/lockers/s55-saddledome-teamroom.svg");--ec-red:#e3243f}
+.ec-room-page.hitmen-room{--ec-stage-photo:url("assets/lgchl/lockers/s55-saddledome-teamroom.webp");--ec-red:#e3243f}
 .ec-room-page[data-league="OHL"]{--ec-red:#4194e4;--ec-metal:#a1b2c5}
 .ec-room-page[data-league="QMJHL"]{--ec-red:#77c5de;--ec-metal:#b4cfd5}
 .ec-room-page *{box-sizing:border-box}
@@ -19,7 +19,7 @@
 .ec-global-header nav a:hover{color:#ffdc91;border-bottom-color:#edbd58}
 .ec-room-page .ec-room-shell{max-width:1360px;margin:auto;padding:0 24px 35px}
 .ec-room-page .ec-room-hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(130px,1.2fr) minmax(0,1fr);align-items:center;min-height:278px;margin:0;isolation:isolate;overflow:hidden;border:4px solid #3d2632;border-top:4px solid #b53846;border-bottom:5px solid #aa3b4d;background:#10090e url("assets/wildman/home/arena.webp") center/cover no-repeat;box-shadow:inset 0 0 40px #000,0 11px 30px #000c}
-.ec-room-page .ec-room-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#07060ff0 0%,#07060fb8 22%,#05050b0b 48%,#09070d9c 78%,#07060fea 100%),var(--ec-stage-photo) center/100% 100% no-repeat}
+.ec-room-page .ec-room-hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,#07060ff0 0%,#07060fb8 22%,#05050b0b 48%,#09070d9c 78%,#07060fea 100%),var(--ec-stage-photo) center/100% 100% no-repeat}
 .ec-room-page .ec-room-hero::after{content:"";position:absolute;inset:auto 0 0;height:5px;background:linear-gradient(90deg,#38131f,#ec6270 20%,#ffa85c 54%,#b92038 86%,#200c12);box-shadow:0 0 14px #fd5268}
 .ec-hero-team{display:flex;align-items:center;gap:13px;z-index:1;padding:18px 6px 18px 25px;min-width:0}
 .ec-hero-team img{width:clamp(70px,9vw,126px);height:clamp(80px,10vw,139px);object-fit:contain;flex:none;filter:drop-shadow(0 6px 7px #000)}
