@@ -49,3 +49,58 @@ h2,h3{font-family:Anton,Impact,sans-serif;letter-spacing:1px;font-weight:400}h2{
 .account-card-arrow{white-space:nowrap;font-size:12px;color:#ebc679}
 .account-card:focus-visible,.account-actions a:focus-visible{outline:2px solid #f6d27a;outline-offset:2px}
 @media(max-width:700px){.account-panel{align-items:stretch;flex-direction:column;padding:16px}.account-actions{justify-content:flex-start}.collection-panel{padding:16px}}
+
+
+/* Card Background Studio v1: scene, edition, and finish are independent. */
+.background-picker{border:0;padding:0;margin:18px 0 14px;min-width:0}
+.background-picker legend{font-size:13px;font-weight:800;padding:0;margin-bottom:10px;color:#f2f3f7}
+.background-picker legend .sub{display:block;margin-top:4px;font-weight:400}
+.background-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.controls .background-option{position:relative;margin:0;display:flex;flex-direction:column;gap:6px;cursor:pointer;min-width:0;font-size:11px;text-align:center;line-height:1.2;color:#c6d1df}
+.background-option input[type=radio]{position:absolute;z-index:2;right:7px;top:7px;width:18px;height:18px;min-height:18px;margin:0;padding:0;accent-color:#efbb4d;cursor:pointer}
+.background-thumb{display:block;width:100%;aspect-ratio:1.18;border:2px solid #465466;border-radius:8px;box-shadow:0 8px 15px #0008,inset 0 0 0 1px #ffffff24;overflow:hidden;position:relative;transition:border-color .15s,box-shadow .15s,transform .15s}
+.background-option input:checked~.background-thumb{border-color:#f6c34f;box-shadow:0 0 0 2px #6d4c16,0 0 16px #e7a72c88,inset 0 0 0 1px #fff8;transform:translateY(-1px)}
+.background-option input:focus-visible~.background-thumb{outline:3px solid #f1df92;outline-offset:3px}
+.card-art{position:absolute;inset:0;z-index:0;opacity:.99;pointer-events:none}
+.card-art:before,.background-thumb:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#03070d8a 0%,transparent 28%,transparent 63%,#0407109c 100%)}
+.card-art:after,.background-thumb:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(115deg,transparent 0 35px,#ffffff0d 36px 37px,transparent 39px 64px)}
+.trading-card[data-background=arena] .card-art,.bg-arena{
+ background:radial-gradient(ellipse at 50% 7%,#f2ffffd9 0 2%,#86b4dc8c 7%,transparent 25%),
+ linear-gradient(0deg,#c9eef4ad 0%,#225c77a9 13%,transparent 32%),
+ repeating-linear-gradient(90deg,transparent 0 43px,#c0eafa25 44px 47px,transparent 49px 90px),
+ linear-gradient(155deg,#0b1d32,#125376 60%,#79b5db)}
+.trading-card[data-background=heat] .card-art,.bg-heat{
+ background:radial-gradient(circle at 56% 62%,#ffcb5077,transparent 42%),
+ radial-gradient(circle at 18% 85%,#e62d16ad,transparent 48%),
+ radial-gradient(circle at 92% 22%,#ed533b99,transparent 38%),
+ repeating-conic-gradient(from 15deg at 55% 110%,#c3361688 0 12deg,#240812a8 13deg 34deg),
+ linear-gradient(155deg,#250b17,#641526 55%,#120910)}
+.trading-card[data-background=city] .card-art,.bg-city{
+ background:linear-gradient(0deg,#070910 0 8%,transparent 29%),
+ repeating-linear-gradient(90deg,#09111de8 0 14px,transparent 15px 18px,#0c1727dd 19px 43px,transparent 44px 50px),
+ radial-gradient(circle at 70% 25%,#ffc39d 0 1%,transparent 4%),
+ linear-gradient(180deg,#101327,#332c50 52%,#b85142)}
+.trading-card[data-background=locker] .card-art,.bg-locker{
+ background:linear-gradient(90deg,#09090ed9 0 5%,transparent 8% 92%,#09090ed9 95%),
+ repeating-linear-gradient(90deg,#111722 0 9%,#5f3030 10%,#171923 12% 31%,#54302e 32%,#111722 34% 43%),
+ linear-gradient(160deg,#1c1d23,#4b2527 75%,#0d0d14)}
+.trading-card[data-background=playoff] .card-art,.bg-playoff{
+ background:radial-gradient(circle at 50% 36%,#f9e9fcbe,transparent 9%),
+ repeating-conic-gradient(from 2deg at 50% 35%,#c9f1ff88 0 3deg,transparent 5deg 20deg),
+ radial-gradient(ellipse at 50% 42%,#7b97cf8a 0%,transparent 62%),
+ linear-gradient(145deg,#080e20,#223460 65%,#070b19)}
+.trading-card[data-background=classic] .card-art,.bg-classic{
+ background:linear-gradient(130deg,#c0c8d044,transparent 29%,#202a38 48%,#c8d9ff29 50%,transparent 75%),
+ repeating-linear-gradient(130deg,#1d2835 0 4px,#111925 5px 12px),
+ linear-gradient(145deg,#344457,#090e17 75%,#64717e)}
+.trading-card{--edition-edge:#d0d9e5;background:linear-gradient(138deg,#fff 0%,#4b5869 6%,#0a1019 12%,var(--edition-edge) 27%,#17212d 40%,#fff 51%,#070b12 64%,var(--edition-edge) 85%,#e6edf5 100%)}
+.trading-card[data-edition=base]{--edition-edge:#bbc5d2}
+.trading-card[data-edition=silver]{--edition-edge:#f1f7ff}
+.trading-card[data-edition=gold]{--edition-edge:#f9c54e}
+.trading-card[data-edition=platinum]{--edition-edge:#fb83de}
+.trading-card[data-edition=signature]{--edition-edge:#7fceff}
+.trading-card[data-edition=playoff]{--edition-edge:#ff6571}
+.trading-card .surface{box-shadow:inset 0 0 0 2px var(--edition-edge),inset 0 0 35px #000}
+.trading-card .edition small{font-weight:900;color:var(--edition-edge);text-shadow:0 2px 5px #000;letter-spacing:1.2px}
+.trading-card .portrait img{-webkit-mask-image:radial-gradient(ellipse 85% 89% at 50% 51%,#000 57%,transparent 100%);mask-image:radial-gradient(ellipse 85% 89% at 50% 51%,#000 57%,transparent 100%)}
+@media(max-width:390px){.background-grid{gap:7px}.background-option input[type=radio]{right:4px;top:4px}}
