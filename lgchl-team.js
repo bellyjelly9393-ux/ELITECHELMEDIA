@@ -36,7 +36,7 @@ function render(){
  $('roomPlayers').setAttribute('aria-busy','false');
 }
 $('roomLogo').src=logo(team);
-document.addEventListener('error',e=>{const image=e.target;if(image.tagName!=='IMG')return;if(image.closest('.jersey-stage')&&!image.dataset.fallback){image.dataset.fallback='true';image.src=logo(team);image.alt='Team crest';}else{image.hidden=true;}},true);
+document.addEventListener('error',e=>{const image=e.target;if(image.tagName!=='IMG')return;if(image.closest('.jersey-stage')&&!image.dataset.fallback){image.dataset.fallback='true';image.src=logo(team);image.alt='Team crest';}else if(team===412&&(image.id==='roomLogo'||image.classList.contains('ec-roster-art-crest')||image.classList.contains('ec-feature-mark'))&&!image.dataset.fallback){image.dataset.fallback='true';image.src='assets/lgchl/s55/team412.png';}else{image.hidden=true;}},true);
 $('roomSearch').addEventListener('input',render);
 $('roomTeam').addEventListener('change',()=>{location.href='lgchl-team.html?team='+Number($('roomTeam').value);});
 async function standings(){
