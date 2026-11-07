@@ -7,8 +7,8 @@ const valid=n=>Number.isSafeInteger(Number(n))&&Number(n)>0;
 if(!valid(team)){$('roomName').textContent='Team not found';['roomRecord','roomPlayers','roomFinals','roomUpcoming'].forEach(id=>$(id).textContent='Choose a team from league coverage.');$('roomPlayers').setAttribute('aria-busy','false');return;}
 document.body.classList.toggle('league-room',true);
 document.body.classList.toggle('hitmen-room',team===412);
-document.body.dataset.league=window.LGLockerChooser?.LEAGUE?.[team]||'LGCHL';
-const roomArt=document.querySelector('.ec-roster-art-crest');if(roomArt)roomArt.src='assets/lgchl/s55/team'+team+'.png';
+if(document.body?.dataset)document.body.dataset.league=window.LGLockerChooser?.LEAGUE?.[team]||'LGCHL';
+const roomArt=document.querySelector?.('.ec-roster-art-crest');if(roomArt)roomArt.src='assets/lgchl/s55/team'+team+'.png';
 const featureLabel=team===412?'HOME ICE · AT THE SADDLEDOME':'LGCHL · SEASON 55 PLAYOFFS';
 document.getElementById('roomPlayers')?.setAttribute('data-feature-label',featureLabel);
 const logo=id=>'assets/lgchl/s55/team'+Number(id)+'.png';
