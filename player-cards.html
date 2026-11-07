@@ -7,9 +7,9 @@
 <title>3D Player Cards | Elitechel Media</title>
 <meta name="description" content="Interactive 3D hockey player cards using verified LGCHL and LG3s league statistics. Customize a personal CHEL character preview.">
 <link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
-<link rel="stylesheet" href="player-cards.css?v=20261101">
+<link rel="stylesheet" href="player-cards.css?v=20261107-bg1">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js" defer></script>
-<script src="player-cards.js?v=20261102-lgchl1" defer></script>
+<script src="player-cards.js?v=20261107-bg1" defer></script>
 <script src="player-cards-account.js?v=20261101" defer></script>
 </head>
 <body>
@@ -40,22 +40,38 @@
    <h3>Personalize the preview</h3>
    <label>CHEL character screenshot <span class="sub">Optional PNG, JPG or WebP (max 8 MB)</span><input id="portraitFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
    <div class="inline"><label>CHEL Overall <span class="sub">Self-reported</span><input id="overall" type="number" min="1" max="99" inputmode="numeric" placeholder="--"></label><label>Jersey number <span class="sub">Optional</span><input id="jersey" type="number" min="0" max="99" inputmode="numeric" placeholder="--"></label></div>
+   <fieldset class="background-picker" aria-label="Card background templates">
+     <legend>Card background <span class="sub">Change the scene, not the player stats</span></legend>
+     <div class="background-grid" id="backgroundOptions">
+       <label class="background-option"><input type="radio" name="cardBackground" value="arena" checked><span class="background-thumb bg-arena" aria-hidden="true"></span><span>Arena Ice</span></label>
+       <label class="background-option"><input type="radio" name="cardBackground" value="heat"><span class="background-thumb bg-heat" aria-hidden="true"></span><span>Fire &amp; Heat</span></label>
+       <label class="background-option"><input type="radio" name="cardBackground" value="city"><span class="background-thumb bg-city" aria-hidden="true"></span><span>City Night</span></label>
+       <label class="background-option"><input type="radio" name="cardBackground" value="locker"><span class="background-thumb bg-locker" aria-hidden="true"></span><span>Locker Room</span></label>
+       <label class="background-option"><input type="radio" name="cardBackground" value="playoff"><span class="background-thumb bg-playoff" aria-hidden="true"></span><span>Playoff Lights</span></label>
+       <label class="background-option"><input type="radio" name="cardBackground" value="classic"><span class="background-thumb bg-classic" aria-hidden="true"></span><span>Classic Steel</span></label>
+     </div>
+   </fieldset>
+   <label>Card edition <span class="sub">Choose a visual edition preview. Progression unlocks are not active yet.</span>
+     <select id="edition"><option value="base">Base</option><option value="silver">Silver</option><option value="gold">Gold</option><option value="platinum">Platinum</option><option value="signature">Signature</option><option value="playoff">Playoff</option></select>
+   </label>
    <label>Card finish<select id="finish"><option value="crimson">Crimson Steel</option><option value="gold">Championship Gold</option><option value="ice">Ice Chrome</option></select></label>
+   <p class="hint">Background and edition are independent. For the cleanest player cutout, use a transparent PNG or WebP. Regular game screenshots retain their original scenery, softened around the edges.</p>
    <div class="actions"><button type="button" id="save">Save on this device</button><button type="button" id="saveToCollection" disabled>Save to My Collection</button><button type="button" id="export">Export PNG</button><button type="button" class="secondary" id="reset">Reset personal edits</button></div>
-   <p class="footnote">Verified league stats are always read-only. CHEL overall is self-reported. Saving to My Collection stores your player choice, finish, overall and jersey on your private account. Your uploaded character image remains on this device only. Export a PNG to keep it; account-based image sync is not available yet.</p>
+   <p class="footnote">League stats remain read-only, and CHEL overall is still self-reported, not a season-calculated rating. Save on this device keeps your background, edition preview, finish, and image locally. My Collection syncs only player, finish, overall, and jersey; background, edition, and uploaded image do not yet sync across devices. Export PNG to keep the complete artwork.</p>
   </section>
   <section class="stage" aria-labelledby="preview-heading">
    <div class="stage-head"><h2 id="preview-heading">3D CARD PREVIEW</h2><span>Move your pointer over the card</span></div>
-   <div class="perspective"><article id="card" class="trading-card" data-finish="crimson" aria-label="Hockey player card preview">
+   <div class="perspective"><article id="card" class="trading-card" data-finish="crimson" data-background="arena" data-edition="base" aria-label="Hockey player card preview">
       <div class="surface">
-        <div class="cardtop"><div class="ovr"><strong id="cardOvr">--</strong><span>CHEL OVR</span></div><div class="edition">ELITE<span>CHEL</span><small>PLAYER SERIES</small></div></div>
+        <div class="card-art" aria-hidden="true"></div>
+        <div class="cardtop"><div class="ovr"><strong id="cardOvr">--</strong><span>CHEL OVR</span></div><div class="edition">ELITE<span>CHEL</span><small id="cardEditionLabel">BASE EDITION</small></div></div>
         <div class="portrait"><img id="portrait" alt="Player-provided CHEL character screenshot" hidden><div id="silhouette" class="silhouette" aria-hidden="true">
           <svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="hockey-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c0c6d1"/><stop offset=".45" stop-color="#485466"/><stop offset="1" stop-color="#151b24"/></linearGradient></defs><path fill="url(#hockey-metal)" stroke="#dfecfa" stroke-width="3" d="M120 13C69 13 56 53 62 99l18 25-13 18-47 20-17 84h234l-17-84-48-20-12-18 18-25C184 54 170 13 120 13Z"/><path fill="#0b121c" d="M82 64c24-18 52-18 76 0l-8 29-30 20-30-20Z"/><path stroke="#e5eaf1" stroke-width="6" fill="none" d="m66 76 108 0m-102 22 96 0m-48-49v65M28 186l92 26 91-26"/><path stroke="#e92b44" stroke-width="12" d="M38 215h164"/></svg>
         </div><div class="portrait-shine"></div></div>
         <div class="card-belt"><span id="cardPosition">PLAYER</span><strong id="cardName">SELECT PLAYER</strong><span id="cardJersey"></span></div>
         <div class="card-team" id="cardTeam">LG VERIFIED STATS</div>
         <div class="statstrip"><div><strong id="stat1">--</strong><span id="lab1">GP</span></div><div><strong id="stat2">--</strong><span id="lab2">G</span></div><div><strong id="stat3">--</strong><span id="lab3">A</span></div><div><strong id="stat4">--</strong><span id="lab4">PTS</span></div></div>
-        <div class="cardfoot"><span>ELITECHEL MEDIA</span><span>LG LEAGUE DATA · USER-CUSTOM OVR</span></div>
+        <div class="cardfoot"><span>ELITECHEL MEDIA</span><span>LEAGUE STATS · CUSTOM OVR</span></div>
       </div>
    </article></div>
    <p class="preview-note">Card artwork is a concept treatment. Actual character images appear when a player uploads their own game screenshot.</p>
