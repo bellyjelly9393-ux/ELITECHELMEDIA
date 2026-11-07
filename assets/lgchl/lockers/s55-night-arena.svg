@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 450" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#12223f"/><stop offset=".52" stop-color="#0d1424"/><stop offset="1" stop-color="#04070e"/></linearGradient><linearGradient id="gold" x2="0" y2="1"><stop stop-color="#f7c675"/><stop offset="1" stop-color="#813c18"/></linearGradient><linearGradient id="glass" x2="0" y2="1"><stop stop-color="#394658"/><stop offset="1" stop-color="#131c25"/></linearGradient></defs>
+<rect width="1600" height="450" fill="url(#sky)"/><path d="M0 140 Q190 20 340 120T700 90T1030 120T1600 80V0H0" fill="#203658" opacity=".25"/>
+<path d="M0 280H1600V450H0" fill="#060910"/>
+<g fill="#111826" stroke="#23314a" stroke-width="2"><path d="M42 300V215h57v85m8 0V170h64v130m13 0V240h50v60m20 0V184h45v116m12 0V221h65v79m20 0V156h60v144m25 0V234h60v66m17 0V191h63v109m22 0V248h45v52m18 0V175h55v125m19 0V205h65v95m21 0V229h64v71m20 0V152h58v148m28 0V220h70v80m25 0V198h55v102"/></g>
+<g fill="#f1ad61" opacity=".53"><path d="M120 200h4v6h-4zm19 0h4v6h-4zm310-20h4v6h-4zm17 0h4v6h-4zm240 36h4v6h-4zm20 0h4v6h-4zm234-18h4v6h-4zm20 0h4v6h-4z"/></g>
+<g transform="translate(1240 50)"><rect x="51" y="94" width="19" height="180" fill="#8090a7"/><path d="M60 16 72 103H48Z" fill="#c7d6ec"/><ellipse cx="60" cy="120" rx="76" ry="15" fill="#cf4450"/><ellipse cx="60" cy="118" rx="57" ry="8" fill="#f9987a"/></g>
+<g transform="translate(590 136)"><path d="M0 180Q25 81 270 46Q512 81 540 180Z" fill="url(#glass)" stroke="#ac8d69" stroke-width="5"/><path d="M-13 132 Q42 60 270 22 Q502 55 552 132L531 148Q459 86 270 66Q73 83 8 151Z" fill="#a51c33" stroke="#f97c71" stroke-width="7"/><path d="M10 180 Q260 145 530 180V240H10Z" fill="#121824" stroke="#75808a" stroke-width="4"/><path d="M24 195H520" stroke="#df955c" stroke-width="6" stroke-dasharray="12 10"/></g>
+<path d="M0 390L600 345H1030L1600 380V450H0" fill="#090c11"/><path d="M0 391L650 350h300l650 43" fill="none" stroke="#c63b39" stroke-width="3" opacity=".5"/>
+<g opacity=".32" stroke="#edc16c" stroke-width="2"><path d="M0 427H1600M0 441H1600M250 375v75M520 365v85M1200 362v88M1460 380v70"/></g>
+</svg>
