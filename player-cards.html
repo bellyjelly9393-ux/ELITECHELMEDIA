@@ -7,15 +7,15 @@
 <title>Player Card Studio | Elite Chel Media</title>
 <meta name="description" content="Interactive 3D hockey player cards using verified LGCHL and LG3s league statistics. Customize a personal CHEL character preview.">
 <link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
-<link rel="stylesheet" href="player-cards.css?v=20261108-release1">
+<link rel="stylesheet" href="player-cards.css?v=20261108-locked-ovr">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js" defer></script>
-<script src="player-card-rating.js?v=20261108-release1" defer></script>
-<script src="player-card-renderer.js?v=20261108-release1" defer></script>
-<script src="player-cards.js?v=20261108-release1" defer></script>
-<script src="player-cards-account.js?v=20261108-release1" defer></script>
-<link rel="stylesheet" href="player-card-studio-v2.css?v=20261108-release1">
-<script src="player-card-studio-v2.js?v=20261108-release1" defer></script>
-<script src="player-card-artwork-submit.js?v=20261108-release1" defer></script>
+<script src="player-card-rating.js?v=20261108-locked-ovr" defer></script>
+<script src="player-card-renderer.js?v=20261108-locked-ovr" defer></script>
+<script src="player-cards.js?v=20261108-locked-ovr" defer></script>
+<script src="player-cards-account.js?v=20261108-locked-ovr" defer></script>
+<link rel="stylesheet" href="player-card-studio-v2.css?v=20261108-locked-ovr">
+<script src="player-card-studio-v2.js?v=20261108-locked-ovr" defer></script>
+<script src="player-card-artwork-submit.js?v=20261108-locked-ovr" defer></script>
 </head>
 <body>
 <header class="top">
@@ -44,7 +44,7 @@
    <div class="divider"></div>
    <h3 class="section-title"><b>2</b> PLAYER PHOTO</h3>
    <label>CHEL character screenshot <span class="sub">PNG, JPG or WebP · up to 8 MB</span><input id="portraitFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
-   <details class="image-tools"><summary>Position your photo</summary><label>Scale<input id="imageScale" type="range" min="50" max="200" value="100"></label><div class="inline"><label>Horizontal<input id="imageX" type="range" min="-150" max="150" value="0"></label><label>Vertical<input id="imageY" type="range" min="-150" max="150" value="0"></label></div><button type="button" id="resetImage">Reset image position</button></details><details><summary>Custom OVR &amp; jersey number</summary><div class="inline"><label>Custom OVR <span class="sub">Optional cosmetic override</span><input id="overall" type="number" min="1" max="99" inputmode="numeric" placeholder="--"></label><label>Jersey number <span class="sub">Optional</span><input id="jersey" type="number" min="0" max="99" inputmode="numeric" placeholder="--"></label></div></details>
+   <details class="image-tools"><summary>Position your photo</summary><label>Scale<input id="imageScale" type="range" min="50" max="200" value="100"></label><div class="inline"><label>Horizontal<input id="imageX" type="range" min="-150" max="150" value="0"></label><label>Vertical<input id="imageY" type="range" min="-150" max="150" value="0"></label></div><button type="button" id="resetImage">Reset image position</button></details><details><summary>Jersey number</summary><label>Jersey number <span class="sub">Optional</span><input id="jersey" type="number" min="0" max="99" inputmode="numeric" placeholder="--"></label></details><p class="hint">Overall is calculated from season stats and cannot be edited.</p>
    <p class="artwork-policy"><strong>Private artwork preview</strong> Your preview stays in this browser unless you submit it for private manager review. Public artwork display is not enabled.</p>
    <details class="artwork-policy"><summary>Submit artwork for review</summary><p>Managers check images before future shared use. Approval does not publish your image. Player ownership is not verified by this submission.</p><label><input type="checkbox" id="artworkRights"> I have permission to use this image and it follows community rules.</label><button type="button" id="submitArtwork">Submit artwork for review</button><p id="artworkReviewStatus" role="status" aria-live="polite">Sign in with Discord to submit artwork.</p></details>
    <fieldset class="background-picker" aria-label="Card background templates">
