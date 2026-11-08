@@ -14,7 +14,7 @@ const server=http.createServer((req,res)=>{
  const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{})});
  try{
  const origin='http://127.0.0.1:'+server.address().port;
- async function pageFor({width=1280,mode='normal',team=412,concept=false,reducedMotion='reduce'}={}){
+ async function pageFor({width=1280,mode='normal',team=412,concept=false,tour=false,reducedMotion='reduce'}={}){
   const context=await browser.newContext({viewport:{width,height:900},hasTouch:width<700,isMobile:width<700,reducedMotion});const page=await context.newPage();
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route('https://lrgllzvwgvqagcpiyvfd.supabase.co/**',route=>route.request().url().includes('wm_lgchl_s55_player_leaders')?route.fulfill({status:503,body:'stats unavailable'}):route.fulfill({json:[]}));
@@ -23,7 +23,7 @@ const server=http.createServer((req,res)=>{
    if(mode==='loading')return;
    const data=structuredClone(snapshot);data.teams['412'].players=mode==='empty'?[]:roster.concat(roster[0]);return route.fulfill({json:data});
   });
-  await page.goto(origin+'/lgchl-team.html?team='+team+(concept?'&room=concept':''));
+  await page.goto(origin+'/lgchl-team.html?team='+team+(concept?'&room=concept':tour?'&room=360':''));
   return {page,context,errors};
  }
  for(const width of [1280,390]){
@@ -78,11 +78,31 @@ const server=http.createServer((req,res)=>{
   assert.match(await page.locator('#conceptRoomPosition').textContent(),/17 \/ 17/);
   assert.deepEqual(errors,[]);await context.close();
  }
+ for(const width of [1440,390]){
+  const {page,context,errors}=await pageFor({width,tour:true});
+  await page.waitForFunction(()=>window.HitmenPublicTour?.getState().loaded);
+  assert.equal(await page.locator('#hitmenPanorama canvas').count(),1,'WebGL panorama rendered');
+  assert.equal(await page.locator('.tour-player-button').count(),17);assert(await page.locator('#roomPlayers').isHidden());
+  const ids=await page.evaluate(()=>window.HitmenPublicTour.getState().players);assert.deepEqual(ids,roster.map(p=>p.lg_user_id));
+  for(const p of roster){await page.evaluate(id=>window.HitmenPublicRoom.focusStall(id),p.lg_user_id);assert.equal(await page.locator('.tour-player-button.is-selected').getAttribute('data-player-id'),String(p.lg_user_id));assert.equal(await page.locator('#tourPlayerCard').getAttribute('href'),'lgchl-player.html?id='+p.lg_user_id+'&kind='+p.player_kind);}
+  await page.locator('#roomSearch').fill('Whiteout');await page.locator('#roomSearch').press('Enter');assert.equal(await page.evaluate(()=>window.HitmenPublicTour.getState().selectedId),77137);
+  // Viewer really rotates on pointer dragging rather than horizontally scrolling a strip.
+  const box=await page.locator('#hitmenPanorama').boundingBox(),before=await page.evaluate(()=>window.HitmenPublicTour.getState().yaw);await page.mouse.move(box.x+box.width*.7,box.y+box.height*.7);await page.mouse.down();await page.mouse.move(box.x+box.width*.3,box.y+box.height*.7,{steps:10});await page.mouse.up();await page.waitForTimeout(150);const after=await page.evaluate(()=>window.HitmenPublicTour.getState().yaw);assert(Math.abs(after-before)>5);
+  await page.locator('#tourReset').click();if(width<600)await page.locator('.tour-floor-arrow').tap();else await page.locator('.tour-floor-arrow').click();await page.waitForFunction(()=>window.HitmenPublicTour.getState().loaded&&window.HitmenPublicTour.getState().scene==='centre');
+  await page.evaluate(()=>window.HitmenPublicRoom.focusStall(77137));
+  const shot=process.env.SCREENSHOT_DIR;if(shot){await page.locator('.tour-shell').screenshot({path:path.join(shot,'room-360-'+width+'.png')});await page.locator('#tourReset').click();await page.locator('.tour-shell').screenshot({path:path.join(shot,'room-360-overview-'+width+'.png')});}
+  await page.locator('#tourReset').click();const yawStart=await page.evaluate(()=>window.HitmenPublicTour.getState().yaw);await page.locator('[data-tour-action="left"]').click();assert(Math.abs((await page.evaluate(()=>window.HitmenPublicTour.getState().yaw))-yawStart)>20);await page.locator('[data-tour-action="in"]').click();await page.locator('[data-tour-action="out"]').click();if(process.env.SCREENSHOT_DIR&&width===1440){for(let n=0;n<5;n++)await page.locator('[data-tour-action="left"]').click();await page.locator('.tour-shell').screenshot({path:path.join(process.env.SCREENSHOT_DIR,'room-360-wrap-review.png')});}
+  await page.evaluate(()=>window.HitmenPublicTour.goToPlayer(999999)===false).then(v=>assert(v));
+  await page.locator('#tourRosterToggle').click();assert(await page.locator('#roomPlayers').isVisible());assert.equal(await page.locator('#roomPlayers .stall').count(),17);
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert.deepEqual(errors,[]);await context.close();
+ }
+ const failedTour=await browser.newPage();await failedTour.route('**/vendor/pannellum/pannellum.js',r=>r.abort());await failedTour.route('https://lrgllzvwgvqagcpiyvfd.supabase.co/**',r=>r.fulfill({json:[]}));await failedTour.goto(origin+'/lgchl-team.html?team=412&room=360');await failedTour.waitForFunction(()=>document.querySelector('#tourStatus').textContent.includes('unavailable on this device'));assert(await failedTour.locator('#roomPlayers').isVisible());assert.equal(await failedTour.locator('#roomPlayers .stall').count(),17);await failedTour.close();
+ if(process.env.PORTABLE_TOUR){const offline=await browser.newPage({viewport:{width:1280,height:1000},reducedMotion:'reduce'});const errors=[],requests=[];offline.on('pageerror',e=>errors.push(e.message));offline.on('request',r=>requests.push(r.url()));await offline.goto(require('node:url').pathToFileURL(process.env.PORTABLE_TOUR).href);await offline.waitForFunction(()=>window.HitmenPublicTour?.getState().loaded);assert.equal(await offline.locator('.tour-player-button').count(),17);await offline.locator('#roomSearch').fill('Kudolken');await offline.locator('#roomSearch').press('Enter');assert.equal(await offline.evaluate(()=>window.HitmenPublicTour.getState().selectedId),12262);await offline.locator('[data-tour-scene="centre"]').click();await offline.waitForFunction(()=>window.HitmenPublicTour.getState().loaded&&window.HitmenPublicTour.getState().scene==='centre');assert.deepEqual(errors,[]);assert(!requests.some(u=>u.startsWith('https:')),'offline tour makes no network requests');await offline.close();console.log('PASS: portable 360 tour opens offline, renders both scenes and all 17 hotspots, selects a player, and has no network dependencies.');}
  const smooth=await pageFor({reducedMotion:'no-preference'});await smooth.page.waitForFunction(()=>!document.querySelector('#roomSearch').disabled);
  const event=await smooth.page.evaluate(()=>{let detail;const room=document.querySelector('#roomPlayers');room.addEventListener('hitmen-stall-selected',e=>detail=e.detail,{once:true});const stall=document.querySelector('#hitmen-stall-73707');stall.scrollIntoView=options=>window.scrollOptions=options;window.HitmenPublicRoom.focusStall(73707);return {detail,options:window.scrollOptions};});assert.equal(event.options.behavior,'smooth');assert.equal(event.detail.lg_user_id,73707);await smooth.context.close();
  const {page,context}=await pageFor({team:364});assert.equal(await page.locator('.stall-finder').count(),0);await page.waitForFunction(()=>document.querySelector('#roomPlayers').getAttribute('aria-busy')==='false');await page.locator('#roomSearch').fill('Shaneomac381');assert.equal(await page.locator('#roomPlayers .stall').count(),1);await context.close();
  if(process.env.PORTABLE_PREVIEW){const offline=await browser.newPage({viewport:{width:1280,height:1000},reducedMotion:'reduce'});const errors=[],requests=[];offline.on('pageerror',e=>errors.push(e.message));offline.on('request',r=>requests.push(r.url()));await offline.goto(require('node:url').pathToFileURL(process.env.PORTABLE_PREVIEW).href);await offline.waitForFunction(()=>document.querySelector('#roomPlayers .stall'));assert.equal(await offline.locator('#roomPlayers .stall').count(),17);assert.equal(await offline.locator('.concept-room').count(),1);await offline.locator('#roomSearch').fill('Kudolken');await offline.locator('#roomSearch').press('Enter');assert.equal(await offline.locator('.is-found').getAttribute('id'),'hitmen-stall-12262');assert.match(await offline.locator('#rosterNote').textContent(),/offline preview/);assert.deepEqual(errors,[]);assert(!requests.some(u=>u.startsWith('https:')),'offline preview makes no network requests');await offline.close();console.log('PASS: portable HTML opens offline with 17 stalls, search/selection, and no network dependencies.');}
  if(process.env.LIVE_SITE){const live=await browser.newPage();try{const response=await live.goto(process.env.LIVE_SITE,{timeout:30000});await live.waitForTimeout(15000);console.log('LIVE INSPECTION:',JSON.stringify({status:response.status(),url:live.url(),title:await live.title(),name:await live.locator('#roomName').textContent(),stalls:await live.locator('#roomPlayers .stall').count()}));}catch(e){console.log('LIVE INSPECTION UNAVAILABLE:',e.message);}finally{await live.close();}}
- console.log('PASS: desktop/mobile room concept + roster layout, 17 ID-to-stall/card mappings, keyboard/search/navigation, missing players, boundaries, public alias contract, loading/empty/error, other-team filtering; public stats mocked unavailable.');
+ console.log('PASS: desktop/mobile 360 tour + room concept + roster layout, 17 ID-to-stall/card mappings, keyboard/search/navigation, missing players, boundaries, public alias contract, loading/empty/error, other-team filtering; public stats mocked unavailable.');
  }finally{await browser.close();server.close();}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1;});

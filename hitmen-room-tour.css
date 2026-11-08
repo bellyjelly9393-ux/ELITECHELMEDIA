@@ -1,0 +1,26 @@
+.hitmen-tour{--gold:#ffc1c5;background:radial-gradient(ellipse at 50% 0,#46171d,transparent 55%),#08090c}
+.hitmen-tour main{max-width:1440px}.hitmen-tour .room-hero{border:1px solid #68313b;border-left:3px solid #f13a50;padding:24px;background:linear-gradient(110deg,#21151a,#111116);gap:20px}.hitmen-tour .room-hero>img{width:85px;height:85px}.hitmen-tour h1{font-size:clamp(28px,4vw,48px)}
+.tour-shell{border:1px solid #70303d;border-top:3px solid #ed354d;background:#0c0e13;border-radius:8px;overflow:hidden;box-shadow:0 25px 60px #0008;margin:22px 0}
+.tour-heading{display:flex;align-items:center;gap:14px;padding:16px 22px;background:linear-gradient(110deg,#2c151d,#111218)}.tour-heading img{width:50px;height:50px;object-fit:contain}.tour-heading span{font-size:9px;letter-spacing:2px;color:#ed8f9b}.tour-heading h2{font-family:Impact,'Arial Narrow',sans-serif;font-size:clamp(22px,3vw,34px);font-weight:400;letter-spacing:1.8px;margin:5px 0 0}.tour-heading>b{margin-left:auto;font-size:22px;color:#ff8193}
+.tour-scene-tabs{display:flex;gap:10px;flex-wrap:wrap;padding:12px 20px;border-top:1px solid #38212b;border-bottom:1px solid #4a2531}
+.tour-shell button,.tour-actions a{min-height:44px;border:1px solid #7a3546;background:#28161f;color:#f9e5eb;border-radius:4px;padding:10px 16px;font:inherit;font-size:12px;cursor:pointer;text-decoration:none}.tour-shell button:disabled{opacity:.4;cursor:default}.tour-shell button[aria-pressed=true]{background:#7b2437;border-color:#ff7c96;color:#fff}.tour-shell a:focus-visible,.tour-shell button:focus-visible,#hitmenPanorama:focus-visible{outline:3px solid #83bdff;outline-offset:3px}
+#hitmenPanorama{height:620px;position:relative;background:#090b10}#hitmenPanorama[hidden]{display:none}
+.tour-caption{padding:12px 20px;background:#121016;border-block:1px solid #39232d}.tour-caption p{margin:0;font-size:12px;color:#efd2dc;line-height:1.6}.tour-caption #tourHelp{font-size:10px;color:#b19aa5;margin-top:3px}
+.tour-actions{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:14px 20px}.tour-actions a{background:#692137;font-weight:700;border-color:#bd506c}.tour-actions [hidden]{display:none}
+.tour-hotspot{position:absolute;width:0;height:0;z-index:2}
+.tour-player-button{position:absolute;display:flex;align-items:center;justify-content:center;min-height:44px;width:120px;padding:8px 9px;transform:translate(-50%,-50%);border:1px solid #d25b72;border-radius:4px;background:#100d12e8;box-shadow:0 3px 13px #000b;color:#fff;text-align:center;text-decoration:none;font-size:11px;font-weight:700;line-height:1.2;overflow-wrap:anywhere}
+.tour-player-button:after{content:'';position:absolute;left:50%;top:100%;height:16px;width:1px;background:#f7728b;pointer-events:none}
+.tour-player-button.is-selected{outline:3px solid #ff9aab;background:#8b1c39;box-shadow:0 0 26px #ff2e5a,0 0 60px #e5294e70;z-index:4}
+.tour-player-button.is-selected:before{content:'';position:absolute;inset:-8px -7px -140px;border:2px solid #ff788e99;box-shadow:inset 0 0 30px #e6294e25;pointer-events:none}
+.tour-shell .tour-floor-arrow{position:absolute;transform:translate(-50%,-50%);background:#30101ccc;border:2px solid #ff5e7e;border-radius:50%;width:64px;height:64px;padding:0;box-shadow:0 0 22px #fa285d70;color:white}.tour-floor-arrow>span{display:block;font-size:34px;line-height:58px}.tour-floor-arrow small{position:absolute;left:50%;top:calc(100% + 8px);transform:translateX(-50%);min-width:130px;background:#100b12e8;border:1px solid #773444;padding:7px;border-radius:4px;color:#fff;font-size:11px;pointer-events:none}
+.hitmen-tour #roomPlayers[hidden]{display:none}.hitmen-tour .stall-finder{border-color:#6f3442;background:#171018}.hitmen-tour .stall-finder nav{display:none}.hitmen-tour #roomSearch{border-color:#9e3e55;background:#100c13}
+@media(max-width:600px){.hitmen-tour main{padding:14px}.hitmen-tour .room-hero{padding:16px 12px;gap:13px}.hitmen-tour .room-hero>img{width:60px;height:70px}.tour-heading{padding:14px 12px;gap:9px}.tour-heading img{width:38px;height:38px}.tour-heading span{font-size:7px;letter-spacing:1px}.tour-heading h2{font-size:21px;letter-spacing:.6px}.tour-heading>b{font-size:17px}.tour-scene-tabs{padding:10px;gap:7px}.tour-shell button,.tour-actions a{font-size:11px;padding:10px}.tour-actions{padding:12px 10px;gap:7px}.tour-caption{padding:12px}#hitmenPanorama{height:500px}.tour-player-button{font-size:10px;width:104px}.tour-player-button.is-selected:before{bottom:-110px}}
+@media(prefers-reduced-motion:reduce){.hitmen-tour *{scroll-behavior:auto!important}}
+
+/* Quiet markers preserve the room view; names appear on hover, focus, or selection. */
+.tour-player-button:not(.is-selected):not(:hover):not(:focus-visible){width:44px;font-size:0;border-radius:50%;background:radial-gradient(circle,#ffe1e9 0 3px,#4c1526dd 4px 17px,#130c12cc 18px);border-color:#ed6b8999;box-shadow:0 0 12px #d52d5270}
+.tour-player-button:not(.is-selected):not(:hover):not(:focus-visible):after{display:none}
+@media(max-width:600px){.tour-player-button{width:92px}}
+
+.tour-look-controls{display:flex;gap:8px;flex-wrap:wrap;padding:10px 20px;background:#101016;border-bottom:1px solid #3d2530}
+@media(max-width:600px){.tour-look-controls{padding:10px;gap:7px}.tour-look-controls button{flex:1 1 auto}}
