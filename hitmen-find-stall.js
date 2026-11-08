@@ -35,7 +35,7 @@ function create({input,room}){
   const q=normalize(input.value);
   if(!q){results.hidden=true;status.textContent=players.length?players.length+' main-rostered players. Search a name or explore the stalls.':'No main-rostered players are available.';return;}
   const found=players.filter(p=>matches(p,input.value));
-  status.textContent=found.length?found.length+' matching player'+(found.length===1?'':'s')+'. Select a name to find their stall.':'Not on this saved 17-player roster, or name not recognized. Try your LG roster name. Training camp and former players are excluded.';
+  if(document.body.classList.contains('hitmen-tour'))status.textContent=found.length?found.length+' matching players':'No player found. Try your LG roster name.';else status.textContent=found.length?found.length+' matching player'+(found.length===1?'':'s')+'. Select a name to find their stall.':'Not on this saved 17-player roster, or name not recognized. Try your LG roster name. Training camp and former players are excluded.';
   for(const p of found){const li=document.createElement('li'),button=document.createElement('button');button.type='button';button.textContent=p.gamertag+' · '+p.position;button.addEventListener('click',()=>choose(players.indexOf(p)));li.append(button);results.append(li);}
   results.hidden=!found.length;
  }

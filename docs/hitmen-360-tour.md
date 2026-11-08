@@ -56,3 +56,16 @@ Clicking a jersey or stall marker now selects it and reveals a brushed-metal nam
 Additional verification passed in the actual browser at 1440px and 390px: 17 real-logo jersey layers; both real sign logos; real game IDs, score data and opponent crest IDs; correct selected name/position/index; clickable jersey hit area; Escape dismissal; custom plate content and public link; plate fully inside viewport; all prior tour, room, fallback and roster checks; offline two-scene rendering with no HTTPS dependencies. The updated standalone copy is `Calgary-Hitmen-360-Tour-v2.html`; the original standalone filename has also been refreshed. Screenshots of the plate, room console and game panels were visually inspected.
 
 No remote push, merge or deployment was performed for this revision.
+
+
+## Room-first interface and jersey fabric (revision 3)
+
+The user requested more realistic sweaters and removal of the surrounding dashboard appearance. Both panoramas now use revised jersey artwork with more varied hanging folds, thicker hems/cuffs, sleeve weight, neck shadows and seam/fabric detail. All 17 bays and their calibration are preserved. Exact team logo layers remain in place and blend with the cloth instead of using a separate glow. New source assets are `centre-fabric-v3.png` and `entrance-fabric-v3.png`; these remain generated concept imagery, not photographs or a final high-resolution textile render.
+
+The large hero, repeated publisher banners, slogans, framed console, bulky camera rows and nested game cards were removed from the tour view. A narrow identity/search header sits above the panorama. Viewpoint tabs and a native View options disclosure provide camera controls and team selection; the bottom dock stays small until a player is selected. Native buttons retain keyboard focus and generous hit targets. The custom physical nameplate is preserved, with a quieter player-card link. Small stall dots replace the large glowing marker rings and floating selection rectangle.
+
+Recent games and upcoming matchups now appear as simple crest/name/score rows divided by thin rules. The original public profile and Game Centre links still work. Roster/source caveats are available in a footer disclosure rather than filling the main view. No roster or score data was fabricated or changed. The original non-tour pages retain their existing layout.
+
+Verified the revised desktop and 390px phone layouts visually, including phone camera framing (65-degree initial horizontal field of view). The existing browser suite passed again for search, all 17 identities, custom plates, both scenes, floor transitions, native options controls, logo/game data mapping, fallback, zero horizontal overflow and offline operation. The 62-team roster regression, syntax checks and diff whitespace check passed. A stale search popover initially intercepted camera controls; it was fixed to close when focus leaves the search area, then the suite passed. No new deployment or remote push was performed.
+
+The current self-contained review file is `Calgary-Hitmen-360-Tour-v3.html`; the unversioned filename is refreshed too. Revision 2 is retained as a previous review copy.
