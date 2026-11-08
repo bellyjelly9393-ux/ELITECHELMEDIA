@@ -20,4 +20,11 @@ async function prepare(src,progress=()=>{},{fullFrame=false}={}){
  const mask=await infer(values);let lo=Infinity,hi=-Infinity;for(const v of mask){lo=Math.min(lo,v);hi=Math.max(hi,v);}if(!Number.isFinite(lo)||hi-lo<1e-5)throw Error('No usable foreground found.');const alpha=sx.createImageData(320,320);for(let i=0;i<mask.length;i++){alpha.data[i*4]=alpha.data[i*4+1]=alpha.data[i*4+2]=255;alpha.data[i*4+3]=Math.round(255*Math.max(0,Math.min(1,(mask[i]-lo)/(hi-lo))));}sx.putImageData(alpha,0,0);const large=canvas(c.width,c.height),lx=large.getContext('2d');lx.drawImage(small,0,0,c.width,c.height);const rgba=lx.getImageData(0,0,c.width,c.height).data;for(let i=3;i<rgba.length;i+=4)original.data[i]=Math.round(original.data[i]*Math.min(1,Math.max(0,(rgba[i]-18)/112)));x.putImageData(original,0,0);return {data:fullFrame?c.toDataURL():trim(c),mode:'cutout'};
  }catch(error){return {data:src,mode:'original-fallback',warning:error.message};}
 }
-window.ECMImagePreparer={prepare,trim};})();
+/* Fresh foreground probability for a crop (used by Re-cut). Returns Float32Array(width*height) in 0..1. */
+async function segment(c){
+ const small=canvas(320,320),sx=small.getContext('2d');sx.drawImage(c,0,0,320,320);const pixels=sx.getImageData(0,0,320,320).data,values=new Float32Array(3*320*320),means=[.485,.456,.406],std=[.229,.224,.225];let max=1;for(let i=0;i<pixels.length;i+=4)for(let ch=0;ch<3;ch++)max=Math.max(max,pixels[i+ch]);for(let i=0;i<320*320;i++)for(let ch=0;ch<3;ch++)values[ch*320*320+i]=(pixels[i*4+ch]/max-means[ch])/std[ch];
+ const mask=await infer(values);let lo=Infinity,hi=-Infinity;for(const v of mask){lo=Math.min(lo,v);hi=Math.max(hi,v);}if(!Number.isFinite(lo)||hi-lo<1e-5)throw Error('No usable foreground found.');
+ const alpha=sx.createImageData(320,320);for(let i=0;i<mask.length;i++){alpha.data[i*4]=alpha.data[i*4+1]=alpha.data[i*4+2]=255;alpha.data[i*4+3]=Math.round(255*(mask[i]-lo)/(hi-lo));}sx.putImageData(alpha,0,0);
+ const large=canvas(c.width,c.height),lx=large.getContext('2d');lx.drawImage(small,0,0,c.width,c.height);const rgba=lx.getImageData(0,0,c.width,c.height).data,out=new Float32Array(c.width*c.height);for(let i=0;i<out.length;i++)out[i]=rgba[i*4+3]/255;return out;
+}
+window.ECMImagePreparer={prepare,trim,segment};})();
