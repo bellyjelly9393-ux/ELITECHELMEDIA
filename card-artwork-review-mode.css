@@ -5,3 +5,5 @@ body.card-review-mode{display:grid;grid-template-columns:minmax(300px,650px) min
 .mask-editor::backdrop{background:#02060de6}.mask-editor h2{margin:0}.mask-stage{margin:12px 0;background:repeating-conic-gradient(#344352 0% 25%,#1a2632 0% 50%) 0/18px 18px;text-align:center}
 .mask-stage canvas{display:block;max-width:100%;max-height:58vh;width:auto;height:auto;margin:auto;touch-action:none;cursor:crosshair}
 .mask-editor button,.mask-editor select{padding:7px;color:#fff;background:#193147;border:1px solid #8ba2ad}
+
+.mask-recut{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:0 0 8px}.mask-recut [data-recut]{font-weight:700;background:#1f4a6e;border-color:#c9d8e6}.mask-editor button:disabled{opacity:.55;cursor:progress}.mask-status{min-height:1.3em;margin:4px 0 10px;color:#cfe0ef}
