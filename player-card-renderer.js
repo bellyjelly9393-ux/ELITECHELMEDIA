@@ -48,7 +48,7 @@ async function draw(canvas,s){const ticket=++serial;const [arena,crest,league,po
 plate(x,70,72,1260,160,colors[1]);x.drawImage(crest,99,83,155,155);text(x,s.edition==='season'?'PLAYER SERIES':s.edition.toUpperCase()+' SERIES',700,140,40,'#e8f6ff','center',790,'CardLabel');text(x,s.season,700,200,44,'#efd589','center',790,'CardLabel');
 
 metal(x,s.overall!==''&&s.overall!=null?String(s.overall):'—',135,475,220,'left',375);text(x,s.ratingKind==='beta'?'ECM OVR · BETA':'OVR PENDING',250,535,36,'#dceefa','center',380,'CardLabel');if(s.ratingKind==='beta'&&s.performanceScore!=null)text(x,'INDEX '+s.performanceScore+' / 100',250,564,24,'#a6c3d9','center',340,'CardLabel');plate(x,105,585,290,94,colors[1]);text(x,(p?.pos||p?.kind||'PLAYER').toUpperCase(),250,657,66,'#fff','center',240);
-if(s.edition!=='season'){plate(x,995,1045,280,100,colors[1]);text(x,s.edition.toUpperCase(),1135,1115,42,'#fff','center',245);}if(s.jersey)text(x,'#'+s.jersey,1220,1200,58,'#fff','right');
+if(s.edition!=='season'){plate(x,105,704,290,87,colors[1]);text(x,s.edition.toUpperCase(),250,764,42,'#fff','center',245);}if(s.jersey)text(x,'#'+s.jersey,1220,1200,58,'#fff','right');
 if(portrait){x.save();x.beginPath();x.rect(65,240,1270,1040);x.clip();const bounds=subjectBounds(portrait);
  const z=Math.min(1170/bounds.w,985/bounds.h)*(s.imageScale||100)/100;
  const px=785+(s.imageX||0)*3-(bounds.x+bounds.w/2)*z;

@@ -23,7 +23,8 @@ button.addEventListener('click',async()=>{
  busy=true;++revision;button.disabled=true;status.textContent='Submitting privately for manager review…';
  try{
   if(!/^data:image\/png;base64,/.test(art))throw Error('Upload a PNG, JPG or WebP through the photo picker first.');
-  const prepared=await window.ECMImagePreparer.prepare(art,message=>status.textContent=message);
+  const refined=window.ECMMaskEditor?.prepared(art);
+  const prepared=refined?{data:refined,mode:'transparent'}:await window.ECMImagePreparer.prepare(art,message=>status.textContent=message);
   const bytes=Uint8Array.from(atob(prepared.data.split(',')[1]),c=>c.charCodeAt(0));
   const originalBytes=Uint8Array.from(atob(art.split(',')[1]),c=>c.charCodeAt(0));
   if(!bytes.length||bytes.length>8388608)throw Error('Review image must be smaller than 8 MB.');
