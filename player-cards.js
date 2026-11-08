@@ -10,10 +10,17 @@ let all=[],visible=[],current=null,req=0;
 let ratingCache=new Map();
 let portraitData='';let uploadRevision=0;
 const BACKGROUNDS=['arena','heat','city','locker','playoff','storm','classic'];
-const EDITIONS=['season','base','silver','gold','platinum','signature','playoff'];
+
 function getBackground(){const selected=document.querySelector('input[name="cardBackground"]:checked');return selected&&BACKGROUNDS.includes(selected.value)?selected.value:'arena';}
 function setBackground(value){const valid=BACKGROUNDS.includes(value)?value:'arena';document.querySelectorAll('input[name="cardBackground"]').forEach(r=>{r.checked=r.value===valid;});}
-function getEdition(){return EDITIONS.includes($('edition').value)?$('edition').value:'base';}
+function earnedStyle(){
+ const ovr=rating().overall;
+ if(ovr==null)return {finish:'ice',edition:'season',label:'Finish pending · unrated'};
+ if(ovr>=90)return {finish:'gold',edition:'gold',label:'Championship Gold · 90+ OVR'};
+ if(ovr>=80)return {finish:'ice',edition:'silver',label:'Ice Chrome · 80–89 OVR'};
+ return {finish:'crimson',edition:'base',label:'Crimson Steel · below 80 OVR'};
+}
+function getEdition(){return earnedStyle().edition;}
 const blank='--';
 const asNum=v=>(v!==null&&v!==undefined&&String(v).trim()!==''&&Number.isFinite(Number(v)))?Number(v):null;
 const fmt=v=>asNum(v)===null?blank:String(asNum(v));
@@ -35,9 +42,9 @@ filter();const activeParams=new URLSearchParams(location.search);const id=active
 $('feedStatus').textContent=all.length+' public player-stat records loaded. Game statistics are read-only.';
 }catch(e){if(i!==req)return;all=[];$('player').innerHTML='';$('player').add(new Option('No player records available',''));$('feedStatus').textContent='League feed unavailable. No example statistics are displayed.';current=null;render();console.warn('Player card read-only feed:',e.message);}}
 function filter(){const q=$('filter').value.trim().toLowerCase();const chosen=$('player').value;visible=all.filter(p=>!q||p.tag.toLowerCase().includes(q)||p.team.toLowerCase().includes(q)).slice(0,500);$('player').innerHTML='';if(!visible.length){$('player').add(new Option('No matching players',''));$('feedStatus').textContent='No matching player. Your selected card has not changed.';return;}for(const p of visible){$('player').add(new Option(p.tag+' · '+(p.team||league.toUpperCase())+' · '+(p.pos||p.kind)+' · '+p.kind,p.kind+':'+p.id));}if(visible.some(p=>p.kind+':'+p.id===chosen))$('player').value=chosen;else{$('player').insertBefore(new Option('Choose a matching record…',''),$('player').firstChild);$('player').value='';}}
-function loadPersonal(){portraitData='';$('portraitFile').value='';$('jersey').value='';$('finish').value='ice';$('edition').value='season';setBackground('arena');if(!current)return;try{const s=localStorage.getItem(key());if(s){const p=JSON.parse(s);$('jersey').value=p.jersey??'';$('finish').value=['crimson','gold','ice'].includes(p.finish)?p.finish:'crimson';portraitData=p.portrait||'';setBackground(p.background);$('edition').value=EDITIONS.includes(p.edition)?p.edition:'base';}}catch(e){console.warn('Local card preferences unavailable:',e.message);}}
+function loadPersonal(){portraitData='';$('portraitFile').value='';$('jersey').value='';setBackground('arena');if(!current)return;try{const s=localStorage.getItem(key());if(s){const p=JSON.parse(s);$('jersey').value=p.jersey??'';portraitData=p.portrait||'';setBackground(p.background);}}catch(e){console.warn('Local card preferences unavailable:',e.message);}}
 function select(){uploadRevision++;const value=$('player').value;current=all.find(p=>p.kind+':'+p.id===value)||null;loadPersonal();render();window.dispatchEvent(new Event('ecm:card-selected'));}
-function render(){const p=current;$('cardLeaderboardLink').href='league-leaderboard.html?league='+league+'&category='+(p?.kind==='goalie'?'save_pct':'points');const locker=$('cardLockerLink');locker.hidden=league!=='lgchl'||!Number.isSafeInteger(Number(p?.teamId))||Number(p?.teamId)<=0;if(!locker.hidden)locker.href='lgchl-team.html?team='+Number(p.teamId);$('cardName').textContent=p?p.tag:'SELECT PLAYER';$('cardTeam').textContent=p?(p.team||'TEAM UNAVAILABLE').toUpperCase():'LG VERIFIED STATS';$('cardPosition').textContent=p?(p.pos||p.kind).toUpperCase():'PLAYER';$('cardJersey').textContent=$('jersey').value?'#'+$('jersey').value:'';$('cardOvr').textContent=displayedOverall()!==''?String(displayedOverall()):blank;const ratingLabel=rating().overall!==null?'ECM OVR · BETA':'OVR PENDING';$('cardOvrLabel').textContent=ratingLabel;$('cardRatingLabel').textContent='LEAGUE STATS · '+ratingLabel;$('card').dataset.finish=$('finish').value;$('card').dataset.background=getBackground();$('card').dataset.edition=getEdition();$('cardEditionLabel').textContent=getEdition().toUpperCase()+' EDITION';
+function render(){const style=earnedStyle();$('finish').value=style.finish;$('edition').value=style.edition;$('earnedFinish').textContent=style.label;const p=current;$('cardLeaderboardLink').href='league-leaderboard.html?league='+league+'&category='+(p?.kind==='goalie'?'save_pct':'points');const locker=$('cardLockerLink');locker.hidden=league!=='lgchl'||!Number.isSafeInteger(Number(p?.teamId))||Number(p?.teamId)<=0;if(!locker.hidden)locker.href='lgchl-team.html?team='+Number(p.teamId);$('cardName').textContent=p?p.tag:'SELECT PLAYER';$('cardTeam').textContent=p?(p.team||'TEAM UNAVAILABLE').toUpperCase():'LG VERIFIED STATS';$('cardPosition').textContent=p?(p.pos||p.kind).toUpperCase():'PLAYER';$('cardJersey').textContent=$('jersey').value?'#'+$('jersey').value:'';$('cardOvr').textContent=displayedOverall()!==''?String(displayedOverall()):blank;const ratingLabel=rating().overall!==null?'ECM OVR · BETA':'OVR PENDING';$('cardOvrLabel').textContent=ratingLabel;$('cardRatingLabel').textContent='LEAGUE STATS · '+ratingLabel;$('card').dataset.finish=$('finish').value;$('card').dataset.background=getBackground();$('card').dataset.edition=getEdition();$('cardEditionLabel').textContent=getEdition().toUpperCase()+' EDITION';
 const portrait=$('portrait');portrait.hidden=!portraitData;portrait.src=portraitData||'';$('silhouette').hidden=!!portraitData;
 const values=p?(p.kind==='goalie'?[fmt(p.gp),fmt(p.wins),pc(p.sv),fixed(p.gaa)]:[fmt(p.gp),fmt(p.goals),fmt(p.assists),fmt(p.points)]):[blank,blank,blank,blank];
 const labels=p?.kind==='goalie'?['GP','W','SV%','GAA']:['GP','G','A','PTS'];values.forEach((v,i)=>{$('stat'+(i+1)).textContent=v;$('lab'+(i+1)).textContent=labels[i];});}
@@ -57,14 +64,16 @@ window.ecmCardStudio={
  getSelected:()=>current,
  getLeague:()=>league,
  getArtwork:()=>portraitData,
+ applyApprovedArtwork:(data,layout,{force=false}={})=>{if(portraitData&&!force)return false;portraitData=data;for(const id of ['imageScale','imageX','imageY'])if(layout[id]!==undefined)$(id).value=layout[id];if(layout.background)setBackground(layout.background);render();return true;},
  getRating:rating,
+ getEarnedStyle:earnedStyle,
  getDisplayedOverall:displayedOverall,
  redraw:render,
 
  applyAccountCustomization:(c)=>{
    if(!current || !c)return;
    $('jersey').value=c.jersey===null||c.jersey===undefined?'':String(c.jersey);
-   $('finish').value=['crimson','gold','ice'].includes(c.finish)?c.finish:'crimson';
+
    render();
  }
 };

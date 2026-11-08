@@ -104,3 +104,17 @@ h2,h3{font-family:Anton,Impact,sans-serif;letter-spacing:1px;font-weight:400}h2{
 .trading-card .edition small{font-weight:900;color:var(--edition-edge);text-shadow:0 2px 5px #000;letter-spacing:1.2px}
 .trading-card .portrait img{-webkit-mask-image:radial-gradient(ellipse 85% 89% at 50% 51%,#000 57%,transparent 100%);mask-image:radial-gradient(ellipse 85% 89% at 50% 51%,#000 57%,transparent 100%)}
 @media(max-width:390px){.background-grid{gap:7px}.background-option input[type=radio]{right:4px;top:4px}}
+
+.background-option .bg-arena {background: linear-gradient(#34669833,transparent),url('assets/wildman/home/arena.webp') center/cover;}
+
+.background-option .bg-heat {background: linear-gradient(#be513633,transparent),url('assets/broadcast/arena-tunnel.webp') center/cover;}
+
+.background-option .bg-city {background: linear-gradient(#51579233,transparent),url('assets/broadcast/arena-blur.webp') center/cover;}
+
+.background-option .bg-locker {background: linear-gradient(#87644e33,transparent),url('assets/hitmen-v3/locker-photo-master.webp') center/cover;}
+
+.background-option .bg-playoff {background: linear-gradient(#9a874e33,transparent),url('assets/war-room/fx-arena.webp') center/cover;}
+
+.background-option .bg-storm {background: linear-gradient(#795bad33,transparent),url('assets/broadcast/fx-lights.webp') center/cover;}
+
+.background-option .bg-classic {background: linear-gradient(#56758433,transparent),url('assets/wildman/home/ice.webp') center/cover;}

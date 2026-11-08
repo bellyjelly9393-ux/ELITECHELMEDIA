@@ -1,4 +1,4 @@
-/* Explicit, private submission only. The renderer never loads shared artwork. */
+/* Explicit submission: on-device preparation, private originals and manager approval. */
 (function(){
 'use strict';
 const button=document.getElementById('submitArtwork'),status=document.getElementById('artworkReviewStatus'),rights=document.getElementById('artworkRights');
@@ -13,7 +13,7 @@ async function refresh(){
  if(!p){status.textContent='Choose a verified player first.';return;}
  const result=await account.getClient().from('ecm_card_artwork_reviews').select('status,review_note,created_at').eq('user_id',who.id).eq('league',p.league).eq('lg_user_id',p.id).eq('player_kind',p.kind).neq('status','withdrawn').order('created_at',{ascending:false}).limit(1);
  if(turn!==revision)return;
- status.textContent=result.error?'Review status unavailable. Try again later.':result.data?.[0]?'Latest submission: '+result.data[0].status+'. '+(result.data[0].review_note||'')+' Public artwork display is not enabled.':'No artwork submitted for this player.';
+ status.textContent=result.error?'Review status unavailable. Try again later.':result.data?.[0]?'Latest submission: '+result.data[0].status+'. '+(result.data[0].review_note||'')+' Approved cards may be published by management.':'No artwork submitted for this player.';
 }
 button.addEventListener('click',async()=>{
  if(busy)return;
@@ -23,17 +23,21 @@ button.addEventListener('click',async()=>{
  busy=true;++revision;button.disabled=true;status.textContent='Submitting privately for manager review…';
  try{
   if(!/^data:image\/png;base64,/.test(art))throw Error('Upload a PNG, JPG or WebP through the photo picker first.');
-  const bytes=Uint8Array.from(atob(art.split(',')[1]),c=>c.charCodeAt(0));
+  const prepared=await window.ECMImagePreparer.prepare(art,message=>status.textContent=message);
+  const bytes=Uint8Array.from(atob(prepared.data.split(',')[1]),c=>c.charCodeAt(0));
+  const originalBytes=Uint8Array.from(atob(art.split(',')[1]),c=>c.charCodeAt(0));
   if(!bytes.length||bytes.length>8388608)throw Error('Review image must be smaller than 8 MB.');
   const draft=await db.rpc('ecm_card_artwork_start',{p_id:id,p_league:p.league,p_lg_user_id:Number(p.id),p_kind:p.kind,p_confirm_rights:true});
   if(draft.error)throw draft.error;
   started=true;const row=Array.isArray(draft.data)?draft.data[0]:draft.data;
   const upload=await db.storage.from('ecm-card-artwork-review').upload(row.object_path,new Blob([bytes],{type:'image/png'}),{contentType:'image/png',upsert:false});
   if(upload.error)throw upload.error;
-  const result=await db.rpc('ecm_card_artwork_submit',{p_id:id});
+  const originalUpload=await db.storage.from('ecm-card-artwork-review').upload(row.original_path,new Blob([originalBytes],{type:'image/png'}),{contentType:'image/png',upsert:false});
+  if(originalUpload.error)throw originalUpload.error;
+  const result=await db.rpc('ecm_card_artwork_submit_prepared',{p_id:id,p_preparation:prepared.mode,p_layout:{...(window.ECMStudioV2?.getDeviceLayout?.()||{}),imageScale:100,imageX:0,imageY:0,finish:document.getElementById('finish').value,background:document.getElementById('card').dataset.background,edition:document.getElementById('edition').value}});
   if(result.error)throw result.error;
   submitted=true;rights.checked=false;
-  status.textContent='Submitted privately. Waiting for manager approval. Public artwork display is not enabled.';
+  status.textContent='Submitted privately. Your prepared card is waiting for manager approval before public display.';
  }catch(error){
   if(started&&!submitted)await db.rpc('ecm_card_artwork_withdraw',{p_id:id}).catch(()=>{});
   status.textContent='Artwork was not submitted: '+error.message;
