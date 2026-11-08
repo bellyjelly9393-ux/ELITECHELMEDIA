@@ -5,7 +5,7 @@ const {esc,read}=D,$=id=>document.getElementById(id),params=new URLSearchParams(
 const raw=params.get('team'),team=raw===null?412:Number(raw);
 const valid=n=>Number.isSafeInteger(Number(n))&&Number(n)>0;
 if(!valid(team)){$('roomName').textContent='Team not found';['roomRecord','roomPlayers','roomFinals','roomUpcoming'].forEach(id=>$(id).textContent='Choose a team from league coverage.');$('roomPlayers').setAttribute('aria-busy','false');return;}
-if(team===412&&!params.has('room')&&!document.body.dataset.roomAngles&&!document.body.dataset.roomConcept)document.body.dataset.roomTour='true';
+if(document.body.dataset&&team===412&&!params.has('room')&&!document.body.dataset.roomAngles&&!document.body.dataset.roomConcept)document.body.dataset.roomTour='true';
 document.body.classList.toggle('league-room',true);
 document.body.classList.toggle('hitmen-room',team===412);
 const logo=id=>'assets/lgchl/s55/team'+Number(id)+'.png';
@@ -68,7 +68,10 @@ async function roster(){
 function game(g,final){
  if(team===412&&(['360','angles'].includes(params.get('room'))||document.body.dataset.roomTour==='true'||document.body.dataset.roomAngles==='true')){
   const side=which=>{const id=Number(g[which+'_lg_team_id']),name=g[which+'_nick']||g[which+'_abbr']||'Team';return '<div class="tour-match-team">'+(valid(id)?'<img src="'+logo(id)+'" alt="'+esc(name)+' crest" width="46" height="46" loading="lazy">':'')+'<b>'+esc(g[which+'_abbr']||name)+'</b><small>'+esc(name)+'</small></div>';};
-  const away=g.away_nick||g.away_abbr||'Away',home=g.home_nick||g.home_abbr||'Home',score=final?fmt(g.away_score)+' – '+fmt(g.home_score):'VS';
+  const label=(g.away_nick||'Away')+' vs '+(g.home_nick||'Home');
+  return '<a class="game-row tour-match-card" href="lgchl-game.html?id='+Number(g.lg_game_id)+'" aria-label="'+esc(label+(final?' '+fmt(g.away_score)+' to '+fmt(g.home_score):' scheduled')+'. Open game centre')+'"><div class="tour-match-meta"><span>'+esc(date(g.game_at))+'</span><b>'+(final?'FINAL':'UPCOMING')+'</b></div><div class="tour-match-teams">'+side('away')+'<strong class="tour-match-score">'+(final?fmt(g.away_score)+'<i>–</i>'+fmt(g.home_score):'<i>VS</i>')+'</strong>'+side('home')+'</div><span class="tour-match-open">GAME CENTRE <span aria-hidden="true">↗</span></span></a>';
+ }
+ const away=g.away_nick||g.away_abbr||'Away',home=g.home_nick||g.home_abbr||'Home',score=final?fmt(g.away_score)+' – '+fmt(g.home_score):'VS';
  const mark=(id,name)=>'<span class="game-team">'+(valid(id)?'<img src="'+logo(id)+'" alt="" loading="lazy">':'')+'<strong>'+esc(name)+'</strong></span>';
  return '<a class="game-row" href="lgchl-game.html?id='+Number(g.lg_game_id)+'" aria-label="'+esc(away+' '+score+' '+home+' · '+date(g.game_at))+'"><span class="game-time">'+esc(date(g.game_at))+'<small>'+ (final?'FINAL':'UPCOMING')+'</small></span>'+mark(g.away_lg_team_id,away)+'<span class="game-score'+(final?' is-final':'')+'">'+esc(score)+'</span>'+mark(g.home_lg_team_id,home)+'</a>';
 }

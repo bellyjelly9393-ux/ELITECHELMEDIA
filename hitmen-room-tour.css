@@ -93,3 +93,5 @@
 
 /* Printed tabletop rink with separate native team and publisher marks. */
 .tour-art-table{aspect-ratio:2/1;opacity:.9}.tour-art-table>svg{position:absolute;inset:0;width:100%;height:100%}.tour-art-table>img.table-hitmen{position:absolute;left:40%;top:24%;width:20%;height:52%}.tour-art-table>img.table-ecm{position:absolute;left:73%;top:30%;width:15%;height:40%}
+
+.hitmen-tour .public-room-schedule>.arena-banner,.hitmen-tour .arena-season{display:none}.hitmen-tour .room-footer details{max-width:100%}

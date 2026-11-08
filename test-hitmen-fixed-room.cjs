@@ -38,7 +38,7 @@ const server=http.createServer((req,res)=>{
    assert.equal(await page.evaluate(()=>window.HitmenFixedRoom.getState().bank),index<6?0:index<11?1:2);
    const selected=page.locator('.angle-stall.is-selected');await selected.waitFor();
    assert.equal(await selected.getAttribute('data-player-id'),String(p.lg_user_id));assert.equal(await selected.getAttribute('aria-current'),'true');
-   await selected.click();assert(await page.locator('.fixed-room-level').isHidden());assert.equal(await page.locator('.stall-level-name').textContent(),p.gamertag);assert.equal(await page.locator('.stall-closeup-position').textContent(),p.position);assert.equal(await page.locator('.stall-public-card').getAttribute('href'),'lgchl-player.html?id='+p.lg_user_id+'&kind='+p.player_kind);
+   await selected.click();assert(await page.locator('.fixed-room-level').isHidden());assert.equal(await page.locator('.stall-level-name').textContent(),p.gamertag);assert.equal(await page.locator('.stall-closeup-position').textContent(),p.position);assert.equal(await page.locator('.stall-public-card').getAttribute('href'),'player-cards.html?league=lgchl&id='+p.lg_user_id+'&kind='+p.player_kind);
    await page.locator('.stall-return').click();assert.equal(await page.evaluate(()=>window.HitmenFixedRoom.getState().view),'room');
   }
   assert.equal(await page.evaluate(()=>window.HitmenFixedRoom.openStall(999999)),false);assert.equal(await page.evaluate(()=>window.HitmenFixedRoom.focusStall(999999)),false);assert.equal(await page.evaluate(()=>window.HitmenFixedRoom.setBank('1')),false);
