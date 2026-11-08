@@ -1,6 +1,10 @@
 # ECM rating beta — 2026-11-08
 
-The card studio now computes a versioned `eco-beta-20261108` score for eligible
+Release revision r2: the display OVR is now `round(60 + 0.39 × performanceIndex)`, from 60 to 99. The underlying 0–100 weighted component index is retained separately as `performanceScore`. Equal-performance peers have index 50 and card OVR 80. This is an explicit product display scale, not calibration against EA ratings. Setty’s prior index 60 displays as OVR 83. All component math below is unchanged; original browser results refer to r1.
+
+Artwork release rule: uploaded player images remain in browser memory/device storage and PNG exports. No automatic public artwork upload, gallery or publishing endpoint is enabled. Existing account collections are protected by owner-only RLS and have no image field. A moderation queue must be added before any future public image display; no review queue is claimed in this release.
+
+The card studio now computes a versioned `eco-beta-20261108-r2` score for eligible
 CHL Season 55 regular-season players. This supersedes the inactive concept
 contract described in the earlier studio review. It is an experimental ECM
 season-stat comparison, not an EA overall, LG rating, validated skill model,

@@ -1,6 +1,6 @@
 /* Independent ECM beta rating: role-relative season statistics, never an EA/LG rating. */
 (function(root){'use strict';
-const version='eco-beta-20261108',MIN_GP=6,MIN_PEERS=20,PRIOR_GP=6,MAX_AGE_MS=48*3600000;
+const version='eco-beta-20261108-r2',MIN_GP=6,MIN_PEERS=20,PRIOR_GP=6,MAX_AGE_MS=48*3600000;
 const weights={C:{Goals:15,Assists:20,Interceptions:15,Takeaways:10,'Puck security':15,Passing:10,Faceoffs:10,Discipline:5},W:{Goals:25,Assists:25,Interceptions:10,Takeaways:10,'Puck security':15,Passing:10,Discipline:5},D:{Goals:5,Assists:15,Interceptions:25,Takeaways:15,'Puck security':20,Passing:10,Discipline:10},G:{'Save percentage':80,'Goals against per 60':20}};
 const number=v=>v!==null&&v!==undefined&&String(v).trim()!==''&&Number.isFinite(Number(v))?Number(v):null;
 const roleOf=p=>p?.kind==='goalie'?'G':p?.pos==='C'?'C':['LW','RW'].includes(p?.pos)?'W':['LD','RD','D'].includes(p?.pos)?'D':null;
@@ -19,7 +19,8 @@ function metrics(p){const role=roleOf(p),s=p?.ratingStats,gp=number(p?.gp);if(!r
  const out={Goals:rate(goals),Assists:rate(assists),Interceptions:rate(ints),Takeaways:rate(takes),'Puck security':rate(gives,true),Passing:{value:passing,exposure:attempts,prior:200,lower:false},Discipline:rate(pim,true)};
  if(role==='C')out.Faceoffs={value:fo,exposure:gp,prior:PRIOR_GP,lower:false};return out;
 }
-function assess(p,players=[],options={}){const role=roleOf(p),base={version,approved:false,status:'pending',overall:null,role,weights:weights[role]||{},factorsUsed:[],peers:0};const pending=reason=>({...base,reason});
+function cardScale(score){return Number.isFinite(score)?Math.round(60+39*Math.max(0,Math.min(100,score))/100):null;}
+function assess(p,players=[],options={}){const role=roleOf(p),base={version,approved:false,status:'pending',overall:null,performanceScore:null,role,weights:weights[role]||{},factorsUsed:[],peers:0};const pending=reason=>({...base,reason});
  if(options.league&&options.league!=='lgchl')return pending('Automatic ratings are available for the LGCHL Season 55 beta only.');
  if(!p||!role)return pending('Select a player with a supported position.');
  if(!p.ratingStats)return pending('Detailed season statistics are unavailable. No automatic rating assigned.');
@@ -38,7 +39,7 @@ function assess(p,players=[],options={}){const role=roleOf(p),base={version,appr
  const lowest=[...factors].sort((a,b)=>a.percentile-b.percentile)[0];const cues={Goals:'Review two missed scoring chances and practice the release you needed.',Assists:'Look for a supporting passing option before entering traffic.',Interceptions:'Protect a passing lane with your stick before chasing the puck.',Takeaways:'Wait for an exposed puck before making a controlled poke.',
  'Puck security':'Use a short outlet or reset when the forward lane is closed.',Passing:'Choose a clear short outlet before trying a contested cross-ice pass.',Faceoffs:'Practice your counter for the draw you lost most often.',Discipline:'Avoid the extra poke or hit after the puck has moved.',
  'Save percentage':'Review the goals allowed and identify one repeatable positioning adjustment.', 'Goals against per 60':'Review a conceded sequence with your defense; this metric also depends on team play.'};
- return {...base,status:'beta',nextGame:lowest.name+': '+cues[lowest.name],overall:Math.round(overall),peers:peers.length,factorsUsed:factors,reason:'ECM beta: a weighted 0–100 percentile score within '+({C:'centers',W:'wingers',D:'defensemen',G:'goalies'}[role])+'. Small samples are pulled toward the role median. This is an experimental season-stat rating, not an EA or LG rating.'};
+ return {...base,status:'beta',nextGame:lowest.name+': '+cues[lowest.name],overall:cardScale(overall),performanceScore:Math.round(overall*10)/10,peers:peers.length,factorsUsed:factors,reason:'ECM beta OVR is shown on a 60–99 card scale. Its separate performance index combines weighted component percentiles within '+({C:'centers',W:'wingers',D:'defensemen',G:'goalies'}[role])+'. Small samples are pulled toward the role median. This is an experimental season-stat rating, not an EA or LG rating.'};
 }
-const api={version,weights,assess,roleOf,metrics};root.ECMRating=api;if(typeof module!=='undefined')module.exports=api;
+const api={version,weights,assess,roleOf,metrics,cardScale};root.ECMRating=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window==='undefined'?globalThis:window);

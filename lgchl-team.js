@@ -19,10 +19,10 @@ function render(){
  const q=$('roomSearch').value.toLocaleLowerCase().trim();
  const rows=players.filter(p=>String(p.gamertag||'').toLocaleLowerCase().includes(q));
  const card=p=>{
- const goalie=p.player_kind==='goalie',url='lgchl-player.html?id='+Number(p.lg_user_id)+'&kind='+(goalie?'goalie':'skater');
+ const goalie=p.player_kind==='goalie',url='player-cards.html?league=lgchl&id='+Number(p.lg_user_id)+'&kind='+(goalie?'goalie':'skater');
  const stats=goalie?[['GP',fmt(p.gp)],['SV%',p.save_pct==null?'—':rate(Number(p.save_pct)*100,1)+'%'],['GAA',rate(p.gaa,2)]]:[['G',fmt(p.goals)],['A',fmt(p.assists)],['PTS',fmt(p.points)]];
  const uniform=jerseyAssets[team]?'<img class="club-jersey" src="'+jersey(team)+'" alt="Verified club jersey" loading="lazy">':'<div class="concept-kit" role="img" aria-label="Non-official jersey concept with team crest"><img class="concept-crest" src="'+logo(team)+'" alt="" loading="lazy"></div><small class="concept-tag">REFERENCE FOUND · CUTOUT PENDING</small>';
- return (valid(p.lg_user_id)?'<a class="stall" href="'+url+'">':'<article class="stall">')+'<strong class="nameplate">'+esc(p.gamertag)+'</strong><div class="jersey-stage">'+uniform+'</div><div class="stall-info"><p>'+esc(p.position||(goalie?'G':'Skater'))+(p.management_role?' · '+esc(p.management_role):'')+' · '+fmt(p.gp)+' GP</p><div class="stats">'+stats.map(([k,v])=>'<span>'+k+'<b>'+esc(v)+'</b></span>').join('')+'</div><span class="open-card">'+(valid(p.lg_user_id)?'OPEN PLAYER CARD →':'PLAYER CARD UNAVAILABLE')+'</span></div>'+(valid(p.lg_user_id)?'</a>':'</article>');
+ return (valid(p.lg_user_id)?'<a class="stall" href="'+url+'">':'<article class="stall">')+'<strong class="nameplate">'+esc(p.gamertag)+'</strong><div class="jersey-stage">'+uniform+'</div><div class="stall-info"><p>'+esc(p.position||(goalie?'G':'Skater'))+(p.management_role?' · '+esc(p.management_role):'')+' · '+fmt(p.gp)+' GP</p><div class="stats">'+stats.map(([k,v])=>'<span>'+k+'<b>'+esc(v)+'</b></span>').join('')+'</div><span class="open-card">'+(valid(p.lg_user_id)?'VIEW / BUILD HOCKEY CARD →':'PLAYER CARD UNAVAILABLE')+'</span></div>'+(valid(p.lg_user_id)?'</a>':'</article>');
  };
  const content=rows.map(card).join('');
  $('roomPlayers').innerHTML=content||'<p class="note">'+(q?'No matching players.':'No public player stats are listed for this team yet.')+'</p>';
@@ -47,7 +47,7 @@ async function roster(){
  if(snapshot.season!==55||!entry||!Array.isArray(entry.players))throw Error('Roster unavailable');
  const clubs=Object.entries(snapshot.teams).filter(([id,c])=>valid(id)&&c&&typeof c.name==='string').map(([id,c])=>({id:Number(id),name:c.name})).sort((a,b)=>a.name.localeCompare(b.name));
  $('roomTeam').innerHTML=clubs.map(c=>'<option value="'+c.id+'"'+(c.id===team?' selected':'')+'>'+esc(c.name)+'</option>').join('');
- $('roomName').textContent=entry.name;
+ $('roomName').textContent=entry.name;$('arenaTeamName').textContent=entry.name;$('roomRadioLink').hidden=team!==412;
  document.title=entry.name+' Team Room | Elite Chel Media';
  const main=entry.players.filter(p=>p.roster_class==='active_roster'&&valid(p.lg_user_id));
  let rows=[];
@@ -55,17 +55,18 @@ async function roster(){
  const unique=new Map();for(const p of rows){const key=p.lg_user_id+':'+p.player_kind,old=unique.get(key);if(!old||String(p.fetched_at)>String(old.fetched_at))unique.set(key,p);}
  players=main.map(p=>({...unique.get(p.lg_user_id+':'+p.player_kind),...p}));
  $('playersTitle').textContent='Main roster · '+players.length;
- $('rosterNote').textContent='Main-roster players only · LG roster snapshot: '+snapshot.as_of+'. The 62-team jersey reference collection is sourced. Finished locker cutouts display where available; remaining jerseys use marked crest concepts while their references are cleaned and reviewed. Imported Season 55 totals may include previous teams; — means unavailable.';
+ $('rosterNote').textContent='Select your stall to view or build your hockey card. Main-roster players only · LG roster snapshot: '+snapshot.as_of+'. The 62-team jersey reference collection is sourced. Finished locker cutouts display where available; remaining jerseys use marked crest concepts while their references are cleaned and reviewed. Imported Season 55 totals may include previous teams; — means unavailable.';
  render();
  }catch{$('roomPlayers').textContent='Current main roster is unavailable. Please try again later.';$('roomPlayers').setAttribute('aria-busy','false');}
 }
 
 function game(g,final){
- const label=(g.away_nick||g.away_abbr||'Away')+' vs '+(g.home_nick||g.home_abbr||'Home');
- return '<a class="game-row" href="lgchl-game.html?id='+Number(g.lg_game_id)+'"><strong>'+esc(label)+(final?' · '+fmt(g.away_score)+'–'+fmt(g.home_score):'')+'</strong><small>'+esc(date(g.game_at))+' · '+(final?'Final':'Scheduled')+' · Open Game Centre →</small></a>';
+ const away=g.away_nick||g.away_abbr||'Away',home=g.home_nick||g.home_abbr||'Home',score=final?fmt(g.away_score)+' – '+fmt(g.home_score):'VS';
+ const mark=(id,name)=>'<span class="game-team">'+(valid(id)?'<img src="'+logo(id)+'" alt="" loading="lazy">':'')+'<strong>'+esc(name)+'</strong></span>';
+ return '<a class="game-row" href="lgchl-game.html?id='+Number(g.lg_game_id)+'" aria-label="'+esc(away+' '+score+' '+home+' · '+date(g.game_at))+'"><span class="game-time">'+esc(date(g.game_at))+'<small>'+ (final?'FINAL':'UPCOMING')+'</small></span>'+mark(g.away_lg_team_id,away)+'<span class="game-score'+(final?' is-final':'')+'">'+esc(score)+'</span>'+mark(g.home_lg_team_id,home)+'</a>';
 }
 async function games(){
- const base={select:'lg_game_id,game_at,status,away_nick,away_abbr,home_nick,home_abbr,away_score,home_score',season:'eq.55',or:'(away_lg_team_id.eq.'+team+',home_lg_team_id.eq.'+team+')',limit:'6'};
+ const base={select:'lg_game_id,game_at,status,away_nick,away_abbr,home_nick,home_abbr,away_score,home_score,away_lg_team_id,home_lg_team_id',season:'eq.55',or:'(away_lg_team_id.eq.'+team+',home_lg_team_id.eq.'+team+')',limit:'6'};
  const results=await Promise.allSettled([read('lgchl_games_board',{...base,status:'eq.final',order:'game_at.desc'}),read('lgchl_games_board',{...base,status:'neq.final',game_at:'gte.'+new Date().toISOString(),order:'game_at.asc'})]);
  results.forEach((r,i)=>{const el=$(i?'roomUpcoming':'roomFinals');el.innerHTML=r.status==='fulfilled'?r.value.filter(g=>valid(g.lg_game_id)&&(!i?String(g.status).toLowerCase()==='final':String(g.status).toLowerCase()==='scheduled')).map(g=>game(g,!i)).join('')||'<p class="note">'+(i?'No upcoming games are listed.':'No final results are listed.')+'</p>':'<p class="note">Games are unavailable. Please try again later.</p>';});
 }

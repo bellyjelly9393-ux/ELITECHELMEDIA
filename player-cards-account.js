@@ -22,6 +22,7 @@
     {auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce'}}
   );
   var me=null, saved=[];
+  window.ecmCardAccount={getClient:()=>db,getUser:()=>me};
   var activeRequest=0;
   async function refresh() {
     if (!me) {saved=[];renderCollection();syncButtons(false);return;}
@@ -58,6 +59,7 @@
   }
   async function setUser(user) {
     me=user||null;
+    window.dispatchEvent(new Event("ecm:card-auth"));
     ++activeRequest;
     syncButtons(!!me);
     byId('accountName').textContent=me

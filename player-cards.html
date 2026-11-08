@@ -4,25 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#08090b">
-<title>Player Card Studio V2 | Elitechel Media</title>
+<title>Player Card Studio | Elite Chel Media</title>
 <meta name="description" content="Interactive 3D hockey player cards using verified LGCHL and LG3s league statistics. Customize a personal CHEL character preview.">
 <link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
-<link rel="stylesheet" href="player-cards.css?v=20261107-bg1">
+<link rel="stylesheet" href="player-cards.css?v=20261108-release1">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js" defer></script>
-<script src="player-card-rating.js" defer></script>
-<script src="player-card-renderer.js" defer></script>
-<script src="player-cards.js?v=20261107-bg1" defer></script>
-<script src="player-cards-account.js?v=20261101" defer></script>
-<link rel="stylesheet" href="player-card-studio-v2.css">
-<script src="player-card-studio-v2.js" defer></script>
+<script src="player-card-rating.js?v=20261108-release1" defer></script>
+<script src="player-card-renderer.js?v=20261108-release1" defer></script>
+<script src="player-cards.js?v=20261108-release1" defer></script>
+<script src="player-cards-account.js?v=20261108-release1" defer></script>
+<link rel="stylesheet" href="player-card-studio-v2.css?v=20261108-release1">
+<script src="player-card-studio-v2.js?v=20261108-release1" defer></script>
+<script src="player-card-artwork-submit.js?v=20261108-release1" defer></script>
 </head>
 <body>
 <header class="top">
   <a class="brand" href="index.html"><img src="assets/brand/ecm-crest.webp" width="54" height="54" alt=""><span><strong>ELITECHEL</strong><small>MEDIA</small></span></a>
-  <nav aria-label="Player card navigation"><a href="index.html">Home</a><a href="league-leaderboards.html?league=lg3s">Leaderboards</a><a href="lg3s-media.html">LG3s Desk</a><a href="lgchl-media.html">LGCHL Desk</a><a href="#myCollection">My Collection</a></nav>
+  <nav aria-label="Player card navigation"><a href="index.html">Home</a><a id="cardLeaderboardLink" href="league-leaderboard.html?league=lgchl&amp;category=points">Find my stats</a><a href="lg3s-media.html">LG3s Desk</a><a href="lgchl-media.html">LGCHL Desk</a><a href="#myCollection">My Collection</a></nav>
 </header>
 <main>
-<div class="heading studio-masthead"><img src="assets/brand/ecm-crest.webp" alt="Elite Chel Media"><div><span class="eyebrow">PLAYER CARD GENERATOR</span><h1>PLAYER CARDS</h1><p>CREATE · TRACK · PROGRESS · UPGRADE</p></div><div class="league-brand"><img id="leagueLogo" src="assets/wildman/home/lgchl-logo.webp" alt="Selected league"><strong id="seasonBrand">SEASON 55</strong></div></div>
+<div class="heading studio-masthead"><img src="assets/brand/ecm-crest.webp" alt="Elite Chel Media"><div><span class="eyebrow">PLAYER CARD GENERATOR</span><h1>PLAYER CARDS</h1><p>YOUR PLAYER · YOUR SEASON · YOUR CARD</p></div><div class="league-brand"><img id="leagueLogo" src="assets/wildman/home/lgchl-logo.webp" alt="Selected league"><strong id="seasonBrand">SEASON 55</strong></div></div>
  <section class="account-panel" id="accountPanel" aria-label="EliteChel account">
   <div><span class="eyebrow">ELITECHEL FOUNDERS BETA</span><h2>YOUR CARDS. YOUR ACCOUNT.</h2>
   <p id="accountStatus" role="status" aria-live="polite">Checking Discord sign-in…</p></div>
@@ -35,15 +36,17 @@
  <div class="studio">
   <section class="controls" aria-labelledby="custom-heading">
    <h2 id="custom-heading">☷ PLAYER CARD BUILDER</h2>
-   <p class="hint">Choose a player from the public league feed, then personalize the look. Nothing is published to other visitors.</p>
+   <p class="hint">Find your verified player, add your CHEL character, and create your card. Your uploaded photo stays private.</p>
    <h3 class="section-title"><b>1</b> PLAYER IDENTITY</h3><label>League<select id="league"><option value="lg3s">LG3s · Season 1</option><option value="lgchl">LGCHL · Season 55</option></select></label>
    <label>Find a player<input id="filter" type="search" aria-controls="searchResults" aria-expanded="false" autocomplete="off" placeholder="Search gamertag or team…" maxlength="90"></label>
    <div id="searchResults" role="listbox" aria-label="Matching player records" hidden></div><label>Player<select id="player"><option value="">Loading players…</option></select></label>
    <p id="feedStatus" class="status" role="status" aria-live="polite">Loading public statistics…</p>
    <div class="divider"></div>
    <h3 class="section-title"><b>2</b> PLAYER PHOTO</h3>
-   <label>CHEL character screenshot <span class="sub">Optional PNG, JPG or WebP (max 8 MB)</span><input id="portraitFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
+   <label>CHEL character screenshot <span class="sub">PNG, JPG or WebP · up to 8 MB</span><input id="portraitFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
    <details class="image-tools"><summary>Position your photo</summary><label>Scale<input id="imageScale" type="range" min="50" max="200" value="100"></label><div class="inline"><label>Horizontal<input id="imageX" type="range" min="-150" max="150" value="0"></label><label>Vertical<input id="imageY" type="range" min="-150" max="150" value="0"></label></div><button type="button" id="resetImage">Reset image position</button></details><details><summary>Custom OVR &amp; jersey number</summary><div class="inline"><label>Custom OVR <span class="sub">Optional cosmetic override</span><input id="overall" type="number" min="1" max="99" inputmode="numeric" placeholder="--"></label><label>Jersey number <span class="sub">Optional</span><input id="jersey" type="number" min="0" max="99" inputmode="numeric" placeholder="--"></label></div></details>
+   <p class="artwork-policy"><strong>Private artwork preview</strong> Your preview stays in this browser unless you submit it for private manager review. Public artwork display is not enabled.</p>
+   <details class="artwork-policy"><summary>Submit artwork for review</summary><p>Managers check images before future shared use. Approval does not publish your image. Player ownership is not verified by this submission.</p><label><input type="checkbox" id="artworkRights"> I have permission to use this image and it follows community rules.</label><button type="button" id="submitArtwork">Submit artwork for review</button><p id="artworkReviewStatus" role="status" aria-live="polite">Sign in with Discord to submit artwork.</p></details>
    <fieldset class="background-picker" aria-label="Card background templates">
      <legend><span class="section-title"><b>3</b> SELECT BACKGROUND</span></legend>
      <div class="background-grid" id="backgroundOptions">
@@ -62,7 +65,7 @@
    <label>Card finish<select id="finish"><option value="crimson">Crimson Steel</option><option value="gold">Championship Gold</option><option value="ice" selected>Ice Chrome</option></select></label>
    <p class="hint">Background and edition are independent. For the cleanest player cutout, use a transparent PNG or WebP. Regular game screenshots retain their original scenery.</p>
    <button type="button" id="generate" class="generate">ϟ GENERATE CARD</button><p id="renderStatus" class="status" role="status" aria-live="polite"></p><div class="actions"><button type="button" id="save">Save on this device</button><button type="button" id="saveToCollection" disabled>Save to My Collection</button><button type="button" id="export">Export PNG</button><button type="button" class="secondary" id="reset">Reset personal edits</button></div>
-   <p class="footnote">League stats remain read-only. Automatic ECM beta OVR uses eligible CHL Season 55 statistics. A custom OVR overrides it and is labeled cosmetic. Save on this device keeps your background, edition preview, finish, and image locally. My Collection syncs only player, finish, overall, and jersey; background, edition, and uploaded image do not yet sync across devices. Export PNG to keep the complete artwork.</p>
+   <p class="footnote">Device save keeps your artwork, layout, background and finish together. Account save keeps the player and basic card settings. Export PNG for a complete copy. Uploaded images are never published by this builder.</p>
   </section>
   <section class="stage" aria-labelledby="preview-heading">
    <div class="stage-head"><h2 id="preview-heading">YOUR SEASON. YOUR CARD.</h2><span>LIVE PREVIEW</span></div>
@@ -79,13 +82,13 @@
         <div class="cardfoot"><span>ELITECHEL MEDIA</span><span id="cardRatingLabel">LEAGUE STATS · OVR PENDING</span></div>
       </div>
    </article></div>
-   <p id="savedSnapshotStatus" class="preview-note"></p><p class="preview-note">Card artwork is a concept treatment. Actual character images appear when a player uploads their own game screenshot.</p>
+   <p class="preview-note"><a id="cardLockerLink" hidden>Back to team locker room →</a></p><p id="savedSnapshotStatus" class="preview-note"></p><p class="preview-note">Upload your own CHEL screenshot above. A transparent cutout gives the cleanest result. Your image stays private. Submit it separately if you want manager review.</p>
   </section>
  </div>
-<section class="studio-explain" aria-label="Rating and progression"><article><h3>▥ AUTOMATIC OVERALL (OVR)</h3><p>CHL Season 55 beta: compare performance within your role. Minimum 6 games; goalies also need 100 shots faced. Custom OVR is cosmetic.</p><a href="elite-chel-cards.html">Explore the beta model →</a></article><article><h3>◎ RATING FACTORS</h3><p id="ratingFactors">Select a player to see their weighted rating factors.</p><details><summary>Explain my overall</summary><p id="ratingDetail">Select a player to see their rating explanation.</p></details></article><article><h3>▱ CARD PROGRESSION</h3><p>Explore cosmetic editions. Earned upgrades, XP and unlocks are planned.</p><small>VISUAL PREVIEWS · NO EARNED UNLOCKS</small></article></section>
+<section class="studio-explain" aria-label="Rating and progression"><article><h3>▥ AUTOMATIC OVERALL (OVR)</h3><p>CHL Season 55 · ECM OVR uses a 60–99 card scale. The separate 0–100 performance index compares role-specific stats. Minimum 6 games; goalies also need 100 shots faced.</p><a href="elite-chel-cards.html">Explore the beta model →</a></article><article><h3>◎ RATING FACTORS</h3><p id="ratingSummary" class="rating-summary" aria-live="polite">Select a player to see their rating.</p><p id="ratingFactors">Select a player to see their weighted rating factors.</p><details><summary>Explain my overall</summary><p id="ratingDetail">Select a player to see their rating explanation.</p></details></article><article><h3>▱ CARD PROGRESSION</h3><p>Choose your card’s look today. Earned editions and season progression are coming later.</p><small>VISUAL PREVIEWS · NO EARNED UNLOCKS</small></article></section>
  <section class="collection-panel" id="myCollection" aria-label="Your personal card collection">
   <div><span class="eyebrow">PLAYER HEADQUARTERS</span><h2>MY CARD COLLECTION</h2>
-  <p class="hint">Your saved players and card finishes. Use the week-by-week collection coming later for fantasy picks.</p></div>
+  <p class="hint">Your saved player selections and basic card settings. Artwork stays on the device where you saved it.</p></div>
   <div id="collectionList" class="collection-grid"><p class="hint">Sign in to see your cards.</p></div>
  </section>
 </main>
