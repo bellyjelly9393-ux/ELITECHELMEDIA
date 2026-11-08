@@ -37,7 +37,7 @@ async function load(){
   const signed=await db.storage.from('ecm-card-artwork-review').createSignedUrl(row.object_path,600);
   if(turn!==revision)return;
   if(signed.error){card.querySelector('.review-preview').textContent='Private preview unavailable. Refresh before approving.';actions.querySelectorAll('button').forEach(b=>b.disabled=true);}
-  else{const img=document.createElement('img');img.alt='Submitted artwork for '+row.gamertag_snapshot;img.referrerPolicy='no-referrer';img.addEventListener('load',()=>actions.querySelectorAll('button').forEach(b=>b.disabled=false));img.src=signed.data.signedUrl;img.addEventListener('error',()=>{actions.querySelectorAll('button').forEach(b=>b.disabled=true);card.querySelector('.decision-status').textContent='Image did not load. Refresh before reviewing.';});card.querySelector('.review-preview').append(img);}
+  else{const img=document.createElement('img');img.alt='Submitted artwork for '+row.gamertag_snapshot;img.referrerPolicy='no-referrer';img.addEventListener('load',()=>actions.querySelectorAll('button').forEach(b=>b.disabled=false));const url=signed.data.signedUrl;img.src=window.ECMCutout?await window.ECMCutout.clean(url).catch(()=>url):url;img.addEventListener('error',()=>{actions.querySelectorAll('button').forEach(b=>b.disabled=true);card.querySelector('.decision-status').textContent='Image did not load. Refresh before reviewing.';});card.querySelector('.review-preview').append(img);}
  }
 }
 $('closeCardReview').addEventListener('click',()=>{$('cardReviewDialog').close();$('cardReviewFrame').src='about:blank';});

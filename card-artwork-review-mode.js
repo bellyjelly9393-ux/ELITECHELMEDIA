@@ -4,8 +4,8 @@ document.body.classList.add('card-review-mode');const robots=document.createElem
 const $=s=>document.getElementById(s);let row,loading=false,loaded=false,source='',imageReady=false,updateTurn=0;
 function appearance(){return {imageScale:Number($('reviewScale').value),imageX:Number($('reviewX').value),imageY:Number($('reviewY').value),background:row.submitted_layout.background||'arena',...window.ecmCardStudio.getEarnedStyle()};}
 async function update(){const request=++updateTurn;imageReady=false;$('reviewPublish').disabled=true;if(!row)return;const db=window.ecmCardAccount.getClient(),selected=$('reviewImageSource').value;
- try{if(source!==selected){const signed=await db.storage.from('ecm-card-artwork-review').createSignedUrl(selected==='original'?row.original_path:row.object_path,600);if(signed.error)throw signed.error;const response=await fetch(signed.data.signedUrl,{referrerPolicy:'no-referrer'});if(!response.ok)throw Error('Private image unavailable');const blob=await response.blob();source=selected;row.previewData=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob);});}
- if(request!==updateTurn)return;window.ecmCardStudio.applyApprovedArtwork(row.previewData,appearance(),{force:true});const rendered=await window.ECMStudioV2.generate();if(request!==updateTurn)return;if(!rendered)throw Error('Card preview did not finish rendering.');imageReady=true;$('reviewPublish').disabled=false;$('reviewModeStatus').textContent='Ready for your placement and content review.';
+ try{if(source!==selected){const signed=await db.storage.from('ecm-card-artwork-review').createSignedUrl(selected==='original'?row.original_path:row.object_path,600);if(signed.error)throw signed.error;const response=await fetch(signed.data.signedUrl,{referrerPolicy:'no-referrer'});if(!response.ok)throw Error('Private image unavailable');const blob=await response.blob();let data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob);});if(selected==='prepared')data=await window.ECMCutout.clean(data);if(request!==updateTurn)return;source=selected;row.previewData=data;}
+ if(request!==updateTurn)return;window.ecmCardStudio.applyApprovedArtwork(row.previewData,appearance(),{force:true});await Promise.resolve();const rendered=await window.ECMStudioV2.generate();if(request!==updateTurn)return;if(!rendered)throw Error('Card preview did not finish rendering.');imageReady=true;$('reviewPublish').disabled=false;$('reviewModeStatus').textContent='Drag the player on the card to position them. Use Scale to resize.';
  }catch(e){$('reviewModeStatus').textContent=e.message;}}
 async function load(){const db=window.ecmCardAccount?.getClient();if(loading||loaded||!db||!window.ecmCardAccount.getUser()||!window.ecmCardStudio.getSelected())return;loading=true;
  try{const access=await db.rpc('ecm_card_review_access');if(access.error||access.data!==true)throw Error('Authorized artwork reviewer required.');const result=await db.from('ecm_card_artwork_reviews').select('id,league,lg_user_id,player_kind,object_path,original_path,status,submitted_layout,preparation,publication_consent_at').eq('id',id).single();if(result.error)throw result.error;row=result.data;
@@ -15,6 +15,24 @@ async function load(){const db=window.ecmCardAccount?.getClient();if(loading||lo
 $('reviewFit').addEventListener('click',()=>{
  $('reviewScale').value=100;$('reviewX').value=0;$('reviewY').value=0;update();
 });
+const canvas=$('cardCanvas');let drag,frame;
+canvas.style.touchAction='none';canvas.style.cursor='grab';
+canvas.addEventListener('pointerdown',e=>{
+ if(!imageReady||drag||e.button!==0||$('reviewX').disabled)return;
+ const rect=canvas.getBoundingClientRect(),y=(e.clientY-rect.top)*canvas.height/rect.height;
+ if(y<240||y>1280)return;
+ drag={id:e.pointerId,x:e.clientX,y:e.clientY,left:+$('reviewX').value,top:+$('reviewY').value,
+  unitX:canvas.width/(3*rect.width),unitY:canvas.height/(3*rect.height)};
+ canvas.setPointerCapture(e.pointerId);canvas.style.cursor='grabbing';
+});
+canvas.addEventListener('pointermove',e=>{
+ if(!drag||drag.id!==e.pointerId)return;
+ $('reviewX').value=Math.round(drag.left+(e.clientX-drag.x)*drag.unitX);
+ $('reviewY').value=Math.round(drag.top+(e.clientY-drag.y)*drag.unitY);
+ $('reviewPublish').disabled=true;imageReady=false;
+ cancelAnimationFrame(frame);frame=requestAnimationFrame(update);
+});
+canvas.addEventListener('lostpointercapture',()=>{if(!drag)return;drag=null;canvas.style.cursor='grab';cancelAnimationFrame(frame);update();});
 for(const id of ['reviewScale','reviewX','reviewY'])$(id).addEventListener('change',update);$('reviewImageSource').addEventListener('change',update);
-$('reviewPublish').addEventListener('click',async()=>{if(!imageReady||!row)return;$('reviewPublish').disabled=true;document.querySelectorAll('#reviewModeEditor input,#reviewModeEditor select,#reviewModeEditor textarea').forEach(el=>el.disabled=true);const result=await window.ecmCardAccount.getClient().rpc('ecm_card_artwork_publish',{p_id:row.id,p_expected_status:row.status,p_layout:appearance(),p_source:$('reviewImageSource').value,p_note:$('reviewPublishNote').value.trim()});if(result.error){document.querySelectorAll('#reviewModeEditor input,#reviewModeEditor select,#reviewModeEditor textarea').forEach(el=>el.disabled=false);$('reviewModeStatus').textContent='Not published: '+result.error.message;$('reviewPublish').disabled=false;return;}row.status='approved';$('reviewModeStatus').textContent='Approved and published. This card is now available from the player’s locker and profile.';if(window.parent!==window)window.parent.postMessage({type:'ecm-card-published',id:row.id},location.origin);});
+$('reviewPublish').addEventListener('click',async()=>{if(drag||!imageReady||!row)return;$('reviewPublish').disabled=true;document.querySelectorAll('#reviewModeEditor input,#reviewModeEditor select,#reviewModeEditor textarea').forEach(el=>el.disabled=true);const result=await window.ecmCardAccount.getClient().rpc('ecm_card_artwork_publish',{p_id:row.id,p_expected_status:row.status,p_layout:appearance(),p_source:$('reviewImageSource').value,p_note:$('reviewPublishNote').value.trim()});if(result.error){document.querySelectorAll('#reviewModeEditor input,#reviewModeEditor select,#reviewModeEditor textarea').forEach(el=>el.disabled=false);$('reviewModeStatus').textContent='Not published: '+result.error.message;$('reviewPublish').disabled=false;return;}row.status='approved';$('reviewModeStatus').textContent='Approved and published. This card is now available from the player’s locker and profile.';if(window.parent!==window)window.parent.postMessage({type:'ecm-card-published',id:row.id},location.origin);});
 window.addEventListener('ecm:card-auth',load);window.addEventListener('ecm:card-selected',()=>{if(loaded){loaded=false;row=null;source='';}load();});load();})();
