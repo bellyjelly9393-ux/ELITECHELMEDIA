@@ -5,6 +5,17 @@ on:
       - 'lgchl-team.html'
       - 'lgchl-team.js'
       - 'lgchl-team.css'
+      - 'hitmen-find-stall.js'
+      - 'hitmen-room-concept.js'
+      - 'hitmen-room-concept.css'
+      - 'hitmen-room-tour.js'
+      - 'hitmen-stall-view.js'
+      - 'hitmen-fixed-room.js'
+      - 'hitmen-room-tour.css'
+      - 'assets/lgchl/room-360/**'
+      - 'vendor/pannellum/**'
+      - 'test-hitmen-find-stall.cjs'
+      - 'test-hitmen-fixed-room.cjs'
       - 'lgchl-locker-chooser.js'
       - 'lgchl-locker-chooser.css'
       - 'public-navigation.js'
@@ -30,6 +41,13 @@ jobs:
       - name: Public roster, links and jersey fallback regressions
         run: |
           node --check lgchl-team.js
+          node --check hitmen-find-stall.js
+          node --check hitmen-room-concept.js
+          node --check hitmen-room-tour.js
+          node --check hitmen-stall-view.js
+          node --check hitmen-fixed-room.js
+          node --check test-hitmen-find-stall.cjs
+          node --check test-hitmen-fixed-room.cjs
           node --check lgchl-locker-chooser.js
           node --check public-navigation.js
           node test-public-team-rosters.cjs

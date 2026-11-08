@@ -5,6 +5,7 @@ const {esc,read}=D,$=id=>document.getElementById(id),params=new URLSearchParams(
 const raw=params.get('team'),team=raw===null?412:Number(raw);
 const valid=n=>Number.isSafeInteger(Number(n))&&Number(n)>0;
 if(!valid(team)){$('roomName').textContent='Team not found';['roomRecord','roomPlayers','roomFinals','roomUpcoming'].forEach(id=>$(id).textContent='Choose a team from league coverage.');$('roomPlayers').setAttribute('aria-busy','false');return;}
+if(document.body.dataset&&team===412&&!params.has('room')&&!document.body.dataset.roomAngles&&!document.body.dataset.roomConcept)document.body.dataset.roomTour='true';
 document.body.classList.toggle('league-room',true);
 document.body.classList.toggle('hitmen-room',team===412);
 const logo=id=>'assets/lgchl/s55/team'+Number(id)+'.png';
@@ -15,22 +16,24 @@ const fmt=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))?Number(
 const rate=(v,d)=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))?Number(v).toFixed(d):'—';
 const date=v=>Number.isFinite(Date.parse(v))?new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(v))+' ET':'Time unavailable';
 let players=[];
+const finder=team===412?window.HitmenStallFinder?.create({input:$('roomSearch'),room:$('roomPlayers')}):null;
+if(finder)window.HitmenPublicRoom=finder;
 function render(){
  const q=$('roomSearch').value.toLocaleLowerCase().trim();
- const rows=players.filter(p=>String(p.gamertag||'').toLocaleLowerCase().includes(q));
+ const rows=finder?players:players.filter(p=>String(p.gamertag||'').toLocaleLowerCase().includes(q));
  const card=p=>{
  const goalie=p.player_kind==='goalie',url='player-cards.html?league=lgchl&id='+Number(p.lg_user_id)+'&kind='+(goalie?'goalie':'skater');
  const stats=goalie?[['GP',fmt(p.gp)],['SV%',p.save_pct==null?'—':rate(Number(p.save_pct)*100,1)+'%'],['GAA',rate(p.gaa,2)]]:[['G',fmt(p.goals)],['A',fmt(p.assists)],['PTS',fmt(p.points)]];
  const uniform=jerseyAssets[team]?'<img class="club-jersey" src="'+jersey(team)+'" alt="Verified club jersey" loading="lazy">':'<div class="concept-kit" role="img" aria-label="Non-official jersey concept with team crest"><img class="concept-crest" src="'+logo(team)+'" alt="" loading="lazy"></div><small class="concept-tag">REFERENCE FOUND · CUTOUT PENDING</small>';
  return (valid(p.lg_user_id)?'<a class="stall" href="'+url+'">':'<article class="stall">')+'<strong class="nameplate">'+esc(p.gamertag)+'</strong><div class="jersey-stage">'+uniform+'</div><div class="stall-info"><p>'+esc(p.position||(goalie?'G':'Skater'))+(p.management_role?' · '+esc(p.management_role):'')+' · '+fmt(p.gp)+' GP</p><div class="stats">'+stats.map(([k,v])=>'<span>'+k+'<b>'+esc(v)+'</b></span>').join('')+'</div><span class="open-card">'+(valid(p.lg_user_id)?'VIEW / BUILD HOCKEY CARD →':'PLAYER CARD UNAVAILABLE')+'</span></div>'+(valid(p.lg_user_id)?'</a>':'</article>');
  };
- const content=rows.map(card).join('');
+ const content=rows.map(p=>{const html=card(p);return finder?html.replace('class="stall"','class="stall" id="hitmen-stall-'+Number(p.lg_user_id)+'"'):html;}).join('');
  $('roomPlayers').innerHTML=content||'<p class="note">'+(q?'No matching players.':'No public player stats are listed for this team yet.')+'</p>';
  $('roomPlayers').setAttribute('aria-busy','false');
 }
 $('roomLogo').src=logo(team);
 document.addEventListener('error',e=>{const image=e.target;if(image.tagName!=='IMG')return;if(image.closest('.jersey-stage')&&!image.dataset.fallback){image.dataset.fallback='true';image.src=logo(team);image.alt='Team crest';}else{image.hidden=true;}},true);
-$('roomSearch').addEventListener('input',render);
+if(!finder)$('roomSearch').addEventListener('input',render);
 $('roomTeam').addEventListener('change',()=>{location.href='lgchl-team.html?team='+Number($('roomTeam').value);});
 async function standings(){
  try{const rows=await read('lgchl_standings_current',{select:'lg_team_id,name,gp,w,l,otl,pts,standings_at',order:'name.asc'});
@@ -50,6 +53,7 @@ async function roster(){
  $('roomName').textContent=entry.name;$('arenaTeamName').textContent=entry.name;$('roomRadioLink').hidden=team!==412;
  document.title=entry.name+' Team Room | Elite Chel Media';
  const main=entry.players.filter(p=>p.roster_class==='active_roster'&&valid(p.lg_user_id));
+ if(finder&&main.length&&(main.length!==17||new Set(main.map(p=>Number(p.lg_user_id))).size!==17))throw Error('Expected the verified 17-player roster');
  let rows=[];
  try{if(main.length)rows=await read('wm_lgchl_s55_player_leaders',{select:'lg_user_id,player_kind,gp,goals,assists,points,save_pct,gaa,fetched_at',lg_user_id:'in.('+main.map(p=>Number(p.lg_user_id)).join(',')+')',limit:'1000'});}catch{/* Roster membership remains visible when stats are unavailable. */}
  const unique=new Map();for(const p of rows){const key=p.lg_user_id+':'+p.player_kind,old=unique.get(key);if(!old||String(p.fetched_at)>String(old.fetched_at))unique.set(key,p);}
@@ -57,10 +61,16 @@ async function roster(){
  $('playersTitle').textContent='Main roster · '+players.length;
  $('rosterNote').textContent='Select your stall to view or build your hockey card. Main-roster players only · LG roster snapshot: '+snapshot.as_of+'. The 62-team jersey reference collection is sourced. Finished locker cutouts display where available; remaining jerseys use marked crest concepts while their references are cleaned and reviewed. Imported Season 55 totals may include previous teams; — means unavailable.';
  render();
- }catch{$('roomPlayers').textContent='Current main roster is unavailable. Please try again later.';$('roomPlayers').setAttribute('aria-busy','false');}
+ finder?.setPlayers(main);
+ }catch{finder?.unavailable();$('roomPlayers').textContent='Current main roster is unavailable. Please try again later.';$('roomPlayers').setAttribute('aria-busy','false');}
 }
 
 function game(g,final){
+ if(team===412&&(['360','angles'].includes(params.get('room'))||document.body.dataset.roomTour==='true'||document.body.dataset.roomAngles==='true')){
+  const side=which=>{const id=Number(g[which+'_lg_team_id']),name=g[which+'_nick']||g[which+'_abbr']||'Team';return '<div class="tour-match-team">'+(valid(id)?'<img src="'+logo(id)+'" alt="'+esc(name)+' crest" width="46" height="46" loading="lazy">':'')+'<b>'+esc(g[which+'_abbr']||name)+'</b><small>'+esc(name)+'</small></div>';};
+  const label=(g.away_nick||'Away')+' vs '+(g.home_nick||'Home');
+  return '<a class="game-row tour-match-card" href="lgchl-game.html?id='+Number(g.lg_game_id)+'" aria-label="'+esc(label+(final?' '+fmt(g.away_score)+' to '+fmt(g.home_score):' scheduled')+'. Open game centre')+'"><div class="tour-match-meta"><span>'+esc(date(g.game_at))+'</span><b>'+(final?'FINAL':'UPCOMING')+'</b></div><div class="tour-match-teams">'+side('away')+'<strong class="tour-match-score">'+(final?fmt(g.away_score)+'<i>–</i>'+fmt(g.home_score):'<i>VS</i>')+'</strong>'+side('home')+'</div><span class="tour-match-open">GAME CENTRE <span aria-hidden="true">↗</span></span></a>';
+ }
  const away=g.away_nick||g.away_abbr||'Away',home=g.home_nick||g.home_abbr||'Home',score=final?fmt(g.away_score)+' – '+fmt(g.home_score):'VS';
  const mark=(id,name)=>'<span class="game-team">'+(valid(id)?'<img src="'+logo(id)+'" alt="" loading="lazy">':'')+'<strong>'+esc(name)+'</strong></span>';
  return '<a class="game-row" href="lgchl-game.html?id='+Number(g.lg_game_id)+'" aria-label="'+esc(away+' '+score+' '+home+' · '+date(g.game_at))+'"><span class="game-time">'+esc(date(g.game_at))+'<small>'+ (final?'FINAL':'UPCOMING')+'</small></span>'+mark(g.away_lg_team_id,away)+'<span class="game-score'+(final?' is-final':'')+'">'+esc(score)+'</span>'+mark(g.home_lg_team_id,home)+'</a>';
