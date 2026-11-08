@@ -52,3 +52,25 @@
 
 /* Keep generous hit targets without adding visible button chrome. */
 .tour-scene-tabs button,.tour-dock button,.tour-dock a,.tour-nameplate-open{min-height:44px}
+
+/* A separate image level keeps the full-size sweater detail out of the panorama texture. */
+.tour-view[hidden],.public-stall-view[hidden]{display:none}
+.public-stall-view{max-width:900px;margin:0 auto;padding-bottom:12px;scroll-margin-top:10px}
+.stall-level-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:62px;padding:8px 0 12px}
+.tour-shell .stall-level-toolbar button,.stall-public-card{display:grid;place-items:center;min-height:44px;padding:10px 12px;border:0;border-radius:3px;background:none;color:#c6ccd6;font:12px Arial,sans-serif;text-decoration:none;cursor:pointer}.tour-shell .stall-level-toolbar button:hover,.stall-public-card:hover{background:#ffffff08;color:white}.tour-shell .stall-level-toolbar button:disabled{opacity:.25;cursor:default}
+.stall-level-nav{display:flex;align-items:center;gap:10px}.stall-level-nav>span{font-size:11px;color:#777f8d;font-variant-numeric:tabular-nums}
+.stall-closeup-art{position:relative;aspect-ratio:1;margin:0;container-type:inline-size;background:#0c0e13;overflow:hidden;border-radius:3px}
+.stall-master{display:block;width:100%;height:100%;object-fit:contain}.stall-closeup-art[aria-busy="true"]{opacity:.6}
+.stall-closeup-header{position:absolute;top:1.9%;left:30%;width:40%;height:10%;text-align:center;display:flex;flex-direction:column;justify-content:center;color:#f5f5f8;filter:drop-shadow(0 2px 2px #000)}.stall-closeup-header small{font:italic 700 2.5cqw Arial,sans-serif;letter-spacing:1.5cqw;line-height:1.2}.stall-closeup-header strong{font:italic 7.5cqw Impact,'Arial Narrow',sans-serif;letter-spacing:.3cqw;line-height:1.1}
+.stall-corner-crest{position:absolute;top:2%;width:17%;height:12%;object-fit:contain;filter:drop-shadow(0 2px 3px #0009)}.stall-corner-crest.left{left:7%}.stall-corner-crest.right{right:7%}
+.stall-closeup-position{position:absolute;left:25.5%;top:14.4%;width:16%;height:7%;display:grid;place-items:center;font:italic 6.3cqw Impact,'Arial Narrow',sans-serif;color:#f0f1f3;text-shadow:0 .15cqw #7c7f87,0 .3cqw .3cqw #000}
+.stall-closeup-name{position:absolute;left:45%;top:14.4%;width:31%;height:7%;display:flex;align-items:center;justify-content:center;font:italic 4.7cqw Impact,'Arial Narrow',sans-serif;color:#f2f2f4;text-transform:uppercase;white-space:nowrap;letter-spacing:.05cqw;text-shadow:0 .15cqw #797b84,0 .3cqw .3cqw #000}
+.stall-closeup-crest{position:absolute;left:34%;top:41.3%;width:32%;height:22%;object-fit:contain;mix-blend-mode:multiply;filter:drop-shadow(0 .1cqw .05cqw #0004)}
+.stall-closeup-publisher{position:absolute;left:40%;bottom:.8%;width:20%;height:14%;object-fit:contain;filter:drop-shadow(0 .2cqw .2cqw #0009)}
+.stall-level-caption{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 14px;padding:17px 2px}.stall-level-caption h2{font:600 16px Arial,sans-serif;letter-spacing:0;margin:0}.stall-level-position{font-size:11px;color:#818998}.stall-image-status{flex-basis:100%;margin:0;font-size:12px;color:#c0c6d1}.stall-image-status:empty{display:none}.stall-closeup-art.image-unavailable{min-height:250px;aspect-ratio:2}.stall-closeup-art.image-unavailable>*{display:none}
+/* One shared arena floor behind both game lists, with no new card chrome. */
+.hitmen-tour .room-columns{position:relative;isolation:isolate;margin-top:36px;padding:36px 34px 30px;gap:55px;background:linear-gradient(90deg,#0b0e14c9,#0b0e14b0 48%,#0b0e14c9),url('assets/lgchl/room-360/games-rink.svg') center/cover no-repeat;border-radius:5px;overflow:hidden}
+.hitmen-tour .room-columns:before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 4% 0,#a51c3342,transparent 42%),radial-gradient(ellipse at 96% 100%,#8b102a33,transparent 42%),url('assets/lgchl/room-360/hitmen-crest-vector.svg') center/280px auto no-repeat;opacity:.18;pointer-events:none}
+.hitmen-tour .room-columns:after{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,#a82b4166,transparent);pointer-events:none}
+.hitmen-tour .room-columns>section{position:relative;z-index:1}.hitmen-tour .room-columns h2{color:#eef0f4;text-shadow:0 1px 3px #0006}.hitmen-tour .tour-match-card{border-bottom-color:#929aab20}.hitmen-tour .tour-match-card:hover{background:#ffffff04}.tour-match-meta>span{color:#a4adbb}.tour-match-team>small{color:#d7dce5}
+@media(max-width:600px){.public-stall-view{padding-inline:0}.stall-level-toolbar{gap:4px;min-height:58px;padding:6px 10px 10px}.tour-shell .stall-level-toolbar button,.stall-public-card{font-size:11px;padding:9px}.stall-level-nav{gap:3px}.stall-level-nav>span{font-size:10px}.stall-level-caption{padding:14px 16px;gap:7px 10px}.stall-level-caption h2{font-size:15px}.stall-level-position{font-size:10px}.hitmen-tour .room-columns{margin:26px 0 0;padding:26px 18px;gap:30px;border-radius:0;background-position:center;background-size:auto 100%}.hitmen-tour .room-columns:before{background-size:auto,auto,220px auto}}

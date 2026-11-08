@@ -17,6 +17,10 @@
  const reduced=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  const roomHfov=()=>window.innerWidth<600?65:110;
  let players=[],viewer=null,selected=-1,loaded=false,pending=null,started=false;
+ const viewerPane=shell.querySelector('.tour-view');let entryPose=null,entryId=null;
+ const closeup=window.HitmenStallView?.create({after:viewerPane,onPlayerChange(id){selected=players.findIndex(p=>p.id===id);sync();},onClose({id}){viewerPane.hidden=false;selected=players.findIndex(p=>p.id===id);sync();viewer?.resize();resizeBrands();if(viewer&&entryPose&&id===entryId){viewer.lookAt(entryPose.pitch,entryPose.yaw,entryPose.hfov,false);shell.querySelector('.tour-player-button[data-player-id="'+id+'"]')?.focus({preventScroll:true});}else if(loaded)goToPlayer(id);else stage.focus({preventScroll:true});viewerPane.scrollIntoView({behavior:'auto',block:'start'});}});
+ function openStall(id,source){const index=players.findIndex(p=>p.id===Number(id));if(index<0)return false;if(!closeup)return finder.focusStall(id);viewer?.stopMovement();entryPose=viewer?{yaw:viewer.getYaw(),pitch:viewer.getPitch(),hfov:viewer.getHfov()}:null;entryId=Number(id);selected=index;sync();viewerPane.hidden=true;if(!closeup.open(id,source)){viewerPane.hidden=false;return false;}rosterVisible(false);return true;}
+ room.addEventListener('click',e=>{const anchor=e.target.closest('a.stall');if(!anchor||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;const id=Number(anchor.id.replace('hitmen-stall-',''));if(players.some(p=>p.id===id)){e.preventDefault();openStall(id,anchor);}});
  // Coordinates are calibrated against the versioned artwork. Roster order binds identities.
  // No jersey numbers or private locker IDs are inferred from the generated environment.
  const points={
@@ -37,6 +41,7 @@
  }
  function fail(){loaded=false;status.textContent='The 360° room is unavailable on this device. Use the public roster cards below.';stage.hidden=true;rosterVisible(true);sync();}
  function goToPlayer(id,focus=true){
+  if(closeup?.isOpen())return closeup.choosePlayer(id);
   const i=players.findIndex(p=>p.id===Number(id));if(i<0)return false;
   selected=i;pending={id:Number(id),focus};sync();
   if(!loaded)return true;
@@ -53,7 +58,7 @@
  shell.querySelectorAll('[data-tour-action]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.tourAction,duration=reduced()?false:450;if(a==='left'||a==='right')viewer.setYaw(viewer.getYaw()+(a==='left'?-30:30),duration);if(a==='in'||a==='out')viewer.setHfov(viewer.getHfov()+(a==='in'?-10:10),duration);if(a==='full')viewer.toggleFullscreen();}));
  reset.addEventListener('click',()=>{selected=-1;pending=null;viewer.lookAt(0,0,roomHfov(),reduced()?false:700);status.textContent='Look around the room or find your stall above.';sync();});
  previous.addEventListener('click',()=>finder.focusStall(players[selected-1]?.id));next.addEventListener('click',()=>finder.focusStall(players[selected+1]?.id));
- room.addEventListener('hitmen-stall-selected',e=>goToPlayer(e.detail.lg_user_id));
+ room.addEventListener('hitmen-stall-selected',e=>{if(closeup?.isOpen())closeup.choosePlayer(e.detail.lg_user_id);else goToPlayer(e.detail.lg_user_id);});
  function playerHotspot(host,{player,scene}){
   const button=document.createElement('button');button.type='button';button.className='tour-player-button';button.dataset.playerId=player.id;button.textContent=player.name;button.setAttribute('aria-label','Find '+player.name+' stall');button.setAttribute('aria-expanded','false');
   const plate=document.createElement('div');plate.className='tour-nameplate';plate.id='tour-nameplate-'+scene+'-'+player.id;plate.hidden=true;plate.setAttribute('role','group');plate.setAttribute('aria-label',player.name+' custom stall nameplate');button.setAttribute('aria-controls',plate.id);
@@ -66,7 +71,7 @@
   plate.append(metal,link);host.append(button,plate);
   const show=()=>{plate.hidden=false;plate.style.top='';button.setAttribute('aria-expanded','true');placeNameplates();};
   const hide=()=>{if(!button.classList.contains('is-selected')&&!host.contains(document.activeElement)){plate.hidden=true;button.setAttribute('aria-expanded','false');}};
-  button.addEventListener('click',e=>{e.stopPropagation();finder.focusStall(player.id);});
+  button.addEventListener('click',e=>{e.stopPropagation();openStall(player.id,button);});
   button.addEventListener('focus',show);host.addEventListener('mouseenter',show);host.addEventListener('mouseleave',hide);host.addEventListener('focusout',()=>setTimeout(hide,0));
   host.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();selected=-1;pending=null;sync();stage.focus({preventScroll:true});status.textContent='Nameplate closed. Continue exploring the room.';}});
  }
@@ -78,7 +83,7 @@
   host.classList.add('tour-brand-anchor');host.setAttribute('aria-hidden','true');
   const el=document.createElement('div');el.className='tour-art-layer tour-art-'+args.kind;
   if(args.kind==='sign')el.innerHTML='<img src="assets/lgchl/s55/team412.png" alt=""><div><b>CALGARY HITMEN</b><span>PUBLIC LOCKER ROOM</span></div><img src="assets/brand/ecm-logo.webp" alt="">';
-  else{const img=document.createElement('img');img.src=args.kind==='jersey'?'assets/lgchl/s55/team412.png':'assets/brand/ecm-logo.webp';img.alt='';el.append(img);if(args.kind==='jersey'){const hit=document.createElement('button');hit.type='button';hit.tabIndex=-1;hit.className='tour-jersey-hit';hit.dataset.playerId=args.player.id;hit.setAttribute('aria-hidden','true');hit.addEventListener('click',e=>{e.stopPropagation();finder.focusStall(args.player.id);});el.append(hit);}}
+  else{const img=document.createElement('img');img.src=args.kind==='jersey'?'assets/lgchl/s55/team412.png':'assets/brand/ecm-logo.webp';img.alt='';el.append(img);if(args.kind==='jersey'){const hit=document.createElement('button');hit.type='button';hit.tabIndex=-1;hit.className='tour-jersey-hit';hit.dataset.playerId=args.player.id;hit.setAttribute('aria-hidden','true');hit.addEventListener('click',e=>{e.stopPropagation();openStall(args.player.id,hit);});el.append(hit);}}
   host.append(el);brandLayers.push({el,scene:args.scene,angle:args.angle});resizeBrands();
  }
  function resizeBrands(){if(!viewer)return;const focal=stage.clientWidth/(2*Math.tan(viewer.getHfov()*Math.PI/360));for(const layer of brandLayers){if(layer.scene===viewer.getScene())layer.el.style.width=(2*focal*Math.tan(layer.angle*Math.PI/360))+'px';}}
@@ -92,7 +97,7 @@
   if(started)return;
   const stalls=[...room.querySelectorAll('.stall[id]')];
   if(stalls.length!==17){status.textContent='The verified 17-player roster is unavailable. Please reload to try again.';stage.hidden=true;rosterVisible(true);return;}
-  players=stalls.map(el=>({id:Number(el.id.replace('hitmen-stall-','')),name:el.querySelector('.nameplate').textContent,href:el.getAttribute('href'),position:el.querySelector('.stall-info p').textContent.split(' · ')[0]}));started=true;
+  players=stalls.map(el=>({id:Number(el.id.replace('hitmen-stall-','')),name:el.querySelector('.nameplate').textContent,href:el.getAttribute('href'),position:el.querySelector('.stall-info p').textContent.split(' · ')[0]}));closeup?.setPlayers(players);started=true;
   try{
    if(!window.pannellum){
     const css=document.createElement('link');css.rel='stylesheet';css.href='vendor/pannellum/pannellum.css';document.head.append(css);
@@ -106,5 +111,5 @@
   }catch{fail();}
  }
  room.addEventListener('hitmen-stalls-ready',start);if(room.getAttribute('aria-busy')==='false')start();
- window.HitmenPublicTour={goToPlayer,setView,getState:()=>({loaded,scene:viewer?.getScene(),selectedId:players[selected]?.id??null,yaw:viewer?.getYaw(),pitch:viewer?.getPitch(),players:players.map(p=>p.id)})};
+ window.HitmenPublicTour={goToPlayer,setView,openStall,closeStall:()=>closeup?.close(),getState:()=>({view:closeup?.isOpen()?'stall':'room',stallPlayerId:closeup?.getPlayerId()??null,loaded,scene:viewer?.getScene(),selectedId:players[selected]?.id??null,yaw:viewer?.getYaw(),pitch:viewer?.getPitch(),players:players.map(p=>p.id)})};
 })();

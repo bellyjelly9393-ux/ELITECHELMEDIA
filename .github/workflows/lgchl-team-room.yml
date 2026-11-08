@@ -9,6 +9,7 @@ on:
       - 'hitmen-room-concept.js'
       - 'hitmen-room-concept.css'
       - 'hitmen-room-tour.js'
+      - 'hitmen-stall-view.js'
       - 'hitmen-room-tour.css'
       - 'assets/lgchl/room-360/**'
       - 'vendor/pannellum/**'
@@ -41,6 +42,7 @@ jobs:
           node --check hitmen-find-stall.js
           node --check hitmen-room-concept.js
           node --check hitmen-room-tour.js
+          node --check hitmen-stall-view.js
           node --check test-hitmen-find-stall.cjs
           node --check lgchl-locker-chooser.js
           node --check public-navigation.js

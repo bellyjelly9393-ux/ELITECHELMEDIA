@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" fill="none">
+ <defs>
+  <radialGradient id="floor"><stop stop-color="#232630"/><stop offset="1" stop-color="#0d1015"/></radialGradient>
+  <pattern id="grain" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 7h8" stroke="#fff" stroke-opacity=".018"/></pattern>
+ </defs>
+ <path fill="url(#floor)" d="M0 0h1400v700H0z"/>
+ <path fill="url(#grain)" d="M0 0h1400v700H0z"/>
+ <g transform="translate(110 65) rotate(-8 590 285)" opacity=".3">
+  <rect x="0" y="0" width="1180" height="570" rx="190" stroke="#b5bfce" stroke-opacity=".25" stroke-width="3"/>
+  <path d="M590 0v570" stroke="#d03147" stroke-width="3"/>
+  <path d="M385 0v570M795 0v570" stroke="#74869d" stroke-opacity=".4" stroke-width="4"/>
+  <circle cx="590" cy="285" r="89" stroke="#c9394d" stroke-width="2"/>
+  <circle cx="590" cy="285" r="5" fill="#c9394d"/>
+  <g stroke="#b74252" stroke-width="2">
+   <circle cx="210" cy="145" r="78"/><circle cx="210" cy="425" r="78"/>
+   <circle cx="970" cy="145" r="78"/><circle cx="970" cy="425" r="78"/>
+  </g>
+  <path d="M95 85v400M1085 85v400" stroke="#ca4052" stroke-opacity=".5" stroke-width="2"/>
+ </g>
+</svg>
