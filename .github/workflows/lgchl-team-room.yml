@@ -9,6 +9,7 @@ on:
       - 'hitmen-room-concept.js'
       - 'hitmen-room-concept.css'
       - 'hitmen-room-tour.js'
+      - 'hitmen-table-texture.js'
       - 'hitmen-stall-view.js'
       - 'hitmen-fixed-room.js'
       - 'hitmen-room-tour.css'
@@ -45,6 +46,7 @@ jobs:
           node --check hitmen-find-stall.js
           node --check hitmen-room-concept.js
           node --check hitmen-room-tour.js
+          node --check hitmen-table-texture.js
           node --check hitmen-stall-view.js
           node --check hitmen-fixed-room.js
           node --check test-hitmen-find-stall.cjs
