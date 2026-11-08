@@ -22,12 +22,13 @@
     {auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce'}}
   );
   var me=null, saved=[];
+  window.ecmCardAccount={getClient:()=>db,getUser:()=>me};
   var activeRequest=0;
   async function refresh() {
     if (!me) {saved=[];renderCollection();syncButtons(false);return;}
     var request=++activeRequest;
     var res=await db.from('elitechel_player_cards')
-      .select('id,league,lg_user_id,player_kind,gamertag_snapshot,finish,self_reported_overall,jersey_number,created_at')
+      .select('id,league,lg_user_id,player_kind,gamertag_snapshot,finish,jersey_number,created_at')
       .eq('user_id',me.id).order('created_at',{ascending:false}).limit(120);
     if(request!==activeRequest) return;
     if(res.error){notice('Could not load your collection: '+res.error.message);return;}
@@ -53,11 +54,12 @@
     var c=saved.find(function(row){return row.league===window.ecmCardStudio.getLeague()
        && String(row.lg_user_id)===p.id && row.player_kind===p.kind;});
     if(c)window.ecmCardStudio.applyAccountCustomization({
-      finish:c.finish,overall:c.self_reported_overall,jersey:c.jersey_number
+      finish:c.finish,jersey:c.jersey_number
     });
   }
   async function setUser(user) {
     me=user||null;
+    window.dispatchEvent(new Event("ecm:card-auth"));
     ++activeRequest;
     syncButtons(!!me);
     byId('accountName').textContent=me
@@ -80,19 +82,20 @@
     if(!me){notice('Sign in with Discord first.');return;}
     var p=window.ecmCardStudio.getSelected();
     if(!p || !/^[0-9]+$/.test(p.id)){notice('Choose a player from verified league data first.');return;}
-    var o=byId('overall').value,j=byId('jersey').value,f=byId('finish').value;
-    var overall=o===''?null:Number(o),jersey=j===''?null:Number(j);
-    if((overall!==null&&(!Number.isInteger(overall)||overall<1||overall>99))
-      ||(jersey!==null&&(!Number.isInteger(jersey)||jersey<0||jersey>99))){
-      notice('Overall must be 1–99 and jersey number 0–99.');return;
+    var j=byId('jersey').value,f=byId('finish').value;
+    var jersey=j===''?null:Number(j);
+    if(jersey!==null&&(!Number.isInteger(jersey)||jersey<0||jersey>99)){
+      notice('Jersey number must be 0–99.');return;
     }
     var b=byId('saveToCollection');b.disabled=true;notice('Saving card to your account…');
     var payload={user_id:me.id,league:window.ecmCardStudio.getLeague(),
       lg_user_id:Number(p.id),player_kind:p.kind,gamertag_snapshot:p.tag.slice(0,80),
-      finish:f,self_reported_overall:overall,jersey_number:jersey,updated_at:new Date().toISOString()};
-    var res=await db.from('elitechel_player_cards').upsert(payload,
-      {onConflict:'user_id,league,lg_user_id,player_kind'});
-    b.disabled=false;
+      finish:f,self_reported_overall:null,jersey_number:jersey,updated_at:new Date().toISOString()};
+    var res;
+    try {res=await db.from('elitechel_player_cards').upsert(payload,
+      {onConflict:'user_id,league,lg_user_id,player_kind'});}
+    catch(e){notice('Card was not saved: '+e.message);return;}
+    finally{b.disabled=!me;}
     if(res.error){notice('Card was not saved: '+res.error.message);return;}
     notice('Card added to My Collection! Your character screenshot remains on this device; export PNG to keep it.');
     await refresh();

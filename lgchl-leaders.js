@@ -26,7 +26,7 @@
   return [...c,...sk,...(['points','goals','assists'].includes(metric)?[]:[[metric,metrics[metric]]])];
  }
  function cell(p,key,metric){
-  if(key==='player')return '<button type="button" class="lg-player-open" data-lg-profile="'+encodeURIComponent(JSON.stringify({p,rank:p.rank,metric}))+'">'+esc(p.gamertag)+'</button><small>'+esc(p.position||'Position unavailable')+' · '+esc(p.team_name||'Team unavailable')+'</small>';
+  if(key==='player')return '<button type="button" class="lg-player-open" data-lg-profile="'+encodeURIComponent(JSON.stringify({p,rank:p.rank,metric}))+'">'+esc(p.gamertag)+'</button><small>'+esc(p.position||'Position unavailable')+' · '+esc(p.team_name||'Team unavailable')+'</small>'+(Number.isSafeInteger(Number(p.lg_user_id))&&Number(p.lg_user_id)>0?'<a class="hockey-card-link" aria-label="View or build '+esc(p.gamertag)+' hockey card" href="player-cards.html?league=lgchl&id='+Number(p.lg_user_id)+'&kind='+(goalie(metric)?'goalie':'skater')+'">View / Build Hockey Card →</a>':'');
   if(key==='rank')return p.rank==null?'—':String(p.rank);
   if(key==='save_pct')return numeric(p[key])?(Number(p[key])*100).toFixed(1)+'%':'—';
   if(key==='gaa')return rate(p[key],2);
