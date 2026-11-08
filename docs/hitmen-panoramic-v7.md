@@ -1,0 +1,15 @@
+# Public panoramic room — revision 7
+
+The user chose the wide panoramic browsing experience again, with a separate detailed view when clicking a stall. The current review artifact is Calgary-Hitmen-Panoramic-Room-v7.html, built from the existing public `room=360` route. The fixed-bank experiment remains independently opt-in; it is not the review entry point.
+
+Equipment corrections use new sibling assets `entrance-gear-v7.png` and `centre-gear-v7.png`. The old white helmets and ambiguous duplicate helmet shapes were replaced by black helmets and padded gloves. The two rightmost goalie bays have goalie masks, catcher/blocker and pads. These are illustrative public equipment concepts, not claims about a player's personally owned kit.
+
+The dedicated stall now selects `stall-goalie-v7.png` only for verified position G, and the existing skater artwork otherwise. This covers Kudolken and XxPASTRNAK88 from the same 17-player public roster. Switching between skater and goalie reloads the appropriate image and resets its loading/error state. The jersey remains the exact existing black team412.webp asset; names, position and public card links remain tied to roster identities. No jersey numbers or private data were added.
+
+The tabletop graphic is native inline SVG rink geometry with a red perimeter, centre/zone lines, the existing Hitmen crest and Elite Chel Media logo. It is a decorative perspective layer that follows the same room camera, not a management board or new UI panel. The entrance floor arrow is below the table. Table perspective remains a lightweight overlay approximation.
+
+Artwork was edited using the built-in image tool. Prompt set: preserve camera, projection, bay count, positions, empty jersey panels and architecture; replace shelf helmets with one black helmet and recognisable padded gloves; use mask/catcher/blocker/pads for the last two goalie bays. For the close-up, preserve blank signage and central jersey area, replace player sticks/gloves with a goalie stick, catcher, blocker, mask and leg pads. No jerseys, invented names, numbers, logos or UI were generated into these backgrounds. All three selected outputs were copied into the repository. The unrelated fixed-left shelf variant started before the user's change of direction was not integrated.
+
+Validation: `test-hitmen-find-stall.cjs` in headless Edge at desktop and mobile widths, including all 17 names/positions/public profile mappings, explicit skater/goalie artwork selection, tabletop SVG and both logo layers, floor-arrow and scene navigation, search, keyboard, back/Escape, failed image fallback, and standalone revision 7 without HTTPS dependencies. Public game reads use saved fixtures and live statistics are disconnected. The 62-team/1,037-player roster regression, syntax and whitespace checks passed. Screenshots of the panoramic room and goalie close-up were visually inspected. No deployed copy, physical phone or screen-reader software was tested.
+
+All changes remain on local branch feat/hitmen-find-my-stall. Nothing pushed, merged or deployed.

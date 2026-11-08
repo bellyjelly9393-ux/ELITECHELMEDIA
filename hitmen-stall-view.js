@@ -10,6 +10,9 @@
   function render(){
    const p=players[index];if(!p)return;
    panel.dataset.playerId=p.id;
+   const goalie=p.position==='G',src=goalie?'assets/lgchl/room-360/stall-goalie-v7.png':'assets/lgchl/room-360/stall-empty-v5.png';
+   art.dataset.equipment=goalie?'goalie':'skater';image.alt=goalie?'Goalie locker with mask, catcher, blocker, goalie stick and leg pads':'Player locker with sticks, gloves and a towel';
+   if(image.getAttribute('src')!==src){art.classList.remove('image-unavailable','is-loaded');art.setAttribute('aria-busy','true');status.textContent='Loading stall image…';image.src=src;}
    get('.stall-closeup-name').textContent=p.name;
    get('.stall-closeup-position').textContent=p.position;
    get('.stall-level-name').textContent=p.name;
@@ -21,7 +24,6 @@
   }
   function choose(i){if(i<0||i>=players.length)return false;index=i;render();onPlayerChange?.(players[index].id);return true;}
   function open(id,source){const i=players.findIndex(p=>p.id===Number(id));if(i<0)return false;index=i;trigger=source||document.activeElement;panel.hidden=false;render();
-   if(!image.getAttribute('src')){art.setAttribute('aria-busy','true');status.textContent='Loading stall image…';image.src='assets/lgchl/room-360/stall-empty-v5.png';}
    back.focus({preventScroll:true});panel.scrollIntoView({behavior:'auto',block:'start'});return true;
   }
   function close(){if(panel.hidden)return;const id=players[index]?.id;panel.hidden=true;onClose?.({id,trigger});}
