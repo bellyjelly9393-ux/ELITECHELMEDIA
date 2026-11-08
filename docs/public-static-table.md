@@ -11,3 +11,8 @@ The prior AI-edited table PNGs are removed from this branch's source tree; the e
 Validation: headless Edge desktop/mobile public-room suite, both scenes, dragging/zooming/navigation, all 17 roster/card mappings, exact skater/goalie assets, live game fixture updates and empty states, and standalone offline preview without HTTPS requests. Explicit browser checks confirm both scenes produce a composed PNG texture and there are zero tabletop overlay elements. The new compositor and main module passed syntax checks, and the diff whitespace check passed. The original-room view with the new logos was visually inspected. No production copy or physical device was tested for this revision.
 
 Branch: fix/public-room-static-table. Not merged or deployed.
+
+
+## Revision 11 — logos on the front face
+
+At the user's request, both marks have moved off the horizontal surface onto the table's upright front fascia. The top retains only its subtle red rink markings. The unchanged source logos are drawn at their intrinsic aspect ratios into each panorama's calibrated front-panel area; the front placement avoids the strong foreshortening of a tabletop logo. There are no floating DOM graphics. The combined texture remains fixed to the photographed table during drag/zoom. Review artifact: Calgary-Hitmen-Front-Logos-v11.html. The desktop/mobile room suite and offline review check passed, and the entrance view was visually inspected. This revision is not merged or deployed.

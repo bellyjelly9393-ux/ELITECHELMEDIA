@@ -25,10 +25,6 @@
    ink.strokeStyle='#a8293e';ink.lineWidth=5;ink.globalAlpha=.85;
    ink.beginPath();ink.roundRect(12,12,976,476,160);ink.stroke();
    ink.lineWidth=3;ink.beginPath();for(const at of [280,500,720]){ink.moveTo(at,20);ink.lineTo(at,480);}ink.stroke();ink.beginPath();ink.arc(500,250,105,0,Math.PI*2);ink.stroke();
-   ink.globalAlpha=.92;
-   // Preserve each source's aspect ratio before projecting the entire flat design.
-   ink.drawImage(hitmen,410,170,180,180*hitmen.height/hitmen.width);
-   ink.drawImage(ecm,770,170,150,150*ecm.height/ecm.width);
    const canvas=document.createElement('canvas');canvas.width=room.width*2;canvas.height=room.height*2;const ctx=canvas.getContext('2d');ctx.scale(2,2);ctx.imageSmoothingQuality='high';ctx.drawImage(room,0,0);
    const q=planes[scene].map(([x,y])=>[x*room.width/1774,y*room.height/887]),point=projection(q),n=24;
    for(let y=0;y<n;y++)for(let x=0;x<n;x++){
@@ -36,6 +32,10 @@
     triangle(ctx,art,[[u*1000,v*500],[U*1000,v*500],[u*1000,V*500]],[point(u,v),point(U,v),point(u,V)]);
     triangle(ctx,art,[[U*1000,V*500],[u*1000,V*500],[U*1000,v*500]],[point(U,V),point(u,V),point(U,v)]);
    }
+   // The upright front fascia keeps both original marks readable at natural proportions.
+   const front=scene==='entrance'?{y:578,height:24,x:[850,898]}:{y:714,height:44,x:[811,911]};
+   const scaleX=room.width/1774,scaleY=room.height/887;ctx.globalAlpha=.98;
+   [hitmen,ecm].forEach((logo,i)=>ctx.drawImage(logo,front.x[i]*scaleX,front.y*scaleY,front.height*logo.width/logo.height*scaleX,front.height*scaleY));
    return canvas.toDataURL('image/png');
   }catch{return src;}})();textures.set(key,task);return task;
  }
