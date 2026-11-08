@@ -1,6 +1,6 @@
 // Offline regression: real locker pages/scripts/styles with isolated auth/data fixtures.
 // No production requests, sessions, database writes or credentials are used.
-const {chromium}=require('playwright');
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs');
 const http=require('node:http');
 const path=require('node:path');
@@ -12,7 +12,7 @@ const TC='33333333-3333-4333-8333-333333333333';
 const root=process.cwd();
 const config=JSON.parse(fs.readFileSync('vercel.json','utf8'));
 assert.ok(!(config.redirects||[]).some(r=>r.source==='/hitmen-team-locker.html'),'Keep the existing full Lineup Lab reachable from its locker-room tool URL');
-const scripts=new Set(['hitmen-team-locker-v3-preview.js','hitmen-stall-v3-preview.js','management-guard.js','media-desk.js','hitmen-locker-shell.js','hitmen-team-locker.js','hitmen-stall-scene.js','hitmen-stall-upgrade.js','vod-review-model.js','hitmen-player-locker.js']);
+const scripts=new Set(['hitmen-private-panorama.js','hitmen-team-locker-v3-preview.js','hitmen-stall-v3-preview.js','management-guard.js','media-desk.js','hitmen-locker-shell.js','hitmen-team-locker.js','hitmen-stall-scene.js','hitmen-stall-upgrade.js','vod-review-model.js','hitmen-player-locker.js']);
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff':'font/woff','.woff2':'font/woff2'};
 const server=http.createServer((req,res)=>{
   const url=new URL(req.url,'http://localhost');
@@ -114,7 +114,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
 (async()=>{
   await new Promise(r=>server.listen(0,'127.0.0.1',r));
   const origin='http://127.0.0.1:'+server.address().port;
-  const browser=await chromium.launch({headless:true});
+  const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{})});
   const screenshots=path.join(root,'artifacts/locker-stalls-live-v3');
   fs.mkdirSync(screenshots,{recursive:true});
   const errors=[];
@@ -139,6 +139,11 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       assert.equal(await page.locator('#lockerRoster .v3-room-jersey').count(),2,'Active roster photo stalls');
       assert.equal(await page.locator('#lockerTcRoster .v3-room-jersey').count(),2,'Both TC roster classes have stalls');
       assert.equal(await page.locator('#lockerRosterCount').innerText(),'2');
+      await page.waitForFunction(()=>window.HitmenPrivatePanorama?.getState().loaded);
+      await page.waitForSelector('.wr-pano-stall');assert.equal(await page.locator('.wr-pano-stall').count(),2,'Only active roster in private panorama');
+      assert((await page.locator('.wr-pano-jersey img').evaluateAll(els=>els.map(el=>el.getAttribute('src')))).every(src=>src.includes('assets/hitmen-v3/locker-photo-master.webp')),'Exact private artwork reused');
+      await page.locator('.wr-pano-search').fill('Fixture Active');await page.locator('.wr-pano-search').press('Enter');assert.equal(await page.locator('.wr-pano-open').getAttribute('href'),'hitmen-stall.html?player='+OWN);
+      if([390,1440].includes(width))await page.locator('.wr-private-panorama').screenshot({path:path.join(screenshots,'private-panorama-'+width+'.png')});
       assert.equal(await page.locator('#lockerTcCount').innerText(),'2');
       assert.equal(await page.locator('.locker-stall').filter({hasText:'Fixture Archived'}).count(),0);
       assert.match(await page.locator('.v3-roster-notice').innerText(),/ROSTER UPDATED/,'Current roster revision visible');
@@ -234,6 +239,9 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
       if([390,1440].includes(width))console.log('LOCKER_VISUAL player '+width+' '+(await page.screenshot({type:'jpeg',quality:50})).toString('base64'));
       await context.close();
     }
+    const fullRoom=await pageFor(1440);
+    await fullRoom.context.addInitScript(()=>{for(let i=3;i<=17;i++)window.lockerFixture.tables.team_player_lockers.push({id:'fixture-locker-'+i,gamertag:'Example Player '+String(i).padStart(2,'0'),team_id:'b0bcbdda-da9d-419d-8f61-b34937966d49',season:55,roster_class:'active_roster',position:'C',jersey_name:'EXAMPLE '+i,jersey_number:String(i)});});
+    await fullRoom.page.goto(origin+'/hitmen-locker.html');await fullRoom.page.waitForFunction(()=>window.HitmenPrivatePanorama?.getState().loaded&&window.HitmenPrivatePanorama.getState().count===17);assert.equal(await fullRoom.page.locator('.wr-pano-stall').count(),17);await fullRoom.page.locator('.wr-private-panorama').screenshot({path:path.join(screenshots,'private-panorama-17-example.png')});await fullRoom.context.close();
     const shared=await pageFor(390);
     await shared.page.goto(origin+'/hitmen-hq.html');
     const rooms=await shared.page.locator('.sub-in a').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
@@ -245,7 +253,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
     const readsBefore=await shared.page.evaluate(()=>window.lockerFixture.reads.length);
     await shared.page.evaluate(()=>{window.VVHLBackend.state.user=null;window.dispatchEvent(new Event('vvhl-auth-change'));});
     assert.equal(await shared.page.locator('#hqApp').getAttribute('hidden'),'','Team content hides on signout');
-    assert.equal(await shared.page.locator('.locker-stall').count(),0,'Stalls clear on signout');
+    assert.equal(await shared.page.locator('.locker-stall').count(),0,'Stalls clear on signout');await shared.page.waitForFunction(()=>!document.querySelector('.wr-private-panorama'));assert.equal(await shared.page.evaluate(()=>window.HitmenPrivatePanorama.getState().count),0);
     assert.equal(await shared.page.evaluate(()=>window.lockerFixture.reads.length),readsBefore,'Signout does not re-query private data');
     await shared.context.close();
     // Alias bookmarks keep UUIDs and view parameters; legacy names canonicalize after auth.
@@ -263,7 +271,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
     const owned=await pageFor(390,{role:'player'});
     await owned.page.goto(origin+'/hitmen-locker.html');
     await owned.page.waitForSelector('#lockerRoster .v3-room-jersey');
-    assert.equal(await owned.page.locator('#lockerRoster a').count(),1,'Player can open own stall only');
+    assert.equal(await owned.page.locator('#lockerRoster a').count(),1,'Player can open own stall only');await owned.page.waitForFunction(()=>window.HitmenPrivatePanorama?.getState().loaded);await owned.page.evaluate(()=>window.HitmenPrivatePanorama.find('FIXTURE TEAMMATE'));assert(await owned.page.locator('.wr-pano-open').isHidden(),'Private panorama cannot open teammate dossier');
     await owned.page.goto(origin+'/hitmen-stall.html?player='+OTHER);
     await owned.page.waitForFunction(()=>document.getElementById('playerTitle').textContent==='Fixture Active');
     assert.equal(await owned.page.locator('#playerTitle').textContent(),'Fixture Active','Another player link cannot expose another dossier');
@@ -274,7 +282,7 @@ function fixture({role='gm',team='b0bcbdda-da9d-419d-8f61-b34937966d49',signedIn
         await page.goto(origin+url);
         const content=page.locator('[data-management-content],[data-locker-content]');
         assert.equal(await content.getAttribute('hidden'),'','Unauthorized content remains gated');
-        assert.equal(await page.evaluate(()=>window.lockerFixture.reads.length),0,'Unauthorized visitors do not query private data');
+        assert.equal(await page.evaluate(()=>window.lockerFixture.reads.length),0,'Unauthorized visitors do not query private data');assert.equal(await page.locator('.wr-private-panorama').count(),0,'No private panorama for unauthorized account');
         await context.close();
       }
     }
