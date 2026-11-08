@@ -75,7 +75,7 @@ Commands: node test-player-card-backgrounds.cjs; node --test tests/player-card-s
 
 ## Saving and known limits
 
-Device saves retain existing cosmetics/artwork plus a separate V2 layout record containing position, season, stats snapshot, model version and save time. When saved source totals differ from current totals, a notice distinguishes current data from the saved snapshot. The original PNG is a fixed snapshot; re-generating uses current available records.
+Device saves now retain cosmetics/artwork and a nested V2 layout snapshot in one atomic localStorage record, including position, season, stats snapshot, model version and save time. Legacy separate layout records remain readable. See REMAINING-LIMITS-QA.md for quota fault-injection results. When saved source totals differ from current totals, a notice distinguishes current data from the saved snapshot. The original PNG is a fixed snapshot; re-generating uses current available records.
 
 Account collections still sync only player reference, finish, custom OVR and jersey number. Cross-device background, edition, image, positioning and historical rendered snapshots require an additive account/storage extension and authenticated QA. No destructive migrations were introduced.
 
