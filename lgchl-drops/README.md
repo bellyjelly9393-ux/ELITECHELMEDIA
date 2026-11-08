@@ -6,6 +6,12 @@ private matchmaking codes.
 
 ## Delivered
 
+- `lineups/2026-11-08/`: **Sun Nov 8: lineups as listed on LG before puck drop**, read off management's
+  screenshots (2:33 PM ET). Chilliwack Bruins @ Calgary 9:35 (complete) and Calgary @ Edmonton Oil Kings
+  10:10 (Edmonton's table is cut off after the RW row; its D pair and goalie come from the posted jerseys).
+  Lethbridge @ Calgary 9:00 was **not captured**. Calgary's posted six is the same in both late games.
+  The matching War Room pregame reports and battle plans are in the database (approved).
+
 - `lineups/2026-11-02/`: **Mon Nov 2: lineups as listed on LG before puck drop** for all three Hitmen
   games: vs Spokane Chiefs 9:00, at Prince George Cougars 9:35, at Victoria Royals 10:10 ET. Team
   ratings, top line and top D pair (LG's Offense/Defense Break Down), first goalie listed, and full
