@@ -27,7 +27,7 @@
   centre:[[-143,4],[-126,4],[-110,4],[-94,4],[-80,4],[-65,4],[-36,1.4],[-18,1.4],[0,1.4],[18,1.4],[36,1.4],[65,4],[80,4],[95,4],[111,4],[127,4],[144,4]],
   entrance:[[-75,0],[-66,0],[-58,0],[-50,0],[-43,0],[-36,0],[-18,-1],[-9,-1],[0,-1],[9,-1],[18,-1],[36,0],[43,0],[50,0],[58,0],[66,0],[75,0]]
  };
- const paths={centre:'assets/lgchl/room-360/centre-fabric-v3.png',entrance:'assets/lgchl/room-360/entrance-fabric-v3.png'};
+ const paths={centre:'assets/lgchl/room-360/centre-empty-v5.png',entrance:'assets/lgchl/room-360/entrance-empty-v5.png'};
  function rosterVisible(show){room.hidden=!show;toggle.textContent=show?'Hide roster':'Roster';toggle.setAttribute('aria-expanded',String(show));}
  toggle.addEventListener('click',()=>rosterVisible(room.hidden));
  function placeNameplates(){requestAnimationFrame(()=>requestAnimationFrame(()=>{const bounds=stage.getBoundingClientRect();shell.querySelectorAll('.tour-nameplate:not([hidden])').forEach(plate=>{const rect=plate.getBoundingClientRect();if(!rect.width||!rect.height)return;let delta=0;if(rect.top<bounds.top+8)delta=bounds.top+8-rect.top;if(rect.bottom+delta>bounds.bottom-8)delta+=bounds.bottom-8-(rect.bottom+delta);if(delta)plate.style.top=(parseFloat(getComputedStyle(plate).top)+delta)+'px';});}));}
@@ -83,14 +83,14 @@
   host.classList.add('tour-brand-anchor');host.setAttribute('aria-hidden','true');
   const el=document.createElement('div');el.className='tour-art-layer tour-art-'+args.kind;
   if(args.kind==='sign')el.innerHTML='<img src="assets/lgchl/s55/team412.png" alt=""><div><b>CALGARY HITMEN</b><span>PUBLIC LOCKER ROOM</span></div><img src="assets/brand/ecm-logo.webp" alt="">';
-  else{const img=document.createElement('img');img.src=args.kind==='jersey'?'assets/lgchl/s55/team412.png':'assets/brand/ecm-logo.webp';img.alt='';el.append(img);if(args.kind==='jersey'){const hit=document.createElement('button');hit.type='button';hit.tabIndex=-1;hit.className='tour-jersey-hit';hit.dataset.playerId=args.player.id;hit.setAttribute('aria-hidden','true');hit.addEventListener('click',e=>{e.stopPropagation();openStall(args.player.id,hit);});el.append(hit);}}
+  else{const img=document.createElement('img');img.src=args.kind==='jersey'?'assets/lgchl/jerseys/team412.webp':'assets/brand/ecm-logo.webp';img.alt='';el.append(img);if(args.kind==='jersey'){const hit=document.createElement('button');hit.type='button';hit.tabIndex=-1;hit.className='tour-jersey-hit';hit.dataset.playerId=args.player.id;hit.setAttribute('aria-hidden','true');hit.addEventListener('click',e=>{e.stopPropagation();openStall(args.player.id,hit);});el.append(hit);}}
   host.append(el);brandLayers.push({el,scene:args.scene,angle:args.angle});resizeBrands();
  }
  function resizeBrands(){if(!viewer)return;const focal=stage.clientWidth/(2*Math.tan(viewer.getHfov()*Math.PI/360));for(const layer of brandLayers){if(layer.scene===viewer.getScene())layer.el.style.width=(2*focal*Math.tan(layer.angle*Math.PI/360))+'px';}}
  function sceneBranding(scene){return [
   {id:'real-room-sign',yaw:0,pitch:scene==='centre'?25:11.5,cssClass:'tour-hotspot',createTooltipFunc:brandHotspot,createTooltipArgs:{kind:'sign',scene,angle:scene==='centre'?67:37}},
   {id:'real-ecm-table',yaw:0,pitch:scene==='centre'?-43:-25,cssClass:'tour-hotspot',createTooltipFunc:brandHotspot,createTooltipArgs:{kind:'table',scene,angle:scene==='centre'?18:10}},
-  ...players.map((p,i)=>({id:'real-jersey-'+p.id,yaw:points[scene][i][0],pitch:scene==='centre'?-11.5:-6.5,cssClass:'tour-hotspot',createTooltipFunc:brandHotspot,createTooltipArgs:{kind:'jersey',scene,player:p,angle:scene==='centre'?4.1:1.6}}))
+  ...players.map((p,i)=>({id:'real-jersey-'+p.id,yaw:points[scene][i][0],pitch:scene==='centre'?-11.5:-6.5,cssClass:'tour-hotspot',createTooltipFunc:brandHotspot,createTooltipArgs:{kind:'jersey',scene,player:p,angle:scene==='centre'?25:10.2}}))
  ];}
  window.addEventListener('resize',resizeBrands);
  async function start(){

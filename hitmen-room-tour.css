@@ -74,3 +74,11 @@
 .hitmen-tour .room-columns:after{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,#a82b4166,transparent);pointer-events:none}
 .hitmen-tour .room-columns>section{position:relative;z-index:1}.hitmen-tour .room-columns h2{color:#eef0f4;text-shadow:0 1px 3px #0006}.hitmen-tour .tour-match-card{border-bottom-color:#929aab20}.hitmen-tour .tour-match-card:hover{background:#ffffff04}.tour-match-meta>span{color:#a4adbb}.tour-match-team>small{color:#d7dce5}
 @media(max-width:600px){.public-stall-view{padding-inline:0}.stall-level-toolbar{gap:4px;min-height:58px;padding:6px 10px 10px}.tour-shell .stall-level-toolbar button,.stall-public-card{font-size:11px;padding:9px}.stall-level-nav{gap:3px}.stall-level-nav>span{font-size:10px}.stall-level-caption{padding:14px 16px;gap:7px 10px}.stall-level-caption h2{font-size:15px}.stall-level-position{font-size:10px}.hitmen-tour .room-columns{margin:26px 0 0;padding:26px 18px;gap:30px;border-radius:0;background-position:center;background-size:auto 100%}.hitmen-tour .room-columns:before{background-size:auto,auto,220px auto}}
+
+/* Use the exact existing photographic black Hitmen sweater, not a generated kit. */
+.tour-art-jersey{aspect-ratio:.77;mix-blend-mode:normal}
+.tour-art-jersey>img{object-fit:fill;opacity:1;filter:brightness(.94) drop-shadow(0 3px 4px #0008)}
+.tour-shell .tour-jersey-hit{inset:12% 14% 9%;min-height:0}
+.stall-closeup-jersey{position:absolute;left:13%;top:18.8%;width:74%;height:74%;object-fit:contain;filter:brightness(.96) drop-shadow(0 .5cqw .5cqw #0009)}
+
+.stall-closeup-art.jersey-unavailable .stall-closeup-jersey{display:none}

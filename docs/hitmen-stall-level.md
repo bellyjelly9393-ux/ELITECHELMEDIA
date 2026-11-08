@@ -37,3 +37,16 @@ The 62-team / 1,037-player roster regression, JavaScript syntax checks and diff 
 - Rink backdrop: new local SVG geometry with no external references.
 
 Current review file: `Calgary-Hitmen-360-Tour-v4.html`. The unversioned review file is updated; prior versioned review files are retained.
+
+
+## Exact black Hitmen jersey (revision 5)
+
+The user selected the black jersey already shown on the public team page. The room and dedicated stall now both render the exact existing `assets/lgchl/jerseys/team412.webp` file, including its black skull crest, copper bands and red/white trim. The kit was not regenerated. Its source has an alpha channel. The former white jerseys were removed from versioned room/stall backdrops so they cannot show behind the native kit. The separate generic crest layer on the close-up chest was removed to avoid a second, incorrect logo.
+
+The same asset is used on all 17 public stalls and in the full-size stall view. Player names, positions and public profile URLs remain verified roster data; no jersey numbers were added. The simplified UI, two-level navigation, custom nameplates and rink backdrop remain in place. Native-image placement is still a lightweight image-layer approximation rather than a cloth simulation or full 3D render. The existing panorama background resolution/seam limitations remain; the exact photographic kit is now independent of that background.
+
+Validation passed in headless Edge on desktop and phone, including explicit checks that all 17 room jersey images and the close-up use the selected file, no duplicate close-up chest crest exists, the native jersey loads, and the prior navigation/public-identity/offline suite still passes. The 62-team roster regression and whitespace check passed. Room and close-up screenshots were visually reviewed.
+
+Current review copy: `Calgary-Hitmen-360-Tour-v5.html`. No push, merge or deployment.
+
+Selected jersey SHA-256: `bb40be52a6b1c602d6ee4a376d5557751e4bba1d8180c27864350ce9d1df9a89`.
