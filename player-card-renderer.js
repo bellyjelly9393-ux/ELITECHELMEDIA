@@ -26,11 +26,39 @@ function scene(x,arena,theme){
  const accent=(backdrops[theme]||backdrops.arena)[1];
  glow(x,950,720,650,accent+'70');glow(x,750,900,500,'#e4f3ff36');x.restore();
 }
+// Scattered mask noise can leave a large transparent border on an otherwise good cutout.
+const portraitBounds=new WeakMap();
+function subjectBounds(img){
+ if(portraitBounds.has(img))return portraitBounds.get(img);
+ const mask=document.createElement('canvas'),scale=Math.min(1,360/Math.max(img.width,img.height));
+ mask.width=Math.max(1,Math.round(img.width*scale));mask.height=Math.max(1,Math.round(img.height*scale));
+ const ctx=mask.getContext('2d');ctx.drawImage(img,0,0,mask.width,mask.height);
+ const pixels=ctx.getImageData(0,0,mask.width,mask.height).data;
+ let left=mask.width,right=-1,top=mask.height,bottom=-1;
+ for(let y=0;y<mask.height;y++)for(let x=0;x<mask.width;x++){
+  if(pixels[(y*mask.width+x)*4+3]<120)continue;
+  left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);
+ }
+ const bounds=right<left?{x:0,y:0,w:img.width,h:img.height}:{
+  x:left*img.width/mask.width,y:top*img.height/mask.height,
+  w:(right-left+1)*img.width/mask.width,h:(bottom-top+1)*img.height/mask.height};
+ portraitBounds.set(img,bounds);return bounds;
+}
 async function draw(canvas,s){const ticket=++serial;const [arena,crest,league,portrait,team]=await Promise.all([image((backdrops[s.background]||backdrops.arena)[0]),image('assets/brand/ecm-crest.webp'),image(s.league==='lgchl'?'assets/wildman/home/lgchl-logo.webp':'assets/lg3s/art/ec-logo-ice.webp'),image(s.portrait),image(s.logo)]);await document.fonts.ready;if(ticket!==serial)return false;const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d'),p=s.player,colors={ice:['#e3faff','#80d6ff','#174a77'],gold:['#fff3bd','#e7b94f','#745019'],crimson:['#ffd2d9','#ef5273','#6a152b']}[s.finish]||['#fff','#8ad8ff','#164777'];scene(x,arena,s.background);
-plate(x,70,72,1260,160,colors[1]);x.drawImage(crest,99,83,155,155);x.drawImage(league,1115,90,175,128);text(x,s.edition==='season'?'PLAYER SERIES':s.edition.toUpperCase()+' SERIES',700,140,40,'#e8f6ff','center',790,'CardLabel');text(x,s.season,700,200,44,'#efd589','center',790,'CardLabel');
+plate(x,70,72,1260,160,colors[1]);x.drawImage(crest,99,83,155,155);text(x,s.edition==='season'?'PLAYER SERIES':s.edition.toUpperCase()+' SERIES',700,140,40,'#e8f6ff','center',790,'CardLabel');text(x,s.season,700,200,44,'#efd589','center',790,'CardLabel');
 
 metal(x,s.overall!==''&&s.overall!=null?String(s.overall):'—',135,475,220,'left',375);text(x,s.ratingKind==='beta'?'ECM OVR · BETA':'OVR PENDING',250,535,36,'#dceefa','center',380,'CardLabel');if(s.ratingKind==='beta'&&s.performanceScore!=null)text(x,'INDEX '+s.performanceScore+' / 100',250,564,24,'#a6c3d9','center',340,'CardLabel');plate(x,105,585,290,94,colors[1]);text(x,(p?.pos||p?.kind||'PLAYER').toUpperCase(),250,657,66,'#fff','center',240);
 if(s.edition!=='season'){plate(x,995,1045,280,100,colors[1]);text(x,s.edition.toUpperCase(),1135,1115,42,'#fff','center',245);}if(s.jersey)text(x,'#'+s.jersey,1220,1200,58,'#fff','right');
-if(portrait){x.save();x.beginPath();x.rect(65,240,1270,1040);x.clip();const z=Math.min(1060/portrait.width,1000/portrait.height)*(s.imageScale||100)/100,w=portrait.width*z,h=portrait.height*z;x.shadowColor='#00142fcc';x.shadowBlur=25;x.drawImage(portrait,700-w/2+(s.imageX||0)*3,1250-h+(s.imageY||0)*3,w,h);x.restore();}else{x.save();glow(x,760,850,490,'#98d9ff33');x.strokeStyle='#c1e8ff88';x.lineWidth=5;x.setLineDash([18,14]);x.strokeRect(400,405,650,790);x.setLineDash([]);x.fillStyle='#06213c99';x.fillRect(402,407,646,786);x.strokeStyle='#acd9f0';x.lineWidth=7;x.beginPath();x.arc(725,650,98,0,Math.PI*2);x.stroke();x.beginPath();x.moveTo(530,1040);x.lineTo(555,845);x.lineTo(645,800);x.lineTo(725,850);x.lineTo(805,800);x.lineTo(895,845);x.lineTo(920,1040);x.stroke();text(x,'YOUR CHEL PLAYER',725,1100,40,'#e5f6ff','center',550,'CardLabel');text(x,'UPLOAD YOUR PHOTO',725,1150,28,'#b1cfe1','center',550,'CardLabel');x.restore();}
-plate(x,76,1287,1248,253,colors[1]);x.save();x.beginPath();bevel(x,79,1290,1321,1537,20);x.clip();if(team){x.globalAlpha=.09;x.drawImage(team,870,1265,360,330);x.globalAlpha=1;}x.fillStyle=gradient(x,0,1460,W,1525,[[0,'#0b1a27'],[.6,'#1b3444'],[1,'#253540']]);x.fillRect(91,1460,1218,60);x.fillStyle=colors[1];x.fillRect(91,1460,1218,3);x.restore();if(team)x.drawImage(team,100,1312,198,198);else text(x,(p?.team||'ECM').split(' ').map(v=>v[0]).join('').slice(0,4),195,1430,64,'#abcce0','center',180);metal(x,(p?.tag||'YOUR PLAYER').toUpperCase(),825,1420,100,'center',940);text(x,(p?.team||'SELECT YOUR VERIFIED PLAYER').toUpperCase(),820,1501,36,'#f1d896','center',950,'CardLabel');plate(x,76,1570,1248,266,colors[1]);for(let i=0;i<4;i++){const a=241+i*305;metal(x,s.values[i],a,1735,126,'center',275);text(x,s.labels[i],a,1800,45,'#efd281','center',260,'CardLabel');if(i<3){x.strokeStyle='#90cfff44';x.beginPath();x.moveTo(a+150,1620);x.lineTo(a+150,1800);x.stroke();}}text(x,s.season+' / '+(s.ratingKind==='beta'?'ECM BETA':'RATING PENDING'),700,1905,32,'#c6deec','center',1190,'CardLabel');frame(x,colors);canvas.width=W;canvas.height=H;canvas.getContext('2d').drawImage(c,0,0);canvas.setAttribute('aria-label',(p?.tag||'No player selected')+', '+(p?.team||'')+', '+s.season+'. '+s.labels.map((l,i)=>l+' '+s.values[i]).join(', ')+'. '+(s.ratingKind==='beta'?'ECM beta OVR '+s.overall+', performance index '+s.performanceScore+' out of 100':'Automatic OVR unavailable'));return true;}
+if(portrait){x.save();x.beginPath();x.rect(65,240,1270,1040);x.clip();const bounds=subjectBounds(portrait);
+ const z=Math.min(1170/bounds.w,985/bounds.h)*(s.imageScale||100)/100;
+ const px=785+(s.imageX||0)*3-(bounds.x+bounds.w/2)*z;
+ const py=1260+(s.imageY||0)*3-(bounds.y+bounds.h)*z;
+ x.filter='brightness(1.14) contrast(1.04)';x.shadowColor='#86becc66';x.shadowBlur=7;
+ x.drawImage(portrait,px,py,portrait.width*z,portrait.height*z);x.restore();}else{x.save();glow(x,760,850,490,'#98d9ff33');x.strokeStyle='#c1e8ff88';x.lineWidth=5;x.setLineDash([18,14]);x.strokeRect(400,405,650,790);x.setLineDash([]);x.fillStyle='#06213c99';x.fillRect(402,407,646,786);x.strokeStyle='#acd9f0';x.lineWidth=7;x.beginPath();x.arc(725,650,98,0,Math.PI*2);x.stroke();x.beginPath();x.moveTo(530,1040);x.lineTo(555,845);x.lineTo(645,800);x.lineTo(725,850);x.lineTo(805,800);x.lineTo(895,845);x.lineTo(920,1040);x.stroke();text(x,'YOUR CHEL PLAYER',725,1100,40,'#e5f6ff','center',550,'CardLabel');text(x,'UPLOAD YOUR PHOTO',725,1150,28,'#b1cfe1','center',550,'CardLabel');x.restore();}
+plate(x,76,1287,1248,253,colors[1]);x.save();x.beginPath();bevel(x,79,1290,1321,1537,20);x.clip();if(team){x.globalAlpha=.09;x.drawImage(team,870,1265,360,330);x.globalAlpha=1;}x.fillStyle=gradient(x,0,1460,W,1525,[[0,'#0b1a27'],[.6,'#1b3444'],[1,'#253540']]);x.fillRect(91,1460,1218,60);x.fillStyle=colors[1];x.fillRect(91,1460,1218,3);x.restore();if(team)x.drawImage(team,100,1312,198,198);else text(x,(p?.team||'ECM').split(' ').map(v=>v[0]).join('').slice(0,4),195,1430,64,'#abcce0','center',180);metal(x,(p?.tag||'YOUR PLAYER').toUpperCase(),825,1420,100,'center',940);text(x,(p?.team||'SELECT YOUR VERIFIED PLAYER').toUpperCase(),820,1501,36,'#f1d896','center',950,'CardLabel');plate(x,76,1570,1248,266,colors[1]);for(let i=0;i<4;i++){const a=241+i*305;metal(x,s.values[i],a,1735,126,'center',275);text(x,s.labels[i],a,1800,45,'#efd281','center',260,'CardLabel');if(i<3){x.strokeStyle='#90cfff44';x.beginPath();x.moveTo(a+150,1620);x.lineTo(a+150,1800);x.stroke();}}text(x,s.season+' / '+(s.ratingKind==='beta'?'ECM BETA':'RATING PENDING'),700,1905,32,'#c6deec','center',1190,'CardLabel');frame(x,colors);
+ // Keep league branding clear of the foil, fitted at its original aspect ratio.
+ const logoScale=Math.min(266/league.width,140/league.height);
+ const lw=league.width*logoScale,lh=league.height*logoScale;
+ x.drawImage(league,1150-lw/2,154-lh/2,lw,lh);
+ canvas.width=W;canvas.height=H;canvas.getContext('2d').drawImage(c,0,0);canvas.setAttribute('aria-label',(p?.tag||'No player selected')+', '+(p?.team||'')+', '+s.season+'. '+s.labels.map((l,i)=>l+' '+s.values[i]).join(', ')+'. '+(s.ratingKind==='beta'?'ECM beta OVR '+s.overall+', performance index '+s.performanceScore+' out of 100':'Automatic OVR unavailable'));return true;}
 window.ECMCardRenderer={draw,width:W,height:H};})();
