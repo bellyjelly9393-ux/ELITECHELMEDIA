@@ -1,0 +1,503 @@
+{
+ "schema": "lgchl-pregame-lineups-v1",
+ "date": "2026-11-08",
+ "basis": "Players listed for each team on LG's game page before puck drop, from management's phone screenshots (2:33 PM ET). Private matchmaking IDs on the page are deliberately left out.",
+ "games": [
+  {
+   "lg_game_id": 918506,
+   "puck_drop_et": "9:00 PM",
+   "away": {
+    "team": "Lethbridge Hurricanes"
+   },
+   "home": {
+    "team": "Calgary Hitmen"
+   },
+   "captured": false,
+   "note": "Not in the screenshots. No lineup captured."
+  },
+  {
+   "lg_game_id": 918541,
+   "puck_drop_et": "9:35 PM",
+   "captured": true,
+   "ratings": {
+    "Tot": {
+     "away": 65,
+     "home": 60
+    },
+    "Off": {
+     "away": 69,
+     "home": 62
+    },
+    "Def": {
+     "away": 65,
+     "home": 56
+    },
+    "Goalie": {
+     "away": 57,
+     "home": 63
+    }
+   },
+   "away": {
+    "team": "Chilliwack Bruins",
+    "skaters": [
+     {
+      "position": "LW",
+      "player": "iCLassYxTTV",
+      "lg_user_id": 76434,
+      "overall": 80,
+      "salary_m": "$3",
+      "rec": "9-4-3",
+      "gp": 16,
+      "pts": 53,
+      "goals": 28,
+      "ast": 25,
+      "plus_minus": 10,
+      "gwg": 5
+     },
+     {
+      "position": "C",
+      "player": "Im-Rukia",
+      "lg_user_id": 72490,
+      "overall": 58,
+      "salary_m": "$7",
+      "rec": "9-4-3",
+      "gp": 16,
+      "pts": 34,
+      "goals": 13,
+      "ast": 21,
+      "plus_minus": 9,
+      "gwg": 1
+     },
+     {
+      "position": "RW",
+      "player": "GBR Dingurz",
+      "lg_user_id": 20808,
+      "overall": 69,
+      "salary_m": "$5.25",
+      "rec": "11-7-1",
+      "gp": 19,
+      "pts": 51,
+      "goals": 25,
+      "ast": 26,
+      "plus_minus": 2,
+      "gwg": 5
+     },
+     {
+      "position": "LD",
+      "player": "Mxstro x 21",
+      "lg_user_id": 32645,
+      "overall": 64,
+      "salary_m": "$1",
+      "rec": "8-2-3",
+      "gp": 13,
+      "pts": 12,
+      "goals": 3,
+      "ast": 9,
+      "plus_minus": 14,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "DANNYZJ7854",
+      "lg_user_id": 71750,
+      "overall": 66,
+      "salary_m": "$3",
+      "rec": "12-2-2",
+      "gp": 16,
+      "pts": 16,
+      "goals": 0,
+      "ast": 16,
+      "plus_minus": 15,
+      "gwg": 0
+     }
+    ],
+    "goalies": [
+     {
+      "position": "G",
+      "player": "disgraziiatooo",
+      "lg_user_id": 70847,
+      "overall": 57,
+      "salary_m": "$0.75",
+      "ggp": 31,
+      "gwin": 15,
+      "gloss": 16,
+      "gaa": 3.0,
+      "savep": 0.779
+     }
+    ],
+    "subs_listed": 8,
+    "offense_breakdown": [
+     {
+      "players": [
+       "C) Im-Rukia",
+       "LW) iCLassYxTTV",
+       "RW) GBR Dingurz"
+      ],
+      "salary_m": "$15.25",
+      "rec": "29-15-7",
+      "gp": 51,
+      "pts": 138,
+      "goals": 66,
+      "ast": 72,
+      "plus_minus": 21,
+      "gwg": 11
+     }
+    ],
+    "defense_breakdown": [
+     {
+      "players": [
+       "LD) Mxstro x 21",
+       "RD) DANNYZJ7854"
+      ],
+      "salary_m": "$4",
+      "rec": "20-4-5",
+      "gp": 29,
+      "pts": 28,
+      "goals": 3,
+      "ast": 25,
+      "plus_minus": 29,
+      "gwg": null
+     }
+    ]
+   },
+   "home": {
+    "team": "Calgary Hitmen",
+    "skaters": [
+     {
+      "position": "LW",
+      "player": "offtheyrk",
+      "lg_user_id": 58225,
+      "overall": 68,
+      "salary_m": "$0.75",
+      "rec": "8-8-3",
+      "gp": 19,
+      "pts": 57,
+      "goals": 28,
+      "ast": 29,
+      "plus_minus": 1,
+      "gwg": 2
+     },
+     {
+      "position": "C",
+      "player": "SmokoLi",
+      "lg_user_id": 74341,
+      "overall": 60,
+      "salary_m": "$3",
+      "rec": "8-9-2",
+      "gp": 19,
+      "pts": 48,
+      "goals": 22,
+      "ast": 26,
+      "plus_minus": -2,
+      "gwg": 4
+     },
+     {
+      "position": "RW",
+      "player": "Gullyrr",
+      "lg_user_id": 79521,
+      "overall": 58,
+      "salary_m": "$5",
+      "rec": "8-10-1",
+      "gp": 19,
+      "pts": 45,
+      "goals": 16,
+      "ast": 29,
+      "plus_minus": -5,
+      "gwg": 1
+     },
+     {
+      "position": "LD",
+      "player": "xSalda-",
+      "lg_user_id": 29039,
+      "overall": 56,
+      "salary_m": "$3.5",
+      "rec": "10-8-1",
+      "gp": 19,
+      "pts": 20,
+      "goals": 0,
+      "ast": 20,
+      "plus_minus": 11,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "Koldex Bands",
+      "lg_user_id": 79440,
+      "overall": 57,
+      "salary_m": "$3.75",
+      "rec": "6-5-1",
+      "gp": 12,
+      "pts": 20,
+      "goals": 2,
+      "ast": 18,
+      "plus_minus": 15,
+      "gwg": 0
+     }
+    ],
+    "goalies": [
+     {
+      "position": "G",
+      "player": "XxPASTRNAK88",
+      "lg_user_id": 80604,
+      "overall": 63,
+      "salary_m": "$0.75",
+      "ggp": 34,
+      "gwin": 16,
+      "gloss": 18,
+      "gaa": 3.22,
+      "savep": 0.794
+     }
+    ],
+    "subs_listed": 6,
+    "offense_breakdown": [
+     {
+      "players": [
+       "C) SmokoLi",
+       "LW) offtheyrk",
+       "RW) Gullyrr"
+      ],
+      "salary_m": "$8.75",
+      "rec": "24-27-6",
+      "gp": 57,
+      "pts": 150,
+      "goals": 66,
+      "ast": 84,
+      "plus_minus": -6,
+      "gwg": 7
+     }
+    ],
+    "defense_breakdown": [
+     {
+      "players": [
+       "LD) xSalda-",
+       "RD) Koldex Bands"
+      ],
+      "salary_m": "$7.25",
+      "rec": "16-13-2",
+      "gp": 31,
+      "pts": 40,
+      "goals": 2,
+      "ast": 38,
+      "plus_minus": 26,
+      "gwg": 0
+     }
+    ]
+   }
+  },
+  {
+   "lg_game_id": 918575,
+   "puck_drop_et": "10:10 PM",
+   "captured": "partial",
+   "ratings": {
+    "Tot": {
+     "away": 60,
+     "home": 55
+    },
+    "Off": {
+     "away": 62,
+     "home": 53
+    },
+    "Def": {
+     "away": 56,
+     "home": 54
+    },
+    "Goalie": {
+     "away": 63,
+     "home": 66
+    }
+   },
+   "away": {
+    "team": "Calgary Hitmen",
+    "skaters": [
+     {
+      "position": "LW",
+      "player": "offtheyrk",
+      "lg_user_id": 58225,
+      "overall": 68,
+      "salary_m": "$0.75",
+      "rec": "8-8-3",
+      "gp": 19,
+      "pts": 57,
+      "goals": 28,
+      "ast": 29,
+      "plus_minus": 1,
+      "gwg": 2
+     },
+     {
+      "position": "C",
+      "player": "SmokoLi",
+      "lg_user_id": 74341,
+      "overall": 60,
+      "salary_m": "$3",
+      "rec": "8-9-2",
+      "gp": 19,
+      "pts": 48,
+      "goals": 22,
+      "ast": 26,
+      "plus_minus": -2,
+      "gwg": 4
+     },
+     {
+      "position": "RW",
+      "player": "Gullyrr",
+      "lg_user_id": 79521,
+      "overall": 58,
+      "salary_m": "$5",
+      "rec": "8-10-1",
+      "gp": 19,
+      "pts": 45,
+      "goals": 16,
+      "ast": 29,
+      "plus_minus": -5,
+      "gwg": 1
+     },
+     {
+      "position": "LD",
+      "player": "xSalda-",
+      "lg_user_id": 29039,
+      "overall": 56,
+      "salary_m": "$3.5",
+      "rec": "10-8-1",
+      "gp": 19,
+      "pts": 20,
+      "goals": 0,
+      "ast": 20,
+      "plus_minus": 11,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "Koldex Bands",
+      "lg_user_id": 79440,
+      "overall": 57,
+      "salary_m": "$3.75",
+      "rec": "6-5-1",
+      "gp": 12,
+      "pts": 20,
+      "goals": 2,
+      "ast": 18,
+      "plus_minus": 15,
+      "gwg": 0
+     }
+    ],
+    "goalies": [
+     {
+      "position": "G",
+      "player": "XxPASTRNAK88",
+      "lg_user_id": 80604,
+      "overall": 63,
+      "salary_m": "$0.75",
+      "ggp": 34,
+      "gwin": 16,
+      "gloss": 18,
+      "gaa": 3.22,
+      "savep": 0.794
+     }
+    ],
+    "subs_listed": 6,
+    "offense_breakdown": [
+     {
+      "players": [
+       "C) SmokoLi",
+       "LW) offtheyrk",
+       "RW) Gullyrr"
+      ],
+      "salary_m": "$8.75",
+      "rec": "24-27-6",
+      "gp": 57,
+      "pts": 150,
+      "goals": 66,
+      "ast": 84,
+      "plus_minus": -6,
+      "gwg": 7
+     }
+    ],
+    "defense_breakdown": [
+     {
+      "players": [
+       "LD) xSalda-",
+       "RD) Koldex Bands"
+      ],
+      "salary_m": "$7.25",
+      "rec": "16-13-2",
+      "gp": 31,
+      "pts": 40,
+      "goals": 2,
+      "ast": 38,
+      "plus_minus": 26,
+      "gwg": 0
+     }
+    ]
+   },
+   "home": {
+    "team": "Edmonton Oil Kings",
+    "skaters": [
+     {
+      "position": "LW",
+      "player": "mrmagoo",
+      "lg_user_id": 33457,
+      "overall": 50,
+      "salary_m": "$0.75",
+      "rec": "9-8-2",
+      "gp": 19,
+      "pts": 38,
+      "goals": 13,
+      "ast": 25,
+      "plus_minus": 7,
+      "gwg": 2
+     },
+     {
+      "position": "C",
+      "player": "Irish_Qcblueice",
+      "lg_user_id": 70651,
+      "overall": 51,
+      "salary_m": "$0.75",
+      "rec": "10-6-2",
+      "gp": 18,
+      "pts": 31,
+      "goals": 12,
+      "ast": 19,
+      "plus_minus": -3,
+      "gwg": 1
+     },
+     {
+      "position": "RW",
+      "player": "morganlynn1996_85689",
+      "lg_user_id": 80026,
+      "overall": 56,
+      "salary_m": "$0.75",
+      "rec": "9-7-2",
+      "gp": 18,
+      "pts": 36,
+      "goals": 15,
+      "ast": 21,
+      "plus_minus": -9,
+      "gwg": 4
+     }
+    ],
+    "posted_jerseys_not_in_table": [
+     {
+      "position": "LD",
+      "player": "N1_Prospect",
+      "lg_user_id": 51341
+     },
+     {
+      "position": "G",
+      "player": "pat_lafontaine16",
+      "lg_user_id": 70676
+     },
+     {
+      "position": "RD",
+      "player": "MillaTime11029",
+      "lg_user_id": 42429
+     }
+    ],
+    "goalies": [],
+    "subs_listed": null,
+    "offense_breakdown": null,
+    "defense_breakdown": null,
+    "note": "Screenshot cut off after the RW row. LD/G/RD come from the posted jerseys (LG shows the bottom jersey row as LD, G, RD); their table rows were not captured."
+   }
+  }
+ ]
+}
