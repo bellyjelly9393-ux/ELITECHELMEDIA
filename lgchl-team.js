@@ -65,11 +65,16 @@ async function roster(){
 }
 
 function game(g,final){
+ if(team===412&&(params.get('room')==='360'||document.body.dataset.roomTour==='true')){
+  const side=which=>{const id=Number(g[which+'_lg_team_id']),name=g[which+'_nick']||g[which+'_abbr']||'Team';return '<div class="tour-match-team">'+(valid(id)?'<img src="'+logo(id)+'" alt="'+esc(name)+' crest" width="46" height="46" loading="lazy">':'')+'<b>'+esc(g[which+'_abbr']||name)+'</b><small>'+esc(name)+'</small></div>';};
+  const label=(g.away_nick||'Away')+' vs '+(g.home_nick||'Home');
+  return '<a class="game-row tour-match-card" href="lgchl-game.html?id='+Number(g.lg_game_id)+'" aria-label="'+esc(label+(final?' '+fmt(g.away_score)+' to '+fmt(g.home_score):' scheduled')+'. Open game centre')+'"><div class="tour-match-meta"><span>'+esc(date(g.game_at))+'</span><b>'+(final?'FINAL':'UPCOMING')+'</b></div><div class="tour-match-teams">'+side('away')+'<strong class="tour-match-score">'+(final?fmt(g.away_score)+'<i>–</i>'+fmt(g.home_score):'<i>VS</i>')+'</strong>'+side('home')+'</div><span class="tour-match-open">GAME CENTRE <span aria-hidden="true">↗</span></span></a>';
+ }
  const label=(g.away_nick||g.away_abbr||'Away')+' vs '+(g.home_nick||g.home_abbr||'Home');
  return '<a class="game-row" href="lgchl-game.html?id='+Number(g.lg_game_id)+'"><strong>'+esc(label)+(final?' · '+fmt(g.away_score)+'–'+fmt(g.home_score):'')+'</strong><small>'+esc(date(g.game_at))+' · '+(final?'Final':'Scheduled')+' · Open Game Centre →</small></a>';
 }
 async function games(){
- const base={select:'lg_game_id,game_at,status,away_nick,away_abbr,home_nick,home_abbr,away_score,home_score',season:'eq.55',or:'(away_lg_team_id.eq.'+team+',home_lg_team_id.eq.'+team+')',limit:'6'};
+ const base={select:'lg_game_id,game_at,status,away_lg_team_id,home_lg_team_id,away_nick,away_abbr,home_nick,home_abbr,away_score,home_score',season:'eq.55',or:'(away_lg_team_id.eq.'+team+',home_lg_team_id.eq.'+team+')',limit:'6'};
  const results=await Promise.allSettled([read('lgchl_games_board',{...base,status:'eq.final',order:'game_at.desc'}),read('lgchl_games_board',{...base,status:'neq.final',game_at:'gte.'+new Date().toISOString(),order:'game_at.asc'})]);
  results.forEach((r,i)=>{const el=$(i?'roomUpcoming':'roomFinals');el.innerHTML=r.status==='fulfilled'?r.value.filter(g=>valid(g.lg_game_id)&&(!i?String(g.status).toLowerCase()==='final':String(g.status).toLowerCase()==='scheduled')).map(g=>game(g,!i)).join('')||'<p class="note">'+(i?'No upcoming games are listed.':'No final results are listed.')+'</p>':'<p class="note">Games are unavailable. Please try again later.</p>';});
 }

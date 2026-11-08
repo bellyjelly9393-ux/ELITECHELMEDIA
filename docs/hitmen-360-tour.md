@@ -20,7 +20,7 @@ Same existing Season 55 / Calgary team 412 public main-roster snapshot dated Nov
 
 ## Artwork and limits
 
-Two AI-generated 2:1 environment textures, each 1774 × 887 pixels. Manually counted six left + five centre + six right bays in each accepted image. Generated drafts with wrong counts were rejected. The source files are `assets/lgchl/room-360/centre-branded-v1.png` and `entrance-branded-v1.png`.
+Two AI-generated 2:1 environment textures, each 1774 × 887 pixels, with generated branding removed and real logo image layers added by the viewer. Manually counted six left + five centre + six right bays in each accepted image. Generated drafts with wrong counts were rejected. The source files are `assets/lgchl/room-360/centre-clean-v2.png` and `entrance-clean-v2.png` (earlier drafts remain available for reference).
 
 This is a reviewable interactive concept, not final high-resolution production artwork. Zoom reveals softness. The rear-wall wrap join and some architectural details differ between the independently generated nodes; the camera positions are illustrative rather than a geometrically surveyed room. Rotation and floor-arrow transitions are functional, but the images still need professional seam/geometry polish before a claim of a fully seamless final tour. Vertical viewing is limited to ±65 degrees to avoid pole artifacts. It does not simulate continuous walking or true real-time 3D geometry.
 
@@ -41,3 +41,18 @@ Stats reads were mocked unavailable for deterministic browser checks. The offlin
 Self-hosted Pannellum 2.5.7 from its documented download URLs, with its licence in `vendor/pannellum/COPYING`. No tour-hosting service or new account is required. Official documentation: https://pannellum.org/documentation/overview/ and https://pannellum.org/documentation/api/ .
 
 No push, merge or deployment was performed. The accompanying consolidated patch contains the public Find My Stall implementation, horizontal concept and this opt-in 360° prototype.
+
+
+## Branding, lower panels and custom nameplates (revision 2)
+
+The generated emblems and lettering were removed from the room sign, 17 jersey chests and tabletop. Real assets from the existing repository are now used without redrawing them: `assets/lgchl/s55/team412.png` for Calgary and `assets/brand/ecm-logo.webp` / `ecm-crest.webp` for Elite Chel Media. The sign, jerseys and table use camera-linked image overlays; the same assets appear in the header, player console and publisher footer. They remain sharp as separate UI image layers, though the underlying environment still has the previously documented visual limits. These overlays are illustrative decals rather than fully modelled 3D materials.
+
+The room console, camera buttons, selected-player area, recent-finals cards, upcoming-game cards and follow-team section share black/chrome surfaces, red accent borders and consistent type. Game cards display both clubs' existing crest assets, abbreviations/names, ET dates, real scores for finals and public Game Centre links. Production code retains the existing public live-read flow and adds the two public team-ID fields to the game projection. Other teams keep their existing presentation.
+
+For the offline review copy, six real finals and six upcoming games were captured from the existing `lgchl_games_board` public projection, stored with source/retrieval metadata in `assets/lgchl/room-360/public-games-preview.json`. For example, game 918480 is Calgary 7, Everett 2; crest IDs 412 and 380. The saved schedule is a snapshot, not a live feed. No results or opponent identities were invented. Live player totals are still disconnected in the offline copy.
+
+Clicking a jersey or stall marker now selects it and reveals a brushed-metal nameplate with the actual Hitmen crest, exact public roster name, position, and display stall index. The plate has rivets, engraved-style lettering and an explicit public-player-card link. Its index is not a jersey number. Hover/focus can preview the plate; Escape dismisses it. Clicking the plate's link or the console's card button opens the public profile. Nameplate placement adjusts to keep the selected plate fully inside the room viewport on desktop and phone.
+
+Additional verification passed in the actual browser at 1440px and 390px: 17 real-logo jersey layers; both real sign logos; real game IDs, score data and opponent crest IDs; correct selected name/position/index; clickable jersey hit area; Escape dismissal; custom plate content and public link; plate fully inside viewport; all prior tour, room, fallback and roster checks; offline two-scene rendering with no HTTPS dependencies. The updated standalone copy is `Calgary-Hitmen-360-Tour-v2.html`; the original standalone filename has also been refreshed. Screenshots of the plate, room console and game panels were visually inspected.
+
+No remote push, merge or deployment was performed for this revision.

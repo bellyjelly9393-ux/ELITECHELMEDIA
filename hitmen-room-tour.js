@@ -5,8 +5,9 @@
  const room=document.getElementById('roomPlayers'),finder=window.HitmenPublicRoom;
  if(!room||!finder)return;
  document.body.classList.add('hitmen-tour');
+ const footer=document.querySelector('.room-footer');if(footer){const brand=document.createElement('div');brand.className='tour-footer-brand';brand.innerHTML='<img src="assets/brand/ecm-logo.webp" alt="Elite Chel Media"><div><b>ELITE CHEL MEDIA</b><span>The home of your team’s stories, players and game nights.</span></div>';footer.prepend(brand);}
  const shell=document.createElement('section');shell.className='tour-shell';shell.setAttribute('aria-label','Calgary Hitmen 360 degree public locker room');
- shell.innerHTML='<div class="tour-heading"><img src="assets/lgchl/s55/team412.png" alt=""><div><span>ELITE CHEL MEDIA · INTERACTIVE CONCEPT</span><h2>PUBLIC LOCKER ROOM</h2></div><b>360°</b></div><div class="tour-scene-tabs" aria-label="Room viewpoints"><button type="button" data-tour-scene="entrance" disabled>Entrance</button><button type="button" data-tour-scene="centre" disabled>Centre of the room</button><button type="button" id="tourReset" disabled>Reset view</button></div><div class="tour-look-controls" aria-label="Look around the room"><button type="button" data-tour-action="left" disabled>← Look left</button><button type="button" data-tour-action="right" disabled>Look right →</button><button type="button" data-tour-action="in" disabled>Zoom in +</button><button type="button" data-tour-action="out" disabled>Zoom out −</button><button type="button" data-tour-action="full" disabled>Full screen</button></div><div id="hitmenPanorama" tabindex="0" aria-label="360 degree room. Drag or swipe to look around. Arrow keys turn the view. Select a player hotspot to open their public card." aria-describedby="tourHelp"></div><div class="tour-caption"><p id="tourStatus" role="status">Loading the 360° room…</p><p id="tourHelp">Drag to look around · Swipe on phone · Floor arrows change viewpoint · Search above to find your stall</p></div><div class="tour-actions"><button type="button" id="tourPrevious" disabled>← Previous stall</button><a id="tourPlayerCard" hidden>Open public player card →</a><button type="button" id="tourNext" disabled>Next stall →</button><button type="button" id="tourRosterToggle" aria-expanded="true" aria-controls="roomPlayers">Hide roster cards</button></div>';
+ shell.innerHTML='<div class="tour-heading"><img src="assets/lgchl/s55/team412.png" alt="Calgary Hitmen crest"><div><span>CALGARY HITMEN · LGCHL SEASON 55</span><h2>PUBLIC LOCKER ROOM</h2></div><img class="tour-ecm-logo" src="assets/brand/ecm-logo.webp" alt="Elite Chel Media"><b>360°</b></div><div class="tour-scene-tabs" aria-label="Room viewpoints"><button type="button" data-tour-scene="entrance" disabled>Entrance</button><button type="button" data-tour-scene="centre" disabled>Centre of the room</button><button type="button" id="tourReset" disabled>Reset view</button></div><div class="tour-look-controls" aria-label="Look around the room"><button type="button" data-tour-action="left" disabled>← Look left</button><button type="button" data-tour-action="right" disabled>Look right →</button><button type="button" data-tour-action="in" disabled>Zoom in +</button><button type="button" data-tour-action="out" disabled>Zoom out −</button><button type="button" data-tour-action="full" disabled>Full screen</button></div><div id="hitmenPanorama" tabindex="0" aria-label="360 degree room. Drag or swipe to look around. Arrow keys turn the view. Select a player hotspot to open their public card." aria-describedby="tourHelp"></div><div class="tour-console"><div class="tour-console-summary"><div class="tour-selected"><img src="assets/lgchl/s55/team412.png" alt=""><div><span>PLAYER STALL</span><strong id="tourSelectionName">Find your stall</strong><small id="tourSelectionMeta">17 MAIN-ROSTERED HITMEN</small></div></div><div class="tour-caption"><p id="tourStatus" role="status">Loading the room…</p><p id="tourHelp">Drag or swipe to look around. Use floor arrows to move, or find your name above.</p></div></div><div class="tour-actions"><div class="tour-stall-stepper"><button type="button" id="tourPrevious" aria-label="Previous player stall" disabled>← <span>Previous</span></button><button type="button" id="tourNext" aria-label="Next player stall" disabled><span>Next</span> →</button></div><a id="tourPlayerCard" hidden>Open player card ↗</a><button type="button" id="tourRosterToggle" aria-expanded="true" aria-controls="roomPlayers">Hide roster cards</button></div><div class="tour-console-brand"><img src="assets/brand/ecm-crest.webp" alt="Elite Chel Media"><span>THE ROOM. THE TEAM. THE GAME.</span><small>PUBLIC LOCKER ROOM · S55</small></div></div>';
  room.before(shell);
  const $=id=>shell.querySelector('#'+id),stage=$('hitmenPanorama'),status=$('tourStatus');
  const sceneButtons=[...shell.querySelectorAll('[data-tour-scene]')],previous=$('tourPrevious'),next=$('tourNext'),card=$('tourPlayerCard'),toggle=$('tourRosterToggle'),reset=$('tourReset');
@@ -18,14 +19,16 @@
   centre:[[-143,4],[-126,4],[-110,4],[-94,4],[-80,4],[-65,4],[-36,1.4],[-18,1.4],[0,1.4],[18,1.4],[36,1.4],[65,4],[80,4],[95,4],[111,4],[127,4],[144,4]],
   entrance:[[-75,0],[-66,0],[-58,0],[-50,0],[-43,0],[-36,0],[-18,-1],[-9,-1],[0,-1],[9,-1],[18,-1],[36,0],[43,0],[50,0],[58,0],[66,0],[75,0]]
  };
- const paths={centre:'assets/lgchl/room-360/centre-branded-v1.png',entrance:'assets/lgchl/room-360/entrance-branded-v1.png'};
+ const paths={centre:'assets/lgchl/room-360/centre-clean-v2.png',entrance:'assets/lgchl/room-360/entrance-clean-v2.png'};
  function rosterVisible(show){room.hidden=!show;toggle.textContent=show?'Hide roster cards':'Show roster cards';toggle.setAttribute('aria-expanded',String(show));}
  toggle.addEventListener('click',()=>rosterVisible(room.hidden));
+ function placeNameplates(){requestAnimationFrame(()=>requestAnimationFrame(()=>{const bounds=stage.getBoundingClientRect();shell.querySelectorAll('.tour-nameplate:not([hidden])').forEach(plate=>{const rect=plate.getBoundingClientRect();if(!rect.width||!rect.height)return;let delta=0;if(rect.top<bounds.top+8)delta=bounds.top+8-rect.top;if(rect.bottom+delta>bounds.bottom-8)delta+=bounds.bottom-8-(rect.bottom+delta);if(delta)plate.style.top=(parseFloat(getComputedStyle(plate).top)+delta)+'px';});}));}
  function sync(){
   previous.disabled=!loaded||selected<=0;next.disabled=!loaded||!players.length||selected===players.length-1;
   shell.querySelectorAll('[data-tour-action]').forEach(b=>b.disabled=!loaded);sceneButtons.forEach(b=>{b.disabled=!loaded;b.setAttribute('aria-pressed',String(viewer?.getScene()===b.dataset.tourScene));});reset.disabled=!loaded;
-  shell.querySelectorAll('.tour-player-button').forEach(b=>{const current=Number(b.dataset.playerId)===players[selected]?.id;b.classList.toggle('is-selected',current);if(current)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current');});
-  if(selected>=0){card.hidden=false;card.href=players[selected].href;card.textContent='Open '+players[selected].name+'’s public card →';}else card.hidden=true;
+  shell.querySelectorAll('.tour-player-button').forEach(b=>{const current=Number(b.dataset.playerId)===players[selected]?.id;b.classList.toggle('is-selected',current);b.setAttribute('aria-expanded',String(current));const plate=b.parentElement.querySelector('.tour-nameplate');if(plate){plate.hidden=!current;plate.style.top='';}if(current)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current');});
+  $('tourSelectionName').textContent=selected>=0?players[selected].name:'Find your stall';$('tourSelectionMeta').textContent=selected>=0?'STALL '+String(selected+1).padStart(2,'0')+' / 17 · '+players[selected].position:'17 MAIN-ROSTERED HITMEN';
+  if(selected>=0){card.hidden=false;card.href=players[selected].href;card.textContent='Open player card ↗';card.setAttribute('aria-label','Open '+players[selected].name+' public player card');}else card.hidden=true;placeNameplates();
  }
  function fail(){loaded=false;status.textContent='The 360° room is unavailable on this device. Use the public roster cards below.';stage.hidden=true;rosterVisible(true);sync();}
  function goToPlayer(id,focus=true){
@@ -34,38 +37,66 @@
   if(!loaded)return true;
   const [yaw,pitch]=points[viewer.getScene()][i];pending=null;
   viewer.lookAt(pitch-10,yaw,window.innerWidth<600?55:85,reduced()?false:850,()=>{
-   if(focus&&players[selected]?.id===Number(id)){const b=shell.querySelector('.tour-player-button[data-player-id="'+id+'"]');b?.focus({preventScroll:true});}
+   if(focus&&players[selected]?.id===Number(id)){const b=shell.querySelector('.tour-player-button[data-player-id="'+id+'"]');b?.focus({preventScroll:true});}placeNameplates();
   });
   stage.focus({preventScroll:true});shell.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'center'});
-  status.textContent=players[i].name+' · Stall '+(i+1)+' of 17 · Select the highlighted name or use Open public player card.';
+  status.textContent='Your stall is highlighted. Open your public player card to explore.';
   return true;
  }
- function setView(scene){if(!viewer||!['entrance','centre'].includes(scene))return false;loaded=false;pending=null;selected=-1;sync();status.textContent='Moving to '+(scene==='centre'?'the centre of the room':'the entrance')+'…';viewer.loadScene(scene,-8,0,100);return true;}
+ function setView(scene){if(!viewer||!['entrance','centre'].includes(scene))return false;loaded=false;pending=null;selected=-1;sync();status.textContent='Moving to '+(scene==='centre'?'the centre of the room':'the entrance')+'…';viewer.loadScene(scene,0,0,110);return true;}
  sceneButtons.forEach(b=>b.addEventListener('click',()=>setView(b.dataset.tourScene)));
  shell.querySelectorAll('[data-tour-action]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.tourAction,duration=reduced()?false:450;if(a==='left'||a==='right')viewer.setYaw(viewer.getYaw()+(a==='left'?-30:30),duration);if(a==='in'||a==='out')viewer.setHfov(viewer.getHfov()+(a==='in'?-10:10),duration);if(a==='full')viewer.toggleFullscreen();}));
- reset.addEventListener('click',()=>{selected=-1;pending=null;viewer.lookAt(-8,0,100,reduced()?false:700);status.textContent='Look around the room or find your stall above.';sync();});
+ reset.addEventListener('click',()=>{selected=-1;pending=null;viewer.lookAt(0,0,110,reduced()?false:700);status.textContent='Look around the room or find your stall above.';sync();});
  previous.addEventListener('click',()=>finder.focusStall(players[selected-1]?.id));next.addEventListener('click',()=>finder.focusStall(players[selected+1]?.id));
  room.addEventListener('hitmen-stall-selected',e=>goToPlayer(e.detail.lg_user_id));
- function playerHotspot(host,{player}){
-  const a=document.createElement('a');a.className='tour-player-button';a.dataset.playerId=player.id;a.href=player.href;a.textContent=player.name;a.setAttribute('aria-label','Open '+player.name+' public player card');host.append(a);
+ function playerHotspot(host,{player,scene}){
+  const button=document.createElement('button');button.type='button';button.className='tour-player-button';button.dataset.playerId=player.id;button.textContent=player.name;button.setAttribute('aria-label','Find '+player.name+' stall');button.setAttribute('aria-expanded','false');
+  const plate=document.createElement('div');plate.className='tour-nameplate';plate.id='tour-nameplate-'+scene+'-'+player.id;plate.hidden=true;plate.setAttribute('role','group');plate.setAttribute('aria-label',player.name+' custom stall nameplate');button.setAttribute('aria-controls',plate.id);
+  const metal=document.createElement('div');metal.className='tour-nameplate-metal';
+  metal.innerHTML='<i class="plate-rivet r1" aria-hidden="true"></i><i class="plate-rivet r2" aria-hidden="true"></i><i class="plate-rivet r3" aria-hidden="true"></i><i class="plate-rivet r4" aria-hidden="true"></i><img src="assets/lgchl/s55/team412.png" alt=""><div class="plate-player"><small>CALGARY HITMEN</small><strong></strong><span></span></div><div class="plate-stall"><small>STALL</small><b></b></div>';
+  metal.querySelector('.plate-player strong').textContent=player.name;
+  metal.querySelector('.plate-player span').textContent=player.position+' · MAIN ROSTER';
+  metal.querySelector('.plate-stall b').textContent=String(players.indexOf(player)+1).padStart(2,'0');
+  const link=document.createElement('a');link.className='tour-nameplate-open';link.href=player.href;link.textContent='OPEN PUBLIC PLAYER CARD ↗';link.setAttribute('aria-label','Open '+player.name+' public player card');
+  plate.append(metal,link);host.append(button,plate);
+  const show=()=>{plate.hidden=false;plate.style.top='';button.setAttribute('aria-expanded','true');placeNameplates();};
+  const hide=()=>{if(!button.classList.contains('is-selected')&&!host.contains(document.activeElement)){plate.hidden=true;button.setAttribute('aria-expanded','false');}};
+  button.addEventListener('click',e=>{e.stopPropagation();finder.focusStall(player.id);});
+  button.addEventListener('focus',show);host.addEventListener('mouseenter',show);host.addEventListener('mouseleave',hide);host.addEventListener('focusout',()=>setTimeout(hide,0));
+  host.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();selected=-1;pending=null;sync();stage.focus({preventScroll:true});status.textContent='Nameplate closed. Continue exploring the room.';}});
  }
  function floorHotspot(host,{target,label}){
   const button=document.createElement('button');button.type='button';button.className='tour-floor-arrow';button.innerHTML='<span aria-hidden="true">↑</span>';const text=document.createElement('small');text.textContent=label;button.append(text);button.setAttribute('aria-label',label);button.addEventListener('click',e=>{e.stopPropagation();setView(target);});host.append(button);
  }
+ const brandLayers=[];
+ function brandHotspot(host,args){
+  host.classList.add('tour-brand-anchor');host.setAttribute('aria-hidden','true');
+  const el=document.createElement('div');el.className='tour-art-layer tour-art-'+args.kind;
+  if(args.kind==='sign')el.innerHTML='<img src="assets/lgchl/s55/team412.png" alt=""><div><b>CALGARY HITMEN</b><span>PUBLIC LOCKER ROOM</span></div><img src="assets/brand/ecm-logo.webp" alt="">';
+  else{const img=document.createElement('img');img.src=args.kind==='jersey'?'assets/lgchl/s55/team412.png':'assets/brand/ecm-logo.webp';img.alt='';el.append(img);if(args.kind==='jersey'){const hit=document.createElement('button');hit.type='button';hit.tabIndex=-1;hit.className='tour-jersey-hit';hit.dataset.playerId=args.player.id;hit.setAttribute('aria-hidden','true');hit.addEventListener('click',e=>{e.stopPropagation();finder.focusStall(args.player.id);});el.append(hit);}}
+  host.append(el);brandLayers.push({el,scene:args.scene,angle:args.angle});resizeBrands();
+ }
+ function resizeBrands(){if(!viewer)return;const focal=stage.clientWidth/(2*Math.tan(viewer.getHfov()*Math.PI/360));for(const layer of brandLayers){if(layer.scene===viewer.getScene())layer.el.style.width=(2*focal*Math.tan(layer.angle*Math.PI/360))+'px';}}
+ function sceneBranding(scene){return [
+  {id:'real-room-sign',yaw:0,pitch:scene==='centre'?25:11.5,cssClass:'tour-hotspot',createTooltipFunc:brandHotspot,createTooltipArgs:{kind:'sign',scene,angle:scene==='centre'?67:37}},
+  {id:'real-ecm-table',yaw:0,pitch:scene==='centre'?-43:-25,cssClass:'tour-hotspot',createTooltipFunc:brandHotspot,createTooltipArgs:{kind:'table',scene,angle:scene==='centre'?18:10}},
+  ...players.map((p,i)=>({id:'real-jersey-'+p.id,yaw:points[scene][i][0],pitch:scene==='centre'?-11.5:-6.5,cssClass:'tour-hotspot',createTooltipFunc:brandHotspot,createTooltipArgs:{kind:'jersey',scene,player:p,angle:scene==='centre'?4.1:1.6}}))
+ ];}
+ window.addEventListener('resize',resizeBrands);
  async function start(){
   if(started)return;
   const stalls=[...room.querySelectorAll('.stall[id]')];
   if(stalls.length!==17){status.textContent='The verified 17-player roster is unavailable. Please reload to try again.';stage.hidden=true;rosterVisible(true);return;}
-  players=stalls.map(el=>({id:Number(el.id.replace('hitmen-stall-','')),name:el.querySelector('.nameplate').textContent,href:el.getAttribute('href')}));started=true;
+  players=stalls.map(el=>({id:Number(el.id.replace('hitmen-stall-','')),name:el.querySelector('.nameplate').textContent,href:el.getAttribute('href'),position:el.querySelector('.stall-info p').textContent.split(' · ')[0]}));started=true;
   try{
    if(!window.pannellum){
     const css=document.createElement('link');css.rel='stylesheet';css.href='vendor/pannellum/pannellum.css';document.head.append(css);
     await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='vendor/pannellum/pannellum.js';script.onload=resolve;script.onerror=reject;document.head.append(script);});
    }
    const scenes={};
-   for(const scene of ['entrance','centre'])scenes[scene]={title:scene==='centre'?'Centre of the room':'Entrance',type:'equirectangular',panorama:paths[scene],yaw:0,pitch:-8,hfov:100,hotSpots:[...players.map((player,i)=>({id:'player-'+player.id,yaw:points[scene][i][0],pitch:points[scene][i][1],cssClass:'tour-hotspot',createTooltipFunc:playerHotspot,createTooltipArgs:{player}})),{id:'floor-travel',yaw:scene==='entrance'?0:180,pitch:-30,cssClass:'tour-hotspot',createTooltipFunc:floorHotspot,createTooltipArgs:{target:scene==='entrance'?'centre':'entrance',label:scene==='entrance'?'Move to centre':'Return to entrance'}}]};
+   for(const scene of ['entrance','centre'])scenes[scene]={title:scene==='centre'?'Centre of the room':'Entrance',type:'equirectangular',panorama:paths[scene],yaw:0,pitch:0,hfov:110,hotSpots:[...sceneBranding(scene),...players.map((player,i)=>({id:'player-'+player.id,yaw:points[scene][i][0],pitch:points[scene][i][1],cssClass:'tour-hotspot',createTooltipFunc:playerHotspot,createTooltipArgs:{player,scene}})),{id:'floor-travel',yaw:scene==='entrance'?0:180,pitch:-24,cssClass:'tour-hotspot',createTooltipFunc:floorHotspot,createTooltipArgs:{target:scene==='entrance'?'centre':'entrance',label:scene==='entrance'?'Move to centre':'Return to entrance'}}]};
    viewer=window.pannellum.viewer(stage,{default:{firstScene:'entrance',autoLoad:true,showControls:false,showFullscreenCtrl:false,mouseZoom:'fullscreenonly',keyboardZoom:false,minHfov:45,maxHfov:110,minPitch:-65,maxPitch:65,sceneFadeDuration:reduced()?0:650,orientationOnByDefault:false,escapeHTML:true},scenes});
-   viewer.on('load',()=>{loaded=true;stage.hidden=false;rosterVisible(false);sync();status.textContent=(viewer.getScene()==='centre'?'Centre of the room':'Entrance')+' · 17 public player stalls · Drag or swipe to explore.';if(pending)goToPlayer(pending.id,pending.focus);});
+   viewer.on('zoomchange',resizeBrands);viewer.on('animatefinished',resizeBrands);viewer.on('load',()=>{loaded=true;brandLayers.splice(0,brandLayers.length,...brandLayers.filter(layer=>layer.el.isConnected));resizeBrands();stage.hidden=false;rosterVisible(false);sync();status.textContent=(viewer.getScene()==='centre'?'Centre of the room':'Entrance')+' · 17 public player stalls · Drag or swipe to explore.';if(pending)goToPlayer(pending.id,pending.focus);});
    viewer.on('error',fail);
   }catch{fail();}
  }
