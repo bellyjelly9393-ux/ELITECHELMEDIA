@@ -22,6 +22,7 @@
     {auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce'}}
   );
   var me=null, saved=[];
+  window.ecmCardAccount={getClient:()=>db,getUser:()=>me};
   var activeRequest=0;
   async function refresh() {
     if (!me) {saved=[];renderCollection();syncButtons(false);return;}
@@ -58,6 +59,7 @@
   }
   async function setUser(user) {
     me=user||null;
+    window.dispatchEvent(new Event("ecm:card-auth"));
     ++activeRequest;
     syncButtons(!!me);
     byId('accountName').textContent=me
@@ -90,9 +92,11 @@
     var payload={user_id:me.id,league:window.ecmCardStudio.getLeague(),
       lg_user_id:Number(p.id),player_kind:p.kind,gamertag_snapshot:p.tag.slice(0,80),
       finish:f,self_reported_overall:overall,jersey_number:jersey,updated_at:new Date().toISOString()};
-    var res=await db.from('elitechel_player_cards').upsert(payload,
-      {onConflict:'user_id,league,lg_user_id,player_kind'});
-    b.disabled=false;
+    var res;
+    try {res=await db.from('elitechel_player_cards').upsert(payload,
+      {onConflict:'user_id,league,lg_user_id,player_kind'});}
+    catch(e){notice('Card was not saved: '+e.message);return;}
+    finally{b.disabled=!me;}
     if(res.error){notice('Card was not saved: '+res.error.message);return;}
     notice('Card added to My Collection! Your character screenshot remains on this device; export PNG to keep it.');
     await refresh();
