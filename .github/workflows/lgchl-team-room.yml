@@ -12,6 +12,7 @@ on:
       - 'hitmen-stall-view.js'
       - 'hitmen-fixed-room.js'
       - 'hitmen-room-tour.css'
+      - 'hitmen-arena-schedule.css'
       - 'assets/lgchl/room-360/**'
       - 'vendor/pannellum/**'
       - 'test-hitmen-find-stall.cjs'
