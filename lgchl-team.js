@@ -59,7 +59,7 @@ async function roster(){
  const unique=new Map();for(const p of rows){const key=p.lg_user_id+':'+p.player_kind,old=unique.get(key);if(!old||String(p.fetched_at)>String(old.fetched_at))unique.set(key,p);}
  players=main.map(p=>({...unique.get(p.lg_user_id+':'+p.player_kind),...p}));
  $('playersTitle').textContent='Main roster · '+players.length;
- $('rosterNote').textContent='Select your stall to view or build your hockey card. Main-roster players only · LG roster snapshot: '+snapshot.as_of+'. The 62-team jersey reference collection is sourced. Finished locker cutouts display where available; remaining jerseys use marked crest concepts while their references are cleaned and reviewed. Imported Season 55 totals may include previous teams; — means unavailable.';
+ $('rosterNote').textContent='Select your stall to view or build your hockey card. Main-roster players only · LG roster snapshot: '+(entry.as_of||snapshot.as_of)+'. The 62-team jersey reference collection is sourced. Finished locker cutouts display where available; remaining jerseys use marked crest concepts while their references are cleaned and reviewed. Imported Season 55 totals may include previous teams; — means unavailable.';
  render();
  finder?.setPlayers(main);
  }catch{finder?.unavailable();$('roomPlayers').textContent='Current main roster is unavailable. Please try again later.';$('roomPlayers').setAttribute('aria-busy','false');}
