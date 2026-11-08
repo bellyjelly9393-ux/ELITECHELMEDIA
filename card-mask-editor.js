@@ -6,7 +6,7 @@
   const [photo, mask] = await Promise.all([image(original), image(initial.data)]);
   const dialog = document.createElement('dialog');
   dialog.className = 'mask-editor';
-  dialog.innerHTML = '<h2>Refine player cutout</h2><p>Paint over missing equipment to restore the original pixels, then press <b>Re-cut</b> to strip the ice and boards that came back with them. Use <b>Restore &amp; lock</b> for anything Re-cut must never remove. Erase removes rink pixels. Turn off the guide to inspect the edges.</p><label>Tool <select><option value="restore">Restore</option><option value="lock">Restore &amp; lock</option><option value="erase">Erase</option></select></label> <label>Brush width <input type="range" data-size min="1" max="70" value="8"></label> <label><input type="checkbox" checked> Show original as guide</label><div class="mask-stage"><canvas></canvas></div><div class="mask-recut"><button type="button" data-recut>Re-cut</button> <label>Re-cut strength <input type="range" data-strength min="0" max="100" value="50"></label></div><p class="mask-status" role="status" aria-live="polite"></p><button type="button" data-undo>Undo</button> <button type="button" data-cancel>Cancel</button> <button type="button" data-use>Use cutout</button>';
+  dialog.innerHTML = '<h2>Refine player cutout</h2><p><b>Smart restore</b>: paint over missing equipment. When you lift the brush, the ice and boards under the stroke are cut away again and the stick stays. <b>Re-cut</b> cleans the whole player with a fresh AI pass. Use <b>Restore &amp; lock</b> for equipment the same colour as the ice (white tape, skates). Erase removes rink pixels. Turn off the guide to inspect the edges.</p><label>Tool <select><option value="smart">Smart restore</option><option value="restore">Restore (everything)</option><option value="lock">Restore &amp; lock</option><option value="erase">Erase</option></select></label> <label>Brush width <input type="range" data-size min="1" max="70" value="8"></label> <label><input type="checkbox" checked> Show original as guide</label><div class="mask-stage"><canvas></canvas></div><div class="mask-recut"><button type="button" data-recut>Re-cut</button> <label>Re-cut strength <input type="range" data-strength min="0" max="100" value="50"></label></div><p class="mask-status" role="status" aria-live="polite"></p><button type="button" data-undo>Undo</button> <button type="button" data-cancel>Cancel</button> <button type="button" data-use>Use cutout</button>';
   document.body.append(dialog);
   const view=dialog.querySelector('canvas'), blank=()=>{const c=document.createElement('canvas');c.width=mask.width;c.height=mask.height;return c;};
   view.width=mask.width;view.height=mask.height;
@@ -18,6 +18,7 @@
   const tool=dialog.querySelector('select'), size=dialog.querySelector('[data-size]'), guide=dialog.querySelector('[type=checkbox]');
   const strength=dialog.querySelector('[data-strength]'), recutButton=dialog.querySelector('[data-recut]'), status=dialog.querySelector('.mask-status');
   const strokes=[];let active=null,pointer=null,frame,busy=false;
+  const strokeMask=blank(),sctx=strokeMask.getContext('2d');
   function display(){
    screen.clearRect(0,0,view.width,view.height);
    if(guide.checked){screen.globalAlpha=.28;screen.drawImage(source,0,0);screen.globalAlpha=1;}
@@ -36,6 +37,28 @@
    line(ctx,erase?'black':pattern,stroke,a,b);
    line(tctx,'white',stroke,a,b);                       // restore marks pixels for Re-cut; erase clears the mark
    if(erase||stroke.tool==='lock')line(kctx,'white',stroke,a,b);
+   if(stroke.tool==='smart')line(sctx,'white',stroke,a,b);
+  }
+  /* Smart restore: re-cut only the area around the finished stroke (fast, colour check only). */
+  function smartCut(stroke){
+   const w=view.width,h=view.height,pad=stroke.size/2+96;
+   const xs=stroke.points.map(p=>p.x),ys=stroke.points.map(p=>p.y);
+   const l=Math.max(0,Math.floor(Math.min(...xs)-pad)),t=Math.max(0,Math.floor(Math.min(...ys)-pad));
+   const r=Math.min(w,Math.ceil(Math.max(...xs)+pad)),b=Math.min(h,Math.ceil(Math.max(...ys)+pad)),cw=r-l,ch=b-t;
+   if(cw<2||ch<2)return 0;
+   const region=ctx.getImageData(l,t,cw,ch),pick=(c,k)=>{const d=c.getContext('2d').getImageData(l,t,cw,ch).data,o=new Uint8ClampedArray(cw*ch);for(let i=0;i<o.length;i++)o[i]=d[i*4+k];return o;};
+   const alpha=new Uint8ClampedArray(cw*ch);for(let i=0;i<alpha.length;i++)alpha[i]=region.data[i*4+3];
+   const result=window.ECMRecut.recut({rgba:source.getContext('2d').getImageData(l,t,cw,ch).data,alpha,width:cw,height:ch,restored:pick(strokeMask,3),locked:pick(locked,3),strength:+strength.value/100,onlyRestored:true});
+   for(let i=0;i<alpha.length;i++)region.data[i*4+3]=result.alpha[i];
+   ctx.putImageData(region,l,t);stroke.after={x:l,y:t,image:region};
+   return result.removed;
+  }
+  function finishStroke(){
+   const stroke=active;active=null;pointer=null;
+   if(!stroke||stroke.tool!=='smart'||!window.ECMRecut)return;
+   try{const removed=smartCut(stroke);status.textContent=removed?'Smart restore kept the equipment and cut '+removed.toLocaleString()+' background pixels. Undo if it took too much, or switch to Restore & lock.':'';}
+   catch(error){status.textContent='Smart cleanup failed, so the stroke was kept as a plain restore: '+error.message;}
+   finally{sctx.clearRect(0,0,view.width,view.height);display();}
   }
   function restoreSnapshot(entry){
    ctx.putImageData(entry.layer,0,0);tctx.clearRect(0,0,view.width,view.height);kctx.putImageData(entry.locked,0,0);
@@ -43,7 +66,8 @@
   function replay(){
    for(const c of [ctx,tctx,kctx])c.clearRect(0,0,view.width,view.height);
    ctx.drawImage(mask,0,0);
-   for(const stroke of strokes){if(stroke.recut)restoreSnapshot(stroke);else stroke.points.forEach((p,i)=>paint(stroke,stroke.points[Math.max(0,i-1)],p));}
+   for(const stroke of strokes){if(stroke.recut)restoreSnapshot(stroke);else{stroke.points.forEach((p,i)=>paint(stroke,stroke.points[Math.max(0,i-1)],p));if(stroke.after)ctx.putImageData(stroke.after.image,stroke.after.x,stroke.after.y);}}
+   sctx.clearRect(0,0,view.width,view.height);
    display();
   }
   function point(e){const r=view.getBoundingClientRect();return {x:(e.clientX-r.left)*view.width/r.width,y:(e.clientY-r.top)*view.height/r.height};}
@@ -79,7 +103,7 @@
   }
   view.onpointerdown=e=>{if(busy||active||e.button!==0)return;pointer=e.pointerId;view.setPointerCapture(pointer);active={tool:tool.value,size:+size.value,points:[]};strokes.push(active);append(e);};
   view.onpointermove=e=>{if(active&&e.pointerId===pointer)append(e);};
-  view.onlostpointercapture=()=>{active=null;pointer=null;};
+  view.onlostpointercapture=finishStroke;
   guide.onchange=display;
   recutButton.onclick=recut;
   dialog.querySelector('[data-undo]').onclick=()=>{if(busy)return;strokes.pop();replay();status.textContent='';};

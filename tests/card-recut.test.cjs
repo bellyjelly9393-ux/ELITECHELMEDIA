@@ -77,3 +77,11 @@ test('re-cut never adds pixels and does nothing without background samples',()=>
  const full=new Uint8ClampedArray(s.w*s.h).fill(255),r=recut({rgba:s.rgba,alpha:full,width:s.w,height:s.h});
  assert.equal(r.removed,0);
 });
+
+test('per-stroke mode only clears restored pixels, so player slivers at the crop edge survive',()=>{
+ const s=scene(),cw=60,ch=40,l=88,t=85,crop=a=>{const o=new a.constructor(cw*ch*(a.length/(s.w*s.h)));const k=a.length/(s.w*s.h);for(let y=0;y<ch;y++)for(let x=0;x<cw*k;x++)o[y*cw*k+x]=a[((t+y)*s.w+l)*k+x];return o;};
+ const {alpha}=recut({rgba:crop(s.rgba),alpha:crop(s.alpha),width:cw,height:ch,restored:crop(s.restored),onlyRestored:true});
+ assert.equal(alpha[10*cw+20],255,'body sliver inside the crop kept');
+ assert.equal(alpha[16*cw+1],255,'restored stick end kept');
+ assert.equal(alpha[8*cw+1],0,'restored ice cut');
+});

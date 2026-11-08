@@ -48,7 +48,7 @@ function nearest(lab,i,palette){
 }
 
 /* Remove specks left behind: components far smaller than the main body. */
-function despeckle(alpha,w,h){
+function despeckle(alpha,w,h,removable){
  const n=w*h,labels=new Int32Array(n),queue=new Int32Array(n),sizes=[0];let body=0;
  for(let s=0;s<n;s++){
   if(labels[s]||alpha[s]<24)continue;
@@ -59,7 +59,7 @@ function despeckle(alpha,w,h){
  }
  if(!body)return 0;
  const minimum=Math.max(30,sizes[body]*.003);let removed=0;
- for(let i=0;i<n;i++){const id=labels[i];if(alpha[i]&&(alpha[i]<24||(id!==body&&sizes[id]<minimum))){alpha[i]=0;removed++;}}
+ for(let i=0;i<n;i++){const id=labels[i];if(alpha[i]&&(!removable||removable[i])&&(alpha[i]<24||(id!==body&&sizes[id]<minimum))){alpha[i]=0;removed++;}}
  return removed;
 }
 
@@ -70,8 +70,9 @@ function despeckle(alpha,w,h){
  * locked: optional Uint8 w*h, non-zero where pixels must be kept as-is
  * ai: optional Float32 w*h foreground probability (0..1) from a fresh tight-crop segmentation
  * strength: 0..1, higher removes more
+ * onlyRestored: speck cleanup may only clear restored pixels (used for per-stroke Smart restore on a crop)
  */
-function recut({rgba,alpha,width:w,height:h,restored,locked,ai,strength=.5}){
+function recut({rgba,alpha,width:w,height:h,restored,locked,ai,strength=.5,onlyRestored=false}){
  const n=w*h,out=new Uint8ClampedArray(alpha),lab=toLab(rgba,n);
  const isLocked=i=>locked&&locked[i],isRestored=i=>restored&&restored[i];
  const isBg=i=>alpha[i]<8&&!isLocked(i),isFg=i=>alpha[i]>=250&&!isRestored(i)&&(!ai||ai[i]>=.6||isLocked(i));
@@ -99,7 +100,7 @@ function recut({rgba,alpha,width:w,height:h,restored,locked,ai,strength=.5}){
   if(dB<2.5&&dF>6||score<limit-.08){if(out[i]){out[i]=0;removed++;}}
   else if(score<limit+.08)out[i]=Math.round(out[i]*(score-(limit-.08))/.16);  // soft edge on mixed pixels
  }
- removed+=despeckle(out,w,h);
+ removed+=despeckle(out,w,h,onlyRestored?restored:null);
  if(locked)for(let i=0;i<n;i++)if(locked[i])out[i]=alpha[i];
  return {alpha:out,removed};
 }
