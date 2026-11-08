@@ -7,18 +7,18 @@
 <title>Player Card Studio | Elite Chel Media</title>
 <meta name="description" content="Interactive 3D hockey player cards using verified LGCHL and LG3s league statistics. Customize a personal CHEL character preview.">
 <link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
-<link rel="stylesheet" href="player-cards.css?v=20261108-publish1">
+<link rel="stylesheet" href="player-cards.css?v=20261108-earned2">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js" defer></script>
-<script src="player-card-rating.js?v=20261108-publish1" defer></script>
-<script src="player-card-renderer.js?v=20261108-publish1" defer></script>
-<script src="player-cards.js?v=20261108-publish1" defer></script>
-<script src="player-cards-account.js?v=20261108-publish1" defer></script>
-<link rel="stylesheet" href="player-card-studio-v2.css?v=20261108-publish1">
-<script src="player-card-studio-v2.js?v=20261108-publish1" defer></script>
-<script src="card-image-preparer.js?v=20261108-publish1" defer></script>
-<script src="player-card-public-artwork.js?v=20261108-publish1" defer></script>
-<script src="card-artwork-review-mode.js?v=20261108-publish1" defer></script>
-<script src="player-card-artwork-submit.js?v=20261108-publish1" defer></script>
+<script src="player-card-rating.js?v=20261108-earned2" defer></script>
+<script src="player-card-renderer.js?v=20261108-earned2" defer></script>
+<script src="player-cards.js?v=20261108-earned2" defer></script>
+<script src="player-cards-account.js?v=20261108-earned2" defer></script>
+<link rel="stylesheet" href="player-card-studio-v2.css?v=20261108-earned2">
+<script src="player-card-studio-v2.js?v=20261108-earned2" defer></script>
+<script src="card-image-preparer.js?v=20261108-earned2" defer></script>
+<script src="player-card-public-artwork.js?v=20261108-earned2" defer></script>
+<script src="card-artwork-review-mode.js?v=20261108-earned2" defer></script>
+<script src="player-card-artwork-submit.js?v=20261108-earned2" defer></script>
 </head>
 <body>
 <header class="top">
@@ -54,21 +54,19 @@
      <legend><span class="section-title"><b>3</b> SELECT BACKGROUND</span></legend>
      <div class="background-grid" id="backgroundOptions">
        <label class="background-option"><input type="radio" name="cardBackground" value="arena" checked><span class="background-thumb bg-arena" aria-hidden="true"></span><span>Arena Ice</span></label>
-       <label class="background-option"><input type="radio" name="cardBackground" value="heat"><span class="background-thumb bg-heat" aria-hidden="true"></span><span>Fire &amp; Heat</span></label>
-       <label class="background-option"><input type="radio" name="cardBackground" value="city"><span class="background-thumb bg-city" aria-hidden="true"></span><span>City Night</span></label>
+       <label class="background-option"><input type="radio" name="cardBackground" value="heat"><span class="background-thumb bg-heat" aria-hidden="true"></span><span>Tunnel Heat</span></label>
+       <label class="background-option"><input type="radio" name="cardBackground" value="city"><span class="background-thumb bg-city" aria-hidden="true"></span><span>Arena Bokeh</span></label>
        <label class="background-option"><input type="radio" name="cardBackground" value="locker"><span class="background-thumb bg-locker" aria-hidden="true"></span><span>Locker Room</span></label>
        <label class="background-option"><input type="radio" name="cardBackground" value="playoff"><span class="background-thumb bg-playoff" aria-hidden="true"></span><span>Playoff Lights</span></label>
        <label class="background-option"><input type="radio" name="cardBackground" value="storm"><span class="background-thumb bg-storm" aria-hidden="true"></span><span>Storm</span></label>
-<label class="background-option"><input type="radio" name="cardBackground" value="classic"><span class="background-thumb bg-classic" aria-hidden="true"></span><span>Classic Steel</span></label>
+<label class="background-option"><input type="radio" name="cardBackground" value="classic"><span class="background-thumb bg-classic" aria-hidden="true"></span><span>Classic Ice</span></label>
      </div>
    </fieldset>
-   <h3 class="section-title"><b>4</b> EDITION &amp; FINISH</h3><label>Card edition <span class="sub">Choose a visual edition preview. Progression unlocks are not active yet.</span>
-     <select id="edition"><option value="season">Season Series</option><option value="base">Base</option><option value="silver">Silver</option><option value="gold">Gold</option><option value="platinum">Platinum</option><option value="signature">Signature</option><option value="playoff">Playoff</option></select>
-   </label>
-   <label>Card finish<select id="finish"><option value="crimson">Crimson Steel</option><option value="gold">Championship Gold</option><option value="ice" selected>Ice Chrome</option></select></label>
-   <p class="hint">Background and edition are independent. For the cleanest player cutout, use a transparent PNG or WebP. Regular game screenshots retain their original scenery.</p>
+   <h3 class="section-title"><b>4</b> EARNED FINISH</h3>
+   <p id="earnedFinish" class="hint">Select a rated player to see their finish.</p>
+   <input type="hidden" id="finish"><input type="hidden" id="edition">
    <button type="button" id="generate" class="generate">ϟ GENERATE CARD</button><p id="renderStatus" class="status" role="status" aria-live="polite"></p><div class="actions"><button type="button" id="save">Save on this device</button><button type="button" id="saveToCollection" disabled>Save to My Collection</button><button type="button" id="export">Export PNG</button><button type="button" class="secondary" id="reset">Reset personal edits</button></div>
-   <p class="footnote">Device save keeps your artwork, layout, background and finish together. Account save keeps the player and basic card settings. Export PNG for a complete copy. Uploaded images are never published by this builder.</p>
+   <p class="footnote">Device save keeps your artwork, layout and background together. Account save keeps the player and basic card settings. Export PNG for a complete copy. Uploaded images are never published by this builder.</p>
   </section>
   <section class="stage" aria-labelledby="preview-heading">
    <div class="stage-head"><h2 id="preview-heading">YOUR SEASON. YOUR CARD.</h2><span>LIVE PREVIEW</span></div>
