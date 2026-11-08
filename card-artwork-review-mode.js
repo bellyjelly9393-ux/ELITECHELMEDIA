@@ -1,6 +1,6 @@
 /* Review uses the real renderer and calculated season data; publication stores appearance only. */
 (()=>{'use strict';const id=new URLSearchParams(location.search).get('review');if(!id)return;
-document.body.classList.add('card-review-mode');const robots=document.createElement('meta');robots.name='robots';robots.content='noindex,nofollow';document.head.append(robots);const panel=document.getElementById('reviewModeControls');panel.hidden=false;panel.innerHTML='<h2>Finished card review</h2><p id="reviewModeStatus" role="status">Sign in with your authorized manager account to load this private review.</p><div id="reviewModeEditor" hidden><p id="reviewPreparation"></p><label>Image version<select id="reviewImageSource"><option value="prepared">Prepared cutout</option><option value="original">Original upload</option></select></label><button type="button" id="refineCutout">Refine player cutout</button><label>Scale<input id="reviewScale" type="range" min="50" max="200" value="100"></label><label>Horizontal<input id="reviewX" type="range" min="-150" max="150" value="0"></label><label>Vertical<input id="reviewY" type="range" min="-150" max="150" value="0"></label><button type="button" id="reviewFit">Fit player to card</button><label>Review note<textarea id="reviewPublishNote" maxlength="500"></textarea></label><p>Confirm the player identity, image rights, content and placement. Publishing makes this exact image and placement public; ratings always come from season stats.</p><button id="reviewPublish" type="button" disabled>Approve &amp; publish card</button></div>';
+document.body.classList.add('card-review-mode');const robots=document.createElement('meta');robots.name='robots';robots.content='noindex,nofollow';document.head.append(robots);const panel=document.getElementById('reviewModeControls');panel.hidden=false;panel.innerHTML='<h2>Finished card review</h2><p id="reviewModeStatus" role="status">Sign in with your authorized manager account to load this private review.</p><div id="reviewModeEditor" hidden><p id="reviewPreparation"></p><label>Image version<select id="reviewImageSource"><option value="prepared">Prepared cutout</option><option value="original">Original upload</option></select></label><button type="button" id="refineCutout">Refine player cutout</button><details><summary>Use an external editor</summary><p>Download the screenshot, edit it in Photopea or your preferred app, then import a transparent PNG.</p><button type="button" id="downloadOriginal">Download original</button> <a href="https://www.photopea.com/" target="_blank" rel="noopener noreferrer">Open Photopea</a><label>Import edited PNG<input type="file" id="importCutout" accept="image/png"></label></details><label>Scale<input id="reviewScale" type="range" min="50" max="200" value="100"></label><label>Horizontal<input id="reviewX" type="range" min="-150" max="150" value="0"></label><label>Vertical<input id="reviewY" type="range" min="-150" max="150" value="0"></label><button type="button" id="reviewFit">Fit player to card</button><label>Review note<textarea id="reviewPublishNote" maxlength="500"></textarea></label><p>Confirm the player identity, image rights, content and placement. Publishing makes this exact image and placement public; ratings always come from season stats.</p><button id="reviewPublish" type="button" disabled>Approve &amp; publish card</button></div>';
 const $=s=>document.getElementById(s);let row,loading=false,loaded=false,source='',imageReady=false,updateTurn=0;
 function appearance(){return {imageScale:Number($('reviewScale').value),imageX:Number($('reviewX').value),imageY:Number($('reviewY').value),background:row.submitted_layout.background||'arena',...window.ecmCardStudio.getEarnedStyle()};}
 async function update(){const request=++updateTurn;imageReady=false;$('reviewPublish').disabled=true;if(!row)return;const db=window.ecmCardAccount.getClient(),selected=$('reviewImageSource').value;
@@ -10,18 +10,42 @@ async function update(){const request=++updateTurn;imageReady=false;$('reviewPub
 async function load(){const db=window.ecmCardAccount?.getClient();if(loading||loaded||!db||!window.ecmCardAccount.getUser()||!window.ecmCardStudio.getSelected())return;loading=true;
  try{const access=await db.rpc('ecm_card_review_access');if(access.error||access.data!==true)throw Error('Authorized artwork reviewer required.');const result=await db.from('ecm_card_artwork_reviews').select('id,league,lg_user_id,player_kind,object_path,original_path,status,submitted_layout,preparation,publication_consent_at').eq('id',id).single();if(result.error)throw result.error;row=result.data;
  const p=window.ecmCardStudio.getSelected();if(row.league!==window.ecmCardStudio.getLeague()||String(row.lg_user_id)!==String(p.id)||row.player_kind!==p.kind)throw Error('Player identity does not match this submission.');if(!['pending','approved'].includes(row.status))throw Error('Submission is no longer available for approval.');if(!row.publication_consent_at)throw Error('This earlier private upload needs to be resubmitted with permission for public display.');
- loaded=true;$('reviewModeEditor').hidden=false;for(const [control,key] of [['reviewScale','imageScale'],['reviewX','imageX'],['reviewY','imageY']])$(control).value=row.submitted_layout[key]??(key==='imageScale'?100:key==='finish'?'ice':0);$('reviewPreparation').textContent=row.preparation==='original-fallback'?'Automatic cutout could not finish. Review the original; do not publish a poor result.':row.preparation==='legacy'?'Earlier upload. Review the image and placement carefully.':'Automatic preparation: '+row.preparation+'. Check equipment and stick edges before approval.';await update();
+ loaded=true;$('reviewModeEditor').hidden=false;for(const [control,key] of [['reviewScale','imageScale'],['reviewX','imageX'],['reviewY','imageY']])$(control).value=row.submitted_layout[key]??(key==='imageScale'?100:key==='finish'?'ice':0);$('reviewPreparation').textContent=row.preparation==='original-fallback'?'Automatic cutout could not finish. Review the original; do not publish a poor result.':row.preparation==='legacy'?'Earlier upload. Review the image and placement carefully.':'Automatic preparation: '+row.preparation+'. Check equipment and stick edges before approval.';await update();if(new URLSearchParams(location.search).get('edit')==='cutout')$('refineCutout').click();
  }catch(e){$('reviewModeStatus').textContent=e.message;}finally{loading=false;}}
+async function originalBlob(){
+ const db=window.ecmCardAccount.getClient(),signed=await db.storage.from('ecm-card-artwork-review').createSignedUrl(row.original_path,600);
+ if(signed.error)throw signed.error;const response=await fetch(signed.data.signedUrl);
+ if(!response.ok)throw Error('Original screenshot unavailable.');return response.blob();
+}
+function selectCorrection(data,full){
+ row.corrected=data;row.correctedFull=full;row.correctedPath=null;
+ const select=$('reviewImageSource');if(!select.querySelector('[value=corrected]'))select.add(new Option('Manager-refined cutout','corrected'));select.value='corrected';
+}
+$('downloadOriginal').onclick=async()=>{try{
+ const url=URL.createObjectURL(await originalBlob()),a=document.createElement('a');
+ a.href=url;a.download='CHEL-'+row.lg_user_id+'-original.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);
+}catch(error){$('reviewModeStatus').textContent=error.message;}};
+$('importCutout').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{
+  if(file.type!=='image/png'||file.size>8388608)throw Error('Choose a transparent PNG under 8 MB.');
+  const url=URL.createObjectURL(file);
+  try{
+   const img=new Image();img.src=url;await img.decode();
+   if(img.width*img.height>16000000)throw Error('Resize the PNG to 16 megapixels or smaller.');
+   const c=document.createElement('canvas');c.width=img.width;c.height=img.height;
+   const ctx=c.getContext('2d');ctx.drawImage(img,0,0);const rgba=ctx.getImageData(0,0,c.width,c.height).data;
+   if(!rgba.some((v,i)=>i%4===3&&v<16))throw Error('The PNG needs a transparent background.');
+   selectCorrection(window.ECMImagePreparer.trim(c),null);await update();
+  }finally{URL.revokeObjectURL(url);}
+ }catch(error){$('reviewModeStatus').textContent=error.message;}finally{e.target.value='';}
+};
 $('refineCutout').onclick=async()=>{
  const button=$('refineCutout'),publish=$('reviewPublish');button.disabled=true;publish.disabled=true;imageReady=false;
  try{
-  const db=window.ecmCardAccount.getClient(),signed=await db.storage.from('ecm-card-artwork-review').createSignedUrl(row.original_path,600);
-  if(signed.error)throw signed.error;
-  const response=await fetch(signed.data.signedUrl);if(!response.ok)throw Error('Original screenshot unavailable.');
-  const url=URL.createObjectURL(await response.blob());
+  const url=URL.createObjectURL(await originalBlob());
   let corrected;try{corrected=await window.ECMMaskEditor.edit(url,msg=>{$('reviewModeStatus').textContent=msg;},row.correctedFull);}finally{URL.revokeObjectURL(url);}
-  if(corrected){row.corrected=corrected.data;row.correctedFull=corrected.full;row.correctedPath=null;
-   const select=$('reviewImageSource');if(!select.querySelector('[value=corrected]'))select.add(new Option('Manager-refined cutout','corrected'));select.value='corrected';}
+  if(corrected)selectCorrection(corrected.data,corrected.full);
   await update();
  }catch(error){$('reviewModeStatus').textContent=error.message;}finally{button.disabled=false;}
 };

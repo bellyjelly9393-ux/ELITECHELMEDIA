@@ -21,7 +21,14 @@ async function load(){
   card.innerHTML='<div class="review-preview"></div><div><h2>'+esc(row.gamertag_snapshot)+'</h2><small>'+esc(row.league.toUpperCase())+' · '+esc(row.player_kind)+' · LG ID '+esc(row.lg_user_id)+'</small><p>'+esc(row.status.toUpperCase())+' · Submitted '+esc(new Date(row.created_at).toLocaleString())+'</p><label>Review note (required to reject)<textarea maxlength="500"></textarea></label><div class="review-buttons"></div><p role="status" class="decision-status"></p></div>';
   card.querySelector('textarea').value=row.review_note||'';
   const actions=card.querySelector('.review-buttons');
-  const preview=document.createElement('button');preview.type='button';preview.textContent=row.status==='approved'?'Review placement / publish':'Review finished card';preview.addEventListener('click',()=>{const query=new URLSearchParams({review:row.id,league:row.league,id:String(row.lg_user_id),kind:row.player_kind});$('cardReviewFrame').src='player-cards.html?'+query;$('cardReviewDialog').showModal();});if(['pending','approved'].includes(row.status))actions.append(preview);
+  if(['pending','approved'].includes(row.status)){
+   for(const [label,edit] of [[row.status==='approved'?'Review placement / publish':'Review finished card',''],['Refine player cutout','cutout']]){
+    const button=document.createElement('button');button.type='button';button.textContent=label;
+    button.onclick=()=>{const query=new URLSearchParams({review:row.id,league:row.league,id:String(row.lg_user_id),kind:row.player_kind});
+     if(edit)query.set('edit',edit);$('cardReviewFrame').src='player-cards.html?'+query;$('cardReviewDialog').showModal();};
+    actions.append(button);
+   }
+  }
   for(const decision of ['pending','approved'].includes(row.status)?['rejected']:[]){
    const button=document.createElement('button');button.type='button';button.disabled=true;button.className=decision==='approved'?'approve':'reject';button.textContent=decision==='approved'?'Approve image':row.status==='approved'?'Revoke approval':'Reject image';
    button.addEventListener('click',async()=>{
