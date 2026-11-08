@@ -57,6 +57,7 @@ window.ecmCardStudio={
  getSelected:()=>current,
  getLeague:()=>league,
  getArtwork:()=>portraitData,
+ applyApprovedArtwork:(data,layout,{force=false}={})=>{if(portraitData&&!force)return false;portraitData=data;for(const id of ['imageScale','imageX','imageY'])if(layout[id]!==undefined)$(id).value=layout[id];if(layout.finish)$('finish').value=layout.finish;if(layout.edition)$('edition').value=layout.edition;if(layout.background)setBackground(layout.background);render();return true;},
  getRating:rating,
  getDisplayedOverall:displayedOverall,
  redraw:render,
