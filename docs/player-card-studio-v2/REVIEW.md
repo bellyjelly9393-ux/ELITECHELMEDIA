@@ -1,5 +1,7 @@
 # Player Card Studio V2 — review build
 
+Update November 8: [RATING-BETA.md](RATING-BETA.md) documents the implemented beta calculation and replaces the inactive OVR description below. Earlier visual and account validation notes remain historical.
+
 This is a reviewable implementation, not the final definition of done. Production deployment is not authorized. Work is isolated to the player-card studio and its tests/documentation.
 
 ## Audit and implementation plan
