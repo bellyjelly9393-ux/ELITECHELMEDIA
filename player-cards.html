@@ -47,11 +47,19 @@
    <p id="feedStatus" class="status" role="status" aria-live="polite">Loading public statistics…</p>
    <div class="divider"></div>
    <h3 class="section-title"><b>2</b> PLAYER PHOTO</h3>
+   <aside class="artwork-policy" aria-labelledby="card-submit-guide">
+    <strong id="card-submit-guide">How to get your card published</strong>
+    <ol>
+     <li>Sign in with Discord and select your gamertag under Player Identity.</li>
+     <li>Upload your CHEL screenshot and check the preview. Use <b>Refine player cutout</b> if the stick or skates need a touch-up.</li>
+     <li>Open <b>Submit artwork for review</b> below, check the image permission box, then press the submit button. Keep this page open until you see the confirmation.</li>
+    </ol>
+    <p>Your preview is private. A manager checks the artwork and placement before publishing your card.</p>
+   </aside>
    <label>CHEL character screenshot <span class="sub">PNG, JPG or WebP · up to 8 MB</span><input id="portraitFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
    <button type="button" id="playerMaskEdit">Refine player cutout</button><p id="playerMaskStatus" role="status"></p>
    <details class="image-tools"><summary>Position your photo</summary><label>Scale<input id="imageScale" type="range" min="50" max="200" value="100"></label><div class="inline"><label>Horizontal<input id="imageX" type="range" min="-150" max="150" value="0"></label><label>Vertical<input id="imageY" type="range" min="-150" max="150" value="0"></label></div><button type="button" id="resetImage">Reset image position</button></details><details><summary>Jersey number</summary><label>Jersey number <span class="sub">Optional</span><input id="jersey" type="number" min="0" max="99" inputmode="numeric" placeholder="--"></label></details><p class="hint">Overall is calculated from season stats and cannot be edited.</p>
-   <p class="artwork-policy"><strong>Private artwork preview</strong> Your preview stays on this device unless you submit it. Only a manager-approved image and placement can appear publicly.</p>
-   <details class="artwork-policy"><summary>Submit artwork for review</summary><p>Your photo is prepared on this device and sent privately to the manager queue. A manager checks the finished card before publishing it to this player’s locker and profile. Keep this page open until submission finishes.</p><label><input type="checkbox" id="artworkRights"> I have permission to use this image, it follows community rules, and I agree to its public display after manager approval.</label><button type="button" id="submitArtwork">Submit artwork for review</button><p id="artworkReviewStatus" role="status" aria-live="polite">Sign in with Discord to submit artwork.</p></details>
+   <details class="artwork-policy"><summary>Submit artwork for review</summary><label><input type="checkbox" id="artworkRights"> I have permission to use this image, it follows community rules, and I agree to its public display after manager approval.</label><button type="button" id="submitArtwork">Submit artwork for review</button><p id="artworkReviewStatus" role="status" aria-live="polite">Sign in with Discord to submit artwork.</p></details>
    <fieldset class="background-picker" aria-label="Card background templates">
      <legend><span class="section-title"><b>3</b> SELECT BACKGROUND</span></legend>
      <div class="background-grid" id="backgroundOptions">
