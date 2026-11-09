@@ -1,8 +1,20 @@
 {
   "featured": [
-    "2026-11-04-tuesday-night-week6-review"
+    "2026-11-08-week-seven-every-point-matters"
   ],
   "episodes": [
+    {
+      "id": "2026-11-08-week-seven-every-point-matters",
+      "date": "2026-11-08",
+      "type": "nightly",
+      "label": "Week Seven · Every Point Matters · Nov 8",
+      "title": "Hitmen Radio — Week Seven: Every Point Matters",
+      "headline": "Week Seven: Every Point Matters",
+      "description": "The latest Hitmen Radio episode from EliteChel Media covering the LGCHL.",
+      "duration": "10:32",
+      "video": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Ic50OgPEnsF6yLkPdMjvCnPfo2/9da65609-a3a3-41c0-94f6-9658868216b5.mp4",
+      "poster": "assets/lgchl/studio/radio-booth.webp"
+    },
     {
       "id": "2026-11-04-tuesday-night-week6-review",
       "date": "2026-11-04",
