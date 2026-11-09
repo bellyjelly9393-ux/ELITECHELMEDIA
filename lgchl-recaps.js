@@ -34,7 +34,7 @@
     return '<ol class="rc-stars">' + st.map(function (x) { return '<li>' + starMark(x.n) + '<span class="rc-ord">' + ORD[x.n] + ' Star</span><strong>' + esc(x.player) + '</strong><span class="rc-team">' + logo(teamOf(x.team, x.logo), 'rc-logo-s') + esc(x.team) + '</span><span class="rc-line">' + esc(x.line) + '</span></li>'; }).join('') + '</ol>';
   }
   function gameCard(g) {
-    return '<details class="rc-game" id="recap-' + esc(g.game || '') + '"><summary>' + matchHead(g) + '<span class="rc-title">' + esc(g.title) + '</span></summary><div class="wu-text">' + g.html + '<h4>Three Stars</h4>' + starList(g.stars, g.starsNote) + '</div></details>';
+    return '<details class="rc-game" id="recap-' + esc(g.game || '') + '"><summary>' + matchHead(g) + '<span class="rc-title">' + esc(g.title) + '</span></summary>' + (window.ECMNarration ? window.ECMNarration.publicPlayer(g.narration, 'Listen to game recap') : '') + '<div class="wu-text">' + g.html + '<h4>Three Stars</h4>' + starList(g.stars, g.starsNote) + '</div></details>';
   }
   function hasFinal(g) { return g.final !== false && !!g.game; } /* no-final games (e.g. 918376) are not shown */
   function render(d) {
