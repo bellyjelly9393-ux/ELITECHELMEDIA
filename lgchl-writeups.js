@@ -10,7 +10,7 @@
   function render(w, openId) {
     body.innerHTML = '<p class="wu-range">' + esc(w.range) + '</p>' + w.items.map(function (it, i) {
       var open = openId ? it.id === openId : i === 0;
-      return '<details class="card wu-item" id="' + esc(it.id) + '"' + (open ? ' open' : '') + '><summary><span class="wu-kind">' + esc(it.kind) + ' · ' + esc(fmt(it.date)) + '</span><span class="wu-title">' + esc(it.title) + '</span></summary><div class="wu-text">' + it.html + '</div></details>';
+      return '<details class="card wu-item" id="' + esc(it.id) + '"' + (open ? ' open' : '') + '><summary><span class="wu-kind">' + esc(it.kind) + ' · ' + esc(fmt(it.date)) + '</span><span class="wu-title">' + esc(it.title) + '</span></summary>' + (window.ECMNarration ? window.ECMNarration.publicPlayer(it.narration, 'Listen to article') : '') + '<div class="wu-text">' + it.html + '</div></details>';
     }).join('');
     [].forEach.call(tabs.querySelectorAll('button'), function (b) { b.setAttribute('aria-pressed', b.dataset.week === w.id ? 'true' : 'false'); });
   }
