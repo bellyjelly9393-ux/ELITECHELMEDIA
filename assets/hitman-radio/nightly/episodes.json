@@ -1,8 +1,21 @@
 {
   "featured": [
+    "2026-11-09-sunday-review-monday-preview",
     "2026-11-09-trade-deadline-special"
   ],
   "episodes": [
+    {
+      "id": "2026-11-09-sunday-review-monday-preview",
+      "date": "2026-11-09",
+      "type": "preview",
+      "label": "Sunday review + Monday playoff preview \u00b7 Nov 9",
+      "title": "Hitmen Radio: Sunday Night Review & Monday Playoff Preview",
+      "headline": "Six games left: Calgary's perfect Sunday, the WHL East race, and tonight's posted playoff-pressure matchups",
+      "description": "Six games left. Graham and David break down Calgary's perfect Sunday \u2014 three wins, two in overtime \u2014 plus the WHL East race, Surges and slides around the LGCHL, and tonight's posted playoff-pressure matchups from Medicine Hat at Calgary to Victoriaville at Blainville. Season 55. Every point matters.",
+      "duration": "8:19",
+      "video": "assets/hitman-radio/nightly/2026-11-09-sunday-review-monday-preview.mp4?v=20261109b",
+      "poster": "assets/hitman-radio/nightly/2026-11-09-sunday-review-monday-preview-poster.jpg?v=20261109b"
+    },
     {
       "id": "2026-11-09-trade-deadline-special",
       "date": "2026-11-09",
