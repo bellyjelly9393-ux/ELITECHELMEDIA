@@ -6,6 +6,21 @@ private matchmaking codes.
 
 ## Delivered
 
+- **Tue Nov 10 drop (for the next episode):**
+  - `games/s55/2026-11-09/`: LGCHL games from Monday Nov 9, **92 of 93** (918579-918671 except 918652,
+    Niagara at Peterborough, which has no result on LG). Same files and game JSON as earlier nights.
+    Hitmen: W 8-2 vs Medicine Hat, L 2-6 at Red Deer, L 1-2 at Prince Albert. `capture.json` flags games
+    whose LG period goals do not add up; some LG games put every goal in period 3.
+  - `standings/2026-11-10/`: all 62 teams after Monday Nov 9 (63 GP each, 3 left), by conference race.
+    Checked against the saved game results for every team. Hitmen: 7th in the WHL Eastern race, 68 PTS (30-25-8).
+  - `leaders/2026-11-10/`: season 55 leaderboards after Nov 9 (1,310 skaters and 213 goalies with a game
+    played), points, goals, assists, +/-, hits, GWG, takeaways, interceptions, blocks, D-men points, goalie boards.
+  - `lineups/2026-11-10/`: **Tue Nov 10: lineups as listed on LG** for all three Hitmen games (Swift Current 9:00,
+    Saskatoon 9:35, at Moose Jaw 10:10 ET). The Hitmen's lineup is the official one: LW morbid_chaos15, C gtcoop73,
+    RW l danks l, LD imona_plain, RD matt_0_5, G Kudolken.
+  - Not in this drop: games from Nov 4-8 (not captured), `opponents/2026-11-10/`, transactions, and power rankings
+    (no LGCHL power-ranking source exists; write it from standings and results).
+
 - `lineups/2026-11-08/`: **Sun Nov 8: lineups as listed on LG before puck drop**, read off management's
   screenshots (2:33 PM ET). Chilliwack Bruins @ Calgary 9:35 (complete) and Calgary @ Edmonton Oil Kings
   10:10 (Edmonton's table is cut off after the RW row; its D pair and goalie come from the posted jerseys).

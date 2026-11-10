@@ -1,0 +1,1488 @@
+{
+ "schema": "lgchl-pregame-lineups-v1",
+ "date": "2026-11-10",
+ "basis": "Players listed for each team on LG's game page before puck drop",
+ "games": [
+  {
+   "lg_game_id": 918697,
+   "puck_drop_et": "9:00 PM",
+   "away": {
+    "team": "Swift Current Broncos",
+    "skaters": [
+     {
+      "position": "LW",
+      "player": "GFLR",
+      "lg_user_id": 79040,
+      "overall": 71,
+      "salary_m": "$7.25",
+      "rec": "11-6-2",
+      "gp": 19,
+      "pts": 63,
+      "goals": 27,
+      "ast": 36,
+      "plus_minus": 8,
+      "gwg": 2
+     },
+     {
+      "position": "LW",
+      "player": "OMG_Magro",
+      "lg_user_id": 62563,
+      "overall": 78,
+      "salary_m": "$1",
+      "rec": "13-7-0",
+      "gp": 20,
+      "pts": 56,
+      "goals": 39,
+      "ast": 17,
+      "plus_minus": 27,
+      "gwg": 7
+     },
+     {
+      "position": "C",
+      "player": "sepoL1083",
+      "lg_user_id": 81172,
+      "overall": 59,
+      "salary_m": "$0.75",
+      "rec": "3-2-1",
+      "gp": 6,
+      "pts": 13,
+      "goals": 5,
+      "ast": 8,
+      "plus_minus": 7,
+      "gwg": 2
+     },
+     {
+      "position": "C",
+      "player": "xDxmba",
+      "lg_user_id": 71571,
+      "overall": 57,
+      "salary_m": "$1.75",
+      "rec": "14-7-1",
+      "gp": 22,
+      "pts": 51,
+      "goals": 23,
+      "ast": 28,
+      "plus_minus": 1,
+      "gwg": 1
+     },
+     {
+      "position": "RW",
+      "player": "scorezyy",
+      "lg_user_id": 6957,
+      "overall": 83,
+      "salary_m": "$4.75",
+      "rec": "8-5-2",
+      "gp": 15,
+      "pts": 53,
+      "goals": 32,
+      "ast": 21,
+      "plus_minus": 3,
+      "gwg": 3
+     },
+     {
+      "position": "RW",
+      "player": "HellsDiscipIe",
+      "lg_user_id": 71261,
+      "overall": 62,
+      "salary_m": "$0",
+      "rec": "3-6-0",
+      "gp": 9,
+      "pts": 23,
+      "goals": 13,
+      "ast": 10,
+      "plus_minus": -3,
+      "gwg": 2
+     },
+     {
+      "position": "RW",
+      "player": "cyclone1189",
+      "lg_user_id": 30403,
+      "overall": 52,
+      "salary_m": "$0.75",
+      "rec": "2-1-0",
+      "gp": 3,
+      "pts": 5,
+      "goals": 2,
+      "ast": 3,
+      "plus_minus": 0,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "scrva",
+      "lg_user_id": 80913,
+      "overall": 60,
+      "salary_m": "$4",
+      "rec": "8-3-1",
+      "gp": 12,
+      "pts": 9,
+      "goals": 1,
+      "ast": 8,
+      "plus_minus": 14,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "Tekniks79",
+      "lg_user_id": 19023,
+      "overall": 52,
+      "salary_m": "$0.75",
+      "rec": "7-9-0",
+      "gp": 16,
+      "pts": 14,
+      "goals": 2,
+      "ast": 12,
+      "plus_minus": -10,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "Bruins37",
+      "lg_user_id": 46329,
+      "overall": 62,
+      "salary_m": "$0.75",
+      "rec": "15-5-2",
+      "gp": 22,
+      "pts": 26,
+      "goals": 6,
+      "ast": 20,
+      "plus_minus": 5,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "Rick96049018",
+      "lg_user_id": 78302,
+      "overall": 51,
+      "salary_m": "$0",
+      "rec": "9-9-1",
+      "gp": 19,
+      "pts": 25,
+      "goals": 3,
+      "ast": 22,
+      "plus_minus": 3,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "Scarffiie",
+      "lg_user_id": 42574,
+      "overall": 63,
+      "salary_m": "$1.25",
+      "rec": "13-7-2",
+      "gp": 22,
+      "pts": 27,
+      "goals": 3,
+      "ast": 24,
+      "plus_minus": 5,
+      "gwg": 0
+     }
+    ],
+    "goalies": [
+     {
+      "position": "G",
+      "player": "Triniboi2003",
+      "lg_user_id": 65771,
+      "overall": 71,
+      "salary_m": "$0.75",
+      "ggp": 36,
+      "gwin": 18,
+      "gloss": 18,
+      "gaa": 3.07,
+      "savep": 0.836
+     },
+     {
+      "position": "G",
+      "player": "da_real_jarry",
+      "lg_user_id": 70700,
+      "overall": 57,
+      "salary_m": "$1.25",
+      "ggp": 9,
+      "gwin": 2,
+      "gloss": 7,
+      "gaa": 6.27,
+      "savep": 0.703
+     },
+     {
+      "position": "G",
+      "player": "iTzDeezTendy31",
+      "lg_user_id": 36288,
+      "overall": 66,
+      "salary_m": "$0.75",
+      "ggp": 26,
+      "gwin": 14,
+      "gloss": 12,
+      "gaa": 3.61,
+      "savep": 0.798
+     }
+    ],
+    "offense_breakdown": [
+     {
+      "players": "C) sepoL1083 LW) GFLR RW) scorezyy",
+      "salary_m": "$12.75",
+      "rec": "22-13-5",
+      "gp": 40,
+      "pts": 129,
+      "goals": 64,
+      "ast": 65,
+      "plus_minus": 18,
+      "gwg": 7
+     }
+    ],
+    "defense_breakdown": [
+     {
+      "players": "LD) scrva RD) Rick96049018",
+      "salary_m": "$4",
+      "rec": "17-12-2",
+      "gp": 31,
+      "pts": 34,
+      "goals": 4,
+      "ast": 30,
+      "plus_minus": 17,
+      "gwg": 0
+     }
+    ]
+   },
+   "home": {
+    "team": "Calgary Hitmen",
+    "skaters": [
+     {
+      "position": "LW",
+      "player": "morbid_chaos15",
+      "lg_user_id": 80981,
+      "overall": 74,
+      "salary_m": "$0.75",
+      "rec": "5-1-0",
+      "gp": 6,
+      "pts": 17,
+      "goals": 9,
+      "ast": 8,
+      "plus_minus": 15,
+      "gwg": 1
+     },
+     {
+      "position": "LW",
+      "player": "offtheyrk",
+      "lg_user_id": 58225,
+      "overall": 68,
+      "salary_m": "$0.75",
+      "rec": "11-8-3",
+      "gp": 22,
+      "pts": 63,
+      "goals": 33,
+      "ast": 30,
+      "plus_minus": 6,
+      "gwg": 3
+     },
+     {
+      "position": "LW",
+      "player": "l Setty l",
+      "lg_user_id": 73707,
+      "overall": 60,
+      "salary_m": "$0",
+      "rec": "10-8-4",
+      "gp": 22,
+      "pts": 60,
+      "goals": 24,
+      "ast": 36,
+      "plus_minus": 23,
+      "gwg": 2
+     },
+     {
+      "position": "C",
+      "player": "gtcoop73",
+      "lg_user_id": 76399,
+      "overall": 66,
+      "salary_m": "$2.75",
+      "rec": "7-8-1",
+      "gp": 16,
+      "pts": 49,
+      "goals": 23,
+      "ast": 26,
+      "plus_minus": 8,
+      "gwg": 2
+     },
+     {
+      "position": "RW",
+      "player": "l danks l",
+      "lg_user_id": 10718,
+      "overall": 76,
+      "salary_m": "$0.75",
+      "rec": "6-3-1",
+      "gp": 10,
+      "pts": 34,
+      "goals": 17,
+      "ast": 17,
+      "plus_minus": 22,
+      "gwg": 1
+     },
+     {
+      "position": "RW",
+      "player": "fred_7517",
+      "lg_user_id": 55685,
+      "overall": 0,
+      "salary_m": "$0.75",
+      "rec": "0-0-1",
+      "gp": 1,
+      "pts": 0,
+      "goals": 0,
+      "ast": 0,
+      "plus_minus": 0,
+      "gwg": 0
+     },
+     {
+      "position": "RW",
+      "player": "Gullyrr",
+      "lg_user_id": 79521,
+      "overall": 59,
+      "salary_m": "$5",
+      "rec": "11-10-1",
+      "gp": 22,
+      "pts": 52,
+      "goals": 18,
+      "ast": 34,
+      "plus_minus": 0,
+      "gwg": 1
+     },
+     {
+      "position": "LD",
+      "player": "imona_plain",
+      "lg_user_id": 17569,
+      "overall": 55,
+      "salary_m": "$0",
+      "rec": "8-8-3",
+      "gp": 19,
+      "pts": 10,
+      "goals": 1,
+      "ast": 9,
+      "plus_minus": 11,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "WhyKayWins",
+      "lg_user_id": 77094,
+      "overall": 63,
+      "salary_m": "$2.75",
+      "rec": "14-5-3",
+      "gp": 22,
+      "pts": 40,
+      "goals": 4,
+      "ast": 36,
+      "plus_minus": 31,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "xSalda-",
+      "lg_user_id": 29039,
+      "overall": 58,
+      "salary_m": "$3.5",
+      "rec": "13-8-1",
+      "gp": 22,
+      "pts": 23,
+      "goals": 1,
+      "ast": 22,
+      "plus_minus": 16,
+      "gwg": 1
+     },
+     {
+      "position": "LD",
+      "player": "SchmeeveTv",
+      "lg_user_id": 80063,
+      "overall": 0,
+      "salary_m": "$0.75",
+      "rec": 0,
+      "gp": 0,
+      "pts": 0,
+      "goals": 0,
+      "ast": 0,
+      "plus_minus": 0,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "BODFUSION",
+      "lg_user_id": 77805,
+      "overall": 45,
+      "salary_m": "$0.75",
+      "rec": "3-10-0",
+      "gp": 13,
+      "pts": 7,
+      "goals": 0,
+      "ast": 7,
+      "plus_minus": -12,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "matt_0_5",
+      "lg_user_id": 81072,
+      "overall": 56,
+      "salary_m": "$0.75",
+      "rec": "8-5-3",
+      "gp": 16,
+      "pts": 11,
+      "goals": 3,
+      "ast": 8,
+      "plus_minus": 13,
+      "gwg": 1
+     },
+     {
+      "position": "RD",
+      "player": "Koldex Bands",
+      "lg_user_id": 79440,
+      "overall": 58,
+      "salary_m": "$3.75",
+      "rec": "9-5-1",
+      "gp": 15,
+      "pts": 26,
+      "goals": 2,
+      "ast": 24,
+      "plus_minus": 20,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "FerdaLettuce",
+      "lg_user_id": 80075,
+      "overall": 55,
+      "salary_m": "$3.25",
+      "rec": "9-12-1",
+      "gp": 22,
+      "pts": 15,
+      "goals": 0,
+      "ast": 15,
+      "plus_minus": 2,
+      "gwg": 0
+     }
+    ],
+    "goalies": [
+     {
+      "position": "G",
+      "player": "Kudolken",
+      "lg_user_id": 12262,
+      "overall": 70,
+      "salary_m": "$0.75",
+      "ggp": 22,
+      "gwin": 10,
+      "gloss": 12,
+      "gaa": 2.91,
+      "savep": 0.835
+     }
+    ],
+    "offense_breakdown": [
+     {
+      "players": "C) gtcoop73 LW) morbid_chaos15 RW) l danks l",
+      "salary_m": "$4.25",
+      "rec": "18-12-2",
+      "gp": 32,
+      "pts": 100,
+      "goals": 49,
+      "ast": 51,
+      "plus_minus": 45,
+      "gwg": 4
+     }
+    ],
+    "defense_breakdown": [
+     {
+      "players": "LD) imona_plain RD) matt_0_5",
+      "salary_m": "$0.75",
+      "rec": "16-13-6",
+      "gp": 35,
+      "pts": 21,
+      "goals": 4,
+      "ast": 17,
+      "plus_minus": 24,
+      "gwg": 1
+     }
+    ]
+   },
+   "team_ratings": {
+    "tot": {
+     "away": 66,
+     "home": 66
+    },
+    "off": {
+     "away": 71,
+     "home": 72
+    },
+    "def": {
+     "away": 55,
+     "home": 55
+    },
+    "goalie": {
+     "away": 71,
+     "home": 70
+    }
+   },
+   "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918697"
+  },
+  {
+   "lg_game_id": 918724,
+   "puck_drop_et": "9:35 PM",
+   "away": {
+    "team": "Saskatoon Blades",
+    "skaters": [
+     {
+      "position": "LW",
+      "player": "mgb2092",
+      "lg_user_id": 55638,
+      "overall": 53,
+      "salary_m": "$0",
+      "rec": "5-11-2",
+      "gp": 18,
+      "pts": 35,
+      "goals": 17,
+      "ast": 18,
+      "plus_minus": -22,
+      "gwg": 2
+     },
+     {
+      "position": "LW",
+      "player": "SKontos39",
+      "lg_user_id": 58696,
+      "overall": 0,
+      "salary_m": "$0.75",
+      "rec": "0-0-1",
+      "gp": 1,
+      "pts": 2,
+      "goals": 0,
+      "ast": 2,
+      "plus_minus": -1,
+      "gwg": 0
+     },
+     {
+      "position": "LW",
+      "player": "foodude56",
+      "lg_user_id": 75884,
+      "overall": 0,
+      "salary_m": "$0.75",
+      "rec": 0,
+      "gp": 0,
+      "pts": 0,
+      "goals": 0,
+      "ast": 0,
+      "plus_minus": 0,
+      "gwg": 0
+     },
+     {
+      "position": "C",
+      "player": "lucidmedia",
+      "lg_user_id": 81211,
+      "overall": 46,
+      "salary_m": "$0.75",
+      "rec": "3-3-1",
+      "gp": 7,
+      "pts": 12,
+      "goals": 6,
+      "ast": 6,
+      "plus_minus": -5,
+      "gwg": 1
+     },
+     {
+      "position": "C",
+      "player": "Stat1c40",
+      "lg_user_id": 51753,
+      "overall": 31,
+      "salary_m": "$0.75",
+      "rec": "1-7-1",
+      "gp": 9,
+      "pts": 8,
+      "goals": 2,
+      "ast": 6,
+      "plus_minus": -19,
+      "gwg": 0
+     },
+     {
+      "position": "C",
+      "player": "Frishmania",
+      "lg_user_id": 52638,
+      "overall": 41,
+      "salary_m": "$0.75",
+      "rec": "8-12-2",
+      "gp": 22,
+      "pts": 29,
+      "goals": 12,
+      "ast": 17,
+      "plus_minus": -19,
+      "gwg": 1
+     },
+     {
+      "position": "RW",
+      "player": "carte883804",
+      "lg_user_id": 80043,
+      "overall": 0,
+      "salary_m": "$0.75",
+      "rec": 0,
+      "gp": 0,
+      "pts": 0,
+      "goals": 0,
+      "ast": 0,
+      "plus_minus": 0,
+      "gwg": 0
+     },
+     {
+      "position": "RW",
+      "player": "xTrEdz_-",
+      "lg_user_id": 62883,
+      "overall": 59,
+      "salary_m": "$0.75",
+      "rec": "8-11-3",
+      "gp": 22,
+      "pts": 51,
+      "goals": 23,
+      "ast": 28,
+      "plus_minus": -9,
+      "gwg": 3
+     },
+     {
+      "position": "LD",
+      "player": "xNHLYork91x",
+      "lg_user_id": 13379,
+      "overall": 0,
+      "salary_m": "$0.75",
+      "rec": 0,
+      "gp": 0,
+      "pts": 0,
+      "goals": 0,
+      "ast": 0,
+      "plus_minus": 0,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "patrickisonfire",
+      "lg_user_id": 22020,
+      "overall": 54,
+      "salary_m": "$1.75",
+      "rec": "9-10-3",
+      "gp": 22,
+      "pts": 13,
+      "goals": 1,
+      "ast": 12,
+      "plus_minus": -1,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "x78095",
+      "lg_user_id": 79038,
+      "overall": 47,
+      "salary_m": "$1.5",
+      "rec": "6-12-1",
+      "gp": 19,
+      "pts": 8,
+      "goals": 1,
+      "ast": 7,
+      "plus_minus": -22,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "JosephLovesU10",
+      "lg_user_id": 8654,
+      "overall": 48,
+      "salary_m": "$3.25",
+      "rec": "3-9-0",
+      "gp": 12,
+      "pts": 3,
+      "goals": 0,
+      "ast": 3,
+      "plus_minus": -9,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "MrManuk",
+      "lg_user_id": 35949,
+      "overall": 47,
+      "salary_m": "$1.25",
+      "rec": "6-10-3",
+      "gp": 19,
+      "pts": 7,
+      "goals": 1,
+      "ast": 6,
+      "plus_minus": -24,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "xShredd",
+      "lg_user_id": 68244,
+      "overall": 56,
+      "salary_m": "$0.75",
+      "rec": "3-1-2",
+      "gp": 6,
+      "pts": 4,
+      "goals": 0,
+      "ast": 4,
+      "plus_minus": 6,
+      "gwg": 0
+     }
+    ],
+    "goalies": [
+     {
+      "position": "G",
+      "player": "imrehabilitated",
+      "lg_user_id": 78530,
+      "overall": 60,
+      "salary_m": "$0.75",
+      "ggp": 21,
+      "gwin": 5,
+      "gloss": 16,
+      "gaa": 3.82,
+      "savep": 0.788
+     }
+    ],
+    "offense_breakdown": [
+     {
+      "players": "C) lucidmedia LW) mgb2092 RW) carte883804",
+      "salary_m": "$0.75",
+      "rec": "8-14-3",
+      "gp": 25,
+      "pts": 47,
+      "goals": 23,
+      "ast": 24,
+      "plus_minus": -27,
+      "gwg": 3
+     }
+    ],
+    "defense_breakdown": [
+     {
+      "players": "LD) xNHLYork91x RD) MrManuk",
+      "salary_m": "$1.25",
+      "rec": "6-10-3",
+      "gp": 19,
+      "pts": 7,
+      "goals": 1,
+      "ast": 6,
+      "plus_minus": -24,
+      "gwg": 0
+     }
+    ]
+   },
+   "home": {
+    "team": "Calgary Hitmen",
+    "skaters": [
+     {
+      "position": "LW",
+      "player": "morbid_chaos15",
+      "lg_user_id": 80981,
+      "overall": 74,
+      "salary_m": "$0.75",
+      "rec": "5-1-0",
+      "gp": 6,
+      "pts": 17,
+      "goals": 9,
+      "ast": 8,
+      "plus_minus": 15,
+      "gwg": 1
+     },
+     {
+      "position": "LW",
+      "player": "offtheyrk",
+      "lg_user_id": 58225,
+      "overall": 68,
+      "salary_m": "$0.75",
+      "rec": "11-8-3",
+      "gp": 22,
+      "pts": 63,
+      "goals": 33,
+      "ast": 30,
+      "plus_minus": 6,
+      "gwg": 3
+     },
+     {
+      "position": "LW",
+      "player": "l Setty l",
+      "lg_user_id": 73707,
+      "overall": 60,
+      "salary_m": "$0",
+      "rec": "10-8-4",
+      "gp": 22,
+      "pts": 60,
+      "goals": 24,
+      "ast": 36,
+      "plus_minus": 23,
+      "gwg": 2
+     },
+     {
+      "position": "C",
+      "player": "gtcoop73",
+      "lg_user_id": 76399,
+      "overall": 66,
+      "salary_m": "$2.75",
+      "rec": "7-8-1",
+      "gp": 16,
+      "pts": 49,
+      "goals": 23,
+      "ast": 26,
+      "plus_minus": 8,
+      "gwg": 2
+     },
+     {
+      "position": "RW",
+      "player": "l danks l",
+      "lg_user_id": 10718,
+      "overall": 76,
+      "salary_m": "$0.75",
+      "rec": "6-3-1",
+      "gp": 10,
+      "pts": 34,
+      "goals": 17,
+      "ast": 17,
+      "plus_minus": 22,
+      "gwg": 1
+     },
+     {
+      "position": "RW",
+      "player": "fred_7517",
+      "lg_user_id": 55685,
+      "overall": 0,
+      "salary_m": "$0.75",
+      "rec": "0-0-1",
+      "gp": 1,
+      "pts": 0,
+      "goals": 0,
+      "ast": 0,
+      "plus_minus": 0,
+      "gwg": 0
+     },
+     {
+      "position": "RW",
+      "player": "Gullyrr",
+      "lg_user_id": 79521,
+      "overall": 59,
+      "salary_m": "$5",
+      "rec": "11-10-1",
+      "gp": 22,
+      "pts": 52,
+      "goals": 18,
+      "ast": 34,
+      "plus_minus": 0,
+      "gwg": 1
+     },
+     {
+      "position": "LD",
+      "player": "imona_plain",
+      "lg_user_id": 17569,
+      "overall": 55,
+      "salary_m": "$0",
+      "rec": "8-8-3",
+      "gp": 19,
+      "pts": 10,
+      "goals": 1,
+      "ast": 9,
+      "plus_minus": 11,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "WhyKayWins",
+      "lg_user_id": 77094,
+      "overall": 63,
+      "salary_m": "$2.75",
+      "rec": "14-5-3",
+      "gp": 22,
+      "pts": 40,
+      "goals": 4,
+      "ast": 36,
+      "plus_minus": 31,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "xSalda-",
+      "lg_user_id": 29039,
+      "overall": 58,
+      "salary_m": "$3.5",
+      "rec": "13-8-1",
+      "gp": 22,
+      "pts": 23,
+      "goals": 1,
+      "ast": 22,
+      "plus_minus": 16,
+      "gwg": 1
+     },
+     {
+      "position": "LD",
+      "player": "SchmeeveTv",
+      "lg_user_id": 80063,
+      "overall": 0,
+      "salary_m": "$0.75",
+      "rec": 0,
+      "gp": 0,
+      "pts": 0,
+      "goals": 0,
+      "ast": 0,
+      "plus_minus": 0,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "BODFUSION",
+      "lg_user_id": 77805,
+      "overall": 45,
+      "salary_m": "$0.75",
+      "rec": "3-10-0",
+      "gp": 13,
+      "pts": 7,
+      "goals": 0,
+      "ast": 7,
+      "plus_minus": -12,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "matt_0_5",
+      "lg_user_id": 81072,
+      "overall": 56,
+      "salary_m": "$0.75",
+      "rec": "8-5-3",
+      "gp": 16,
+      "pts": 11,
+      "goals": 3,
+      "ast": 8,
+      "plus_minus": 13,
+      "gwg": 1
+     },
+     {
+      "position": "RD",
+      "player": "Koldex Bands",
+      "lg_user_id": 79440,
+      "overall": 58,
+      "salary_m": "$3.75",
+      "rec": "9-5-1",
+      "gp": 15,
+      "pts": 26,
+      "goals": 2,
+      "ast": 24,
+      "plus_minus": 20,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "FerdaLettuce",
+      "lg_user_id": 80075,
+      "overall": 55,
+      "salary_m": "$3.25",
+      "rec": "9-12-1",
+      "gp": 22,
+      "pts": 15,
+      "goals": 0,
+      "ast": 15,
+      "plus_minus": 2,
+      "gwg": 0
+     }
+    ],
+    "goalies": [
+     {
+      "position": "G",
+      "player": "Kudolken",
+      "lg_user_id": 12262,
+      "overall": 70,
+      "salary_m": "$0.75",
+      "ggp": 22,
+      "gwin": 10,
+      "gloss": 12,
+      "gaa": 2.91,
+      "savep": 0.835
+     }
+    ],
+    "offense_breakdown": [
+     {
+      "players": "C) gtcoop73 LW) morbid_chaos15 RW) l danks l",
+      "salary_m": "$4.25",
+      "rec": "18-12-2",
+      "gp": 32,
+      "pts": 100,
+      "goals": 49,
+      "ast": 51,
+      "plus_minus": 45,
+      "gwg": 4
+     }
+    ],
+    "defense_breakdown": [
+     {
+      "players": "LD) imona_plain RD) matt_0_5",
+      "salary_m": "$0.75",
+      "rec": "16-13-6",
+      "gp": 35,
+      "pts": 21,
+      "goals": 4,
+      "ast": 17,
+      "plus_minus": 24,
+      "gwg": 1
+     }
+    ]
+   },
+   "team_ratings": {
+    "tot": {
+     "away": 52,
+     "home": 66
+    },
+    "off": {
+     "away": 50,
+     "home": 72
+    },
+    "def": {
+     "away": 47,
+     "home": 55
+    },
+    "goalie": {
+     "away": 60,
+     "home": 70
+    }
+   },
+   "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918724"
+  },
+  {
+   "lg_game_id": 918754,
+   "puck_drop_et": "10:10 PM",
+   "away": {
+    "team": "Calgary Hitmen",
+    "skaters": [
+     {
+      "position": "LW",
+      "player": "morbid_chaos15",
+      "lg_user_id": 80981,
+      "overall": 74,
+      "salary_m": "$0.75",
+      "rec": "5-1-0",
+      "gp": 6,
+      "pts": 17,
+      "goals": 9,
+      "ast": 8,
+      "plus_minus": 15,
+      "gwg": 1
+     },
+     {
+      "position": "LW",
+      "player": "offtheyrk",
+      "lg_user_id": 58225,
+      "overall": 68,
+      "salary_m": "$0.75",
+      "rec": "11-8-3",
+      "gp": 22,
+      "pts": 63,
+      "goals": 33,
+      "ast": 30,
+      "plus_minus": 6,
+      "gwg": 3
+     },
+     {
+      "position": "LW",
+      "player": "l Setty l",
+      "lg_user_id": 73707,
+      "overall": 60,
+      "salary_m": "$0",
+      "rec": "10-8-4",
+      "gp": 22,
+      "pts": 60,
+      "goals": 24,
+      "ast": 36,
+      "plus_minus": 23,
+      "gwg": 2
+     },
+     {
+      "position": "C",
+      "player": "gtcoop73",
+      "lg_user_id": 76399,
+      "overall": 66,
+      "salary_m": "$2.75",
+      "rec": "7-8-1",
+      "gp": 16,
+      "pts": 49,
+      "goals": 23,
+      "ast": 26,
+      "plus_minus": 8,
+      "gwg": 2
+     },
+     {
+      "position": "RW",
+      "player": "l danks l",
+      "lg_user_id": 10718,
+      "overall": 76,
+      "salary_m": "$0.75",
+      "rec": "6-3-1",
+      "gp": 10,
+      "pts": 34,
+      "goals": 17,
+      "ast": 17,
+      "plus_minus": 22,
+      "gwg": 1
+     },
+     {
+      "position": "RW",
+      "player": "fred_7517",
+      "lg_user_id": 55685,
+      "overall": 0,
+      "salary_m": "$0.75",
+      "rec": "0-0-1",
+      "gp": 1,
+      "pts": 0,
+      "goals": 0,
+      "ast": 0,
+      "plus_minus": 0,
+      "gwg": 0
+     },
+     {
+      "position": "RW",
+      "player": "Gullyrr",
+      "lg_user_id": 79521,
+      "overall": 59,
+      "salary_m": "$5",
+      "rec": "11-10-1",
+      "gp": 22,
+      "pts": 52,
+      "goals": 18,
+      "ast": 34,
+      "plus_minus": 0,
+      "gwg": 1
+     },
+     {
+      "position": "LD",
+      "player": "imona_plain",
+      "lg_user_id": 17569,
+      "overall": 55,
+      "salary_m": "$0",
+      "rec": "8-8-3",
+      "gp": 19,
+      "pts": 10,
+      "goals": 1,
+      "ast": 9,
+      "plus_minus": 11,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "WhyKayWins",
+      "lg_user_id": 77094,
+      "overall": 63,
+      "salary_m": "$2.75",
+      "rec": "14-5-3",
+      "gp": 22,
+      "pts": 40,
+      "goals": 4,
+      "ast": 36,
+      "plus_minus": 31,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "xSalda-",
+      "lg_user_id": 29039,
+      "overall": 58,
+      "salary_m": "$3.5",
+      "rec": "13-8-1",
+      "gp": 22,
+      "pts": 23,
+      "goals": 1,
+      "ast": 22,
+      "plus_minus": 16,
+      "gwg": 1
+     },
+     {
+      "position": "LD",
+      "player": "SchmeeveTv",
+      "lg_user_id": 80063,
+      "overall": 0,
+      "salary_m": "$0.75",
+      "rec": 0,
+      "gp": 0,
+      "pts": 0,
+      "goals": 0,
+      "ast": 0,
+      "plus_minus": 0,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "BODFUSION",
+      "lg_user_id": 77805,
+      "overall": 45,
+      "salary_m": "$0.75",
+      "rec": "3-10-0",
+      "gp": 13,
+      "pts": 7,
+      "goals": 0,
+      "ast": 7,
+      "plus_minus": -12,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "matt_0_5",
+      "lg_user_id": 81072,
+      "overall": 56,
+      "salary_m": "$0.75",
+      "rec": "8-5-3",
+      "gp": 16,
+      "pts": 11,
+      "goals": 3,
+      "ast": 8,
+      "plus_minus": 13,
+      "gwg": 1
+     },
+     {
+      "position": "RD",
+      "player": "Koldex Bands",
+      "lg_user_id": 79440,
+      "overall": 58,
+      "salary_m": "$3.75",
+      "rec": "9-5-1",
+      "gp": 15,
+      "pts": 26,
+      "goals": 2,
+      "ast": 24,
+      "plus_minus": 20,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "FerdaLettuce",
+      "lg_user_id": 80075,
+      "overall": 55,
+      "salary_m": "$3.25",
+      "rec": "9-12-1",
+      "gp": 22,
+      "pts": 15,
+      "goals": 0,
+      "ast": 15,
+      "plus_minus": 2,
+      "gwg": 0
+     }
+    ],
+    "goalies": [
+     {
+      "position": "G",
+      "player": "Kudolken",
+      "lg_user_id": 12262,
+      "overall": 70,
+      "salary_m": "$0.75",
+      "ggp": 22,
+      "gwin": 10,
+      "gloss": 12,
+      "gaa": 2.91,
+      "savep": 0.835
+     }
+    ],
+    "offense_breakdown": [
+     {
+      "players": "C) gtcoop73 LW) morbid_chaos15 RW) l danks l",
+      "salary_m": "$4.25",
+      "rec": "18-12-2",
+      "gp": 32,
+      "pts": 100,
+      "goals": 49,
+      "ast": 51,
+      "plus_minus": 45,
+      "gwg": 4
+     }
+    ],
+    "defense_breakdown": [
+     {
+      "players": "LD) imona_plain RD) matt_0_5",
+      "salary_m": "$0.75",
+      "rec": "16-13-6",
+      "gp": 35,
+      "pts": 21,
+      "goals": 4,
+      "ast": 17,
+      "plus_minus": 24,
+      "gwg": 1
+     }
+    ]
+   },
+   "home": {
+    "team": "Moose Jaw Warriors",
+    "skaters": [
+     {
+      "position": "LW",
+      "player": "Kingovi83608",
+      "lg_user_id": 77813,
+      "overall": 74,
+      "salary_m": "$0.75",
+      "rec": "10-8-2",
+      "gp": 20,
+      "pts": 64,
+      "goals": 36,
+      "ast": 28,
+      "plus_minus": -2,
+      "gwg": 6
+     },
+     {
+      "position": "LW",
+      "player": "RabbitMilk98881",
+      "lg_user_id": 79993,
+      "overall": 53,
+      "salary_m": "$0.75",
+      "rec": "6-3-0",
+      "gp": 9,
+      "pts": 16,
+      "goals": 11,
+      "ast": 5,
+      "plus_minus": 3,
+      "gwg": 1
+     },
+     {
+      "position": "C",
+      "player": "LewIAmYourFather",
+      "lg_user_id": 66719,
+      "overall": 40,
+      "salary_m": "$0",
+      "rec": "3-11-1",
+      "gp": 15,
+      "pts": 23,
+      "goals": 8,
+      "ast": 15,
+      "plus_minus": -30,
+      "gwg": 1
+     },
+     {
+      "position": "RW",
+      "player": "ndima99",
+      "lg_user_id": 60234,
+      "overall": 56,
+      "salary_m": "$0.75",
+      "rec": "5-9-2",
+      "gp": 16,
+      "pts": 37,
+      "goals": 19,
+      "ast": 18,
+      "plus_minus": -10,
+      "gwg": 1
+     },
+     {
+      "position": "LD",
+      "player": "Capsrule19",
+      "lg_user_id": 30440,
+      "overall": 47,
+      "salary_m": "$2.5",
+      "rec": "6-12-0",
+      "gp": 18,
+      "pts": 18,
+      "goals": 5,
+      "ast": 13,
+      "plus_minus": -29,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "AksCookieMonster",
+      "lg_user_id": 73646,
+      "overall": 45,
+      "salary_m": "$0.75",
+      "rec": "3-4-1",
+      "gp": 8,
+      "pts": 5,
+      "goals": 1,
+      "ast": 4,
+      "plus_minus": -9,
+      "gwg": 0
+     },
+     {
+      "position": "LD",
+      "player": "DeAtHAlEx44",
+      "lg_user_id": 79049,
+      "overall": 55,
+      "salary_m": "$0.75",
+      "rec": "11-10-1",
+      "gp": 22,
+      "pts": 14,
+      "goals": 0,
+      "ast": 14,
+      "plus_minus": -4,
+      "gwg": 0
+     },
+     {
+      "position": "RD",
+      "player": "Wince x 11",
+      "lg_user_id": 73026,
+      "overall": 41,
+      "salary_m": "$0",
+      "rec": "2-10-2",
+      "gp": 14,
+      "pts": 10,
+      "goals": 1,
+      "ast": 9,
+      "plus_minus": -21,
+      "gwg": 0
+     }
+    ],
+    "goalies": [
+     {
+      "position": "G",
+      "player": "ewaddles07881",
+      "lg_user_id": 79031,
+      "overall": 61,
+      "salary_m": "$0.75",
+      "ggp": 23,
+      "gwin": 10,
+      "gloss": 13,
+      "gaa": 4.3,
+      "savep": 0.773
+     },
+     {
+      "position": "G",
+      "player": "Not_Jo_Momma",
+      "lg_user_id": 73300,
+      "overall": 59,
+      "salary_m": "$1.75",
+      "ggp": 30,
+      "gwin": 18,
+      "gloss": 12,
+      "gaa": 3.26,
+      "savep": 0.759
+     }
+    ],
+    "offense_breakdown": [
+     {
+      "players": "C) LewIAmYourFather LW) Kingovi83608 RW) ndima99",
+      "salary_m": "$1.5",
+      "rec": "18-28-5",
+      "gp": 51,
+      "pts": 124,
+      "goals": 63,
+      "ast": 61,
+      "plus_minus": -42,
+      "gwg": 8
+     }
+    ],
+    "defense_breakdown": [
+     {
+      "players": "LD) Capsrule19 RD) Wince x 11",
+      "salary_m": "$2.5",
+      "rec": "8-22-2",
+      "gp": 32,
+      "pts": 28,
+      "goals": 6,
+      "ast": 22,
+      "plus_minus": -50,
+      "gwg": 0
+     }
+    ]
+   },
+   "team_ratings": {
+    "tot": {
+     "away": 66,
+     "home": 53
+    },
+    "off": {
+     "away": 72,
+     "home": 57
+    },
+    "def": {
+     "away": 55,
+     "home": 44
+    },
+    "goalie": {
+     "away": 70,
+     "home": 61
+    }
+   },
+   "source_url": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=918754"
+  }
+ ]
+}
