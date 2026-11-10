@@ -14,8 +14,9 @@
   }
   function showDurable(state){
     if(!state?.usableEvidence)return false;
-    const text=state.next+(state.recovered?' Raw recording retrieval failed earlier; the saved reports remain available.':'');
-    setStatus(text,state.analysisComplete?'good':'warn');
+    const warnings=(state.warnings||[]).join(' ');
+    const text=state.next+(state.recovered?' Raw recording retrieval failed earlier; the saved reports remain available.':'')+(warnings?' '+warnings:'');
+    setStatus(text,state.analysisComplete&&!warnings?'good':'warn');
     const b=document.getElementById('vodAnalyzeGame');if(b)b.textContent=state.analysisComplete?'View Reports':'Continue Analysis';
     return true;
   }
@@ -502,6 +503,8 @@
     segments=model.activeSegments(segments);
     // Overtime the manager entered is real; the schedule's "no OT" only folds OT into P3 when none was entered.
     const linkedOt=await linkedFinalOvertime(review),noOvertime=linkedOt===false&&!segments.some(s=>s.segment_type==='overtime');
+    // Read before any relabelling below, so overtime the worker saw is reported instead of hidden in Period 3.
+    const otWarnings=model.overtimeWarnings({segments,chunks,periodReports,offset,scheduleOvertime:linkedOt});
     if(noOvertime){
       chunks=chunks.map(c=>isOvertimeLabel(c?.label)?{...c,label:'Period 3'}:c);
       periodReports=normalizePeriodReports(periodReports,true);
@@ -606,6 +609,7 @@
         ?'A period was approved while importing, so the new game write-up was kept as a draft. Period evidence is saved.'
         :`Analysis imported into ${filled} period${filled===1?'':'s'}. Review each period, approve it, then publish.`,'good');
     }
+    if(otWarnings.length){setStatus(otWarnings.join(' '),'warn');document.getElementById('manualPeriodBuilder')?.setAttribute('open','');}
     setTimeout(()=>document.getElementById('refreshVod')?.click(),350);
   }
 

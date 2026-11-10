@@ -198,6 +198,13 @@ const fixture=()=>{
   await page.setViewportSize({width:390,height:844});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true,'Mobile must not overflow');
   await page.screenshot({path:'/tmp/wildman-vod-review-mobile.png',fullPage:true});
+  // Overtime the worker saw but no period holds must stay visible after a reload, not flash and vanish.
+  await page.evaluate(()=>{window.workerJob=null;window.testRows.vod_review_segments.filter(p=>p.segment_type==='period').forEach(p=>Object.assign(p,{analysis_summary:'Synthetic period evidence',status:'needs_review',updated_at:new Date().toISOString()}));window.testRows.vod_review_sessions[0].worker_result={period_reports:[{label:'Overtime 1',report:{summary:'Synthetic overtime winner'}}]};window.testRows.vod_review_sessions[0].updated_at=new Date().toISOString();});
+  await page.locator('#refreshVod').click();
+  await page.waitForFunction(()=>/found overtime play/.test(document.getElementById('vodPipelineStatus')?.textContent||''));
+  assert.equal(await page.locator('#vodPipelineStatus').getAttribute('data-tone'),'warn');
+  await page.waitForTimeout(6000); // one full poll cycle
+  assert.match(await page.locator('#vodPipelineStatus').textContent(),/found overtime play/,'warning survives the status poll');
   assert.deepEqual(errors,[]);
   console.log('PASS: period times + skip saved and sent to analysis, recovered stages, no redundant rerun, preserved reviewed evidence, approval/publish/reopen/archive/restore, collapsed reports, desktop/mobile');
  }finally{await browser.close();}

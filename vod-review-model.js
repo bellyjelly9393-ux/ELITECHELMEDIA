@@ -85,6 +85,21 @@
     const label=periodLabel(chunk?.label);
     return periods.find(s=>periodLabel(s.label)===label)||null;
   }
+  // Overtime must never vanish quietly. Returns plain warnings when the worker's evidence or the
+  // official result says overtime happened but no Overtime period holds it.
+  function overtimeWarnings({segments=[],chunks=[],periodReports=[],offset=0,scheduleOvertime=null}={}){
+    const periods=activeSegments(segments).filter(s=>['period','overtime'].includes(s.segment_type));
+    const isOt=v=>/^Overtime \d+$/.test(periodLabel(v));
+    const hasOt=periods.some(s=>s.segment_type==='overtime'),out=[];
+    const stray=[...array(chunks),...array(periodReports)].filter(c=>isOt(c?.label)&&segmentForChunk(c,periods,offset)?.segment_type!=='overtime');
+    if(stray.length){
+      const homes=[...new Set(stray.map(c=>segmentForChunk(c,periods,offset)?.label||'no period'))].join(', ');
+      out.push(`The analysis found overtime play, but it is filed under ${homes}. Add the overtime start time in Step 1 so it is reviewed as its own period.`);
+    }
+    if(scheduleOvertime===true&&!hasOt)out.push('The official result says this game went to overtime, but no Overtime period is saved. Add the overtime start time in Step 1.');
+    if(scheduleOvertime===false&&(hasOt||stray.length))out.push('The official result says this game ended in regulation, but overtime was found in the video. Check that this is the right game and that the result is correct.');
+    return out;
+  }
   function reconcile(review={},segments=[],publication=null,job=null){
     const active=activeSegments(segments),periods=active.filter(s=>['period','overtime'].includes(s.segment_type));
     const bounds=periodErrors(review,periods),validPeriods=periods.filter(s=>s.end_seconds!=null&&Number(s.end_seconds)>Number(s.start_seconds)&&Number(s.start_seconds)>=Number(review.source_start_seconds||0)&&(review.source_end_seconds==null||Number(s.end_seconds)<=Number(review.source_end_seconds)));
@@ -97,7 +112,10 @@
     const writeup=Boolean(text(review.review_document?.summary||review.full_game_summary).trim());
     const published=Boolean(publication?.active&&approved&&text(publication.report?.summary).trim());
     const refreshing=published&&['retrieving','queued','processing','awaiting_ai'].includes(rawStatus);
-    return {periods,usableEvidence:evidence.length>0,analysisComplete,approved,writeup,published,refreshing,
+    // Saved worker output keeps its original labels, so hidden overtime stays reported after every reload.
+    const saved=[review.worker_result,review.pending_worker_result].filter(Boolean);
+    const warnings=overtimeWarnings({segments,offset:Number(review.source_start_seconds)||0,chunks:saved.flatMap(r=>array(r.chunks)),periodReports:saved.flatMap(r=>array(r.period_reports))});
+    return {periods,warnings,usableEvidence:evidence.length>0,analysisComplete,approved,writeup,published,refreshing,
       recovered:rawFailure&&evidence.length>0,rawFailure,rawStatus,
       stages:[
         {name:'Game Review',label:'1 · Source',done:Boolean(review.id)},
@@ -270,5 +288,5 @@
     const scores=[...unique.values()];
     return {games:scores.length,score:scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):null};
   }
-  return {clock,periodLabel,planPeriods,workerPeriods,segmentForChunk,systems,periodErrors,documentFor,documentFromPeriods,parsePlayerNote,mergeDocuments,rating,baseline,activeSegments,hasAnalysis,protectedEvidence,reconcile};
+  return {clock,periodLabel,planPeriods,workerPeriods,segmentForChunk,systems,periodErrors,documentFor,documentFromPeriods,parsePlayerNote,mergeDocuments,rating,baseline,activeSegments,hasAnalysis,protectedEvidence,reconcile,overtimeWarnings};
 });
