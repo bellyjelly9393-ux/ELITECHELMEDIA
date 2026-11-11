@@ -43,8 +43,8 @@ test('LGCHL media at 390, 768 and 1440: live, pending and empty feeds; safe text
      if(mode==='readonly'&&route.request().method()==='GET'&&['lgchl_standings_current','lgchl_standings_snapshots','lgchl_games_board','wm_lgchl_s55_player_leaders'].includes(url.pathname.split('/').pop()))return route.continue();
      const table=url.pathname.split('/').pop();
      // Approved public stat-history views (LG season totals compared over time) are always readable.
-     const STAT_HISTORY_VIEWS=['lgchl_public_night_players','lgchl_public_week_players','lgchl_public_trending_players'];
-     if((table.startsWith('lgchl_public_')||table.startsWith('lg_public_'))&&!STAT_HISTORY_VIEWS.includes(table))newReads.push(table);
+     const APPROVED_PUBLIC=['lgchl_public_night_players','lgchl_public_week_players','lgchl_public_trending_players','lgchl_public_player_badges'];
+     if((table.startsWith('lgchl_public_')||table.startsWith('lg_public_'))&&!APPROVED_PUBLIC.includes(table))newReads.push(table);
      return route.fulfill({json:fixture(table,url,mode)});
     }
     if(!['pending','readonly'].includes(mode)&&url.pathname==='/lgchl-media-config.js')return route.fulfill({contentType:'application/javascript',body:'window.LGCHL_PUBLIC_MEDIA_CONFIG={history:true,boxScores:true};'});
