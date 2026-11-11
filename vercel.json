@@ -67,6 +67,9 @@
     },
     "api/hitmen-recap-writer.js": {
       "maxDuration": 120
+    },
+    "api/lgchl-playoffs.js": {
+      "maxDuration": 30
     }
   },
   "redirects": [
