@@ -135,3 +135,29 @@ test('a failed run with no saved evidence does not blame the recording',()=>{
  assert.equal(state.rawFailure,true);assert.doesNotMatch(state.next,/^Recording retrieval failed/);
  assert.match(state.next,/Saved parts are kept/);
 });
+
+test('overtime found by the worker or the official result is never hidden without a warning',()=>{
+ const p3=[1,2,3].map(n=>({id:n,segment_type:'period',segment_index:n,label:'Period '+n,start_seconds:5340+(n-1)*600,end_seconds:5340+n*600}));
+ const wide=model.planPeriods({p1:'1:29:00',p2:'1:37:00',p3:'1:44:30',end:'2:07:54'}).segments;
+ const ot={label:'Overtime',start:2100,end:2160};
+ // Positive: overtime evidence swallowed by a wide Period 3, or matching no period at all.
+ assert.match(model.overtimeWarnings({segments:wide,chunks:[ot],offset:5340})[0],/filed under Period 3/);
+ assert.match(model.overtimeWarnings({segments:p3,periodReports:[{label:'OT'}],offset:5340})[0],/filed under no period/);
+ assert.match(model.overtimeWarnings({segments:p3,scheduleOvertime:true}).join(' '),/official result says this game went to overtime/);
+ assert.match(model.overtimeWarnings({segments:p3,chunks:[ot],offset:5340,scheduleOvertime:false}).join(' '),/ended in regulation, but overtime was found/);
+ // Negative: nothing to report for a regulation game, or when overtime has its own period.
+ assert.deepEqual(model.overtimeWarnings({segments:p3,chunks:[{label:'Period 3',start:1700,end:1760}],offset:5340,scheduleOvertime:false}),[]);
+ assert.deepEqual(model.overtimeWarnings({segments:p3,scheduleOvertime:null}),[]);
+ const full=model.planPeriods({p1:'1:29:00',p2:'1:37:00',p3:'1:44:30',overtimes:'2:02:39',end:'2:07:54'}).segments;
+ assert.deepEqual(model.overtimeWarnings({segments:full,chunks:[ot],periodReports:[{label:'Overtime 1'}],offset:5340,scheduleOvertime:true}),[]);
+ // Edge: archived overtime rows do not count, and empty input is safe.
+ assert.match(model.overtimeWarnings({segments:[...p3,{segment_type:'overtime',segment_index:1,label:'Overtime 1',start_seconds:7140,end_seconds:7300,archived_at:'2026-10-03'}],scheduleOvertime:true})[0],/no Overtime period is saved/);
+ assert.deepEqual(model.overtimeWarnings(),[]);
+});
+
+test('hidden overtime stays reported from the saved worker output',()=>{
+ const p=periods(),r={...review,id:'r',worker_result:{period_reports:[{label:'Overtime 1',report:{summary:'OT winner'}}]}};
+ assert.match(model.reconcile(r,p).warnings.join(' '),/filed under no period/);
+ assert.deepEqual(model.reconcile({...review,id:'r'},p).warnings,[]);
+ assert.deepEqual(model.reconcile({...review,id:'r',worker_result:{period_reports:[{label:'Period 3',report:{summary:'x'}}]}},p).warnings,[]);
+});
