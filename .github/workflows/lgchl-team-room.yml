@@ -5,6 +5,10 @@ on:
       - 'lgchl-team.html'
       - 'lgchl-team.js'
       - 'lgchl-team.css'
+      - 'lgchl-room-theme.js'
+      - 'lgchl-room-theme.css'
+      - 'assets/lgchl/themes/**'
+      - 'test-lgchl-room-theme.cjs'
       - 'lgchl-locker-chooser.js'
       - 'lgchl-locker-chooser.css'
       - 'public-navigation.js'
@@ -29,6 +33,8 @@ jobs:
           node-version: '22'
       - name: Public roster, links and jersey fallback regressions
         run: |
+          node --check lgchl-room-theme.js
+          node test-lgchl-room-theme.cjs
           node --check lgchl-team.js
           node --check lgchl-locker-chooser.js
           node --check public-navigation.js

@@ -1,0 +1,12 @@
+/* Swappable environment. Original jerseys, stalls and data remain intact. */
+body[data-room-theme="s55-playoffs"]{--playoff-light:202,164,91}
+body[data-room-league="OHL"]{--playoff-light:132,170,201}
+body[data-room-league="QMJHL"]{--playoff-light:153,190,204}
+[data-room-theme="s55-playoffs"] .room-roster{position:relative;isolation:isolate;padding:clamp(16px,3vw,36px);border:1px solid #736044;background:#090d13;box-shadow:0 18px 48px #0007}
+[data-room-theme="s55-playoffs"] .room-roster::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#060a1040,#080b11df 760px),radial-gradient(ellipse at 20% 12%,rgba(var(--playoff-light),.18),transparent 45%),url('assets/lgchl/themes/s55-playoffs/arena.svg') center top/1200px 760px no-repeat}
+[data-room-theme="s55-playoffs"] .room-season-label{margin:0 0 28px;padding:12px 0;border-block:1px solid #b995554a;color:#f1d8a5;font-size:clamp(12px,2vw,16px);font-weight:800;letter-spacing:.2em;line-height:1.6;text-align:center}
+/* Only gaps reveal the atmosphere. Every stall keeps its opaque original artwork. */
+[data-room-theme="s55-playoffs"].league-room .stalls{background:transparent;border-block-color:#8b734e88;row-gap:28px}
+[data-room-theme="s55-playoffs"] .room-roster .section-heading,[data-room-theme="s55-playoffs"] #rosterNote{background:#090d13ed;padding:12px;border-radius:3px}
+@media(max-width:700px){[data-room-theme="s55-playoffs"] .room-roster{padding:12px}[data-room-theme="s55-playoffs"] .room-season-label{letter-spacing:.12em;margin-bottom:18px}}
+@media(forced-colors:active){[data-room-theme="s55-playoffs"] .room-roster::before{display:none}}

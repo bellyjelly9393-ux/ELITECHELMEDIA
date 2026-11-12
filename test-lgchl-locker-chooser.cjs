@@ -47,7 +47,7 @@ assert.match(team, /data-locker-variant="room"/);
 assert.match(team, /lgchl-locker-chooser\.js/);
 assert.match(team, /lgchl-locker-chooser\.css/);
 const nav = fs.readFileSync('public-navigation.js', 'utf8');
-const markup = JSON.parse(nav.match(/const markup=(.*);\n/)[1]);
+const markup = JSON.parse(nav.match(/const markup=(.*);\r?\n/)[1]);
 assert.match(markup, /data-locker-chooser/);
 assert.match(markup, /data-locker-variant="nav"/);
 assert.match(markup, /href="lgchl-team\.html"/);
