@@ -71,7 +71,7 @@
             <summary>Multi-game night from one Twitch VOD</summary>
             <div class="section-divider"></div>
             <div class="eyebrow">SMART VOD INTAKE</div><h3>Queue the Whole Night</h3>
-            <p class="section-note">Paste one Twitch replay and list each game's start/end window. Each game becomes its own review. Then open each game, enter its period times and press Analyze Game.</p>
+            <p class="section-note">Paste one Twitch replay and list each game's start/end window. Each game becomes its own review. Then open each game and press Analyze Game for automatic period detection.</p>
             <div class="vod-form">
               <label class="wide">Twitch replay URL<input id="batchVodUrl" class="field" type="url" placeholder="https://www.twitch.tv/videos/..."></label>
               <label>Game date<input id="batchVodDate" class="field" type="datetime-local"></label>
@@ -86,22 +86,23 @@
           </details>
           <div class="section-divider"></div>
           <div class="eyebrow">REVIEW LIBRARY</div><h3>Games</h3>
+          <label>Show reviews<select id="vodLibraryFilter" class="select-field"><option value="reviewed">Active games + filed reports</option><option value="active">Active games</option><option value="filed">Filed reports</option><option value="all">All reviews, including archives</option></select></label>
           <div id="vodLibrary" class="vod-library"></div>
         </section>
 
         <section class="vod-panel">
-          <div id="vodEmpty" class="vod-empty"><strong>Select or create a VOD review.</strong><br>Enter its period times, then press Analyze Game.</div>
+          <div id="vodEmpty" class="vod-empty"><strong>Select or create a VOD review.</strong><br>Press Analyze Game to detect periods automatically.</div>
           <div id="vodDetail" hidden>
             <div class="vod-detail-head">
               <div><div class="eyebrow" id="vodDetailTeam">TEAM VOD</div><h2 id="vodDetailTitle">Game VOD</h2><p id="vodDetailMeta"></p><a id="vodOpenLink" class="video-link" href="#" target="_blank" rel="noopener">OPEN FULL VOD ↗</a></div>
               <details><summary>Advanced Tools</summary><div class="vod-actions"><button id="archiveVod" class="small-btn" type="button">Archive</button><button id="deleteVod" class="small-btn" type="button">Delete</button></div></details>
             </div>
 
-            <details id="manualPeriodBuilder" open>
-              <summary>Step 1 · Period times</summary>
+            <details id="manualPeriodBuilder">
+              <summary>Confirm / correct period times and lag-out skips</summary>
               <div class="section-divider"></div>
               <div class="eyebrow">STEP 1</div><h3>Period Times</h3>
-              <p class="section-note">Use the times shown on the full Twitch VOD (the intermission logo marks each break). Save them, then press <strong>Analyze Game</strong>. Only these periods are analyzed.</p>
+              <p class="section-note">Analyze Game detects P1/P2/P3 automatically. If detection needs help, enter the times shown on the full Twitch VOD. Confirm restarts, lag-out skips and overtime here, save, then continue analysis.</p>
               <div class="segment-builder">
                 <label>Period 1 starts<input id="period1Start" class="field mono" placeholder="34:30"></label>
                 <label>Period 2 starts<input id="period2Start" class="field mono" placeholder="44:35"></label>
@@ -191,10 +192,10 @@
 <script src="backend.js"></script>
 <script src="management-guard.js"></script>
 <script src="script.js?v=20261003-durable"></script>
-<script src="vod-review-cache.js?v=20261009-egress"></script>
+<script src="vod-review-cache.js?v=20261012-auto-restore"></script>
 <script src="vod-review-model.js?v=20261008-period-times"></script>
-<script src="vod-lab.js?v=20261009-player-matching2"></script>
-<script src="vod-pipeline.js?v=20261009-egress"></script>
-<script src="vod-pipeline-polish.js?v=20261009-egress"></script>
+<script src="vod-lab.js?v=20261012-auto-restore"></script>
+<script src="vod-pipeline.js?v=20261012-auto-restore"></script>
+<script src="vod-pipeline-polish.js?v=20261012-auto-restore"></script>
 </body>
 </html>
