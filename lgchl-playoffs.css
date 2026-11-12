@@ -4,21 +4,40 @@
   isolation: isolate;
   overflow-x: clip;
   border-bottom: 1px solid var(--line);
-  background:
-    radial-gradient(90% 50% at 50% -10%, rgba(255,255,255,.05), transparent 55%),
-    linear-gradient(180deg, #101318 0%, #0b0d11 40%, #08090c 100%);
+  background: #08090c;
   padding-top: 42px;
   padding-bottom: 54px;
+}
+.po-bg {
+  position: absolute;
+  z-index: 0;
+  left: 0; right: 0; top: 0;
+  height: calc(100vw * (2400 - 330) / 1920);
+  overflow: hidden;
+  pointer-events: none;
+}
+.po-bg picture, .po-bg img { display: block; width: 100%; height: auto; }
+.po-bg img { transform: translateY(calc(-330 / 2400 * 100%)); }
+.po-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7,8,11,.86) 0%, rgba(7,8,11,.5) 16%, rgba(7,8,11,.08) 36%, transparent 50%),
+    linear-gradient(180deg, rgba(7,8,11,.78) 0%, rgba(7,8,11,.28) 9%, transparent 20%),
+    linear-gradient(180deg, transparent 34%, rgba(8,9,12,.25) 52%, rgba(8,9,12,.82) 70%, #08090c 84%);
 }
 .po::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
   background: var(--scratch);
-  opacity: .45;
+  opacity: .22;
 }
-.po-in { position: relative; max-width: 1320px; margin: 0 auto; }
+.po-in { position: relative; z-index: 2; max-width: 1320px; margin: 0 auto; }
+.po-stage { display: none; }
 .po-head { display: flex; justify-content: space-between; gap: 24px; align-items: flex-end; margin-bottom: 22px; }
 .po-eye { color: var(--ice); font-size: 15px; letter-spacing: .22em; }
 .po-lead { max-width: 62ch; margin: 8px 0 0; color: var(--mute); font-size: 17px; }
@@ -68,10 +87,12 @@
   display: flex; flex-direction: column; gap: 6px;
   padding: 10px 12px 12px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015) 28%, transparent 28%),
-    linear-gradient(160deg, rgba(28,32,38,.92), rgba(12,14,18,.94));
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 14px 30px rgba(0,0,0,.28);
+    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02) 30%, transparent 30%),
+    linear-gradient(165deg, rgba(18,20,24,.58), rgba(8,10,14,.66));
+  -webkit-backdrop-filter: blur(12px) saturate(1.15);
+  backdrop-filter: blur(12px) saturate(1.15);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 16px 34px rgba(0,0,0,.32);
   border-radius: 2px;
   min-width: 0;
 }
@@ -149,10 +170,25 @@
 }
 
 @media (max-width: 859px) {
-  .po { padding-top: 28px; padding-bottom: 36px; }
+  .po { padding-top: 22px; padding-bottom: 36px; }
+  .po-bg { height: 520px; }
+  .po-bg img {
+    width: 188%;
+    max-width: none;
+    height: auto;
+    margin-left: -44%;
+    transform: translateY(20%);
+  }
+  .po-bg::after {
+    background:
+      linear-gradient(180deg, rgba(7,8,11,.92) 0%, rgba(7,8,11,.78) 28%, rgba(7,8,11,.2) 42%, transparent 50%),
+      linear-gradient(90deg, rgba(7,8,11,.4) 0%, transparent 34%),
+      linear-gradient(180deg, transparent 72%, rgba(8,9,12,.75) 88%, #08090c 97%);
+  }
   .po-head { flex-direction: column; align-items: flex-start; gap: 12px; }
   .po-meta { align-items: flex-start; text-align: left; }
-  .po-tabs { position: sticky; top: 58px; z-index: 5; margin-inline: -4px; padding: 8px 4px; background: rgba(11,13,17,.92); backdrop-filter: blur(8px); }
+  .po-stage { display: block; height: 210px; }
+  .po-tabs { position: sticky; top: 58px; z-index: 5; margin-inline: -4px; padding: 8px 4px; background: rgba(8,9,12,.9); backdrop-filter: blur(8px); }
   #playoffs[data-view="WHL"] .po-league:not([data-league="WHL"]),
   #playoffs[data-view="OHL"] .po-league:not([data-league="OHL"]),
   #playoffs[data-view="QMJHL"] .po-league:not([data-league="QMJHL"]),

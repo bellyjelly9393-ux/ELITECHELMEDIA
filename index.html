@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="live-hub-home-nav.css?v=20261024-leaders">
 <link rel="stylesheet" href="ecm-home.css?v=20261019c">
-<link rel="stylesheet" href="lgchl-playoffs.css?v=20261111">
+<link rel="stylesheet" href="lgchl-playoffs.css?v=20261112-ice">
 <link rel="stylesheet" href="hitman-nightly.css?v=20261025-p">
 <script src="hitman-nightly.js?v=20261025-p" defer></script>
 <link rel="stylesheet" href="hitmen-radio-studio.css?v=20261029-lg1">
@@ -201,6 +201,13 @@
   </section>
 
   <section class="po band" id="playoffs" data-view="WHL" aria-labelledby="poTitle">
+    <div class="po-bg" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 859px)" srcset="assets/broadcast/playoff-bracket-bg-hero.jpg">
+        <source type="image/webp" srcset="assets/broadcast/playoff-bracket-bg.webp">
+        <img src="assets/broadcast/playoff-bracket-bg.jpg" width="1920" height="2400" alt="">
+      </picture>
+    </div>
     <div class="po-in">
       <div class="po-head">
         <div>
@@ -215,6 +222,7 @@
         </div>
       </div>
       <p class="po-note" id="poNote" hidden></p>
+      <div class="po-stage" aria-hidden="true"></div>
       <div class="po-tabs" role="tablist" aria-label="Playoff bracket">
         <button type="button" role="tab" data-po-tab="WHL" aria-selected="true">WHL</button>
         <button type="button" role="tab" data-po-tab="OHL" aria-selected="false">OHL</button>
