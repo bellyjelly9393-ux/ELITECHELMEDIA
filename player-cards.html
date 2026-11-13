@@ -14,6 +14,7 @@
 <script src="player-cards.js?v=20261108-mask1" defer></script>
 <script src="player-cards-account.js?v=20261108-mask1" defer></script>
 <link rel="stylesheet" href="player-card-studio-v2.css?v=20261108-mask1">
+<script src="player-card-orbit.js?v=1" defer></script>
 <script src="player-card-studio-v2.js?v=20261108-mask1" defer></script>
 <script src="card-cutout-cleanup.js?v=1" defer></script><script src="card-image-preparer.js?v=20261108-recut2" defer></script><script src="card-recut.js?v=20261108-recut2" defer></script>
 <script src="player-card-public-artwork.js?v=20261108-mask1" defer></script>
@@ -93,6 +94,13 @@
         <div class="cardfoot"><span>ELITECHEL MEDIA</span><span id="cardRatingLabel">LEAGUE STATS · OVR PENDING</span></div>
       </div>
    </article></div>
+   <button type="button" id="openOrbit">Preview card motion</button>
+   <dialog id="orbitDialog" aria-labelledby="orbitTitle" style="box-sizing:border-box;width:min(94vw,440px);max-height:96vh;background:#081321;color:#eff5fc;border:1px solid #50667a;padding:12px">
+    <h2 id="orbitTitle">Hover Orbit</h2>
+    <canvas id="orbitCanvas" width="720" height="1280" style="display:block;width:auto;height:auto;max-width:100%;max-height:60vh;margin:auto" aria-label="Animated player card"></canvas>
+    <button type="button" id="toggleOrbit">Play</button> <button type="button" id="saveOrbit">Download 5-second clip</button> <button type="button" id="closeOrbit">Close</button>
+    <p id="orbitStatus" role="status"></p>
+   </dialog>
    <p class="preview-note"><a id="cardLockerLink" hidden>Back to team locker room →</a></p><p id="savedSnapshotStatus" class="preview-note"></p><p class="preview-note">Upload your own CHEL screenshot above. A transparent cutout gives the cleanest result. Your image stays private. Submit it separately if you want manager review.</p>
   </section>
  </div>
