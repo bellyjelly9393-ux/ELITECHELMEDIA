@@ -16,7 +16,8 @@ function fixture(table,url,mode){
  if(table==='lgchl_public_breakout_watch')return [history];
  if(table==='lgchl_public_ahl_movement')return [{...history,from_league:'AHL',from_season:54,from_gp:5,from_points:5,from_ppg:1,from_plus_minus:0}];
  if(table==='lgchl_public_trending')return [player];
- if(table==='lgchl_public_weekly_players')return [{...player,week:3}];
+ if(mode==='live'&&(table==='lgchl_public_weekly_players'||table==='lgchl_public_week_players'))return [{...player,week:3,week_complete:true,shots:12,saves:20,shots_against:24,goals_against:4,through_at:at}];
+ if(mode==='live'&&table==='lgchl_public_trending_players')return [{...player,through_at:at,since_at:at,shots:12}];
  if(table==='lgchl_public_box_coverage')return [{final_games:100,imported_games:5,imported_at:at}];
  return [];
 }
@@ -43,11 +44,15 @@ test('LGCHL media at 390, 768 and 1440: live, pending and empty feeds; safe text
      if(mode==='readonly'&&route.request().method()==='GET'&&['lgchl_standings_current','lgchl_standings_snapshots','lgchl_games_board','wm_lgchl_s55_player_leaders'].includes(url.pathname.split('/').pop()))return route.continue();
      const table=url.pathname.split('/').pop();
      // Approved public stat-history views (LG season totals compared over time) are always readable.
-     const STAT_HISTORY_VIEWS=['lgchl_public_night_players','lgchl_public_week_players','lgchl_public_trending_players'];
-     if((table.startsWith('lgchl_public_')||table.startsWith('lg_public_'))&&!STAT_HISTORY_VIEWS.includes(table))newReads.push(table);
+     const APPROVED_PUBLIC=['lgchl_public_night_players','lgchl_public_week_players','lgchl_public_trending_players','lgchl_public_player_badges'];
+     if((table.startsWith('lgchl_public_')||table.startsWith('lg_public_'))&&!APPROVED_PUBLIC.includes(table))newReads.push(table);
      return route.fulfill({json:fixture(table,url,mode)});
     }
     if(!['pending','readonly'].includes(mode)&&url.pathname==='/lgchl-media-config.js')return route.fulfill({contentType:'application/javascript',body:'window.LGCHL_PUBLIC_MEDIA_CONFIG={history:true,boxScores:true};'});
+    // Local capture files are real site data. Keep the browser on the synthetic fixtures above.
+    if(url.pathname==='/data/lgchl/leaders-current.json')return route.fulfill({contentType:'application/json',body:'{}'});
+    if(url.pathname==='/data/lgchl/night-current.json')return route.fulfill({contentType:'application/json',body:'null'});
+    if(url.pathname==='/data/lgchl/history-s55.json')return route.fulfill({contentType:'application/json',body:JSON.stringify({breakout_rule:'Dated snapshot rule',breakouts:[{gamertag:'Snapshot Player',position:'C',lg_team_id:413,gp:9,goals:4,assists:5,points:9,plus_minus:1,ppg:2,prev_ppg:1,note:'Dated snapshot'}],movers:[]})});
     if(url.hostname!=='127.0.0.1')return route.fulfill({status:200,body:'',contentType:'text/css'});
     return route.continue();
    });
@@ -60,16 +65,16 @@ test('LGCHL media at 390, 768 and 1440: live, pending and empty feeds; safe text
    if(mode==='pending'||mode==='readonly'){
     assert.deepEqual(newReads,[],'Unapproved tables must not be requested');
     assert.match(await page.locator('#lgBreakout').innerText(),/Dated snapshot/i);
-    assert.match(await page.locator('#lgTrendingRecords').innerText(),/awaiting approval/);
+    assert.match(await page.locator('#lgTrendingRecords').innerText(),/First board after Sunday night/i);
    }else if(mode==='live'){
     assert.match(await page.locator('#lgTrendingRecords').innerText(),/15/);
-    assert.match(await page.locator('#lgWeekPlayers').innerText(),/Week 3/i);
-    assert.match(await page.locator('#lgBreakout').innerText(),/Public history import/i);
+    assert.match(await page.locator('#lgWeekPlayersNote').innerText(),/Week 3/i);
+    assert.match(await page.locator('#lgBoNote').innerText(),/Early season/i);
     assert.match(await page.locator('#lgBreakout').innerText(),/Example <img/);
     assert.equal(await page.locator('img[onerror]').count(),0,'Names remain text, never HTML');
    }else{
     assert.match(await page.locator('#lgBreakout').innerText(),/No players meet/);
-    assert.match(await page.locator('#lgTrendingRecords').innerText(),/No qualifying/);
+    assert.match(await page.locator('#lgTrendingRecords').innerText(),/First board after Sunday night/i);
    }
    await page.locator('button[data-metric="save_pct"]').click();
    await page.waitForTimeout(100);

@@ -18,7 +18,7 @@ test('media top 10 and searchable top 250 at 390, 768 and 1440 pixels',async()=>
    if(u.hostname.endsWith('supabase.co')){
     const table=u.pathname.split('/').pop();
     assert.equal(route.request().method(),'GET','Browser statistics only perform public reads');
-    assert.ok(['wm_lgchl_s55_player_leaders','lgchl_standings_current','lgchl_games_board','lgchl_standings_snapshots','lgchl_public_night_players','lgchl_public_week_players','lgchl_public_trending_players'].includes(table),'Unexpected/private query: '+table);
+    assert.ok(['wm_lgchl_s55_player_leaders','lgchl_standings_current','lgchl_games_board','lgchl_standings_snapshots','lgchl_public_night_players','lgchl_public_week_players','lgchl_public_trending_players','lgchl_public_player_badges'].includes(table),'Unexpected/private query: '+table);
     if(table!=='wm_lgchl_s55_player_leaders')return route.fulfill({json:[]});
     reads.push(u);
     if(mode==='empty')return route.fulfill({json:[]});
@@ -27,6 +27,8 @@ test('media top 10 and searchable top 250 at 390, 768 and 1440 pixels',async()=>
     const rows=[...(u.searchParams.get('player_kind')==='eq.goalie'?goalies:skaters)].sort((a,b)=>(a[metric]-b[metric])*(ascending?1:-1)||b.gp-a.gp||a.gamertag.localeCompare(b.gamertag)).slice(0,Number(u.searchParams.get('limit')||250));
     return route.fulfill({json:rows});
    }
+   if(u.pathname==='/data/lgchl/leaders-current.json')return route.fulfill({contentType:'application/json',body:'{}'});
+   if(u.pathname==='/data/lgchl/night-current.json')return route.fulfill({contentType:'application/json',body:'null'});
    if(u.hostname!=='127.0.0.1')return route.fulfill({status:200,body:'',contentType:u.pathname.endsWith('.js')?'application/javascript':'text/css'});
    return route.continue();
   });
@@ -49,12 +51,12 @@ test('media top 10 and searchable top 250 at 390, 768 and 1440 pixels',async()=>
   await page.waitForFunction(()=>document.getElementById('lgLeaders').getAttribute('aria-busy')==='false');
   assert.equal(await page.locator('#lgMetric').inputValue(),'goals');
   assert.equal(await page.locator('#lgLeaders tbody tr').count(),25);
-  assert.match(await page.locator('#lgPlayerStatus').innerText(),/of 250 players/);
+  assert.match(await page.locator('#lgPlayerStatus').innerText(),/of 280 players/);
   await page.locator('#lgMetric').selectOption('points');
   await page.waitForFunction(()=>document.querySelector('#lgLeaders').textContent.includes('Player001'));
   assert.equal(await page.locator('#lgLeaders tbody tr').nth(1).locator('th').innerText(),'1');
   await page.locator('#lgNextPage').click();
-  assert.match(await page.locator('#lgPageStatus').innerText(),/Page 2 of 10/);
+  assert.match(await page.locator('#lgPageStatus').innerText(),/Page 2 of 12/);
   assert.equal(await page.locator('#lgLeaders tbody tr').first().locator('th').innerText(),'25','Tied league rank crosses page boundary');
   await page.locator('#lgPlayerSearch').fill('Player125');
   assert.equal(await page.locator('#lgLeaders tbody tr').count(),1);
@@ -68,13 +70,13 @@ test('media top 10 and searchable top 250 at 390, 768 and 1440 pixels',async()=>
   assert.equal(await page.locator('#lgNextPage').isDisabled(),true);
   await page.locator('#lgClearSearch').click();
   assert.equal(await page.locator('#lgLeaders tbody tr').count(),25);
-  for(let i=0;i<9;i++)await page.locator('#lgNextPage').click();
-  assert.match(await page.locator('#lgPlayerStatus').innerText(),/226–250 of 250/);
+  for(let i=0;i<11;i++)await page.locator('#lgNextPage').click();
+  assert.match(await page.locator('#lgPlayerStatus').innerText(),/276–280 of 280/);
   assert.equal(await page.locator('#lgNextPage').isDisabled(),true);
   await page.locator('#lgMetric').selectOption('gaa');
   await page.waitForFunction(()=>document.querySelector('#lgLeaders').textContent.includes('Goalie001'));
   assert.match(await page.locator('#lgPlayerStatus').innerText(),/goalies with 8\+ GP/);
-  assert.ok(reads.some(u=>u.searchParams.get('gp')==='gte.8'&&u.searchParams.get('order').startsWith('gaa.asc')));
+  assert.ok(reads.some(u=>u.searchParams.get('player_kind')==='eq.goalie'),'Goalie board reads the public goalie rows and filters 8+ GP on the page');
   await noOverflow('Goalie board');
   if(process.env.LGCHL_SCREENSHOT_DIR){
    fs.mkdirSync(process.env.LGCHL_SCREENSHOT_DIR,{recursive:true});

@@ -24,10 +24,12 @@
 <link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="live-hub-home-nav.css?v=20261024-leaders">
 <link rel="stylesheet" href="ecm-home.css?v=20261019c">
+<link rel="stylesheet" href="lgchl-playoffs.css?v=20261112-ice">
 <link rel="stylesheet" href="hitman-nightly.css?v=20261025-p">
 <script src="hitman-nightly.js?v=20261025-p" defer></script>
 <link rel="stylesheet" href="hitmen-radio-studio.css?v=20261029-lg1">
 <script src="hitmen-radio-studio.js?v=20261029-lg1" defer></script>
+<script src="lgchl-playoffs.js?v=20261111" defer></script>
 <script src="wildman-home.js?v=20261019" defer></script>
 <script src="league-nav.js?v=20261024" defer></script><link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script></head>
 <body>
@@ -196,6 +198,39 @@
       </a>
     </div>
     <p class="stamp band num" id="standings-stamp" aria-live="polite">Loading official standings import…</p>
+  </section>
+
+  <section class="po band" id="playoffs" data-view="WHL" aria-labelledby="poTitle">
+    <div class="po-bg" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 859px)" srcset="assets/broadcast/playoff-bracket-bg-hero.jpg">
+        <source type="image/webp" srcset="assets/broadcast/playoff-bracket-bg.webp">
+        <img src="assets/broadcast/playoff-bracket-bg.jpg" width="1920" height="2400" alt="">
+      </picture>
+    </div>
+    <div class="po-in">
+      <div class="po-head">
+        <div>
+          <p class="eyebrow po-eye">LGCHL · Season 55</p>
+          <h2 class="sec-title" id="poTitle">Playoff <em>bracket</em></h2>
+          <p class="po-lead">Round 1 is a best of seven, first to four. Seeds, byes and series come from the official LeagueGaming bracket and update on their own.</p>
+        </div>
+        <div class="po-meta">
+          <span class="po-live" id="poLive"><i aria-hidden="true"></i><b>Live</b></span>
+          <time class="po-stamp" id="poStamp"></time>
+          <a class="po-official" href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=playoffs&leagueid=39&seasonid=55">Official bracket</a>
+        </div>
+      </div>
+      <p class="po-note" id="poNote" hidden></p>
+      <div class="po-stage" aria-hidden="true"></div>
+      <div class="po-tabs" role="tablist" aria-label="Playoff bracket">
+        <button type="button" role="tab" data-po-tab="WHL" aria-selected="true">WHL</button>
+        <button type="button" role="tab" data-po-tab="OHL" aria-selected="false">OHL</button>
+        <button type="button" role="tab" data-po-tab="QMJHL" aria-selected="false">QMJHL</button>
+        <button type="button" role="tab" data-po-tab="CUP" aria-selected="false">Finals</button>
+      </div>
+      <div id="poBoard" aria-live="polite"><p class="po-loading">Loading the official playoff bracket…</p></div>
+    </div>
   </section>
 
   <section class="opp band" id="opponents" aria-label="Season 55 opponents">
