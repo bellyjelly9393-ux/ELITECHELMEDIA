@@ -13,7 +13,16 @@ const UA = 'Elitechel-Media-Esports/1.0 (playoff bracket; elitechelmedia.com)';
 const FRESH_MS = 120000;
 const STALE_MS = 30000;
 
-const snapshot = JSON.parse(readFileSync(fileURLToPath(new URL('../assets/lgchl/playoffs/s55.json', import.meta.url)), 'utf8'));
+function readSnapshot() {
+  return JSON.parse(readFileSync(fileURLToPath(new URL('../assets/lgchl/playoffs/s55.json', import.meta.url)), 'utf8'));
+}
+
+let snapshot = null;
+try {
+  snapshot = readSnapshot();
+} catch {
+  snapshot = { ok: false, leagues: [], teams: {}, stale: true, stale_reason: 'snapshot_missing' };
+}
 
 let memory = null;
 let memoryAt = 0;

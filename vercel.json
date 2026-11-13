@@ -69,7 +69,8 @@
       "maxDuration": 120
     },
     "api/lgchl-playoffs.js": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "assets/lgchl/playoffs/**"
     }
   },
   "redirects": [
