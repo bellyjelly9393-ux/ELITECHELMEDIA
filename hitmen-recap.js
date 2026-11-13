@@ -79,7 +79,8 @@
         '<div class="story-head"><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow opp-eye">Calgary Hitmen · Game recap</p><h1 class="sec-title rh-title">' + esc(nb(post.title)) + '</h1>' +
         (m.dek ? '<p class="dek">' + esc(m.dek) + '</p>' : '') +
         '<div class="meta"><span>' + esc(recapDate(m)) + '</span><span>Hitmen Media desk</span><span>Published ' + esc(F.md.format(new Date(post.published_at))) + '</span>' + (/LeagueGaming/i.test(m.source_label || source) ? '<span class="verified">Verified LG box score</span>' : '') + '</div></div>' +
-        '<div class="body-copy">' + body + '</div>' +
+        (window.ECMNarration ? window.ECMNarration.publicPlayer(m.narration, 'Listen to game recap') : '') +
+         '<div class="body-copy">' + body + '</div>' +
         '<div class="source card"><span class="eyebrow opp-eye" style="font-size:15px">Source</span><p class="src-line">' + esc(srcText) + '</p>' + (Number.isSafeInteger(lg) && lg > 0 ? '<a class="btn btn-line btn-sm" href="' + lgGameUrl(lg) + '" target="_blank" rel="noopener noreferrer" style="justify-self:start"><span class="btxt">Official LG box score</span> <span class="arr">↗</span></a>' : '') + '</div>' +
       '</article><aside class="aside" aria-label="Game details">' +
         (stars ? '<div class="leaders card" id="recapStars"><div class="leaders-head"><span>Three stars</span><small>As published</small></div>' + stars + '</div>' : '') +

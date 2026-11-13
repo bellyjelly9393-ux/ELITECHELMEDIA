@@ -146,6 +146,25 @@ function renderReport(report,game,vods,v){
  const qp=game?.id?'game='+encodeURIComponent(game.id):report?.id?'report='+encodeURIComponent(report.id)+'&opponent='+encodeURIComponent(report.opponent_name):'opponent='+encodeURIComponent(report?.opponent_name||game?.opponent_name||'');
  $('hrvOtherView').href='hitmen-vod-report.html?'+qp;$('hrvOtherView').textContent='VOD Reference';
 }
+/* Narration is served only to an authorized team member via a short-lived
+   signed URL. Never store a private clip as a public asset or in public JSON. */
+async function hydrateReportNarration(report, v) {
+ const mount=$('hrvAudioMount');
+ if(!mount)return;
+ mount.hidden=true;mount.innerHTML='';
+ const audio=report?.evidence_summary?.narration;
+ if(!v?.member||!v?.user||!audio||audio.approved!==true||!window.ECMNarration)return;
+ const path=String(audio.storage_path||'');
+ if(!/^[A-Za-z0-9/_-]+\.mp3$/.test(path)||path.includes('//')||path.includes('../'))return;
+ try{
+  const {data,error}=await DB().storage.from('hitmen-report-narration').createSignedUrl(path,600);
+  if(error||!data?.signedUrl)return;
+  // The signed response must not be mounted after the viewer signs out/switches.
+  if((ST().user?.id||'')!==v.user.id)return;
+  const markup=window.ECMNarration.signedPlayer(data.signedUrl,'Listen to scouting report',audio.voice_label||'');
+  if(markup){mount.innerHTML=markup;mount.hidden=false}
+ }catch(e){console.warn('Scouting narration not available',e)}
+}
 function renderVod(report,game,vods,v){
  setHero(report,game,v);
  $('hrvReportTitle').textContent='VOD reference';
@@ -174,7 +193,7 @@ async function load(){
   $('hrvGate').hidden=false;$('hrvGate').innerHTML='<h2>Loading scouting brief…</h2><p>Pulling the approved report and attached film reference.</p>';
   const report=await getReport(v),game=await getGame(report),vods=await getVods(report,game);
   $('hrvGate').hidden=true;$('hrvContent').hidden=false;
-  if(view==='vod')renderVod(report,game,vods,v);else renderReport(report,game,vods,v);
+  if(view==='vod')renderVod(report,game,vods,v);else { renderReport(report,game,vods,v); await hydrateReportNarration(report,v); }
  }catch(e){console.error(e);showGate('Could not load report',e.message||'The scouting brief could not be loaded.')}
  finally{busy=false}
 }

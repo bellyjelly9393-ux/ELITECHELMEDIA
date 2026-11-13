@@ -1,0 +1,35 @@
+/* Small, reusable read-or-listen controls for recaps and team-authorized scouting. */
+.ecm-narration {
+  margin: 16px 0 22px;
+  padding: 16px;
+  border: 1px solid rgba(218,171,79,.45);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #181715, #090a0d 75%);
+  color: #f5eee1;
+  box-shadow: 0 12px 24px rgba(0,0,0,.18);
+}
+.ecm-narration-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.ecm-narration-symbol {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(223,180,85,.65);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: #f2d38d;
+  font-size: 15px;
+}
+.ecm-narration-top > div { display: grid; gap: 3px; flex: 1 1 160px; }
+.ecm-narration-top strong { font: 800 17px/1.2 "Barlow Condensed", sans-serif; text-transform: uppercase; letter-spacing: .025em; }
+.ecm-narration-top small { color: #b5a99a; font: 500 11px/1.35 system-ui, sans-serif; }
+.ecm-narration-voice { color: #dec18b; font: 700 11px/1.2 system-ui, sans-serif; text-transform: uppercase; letter-spacing: .08em; }
+.ecm-narration audio { display: block; width: 100%; max-width: 100%; height: 40px; }
+.ecm-narration[hidden] { display: none !important; }
+@media (max-width: 560px) { .ecm-narration { padding: 12px; } }
