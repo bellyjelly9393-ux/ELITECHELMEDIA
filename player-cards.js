@@ -36,10 +36,44 @@ async function readRatingRows(){const rows=[];for(let n=0;n<30;n++){const q=new 
 function rating(){const key=current?current.kind+':'+current.id:'none';if(!ratingCache.has(key))ratingCache.set(key,window.ECMRating.assess(current,all,{league}));return ratingCache.get(key);}
 function displayedOverall(){return rating().overall??'';}
 function attachDetailed(rows,raw){const teamNames=new Map(rows.filter(p=>p.teamId&&p.team).map(p=>[Number(p.teamId),p.team]));const latest=new Map();for(const p of raw){if(!p.lg_user_id||p.stats?.current_source_missing)continue;const key=p.player_kind+':'+p.lg_user_id,old=latest.get(key);if(old&&old.fetched_at===p.fetched_at&&JSON.stringify(old)!==JSON.stringify(p))throw Error('Conflicting source records for one LG ID');if(!old||Date.parse(p.fetched_at)>Date.parse(old.fetched_at))latest.set(key,p);}if(!latest.size)return rows;return [...latest.values()].map(p=>{const s=p.stats||{},goalie=p.player_kind==='goalie';return {id:String(p.lg_user_id),kind:p.player_kind,tag:p.gamertag,teamId:p.lg_team_id,team:teamNames.get(Number(p.lg_team_id))||'',pos:goalie?'G':p.position,gp:p.games_played,goals:s.goals??null,assists:s.assists??null,points:s.points??null,wins:s.wins??(typeof s.record==='string'?Number(s.record.split('-')[0]):null),sv:s.savep??null,gaa:s.gaa??null,updated:p.fetched_at,ratingStats:s};});}
+
+/* Official LG3s main roster snapshot fills verified player identities missing from
+   stats leaderboards (e.g. players with no published games). This is not a stats
+   source and never invents games played, ratings, jersey numbers or card artwork.
+   Preserve all existing league leaders, including non-rostered players. */
+async function supplementLG3sRosterRows(rows){
+ try{
+  const response=await fetch('data/lg3s/season1-active-roster-2026-11-14.json',{cache:'no-cache',signal:AbortSignal.timeout(10000)});
+  if(!response.ok)return rows;
+  const data=await response.json();
+  if(data?.schemaVersion!==1||data.league!=='lg3s'||data.leagueId!==154||
+     data.season!==1||data.scope!=='official-current-main-roster-only-excludes-training-camp'||
+     !Array.isArray(data.teams)||data.teams.length!==12)return rows;
+  const seen=new Set(rows.map(p=>p.kind+':'+p.id));
+  const extras=[];
+  for(const team of data.teams){
+   if(!team||!Number.isSafeInteger(team.lgTeamId)||typeof team.teamName!=='string'||!Array.isArray(team.players))continue;
+   for(const p of team.players){
+    if(!p||p.rosterStatus!=='active'||typeof p.lgUserId!=='string'||!/^[1-9][0-9]{0,19}$/.test(p.lgUserId)||
+       typeof p.gamertag!=='string'||!p.gamertag.trim()||
+       !['C','LW','RW','F','LD','RD','D','G'].includes(p.position))continue;
+    const kind=p.position==='G'?'goalie':'skater',key=kind+':'+p.lgUserId;
+    if(p.playerKind!==kind||seen.has(key))continue;
+    seen.add(key);
+    extras.push({
+     id:p.lgUserId,kind,tag:p.gamertag,team:team.teamName,teamId:team.lgTeamId,pos:p.position,
+     gp:null,goals:null,assists:null,points:null,wins:null,sv:null,gaa:null,
+     rosterOnly:true,rosterCapturedOn:data.capturedOn
+    });
+   }
+  }
+  return [...rows,...extras];
+ }catch(error){console.warn('Optional LG3s main roster fallback unavailable:',error.message);return rows;}
+}
 async function load(){const i=++req;uploadRevision++;ratingCache=new Map();all=[];current=null;loadPersonal();render();window.dispatchEvent(new Event('ecm:card-selected'));$('league').value=league;$('player').innerHTML='';$('player').add(new Option('Loading verified players…',''));$('feedStatus').textContent='Loading public league records…';
-try{let rows;if(league==='lg3s'){const [s,g]=await Promise.all([read('lg3s_public_skater_leaders'),read('lg3s_public_goalie_leaders')]);rows=[...s.map(p=>norm(p,'skater')),...g.map(p=>norm(p,'goalie'))];}else{const s=await read('wm_lgchl_s55_player_leaders');let capture=null;try{const response=await fetch('data/lgchl/leaders-current.json',{cache:'no-cache'});if(response.ok)capture=await response.json();}catch{}const fresh=new Map();if(capture?.boards&&Number.isFinite(Date.parse(capture.captured_at))){for(const board of Object.values(capture.boards)){for(const p of board){const k=p.player_kind+':'+p.lg_user_id;if(!fresh.has(k))fresh.set(k,p);}}}rows=s.map(p=>{const newer=fresh.get(p.player_kind+':'+p.lg_user_id);return norm(newer&&(!p.fetched_at||Date.parse(capture.captured_at)>Date.parse(p.fetched_at))?{...newer,fetched_at:capture.captured_at}:p,p.player_kind);});}if(league==='lgchl'){try{rows=attachDetailed(rows,await readRatingRows());}catch(e){console.warn('Detailed rating data unavailable:',e.message);}}if(i!==req)return;all=rows.filter(p=>/^[0-9]+$/.test(p.id)&&Number(p.id)>0).sort((a,b)=>a.tag.localeCompare(b.tag));
+try{let rows;if(league==='lg3s'){const [s,g]=await Promise.all([read('lg3s_public_skater_leaders'),read('lg3s_public_goalie_leaders')]);rows=await supplementLG3sRosterRows([...s.map(p=>norm(p,'skater')),...g.map(p=>norm(p,'goalie'))]);}else{const s=await read('wm_lgchl_s55_player_leaders');let capture=null;try{const response=await fetch('data/lgchl/leaders-current.json',{cache:'no-cache'});if(response.ok)capture=await response.json();}catch{}const fresh=new Map();if(capture?.boards&&Number.isFinite(Date.parse(capture.captured_at))){for(const board of Object.values(capture.boards)){for(const p of board){const k=p.player_kind+':'+p.lg_user_id;if(!fresh.has(k))fresh.set(k,p);}}}rows=s.map(p=>{const newer=fresh.get(p.player_kind+':'+p.lg_user_id);return norm(newer&&(!p.fetched_at||Date.parse(capture.captured_at)>Date.parse(p.fetched_at))?{...newer,fetched_at:capture.captured_at}:p,p.player_kind);});}if(league==='lgchl'){try{rows=attachDetailed(rows,await readRatingRows());}catch(e){console.warn('Detailed rating data unavailable:',e.message);}}if(i!==req)return;all=rows.filter(p=>/^[0-9]+$/.test(p.id)&&Number(p.id)>0).sort((a,b)=>a.tag.localeCompare(b.tag));
 filter();const activeParams=new URLSearchParams(location.search);const id=activeParams.get('id'),kind=activeParams.get('kind');const requested=all.find(p=>p.id===id&&(!kind||p.kind===kind));if(requested){const value=requested.kind+':'+requested.id;if(![...$('player').options].some(o=>o.value===value))$('player').add(new Option(requested.tag+' · '+requested.team,value));$('player').value=value;select();}else{$('player').insertBefore(new Option('Choose a verified player…',''),$('player').firstChild);$('player').value='';render();}
-$('feedStatus').textContent=all.length+' public player-stat records loaded. Game statistics are read-only.';
+const rosterOnlyCount=all.filter(p=>p.rosterOnly).length;$('feedStatus').textContent=(all.length-rosterOnlyCount)+' public player-stat records loaded'+(rosterOnlyCount?' · '+rosterOnlyCount+' official main-roster identities awaiting published stats (snapshot 2026-11-14)':'')+'. Game statistics are read-only.';
 }catch(e){if(i!==req)return;all=[];$('player').innerHTML='';$('player').add(new Option('No player records available',''));$('feedStatus').textContent='League feed unavailable. No example statistics are displayed.';current=null;render();console.warn('Player card read-only feed:',e.message);}}
 function filter(){const q=$('filter').value.trim().toLowerCase();const chosen=$('player').value;visible=all.filter(p=>!q||p.tag.toLowerCase().includes(q)||p.team.toLowerCase().includes(q)).slice(0,500);$('player').innerHTML='';if(!visible.length){$('player').add(new Option('No matching players',''));$('feedStatus').textContent='No matching player. Your selected card has not changed.';return;}for(const p of visible){$('player').add(new Option(p.tag+' · '+(p.team||league.toUpperCase())+' · '+(p.pos||p.kind)+' · '+p.kind,p.kind+':'+p.id));}if(visible.some(p=>p.kind+':'+p.id===chosen))$('player').value=chosen;else{$('player').insertBefore(new Option('Choose a matching record…',''),$('player').firstChild);$('player').value='';}}
 function loadPersonal(){portraitData='';$('portraitFile').value='';$('jersey').value='';setBackground('arena');if(!current)return;try{const s=localStorage.getItem(key());if(s){const p=JSON.parse(s);$('jersey').value=p.jersey??'';portraitData=p.portrait||'';setBackground(p.background);}}catch(e){console.warn('Local card preferences unavailable:',e.message);}}
