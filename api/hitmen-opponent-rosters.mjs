@@ -1,3 +1,4 @@
+// .mjs so Vercel can load ../lib/opponent-refresh.mjs (this repo has no package.json, so .js API routes are CommonJS).
 import { ROSTER_URL, parseRosters, clean } from '../lib/opponent-refresh.mjs';
 
 export default async function handler(req,res){

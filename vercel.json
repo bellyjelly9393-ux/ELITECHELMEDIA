@@ -68,7 +68,7 @@
     "api/hitmen-recap-writer.js": {
       "maxDuration": 120
     },
-    "api/lgchl-playoffs.js": {
+    "api/lgchl-playoffs.mjs": {
       "maxDuration": 30,
       "includeFiles": "assets/lgchl/playoffs/**"
     }
