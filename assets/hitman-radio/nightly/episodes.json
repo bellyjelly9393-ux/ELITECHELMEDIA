@@ -1,9 +1,20 @@
 {
   "featured": [
-    "2026-11-09-sunday-review-monday-preview",
-    "2026-11-09-trade-deadline-special"
+    "2026-11-13-season55-recap"
   ],
   "episodes": [
+    {
+      "id": "2026-11-13-season55-recap",
+      "date": "2026-11-13",
+      "type": "recap",
+      "label": "Season 55 Full-Season Recap \u00b7 Nov 13",
+      "title": "Hitmen Radio: Season 55 Full-Season Recap",
+      "headline": "The Rimouski ruling, the final standings, and who exceeded or fell short in Season 55",
+      "description": "Graham and David look back on LGCHL Season 55, starting with the ruling that overturned 22 Rimouski wins and reshaped the final standings: Moncton finishes first and Quebec takes the last QMJHL playoff spot. Then the final conference races, the league leaders, the teams that exceeded expectations and the ones that fell short, an open line with the callers, and a first look ahead to the playoffs. The Hitmen finish eighth and miss out. Season 55. Every point mattered.",
+      "duration": "15:44",
+      "video": "assets/hitman-radio/nightly/2026-11-13-season55-recap.mp4?v=20261114",
+      "poster": "assets/hitman-radio/nightly/2026-11-13-season55-recap-poster.jpg?v=20261114"
+    },
     {
       "id": "2026-11-09-sunday-review-monday-preview",
       "date": "2026-11-09",
