@@ -1,0 +1,1108 @@
+{
+  "schemaVersion": 1,
+  "league": "lg3s",
+  "leagueId": 154,
+  "season": 1,
+  "capturedOn": "2026-11-14",
+  "sourceUrl": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&leagueid=154&page=roster&seasonid=1",
+  "scope": "official-current-main-roster-only-excludes-training-camp",
+  "notes": "LeagueGaming roster page main roster only, split at Training Camp Roster heading. LG roster performance badge values are NOT jersey numbers. Player card publication status is independent.",
+  "teams": [
+    {
+      "lgTeamId": 341,
+      "teamName": "Canada",
+      "players": [
+        {
+          "lgUserId": "55504",
+          "gamertag": "Brayl18l",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "77399",
+          "gamertag": "Bwxxd",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "73445",
+          "gamertag": "ProdsznK",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "20358",
+          "gamertag": "Yicky Numbahs",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "15836",
+          "gamertag": "Melvin x 94",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "24309",
+          "gamertag": "I Parksy x I76I",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "8688",
+          "gamertag": "Dekeception",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "45446",
+          "gamertag": "PAPA SMOKE 9",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "56132",
+          "gamertag": "PEPPIRONE",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "54463",
+          "gamertag": "Reimer I32I",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    },
+    {
+      "lgTeamId": 532,
+      "teamName": "Germany",
+      "players": [
+        {
+          "lgUserId": "45356",
+          "gamertag": "Chrispy8120",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "76399",
+          "gamertag": "gtcoop73",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "72359",
+          "gamertag": "l91l Stamkos x",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "71562",
+          "gamertag": "FunkShow1175",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "74057",
+          "gamertag": "LowkeyNHL",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "48333",
+          "gamertag": "MythicI9I",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "50083",
+          "gamertag": "Sham x 19",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "70722",
+          "gamertag": "Drouinnn",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "77424",
+          "gamertag": "xLucic",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "20387",
+          "gamertag": "ISWAYMANI",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "37711",
+          "gamertag": "old_man_fool",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    },
+    {
+      "lgTeamId": 1446,
+      "teamName": "Great Britain",
+      "players": [
+        {
+          "lgUserId": "58225",
+          "gamertag": "offtheyrk",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "51991",
+          "gamertag": "Myltxn",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "77323",
+          "gamertag": "Splxsh x 34",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "58727",
+          "gamertag": "xSogaard",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "73707",
+          "gamertag": "l Setty l",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "56067",
+          "gamertag": "Sceebzy",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "44814",
+          "gamertag": "HowToFIFA8",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "65317",
+          "gamertag": "l ArCzY l",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "75845",
+          "gamertag": "Pazqi",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "80303",
+          "gamertag": "ClxpNHL",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "70480",
+          "gamertag": "ItsaMeAquino",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    },
+    {
+      "lgTeamId": 822,
+      "teamName": "Italy",
+      "players": [
+        {
+          "lgUserId": "67049",
+          "gamertag": "xCarrot44",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "77960",
+          "gamertag": "KingPinFisk63",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "44494",
+          "gamertag": "KnifeVet22",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "47756",
+          "gamertag": "NotoriousNG3",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "58800",
+          "gamertag": "WithReddd",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "78842",
+          "gamertag": "Vaydenhimself_",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "78990",
+          "gamertag": "Strome x17x",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "75391",
+          "gamertag": "T Dog 9328",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "71683",
+          "gamertag": "xSedin22l33",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "79340",
+          "gamertag": "IVcrwIV",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "62335",
+          "gamertag": "Swayman x 18170",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    },
+    {
+      "lgTeamId": 591,
+      "teamName": "Japan",
+      "players": [
+        {
+          "lgUserId": "40355",
+          "gamertag": "Foxl14I",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "77012",
+          "gamertag": "mynvi",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "70455",
+          "gamertag": "Isaiah LikeIy",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "15004",
+          "gamertag": "Mxtichh",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "52222",
+          "gamertag": "Seshchel",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "73010",
+          "gamertag": "Kxne I88I",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "41357",
+          "gamertag": "xStealthyxQC-_-",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "36272",
+          "gamertag": "Fug84",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "79398",
+          "gamertag": "PapiThews",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "73374",
+          "gamertag": "Cpt McCoral",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "7582",
+          "gamertag": "Ix Mazy xI",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    },
+    {
+      "lgTeamId": 531,
+      "teamName": "Kazakhstan",
+      "players": [
+        {
+          "lgUserId": "54735",
+          "gamertag": "Comrade Borker",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "71388",
+          "gamertag": "GBman 22",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "53964",
+          "gamertag": "Stinky x Puh",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "71008",
+          "gamertag": "Wakabwaka",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "78781",
+          "gamertag": "xXBOUCHARDXx94",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "64523",
+          "gamertag": "Zaramoan",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "46688",
+          "gamertag": "Licks-_-97",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "74258",
+          "gamertag": "MuggyBobcat",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "64723",
+          "gamertag": "Yanneux",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "21908",
+          "gamertag": "Fxllion89",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    },
+    {
+      "lgTeamId": 1439,
+      "teamName": "Latvia",
+      "players": [
+        {
+          "lgUserId": "70598",
+          "gamertag": "VYX1627",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "40771",
+          "gamertag": "YaDayz-_-",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "61131",
+          "gamertag": "Joe K l47l",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "77728",
+          "gamertag": "Txrasenko",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "56441",
+          "gamertag": "Txske",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "46618",
+          "gamertag": "BTL_MoTi",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "70972",
+          "gamertag": "KarismaMentality",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "79440",
+          "gamertag": "Koldex Bands",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "29472",
+          "gamertag": "twilightx57x",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "57932",
+          "gamertag": "DEP0RTT MEEE",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    },
+    {
+      "lgTeamId": 1444,
+      "teamName": "Poland",
+      "players": [
+        {
+          "lgUserId": "11902",
+          "gamertag": "Rock Lee",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "49944",
+          "gamertag": "IIII metro",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "74341",
+          "gamertag": "SmokoLi",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "58625",
+          "gamertag": "Asumptionn",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "10206",
+          "gamertag": "I Scribbzy I",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "79694",
+          "gamertag": "Baw x 22",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "80054",
+          "gamertag": "Call1-800gambler",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "18330",
+          "gamertag": "CHARAx33z",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "31217",
+          "gamertag": "ItzSmarshy",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "60915",
+          "gamertag": "Pricee x 31",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    },
+    {
+      "lgTeamId": 1079,
+      "teamName": "Slovakia",
+      "players": [
+        {
+          "lgUserId": "39264",
+          "gamertag": "Prestaraaa",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "73616",
+          "gamertag": "Hxndsor",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "75996",
+          "gamertag": "I Bxndit l",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "65286",
+          "gamertag": "Rxundsy",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "29846",
+          "gamertag": "Shlarchey",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "42185",
+          "gamertag": "Blehdes",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "67347",
+          "gamertag": "Blaze Jaeger",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "60088",
+          "gamertag": "Serrrvz-",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "19886",
+          "gamertag": "xElfpha",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "77863",
+          "gamertag": "Jahkss",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "58114",
+          "gamertag": "l Mooosey l",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    },
+    {
+      "lgTeamId": 343,
+      "teamName": "Sweden",
+      "players": [
+        {
+          "lgUserId": "52714",
+          "gamertag": "nLands",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "78053",
+          "gamertag": "Spookybasket214",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "50135",
+          "gamertag": "vSkoon",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "46977",
+          "gamertag": "Steppm",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "38985",
+          "gamertag": "Fialah",
+          "position": "F",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "45193",
+          "gamertag": "Sarkazim",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "59983",
+          "gamertag": "Mantzzzy",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "31878",
+          "gamertag": "Trenur",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "7871",
+          "gamertag": "zSwivell",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "44660",
+          "gamertag": "Finn l35l",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "67084",
+          "gamertag": "l Binner l",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    },
+    {
+      "lgTeamId": 404,
+      "teamName": "Switzerland",
+      "players": [
+        {
+          "lgUserId": "77679",
+          "gamertag": "Roboticfishy3",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "57812",
+          "gamertag": "DirtyDangler82",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "71960",
+          "gamertag": "Millsakov",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "77622",
+          "gamertag": "Nick on DS",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "9131",
+          "gamertag": "goosekevin",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "9189",
+          "gamertag": "Mojox90",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "46041",
+          "gamertag": "EDGEx22",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "79209",
+          "gamertag": "harlem_143rd",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "65685",
+          "gamertag": "xACx77",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "46036",
+          "gamertag": "DeeFroster",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "55861",
+          "gamertag": "dobyyx75",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    },
+    {
+      "lgTeamId": 342,
+      "teamName": "USA",
+      "players": [
+        {
+          "lgUserId": "58394",
+          "gamertag": "Gweeds-",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "74177",
+          "gamertag": "Delco PAWXS",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "70768",
+          "gamertag": "iKaprizov",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "71469",
+          "gamertag": "Kwazii1x",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "65814",
+          "gamertag": "Slap-Time",
+          "position": "LW",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "80268",
+          "gamertag": "lLittleNicky12l",
+          "position": "C",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "69674",
+          "gamertag": "Malkin 71 l",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "74844",
+          "gamertag": "oGraavy",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "4321",
+          "gamertag": "Lazy Pedestrian",
+          "position": "LD",
+          "playerKind": "skater",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "73474",
+          "gamertag": "Fil x 8",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        },
+        {
+          "lgUserId": "62725",
+          "gamertag": "SHADOWxplayz21",
+          "position": "G",
+          "playerKind": "goalie",
+          "rosterStatus": "active",
+          "jerseyNumber": null
+        }
+      ]
+    }
+  ]
+}
