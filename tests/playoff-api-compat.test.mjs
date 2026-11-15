@@ -8,6 +8,8 @@ test('Vercel-playoffs API avoids import.meta in JavaScript bundled as CommonJS',
  const api=read('api/lgchl-playoffs.js');
  assert.doesNotMatch(api,/import\.meta/);
  assert.match(api,/join\(process\.cwd\(\), 'assets', 'lgchl', 'playoffs', 's55\.json'\)/);
+ assert.match(api,/import\('\.\.\/lib\/lgchl-playoff\.mjs'\)/);
+ assert.doesNotMatch(api,/^import\s+\{[^\n]*\}\s+from\s+'\.\.\/lib\/lgchl-playoff\.mjs'/m);
  assert.match(api,/catch\s*\{/);
 });
 
