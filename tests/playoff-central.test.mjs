@@ -59,8 +59,17 @@ test('predictor series-length changes use the same ID key as saved and submitted
  assert.match(js,/state\.saved\.set\(seriesKey\(x\.series_id\),x\)/);
  assert.match(js,/state\.picks\.get\(seriesKey\(s\.id\)\)/);
  assert.match(js,/state\.saved\.get\(seriesKey\(s\.id\)\)/);
- assert.match(js,/state\.picks\.set\(s,\{\.\.\.current,games:Number\(select\.value\)\}\)/);
+ assert.match(js,/state\.picks\.set\(s,\{\.\.\.current,games\}\)/);
+ assert.match(js,/e\.target\.closest\('button\[data-series-length\]'\)/);
+ assert.match(js,/button\.dataset\.games/);
+ assert.match(js,/aria-pressed/);
+ assert.doesNotMatch(js,/select\[data-series-length\]/);
  assert.match(js,/\[4,5,6,7\]\.map/);
+ const hq=read('playoff-hq.html');
+ assert.match(hq,/playoff-central\.js\?v=20261115-length-buttons-v2/);
+ assert.match(page,/playoff-central\.js\?v=20261115-length-buttons-v2/);
+ assert.match(hq,/playoff-central\.css\?v=20261115-length-buttons-v2/);
+ assert.match(page,/playoff-central\.css\?v=20261115-length-buttons-v2/);
  const saved=new Map([['101',{winner_id:11,games:6}]]);
  const picks=new Map();
  for(const games of [4,5,6,7]){
