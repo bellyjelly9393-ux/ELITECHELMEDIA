@@ -101,6 +101,12 @@
       <div id="poBoard" aria-live="polite"><p class="po-loading">Loading the official playoff bracket…</p></div>
     </div>
   </section>
+
+  <nav class="ecm-league-showcase" aria-label="Select a league playoff bracket">
+    <a href="#playoffs" class="ecm-league-tile ecm-ohl" data-ecm-league="OHL" aria-label="Show Ontario Hockey League playoff bracket"><strong>OHL</strong><span>Ontario Hockey League</span><b>View bracket →</b></a>
+    <a href="#playoffs" class="ecm-league-tile ecm-whl" data-ecm-league="WHL" aria-label="Show Western Hockey League playoff bracket"><strong>WHL</strong><span>Western Hockey League</span><b>View bracket →</b></a>
+    <a href="#playoffs" class="ecm-league-tile ecm-qmjhl" data-ecm-league="QMJHL" aria-label="Show Quebec Major Junior Hockey League playoff bracket"><strong>QMJHL</strong><span>Quebec Major Junior Hockey League</span><b>View bracket →</b></a>
+  </nav>
   <section class="pc-section pc-wide" id="scoreboard" aria-labelledby="scoreTitle">
     <div class="pc-section-head"><div><p class="pc-overline">THE HOCKEY</p><h2 id="scoreTitle">GAME-BY-GAME <span>SCORES</span></h2><p>Our original playoff bracket is directly above. Dive into each series and its individual game results here.</p></div><a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=playoffs&leagueid=39&seasonid=55" target="_blank" rel="noopener noreferrer" class="pc-text-link">Official LG bracket ↗</a></div>
     <div class="pc-controls"><div class="pc-tablist" role="group" aria-label="Filter league"><button type="button" class="is-on" data-league="ALL">ALL</button><button type="button" data-league="WHL">WHL</button><button type="button" data-league="OHL">OHL</button><button type="button" data-league="QMJHL">QMJHL</button></div><label class="pc-select-label">Round <select id="pcScoreRound"><option value="ALL">All rounds</option><option value="R1" selected>Wildcard · R1</option><option value="R2">Divisional · R2</option><option value="R3">Conference · R3</option><option value="FINAL">League finals</option><option value="CUP">Memorial Cup</option></select></label></div>
@@ -176,6 +182,13 @@ document.addEventListener('keydown', event => {
     mediaMenu.open = false;
     mediaMenu.querySelector('summary').focus();
   }
+});
+// Reuse the existing live bracket controls rather than creating a second data source.
+document.querySelectorAll('[data-ecm-league]').forEach(link => {
+  link.addEventListener('click', () => {
+    const league = link.dataset.ecmLeague;
+    document.querySelector('[data-po-tab="' + league + '"]')?.click();
+  });
 });
 </script>
 </body></html>
