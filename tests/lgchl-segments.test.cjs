@@ -77,6 +77,17 @@ test('Every team journey uses official league-specific rounds and keeps future o
  assert.equal(C.journey(snapshot,qmjhl.id).length,5);
  assert.ok(C.journey(snapshot,whl.id).some(x=>x.state==='PENDING'));
 });
+test('A future pending round never reveals an unconfirmed opponent',()=>{
+ const s=synthetic([0,0]);
+ s.leagues[0].conferences[0].rounds.push({label:'R2',slots:[{id:null,kind:'pending',sides:[{team_id:1},{team_id:2}],score:[0,0],wins_needed:4,games:[]}]});
+ const step=C.journey(s,1)[1];
+ assert.equal(step.state,'PENDING');assert.equal(step.opponent,null);
+});
+test('Every later round is locked after a verified elimination',()=>{
+ const s=synthetic([0,4],2);
+ s.leagues[0].conferences[0].rounds.push({label:'R2',slots:[{id:null,kind:'pending',sides:[{team_id:1},{team_id:2}],score:[0,0],wins_needed:4,games:[]}]});
+ assert.equal(C.journey(s,1)[1].state,'LOCKED');
+});
 test('Homepage, Predictor, bracket, management and existing scoring scripts remain intact',()=>{
  const h=readFileSync(join(root,'index.html'),'utf8');
  const nav=h.match(/<header class="nav">[\s\S]*?<\/header>/)?.[0]||'';
