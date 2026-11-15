@@ -48,7 +48,7 @@ test('Actual 3D renderer and red/black jersey silhouette are present',()=>{
 });
 test('Card and nation links use actual IDs and preserve the Great Britain 3D route',()=>{
  assert.match(shell,/player-cards\.html\?league=lg3s&id=/);
- assert.match(shell,/player=\x27/);
+ assert.match(shell,/searchParams\.set\(\x27player\x27/);
  assert.match(team,/id===1446\?\x27lg3s-gb-locker\.html\x27/);
  assert.match(team,/id===591\?\x27lg3s-japan-locker\.html\x27/);
  assert.match(team,/teamId===1446&&params\.get\(\x27fallback\x27\)!==\x271\x27/);
