@@ -6,7 +6,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const params=new URLSearchParams(location.search);
 const teamId=Number(params.get('team'));
 const LOGO=id=>'assets/lg3s/team'+id+'.svg';
-const ROOM=id=>id===1446?'lg3s-gb-locker.html':'lg3s-team.html?team='+id;
+const ROOM=id=>id===1446?'lg3s-gb-locker.html':id===591?'lg3s-japan-locker.html':'lg3s-team.html?team='+id;
 let rows=[];
 function render(){
  const q=String($('roomSearch').value||'').trim().toLocaleLowerCase();
@@ -55,6 +55,7 @@ async function start(){
  }catch(e){console.warn('LG3s team room roster:',e);$('roomName').textContent='LG3s Team Room';fail('Main-roster snapshot temporarily unavailable.');}
 }
 if(teamId===1446&&params.get('fallback')!=='1'){location.replace('lg3s-gb-locker.html');return;}
+if(teamId===591&&params.get('fallback')!=='1'){location.replace('lg3s-japan-locker.html');return;}
 $('roomSearch').addEventListener('input',render);
 start();
 })();
