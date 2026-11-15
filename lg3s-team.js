@@ -31,14 +31,14 @@ function fail(message){
 }
 async function start(){
  try{
-   const response=await fetch('lg3s-season1-data.json',{cache:'no-cache'});
+   const response=await fetch('data/lg3s/season1-active-roster-2026-11-14.json',{cache:'no-cache'});
    if(!response.ok)throw Error('Public roster fetch failed');
    const d=await response.json();
-   if(d.league!=='LG3s'||d.season!==1||!Array.isArray(d.teams)||!Array.isArray(d.players))throw Error('Invalid LG3s snapshot');
-   const eligible=d.teams.filter(t=>Number.isSafeInteger(Number(t.id)));
-   $('roomTeam').innerHTML=eligible.map(t=>'<option value="'+Number(t.id)+'"'+(Number(t.id)===teamId?' selected':'')+'>'+esc(t.name)+'</option>').join('');
+   if(d.league!=='LG3s'||d.season!==1||!Array.isArray(d.teams))throw Error('Invalid LG3s snapshot');
+   const eligible=d.teams.filter(t=>Number.isSafeInteger(Number(t.lgTeamId)));
+   $('roomTeam').innerHTML=eligible.map(t=>'<option value="'+Number(t.lgTeamId)+'"'+(Number(t.lgTeamId)===teamId?' selected':'')+'>'+esc(t.name)+'</option>').join('');
    $('roomTeam').addEventListener('change',()=>{location.href=ROOM(Number($('roomTeam').value));});
-   const team=eligible.find(t=>Number(t.id)===teamId);
+   const team=eligible.find(t=>Number(t.lgTeamId)===teamId);
    if(!team||!Number.isSafeInteger(teamId)||teamId<=0){$('roomName').textContent='Team not found';fail('Choose a nation from the LG3s coverage page.');return;}
    $('roomLogo').src=LOGO(teamId);
    $('roomLogo').alt=team.name+' team crest';
@@ -46,8 +46,8 @@ async function start(){
    $('roomTeam').value=String(teamId);
    document.title=team.name+' LG3s Locker Room | EliteChel Media';
    $('nationCoverage').href='lg3s-media.html#nation/'+teamId;
-   rows=d.players.filter(p=>Number(p.t)===teamId&&p.s==='Active'&&Number.isSafeInteger(Number(p.id))&&Number(p.id)>0);
-   const recordedDate=String(d.as_of||'source date not available');
+   rows=team.players.filter(p=>p.rosterStatus==='active'&&Number.isSafeInteger(Number(p.lgUserId))&&Number(p.lgUserId)>0).map(p=>({id:Number(p.lgUserId),n:p.gamertag,p:p.position}));
+   const recordedDate=String(d.capturedOn||'source date not available');
    $('roomRecord').textContent=rows.length+' main-roster players · Snapshot '+recordedDate;
    $('playersTitle').textContent='Main roster · '+rows.length;
    $('rosterNote').textContent='Source: saved LG3s Season 1 main-roster snapshot, '+recordedDate+'. Training Camp excluded. Uniforms are generic concepts, not official designs. Statistics are not invented; open a player card for available verified data.';
