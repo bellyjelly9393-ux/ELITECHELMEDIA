@@ -42,7 +42,8 @@ test('No elimination from an inconsistent or unconfirmed clinch signal',()=>{
  let s=synthetic([2,3],2);
  assert.equal(C.teamState(s,1).status,'ON THE BRINK');
  s=synthetic([2,4],null);
- assert.equal(C.teamState(s,1).status,'ON THE BRINK');
+ assert.equal(C.teamState(s,1).status,'PENDING REVIEW');
+ assert.equal(C.pressure(s,1).label,'AWAITING VERIFIED SCORE');
 });
 test('Confirmed byes count as advancement, not guessed wins',()=>{
  const s=synthetic([0,0]);
