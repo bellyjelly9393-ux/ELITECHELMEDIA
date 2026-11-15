@@ -113,6 +113,68 @@ function renderRivalry(){
  $('segTitle').textContent='Rivalry Report · '+list.length+' playoff series';
  root.innerHTML=list.length?'<div class="seg-grid">'+list.map(seriesPreview).join('')+'</div>':'<p class="seg-empty">No verified matchups match your filters. Return when the bracket confirms the next series.</p>';
 }
+
+/* Fan War Room. Polls exist only when editorially published in the separate RLS backend.
+   One authenticated user, one vote per poll; aggregate percentages come from recorded votes. */
+let fanDb=null;
+const fanClient=()=>{if(!fanDb&&window.supabase?.createClient)fanDb=window.supabase.createClient('https://lrgllzvwgvqagcpiyvfd.supabase.co',KEY);return fanDb};
+const pollNodeId='segFanWarRoom';
+async function renderPolls(){
+ const seriesId=C.validId(qs.get('series')),slot=C.allSeries(state.data).find(x=>Number(x.id)===seriesId);if(!slot)return;
+ const response=await Promise.allSettled([
+  getJSON(BASE+'ecm_s55_rivalry_polls?select=id,series_id,question,options,status,published,updated_at&season=eq.55&published=is.true&series_id=eq.'+seriesId+'&order=updated_at.desc&limit=10',{headers:{apikey:KEY}}),
+  fanClient()?.auth.getUser()||Promise.resolve({data:{user:null}})
+ ]);
+ const polls=response[0].status==='fulfilled'&&Array.isArray(response[0].value)?response[0].value:[];
+ let node=document.getElementById(pollNodeId);
+ if(!polls.length){node?.remove();return}
+ if(!node){node=document.createElement('section');node.id=pollNodeId;node.className='seg-panel';node.style.marginTop='20px';root.appendChild(node)}
+ const user=response[1].status==='fulfilled'?response[1].value?.data?.user:null;
+ const prior=new Set();
+ if(user&&fanClient()){
+  const ids=polls.map(p=>p.id);
+  const {data}=await fanClient().from('ecm_s55_rivalry_votes').select('poll_id').in('poll_id',ids).eq('voter_id',user.id);
+  for(const row of data||[])prior.add(row.poll_id);
+ }
+ node.innerHTML='<p class="seg-kicker">COMMUNITY · SEPARATE FROM THE PREDICTOR</p><h3>FAN WAR ROOM</h3><p>One vote per signed-in account, per poll. Percentages are based on actual submitted votes.</p>'+
+ polls.map(p=>{
+  const options=Array.isArray(p.options)?p.options:[],voted=prior.has(p.id),closed=p.status!=='open';
+  if(options.length<2||options.length>5)return'';
+  return'<article class="seg-poll" data-poll="'+E(p.id)+'"><p class="seg-kicker">'+(closed?'CLOSED':'OPEN')+' POLL · '+E(fmt(p.updated_at))+'</p><h4>'+E(p.question)+'</h4>'+
+   (voted||closed?'<div class="seg-poll-results" data-results="'+E(p.id)+'">Loading recorded votes…</div>':
+   user?'<div class="seg-poll-answers">'+options.map((x,i)=>'<button type="button" data-vote="'+i+'" data-poll-id="'+E(p.id)+'">'+E(x)+'</button>').join('')+'</div>':
+   '<p>Sign into your EliteChel account to vote. Voting results appear after you vote or when the poll closes.</p><a class="seg-action" href="management.html">EliteChel account sign-in →</a>')+
+   '</article>';
+ }).join('');
+ for(const p of polls){
+  if(prior.has(p.id)||p.status!=='open')updatePollResult(p);
+ }
+ node.querySelectorAll('button[data-vote]').forEach(button=>button.addEventListener('click',async()=>{
+  const id=button.dataset.pollId,p=polls.find(x=>x.id===id),choice=Number(button.dataset.vote);
+  if(!user||!p||p.status!=='open'||!Number.isInteger(choice)||choice<0||choice>=p.options.length)return;
+  button.disabled=true;
+  let status=node.querySelector('[data-poll-status="'+id+'"]');
+  if(!status){status=document.createElement('p');status.dataset.pollStatus=id;button.parentNode.after(status)}
+  status.textContent='Recording your vote…';
+  const {error}=await fanClient().from('ecm_s55_rivalry_votes').insert({poll_id:id,voter_id:user.id,choice});
+  if(error){status.textContent=error.code==='23505'?'You have already voted in this poll.':'Vote was not recorded: '+(error.message||'Try again.');button.disabled=false;return;}
+  status.textContent='Vote recorded. Showing actual results.';
+  const article=node.querySelector('[data-poll="'+id+'"]'),answers=article?.querySelector('.seg-poll-answers');
+  if(answers){answers.replaceWith(Object.assign(document.createElement('div'),{className:'seg-poll-results',dataset:{results:id}}))}
+  updatePollResult(p);
+ }));
+}
+async function updatePollResult(p){
+ const holder=root.querySelector('[data-results="'+p.id+'"]');if(!holder)return;
+ try{
+  const r=await fetch('https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/rpc/ecm_s55_poll_results',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({p_poll_id:p.id}),signal:AbortSignal.timeout(12000)});
+  if(!r.ok)throw Error('Results temporarily unavailable');
+  const data=await r.json(),total=Number(data?.total||0),counts=Array.isArray(data?.counts)?data.counts:[];
+  holder.innerHTML='<small>'+total+' recorded vote'+(total===1?'':'s')+'</small>'+
+   p.options.map((x,i)=>{const n=Number(counts[i]||0),pct=total>0?Math.round(n*100/total):0;return'<div class="seg-poll-result"><div><span>'+E(x)+'</span><strong>'+pct+'% · '+n+'</strong></div><div class="seg-poll-track"><i style="width:'+pct+'%"></i></div></div>'}).join('');
+ }catch{holder.textContent='Verified vote counts are temporarily unavailable.'}
+}
+
 function stageCard(s,team){
  const label=s.state==='PENDING'||s.state==='LOCKED'?'Opponent TBD':s.state==='BYE'?'Confirmed bye':s.opponent?.name||'Opponent TBD';
  const cls=labelClass(s.state);
@@ -146,7 +208,7 @@ async function load(){
  const age=Date.parse(state.data.fetched_at||'');const delayed=state.data.stale||state.source==='snapshot';
  $('segUpdated').textContent=sourceLabel()+' · '+(Number.isFinite(age)?fmt(state.data.fetched_at):'time unverified')+(delayed?' · delayed source':'');
  $('segSource').textContent='All scores, advancement and team IDs come from the existing official Season 55 playoff bracket. '+(delayed?'Source is a saved or delayed snapshot: results may have changed. ':'')+'Automated pressure labels use only series scores and verified final games. “Built Different” and featured stories require authorized editorial publication. No playoff player totals are fabricated.';
- selectors(view);render();
+ selectors(view);render();if(view==='rivalry'&&qs.get('series'))renderPolls().catch(()=>{});
 }
 load();
 setInterval(()=>{if(!document.hidden)load()},180000);
