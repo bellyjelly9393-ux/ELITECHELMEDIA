@@ -4,6 +4,9 @@
   'use strict';
   const $ = (id) => document.getElementById(id);
   const state = { bracket: null, league: 'ALL', round: 'R1', series: [], picks: new Map(), saved: new Map(), dbReady: false };
+  // HTML data-* attributes are strings, while Supabase can return numeric series IDs.
+  // Use one key type for draft picks and saved picks so rerenders preserve changes.
+  const seriesKey = (id) => String(id);
   const db = () => window.VVHLBackend?.db;
   const user = () => window.VVHLBackend?.state?.user;
   const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -137,7 +140,7 @@
       client.from('ecm_playoff_picks').select('series_id,winner_id,games').eq('user_id',who.id),
       client.from('ecm_playoff_handles').select('handle').eq('user_id',who.id).maybeSingle()
     ]);
-    if (!p.error) (p.data || []).forEach(x => state.saved.set(x.series_id,x));
+    if (!p.error) (p.data || []).forEach(x => state.saved.set(seriesKey(x.series_id),x));
     if (!h.error && h.data?.handle) $('pcHandle').value=h.data.handle;
     else if (!$('pcHandle').value && window.VVHLBackend.state?.profile?.display_name) $('pcHandle').value=window.VVHLBackend.state.profile.display_name.slice(0,24);
     renderBallot();
@@ -160,7 +163,7 @@
     $('pcEntryStatus').textContent = ready ? 'Entries open · all series required' : !user() ? 'Sign in to predict' : 'Predictions locked or awaiting launch';
     el.innerHTML=items.map(s=>{
       const a=team(s.team_a),b=team(s.team_b);
-      const selected = state.picks.get(s.id) || state.saved.get(s.id) || {};
+      const selected = state.picks.get(seriesKey(s.id)) || state.saved.get(seriesKey(s.id)) || {};
       const locked = !s.is_open || Date.parse(s.lock_at) <= Date.now() || !user();
       const winner = number(selected.winner_id);
       const games = number(selected.games) || 6;
@@ -174,7 +177,7 @@
         [4,5,6,7].map(v=>'<option value="' + v + '"' + (v===games?' selected':'') + '>' + v + ' games</option>').join('') +
         '</select></label></div>';
     }).join('');
-    const incomplete=items.filter(s => !(state.picks.get(s.id)||state.saved.get(s.id))?.winner_id);
+    const incomplete=items.filter(s => !(state.picks.get(seriesKey(s.id))||state.saved.get(seriesKey(s.id)))?.winner_id);
     $('pcBallotStatus').textContent = !user() ? 'Sign into your EliteChel account in the panel to enter.' :
       ready ? 'Choose the winner in every series, then submit. ' + incomplete.length + ' picks still needed.' :
       'This round is closed or is not yet officially open for entries.';
@@ -189,7 +192,7 @@
       return;
     }
     const ballot=items.map(s=>{
-      const v=state.picks.get(s.id)||state.saved.get(s.id)||{};
+      const v=state.picks.get(seriesKey(s.id))||state.saved.get(seriesKey(s.id))||{};
       return {series_id:s.id,winner_id:number(v.winner_id),games:number(v.games)||6};
     });
     if (ballot.some(x=>x.winner_id===null)) {
@@ -201,7 +204,7 @@
     const {data,error}=await client.rpc('ecm_predictor_submit_ballot',{p_round:Number($('pcPickRound').value),p_handle:handle,p_ballot:ballot});
     if (error) $('pcBallotStatus').textContent='Unable to save: ' + (error.message||'Try again.');
     else {
-      ballot.forEach(x=>state.saved.set(x.series_id,x));state.picks.clear();
+      ballot.forEach(x=>state.saved.set(seriesKey(x.series_id),x));state.picks.clear();
       $('pcBallotStatus').textContent='Ballot saved for this round. You can revise it before the first game locks.';
       await loadLeaderboard();
     }
@@ -231,13 +234,13 @@
   $('pcSubmit').addEventListener('click',submitBallot);
   $('pcBallot').addEventListener('click',e=>{
     const button=e.target.closest('button[data-winner]');if(!button||button.disabled)return;
-    const s=button.dataset.series;const current=state.picks.get(s)||state.saved.get(s)||{};
+    const s=seriesKey(button.dataset.series);const current=state.picks.get(s)||state.saved.get(s)||{};
     state.picks.set(s,{...current,winner_id:Number(button.dataset.winner)});
     renderBallot();
   });
   $('pcBallot').addEventListener('change',e=>{
     const select=e.target.closest('select[data-series-length]');if(!select)return;
-    const s=select.dataset.series;const current=state.picks.get(s)||state.saved.get(s)||{};
+    const s=seriesKey(select.dataset.series);const current=state.picks.get(s)||state.saved.get(s)||{};
     state.picks.set(s,{...current,games:Number(select.value)});
     renderBallot();
   });
