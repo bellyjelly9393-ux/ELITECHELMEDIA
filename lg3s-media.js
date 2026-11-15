@@ -102,7 +102,7 @@
     // 6s-inspired locker-room layout with verified main-roster player stalls.
     $('thNations').innerHTML = data.teams.map(t => {
       const id = Number(t.id);
-      const href = id === 1446 ? 'lg3s-gb-locker.html' : 'lg3s-team.html?team=' + id;
+      const href = id === 1446 ? 'lg3s-gb-locker.html' : id === 591 ? 'lg3s-japan-locker.html' : 'lg3s-team.html?team=' + id;
       return '<a href="' + href + '" class="th-nation-chip" title="Enter ' + esc(t.name) + ' locker room" aria-label="Enter ' + esc(t.name) + ' locker room">' + teamMark(t,34) + '<span>' + esc(t.name) + '</span></a>';
     }).join('');
   }
