@@ -2,6 +2,7 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const {readFileSync}=require('node:fs');
 const {join}=require('node:path');
+const {URL,URLSearchParams}=require('node:url');
 const shell=readFileSync(join(__dirname,'../lg3s-japan-shell.js'),'utf8');
 const snapshot=JSON.parse(readFileSync(join(__dirname,'../data/lg3s/season1-active-roster-2026-11-14.json'),'utf8'));
 const STORE='ecm:lg3s:s1:japan:custom:v1:';
@@ -35,8 +36,8 @@ function makeHarness(storage=new Map()){
  const history={replaceState(){}};
  const fetch=async()=>({ok:true,json:async()=>snapshot});
  const CustomEvent=function(type,options){this.type=type;this.detail=options.detail};
- new Function('window','document','location','history','fetch','CustomEvent','setTimeout','console',shell)(
-  site,{getElementById:element},location,history,fetch,CustomEvent,()=>0,{warn(){}}
+ new Function('window','document','location','history','fetch','CustomEvent','setTimeout','console','URL','URLSearchParams',shell)(
+  site,{getElementById:element},location,history,fetch,CustomEvent,()=>0,{warn(){}},URL,URLSearchParams
  );
  return{site,storage,element,events,ready:site.ECMJapanLocker.ready};
 }
