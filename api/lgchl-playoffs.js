@@ -5,7 +5,7 @@
 // A saved snapshot is served if LeagueGaming or Supabase is unavailable.
 import { spawn } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { rest } from './_lgchl.js';
 import { bracketUrl, isBlocked, refreshFromSources, toPublic } from '../lib/lgchl-playoff.mjs';
 
@@ -14,7 +14,7 @@ const FRESH_MS = 120000;
 const STALE_MS = 30000;
 
 function readSnapshot() {
-  return JSON.parse(readFileSync(fileURLToPath(new URL('../assets/lgchl/playoffs/s55.json', import.meta.url)), 'utf8'));
+  return JSON.parse(readFileSync(join(process.cwd(), 'assets', 'lgchl', 'playoffs', 's55.json'), 'utf8'));
 }
 
 let snapshot = null;
