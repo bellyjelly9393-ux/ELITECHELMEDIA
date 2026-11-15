@@ -69,3 +69,11 @@ test('both playoff entry pages link to the official Discord community but keep p
  }
 });
 
+
+test('management and Hitmen War Room remain reachable from playoff homepage',()=>{
+ assert.match(home, /<a class="pc-management-nav" href="management\.html"/);
+ assert.match(home, /<a href="management\.html" aria-label="Private EliteChel Media management controls">Management<\/a>/);
+ assert.match(home, /<a href="hitmen-hq\.html">Hitmen War Room<\/a>/);
+ assert.ok(read('management.html').includes('ELITECHEL MANAGEMENT'));
+ assert.ok(read('hitmen-hq.html').includes('Management only'));
+});
