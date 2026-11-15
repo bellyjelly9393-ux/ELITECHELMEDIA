@@ -4,8 +4,9 @@ const {readFileSync}=require('node:fs');
 const {join}=require('node:path');
 const {URL,URLSearchParams}=require('node:url');
 const shell=readFileSync(join(__dirname,'../lg3s-japan-shell.js'),'utf8');
+const basic=readFileSync(join(__dirname,'../lg3s-basic-customization.js'),'utf8');
 const snapshot=JSON.parse(readFileSync(join(__dirname,'../data/lg3s/season1-active-roster-2026-11-14.json'),'utf8'));
-const STORE='ecm:lg3s:s1:japan:custom:v1:';
+const STORE='ecm:lg3s:s1:team:591:player:';
 
 function makeHarness(storage=new Map()){
  const elements=new Map(),events=[];
@@ -36,6 +37,7 @@ function makeHarness(storage=new Map()){
  const history={replaceState(){}};
  const fetch=async()=>({ok:true,json:async()=>snapshot});
  const CustomEvent=function(type,options){this.type=type;this.detail=options.detail};
+ new Function('window',basic)(site);
  new Function('window','document','location','history','fetch','CustomEvent','setTimeout','console','URL','URLSearchParams',shell)(
   site,{getElementById:element},location,history,fetch,CustomEvent,()=>0,{warn(){}},URL,URLSearchParams
  );
