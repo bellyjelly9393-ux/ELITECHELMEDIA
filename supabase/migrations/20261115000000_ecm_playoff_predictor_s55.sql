@@ -117,7 +117,8 @@ grant execute on function public.ecm_predictor_submit_ballot(integer,text,jsonb)
 create or replace function public.ecm_predictor_leaderboard(p_round integer default null)
 returns table(
   rank bigint, handle text, points bigint, correct_winners bigint,
-  exact_calls bigint, upset_calls bigint, perfect_rounds bigint
+  exact_calls bigint, upset_calls bigint, perfect_rounds bigint,
+  grand_prize_eligible boolean
 )
 language sql stable security definer set search_path = ''
 as $body$
@@ -159,13 +160,31 @@ totals as (
    coalesce(sum(b.winners),0)::bigint as wins,
    coalesce(sum(b.exacts),0)::bigint as exact,
    coalesce(sum(b.upsets),0)::bigint as upsets,
-   coalesce(sum(b.perfect),0)::bigint as perfects
+   coalesce(sum(b.perfect),0)::bigint as perfects,
+   not exists (
+     select 1 from (
+       select s.round_no, count(*) as required_count
+       from public.ecm_playoff_series s
+       where s.season=55 and s.is_open
+         and exists (select 1 from public.ecm_playoff_series opened
+                     where opened.season=55 and opened.round_no=s.round_no
+                       and opened.is_open and opened.lock_at <= now())
+       group by s.round_no
+     ) locked_round
+     where (
+       select count(*)
+       from public.ecm_playoff_picks picks
+       join public.ecm_playoff_series ms on ms.id=picks.series_id
+       where picks.user_id=h.user_id and ms.season=55
+         and ms.round_no=locked_round.round_no
+     ) <> locked_round.required_count
+   ) as eligible
  from public.ecm_playoff_handles h
  join bonus b on b.user_id=h.user_id
  group by h.user_id,h.handle
 )
 select row_number() over(order by t.total desc,t.wins desc,t.exact desc,t.handle asc)::bigint,
-  t.handle,t.total,t.wins,t.exact,t.upsets,t.perfects
+  t.handle,t.total,t.wins,t.exact,t.upsets,t.perfects,t.eligible
 from totals t
 order by t.total desc,t.wins desc,t.exact desc,t.handle asc
 limit 100;
