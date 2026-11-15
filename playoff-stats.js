@@ -8,8 +8,8 @@ const safeId=v=>Number.isSafeInteger(Number(v))&&Number(v)>0?Number(v):null;
 const safeUrl=v=>typeof v==='string'&&/^https:\/\/www\.leaguegaming\.com\//i.test(v)?v:null;
 const fmtDate=s=>{const d=new Date(s);return Number.isFinite(+d)?new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(d):'Schedule pending';};
 function completedGame(g){
- return g&&String(g.status).toLowerCase()==='final'&&safeId(g.away)&&safeId(g.home)&&
- [g.away_score,g.home_score].every(v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))&&Number(v)>=0);
+ return g&&String(g.status).toLowerCase()==='final'&&safeId(g.id)&&safeId(g.away)&&safeId(g.home)&&
+ [g.away_score,g.home_score].every(v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))&&Number(v)>=0)&&Number(g.away_score)!==Number(g.home_score);
 }
 function aggregateTeams(data){
  const teams=Object.values(data?.teams||{}).filter(t=>safeId(t.id)).map(t=>({
@@ -31,7 +31,7 @@ function aggregateTeams(data){
  return teams.map(t=>({...t,gd:t.gf-t.ga})).sort((a,b)=>b.w-a.w||b.gd-a.gd||b.gf-a.gf||a.name.localeCompare(b.name));
 }
 function verifiedPlayerRows(feed,kind){
- const rows=(feed?.[kind]||[]).filter(p=>p&&p.verified===true&&safeId(p.lg_user_id)&&safeId(p.lg_team_id)&&p.source_url&&Number.isFinite(Number(p.gp))&&Number(p.gp)>0);
+ const rows=(feed?.[kind]||[]).filter(p=>p&&p.verified===true&&safeId(p.lg_user_id)&&safeId(p.lg_team_id)&&p.source_url&&p.source_checked_at&&/^https:\/\/(www\.)?leaguegaming\.com\//i.test(p.source_url)&&Number.isFinite(Number(p.gp))&&Number(p.gp)>0);
  return rows.sort((a,b)=>kind==='skaters'?Number(b.points||0)-Number(a.points||0)||Number(b.goals||0)-Number(a.goals||0):Number(b.save_pct||0)-Number(a.save_pct||0)||Number(a.gaa||99)-Number(b.gaa||99));
 }
 function nextSeries(data){
@@ -76,14 +76,15 @@ async function load(){
   const [live,snapshot,players]=await Promise.allSettled([
     fetch('/api/lgchl-playoffs',{cache:'no-store',signal:AbortSignal.timeout(18000)}).then(r=>{if(!r.ok)throw Error(String(r.status));return r.json();}),
     fetch('assets/lgchl/playoffs/s55.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error(String(r.status));return r.json();}),
-    fetch('data/lgchl/playoff-player-stats-s55.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error(String(r.status));return r.json();})
+    fetch('https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/ecm_lgchl_s55_playoff_public_players?select=season,lg_user_id,lg_team_id,player_kind,gamertag,team_name,league,gp,goals,assists,points,saves,shots_against,goals_against,save_pct,gaa,verified,source_url,source_checked_at&verified=is.true&limit=1000',{headers:{apikey:'sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP'},cache:'no-store',signal:AbortSignal.timeout(17000)}).then(async r=>{if(!r.ok)throw Error(String(r.status));const rows=await r.json();return{skaters:rows.filter(p=>p.player_kind==='skater'),goalies:rows.filter(p=>p.player_kind==='goalie')}})
   ]);
   const candidates=[live,snapshot].map((r,i)=>r.status==='fulfilled'&&r.value?.ok&&r.value?.teams&&r.value?.matchups?{data:r.value,source:i===0?'live':'snapshot'}:null).filter(Boolean).sort((a,b)=>Date.parse(b.data.fetched_at||0)-Date.parse(a.data.fetched_at||0));
   if(!candidates.length)throw Error('bracket_unavailable');
   state.data=candidates[0].data;state.source=candidates[0].source;
   state.feed=players.status==='fulfilled'?players.value:{skaters:[],goalies:[]};
+  const verifiedCount=verifiedPlayerRows(state.feed,'skaters').length+verifiedPlayerRows(state.feed,'goalies').length;
   const stamp=state.data.fetched_at&&Number.isFinite(Date.parse(state.data.fetched_at))?fmtDate(state.data.fetched_at):'time unknown';
-  $('psFreshness').textContent='Bracket: '+(state.source==='live'?'live feed':'saved snapshot')+' · fetched '+stamp+(state.data.stale?' · STALE':'')+'.';
+  $('psFreshness').textContent='Bracket: '+(state.source==='live'?'live feed':'saved snapshot')+' · fetched '+stamp+(state.data.stale?' · STALE':'')+' · '+verifiedCount+' verified playoff player records.';
   render();renderMatchups();
  }catch(e){$('psFreshness').textContent='Playoff data unavailable. No results or player stats were invented.';state.data=null;render();$('psMatchStatus').textContent='Upcoming schedule temporarily unavailable.';console.warn(e);}
 }
