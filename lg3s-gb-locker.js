@@ -24,12 +24,16 @@ button.disabled=false;
 standalone.hidden=false;
 standalone.href=base;
 status.textContent='Explore the interactive 3D dressing room. The experience loads only when you enter.';
-button.addEventListener('click',()=>{
+const enterRoom=()=>{
   if(frame.src)return;
   button.disabled=true;
   status.textContent='Opening 3D locker room…';
   frame.src=base;
   frame.hidden=false;
   splash.hidden=true;
-});
+};
+button.addEventListener('click',enterRoom);
+// Nation-card visitors have already chosen the 3D room: enter directly.
+// On data-saver connections keep the explicit Enter button, with a 2D fallback.
+if(!navigator.connection?.saveData) enterRoom();
 })();
