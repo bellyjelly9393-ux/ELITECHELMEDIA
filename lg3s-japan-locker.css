@@ -54,3 +54,25 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:15px;fl
 @media(max-width:880px){.experience{grid-template-columns:1fr}.viewport,.scene-surface{min-height:440px}.inspector-bottom{margin-top:12px}.roster-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:minmax(0,1fr) 145px}.hero-crest{width:140px}}
 @media(max-width:560px){.site-header{justify-content:center}.site-header nav{width:100%;justify-content:space-between;gap:7px}.site-header nav a{font-size:11px}.hero{grid-template-columns:1fr;padding:28px 10px}.hero-crest{position:absolute;right:4%;top:26px;opacity:.18;width:160px;pointer-events:none}.hero-copy{z-index:1}.hero h1{font-size:clamp(49px,13vw,70px)}.hero-links a{width:100%}.room-shell,.roster-shell{padding:12px;margin:14px 0}.room-heading h2,.roster-header h2{font-size:35px}.room-heading .status{text-align:left}.viewport,.scene-surface{min-height:365px}.scene-hud{left:9px;top:10px;right:9px}.scene-hud span{font-size:8px;padding:5px 7px}.scene-controls{left:8px;right:8px;bottom:10px;gap:6px}.scene-controls button{padding:8px 7px;min-height:40px;flex:1 1 auto;font-size:10px}.roster-grid{grid-template-columns:1fr}.roster-header input{min-width:0;width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.scene-hud .status-dot{box-shadow:none}}
+
+/* Included nameplate + number styling. These controls are free, per-browser, and not official roster edits. */
+.free-customize{padding:15px 14px;border:1px solid #a17d68;border-top:3px solid #db344a;border-radius:7px;background:linear-gradient(135deg,#2b1b28,#111720);margin:6px 0 16px}
+.free-customize .customize-heading{margin:0 0 12px}
+.tier-label{display:inline-block;color:#f0ce96;font:900 10px/1.2 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.customize-heading h4,.upgrade-customize h4{font:900 clamp(23px,2.6vw,32px)/1.1 JapanHead,Impact,sans-serif;text-transform:uppercase;color:#fff;margin:8px 0 8px}
+.customize-heading p,.upgrade-customize p{font-size:12px;line-height:1.55;color:#c9d5e2;margin:0 0 10px}
+.free-customize label{margin:13px 0 6px;display:flex;flex-direction:column;gap:3px;color:#f7dda9;font-weight:800}
+.free-customize label span{color:#bcc7d5;font-weight:500;font-size:11px}
+.free-customize input{display:block;min-width:0;width:100%;min-height:45px;padding:9px 11px;color:#fff;background:#0b121d;border:1px solid #637185;border-radius:5px}
+.free-customize input:disabled{opacity:.56;cursor:not-allowed}
+.customize-buttons{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px;margin-top:16px}
+.customize-buttons button{min-height:45px;border:1px solid #d4a479;border-radius:5px;padding:10px 12px;background:linear-gradient(#a53642,#62232d);color:#fff;font:900 12px/1.2 system-ui,sans-serif}
+.customize-buttons #resetFreeCustomization{background:#1e2631;border-color:#647080;color:#e0e9f1}
+.customize-buttons button:disabled{opacity:.47;cursor:not-allowed}
+.customize-buttons button:hover:not(:disabled){border-color:#fff;filter:brightness(1.11)}
+.free-customize .preview-disclaimer{margin:12px 0 1px;color:#cfdae6;font-size:11px;line-height:1.55}
+.upgrade-customize{margin:0 0 20px;padding:15px;border:1px solid #74624c;border-top:3px solid #c7a060;border-radius:7px;background:linear-gradient(130deg,#2a2530,#111821)}
+.tier-label.premium{color:#f5d49c}
+.upgrade-customize h4{font-size:clamp(22px,2.5vw,28px)}
+.upgrade-customize .premium-note{font-size:11px;color:#aebaca;margin:11px 0 0;padding-top:10px;border-top:1px solid #ffffff25}
+@media(max-width:560px){.customize-buttons{grid-template-columns:1fr}.customize-buttons button{width:100%}.free-customize,.upgrade-customize{padding:13px}}
