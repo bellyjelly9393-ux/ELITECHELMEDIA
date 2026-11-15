@@ -160,7 +160,7 @@ async function renderPolls(){
   if(error){status.textContent=error.code==='23505'?'You have already voted in this poll.':'Vote was not recorded: '+(error.message||'Try again.');button.disabled=false;return;}
   status.textContent='Vote recorded. Showing actual results.';
   const article=node.querySelector('[data-poll="'+id+'"]'),answers=article?.querySelector('.seg-poll-answers');
-  if(answers){answers.replaceWith(Object.assign(document.createElement('div'),{className:'seg-poll-results',dataset:{results:id}}))}
+  if(answers){const fresh=document.createElement('div');fresh.className='seg-poll-results';fresh.dataset.results=id;answers.replaceWith(fresh)}
   updatePollResult(p);
  }));
 }
