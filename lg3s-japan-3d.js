@@ -14,7 +14,7 @@ const reducedMotion=window.matchMedia('(prefers-reduced-motion:reduce)').matches
 const isFiniteNumber=n=>typeof n==='number'&&Number.isFinite(n);
 const clamp=(x,min,max)=>Math.max(min,Math.min(max,x));
 let renderer=null,scene=null,camera=null,controls=null,clock=null;
-let selected=null,turnBack=false,interactionOn=!mobile,frame=0;
+let selected=null,turnBack=false,interactionOn=!mobile,frame=0,cameraTransition=true;
 const groups=new Map(),pickables=[],lights=[],focus=new THREE.Vector3(0,2.5,-2.4);
 let cameraGoal=new THREE.Vector3(0,7.1,16.7),targetGoal=focus.clone();
 
@@ -252,7 +252,7 @@ function buildRoom(players){
  const amber=new THREE.PointLight(0xf0c28f,62,26,2);amber.position.set(9,7,4);scene.add(amber);
 }
 function moveToOverview(){
- cameraGoal.set(0,7.3,17.3);targetGoal.set(0,2.8,-2.0);
+ cameraGoal.set(0,7.3,17.3);targetGoal.set(0,2.8,-2.0);cameraTransition=true;
 }
 function focusPlayer(id){
  const entry=groups.get(Number(id));if(!entry)return;
@@ -260,7 +260,7 @@ function focusPlayer(id){
  for(const e of groups.values())e.accent.visible=e===entry;
  const target=entry.root.position.clone().add(new THREE.Vector3(0,3.12,0));
  cameraGoal.copy(target.clone().addScaledVector(entry.normal,5.9).add(new THREE.Vector3(0,1.05,0)));
- targetGoal.copy(target);
+ targetGoal.copy(target);cameraTransition=true;
  if(shell.previewNumber!==entry.jersey.userData.number)retextureBack(entry,shell.previewNumber);
 }
 function toggleJersey(){
@@ -297,9 +297,14 @@ function resize(){
 }
 function animate(){
  frame=requestAnimationFrame(animate);
- const speed=reducedMotion?1:.075;
- camera.position.lerp(cameraGoal,speed);
- controls.target.lerp(targetGoal,speed);
+ if(cameraTransition){
+  const speed=reducedMotion?1:.12;
+  camera.position.lerp(cameraGoal,speed);
+  controls.target.lerp(targetGoal,speed);
+  if(camera.position.distanceToSquared(cameraGoal)<.0009&&controls.target.distanceToSquared(targetGoal)<.0009){
+   cameraTransition=false;
+  }
+ }
  controls.update();
  renderer.render(scene,camera);
 }
@@ -316,7 +321,7 @@ function init(players){
  renderer.toneMappingExposure=1.16;
  renderer.shadowMap.enabled=!mobile;
  renderer.shadowMap.type=THREE.PCFSoftShadowMap;
- host.textContent='';host.appendChild(renderer.domElement);
+ host.textContent='';host.appendChild(renderer.domElement);host.dataset.ready='true';
  resize();
  controls=new OrbitControls(camera,renderer.domElement);
  controls.enableDamping=!reducedMotion;controls.dampingFactor=.10;
@@ -324,6 +329,7 @@ function init(players){
  controls.minDistance=3.6;controls.maxDistance=30;
  controls.enablePan=true;controls.target.copy(targetGoal);
  controls.screenSpacePanning=false;
+ controls.addEventListener('start',()=>{cameraTransition=false});
  buildRoom(players);
  if(mobile)enableMobileInteraction(false);
  $('viewOverview').disabled=false;$('viewPlayer').disabled=!shell.selected;$('rotateJersey').disabled=!shell.selected;
