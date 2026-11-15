@@ -106,11 +106,16 @@
     const sides = (slot.sides || []).map((side, i) => sideLine(side, score, slot, i)).join('<i class="po-vs" aria-hidden="true">vs</i>');
     const bye = slot.kind === 'bye' ? '<span class="po-adv">Advances</span>' : '';
     const adv = slot.clinched && slot.kind === 'series' ? '<span class="po-adv">Advances</span>' : '';
+    const featureLinks = slot.kind==='series'&&Number.isSafeInteger(Number(slot.id))&&Number(slot.id)>0
+      ? '<nav class="po-feature-links" aria-label="Series features"><a href="rivalry-report.html?series='+Number(slot.id)+'">Rivalry Report ↗</a>'+
+        (slot.sides||[]).filter(side=>Number.isSafeInteger(Number(side.team_id))&&Number(side.team_id)>0).map(side=>'<a href="road-to-cup.html?team='+Number(side.team_id)+'">Road: '+esc(shown.teams?.[side.team_id]?.nick||'Team')+' ↗</a>').join('')+'</nav>'
+      : '';
     return `<article class="po-slot is-${esc(slot.kind)}${slot.clinched ? ' is-clinched' : ''}">
       <header class="po-kicker"><span>${kicker}</span>${seedLine}</header>
       <div class="po-sides">${sides}</div>
       ${bye}${adv}
       ${slot.kind === 'series' ? gamesHtml(slot, now) : ''}
+      ${featureLinks}
     </article>`;
   }
 

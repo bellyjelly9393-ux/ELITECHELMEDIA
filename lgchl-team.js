@@ -5,6 +5,7 @@ const {esc,read}=D,$=id=>document.getElementById(id),params=new URLSearchParams(
 const raw=params.get('team'),team=raw===null?412:Number(raw);
 const valid=n=>Number.isSafeInteger(Number(n))&&Number(n)>0;
 if(!valid(team)){$('roomName').textContent='Team not found';['roomRecord','roomPlayers','roomFinals','roomUpcoming'].forEach(id=>$(id).textContent='Choose a team from league coverage.');$('roomPlayers').setAttribute('aria-busy','false');return;}
+const roadLink=$('roomRoadLink');if(roadLink)roadLink.href='road-to-cup.html?team='+encodeURIComponent(team);
 if(document.body.dataset&&team===412&&!params.has('room')&&!document.body.dataset.roomAngles&&!document.body.dataset.roomConcept)document.body.dataset.roomTour='true';
 document.body.classList.toggle('league-room',true);
 document.body.classList.toggle('hitmen-room',team===412);

@@ -204,3 +204,9 @@
 @media (prefers-reduced-motion: reduce) {
   .po-live i { box-shadow: none; }
 }
+
+/* Canonical Rivalry Report and Road links inside the existing official bracket cards. */
+.po-feature-links{display:flex;flex-wrap:wrap;gap:5px;padding:8px 9px 10px;border-top:1px solid #ffffff24}
+.po-feature-links a{display:inline-flex;align-items:center;min-height:32px;font:800 10px/1.2 system-ui,sans-serif;letter-spacing:.02em;padding:6px 8px;text-decoration:none;color:#f8d39b;border:1px solid #745b55;border-radius:3px;background:#201c23}
+.po-feature-links a:hover,.po-feature-links a:focus-visible{background:#832b39;color:#fff;border-color:#e0bc89}
+@media(max-width:600px){.po-feature-links{gap:5px}.po-feature-links a{flex:1 1 auto;justify-content:center}}
