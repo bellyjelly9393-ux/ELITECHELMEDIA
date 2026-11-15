@@ -22,7 +22,16 @@ function logo(team, size) {
   return im;
 }
 function slot(series) {
-  const card = node('div','slot');
+  const linkable=series?.kind==='series'&&Number.isSafeInteger(Number(series?.id))&&Number(series.id)>0;
+  const card=node(linkable?'a':'div','slot');
+  if(linkable){
+    card.href='rivalry-report.html?series='+Number(series.id);
+    card.title='Open the verified Rivalry Report for this series';
+    card.setAttribute('aria-label','Open Rivalry Report for series '+Number(series.id));
+    card.style.display='block';
+    card.style.textDecoration='none';
+    card.style.color='inherit';
+  }
   for (const i of [0,1]) {
     const side = series?.sides?.[i];
     const team = bracket.teams[side?.team_id];
