@@ -26,7 +26,7 @@
    <div class="hero-copy">
     <p class="eyebrow">LG3s · SEASON 1 · 3D NATION LOCKERS · DESIGN PREVIEW</p>
     <h1 id="heroTitle">JAPAN <span>LOCKER ROOM</span></h1>
-    <p class="lead">Inside the red-and-black dressing room. Explore all 11 main-roster stalls, inspect the Japan concept jersey, and open verified player identities.</p>
+    <p class="lead">Inside the red-and-black dressing room. Explore all 11 main-roster stalls, personalize your nameplate and number for free, and discover the upcoming premium 3D locker upgrades.</p>
     <div class="hero-links">
       <a href="#locker" class="primary">Enter Japan's locker room</a>
       <a href="lg3s-team.html?team=591&amp;fallback=1" class="secondary">Accessible 2D team stalls</a>
@@ -69,9 +69,23 @@
         <img src="assets/lg3s/team591.svg" alt="" width="76" height="76">
         <div><b>BLACK / CRIMSON</b><small>Japan reference concept</small><small>Real player number: unverified</small></div>
       </div>
-      <label for="jerseyPreviewNumber">Try a jersey number <span>(visual preview only)</span></label>
-      <div class="number-controls"><input id="jerseyPreviewNumber" type="text" maxlength="2" inputmode="numeric" pattern="[0-9]{0,2}" placeholder="Unassigned"><button type="button" id="clearPreview">Clear</button></div>
-      <p class="preview-disclaimer" id="numberPreviewStatus">Custom preview numbers are not stored, assigned to players, or represented as official.</p>
+      <section class="free-customize" aria-labelledby="freeCustomizeTitle">
+        <div class="customize-heading"><span class="tier-label">INCLUDED · FREE</span><h4 id="freeCustomizeTitle">Your Nameplate &amp; Number</h4><p>Personalize how this stall looks in your own browser. Your real LG3s identity and Hockey Card never change.</p></div>
+        <form id="freeCustomizeForm">
+          <label for="plateDisplayName">Name on your plate <span>(display only · maximum 18 characters)</span></label>
+          <input id="plateDisplayName" type="text" maxlength="18" autocomplete="off" placeholder="Choose your display name" disabled>
+          <label for="jerseyPreviewNumber">Jersey number <span>(00–99 · visual only, not official)</span></label>
+          <input id="jerseyPreviewNumber" type="text" maxlength="2" inputmode="numeric" pattern="[0-9]{0,2}" placeholder="Unassigned" disabled>
+          <div class="customize-buttons"><button type="submit" id="saveFreeCustomization" disabled>Save free customization</button><button type="button" id="resetFreeCustomization" disabled>Reset</button></div>
+          <p class="preview-disclaimer" id="numberPreviewStatus" role="status">Choose a verified roster player first. Changes are private to this browser, not published to the team.</p>
+        </form>
+      </section>
+      <section class="upgrade-customize" aria-labelledby="premiumCustomizeTitle">
+        <span class="tier-label premium">3D LOCKER UPGRADE · LOCKED</span>
+        <h4 id="premiumCustomizeTitle"><span aria-hidden="true">🔒</span> Premium Stall Customization</h4>
+        <p>With an approved 3D locker upgrade: equipment and goalie gear styles, gloves, helmets, stall lighting, graphics and arena themes.</p>
+        <p class="premium-note">These options will require a verified purchase and player ownership. No checkout or premium access is enabled in this prototype.</p>
+      </section>
       <a href="lg3s-team.html?team=591&amp;fallback=1" id="playerCardLink" class="inspector-cta">Select a player for their Hockey Card →</a>
       <div class="inspector-bottom"><b>3D PROTOTYPE</b><p>Fabric shaping, jersey references, lighting and equipment are in visual QA. Great Britain’s existing 3D room is unchanged.</p></div>
     </aside>
