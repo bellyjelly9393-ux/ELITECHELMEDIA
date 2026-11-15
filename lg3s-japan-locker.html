@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0b0f">
+<title>Japan 3D Locker Room | LG3s Season 1 | EliteChel Media</title>
+<meta name="description" content="Explore a Japan LG3s Season 1 3D locker room preview with verified main-roster player stalls, black and red concept jerseys, and Hockey Card links.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
+<link rel="stylesheet" href="lg3s-japan-locker.css?v=20261115-basic2">
+<script src="lg3s-basic-customization.js?v=20261115-basic1" defer></script>
+<script src="lg3s-japan-shell.js?v=20261115-basic2" defer></script>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"}}
+</script>
+<script type="module" src="lg3s-japan-3d.js?v=20261115-basic2"></script>
+</head>
+<body>
+<a class="skip-link" href="#locker">Skip to locker room</a>
+<header class="site-header">
+ <a class="site-brand" href="index.html"><img src="assets/brand/ecm-crest.webp" width="50" height="50" alt=""><span>ELITECHEL <b>MEDIA</b></span></a>
+ <nav aria-label="LG3s navigation"><a href="lg3s-media.html">LG3s Desk</a><a href="lg3s-team.html?team=591&amp;fallback=1">2D Stalls</a><a href="lg3s-gb-locker.html">Great Britain 3D</a></nav>
+</header>
+<main>
+ <section class="hero" aria-labelledby="heroTitle">
+   <div class="hero-copy">
+    <p class="eyebrow">LG3s · SEASON 1 · 3D NATION LOCKERS · DESIGN PREVIEW</p>
+    <h1 id="heroTitle">JAPAN <span>LOCKER ROOM</span></h1>
+    <p class="lead">Inside the red-and-black dressing room. Explore all 11 main-roster stalls, personalize your nameplate and number for free, and discover the upcoming premium 3D locker upgrades.</p>
+    <div class="hero-links">
+      <a href="#locker" class="primary">Enter Japan's locker room</a>
+      <a href="lg3s-team.html?team=591&amp;fallback=1" class="secondary">Accessible 2D team stalls</a>
+    </div>
+    <p class="source-note">Jersey artwork is a concept based on the supplied reference, not a licensed national uniform. Player names are sourced from the LG3s November 14 roster snapshot. No official jersey numbers are assumed.</p>
+   </div>
+   <img class="hero-crest" src="assets/lg3s/art/nation-japan.webp" width="350" height="350" alt="Japan national team emblem">
+ </section>
+ <section class="room-shell" id="locker" aria-labelledby="lockerTitle">
+   <div class="room-heading">
+     <div><p class="eyebrow">THE 3D EXPERIENCE</p><h2 id="lockerTitle">Inside the dressing room</h2></div>
+     <p id="sceneStatus" class="status" role="status">Connecting to the 3D room. The roster below remains available if WebGL cannot load.</p>
+   </div>
+   <div class="experience">
+    <div class="viewport">
+      <div id="japanScene" class="scene-surface" role="img" aria-label="Interactive three-dimensional Japan hockey locker room with selectable player stalls">
+       <div class="scene-placeholder"><img src="assets/lg3s/art/nation-japan.webp" width="120" height="120" alt=""><p>Preparing the interactive locker room…</p></div>
+      </div>
+      <div class="scene-hud">
+       <span><i class="status-dot" aria-hidden="true"></i> JAPAN · TEAM 591</span>
+       <span>DRAG TO LOOK AROUND · TAP A STALL TO SELECT</span>
+      </div>
+      <div class="scene-controls" role="group" aria-label="3D room camera controls">
+       <button type="button" id="viewOverview">Overview</button>
+       <button type="button" id="viewPlayer">Selected stall</button>
+       <button type="button" id="rotateJersey">Rotate jersey</button>
+       <button type="button" id="toggleInteraction" class="touch-toggle" aria-pressed="false">Enable touch view</button>
+      </div>
+    </div>
+    <aside class="inspector" aria-labelledby="inspectorTitle">
+      <p class="eyebrow">PLAYER DEVELOPMENT · PLAYER IDENTITY</p>
+      <h3 id="inspectorTitle">SELECT A STALL</h3>
+      <p class="inspector-help">Select a player from the locker room or roster below. Verified LeagueGaming IDs power these stalls and their Hockey Card links.</p>
+      <div class="inspector-identity">
+       <span class="inspector-position" id="selectedPosition">LG3s · JAPAN</span>
+       <strong id="selectedPlayer">No stall selected</strong>
+       <small id="selectedId">11 active main-roster players</small>
+      </div>
+      <div class="inspector-preview">
+        <img src="assets/lg3s/team591.svg" alt="" width="76" height="76">
+        <div><b>BLACK / CRIMSON</b><small>Japan reference concept</small><small>Real player number: unverified</small></div>
+      </div>
+      <section class="free-customize" aria-labelledby="freeCustomizeTitle">
+        <div class="customize-heading"><span class="tier-label">INCLUDED · FREE</span><h4 id="freeCustomizeTitle">Your Nameplate &amp; Number</h4><p>Personalize how this stall looks in your own browser. Your real LG3s identity and Hockey Card never change.</p></div>
+        <form id="freeCustomizeForm">
+          <label for="plateDisplayName">Name on your plate <span>(display only · maximum 18 characters)</span></label>
+          <input id="plateDisplayName" type="text" maxlength="18" autocomplete="off" placeholder="Choose your display name" disabled>
+          <label for="jerseyPreviewNumber">Jersey number <span>(00–99 · visual only, not official)</span></label>
+          <input id="jerseyPreviewNumber" type="text" maxlength="2" inputmode="numeric" pattern="[0-9]{0,2}" placeholder="Unassigned" disabled>
+          <div class="customize-buttons"><button type="submit" id="saveFreeCustomization" disabled>Save free customization</button><button type="button" id="resetFreeCustomization" disabled>Reset</button></div>
+          <p class="preview-disclaimer" id="numberPreviewStatus" role="status">Choose a verified roster player first. Changes are private to this browser, not published to the team.</p>
+        </form>
+      </section>
+      <section class="upgrade-customize" aria-labelledby="premiumCustomizeTitle">
+        <span class="tier-label premium">3D LOCKER UPGRADE · LOCKED</span>
+        <h4 id="premiumCustomizeTitle"><span aria-hidden="true">🔒</span> Premium Stall Customization</h4>
+        <p>With an approved 3D locker upgrade: equipment and goalie gear styles, gloves, helmets, stall lighting, graphics and arena themes.</p>
+        <p class="premium-note">These options will require a verified purchase and player ownership. No checkout or premium access is enabled in this prototype.</p>
+      </section>
+      <a href="lg3s-team.html?team=591&amp;fallback=1" id="playerCardLink" class="inspector-cta">Select a player for their Hockey Card →</a>
+      <div class="inspector-bottom"><b>3D PROTOTYPE</b><p>Fabric shaping, jersey references, lighting and equipment are in visual QA. Great Britain’s existing 3D room is unchanged.</p></div>
+    </aside>
+   </div>
+ </section>
+ <section class="roster-shell" id="roster" aria-labelledby="rosterTitle">
+   <div class="roster-header"><div><p class="eyebrow">THE VERIFIED MAIN ROSTER</p><h2 id="rosterTitle">Find your stall</h2></div><label for="playerSearch">Search players<input id="playerSearch" type="search" maxlength="100" placeholder="Search gamertag"></label></div>
+   <p id="rosterStatus" class="source-note">Loading the saved public LG3s Season 1 roster…</p>
+   <div id="rosterGrid" class="roster-grid" aria-live="polite"></div>
+ </section>
+</main>
+<footer><span>ELITECHEL MEDIA · JAPAN LG3s SEASON 1 · PROTOTYPE</span><div><a href="lg3s-media.html">LG3s Media</a><a href="lg3s-gb-locker.html">Great Britain 3D</a><a href="lg3s-team.html?team=591&amp;fallback=1">2D fallback</a></div></footer>
+</body>
+</html>

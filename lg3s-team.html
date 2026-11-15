@@ -9,7 +9,9 @@
   <link rel="icon" href="assets/brand/ecm-crest.webp">
   <link rel="stylesheet" href="lgchl-team.css?v=20261107-findstall">
   <link rel="stylesheet" href="lg3s-team.css?v=20261115-launch1">
-  <script src="lg3s-team.js?v=20261115-launch1" defer></script>
+  <link rel="stylesheet" href="lg3s-basic-customization.css?v=20261115-basic1">
+  <script src="lg3s-basic-customization.js?v=20261115-basic1" defer></script>
+  <script src="lg3s-team.js?v=20261115-basic2" defer></script>
 </head>
 <body class="league-room lg3s-team-room">
   <header>
@@ -34,6 +36,23 @@
         <a id="nationCoverage" href="lg3s-media.html" class="room-nation-link">Team results &amp; media coverage ↗</a>
       </div>
     </section>
+    <section class="room-basic-custom" id="roomCustomize" aria-labelledby="roomCustomizeTitle">
+      <div class="room-custom-header">
+        <div><p class="eyebrow">YOUR STALL · INCLUDED FREE</p><h2 id="roomCustomizeTitle">Personalize Your Nameplate</h2><p>Choose a real rostered stall to change its <strong>display name and jersey number</strong> in your own browser. The official player identity and Hockey Card stay untouched.</p></div>
+        <span class="room-custom-tier">FREE CUSTOMIZATION</span>
+      </div>
+      <form id="roomCustomizeForm" class="room-custom-form">
+        <label for="roomCustomizePlayer">Player stall<select id="roomCustomizePlayer" disabled><option value="">Loading verified roster…</option></select></label>
+        <label for="roomPlateName">Name on plate<input id="roomPlateName" maxlength="18" autocomplete="off" placeholder="Your display name" disabled></label>
+        <label for="roomJerseyNumber">Jersey number<input id="roomJerseyNumber" maxlength="2" inputmode="numeric" pattern="[0-9]{0,2}" placeholder="Unassigned" disabled></label>
+        <div class="room-custom-actions"><button type="submit" id="roomSaveBasic" disabled>Save free customization</button><button type="button" id="roomResetBasic" disabled>Reset</button></div>
+      </form>
+      <p id="roomCustomizeStatus" class="room-custom-status" role="status">Select a roster player to personalize a nameplate. Display preferences are local to this browser, not published to the team.</p>
+      <div class="room-premium-teaser">
+        <strong>🔒 PREMIUM 3D LOCKER UPGRADE</strong>
+        <p>Additional customization such as jerseys, helmets, gloves, goalie equipment, stall graphics and lighting will require verified 3D locker ownership. No purchase or premium entitlement is activated here.</p>
+      </div>
+    </section>
     <section class="room-season" aria-labelledby="playersTitle">
       <div class="section-heading">
         <div><p class="eyebrow">THE LOCKER ROOM</p><h2 id="playersTitle">Main-roster player stalls</h2></div>
@@ -43,8 +62,8 @@
       <div class="stalls" id="roomPlayers" aria-live="polite" aria-busy="true"></div>
     </section>
     <div class="room-bottom">
-      <div><p class="eyebrow">NEXT IN THE LOCKER ROOM</p><h2>Custom rooms are coming.</h2><p>Great Britain's interactive 3D build is the first. The other national teams use a reusable public locker-room design, ready for future customization.</p></div>
-      <a href="lg3s-gb-locker.html">Explore Great Britain's 3D room ↗</a>
+      <div><p class="eyebrow">NEXT IN THE LOCKER ROOM</p><h2>Custom rooms are coming.</h2><p>Free local nameplate and number customization is available in every generic LG3s room. Full equipment, locker graphics, and arena customization will be part of a verified premium 3D locker upgrade. Great Britain's existing 3D room remains unchanged.</p></div>
+      <a href="lg3s-gb-locker.html">Explore Great Britain's 3D room ↗</a><a href="lg3s-japan-locker.html">Preview Japan's 3D room ↗</a>
     </div>
   </main>
   <footer>EliteChel Media · Independent LG3s coverage · Player cards link to public identities only · No private team data.</footer>
