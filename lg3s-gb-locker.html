@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080e19">
+  <title>Great Britain 3D Locker Room | EliteChel Media</title>
+  <meta name="description" content="Explore the Great Britain LG3s interactive 3D dressing room, real rostered players, and EliteChel hockey-card links. An evolving EliteChel Media experience.">
+  <link rel="canonical" href="https://wildmanhockey-elitechelmedia.app/lg3s-gb-locker.html">
+  <link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#080e19;color:#f4f7ff}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 6%,#243855 0%,#0d1625 34%,#060a10 100%)}
+    a{color:inherit}.skip{position:absolute;left:-10000px;top:0;padding:10px;background:#fff;color:#080e19;z-index:50}.skip:focus{left:0}
+    .nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid #ffffff24;background:#070d17e8;padding:13px clamp(14px,4vw,54px)}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;letter-spacing:.05em;text-transform:uppercase}.brand img{width:40px;height:40px;object-fit:contain}
+    .navlinks{display:flex;gap:15px;align-items:center;font-size:14px}.navlinks a{text-decoration:none;color:#d5e0ef}.navlinks a:hover{text-decoration:underline}
+    .shell{width:min(1600px,calc(100% - 32px));margin:auto}.intro{padding:clamp(26px,4vw,64px) 0 22px;display:flex;align-items:center;gap:25px;flex-wrap:wrap}
+    .intro img{width:clamp(65px,11vw,118px);height:auto}.eyebrow{font-size:12px;font-weight:800;color:#fe9ba1;letter-spacing:.25em;margin:0 0 9px;text-transform:uppercase}
+    h1{font-size:clamp(30px,5vw,58px);line-height:1.04;letter-spacing:-.035em;margin:0 0 11px}p{line-height:1.55;color:#b8c5d7}
+    .intro p{margin:0;max-width:790px}.action{display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:10px 16px;border-radius:9px;background:#c8102e;color:#fff;text-decoration:none;font-weight:800;border:0;cursor:pointer;font-size:14px}
+    button:disabled{opacity:.48;cursor:not-allowed}.action:hover:not(:disabled){background:#a90e29}.meta{display:flex;gap:8px 18px;flex-wrap:wrap;color:#aab7ca;font-size:12px;padding-bottom:18px}
+    .frame{position:relative;min-height:60vh;border:1px solid #33445f;border-radius:16px;overflow:hidden;background:#080e17;box-shadow:0 20px 65px #0006}
+    .frame iframe{display:block;width:100%;height:min(78vh,840px);min-height:520px;border:0;background:#070b13}
+    .ready{padding:clamp(32px,8vw,100px) 25px;text-align:center;max-width:740px;margin:auto}.ready img{height:100px;max-width:120px}
+    .ready h2{font-size:clamp(22px,3vw,36px);margin:15px 0 6px}.ready p{margin:10px auto 25px}
+    .below{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0 48px}.below article{background:#132238;border:1px solid #2c3d58;border-radius:12px;padding:18px}
+    .below h3{margin:0 0 7px;font-size:16px}.below p{margin:0;font-size:14px}.below a{color:#bddeff}
+    footer{border-top:1px solid #ffffff1b;padding:23px 16px;text-align:center;color:#96a7bd;font-size:12px}
+  </style>
+  <script defer src="lg3s-gb-locker-config.js"></script>
+  <script defer src="lg3s-gb-locker.js"></script>
+</head>
+<body>
+  <a href="#main" class="skip">Skip to locker room</a>
+  <nav class="nav" aria-label="Site navigation">
+    <a class="brand" href="index.html"><img src="assets/brand/ecm-crest.webp" alt=""><span>EliteChel Media</span></a>
+    <div class="navlinks"><a href="lg3s-media.html">LG3s Coverage</a><a href="player-cards.html?league=lg3s">Hockey Cards</a><a href="index.html">Home</a></div>
+  </nav>
+  <main id="main" class="shell">
+    <header class="intro">
+      <img src="assets/lg3s/team1446.svg" alt="Great Britain team crest">
+      <div>
+        <p class="eyebrow">LG3s Season 1 · Great Britain</p>
+        <h1>Inside the 3D Locker Room.</h1>
+        <p>Walk through the Great Britain dressing room, explore player stalls and open real EliteChel hockey-card profiles. This room is an evolving release: more realistic gloves, helmets, skates and goalie gear will arrive through independent upgrades.</p>
+      </div>
+    </header>
+    <div class="meta"><span>Official main roster snapshot: November 14, 2026</span><span>11 rostered players · Training Camp excluded</span><span>3D experience · accessible player list available</span></div>
+    <section class="frame" aria-label="Great Britain 3D room" id="room">
+      <div class="ready" id="lockerSplash">
+        <img src="assets/lg3s/team1446.svg" alt="">
+        <h2>Great Britain Locker Room</h2>
+        <p id="lockerStatus" role="status">Loading 3D room connection…</p>
+        <button id="enterLocker" class="action" type="button" disabled>Enter the 3D Locker Room</button>
+        <p><a id="openStandalone" href="#" hidden target="_blank" rel="noopener noreferrer">Open the room in a separate window</a></p>
+        <p><a href="lg3s-team.html?team=1446&amp;fallback=1" class="action" style="background:#1b3852;border:1px solid #617d9f">Explore Great Britain Player Stalls (2D)</a></p>
+      </div>
+      <iframe id="lockerFrame" title="Interactive Great Britain LG3s 3D locker room" loading="lazy" referrerpolicy="no-referrer" allow="fullscreen" hidden></iframe>
+    </section>
+    <div class="below">
+      <article><h3>Verified roster identities</h3><p>Player stalls link by LeagueGaming user ID, not guessed names or jersey numbers. <a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&leagueid=154&page=roster&seasonid=1" target="_blank" rel="noopener noreferrer">Official LG3s roster</a></p></article>
+      <article><h3>EliteChel hockey cards</h3><p>Every player can open their verified Player Card Studio identity. Unpublished artwork stays unpublished. <a href="player-cards.html?league=lg3s">Explore hockey cards</a></p></article>
+      <article><h3>Built to keep improving</h3><p>New equipment assets, goalie lockers and lighting can be released without rebuilding the entire media website.</p></article>
+    </div>
+  </main>
+  <footer>EliteChel Media · Independent LG3s team showcase · Not an official LeagueGaming product.</footer>
+</body>
+</html>
