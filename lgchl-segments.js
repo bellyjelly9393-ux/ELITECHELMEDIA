@@ -203,6 +203,7 @@ function renderRoad(){
  const requested=C.validId(qs.get('team'));
  const id=teams.some(t=>Number(t.id)===requested)?requested:Number(teams[0]?.id);
  const team=state.data.teams[id];
+ if(team&&requested!==id){qs.set('team',String(id));history.replaceState(null,'','road-to-cup.html?'+qs.toString())}
  const tiles='<div class="seg-tilegrid">'+teams.map(t=>'<button type="button" class="seg-tile" data-team="'+t.id+'" aria-pressed="'+String(Number(t.id)===id)+'">'+thumb(t.id)+'<span>'+E(t.nick||t.name)+'</span></button>').join('')+'</div>';
  if(!team){root.innerHTML='<p class="seg-empty">Choose a playoff team to view its confirmed journey.</p>'+tiles;return;}
  const status=C.teamState(state.data,id),steps=C.journey(state.data,id),published=ed('road',id);
