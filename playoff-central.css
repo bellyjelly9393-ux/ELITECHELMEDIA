@@ -20,3 +20,21 @@
 .pc-community-links{display:grid;gap:12px;justify-items:start}
 .pc-community-coming{font-size:12px;color:#c6b887;background:#2b281b;border:1px solid #665735;border-radius:3px;padding:10px 14px}
 @media(max-width:800px){.pc-community-inner{grid-template-columns:1fr;gap:15px}}
+
+/* Playoff preview episode spotlight: no unapproved video embeds or false live links. */
+.pc-episode-tease{border-bottom:1px solid var(--line);background:linear-gradient(135deg,#11151d,#0a0b10);scroll-margin-top:85px}
+.pc-episode-inner{display:grid;grid-template-columns:minmax(240px,420px) minmax(0,1fr);gap:35px;align-items:center;padding-top:32px;padding-bottom:35px}
+.pc-episode-art{display:grid;align-content:center;min-height:230px;background:linear-gradient(135deg,#500e1e,#1b1019 60%,#070a0f);border:1px solid #823040;box-shadow:inset 0 0 65px #0008;padding:30px;position:relative;overflow:hidden}
+.pc-episode-art:after{content:"";position:absolute;right:-50px;top:-60px;height:260px;width:260px;border:26px solid #ffffff10;transform:rotate(-25deg)}
+.pc-episode-art span{font:22px/.95 ECM-Display,sans-serif;letter-spacing:.13em;color:#e5e9ef}
+.pc-episode-art b{margin:18px 0;font:clamp(37px,5vw,65px)/.95 ECM-Head,sans-serif;letter-spacing:.01em;color:#fff;position:relative;z-index:1}
+.pc-episode-art small{font-size:11px;letter-spacing:.25em;color:var(--gold);font-weight:800}
+.pc-episode-copy h2{font:clamp(35px,5vw,58px)/1 ECM-Head,sans-serif;margin:5px 0 12px}
+.pc-episode-copy h2 span{color:var(--red)}
+.pc-episode-copy>p:not(.pc-overline){color:#c4cbd5;max-width:690px}
+.pc-episode-copy .pc-episode-state{color:var(--gold)!important;font-size:12px;font-weight:800;letter-spacing:.045em;margin:16px 0}
+.pc-episode-copy .pc-outline{margin-top:8px}
+.pc-rules-section .pc-proposed{color:var(--gold);font-size:14px;vertical-align:middle;white-space:nowrap}
+.pc-rule-list{margin:20px 0;padding-left:24px;max-width:900px}
+.pc-rule-list li{padding:5px 0;color:#d6dbe3;font-size:13px}
+@media(max-width:760px){.pc-episode-inner{grid-template-columns:1fr;gap:20px}.pc-episode-art{min-height:190px}.pc-episode-art b{font-size:48px}}
