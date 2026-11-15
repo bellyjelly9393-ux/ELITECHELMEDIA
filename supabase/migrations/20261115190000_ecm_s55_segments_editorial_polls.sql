@@ -130,3 +130,22 @@ end;$$;
 revoke all on function public.ecm_s55_poll_results(uuid) from public;
 grant execute on function public.ecm_s55_poll_results(uuid) to anon,authenticated;
 -- Auditing, rate limiting and authentication abuse monitoring are release gates.
+
+-- A deliberately privileged *staff-only* reset, checked against explicit editor grants.
+create or replace function public.ecm_s55_editor_reset_poll(p_poll_id uuid)
+returns integer language plpgsql security definer set search_path='' as $$
+declare n integer;
+begin
+ if (select auth.uid()) is null
+    or not exists(select 1 from public.ecm_s55_segment_editors e where e.user_id=(select auth.uid())) then
+   raise exception 'editor_permission_required';
+ end if;
+ update public.ecm_s55_rivalry_polls set status='closed',updated_at=now()
+ where id=p_poll_id and season=55;
+ if not found then raise exception 'poll_not_found';end if;
+ delete from public.ecm_s55_rivalry_votes where poll_id=p_poll_id;
+ get diagnostics n=row_count;
+ return n;
+end;$$;
+revoke all on function public.ecm_s55_editor_reset_poll(uuid) from public;
+grant execute on function public.ecm_s55_editor_reset_poll(uuid) to authenticated;
