@@ -111,7 +111,7 @@
     renderBallot();
   }
 
-  function setLeaderPlaceholder(text) { $('pcLeaders').innerHTML = '<tr><td colspan="7">' + esc(text) + '</td></tr>'; }
+  function setLeaderPlaceholder(text) { $('pcLeaders').innerHTML = '<tr><td colspan="8">' + esc(text) + '</td></tr>'; }
   async function loadSeries() {
     const client = db();
     if (!client) { $('pcEntryStatus').textContent = 'Account connection unavailable'; return; }
@@ -214,7 +214,7 @@
     $('pcLeaderNotice').textContent='Leaderboard reflects confirmed outcomes only. Updated ' + et(new Date().toISOString()) + '.';
     $('pcLeaders').innerHTML=data.map(r=>'<tr><td>' + esc(r.rank) + '</td><td>' + esc(r.handle) + '</td><td>' +
       esc(r.points) + '</td><td>' + esc(r.correct_winners) + '</td><td>' + esc(r.exact_calls) + '</td><td>' +
-      esc(r.upset_calls) + '</td><td>' + esc(r.perfect_rounds) + '</td></tr>').join('');
+      esc(r.upset_calls) + '</td><td>' + esc(r.perfect_rounds) + '</td><td>' + (r.grand_prize_eligible ? 'Eligible' : 'Missed round') + '</td></tr>').join('');
   }
 
   document.querySelectorAll('[data-league]').forEach(button=>button.addEventListener('click',()=>{
