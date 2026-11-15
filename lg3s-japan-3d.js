@@ -111,11 +111,11 @@ function jerseyShape(){
 }
 const jerseyOutline=jerseyShape(),shirtGeo=shapeGeometry(jerseyOutline);
 const shirtVolume=new THREE.ExtrudeGeometry(jerseyOutline,{depth:.19,steps:1,bevelEnabled:true,bevelThickness:.035,bevelSize:.035,bevelSegments:2,curveSegments:18});
-function createJersey(player){
+function createJersey(player,custom){
  const jersey=new THREE.Group(),body=mesh(jersey,shirtVolume,mats.black);
  body.position.z=-.095;
  const frontTexture=textureFace(player,'front');
- const backTexture=textureFace(player,'back');
+ const backTexture=textureFace({...player,gamertag:custom.name},'back',custom.number);
  const front=mesh(jersey,shirtGeo,new THREE.MeshStandardMaterial({map:frontTexture,side:THREE.DoubleSide,roughness:.90,metalness:.01,transparent:false}),0,0,.15);
  const back=mesh(jersey,shirtGeo,new THREE.MeshStandardMaterial({map:backTexture,side:THREE.DoubleSide,roughness:.90,metalness:.01}),0,0,-.15);
  back.rotation.y=Math.PI;
@@ -124,33 +124,42 @@ function createJersey(player){
  const hanger=cube(jersey,.015,.27,.016,mats.metal,0,.87,-.06);hanger.rotation.z=.17;
  const hook=mesh(jersey,new THREE.TorusGeometry(.12,.018,6,14,Math.PI*1.4),mats.metal,.01,1.03,-.06);
  hook.rotation.z=-.12;
- jersey.userData={playerId:player.id,front,back,player,number:'',isBack:false};
+ jersey.userData={playerId:player.id,front,back,player,number:custom.number,name:custom.name,isBack:false};
  return jersey;
 }
-function retextureBack(entry,number){
- const back=entry.jersey.userData.back;
- const old=back.material.map;
- back.material.map=textureFace(entry.player,'back',number);
- back.material.needsUpdate=true;
- old?.dispose();
- entry.jersey.userData.number=number;
-}
-function makePlateText(player){
+/* Only cosmetic local appearance changes here. Player IDs and stat links never change. */
+function makePlateText(player,custom){
  return canvasTexture((ctx,w,h)=>{
   ctx.fillStyle='#131821';ctx.fillRect(0,0,w,h);
   ctx.strokeStyle='#cd9d6c';ctx.lineWidth=12;ctx.strokeRect(7,7,w-14,h-14);
   ctx.textAlign='center';ctx.textBaseline='middle';
-  ctx.fillStyle='#fff';ctx.font='900 57px Arial,sans-serif';
-  ctx.fillText(player.gamertag.toUpperCase(),w/2,h*.43,w*.87);
-  ctx.fillStyle='#ff7a85';ctx.font='800 22px Arial,sans-serif';
-  ctx.fillText(player.position+' · MAIN ROSTER · NO VERIFIED JERSEY #',w/2,h*.77,w*.90);
+  ctx.fillStyle='#fff';ctx.font='900 61px Arial,sans-serif';
+  const main=custom.name+(custom.number!==''?' · #'+custom.number:'');
+  ctx.fillText(main.toUpperCase(),w/2,h*.39,w*.90);
+  ctx.fillStyle='#ff7a85';ctx.font='800 23px Arial,sans-serif';
+  ctx.fillText('VERIFIED: '+player.gamertag+' · '+player.position+' · PERSONAL PREVIEW',w/2,h*.77,w*.92);
  },768,170);
 }
-function namePlate(parent,player){
- const plate=cube(parent,2.68,.64,.11,mats.black,0,5.25,.08);
- const face=mesh(parent,new THREE.PlaneGeometry(2.56,.53),
-  new THREE.MeshBasicMaterial({map:makePlateText(player),transparent:false}),0,5.25,.151);
- return face;
+function namePlate(parent,player,custom){
+ cube(parent,2.68,.64,.11,mats.black,0,5.25,.08);
+ return mesh(parent,new THREE.PlaneGeometry(2.56,.53),
+  new THREE.MeshBasicMaterial({map:makePlateText(player,custom),transparent:false}),0,5.25,.151);
+}
+function apply3dCustomization(entry,custom){
+ if(!entry||!custom)return;
+ if(entry.custom.name===custom.name&&entry.custom.number===custom.number)return;
+ const back=entry.jersey.userData.back;
+ const oldBack=back.material.map;
+ back.material.map=textureFace({...entry.player,gamertag:custom.name},'back',custom.number);
+ back.material.needsUpdate=true;
+ oldBack?.dispose();
+ const oldPlate=entry.plate.material.map;
+ entry.plate.material.map=makePlateText(entry.player,custom);
+ entry.plate.material.needsUpdate=true;
+ oldPlate?.dispose();
+ entry.custom={name:custom.name,number:custom.number};
+ entry.jersey.userData.number=custom.number;
+ entry.jersey.userData.name=custom.name;
 }
 function goalieEquipment(bay){
  const padL=cube(bay,.44,1.04,.32,mats.pale,-.72,1.06,.50);
@@ -182,13 +191,14 @@ function buildBay(player,position,rotation){
  const light=cube(root,2.77,.065,.30,mats.redGlow,0,5.69,.18);light.castShadow=false;
  const baseFrame=cube(root,2.80,3.44,.095,mats.black,0,3.03,-.12);
  baseFrame.receiveShadow=true;
- const jersey=createJersey(player);jersey.position.set(0,3.18,.39);jersey.scale.set(.97,.97,.97);root.add(jersey);
- const plate=namePlate(root,player);
+ const custom=shell.getCustomization(player.id)||{name:player.gamertag.slice(0,18),number:''};
+ const jersey=createJersey(player,custom);jersey.position.set(0,3.18,.39);jersey.scale.set(.97,.97,.97);root.add(jersey);
+ const plate=namePlate(root,player,custom);
  if(player.kind==='goalie')goalieEquipment(root);else skaterEquipment(root);
  const accent=cube(root,3.02,.08,.33,mats.gold,0,5.53,.22);accent.visible=false;
  const pick=[plate,jersey.userData.front,jersey.userData.back,baseFrame];
  for(const m of pick){m.userData.playerId=player.id;pickables.push(m)}
- const entry={player,root,jersey,accent,normal:new THREE.Vector3(0,0,1).applyAxisAngle(new THREE.Vector3(0,1,0),rotation),baseFront:rotation};
+ const entry={player,root,jersey,plate,custom,accent,normal:new THREE.Vector3(0,0,1).applyAxisAngle(new THREE.Vector3(0,1,0),rotation),baseFront:rotation};
  groups.set(player.id,entry);
  return entry;
 }
@@ -266,14 +276,14 @@ function focusPlayer(id){
  const target=entry.root.position.clone().add(new THREE.Vector3(0,3.12,0));
  cameraGoal.copy(target.clone().addScaledVector(entry.normal,5.9).add(new THREE.Vector3(0,1.05,0)));
  targetGoal.copy(target);cameraTransition=true;
- if(shell.previewNumber!==entry.jersey.userData.number)retextureBack(entry,shell.previewNumber);
+ apply3dCustomization(entry,shell.getCustomization(entry.player.id));
 }
 function toggleJersey(){
  if(!selected)return;
  turnBack=!turnBack;
  selected.jersey.rotation.y=turnBack?Math.PI:0;
  $('rotateJersey').textContent=turnBack?'Show jersey front':'Show jersey back';
- if(turnBack&&shell.previewNumber!==selected.jersey.userData.number)retextureBack(selected,shell.previewNumber);
+
 }
 function enableMobileInteraction(active){
  interactionOn=active;
@@ -350,8 +360,9 @@ function init(players){
   focusPlayer(event.detail.player.id);
   $('viewPlayer').disabled=false;$('rotateJersey').disabled=false;
  });
- window.addEventListener('ecm-japan-number-preview',event=>{
-  if(selected)retextureBack(selected,event.detail.number);
+ window.addEventListener('ecm-japan-customization-change',event=>{
+  const entry=groups.get(Number(event.detail?.playerId));
+  if(entry)apply3dCustomization(entry,event.detail.customize);
  });
  renderer.domElement.addEventListener('pointerdown',event=>{
   down={x:event.clientX,y:event.clientY};
