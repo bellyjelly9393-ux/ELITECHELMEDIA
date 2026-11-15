@@ -56,3 +56,16 @@ test('older homepage can be restored without chasing previous Git commits',()=>{
  assert.match(old,/name="robots" content="noindex,nofollow"/);
  assert.notEqual(home,old);
 });
+
+test('both playoff entry pages link to the official Discord community but keep picks onsite',()=>{
+ const discord='https://discord.gg/KMBjak7RD';
+ const standalone=read('playoff-central.html');
+ for(const page of [home,standalone]){
+  assert.match(page,/id="community"/);
+  assert.ok(page.includes('href="'+discord+'"'));
+  assert.match(page,/target="_blank" rel="noopener noreferrer"/);
+  assert.match(page,/Discord is optional/);
+  assert.match(page,/href="#predictor"/);
+ }
+});
+
