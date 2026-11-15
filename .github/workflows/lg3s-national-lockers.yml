@@ -1,0 +1,50 @@
+name: LG3s National Locker Checks
+on:
+  push:
+    paths:
+      - "lg3s-team.*"
+      - "player-cards.*"
+      - "assets/lg3s/jerseys/**"
+      - "data/lg3s/season1-active-roster-2026-11-14.json"
+      - "tests/lg3s-national-lockers.test.cjs"
+      - ".github/workflows/lg3s-national-lockers.yml"
+  pull_request:
+    paths:
+      - "lg3s-team.*"
+      - "player-cards.*"
+      - "assets/lg3s/jerseys/**"
+      - "data/lg3s/season1-active-roster-2026-11-14.json"
+      - "tests/lg3s-national-lockers.test.cjs"
+      - ".github/workflows/lg3s-national-lockers.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check lg3s-team.js
+          node --check player-cards.js
+      - name: Run national locker regression tests
+        run: node --test tests/lg3s-national-lockers.test.cjs
+      - name: Validate eleven SVG jersey documents
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          ids = (341, 342, 343, 404, 531, 532, 591, 822, 1079, 1439, 1444)
+          for team_id in ids:
+              path = Path('assets/lg3s/jerseys') / f'{team_id}.svg'
+              root = ET.parse(path).getroot()
+              assert root.tag == '{http://www.w3.org/2000/svg}svg', path
+              assert path.stat().st_size > 1000, path
+          print(f'Validated {len(ids)} national kit SVGs; Great Britain 3D route excluded')
+          PY
