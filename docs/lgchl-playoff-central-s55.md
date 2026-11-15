@@ -12,6 +12,13 @@ Status: **staged, not launched**. The broadcast script is separate. This is the 
 - 10 points for a correct winner, 5 more for exact length, 5 more for a lower-seed upset, and 20 for a perfect round of at least two series. Exact and upset only score when the winner was correct.
 - A separate public ranking also displays whether a person remains eligible for the grand prize based on complete entries in every **started** open round. Missing rounds can still participate in the weekly standings.
 
+## Playoff episode promotion
+
+- The Playoff Central page has an episode spotlight, clearly marked **in production**; it does not embed unapproved or nonexistent video URLs.
+- When Gronk's episodes have a confirmed public destination, replace the spotlight's placeholder with actual published episode links or an owned video index.
+- Planned contest rules, including all-round participation and a one-time approved-community share challenge, are shown explicitly as **PROPOSED** and are not enforced or represented as active before legal and administrative review.
+- A partial launch of the public scoreboard and episode promotion is permitted while contest submissions remain disabled.
+
 ## Discord's role (optional updates)
 
 - All official predictions, scores, rankings, prize terms, deadlines and contest decisions remain on the EliteChel Media website.
