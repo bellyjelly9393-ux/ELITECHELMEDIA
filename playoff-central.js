@@ -66,7 +66,10 @@
       logo(t) + '<span class="pc-team-name"><small class="pc-team-seed">' + (side.seed != null ? 'Seed #' + esc(side.seed) : 'Seed TBD') + '</small>' +
       esc(t.name || side.from || 'TBD') + '</span><b class="pc-team-score">' + (s.kind === 'series' && wins[i] != null ? esc(wins[i]) : '–') + '</b></div>';
     const games = (s.games || []).map(g => gameTile(g,a.team_id)).join('');
-    const seriesStatus = winner ? 'FINAL · ADVANCING' : s.kind === 'pending' ? 'MATCHUP TBD' : 'SERIES IN PROGRESS';
+    const played = (s.games || []).some(g => g.status === 'final' || g.winner || (g.away_score != null && g.home_score != null));
+    const live = (s.games || []).some(g => g.status === 'live');
+    const seriesStatus = winner ? 'FINAL · ADVANCING' : s.kind === 'pending' ? 'MATCHUP TBD' :
+      live ? 'GAME IN PROGRESS' : played ? 'SERIES UNDERWAY' : 'SERIES SCHEDULED';
     const safe = safeLgUrl(s.url);
     return '<article class="pc-score"><div class="pc-score-header"><span>' + esc(s.league) + ' · ' + esc(s.conference) + ' · ' + esc(s.round) +
       '</span><span class="pc-final-badge">' + esc(seriesStatus) + '</span></div>' +
