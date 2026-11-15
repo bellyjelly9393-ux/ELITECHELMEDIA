@@ -30,6 +30,7 @@
 .trophy-banner{background:#080707 url(assets/broadcast/playoff-bracket-bg-hero.jpg) center/cover;border-bottom:2px solid #ad2931}.trophy-banner h1{margin:0;text-align:center;background:#0008}.trophy-banner img{display:block;width:min(100%,1250px);height:auto;margin:auto;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
 .pc-episode-inner{display:grid;grid-template-columns:1.5fr 1.1fr .8fr;gap:14px;align-items:stretch;padding-block:16px}.feature-panel,.live-panel,.pc-episode-copy{border:1px solid #aa7846;border-radius:8px;padding:clamp(14px,2vw,30px);background-color:#0e1015}.feature-panel{color:white;text-decoration:none;display:grid;align-content:center;background:linear-gradient(90deg,#08090cf5,transparent),url(assets/broadcast/s55-feature.webp) right center/cover}.feature-panel strong,.live-panel h2{font:italic 900 clamp(32px,4vw,66px)/.94 ECM-Display,Impact,sans-serif;text-transform:uppercase}.feature-panel span{margin-top:15px;color:#ffc880}.live-panel{display:grid;align-content:center;gap:14px}.live-panel h2{margin:0}.feature-panel small,.live-panel small{text-transform:uppercase;color:#ffc880}.pc-episode-copy p{margin-block:8px}
 @media(max-width:760px){.pc-episode-inner{grid-template-columns:1fr}.feature-panel{min-height:165px}.pc-nav .pc-media-menu nav{min-width:min(240px,88vw)}}
+.challenge-strip,.central-links div{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}.challenge-strip article,.central-links a{padding:20px;border:1px solid #a57848;background:linear-gradient(140deg,#191b21,#08090b);border-radius:8px}.challenge-strip h2,.central-links h2{font:italic 800 clamp(22px,2.3vw,36px)/1 ECM-Display,Impact,sans-serif;text-transform:uppercase;margin:0}.challenge-strip p{color:#dad7cf}.central-links{padding-block:24px}.central-links div{margin-top:12px;grid-template-columns:repeat(6,minmax(0,1fr))}.central-links a{text-align:center;color:#fff;font-weight:800}.central-links a:hover,.central-links a:focus-visible{border-color:#ffbf62}@media(max-width:760px){.challenge-strip{grid-template-columns:1fr}.central-links div{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style></head>
 <body>
 <a class="pc-skip" href="#pcMain">Skip to content</a>
@@ -111,6 +112,7 @@
     <div id="pcScoreGrid" class="pc-score-grid" aria-live="polite"></div>
     <p class="pc-footnote">Scores may be delayed while LeagueGaming confirms results. A game is not labelled live merely because its scheduled start time has passed.</p>
   </section>
+  <section class="challenge-strip pc-wide" aria-label="Playoff predictor challenge"><article><h2>Playoff Predictor</h2><p>Pick every winner and series length.</p><a class="pc-primary" href="#predictor">Make your picks →</a></article><article><h2>Predictor Leaderboard</h2><p>Track the standings through every round.</p><a class="pc-outline" href="#leaderboard">View leaderboard →</a></article><article><h2>Predictor Rules</h2><p>Winners, exact lengths, upsets and perfect rounds earn points.</p><a class="pc-outline" href="#contest-rules">Read rules →</a></article></section>
   <section class="pc-section pc-section-alt" id="predictor" aria-labelledby="predictTitle">
     <div class="pc-wide">
       <div class="pc-section-head"><div><p class="pc-overline">THE FANS</p><h2 id="predictTitle">PLAYOFF <span>PREDICTOR</span></h2><p>Choose every winner and predict the exact series length. Compete round after round.</p></div><div class="pc-points"><b>10</b> winner <span>+</span> <b>5</b> exact <span>+</span> <b>5</b> upset</div></div>
@@ -163,7 +165,7 @@
     </ol>
     <p class="pc-footnote">EliteChel Media is independent fan coverage. LeagueGaming retains its own official results and rules.</p>
   </section>
-</main>
+<nav class="central-links pc-wide" aria-label="Playoff Central shortcuts"><h2>Playoff Central</h2><div><a href="#episodes">Episodes</a><a href="#playoffs">Bracket</a><a href="#scoreboard">Scores</a><a href="lgchl-media.html">LGCHL Desk</a><a href="lgchl-media.html#lgRadioSec">Hitmen Radio</a><a href="esports-hub.html">Live Hub</a></div></nav></main>
 <footer class="pc-footer"><span>© EliteChel Media · Season 55</span><div class="pc-footer-links"><a href="lgchl-media.html">LGCHL Desk</a><a href="hitmen-media.html">Hitmen</a><a href="lg3s-media.html">LG3s</a><a href="esports-hub.html">Live Hub</a><a href="management.html" aria-label="Private EliteChel Media management controls">Management</a><a href="hitmen-hq.html">Hitmen War Room</a></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script src="backend.js"></script>
