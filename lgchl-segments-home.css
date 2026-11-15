@@ -26,3 +26,17 @@
 /* Expanded All Media coverage must remain usable on narrow screens and short laptops. */
 .nl details nav{max-height:min(70vh,520px);overflow-y:auto;overscroll-behavior:contain;z-index:150}
 @media(max-width:700px){.nl details nav{max-height:55vh}}
+
+/* Canonical Playoff Central placement: broadcast desk is a true page section,
+   not a narrow sidebar, with navigation usable on compact mobile screens. */
+.pc-segments-in-central{margin-block:clamp(28px,5vw,62px);scroll-margin-top:105px}
+.pc-segments-in-central .s55-seg-heading{padding-bottom:5px}
+@media(max-width:950px){
+  .pc-nav nav{gap:8px 14px}
+  .pc-nav nav a{font-size:12px;min-height:37px;display:inline-flex;align-items:center}
+}
+@media(max-width:700px){
+  .pc-segments-in-central{margin-block:24px;scroll-margin-top:140px}
+  .pc-nav nav{gap:4px 12px}
+  .pc-nav nav a{font-size:11px}
+}
