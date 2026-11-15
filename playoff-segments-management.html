@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1018"><title>Playoff Segment Desk | EliteChel Management</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
+<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="management.css"><link rel="stylesheet" href="network-v2.css"><link rel="stylesheet" href="lgchl-segments-admin.css?v=20261115-s55a">
+</head><body class="management-protected wm-ds">
+<header class="psa-header"><a href="management.html">← Management Control Room</a><a href="index.html">EliteChel Media</a></header>
+<main class="psa-main">
+<div class="psa-title"><p>ELITECHEL · PRIVATE BROADCAST CONTROL</p><h1>PLAYOFF SEGMENT DESK</h1><span>Authorized publishing only · Results stay read-only</span></div>
+<section class="psa-panel"><h2>Account and access</h2><div id="accountPanel" class="account-panel"><p>Checking your account…</p></div><p id="managementLockedMessage">Management access required.</p><p id="psaPermission" role="status">Checking editorial assignment…</p></section>
+<section class="psa-panel" data-management-content hidden>
+<p><strong>Publication safeguard:</strong> Editor access must be explicitly assigned in the database. Player identities, scores, series advancement, and bracket results cannot be edited here.</p>
+<div id="psaEditor" hidden>
+<div class="psa-grid">
+<label>Segment<select id="psaKind"><option value="pressure">The Pressure Cooker</option><option value="rivalry">Rivalry Report</option><option value="road">Road to the Cup</option></select></label>
+<label>Team or series<select id="psaTarget"><option value="">Choose verified target</option></select></label>
+<label>Pressure label<select id="psaLabel"><option value="">No editorial override</option><option>RED HOT</option><option>FEELING THE HEAT</option><option>ON THE BRINK</option><option>ICE COLD</option><option>BUILT DIFFERENT</option></select></label>
+<label>Editorial designation reason<input id="psaReason" maxlength="500" placeholder="Why does this evidence support this designation?"></label>
+</div>
+<label>Rivalry story / team journey editorial notes<textarea id="psaBody" rows="7" maxlength="7000" placeholder="Write a sourced story. No fabricated quotes, statistics or player performances."></textarea></label>
+<div class="psa-grid">
+<label class="psa-check"><input type="checkbox" id="psaFeatured"> Feature this rivalry report</label>
+<label class="psa-check"><input type="checkbox" id="psaPublished"> Publish approved editorial</label>
+</div>
+<details class="psa-advanced"><summary>Player spotlights and verified moment</summary>
+<p>Spotlights must match reviewed playoff player IDs in the approved public stats feed. Use JSON array objects with <code>player_id</code>, <code>team_id</code>, <code>role</code> and optional <code>note</code>.</p>
+<label>Players JSON<textarea id="psaPlayers" rows="4" placeholder="[]">[]</textarea></label>
+<div class="psa-grid">
+<label>Verified game ID<input id="psaMomentGame" inputmode="numeric" type="number" min="1"></label>
+<label>Period (optional)<input id="psaMomentPeriod" maxlength="12" placeholder="3"></label>
+<label>Game clock (optional)<input id="psaMomentClock" maxlength="24" placeholder="4:21"></label>
+<label>Evidence video URL<input id="psaMomentUrl" type="url" maxlength="700" placeholder="https://clips.twitch.tv/..."></label>
+</div>
+<label>Moment description<textarea id="psaMomentDescription" rows="3" maxlength="700"></textarea></label>
+<label class="psa-check"><input id="psaMomentVerified" type="checkbox"> I have checked this clip against the listed final game</label>
+</details>
+<div class="psa-buttons"><button id="psaSaveDraft" type="button">Save unpublished draft</button><button id="psaSave" type="button">Save / Publish</button><button id="psaDelete" type="button" class="psa-danger">Remove editorial</button></div>
+<p id="psaStatus" role="status"></p>
+</div>
+</section>
+<section class="psa-panel" data-management-content hidden>
+<h2>Fan War Room polls</h2>
+<p>Separate from the Predictor Challenge. One signed-in account gets one vote per poll. A poll's results are public only when the poll is published.</p>
+<div id="psaPollEditor" hidden>
+<div class="psa-grid"><label>Series<select id="psaPollSeries"></select></label><label>Existing poll<select id="psaPollSelect"><option value="">Create a new poll</option></select></label></div>
+<label>Poll question<input id="psaPollQuestion" maxlength="220" placeholder="Who has the momentum?"></label>
+<label>Answer options, one per line (2–5)<textarea id="psaPollOptions" rows="5"></textarea></label>
+<div class="psa-grid"><label>Status<select id="psaPollStatus"><option value="closed">Closed</option><option value="open">Open for voting</option></select></label><label class="psa-check"><input id="psaPollPublished" type="checkbox"> Publish poll</label></div>
+<div class="psa-buttons"><button id="psaPollSave" type="button">Save poll</button><button id="psaPollClose" type="button">Close selected poll</button><button id="psaPollReset" type="button" class="psa-danger">Reset votes (requires confirmation)</button></div>
+<p id="psaPollNotice" role="status"></p>
+</div>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="backend.js"></script>
+<script src="management-guard.js"></script>
+<script defer src="lgchl-segments-core.js?v=20261115-s55a"></script>
+<script defer src="lgchl-segments-admin.js?v=20261115-s55a"></script>
+</body></html>
