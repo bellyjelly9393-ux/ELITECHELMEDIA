@@ -16,7 +16,7 @@ function render(){
    const card='player-cards.html?league=lg3s&id='+Number(p.id)+'&kind='+type;
    return '<a class="stall" href="'+card+'" aria-label="Open '+esc(p.n)+' hockey card profile">'
      +'<strong class="nameplate">'+esc(p.n)+'</strong>'
-     +'<div class="jersey-stage"><div class="concept-kit" role="img" aria-label="Generic non-official Great Britain-style jersey template with '+esc($('roomName').textContent)+' crest">'
+     +'<div class="jersey-stage"><div class="concept-kit" role="img" aria-label="Generic non-official hockey jersey template with '+esc($('roomName').textContent)+' crest">'
      +'<img class="concept-crest" loading="lazy" alt="" src="'+LOGO(teamId)+'"></div><small class="concept-tag">CONCEPT JERSEY · NOT OFFICIAL</small></div>'
      +'<div class="stall-info"><p>'+esc(p.p)+' · MAIN ROSTER</p>'
      +'<div class="stats"><span>PLAYER<b>'+esc(type==='goalie'?'GOALIE':'SKATER')+'</b></span><span>SEASON<b>1</b></span></div>'
