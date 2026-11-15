@@ -41,7 +41,7 @@ async function addRosterOnlyPlayers(statRows){
  if(!response.ok)throw Error('LG3s roster snapshot '+response.status);
  const snapshot=await response.json();
  if(snapshot.league!=='lg3s'||snapshot.season!==1||!Array.isArray(snapshot.teams))throw Error('Invalid roster snapshot');
- const existing=new Set(statRows.map(p=>p.kind+':'+p.id));
+ const existing=new Map(statRows.map(p=>[p.kind+':'+p.id,p]));
  const result=[...statRows];
  for(const team of snapshot.teams){
   for(const player of team.players||[]){
@@ -49,8 +49,14 @@ async function addRosterOnlyPlayers(statRows){
    if(player.rosterStatus!=='active'||!/^\\d+$/.test(id)||Number(id)<=0)continue;
    const kind=player.playerKind==='goalie'||player.position==='G'?'goalie':'skater';
    const key=kind+':'+id;
-   if(existing.has(key))continue;
-   existing.add(key);
+   if(existing.has(key)){
+    const found=existing.get(key);
+    found.teamId=Number(team.lgTeamId);
+    found.team=team.teamName||found.team;
+    found.pos=player.position||found.pos;
+    continue;
+   }
+   existing.set(key,true);
    result.push({id,kind,tag:player.gamertag||'Unknown',team:team.teamName||'',teamId:Number(team.lgTeamId),pos:player.position||'',gp:null,goals:null,assists:null,points:null,wins:null,sv:null,gaa:null});
   }
  }
