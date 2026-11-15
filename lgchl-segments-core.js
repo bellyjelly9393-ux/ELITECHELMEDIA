@@ -58,7 +58,7 @@
  }
  function recentForm(slot,teamId){
   const games=finalGames(slot),id=validId(teamId);
-  const rec=games.map(g=>({id:Number(g.id),at:g.at||null,win:validId(g.winner)|| (Number(g.away_score)>Number(g.home_score)?Number(g.away):Number(g.home)),gf:Number(id===Number(g.away)?g.away_score:g.home_score),ga:Number(id===Number(g.away)?g.home_score:g.away_score),url:g.url||null}));
+  const rec=games.map(g=>({id:Number(g.id),at:g.at||null,win:(Number(g.away_score)>Number(g.home_score)?Number(g.away):Number(g.home)),gf:Number(id===Number(g.away)?g.away_score:g.home_score),ga:Number(id===Number(g.away)?g.home_score:g.away_score),url:g.url||null}));
   const mine=rec.filter(x=>x.win===id||x.win!==id);
   let streak=0,prev=null;for(let i=mine.length-1;i>=0;i--){const result=mine[i].win===id?'W':'L';if(prev&&result!==prev)break;prev=result;streak++;}
   return {games:mine,streak:prev&&streak?prev+streak:null,streakWins:prev==='W'?streak:0,streakLosses:prev==='L'?streak:0};
@@ -69,7 +69,7 @@
   if(!slot||slot.kind!=='series'||slotTeams(slot).length!==2)return {...st,label:'AWAITING FIRST PUCK',reason:'Current series or opponent not confirmed',active:true};
   const score=scoreFor(slot,teamId),form=recentForm(slot,teamId);
   if(!score)return {...st,label:'AWAITING VERIFIED SCORE',active:true};
-  let label='IN THE FIGHT',reason='Series level; the next game can change everything.';
+  let label=score.for===0&&score.against===0?'AWAITING FIRST PUCK':'IN THE FIGHT',reason=score.for===0&&score.against===0?'No final playoff game recorded in this series.':'Series level; the next game can change everything.';
   if(score.against===score.needed-1){label='ON THE BRINK';reason='Exactly one verified series loss from elimination.';}
   else if(score.for>=score.against+2||form.streakWins>=2){label='RED HOT';reason='Leading this series or riding a verified playoff winning streak.';}
   else if(score.against>=score.for+2||form.streakLosses>=2){label='ICE COLD';reason='Facing a multi-game series deficit or verified losing streak.';}
@@ -100,7 +100,7 @@
  function seriesStory(data,slot){
   const ids=slotTeams(slot),a=data?.teams?.[ids[0]],b=data?.teams?.[ids[1]],g=finalGames(slot),score=scoreFor(slot,ids[0]),winner=verifiedWinner(slot);
   if(!a||!b)return'Official matchup details have not been confirmed.';
-  if(winner)return escape(data.teams[winner]?.name||'The series winner')+' has clinched this series '+(score?score.for+'–'+score.against:'')+'.';
+  if(winner){const w=scoreFor(slot,winner);return escape(data.teams[winner]?.name||'The series winner')+' has clinched this series '+(w?w.for+'–'+w.against:'')+'.';}
   if(score&&(score.for||score.against)){
    const leader=score.for===score.against?null:score.for>score.against?a:b;
    return leader?escape(leader.name)+' leads '+Math.max(score.for,score.against)+'–'+Math.min(score.for,score.against)+'. '+(g.length?'The next result could reshape the series.':'Individual final-game details are still pending verification.'):
