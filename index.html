@@ -1,223 +1,313 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#08090c">
-<title>EliteChel Media | LGCHL Season 55 Playoff Headquarters</title>
-<meta name="description" content="EliteChel Media Season 55 playoff headquarters. Gronk's episodes, original LGCHL playoff bracket, real series scores, fan predictor, leaderboard and community updates.">
-<link rel="canonical" href="https://wildmanhockey-elitechelmedia.app/">
-<meta property="og:type" content="website"><meta property="og:site_name" content="EliteChel Media">
-<meta property="og:title" content="EliteChel Media | Season 55 Playoff Headquarters">
-<meta property="og:description" content="Every round. Every rivalry. Every pick. LGCHL playoffs on EliteChel Media.">
-<meta property="og:image" content="https://wildmanhockey-elitechelmedia.app/assets/brand/ecm-share.jpg">
-<meta property="og:url" content="https://wildmanhockey-elitechelmedia.app/">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
-<link rel="stylesheet" href="playoff-central.css?v=20261115-home">
-<link rel="stylesheet" href="lgchl-playoffs.css?v=20261112-ice">
-<link rel="stylesheet" href="playoff-home.css?v=20261115-1">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>EliteChel Media | Season 55 Playoff Headquarters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;1,800;1,900&amp;family=Barlow:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;family=Anton&amp;display=swap">
 <style>
-.pc-media-menu{position:relative;margin-right:auto}
-.pc-media-menu summary{cursor:pointer;color:#f3bc63;font-weight:800;white-space:nowrap;padding:10px}
-.pc-nav .pc-media-menu nav{position:absolute;top:100%;left:0;display:grid;gap:0;width:15rem;padding:6px;background:#101318;border:1px solid #484d54;border-radius:6px;box-shadow:0 12px 32px #0009}
-.pc-media-menu nav a{display:block;padding:12px}
-.pc-media-menu :focus-visible{outline:2px solid #f3bc63;outline-offset:-2px}
-@media(max-width:900px){.pc-nav{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;justify-content:space-between}.pc-media-menu{margin:0}.pc-nav .pc-media-menu nav{left:auto;right:0}.pc-nav>nav{width:100%}}
-</style>
-<link rel="stylesheet" href="ecm-playoff-broadcast.css?v=20261115-s55">
-<style>
-.pc-nav{overflow:visible;z-index:1000}.pc-nav .pc-media-menu:not([open]) nav{display:none}.pc-nav .pc-media-menu nav{max-height:65dvh;overflow-y:auto}
-.trophy-banner{background:#080707 url(assets/broadcast/playoff-bracket-bg-hero.jpg) center/cover;border-bottom:2px solid #ad2931}.trophy-banner h1{margin:0;text-align:center;background:#0008}.trophy-banner img{display:block;width:min(100%,1250px);height:auto;margin:auto;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.pc-episode-inner{display:grid;grid-template-columns:1.5fr 1.1fr .8fr;gap:14px;align-items:stretch;padding-block:16px}.feature-panel,.live-panel,.pc-episode-copy{border:1px solid #aa7846;border-radius:8px;padding:clamp(14px,2vw,30px);background-color:#0e1015}.feature-panel{color:white;text-decoration:none;display:grid;align-content:center;background:linear-gradient(90deg,#08090cf5,transparent),url(assets/broadcast/s55-feature.webp) right center/cover}.feature-panel strong,.live-panel h2{font:italic 900 clamp(32px,4vw,66px)/.94 ECM-Display,Impact,sans-serif;text-transform:uppercase}.feature-panel span{margin-top:15px;color:#ffc880}.live-panel{display:grid;align-content:center;gap:14px}.live-panel h2{margin:0}.feature-panel small,.live-panel small{text-transform:uppercase;color:#ffc880}.pc-episode-copy p{margin-block:8px}
-@media(max-width:760px){.pc-episode-inner{grid-template-columns:1fr}.feature-panel{min-height:165px}.pc-nav .pc-media-menu nav{min-width:min(240px,88vw)}}
-.challenge-strip,.central-links div{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}.challenge-strip article,.central-links a{padding:20px;border:1px solid #a57848;background:linear-gradient(140deg,#191b21,#08090b);border-radius:8px}.challenge-strip h2,.central-links h2{font:italic 800 clamp(22px,2.3vw,36px)/1 ECM-Display,Impact,sans-serif;text-transform:uppercase;margin:0}.challenge-strip p{color:#dad7cf}.central-links{padding-block:24px}.central-links div{margin-top:12px;grid-template-columns:repeat(6,minmax(0,1fr))}.central-links a{text-align:center;color:#fff;font-weight:800}.central-links a:hover,.central-links a:focus-visible{border-color:#ffbf62}@media(max-width:760px){.challenge-strip{grid-template-columns:1fr}.central-links div{grid-template-columns:repeat(2,minmax(0,1fr))}}
+body{margin:0;background:#0b0c0f}
+a{color:#f0c14b}a:hover{color:#ffd978}
+.pg{font-family:'Barlow',sans-serif;color:#f2f3f5;background-color:#0b0c0f;background-image:repeating-linear-gradient(17deg,rgba(255,255,255,.02) 0 1px,transparent 1px 41px),repeating-linear-gradient(-23deg,rgba(255,255,255,.016) 0 1px,transparent 1px 67px),repeating-linear-gradient(71deg,rgba(255,255,255,.012) 0 1px,transparent 1px 113px)}
+.disp{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:900;text-transform:uppercase}
+.mono{font-family:'JetBrains Mono',monospace}
+.wrap{max-width:1520px;margin:0 auto;padding:0 clamp(12px,2vw,28px)}
+:focus-visible{outline:2px solid #f0c14b;outline-offset:-3px}
 
-/* Broadcast panels: a lit upper rim, recessed face and solid lower edge. */
-.feature-panel,.pc-episode-copy,.live-panel,.challenge-strip article,.central-links a,.pc-score,.pc-series-pick,.pc-prediction-card,.ecm-league-tile {
-  border:1px solid #846444;
-  border-color:#cea371 #71543b #443021 #97734f;
-  box-shadow:inset 0 1px 0 #fff3,inset 0 -3px 0 #0009,0 3px 0 #261a15,0 9px 18px #0007;
-}
-.pc-episode-copy,.challenge-strip article,.central-links a,.pc-score,.pc-series-pick {
-  background:linear-gradient(122deg,#302a29 0%,#1b1e24 27%,#101216 74%,#24191b);
-}
-.feature-panel,.live-panel,.challenge-strip article,.central-links a {position:relative;isolation:isolate}
-.feature-panel::after,.live-panel::after,.challenge-strip article::after,.central-links a::after {
-  content:"";position:absolute;inset:3px;pointer-events:none;border:1px solid #e9c79c22;border-radius:5px;
-}
-.feature-panel strong,.live-panel h2,.challenge-strip h2,.central-links a {text-shadow:0 2px 0 #000,0 4px 9px #000a}
-.feature-panel span {justify-self:start;border-bottom:2px solid #ee3640;padding-bottom:4px}
-.live-panel {background:linear-gradient(90deg,#090a0ff0,#0b101479),url(assets/broadcast/arena-tunnel.webp) center/cover}
-.challenge-strip article {padding:clamp(18px,2.5vw,34px);padding-top:26px;display:flex;flex-direction:column;align-items:flex-start}
-.challenge-strip article::before {content:"";position:absolute;top:0;left:20px;width:52px;height:4px;background:#f53845;transform:skewX(-25deg);box-shadow:0 1px 8px #ed243766}
-.challenge-strip article:nth-child(2)::before {background:#efba69}
-.challenge-strip article p {flex:1;max-width:36ch;line-height:1.45}
-.central-links a {display:grid;place-content:center;justify-items:center;gap:8px;padding:18px 8px;font:800 18px/1.2 ECM-Display,Impact,sans-serif;text-transform:uppercase}
-.tile-icon {display:block;width:34px;height:34px;fill:none;stroke:#f5d4a4;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 1px #000)}
-.pc-score-header {background:linear-gradient(100deg,#372024,#15171b);border-bottom:1px solid #896d4f}
-@media (hover:hover) and (prefers-reduced-motion:no-preference) {
-  .central-links a,.feature-panel {transition:transform .16s ease,box-shadow .16s ease}
-  .central-links a:hover,.feature-panel:hover {transform:translateY(-2px);box-shadow:inset 0 1px #ffe5b7,0 4px 0 #382820,0 12px 20px #0009}
-}
+/* NAV */
+.nav{background:linear-gradient(180deg,#1c1e25,#101116);border-bottom:3px solid #c8102e;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 0 #000}
+.nav-in{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;min-height:72px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#f2f3f5;margin-right:auto}
+.brand:hover{color:#fff}
+.nl{display:flex;flex-wrap:wrap;align-items:center;gap:2px}
+.nl a{display:flex;align-items:center;min-height:44px;padding:0 15px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:800;font-size:19px;letter-spacing:.03em;text-transform:uppercase;color:#d5d8de;text-decoration:none}
+.nl a:hover{color:#fff}
+.nl a.on{color:#fff;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);background:linear-gradient(180deg,#ea3550 0,#ea3550 2px,#c8102e 2px,#c8102e calc(100% - 4px),#7d0a1c calc(100% - 4px));padding:0 22px}
+.nl a.all{transform:skewX(-14deg);border:1.5px solid #d4a017;background:#14161b;color:#f0c14b;box-shadow:inset 0 2px 3px rgba(0,0,0,.7);margin-left:8px}
+.nl a.all span{display:block;transform:skewX(14deg)}
+
+/* RINK LINE */
+.rl{position:relative;height:30px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,transparent 12px,#9e0d24 12px,#c8102e 14px,#9e0d24 18px,transparent 18px)}
+.rl span{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle,#c8102e 0 6px,#0b0c0f 6.5px 10px,#c8102e 10.5px 13px,transparent 13.5px)}
+
+/* PANELS: one light from top-left. Lit rim, solid lower edge, hard drop. */
+.pw{filter:drop-shadow(0 4px 0 #000) drop-shadow(0 12px 14px rgba(0,0,0,.5));min-width:0}
+.pnl{--cut:14px;clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut));background:linear-gradient(135deg,#6a707c 0%,#2c3039 28%,#08090b 100%);padding:1.5px;height:100%;box-sizing:border-box}
+.pin{clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut));height:100%;display:flex;flex-direction:column;background-color:#15171c;background-image:repeating-linear-gradient(115deg,rgba(255,255,255,.017) 0 2px,transparent 2px 7px)}
+.pin.art{background-image:linear-gradient(180deg,rgba(14,15,19,.80),rgba(14,15,19,.93)),url(assets/s55-design/88f26bd6c3a6e5e99fde656bfc2cfcdc.webp);background-size:cover;background-position:center 40%}
+.ph{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:0 12px 0 0;min-height:52px;background:linear-gradient(180deg,#262932,#1a1c22);box-shadow:inset 0 1px 0 rgba(255,255,255,.09);border-bottom:3px solid #c8102e}
+.ph-ic{align-self:stretch;display:flex;align-items:center;justify-content:center;width:58px;min-height:52px;background:linear-gradient(180deg,#ea3550 0,#ea3550 2px,#c8102e 2px);clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%);color:#fff}
+.ph-ic.gold{background:linear-gradient(180deg,#f5d26b 0,#f5d26b 2px,#d4a017 2px);color:#160f02}
+.ph-ic svg{width:24px;height:24px;margin-right:8px}
+.ttl{margin:0;font-size:27px;line-height:1;letter-spacing:.01em;color:#fff;text-shadow:0 2px 0 #000}
+.pb{padding:14px;display:flex;flex-direction:column;gap:12px;flex:1}
+.well{background:#0c0d11;border:1px solid #000;box-shadow:inset 0 2px 5px rgba(0,0,0,.8),inset 0 -1px 0 rgba(255,255,255,.05)}
+
+/* BUTTONS: physical keys */
+.bw{filter:drop-shadow(0 3px 0 #000);display:block}
+.btn{display:flex;justify-content:center;align-items:center;gap:10px;min-height:48px;padding:0 26px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:800;font-size:21px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:#fff;clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);background:linear-gradient(180deg,#ea3550 0,#ea3550 2px,#c8102e 2px,#c8102e calc(100% - 5px),#7d0a1c calc(100% - 5px));transition:transform .08s}
+.btn:hover{color:#fff;transform:translateY(-1px)}
+.btn:active{transform:translateY(2px)}
+.btn.gold{color:#160f02;background:linear-gradient(180deg,#f5d26b 0,#f5d26b 2px,#d4a017 2px,#d4a017 calc(100% - 5px),#8a6408 calc(100% - 5px))}
+.btn.gold:hover{color:#160f02}
+.btn svg{width:20px;height:20px}
+
+/* TABS: active is a raised block, inactive is a recessed slot */
+.tabs{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto}
+.tab{appearance:none;border:0;cursor:pointer;min-height:44px;padding:0 18px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:800;font-size:18px;letter-spacing:.03em;text-transform:uppercase;color:#b9bec8;background:#0c0d11;box-shadow:inset 0 3px 5px rgba(0,0,0,.85);clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.tab:hover{color:#fff}
+.tab.on{color:#fff;background:linear-gradient(180deg,#ea3550 0,#ea3550 2px,#c8102e 2px,#c8102e calc(100% - 4px),#7d0a1c calc(100% - 4px));box-shadow:none}
+
+/* DASHBOARD GRID */
+.dash{display:grid;grid-template-columns:minmax(250px,290px) minmax(0,1fr) minmax(280px,330px);gap:18px;align-items:stretch}
+.c-left{display:flex;flex-direction:column;gap:18px;min-width:0}
+.c-left .pw:last-child{flex:1}
+@media(max-width:1180px){.dash{grid-template-columns:repeat(2,minmax(0,1fr))}.c-mid{grid-column:1/-1;order:-1}.c-left{order:2}.c-right{order:1}}
+@media(max-width:760px){.dash{grid-template-columns:minmax(0,1fr)}.c-right{order:-2}.c-mid{order:-1}.nl a{padding:0 10px;font-size:17px}.ttl{font-size:24px}}
+
+/* BRACKET */
+.bk-scroll{overflow-x:auto;padding-bottom:4px}
+.bk{min-width:770px}
+.bk-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.75fr) repeat(3,minmax(0,1fr));column-gap:18px}
+.bk-h{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:.12em;color:#e3e6eb;text-align:center;text-transform:uppercase;padding:6px 0;background:#0c0d11;box-shadow:inset 0 2px 4px rgba(0,0,0,.8)}
+.bk-rows{height:296px;margin-top:8px}
+.col{display:grid;min-width:0}
+.col.c4{grid-template-rows:repeat(4,1fr)}.col.c2{grid-template-rows:repeat(2,1fr)}.col.c1{grid-template-rows:1fr}
+.bc{position:relative;display:flex;align-items:center;min-width:0}
+.bl::before,.br::before{content:"";position:absolute;width:9px;top:25%;height:50%;border:2px solid #555b67;box-sizing:border-box}
+.bl::before{left:-18px;border-left:0}.br::before{right:-18px;border-right:0}
+.bl::after,.br::after{content:"";position:absolute;width:9px;top:50%;border-top:2px solid #555b67;margin-top:-1px}
+.bl::after{left:-9px}.br::after{right:-9px}
+.bf::before,.bf::after{content:"";position:absolute;width:18px;top:50%;border-top:2px solid #d4a017;margin-top:-1px}
+.bf::before{left:-18px}.bf::after{right:-18px}
+.slot{width:100%;min-width:0;background:linear-gradient(180deg,#22252d,#1a1c22);border:1px solid #000;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 2px 0 #000}
+.slot.bye{background:linear-gradient(180deg,#1b1d23,#15171b)}
+.sr{display:flex;align-items:center;gap:6px;height:28px;padding:0 7px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;letter-spacing:.03em;color:#fff;white-space:nowrap;overflow:hidden}
+.sr+.sr{border-top:1px solid #0b0c0f;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.sr .sd{font-weight:600;font-size:13px;color:#aab0bb;min-width:8px}
+.sr .ab{flex:1;overflow:hidden;text-overflow:ellipsis}
+.sr .w{font-family:'Anton',sans-serif;font-weight:400;font-size:17px;color:#fff}
+.sr.tbd{color:#b9bec8}.sr.tbd .ab{font-weight:600;font-size:15px;letter-spacing:.06em}
+/* league final: a gold plinth the trophy stands on */
+.plinth{position:relative;width:100%;padding:2px;box-sizing:border-box;background:linear-gradient(180deg,#f7dc86 0%,#d4a017 45%,#8a6408 100%);box-shadow:0 3px 0 #5e4406,0 6px 0 #000,0 14px 14px rgba(0,0,0,.6)}
+.plate{padding:5px 2px 4px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:900;font-size:18px;line-height:1;letter-spacing:.08em;text-transform:uppercase;color:#1a1202;background:linear-gradient(180deg,#ffeeb5 0%,#e9bd45 50%,#b98a14 100%);text-shadow:0 1px 0 rgba(255,255,255,.5)}
+.slot.fin{border:0;background:linear-gradient(180deg,#2e2510,#14100a);box-shadow:inset 0 3px 5px rgba(0,0,0,.75)}
+.slot.fin .sr{height:30px}
+.slot.fin .sr.tbd{color:#f5d26b;justify-content:center}.slot.fin .sr .sd,.slot.fin .sr .w{display:none}.slot.fin .sr .ab{text-align:center;font-weight:800;font-size:16px;letter-spacing:.1em}
+.fin-cap{position:absolute;left:0;right:0;bottom:calc(50% + 40px);display:flex;justify-content:center;pointer-events:none}
+.fin-cap img{height:104px;width:auto;filter:drop-shadow(0 6px 5px rgba(0,0,0,.75))}
+.fin-name{position:absolute;left:-6px;right:-6px;top:calc(50% + 58px);text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;line-height:1.1;letter-spacing:.1em;text-transform:uppercase;color:#f0c14b}
+
+
+/* SCORES */
+.gm{display:grid;grid-template-columns:minmax(0,1fr) 86px;gap:10px;align-items:stretch;padding:9px 10px;background:linear-gradient(180deg,#20232a,#1a1c22);border:1px solid #000;box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 2px 0 #000}
+.gm-l{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;letter-spacing:.14em;color:#b9bec8;margin-bottom:4px}
+.gm-t{display:flex;align-items:center;gap:8px;min-height:26px}
+.gm-t b{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:800;font-size:21px;letter-spacing:.02em;color:#fff}
+.gm-t i{font-style:normal;font-size:13px;color:#aab0bb;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gm-t em{font-style:normal;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:19px;color:#aab0bb}
+.gm-s{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.gm-time{font-family:'Anton',sans-serif;font-size:31px;line-height:1;letter-spacing:.02em;color:#fff;text-shadow:0 2px 0 #000}
+.gm-sfx{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:800;font-size:15px;line-height:1;letter-spacing:.14em;color:#f0c14b}
+.badge{display:flex;align-items:center;gap:7px;min-height:28px;padding:0 12px;margin-left:auto;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:11px;letter-spacing:.1em;color:#f2f3f5;background:#0c0d11;box-shadow:inset 0 2px 4px rgba(0,0,0,.85)}
+.badge i{width:8px;height:8px;border-radius:50%;background:#e0263f}
+
+/* TEAM BACKDROPS: crests sit behind the content like logos painted under the ice */
+.gm{position:relative;overflow:hidden;isolation:isolate}
+.gm>div{position:relative;z-index:1}
+.wm,.ws{position:absolute;z-index:0;pointer-events:none;object-fit:contain;top:50%}
+.wm{width:96px;height:96px;margin-top:-48px;opacity:.14}
+.ws{width:180px;height:180px;margin-top:-90px;opacity:.3;filter:blur(30px) saturate(1.6)}
+.wm.a{left:-20px}.ws.a{left:-80px}
+.wm.h{right:82px}.ws.h{right:30px}
+.ice{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.ice-w1,.ice-w2{position:absolute;left:50%;top:50%;white-space:nowrap;line-height:.8;-webkit-background-clip:text;background-clip:text;color:transparent}
+.ice-w1{transform:translate(-50%,-66%);font-size:clamp(118px,17vw,250px);letter-spacing:.02em;background-image:linear-gradient(180deg,rgba(255,255,255,.17),rgba(255,255,255,.035))}
+.ice-w2{transform:translate(-50%,128%);font-size:clamp(44px,6.4vw,94px);letter-spacing:.2em;background-image:linear-gradient(180deg,rgba(224,38,63,.5),rgba(224,38,63,.16))}
+.ice::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(17deg,rgba(255,255,255,.035) 0 1px,transparent 1px 41px),repeating-linear-gradient(-23deg,rgba(255,255,255,.03) 0 1px,transparent 1px 67px),repeating-linear-gradient(71deg,rgba(255,255,255,.022) 0 1px,transparent 1px 113px)}
+.bd-mono .ws{display:none}.bd-mono .wm{filter:grayscale(1)}
+.bd-off .wm,.bd-off .ws,.bd-off .ice{display:none}
+
+/* EPISODES */
+.thumb{position:relative;display:block;aspect-ratio:16/9;background:#0c0d11 url(assets/s55-design/53644a3c5e2aefd5ba47a38a62fbdbe4.webp) center/cover;border:1px solid #000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.thumb::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.55))}
+.play{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:radial-gradient(circle at 38% 30%,#3a3d46,#0b0c0f 70%);border:2px solid #f2f3f5;box-shadow:0 3px 0 #000;display:flex;align-items:center;justify-content:center;color:#fff}
+.ep{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 4px;border-bottom:1px solid #0b0c0f;box-shadow:0 1px 0 rgba(255,255,255,.05);color:#f2f3f5;text-decoration:none;font-size:15px;font-weight:500}
+.ep:hover{color:#fff}
+.ep span{flex:1}
+.puck{flex:none;width:18px;height:9px;border-radius:50%/50%;background:linear-gradient(180deg,#3d4049 0 40%,#07080a 41%);box-shadow:0 2px 0 #000,inset 0 1px 0 rgba(255,255,255,.25)}
+.ep svg{width:16px;height:16px;color:#aab0bb}
+
+/* PREDICTOR */
+.pts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));text-align:center}
+.pts div{padding:8px 2px}.pts div+div{border-left:1px solid #000;box-shadow:inset 1px 0 0 rgba(255,255,255,.05)}
+.pts b{display:block;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:900;font-size:26px;line-height:1;color:#f0c14b}
+.pts span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#aab0bb}
+
+/* LEAGUE TILES */
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media(max-width:860px){.tiles{grid-template-columns:minmax(0,1fr)}}
+.tile{display:block;min-width:0;filter:drop-shadow(0 4px 0 #000) drop-shadow(0 10px 12px rgba(0,0,0,.5));transition:transform .08s}
+.tile:hover{transform:translateY(-2px)}
+.tile:active{transform:translateY(2px)}
+
+.foot{border-top:1px solid #000;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);background:#101116}
+.foot a{color:#c9cdd5;text-decoration:none;font-size:14px;display:inline-flex;align-items:center;min-height:44px}
+.foot a:hover{color:#fff}
 </style>
-<link rel="stylesheet" href="homepage-responsive.css?v=20261115-layout1">
-</head>
-<body>
-<a class="pc-skip" href="#pcMain">Skip to content</a>
-<header class="pc-nav">
-  <a class="pc-brand" href="index.html" aria-label="EliteChel Media home"><img src="assets/brand/ecm-crest.webp" width="72" height="72" alt="EliteChel Media crest"><span>ELITECHEL <b>MEDIA</b></span></a>
-  <details class="pc-media-menu">
-    <summary>All Media</summary>
-    <nav aria-label="Other EliteChel Media coverage">
-        <a href="lgchl-media.html">LGCHL Desk</a>
-        <a href="lgchl-media.html#lgRadioSec">Hitmen Radio</a>
-        <a href="esports-hub.html">Live Hub</a>
-        <a href="league-leaderboards.html?league=lgchl">League Leaders</a>
-        <a href="lg3s-media.html">LG3s</a>
-        <a href="interest.html?program=hut">HUT Tournament</a>
-    </nav>
-  </details>
-  <nav aria-label="Playoff homepage navigation">
-    <a href="#episodes">Episodes</a><a href="#playoffs">Bracket</a><a href="#scoreboard">Scores</a><a href="#predictor">Make your picks</a><a href="#leaderboard">Leaderboard</a><a href="#community">Discord</a>
-  </nav>
+<style>*{box-sizing:border-box}.nav{position:relative;z-index:10}.nl details{position:relative}.nl summary{cursor:pointer;padding:12px;color:#f0c14b;border:1px solid #aa8636}.nl details nav{position:absolute;right:0;min-width:195px;background:#12141a;border:1px solid #aa8636;box-shadow:0 8px 16px #0009}.nl details a:hover{background:#56232b}@media(max-width:700px){.nl{position:relative}.nl details{position:static}.nl details nav{right:0;left:0;max-height:55vh;overflow:auto}.nav-in{padding-bottom:8px}}[hidden]{display:none!important}[data-round]{display:contents}</style><link rel="icon" href="assets/brand/ecm-crest.webp"><style>#league-view,.c-mid,.c-mid .pb{min-width:0}.bk-scroll{max-width:100%}</style></head><body><div class="pg" style="min-height: 100vh">
+
+<header class="nav">
+<div class="wrap nav-in">
+<a class="brand" href="#top" aria-label="Elite Chel Media home">
+<img src="assets/s55-design/fa201f7e68c2c45e066ce71308928fe6.webp" alt="" width="58" height="59" style="width: 58px; height: 59px">
+<span class="disp" style="font-size: 26px; line-height: .9; text-shadow: 0 2px 0 #000">Elitechel <span style="color: #f0c14b">Media</span></span>
+</a>
+<nav class="nl" aria-label="Main">
+<a class="on" href="#top" aria-current="page">Home</a>
+<a href="#bracket">Playoffs</a>
+<a href="#episodes">Episodes</a>
+<a href="playoff-hq.html#predictor">Predictor</a>
+<a href="#scores">Scores</a>
+<a href="#leagues">Teams</a>
+<details><summary>All Media ▾</summary><nav aria-label="Other EliteChel Media coverage"><a href="lgchl-media.html">LGCHL Desk</a><a href="lgchl-media.html#lgRadioSec">Hitmen Radio</a><a href="esports-hub.html">Live Hub</a><a href="league-leaderboards.html?league=lgchl">League Leaders</a><a href="lg3s-media.html">LG3s</a><a href="interest.html?program=hut">HUT Tournament</a></nav></details>
+</nav>
+</div>
 </header>
-<main id="pcMain">
-  <section class="trophy-banner" aria-label="LGCHL Season 55"><h1><img src="assets/broadcast/s55-trophy.webp" width="900" height="269" alt="LGCHL Season 55 Playoffs — The Road to the Memorial Cup"></h1></section>
-  <section class="challenge-strip pc-wide" aria-label="Playoff predictor challenge"><article><h2>Playoff Predictor</h2><p>Pick every winner and series length.</p><a class="pc-primary" href="#predictor">Make your picks →</a></article><article><h2>Predictor Leaderboard</h2><p>Track the standings through every round.</p><a class="pc-outline" href="#leaderboard">View leaderboard →</a></article><article><h2>Predictor Rules</h2><p>Winners, exact lengths, upsets and perfect rounds earn points.</p><a class="pc-outline" href="#contest-rules">Read rules →</a></article></section>
 
-  <section class="pc-episode-tease" id="episodes" aria-labelledby="pcEpisodeTitle">
-    <div class="pc-wide pc-episode-inner">
-      <a class="feature-panel" href="lgchl-media.html"><small>Featured episode</small><strong>Playoff<br>Preview</strong><span>Visit the desk →</span></a>
-      <div class="pc-episode-copy">
-        <p class="pc-overline">ON THE ELITECHEL MEDIA DESK</p>
-        <h2 id="pcEpisodeTitle">THE PLAYOFF <span>EPISODES</span></h2>
-        <p>Gronk's playoff preview coverage is on the way. Visit the desk for new episodes, then come back here for the bracket, scores and fan predictor.</p>
-        <p class="pc-episode-state">Episodes are in production · Watch links will appear when released</p>
-        <a class="pc-outline" href="lgchl-media.html">Go to the LGCHL desk <span aria-hidden="true">↗</span></a>
-      </div>
-      <aside class="live-panel"><small>Broadcast desk</small><h2>Live coverage</h2><a class="pc-outline" href="esports-hub.html">View live hub →</a></aside>
-    </div>
-  </section>
-  <section class="po band" id="playoffs" data-view="WHL" aria-labelledby="poTitle">
-    <div class="po-bg" aria-hidden="true">
-      <picture>
-        <source media="(max-width: 859px)" srcset="assets/broadcast/playoff-bracket-bg-hero.jpg">
-        <source type="image/webp" srcset="assets/broadcast/playoff-bracket-bg.webp">
-        <img src="assets/broadcast/playoff-bracket-bg.jpg" width="1920" height="2400" alt="">
-      </picture>
-    </div>
-    <div class="po-in">
-      <div class="po-head">
-        <div>
-          <p class="eyebrow po-eye">LGCHL · Season 55</p>
-          <h2 class="sec-title" id="poTitle">Playoff <em>bracket</em></h2>
-          <p class="po-lead">Round 1 is a best of seven, first to four. Seeds, byes and series come from the official LeagueGaming bracket and update on their own. <a href="playoff-central.html" style="color:#f3bc63;text-decoration:underline">Open Playoff Central for all scores and fan predictions ↗</a></p>
-        </div>
-        <div class="po-meta">
-          <span class="po-live" id="poLive"><i aria-hidden="true"></i><b>Live</b></span>
-          <time class="po-stamp" id="poStamp"></time>
-          <a class="po-official" href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=playoffs&leagueid=39&seasonid=55">Official bracket</a>
-        </div>
-      </div>
-      <p class="po-note" id="poNote" hidden></p>
-      <div class="po-stage" aria-hidden="true"></div>
-      <div class="po-tabs" role="tablist" aria-label="Playoff bracket">
-        <button type="button" role="tab" data-po-tab="WHL" aria-selected="true">WHL</button>
-        <button type="button" role="tab" data-po-tab="OHL" aria-selected="false">OHL</button>
-        <button type="button" role="tab" data-po-tab="QMJHL" aria-selected="false">QMJHL</button>
-        <button type="button" role="tab" data-po-tab="CUP" aria-selected="false">Finals</button>
-      </div>
-      <div id="poBoard" aria-live="polite"><p class="po-loading">Loading the official playoff bracket…</p></div>
-    </div>
-  </section>
+<main id="top">
+<div style="background: #000"><img src="assets/s55-design/a33310dcd5fb006060c5a5bebd1a55b9.webp" alt="Elite Chel Media — LGCHL Season 55 Playoffs, The Road to the Memorial Cup" width="2172" height="724" style="display: block; width: 100%; height: auto"></div>
+<div class="rl" aria-hidden="true"><span></span></div>
 
-  <nav class="ecm-league-showcase" aria-label="Select a league playoff bracket">
-    <a href="#playoffs" class="ecm-league-tile ecm-ohl" data-ecm-league="OHL" aria-label="Show Ontario Hockey League playoff bracket"><strong>OHL</strong><span>Ontario Hockey League</span><b>View bracket →</b></a>
-    <a href="#playoffs" class="ecm-league-tile ecm-whl" data-ecm-league="WHL" aria-label="Show Western Hockey League playoff bracket"><strong>WHL</strong><span>Western Hockey League</span><b>View bracket →</b></a>
-    <a href="#playoffs" class="ecm-league-tile ecm-qmjhl" data-ecm-league="QMJHL" aria-label="Show Quebec Major Junior Hockey League playoff bracket"><strong>QMJHL</strong><span>Quebec Major Junior Hockey League</span><b>View bracket →</b></a>
-  </nav>
-  <section class="pc-section pc-wide" id="scoreboard" aria-labelledby="scoreTitle">
-    <div class="pc-section-head"><div><p class="pc-overline">THE HOCKEY</p><h2 id="scoreTitle">GAME-BY-GAME <span>SCORES</span></h2><p>Our original playoff bracket is directly above. Dive into each series and its individual game results here.</p></div><a href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=playoffs&leagueid=39&seasonid=55" target="_blank" rel="noopener noreferrer" class="pc-text-link">Official LG bracket ↗</a></div>
-    <p id="pcUpdated" aria-live="polite">Checking league results…</p><div class="pc-controls"><div class="pc-tablist" role="group" aria-label="Filter league"><button type="button" class="is-on" data-league="ALL">ALL</button><button type="button" data-league="WHL">WHL</button><button type="button" data-league="OHL">OHL</button><button type="button" data-league="QMJHL">QMJHL</button></div><label class="pc-select-label">Round <select id="pcScoreRound"><option value="ALL">All rounds</option><option value="R1" selected>Wildcard · R1</option><option value="R2">Divisional · R2</option><option value="R3">Conference · R3</option><option value="FINAL">League finals</option><option value="CUP">Memorial Cup</option></select></label></div>
-    <p id="pcScoreNotice" class="pc-notice" role="status">Loading verified bracket…</p>
-    <div id="pcScoreGrid" class="pc-score-grid" aria-live="polite"></div>
-    <p class="pc-footnote">Scores may be delayed while LeagueGaming confirms results. A game is not labelled live merely because its scheduled start time has passed.</p>
-  </section>
-  <section class="pc-section pc-section-alt" id="predictor" aria-labelledby="predictTitle">
-    <div class="pc-wide">
-      <div class="pc-section-head"><div><p class="pc-overline">THE FANS</p><h2 id="predictTitle">PLAYOFF <span>PREDICTOR</span></h2><p>Choose every winner and predict the exact series length. Compete round after round.</p></div><div class="pc-points"><b>10</b> winner <span>+</span> <b>5</b> exact <span>+</span> <b>5</b> upset</div></div>
-      <div class="pc-predict-layout">
-        <div class="pc-prediction-card">
-          <div class="pc-subhead"><h3>YOUR ROUND BALLOT</h3><span id="pcEntryStatus">Checking contest status</span></div>
-          <div class="pc-fields"><label>Leaderboard name<input id="pcHandle" maxlength="24" minlength="3" autocomplete="nickname" placeholder="Your gamertag" aria-describedby="pcHandleHint"></label><label>Round<select id="pcPickRound"><option value="1">Wildcard · Round 1</option><option value="2">Divisional · Round 2</option><option value="3">Conference semifinals · Round 3</option><option value="4">Conference finals · Round 4</option><option value="5">Cup qualifier · Round 5</option><option value="6">Memorial Cup final · Round 6</option></select></label></div>
-          <p class="pc-footnote" id="pcHandleHint">One account per entrant. Your chosen name is public on the leaderboard.</p>
-          <div id="pcBallot" class="pc-ballot"></div>
-          <button id="pcSubmit" class="pc-primary pc-submit" disabled type="button">Submit complete round ballot</button>
-          <p id="pcBallotStatus" class="pc-notice" role="status">Loading the round ballot…</p>
-        </div>
-        <aside class="pc-account">
-          <p class="pc-overline">YOUR ELITECHEL ACCOUNT</p>
-          <section id="accountPanel" class="account-panel"><p>Loading account…</p></section>
-          <div class="pc-rules"><h3>HOW TO WIN</h3><p><b>+10</b> Pick the series winner.</p><p><b>+5</b> Correct winner and exact games (4–7).</p><p><b>+5</b> Correct lower-seed upset.</p><p><b>+20</b> Perfect round: every winner and exact length correct, minimum two series.</p><p>Grand-prize eligibility requires a complete ballot in every available round before the lock. Missing a round does not remove you from the weekly scoreboard.</p><a href="#contest-rules" class="pc-text-link">Contest information ↗</a></div>
-        </aside>
-      </div>
-    </div>
-  </section>
-  <section class="pc-section pc-wide" id="leaderboard" aria-labelledby="leaderTitle">
-    <div class="pc-section-head"><div><p class="pc-overline">THE STANDINGS</p><h2 id="leaderTitle">PREDICTOR <span>LEADERBOARD</span></h2><p>Officially confirmed series are the only results that award points.</p></div><label class="pc-select-label">Ranking <select id="pcLeaderRound"><option value="ALL">Overall</option><option value="1">Round 1</option><option value="2">Round 2</option><option value="3">Round 3</option><option value="4">Round 4</option><option value="5">Round 5</option><option value="6">Round 6</option></select></label></div>
-    <div class="pc-table-shell"><table><thead><tr><th>Rank</th><th>Predictor</th><th>Points</th><th>Winners</th><th>Exact</th><th>Upsets</th><th>Perfect</th><th>Grand Prize</th></tr></thead><tbody id="pcLeaders"><tr><td colspan="8">Leaderboard opens after the contest is configured.</td></tr></tbody></table></div>
-    <p id="pcLeaderNotice" class="pc-notice" role="status"></p>
-  </section>
-  <section class="pc-community" id="community" aria-labelledby="pcCommunityTitle">
-    <div class="pc-wide pc-community-inner">
-      <div>
-        <p class="pc-overline">STAY IN THE LOOP</p>
-        <h2 id="pcCommunityTitle">DISCORD <span>UPDATES</span></h2>
-        <p>Want alerts when a new round opens, a leaderboard changes, or Gronk drops another playoff preview? Follow the existing EliteChel Media Discord community.</p>
-        <p class="pc-footnote">Discord is optional. All official picks, deadlines, scores, standings and contest rules stay right here on EliteChel Media. You won't miss anything essential by staying on the website.</p>
-      </div>
-      <div class="pc-community-links">
-        <a class="pc-primary pc-discord-join" href="https://discord.gg/KMBjak7RD" target="_blank" rel="noopener noreferrer" aria-label="Join the EliteChel Media Discord server for optional playoff updates">Join EliteChel Media Discord <span aria-hidden="true">↗</span></a>
-        <a class="pc-outline" href="#predictor">Go to the official predictor <span aria-hidden="true">↗</span></a>
-      </div>
-    </div>
-  </section>
-  <section class="pc-rules-section pc-wide" id="contest-rules" aria-labelledby="pcRulesTitle">
-    <p class="pc-overline">HOW THE CONTEST WILL WORK</p>
-    <h2 id="pcRulesTitle">PREDICTOR RULES <span class="pc-proposed">· SEASON 55</span></h2>
-    <p id="pcRulesStatus">Sign in and submit all 12 Round 1 picks before November 15 at 9 p.m. Eastern. Entry is free. Play for leaderboard points. Prize details are pending.</p>
-    <ol class="pc-rule-list">
-      <li>Submit a complete winner and series-length prediction for every matchup in every playoff round to remain in grand-prize contention.</li>
-      <li>Predictions lock before the scheduled start of the series. No changes after the lock.</li>
-      <li>One account per person. Officially verified series results determine points and rankings.</li>
-      <li>A one-time share of an official EliteChel Media playoff video in a community that permits promotion is planned. Exact proof and eligibility requirements will be announced after the contest review. Never spam a server.</li>
-      <li>No purchase is required. Prize terms and eligibility will be announced separately.</li>
-    </ol>
-    <p class="pc-footnote">EliteChel Media is independent fan coverage. LeagueGaming retains its own official results and rules.</p>
-  </section>
-<nav class="central-links pc-wide" aria-label="Playoff Central shortcuts"><h2>Playoff Central</h2><div><a href="#episodes"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z M10 9l5 3-5 3z"/></svg>Episodes</a><a href="#playoffs"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h5v6H2 M2 14h5v6H2 M7 7h5v10H7 M12 12h8"/></svg>Bracket</a><a href="#scoreboard"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2z M12 5v14 M5 9h3v5H5z M16 9h3v5h-3z"/></svg>Scores</a><a href="lgchl-media.html"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8h6v5H6z M15 8h3 M15 11h3 M6 16h12"/></svg>LGCHL Desk</a><a href="lgchl-media.html#lgRadioSec"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0z M6 10v1a6 6 0 0 0 12 0v-1 M12 17v4 M8 21h8"/></svg>Hitmen Radio</a><a href="esports-hub.html"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4q-5 8 0 16 M7 7q-3 5 0 10 M20 4q5 8 0 16 M17 7q3 5 0 10 M10 9l5 3-5 3z"/></svg>Live Hub</a></div></nav></main>
-<footer class="pc-footer"><span>© EliteChel Media · Season 55</span><div class="pc-footer-links"><a href="lgchl-media.html">LGCHL Desk</a><a href="hitmen-media.html">Hitmen</a><a href="lg3s-media.html">LG3s</a><a href="esports-hub.html">Live Hub</a><a href="management.html" aria-label="Private EliteChel Media management controls">Management</a><a href="hitmen-hq.html">Hitmen War Room</a></div></footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
-<script src="backend.js"></script>
-<script src="lgchl-playoffs.js?v=20261115-home" defer></script>
-<script src="playoff-central.js?v=20261115-home" defer></script>
-<script>
-const mediaMenu = document.querySelector('.pc-media-menu');
-document.addEventListener('click', event => {
-  if (!mediaMenu.contains(event.target)) mediaMenu.open = false;
-});
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && mediaMenu.open) {
-    mediaMenu.open = false;
-    mediaMenu.querySelector('summary').focus();
-  }
-});
-// Reuse the existing live bracket controls rather than creating a second data source.
-document.querySelectorAll('[data-ecm-league]').forEach(link => {
-  link.addEventListener('click', () => {
-    const league = link.dataset.ecmLeague;
-    document.querySelector('[data-po-tab="' + league + '"]')?.click();
-  });
-});
-</script>
-</body></html>
+<div class="wrap" style="padding-top: 14px; padding-bottom: 28px; display: flex; flex-direction: column; gap: 22px">
+
+<div class="dash">
+
+<div class="c-left">
+<section class="pw" id="episodes" aria-labelledby="epT">
+<div class="pnl"><div class="pin">
+<div class="ph">
+<span class="ph-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"></path></svg></span>
+<h2 class="ttl disp" id="epT">Playoff Episodes</h2>
+</div>
+<div class="pb">
+<a class="thumb" href="assets/hitman-radio/nightly/2026-11-15-season55-playoff-preview.mp4?v=20261115" aria-label="Play Hitmen Radio: Season 55 Playoff Preview"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M9 6v12l10-6z"></path></svg></span><span class="mono" style="position: absolute; right: 6px; bottom: 6px; padding: 2px 6px; background: #0b0c0f; color: #f2f3f5; font-size: 11px; font-weight: 600">13:49</span></a>
+<div>
+<p class="mono" style="margin: 0 0 4px; font-size: 10.5px; letter-spacing: .12em; color: #f0c14b">LATEST · HITMEN RADIO · NOV 15</p>
+<h3 class="disp" style="margin: 0; font-size: 23px; line-height: 1; color: #fff; text-shadow: 0 2px 0 #000">Season 55 Playoff Preview</h3>
+<p style="margin: 6px 0 0; font-size: 14px; line-height: 1.4; color: #d5d8de">All 12 wildcard series, the Upset Alarm, breakout players and the Playoff Predictor Challenge.</p>
+</div>
+<div>
+<p class="mono" style="margin: 0 0 2px; font-size: 10.5px; letter-spacing: .12em; color: #aab0bb">MORE EPISODES</p>
+<a class="ep" href="assets/hitman-radio/nightly/2026-11-13-season55-recap.mp4?v=20261114"><i class="puck" aria-hidden="true"></i><span>Season 55 Full-Season Recap</span><em class="mono" style="font-style: normal; font-size: 11px; color: #aab0bb">15:44</em><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+<a class="ep" href="lgchl-media.html#lgRadioSec"><i class="puck" aria-hidden="true"></i><span>Sunday Review &amp; Monday Playoff Preview</span><em class="mono" style="font-style: normal; font-size: 11px; color: #aab0bb">8:19</em><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+<a class="ep" href="assets/hitman-radio/nightly/2026-11-09-trade-deadline-special.mp4?v=20261109"><i class="puck" aria-hidden="true"></i><span>Trade Deadline Special: All In or All Out</span><em class="mono" style="font-style: normal; font-size: 11px; color: #aab0bb">11:09</em><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+</div>
+<span class="bw" style="margin-top: auto"><a class="btn" href="lgchl-media.html#lgRadioSec">View all episodes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"></path></svg></a></span>
+</div>
+</div></div>
+</section>
+
+<section class="pw" id="predictor" aria-labelledby="prT">
+<div class="pnl"><div class="pin">
+<div class="ph" style="border-bottom-color: #d4a017">
+<span class="ph-ic gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 20h8"></path></svg></span>
+<h2 class="ttl disp" id="prT">Playoff Predictor</h2>
+</div>
+<div class="pb">
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #d5d8de">Pick every series winner and how many games it takes. Earn points all playoffs long.</p>
+<div class="well pts">
+<div><b>+10</b><span>WINNER</span></div>
+<div><b>+5</b><span>EXACT</span></div>
+<div><b>+5</b><span>UPSET</span></div>
+</div>
+<p class="mono" style="margin: 0; font-size: 11px; letter-spacing: .08em; color: #aab0bb">ROUND 1 PICKS LOCK NOV 15 · 9:00 PM ET</p>
+<span class="bw" style="margin-top: auto"><a class="btn gold" href="playoff-hq.html#predictor">Make your picks <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"></path></svg></a></span>
+<p style="display:flex;justify-content:space-between;margin:0"><a href="playoff-hq.html#leaderboard">Leaderboard</a><a href="playoff-hq.html#contest-rules">Rules</a></p></div></div></div></section>
+</div>
+
+<section class="pw c-mid" id="bracket" aria-labelledby="bkT">
+<div class="pnl"><div class="pin art">
+<div class="ph">
+<span class="ph-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h5v5H3M3 14h5v5H3M8 7.5h4v9H8M12 12h4M16 9.5h5v5h-5z"></path></svg></span>
+<h2 class="ttl disp" id="bkT">Playoff Bracket</h2>
+<div class="tabs" role="group" aria-label="Choose a bracket">
+<button class="tab on" aria-pressed="true" data-league="WHL">WHL</button><button class="tab " aria-pressed="false" data-league="OHL">OHL</button><button class="tab " aria-pressed="false" data-league="QMJHL">QMJHL</button><button class="tab " aria-pressed="false" data-league="CUP">Memorial Cup</button>
+</div>
+</div>
+<div class="pb" style="gap: 14px; position: relative; isolation: isolate">
+<div class="ice" aria-hidden="true"><span class="ice-w1 disp">LGCHL</span><span class="ice-w2 disp">Season 55</span></div>
+
+<div id="league-view">
+<div class="bk-scroll" style="position: relative; z-index: 1"><div class="bk">
+<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px">
+<span class="disp" style="font-size: 20px; color: #fff; text-shadow: 0 2px 0 #000">Eastern Conference</span>
+<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: .14em; color: #b9bec8">ALL SERIES BEST OF 7</span>
+<span class="disp" style="font-size: 20px; color: #fff; text-shadow: 0 2px 0 #000">Western Conference</span>
+</div>
+<div class="bk-g">
+<div class="bk-h">Round 1</div><div class="bk-h">Round 2</div><div class="bk-h">Conf Final</div><div class="bk-h" style="color: #f0c14b">League Final</div><div class="bk-h">Conf Final</div><div class="bk-h">Round 2</div><div class="bk-h">Round 1</div>
+</div>
+<div class="bk-g bk-rows">
+<div class="col c4"><div data-round="eR1"></div></div>
+<div class="col c2"><div data-round="eR2"></div></div>
+<div class="col c1"><div data-round="eR3"></div></div>
+<div class="col c1"><div data-round="fin"></div></div>
+<div class="col c1"><div data-round="wR3"></div></div>
+<div class="col c2"><div data-round="wR2"></div></div>
+<div class="col c4"><div data-round="wR1"></div></div>
+</div>
+</div></div>
+</div>
+
+<div id="cup-view" hidden>
+<div style="position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 18px 0 26px">
+<img src="assets/s55-design/002783381a9daca3c155864e44c0b7c7.webp" alt="Memorial Cup" width="124" height="120" style="width: 124px; height: 120px; object-fit: contain; filter: drop-shadow(0 6px 5px rgba(0,0,0,.75))">
+<span class="disp" style="font-size: 34px; line-height: 1; color: #fff; text-shadow: 0 2px 0 #7d0a1c, 0 4px 0 #000">Memorial Cup</span>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 0">
+<div style="width: 190px"><div class="bk-h" style="margin-bottom: 6px">Semifinal</div><div class="slot"><div class="sr tbd"><span class="ab">WHL CHAMPION</span></div><div class="sr tbd"><span class="ab">OHL CHAMPION</span></div></div></div>
+<div aria-hidden="true" style="width: 34px; border-top: 2px solid #d4a017"></div>
+<div style="width: 230px"><div class="plinth"><div class="plate">Memorial Cup Final</div><div class="slot fin"><div class="sr tbd"><span class="ab">SEMIFINAL WINNER</span></div><div class="sr tbd"><span class="ab">QMJHL CHAMPION</span></div></div></div></div>
+</div>
+<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: .14em; color: #b9bec8; margin-top: 8px">BOTH SERIES BEST OF 7</span>
+</div>
+</div>
+
+<span class="bw" style="position: relative; z-index: 1; margin-top: auto; align-self: center; width: min(100%, 420px)"><a class="btn" href="playoff-hq.html#playoffs">View full bracket <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"></path></svg></a></span>
+</div>
+</div></div>
+</section>
+
+<section class="pw c-right" id="scores" aria-labelledby="scT">
+<div class="pnl"><div class="pin">
+<div class="ph">
+<span class="ph-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3zM12 6v12M6.5 10v4M17 10h1v4h-1"></path></svg></span>
+<h2 class="ttl disp" id="scT">Scores</h2>
+<span class="badge"><i aria-hidden="true"></i>SEASON 55</span>
+</div>
+<div class="pb" style="gap: 10px">
+<div class="tabs" role="group" aria-label="Filter scores by league" style="margin-left: 0">
+<button class="tab on" aria-pressed="true" data-filter="ALL">All</button><button class="tab " aria-pressed="false" data-filter="OHL">OHL</button><button class="tab " aria-pressed="false" data-filter="WHL">WHL</button><button class="tab " aria-pressed="false" data-filter="QMJHL">QMJHL</button>
+</div>
+<div id="game-list" style="display:grid;gap:10px"></div>
+<p class="mono" style="margin: 0; font-size: 11px; letter-spacing: .08em; color: #aab0bb; text-align: center">Loading schedule…</p>
+<span class="bw" style="margin-top: auto"><a class="btn" href="playoff-hq.html#scoreboard">View all scores <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"></path></svg></a></span>
+</div>
+</div></div>
+</section>
+
+</div>
+
+<nav class="tiles" id="leagues" aria-label="League brackets">
+<a class="tile" href="#bracket" data-league="OHL"><img style="width:100%;height:auto" src="assets/s55-design/6220680691753ec4ef2a24444790f42a.png" alt="OHL playoff bracket"></a><a class="tile" href="#bracket" data-league="WHL"><img style="width:100%;height:auto" src="assets/s55-design/2fcb71c77cca6c93fef3cfc5e3e0e638.png" alt="WHL playoff bracket"></a><a class="tile" href="#bracket" data-league="QMJHL"><img style="width:100%;height:auto" src="assets/s55-design/bb29c558b5c20a2da69c3e03a1526a7e.png" alt="QMJHL playoff bracket"></a>
+</nav>
+
+</div>
+</main>
+
+<footer class="foot">
+<div class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 24px; padding-top: 10px; padding-bottom: 10px">
+<span style="font-size: 14px; color: #aab0bb">© EliteChel Media · Season 55 · Independent fan coverage, not affiliated with LeagueGaming</span>
+<div style="display: flex; flex-wrap: wrap; gap: 0 20px">
+<a href="lgchl-media.html">LGCHL Desk</a><a href="hitmen-media.html">Hitmen</a><a href="lg3s-media.html">LG3s</a><a href="esports-hub.html">Live Hub</a><a href="management.html">Management</a>
+</div>
+</div>
+</footer>
+
+</div><script defer src="s55-home.js"></script></body></html>
