@@ -75,7 +75,7 @@ test('Mobile vertical scrolling is protected when touch orbit is disabled',()=>{
 });
 test('No local player data persistence or private Labs integration',()=>{
  assert.doesNotMatch(shell+scene,/localStorage|sessionStorage|\.from\(['"](?:private|elite_labs)|eval\(/i);
- assert.match(shell,/saved public LG3s Season 1 roster/i);
+ assert.match(shell,/snapshot\.capturedOn/);
  assert.match(shell,/2026-11-14\.json/);
 });
 test('All authored JavaScript files parse and CSS blocks balance',()=>{
