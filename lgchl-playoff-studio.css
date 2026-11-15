@@ -1,0 +1,73 @@
+/* ===== Studio theme: the Power Rankings broadcast look, across the whole page ===== */
+.lgchl-playoff-scroll{--fr:url('assets/lgchl/studio/broadcast-frame-v2.webp');--gold:#f6d47b;--gold-d:#bd8d3f;--chrome:linear-gradient(#fff 20%,#f3f4f6 43%,#8d9299 65%,#fff 82%);--goldtxt:linear-gradient(#fff0b8,#ffc949 45%,#a36910 70%,#f9d778);background:#0b0c0e radial-gradient(ellipse at 50% 0,#1d1a14 0,#0b0c0e 60%) fixed!important}
+.lgchl-playoff-scroll main{background:none!important}
+
+/* --- Big section frames --- */
+.lgchl-playoff-scroll main>section{position:relative;border:22px solid transparent!important;border-image:var(--fr) 90 fill / 22px / 0 stretch!important;border-radius:0!important;background:none!important;box-shadow:0 20px 30px #000a!important;padding:30px 30px 34px!important;margin:0 auto 34px!important;max-width:1360px!important;outline:0!important}
+.lgchl-playoff-scroll main>section::before,.lgchl-playoff-scroll main>section::after{display:none!important}
+.lgchl-playoff-scroll #lgRadioSec{background:linear-gradient(#06080a33,#06080ae0),url('assets/lgchl/studio/radio-booth.webp') center top/cover!important;background-origin:border-box!important}
+
+/* --- Section headings: chrome italic with gold accent, gold rule under --- */
+.lgchl-playoff-scroll main>section>h1,.lgchl-playoff-scroll main>section>h2,.lgchl-playoff-scroll .lg-scroll-heading h2,.lgchl-playoff-scroll .s55-seg-heading h2,.lgchl-playoff-scroll .hn-title,.lgchl-playoff-scroll .seg-toolbar h2,.lgchl-playoff-scroll .ps-head h2,.lgchl-playoff-scroll .lg-panel-title{font:italic 900 clamp(34px,4.4vw,60px)/1.1 "Kanit","Arial Black",Impact,sans-serif!important;text-transform:uppercase!important;letter-spacing:0!important;background:var(--chrome)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important;filter:drop-shadow(0 3px #000) drop-shadow(0 7px 6px #000a);text-shadow:none!important}
+.lgchl-playoff-scroll main>section>h1{font-size:clamp(46px,6vw,82px)!important}
+.lgchl-playoff-scroll .seg-toolbar h2,.lgchl-playoff-scroll .ps-head h2,.lgchl-playoff-scroll .hn-title{font-size:clamp(28px,3.2vw,44px)!important}
+.lgchl-playoff-scroll main h1 em,.lgchl-playoff-scroll main h2 em,.lgchl-playoff-scroll .hn-title em{font:inherit!important;background:var(--goldtxt)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+.lgchl-playoff-scroll .lg-scroll-heading,.lgchl-playoff-scroll .s55-seg-heading,.lgchl-playoff-scroll .seg-toolbar,.lgchl-playoff-scroll .ps-head{border-bottom:2px solid var(--gold-d)!important;box-shadow:0 2px #000!important;padding-bottom:18px!important;margin-bottom:24px!important;background:none!important}
+.lgchl-playoff-scroll main>section>h2{border-bottom:2px solid var(--gold-d);box-shadow:0 2px #000;padding-bottom:16px;margin-bottom:20px}
+.lgchl-playoff-scroll main .eyebrow,.lgchl-playoff-scroll .s55-label,.lgchl-playoff-scroll .seg-kicker,.lgchl-playoff-scroll .lg-scroll-preview>span,.lgchl-playoff-scroll .ecm-full-label,.lgchl-playoff-scroll .lg-scroll-heading p:first-child{color:#d4cbb8!important;letter-spacing:.18em!important;text-transform:uppercase}
+.lgchl-playoff-scroll .ecm-full-label i{color:#9b968c!important}
+.lgchl-playoff-scroll main h3{font-family:"Anton",Impact,sans-serif!important;text-transform:uppercase;color:#f3f4f6!important;letter-spacing:.02em;text-shadow:0 3px #000}
+
+/* --- Medium frames: preview cards, feature tiles, embedded boards --- */
+.lgchl-playoff-scroll .lg-scroll-preview,.lgchl-playoff-scroll .s55-seg-tile,.lgchl-playoff-scroll .ecm-full,.lgchl-playoff-scroll .hn-in,.lgchl-playoff-scroll .hn-card,.lgchl-playoff-scroll .hn-arch,.lgchl-playoff-scroll .hn-dual,.lgchl-playoff-scroll .seg-road-header,.lgchl-playoff-scroll .seg-panel,.lgchl-playoff-scroll .lg-scroll-cup-action>div{border:14px solid transparent!important;border-image:var(--fr) 90 fill / 14px / 0 stretch!important;border-radius:0!important;background:none!important;box-shadow:0 12px 20px #000a!important;outline:0!important}
+.lgchl-playoff-scroll .s55-seg-tile::before,.lgchl-playoff-scroll .s55-seg-tile::after,.lgchl-playoff-scroll .lg-scroll-preview::before,.lgchl-playoff-scroll .lg-scroll-preview::after{display:none!important}
+.lgchl-playoff-scroll .ecm-full{padding:16px!important}
+.lgchl-playoff-scroll .ecm-full-scroll{scrollbar-color:#d9ae56 #0d1014!important}
+.lgchl-playoff-scroll .seg-frame,.lgchl-playoff-scroll .seg-app,.lgchl-playoff-scroll .ps-content{background:none!important;border:0!important;box-shadow:none!important}
+
+/* --- Small frames: every team card --- */
+.lgchl-playoff-scroll .seg-card,.lgchl-playoff-scroll .ps-team-card,.lgchl-playoff-scroll .seg-road-stage,.lgchl-playoff-scroll .lg-stall-stats{border:10px solid transparent!important;border-image:var(--fr) 90 fill / 10px / 0 stretch!important;border-radius:0!important;background-color:transparent!important;box-shadow:0 8px 14px #0009!important}
+.lgchl-playoff-scroll .seg-card{background-image:none!important}
+
+/* --- Scoreboard strip --- */
+.lgchl-playoff-scroll .desk-games p{border:10px solid transparent!important;border-image:var(--fr) 90 fill / 10px / 0 stretch!important;border-radius:0!important;background:none!important;box-shadow:0 8px 14px #0009!important;font-family:"Barlow Semi Condensed",sans-serif;font-weight:700;font-size:17px;color:#fff}
+.lgchl-playoff-scroll .desk-games small{color:var(--gold)!important;letter-spacing:.06em}
+
+/* --- Ranked rows (locker rooms, contender list, ranking tables) --- */
+.lgchl-playoff-scroll .ecm-rooms{background:none!important;border:0!important;padding:0!important}
+.lgchl-playoff-scroll .ecm-room{border:0!important;border-bottom:1px solid #bc8c39!important;border-radius:0!important;background:linear-gradient(#1c1c1a,#070809 55%,#0c0d0e)!important;font:700 17px/1.2 "Barlow Semi Condensed",sans-serif!important;text-transform:uppercase;color:#fff!important;padding:10px 12px!important;box-shadow:none!important}
+.lgchl-playoff-scroll .ecm-room:hover{background:linear-gradient(110deg,#092246,#183f72 70%,#07152c)!important}
+.lgchl-playoff-scroll .ecm-room img{filter:drop-shadow(0 3px 2px #000)}
+.lgchl-playoff-scroll .lg-pr-row{border:0!important;border-bottom:1px solid #bc8c39!important;border-radius:0!important;background:linear-gradient(#1c1c1a,#070809 55%,#0c0d0e)!important;box-shadow:none!important}
+.lgchl-playoff-scroll .lg-pr-list{border:12px solid transparent!important;border-image:var(--fr) 90 fill / 12px / 0 stretch!important;padding:0!important;background:none!important}
+.lgchl-playoff-scroll .lg-pr-rk b{font:italic 900 32px/1 "Kanit",sans-serif!important;color:#f6f7f8!important;text-shadow:0 4px #000}
+.lgchl-playoff-scroll .lg-pr-stats dt{color:var(--gold)!important}
+
+/* --- Tables: gold column headers, gold-ruled rows --- */
+.lgchl-playoff-scroll main table th{color:var(--gold)!important;font:700 15px/1.3 "Barlow Semi Condensed",sans-serif!important;letter-spacing:.06em;text-transform:uppercase;border-bottom:2px solid #c29a4e!important;background:none!important}
+.lgchl-playoff-scroll main table td{border-bottom:1px solid #bc8c3966!important}
+
+/* --- Buttons: gold bars for primary, gold-edged dark for secondary --- */
+.lgchl-playoff-scroll .s55-seg-cta,.lgchl-playoff-scroll .hn-cta:not(.hn-cta-ghost),.lgchl-playoff-scroll .seg-action,.lgchl-playoff-scroll .lg-scroll-cup-action a:first-of-type,.lgchl-playoff-scroll .hn-more{display:inline-flex;align-items:center;justify-content:center;border:2px solid #ffe2a0!important;border-radius:4px!important;color:#15110b!important;-webkit-text-fill-color:#15110b;background:linear-gradient(120deg,#98611f,#fff0ac 14%,#e9b348 44%,#ffd66e 72%,#9b651d)!important;font:italic 900 18px/1.2 "Kanit",sans-serif!important;text-transform:uppercase;letter-spacing:0!important;box-shadow:inset 0 0 0 3px #a46f29,0 5px #4a2c0c,0 10px 16px #000c!important;text-shadow:none!important;padding:12px 22px!important}
+.lgchl-playoff-scroll .lg-scroll-jump a,.lgchl-playoff-scroll .desk-links a,.lgchl-playoff-scroll .seg-card-foot a,.lgchl-playoff-scroll .ps-link,.lgchl-playoff-scroll .hn-cta-ghost,.lgchl-playoff-scroll .lg-scroll-section-foot a,.lgchl-playoff-scroll .lg-scroll-cup-action a,.lgchl-playoff-scroll .s55-seg-mini{border:1px solid #b28b3b!important;border-radius:2px!important;background:linear-gradient(#31312d,#0b0d10 60%)!important;color:#f3e6c4!important;box-shadow:0 4px #0009!important;text-decoration:none!important;font-weight:700}
+.lgchl-playoff-scroll .lg-scroll-cup-action a:first-of-type{color:#15110b!important}
+.lgchl-playoff-scroll .lg-scroll-jump a:hover,.lgchl-playoff-scroll .seg-card-foot a:hover,.lgchl-playoff-scroll .ps-link:hover{border-color:#ffe2a0!important;color:#fff!important}
+
+/* --- Tabs, filters, inputs --- */
+.lgchl-playoff-scroll .ps-tabs,.lgchl-playoff-scroll .lg-tabs{border:2px solid #b28b3b!important;background:linear-gradient(#31312d,#0b0d10 60%)!important;border-radius:0!important;box-shadow:0 5px 7px #0009!important;gap:0!important;padding:0!important}
+.lgchl-playoff-scroll .ps-tabs button{border:0!important;border-right:1px solid #a28c56!important;border-radius:0!important;background:none!important;color:#e4e4e8!important;font:italic 900 18px "Kanit",sans-serif!important;padding:10px 18px!important;box-shadow:none!important}
+.lgchl-playoff-scroll .ps-tabs button[aria-pressed=true],.lgchl-playoff-scroll .ps-tabs button[aria-selected=true],.lgchl-playoff-scroll .ps-tabs button.is-active,.lgchl-playoff-scroll .ps-tabs button.active{color:#0b0a07!important;background:linear-gradient(110deg,#d79625,#ffe294 50%,#daa136)!important;box-shadow:inset 0 2px #fff8cc,inset 0 -3px #644015!important}
+.lgchl-playoff-scroll main select,.lgchl-playoff-scroll main input{background:#0b0d10!important;border:1px solid #b28b3b!important;border-radius:2px!important;color:#f3e6c4!important}
+.lgchl-playoff-scroll main label,.lgchl-playoff-scroll .seg-controls label>span{color:var(--gold)!important}
+.lgchl-playoff-scroll .seg-status{border-color:#b28b3b!important;background:#0b0d10!important;color:var(--gold)!important;border-radius:2px!important}
+.lgchl-playoff-scroll .seg-score,.lgchl-playoff-scroll .ps-value{color:#fff!important}
+.lgchl-playoff-scroll .ps-value small,.lgchl-playoff-scroll .seg-card-topline small{color:var(--gold)!important}
+
+/* --- Sub-nav bar --- */
+.lgchl-playoff-scroll .lg-scroll-nav{background:linear-gradient(#1e1d1a,#08090b)!important;border-top:1px solid #6d5427!important;border-bottom:2px solid var(--gold-d)!important;box-shadow:0 2px #000,0 8px 14px #0008!important}
+.lgchl-playoff-scroll .lg-scroll-nav a,.lgchl-playoff-scroll .lg-scroll-nav button{color:#e9e2cf!important}
+.lgchl-playoff-scroll .lg-scroll-nav a:hover{color:var(--gold)!important}
+
+/* --- Body copy --- */
+.lgchl-playoff-scroll main>section p{color:#d6d1c7}
+.lgchl-playoff-scroll main a:not([class]){color:var(--gold)}

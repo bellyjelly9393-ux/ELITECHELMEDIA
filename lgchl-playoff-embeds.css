@@ -1,0 +1,18 @@
+/* mockup additions: full segment content inside the live LGCHL page */
+.ecm-rooms{display:grid;grid-template-columns:1fr;gap:6px;margin:10px 0 4px}
+.ecm-room{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 10px;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.28);color:#f3f3f4!important;text-decoration:none;font-weight:700;font-size:14px}
+.ecm-room:hover{border-color:#b62636;background:rgba(182,38,54,.18)}
+.ecm-room img{width:34px;height:34px;object-fit:contain;flex:none}
+.ecm-full{margin-top:18px;border-top:1px solid rgba(255,255,255,.1);padding-top:14px}
+.ecm-full-label{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px;margin:0 0 10px;font:700 12px/1.3 'Barlow Semi Condensed',Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#f8c76d}
+.ecm-full-label i{font-style:normal;color:#b9b9c2;letter-spacing:.08em}
+.ecm-full-scroll{max-height:760px;overflow:auto;overscroll-behavior:contain;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.18);padding:4px;scrollbar-color:#b62636 #15151a}
+.ecm-full-scroll.short{max-height:none}
+.s55-seg-tiles>.ecm-full{grid-column:1/-1}
+#archive.lg-scroll-block{max-width:none}
+.ecm-rooms.ecm-full-scroll{padding:6px;margin-top:10px}
+
+.lgchl-playoff-scroll iframe[data-board]{display:block;width:100%;height:min(72vh,750px);min-height:340px;border:0;background:#101116}
+.lgchl-playoff-scroll main,.lgchl-playoff-scroll section,.lgchl-playoff-scroll article,.lgchl-playoff-scroll .ecm-full{min-width:0;box-sizing:border-box}
+[data-s55-fresh],#lgScrollTeamRecords small{display:none!important}
+@media(max-width:600px){.lgchl-playoff-scroll main>section{max-width:100%!important;padding:14px 8px!important;border-width:10px!important}.ecm-full{margin-inline:0!important}}
