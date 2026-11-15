@@ -21,8 +21,8 @@
 
 <script src="hitman-nightly.js?v=20261025-p" defer></script>
 <link rel="stylesheet" href="public-navigation.css?v=20261025"><link rel="stylesheet" href="lgchl-locker-chooser.css?v=20261105-lockers1"><script defer src="public-navigation.js?v=20261025"></script><link rel="stylesheet" href="lgchl-studio.css?v=20261104-jerseys1">
-<style>.playdesk{max-width:1150px;margin:auto;padding:24px clamp(16px,4vw,48px);color:#f3f3f4}.playdesk h1,.playdesk h2{font-family:Anton,Impact,sans-serif;text-transform:uppercase;margin:.25em 0}.playdesk h1{font-size:clamp(32px,6vw,68px)}.playdesk a{color:#f8c76d}.desk-links{display:flex;flex-wrap:wrap;gap:10px 22px;padding:12px 0}.desk-games{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(245px,100%),1fr));gap:9px}.desk-games p{padding:14px;background:linear-gradient(140deg,#27252a,#131317);border-left:3px solid #b62636;margin:0}.desk-games small{display:block;color:#d6bb91;margin-bottom:5px}</style></head>
-<body>
+<style>.playdesk{max-width:1150px;margin:auto;padding:24px clamp(16px,4vw,48px);color:#f3f3f4}.playdesk h1,.playdesk h2{font-family:Anton,Impact,sans-serif;text-transform:uppercase;margin:.25em 0}.playdesk h1{font-size:clamp(32px,6vw,68px)}.playdesk a{color:#f8c76d}.desk-links{display:flex;flex-wrap:wrap;gap:10px 22px;padding:12px 0}.desk-games{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(245px,100%),1fr));gap:9px}.desk-games p{padding:14px;background:linear-gradient(140deg,#27252a,#131317);border-left:3px solid #b62636;margin:0}.desk-games small{display:block;color:#d6bb91;margin-bottom:5px}</style><link rel="stylesheet" href="lgchl-segments-home.css?v=20261115-stack2"><link rel="stylesheet" href="lgchl-playoff-scroll.css?v=20261115-stack2"></head>
+<body class="lgchl-playoff-scroll">
 <header class="top band">
   <div class="top-in">
     <a class="brand" href="index.html" aria-label="Elitechel Media home">
@@ -53,23 +53,56 @@
   </div>
 </nav>
 
-<nav class="sub-bar band lg-sub" aria-label="LGCHL Media sections">
-  <div class="sub-in">
-    <a href="lgchl-media.html" aria-current="page">LGCHL Home</a>
-    <div class="lg-locker-mount" data-locker-chooser data-locker-variant="sub" data-locker-label="Team rooms"><a class="lg-locker-fallback" href="lgchl-team.html">Team rooms</a></div>
-    <a href="#lgRadioSec">Hitmen Radio</a>
-    <a href="lgchl-power.html">Memorial Cup contenders</a><a href="playoff-stats.html">Playoff stats</a>
-    <a href="#lgRaceSec">The races</a>
-    <a href="#lgStreakSec">Heaters &amp; skids</a>
-    <a href="#lgStatsSec">Leaders</a>
-    <a href="#lgBreakoutSec">Breakout watch</a>
-    <a href="#lgPlayersWeekSec">Players of the week</a>
-    <a href="#lgMatchSec">Matchups</a>
-    <a href="league-leaderboards.html?league=lgchl">Full LGCHL stats</a>
-  </div>
+<nav class="sub-bar band lg-sub" aria-label="Jump to LGCHL playoff sections">
+ <div class="sub-in lg-scroll-nav">
+  <div class="lg-scroll-desktop-links">
+  <a href="#top">Playoff Home</a><div class="lg-locker-mount" data-locker-chooser data-locker-variant="sub" data-locker-label="Team rooms"><a class="lg-locker-fallback" href="lgchl-team.html">Team rooms</a></div>
+  <a href="#lgPressure">Pressure Cooker</a>
+  <a href="#lgRivalry">Rivalry Report</a>
+  <a href="#lgRoad">Road to the Cup</a>
+  <a href="#lgPlayoffStats">Playoff Stats</a>
+  <a href="#lgContenders">Cup Contenders</a>
+  <a href="#lgRadioSec">Hitmen Radio</a>
+  <a href="#archive">Season Archive</a></div>
+  <details class="lg-scroll-mobile-menu">
+   <summary>Browse playoff sections <span aria-hidden="true">▾</span></summary>
+   <div class="lg-scroll-mobile-links">
+  <a href="#top">Playoff Home</a>
+  <a href="lgchl-team.html">Team Rooms</a>
+  <a href="#lgPressure">Pressure Cooker</a>
+  <a href="#lgRivalry">Rivalry Report</a>
+  <a href="#lgRoad">Road to the Cup</a>
+  <a href="#lgPlayoffStats">Playoff Stats</a>
+  <a href="#lgContenders">Cup Contenders</a>
+  <a href="#lgRadioSec">Hitmen Radio</a>
+  <a href="#archive">Season Archive</a></div>
+  </details>
+ </div>
 </nav>
 
-<main id="top"><section class="playdesk"><p class="eyebrow">LGCHL MEDIA · SEASON 55</p><h1>Playoff Central</h1><nav class="desk-links" aria-label="Playoff coverage"><a href="playoff-stats.html">Playoff stats &amp; matchups</a><a href="#cup">Road to the Memorial Cup</a><a href="#lgRadioSec">Hitmen Radio</a><a href="playoff-hq.html#predictor">Make your picks</a><a href="#archive">Regular-season archive</a></nav><h2 id="desk-title">Around the playoffs</h2><p id="desk-status" role="status">Loading playoff games…</p><div class="desk-games" id="desk-games"></div><div class="desk-links"><a href="playoff-hq.html#scoreboard">All playoff scores and schedules →</a></div></section><section class="playdesk" id="cup"><p class="eyebrow">CHAMPIONSHIP COVERAGE</p><h2>Road to the Memorial Cup</h2><p>Follow the WHL, OHL and QMJHL brackets through the league finals and into the Memorial Cup.</p><a href="index.html#memorial-cup">Open the Memorial Cup bracket →</a></section><section class="hn band" id="lgRadioSec" aria-labelledby="lgRadioTitle" data-manifest="assets/hitman-radio/nightly/episodes.json?v=20261109b">
+<main id="top"><section class="playdesk"><p class="eyebrow">LGCHL MEDIA · SEASON 55</p><h1>Playoff Central</h1><p class="lg-scroll-lead">Your complete Season 55 playoff desk. Scroll down for pressure rankings, rivalries, team journeys, stats and Memorial Cup coverage.</p><nav class="desk-links lg-scroll-jump" aria-label="Scroll through playoff coverage"><a href="#lgPressure">🔥 Pressure Cooker ↓</a><a href="#lgRivalry">Rivalry Report ↓</a><a href="#lgRoad">Road to the Cup ↓</a><a href="#lgPlayoffStats">Playoff stats ↓</a><a href="#lgContenders">Memorial Cup contenders ↓</a><a href="#lgRadioSec">Hitmen Radio ↓</a><a href="playoff-central.html#predictor">Predictor Challenge ↗</a></nav><h2 id="desk-title">Around the playoffs</h2><p id="desk-status" role="status">Loading playoff games…</p><div class="desk-games" id="desk-games"></div><div class="desk-links"><a href="playoff-central.html#scoreboard">All playoff scores and schedules →</a></div></section><section id="ecmSegmentsHome" aria-label="Interactive LGCHL playoff segments" class="lgchl-scroll-segments">
+  <header class="s55-seg-heading"><div><p>ELITECHEL MEDIA · PLAYOFF FEATURES</p><h2>THE <em>PLAYOFF DESK</em> <small class="lg-scroll-subtitle">Scroll through the postseason</small></h2></div><p data-s55-fresh role="status">Loading official bracket…</p></header>
+  <div class="s55-seg-tiles">
+    <article class="s55-seg-tile" id="lgPressure"><span class="s55-label">01 · The Stakes</span><h3>The Pressure Cooker</h3><p>Some teams rise. Others break.</p><div class="s55-seg-slot" data-s55-slot="pressure"><p class="s55-seg-pending">Checking playoff pressure…</p></div><a class="s55-seg-cta" href="pressure-cooker.html">Enter the Pressure Cooker →</a></article>
+    <article class="s55-seg-tile" id="lgRivalry"><span class="s55-label">02 · The Matchup</span><h3>Rivalry Report</h3><p>The series ends. The rivalry lives.</p><div class="s55-seg-slot" data-s55-slot="rivalry"><p class="s55-seg-pending">Checking active series…</p></div><a class="s55-seg-cta" href="rivalry-report.html">Explore Rivalry Reports →</a></article>
+    <article class="s55-seg-tile" id="lgRoad"><span class="s55-label">03 · The Journey</span><h3>Road to the Cup</h3><p>One goal. One journey. One champion.</p><div class="s55-seg-slot"><label for="s55RoadSelect" style="font-weight:800;font-size:12px">Find your playoff team</label><select id="s55RoadSelect"><option value="">Loading teams…</option></select></div><a class="s55-seg-cta" href="road-to-cup.html" id="s55RoadLink">Explore every team →</a></article>
+  </div>
+<div class="lg-scroll-section-foot"><a href="playoff-central.html">Open full Playoff Central, including the Predictor Challenge, scoreboard and leaderboard →</a></div>
+</section><section class="playdesk lg-scroll-block" id="lgPlayoffStats" aria-labelledby="lgScrollStatsTitle">
+  <div class="lg-scroll-heading"><p class="eyebrow">LIVE POSTSEASON DATA</p><h2 id="lgScrollStatsTitle">Playoff <em>Stat Central</em></h2><p>Playoff-only team results, skater leaders and goalie numbers. Season 55 regular-season totals stay in the archive.</p></div>
+  <div class="lg-scroll-preview-grid">
+    <article class="lg-scroll-preview"><span>01 · Club Results</span><h3>Playoff Team Records</h3><div id="lgScrollTeamRecords" aria-live="polite"><p>Checking confirmed playoff finals…</p></div><a href="playoff-stats.html">All team playoff records →</a></article>
+    <article class="lg-scroll-preview"><span>02 · The Scorers</span><h3>Playoff Point Leaders</h3><p>Verified postseason points, goals and assists. Regular-season scoring is not substituted.</p><a href="playoff-stats.html">View playoff skaters →</a></article>
+    <article class="lg-scroll-preview"><span>03 · Between the Pipes</span><h3>Playoff Goalie Leaders</h3><p>Postseason save percentage, games played and goals-against average from verified sources only.</p><a href="playoff-stats.html">View playoff goalies →</a></article>
+  </div>
+</section>
+<section class="playdesk lg-scroll-block lg-scroll-contenders" id="lgContenders" aria-labelledby="lgScrollCupTitle">
+  <div class="lg-scroll-heading"><p class="eyebrow">THE ROAD TO THE MEMORIAL CUP</p><h2 id="lgScrollCupTitle">Memorial Cup <em>Contenders</em></h2><p>Which playoff teams have the strongest championship case? See the editorial contender index, verified results and any standings corrections still under review.</p></div>
+  <div class="lg-scroll-cup-action">
+    <img src="assets/lgchl/studio/radio-booth.webp" loading="lazy" width="640" height="384" alt="Hockey arena broadcast scene">
+    <div><strong>Season 55 Championship Race</strong><p>Follow contender rankings across the OHL, WHL and QMJHL. The ranking is an editorial analysis, not official championship odds.</p><a href="lgchl-power.html">Explore full Memorial Cup contender rankings →</a></div>
+  </div>
+</section><section class="playdesk lg-scroll-block lg-scroll-bracket" id="cup"><p class="eyebrow">CHAMPIONSHIP COVERAGE</p><h2>Memorial Cup Bracket</h2><p>Follow WHL, OHL and QMJHL league champions into the Memorial Cup. The original bracket, series results and Predictor Challenge remain intact.</p><div class="lg-scroll-section-foot"><a href="index.html#memorial-cup">View full original championship bracket →</a><a href="playoff-central.html#predictor">Make your Predictor Challenge picks →</a></div></section><section class="hn band" id="lgRadioSec" aria-labelledby="lgRadioTitle" data-manifest="assets/hitman-radio/nightly/episodes.json?v=20261109b">
     <div class="hrs-sign" aria-label="Hitmen Radio studio"><span class="hrs-name">HITMEN <b>RADIO</b></span><span class="hrs-meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="hrs-status" data-hrs-status>READY TO PLAY</span></div>
     <div class="lg-radio-visual"><img src="assets/lgchl/studio/radio-booth.webp" alt="Elitechel Media and LGCHL rinkside radio booth" width="1620" height="972" loading="lazy"><p id="lgRadioSceneTitle">ELITECHEL MEDIA · HITMEN RADIO</p></div>
     <div class="hn-in">
@@ -98,4 +131,4 @@
     <nav class="foot-nav" aria-label="Footer"><a href="hitmen-media.html">Hitmen Media</a><a href="lgchl-media.html">LGCHL Media</a><a href="lg3s-media.html">LG3s Media</a><a href="league-leaderboards.html?league=lgchl">LGCHL Stats</a><a href="game-center.html?channel=hitmen">Game Center</a></nav>
     <span>LGCHL on LeagueGaming, not the real-world CHL · Times Eastern</span>
   </div>
-</footer><script defer src="lgchl-playoff-desk.js"></script></body></html>
+</footer><script defer src="lgchl-playoff-desk.js"></script><script defer src="lgchl-segments-core.js?v=20261115-stack2"></script><script defer src="lgchl-segments-home.js?v=20261115-stack2"></script><script defer src="lgchl-playoff-scroll.js?v=20261115-stack2"></script></body></html>
