@@ -43,7 +43,7 @@ function nextSeries(data){
 }
 if(typeof module!=='undefined'&&module.exports){module.exports={aggregateTeams,verifiedPlayerRows,completedGame,nextSeries};return;}
 const $=id=>document.getElementById(id);
-const state={mode:'teams',league:'ALL',search:'',data:null,feed:null,source:'',error:''};
+const state={mode:'teams',league:'ALL',search:'',data:null,feed:null,source:'',spotlights:{skaters:new Map(),goalies:new Map()},error:''};
 const logo=t=>{const id=safeId(t.id||t.lg_team_id);return id?'assets/lgchl/s55/team'+id+'.png':'assets/brand/ecm-crest.webp';};
 const personCard=(p,kind)=>{
  const id=safeId(p.lg_user_id),team=safeId(p.lg_team_id),value=kind==='skaters'?Number(p.points):Number(p.save_pct)*100;
@@ -61,27 +61,52 @@ function render(){
    box.innerHTML=rows.length?rows.map(p=>personCard(p,state.mode)).join(''):'<div class="ps-empty"><h3>Verified playoff '+(state.mode==='skaters'?'skater':'goalie')+' records pending</h3><p>The regular-season feed cannot be used as playoff totals. Player-specific postseason rankings will appear after an approved game-by-game import with source box scores.</p><a class="ps-link" href="league-leaderboards.html?league=lgchl">Browse Season 55 regular-season archive →</a></div>';
  }
 }
+async function readRegularSeasonWatch(kind){
+ const rows=[],base='https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/wm_lgchl_s55_player_leaders',key='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
+ // This selects only published season totals; it never masquerades as playoff statistics.
+ for(let off=0;off<(kind==='skater'?1500:500);off+=500){
+  const q=new URLSearchParams({select:'lg_team_id,gamertag,player_kind,gp,points,goals,assists,save_pct,gaa',player_kind:'eq.'+kind,gp:'gte.8',order:kind==='skater'?'points.desc.nullslast':'save_pct.desc.nullslast',limit:'500',offset:String(off)});
+  const r=await fetch(base+'?'+q,{headers:{apikey:key},cache:'no-store',signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('season_watch_'+r.status);
+  const part=await r.json();rows.push(...part);if(part.length<500)break;
+ }
+ const best=new Map();
+ for(const p of rows){
+  const team=safeId(p.lg_team_id),gp=Number(p.gp);if(!team||!(gp>=8))continue;
+  if(kind==='skater'&&!Number.isFinite(Number(p.points)))continue;
+  if(kind==='goalie'&&!(Number(p.save_pct)>0&&Number(p.save_pct)<=1))continue;
+  const score=kind==='skater'?Number(p.points)/gp:Number(p.save_pct);
+  if(!best.has(team)||score>best.get(team).score)best.set(team,{...p,score});
+ }
+ return best;
+}
 function renderMatchups(){
  const games=nextSeries(state.data||{});$('psMatchStatus').textContent=games.length?'Upcoming matchups from '+(state.source==='live'?'live bracket feed':'saved bracket snapshot')+'. Predictions are editorial previews, not official odds.':'No upcoming verified series dates in the current feed.';
  $('psMatchups').innerHTML=games.map(m=>{
   const a=m.sides[0],b=m.sides[1],ta=a.team,tb=b.team,seedA=Number(a.seed||ta.seed),seedB=Number(b.seed||tb.seed);
   const favored=seedA>0&&seedB>0&&seedA!==seedB?(seedA<seedB?ta:tb):null;
   const angle=favored?esc(favored.name)+' enters as the higher seed. The opening games will show whether that advantage translates into results.':'The teams begin the series with everything to prove. Game results will establish the early edge.';
+  const skA=state.spotlights.skaters.get(Number(ta.id)),skB=state.spotlights.skaters.get(Number(tb.id));
+  const gaA=state.spotlights.goalies.get(Number(ta.id)),gaB=state.spotlights.goalies.get(Number(tb.id));
+  const scorer=p=>p?esc(p.gamertag)+' ('+Number(p.points)+' PTS in '+Number(p.gp)+' GP)':'not yet verified';
+  const keeper=p=>p?esc(p.gamertag)+' ('+(Number(p.save_pct)*100).toFixed(1)+'% SV in '+Number(p.gp)+' GP)':'not yet verified';
+  const watch=skA||skB||gaA||gaB?'<div class="ps-watch"><strong>REGULAR-SEASON PLAYERS TO WATCH</strong><p>Scoring: '+scorer(skA)+' · '+scorer(skB)+'</p><p>Goalies: '+keeper(gaA)+' · '+keeper(gaB)+'</p><small>Historical regular-season evidence only; playoff lineup availability is not confirmed.</small></div>':'';
   const href=safeUrl(m.game.url);
-  return '<article class="ps-match-card"><p class="ps-overline">'+esc(String(ta.league||tb.league))+' · UPCOMING SERIES</p><div class="ps-vs"><img src="'+logo(ta)+'" alt="" loading="lazy"><h3>'+esc(ta.name)+' <span>VS</span> '+esc(tb.name)+'</h3><img src="'+logo(tb)+'" alt="" loading="lazy"></div><p>'+angle+'</p><p class="ps-kickoff">Next listed game: '+esc(fmtDate(m.game.at))+'</p>'+(href?'<a class="ps-link" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">Official game details ↗</a>':'')+'</article>';
+  return '<article class="ps-match-card"><p class="ps-overline">'+esc(String(ta.league||tb.league))+' · UPCOMING SERIES</p><div class="ps-vs"><img src="'+logo(ta)+'" alt="" loading="lazy"><h3>'+esc(ta.name)+' <span>VS</span> '+esc(tb.name)+'</h3><img src="'+logo(tb)+'" alt="" loading="lazy"></div><p>'+angle+'</p>'+watch+'<p class="ps-kickoff">Next listed game: '+esc(fmtDate(m.game.at))+'</p>'+(href?'<a class="ps-link" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">Official game details ↗</a>':'')+'</article>';
  }).join('');
 }
 async function load(){
  try{
-  const [live,snapshot,players]=await Promise.allSettled([
+  const [live,snapshot,players,skaterWatch,goalieWatch]=await Promise.allSettled([
     fetch('/api/lgchl-playoffs',{cache:'no-store',signal:AbortSignal.timeout(18000)}).then(r=>{if(!r.ok)throw Error(String(r.status));return r.json();}),
     fetch('assets/lgchl/playoffs/s55.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error(String(r.status));return r.json();}),
     fetch('https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/ecm_lgchl_s55_playoff_public_players?select=season,lg_user_id,lg_team_id,player_kind,gamertag,team_name,league,gp,goals,assists,points,saves,shots_against,goals_against,save_pct,gaa,verified,source_url,source_checked_at&verified=is.true&limit=1000',{headers:{apikey:'sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP'},cache:'no-store',signal:AbortSignal.timeout(17000)}).then(async r=>{if(!r.ok)throw Error(String(r.status));const rows=await r.json();return{skaters:rows.filter(p=>p.player_kind==='skater'),goalies:rows.filter(p=>p.player_kind==='goalie')}})
+    ,readRegularSeasonWatch('skater'),readRegularSeasonWatch('goalie')
   ]);
   const candidates=[live,snapshot].map((r,i)=>r.status==='fulfilled'&&r.value?.ok&&r.value?.teams&&r.value?.matchups?{data:r.value,source:i===0?'live':'snapshot'}:null).filter(Boolean).sort((a,b)=>Date.parse(b.data.fetched_at||0)-Date.parse(a.data.fetched_at||0));
   if(!candidates.length)throw Error('bracket_unavailable');
   state.data=candidates[0].data;state.source=candidates[0].source;
   state.feed=players.status==='fulfilled'?players.value:{skaters:[],goalies:[]};
+  state.spotlights={skaters:skaterWatch.status==='fulfilled'?skaterWatch.value:new Map(),goalies:goalieWatch.status==='fulfilled'?goalieWatch.value:new Map()};
   const verifiedCount=verifiedPlayerRows(state.feed,'skaters').length+verifiedPlayerRows(state.feed,'goalies').length;
   const stamp=state.data.fetched_at&&Number.isFinite(Date.parse(state.data.fetched_at))?fmtDate(state.data.fetched_at):'time unknown';
   $('psFreshness').textContent='Bracket: '+(state.source==='live'?'live feed':'saved snapshot')+' · fetched '+stamp+(state.data.stale?' · STALE':'')+' · '+verifiedCount+' verified playoff player records.';
