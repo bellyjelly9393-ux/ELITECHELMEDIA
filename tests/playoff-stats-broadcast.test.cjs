@@ -16,7 +16,7 @@ test('Playoff team totals use only scored finals, no duplicates or scheduled gam
 });
 test('Playoff player totals must be verified and sourced',()=>{
  const feed={skaters:[
-  {lg_user_id:4,lg_team_id:1,gp:2,points:5,verified:false,source_url:'https://leaguegaming.com'},
+  {lg_user_id:4,lg_team_id:1,gp:2,points:5,verified:false,source_url:'https://www.leaguegaming.com/forums/index.php?gameid=12'},
   {lg_user_id:5,lg_team_id:1,gp:2,points:4,verified:true,source_url:null},
   {lg_user_id:6,lg_team_id:1,gp:2,points:3,verified:true,source_checked_at:'2026-11-15T17:00:00Z',source_url:'https://leaguegaming.com'}
  ],goalies:[]};
