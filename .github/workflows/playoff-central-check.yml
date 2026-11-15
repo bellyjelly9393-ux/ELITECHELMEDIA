@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'playoff-central.*'
+      - 'api/lgchl-playoffs.js'
+      - 'tests/playoff-api-compat.test.mjs'
       - 'index.html'
       - 'lgchl-media.html'
       - 'supabase/migrations/*ecm_playoff_predictor*'
@@ -27,4 +29,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tests/playoff-central.test.mjs tests/playoff-homepage.test.mjs
+      - run: node --test tests/playoff-central.test.mjs tests/playoff-homepage.test.mjs tests/playoff-api-compat.test.mjs
