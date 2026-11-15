@@ -13,7 +13,12 @@ const state={league:params.get('league')==='lg3s'?'lg3s':'lgchl',category:catego
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const format=(p,c)=>c.key==='save_pct'?(Number(p[c.key])*100).toFixed(1)+'%':c.key==='gaa'?Number(p[c.key]).toFixed(2):Number(p[c.key]).toLocaleString('en-US');
 const playerName=(p,c)=>state.league==='lgchl'&&Number.isSafeInteger(Number(p.id))&&Number(p.id)>0?'<a href="lgchl-player.html?id='+Number(p.id)+'&kind='+c.kind+'&metric='+encodeURIComponent(c.key)+'">'+esc(p.gamertag)+'</a>':esc(p.gamertag);
-const teamLogo=p=>state.league==='lgchl'&&Number.isSafeInteger(Number(p.lg_team_id))&&Number(p.lg_team_id)>0?'assets/lgchl/s55/team'+Number(p.lg_team_id)+'.png':'assets/brand/ecm-crest.webp';
+const nationArt={CAN:'canada',USA:'usa',GBR:'great-britain',GER:'germany',SWE:'sweden',JPN:'japan',ITA:'italy',SUI:'switzerland',LVA:'latvia',POL:'poland',SVK:'slovakia',KAZ:'kazakhstan',CANADA:'canada',GERMANY:'germany',SWEDEN:'sweden',JAPAN:'japan',ITALY:'italy',SWITZERLAND:'switzerland',LATVIA:'latvia',POLAND:'poland',SLOVAKIA:'slovakia',KAZAKHSTAN:'kazakhstan','GREAT BRITAIN':'great-britain','UNITED STATES':'usa'};
+const teamLogo=p=>{
+ if(state.league==='lgchl')return Number.isSafeInteger(Number(p.lg_team_id))&&Number(p.lg_team_id)>0?'assets/lgchl/s55/team'+Number(p.lg_team_id)+'.png':'assets/brand/ecm-crest.webp';
+ const nation=String(p.nation||(Array.isArray(p.nations_played_for)?p.nations_played_for[0]:'')||p.team||'').toUpperCase().split(',')[0].trim();
+ return nationArt[nation]?'assets/lg3s/art/nation-'+nationArt[nation]+'.webp':'assets/lg3s/art/lg3s-crest-96.webp';
+};
 const hockeyCard=(p,c)=>Number.isSafeInteger(Number(p.id))&&Number(p.id)>0?'<a class="hockey-card-link" aria-label="View or build '+esc(p.gamertag)+' hockey card" href="player-cards.html?league='+state.league+'&id='+Number(p.id)+'&kind='+c.kind+'">View / Build Hockey Card →</a>':'';
 const href=c=>'league-leaderboard.html?league='+state.league+'&category='+c.key;
 function url(){const u=new URL(location.href);u.searchParams.set('league',state.league);if(full){u.searchParams.set('category',state.category);if(state.query)u.searchParams.set('q',state.query);else u.searchParams.delete('q');}history.replaceState(null,'',u);}
