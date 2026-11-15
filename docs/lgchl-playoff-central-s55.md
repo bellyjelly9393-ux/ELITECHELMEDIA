@@ -12,6 +12,14 @@ Status: **staged, not launched**. The broadcast script is separate. This is the 
 - 10 points for a correct winner, 5 more for exact length, 5 more for a lower-seed upset, and 20 for a perfect round of at least two series. Exact and upset only score when the winner was correct.
 - A separate public ranking also displays whether a person remains eligible for the grand prize based on complete entries in every **started** open round. Missing rounds can still participate in the weekly standings.
 
+## Discord's role (optional updates)
+
+- All official predictions, scores, rankings, prize terms, deadlines and contest decisions remain on the EliteChel Media website.
+- The existing EliteChel Media Discord can distribute round-opening notifications, new video alerts, leaderboard summaries and discussion. This is an **optional notification/community channel**, not a requirement to use the predictor.
+- No Discord-specific ballot, points or eligibility system.
+- A Discord link is deliberately not active until the owner supplies and approves the official invite URL. Don't invent an invite or link to a different server.
+- The site's official contest information takes precedence if posts are delayed or differ.
+
 ## Launch is blocked until
 
 1. Approve the free-to-enter promotional contest's official rules: eligibility, jurisdiction, age, prize, deadlines, dispute handling, ties, contest period, privacy disclosures, and any legally required skill-testing provisions.
