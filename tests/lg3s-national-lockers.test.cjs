@@ -69,3 +69,53 @@ test('LG3s card page and generic locker use cache-busted assets',()=>{
  assert.match(cardJS,/lg3s-team\.html\?team=/);
  assert.match(cardJS,/lg3s-gb-locker\.html/);
 });
+
+const vm=require('node:vm');
+
+function roomHarness(teamId){
+ const nodes=new Map();
+ const get=id=>{
+  if(!nodes.has(id))nodes.set(id,{
+   value:'',textContent:'',innerHTML:'',src:'',alt:'',href:'',
+   listeners:{},setAttribute(){},addEventListener(name,cb){this.listeners[name]=cb;}
+  });
+  return nodes.get(id);
+ };
+ const document={getElementById:get,body:{style:{setProperty(){}}},title:''};
+ const location={search:'?team='+teamId,href:'',replaced:null,replace(url){this.replaced=url;}};
+ const fetch=async url=>{
+  if(url.includes('season1-active-roster-2026-11-14.json'))return {ok:true,json:async()=>roster};
+  if(url.includes('lg3s_public_skater_leaders'))return {ok:true,json:async()=>[{lg_user_id:55504,gp:12,p:20}]};
+  if(url.includes('lg3s_public_goalie_leaders'))return {ok:true,json:async()=>[{lg_user_id:54463,gp:9,sv_pct:0.92}]};
+  throw Error('Unexpected URL '+url);
+ };
+ const context={document,location,fetch,URLSearchParams,AbortSignal,console};
+ return {nodes,get,document,location,context};
+}
+
+test('Canada room renders real roster identities, front jersey assets and verified season stats',async()=>{
+ const h=roomHarness(341);
+ vm.runInNewContext(teamJS,h.context,{timeout:2000,filename:'lg3s-team.js'});
+ await new Promise(resolve=>setTimeout(resolve,25));
+ const html=h.get('roomPlayers').innerHTML;
+ assert.match(h.get('roomName').textContent,/Canada/);
+ assert.match(h.get('roomRecord').textContent,/10 main-roster players/);
+ assert.match(html,/Brayl18l/i);
+ assert.match(html,/assets\/lg3s\/jerseys\/341.svg/);
+ assert.match(html,/player-cards.html\?league=lg3s&id=55504&kind=skater/);
+ assert.match(html,/SEASON GP<b>12<\/b>/);
+ assert.match(html,/PTS<b>20<\/b>/);
+ assert.match(html,/92\.0%/);
+ assert.doesNotMatch(html,/#91 OVR|CAPTAIN/);
+ assert.match(h.get('rosterNote').textContent,/Season-wide GP/);
+ h.get('roomSearch').value='not-a-real-player';
+ h.get('roomSearch').listeners.input();
+ assert.match(h.get('roomPlayers').innerHTML,/No main-roster players match/);
+});
+
+test('Great Britain entry preserves separate 3D routing and does not fetch generic stalls',()=>{
+ const h=roomHarness(1446);
+ vm.runInNewContext(teamJS,h.context,{timeout:2000,filename:'lg3s-team.js'});
+ assert.equal(h.location.replaced,'lg3s-gb-locker.html');
+ assert.equal(h.nodes.size,0);
+});
