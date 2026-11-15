@@ -99,7 +99,7 @@ function renderReport(s){
  const stats=['Series wins','GF in verified finals','GA in verified finals'];
  const vals=[[sa.score?.for,sa.score?.against],[sa.finals?sa.gf:null,sb.finals?sb.gf:null],[sa.finals?sa.ga:null,sb.finals?sb.ga:null]];
  const tape=stats.map((l,i)=>'<div class="seg-stat"><small>'+E(l)+'</small><b>'+(vals[i][0]??'—')+' : '+(vals[i][1]??'—')+'</b></div>').join('');
- const narrative=editor?.body?'<p>'+E(editor.body).replace(/\n/g,'</p><p>')+'</p>':'<p>'+E(C.seriesStory(state.data,s))+'</p>';
+ const narrative=editor?.body?'<p>'+E(editor.body).replace(/\n/g,'</p><p>')+'</p><small>Editorial · Last Updated '+E(fmt(editor.updated_at))+'</small>':'<p>'+E(C.seriesStory(state.data,s))+'</p><small>Automatically summarized from verified series standings. No editorial report published yet.</small>';
  const story='<section class="seg-panel"><p class="seg-kicker">'+E(s.league)+' · '+E(s.roundTitle)+' · SERIES #'+E(s.id)+'</p><div class="seg-vs"><div class="seg-vs-team">'+thumb(a.id)+'<h3>'+E(a.name)+'</h3></div><span class="seg-vs-mark">VS</span><div class="seg-vs-team">'+thumb(b.id)+'<h3>'+E(b.name)+'</h3></div></div><div class="seg-series-score">'+(sa.score?sa.score.for+' : '+sa.score.against:'Score pending')+'</div><div class="seg-statgrid">'+tape+'</div><h4>The Story So Far</h4><div class="seg-story">'+narrative+'</div><h4>Verified Series Results</h4>'+printVerifiedGames(s)+'<div class="seg-card-foot">'+cardButton(a.name+' journey',teamLink(a.id))+cardButton(b.name+' journey',teamLink(b.id))+(allowedExternal(s.url)?'<a href="'+E(allowedExternal(s.url))+'" target="_blank" rel="noopener noreferrer">Official series ↗</a>':'')+'</div></section>';
  const sidebar='<section class="seg-panel"><h3>THE TALE OF THE TAPE</h3><p>League: '+E(s.league)+' · '+E(s.conference||'Final')+'</p><p>First to '+E(sa.score?.needed||s.wins_needed||4)+' confirmed series wins. Individual game goals only include verified finals.</p><h4>Series status</h4><p>'+E(C.verifiedWinner(s)?teamName(C.verifiedWinner(s))+' has won the series.':'Unresolved. No winner declared.')+'</p><h4>Share this matchup</h4><button class="seg-share" type="button" data-share>Share Rivalry Report</button><p>Fan polls and additional editorials appear only after verified content is published.</p></section>';
  root.innerHTML='<div class="seg-report"><div>'+story+'</div><aside>'+sidebar+'</aside></div><div class="seg-report" style="margin-top:18px">'+spotlights(s,editor)+verifiedMoment(s,editor)+'</div>';
@@ -180,6 +180,23 @@ function stageCard(s,team){
  const cls=labelClass(s.state);
  return'<article class="seg-road-stage is-'+cls+'"><p class="seg-kicker">'+E(s.title)+'</p><h4>'+E(s.state==='BYE'?'BYE · ADVANCE':s.state==='LOCKED'?'LOCKED':s.state==='ADVANCED'?'SURVIVE & ADVANCE':s.state)+'</h4><div class="seg-stage-opp">'+(s.opponent?thumb(s.opponent.id):'')+'<strong>'+E(label)+'</strong></div><p>'+((s.score&&s.slot?.kind==='series')?'Series '+s.score.for+'–'+s.score.against:'')+'</p><p>'+(s.state==='PENDING'?'Future opponent not confirmed':s.state==='LOCKED'?'Playoff journey finished before this round':s.state==='BYE'?'Officially seeded through this round':s.state==='ADVANCED'?'Series winner confirmed':s.state==='ELIMINATED'?'Series loss confirmed':s.state==='ACTIVE'?'Currently competing':'Waiting for a verified matchup')+'</p>'+(s.slot?.id?'<a class="seg-action" href="'+rivalryLink(s.slot)+'">View Rivalry Report →</a>':'')+'</article>';
 }
+function roadMilestones(data,teamId){
+ const found=[],seen=new Set(),slots=C.seriesFor(data,teamId);
+ const games=slots.flatMap(s=>C.finalGames(s)).filter(g=>{if(seen.has(Number(g.id)))return false;seen.add(Number(g.id));return true}).sort((a,b)=>Date.parse(a.at||0)-Date.parse(b.at||0));
+ const firstWin=games.find(g=>(Number(g.away_score)>Number(g.home_score)?Number(g.away):Number(g.home))===teamId);
+ if(firstWin)found.push('First verified playoff victory · Game '+(firstWin.n||firstWin.id)+(firstWin.at?' · '+fmt(firstWin.at):''));
+ for(const s of slots){
+  if(s.kind!=='series'||C.verifiedWinner(s)!==teamId)continue;
+  const ids=C.slotTeams(s),opponent=ids.find(id=>id!==teamId),other=data.teams?.[opponent];
+  found.push('Won '+s.roundTitle+' against '+(other?.name||'opponent'));
+  const mySeed=Number(s.sides?.find(x=>Number(x.team_id)===teamId)?.seed);
+  const oppSeed=Number(s.sides?.find(x=>Number(x.team_id)===opponent)?.seed);
+  if(mySeed>0&&oppSeed>0&&mySeed>oppSeed)found.push('Confirmed seed upset: #'+mySeed+' defeated #'+oppSeed);
+ }
+ const cup=data.championship?.final;
+ if(C.verifiedWinner(cup)===teamId)found.push('Memorial Cup championship victory confirmed');
+ return found.slice(0,10);
+}
 function renderRoad(){
  const teams=Object.values(state.data.teams||{}).filter(t=>(state.league==='ALL'||t.league===state.league)&&t.name.toLowerCase().includes(state.search)).sort(sortTeams);
  const id=C.validId(qs.get('team'))||Number(teams[0]?.id);
@@ -187,9 +204,11 @@ function renderRoad(){
  const tiles='<div class="seg-tilegrid">'+teams.map(t=>'<button type="button" class="seg-tile" data-team="'+t.id+'" aria-pressed="'+String(Number(t.id)===id)+'">'+thumb(t.id)+'<span>'+E(t.nick||t.name)+'</span></button>').join('')+'</div>';
  if(!team){root.innerHTML='<p class="seg-empty">Choose a playoff team to view its confirmed journey.</p>'+tiles;return;}
  const status=C.teamState(state.data,id),steps=C.journey(state.data,id),published=ed('road',id);
+ const milestones=roadMilestones(state.data,id);
  $('segTitle').textContent=team.name+' · Road to the Cup';
  root.innerHTML='<section class="seg-road-header">'+thumb(id)+'<div><p class="seg-kicker">'+E(team.league)+' · PLAYOFF JOURNEY</p><h3>'+E(team.name)+'</h3><p>'+E(status.reason)+'</p><span class="seg-status '+labelClass(status.status)+'">'+E(status.status)+'</span></div><button type="button" class="seg-share" data-share>Share Your Road</button></section><div class="seg-road">'+steps.map(s=>stageCard(s,team)).join('')+'</div>'+
  (published?.body?'<section class="seg-panel" style="margin-top:20px"><h3>TEAM PLAYOFF STORY</h3><p>'+E(published.body).replace(/\n/g,'</p><p>')+'</p><small>Editorial analysis · '+E(fmt(published.updated_at))+'</small></section>':'')+
+ (milestones.length?'<section class="seg-panel" style="margin-top:20px"><h3>VERIFIED PLAYOFF MILESTONES</h3><ul>'+milestones.map(x=>'<li>'+E(x)+'</li>').join('')+'</ul></section>':'')+
  '<section class="seg-panel" style="margin-top:22px"><h3>FIND YOUR TEAM</h3><p>Choose any officially listed playoff team. The path always comes from the existing bracket.</p>'+tiles+'</section>';
  root.querySelectorAll('[data-team]').forEach(b=>b.addEventListener('click',()=>{qs.set('team',b.dataset.team);history.replaceState(null,'','road-to-cup.html?'+qs.toString());renderRoad()}));
  root.querySelector('[data-share]').addEventListener('click',()=>shareCurrent(team.name+' · Road to the Cup'));
