@@ -20,6 +20,7 @@ function renderButtons(){
 function selectPlayer(id){
  const player=api.players.find(p=>p.id===Number(id));
  if(!player)return;
+ if(api.selected&&api.selected.id!==player.id&&api.previewNumber)updatePreviewNumber('');
  api.selected=player;
  $('inspectorTitle').textContent='PLAYER STALL';
  $('selectedPlayer').textContent=player.gamertag;
@@ -77,4 +78,11 @@ api.ready=(async()=>{
   throw error;
  }
 })();
+// Graceful fallback if the external Three.js module cannot start.
+setTimeout(()=>{
+ if(document.getElementById('japanScene')?.dataset.ready!=='true'
+    && document.getElementById('sceneStatus')?.textContent?.startsWith('Connecting')){
+   document.getElementById('sceneStatus').textContent='The 3D engine is unavailable or still loading. The accessible verified roster below remains usable.';
+ }
+},13000);
 })();
