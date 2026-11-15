@@ -44,7 +44,7 @@ test('full homepage promotes episodes, bracket, scores, picks, rankings, updates
   assert.match(home,new RegExp('id="'+id+'"'));
  }
  assert.match(home,/Episodes are in production/);
- assert.match(home,/Official Discord invite link to be connected/);
+ assert.match(home,/href="https:\/\/discord\.gg\/KMBjak7RD"/);
  assert.match(home,/PREDICTOR RULES/);
  assert.match(home,/not active until official rules/);
  assert.match(home,/lgchl-media\.html#lgRadioSec/);
