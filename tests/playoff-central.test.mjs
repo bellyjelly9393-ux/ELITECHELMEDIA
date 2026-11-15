@@ -52,3 +52,23 @@ test('navigation links to the new dashboard',()=>{
  assert.match(page,/id="pcLeaders"/);
  assert.match(page,/id="pcBallot"/);
 });
+
+
+test('predictor series-length changes use the same ID key as saved and submitted picks',()=>{
+ assert.match(js,/const seriesKey = \(id\) => String\(id\)/);
+ assert.match(js,/state\.saved\.set\(seriesKey\(x\.series_id\),x\)/);
+ assert.match(js,/state\.picks\.get\(seriesKey\(s\.id\)\)/);
+ assert.match(js,/state\.saved\.get\(seriesKey\(s\.id\)\)/);
+ assert.match(js,/state\.picks\.set\(s,\{\.\.\.current,games:Number\(select\.value\)\}\)/);
+ assert.match(js,/\[4,5,6,7\]\.map/);
+ const saved=new Map([['101',{winner_id:11,games:6}]]);
+ const picks=new Map();
+ for(const games of [4,5,6,7]){
+   const fromDom='101';
+   const previous=picks.get(fromDom)||saved.get(fromDom);
+   picks.set(fromDom,{...previous,games});
+   const rendered=picks.get(String(101))||saved.get(String(101));
+   assert.equal(rendered.games,games);
+   assert.equal(rendered.winner_id,11);
+ }
+});
