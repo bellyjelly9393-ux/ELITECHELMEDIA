@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 540" role="img" aria-labelledby="title desc">
+<title id="title">Poland inspired hockey jersey</title><desc id="desc">Original national colour concept artwork for the EliteChel Media LG3s public locker room; not an official licensed uniform.</desc>
+<defs>
+<linearGradient id="fabric" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#030406" stop-opacity=".52"/><stop offset=".21" stop-color="#fff" stop-opacity=".08"/><stop offset=".52" stop-color="#fff" stop-opacity=".12"/><stop offset=".79" stop-color="#030406" stop-opacity=".13"/><stop offset="1" stop-color="#020306" stop-opacity=".55"/></linearGradient>
+<linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff" stop-opacity=".15"/><stop offset=".28" stop-color="#fff" stop-opacity="0"/><stop offset=".72" stop-color="#fff" stop-opacity=".03"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient>
+<pattern id="mesh" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M0 0 5 5M5 0 0 5" stroke="#fff" stroke-width=".43" opacity=".08"/></pattern>
+<clipPath id="cut"><path d="M161 72 118 85Q85 95 65 124L12 350Q9 367 25 373L89 395Q105 395 112 375L153 225Z M339 72 382 85Q415 95 435 124L488 350Q491 367 475 373L411 395Q395 395 388 375L347 225Z M161 72 212 91 288 91 339 72 374 111 367 508Q250 520 133 508L126 111Z"/></clipPath>
+</defs>
+<path d="M161 72 118 85Q85 95 65 124L12 350Q9 367 25 373L89 395Q105 395 112 375L153 225Z" fill="#d24252" stroke="#0b0d11" stroke-width="3"/>
+<path d="M339 72 382 85Q415 95 435 124L488 350Q491 367 475 373L411 395Q395 395 388 375L347 225Z" fill="#d24252" stroke="#0b0d11" stroke-width="3"/>
+<path d="M161 72 212 91 288 91 339 72 374 111 367 508Q250 520 133 508L126 111Z" fill="#a72a3e" stroke="#090b0e" stroke-width="3"/>
+<g clip-path="url(#cut)"><path d="M134 92 208 92 250 118 292 92 366 92 366 194 134 194Z" fill="#f1eeea"/><path d="M27 274 109 296 106 319 22 297Z M391 296 473 274 478 297 394 319Z" fill="#f1eee9"/><path d="M21 321 101 343 98 354 19 334Z M399 343 479 321 481 334 402 354Z" fill="#c93248"/><rect x="128" y="488" width="244" height="9" fill="#f1eee9"/><path d="M161 72 118 85Q85 95 65 124L12 350Q9 367 25 373L89 395Q105 395 112 375L153 225Z M339 72 382 85Q415 95 435 124L488 350Q491 367 475 373L411 395Q395 395 388 375L347 225Z M161 72 212 91 288 91 339 72 374 111 367 508Q250 520 133 508L126 111Z" fill="url(#fabric)"/><path d="M161 72 118 85Q85 95 65 124L12 350Q9 367 25 373L89 395Q105 395 112 375L153 225Z M339 72 382 85Q415 95 435 124L488 350Q491 367 475 373L411 395Q395 395 388 375L347 225Z M161 72 212 91 288 91 339 72 374 111 367 508Q250 520 133 508L126 111Z" fill="url(#sheen)"/><rect width="500" height="540" fill="url(#mesh)"/><g fill="none" stroke="#fff" stroke-opacity=".075" stroke-width="6"><path d="M145 135Q183 188 160 296"/><path d="M353 128Q321 193 345 308"/><path d="M170 349Q188 384 168 476"/><path d="M332 350Q312 399 334 480"/><path d="M78 173Q54 232 63 311"/><path d="M417 173Q441 233 433 318"/></g></g>
+<path d="M161 72 212 91 288 91 339 72" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="4"/>
+<path d="M188 69 218 96Q250 108 282 96L312 69 282 55Q250 66 218 55Z" fill="#0a1019" stroke="#4a4c4e" stroke-width="3"/>
+<path d="M210 72Q249 119 290 72" fill="none" stroke="#c93248" stroke-width="6" stroke-opacity=".8"/>
+<path d="M133 509Q250 518 367 509" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="3"/>
+<path d="M112 114 130 155M388 155 407 114" fill="none" stroke="#fff" stroke-opacity=".10" stroke-width="3"/>
+<g><path d="M138 181H364" stroke="#f4f4f1" stroke-width="8" opacity=".8"/></g>
+<path d="M161 72 118 85Q85 95 65 124L12 350Q9 367 25 373L89 395Q105 395 112 375L153 225" fill="none" stroke="#15171b" stroke-width="4"/>
+<path d="M339 72 382 85Q415 95 435 124L488 350Q491 367 475 373L411 395Q395 395 388 375L347 225" fill="none" stroke="#15171b" stroke-width="4"/>
+</svg>
