@@ -173,9 +173,12 @@
       };
       return '<div class="pc-series-pick"><div class="pc-pick-top">' + esc(s.league) + ' · ' + esc(s.conference) + ' · Lock: ' + esc(et(s.lock_at)) + '</div>' +
         '<div class="pc-pick-teams">' + choice(a,'a',s.team_a,s.seed_a) + '<strong>VS</strong>' + choice(b,'b',s.team_b,s.seed_b) + '</div>' +
-        '<label class="pc-length">Series ends in <select data-series-length="' + esc(s.id) + '"' + (locked?' disabled':'') + '>' +
-        [4,5,6,7].map(v=>'<option value="' + v + '"' + (v===games?' selected':'') + '>' + v + ' games</option>').join('') +
-        '</select></label></div>';
+        '<div class="pc-length" role="group" aria-label="Predicted series length for ' + esc(a.nick||a.name) + ' versus ' + esc(b.nick||b.name) + '">' +
+        '<span>Series ends in</span><div class="pc-length-options">' +
+        [4,5,6,7].map(v=>'<button type="button" class="pc-length-option' + (v===games?' is-selected':'') +
+          '" data-series-length="' + esc(s.id) + '" data-games="' + v + '"' + (locked?' disabled':'') +
+          ' aria-pressed="' + (v===games) + '">' + v + ' games</button>').join('') +
+        '</div></div></div>';
     }).join('');
     const incomplete=items.filter(s => !(state.picks.get(seriesKey(s.id))||state.saved.get(seriesKey(s.id)))?.winner_id);
     $('pcBallotStatus').textContent = !user() ? 'Sign into your EliteChel account in the panel to enter.' :
@@ -238,11 +241,19 @@
     state.picks.set(s,{...current,winner_id:Number(button.dataset.winner)});
     renderBallot();
   });
-  $('pcBallot').addEventListener('change',e=>{
-    const select=e.target.closest('select[data-series-length]');if(!select)return;
-    const s=seriesKey(select.dataset.series);const current=state.picks.get(s)||state.saved.get(s)||{};
-    state.picks.set(s,{...current,games:Number(select.value)});
-    renderBallot();
+  $('pcBallot').addEventListener('click',e=>{
+    const button=e.target.closest('button[data-series-length]');if(!button||button.disabled)return;
+    const games=Number(button.dataset.games);
+    if(![4,5,6,7].includes(games))return;
+    const s=seriesKey(button.dataset.seriesLength);
+    const current=state.picks.get(s)||state.saved.get(s)||{};
+    state.picks.set(s,{...current,games});
+    // Update the active option without tearing down the DOM (and losing focus).
+    button.closest('.pc-length-options')?.querySelectorAll('button[data-series-length]').forEach(option=>{
+      const active=option===button;
+      option.classList.toggle('is-selected',active);
+      option.setAttribute('aria-pressed',String(active));
+    });
   });
   window.addEventListener('vvhl-auth-change',loadSaved);
   Promise.allSettled([loadBracket(),loadSeries(),loadLeaderboard()]).then(loadSaved);

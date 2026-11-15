@@ -38,3 +38,13 @@
 .pc-rule-list{margin:20px 0;padding-left:24px;max-width:900px}
 .pc-rule-list li{padding:5px 0;color:#d6dbe3;font-size:13px}
 @media(max-width:760px){.pc-episode-inner{grid-template-columns:1fr;gap:20px}.pc-episode-art{min-height:190px}.pc-episode-art b{font-size:48px}}
+
+/* Make every fan series-length prediction an obvious, independently selectable control. */
+.pc-length{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.pc-length-options{display:flex;flex-wrap:wrap;gap:7px}
+.pc-length-option{appearance:none;border:1px solid #626c78;border-radius:4px;background:#11171f;color:#f2f4f8;min-width:67px;min-height:43px;padding:8px 11px;font-size:12px;font-weight:800;cursor:pointer;transition:background .12s ease,border-color .12s ease}
+.pc-length-option:hover:not(:disabled){background:#323c4b;border-color:#f0c14b}
+.pc-length-option.is-selected{background:#6b1b2a;border-color:#ff6a7b;box-shadow:inset 0 0 0 1px #ff6a7b55;color:#fff}
+.pc-length-option:focus-visible{outline:2px solid #f0c14b;outline-offset:3px}
+.pc-length-option:disabled{opacity:.48;cursor:not-allowed}
+@media(max-width:480px){.pc-length-option{min-width:57px;padding:8px 9px}}
