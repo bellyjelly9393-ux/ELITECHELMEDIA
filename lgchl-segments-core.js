@@ -49,6 +49,7 @@
   const active=gameSeries.filter(s=>!verifiedWinner(s)).at(-1);
   if(active){
     const score=scoreFor(active,id);
+    if(score&&(score.against>=score.needed||score.for>=score.needed))return{status:'PENDING REVIEW',reason:'Series score suggests clinch, but official advancement is not verified.',slot:active};
     if(score&&score.against===score.needed-1)return{status:'ON THE BRINK',reason:'One loss from elimination',slot:active};
     return{status:'ALIVE',reason:'Competing in '+active.roundTitle,slot:active};
   }
@@ -66,6 +67,7 @@
  function pressure(data,teamId,editorial){
   const st=teamState(data,teamId);if(st.status==='ELIMINATED'||st.status==='CHAMPION')return {...st,label:null,active:false};
   const slot=st.slot;
+  if(st.status==='PENDING REVIEW')return{...st,label:'AWAITING VERIFIED SCORE',active:true};
   if(!slot||slot.kind!=='series'||slotTeams(slot).length!==2)return {...st,label:'AWAITING FIRST PUCK',reason:'Current series or opponent not confirmed',active:true};
   const score=scoreFor(slot,teamId),form=recentForm(slot,teamId);
   if(!score)return {...st,label:'AWAITING VERIFIED SCORE',active:true};
