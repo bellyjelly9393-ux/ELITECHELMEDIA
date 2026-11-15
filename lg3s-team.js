@@ -65,7 +65,7 @@ async function loadStats(){
   if(!ids.length)continue;
   const qs=new URLSearchParams({select:fields,lg_user_id:'in.('+ids.join(',')+')'});
   requests.push(fetch(API+view+'?'+qs.toString(),{
-   headers:{apikey:KEY,Authorization:'Bearer '+KEY},cache:'no-store'
+   headers:{apikey:KEY,Authorization:'Bearer '+KEY},cache:'no-store',signal:AbortSignal.timeout(12000)
   }).then(async response=>{
    if(!response.ok)throw Error(view+' '+response.status);
    const data=await response.json();
@@ -74,11 +74,13 @@ async function loadStats(){
   }));
  }
  try{
-  const results=await Promise.all(requests);
+  const outcomes=await Promise.allSettled(requests);
+  const results=outcomes.filter(x=>x.status==='fulfilled').map(x=>x.value);
+  const partial=outcomes.some(x=>x.status==='rejected');
   const map=new Map(results.flat().filter(x=>Number.isSafeInteger(Number(x.lg_user_id))).map(x=>[Number(x.lg_user_id),x]));
   players.forEach(p=>{p.stats=map.get(p.id)||null;});
   render();
-  $('rosterNote').textContent='Main roster: verified snapshot '+latestSnapshot+'; Training Camp excluded. Season-wide GP and points/save percentages come from read-only public stats. Concept jerseys are not official uniforms. Jersey numbers are intentionally omitted until verified.';
+  $('rosterNote').textContent='Main roster: verified snapshot '+latestSnapshot+'; Training Camp excluded. Season-wide GP and points/save percentages come from read-only public stats. Concept jerseys are not official uniforms. Jersey numbers are intentionally omitted until verified.'+(partial?' One or more stat feeds could not be loaded.':'');
  }catch(error){
   console.warn('LG3s optional player stats:',error);
   $('rosterNote').textContent='Main roster: saved snapshot '+latestSnapshot+'. Season stats are temporarily unavailable; no values were invented. Concept jerseys are not official uniforms.';
