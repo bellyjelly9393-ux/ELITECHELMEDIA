@@ -9,6 +9,7 @@ const roster=JSON.parse(readFileSync(path('data/lg3s/season1-active-roster-2026-
 const html=readFileSync(path('lg3s-japan-locker.html'),'utf8');
 const css=readFileSync(path('lg3s-japan-locker.css'),'utf8');
 const shell=readFileSync(path('lg3s-japan-shell.js'),'utf8');
+const basic=readFileSync(path('lg3s-basic-customization.js'),'utf8');
 const scene=readFileSync(path('lg3s-japan-3d.js'),'utf8');
 const team=readFileSync(path('lg3s-team.js'),'utf8');
 const media=readFileSync(path('lg3s-media.js'),'utf8');
@@ -66,6 +67,7 @@ test('Japan preview retains accessible 2D fallback and source disclosure',()=>{
  assert.match(html,/not a licensed national uniform/i);
  assert.match(html,/noindex,nofollow/);
  assert.match(html,/type="importmap"/);
+ assert.ok(html.includes('lg3s-basic-customization.js'));
 });
 test('Mobile vertical scrolling is protected when touch orbit is disabled',()=>{
  assert.match(scene,/enableMobileInteraction\(false\)/);
@@ -76,13 +78,13 @@ test('Mobile vertical scrolling is protected when touch orbit is disabled',()=>{
  assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
 });
 test('Free appearance saves locally by team and player, without changing roster IDs or private Labs data',()=>{
- assert.match(shell,/STORAGE_PREFIX='ecm:lg3s:s1:japan:custom:v1:'/);
- assert.match(shell,/localStorage\?\.setItem\(STORAGE_PREFIX\+player\.id/);
- assert.match(shell,/localStorage\?\.removeItem\(STORAGE_PREFIX\+player\.id/);
+ assert.match(basic,/PREFIX='ecm:lg3s:s1:team:'/);
+ assert.match(basic,/localStorage\?\.setItem\(storageKey/);
+ assert.match(basic,/localStorage\?\.removeItem\(storageKey/);
  assert.match(scene,/function apply3dCustomization\(entry,custom\)/);
  assert.match(scene,/makePlateText\(entry\.player,custom\)/);
  assert.match(scene,/custom\.number/);
- assert.doesNotMatch(shell+scene,/\.from\(['"](?:private|elite_labs)|eval\(/i);
+ assert.doesNotMatch(shell+scene+basic,/\.from\(['"](?:private|elite_labs)|eval\(/i);
  assert.match(shell,/snapshot\.capturedOn/);
  assert.match(shell,/2026-11-14\.json/);
 });
@@ -97,7 +99,7 @@ test('Paid-only customizations are visibly locked without a fake payment flow',(
  assert.doesNotMatch(html,/href="[^"]*(?:checkout|stripe)[^"]*"/i);
 });
 test('All authored JavaScript files parse and CSS blocks balance',()=>{
- new Function(shell);
+ new Function(shell);new Function('window',basic);
  new Function(scene.replace(/^import .*?;\n/gm,''));
  new Function(team);new Function(media);
  let depth=0;for(const c of css){if(c==='{')depth++;if(c==='}')depth--;assert.ok(depth>=0,'CSS braces negative');}
