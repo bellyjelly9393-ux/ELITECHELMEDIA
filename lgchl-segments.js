@@ -25,6 +25,7 @@ const ed=(kind,target)=>state.editorial.find(r=>r.kind===kind&&String(r.target_i
 function line(s){return s?.length?s.map(x=>'<li>'+E(x)+'</li>').join(''):''}
 function sortTeams(a,b){return String(a?.name||'').localeCompare(String(b?.name||''))}
 function selectors(type){
+ if(type==='rivalry'&&qs.get('series')){$('segControls').innerHTML='<a class="seg-action" href="rivalry-report.html">← All Rivalry Reports</a>';return}
  $('segControls').innerHTML='<label>League<select id="segLeague"><option value="ALL">All three leagues</option><option value="OHL">OHL</option><option value="WHL">WHL</option><option value="QMJHL">QMJHL</option></select></label>'+
   (type==='pressure'?'<label>Conference<select id="segConf"><option value="ALL">All conferences</option><option value="Eastern">Eastern</option><option value="Western">Western</option></select></label><label>Round<select id="segRound"><option value="ALL">All rounds</option><option value="R1">Round One</option><option value="R2">Round Two</option><option value="R3">Conference Final</option><option value="LF">League Final</option><option value="SF">Cup Semifinal</option><option value="F">Cup Final</option></select></label>':
   type==='rivalry'?'<label>Round<select id="segRound"><option value="ALL">All rounds</option><option value="R1">Round One</option><option value="R2">Round Two</option><option value="R3">Conference Final</option><option value="LF">League Final</option><option value="SF">Cup Semifinal</option><option value="F">Cup Final</option></select></label>':'')+
@@ -199,7 +200,8 @@ function roadMilestones(data,teamId){
 }
 function renderRoad(){
  const teams=Object.values(state.data.teams||{}).filter(t=>(state.league==='ALL'||t.league===state.league)&&t.name.toLowerCase().includes(state.search)).sort(sortTeams);
- const id=C.validId(qs.get('team'))||Number(teams[0]?.id);
+ const requested=C.validId(qs.get('team'));
+ const id=teams.some(t=>Number(t.id)===requested)?requested:Number(teams[0]?.id);
  const team=state.data.teams[id];
  const tiles='<div class="seg-tilegrid">'+teams.map(t=>'<button type="button" class="seg-tile" data-team="'+t.id+'" aria-pressed="'+String(Number(t.id)===id)+'">'+thumb(t.id)+'<span>'+E(t.nick||t.name)+'</span></button>').join('')+'</div>';
  if(!team){root.innerHTML='<p class="seg-empty">Choose a playoff team to view its confirmed journey.</p>'+tiles;return;}
