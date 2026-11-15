@@ -86,7 +86,14 @@
   }
 
   function renderNations() {
-    $('thNations').innerHTML = data.teams.map(t => '<a href="#nation/' + Number(t.id) + '" class="th-nation-chip" title="' + esc(t.name) + ' nation page">' + teamMark(t,34) + '<span>' + esc(t.name) + '</span></a>').join('');
+    // Enter the team's public locker directly from the 12-nation strip.
+    // Great Britain's 3D room is hosted separately; other teams use the generic
+    // 6s-inspired locker-room layout with verified main-roster player stalls.
+    $('thNations').innerHTML = data.teams.map(t => {
+      const id = Number(t.id);
+      const href = id === 1446 ? 'lg3s-gb-locker.html' : 'lg3s-team.html?team=' + id;
+      return '<a href="' + href + '" class="th-nation-chip" title="Enter ' + esc(t.name) + ' locker room" aria-label="Enter ' + esc(t.name) + ' locker room">' + teamMark(t,34) + '<span>' + esc(t.name) + '</span></a>';
+    }).join('');
   }
   const natBg=(n,size)=>{const A=window.LG3S_NATION_ART;const u=A&&A.css(n,size||'card');return u&&u!=='none'?' style="--nat:'+esc(u)+';--nc:'+A.color(n)+';--nc2:'+A.color(n,1)+'"':'';};
   const natCls=n=>window.LG3S_NATION_ART&&window.LG3S_NATION_ART.has(n)?' has-nat':'';
