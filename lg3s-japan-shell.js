@@ -10,7 +10,7 @@ const api={teamId:TEAM,players:[],selected:null,previewNumber:'',previewName:'',
 window.ECMJapanLocker=api;
 for(const id of ['viewOverview','viewPlayer','rotateJersey'])$(id).disabled=true;
 const cardHref=p=>'player-cards.html?league=lg3s&id='+p.id+'&kind='+(p.kind==='goalie'?'goalie':'skater');
-const cleanName=x=>String(x??'').normalize('NFC').replace(/[\\u0000-\\u001f\\u007f]/g,'').replace(/\\s+/g,' ').trim().slice(0,18);
+const cleanName=x=>String(x??'').normalize('NFC').replace(/[\u0000-\u001f\u007f\u202a-\u202e\u2066-\u2069]/g,'').replace(/\s+/g,' ').trim().slice(0,18);
 const cleanNumber=x=>{
  const n=String(x??'').trim();
  return n===''||/^[0-9]{1,2}$/.test(n)?n:null;
