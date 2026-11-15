@@ -1,0 +1,44 @@
+/* Season 55 homepage takeover shell.
+   The existing bracket markup and lgchl-playoffs.js/css remain unchanged.
+   This file ONLY supplies the legacy bracket's typography variables and homepage links. */
+.pc-quicklinks{background:#10141b;border-bottom:1px solid #343b45;padding:12px 0}
+.pc-quicklinks-inner{display:flex;align-items:center;gap:12px 21px;flex-wrap:wrap}
+.pc-quicklinks-inner span{font:700 11px/1.4 system-ui,sans-serif;letter-spacing:.15em;color:#f3bc63;white-space:nowrap}
+.pc-quicklinks-inner a{font:700 12px/1.5 system-ui,sans-serif;color:#d6dee8;text-decoration:none}
+.pc-quicklinks-inner a:hover,.pc-quicklinks-inner a:focus-visible{color:#f3bc63;text-decoration:underline}
+.pc-footer-links{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.pc-footer-links a:hover{text-decoration:underline;color:#f3bc63}
+#playoffs{
+  --bone:#f3f0e9;
+  --mute:#a9a8a1;
+  --ice:#cfe0ec;
+  --f-head:"ECM-Head",Impact,sans-serif;
+  --f-ui:"ECM-Display",sans-serif;
+  --f-body:system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  --scratch:repeating-linear-gradient(118deg,transparent 0 34px,rgba(255,255,255,.022) 34px 35px,transparent 35px 71px,rgba(255,255,255,.014) 71px 72px);
+  --gut:max(16px,calc((100% - 1320px)/2));
+  color:var(--bone);
+  padding-inline:var(--gut);
+  scroll-margin-top:75px;
+}
+#playoffs .eyebrow{font:600 20px/1.2 ECM-Display,sans-serif;text-transform:uppercase;letter-spacing:.22em}
+#playoffs .sec-title{font:clamp(42px,5.4vw,72px)/.95 ECM-Head,Impact,sans-serif;text-transform:uppercase;letter-spacing:-.015em;margin:0}
+#playoffs .sec-title em{font-style:normal;color:#e0e6ed}
+#playoffs .po-tabs button{background:none;border:0;border-bottom:2px solid transparent;color:var(--mute);border-radius:0}
+#playoffs .po-tabs button[aria-selected="true"]{color:var(--bone);border-bottom-color:rgba(215,221,228,.7)}
+#playoffs .po-head p.po-lead{max-width:64ch}
+#playoffs .po-official{text-decoration:underline;text-underline-offset:4px}
+#playoffs .po-slot{font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+@media(max-width:1000px){
+ .pc-nav nav{gap:11px}
+ .pc-nav nav a{font-size:11px}
+}
+@media(max-width:700px){
+ .pc-quicklinks{padding:11px 0}
+ .pc-quicklinks-inner{gap:10px 15px}
+ .pc-quicklinks-inner span{width:100%}
+ #playoffs .po-tabs{top:103px}
+ #playoffs .sec-title{font-size:47px}
+ .pc-footer-links{gap:12px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
