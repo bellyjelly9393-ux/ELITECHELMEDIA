@@ -24,7 +24,8 @@ Status: **staged, not launched**. The broadcast script is separate. This is the 
 - All official predictions, scores, rankings, prize terms, deadlines and contest decisions remain on the EliteChel Media website.
 - The existing EliteChel Media Discord can distribute round-opening notifications, new video alerts, leaderboard summaries and discussion. This is an **optional notification/community channel**, not a requirement to use the predictor.
 - No Discord-specific ballot, points or eligibility system.
-- A Discord link is deliberately not active until the owner supplies and approves the official invite URL. Don't invent an invite or link to a different server.
+- The owner supplied the official EliteChel Media Discord invite: https://discord.gg/KMBjak7RD. Both the homepage and standalone Playoff Central link directly to that invite; opens in a new tab.
+- Discord announcements and community discussion are optional. No bot is installed and no automatic notification posting is claimed.
 - The site's official contest information takes precedence if posts are delayed or differ.
 
 ## Launch is blocked until
