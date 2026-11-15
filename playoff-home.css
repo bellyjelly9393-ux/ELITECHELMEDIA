@@ -42,3 +42,7 @@
  .pc-footer-links{gap:12px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Restore the operator's management access in the playoff navigation. */
+.pc-nav .pc-management-nav{color:#f3bc63;border:1px solid rgba(243,188,99,.45);padding:5px 9px;border-radius:3px;white-space:nowrap}
+.pc-nav .pc-management-nav:hover,.pc-nav .pc-management-nav:focus-visible{color:#fff;background:rgba(243,188,99,.14)}
