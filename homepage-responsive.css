@@ -1,0 +1,246 @@
+/* EliteChel Media | Season 55 homepage responsive layout repair
+   Layout only: preserve the existing bracket, score, predictor, dropdown and account scripts. */
+
+/* The full-width trophy and predictor tiles were auto-placed in the dashboard grid.
+   Explicitly span them so they cannot be squeezed into leftover columns. */
+.pc-nav{width:100%;max-width:none;box-sizing:border-box}
+main#pcMain{min-width:0}
+#pcMain>.trophy-banner{
+  grid-column:1/-1;
+  grid-row:1;
+  width:auto;
+  min-width:0;
+  margin-inline:calc(-1 * clamp(12px,1.5vw,26px));
+}
+#pcMain>.trophy-banner h1{width:100%;margin:0}
+#pcMain>.trophy-banner img{
+  display:block;
+  width:100%;
+  max-width:1700px;
+  height:auto;
+  margin-inline:auto;
+  object-fit:contain;
+  -webkit-mask-image:none;
+  mask-image:none;
+}
+#pcMain>.challenge-strip{
+  grid-column:1/-1;
+  width:100%;
+  min-width:0;
+  margin-inline:0;
+}
+#pcMain>.ecm-league-showcase,
+#pcMain>.central-links{grid-column:1/-1;min-width:0;width:100%}
+#pcMain>.pc-episode-tease,
+#pcMain>#scoreboard,
+#pcMain>#playoffs,
+#pcMain>#predictor,
+#pcMain>#leaderboard,
+#pcMain>#community,
+#pcMain>#contest-rules{min-width:0;max-width:100%}
+#pcMain .pc-episode-inner>*,
+#pcMain .pc-section-head>*,
+#pcMain .pc-predict-layout>*{min-width:0}
+
+/* Full-size broadcast layout: all home-page sections get an explicit grid row. */
+@media(min-width:1500px){
+  #pcMain>.pc-episode-tease{grid-column:1;grid-row:2}
+  #pcMain>#playoffs{grid-column:2;grid-row:2}
+  #pcMain>#scoreboard{grid-column:3;grid-row:2}
+  #pcMain>.challenge-strip{grid-row:3}
+  #pcMain>.ecm-league-showcase{grid-row:4}
+  #pcMain>#predictor{grid-row:5}
+  #pcMain>#leaderboard{grid-row:6}
+  #pcMain>#community{grid-row:7}
+  #pcMain>#contest-rules{grid-row:8}
+  #pcMain>.central-links{grid-row:9}
+}
+
+/* Two-column broadcast at mid-size desktops. Bracket has its own full row. */
+@media(min-width:1281px) and (max-width:1499px){
+  #pcMain>.pc-episode-tease{grid-column:1;grid-row:2}
+  #pcMain>#scoreboard{grid-column:2;grid-row:2}
+  #pcMain>#playoffs{grid-column:1/-1;grid-row:3}
+  #pcMain>.challenge-strip{grid-row:4}
+  #pcMain>.ecm-league-showcase{grid-row:5}
+  #pcMain>#predictor{grid-row:6}
+  #pcMain>#leaderboard{grid-row:7}
+  #pcMain>#community{grid-row:8}
+  #pcMain>#contest-rules{grid-row:9}
+  #pcMain>.central-links{grid-row:10}
+}
+
+/* Tablet and mobile (including phones requesting a desktop-size viewport):
+   a single editorial column instead of two unusably thin half-width panels. */
+@media(max-width:1280px){
+  main#pcMain{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:16px;
+    padding:0 16px 32px;
+  }
+  #pcMain>*{
+    flex:0 0 auto;
+    min-width:0;
+    max-width:100%;
+  }
+  #pcMain>.trophy-banner{
+    width:auto;
+    max-width:none;
+    margin:0 -16px;
+    flex:0 0 auto;
+  }
+  #pcMain>.challenge-strip,
+  #pcMain>.ecm-league-showcase,
+  #pcMain>.central-links,
+  #pcMain>#scoreboard,
+  #pcMain>#playoffs,
+  #pcMain>.pc-episode-tease,
+  #pcMain>#predictor,
+  #pcMain>#leaderboard,
+  #pcMain>#community,
+  #pcMain>#contest-rules{width:100%;margin-inline:0}
+  #pcMain>.pc-episode-tease{padding:0}
+  #pcMain .pc-episode-inner{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:16px;
+    padding:18px;
+    width:100%;
+    align-items:stretch;
+  }
+  #pcMain .feature-panel,#pcMain .pc-episode-copy,#pcMain .live-panel{
+    min-width:0;
+    min-height:235px;
+    padding:clamp(18px,2vw,28px);
+  }
+  #pcMain .feature-panel strong,#pcMain .live-panel h2{
+    font-size:clamp(34px,4vw,58px);
+  }
+  #scoreboard .pc-score-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    max-height:none;
+    overflow:visible;
+  }
+  #scoreboard .pc-score{padding:16px}
+  #scoreboard .pc-team-name{font-size:17px}
+  #scoreboard .pc-game{min-height:44px}
+  #scoreboard .pc-game b{font-size:11px}
+  #scoreboard .pc-game span{font-size:13px}
+  #playoffs .po-pairs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pc-nav{
+    width:100%;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:center;
+    gap:8px 16px;
+    padding:10px 16px;
+    min-height:unset;
+  }
+  .pc-nav>.pc-brand{grid-column:1;grid-row:1;min-width:0;justify-self:start}
+  .pc-nav>.pc-media-menu{grid-column:2;grid-row:1;justify-self:end;margin:0}
+  .pc-nav>nav{
+    grid-column:1/-1;
+    grid-row:2;
+    width:100%;
+    margin:0;
+    padding:3px 0 5px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:9px 20px;
+    flex-wrap:wrap;
+    overflow:visible;
+  }
+  .pc-nav>nav a{font-size:13px;white-space:nowrap;padding:8px 5px}
+  .pc-nav .pc-media-menu nav{
+    position:absolute;
+    display:grid;
+    top:calc(100% + 7px);
+    right:0;
+    left:auto;
+    width:max-content;
+    max-width:min(90vw,340px);
+    z-index:120;
+  }
+  html{scroll-padding-top:138px}
+}
+
+/* Medium tablet: feature cards breathe, not three narrow strips. */
+@media(max-width:920px){
+  #pcMain .pc-episode-inner{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #pcMain .live-panel{grid-column:1/-1;min-height:145px}
+  #playoffs .po-pairs{grid-template-columns:1fr}
+  .challenge-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .challenge-strip article:last-child{grid-column:1/-1}
+  .ecm-league-showcase{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ecm-league-showcase .ecm-league-tile:last-child{grid-column:1/-1}
+}
+@media(max-width:700px){
+  main#pcMain{padding:0 12px 26px;gap:13px}
+  #pcMain>.trophy-banner{margin:0 -12px}
+  #pcMain .pc-episode-inner{grid-template-columns:1fr;gap:12px;padding:12px}
+  #pcMain .feature-panel,
+  #pcMain .pc-episode-copy,
+  #pcMain .live-panel{min-height:auto;padding:18px}
+  #pcMain .feature-panel{min-height:210px}
+  #pcMain .live-panel{grid-column:auto;min-height:145px}
+  #pcMain .feature-panel strong,#pcMain .live-panel h2{font-size:clamp(38px,10vw,54px)}
+  .challenge-strip{grid-template-columns:1fr;gap:12px}
+  .challenge-strip article,
+  .challenge-strip article:last-child{grid-column:auto;min-height:155px;padding:19px 20px}
+  .challenge-strip h2{font-size:clamp(27px,7.5vw,36px)}
+  .challenge-strip article p{max-width:none;font-size:14px}
+  .challenge-strip .pc-primary,.challenge-strip .pc-outline{width:100%;justify-content:center;min-height:46px}
+  .ecm-league-showcase{grid-template-columns:1fr;gap:10px}
+  .ecm-league-showcase .ecm-league-tile:last-child{grid-column:auto}
+  .ecm-league-tile{min-height:100px;flex-direction:row;align-items:center;flex-wrap:wrap;gap:10px}
+  .ecm-league-tile strong{font-size:42px}
+  .ecm-league-tile b{margin-left:auto}
+  #scoreboard .pc-score-grid{grid-template-columns:1fr;gap:12px}
+  #pcMain>#scoreboard{padding:17px 14px}
+  #scoreboard .pc-score{padding:14px}
+  #scoreboard .pc-controls{gap:12px}
+  #scoreboard .pc-select-label{width:100%;justify-content:space-between}
+  #scoreboard .pc-select-label select{min-width:0;max-width:65%}
+  #scoreboard .pc-team-name{font-size:16px}
+  #scoreboard .pc-games{gap:3px}
+  #scoreboard .pc-game{min-width:0;padding:5px 1px}
+  #scoreboard .pc-game b{font-size:10px}
+  #scoreboard .pc-game span{font-size:12px}
+  #playoffs{padding:15px 12px}
+  #playoffs .po-head{display:block}
+  #playoffs .po-tabs{display:flex;flex-wrap:wrap;gap:6px;position:static}
+  #playoffs .po-tabs button{font-size:15px;min-height:42px}
+  #pcMain>#predictor,#pcMain>#leaderboard,#pcMain>#contest-rules{padding:17px 12px}
+  #predictor .pc-section-head h2,#leaderboard .pc-section-head h2{font-size:clamp(32px,9vw,46px)}
+  #predictor .pc-prediction-card,#predictor .pc-account{padding:16px 13px}
+  #predictor .pc-fields{grid-template-columns:1fr}
+  #predictor .pc-pick-option{min-width:0;flex-wrap:wrap;overflow-wrap:anywhere}
+  #predictor .pc-pick-option img{width:28px;height:28px}
+  #leaderboard .pc-table-shell{-webkit-overflow-scrolling:touch;overflow-x:auto}
+  #pcMain>.central-links div{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pc-nav{padding:9px 12px 8px;gap:5px 8px}
+  .pc-brand{font-size:clamp(18px,5vw,24px);gap:7px}
+  .pc-brand img{width:43px;height:43px;flex:0 0 43px}
+  .pc-media-menu summary{font-size:12px;padding:11px 12px;min-height:44px}
+  .pc-nav>nav{justify-content:space-between;gap:2px 7px;padding:3px 0 0}
+  .pc-nav>nav a{flex:1 0 auto;text-align:center;padding:7px 4px;font-size:12px}
+  #pcMain>.trophy-banner img{width:100%;height:auto}
+  .pc-footer{padding-inline:16px}
+  html{scroll-padding-top:150px}
+}
+@media(max-width:370px){
+  .pc-brand{font-size:17px}
+  .pc-brand img{width:38px;height:38px;flex-basis:38px}
+  .pc-nav>nav a{font-size:11px}
+  #predictor .pc-pick-option{font-size:12px;padding-inline:4px}
+  #playoffs .po-tabs button{font-size:13px;padding:8px}
+}
+/* Accessible touch targets and consistent local overflow boundaries. */
+.pc-nav .pc-media-menu summary,
+#scoreboard .pc-tablist button,
+#playoffs .po-tabs button{touch-action:manipulation}
+.pc-table-shell{max-width:100%}
