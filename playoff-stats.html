@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090c12">
+<title>Season 55 Playoff Stats | EliteChel Media</title>
+<meta name="description" content="LGCHL Season 55 verified playoff team stats, playoff skater and goalie leaderboards, and upcoming matchup previews. Regular season archived separately.">
+<link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
+<link rel="stylesheet" href="playoff-stats.css?v=20261115-v1">
+<script defer src="playoff-stats.js?v=20261115-v1"></script>
+</head>
+<body>
+<a class="ps-skip" href="#content">Skip to playoff stats</a>
+<header class="ps-header">
+  <a class="ps-brand" href="index.html"><img src="assets/brand/ecm-crest.webp" width="64" height="64" alt=""><span>ELITECHEL <b>MEDIA</b></span></a>
+  <nav aria-label="League coverage"><a href="index.html">Home</a><a href="lgchl-media.html">LGCHL Desk</a><a href="lgchl-power.html">Cup Contenders</a><a href="league-leaderboards.html?league=lgchl">Season Archive</a></nav>
+</header>
+<main id="content">
+ <section class="ps-hero">
+  <p class="ps-overline">LGCHL · SEASON 55 · POSTSEASON</p>
+  <h1>PLAYOFF <em>STAT CENTRAL</em></h1>
+  <p>Separate numbers for a separate season. Team results come from confirmed playoff games. Skater and goalie totals require verified playoff box scores and never borrow regular-season numbers.</p>
+  <div class="ps-actions"><a href="lgchl-power.html">Memorial Cup Contenders →</a><a href="league-leaderboards.html?league=lgchl">Regular Season Stats Archive →</a><a href="index.html#playoffs">Live Playoff Bracket →</a></div>
+ </section>
+ <section class="ps-content">
+  <div class="ps-head"><div><p class="ps-overline">THE TOURNAMENT</p><h2>PLAYOFF LEADERS</h2></div><p id="psFreshness" class="ps-fresh" role="status">Checking verified postseason sources…</p></div>
+  <div class="ps-controls">
+   <div class="ps-tabs" role="group" aria-label="Playoff statistics"><button type="button" data-mode="teams" aria-pressed="true">Teams</button><button type="button" data-mode="skaters" aria-pressed="false">Skaters</button><button type="button" data-mode="goalies" aria-pressed="false">Goalies</button></div>
+   <label>League <select id="psLeague"><option value="ALL">All leagues</option><option value="OHL">OHL</option><option value="WHL">WHL</option><option value="QMJHL">QMJHL</option></select></label>
+   <label>Find <input id="psSearch" type="search" maxlength="80" placeholder="Team or gamertag"></label>
+  </div>
+  <div id="psContent" class="ps-cards" aria-live="polite"><p class="ps-empty">Loading verified playoff records…</p></div>
+  <p class="ps-fine">A scheduled game is not counted as played. Only final games with verified scores enter team totals. Playoff player statistics remain separate from regular-season records and are shown only when independently available.</p>
+ </section>
+ <section class="ps-content" id="matchupPreviews">
+  <div class="ps-head"><div><p class="ps-overline">THE NEXT CHAPTER</p><h2>UPCOMING SERIES</h2></div><a class="ps-text-link" href="index.html#playoffs">Explore full bracket ↗</a></div>
+  <p id="psMatchStatus" class="ps-fine">Checking the tournament schedule…</p>
+  <div id="psMatchups" class="ps-matchups"></div>
+ </section>
+</main>
+<footer class="ps-footer"><span>© EliteChel Media · LGCHL Season 55</span><a href="league-leaderboards.html?league=lgchl">Season Archive</a><a href="lgchl-media.html">LGCHL Desk</a><a href="management.html">Management</a></footer>
+</body></html>
