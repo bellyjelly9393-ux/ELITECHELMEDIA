@@ -16,9 +16,20 @@
   const RECAPS_LIVE = true;
   const live = { ok: false, games: new Map(), standings: [], official: [], skaters: [], goalies: [], lines: [], recaps: new Map() };
   async function view(name, q) {
-    const r = await fetch(LIVE.base + name + '?' + q, { headers: { apikey: LIVE.key, Authorization: 'Bearer ' + LIVE.key }, cache: 'no-store' });
-    if (!r.ok) throw Error(name + ' ' + r.status);
-    return r.json();
+    /* PostgREST caps each response at 1,000 rows (db-max-rows). Follow Range until we have the full result. */
+    const acc = [];
+    let from = 0, page = 1000;
+    for (;;) {
+      const r = await fetch(LIVE.base + name + '?' + q, { headers: { apikey: LIVE.key, Authorization: 'Bearer ' + LIVE.key, Range: from + '-' + (from + page - 1), Prefer: 'count=exact' }, cache: 'no-store' });
+      if (!r.ok) throw Error(name + ' ' + r.status);
+      const chunk = await r.json();
+      if (!Array.isArray(chunk) || !chunk.length) break;
+      acc.push(...chunk);
+      const m = /\/(\d+|\*)\s*$/.exec(r.headers.get('content-range') || '');
+      from += chunk.length;
+      if (chunk.length < page || (m && m[1] !== '*' && from >= Number(m[1]))) break;
+    }
+    return acc;
   }
   async function loadLive() {
     const [g, s] = await Promise.all([view('lg3s_public_games', 'select=*&order=scheduled_at'), view('lg3s_public_standings', 'select=*')]);
