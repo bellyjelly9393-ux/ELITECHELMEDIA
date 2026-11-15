@@ -42,22 +42,10 @@ main#pcMain{min-width:0}
 #pcMain .pc-section-head>*,
 #pcMain .pc-predict-layout>*{min-width:0}
 
-/* Full-size broadcast layout: all home-page sections get an explicit grid row. */
-@media(min-width:1500px){
-  #pcMain>.challenge-strip{grid-row:2}
-  #pcMain>.pc-episode-tease{grid-column:1;grid-row:3}
-  #pcMain>#playoffs{grid-column:2;grid-row:3}
-  #pcMain>#scoreboard{grid-column:3;grid-row:3}
-  #pcMain>.ecm-league-showcase{grid-row:4}
-  #pcMain>#predictor{grid-row:5}
-  #pcMain>#leaderboard{grid-row:6}
-  #pcMain>#community{grid-row:7}
-  #pcMain>#contest-rules{grid-row:8}
-  #pcMain>.central-links{grid-row:9}
-}
-
-/* Two-column broadcast at mid-size desktops. Bracket has its own full row. */
-@media(min-width:1281px) and (max-width:1499px){
+/* Wide-screen layout: two substantial broadcast panels, never a cramped 20% rail.
+   The bracket follows at full width, where the tournament tree can breathe. */
+@media(min-width:1281px){
+  main#pcMain{grid-template-columns:repeat(2,minmax(0,1fr))}
   #pcMain>.challenge-strip{grid-row:2}
   #pcMain>.pc-episode-tease{grid-column:1;grid-row:3}
   #pcMain>#scoreboard{grid-column:2;grid-row:3}
@@ -68,6 +56,20 @@ main#pcMain{min-width:0}
   #pcMain>#community{grid-row:8}
   #pcMain>#contest-rules{grid-row:9}
   #pcMain>.central-links{grid-row:10}
+  #pcMain .pc-episode-inner{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    align-items:stretch;
+    gap:14px;
+    padding:16px;
+    width:100%;
+  }
+  #pcMain .feature-panel,#pcMain .pc-episode-copy{min-width:0;min-height:260px}
+  #pcMain .live-panel{grid-column:1/-1;min-height:158px}
+  #scoreboard .pc-score-grid{
+    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+    max-height:860px;
+  }
 }
 
 /* Tablet and mobile (including phones requesting a desktop-size viewport):
