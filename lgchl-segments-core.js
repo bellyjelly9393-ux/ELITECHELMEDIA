@@ -92,11 +92,12 @@
   const completedLoss=st.status==='ELIMINATED'?st.slot:null;
   return stages.map((stage,i)=>{
     const s=matches.find(x=>x.stage===stage);
+    if(completedLoss&&i>stages.indexOf(completedLoss.stage))return{stage,title:roundTitles[stage],state:'LOCKED',opponent:null,slot:null};
     if(!s)return{stage,title:roundTitles[stage],state:completedLoss&&i>stages.indexOf(completedLoss.stage)?'LOCKED':'PENDING',opponent:null,slot:null};
     const other=slotTeams(s).find(t=>t!==Number(teamId))||null;
     const score=scoreFor(s,teamId),winner=verifiedWinner(s);
     const state=s.kind==='bye'&&winner===Number(teamId)?'BYE':winner===Number(teamId)?'ADVANCED':winner?'ELIMINATED':s.kind==='series'&&other?'ACTIVE':'PENDING';
-    return{stage,title:roundTitles[stage],state,opponent:other?data.teams?.[other]||null:null,slot:s,score,winner};
+    return{stage,title:roundTitles[stage],state,opponent:s.kind==='pending'?null:(other?data.teams?.[other]||null:null),slot:s,score,winner};
   });
  }
  function seriesStory(data,slot){
