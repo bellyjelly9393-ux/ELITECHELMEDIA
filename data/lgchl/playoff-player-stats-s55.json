@@ -1,0 +1,9 @@
+{
+  "season": 55,
+  "scope": "LGCHL playoffs only",
+  "status": "awaiting_verified_playoff_box_scores",
+  "verified_at": null,
+  "skaters": [],
+  "goalies": [],
+  "source_note": "Postseason player totals may be published only from independently verified LGCHL Season 55 playoff game box scores. Regular-season totals are not a fallback. Each player row must have verified:true, a league user/team identity, gp and a traceable source_url."
+}
