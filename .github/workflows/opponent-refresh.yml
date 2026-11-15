@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '24'
       - run: node --test test-opponent-refresh.mjs test-vod-review.cjs test-deep-scout.cjs
-      - run: node --check hitmen-opponent-intel.js && node --check hitmen-opponent-refresh.js && node --check api/hitmen-opponent-rosters.js
+      - run: node --check hitmen-opponent-intel.js && node --check hitmen-opponent-refresh.js && node --check api/hitmen-opponent-rosters.mjs
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x

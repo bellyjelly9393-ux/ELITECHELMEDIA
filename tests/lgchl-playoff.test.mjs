@@ -191,3 +191,131 @@ test('a saved board is returned when LeagueGaming is unreachable', async () => {
   assert.equal(out.stale_reason, 'lg_unavailable');
   assert.equal(out.fetched_at, snapshot.fetched_at);
 });
+
+import { readFileSync } from 'node:fs';
+import handler, { fetchLg, __resetPlayoffCache, __setPlayoffSnapshot } from '../api/lgchl-playoffs.mjs';
+import { setRestFetcher } from '../api/_lgchl.js';
+
+function mockRes() {
+  return {
+    headers: {},
+    statusCode: 0,
+    body: null,
+    setHeader(key, value) { this.headers[key] = value; },
+    status(code) { this.statusCode = code; return this; },
+    json(body) { this.body = body; return this; },
+  };
+}
+
+const realFetch = globalThis.fetch;
+
+function stubNetwork({ fetchImpl, restRows = [] } = {}) {
+  __resetPlayoffCache();
+  setRestFetcher(async () => ({
+    ok: true,
+    status: 200,
+    json: async () => restRows,
+  }));
+  globalThis.fetch = fetchImpl || (async () => { throw new Error('network_down'); });
+}
+
+function restoreNetwork() {
+  globalThis.fetch = realFetch;
+  __resetPlayoffCache();
+  setRestFetcher((url, init) => fetch(url, init));
+}
+
+test('playoff API file is ESM and does not spawn curl', () => {
+  const src = readFileSync(new URL('../api/lgchl-playoffs.mjs', import.meta.url), 'utf8');
+  assert.equal(src.includes('child_process'), false);
+  assert.equal(src.includes("spawn('curl'"), false);
+  assert.match(src, /from '\.\.\/lib\/lgchl-playoff\.mjs'/);
+});
+
+test('playoff API returns the saved bracket when LeagueGaming fetch fails', async () => {
+  stubNetwork({
+    fetchImpl: async () => { throw new Error('network_down'); },
+  });
+  try {
+    const res = mockRes();
+    const result = await handler({ method: 'GET' }, res);
+    assert.equal(res.statusCode, 200);
+    assert.equal(result, res);
+    assert.equal(res.body.ok, true);
+    assert.ok(Array.isArray(res.body.leagues) && res.body.leagues.length >= 3);
+    assert.equal(res.body.matchups, undefined);
+  } finally {
+    restoreNetwork();
+  }
+});
+
+test('playoff API still returns the saved bracket when LeagueGaming blocks the request', async () => {
+  stubNetwork({
+    fetchImpl: async () => ({
+      status: 403,
+      ok: false,
+      text: async () => '<title>Just a moment...</title>',
+    }),
+  });
+  try {
+    const res = mockRes();
+    await handler({ method: 'GET' }, res);
+    assert.equal(res.statusCode, 200);
+    assert.ok(res.body.leagues.length >= 3);
+    assert.equal(res.body.ok, true);
+  } finally {
+    restoreNetwork();
+  }
+});
+
+test('playoff API still returns the saved bracket when Supabase also fails', async () => {
+  __resetPlayoffCache();
+  setRestFetcher(async () => { throw new Error('supabase_down'); });
+  globalThis.fetch = async () => { throw new Error('network_down'); };
+  try {
+    const res = mockRes();
+    await handler({ method: 'GET' }, res);
+    assert.equal(res.statusCode, 200);
+    assert.equal(res.body.stale, true);
+    assert.ok(res.body.leagues.length >= 3);
+  } finally {
+    restoreNetwork();
+  }
+});
+
+test('fetchLg uses fetch only and throws when the official page is blocked', async () => {
+  globalThis.fetch = async () => ({
+    status: 200,
+    ok: true,
+    text: async () => '<title>Just a moment...</title>',
+  });
+  try {
+    await assert.rejects(() => fetchLg('https://example.invalid/bracket'), /lg_/);
+  } finally {
+    globalThis.fetch = realFetch;
+  }
+});
+
+test('playoff API returns 503 only when the saved bracket is also missing', async () => {
+  const saved = JSON.parse(readFileSync(new URL('../assets/lgchl/playoffs/s55.json', import.meta.url), 'utf8'));
+  setRestFetcher(async () => { throw new Error('down'); });
+  globalThis.fetch = async () => { throw new Error('down'); };
+  try {
+    __setPlayoffSnapshot({ ok: false, leagues: [], teams: {} });
+    __resetPlayoffCache();
+    const empty = mockRes();
+    await handler({ method: 'GET' }, empty);
+    assert.equal(empty.statusCode, 503);
+    assert.equal(empty.body.error, 'playoff_bracket_unavailable');
+  } finally {
+    __setPlayoffSnapshot(saved);
+    restoreNetwork();
+  }
+});
+
+test('unsupported methods are rejected without crashing', async () => {
+  const res = mockRes();
+  await handler({ method: 'POST' }, res);
+  assert.equal(res.statusCode, 405);
+  assert.equal(res.body.error, 'method_not_allowed');
+});

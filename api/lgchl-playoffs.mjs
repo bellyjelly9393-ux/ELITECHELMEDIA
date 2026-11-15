@@ -3,7 +3,10 @@
 // of truth (bracket shape, byes, seeds, series score, game list). public.lgchl_games fills
 // in a final score when the existing league sync has it and the series page does not yet.
 // A saved snapshot is served if LeagueGaming or Supabase is unavailable.
-import { spawn } from 'node:child_process';
+//
+// This file is .mjs on purpose: the repo has no package.json, so Vercel treats .js API
+// routes as CommonJS. CommonJS cannot import ../lib/lgchl-playoff.mjs, which crashed the
+// function on startup (FUNCTION_INVOCATION_FAILED) before any snapshot fallback could run.
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { rest } from './_lgchl.js';
@@ -13,8 +16,21 @@ const UA = 'Elitechel-Media-Esports/1.0 (playoff bracket; elitechelmedia.com)';
 const FRESH_MS = 120000;
 const STALE_MS = 30000;
 
+function snapshotPath() {
+  return fileURLToPath(new URL('../assets/lgchl/playoffs/s55.json', import.meta.url));
+}
+
 function readSnapshot() {
-  return JSON.parse(readFileSync(fileURLToPath(new URL('../assets/lgchl/playoffs/s55.json', import.meta.url)), 'utf8'));
+  const paths = [snapshotPath(), 'assets/lgchl/playoffs/s55.json'];
+  let last;
+  for (const path of paths) {
+    try {
+      return JSON.parse(readFileSync(path, 'utf8'));
+    } catch (error) {
+      last = error;
+    }
+  }
+  throw last;
 }
 
 let snapshot = null;
@@ -28,41 +44,14 @@ let memory = null;
 let memoryAt = 0;
 let inflight = null;
 
-function curlHtml(url) {
-  return new Promise((resolve, reject) => {
-    const child = spawn('curl', ['-sS', '-L', '--max-time', '20', '-A', UA, '-H', 'Accept: text/html', '-H', 'Accept-Language: en-US,en;q=0.9', '-w', '\n%{http_code}', url]);
-    const chunks = [];
-    let err = '';
-    const timer = setTimeout(() => { child.kill('SIGKILL'); reject(new Error('curl_timeout')); }, 22000);
-    child.stdout.on('data', (buf) => chunks.push(buf));
-    child.stderr.on('data', (buf) => { err += buf; });
-    child.on('error', (error) => { clearTimeout(timer); reject(error); });
-    child.on('close', (code) => {
-      clearTimeout(timer);
-      if (code !== 0) return reject(new Error(err || 'curl_' + code));
-      const raw = Buffer.concat(chunks).toString('utf8');
-      const cut = raw.lastIndexOf('\n');
-      const status = Number(raw.slice(cut + 1));
-      const html = raw.slice(0, cut);
-      if (!html || status === 403 || status === 429 || isBlocked(html)) return reject(new Error('lg_blocked'));
-      if (status && status >= 400) return reject(new Error('lg_' + status));
-      resolve(html);
-    });
-  });
-}
-
 export async function fetchLg(url) {
-  try {
-    const res = await fetch(url, {
-      headers: { 'User-Agent': UA, Accept: 'text/html', 'Accept-Language': 'en-US,en;q=0.9' },
-      signal: AbortSignal.timeout(12000),
-    });
-    const html = await res.text();
-    if (res.status === 403 || res.status === 429 || isBlocked(html) || !res.ok) throw new Error('lg_' + res.status);
-    return html;
-  } catch {
-    return curlHtml(url);
-  }
+  const res = await fetch(url, {
+    headers: { 'User-Agent': UA, Accept: 'text/html', 'Accept-Language': 'en-US,en;q=0.9' },
+    signal: AbortSignal.timeout(12000),
+  });
+  const html = await res.text();
+  if (res.status === 403 || res.status === 429 || isBlocked(html) || !res.ok) throw new Error('lg_' + res.status);
+  return html;
 }
 
 async function loadTeams() {
@@ -102,6 +91,10 @@ export function __resetPlayoffCache() {
   inflight = null;
 }
 
+export function __setPlayoffSnapshot(value) {
+  snapshot = value;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.setHeader('Allow', 'GET, HEAD');
@@ -117,10 +110,12 @@ export default async function handler(req, res) {
     return res.status(200).json(body);
   } catch {
     res.setHeader('Cache-Control', 'no-store');
-    const fallback = toPublic(snapshot);
-    if (fallback?.leagues?.length) {
-      return res.status(200).json({ ...fallback, stale: true, stale_reason: 'lg_unavailable' });
-    }
+    try {
+      const fallback = toPublic(snapshot);
+      if (fallback?.leagues?.length) {
+        return res.status(200).json({ ...fallback, stale: true, stale_reason: 'lg_unavailable' });
+      }
+    } catch { /* still report unavailable below */ }
     return res.status(503).json({ ok: false, error: 'playoff_bracket_unavailable', source_url: bracketUrl() });
   }
 }
