@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/lg3s-locker",
+      "destination": "/lg3s-gb-locker.html"
+    },
+    {
       "source": "/vod-archive",
       "destination": "/vod-archive.html"
     },
