@@ -7,7 +7,9 @@ import { spawn } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { rest } from './_lgchl.js';
-import { bracketUrl, isBlocked, refreshFromSources, toPublic } from '../lib/lgchl-playoff.mjs';
+// Vercel packages this .js endpoint as CommonJS. Load the .mjs parser with
+// native dynamic import, not a static import that becomes require(.mjs).
+const playoffModule = () => import('../lib/lgchl-playoff.mjs');
 
 const UA = 'Elitechel-Media-Esports/1.0 (playoff bracket; elitechelmedia.com)';
 const FRESH_MS = 120000;
@@ -28,7 +30,7 @@ let memory = null;
 let memoryAt = 0;
 let inflight = null;
 
-function curlHtml(url) {
+function curlHtml(url, isBlocked) {
   return new Promise((resolve, reject) => {
     const child = spawn('curl', ['-sS', '-L', '--max-time', '20', '-A', UA, '-H', 'Accept: text/html', '-H', 'Accept-Language: en-US,en;q=0.9', '-w', '\n%{http_code}', url]);
     const chunks = [];
@@ -52,6 +54,7 @@ function curlHtml(url) {
 }
 
 export async function fetchLg(url) {
+  const { isBlocked } = await playoffModule();
   try {
     const res = await fetch(url, {
       headers: { 'User-Agent': UA, Accept: 'text/html', 'Accept-Language': 'en-US,en;q=0.9' },
@@ -61,7 +64,7 @@ export async function fetchLg(url) {
     if (res.status === 403 || res.status === 429 || isBlocked(html) || !res.ok) throw new Error('lg_' + res.status);
     return html;
   } catch {
-    return curlHtml(url);
+    return curlHtml(url, isBlocked);
   }
 }
 
@@ -84,6 +87,7 @@ async function loadScores(ids) {
 }
 
 export async function loadPlayoffs(now = Date.now()) {
+  const { refreshFromSources } = await playoffModule();
   if (memory && now - memoryAt < (memory.stale ? STALE_MS : FRESH_MS)) return memory;
   if (!inflight) {
     inflight = refreshFromSources({ snapshot, fetchHtml: fetchLg, loadTeams, loadScores, now })
@@ -103,6 +107,7 @@ export function __resetPlayoffCache() {
 }
 
 export default async function handler(req, res) {
+  const { toPublic, bracketUrl } = await playoffModule();
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.setHeader('Allow', 'GET, HEAD');
     return res.status(405).json({ ok: false, error: 'method_not_allowed' });
