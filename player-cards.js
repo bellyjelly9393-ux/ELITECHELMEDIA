@@ -46,7 +46,7 @@ async function addRosterOnlyPlayers(statRows){
  for(const team of snapshot.teams){
   for(const player of team.players||[]){
    const id=String(player.lgUserId||'');
-   if(player.rosterStatus!=='active'||!/^\\d+$/.test(id)||Number(id)<=0)continue;
+   if(player.rosterStatus!=='active'||!/^[0-9]+$/.test(id)||Number(id)<=0)continue;
    const kind=player.playerKind==='goalie'||player.position==='G'?'goalie':'skater';
    const key=kind+':'+id;
    if(existing.has(key)){
