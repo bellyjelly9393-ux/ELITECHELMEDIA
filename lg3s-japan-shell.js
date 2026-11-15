@@ -1,14 +1,44 @@
 /* Japan LG3s 3D locker public shell.
    Roster remains accessible even when WebGL/Three.js CDN is unavailable.
-   No player jersey numbers are inferred or persisted. */
+   Player nameplate and number are cosmetic local-browser preferences only. */
 (()=>{'use strict';
 const TEAM=591;
 const $=id=>document.getElementById(id);
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const api={teamId:TEAM,players:[],selected:null,previewNumber:'',ready:null,selectPlayer,updatePreviewNumber};
+const STORAGE_PREFIX='ecm:lg3s:s1:japan:custom:v1:';
+const api={teamId:TEAM,players:[],selected:null,previewNumber:'',previewName:'',ready:null,selectPlayer,getCustomization};
 window.ECMJapanLocker=api;
 for(const id of ['viewOverview','viewPlayer','rotateJersey'])$(id).disabled=true;
 const cardHref=p=>'player-cards.html?league=lg3s&id='+p.id+'&kind='+(p.kind==='goalie'?'goalie':'skater');
+const cleanName=x=>String(x??'').normalize('NFC').replace(/[\\u0000-\\u001f\\u007f]/g,'').replace(/\\s+/g,' ').trim().slice(0,18);
+const cleanNumber=x=>{
+ const n=String(x??'').trim();
+ return n===''||/^[0-9]{1,2}$/.test(n)?n:null;
+};
+function getCustomization(id){
+ const player=api.players.find(p=>p.id===Number(id));if(!player)return null;
+ const fallback={name:player.gamertag.slice(0,18),number:''};
+ try{
+  const raw=window.localStorage?.getItem(STORAGE_PREFIX+player.id);
+  if(!raw)return fallback;
+  const saved=JSON.parse(raw);
+  const name=cleanName(saved?.name);
+  const number=cleanNumber(saved?.number);
+  return{name:name||fallback.name,number:number===null?'':number};
+ }catch{return fallback;}
+}
+function applyCustomization(player,custom){
+ const value=custom||getCustomization(player.id);
+ api.previewName=value.name;api.previewNumber=value.number;
+ $('plateDisplayName').value=value.name;
+ $('jerseyPreviewNumber').value=value.number;
+ $('plateDisplayName').disabled=false;
+ $('jerseyPreviewNumber').disabled=false;
+ $('saveFreeCustomization').disabled=false;
+ $('resetFreeCustomization').disabled=false;
+ $('selectedId').textContent='LG player ID '+player.id+' · original gamertag: '+player.gamertag+' · uniform number unverified';
+ $('numberPreviewStatus').textContent='Free cosmetic preview. Changes appear on this device only. Verified roster identity stays '+player.gamertag+'.';
+}
 function renderButtons(){
  const q=$('playerSearch').value.trim().toLocaleLowerCase();
  const players=api.players.filter(p=>!q||p.gamertag.toLocaleLowerCase().includes(q));
@@ -20,39 +50,53 @@ function renderButtons(){
 function selectPlayer(id){
  const player=api.players.find(p=>p.id===Number(id));
  if(!player)return;
- if(api.selected&&api.selected.id!==player.id&&api.previewNumber)updatePreviewNumber('');
  api.selected=player;
  $('inspectorTitle').textContent='PLAYER STALL';
  $('selectedPlayer').textContent=player.gamertag;
- $('selectedId').textContent='LG player ID '+player.id+' · official jersey number unverified';
  $('selectedPosition').textContent=player.position+' · JAPAN · '+(player.kind==='goalie'?'GOALTENDER':'SKATER');
  $('playerCardLink').href=cardHref(player);
  $('playerCardLink').textContent='Open '+player.gamertag+' Hockey Card →';
+ applyCustomization(player);
  renderButtons();
  const url=new URL(location.href);url.searchParams.set('player',String(player.id));
  history.replaceState(null,'',url.pathname+url.search+url.hash);
  window.dispatchEvent(new CustomEvent('ecm-japan-player-select',{detail:{player}}));
 }
-function updatePreviewNumber(next){
- const text=String(next??'').trim();
- if(text&&!/^[0-9]{1,2}$/.test(text)){
-  $('numberPreviewStatus').textContent='Enter a whole number from 0 to 99. Nothing is saved.';
-  $('jerseyPreviewNumber').value=api.previewNumber;
-  return;
- }
- api.previewNumber=text;
- $('jerseyPreviewNumber').value=text;
- $('numberPreviewStatus').textContent=text?
-  'Preview #'+text+' applied visually. This is NOT the player\'s official jersey number and is NOT saved.':
-  'Jersey number unassigned. Nothing is stored, assigned, or claimed as official.';
- window.dispatchEvent(new CustomEvent('ecm-japan-number-preview',{detail:{number:text}}));
+function saveCustomization(event){
+ event.preventDefault();
+ const player=api.selected;
+ if(!player){$('numberPreviewStatus').textContent='Select a verified roster player before saving.';return;}
+ const rawName=$('plateDisplayName').value;
+ const cleaned=cleanName(rawName);
+ const number=cleanNumber($('jerseyPreviewNumber').value);
+ if(!cleaned){$('numberPreviewStatus').textContent='Enter at least one character for the nameplate.';return;}
+ if(number===null){$('numberPreviewStatus').textContent='Jersey number must be blank or 0 to 99.';return;}
+ const customize={name:cleaned,number};
+ let saved=false;
+ try{
+  window.localStorage?.setItem(STORAGE_PREFIX+player.id,JSON.stringify(customize));
+  saved=window.localStorage?.getItem(STORAGE_PREFIX+player.id)!==null;
+ }catch{}
+ applyCustomization(player,customize);
+ window.dispatchEvent(new CustomEvent('ecm-japan-customization-change',{detail:{playerId:player.id,customize}}));
+ $('numberPreviewStatus').textContent=saved
+  ?'Saved for this browser only. Your chosen plate reads '+cleaned+(number?' · #'+number:'')+'. Official roster identity unchanged.'
+  :'Preview applied, but this browser blocked saving. Your appearance may reset after closing the page.';
+}
+function resetCustomization(){
+ const player=api.selected;if(!player)return;
+ try{window.localStorage?.removeItem(STORAGE_PREFIX+player.id)}catch{}
+ const defaults={name:player.gamertag.slice(0,18),number:''};
+ applyCustomization(player,defaults);
+ window.dispatchEvent(new CustomEvent('ecm-japan-customization-change',{detail:{playerId:player.id,customize:defaults}}));
+ $('numberPreviewStatus').textContent='This browser\'s nameplate and number preference has been reset. Verified identity unchanged.';
 }
 $('playerSearch').addEventListener('input',renderButtons);
 $('rosterGrid').addEventListener('click',event=>{
  const el=event.target.closest('button[data-player-id]');if(el)selectPlayer(el.dataset.playerId);
 });
-$('jerseyPreviewNumber').addEventListener('change',event=>updatePreviewNumber(event.target.value));
-$('clearPreview').addEventListener('click',()=>updatePreviewNumber(''));
+$('freeCustomizeForm').addEventListener('submit',saveCustomization);
+$('resetFreeCustomization').addEventListener('click',resetCustomization);
 api.ready=(async()=>{
  try{
   const res=await fetch('data/lg3s/season1-active-roster-2026-11-14.json',{cache:'no-cache'});
