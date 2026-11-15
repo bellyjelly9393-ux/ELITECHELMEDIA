@@ -16,11 +16,30 @@
 <link rel="stylesheet" href="playoff-central.css?v=20261115-home">
 <link rel="stylesheet" href="lgchl-playoffs.css?v=20261112-ice">
 <link rel="stylesheet" href="playoff-home.css?v=20261115-1">
+<style>
+.pc-media-menu{position:relative;margin-right:auto}
+.pc-media-menu summary{cursor:pointer;color:#f3bc63;font-weight:800;white-space:nowrap;padding:10px}
+.pc-nav .pc-media-menu nav{position:absolute;top:100%;left:0;display:grid;gap:0;width:15rem;padding:6px;background:#101318;border:1px solid #484d54;border-radius:6px;box-shadow:0 12px 32px #0009}
+.pc-media-menu nav a{display:block;padding:12px}
+.pc-media-menu :focus-visible{outline:2px solid #f3bc63;outline-offset:-2px}
+@media(max-width:900px){.pc-nav{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;justify-content:space-between}.pc-media-menu{margin:0}.pc-nav .pc-media-menu nav{left:auto;right:0}.pc-nav>nav{width:100%}}
+</style>
 </head>
 <body>
 <a class="pc-skip" href="#pcMain">Skip to content</a>
 <header class="pc-nav">
   <a class="pc-brand" href="index.html"><img src="assets/brand/ecm-crest.webp" width="48" height="48" alt=""><span>ELITECHEL <b>MEDIA</b></span></a>
+  <details class="pc-media-menu">
+    <summary>All media</summary>
+    <nav aria-label="Other EliteChel Media coverage">
+        <a href="lgchl-media.html">LGCHL Desk</a>
+        <a href="lgchl-media.html#lgRadioSec">Hitmen Radio</a>
+        <a href="esports-hub.html">Live Hub</a>
+        <a href="league-leaderboards.html?league=lgchl">League Leaders</a>
+        <a href="lg3s-media.html">LG3s</a>
+        <a href="interest.html?program=hut">HUT Tournament</a>
+    </nav>
+  </details>
   <nav aria-label="Playoff homepage navigation">
     <a href="#episodes">Episodes</a><a href="#playoffs">Bracket</a><a href="#scoreboard">Scores</a><a href="#predictor">Predictions</a><a href="#leaderboard">Leaderboard</a><a href="#community">Discord</a><a class="pc-management-nav" href="management.html" aria-label="Open private EliteChel Media management controls">Management</a>
   </nav>
@@ -35,17 +54,7 @@
       <div class="pc-hero-meta"><span id="pcUpdated">Checking league results…</span><span>Official result verification required for predictor scoring</span></div>
     </div>
   </section>
-  <section class="pc-quicklinks" aria-label="Other EliteChel Media coverage">
-    <div class="pc-wide pc-quicklinks-inner">
-      <span>ALSO ON ELITECHEL</span>
-      <a href="lgchl-media.html">LGCHL Desk</a>
-      <a href="lgchl-media.html#lgRadioSec">Hitmen Radio</a>
-      <a href="esports-hub.html">Live Hub</a>
-      <a href="league-leaderboards.html?league=lgchl">League Leaders</a>
-      <a href="lg3s-media.html">LG3s</a>
-      <a href="interest.html?program=hut">HUT Tournament</a>
-    </div>
-  </section>
+
   <section class="pc-episode-tease" id="episodes" aria-labelledby="pcEpisodeTitle">
     <div class="pc-wide pc-episode-inner">
       <div class="pc-episode-art" aria-hidden="true"><span>ELITECHEL<br>MEDIA</span><b>PLAYOFF<br>PREVIEW</b><small>SEASON 55</small></div>
@@ -155,4 +164,16 @@
 <script src="backend.js"></script>
 <script src="lgchl-playoffs.js?v=20261115-home" defer></script>
 <script src="playoff-central.js?v=20261115-home" defer></script>
+<script>
+const mediaMenu = document.querySelector('.pc-media-menu');
+document.addEventListener('click', event => {
+  if (!mediaMenu.contains(event.target)) mediaMenu.open = false;
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && mediaMenu.open) {
+    mediaMenu.open = false;
+    mediaMenu.querySelector('summary').focus();
+  }
+});
+</script>
 </body></html>
