@@ -34,17 +34,17 @@ async function start(){
    const response=await fetch('data/lg3s/season1-active-roster-2026-11-14.json',{cache:'no-cache'});
    if(!response.ok)throw Error('Public roster fetch failed');
    const d=await response.json();
-   if(d.league!=='LG3s'||d.season!==1||!Array.isArray(d.teams))throw Error('Invalid LG3s snapshot');
+   if(d.league!=='lg3s'||d.season!==1||!Array.isArray(d.teams))throw Error('Invalid LG3s snapshot');
    const eligible=d.teams.filter(t=>Number.isSafeInteger(Number(t.lgTeamId)));
-   $('roomTeam').innerHTML=eligible.map(t=>'<option value="'+Number(t.lgTeamId)+'"'+(Number(t.lgTeamId)===teamId?' selected':'')+'>'+esc(t.name)+'</option>').join('');
+   $('roomTeam').innerHTML=eligible.map(t=>'<option value="'+Number(t.lgTeamId)+'"'+(Number(t.lgTeamId)===teamId?' selected':'')+'>'+esc(t.teamName)+'</option>').join('');
    $('roomTeam').addEventListener('change',()=>{location.href=ROOM(Number($('roomTeam').value));});
    const team=eligible.find(t=>Number(t.lgTeamId)===teamId);
    if(!team||!Number.isSafeInteger(teamId)||teamId<=0){$('roomName').textContent='Team not found';fail('Choose a nation from the LG3s coverage page.');return;}
    $('roomLogo').src=LOGO(teamId);
-   $('roomLogo').alt=team.name+' team crest';
-   $('roomName').textContent=team.name;
+   $('roomLogo').alt=team.teamName+' team crest';
+   $('roomName').textContent=team.teamName;
    $('roomTeam').value=String(teamId);
-   document.title=team.name+' LG3s Locker Room | EliteChel Media';
+   document.title=team.teamName+' LG3s Locker Room | EliteChel Media';
    $('nationCoverage').href='lg3s-media.html#nation/'+teamId;
    rows=team.players.filter(p=>p.rosterStatus==='active'&&Number.isSafeInteger(Number(p.lgUserId))&&Number(p.lgUserId)>0).map(p=>({id:Number(p.lgUserId),n:p.gamertag,p:p.position}));
    const recordedDate=String(d.capturedOn||'source date not available');
