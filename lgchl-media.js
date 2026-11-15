@@ -26,7 +26,7 @@
     return 100 * (.70 * Math.min(1, pts / (2 * gp)) + .20 * Math.max(0, Math.min(1, ((gf - ga) / gp + 3) / 6)) + .10 * Math.max(0, Math.min(1, (gf / gp) / 6)));
   }
   function rankTeams(rows) {
-    return rows.filter(s => Number(s.gp) >= 5 && ['pts','gf','ga'].every(k=>s[k]!=null && Number.isFinite(Number(s[k]))))
+    return rows.filter(s => Number(s.gp) >= 5 && ['pts','gf','ga'].every(k=>s[k]!=null && Number.isFinite(Number(s[k]))) && !(Number(s.lg_team_id)===465 && Number(s.l)<22))
       .map(s => ({ ...s, score: powerScore(s), gd: Number(s.gf || 0) - Number(s.ga || 0) }))
       .sort((a, b) => b.score - a.score || b.gd - a.gd || Number(b.gf) - Number(a.gf))
       .map((s, i) => ({ ...s, rank: i + 1 }));
@@ -161,9 +161,9 @@
         '<td class="r"><div class="lg-score-cell"><b>' + t.score.toFixed(1) + '</b><div class="lg-bar"><i style="width:' + Math.min(100, t.score).toFixed(1) + '%"></i></div></div></td></tr>';
     }).join('');
     const at = (standings || []).map(s => s.standings_at).filter(Boolean).sort().pop();
-    const all = $('lgPowerAll'); if (all) all.textContent = 'FULL POWER RANKINGS · ALL ' + ranked.length + ' TEAMS →';
-    $('lgPowerNote').textContent = 'Score = 70% points percentage + 20% goal differential per game + 10% goals per game. Minimum 5 GP. ' +
-      (week ? 'Move compares with the standings before Week ' + week + '. ' : '') + 'No subjective boosts, for any team.';
+    const all = $('lgPowerAll'); if (all) all.textContent = 'PLAYOFF CONTENDERS · MEMORIAL CUP INDEX →';
+    $('lgPowerNote').textContent = 'Historical regular-season formula. The current feed still shows Rimouski at fewer than the reported 22 losses; its unverified standing is withheld until corrected. The Memorial Cup contender index uses playoff-qualified teams. ' +
+      (week ? 'Week movement is historical. ' : '') + 'Scores here are not championship odds.';
   }
 
   const rate = (v,d) => v==null || v==='' || !Number.isFinite(Number(v)) ? '—' : Number(v).toFixed(d);
