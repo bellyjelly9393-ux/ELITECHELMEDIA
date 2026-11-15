@@ -25,7 +25,7 @@ body.lgchl-playoff-scroll main#top>section{
 body.lgchl-playoff-scroll :is(#lgPressure,#lgRivalry,#lgRoad,#lgPlayoffStats,#lgContenders,#cup,#lgRadioSec,#archive){
  scroll-margin-top:112px;
 }
-.lg-scroll-nav{width:100%;max-width:1450px;margin:auto}
+.lg-scroll-nav{width:100%;max-width:1450px;margin:auto;display:block!important;overflow:visible!important}
 .lg-scroll-desktop-links{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:4px 13px;min-height:46px}
 .lg-scroll-desktop-links a{min-height:44px;display:inline-flex;align-items:center;font:800 12px system-ui,sans-serif;color:#d8e2f0;text-transform:uppercase;text-decoration:none;padding:5px 9px}
 .lg-scroll-desktop-links a:hover,.lg-scroll-desktop-links a:focus-visible{color:#f5ca83;background:#251e29}
@@ -128,7 +128,7 @@ body.lgchl-playoff-scroll :is(#lgPressure,#lgRivalry,#lgRoad,#lgPlayoffStats,#lg
  .lg-scroll-mobile-menu summary::-webkit-details-marker{display:none}
  .lg-scroll-mobile-menu[open] summary{border-bottom-left-radius:0;border-bottom-right-radius:0}
  .lg-scroll-mobile-links{display:grid;grid-template-columns:1fr;gap:1px;padding:6px;background:#10151e;border:1px solid #a07957;border-top:0;border-radius:0 0 6px 6px;max-height:60vh;overflow-y:auto}
- .lg-scroll-mobile-links a{display:flex;align-items:center;min-height:46px;padding:10px 13px;color:#f3e1c7;font:800 12px system-ui,sans-serif;text-decoration:none}
+ .lg-scroll-mobile-links a{display:flex;align-items:center;min-height:46px;padding:10px 13px;color:#f3e1c7;font:800 12px system-ui,sans-serif;text-decoration:none;white-space:normal;overflow-wrap:anywhere}
  .lg-scroll-mobile-links a:hover{background:#3a2430}
  .lg-scroll-jump{display:grid;grid-template-columns:1fr 1fr;gap:8px}
  .lg-scroll-jump a{justify-content:center;text-align:center;padding:10px 7px;min-height:49px;font-size:11px}
