@@ -161,7 +161,7 @@ totals as (
    coalesce(sum(b.upsets),0)::bigint as upsets,
    coalesce(sum(b.perfect),0)::bigint as perfects
  from public.ecm_playoff_handles h
- left join bonus b on b.user_id=h.user_id
+ join bonus b on b.user_id=h.user_id
  group by h.user_id,h.handle
 )
 select row_number() over(order by t.total desc,t.wins desc,t.exact desc,t.handle asc)::bigint,
