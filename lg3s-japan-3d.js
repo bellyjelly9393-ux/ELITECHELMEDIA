@@ -256,7 +256,12 @@ function moveToOverview(){
 }
 function focusPlayer(id){
  const entry=groups.get(Number(id));if(!entry)return;
+ if(selected&&selected!==entry){
+  selected.jersey.rotation.y=0;
+  turnBack=false;
+ }
  selected=entry;
+ $('rotateJersey').textContent='Show jersey back';
  for(const e of groups.values())e.accent.visible=e===entry;
  const target=entry.root.position.clone().add(new THREE.Vector3(0,3.12,0));
  cameraGoal.copy(target.clone().addScaledVector(entry.normal,5.9).add(new THREE.Vector3(0,1.05,0)));
@@ -333,6 +338,7 @@ function init(players){
  buildRoom(players);
  if(mobile)enableMobileInteraction(false);
  $('viewOverview').disabled=false;$('viewPlayer').disabled=!shell.selected;$('rotateJersey').disabled=!shell.selected;
+ $('rotateJersey').textContent='Show jersey back';
  $('toggleInteraction').disabled=false;
  const touchBtn=$('toggleInteraction');
  if(!mobile){touchBtn.hidden=true;}
