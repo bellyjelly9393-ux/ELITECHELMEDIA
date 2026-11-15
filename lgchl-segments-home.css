@@ -22,3 +22,7 @@
 @media(max-width:640px){.s55-seg-tiles{grid-template-columns:1fr}.s55-seg-tile:last-child{grid-column:auto}.s55-seg-tile{min-height:unset}.s55-seg-heading h2{font-size:37px}}
 @media(prefers-reduced-motion:no-preference){.s55-seg-tile{transition:transform .18s ease}.s55-seg-tile:hover{transform:translateY(-2px)}}
 @media(prefers-reduced-motion:reduce){.s55-seg-tile{transition:none}.s55-seg-tile:hover{transform:none}}
+
+/* Expanded All Media coverage must remain usable on narrow screens and short laptops. */
+.nl details nav{max-height:min(70vh,520px);overflow-y:auto;overscroll-behavior:contain;z-index:150}
+@media(max-width:700px){.nl details nav{max-height:55vh}}
