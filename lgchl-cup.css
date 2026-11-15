@@ -1,0 +1,19 @@
+/* Season 55 Memorial Cup editorial contenders, styled to match the broadcast homepage */
+.lg-pr-hero{border-bottom:3px solid #bd303d;background:linear-gradient(95deg,#090e16ed,#16121bd9),url(assets/broadcast/arena-tunnel.webp) center/cover;min-height:300px}
+.lg-pr-hero .lg-h1{font-size:clamp(43px,7vw,94px);line-height:.98;color:#fff;text-shadow:0 4px 15px #000}
+.lg-pr-hero .lg-h1 em{color:#f4434d}
+.lg-pr-hero .lg-dek{color:#d9e1ea;max-width:820px;font-size:clamp(15px,1.7vw,19px)}
+.cup-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.cup-links a{padding:12px 16px;border:1px solid #c69764;border-radius:5px;background:linear-gradient(140deg,#682e32,#1b1b26);font:800 13px system-ui,sans-serif;text-transform:uppercase;color:#ffe2ab}
+.cup-links a:hover,.cup-links a:focus-visible{background:#892934;color:#fff;border-color:#fff}
+.lg-pr-list .cup-rank-row{position:relative;overflow:hidden;border:1px solid #65606a;border-left:5px solid #ca303e;background:linear-gradient(125deg,#28202b,#101822);box-shadow:inset 0 1px #ffffff2a,0 9px 23px #0007}
+.lg-pr-list .cup-rank-row:after{content:"";position:absolute;inset:6px;border:1px solid #ffffff12;pointer-events:none}
+.cup-team-link{font-size:12px;font-weight:800;color:#ffcf85;text-transform:uppercase;white-space:nowrap;z-index:2}
+.cup-team-link:hover{text-decoration:underline}
+.cup-podium{background:linear-gradient(130deg,#29202a,#0c1620)!important;border-color:#a37e50!important;box-shadow:inset 0 1px #fff3,0 13px 27px #000a!important}
+.cup-podium h3{font-weight:900;text-shadow:0 4px 10px #000}
+.cup-review{display:flex;align-items:center;gap:15px;padding:19px;border-left:5px solid #dea348;background:#302718}
+.cup-review img{width:62px;height:62px;object-fit:contain}
+.cup-review strong{display:block;color:#ffe0a4;font-size:18px}
+.cup-review p{margin:6px 0 0;font-size:13px;color:#d4cdc6}
+@media(max-width:700px){.lg-pr-hero .lg-h1{font-size:45px}.cup-links{flex-direction:column}.cup-links a{text-align:center}.lg-pr-list .cup-rank-row{gap:12px}.cup-team-link{white-space:normal;font-size:11px}.cup-review{padding:13px}.cup-review img{width:45px;height:45px}}
