@@ -7,6 +7,9 @@ on:
       - 'lgchl-media.html'
       - 'supabase/migrations/*ecm_playoff_predictor*'
       - 'tests/playoff-central.test.mjs'
+      - 'tests/playoff-homepage.test.mjs'
+      - 'home-archive-s55.html'
+      - 'playoff-home.css'
       - '.github/workflows/playoff-central-check.yml'
   push:
     branches: [feature/lgchl-playoff-central-predictor-s55]
@@ -24,4 +27,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tests/playoff-central.test.mjs
+      - run: node --test tests/playoff-central.test.mjs tests/playoff-homepage.test.mjs
