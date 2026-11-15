@@ -122,3 +122,9 @@ refresh();setInterval(refresh,120000);
 // Keep previously shared homepage links pointed at the full, interactive tools.
 const fullPageSections = ['predictor','playoffs','scoreboard','leaderboard','community','contest-rules'];
 if (fullPageSections.includes(location.hash.slice(1))) location.replace('playoff-hq.html'+location.hash);
+
+function showCupFromLink() {
+  if(location.hash!=='#memorial-cup')return;
+  league='CUP';choose('league',league);if(bracket)drawBracket();one('#bracket').scrollIntoView();
+}
+showCupFromLink();window.addEventListener('hashchange',showCupFromLink);
