@@ -1,0 +1,24 @@
+/* Compact Season 55 broadcast feature links; scoped to avoid the current homepage dashboard grid. */
+#ecmSegmentsHome{border:1px solid #744c4c;border-top:4px solid #db3341;background:linear-gradient(115deg,#251923,#0c111a 65%);padding:clamp(14px,2vw,26px);border-radius:8px;box-shadow:inset 0 1px #ffffff25,0 15px 30px #0009}
+.s55-seg-heading{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.s55-seg-heading h2{font:italic 900 clamp(32px,4vw,55px)/.95 'Barlow Condensed',Impact,sans-serif;text-transform:uppercase;margin:6px 0;color:white}
+.s55-seg-heading h2 em{color:#e94854;font-style:normal}
+.s55-seg-heading p{margin:0;color:#c9b2a1;font-size:12px;letter-spacing:.06em}
+.s55-seg-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.s55-seg-tile{position:relative;min-width:0;overflow:hidden;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:248px;border:1px solid #545665;border-top:3px solid #bd303d;border-radius:7px;background:radial-gradient(ellipse at 100% -20%,#b62d4039,transparent 56%),linear-gradient(145deg,#24202b,#111925);box-shadow:0 6px 20px #0006}
+.s55-seg-tile h3{font:italic 900 clamp(25px,2.7vw,37px)/1 'Barlow Condensed',Impact,sans-serif;text-transform:uppercase;color:#fff;margin:0}
+.s55-seg-tile p{font:500 12px/1.5 system-ui,sans-serif;color:#c8d2db;margin:0}
+.s55-seg-tile .s55-label{font:800 10px system-ui,sans-serif;color:#fac87f;letter-spacing:.12em;text-transform:uppercase}
+.s55-seg-slot{flex:1;display:grid;gap:8px;align-content:start}
+.s55-seg-mini{display:flex;align-items:center;gap:10px;min-width:0;padding:8px 9px;border:1px solid #4b5868;border-radius:5px;background:#0b121cdb;color:#fff!important;text-decoration:none!important}
+.s55-seg-mini:hover{border-color:#f2be7a;background:#34212c}
+.s55-seg-mini img{height:38px;width:38px;object-fit:contain;flex:none}
+.s55-seg-mini div{min-width:0;flex:1}.s55-seg-mini b{display:block;font:800 13px system-ui,sans-serif;overflow-wrap:anywhere}.s55-seg-mini small{display:block;color:#bdc7d3;font:500 11px system-ui,sans-serif}
+.s55-seg-pending{border:1px dashed #6f6670;border-radius:5px;padding:12px}
+.s55-seg-tile .s55-seg-cta{display:flex;align-items:center;justify-content:center;min-height:43px;padding:9px 13px;background:linear-gradient(#a82a36,#621e2b);border:1px solid #bb6470;border-radius:5px;color:white;font:800 11px system-ui,sans-serif;text-transform:uppercase;text-decoration:none!important}
+.s55-seg-tile .s55-seg-cta:hover{background:#bd3641;border-color:#f3c27d}
+#s55RoadSelect{width:100%;min-height:45px;padding:9px;background:#101722;color:#fff;border:1px solid #707783;border-radius:5px;font:700 13px system-ui,sans-serif}
+@media(max-width:1000px){.s55-seg-tiles{grid-template-columns:1fr 1fr}.s55-seg-tile:last-child{grid-column:1/-1;min-height:180px}}
+@media(max-width:640px){.s55-seg-tiles{grid-template-columns:1fr}.s55-seg-tile:last-child{grid-column:auto}.s55-seg-tile{min-height:unset}.s55-seg-heading h2{font-size:37px}}
+@media(prefers-reduced-motion:no-preference){.s55-seg-tile{transition:transform .18s ease}.s55-seg-tile:hover{transform:translateY(-2px)}}
+@media(prefers-reduced-motion:reduce){.s55-seg-tile{transition:none}.s55-seg-tile:hover{transform:none}}
