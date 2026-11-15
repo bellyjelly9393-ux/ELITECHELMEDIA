@@ -96,21 +96,25 @@ function renderMatchups(){
 }
 async function load(){
  try{
-  const [live,snapshot,players,skaterWatch,goalieWatch]=await Promise.allSettled([
+  const [live,snapshot,players]=await Promise.allSettled([
     fetch('/api/lgchl-playoffs',{cache:'no-store',signal:AbortSignal.timeout(18000)}).then(r=>{if(!r.ok)throw Error(String(r.status));return r.json();}),
     fetch('assets/lgchl/playoffs/s55.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error(String(r.status));return r.json();}),
     fetch('https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/ecm_lgchl_s55_playoff_public_players?select=season,lg_user_id,lg_team_id,player_kind,gamertag,team_name,league,gp,goals,assists,points,saves,shots_against,goals_against,save_pct,gaa,verified,source_url,source_checked_at&verified=is.true&limit=1000',{headers:{apikey:'sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP'},cache:'no-store',signal:AbortSignal.timeout(17000)}).then(async r=>{if(!r.ok)throw Error(String(r.status));const rows=await r.json();return{skaters:rows.filter(p=>p.player_kind==='skater'),goalies:rows.filter(p=>p.player_kind==='goalie')}})
-    ,readRegularSeasonWatch('skater'),readRegularSeasonWatch('goalie')
+
   ]);
   const candidates=[live,snapshot].map((r,i)=>r.status==='fulfilled'&&r.value?.ok&&r.value?.teams&&r.value?.matchups?{data:r.value,source:i===0?'live':'snapshot'}:null).filter(Boolean).sort((a,b)=>Date.parse(b.data.fetched_at||0)-Date.parse(a.data.fetched_at||0));
   if(!candidates.length)throw Error('bracket_unavailable');
   state.data=candidates[0].data;state.source=candidates[0].source;
   state.feed=players.status==='fulfilled'?players.value:{skaters:[],goalies:[]};
-  state.spotlights={skaters:skaterWatch.status==='fulfilled'?skaterWatch.value:new Map(),goalies:goalieWatch.status==='fulfilled'?goalieWatch.value:new Map()};
   const verifiedCount=verifiedPlayerRows(state.feed,'skaters').length+verifiedPlayerRows(state.feed,'goalies').length;
   const stamp=state.data.fetched_at&&Number.isFinite(Date.parse(state.data.fetched_at))?fmtDate(state.data.fetched_at):'time unknown';
   $('psFreshness').textContent='Bracket: '+(state.source==='live'?'live feed':'saved snapshot')+' · fetched '+stamp+(state.data.stale?' · STALE':'')+' · '+verifiedCount+' verified playoff player records.';
   render();renderMatchups();
+  // Secondary enrichment cannot delay or block the primary playoff scoreboard.
+  Promise.allSettled([readRegularSeasonWatch('skater'),readRegularSeasonWatch('goalie')]).then(([s,g])=>{
+   state.spotlights={skaters:s.status==='fulfilled'?s.value:new Map(),goalies:g.status==='fulfilled'?g.value:new Map()};
+   renderMatchups();
+  }).catch(()=>{});
  }catch(e){$('psFreshness').textContent='Playoff data unavailable. No results or player stats were invented.';state.data=null;render();$('psMatchStatus').textContent='Upcoming schedule temporarily unavailable.';console.warn(e);}
 }
 document.querySelectorAll('.ps-tabs button').forEach(btn=>btn.addEventListener('click',()=>{
