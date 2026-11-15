@@ -1,0 +1,27 @@
+name: Playoff Central checks
+on:
+  pull_request:
+    paths:
+      - 'playoff-central.*'
+      - 'index.html'
+      - 'lgchl-media.html'
+      - 'supabase/migrations/*ecm_playoff_predictor*'
+      - 'tests/playoff-central.test.mjs'
+      - '.github/workflows/playoff-central-check.yml'
+  push:
+    branches: [feature/lgchl-playoff-central-predictor-s55]
+    paths:
+      - 'playoff-central.*'
+      - 'tests/playoff-central.test.mjs'
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/playoff-central.test.mjs
