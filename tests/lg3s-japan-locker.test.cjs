@@ -30,7 +30,9 @@ test('No unverified jersey numbers are published as player facts',()=>{
  assert.ok(japan.players.every(p=>p.jerseyNumber===null));
  assert.match(html,/Real player number: unverified/);
  assert.match(shell,/number:null/);
- assert.match(shell,/NOT the player/);
+ assert.match(shell,/uniform number unverified/);
+ assert.match(shell,/verified roster identity/i);
+ assert.match(html,/Changes are private to this browser/);
  assert.doesNotMatch(scene,/jerseyNumber.*\|\|\s*22/);
 });
 test('Actual 3D renderer and red/black jersey silhouette are present',()=>{
@@ -73,10 +75,26 @@ test('Mobile vertical scrolling is protected when touch orbit is disabled',()=>{
  assert.match(css,/@media\(max-width:560px\)/);
  assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
 });
-test('No local player data persistence or private Labs integration',()=>{
- assert.doesNotMatch(shell+scene,/localStorage|sessionStorage|\.from\(['"](?:private|elite_labs)|eval\(/i);
+test('Free appearance saves locally by team and player, without changing roster IDs or private Labs data',()=>{
+ assert.match(shell,/STORAGE_PREFIX='ecm:lg3s:s1:japan:custom:v1:'/);
+ assert.match(shell,/localStorage\?\.setItem\(STORAGE_PREFIX\+player\.id/);
+ assert.match(shell,/localStorage\?\.removeItem\(STORAGE_PREFIX\+player\.id/);
+ assert.match(scene,/function apply3dCustomization\(entry,custom\)/);
+ assert.match(scene,/makePlateText\(entry\.player,custom\)/);
+ assert.match(scene,/custom\.number/);
+ assert.doesNotMatch(shell+scene,/\.from\(['"](?:private|elite_labs)|eval\(/i);
  assert.match(shell,/snapshot\.capturedOn/);
  assert.match(shell,/2026-11-14\.json/);
+});
+test('Paid-only customizations are visibly locked without a fake payment flow',()=>{
+ assert.match(html,/INCLUDED · FREE/);
+ assert.match(html,/3D LOCKER UPGRADE · LOCKED/);
+ assert.match(html,/verified purchase and player ownership/i);
+ assert.ok(html.includes('id="freeCustomizeForm"'));
+ assert.ok(html.includes('id="plateDisplayName"'));
+ assert.ok(html.includes('id="saveFreeCustomization"'));
+ assert.ok(html.includes('id="resetFreeCustomization"'));
+ assert.doesNotMatch(html,/href="[^"]*(?:checkout|stripe)[^"]*"/i);
 });
 test('All authored JavaScript files parse and CSS blocks balance',()=>{
  new Function(shell);
