@@ -38,5 +38,5 @@ test('Full ranking presentation retains same hockey card routes and separates se
  assert.match(full,/playoff-stats\.html/);
  assert.match(css,/--lb-crest/);
  assert.match(power,/tid===465&&num\(s\.l\)/);
- assert.match(power,/reported 22-loss adjustment/);
+ assert.match(power,/[Rr]eported 22-loss adjustment/);
 });
