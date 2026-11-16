@@ -62,7 +62,8 @@
   }
   fetch(s.dataset.recaps, { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (j) {
     var list = j.nights || [];
-    if (!list.length) { body.innerHTML = '<p class="empty">No recaps yet.</p>'; return; }
+    if (s.hasAttribute('data-postseason')) list = list.filter(n=>n.phase==='playoffs'||/playoff|wildcard|postseason/i.test(n.label));
+    if (!list.length) { body.innerHTML = '<p class="empty">No game recaps have been published yet.</p>'; return; }
     nights.innerHTML = list.map(function (n) { return '<button type="button" data-file="' + esc(n.file) + '">' + esc(n.label) + '</button>'; }).join('');
     nights.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) list.forEach(function (n) { if (n.file === b.dataset.file) load(n); }); });
     load(list[0]);

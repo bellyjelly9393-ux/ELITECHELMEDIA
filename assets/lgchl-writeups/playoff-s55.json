@@ -1,0 +1,32 @@
+{
+  "weeks": [
+    {
+      "id": "s55-wildcard",
+      "label": "Wildcard round",
+      "range": "Season 55 · Opening round",
+      "items": [
+        {
+          "id": "wu-s55-playoff-whl",
+          "kind": "Series guide",
+          "date": "2026-11-15",
+          "title": "WHL wildcard preview",
+          "html": "<p>Two 5-vs-4 series split the spotlight. Swift Current faces Red Deer in the East, while Victoria meets Penticton in the West. Each series is first to four wins.</p><ul><li>No. 6 Chilliwack Bruins vs. No. 3 Edmonton Oil Kings</li><li>No. 5 Swift Current Broncos vs. No. 4 Red Deer Rebels</li><li>No. 6 Kelowna Rockets vs. No. 2 Tri City Americans</li><li>No. 5 Victoria Royals vs. No. 4 Penticton Vees</li></ul><p><a href=\"playoff-hq.html#scoreboard\">Game schedules and results →</a></p>"
+        },
+        {
+          "id": "wu-s55-playoff-ohl",
+          "kind": "Series guide",
+          "date": "2026-11-15",
+          "title": "OHL wildcard preview",
+          "html": "<p>Sarnia opens against Erie, while Sudbury draws Brampton. Both No. 2 seeds face a wildcard series before they can advance. Each series is first to four wins.</p><ul><li>No. 6 Kingston Frontenacs vs. No. 3 North Bay Battalion</li><li>No. 4 Brampton Steelheads vs. No. 2 Sudbury Wolves</li><li>No. 6 Erie Otters vs. No. 2 Sarnia Sting</li><li>No. 5 Flint Firebirds vs. No. 4 Saginaw Spirit</li></ul><p><a href=\"playoff-hq.html#scoreboard\">Game schedules and results →</a></p>"
+        },
+        {
+          "id": "wu-s55-playoff-qmjhl",
+          "kind": "Series guide",
+          "date": "2026-11-15",
+          "title": "QMJHL wildcard preview",
+          "html": "<p>The two conferences have the same seed pairings. Both No. 3 seeds draw a No. 6, and both No. 4 seeds open against a No. 5. Each series is first to four wins.</p><ul><li>No. 6 Charlottetown Islanders vs. No. 3 Cape Breton Eagles</li><li>No. 5 Quebec Remparts vs. No. 4 Chicoutimi Sagueneens</li><li>No. 6 Shawinigan Cataractes vs. No. 3 Victoriaville Tigres</li><li>No. 5 Blainville-Boisbriand Armada vs. No. 4 Val-d'Or Foreurs</li></ul><p><a href=\"playoff-hq.html#scoreboard\">Game schedules and results →</a></p>"
+        }
+      ]
+    }
+  ]
+}
