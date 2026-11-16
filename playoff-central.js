@@ -122,7 +122,7 @@
   async function loadSeries() {
     const client = db();
     if (!client) { $('pcEntryStatus').textContent = 'Account connection unavailable'; return; }
-    const { data, error } = await client.from('ecm_playoff_series').select('id,season,round_no,league,conference,team_a,team_b,seed_a,seed_b,lock_at,is_open,confirmed_winner_id,actual_games').eq('season',55).order('round_no').order('id');
+    const { data, error } = await client.from('ecm_playoff_series').select('id,season,round_no,league,conference,team_a,team_b,seed_a,seed_b,lock_at,original_lock_at,is_open,confirmed_winner_id,actual_games').eq('season',55).order('round_no').order('id');
     if (error) {
       $('pcEntryStatus').textContent = 'Contest configuration pending';
       $('pcBallotStatus').textContent = 'Entries are not open yet. Scoreboard results remain available above.';
@@ -138,7 +138,7 @@
     const client=db(), who=user();
     if (!client || !who) { renderBallot(); return; }
     const [p,h] = await Promise.all([
-      client.from('ecm_playoff_picks').select('series_id,winner_id,games').eq('user_id',who.id),
+      client.from('ecm_playoff_picks').select('series_id,winner_id,games,is_late').eq('user_id',who.id),
       client.from('ecm_playoff_handles').select('handle').eq('user_id',who.id).maybeSingle()
     ]);
     if (!p.error) (p.data || []).forEach(x => state.saved.set(seriesKey(x.series_id),x));
@@ -148,7 +148,19 @@
   }
 
   function roundSeries() { return state.series.filter(s => s.round_no === Number($('pcPickRound').value)); }
-  function canEnter(items) { return items.length>0 && !!user() && items.every(s => s.is_open && Date.parse(s.lock_at)>Date.now()); }
+  function isLateRound(items) {
+    return items.some(s => s.original_lock_at && Date.parse(s.original_lock_at) <= Date.now());
+  }
+  function earlyBallotFrozen(items) {
+    return isLateRound(items) && items.some(s => {
+      const saved = state.saved.get(seriesKey(s.id));
+      return saved && saved.is_late === false;
+    });
+  }
+  function canEnter(items) {
+    return items.length>0 && !!user() && !earlyBallotFrozen(items) &&
+      items.every(s => s.is_open && Date.parse(s.lock_at)>Date.now() && !s.confirmed_winner_id);
+  }
 
   function renderBallot() {
     const items = roundSeries();
@@ -161,11 +173,14 @@
       $('pcEntryStatus').textContent = state.dbReady ? 'Round not published' : 'Preparing contest';
       return;
     }
-    $('pcEntryStatus').textContent = ready ? 'Entries open · all series required' : !user() ? 'Sign in to predict' : 'Predictions locked or awaiting launch';
+    const late=isLateRound(items),frozen=earlyBallotFrozen(items);
+    $('pcEntryStatus').textContent = frozen ? 'Original ballot safely locked' : ready ?
+      (late ? 'Late-entry community picks OPEN' : 'Entries open · all series required') :
+      !user() ? 'Sign in to predict' : 'Predictions locked or awaiting launch';
     el.innerHTML=items.map(s=>{
       const a=team(s.team_a),b=team(s.team_b);
       const selected = state.picks.get(seriesKey(s.id)) || state.saved.get(seriesKey(s.id)) || {};
-      const locked = !s.is_open || Date.parse(s.lock_at) <= Date.now() || !user();
+      const locked = !canEnter(items);
       const winner = number(selected.winner_id);
       const games = number(selected.games) || 6;
       const choice=(t,side,id,seed)=>{
@@ -182,9 +197,14 @@
         '</div></div></div>';
     }).join('');
     const incomplete=items.filter(s => !(state.picks.get(seriesKey(s.id))||state.saved.get(seriesKey(s.id)))?.winner_id);
-    $('pcBallotStatus').textContent = !user() ? 'Sign into your EliteChel account in the panel to enter.' :
-      ready ? 'Choose the winner in every series, then submit. ' + incomplete.length + ' picks still needed.' :
-      'This round is closed or is not yet officially open for entries.';
+    const savedAll=items.every(s => state.saved.has(seriesKey(s.id))) && !state.picks.size;
+    $('pcBallotStatus').textContent = !user() ? 'Sign into your EliteChel account to join the challenge.' :
+      frozen ? 'Your original on-time picks are frozen to protect their leaderboard eligibility. Round 2 opens when the new matchups are announced.' :
+      ready && savedAll ? (late ? 'Late-entry ballot saved. Round 1 is community-only, and you can edit these picks until the posted lock. You can compete for full points starting Round 2.' :
+        'Your complete ballot is saved. It stays editable until its original lock time.') :
+      ready ? (late ? 'LATE-ENTRY WINDOW: Round 1 picks are for community participation, without Round 1 points or grand-prize eligibility. Your picks count normally starting Round 2. ' :
+        'Choose the winner in every series. ') + incomplete.length + ' picks still needed. Close: ' + et(items[0].lock_at) + '.' :
+      'This round is closed or awaiting publication. New rounds open when their matchups are confirmed.';
   }
 
   async function submitBallot() {
@@ -208,8 +228,8 @@
     const {data,error}=await client.rpc('ecm_predictor_submit_ballot',{p_round:Number($('pcPickRound').value),p_handle:handle,p_ballot:ballot});
     if (error) $('pcBallotStatus').textContent='Unable to save: ' + (error.message||'Try again.');
     else {
-      ballot.forEach(x=>state.saved.set(seriesKey(x.series_id),x));state.picks.clear();
-      $('pcBallotStatus').textContent='Ballot saved for this round. You can revise it before the first game locks.';
+      ballot.forEach(x=>state.saved.set(seriesKey(x.series_id),{...x,is_late:data?.late===true}));state.picks.clear();
+      $('pcBallotStatus').textContent=data?.late ? 'Late-entry community ballot saved, with Round 2 full scoring available.' : 'On-time ballot saved.';
       await loadLeaderboard();
     }
     renderBallot();
@@ -224,7 +244,7 @@
     $('pcLeaderNotice').textContent='Leaderboard reflects confirmed outcomes only. Updated ' + et(new Date().toISOString()) + '.';
     $('pcLeaders').innerHTML=data.map(r=>'<tr><td>' + esc(r.rank) + '</td><td>' + esc(r.handle) + '</td><td>' +
       esc(r.points) + '</td><td>' + esc(r.correct_winners) + '</td><td>' + esc(r.exact_calls) + '</td><td>' +
-      esc(r.upset_calls) + '</td><td>' + esc(r.perfect_rounds) + '</td><td>' + (r.grand_prize_eligible ? 'Eligible' : 'Missed round') + '</td></tr>').join('');
+      esc(r.upset_calls) + '</td><td>' + esc(r.perfect_rounds) + '</td><td>' + (r.grand_prize_eligible ? 'Eligible' : 'Late / incomplete') + '</td></tr>').join('');
   }
 
   document.querySelectorAll('#scoreboard [data-league]').forEach(button=>button.addEventListener('click',()=>{
