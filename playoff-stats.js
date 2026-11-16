@@ -11,13 +11,23 @@ function completedGame(g){
  return g&&String(g.status).toLowerCase()==='final'&&safeId(g.id)&&safeId(g.away)&&safeId(g.home)&&
  [g.away_score,g.home_score].every(v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))&&Number(v)>=0)&&Number(g.away_score)!==Number(g.home_score);
 }
+function playoffSlots(data){
+ const slots=[];
+ for(const league of data?.leagues||[]){
+  for(const conf of league.conferences||[])for(const round of conf.rounds||[])slots.push(...(round.slots||[]));
+  if(league.final)slots.push(league.final);
+ }
+ if(data?.championship?.semi)slots.push(data.championship.semi);
+ if(data?.championship?.final)slots.push(data.championship.final);
+ return slots;
+}
 function aggregateTeams(data){
  const teams=Object.values(data?.teams||{}).filter(t=>safeId(t.id)).map(t=>({
    id:Number(t.id),name:String(t.name||t.nick||'Team'),nick:String(t.nick||t.name||'Team'),league:String(t.league||''),
    logo:String(t.logo||('assets/lgchl/s55/team'+Number(t.id)+'.png')),gp:0,w:0,l:0,gf:0,ga:0,gd:0
  }));
  const byId=new Map(teams.map(t=>[t.id,t])),seen=new Set();
- for(const match of Object.values(data?.matchups||{})){
+ for(const match of playoffSlots(data)){
    for(const g of match.games||[]){
      if(!completedGame(g)||seen.has(Number(g.id)))continue;
      seen.add(Number(g.id));
@@ -35,10 +45,10 @@ function verifiedPlayerRows(feed,kind){
  return rows.sort((a,b)=>kind==='skaters'?Number(b.points||0)-Number(a.points||0)||Number(b.goals||0)-Number(a.goals||0):Number(b.save_pct||0)-Number(a.save_pct||0)||Number(a.gaa||99)-Number(b.gaa||99));
 }
 function nextSeries(data){
- return Object.entries(data?.matchups||{}).map(([id,m])=>{
-   const sides=(m.entries||[]).slice(0,2).map(e=>({...e,team:data.teams?.[e.team_id]||null}));
-   const future=(m.games||[]).filter(g=>g.status==='scheduled'&&g.at&&Date.parse(g.at)>=Date.now()-3600000).sort((a,b)=>Date.parse(a.at)-Date.parse(b.at))[0];
-   return{ id, sides, game:future,match:m };
+ return playoffSlots(data).filter(m=>m?.kind==='series').map(m=>{
+  const sides=(m.sides||[]).slice(0,2).map(x=>({...x,team:data.teams?.[x.team_id]||null}));
+  const future=(m.games||[]).filter(g=>g.status==='scheduled'&&g.at&&Date.parse(g.at)>=Date.now()-3600000).sort((a,b)=>Date.parse(a.at)-Date.parse(b.at))[0];
+  return{id:m.id,sides,game:future,match:m};
  }).filter(m=>m.sides.length===2&&m.sides.every(s=>s.team)&&m.game).sort((a,b)=>Date.parse(a.game.at)-Date.parse(b.game.at)).slice(0,12);
 }
 if(typeof module!=='undefined'&&module.exports){module.exports={aggregateTeams,verifiedPlayerRows,completedGame,nextSeries};return;}
@@ -47,7 +57,7 @@ const state={mode:'teams',league:'ALL',search:'',data:null,feed:null,source:'',s
 const logo=t=>{const id=safeId(t.id||t.lg_team_id);return id?'assets/lgchl/s55/team'+id+'.png':'assets/brand/ecm-crest.webp';};
 const personCard=(p,kind)=>{
  const id=safeId(p.lg_user_id),team=safeId(p.lg_team_id),value=kind==='skaters'?Number(p.points):Number(p.save_pct)*100;
- const sub=kind==='skaters'?('GP '+Number(p.gp)+' · G '+Number(p.goals||0)+' · A '+Number(p.assists||0)):('GP '+Number(p.gp)+' · GAA '+(Number.isFinite(Number(p.gaa))?Number(p.gaa).toFixed(2):'—'));
+ const sub=kind==='skaters'?('GP '+Number(p.gp)+' · G '+Number(p.goals||0)+' · A '+Number(p.assists||0)):('GP '+Number(p.gp)+' · GAA '+(p.gaa!==null&&p.gaa!==undefined&&Number.isFinite(Number(p.gaa))?Number(p.gaa).toFixed(2):'—'));
  const score=Number.isFinite(value)?(kind==='skaters'?String(value):value.toFixed(1)+'%'):'—';
  return '<article class="ps-team-card" style="--ps-crest:url('+logo({id:team})+')"><div class="ps-identity"><img src="'+logo({id:team})+'" alt="" loading="lazy"><div><h3>'+esc(p.gamertag||'Player')+'</h3><p>'+esc(p.team_name||'Playoff team')+' · '+esc(sub)+'</p></div></div><strong class="ps-value">'+esc(score)+'<small>'+(kind==='skaters'?'PTS':'SV%')+'</small></strong><a class="ps-link" href="player-cards.html?league=lgchl&amp;id='+id+'&amp;kind='+(kind==='skaters'?'skater':'goalie')+'">Season 55 Hockey Card →</a></article>';
 };
@@ -102,7 +112,7 @@ async function load(){
     fetch('https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/ecm_lgchl_s55_playoff_public_players?select=season,lg_user_id,lg_team_id,player_kind,gamertag,team_name,league,gp,goals,assists,points,saves,shots_against,goals_against,save_pct,gaa,verified,source_url,source_checked_at&verified=is.true&limit=1000',{headers:{apikey:'sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP'},cache:'no-store',signal:AbortSignal.timeout(17000)}).then(async r=>{if(!r.ok)throw Error(String(r.status));const rows=await r.json();return{skaters:rows.filter(p=>p.player_kind==='skater'),goalies:rows.filter(p=>p.player_kind==='goalie')}})
 
   ]);
-  const candidates=[live,snapshot].map((r,i)=>r.status==='fulfilled'&&r.value?.ok&&r.value?.teams&&r.value?.matchups?{data:r.value,source:i===0?'live':'snapshot'}:null).filter(Boolean).sort((a,b)=>Date.parse(b.data.fetched_at||0)-Date.parse(a.data.fetched_at||0));
+  const candidates=[live,snapshot].map((r,i)=>r.status==='fulfilled'&&r.value?.ok&&r.value?.teams&&r.value?.leagues?.length?{data:r.value,source:i===0?'live':'snapshot'}:null).filter(Boolean).sort((a,b)=>Date.parse(b.data.fetched_at||0)-Date.parse(a.data.fetched_at||0));
   if(!candidates.length)throw Error('bracket_unavailable');
   state.data=candidates[0].data;state.source=candidates[0].source;
   state.feed=players.status==='fulfilled'?players.value:{skaters:[],goalies:[]};
