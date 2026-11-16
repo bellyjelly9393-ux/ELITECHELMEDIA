@@ -94,7 +94,9 @@ function renderMatchups(){
  $('psMatchups').innerHTML=games.map(m=>{
   const a=m.sides[0],b=m.sides[1],ta=a.team,tb=b.team,seedA=Number(a.seed||ta.seed),seedB=Number(b.seed||tb.seed);
   const favored=seedA>0&&seedB>0&&seedA!==seedB?(seedA<seedB?ta:tb):null;
-  const angle=favored?esc(favored.name)+' enters as the higher seed. The opening games will show whether that advantage translates into results.':'The teams begin the series with everything to prove. Game results will establish the early edge.';
+  const seriesScore=Array.isArray(m.match?.score)&&m.match.score.length===2?m.match.score.map(Number):null;
+  const scoreLabel=seriesScore?'After two games: '+seriesScore[0]+'–'+seriesScore[1]+' ('+esc(ta.nick||ta.name)+'–'+esc(tb.nick||tb.name)+'). ':'';
+  const angle=scoreLabel+(favored?esc(favored.name)+' is the higher seed. Game 3 brings the next test.':'Game 3 is the next chance to change the series.');
   const skA=state.spotlights.skaters.get(Number(ta.id)),skB=state.spotlights.skaters.get(Number(tb.id));
   const gaA=state.spotlights.goalies.get(Number(ta.id)),gaB=state.spotlights.goalies.get(Number(tb.id));
   const scorer=p=>p?esc(p.gamertag)+' ('+Number(p.points)+' PTS in '+Number(p.gp)+' GP)':'not yet verified';
