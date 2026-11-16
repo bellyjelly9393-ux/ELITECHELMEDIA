@@ -199,11 +199,12 @@
     }).join('');
     const incomplete=items.filter(s => !(state.picks.get(seriesKey(s.id))||state.saved.get(seriesKey(s.id)))?.winner_id);
     const savedAll=items.every(s => state.saved.has(seriesKey(s.id))) && !state.picks.size;
+    const savedCount=items.filter(s => state.saved.has(seriesKey(s.id))).length;
     $('pcBallotStatus').textContent = !user() ? 'Sign into your EliteChel account to join the challenge.' :
       frozen ? 'Your original on-time picks are frozen to protect their leaderboard eligibility. Round 2 opens when the new matchups are announced.' :
       ready && savedAll ? (late ? 'Late-entry ballot saved. Round 1 is community-only, and you can edit these picks until the posted lock. You can compete for full points starting Round 2.' :
         'Your complete ballot is saved. It stays editable until its original lock time.') :
-      ready ? (late ? 'LATE-ENTRY WINDOW: Pick one matchup or all twelve. Save and return to finish later. Community picks do not earn Round 1 points or grand-prize eligibility; new entrants can score normally from Round 2. ' :
+      ready ? (late ? 'LATE-ENTRY WINDOW: Pick one matchup or all twelve. Save and return to finish later. Community picks do not earn Round 1 points or grand-prize eligibility; new entrants can score normally from Round 2. ' + savedCount + ' of ' + items.length + ' picks saved. ' :
         'Choose the winner in every series. ') + (late ? incomplete.length + ' series still unpicked.' : incomplete.length + ' picks still needed.') + ' Close: ' + et(items[0].lock_at) + '.' :
       'This round is closed or awaiting publication. New rounds open when their matchups are confirmed.';
   }
