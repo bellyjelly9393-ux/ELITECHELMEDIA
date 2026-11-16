@@ -168,6 +168,7 @@
     const el = $('pcBallot');
     const button = $('pcSubmit');
     button.disabled = !ready;
+    button.textContent = isLateRound(items) ? 'Save community picks' : 'Submit complete round ballot';
     if (!items.length) {
       el.innerHTML='<p class="pc-ballot-empty">Matchups for this round are not ready for predictions yet. Check the live scoreboards above.</p>';
       $('pcEntryStatus').textContent = state.dbReady ? 'Round not published' : 'Preparing contest';
@@ -202,8 +203,8 @@
       frozen ? 'Your original on-time picks are frozen to protect their leaderboard eligibility. Round 2 opens when the new matchups are announced.' :
       ready && savedAll ? (late ? 'Late-entry ballot saved. Round 1 is community-only, and you can edit these picks until the posted lock. You can compete for full points starting Round 2.' :
         'Your complete ballot is saved. It stays editable until its original lock time.') :
-      ready ? (late ? 'LATE-ENTRY WINDOW: Round 1 picks are for community participation, without Round 1 points or grand-prize eligibility. Your picks count normally starting Round 2. ' :
-        'Choose the winner in every series. ') + incomplete.length + ' picks still needed. Close: ' + et(items[0].lock_at) + '.' :
+      ready ? (late ? 'LATE-ENTRY WINDOW: Pick one matchup or all twelve. Save and return to finish later. Community picks do not earn Round 1 points or grand-prize eligibility; new entrants can score normally from Round 2. ' :
+        'Choose the winner in every series. ') + (late ? incomplete.length + ' series still unpicked.' : incomplete.length + ' picks still needed.') + ' Close: ' + et(items[0].lock_at) + '.' :
       'This round is closed or awaiting publication. New rounds open when their matchups are confirmed.';
   }
 
@@ -215,12 +216,15 @@
       $('pcBallotStatus').textContent='Use a 3–24 character name starting with a letter or number. Letters, numbers, spaces, periods, underscores and dashes are allowed.';
       return;
     }
+    const late=isLateRound(items);
     const ballot=items.map(s=>{
       const v=state.picks.get(seriesKey(s.id))||state.saved.get(seriesKey(s.id))||{};
       return {series_id:s.id,winner_id:number(v.winner_id),games:number(v.games)||6};
-    });
-    if (ballot.some(x=>x.winner_id===null)) {
-      $('pcBallotStatus').textContent='Pick a winner in every series before submitting.';
+    }).filter(x=>x.winner_id!==null);
+    if ((late && ballot.length===0) || (!late && ballot.length!==items.length)) {
+      $('pcBallotStatus').textContent=late ?
+        'Choose at least one series winner before saving your community picks.' :
+        'Pick a winner in every series before submitting.';
       return;
     }
     $('pcSubmit').disabled=true;
