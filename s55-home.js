@@ -129,7 +129,7 @@ async function refresh() {
 refresh();setInterval(refresh,120000);
 
 // Keep previously shared homepage links pointed at the full, interactive tools.
-const fullPageSections = ['predictor','playoffs','scoreboard','leaderboard','community','contest-rules'];
+const fullPageSections = ['playoffs','scoreboard','community'];
 if (fullPageSections.includes(location.hash.slice(1))) location.replace('playoff-hq.html'+location.hash);
 
 function showCupFromLink() {

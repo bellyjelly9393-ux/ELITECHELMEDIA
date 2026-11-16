@@ -83,6 +83,7 @@
   }
 
   function renderScoreboard() {
+    if (!$('pcScoreGrid')) return;
     const result = slots().filter(s => {
       if (state.league !== 'ALL' && s.league !== state.league) return false;
       if (state.round !== 'ALL' && s.round !== state.round) return false;
@@ -100,17 +101,17 @@
       const data = await res.json();
       if (!data.leagues?.length) throw new Error('no bracket');
       state.bracket = data;
-      notice.textContent = data.stale ? 'Live updates unavailable. Showing the most recent saved bracket.' : '';
-      $('pcUpdated').textContent = (data.stale ? 'Saved bracket' : 'Bracket refreshed') + ' · ' + et(data.fetched_at);
+      if (notice) notice.textContent = data.stale ? 'Live updates unavailable. Showing the most recent saved bracket.' : '';
+      if ($('pcUpdated')) $('pcUpdated').textContent = (data.stale ? 'Saved bracket' : 'Bracket refreshed') + ' · ' + et(data.fetched_at);
     } catch {
       try {
         const res = await fetch('assets/lgchl/playoffs/s55.json', {cache:'no-cache'});
         if (!res.ok) throw new Error('no snapshot');
         state.bracket = await res.json();
-        $('pcUpdated').textContent = 'Saved bracket · ' + et(state.bracket.fetched_at);
-        notice.textContent = 'League feed unavailable. Showing a saved snapshot, which may be out of date.';
+        if ($('pcUpdated')) $('pcUpdated').textContent = 'Saved bracket · ' + et(state.bracket.fetched_at);
+        if (notice) notice.textContent = 'League feed unavailable. Showing a saved snapshot, which may be out of date.';
       } catch {
-        notice.textContent = 'Unable to load the league bracket. Use the official LeagueGaming link above.';
+        if (notice) notice.textContent = 'Unable to load the league bracket. Use the official LeagueGaming link above.';
       }
     }
     renderScoreboard();
@@ -226,12 +227,12 @@
       esc(r.upset_calls) + '</td><td>' + esc(r.perfect_rounds) + '</td><td>' + (r.grand_prize_eligible ? 'Eligible' : 'Missed round') + '</td></tr>').join('');
   }
 
-  document.querySelectorAll('[data-league]').forEach(button=>button.addEventListener('click',()=>{
+  document.querySelectorAll('#scoreboard [data-league]').forEach(button=>button.addEventListener('click',()=>{
     state.league=button.dataset.league;
-    document.querySelectorAll('[data-league]').forEach(b=>b.classList.toggle('is-on',b===button));
+    document.querySelectorAll('#scoreboard [data-league]').forEach(b=>b.classList.toggle('is-on',b===button));
     renderScoreboard();
   }));
-  $('pcScoreRound').addEventListener('change',e=>{state.round=e.target.value;renderScoreboard();});
+  $('pcScoreRound')?.addEventListener('change',e=>{state.round=e.target.value;renderScoreboard();});
   $('pcPickRound').addEventListener('change',()=>{state.picks.clear();renderBallot();});
   $('pcLeaderRound').addEventListener('change',loadLeaderboard);
   $('pcSubmit').addEventListener('click',submitBallot);

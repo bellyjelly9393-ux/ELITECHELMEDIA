@@ -151,7 +151,7 @@ a{color:#f0c14b}a:hover{color:#ffd978}
 .foot a{color:#c9cdd5;text-decoration:none;font-size:14px;display:inline-flex;align-items:center;min-height:44px}
 .foot a:hover{color:#fff}
 </style>
-<style>*{box-sizing:border-box}.nav{position:relative;z-index:10}.nl details{position:relative}.nl summary{cursor:pointer;padding:12px;color:#f0c14b;border:1px solid #aa8636}.nl details nav{position:absolute;right:0;min-width:195px;background:#12141a;border:1px solid #aa8636;box-shadow:0 8px 16px #0009}.nl details a:hover{background:#56232b}@media(max-width:700px){.nl{position:relative}.nl details{position:static}.nl details nav{right:0;left:0;max-height:55vh;overflow:auto}.nav-in{padding-bottom:8px}}[hidden]{display:none!important}[data-round]{display:contents}</style><link rel="icon" href="assets/brand/ecm-crest.webp"><style>#league-view,.c-mid,.c-mid .pb{min-width:0}.bk-scroll{max-width:100%}</style><link rel="stylesheet" href="lgchl-segments-home.css?v=20261115-s55a"></head><body><div class="pg" style="min-height: 100vh">
+<style>*{box-sizing:border-box}.nav{position:relative;z-index:10}.nl details{position:relative}.nl summary{cursor:pointer;padding:12px;color:#f0c14b;border:1px solid #aa8636}.nl details nav{position:absolute;right:0;min-width:195px;background:#12141a;border:1px solid #aa8636;box-shadow:0 8px 16px #0009}.nl details a:hover{background:#56232b}@media(max-width:700px){.nl{position:relative}.nl details{position:static}.nl details nav{right:0;left:0;max-height:55vh;overflow:auto}.nav-in{padding-bottom:8px}}[hidden]{display:none!important}[data-round]{display:contents}</style><link rel="icon" href="assets/brand/ecm-crest.webp"><style>#league-view,.c-mid,.c-mid .pb{min-width:0}.bk-scroll{max-width:100%}</style><link rel="stylesheet" href="lgchl-segments-home.css?v=20261115-s55a"><link rel="stylesheet" href="s55-predictor.css"></head><body><div class="pg" style="min-height: 100vh">
 
 <header class="nav">
 <div class="wrap nav-in">
@@ -163,7 +163,7 @@ a{color:#f0c14b}a:hover{color:#ffd978}
 <a class="on" href="#top" aria-current="page">Home</a>
 <a href="#bracket">Playoffs</a>
 <a href="#episodes">Episodes</a>
-<a href="playoff-hq.html#predictor">Predictor</a>
+<a href="#predictor">Predictor</a>
 <a href="#scores">Scores</a>
 <a href="#leagues">Teams</a>
 <details><summary>All Media ▾</summary><nav aria-label="Other EliteChel Media coverage"><a href="lgchl-media.html">LGCHL Media</a><a href="esports-hub.html">Live Hub</a><a href="lg3s-media.html">LG3s</a><a href="interest.html?program=hut">HUT Tournament</a></nav></details>
@@ -204,7 +204,7 @@ a{color:#f0c14b}a:hover{color:#ffd978}
 </div></div>
 </section>
 
-<section class="pw" id="predictor" aria-labelledby="prT">
+<section class="pw" id="predictor-card" aria-labelledby="prT">
 <div class="pnl"><div class="pin">
 <div class="ph" style="border-bottom-color: #d4a017">
 <span class="ph-ic gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 20h8"></path></svg></span>
@@ -218,8 +218,8 @@ a{color:#f0c14b}a:hover{color:#ffd978}
 <div><b>+5</b><span>UPSET</span></div>
 </div>
 <p class="mono" style="margin: 0; font-size: 11px; letter-spacing: .08em; color: #aab0bb">ROUND 1 PICKS LOCK NOV 15 · 9:00 PM ET</p>
-<span class="bw" style="margin-top: auto"><a class="btn gold" href="playoff-hq.html#predictor">Make your picks <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"></path></svg></a></span>
-<p style="display:flex;justify-content:space-between;margin:0"><a href="playoff-hq.html#leaderboard">Leaderboard</a><a href="playoff-hq.html#contest-rules">Rules</a></p></div></div></div></section>
+<span class="bw" style="margin-top: auto"><a class="btn gold" href="#predictor">Make your picks <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"></path></svg></a></span>
+<p style="display:flex;justify-content:space-between;margin:0"><a href="#leaderboard">Leaderboard</a><a href="#contest-rules">Rules</a></p></div></div></div></section>
 </div>
 
 <section class="pw c-mid" id="bracket" aria-labelledby="bkT">
@@ -302,6 +302,45 @@ a{color:#f0c14b}a:hover{color:#ffd978}
   </div>
 </section>
 
+<div id="fan-tools"><section class="pc-section pc-section-alt" id="predictor" aria-labelledby="predictTitle">
+    <div class="pc-wide">
+      <div class="pc-section-head"><div><p class="pc-overline">THE FANS</p><h2 id="predictTitle">PLAYOFF <span>PREDICTOR</span></h2><p>Choose every winner and predict the exact series length. Compete round after round.</p></div><div class="pc-points"><b>10</b> winner <span>+</span> <b>5</b> exact <span>+</span> <b>5</b> upset</div></div>
+      <div class="pc-predict-layout">
+        <div class="pc-prediction-card">
+          <div class="pc-subhead"><h3>YOUR ROUND BALLOT</h3><span id="pcEntryStatus">Checking contest status</span></div>
+          <div class="pc-fields"><label>Leaderboard name<input id="pcHandle" maxlength="24" minlength="3" autocomplete="nickname" placeholder="Your gamertag" aria-describedby="pcHandleHint"></label><label>Round<select id="pcPickRound"><option value="1">Wildcard · Round 1</option><option value="2">Divisional · Round 2</option><option value="3">Conference semifinals · Round 3</option><option value="4">Conference finals · Round 4</option><option value="5">Cup qualifier · Round 5</option><option value="6">Memorial Cup final · Round 6</option></select></label></div>
+          <p class="pc-footnote" id="pcHandleHint">One account per entrant. Your chosen name is public on the leaderboard.</p>
+          <div id="pcBallot" class="pc-ballot"></div>
+          <button id="pcSubmit" class="pc-primary pc-submit" disabled type="button">Submit complete round ballot</button>
+          <p id="pcBallotStatus" class="pc-notice" role="status">Loading the round ballot…</p>
+        </div>
+        <aside class="pc-account">
+          <p class="pc-overline">YOUR ELITECHEL ACCOUNT</p>
+          <section id="accountPanel" class="account-panel"><p>Loading account…</p></section>
+          <div class="pc-rules"><h3>HOW TO WIN</h3><p><b>+10</b> Pick the series winner.</p><p><b>+5</b> Correct winner and exact games (4–7).</p><p><b>+5</b> Correct lower-seed upset.</p><p><b>+20</b> Perfect round: every winner and exact length correct, minimum two series.</p><p>Grand-prize eligibility requires a complete ballot in every available round before the lock. Missing a round does not remove you from the weekly scoreboard.</p><a href="#contest-rules" class="pc-text-link">Contest information ↗</a></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+<section class="pc-section pc-wide" id="leaderboard" aria-labelledby="leaderTitle">
+    <div class="pc-section-head"><div><p class="pc-overline">THE STANDINGS</p><h2 id="leaderTitle">PREDICTOR <span>LEADERBOARD</span></h2><p>Officially confirmed series are the only results that award points.</p></div><label class="pc-select-label">Ranking <select id="pcLeaderRound"><option value="ALL">Overall</option><option value="1">Round 1</option><option value="2">Round 2</option><option value="3">Round 3</option><option value="4">Round 4</option><option value="5">Round 5</option><option value="6">Round 6</option></select></label></div>
+    <div class="pc-table-shell"><table><thead><tr><th>Rank</th><th>Predictor</th><th>Points</th><th>Winners</th><th>Exact</th><th>Upsets</th><th>Perfect</th><th>Grand Prize</th></tr></thead><tbody id="pcLeaders"><tr><td colspan="8">Leaderboard opens after the contest is configured.</td></tr></tbody></table></div>
+    <p id="pcLeaderNotice" class="pc-notice" role="status"></p>
+  </section>
+<section class="pc-rules-section pc-wide" id="contest-rules" aria-labelledby="pcRulesTitle">
+    <p class="pc-overline">HOW THE CONTEST WILL WORK</p>
+    <h2 id="pcRulesTitle">PREDICTOR RULES <span class="pc-proposed">· SEASON 55</span></h2>
+    <p id="pcRulesStatus">Sign in and submit all 12 Round 1 picks before November 15 at 9 p.m. Eastern. Entry is free. Play for leaderboard points. Prize details are pending.</p>
+    <ol class="pc-rule-list">
+      <li>Submit a complete winner and series-length prediction for every matchup in every playoff round to remain in grand-prize contention.</li>
+      <li>Predictions lock before the scheduled start of the series. No changes after the lock.</li>
+      <li>One account per person. Officially verified series results determine points and rankings.</li>
+      <li>A one-time share of an official EliteChel Media playoff video in a community that permits promotion is planned. Exact proof and eligibility requirements will be announced after the contest review. Never spam a server.</li>
+      <li>No purchase is required. Prize terms and eligibility will be announced separately.</li>
+    </ol>
+    <p class="pc-footnote">EliteChel Media is independent fan coverage. LeagueGaming retains its own official results and rules.</p>
+  </section>
+<nav class="central-links pc-wide" aria-label="Playoff Central shortcuts"><h2>Playoff Central</h2><div><a href="#episodes"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z M10 9l5 3-5 3z"/></svg>Episodes</a><a href="#playoffs"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h5v6H2 M2 14h5v6H2 M7 7h5v10H7 M12 12h8"/></svg>Bracket</a><a href="#scoreboard"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2z M12 5v14 M5 9h3v5H5z M16 9h3v5h-3z"/></svg>Scores</a><a href="lgchl-media.html"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8h6v5H6z M15 8h3 M15 11h3 M6 16h12"/></svg>LGCHL Desk</a><a href="lgchl-media.html#lgRadioSec"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0z M6 10v1a6 6 0 0 0 12 0v-1 M12 17v4 M8 21h8"/></svg>Hitmen Radio</a><a href="esports-hub.html"><svg class="tile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4q-5 8 0 16 M7 7q-3 5 0 10 M20 4q5 8 0 16 M17 7q3 5 0 10 M10 9l5 3-5 3z"/></svg>Live Hub</a></div></nav></div>
 <nav class="tiles" id="leagues" aria-label="League brackets">
 <a class="tile" href="#bracket" data-league="OHL"><img style="width:100%;height:auto" src="assets/s55-design/6220680691753ec4ef2a24444790f42a.png" alt="OHL playoff bracket"></a><a class="tile" href="#bracket" data-league="WHL"><img style="width:100%;height:auto" src="assets/s55-design/2fcb71c77cca6c93fef3cfc5e3e0e638.png" alt="WHL playoff bracket"></a><a class="tile" href="#bracket" data-league="QMJHL"><img style="width:100%;height:auto" src="assets/s55-design/bb29c558b5c20a2da69c3e03a1526a7e.png" alt="QMJHL playoff bracket"></a>
 </nav>
@@ -318,4 +357,4 @@ a{color:#f0c14b}a:hover{color:#ffd978}
 </div>
 </footer>
 
-</div><script defer src="lgchl-segments-core.js?v=20261115-s55a"></script><script defer src="lgchl-segments-home.js?v=20261115-s55a"></script><script defer src="s55-home.js"></script></body></html>
+</div><script defer src="lgchl-segments-core.js?v=20261115-s55a"></script><script defer src="lgchl-segments-home.js?v=20261115-s55a"></script><script defer src="s55-home.js?v=s55-inline1"></script><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script><script defer src="backend.js"></script><script defer src="playoff-central.js?v=s55-inline1"></script></body></html>
