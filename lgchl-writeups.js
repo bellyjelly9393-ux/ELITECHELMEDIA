@@ -14,8 +14,13 @@
     }).join('');
     [].forEach.call(tabs.querySelectorAll('button'), function (b) { b.setAttribute('aria-pressed', b.dataset.week === w.id ? 'true' : 'false'); });
   }
-  fetch(s.dataset.writeups, { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (j) {
+  fetch(s.dataset.writeups, { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(async function (j) {
     var weeks = j.weeks || [];
+    if (s.hasAttribute('data-postseason')) {
+      weeks = weeks.map(w => ({...w, items:w.items.filter(it => (it.phase || w.phase) === 'playoffs' || /playoffs|postseason|wildcard/i.test(w.id+' '+w.label))})).filter(w => w.items.length);
+      const opening = await fetch('assets/lgchl-writeups/playoff-s55.json', {cache:'no-cache'}).then(r=>r.json());
+      weeks = weeks.concat(opening.weeks);
+    }
     if (!weeks.length) { body.innerHTML = '<p class="empty">No write-ups yet.</p>'; return; }
     tabs.innerHTML = weeks.map(function (w) { return '<button type="button" data-week="' + esc(w.id) + '">' + esc(w.label) + '</button>'; }).join('');
     tabs.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; weeks.forEach(function (w) { if (w.id === b.dataset.week) render(w); }); });
