@@ -686,3 +686,12 @@
 }
 .lg3s-team-room .room-stage .stall .jersey-stage img.jersey-fabric{opacity:.4}
 .lg3s-team-room .room-stage .stall .stall-info{top:73%;bottom:3%}
+
+/* Photoreal jersey crops: the source images contain transparent breathing room.
+   Scale the garments inside the existing arena bay without changing cards. */
+.lg3s-team-room .room-stage .stall .jersey-stage img.nation-jersey{
+ transform:scale(1.47);transform-origin:center center;
+}
+.lg3s-team-room .room-stage .stall .jersey-stage img.jersey-fabric{
+ transform:scale(1.47);transform-origin:center center;opacity:.25;
+}
