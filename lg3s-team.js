@@ -37,7 +37,8 @@ function renderNationRibbon(teams){
    +'<b>'+flag[1]+'</b></a>';
  }).join('');
 }
-let players=[],latestSnapshot='';
+let players=[],latestSnapshot='',page=0;
+const PAGE_SIZE=6;
 function validPlayer(p){
  return p?.rosterStatus==='active'&&Number.isSafeInteger(Number(p.lgUserId))&&Number(p.lgUserId)>0;
 }
@@ -47,7 +48,12 @@ function statCell(label,value){
 function render(){
  const search=String($('roomSearch').value||'').trim().toLocaleLowerCase();
  const filtered=search?players.filter(p=>p.name.toLocaleLowerCase().includes(search)):players;
- $('roomPlayers').innerHTML=filtered.map(p=>{
+ const pageCount=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE));
+ page=Math.max(0,Math.min(page,pageCount-1));
+ $('roomPageStatus').textContent=filtered.length?'STALLS '+(page*PAGE_SIZE+1)+'–'+Math.min(filtered.length,(page+1)*PAGE_SIZE)+' OF '+filtered.length:'NO MATCHING PLAYERS';
+ $('roomPrev').disabled=page===0;
+ $('roomNext').disabled=page>=pageCount-1;
+ $('roomPlayers').innerHTML=filtered.map((p,idx)=>{
   const kind=p.pos==='G'?'goalie':'skater';
   const card='player-cards.html?league=lg3s&id='+p.id+'&kind='+kind;
   const image=jersey(teamId);
@@ -55,7 +61,8 @@ function render(){
   const stats=p.stats;
   const second=kind==='goalie'?(stats?.sv_pct==null?'—':(Number(stats.sv_pct)<=1?Number(stats.sv_pct)*100:Number(stats.sv_pct)).toFixed(1)+'%'):(stats?.p??'—');
   const label=kind==='goalie'?'SV%':'PTS';
-  return '<a class="stall" href="'+card+'" aria-label="Open '+esc(p.name)+' player card">'
+  const outOfPage=idx<page*PAGE_SIZE||idx>=(page+1)*PAGE_SIZE;
+  return '<a class="stall"'+(outOfPage?' hidden':'')+' href="'+card+'" aria-label="Open '+esc(p.name)+' player card">'
     +'<strong class="nameplate"><img src="'+logo(teamId)+'" alt="" loading="lazy"><span>'+esc(p.name)+'</span></strong>'
     +'<div class="locker-spotlight" aria-hidden="true"></div>'
     +'<div class="jersey-stage"><span class="jersey-hanger" aria-hidden="true"></span>'
@@ -138,6 +145,12 @@ async function start(){
  }catch(error){console.warn('LG3s public locker:',error);$('roomName').textContent='LG3s Team Locker';fail('Public roster snapshot unavailable.');}
 }
 if(teamId===1446&&params.get('fallback')!=='1'){location.replace('lg3s-gb-locker.html');return;}
-$('roomSearch').addEventListener('input',render);
+$('roomSearch').addEventListener('input',()=>{page=0;render();});
+$('roomPrev').addEventListener('click',()=>{if(page>0){page--;render();}});
+$('roomNext').addEventListener('click',()=>{
+ const filtered=String($('roomSearch').value||'').trim().toLocaleLowerCase();
+ const count=filtered?players.filter(p=>p.name.toLocaleLowerCase().includes(filtered)).length:players.length;
+ if((page+1)*PAGE_SIZE<count){page++;render();}
+});
 start();
 })();
