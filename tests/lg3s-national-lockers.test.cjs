@@ -151,7 +151,7 @@ test('panoramic arena remains real navigable content with twelve nations and liv
  await new Promise(resolve=>setTimeout(resolve,25));
  const nav=h.get('nationRibbon').innerHTML;
  assert.equal((nav.match(/class="nation-tab/g)||[]).length,12);
- assert.match(nav,/lg3s-gb-locker\.html/);
+ assert.match(nav,/lg3s-team\.html\?team=1446&fallback=1/);
  assert.match(nav,/aria-current="page"/);
  assert.equal(h.get('roomFloorName').textContent,'CANADA');
  assert.match(h.get('roomName').textContent,/TEAM Canada/);
