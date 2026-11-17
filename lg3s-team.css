@@ -774,3 +774,10 @@
  .lg3s-team-room .arena-header{background-position:center,55% 24%}
  .lg3s-team-room .arena-team{padding-block:14px}
 }
+
+.lg3s-team-room .nation-tab .nation-flag-image{
+ display:block;width:min(72%,60px);height:36px;object-fit:contain;
+ border:0;border-radius:0;filter:drop-shadow(0 2px 3px #0008)
+}
+.lg3s-team-room .nation-tab{padding:8px 3px;justify-content:center}
+@media(max-width:600px){.lg3s-team-room .nation-tab .nation-flag-image{height:24px;width:90%}}

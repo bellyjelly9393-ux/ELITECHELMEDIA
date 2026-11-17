@@ -32,12 +32,12 @@ function renderNationRibbon(teams){
  const order=[341,342,1446,532,343,591,822,404,1439,1444,1079,531];
  const sorted=[...teams].sort((a,b)=>order.indexOf(Number(a.lgTeamId))-order.indexOf(Number(b.lgTeamId)));
  ribbon.innerHTML=sorted.map(t=>{
-  const id=Number(t.lgTeamId),flag=nationFlags[id]||['🏒','TEAM'];
+  const id=Number(t.lgTeamId);
+  const flagCode={341:'ca',342:'us',1446:'gb',532:'de',343:'se',591:'jp',822:'it',404:'ch',1439:'lv',1444:'pl',1079:'sk',531:'kz'}[id];
   return '<a class="nation-tab'+(id===teamId?' is-active':'')+'" href="'+room(id)+'"'
    +(id===teamId?' aria-current="page"':'')
-   +' aria-label="'+esc(t.teamName)+(' locker room')+'">'
-   +'<span class="nation-flag" aria-hidden="true">'+flag[0]+'</span>'
-   +'<b>'+flag[1]+'</b></a>';
+   +' title="'+esc(t.teamName)+'" aria-label="'+esc(t.teamName)+(' locker room')+'">'
+   +'<img class="nation-flag-image" src="assets/lg3s/flags/'+flagCode+'.png" alt="" width="48" height="32"></a>';
  }).join('');
 }
 let players=[],latestSnapshot='',page=0;
