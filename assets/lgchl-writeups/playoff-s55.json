@@ -1,6 +1,105 @@
 {
   "weeks": [
     {
+      "id": "s55-playoff-nov16",
+      "label": "Nov 16 · All 12 Series",
+      "range": "Season 55 · Round 1 · Monday, November 16, 2026 · Two complete nights",
+      "phase": "playoffs",
+      "items": [
+        {
+          "id": "wu-s55-nov16-roundup",
+          "kind": "Night wrap",
+          "date": "2026-11-16",
+          "title": "Monday: 24 finals, 142 goals and 12 series updates",
+          "html": "<p>All 12 wildcard matchups have four confirmed games. Six series are tied at 2–2 and six stand 3–1. Monday had 142 goals and three overtime decisions. The original bracket and Predictor Challenge remain untouched.</p><p><strong>Evidence note:</strong> No November 16 player box-score lines are yet present in the parser. Only verified game results, confirmed totals and clearly dated pre-Monday player context are used.</p><p><a href=\"s55-series-roundup-2026-11-16.html\">Read every series in full, with official game links →</a> · <a href=\"s55-night-in-review-2026-11-16.html\">Night in Review →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-2",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Chilliwack Bruins vs Edmonton Oil Kings · Series tied 2–2",
+          "html": "<p><strong>Series tied 2–2.</strong> Monday's two finals: <strong>Edmonton Oil Kings 3 – Chilliwack Bruins 4</strong> and <strong>Edmonton Oil Kings 4 – Chilliwack Bruins 3</strong>.</p><p>With the matchup tied, Game 5 will give somebody the first three-win edge. No team can clinch immediately. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-2\">Full report: Chilliwack Bruins vs. Edmonton Oil Kings →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-3",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Swift Current Broncos vs Red Deer Rebels · Series tied 2–2",
+          "html": "<p><strong>Series tied 2–2.</strong> Monday's two finals: <strong>Red Deer Rebels 1 – Swift Current Broncos 4</strong> and <strong>Red Deer Rebels 0 – Swift Current Broncos 1</strong>.</p><p>With the matchup tied, Game 5 will give somebody the first three-win edge. No team can clinch immediately. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-3\">Full report: Swift Current Broncos vs. Red Deer Rebels →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-6",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Kelowna Rockets vs Tri City Americans · Tri City Americans leads 3–1",
+          "html": "<p><strong>Tri City Americans leads 3–1.</strong> Monday's two finals: <strong>Tri City Americans 1 – Kelowna Rockets 6</strong> and <strong>Tri City Americans 6 – Kelowna Rockets 1</strong>.</p><p>The club trailing 1–3 cannot afford another loss. Its opponent is one confirmed win from advancing. The series is not yet complete. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-6\">Full report: Kelowna Rockets vs. Tri City Americans →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-7",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Victoria Royals vs Penticton Vees · Penticton Vees leads 3–1",
+          "html": "<p><strong>Penticton Vees leads 3–1.</strong> Monday's two finals: <strong>Penticton Vees 2 – Victoria Royals 1 (OT)</strong> and <strong>Penticton Vees 1 – Victoria Royals 5</strong>.</p><p>The club trailing 1–3 cannot afford another loss. Its opponent is one confirmed win from advancing. The series is not yet complete. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-7\">Full report: Victoria Royals vs. Penticton Vees →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-10",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Kingston Frontenacs vs North Bay Battalion · North Bay Battalion leads 3–1",
+          "html": "<p><strong>North Bay Battalion leads 3–1.</strong> Monday's two finals: <strong>North Bay Battalion 5 – Kingston Frontenacs 3</strong> and <strong>North Bay Battalion 3 – Kingston Frontenacs 2</strong>.</p><p>The club trailing 1–3 cannot afford another loss. Its opponent is one confirmed win from advancing. The series is not yet complete. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-10\">Full report: Kingston Frontenacs vs. North Bay Battalion →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-11",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Brampton Steelheads vs Sudbury Wolves · Series tied 2–2",
+          "html": "<p><strong>Series tied 2–2.</strong> Monday's two finals: <strong>Sudbury Wolves 2 – Brampton Steelheads 3</strong> and <strong>Sudbury Wolves 2 – Brampton Steelheads 1</strong>.</p><p>With the matchup tied, Game 5 will give somebody the first three-win edge. No team can clinch immediately. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-11\">Full report: Brampton Steelheads vs. Sudbury Wolves →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-14",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Erie Otters vs Sarnia Sting · Series tied 2–2",
+          "html": "<p><strong>Series tied 2–2.</strong> Monday's two finals: <strong>Sarnia Sting 1 – Erie Otters 5</strong> and <strong>Sarnia Sting 5 – Erie Otters 3</strong>.</p><p>With the matchup tied, Game 5 will give somebody the first three-win edge. No team can clinch immediately. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-14\">Full report: Erie Otters vs. Sarnia Sting →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-15",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Flint Firebirds vs Saginaw Spirit · Series tied 2–2",
+          "html": "<p><strong>Series tied 2–2.</strong> Monday's two finals: <strong>Saginaw Spirit 1 – Flint Firebirds 2 (OT)</strong> and <strong>Saginaw Spirit 1 – Flint Firebirds 3</strong>.</p><p>With the matchup tied, Game 5 will give somebody the first three-win edge. No team can clinch immediately. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-15\">Full report: Flint Firebirds vs. Saginaw Spirit →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-18",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Charlottetown Islanders vs Cape Breton Eagles · Cape Breton Eagles leads 3–1",
+          "html": "<p><strong>Cape Breton Eagles leads 3–1.</strong> Monday's two finals: <strong>Cape Breton Eagles 1 – Charlottetown Islanders 4</strong> and <strong>Cape Breton Eagles 4 – Charlottetown Islanders 3</strong>.</p><p>The club trailing 1–3 cannot afford another loss. Its opponent is one confirmed win from advancing. The series is not yet complete. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-18\">Full report: Charlottetown Islanders vs. Cape Breton Eagles →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-19",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Quebec Remparts vs Chicoutimi Sagueneens · Chicoutimi Sagueneens leads 3–1",
+          "html": "<p><strong>Chicoutimi Sagueneens leads 3–1.</strong> Monday's two finals: <strong>Chicoutimi Sagueneens 6 – Quebec Remparts 3</strong> and <strong>Chicoutimi Sagueneens 1 – Quebec Remparts 4</strong>.</p><p>The club trailing 1–3 cannot afford another loss. Its opponent is one confirmed win from advancing. The series is not yet complete. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-19\">Full report: Quebec Remparts vs. Chicoutimi Sagueneens →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-22",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Shawinigan Cataractes vs Victoriaville Tigres · Series tied 2–2",
+          "html": "<p><strong>Series tied 2–2.</strong> Monday's two finals: <strong>Victoriaville Tigres 1 – Shawinigan Cataractes 4</strong> and <strong>Victoriaville Tigres 1 – Shawinigan Cataractes 2</strong>.</p><p>With the matchup tied, Game 5 will give somebody the first three-win edge. No team can clinch immediately. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-22\">Full report: Shawinigan Cataractes vs. Victoriaville Tigres →</a></p>"
+        },
+        {
+          "id": "wu-s55-nov16-series-23",
+          "kind": "Series write-up",
+          "date": "2026-11-16",
+          "title": "Blainville-Boisbriand Armada vs Val-d'Or Foreurs · Val-d'Or Foreurs leads 3–1",
+          "html": "<p><strong>Val-d&#39;Or Foreurs leads 3–1.</strong> Monday's two finals: <strong>Val-d&#39;Or Foreurs 7 – Blainville-Boisbriand Armada 5</strong> and <strong>Val-d&#39;Or Foreurs 6 – Blainville-Boisbriand Armada 5 (OT)</strong>.</p><p>The club trailing 1–3 cannot afford another loss. Its opponent is one confirmed win from advancing. The series is not yet complete. Read the full four-game story, with context from Sunday and game-by-game official links.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-23\">Full report: Blainville-Boisbriand Armada vs. Val-d&#39;Or Foreurs →</a></p>"
+        }
+      ]
+    },
+    {
       "id": "s55-wildcard",
       "label": "Wildcard round",
       "range": "Season 55 · Opening round",

@@ -1,0 +1,506 @@
+{
+  "date": "2026-11-16",
+  "title": "EliteChel Media | LGCHL Playoff Night in Review",
+  "subtitle": "Monday, November 16, 2026 · Season 55, Round 1",
+  "hitmenLogo": "assets/logos/chl/calgary-hitmen.png",
+  "intro": "<p>Verified final scores from public.lgchl_games after the November 16 manual delta sync: 24 completed games, 142 total goals, three overtimes, one shutout. Twenty-four games belong to the 12 confirmed first-round series; four other scheduled QMJHL games remain unresolved and are excluded.</p><p>Individual Nov 16 game box scores and player lines have not been imported. No player scoring, goal order, shots, assists, saves or three-star selections are inferred. Links point to the LeagueGaming game pages.</p>",
+  "threeStars": "<p>Individual player data for Monday's playoff games has not been verified. Three Stars will remain unassigned until reliable box-score lines are available.</p>",
+  "hitmen": {
+    "title": "Calgary Hitmen Watch",
+    "html": "<p>No Calgary game is listed among the 24 confirmed Monday wildcard finals. This section will not invent a Calgary score or player line.</p>",
+    "games": []
+  },
+  "slots": [
+    {
+      "slot": "9:35 PM ET",
+      "games": [
+        {
+          "game": 923565,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Edmonton Oil Kings",
+            "logo": "assets/lgchl/s55/team415.png",
+            "score": 3
+          },
+          "home": {
+            "name": "Chilliwack Bruins",
+            "logo": "assets/lgchl/s55/team2983.png",
+            "score": 4
+          },
+          "title": "Game 3: Chilliwack Bruins wins · Chilliwack Bruins ahead 2–1",
+          "html": "<p><strong>Chilliwack Bruins</strong> took Game 3 by a 4–3 score. This result leaves Chilliwack Bruins ahead 2–1 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-2\">Read the complete Chilliwack Bruins vs. Edmonton Oil Kings series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923565\" rel=\"noopener noreferrer\">Official LG game page 923565</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923572,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Red Deer Rebels",
+            "logo": "assets/lgchl/s55/team385.png",
+            "score": 1
+          },
+          "home": {
+            "name": "Swift Current Broncos",
+            "logo": "assets/lgchl/s55/team377.png",
+            "score": 4
+          },
+          "title": "Game 3: Swift Current Broncos wins · Red Deer Rebels ahead 2–1",
+          "html": "<p><strong>Swift Current Broncos</strong> took Game 3 by a 4–1 score. This result leaves Red Deer Rebels ahead 2–1 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-3\">Read the complete Swift Current Broncos vs. Red Deer Rebels series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923572\" rel=\"noopener noreferrer\">Official LG game page 923572</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923593,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Tri City Americans",
+            "logo": "assets/lgchl/s55/team399.png",
+            "score": 1
+          },
+          "home": {
+            "name": "Kelowna Rockets",
+            "logo": "assets/lgchl/s55/team400.png",
+            "score": 6
+          },
+          "title": "Game 3: Kelowna Rockets wins · Tri City Americans ahead 2–1",
+          "html": "<p><strong>Kelowna Rockets</strong> took Game 3 by a 6–1 score. This result leaves Tri City Americans ahead 2–1 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-6\">Read the complete Kelowna Rockets vs. Tri City Americans series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923593\" rel=\"noopener noreferrer\">Official LG game page 923593</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923600,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "OT",
+          "away": {
+            "name": "Penticton Vees",
+            "logo": "assets/lgchl/s55/team2981.png",
+            "score": 2
+          },
+          "home": {
+            "name": "Victoria Royals",
+            "logo": "assets/lgchl/s55/team419.png",
+            "score": 1
+          },
+          "title": "Game 3: Penticton Vees wins · Penticton Vees ahead 3–0",
+          "html": "<p><strong>Penticton Vees</strong> took Game 3 by a 2–1 score, in overtime. This result leaves Penticton Vees ahead 3–0 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-7\">Read the complete Victoria Royals vs. Penticton Vees series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923600\" rel=\"noopener noreferrer\">Official LG game page 923600</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923621,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "North Bay Battalion",
+            "logo": "assets/lgchl/s55/team448.png",
+            "score": 5
+          },
+          "home": {
+            "name": "Kingston Frontenacs",
+            "logo": "assets/lgchl/s55/team444.png",
+            "score": 3
+          },
+          "title": "Game 3: North Bay Battalion wins · North Bay Battalion ahead 2–1",
+          "html": "<p><strong>North Bay Battalion</strong> took Game 3 by a 5–3 score. This result leaves North Bay Battalion ahead 2–1 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-10\">Read the complete Kingston Frontenacs vs. North Bay Battalion series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923621\" rel=\"noopener noreferrer\">Official LG game page 923621</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923628,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Sudbury Wolves",
+            "logo": "assets/lgchl/s55/team447.png",
+            "score": 2
+          },
+          "home": {
+            "name": "Brampton Steelheads",
+            "logo": "assets/lgchl/s55/team402.png",
+            "score": 3
+          },
+          "title": "Game 3: Brampton Steelheads wins · Brampton Steelheads ahead 2–1",
+          "html": "<p><strong>Brampton Steelheads</strong> took Game 3 by a 3–2 score. This result leaves Brampton Steelheads ahead 2–1 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-11\">Read the complete Brampton Steelheads vs. Sudbury Wolves series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923628\" rel=\"noopener noreferrer\">Official LG game page 923628</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923649,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Sarnia Sting",
+            "logo": "assets/lgchl/s55/team451.png",
+            "score": 1
+          },
+          "home": {
+            "name": "Erie Otters",
+            "logo": "assets/lgchl/s55/team383.png",
+            "score": 5
+          },
+          "title": "Game 3: Erie Otters wins · Erie Otters ahead 2–1",
+          "html": "<p><strong>Erie Otters</strong> took Game 3 by a 5–1 score. This result leaves Erie Otters ahead 2–1 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-14\">Read the complete Erie Otters vs. Sarnia Sting series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923649\" rel=\"noopener noreferrer\">Official LG game page 923649</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923656,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "OT",
+          "away": {
+            "name": "Saginaw Spirit",
+            "logo": "assets/lgchl/s55/team408.png",
+            "score": 1
+          },
+          "home": {
+            "name": "Flint Firebirds",
+            "logo": "assets/lgchl/s55/team514.png",
+            "score": 2
+          },
+          "title": "Game 3: Flint Firebirds wins · Saginaw Spirit ahead 2–1",
+          "html": "<p><strong>Flint Firebirds</strong> took Game 3 by a 2–1 score, in overtime. This result leaves Saginaw Spirit ahead 2–1 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-15\">Read the complete Flint Firebirds vs. Saginaw Spirit series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923656\" rel=\"noopener noreferrer\">Official LG game page 923656</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923733,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Cape Breton Eagles",
+            "logo": "assets/lgchl/s55/team455.png",
+            "score": 1
+          },
+          "home": {
+            "name": "Charlottetown Islanders",
+            "logo": "assets/lgchl/s55/team457.png",
+            "score": 4
+          },
+          "title": "Game 3: Charlottetown Islanders wins · Cape Breton Eagles ahead 2–1",
+          "html": "<p><strong>Charlottetown Islanders</strong> took Game 3 by a 4–1 score. This result leaves Cape Breton Eagles ahead 2–1 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-18\">Read the complete Charlottetown Islanders vs. Cape Breton Eagles series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923733\" rel=\"noopener noreferrer\">Official LG game page 923733</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923740,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Chicoutimi Sagueneens",
+            "logo": "assets/lgchl/s55/team468.png",
+            "score": 6
+          },
+          "home": {
+            "name": "Quebec Remparts",
+            "logo": "assets/lgchl/s55/team467.png",
+            "score": 3
+          },
+          "title": "Game 3: Chicoutimi Sagueneens wins · Chicoutimi Sagueneens ahead 3–0",
+          "html": "<p><strong>Chicoutimi Sagueneens</strong> took Game 3 by a 6–3 score. This result leaves Chicoutimi Sagueneens ahead 3–0 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-19\">Read the complete Quebec Remparts vs. Chicoutimi Sagueneens series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923740\" rel=\"noopener noreferrer\">Official LG game page 923740</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923705,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Victoriaville Tigres",
+            "logo": "assets/lgchl/s55/team466.png",
+            "score": 1
+          },
+          "home": {
+            "name": "Shawinigan Cataractes",
+            "logo": "assets/lgchl/s55/team382.png",
+            "score": 4
+          },
+          "title": "Game 3: Shawinigan Cataractes wins · Victoriaville Tigres ahead 2–1",
+          "html": "<p><strong>Shawinigan Cataractes</strong> took Game 3 by a 4–1 score. This result leaves Victoriaville Tigres ahead 2–1 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-22\">Read the complete Shawinigan Cataractes vs. Victoriaville Tigres series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923705\" rel=\"noopener noreferrer\">Official LG game page 923705</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923712,
+          "seriesGame": 3,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Val-d'Or Foreurs",
+            "logo": "assets/lgchl/s55/team460.png",
+            "score": 7
+          },
+          "home": {
+            "name": "Blainville-Boisbriand Armada",
+            "logo": "assets/lgchl/s55/team458.png",
+            "score": 5
+          },
+          "title": "Game 3: Val-d'Or Foreurs wins · Val-d'Or Foreurs ahead 2–1",
+          "html": "<p><strong>Val-d&#39;Or Foreurs</strong> took Game 3 by a 7–5 score. This result leaves Val-d&#39;Or Foreurs ahead 2–1 after 3 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-23\">Read the complete Blainville-Boisbriand Armada vs. Val-d&#39;Or Foreurs series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923712\" rel=\"noopener noreferrer\">Official LG game page 923712</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        }
+      ]
+    },
+    {
+      "slot": "10:10 PM ET",
+      "games": [
+        {
+          "game": 923566,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Edmonton Oil Kings",
+            "logo": "assets/lgchl/s55/team415.png",
+            "score": 4
+          },
+          "home": {
+            "name": "Chilliwack Bruins",
+            "logo": "assets/lgchl/s55/team2983.png",
+            "score": 3
+          },
+          "title": "Game 4: Edmonton Oil Kings wins · the series even",
+          "html": "<p><strong>Edmonton Oil Kings</strong> took Game 4 by a 4–3 score. This result leaves the series even after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-2\">Read the complete Chilliwack Bruins vs. Edmonton Oil Kings series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923566\" rel=\"noopener noreferrer\">Official LG game page 923566</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923573,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Red Deer Rebels",
+            "logo": "assets/lgchl/s55/team385.png",
+            "score": 0
+          },
+          "home": {
+            "name": "Swift Current Broncos",
+            "logo": "assets/lgchl/s55/team377.png",
+            "score": 1
+          },
+          "title": "Game 4: Swift Current Broncos wins · the series even",
+          "html": "<p><strong>Swift Current Broncos</strong> took Game 4 by a 1–0 score. This result leaves the series even after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-3\">Read the complete Swift Current Broncos vs. Red Deer Rebels series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923573\" rel=\"noopener noreferrer\">Official LG game page 923573</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923594,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Tri City Americans",
+            "logo": "assets/lgchl/s55/team399.png",
+            "score": 6
+          },
+          "home": {
+            "name": "Kelowna Rockets",
+            "logo": "assets/lgchl/s55/team400.png",
+            "score": 1
+          },
+          "title": "Game 4: Tri City Americans wins · Tri City Americans ahead 3–1",
+          "html": "<p><strong>Tri City Americans</strong> took Game 4 by a 6–1 score. This result leaves Tri City Americans ahead 3–1 after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-6\">Read the complete Kelowna Rockets vs. Tri City Americans series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923594\" rel=\"noopener noreferrer\">Official LG game page 923594</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923601,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Penticton Vees",
+            "logo": "assets/lgchl/s55/team2981.png",
+            "score": 1
+          },
+          "home": {
+            "name": "Victoria Royals",
+            "logo": "assets/lgchl/s55/team419.png",
+            "score": 5
+          },
+          "title": "Game 4: Victoria Royals wins · Penticton Vees ahead 3–1",
+          "html": "<p><strong>Victoria Royals</strong> took Game 4 by a 5–1 score. This result leaves Penticton Vees ahead 3–1 after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-7\">Read the complete Victoria Royals vs. Penticton Vees series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923601\" rel=\"noopener noreferrer\">Official LG game page 923601</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923622,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "North Bay Battalion",
+            "logo": "assets/lgchl/s55/team448.png",
+            "score": 3
+          },
+          "home": {
+            "name": "Kingston Frontenacs",
+            "logo": "assets/lgchl/s55/team444.png",
+            "score": 2
+          },
+          "title": "Game 4: North Bay Battalion wins · North Bay Battalion ahead 3–1",
+          "html": "<p><strong>North Bay Battalion</strong> took Game 4 by a 3–2 score. This result leaves North Bay Battalion ahead 3–1 after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-10\">Read the complete Kingston Frontenacs vs. North Bay Battalion series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923622\" rel=\"noopener noreferrer\">Official LG game page 923622</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923629,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Sudbury Wolves",
+            "logo": "assets/lgchl/s55/team447.png",
+            "score": 2
+          },
+          "home": {
+            "name": "Brampton Steelheads",
+            "logo": "assets/lgchl/s55/team402.png",
+            "score": 1
+          },
+          "title": "Game 4: Sudbury Wolves wins · the series even",
+          "html": "<p><strong>Sudbury Wolves</strong> took Game 4 by a 2–1 score. This result leaves the series even after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-11\">Read the complete Brampton Steelheads vs. Sudbury Wolves series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923629\" rel=\"noopener noreferrer\">Official LG game page 923629</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923650,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Sarnia Sting",
+            "logo": "assets/lgchl/s55/team451.png",
+            "score": 5
+          },
+          "home": {
+            "name": "Erie Otters",
+            "logo": "assets/lgchl/s55/team383.png",
+            "score": 3
+          },
+          "title": "Game 4: Sarnia Sting wins · the series even",
+          "html": "<p><strong>Sarnia Sting</strong> took Game 4 by a 5–3 score. This result leaves the series even after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-14\">Read the complete Erie Otters vs. Sarnia Sting series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923650\" rel=\"noopener noreferrer\">Official LG game page 923650</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923657,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Saginaw Spirit",
+            "logo": "assets/lgchl/s55/team408.png",
+            "score": 1
+          },
+          "home": {
+            "name": "Flint Firebirds",
+            "logo": "assets/lgchl/s55/team514.png",
+            "score": 3
+          },
+          "title": "Game 4: Flint Firebirds wins · the series even",
+          "html": "<p><strong>Flint Firebirds</strong> took Game 4 by a 3–1 score. This result leaves the series even after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-15\">Read the complete Flint Firebirds vs. Saginaw Spirit series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923657\" rel=\"noopener noreferrer\">Official LG game page 923657</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923734,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Cape Breton Eagles",
+            "logo": "assets/lgchl/s55/team455.png",
+            "score": 4
+          },
+          "home": {
+            "name": "Charlottetown Islanders",
+            "logo": "assets/lgchl/s55/team457.png",
+            "score": 3
+          },
+          "title": "Game 4: Cape Breton Eagles wins · Cape Breton Eagles ahead 3–1",
+          "html": "<p><strong>Cape Breton Eagles</strong> took Game 4 by a 4–3 score. This result leaves Cape Breton Eagles ahead 3–1 after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-18\">Read the complete Charlottetown Islanders vs. Cape Breton Eagles series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923734\" rel=\"noopener noreferrer\">Official LG game page 923734</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923741,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Chicoutimi Sagueneens",
+            "logo": "assets/lgchl/s55/team468.png",
+            "score": 1
+          },
+          "home": {
+            "name": "Quebec Remparts",
+            "logo": "assets/lgchl/s55/team467.png",
+            "score": 4
+          },
+          "title": "Game 4: Quebec Remparts wins · Chicoutimi Sagueneens ahead 3–1",
+          "html": "<p><strong>Quebec Remparts</strong> took Game 4 by a 4–1 score. This result leaves Chicoutimi Sagueneens ahead 3–1 after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-19\">Read the complete Quebec Remparts vs. Chicoutimi Sagueneens series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923741\" rel=\"noopener noreferrer\">Official LG game page 923741</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923706,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "",
+          "away": {
+            "name": "Victoriaville Tigres",
+            "logo": "assets/lgchl/s55/team466.png",
+            "score": 1
+          },
+          "home": {
+            "name": "Shawinigan Cataractes",
+            "logo": "assets/lgchl/s55/team382.png",
+            "score": 2
+          },
+          "title": "Game 4: Shawinigan Cataractes wins · the series even",
+          "html": "<p><strong>Shawinigan Cataractes</strong> took Game 4 by a 2–1 score. This result leaves the series even after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-22\">Read the complete Shawinigan Cataractes vs. Victoriaville Tigres series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923706\" rel=\"noopener noreferrer\">Official LG game page 923706</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        },
+        {
+          "game": 923713,
+          "seriesGame": 4,
+          "final": true,
+          "decision": "OT",
+          "away": {
+            "name": "Val-d'Or Foreurs",
+            "logo": "assets/lgchl/s55/team460.png",
+            "score": 6
+          },
+          "home": {
+            "name": "Blainville-Boisbriand Armada",
+            "logo": "assets/lgchl/s55/team458.png",
+            "score": 5
+          },
+          "title": "Game 4: Val-d'Or Foreurs wins · Val-d'Or Foreurs ahead 3–1",
+          "html": "<p><strong>Val-d&#39;Or Foreurs</strong> took Game 4 by a 6–5 score, in overtime. This result leaves Val-d&#39;Or Foreurs ahead 3–1 after 4 completed games.</p><p><a href=\"s55-series-roundup-2026-11-16.html#series-23\">Read the complete Blainville-Boisbriand Armada vs. Val-d&#39;Or Foreurs series write-up</a> · <a href=\"https://www.leaguegaming.com/forums/index.php?leaguegaming/league&amp;action=league&amp;page=game&amp;gameid=923713\" rel=\"noopener noreferrer\">Official LG game page 923713</a></p>",
+          "stars": [],
+          "starsNote": "Individual player scoring and goaltending statistics for this game have not been verified. No stars assigned."
+        }
+      ]
+    }
+  ],
+  "threeStarsTeams": []
+}
