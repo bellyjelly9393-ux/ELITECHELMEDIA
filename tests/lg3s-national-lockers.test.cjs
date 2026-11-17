@@ -62,8 +62,8 @@ test('season totals come only from read-only public leader views',()=>{
 });
 
 test('LG3s card page and generic locker use cache-busted assets',()=>{
- assert.match(teamHTML,/lg3s-team\.js\?v=20261116-panoramic-v1/);
- assert.match(teamHTML,/lg3s-team\.css\?v=20261116-panoramic-v1/);
+ assert.match(teamHTML,/lg3s-team\.js\?v=20261117-photo11-v1/);
+ assert.match(teamHTML,/lg3s-team\.css\?v=20261117-photo11-v1/);
  const cards=load('player-cards.html');
  assert.match(cards,/player-cards\.js\?v=20261115-lg3s-roster/);
  assert.match(cardJS,/lg3s-team\.html\?team=/);
@@ -101,7 +101,7 @@ test('Canada room renders real roster identities, front jersey assets and verifi
  assert.match(h.get('roomName').textContent,/Canada/);
  assert.match(h.get('roomRecord').textContent,/10 main-roster players/);
  assert.match(html,/Brayl18l/i);
- assert.match(html,/assets\/lg3s\/jerseys\/341-photo.svg/);
+ assert.match(html,/assets\/lg3s\/jerseys\/341.webp/);
  assert.match(html,/player-cards.html\?league=lg3s&id=55504&kind=skater/);
  assert.match(html,/SEASON GP<b>12<\/b>/);
  assert.match(html,/PTS<b>20<\/b>/);
@@ -178,11 +178,17 @@ test('arena paging shows six verified players at a time, with the rest reachable
  assert.equal(h.get('roomNext').disabled,true);
 });
 
-test('Canada uses the uploaded photographic black jersey and other national concepts remain available',()=>{
- const asset=load('assets/lg3s/jerseys/341-photo.svg');
- assert.match(asset,/<svg/);
- assert.match(asset,/data:image\/webp;base64,/);
- assert.match(teamJS,/341-photo\.svg/);
+test('all 11 national jersey photographs are valid WebP assets and retain the nation navigation order',()=>{
+ const idList=[341,342,532,343,591,822,404,1439,1444,1079,531];
+ for(const id of idList){
+  const image=fs.readFileSync(path.join(root,'assets/lg3s/jerseys/'+id+'.webp'));
+  assert.ok(image.length>10000,'photo jersey image too small for '+id);
+  assert.equal(image.subarray(0,4).toString('ascii'),'RIFF');
+  assert.equal(image.subarray(8,12).toString('ascii'),'WEBP');
+  assert.match(teamJS,new RegExp('(?:^|[^0-9])'+id+':\\['));
+ }
+ assert.equal(teamJS.includes('341-photo.svg'),false);
+ assert.ok(teamJS.includes("const jersey=id=>'assets/lg3s/jerseys/'+id+'.webp';"));
  const order=['341','342','1446','532','343','591','822','404','1439','1444','1079','531'];
  assert.match(teamJS,new RegExp('const order=\\['+order.join(',')+'\\]'));
 });
