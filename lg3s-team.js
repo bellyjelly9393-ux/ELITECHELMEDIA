@@ -7,7 +7,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const params=new URLSearchParams(location.search);
 const teamId=Number(params.get('team'));
 const logo=id=>'assets/lg3s/team'+id+'.svg';
-const jersey=id=>'assets/lg3s/jerseys/'+id+'.svg';
+const jersey=id=>id===341?'assets/lg3s/jerseys/341-photo.svg':'assets/lg3s/jerseys/'+id+'.svg';
 const room=id=>id===1446?'lg3s-gb-locker.html':'lg3s-team.html?team='+id;
 const API='https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/';
 const KEY='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
@@ -28,7 +28,9 @@ const nationFlags={
 };
 function renderNationRibbon(teams){
  const ribbon=$('nationRibbon');
- ribbon.innerHTML=teams.map(t=>{
+ const order=[341,342,1446,532,343,591,822,404,1439,1444,1079,531];
+ const sorted=[...teams].sort((a,b)=>order.indexOf(Number(a.lgTeamId))-order.indexOf(Number(b.lgTeamId)));
+ ribbon.innerHTML=sorted.map(t=>{
   const id=Number(t.lgTeamId),flag=nationFlags[id]||['🏒','TEAM'];
   return '<a class="nation-tab'+(id===teamId?' is-active':'')+'" href="'+room(id)+'"'
    +(id===teamId?' aria-current="page"':'')
