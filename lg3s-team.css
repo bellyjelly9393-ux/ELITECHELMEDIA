@@ -652,3 +652,10 @@
  .lg3s-team-room .room-pager button{min-height:38px;padding:6px 11px;font-size:11px}
  .lg3s-team-room .room-pager span{min-width:112px;font-size:11px}
 }
+
+/* Explicit grid sizing: intrinsic jersey aspect ratio must never overrun a bay. */
+.lg3s-team-room .room-stage .stalls{grid-auto-rows:max-content;align-content:start}
+.lg3s-team-room .room-stage .stall{
+ display:block;width:100%;max-width:100%;height:auto;min-width:0;min-height:0;
+ justify-self:stretch;align-self:start;aspect-ratio:2 / 3;box-sizing:border-box
+}
