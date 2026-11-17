@@ -612,3 +612,43 @@
 @media(prefers-reduced-motion:reduce){
  .lg3s-team-room .nation-tab,.lg3s-team-room .stall{transition:none}
 }
+
+/* Scene composition and real-player paging: one six-stall row on screen. */
+.lg3s-team-room main>section{margin-top:0}
+.lg3s-team-room .site-navigation{padding-block:4px}
+.lg3s-team-room .site-navigation .brand img{width:38px;height:38px}
+.lg3s-team-room .arena-header{padding-top:9px}
+.lg3s-team-room .arena-brand{margin-bottom:6px}
+.lg3s-team-room .nation-ribbon{padding-block:6px 8px}
+.lg3s-team-room .nation-tab{min-height:53px}
+.lg3s-team-room .arena-team{padding-block:8px}
+.lg3s-team-room .arena-team>img{width:clamp(48px,5.3vw,78px);height:clamp(48px,5.3vw,78px)}
+.lg3s-team-room .room-stage .stall[hidden]{display:none!important}
+.lg3s-team-room .stage-head .room-pager{
+ display:flex;align-items:center;justify-content:flex-end;gap:9px;
+ min-width:0
+}
+.lg3s-team-room .room-pager button{
+ appearance:none;min-height:34px;padding:6px 11px;
+ border:1px solid #8d4c50;background:linear-gradient(#432024,#180d11);
+ color:#fff;font:800 clamp(10px,.95vw,13px)/1.1 Arial,sans-serif;
+ cursor:pointer;border-radius:3px
+}
+.lg3s-team-room .room-pager button:disabled{opacity:.36;cursor:default}
+.lg3s-team-room .room-pager button:focus-visible{outline:3px solid #91caff;outline-offset:2px}
+.lg3s-team-room .room-pager span{
+ text-align:center;min-width:116px;color:#e6dfe2;
+ font:850 clamp(10px,.98vw,14px)/1.2 Arial,sans-serif;letter-spacing:.04em
+}
+.lg3s-team-room .arena-utilities{margin:8px 0 0}
+@media(max-width:700px){
+ .lg3s-team-room .site-navigation{padding:5px 8px}
+ .lg3s-team-room .site-navigation nav{gap:8px}
+ .lg3s-team-room .site-navigation nav a{font-size:11px}
+ .lg3s-team-room .site-navigation .brand{font-size:12px}
+ .lg3s-team-room .site-navigation .brand img{width:28px;height:28px}
+ .lg3s-team-room .stage-head{flex-wrap:wrap;justify-content:center;gap:5px}
+ .lg3s-team-room .stage-head h2{font-size:13px}
+ .lg3s-team-room .room-pager button{min-height:38px;padding:6px 11px;font-size:11px}
+ .lg3s-team-room .room-pager span{min-width:112px;font-size:11px}
+}
