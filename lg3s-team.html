@@ -3,50 +3,84 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#090d12">
-  <title>LG3s Team Locker Room | EliteChel Media</title>
-  <meta name="description" content="Explore public LG3s Season 1 team locker rooms, main-roster player stalls and EliteChel hockey card profiles.">
+  <meta name="theme-color" content="#100b0d">
+  <title>LG3s International Locker Room | EliteChel Media</title>
+  <meta name="description" content="Enter the EliteChel Media LG3s national-team locker room. Explore authentic roster identities, national concept jerseys and player hockey cards.">
   <link rel="icon" href="assets/brand/ecm-crest.webp">
   <link rel="stylesheet" href="lgchl-team.css?v=20261107-findstall">
-  <link rel="stylesheet" href="lg3s-team.css?v=20261116-real-bay">
-  <script src="lg3s-team.js?v=20261116-real-bay" defer></script>
+  <link rel="stylesheet" href="lg3s-team.css?v=20261116-panoramic-v1">
+  <script src="lg3s-team.js?v=20261116-panoramic-v1" defer></script>
 </head>
 <body class="league-room lg3s-team-room">
-  <header>
+  <header class="site-navigation">
     <a class="brand" href="index.html"><img src="assets/brand/ecm-crest.webp" width="55" height="55" alt="">ELITECHEL MEDIA</a>
-    <nav aria-label="Main navigation"><a href="lg3s-media.html">LG3s Desk</a><a href="league-leaderboards.html?league=lg3s">LG3s Leaders</a><a href="player-cards.html?league=lg3s">Hockey Cards</a></nav>
+    <nav aria-label="Website navigation"><a href="lg3s-media.html">LG3s Desk</a><a href="league-leaderboards.html?league=lg3s">Standings &amp; Leaders</a><a href="player-cards.html?league=lg3s">Hockey Cards</a></nav>
   </header>
   <main id="main">
-    <div class="room-toolbar">
-      <a href="lg3s-media.html">← Back to LG3s Media</a>
-      <div class="room-team-slot">
-        <label class="room-team-caption" for="roomTeam">Choose another nation's locker room</label>
-        <select id="roomTeam" aria-label="Choose a LG3s team"><option>Loading teams…</option></select>
+    <section class="arena-header" aria-label="LG3s international national locker rooms">
+      <div class="arena-brand">
+        <img src="assets/brand/ecm-crest.webp" alt="" width="86" height="86">
+        <div><strong>ELITE CHEL MEDIA</strong><span>LG3s INTERNATIONAL LEAGUE</span></div>
+        <img src="assets/brand/ecm-crest.webp" alt="" width="86" height="86">
       </div>
+      <nav id="nationRibbon" class="nation-ribbon" aria-label="Select a national locker room">
+        <span class="note">Loading the 12 nations…</span>
+      </nav>
+      <div class="arena-team">
+        <img id="roomLogo" src="assets/lg3s/team341.svg" alt="" width="96" height="96">
+        <div class="arena-title">
+          <p class="eyebrow">SEASON 1 · NATIONAL TEAM HEADQUARTERS</p>
+          <h1 id="roomName">Loading team…</h1>
+          <p id="roomRecord" role="status">Loading verified main-roster players…</p>
+        </div>
+        <img id="roomLogoMirror" src="assets/lg3s/team341.svg" alt="" width="96" height="96">
+      </div>
+    </section>
+
+    <section class="room-stage" aria-labelledby="playersTitle">
+      <div class="stage-head">
+        <h2 id="playersTitle">Main roster</h2>
+        <div class="room-pager">
+          <button type="button" id="roomPrev" aria-label="Previous six player stalls" disabled>‹ PREV</button>
+          <span id="roomPageStatus" role="status">Loading roster…</span>
+          <button type="button" id="roomNext" aria-label="Next six player stalls" disabled>NEXT ›</button>
+        </div>
+      </div>
+      <div class="room-stage-inner">
+        <aside class="arena-side-banner" aria-hidden="true"><img id="roomBannerLeft" src="assets/lg3s/team341.svg" alt=""><b id="roomSideName">CANADA</b><small>LG3s INTERNATIONAL</small></aside>
+        <div class="stalls" id="roomPlayers" aria-live="polite" aria-busy="true"></div>
+        <aside class="arena-side-banner" aria-hidden="true"><img id="roomBannerRight" src="assets/lg3s/team341.svg" alt=""><b>ELITE CHEL MEDIA</b><small>HOCKEY INTERNATIONAL</small></aside>
+      </div>
+      <div class="arena-floor" aria-hidden="true">
+        <div class="floor-glow"></div>
+        <img id="roomFloorCrest" src="assets/lg3s/team341.svg" alt="">
+        <span id="roomFloorName">CANADA</span>
+      </div>
+    </section>
+
+    <nav class="arena-action-bar" aria-label="Team locker actions">
+      <a href="#roomSearch"><span aria-hidden="true">⌕</span> FIND MY STALL</a>
+      <a href="#roomPlayers"><span aria-hidden="true">♙</span> ROSTER</a>
+      <a href="lg3s-media.html"><span aria-hidden="true">▤</span> LEAGUE DESK</a>
+      <a href="league-leaderboards.html?league=lg3s"><span aria-hidden="true">▥</span> LEADERS</a>
+      <a href="player-cards.html?league=lg3s"><span aria-hidden="true">▣</span> PLAYER CARDS</a>
+      <a id="nationCoverage" href="lg3s-media.html"><span aria-hidden="true">◉</span> TEAM COVERAGE</a>
+    </nav>
+    <div class="arena-utilities">
+      <a href="lg3s-media.html">← LG3s Media Desk</a>
+      <label for="roomSearch">Find my stall
+        <input id="roomSearch" type="search" placeholder="Search a rostered player" maxlength="100" autocomplete="off">
+      </label>
+      <label class="room-team-slot" for="roomTeam">Change nation
+        <select id="roomTeam" aria-label="Choose another national locker room"><option>Loading teams…</option></select>
+      </label>
     </div>
-    <section class="room-hero" aria-labelledby="roomName">
-      <img id="roomLogo" src="assets/lg3s/team341.svg" alt="" width="120" height="120">
-      <div class="room-hero-copy">
-        <p class="eyebrow">LG3s · Season 1 · Public Team Locker</p>
-        <h1 id="roomName">Loading team…</h1>
-        <p>Walk the team stalls, discover rostered players and explore their hockey cards.</p>
-        <p id="roomRecord" class="note" role="status">Loading verified public roster snapshot…</p>
-        <a id="nationCoverage" href="lg3s-media.html" class="room-nation-link">Team results &amp; media coverage ↗</a>
-      </div>
-    </section>
-    <section class="room-season" aria-labelledby="playersTitle">
-      <div class="section-heading">
-        <div><p class="eyebrow">THE LOCKER ROOM</p><h2 id="playersTitle">Main-roster player stalls</h2></div>
-        <label for="roomSearch">Find a player<input id="roomSearch" type="search" placeholder="Search gamertag" maxlength="100"></label>
-      </div>
-      <p class="note" id="rosterNote">Main roster from a verified LG3s snapshot, with season-wide public stats when available. Jerseys are nation-inspired concepts displayed in the realistic LGCHL-style locker bays. Not official licensed uniforms.</p>
-      <div class="stalls" id="roomPlayers" aria-live="polite" aria-busy="true"></div>
-    </section>
-    <div class="room-bottom">
-      <div><p class="eyebrow">NATIONAL TEAM ROOMS</p><h2>11 national locker rooms. One GB 3D experience.</h2><p>Explore the current saved main roster, nation-inspired jersey artwork and player hockey cards. Great Britain keeps its separate interactive 3D room.</p></div>
-      <a href="lg3s-gb-locker.html">Explore Great Britain's 3D room ↗</a>
+
+    <div class="arena-explainer">
+      <p class="note" id="rosterNote">Main roster from the saved, verified LG3s Season 1 snapshot. Jerseys are independent national concepts, not official licensed uniforms. Season stats are read-only when available.</p>
+      <p>Great Britain keeps its separate <a href="lg3s-gb-locker.html">interactive 3D locker room</a>.</p>
     </div>
   </main>
-  <footer>EliteChel Media · Independent LG3s coverage · Player cards link to public identities only · No private team data.</footer>
+  <footer>EliteChel Media · LG3s independent coverage · Verified public player IDs only · No fabricated jersey numbers or ratings.</footer>
 </body>
 </html>

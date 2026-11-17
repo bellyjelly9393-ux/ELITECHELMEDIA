@@ -7,7 +7,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const params=new URLSearchParams(location.search);
 const teamId=Number(params.get('team'));
 const logo=id=>'assets/lg3s/team'+id+'.svg';
-const jersey=id=>'assets/lg3s/jerseys/'+id+'.svg';
+const jersey=id=>id===341?'assets/lg3s/jerseys/341-photo.svg':'assets/lg3s/jerseys/'+id+'.svg';
 const room=id=>id===1446?'lg3s-gb-locker.html':'lg3s-team.html?team='+id;
 const API='https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/';
 const KEY='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
@@ -20,7 +20,27 @@ const kits={
  531:['#218abf','#e6c334','#f8ebbf']
 };
 const chestCrest=new Set([532,822,1439,1444,1079,531]);
-let players=[],latestSnapshot='';
+const nationFlags={
+ 341:['🇨🇦','CAN'],342:['🇺🇸','USA'],1446:['🇬🇧','GBR'],
+ 532:['🇩🇪','GER'],343:['🇸🇪','SWE'],591:['🇯🇵','JPN'],
+ 822:['🇮🇹','ITA'],404:['🇨🇭','SUI'],1439:['🇱🇻','LVA'],
+ 1444:['🇵🇱','POL'],1079:['🇸🇰','SVK'],531:['🇰🇿','KAZ']
+};
+function renderNationRibbon(teams){
+ const ribbon=$('nationRibbon');
+ const order=[341,342,1446,532,343,591,822,404,1439,1444,1079,531];
+ const sorted=[...teams].sort((a,b)=>order.indexOf(Number(a.lgTeamId))-order.indexOf(Number(b.lgTeamId)));
+ ribbon.innerHTML=sorted.map(t=>{
+  const id=Number(t.lgTeamId),flag=nationFlags[id]||['🏒','TEAM'];
+  return '<a class="nation-tab'+(id===teamId?' is-active':'')+'" href="'+room(id)+'"'
+   +(id===teamId?' aria-current="page"':'')
+   +' aria-label="'+esc(t.teamName)+(id===1446?' 3D locker room':' locker room')+'">'
+   +'<span class="nation-flag" aria-hidden="true">'+flag[0]+'</span>'
+   +'<b>'+flag[1]+'</b></a>';
+ }).join('');
+}
+let players=[],latestSnapshot='',page=0;
+const PAGE_SIZE=6;
 function validPlayer(p){
  return p?.rosterStatus==='active'&&Number.isSafeInteger(Number(p.lgUserId))&&Number(p.lgUserId)>0;
 }
@@ -30,7 +50,12 @@ function statCell(label,value){
 function render(){
  const search=String($('roomSearch').value||'').trim().toLocaleLowerCase();
  const filtered=search?players.filter(p=>p.name.toLocaleLowerCase().includes(search)):players;
- $('roomPlayers').innerHTML=filtered.map(p=>{
+ const pageCount=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE));
+ page=Math.max(0,Math.min(page,pageCount-1));
+ $('roomPageStatus').textContent=filtered.length?'STALLS '+(page*PAGE_SIZE+1)+'–'+Math.min(filtered.length,(page+1)*PAGE_SIZE)+' OF '+filtered.length:'NO MATCHING PLAYERS';
+ $('roomPrev').disabled=page===0;
+ $('roomNext').disabled=page>=pageCount-1;
+ $('roomPlayers').innerHTML=filtered.map((p,idx)=>{
   const kind=p.pos==='G'?'goalie':'skater';
   const card='player-cards.html?league=lg3s&id='+p.id+'&kind='+kind;
   const image=jersey(teamId);
@@ -38,7 +63,8 @@ function render(){
   const stats=p.stats;
   const second=kind==='goalie'?(stats?.sv_pct==null?'—':(Number(stats.sv_pct)<=1?Number(stats.sv_pct)*100:Number(stats.sv_pct)).toFixed(1)+'%'):(stats?.p??'—');
   const label=kind==='goalie'?'SV%':'PTS';
-  return '<a class="stall" href="'+card+'" aria-label="Open '+esc(p.name)+' player card">'
+  const outOfPage=idx<page*PAGE_SIZE||idx>=(page+1)*PAGE_SIZE;
+  return '<a class="stall"'+(outOfPage?' hidden':'')+' href="'+card+'" aria-label="Open '+esc(p.name)+' player card">'
     +'<strong class="nameplate"><img src="'+logo(teamId)+'" alt="" loading="lazy"><span>'+esc(p.name)+'</span></strong>'
     +'<div class="locker-spotlight" aria-hidden="true"></div>'
     +'<div class="jersey-stage"><span class="jersey-hanger" aria-hidden="true"></span>'
@@ -97,11 +123,15 @@ async function start(){
   const eligible=data.teams.filter(t=>Number.isSafeInteger(Number(t.lgTeamId))&&Number(t.lgTeamId)>0);
   $('roomTeam').innerHTML=eligible.map(t=>'<option value="'+Number(t.lgTeamId)+'"'+(Number(t.lgTeamId)===teamId?' selected':'')+'>'+esc(t.teamName)+'</option>').join('');
   $('roomTeam').addEventListener('change',()=>{location.href=room(Number($('roomTeam').value));});
+  renderNationRibbon(eligible);
   const team=eligible.find(t=>Number(t.lgTeamId)===teamId);
   if(!team){$('roomName').textContent='Team not found';fail('Choose a nation from the LG3s desk.');return;}
   $('roomLogo').src=logo(teamId);
   $('roomLogo').alt=team.teamName+' crest';
-  $('roomName').textContent=team.teamName;
+  $('roomName').textContent='TEAM '+team.teamName;
+  for(const id of ['roomLogoMirror','roomBannerLeft','roomBannerRight','roomFloorCrest'])$(id).src=logo(teamId);
+  $('roomSideName').textContent=team.teamName.toLocaleUpperCase();
+  $('roomFloorName').textContent=team.teamName.toLocaleUpperCase();
   $('roomTeam').value=String(teamId);
   document.title=team.teamName+' LG3s Locker Room | EliteChel Media';
   $('nationCoverage').href='lg3s-media.html#nation/'+teamId;
@@ -117,6 +147,12 @@ async function start(){
  }catch(error){console.warn('LG3s public locker:',error);$('roomName').textContent='LG3s Team Locker';fail('Public roster snapshot unavailable.');}
 }
 if(teamId===1446&&params.get('fallback')!=='1'){location.replace('lg3s-gb-locker.html');return;}
-$('roomSearch').addEventListener('input',render);
+$('roomSearch').addEventListener('input',()=>{page=0;render();});
+$('roomPrev').addEventListener('click',()=>{if(page>0){page--;render();}});
+$('roomNext').addEventListener('click',()=>{
+ const filtered=String($('roomSearch').value||'').trim().toLocaleLowerCase();
+ const count=filtered?players.filter(p=>p.name.toLocaleLowerCase().includes(filtered)).length:players.length;
+ if((page+1)*PAGE_SIZE<count){page++;render();}
+});
 start();
 })();
