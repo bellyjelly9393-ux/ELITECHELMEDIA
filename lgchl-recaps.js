@@ -26,7 +26,7 @@
     sides(g);
     if (!g.away) return '<span class="rc-match">' + esc(g.matchup || '') + (g.game ? ' · Game ' + esc(g.game) : '') + '</span>';
     function side(t) { return '<span class="rc-side">' + logo(t) + '<span class="rc-tn">' + esc(t.name) + '</span><b class="rc-sc">' + esc(t.score) + '</b></span>'; }
-    return '<span class="rc-match">' + side(g.away) + '<span class="rc-at">@</span>' + side(g.home) + '<span class="rc-gm">' + (g.decision ? esc(g.decision) + ' · ' : '') + 'Game ' + esc(g.game) + '</span></span>';
+    return '<span class="rc-match">' + side(g.away) + '<span class="rc-at">@</span>' + side(g.home) + '<span class="rc-gm">' + (g.decision ? esc(g.decision) + ' · ' : '') + 'Game ' + esc(g.seriesGame || g.game) + '</span></span>';
   }
   function starMark(n) { return '<span class="rc-star" aria-label="' + ORD[n] + ' star">' + new Array(n + 1).join('&#9733;') + '</span>'; }
   function starList(st, note) {
