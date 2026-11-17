@@ -62,8 +62,8 @@ test('season totals come only from read-only public leader views',()=>{
 });
 
 test('LG3s card page and generic locker use cache-busted assets',()=>{
- assert.match(teamHTML,/lg3s-team\.js\?v=20261116-real-bay/);
- assert.match(teamHTML,/lg3s-team\.css\?v=20261116-real-bay/);
+ assert.match(teamHTML,/lg3s-team\.js\?v=20261116-panoramic-v1/);
+ assert.match(teamHTML,/lg3s-team\.css\?v=20261116-panoramic-v1/);
  const cards=load('player-cards.html');
  assert.match(cards,/player-cards\.js\?v=20261115-lg3s-roster/);
  assert.match(cardJS,/lg3s-team\.html\?team=/);
@@ -131,4 +131,26 @@ test('national jersey display uses the verified LGCHL physical bay without touch
  assert.match(overlay,/<svg/);
  assert.match(overlay,/stitch/);
  assert.doesNotMatch(teamJS,/write\(|INSERT INTO|service_role/);
+});
+
+test('panoramic arena remains real navigable content with twelve nations and live identity',async()=>{
+ assert.match(teamHTML,/class="arena-header"/);
+ assert.match(teamHTML,/id="nationRibbon"/);
+ assert.match(teamHTML,/class="room-stage"/);
+ assert.match(teamHTML,/class="arena-floor"/);
+ assert.match(teamHTML,/class="arena-action-bar"/);
+ const css=load('lg3s-team.css');
+ assert.match(css,/repeat\(6,minmax\(0,1fr\)\)/);
+ assert.match(css,/\.arena-side-banner/);
+ assert.match(css,/\.nation-tab\.is-active/);
+ const h=roomHarness(341);
+ vm.runInNewContext(teamJS,h.context,{timeout:2000,filename:'lg3s-team.js'});
+ await new Promise(resolve=>setTimeout(resolve,25));
+ const nav=h.get('nationRibbon').innerHTML;
+ assert.equal((nav.match(/class="nation-tab/g)||[]).length,12);
+ assert.match(nav,/lg3s-gb-locker\.html/);
+ assert.match(nav,/aria-current="page"/);
+ assert.equal(h.get('roomFloorName').textContent,'CANADA');
+ assert.match(h.get('roomName').textContent,/TEAM Canada/);
+ assert.match(h.get('roomPlayers').innerHTML,/Brayl18l/i);
 });
