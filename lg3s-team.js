@@ -20,6 +20,23 @@ const kits={
  531:['#218abf','#e6c334','#f8ebbf']
 };
 const chestCrest=new Set([532,822,1439,1444,1079,531]);
+const nationFlags={
+ 341:['🇨🇦','CAN'],342:['🇺🇸','USA'],1446:['🇬🇧','GBR'],
+ 532:['🇩🇪','GER'],343:['🇸🇪','SWE'],591:['🇯🇵','JPN'],
+ 822:['🇮🇹','ITA'],404:['🇨🇭','SUI'],1439:['🇱🇻','LVA'],
+ 1444:['🇵🇱','POL'],1079:['🇸🇰','SVK'],531:['🇰🇿','KAZ']
+};
+function renderNationRibbon(teams){
+ const ribbon=$('nationRibbon');
+ ribbon.innerHTML=teams.map(t=>{
+  const id=Number(t.lgTeamId),flag=nationFlags[id]||['🏒','TEAM'];
+  return '<a class="nation-tab'+(id===teamId?' is-active':'')+'" href="'+room(id)+'"'
+   +(id===teamId?' aria-current="page"':'')
+   +' aria-label="'+esc(t.teamName)+(id===1446?' 3D locker room':' locker room')+'">'
+   +'<span class="nation-flag" aria-hidden="true">'+flag[0]+'</span>'
+   +'<b>'+flag[1]+'</b></a>';
+ }).join('');
+}
 let players=[],latestSnapshot='';
 function validPlayer(p){
  return p?.rosterStatus==='active'&&Number.isSafeInteger(Number(p.lgUserId))&&Number(p.lgUserId)>0;
@@ -97,11 +114,15 @@ async function start(){
   const eligible=data.teams.filter(t=>Number.isSafeInteger(Number(t.lgTeamId))&&Number(t.lgTeamId)>0);
   $('roomTeam').innerHTML=eligible.map(t=>'<option value="'+Number(t.lgTeamId)+'"'+(Number(t.lgTeamId)===teamId?' selected':'')+'>'+esc(t.teamName)+'</option>').join('');
   $('roomTeam').addEventListener('change',()=>{location.href=room(Number($('roomTeam').value));});
+  renderNationRibbon(eligible);
   const team=eligible.find(t=>Number(t.lgTeamId)===teamId);
   if(!team){$('roomName').textContent='Team not found';fail('Choose a nation from the LG3s desk.');return;}
   $('roomLogo').src=logo(teamId);
   $('roomLogo').alt=team.teamName+' crest';
-  $('roomName').textContent=team.teamName;
+  $('roomName').textContent='TEAM '+team.teamName;
+  for(const id of ['roomLogoMirror','roomBannerLeft','roomBannerRight','roomFloorCrest'])$(id).src=logo(teamId);
+  $('roomSideName').textContent=team.teamName.toLocaleUpperCase();
+  $('roomFloorName').textContent=team.teamName.toLocaleUpperCase();
   $('roomTeam').value=String(teamId);
   document.title=team.teamName+' LG3s Locker Room | EliteChel Media';
   $('nationCoverage').href='lg3s-media.html#nation/'+teamId;
