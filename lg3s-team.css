@@ -725,3 +725,22 @@
  mask-image:linear-gradient(90deg,#000 74%,transparent);opacity:var(--floor-overlay,1);transform:none}
 .lg3s-team-room .arena-floor:after{left:auto;right:0;transform:scaleX(-1)}
 @media(max-width:800px){.hq-wing{display:none}}
+
+/* A wall-mounted screen occupies only the unused bays of the final row. */
+.locker-monitor{display:none;align-self:stretch;align-items:center;justify-content:center;min-width:0;padding:clamp(4px,1vw,20px);background:linear-gradient(110deg,#141518,#08090b)}
+.locker-monitor a{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:.35em;width:100%;max-width:600px;aspect-ratio:16/9;box-sizing:border-box;padding:7%;overflow-wrap:anywhere;color:#fff;text-decoration:none;border:5px ridge #444951;border-bottom-width:9px;border-radius:5px;box-shadow:0 12px 14px #000a;background:radial-gradient(ellipse at top right,color-mix(in srgb,var(--kit-base) 55%,#334154),transparent 75%),#0b111a}
+.locker-monitor a:focus-visible{outline:3px solid white}
+.locker-monitor small,.locker-monitor b{font:700 clamp(9px,.9vw,15px)/1.2 Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.locker-monitor strong{font:italic 900 clamp(14px,2.4vw,38px)/1.05 Arial,sans-serif}
+.locker-monitor span{font:600 clamp(11px,1.15vw,18px)/1.3 Arial,sans-serif}
+.locker-monitor b{border-top:1px solid #8290a3;padding-top:.5em}
+@media(min-width:1251px){
+ .locker-monitor{display:flex;grid-column-end:-1}
+ .slots-1{grid-column-start:2}.slots-2{grid-column-start:3}.slots-3{grid-column-start:4}.slots-4{grid-column-start:5}.slots-5{grid-column-start:6}
+}
+@media(min-width:601px) and (max-width:1250px){
+ .slots-1,.slots-4{display:flex;grid-column:2/-1}.slots-2,.slots-5{display:flex;grid-column:3/-1}
+}
+@media(min-width:371px) and (max-width:600px){
+ .slots-1,.slots-3,.slots-5{display:flex;grid-column:2/-1}
+}

@@ -48,6 +48,24 @@ function validPlayer(p){
 function statCell(label,value){
  return '<span>'+esc(label)+'<b>'+esc(value==null?'—':value)+'</b></span>';
 }
+let fixture=null,nationName='',nationNames=new Map();
+function monitor(count){
+ const href=fixture?'lg3s-media.html#game/'+Number(fixture.lg_game_id):'lg3s-media.html#nation/'+teamId;
+ const opponent=fixture&&nationNames.get(Number(fixture.home_lg_team_id)===teamId?Number(fixture.away_lg_team_id):Number(fixture.home_lg_team_id));
+ const time=fixture&&new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(new Date(fixture.scheduled_at));
+ return '<aside class="locker-monitor slots-'+count+'"><a href="'+href+'"><small>ECM · '+esc(nationName)+'</small><strong>'+esc(opponent?('vs. '+opponent):'Team coverage')+'</strong><span>'+esc(time||'Results & schedule')+'</span><b>'+ (opponent?'Game preview':'Open team desk')+' →</b></a></aside>';
+}
+async function loadNextGame(){
+ const query=new URLSearchParams({select:'lg_game_id,home_lg_team_id,away_lg_team_id,scheduled_at',status:'eq.scheduled',scheduled_at:'gte.'+new Date().toISOString(),or:'(home_lg_team_id.eq.'+teamId+',away_lg_team_id.eq.'+teamId+')',order:'scheduled_at.asc',limit:'1'});
+ try{
+  const result=await fetch(API+'lg3s_public_games?'+query,{headers:{apikey:KEY,Authorization:'Bearer '+KEY},signal:AbortSignal.timeout(8000)});
+  if(!result.ok)return;
+  const [game]=await result.json();
+  if(game&&Number(game.lg_game_id)>0&&Date.parse(game.scheduled_at)>=Date.now()){
+   fixture=game;render();
+  }
+ }catch{ /* The team desk remains available when the schedule feed is offline. */ }
+}
 function render(){
  const search=String($('roomSearch').value||'').trim().toLocaleLowerCase();
  const filtered=search?players.filter(p=>p.name.toLocaleLowerCase().includes(search)):players;
@@ -77,6 +95,8 @@ function render(){
     +'<span class="open-card">VIEW / BUILD HOCKEY CARD →</span></div>'
     +'</a>';
  }).join('')||'<p class="note">'+(search?'No main-roster players match that search.':'No verified main-roster players in this snapshot.')+'</p>';
+ const visible=Math.min(PAGE_SIZE,filtered.length-page*PAGE_SIZE);
+ if(!search&&visible>0&&visible<PAGE_SIZE)$('roomPlayers').innerHTML+=monitor(visible);
  $('roomPlayers').setAttribute('aria-busy','false');
 }
 function fail(message){
@@ -141,12 +161,14 @@ async function start(){
   const kit=kits[teamId]||['#1b2738','#c8ad6b','#fff'];
   ['--kit-base','--kit-accent','--kit-trim'].forEach((name,i)=>document.body.style.setProperty(name,kit[i]));
   players=(team.players||[]).filter(validPlayer).map(p=>({id:Number(p.lgUserId),name:String(p.gamertag||'Unknown'),pos:String(p.position||''),team:team.teamName,stats:null}));
+  nationName=team.teamName;
+  nationNames=new Map(eligible.map(t=>[Number(t.lgTeamId),t.teamName]));
   latestSnapshot=String(data.capturedOn||'date not recorded');
   $('roomRecord').textContent=players.length+' main-roster players · Snapshot '+latestSnapshot;
   $('playersTitle').textContent='Main roster · '+players.length;
   $('rosterNote').textContent='Verified main roster snapshot '+latestSnapshot+'. Loading season statistics…';
   render();
-  await loadStats();
+  await Promise.all([loadStats(),loadNextGame()]);
  }catch(error){console.warn('LG3s public locker:',error);$('roomName').textContent='LG3s Team Locker';fail('Public roster snapshot unavailable.');}
 }
 if(teamId===1446&&params.get('fallback')!=='1'){location.replace('lg3s-gb-locker.html');return;}
