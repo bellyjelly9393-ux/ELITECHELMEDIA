@@ -62,8 +62,8 @@ test('season totals come only from read-only public leader views',()=>{
 });
 
 test('LG3s card page and generic locker use cache-busted assets',()=>{
- assert.match(teamHTML,/lg3s-team\.js\?v=20261115-jersey-v2/);
- assert.match(teamHTML,/lg3s-team\.css\?v=20261115-jersey-v2/);
+ assert.match(teamHTML,/lg3s-team\.js\?v=20261116-real-bay/);
+ assert.match(teamHTML,/lg3s-team\.css\?v=20261116-real-bay/);
  const cards=load('player-cards.html');
  assert.match(cards,/player-cards\.js\?v=20261115-lg3s-roster/);
  assert.match(cardJS,/lg3s-team\.html\?team=/);
@@ -118,4 +118,17 @@ test('Great Britain entry preserves separate 3D routing and does not fetch gener
  vm.runInNewContext(teamJS,h.context,{timeout:2000,filename:'lg3s-team.js'});
  assert.equal(h.location.replaced,'lg3s-gb-locker.html');
  assert.equal(h.nodes.size,0);
+});
+
+test('national jersey display uses the verified LGCHL physical bay without touching GB 3D',()=>{
+ const css=load('lg3s-team.css');
+ const overlay=load('assets/lg3s/jerseys/fabric-overlay.svg');
+ assert.match(css,/hitmen-bay\.webp/);
+ assert.match(css,/jersey-fabric/);
+ assert.match(css,/\.jersey-hanger/);
+ assert.match(teamJS,/fabric-overlay\.svg/);
+ assert.match(teamJS,/nation-jersey/);
+ assert.match(overlay,/<svg/);
+ assert.match(overlay,/stitch/);
+ assert.doesNotMatch(teamJS,/write\(|INSERT INTO|service_role/);
 });

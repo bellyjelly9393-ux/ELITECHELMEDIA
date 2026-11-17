@@ -41,7 +41,9 @@ function render(){
   return '<a class="stall" href="'+card+'" aria-label="Open '+esc(p.name)+' player card">'
     +'<strong class="nameplate"><img src="'+logo(teamId)+'" alt="" loading="lazy"><span>'+esc(p.name)+'</span></strong>'
     +'<div class="locker-spotlight" aria-hidden="true"></div>'
-    +'<div class="jersey-stage"><img class="nation-jersey" src="'+image+'" alt="'+esc(p.team)+' inspired hockey jersey concept" loading="lazy" decoding="async">'+crest
+    +'<div class="jersey-stage"><span class="jersey-hanger" aria-hidden="true"></span>'
+    +'<img class="nation-jersey" src="'+image+'" alt="'+esc(p.team)+' inspired hockey jersey concept" loading="lazy" decoding="async">'
+    +'<img class="jersey-fabric" src="assets/lg3s/jerseys/fabric-overlay.svg" alt="" aria-hidden="true" loading="lazy" decoding="async">'+crest
     +'<small class="concept-tag">NATIONAL CONCEPT KIT · NOT OFFICIAL</small></div>'
     +'<div class="stall-info"><p>'+esc(p.pos)+' · '+(kind==='goalie'?'GOALTENDER':'SKATER')+' · MAIN ROSTER</p>'
     +'<div class="stats">'+statCell('SEASON GP',stats?.gp??'—')+statCell(label,second)+'</div>'
