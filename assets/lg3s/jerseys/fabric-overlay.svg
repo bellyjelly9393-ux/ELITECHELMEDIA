@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 540" role="img" aria-label="Hockey jersey fabric lighting and seam detail">
+<defs>
+<clipPath id="shirt"><path d="M161 72 118 85Q85 95 65 124L12 350Q9 367 25 373L89 395Q105 395 112 375L153 225Z M339 72 382 85Q415 95 435 124L488 350Q491 367 475 373L411 395Q395 395 388 375L347 225Z M161 72 212 91 288 91 339 72 374 111 367 508Q250 520 133 508L126 111Z"/></clipPath>
+<linearGradient id="body" x1="0" x2="1"><stop stop-color="#000" stop-opacity=".42"/><stop offset=".19" stop-color="#fff" stop-opacity=".11"/><stop offset=".46" stop-color="#fff" stop-opacity=".09"/><stop offset=".7" stop-color="#fff" stop-opacity=".03"/><stop offset="1" stop-color="#000" stop-opacity=".42"/></linearGradient>
+<linearGradient id="fold"><stop stop-color="#000" stop-opacity="0"/><stop offset=".25" stop-color="#000" stop-opacity=".35"/><stop offset=".43" stop-color="#fff" stop-opacity=".17"/><stop offset=".68" stop-color="#000" stop-opacity=".28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+<filter id="cloth" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".16 .22" numOctaves="2" seed="8" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".17"/></feComponentTransfer></filter>
+</defs>
+<g clip-path="url(#shirt)">
+<rect width="500" height="540" fill="url(#body)"/>
+<rect width="500" height="540" fill="#fff" filter="url(#cloth)" opacity=".56"/>
+<path d="M122 160Q171 243 117 385Q191 408 152 520H183Q215 416 167 319Q201 242 145 152Z" fill="url(#fold)" opacity=".69"/>
+<path d="M377 151Q327 238 373 345Q333 436 344 520H305Q299 412 338 329Q296 237 354 151Z" fill="url(#fold)" opacity=".73"/>
+<path d="M192 177Q221 254 210 379Q230 429 201 506" stroke="#fff" stroke-opacity=".11" stroke-width="7" fill="none"/>
+<path d="M297 159Q268 248 290 327Q275 430 310 493" stroke="#000" stroke-opacity=".25" stroke-width="11" fill="none"/>
+<path d="M79 147Q126 228 61 368M422 145Q372 223 439 373" stroke="#000" stroke-opacity=".19" stroke-width="13" fill="none"/>
+<path d="M126 121Q153 142 167 196M374 122Q349 153 339 200" stroke="#fff" stroke-opacity=".12" stroke-width="8" fill="none"/>
+<path d="M134 509Q250 517 366 509" stroke="#000" stroke-opacity=".45" stroke-width="5" fill="none"/>
+</g>
+<g fill="none" stroke="#d9dfe5" stroke-opacity=".32" stroke-width="1.2" stroke-dasharray="2 4">
+<path d="M151 91Q174 123 168 188M348 90Q322 119 331 189"/>
+<path d="M36 361Q66 371 91 391M410 391Q438 373 472 360"/>
+<path d="M136 500Q248 510 364 500"/>
+</g>
+</svg>
