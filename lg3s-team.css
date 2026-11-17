@@ -744,3 +744,11 @@
 @media(min-width:371px) and (max-width:600px){
  .slots-1,.slots-3,.slots-5{display:flex;grid-column:2/-1}
 }
+
+.lg3s-team-room .stall .stall-gamertag{
+ position:absolute;z-index:5;top:1.1%;left:18%;width:64%;height:6.1%;
+ pointer-events:none;display:block
+}
+.stall-gamertag text{font:900 18px Arial,sans-serif;fill:#181412;letter-spacing:normal;text-shadow:0 1px 0 #ffffff66}
+.lg3s-team-room .room-stage .stall .nameplate{padding:0 3px;white-space:nowrap}
+.lg3s-team-room .room-stage .stall .nameplate img{height:95%;width:auto}

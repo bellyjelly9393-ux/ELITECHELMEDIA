@@ -66,6 +66,21 @@ async function loadNextGame(){
   }
  }catch{ /* The team desk remains available when the schedule feed is offline. */ }
 }
+// Fit the lettering to the brass plaque even when a stall is resized.
+const lettering=document.createElement?.('canvas')?.getContext('2d');
+function upperPlate(name){
+ const label=name.toUpperCase();
+ if(lettering)lettering.font='900 18px Arial';
+ const width=Math.max(130,Math.ceil(lettering?.measureText(label).width||label.length*18)+8);
+ return '<svg class="stall-gamertag" aria-hidden="true" viewBox="0 0 '+width+' 24"><text x="50%" y="18" text-anchor="middle">'+esc(label)+'</text></svg>';
+}
+function stallNumber(player,kind){
+ let number=player.jerseyNumber;
+ if(number==null){
+  try{number=JSON.parse(localStorage.getItem('ecm-card-v1:lg3s:'+kind+':'+player.id))?.jersey;}catch{}
+ }
+ return /^\d{1,2}$/.test(String(number))?'#'+number:'';
+}
 function render(){
  const search=String($('roomSearch').value||'').trim().toLocaleLowerCase();
  const filtered=search?players.filter(p=>p.name.toLocaleLowerCase().includes(search)):players;
@@ -84,7 +99,8 @@ function render(){
   const label=kind==='goalie'?'SV%':'PTS';
   const outOfPage=idx<page*PAGE_SIZE||idx>=(page+1)*PAGE_SIZE;
   return '<a class="stall"'+(outOfPage?' hidden':'')+' href="'+card+'" aria-label="Open '+esc(p.name)+' player card">'
-    +'<strong class="nameplate"><img src="'+logo(teamId)+'" alt="" loading="lazy"><span>'+esc(p.name)+'</span></strong>'
+    +upperPlate(p.name)
+    +'<strong class="nameplate"><img src="'+logo(teamId)+'" alt="" loading="lazy"><span>'+stallNumber(p,kind)+'</span></strong>'
     +'<div class="locker-spotlight" aria-hidden="true"></div>'
     +'<div class="jersey-stage"><span class="jersey-hanger" aria-hidden="true"></span>'
     +'<img class="nation-jersey" src="'+image+'" alt="'+esc(p.team)+' inspired hockey jersey concept" loading="lazy" decoding="async">'
@@ -160,7 +176,7 @@ async function start(){
   $('nationCoverage').href='lg3s-media.html#nation/'+teamId;
   const kit=kits[teamId]||['#1b2738','#c8ad6b','#fff'];
   ['--kit-base','--kit-accent','--kit-trim'].forEach((name,i)=>document.body.style.setProperty(name,kit[i]));
-  players=(team.players||[]).filter(validPlayer).map(p=>({id:Number(p.lgUserId),name:String(p.gamertag||'Unknown'),pos:String(p.position||''),team:team.teamName,stats:null}));
+  players=(team.players||[]).filter(validPlayer).map(p=>({id:Number(p.lgUserId),jerseyNumber:p.jerseyNumber,name:String(p.gamertag||'Unknown'),pos:String(p.position||''),team:team.teamName,stats:null}));
   nationName=team.teamName;
   nationNames=new Map(eligible.map(t=>[Number(t.lgTeamId),t.teamName]));
   latestSnapshot=String(data.capturedOn||'date not recorded');
