@@ -40,7 +40,11 @@
     <section class="room-stage" aria-labelledby="playersTitle">
       <div class="stage-head">
         <h2 id="playersTitle">Main roster</h2>
-        <span>SELECT A STALL TO VIEW THE PLAYER'S HOCKEY CARD</span>
+        <div class="room-pager">
+          <button type="button" id="roomPrev" aria-label="Previous six player stalls" disabled>‹ PREV</button>
+          <span id="roomPageStatus" role="status">Loading roster…</span>
+          <button type="button" id="roomNext" aria-label="Next six player stalls" disabled>NEXT ›</button>
+        </div>
       </div>
       <div class="room-stage-inner">
         <aside class="arena-side-banner" aria-hidden="true"><img id="roomBannerLeft" src="assets/lg3s/team341.svg" alt=""><b id="roomSideName">CANADA</b><small>LG3s INTERNATIONAL</small></aside>
