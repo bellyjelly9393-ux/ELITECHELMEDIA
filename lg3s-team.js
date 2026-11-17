@@ -8,10 +8,11 @@ const params=new URLSearchParams(location.search);
 const teamId=Number(params.get('team'));
 const logo=id=>'assets/lg3s/team'+id+'.svg';
 const jersey=id=>'assets/lg3s/jerseys/'+id+'.webp';
-const room=id=>id===1446?'lg3s-gb-locker.html':'lg3s-team.html?team='+id;
+const room=id=>id===1446?'lg3s-team.html?team=1446&fallback=1':'lg3s-team.html?team='+id;
 const API='https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/';
 const KEY='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
 const kits={
+ 1446:['#102448','#cb2446','#ffffff'],
  341:['#111318','#e33440','#f4f4f4'],342:['#163a86','#ebebf0','#cb2438'],
  532:['#171717','#dfb134','#d72636'],343:['#123259','#f6cf39','#f2f2f2'],
  591:['#111316','#d7293e','#ebebeb'],822:['#176eb1','#f5f5f5','#d52940'],
@@ -34,7 +35,7 @@ function renderNationRibbon(teams){
   const id=Number(t.lgTeamId),flag=nationFlags[id]||['🏒','TEAM'];
   return '<a class="nation-tab'+(id===teamId?' is-active':'')+'" href="'+room(id)+'"'
    +(id===teamId?' aria-current="page"':'')
-   +' aria-label="'+esc(t.teamName)+(id===1446?' 3D locker room':' locker room')+'">'
+   +' aria-label="'+esc(t.teamName)+(' locker room')+'">'
    +'<span class="nation-flag" aria-hidden="true">'+flag[0]+'</span>'
    +'<b>'+flag[1]+'</b></a>';
  }).join('');
@@ -58,7 +59,7 @@ function render(){
  $('roomPlayers').innerHTML=filtered.map((p,idx)=>{
   const kind=p.pos==='G'?'goalie':'skater';
   const card='player-cards.html?league=lg3s&id='+p.id+'&kind='+kind;
-  const image=jersey(teamId);
+  const image=teamId===1446?'assets/lg3s/scene/gb-kit.webp':jersey(teamId);
   const crest=''; // Chest motif is already baked into the photoreal-style jersey image.
   const stats=p.stats;
   const second=kind==='goalie'?(stats?.sv_pct==null?'—':(Number(stats.sv_pct)<=1?Number(stats.sv_pct)*100:Number(stats.sv_pct)).toFixed(1)+'%'):(stats?.p??'—');
@@ -126,6 +127,8 @@ async function start(){
   renderNationRibbon(eligible);
   const team=eligible.find(t=>Number(t.lgTeamId)===teamId);
   if(!team){$('roomName').textContent='Team not found';fail('Choose a nation from the LG3s desk.');return;}
+  document.body.style.setProperty('--room-floor',teamId===341?'url(assets/lg3s/scene/canada-floor.webp)':'none');
+  document.body.style.setProperty('--floor-overlay',teamId===341?'0':'1');
   $('roomLogo').src=logo(teamId);
   $('roomLogo').alt=team.teamName+' crest';
   $('roomName').textContent='TEAM '+team.teamName;
