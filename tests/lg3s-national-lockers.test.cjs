@@ -154,3 +154,23 @@ test('panoramic arena remains real navigable content with twelve nations and liv
  assert.match(h.get('roomName').textContent,/TEAM Canada/);
  assert.match(h.get('roomPlayers').innerHTML,/Brayl18l/i);
 });
+
+test('arena paging shows six verified players at a time, with the rest reachable',async()=>{
+ const h=roomHarness(341);
+ vm.runInNewContext(teamJS,h.context,{timeout:2000,filename:'lg3s-team.js'});
+ await new Promise(resolve=>setTimeout(resolve,25));
+ assert.equal(h.get('roomPageStatus').textContent,'STALLS 1–6 OF 10');
+ assert.equal(h.get('roomPrev').disabled,true);
+ assert.equal(h.get('roomNext').disabled,false);
+ assert.equal((h.get('roomPlayers').innerHTML.match(/ hidden href=/g)||[]).length,4);
+ h.get('roomNext').listeners.click();
+ assert.equal(h.get('roomPageStatus').textContent,'STALLS 7–10 OF 10');
+ assert.equal(h.get('roomPrev').disabled,false);
+ assert.equal(h.get('roomNext').disabled,true);
+ h.get('roomPrev').listeners.click();
+ assert.equal(h.get('roomPageStatus').textContent,'STALLS 1–6 OF 10');
+ h.get('roomSearch').value='Brayl18l';
+ h.get('roomSearch').listeners.input();
+ assert.equal(h.get('roomPageStatus').textContent,'STALLS 1–1 OF 1');
+ assert.equal(h.get('roomNext').disabled,true);
+});
