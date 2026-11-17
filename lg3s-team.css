@@ -675,3 +675,14 @@
  .lg3s-team-room .arena-side-banner img{max-height:65px}
  .lg3s-team-room .arena-side-banner b{font-size:clamp(10px,1.1vw,17px);letter-spacing:.09em}
 }
+
+/* National jersey cutouts get the visual priority of the reference scene. */
+.lg3s-team-room .room-stage .stall .jersey-stage{
+ top:25%;height:45%;left:1%;right:1%
+}
+.lg3s-team-room .room-stage .stall .jersey-stage img.nation-jersey,
+.lg3s-team-room .room-stage .stall .jersey-stage img.jersey-fabric{
+ object-fit:contain
+}
+.lg3s-team-room .room-stage .stall .jersey-stage img.jersey-fabric{opacity:.4}
+.lg3s-team-room .room-stage .stall .stall-info{top:73%;bottom:3%}
