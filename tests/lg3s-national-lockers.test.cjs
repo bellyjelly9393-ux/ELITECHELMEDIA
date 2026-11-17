@@ -139,6 +139,9 @@ test('panoramic arena remains real navigable content with twelve nations and liv
  assert.match(teamHTML,/class="room-stage"/);
  assert.match(teamHTML,/class="arena-floor"/);
  assert.match(teamHTML,/class="arena-action-bar"/);
+ assert.match(teamHTML,/id="roomPrev"/);
+ assert.match(teamHTML,/id="roomNext"/);
+ assert.match(teamHTML,/id="roomPageStatus"/);
  const css=load('lg3s-team.css');
  assert.match(css,/repeat\(6,minmax\(0,1fr\)\)/);
  assert.match(css,/\.arena-side-banner/);
