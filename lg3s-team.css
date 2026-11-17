@@ -1,43 +1,186 @@
-/* LG3s 6s-style public locker room. Uses the established LGCHL stall proportions
-   but no Calgary branding or unverified official uniforms. */
-.lg3s-team-room{--tc:32,59,85;--gold:#d7bd82;background:radial-gradient(ellipse at 50% 3%,#192a3b 0%,#090d13 60%)}
-.lg3s-team-room header{max-width:1400px;border-bottom:1px solid #374350}
-.lg3s-team-room main,.lg3s-team-room footer{max-width:1320px}
-.lg3s-team-room nav a{font-size:14px;color:#d9e4ee;text-decoration:none}
-.lg3s-team-room nav a:hover{text-decoration:underline}
-.lg3s-team-room .room-hero{border:2px solid #45546a;border-radius:4px;background:linear-gradient(110deg,#0d1929,#253041 48%,#0e1017);box-shadow:0 25px 42px #0009,inset 0 1px #ffffff25}
-.lg3s-team-room .room-hero>img{object-fit:contain;filter:drop-shadow(0 7px 10px #000)}
-.lg3s-team-room .room-hero-copy{min-width:0;flex:1}
-.lg3s-team-room .room-hero .note{color:#bbc9d7}
-.lg3s-team-room .room-nation-link{display:inline-block;padding:9px 12px;background:#132c43;border:1px solid #6586ab;margin-top:8px;color:#fff;font-weight:700;text-decoration:none}
-.lg3s-team-room .room-season{padding-top:14px}
-.lg3s-team-room .stalls{gap:18px 8px;border-block:3px solid #374a59;background:linear-gradient(90deg,#273039,#0a0e16 4%,#0a0e16 96%,#273039);padding:18px 13px}
-.lg3s-team-room .stall{position:relative;background:linear-gradient(90deg,#08090b 0 3%,#526070 4%,#1a1f2a 8%,#1c2028 91%,#48576b 96%,#08090c 98%);border:2px solid #384757;box-shadow:0 18px 22px #000a,inset 0 3px 12px #000,0 1px #91a5b452;overflow:hidden}
-.lg3s-team-room .stall:before{content:"";position:absolute;inset:17% 12% 33%;border:5px ridge #38414a;background:radial-gradient(ellipse at 50% 15%,#a6986430,transparent 55%),linear-gradient(#0b0e15,#11141b);z-index:0}
-.lg3s-team-room .stall:after{content:"";position:absolute;left:9%;right:9%;top:60.5%;height:5%;background:linear-gradient(180deg,#5d666c,#1a1c22);border:3px solid #1f2934;box-shadow:0 6px 12px #000c;pointer-events:none}
-.lg3s-team-room .stall:hover{filter:brightness(1.17)}
-.lg3s-team-room .nameplate{z-index:2;inset:3% 12% auto;height:9%;color:#ebf0f7;background:linear-gradient(#243246,#101924);border:1px solid #798797;box-shadow:0 2px 8px #000;font:800 clamp(12px,4.7cqw,18px)/1.1 Arial,sans-serif;letter-spacing:.025em;text-shadow:0 2px 4px #000;overflow-wrap:anywhere;padding:4px 8px}
-.lg3s-team-room .jersey-stage{z-index:1;top:22%;height:37%}
-.lg3s-team-room .concept-kit{position:relative;height:100%;width:100%;background:url('assets/lgchl/jerseys/crest-concept-template.svg') center/contain no-repeat}
-.lg3s-team-room .concept-crest{position:absolute;left:50%;top:41%;width:31%;height:27%;transform:translate(-50%,-50%);object-fit:contain;filter:drop-shadow(0 4px 3px #000)}
-.lg3s-team-room .concept-tag{position:absolute;left:4%;right:4%;bottom:0;text-align:center;font-size:clamp(8px,2.45cqw,11px);font-weight:700;line-height:1.2;background:#06121fd9;color:#cdd6e1;border:1px solid #627389;padding:4px 2px;letter-spacing:.025em}
-.lg3s-team-room .stall-info{z-index:3;top:67%;left:10%;right:10%;bottom:8%;display:flex;flex-direction:column;justify-content:space-between;align-items:stretch}
-.lg3s-team-room .stall-info p{color:#e2e6eb;font-weight:700;letter-spacing:.08em}
-.lg3s-team-room .stats{border:1px solid #53677b;background:linear-gradient(#1d2c3e,#08111c);color:#eaf1f8;padding:7px 4px}
-.lg3s-team-room .stats span{font:600 clamp(10px,2.8cqw,13px)/1.2 Arial,sans-serif}
-.lg3s-team-room .stats b{color:#f7e8bc;font-size:clamp(14px,4cqw,20px)}
-.lg3s-team-room .open-card{border:1px solid #607b99;background:#122942;color:#d9ebff;font-size:clamp(10px,2.8cqw,13px);padding:7px 3px}
-.lg3s-team-room .room-bottom{margin:36px 0;padding:25px;background:#121e2d;border:1px solid #36495f;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.lg3s-team-room .room-bottom h2{margin:0 0 10px}.lg3s-team-room .room-bottom p{color:#c4cedb;max-width:730px}
-.lg3s-team-room .room-bottom a{color:#101820;background:#d8c08b;font-weight:800;padding:13px 17px;text-decoration:none}
-.lg3s-team-room .room-toolbar{margin-top:10px}.lg3s-team-room .room-team-slot{min-width:260px}
-@media(max-width:700px){
- .lg3s-team-room .stalls{grid-template-columns:repeat(2,minmax(0,1fr));max-width:none;gap:10px;padding:12px 5px}
- .lg3s-team-room .stall{aspect-ratio:2/3;min-width:0}
- .lg3s-team-room .room-hero>img{width:80px;height:80px}
- .lg3s-team-room .nameplate{font-size:clamp(10px,3.4vw,15px)}
- .lg3s-team-room .room-hero{align-items:flex-start}
- .lg3s-team-room .stall-info{top:65%;bottom:6%}
+/* LG3s public national locker design.
+   All 11 generic nation rooms share this system. GB uses its separate 3D portal. */
+.lg3s-team-room{
+ --kit-base:#18202c;--kit-accent:#d3b36a;--kit-trim:#f5f5f5;
+ --gold:#e0be7c;--tc:33,43,57;
+ background:
+ radial-gradient(ellipse at 12% 2%,color-mix(in srgb,var(--kit-base) 42%,transparent),transparent 34%),
+ radial-gradient(ellipse at 88% 18%,#202b37 0%,transparent 37%),
+ #080a0e;
+ color:#f1f2f5
 }
-@media(max-width:420px){.lg3s-team-room .stalls{grid-template-columns:1fr;max-width:330px;margin:auto}}
+.lg3s-team-room header{max-width:1460px;border-bottom:1px solid #303846;gap:15px}
+.lg3s-team-room main,.lg3s-team-room footer{max-width:1400px}
+.lg3s-team-room nav a{color:#e3e7ec;text-decoration:none;font-size:14px}
+.lg3s-team-room nav a:hover{color:#fff;text-decoration:underline}
+.lg3s-team-room h1{font-style:normal;color:#f1f1f3;text-shadow:0 4px 10px #000;letter-spacing:2px}
+.lg3s-team-room .room-toolbar{margin-top:12px}
+.lg3s-team-room .room-team-slot{min-width:min(300px,100%)}
+.lg3s-team-room .room-hero{
+ border:1px solid color-mix(in srgb,var(--kit-accent) 62%,#444b56);
+ border-radius:8px;
+ background:
+ linear-gradient(115deg,#101721 3%,color-mix(in srgb,var(--kit-base) 50%,#1e2936) 53%,#0c1017 95%);
+ box-shadow:0 14px 40px #0009,inset 0 1px #ffffff20,0 0 0 3px #05080d;
+ position:relative;overflow:hidden
+}
+.lg3s-team-room .room-hero:after{content:"";position:absolute;right:0;top:0;bottom:0;width:5px;background:var(--kit-accent);box-shadow:0 0 25px var(--kit-accent)}
+.lg3s-team-room .room-hero>img{object-fit:contain;filter:drop-shadow(0 9px 10px #000)}
+.lg3s-team-room .room-hero-copy{min-width:0;flex:1}
+.lg3s-team-room .room-hero .note{color:#cfdae6}
+.lg3s-team-room .room-nation-link{
+ display:inline-flex;align-items:center;min-height:42px;
+ padding:10px 14px;color:#fff;font-weight:750;text-decoration:none;
+ background:linear-gradient(#203346,#0c1927);
+ border:1px solid color-mix(in srgb,var(--kit-accent) 60%,#61778d);
+ border-radius:4px;margin-top:5px
+}
+.lg3s-team-room .room-season{padding-top:18px}
+.lg3s-team-room .section-heading{align-items:end}
+.lg3s-team-room .section-heading h2{margin-bottom:0}
+.lg3s-team-room .room-season .note{max-width:1000px}
+.lg3s-team-room .stalls{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ max-width:1400px;gap:20px;padding:25px 12px;
+ border-block:2px solid color-mix(in srgb,var(--kit-accent) 45%,#29333c);
+ background:linear-gradient(90deg,#28303a 0%,#090d13 3%,#0d121a 50%,#090d13 97%,#28303a 100%)
+}
+.lg3s-team-room .stall{
+ container-type:inline-size;aspect-ratio:0.81;min-width:0;
+ border:3px solid #4b5360;border-radius:7px;
+ background:
+ linear-gradient(90deg,#0e1116 0 3%,#66707b 4%,#252b34 7%,#171b24 13%,#171b24 87%,#252b34 93%,#66707b 96%,#0e1116 97%),
+ #161b23;
+ box-shadow:0 19px 26px #000c,inset 0 0 15px #000,0 2px 0 #b2b5bb34;
+ color:#f7f8fa;overflow:hidden;
+ transition:filter .16s ease,border-color .16s ease;
+ transform:none
+}
+.lg3s-team-room .stall:hover{
+ filter:brightness(1.1);
+ border-color:color-mix(in srgb,var(--kit-accent) 75%,#999);
+ transform:none
+}
+.lg3s-team-room .stall:focus-visible{outline:3px solid #91caff;outline-offset:3px}
+.lg3s-team-room .stall:before{
+ content:"";position:absolute;inset:16% 9% 31%;z-index:0;
+ border:3px ridge #2f3642;
+ background:
+ radial-gradient(ellipse at 50% 10%,color-mix(in srgb,var(--kit-accent) 26%,transparent),transparent 57%),
+ repeating-linear-gradient(90deg,#151b24 0 4px,#171d26 4px 8px,#121720 8px 12px);
+ box-shadow:inset 0 0 30px #0009;
+ pointer-events:none
+}
+.lg3s-team-room .stall:after{
+ content:"";position:absolute;top:67.5%;left:6.5%;right:6.5%;height:3%;
+ border:2px solid #333e4b;
+ background:linear-gradient(#818893,#323b47 45%,#11141a);
+ box-shadow:0 5px 8px #000d;
+ pointer-events:none;z-index:2
+}
+.lg3s-team-room .nameplate{
+ position:absolute;inset:2.6% 8% auto;height:11.2%;z-index:4;
+ display:flex;align-items:center;justify-content:center;gap:10px;
+ padding:7px 9px;min-height:0;
+ border:1px solid #747f8b;border-bottom:3px solid var(--kit-accent);
+ border-radius:4px;
+ background:linear-gradient(180deg,#344357 0%,#17212e 52%,#0a111a 100%);
+ box-shadow:0 4px 8px #000a,inset 0 1px #e7f6ff3b;
+ color:#fbfcfd;
+ font:800 clamp(12px,4.3cqw,22px)/1.13 Arial,sans-serif;
+ letter-spacing:.015em;text-shadow:0 2px 3px #000;
+ text-align:center;overflow-wrap:anywhere
+}
+.lg3s-team-room .nameplate img{width:clamp(19px,7cqw,37px);height:clamp(19px,7cqw,37px);object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 3px 3px #000);border:0}
+.lg3s-team-room .nameplate span{min-width:0}
+.lg3s-team-room .locker-spotlight{
+ position:absolute;top:16%;left:26%;right:26%;height:1.8%;
+ z-index:2;border-radius:50%;
+ background:linear-gradient(90deg,transparent,#fbebbf 20%,#fffefa 50%,#fbebbf 80%,transparent);
+ box-shadow:0 3px 16px #ffdeb890,0 10px 30px #f2d49b40
+}
+.lg3s-team-room .jersey-stage{
+ position:absolute;inset:18% 7% auto;height:48%;z-index:1;
+ display:block;background:none;border:0;overflow:visible
+}
+.lg3s-team-room .jersey-stage img.nation-jersey{
+ position:absolute;left:6%;top:0;width:88%;height:100%;
+ max-width:none;min-width:0;min-height:0;
+ object-fit:contain;filter:drop-shadow(0 14px 8px #000c) drop-shadow(0 0 11px #ffffff0b)
+}
+.lg3s-team-room .jersey-stage img.jersey-crest{
+ position:absolute;left:50%;top:46%;
+ transform:translate(-50%,-50%);
+ width:clamp(36px,14cqw,70px);height:clamp(36px,14cqw,70px);
+ min-width:0;min-height:0;max-width:24%;
+ object-fit:contain;z-index:3;filter:drop-shadow(0 3px 2px #000a)
+}
+.lg3s-team-room .concept-tag{
+ position:absolute;left:8%;right:8%;bottom:-3%;
+ z-index:4;text-align:center;line-height:1.25;
+ font-size:clamp(7px,2.6cqw,11px);font-weight:700;letter-spacing:.05em;
+ padding:5px 3px;color:#e8ecf1;
+ border:1px solid #4a5a68;
+ background:#0d141fce
+}
+.lg3s-team-room .stall-info{
+ position:absolute;inset:71% 8% 4%;z-index:3;
+ padding:0;display:flex;flex-direction:column;align-items:stretch;
+ justify-content:space-between;text-align:center;
+}
+.lg3s-team-room .stall-info p{
+ margin:0;color:#dfe6ec;letter-spacing:.04em;
+ font-size:clamp(9px,3cqw,14px);font-weight:750
+}
+.lg3s-team-room .stats{
+ display:flex;gap:0;padding:6px 2px;
+ border:1px solid #465969;border-radius:3px;
+ background:linear-gradient(180deg,#223447,#0b1420);
+ box-shadow:inset 0 1px #ffffff2e;color:#dbe3eb
+}
+.lg3s-team-room .stats span{
+ flex:1;border-right:1px solid #455160;
+ display:flex;align-items:center;flex-direction:column;justify-content:center;
+ gap:3px;font:700 clamp(9px,2.8cqw,12px)/1.1 Arial,sans-serif;
+ color:#cfd9e5
+}
+.lg3s-team-room .stats span:last-child{border-right:0}
+.lg3s-team-room .stats b{
+ font-size:clamp(16px,5.1cqw,24px);
+ color:#fff;line-height:1.1;font-variant-numeric:tabular-nums
+}
+.lg3s-team-room .open-card{
+ display:block;margin:0;padding:10px 5px;
+ border:1px solid color-mix(in srgb,var(--kit-accent) 65%,#5a6e83);
+ border-radius:4px;
+ background:linear-gradient(180deg,#23394d,#0d1b2b);
+ box-shadow:inset 0 1px #ffffff17;
+ font-size:clamp(9px,2.9cqw,13px);letter-spacing:.015em;
+ font-weight:800;color:#f0f5fa
+}
+.lg3s-team-room .room-bottom{
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+ gap:18px;margin:35px 0;padding:25px;
+ background:#151f2c;border:1px solid #394759;border-radius:6px
+}
+.lg3s-team-room .room-bottom h2{margin:0 0 10px}
+.lg3s-team-room .room-bottom p{max-width:650px;color:#c4cfdb}
+.lg3s-team-room .room-bottom a{background:#dbbf7c;color:#111a22;font-weight:800;padding:13px 17px;text-decoration:none;border-radius:3px}
+@media(min-width:701px) and (max-width:1040px){
+ .lg3s-team-room .stalls{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+ .lg3s-team-room .stalls{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px 5px;max-width:none;margin:0}
+ .lg3s-team-room .stall{aspect-ratio:.68}
+ .lg3s-team-room .room-hero{align-items:flex-start}
+ .lg3s-team-room .room-hero>img{width:80px;height:80px}
+ .lg3s-team-room .nameplate{font-size:clamp(10px,3.6vw,18px);gap:5px}
+ .lg3s-team-room .stall-info{inset:69% 7% 3.5%}
+ .lg3s-team-room .stats{padding:4px 2px}
+ .lg3s-team-room .open-card{padding:6px 2px}
+}
+@media(max-width:410px){
+ .lg3s-team-room .stalls{grid-template-columns:minmax(0,1fr);gap:16px;max-width:350px;margin:0 auto}
+ .lg3s-team-room .stall{aspect-ratio:.77}
+}
 @media(prefers-reduced-motion:reduce){.lg3s-team-room .stall{transition:none}}
