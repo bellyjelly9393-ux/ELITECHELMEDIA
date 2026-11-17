@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "teamId": 1446,
+  "team": "Great Britain",
+  "season": "LG3s Season 1",
+  "status": "pregame",
+  "opponent": null,
+  "opponentFlag": null,
+  "startsAt": null,
+  "timezone": "America/Toronto",
+  "sourceUrl": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&leagueid=154&page=roster&seasonid=1",
+  "preview": {
+    "lead": "Great Britain's matchup analysis will appear here when the fixture and player availability are verified.",
+    "formWatch": "Awaiting verified results",
+    "keyMatchup": "Awaiting opponent",
+    "url": "lg3s-media.html"
+  },
+  "postgame": {
+    "verified": false,
+    "score": null,
+    "lead": "The official score, verified box score and ECM recap will appear after the game.",
+    "url": "lg3s-media.html"
+  },
+  "streams": []
+}
