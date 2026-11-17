@@ -187,8 +187,8 @@ test('all 11 national jersey photographs are valid WebP assets and retain the na
   assert.equal(image.subarray(8,12).toString('ascii'),'WEBP');
   assert.match(teamJS,new RegExp('(?:^|[^0-9])'+id+':\\['));
  }
- assert.doesNotMatch(teamJS,/341-photo\\.svg/);
- assert.match(teamJS,/jerseys\/'+id+'\\.webp/);
+ assert.equal(teamJS.includes('341-photo.svg'),false);
+ assert.ok(teamJS.includes("const jersey=id=>'assets/lg3s/jerseys/'+id+'.webp';"));
  const order=['341','342','1446','532','343','591','822','404','1439','1444','1079','531'];
  assert.match(teamJS,new RegExp('const order=\\['+order.join(',')+'\\]'));
 });
