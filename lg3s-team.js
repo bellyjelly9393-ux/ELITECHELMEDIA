@@ -165,6 +165,8 @@ async function start(){
   if(!team){$('roomName').textContent='Team not found';fail('Choose a nation from the LG3s desk.');return;}
   document.body.style.setProperty('--room-floor',teamId===341?'url(assets/lg3s/scene/canada-floor.webp)':'none');
   document.body.style.setProperty('--floor-overlay',teamId===341?'0':'1');
+  const nationArt={341:'canada',342:'usa',1446:'great-britain',532:'germany',343:'sweden',591:'japan',822:'italy',404:'switzerland',1439:'latvia',1444:'poland',1079:'slovakia',531:'kazakhstan'};
+  document.body.style.setProperty('--nation-header-art','url(assets/lg3s/nations/'+nationArt[teamId]+'-hero.webp)');
   $('roomLogo').src=logo(teamId);
   $('roomLogo').alt=team.teamName+' crest';
   $('roomName').textContent='TEAM '+team.teamName;

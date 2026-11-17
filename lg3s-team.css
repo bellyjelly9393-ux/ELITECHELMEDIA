@@ -752,3 +752,25 @@
 .stall-gamertag text{font:900 18px Arial,sans-serif;fill:#181412;letter-spacing:normal;text-shadow:0 1px 0 #ffffff66}
 .lg3s-team-room .room-stage .stall .nameplate{padding:0 3px;white-space:nowrap}
 .lg3s-team-room .room-stage .stall .nameplate img{height:95%;width:auto}
+
+/* National arena artwork behind the headquarters header. */
+.lg3s-team-room .arena-header{
+ background-image:linear-gradient(180deg,#060a12b8 0%,#060a1280 35%,#060a1273 100%),var(--nation-header-art);
+ background-size:cover;background-position:center,center 27%;
+ border-top-color:var(--kit-accent);box-shadow:inset 0 -2px 0 var(--kit-accent),0 0 22px #0009
+}
+.lg3s-team-room .arena-team{
+ max-width:none;isolation:isolate;padding-block:18px;
+ background:linear-gradient(90deg,#080c1680,transparent 28%,#080c16b8 50%,transparent 72%,#080c1680);
+ border-top:1px solid #ffffff36;border-bottom:2px solid var(--kit-accent)
+}
+.lg3s-team-room .arena-team:after{
+ content:"";position:absolute;bottom:-2px;left:25%;right:25%;height:2px;
+ background:var(--kit-accent);box-shadow:0 0 14px 2px var(--kit-accent)
+}
+.lg3s-team-room .arena-title{text-shadow:0 2px 5px #000,0 0 15px #000}
+.lg3s-team-room .nation-ribbon{background:#070b14a6;backdrop-filter:blur(3px)}
+@media(max-width:600px){
+ .lg3s-team-room .arena-header{background-position:center,55% 24%}
+ .lg3s-team-room .arena-team{padding-block:14px}
+}
