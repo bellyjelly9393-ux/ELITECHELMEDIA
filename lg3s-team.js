@@ -7,7 +7,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const params=new URLSearchParams(location.search);
 const teamId=Number(params.get('team'));
 const logo=id=>'assets/lg3s/team'+id+'.svg';
-const jersey=id=>id===341?'assets/lg3s/jerseys/341-photo.svg':'assets/lg3s/jerseys/'+id+'.svg';
+const jersey=id=>'assets/lg3s/jerseys/'+id+'.webp';
 const room=id=>id===1446?'lg3s-gb-locker.html':'lg3s-team.html?team='+id;
 const API='https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/';
 const KEY='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
@@ -19,7 +19,7 @@ const kits={
  1444:['#b02d42','#f5f1ef','#fff'],1079:['#1d5094','#f0edef','#d92a39'],
  531:['#218abf','#e6c334','#f8ebbf']
 };
-const chestCrest=new Set([532,822,1439,1444,1079,531]);
+// Photo-style cutouts already include the reference chest graphics: never double-overlay crests.
 const nationFlags={
  341:['🇨🇦','CAN'],342:['🇺🇸','USA'],1446:['🇬🇧','GBR'],
  532:['🇩🇪','GER'],343:['🇸🇪','SWE'],591:['🇯🇵','JPN'],
@@ -59,7 +59,7 @@ function render(){
   const kind=p.pos==='G'?'goalie':'skater';
   const card='player-cards.html?league=lg3s&id='+p.id+'&kind='+kind;
   const image=jersey(teamId);
-  const crest=chestCrest.has(teamId)?'<img class="jersey-crest" src="'+logo(teamId)+'" alt="" loading="lazy">':'';
+  const crest=''; // Chest motif is already baked into the photoreal-style jersey image.
   const stats=p.stats;
   const second=kind==='goalie'?(stats?.sv_pct==null?'—':(Number(stats.sv_pct)<=1?Number(stats.sv_pct)*100:Number(stats.sv_pct)).toFixed(1)+'%'):(stats?.p??'—');
   const label=kind==='goalie'?'SV%':'PTS';
