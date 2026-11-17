@@ -659,3 +659,19 @@
  display:block;width:100%;max-width:100%;height:auto;min-width:0;min-height:0;
  justify-self:stretch;align-self:start;aspect-ratio:2 / 3;box-sizing:border-box
 }
+
+/* Decorative side flags must not set row height: the jerseys set room height. */
+@media(min-width:801px){
+ .lg3s-team-room .room-stage-inner{
+  display:block;position:relative;padding-inline:7%;
+  min-height:0;overflow:hidden
+ }
+ .lg3s-team-room .arena-side-banner{
+  position:absolute;top:0;bottom:0;width:7%;height:auto;min-height:0;
+  padding:12px 3px;overflow:hidden
+ }
+ .lg3s-team-room .arena-side-banner:first-child{left:0}
+ .lg3s-team-room .arena-side-banner:last-child{right:0}
+ .lg3s-team-room .arena-side-banner img{max-height:65px}
+ .lg3s-team-room .arena-side-banner b{font-size:clamp(10px,1.1vw,17px);letter-spacing:.09em}
+}
