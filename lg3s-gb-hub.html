@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07101c">
+<meta name="description" content="Great Britain LG3s game night: pregame breakdowns, authorized public player streams, multiview, and postgame coverage.">
+<title>Great Britain Game Night | ECM Hockey Hub</title>
+<link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
+<link rel="stylesheet" href="lg3s-gb-hub.css?v=1">
+<script defer src="lg3s-gb-hub.js?v=1"></script>
+</head>
+<body>
+<a href="#main" class="skip">Skip to game night</a>
+<header class="site-head">
+  <a class="brand" href="index.html"><img alt="ECM crest" src="assets/brand/ecm-crest.webp" width="56" height="56"><span>ELITE CHEL <b>MEDIA</b><small>HOCKEY HUB</small></span></a>
+  <nav aria-label="Hockey Hub navigation"><a href="esports-hub.html">Live Hub</a><a href="lg3s-media.html">LG3s Desk</a><a href="lg3s-gb-locker.html">GB Locker</a><a href="multiview.html?hub=1&amp;league=lg3s">Full Multiview</a></nav>
+</header>
+<main id="main">
+  <section class="broadcast-hero" aria-labelledby="pageTitle">
+    <div class="lights" aria-hidden="true"></div>
+    <div class="ice" aria-hidden="true"></div>
+    <div class="hero-wrap">
+      <div class="kicker"><span class="pulse" aria-hidden="true"></span> ECM GAME NIGHT <span class="kicker-sep">/</span> LG3s SEASON 1</div>
+      <div class="match-card">
+        <div class="match-top"><span class="panel-label">GREAT BRITAIN GAME CENTRE</span><span id="gameState" class="state">PREGAME</span></div>
+        <div class="matchup">
+          <div class="nation"><img src="assets/lg3s/team1446.svg" alt="Great Britain crest" width="78" height="78"><span><small>HOME TEAM</small><strong>GREAT BRITAIN</strong></span></div>
+          <span class="vs">VS</span>
+          <div class="nation opponent"><span><small>OPPONENT</small><strong id="opponentName">TO BE CONFIRMED</strong></span><span class="flag" id="opponentFlag" aria-hidden="true">🏒</span></div>
+        </div>
+        <div class="match-bottom"><span id="matchDate">Next verified matchup will appear here</span><a id="matchSource" href="lg3s-media.html" rel="noopener">LG3s coverage ↗</a></div>
+      </div>
+      <div class="hero-actions"><a class="button primary" href="#watch">WATCH GAME DESK ↓</a><a class="button secondary" href="#pregame">PREGAME REPORT</a></div>
+      <h1 id="pageTitle" class="sr-only">ECM Great Britain game night and multiview</h1>
+    </div>
+  </section>
+
+  <section class="shell status-row" aria-label="Game status"><span id="statusMessage">Preparing Great Britain's first Hockey Hub game room.</span><span id="streamCount">0 registered feeds</span></section>
+
+  <section id="watch" class="shell block" aria-labelledby="watchTitle">
+    <div class="section-head"><div><p class="eyebrow">PLAYER-POWERED BROADCAST</p><h2 id="watchTitle">THE GB MULTIVIEW DESK</h2><p>Pick one perspective or follow multiple authorized public broadcasts. One feed's audio at a time.</p></div><a class="button secondary" href="multiview.html?hub=1&amp;league=lg3s">OPEN 8-STREAM DESK ↗</a></div>
+    <div class="watch-tools">
+      <button id="viewFeatured" class="chip active" type="button" aria-pressed="true">Featured view</button>
+      <button id="viewGrid" class="chip" type="button" aria-pressed="false">Multiview</button>
+      <span class="hint">Live status is not automatically verified in this pilot.</span>
+    </div>
+    <p id="watchNotice" role="status" aria-live="polite" class="notice">Streams appear when approved channels have been added. You can test your own stream locally below.</p>
+    <div class="player-grid" id="playerGrid"><div class="empty"><strong>FEEDS AWAITING REGISTRATION</strong><p>Players can connect public Twitch/YouTube links below. Nothing gets published without review.</p></div></div>
+    <div class="feed-list"><h3>Available perspectives <span id="feedCounter">0</span></h3><div id="streamPicker" class="stream-picker"></div></div>
+  </section>
+
+  <section class="shell split" id="pregame" aria-label="Game editorial coverage">
+    <article class="panel">
+      <p class="eyebrow">BEFORE PUCK DROP</p><h2>PREGAME DESK</h2>
+      <p id="previewLead">The Great Britain matchup preview will be added once the next fixture is verified.</p>
+      <div class="report-grid">
+        <div><span>FORM WATCH</span><strong id="formWatch">Awaiting verified results</strong></div>
+        <div><span>KEY MATCHUP</span><strong id="keyMatchup">Awaiting opponent</strong></div>
+      </div>
+      <div class="panel-links"><a id="previewLink" href="lg3s-media.html">Read LG3s preview ↗</a><a href="lg3s-gb-locker.html">Explore GB locker room ↗</a></div>
+    </article>
+    <article class="panel postgame">
+      <p class="eyebrow">AFTER THE FINAL HORN</p><h2>POSTGAME DESK</h2>
+      <p id="postgameLead">Final score, box score and recap appear after verification. No invented scores or player stats.</p>
+      <div class="report-grid">
+        <div><span>FINAL SCORE</span><strong id="finalScore">Awaiting official final</strong></div>
+        <div><span>GAME REPORT</span><strong id="reportState">Pending</strong></div>
+      </div>
+      <div class="panel-links"><a id="postgameLink" href="lg3s-media.html">LG3s coverage ↗</a></div>
+    </article>
+  </section>
+
+  <section class="shell block" id="connect" aria-labelledby="connectTitle">
+    <div class="section-head"><div><p class="eyebrow">GB PLAYER / TEAM STREAMER</p><h2 id="connectTitle">BRING YOUR STREAM TO GAME NIGHT</h2><p>Paste your public stream, check it in your own browser, and copy a listing request for ECM to review.</p></div></div>
+    <form id="streamForm" class="connect-form">
+      <label>Gamertag or public display name <input id="playerName" maxlength="40" autocomplete="nickname" required placeholder="Your gamertag"></label>
+      <label>Public Twitch or YouTube URL <input id="streamUrl" type="url" inputmode="url" required placeholder="https://www.twitch.tv/yourchannel"></label>
+      <label>Perspective <select id="streamRole"><option value="Forward POV">Forward</option><option value="Defence POV">Defence</option><option value="Goalie POV">Goalie</option><option value="Broadcast POV">Broadcast / Commentary</option></select></label>
+      <label class="consent"><input id="streamConsent" type="checkbox" required><span>I own or am authorized to submit this public stream for ECM to link and embed. I understand this is a listing request, not permission for VOD copying or Elite Labs analysis.</span></label>
+      <div class="form-actions"><button class="button primary" type="submit">TEST IN MY DESK</button><button class="button secondary" id="copyRequest" type="button">COPY LISTING REQUEST</button></div>
+      <p id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+    <p class="disclaimer"><strong>Privacy and approval:</strong> The test feed is saved only in this browser. Public listings require manual ECM approval; this form does not send data to a server. Twitch and YouTube deliver their own video. Elite Labs remains separate and private.</p>
+  </section>
+</main>
+<footer><img src="assets/brand/ecm-crest.webp" alt="" width="40" height="40"><span>© EliteChel Media · Independent LG3s coverage · Not affiliated with LeagueGaming</span><a href="esports-hub.html">Back to Hockey Hub</a></footer>
+</body></html>
