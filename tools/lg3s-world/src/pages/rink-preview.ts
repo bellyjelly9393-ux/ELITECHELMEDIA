@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { createGBR3DSkaterTexture, GBR_ROSTER, jerseyImage } from '../utils/gbrRoyalBlueJersey';
 import { demoFormations, demoMatch, type CameraAngle, type Match } from '../utils/match';
 
-import type { PregameBoard } from '../utils/pregame';
+import { warmupPose, type PregameBoard } from '../utils/pregame';
 
 type State = Match & { positions?: Record<number, [number, number]>; pregame?: PregameBoard };
 const pregameOnly = new URLSearchParams(location.search).get('pregame') === '1';
@@ -199,15 +199,19 @@ function mountRink() {
     camera.updateProjectionMatrix();
   }).observe(viewport);
   let last = 0;
+  let warmupSeconds = 0;
   const endpoint = new THREE.Vector3();
   renderer.setAnimationLoop((now) => {
-    const damping = 1 - Math.exp(-Math.min(100, now - last) / 130);
+    const dt = Math.min(100, now - (last || now));
+    const damping = 1 - Math.exp(-dt / 130);
     last = now;
+    if (state.pregame?.skating) warmupSeconds += dt / 1000;
     const [x, y, z] = views[cameraMode] ?? views.ice;
     const yaw = now * .00016;
     endpoint.set(cameraMode === 'orbit' ? Math.cos(yaw) * 44 : x, y, cameraMode === 'orbit' ? Math.sin(yaw) * 44 : z);
     if (camera.aspect < 1.5) endpoint.multiplyScalar(Math.min(1.55, 1.5 / camera.aspect));
-    camera.position.lerp(endpoint, damping);
+    if (pregameOnly && !state.pregame?.skating) camera.position.copy(endpoint);
+    else camera.position.lerp(endpoint, damping);
     jumpTarget.set(0, cameraMode === 'jumbotron' ? 5 : 0, 0);
     camera.lookAt(jumpTarget);
     const positions = state.positions ?? demoFormations.find((f) => f.slug === state.active_formation)?.positions;
@@ -222,15 +226,21 @@ function mountRink() {
       p.ring.visible = p.spec.num === chosen;
       p.ring.scale.setScalar(1 + .14 * Math.sin(now * .007));
     }
-    pregameSkaters.forEach(({group,body,ring}, index) => {
+    pregameSkaters.forEach(({group,body,stripe,legs,pads,ring}, index) => {
       const marker = state.pregame?.markers[index];
       group.visible = !!marker;
       if (!marker) return;
-      group.rotation.y = marker.britain ? Math.PI / 2 : -Math.PI / 2;
-      group.position.set(marker.x,0,marker.z);
-      body.material.color.setHex(marker.britain ? 0x1267ca : 0xc72b47);
+      const pose = warmupPose(marker,warmupSeconds);
+      group.rotation.y = pose.yaw;
+      group.position.set(pose.x,0,pose.z);
+      body.material.color.setHex(marker.britain ? 0x0d63b8 : 0xc72b47);
+      stripe.material.color.setHex(marker.britain ? 0xd81e28 : 0x331b34);
+      pads.visible = marker.goalie;
+      const stride = marker.warmup && !marker.goalie ? Math.sin(warmupSeconds * 8 + marker.id) * .34 : 0;
+      legs[0].rotation.x = stride;
+      legs[1].rotation.x = -stride;
       ring.visible = state.pregame?.highlighted.includes(marker.id) ?? false;
-      ring.scale.setScalar(1 + .1 * Math.sin(now * .006));
+      ring.scale.setScalar(1 + .1 * Math.sin(warmupSeconds * 6));
     });
     renderer.render(scene, camera);
   });
@@ -281,8 +291,13 @@ function mountCanvasRink() {
     selects.forEach((callback) => callback(hit.num));
   });
   const coord = new THREE.Vector3();
+  let lastFrame = 0;
+  let warmupSeconds = 0;
   function render(now: number) {
     requestAnimationFrame(render);
+    const dt = Math.min(100, now - (lastFrame || now));
+    lastFrame = now;
+    if (state.pregame?.skating) warmupSeconds += dt / 1000;
     const { clientWidth: width, clientHeight: height } = viewport;
     if (!width || !height) return;
     const ratio = Math.min(1.5, devicePixelRatio);
@@ -351,8 +366,9 @@ function mountCanvasRink() {
     }
     if (pregameOnly) {
       for (const marker of state.pregame?.markers ?? []) {
-        const foot = point(marker.x,marker.z);
-        const head = point(marker.x,marker.z,3.5);
+        const pose = warmupPose(marker,warmupSeconds);
+        const foot = point(pose.x,pose.z);
+        const head = point(pose.x,pose.z,3.5);
         const selected = state.pregame?.highlighted.includes(marker.id);
         ctx.lineWidth = selected ? 3 : 1.5;
         ctx.strokeStyle = selected ? '#e5a722' : '#e1eafa';
@@ -389,6 +405,9 @@ function createPregameSkaters(scene: THREE.Scene) {
   const torsoGeometry = new THREE.CapsuleGeometry(.58,.65,5,9);
   const helmetGeometry = new THREE.SphereGeometry(.39,12,9);
   const legGeometry = new THREE.BoxGeometry(.28,.93,.28);
+  const padGeometry = new THREE.BoxGeometry(.43,.8,.28);
+  const trimGeometry = new THREE.CylinderGeometry(.584,.584,.26,20);
+  const stripeGeometry = new THREE.CylinderGeometry(.587,.587,.16,20);
   const stickGeometry = new THREE.BoxGeometry(.08,1.55,.10);
   const bladeGeometry = new THREE.BoxGeometry(.55,.09,.12);
   const dark = new THREE.MeshStandardMaterial({color:0x152138});
@@ -406,13 +425,34 @@ function createPregameSkaters(scene: THREE.Scene) {
     };
     const body = new THREE.Mesh(torsoGeometry,new THREE.MeshStandardMaterial({color:0x1267ca,roughness:.7}));
     add(body,0,1.42,.02);
+    add(new THREE.Mesh(trimGeometry,tape),0,1.42,.02);
+    const stripe = new THREE.Mesh(stripeGeometry,new THREE.MeshStandardMaterial({color:0xd81e28}));
+    add(stripe,0,1.42,.02);
     add(new THREE.Mesh(helmetGeometry,dark),0,2.43,.17);
-    for (const x of [-.27,.27]) add(new THREE.Mesh(legGeometry,dark),x,.52,0);
+    const legs = [-.27,.27].map((x) => {
+      const pivot = new THREE.Group();
+      pivot.position.set(x,.98,0);
+      const leg = new THREE.Mesh(legGeometry,dark);
+      leg.position.y = -.46;
+      const skate = new THREE.Mesh(bladeGeometry,tape);
+      skate.rotation.y = Math.PI / 2;
+      skate.position.set(0,-.92,.1);
+      pivot.add(leg,skate);
+      group.add(pivot);
+      return pivot;
+    });
+    const pads = new THREE.Group();
+    for (const x of [-.28,.28]) {
+      const pad = new THREE.Mesh(padGeometry,tape);
+      pad.position.set(x,.5,.2);
+      pads.add(pad);
+    }
+    group.add(pads);
     const stick = add(new THREE.Mesh(stickGeometry,tape),.72,.91,.44);
     stick.rotation.z = -.3;
     add(new THREE.Mesh(bladeGeometry,dark),.53,.16,.51);
     const ring = add(new THREE.Mesh(ringGeometry,ringMaterial),0,.045,0);
     ring.rotation.x = -Math.PI / 2;
-    return {group,body,ring};
+    return {group,body,stripe,legs,pads,ring};
   });
 }

@@ -56,8 +56,8 @@ $('pregame').innerHTML = `
     <div class="kickoff"><span id="game-day"></span><span id="game-time"></span><small id="queue"></small></div>
   </header>
   <div class="world-board">
-    <section class="world-rink" aria-label="3D tactical rink">
-      <iframe id="world-rink" title="LG3s pregame tactical rink"></iframe>
+    <section class="world-rink" aria-label="3D warmup rink">
+      <iframe id="world-rink" title="LG3s 3D pregame warmup"></iframe>
       <p class="rink-label" id="rink-label">Loading matchup…</p>
     </section>
     <section class="world-players" id="world-players" aria-label="Featured players"></section>
@@ -78,16 +78,17 @@ let rinkReady = false;
 let latestBoard: ReturnType<typeof makeBoard> = { markers:[], highlighted:[] };
 let latestCamera: CameraAngle = 'ice';
 function sendBoard() {
+  const board = { ...latestBoard, skating:playing };
   if (companionOrigin) {
     const box = rink.parentElement!.getBoundingClientRect();
     window.parent.postMessage({
-      protocol:'icevision:pregame:1', type:'board', board:latestBoard, camera:latestCamera,
+      protocol:'icevision:pregame:1', type:'board', board, camera:latestCamera,
       viewport:{ x:box.x, y:box.y, width:box.width, height:box.height },
     },companionOrigin);
     return;
   }
   if (rinkReady) rink.contentWindow?.postMessage({
-    protocol:'lg3s:1', type:'state', payload:{ ...demoMatch, camera_angle:latestCamera, pregame:latestBoard },
+    protocol:'lg3s:1', type:'state', payload:{ ...demoMatch, camera_angle:latestCamera, pregame:board },
   }, location.origin);
 }
 window.addEventListener('message', (event) => {
@@ -191,10 +192,12 @@ function playerCard(player: PregamePlayer | undefined, unit: PregameUnit, teamId
     ? [['GP',stat?.gp],['SV%',sv],['SAVES',stat?.sv],['SA',stat?.sa]]
     : [['GP',stat?.gp],['G',stat?.g],['A',stat?.a],['PTS',stat?.p],['+/−',stat?.plus_minus]];
   const href = `/player-cards.html?league=lg3s&id=${player.id}&kind=${kind}`;
-  const jerseyArt = gb ? '/assets/lg3s/scene/gb-kit.webp' : `/assets/lg3s/jerseys/${teamId}.webp`;
+  const artwork = gb
+    ? `<span class="card-portrait ${kind}" aria-hidden="true"><img src="/assets/lg3s/scene/gbr-warmup-reference.jpg" alt="" width="1376" height="768"></span>`
+    : `<img class="card-jersey" src="/assets/lg3s/jerseys/${teamId}.webp" alt="">`;
   return `<article class="player card-motion" data-gb="${gb}">
     <div class="card-art">
-      ${badge}<img class="card-jersey" src="${jerseyArt}" alt="">
+      ${badge}${artwork}
       ${player.jersey ? `<b class="card-number">#${esc(player.jersey)}</b>` : ''}
     </div>
     <div class="player-content">
@@ -250,7 +253,7 @@ function render() {
   const view: Record<string,CameraAngle> = { O:'ice', C:'orbit', D:'overhead', G:'goalie' };
   latestCamera = playing ? view[slot] : 'ice';
   latestBoard = makeBoard(game.gb,game.away,[a,b]);
-  $('rink-label').textContent = ({O:'Wing',C:'Center',D:'Defense',G:'Goaltending'})[slot] + ' matchup';
+  $('rink-label').textContent = 'Pregame warmup · ' + ({O:'Wing',C:'Center',D:'Defense',G:'Goaltending'})[slot] + ' matchup';
   sendBoard();
 }
 async function refresh() {
