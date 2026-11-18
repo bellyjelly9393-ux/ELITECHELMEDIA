@@ -6,6 +6,15 @@ import './pregame.css';
 const params = new URLSearchParams(location.search);
 const onAir = params.get('mode') === 'obs';
 document.body.classList.toggle('on-air', onAir);
+function trustedCompanion() {
+  try {
+    const origin = new URL(params.get('arenaParent') ?? '');
+    if (!onAir || origin.origin !== new URL(document.referrer).origin || origin.protocol !== 'http:'
+        || !['localhost','127.0.0.1'].includes(origin.hostname) || window.parent === window) return '';
+    return origin.origin;
+  } catch { return ''; }
+}
+const companionOrigin = trustedCompanion();
 const db = createClient(import.meta.env.VITE_SUPABASE_URL || 'http://localhost', import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'preview', {
   auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: 'lg3s-pregame-public' },
 });
@@ -33,11 +42,11 @@ interface Review {
   stats: Map<string, SeasonStats>;
 }
 interface RosterFile {
-  teams: { lgTeamId: number | string; players: { lgUserId: unknown; gamertag: unknown; position: unknown; rosterStatus: string }[] }[];
+  teams: { lgTeamId: number | string; players: { lgUserId: unknown; gamertag: unknown; position: unknown; jerseyNumber?: unknown; rosterStatus: string }[] }[];
 }
 interface PostedFile {
   schema: string;
-  games: { lg_game_id: number; teams: Record<string, { lg_user_id: unknown; gamertag: unknown; position: unknown }[]> }[];
+  games: { lg_game_id: number; teams: Record<string, { lg_user_id: unknown; gamertag: unknown; position: unknown; jersey_number?: unknown }[]> }[];
 }
 
 $('pregame').innerHTML = `
@@ -69,11 +78,25 @@ let rinkReady = false;
 let latestBoard: ReturnType<typeof makeBoard> = { markers:[], highlighted:[] };
 let latestCamera: CameraAngle = 'ice';
 function sendBoard() {
+  if (companionOrigin) {
+    const box = rink.parentElement!.getBoundingClientRect();
+    window.parent.postMessage({
+      protocol:'icevision:pregame:1', type:'board', board:latestBoard, camera:latestCamera,
+      viewport:{ x:box.x, y:box.y, width:box.width, height:box.height },
+    },companionOrigin);
+    return;
+  }
   if (rinkReady) rink.contentWindow?.postMessage({
     protocol:'lg3s:1', type:'state', payload:{ ...demoMatch, camera_angle:latestCamera, pregame:latestBoard },
   }, location.origin);
 }
 window.addEventListener('message', (event) => {
+  if (companionOrigin && event.origin === companionOrigin && event.source === window.parent
+      && event.data?.protocol === 'icevision:pregame:1' && event.data.type === 'ready') {
+    document.body.classList.add('companion');
+    if (rink.getAttribute('src') !== 'about:blank') rink.src = 'about:blank';
+    return;
+  }
   if (event.origin !== location.origin || event.source !== rink.contentWindow) return;
   if (event.data?.protocol === 'lg3s:1' && event.data.type === 'ready') {
     rinkReady = true;
@@ -81,6 +104,7 @@ window.addEventListener('message', (event) => {
   }
 });
 rink.addEventListener('load', () => rink.contentWindow?.postMessage({ protocol:'lg3s:1', type:'hello' }, location.origin));
+if (companionOrigin) new ResizeObserver(sendBoard).observe(document.querySelector('.world')!);
 rink.src = import.meta.env.BASE_URL + 'rink-preview.html?embed=true&mode=obs&pregame=1';
 
 async function readJson<T>(path: string, signal: AbortSignal): Promise<T> {
@@ -92,7 +116,7 @@ function playersFromRoster(data: RosterFile | undefined) {
   return new Map((data?.teams ?? []).map((team) => [
     Number(team.lgTeamId),
     unique(team.players.flatMap((p) => {
-      const player = p.rosterStatus === 'active' && makePlayer(p.lgUserId,p.gamertag,p.position);
+      const player = p.rosterStatus === 'active' && makePlayer(p.lgUserId,p.gamertag,p.position,p.jerseyNumber);
       return player ? [player] : [];
     })),
   ]));
@@ -101,7 +125,7 @@ function postedUnit(source: PostedFile | undefined, fixture: PregameGame, teamId
   if (source?.schema !== 'lg3s-pregame-lineups-v1') return;
   const rows = source.games.find((game) => Number(game.lg_game_id) === fixture.lg_game_id)?.teams[String(teamId)];
   if (!rows) return;
-  const players = unique(rows.flatMap((p) => makePlayer(p.lg_user_id,p.gamertag,p.position) ?? []));
+  const players = unique(rows.flatMap((p) => makePlayer(p.lg_user_id,p.gamertag,p.position,p.jersey_number) ?? []));
   return players.length ? { players, basis:'posted', sourceGame:fixture.lg_game_id } : noSide;
 }
 function opponentFor(fixture: PregameGame) {
@@ -157,7 +181,7 @@ async function loadReview(): Promise<Review> {
 
 function formatStat(value: unknown) { return value === null || value === undefined ? '—' : String(value); }
 function playerCard(player: PregamePlayer | undefined, unit: PregameUnit, teamId: number, team: string, gb: boolean) {
-  const badge = teamId ? `<img src="/assets/lg3s/team${teamId}.svg" alt="">` : '';
+  const badge = teamId ? `<img class="team-crest" src="/assets/lg3s/team${teamId}.svg" alt="">` : '';
   const proof = unit.basis === 'posted' ? 'Posted lineup' : 'Roster spotlight · lineup pending';
   if (!player) return `<article class="player" data-gb="${gb}">${badge}<div class="player-content"><p class="player-meta">${esc(team)}</p><h2 class="player-title">${unit.basis==='posted'?'Slot not posted':'Lineup pending'}</h2></div></article>`;
   const kind = player.slot === 'G' ? 'goalie' : 'skater';
@@ -167,13 +191,34 @@ function playerCard(player: PregamePlayer | undefined, unit: PregameUnit, teamId
     ? [['GP',stat?.gp],['SV%',sv],['SAVES',stat?.sv],['SA',stat?.sa]]
     : [['GP',stat?.gp],['G',stat?.g],['A',stat?.a],['PTS',stat?.p],['+/−',stat?.plus_minus]];
   const href = `/player-cards.html?league=lg3s&id=${player.id}&kind=${kind}`;
-  return `<article class="player" data-gb="${gb}">
-    ${badge}<div class="player-content">
-      <p class="player-meta">${esc(team)} / ${esc(player.position)}</p>
+  const jerseyArt = gb ? '/assets/lg3s/scene/gb-kit.webp' : `/assets/lg3s/jerseys/${teamId}.webp`;
+  return `<article class="player card-motion" data-gb="${gb}">
+    <div class="card-art">
+      ${badge}<img class="card-jersey" src="${jerseyArt}" alt="">
+      ${player.jersey ? `<b class="card-number">#${esc(player.jersey)}</b>` : ''}
+    </div>
+    <div class="player-content">
+      <p class="player-meta">${esc(team)} <span>${esc(player.position)}</span></p>
       <h2 class="player-title"><a href="${href}" target="_blank" rel="noopener">${esc(player.name)}</a></h2>
       <p class="player-source">${proof}</p>
       <dl class="stats">${fields.map(([label,value]) => `<div><dt>${label}</dt><dd>${esc(formatStat(value))}</dd></div>`).join('')}</dl>
     </div></article>`;
+}
+
+const pointerTilt = matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+function enableCardTilt() {
+  if (onAir || !pointerTilt.matches) return;
+  document.querySelectorAll<HTMLElement>('.card-motion').forEach((card) => {
+    card.onpointermove = (event) => {
+      const box = card.getBoundingClientRect();
+      card.style.setProperty('--pitch', `${(0.5 - (event.clientY - box.top) / box.height) * 7}deg`);
+      card.style.setProperty('--yaw', `${((event.clientX - box.left) / box.width - 0.5) * 8}deg`);
+    };
+    card.onpointerleave = () => {
+      card.style.removeProperty('--pitch');
+      card.style.removeProperty('--yaw');
+    };
+  });
 }
 function framesFor(game: Matchup) {
   return rinkSlots.flatMap((slot) => {
@@ -201,6 +246,7 @@ function render() {
   $<HTMLAnchorElement>('fixture-link').href = fixture ? `/lg3s-media.html#game/${fixture.lg_game_id}` : '/lg3s-media.html#nation/1446';
   $('world-players').innerHTML = playerCard(a,game.gb,greatBritain,'Great Britain',true)
     + playerCard(b,game.away,game.opponentId,game.opponent || 'Opponent',false);
+  enableCardTilt();
   const view: Record<string,CameraAngle> = { O:'ice', C:'orbit', D:'overhead', G:'goalie' };
   latestCamera = playing ? view[slot] : 'ice';
   latestBoard = makeBoard(game.gb,game.away,[a,b]);

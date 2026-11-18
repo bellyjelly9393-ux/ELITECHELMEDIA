@@ -7,6 +7,7 @@ export interface PregamePlayer {
   name: string;
   position: string;
   slot: RinkSlot;
+  jersey?: string;
 }
 export interface PregameUnit {
   players: PregamePlayer[];
@@ -36,6 +37,9 @@ export interface SeasonStats {
 export interface PregameMarker {
   id: number;
   britain: boolean;
+  name: string;
+  jersey?: string;
+  goalie: boolean;
   x: number;
   z: number;
 }
@@ -51,12 +55,13 @@ export function slotFor(position: string): RinkSlot | undefined {
   if (['LD', 'RD', 'D'].includes(position)) return 'D';
 }
 
-export function makePlayer(id: unknown, name: unknown, rawPosition: unknown): PregamePlayer | undefined {
+export function makePlayer(id: unknown, name: unknown, rawPosition: unknown, jerseyNumber?: unknown): PregamePlayer | undefined {
   const value = Number(id);
   const position = String(rawPosition ?? '').trim().toUpperCase();
   const slot = slotFor(position);
   if (!Number.isSafeInteger(value) || value < 1 || typeof name !== 'string' || !name.trim() || !slot) return;
-  return { id: value, name: name.trim().slice(0, 80), position, slot };
+  const jersey = /^\d{1,2}$/.test(String(jerseyNumber)) ? String(jerseyNumber) : undefined;
+  return { id: value, name: name.trim().slice(0, 80), position, slot, jersey };
 }
 
 export function makeBoard(britain: PregameUnit, opponent: PregameUnit, featured: (PregamePlayer | undefined)[]): PregameBoard {
@@ -72,7 +77,7 @@ export function makeBoard(britain: PregameUnit, opponent: PregameUnit, featured:
         const i = count.get(p.slot) ?? 0;
         count.set(p.slot, i + 1);
         const [x,z] = locations[p.slot];
-        return { id: p.id, britain: index === 0, x: (index ? 1 : -1) * x, z: (index ? -1 : 1) * z + i * 2.3 };
+        return { id: p.id, name:p.name, jersey:p.jersey, goalie:p.slot==='G', britain: index === 0, x: (index ? 1 : -1) * x, z: (index ? -1 : 1) * z + i * 2.3 };
       });
     }).slice(0, 18),
   };
