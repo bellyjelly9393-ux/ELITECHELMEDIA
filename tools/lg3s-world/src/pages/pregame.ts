@@ -43,6 +43,9 @@ const cardRenderer = import(/* @vite-ignore */ cardRendererUrl).then(() => windo
 const onAir = params.get('mode') === 'obs';
 document.body.classList.toggle('on-air', onAir);
 const companionOrigin = onAir ? localIceVisionParent('arenaParent') : '';
+const expectsArena = onAir && params.has('arenaParent');
+const cardsOnly = onAir && !expectsArena && params.get('layout') === 'cards';
+document.body.classList.toggle('cards-only',cardsOnly);
 const db = createClient(import.meta.env.VITE_SUPABASE_URL || 'http://localhost', import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'preview', {
   auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: 'lg3s-pregame-public' },
 });
@@ -92,7 +95,7 @@ $('pregame').innerHTML = `
     <div class="kickoff" id="kickoff" hidden><span id="game-day"></span><strong id="game-time"></strong><small id="queue"></small></div>
   </header>
   <div class="world-board">
-    <section class="world-rink" aria-label="3D warmup rink">
+    <section class="world-rink" aria-label="3D warmup rink" ${cardsOnly ? 'hidden' : ''}>
       <iframe id="world-rink" title="LG3s 3D pregame warmup"></iframe>
       <p class="rink-label" id="rink-label">Loading matchup…</p>
     </section>
@@ -143,7 +146,7 @@ window.addEventListener('message', (event) => {
 });
 rink.addEventListener('load', () => rink.contentWindow?.postMessage({ protocol:'lg3s:1', type:'hello' }, location.origin));
 if (companionOrigin) new ResizeObserver(sendBoard).observe(document.querySelector('.world')!);
-rink.src = import.meta.env.BASE_URL + 'rink-preview.html?embed=true&mode=obs&pregame=1';
+if (!expectsArena && !cardsOnly) rink.src = import.meta.env.BASE_URL + 'rink-preview.html?embed=true&mode=obs&pregame=1';
 
 async function readJson<T>(path: string, signal: AbortSignal): Promise<T> {
   const response = await fetch(path, { signal, cache:'no-cache' });

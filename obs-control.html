@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="wildman.css">
   <link rel="stylesheet" href="management.css">
   <link rel="stylesheet" href="network-v2.css">
-  <link rel="stylesheet" href="obs-control.css?v=20261118-pregame">
+  <link rel="stylesheet" href="obs-control.css?v=20261118-carbon-preview">
 </head>
 <body class="wildman-site management-protected obs-control-page">
 <header class="site-header">
@@ -38,7 +38,10 @@
       <section class="obs-preview-card obs-access-sample" aria-labelledby="obsAccessSampleTitle">
         <div class="obs-card-head">
           <div><h2 id="obsAccessSampleTitle">GBR graphics preview</h2><p>Sample scorebug and tactical rink</p></div>
-          <a href="/lg3s-gb?mode=obs&amp;preview=true&amp;audio=off" target="_blank" rel="noopener">Open preview ↗</a>
+          <div class="obs-preview-switch">
+            <a href="/lg3s-gb?mode=obs&amp;preview=true&amp;audio=off" target="_blank" rel="noopener">Open sample ↗</a>
+            <a href="http://127.0.0.1:4180/broadcast.html" target="_blank" rel="noopener">Open Carbon Arena ↗</a>
+          </div>
         </div>
         <div class="obs-preview-frame" data-mode="sample">
           <iframe src="/lg3s-gb?mode=obs&amp;preview=true&amp;audio=off" title="Sample GBR OBS graphics" loading="lazy"></iframe>
@@ -89,8 +92,12 @@
               <div class="obs-preview-canvas" id="obsPreviewCanvas">
                 <iframe id="obsPreview" width="1280" height="720" title="OBS program monitor"></iframe>
               </div>
+              <div class="obs-carbon-status" id="obsCarbonPreviewStatus" hidden>
+                <div role="status"><strong id="obsCarbonHeading"></strong><p id="obsCarbonDetail"></p></div>
+                <button type="button" id="obsRetryCarbon" hidden>Try again</button>
+              </div>
             </div>
-            <div class="obs-monitor-footer"><span id="obsMonitorNote">Game feed and graphics · Muted</span><a id="obsOpenCarbonArena" href="http://127.0.0.1:4180/broadcast.html" target="_blank" rel="noopener" hidden>Open Carbon Arena ↗</a><a id="obsOpenMonitor" href="#" target="_blank" rel="noopener">Open monitor ↗</a></div>
+            <div class="obs-monitor-footer"><span id="obsMonitorNote">Game feed and graphics · Muted</span><a id="obsOpenMonitor" href="#" target="_blank" rel="noopener">Open monitor ↗</a></div>
           </section>
 
           <section class="obs-scenes-card" aria-labelledby="obsScenesHeading">
@@ -335,23 +342,22 @@
           </div>
         </div>
         <div class="obs-overlay-only" id="obsGbrSource" hidden>
-          <small>LG3S GREAT BRITAIN · TRANSPARENT TOP SOURCE</small>
-          <div class="obs-source-row">
-            <input id="gbrObsUrl" class="field" aria-label="Great Britain OBS browser source URL" readonly>
-            <button id="copyGbrObsUrl" class="small-btn primary" type="button">Copy GBR OBS URL</button>
-            <a id="openGbrObsUrl" class="small-btn" href="/lg3s-gb?mode=obs" target="_blank" rel="noopener">Open GBR Graphics</a>
-            <a class="small-btn" href="/lg3s-gb" target="_blank" rel="noopener">Open Live Hub</a>
-            <a class="small-btn" href="/lg3s-gb/pregame" target="_blank" rel="noopener">Open Pregame Loop</a>
-            <a class="small-btn" href="/lg3s-gb?mode=obs&amp;preview=true" target="_blank" rel="noopener">Preview Sample Graphics</a>
-          </div>
-          <p class="obs-preview-note">Set this Browser Source to <b>1920 × 1080 at 60 FPS</b> and enable <b>Control audio via OBS</b> for the goal horn. Place it above your gameplay capture or the Gameplay Only browser source.</p>
           <small>CARBON ARENA · FOLLOWS DESK SCENES</small>
           <div class="obs-source-row">
             <input id="carbonObsUrl" class="field" aria-label="Carbon Arena OBS browser source URL" value="http://127.0.0.1:4180/broadcast.html?follow=desk" readonly>
             <button id="copyCarbonObsUrl" class="small-btn primary" type="button">Copy Carbon Arena OBS URL</button>
             <a class="small-btn" href="http://127.0.0.1:4180/broadcast.html" target="_blank" rel="noopener">Preview Carbon Arena</a>
           </div>
-          <p class="obs-preview-note">With Elite Labs running on the OBS computer, put the Carbon Arena URL in your GBR Browser Source. Select <b>Pregame</b> in Scenes to show the full rink, warmup, and player cards.</p>
+          <p class="obs-preview-note">Run Elite Labs on the OBS computer and use the Carbon Arena URL for your GBR Browser Source. Set it to <b>1920 × 1080 at 60 FPS</b> and enable <b>Control audio via OBS</b> for the goal horn.</p>
+          <small>GBR WEB GRAPHICS</small>
+          <div class="obs-source-row">
+            <input id="gbrObsUrl" class="field" aria-label="Great Britain OBS browser source URL" readonly>
+            <button id="copyGbrObsUrl" class="small-btn" type="button">Copy web graphics URL</button>
+            <a id="openGbrObsUrl" class="small-btn" href="/lg3s-gb?mode=obs" target="_blank" rel="noopener">Open GBR Graphics</a>
+            <a class="small-btn" href="/lg3s-gb" target="_blank" rel="noopener">Open Live Hub</a>
+            <a class="small-btn" href="/lg3s-gb/pregame" target="_blank" rel="noopener">Open Web Pregame</a>
+            <a class="small-btn" href="/lg3s-gb?mode=obs&amp;preview=true" target="_blank" rel="noopener">Preview Sample Graphics</a>
+          </div>
         </div>
         <div class="obs-setup-grid" id="obsStandardSetup">
           <div><small>OBS SOURCE</small><strong>Browser</strong><span>Paste the permanent URL.</span></div>
@@ -374,6 +380,6 @@
 <script src="script.js"></script>
 <script src="obs-config.js?v=20261005b"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
-<script src="obs-control.js?v=20261118-carbon-program"></script>
+<script src="obs-control.js?v=20261118-carbon-preview"></script>
 </body>
 </html>
