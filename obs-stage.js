@@ -40,7 +40,7 @@
     if(overlay) overlay.remove();
     overlay=null;
   }else if(overlay){
-    overlay.src='obs-overlay.html?channel='+encodeURIComponent(channel);
+    overlay.src=channel==='lg3s-gbr'?'/lg3s-gb?mode=obs':'obs-overlay.html?channel='+encodeURIComponent(channel);
   }
 
   function setStatus(value){if(status)status.textContent=value;}

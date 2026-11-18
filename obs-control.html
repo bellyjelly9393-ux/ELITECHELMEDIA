@@ -267,7 +267,7 @@
         <div>
           <div class="eyebrow">3 · OBS BROWSER SOURCE</div>
           <h2>OBS Browser Sources</h2>
-          <p>For Twitch, use the two clearly labeled Browser Sources below at <b>1280 × 720</b>: Gameplay Only on the bottom and Graphics Only on the top. The Combined Preview is just for checking the finished look in a browser.</p>
+          <p id="obsStandardCopy">For Twitch, use the two clearly labeled Browser Sources below at <b>1280 × 720</b>: Gameplay Only on the bottom and Graphics Only on the top. The Combined Preview is just for checking the finished look in a browser.</p>
         </div>
         <div class="obs-source-row">
           <input id="obsSourceUrl" class="field" readonly>
@@ -283,7 +283,7 @@
           </div>
           <p class="obs-preview-note">This source is the live gameplay picture only. Add it as the <b>bottom</b> Browser Source in OBS. It will not show Elite Media graphics by itself.</p>
         </div>
-        <div class="obs-overlay-only">
+        <div class="obs-overlay-only" id="obsStandardGraphics">
           <small>GRAPHICS ONLY · TOP SOURCE</small>
           <div class="obs-source-row">
             <input id="obsOverlayOnlyUrl" class="field" readonly>
@@ -291,7 +291,20 @@
             <a id="openOverlayUrl" class="small-btn" href="#" target="_blank" rel="noopener">Open Graphics Only</a>
           </div>
         </div>
-        <div class="obs-setup-grid">
+        <div class="obs-overlay-only" id="obsGbrSource" hidden>
+          <small>LG3S GREAT BRITAIN · TRANSPARENT TOP SOURCE</small>
+          <div class="obs-source-row">
+            <input id="gbrObsUrl" class="field" aria-label="Great Britain OBS browser source URL" readonly>
+            <button id="copyGbrObsUrl" class="small-btn primary" type="button">Copy GBR OBS URL</button>
+            <a id="openGbrObsUrl" class="small-btn" href="/lg3s-gb?mode=obs" target="_blank" rel="noopener">Open GBR Graphics</a>
+            <a class="small-btn" href="/lg3s-gb" target="_blank" rel="noopener">Open Live Hub</a>
+            <a class="small-btn" href="/lg3s-gb?mode=obs&amp;preview=true" target="_blank" rel="noopener">Preview Sample Graphics</a>
+          </div>
+          <p class="obs-preview-note">Set this Browser Source to <b>1920 × 1080 at 60 FPS</b> and enable <b>Control audio via OBS</b> for the goal horn. Place it above your gameplay capture or the Gameplay Only browser source.</p>
+          <button id="triggerGbrGoal" class="small-btn" type="button">Trigger GBR Goal Horn</button>
+          <p class="obs-preview-note">Publish the gameplay feed, score, period and clock from this channel. Use a three-letter opponent code for the scorebug.</p>
+        </div>
+        <div class="obs-setup-grid" id="obsStandardSetup">
           <div><small>OBS SOURCE</small><strong>Browser</strong><span>Paste the permanent URL.</span></div>
           <div><small>WIDTH</small><strong>1280</strong><span>Browser source width.</span></div>
           <div><small>HEIGHT</small><strong>720</strong><span>Browser source height.</span></div>
@@ -310,6 +323,6 @@
 <script src="script.js"></script>
 <script src="obs-config.js?v=20261005b"></script>
 <script src="obs-scenes.js?v=20261011-bobbleheads"></script>
-<script src="obs-control.js?v=20261006-size1"></script>
+<script src="obs-control.js?v=20261118-gbr"></script>
 </body>
 </html>

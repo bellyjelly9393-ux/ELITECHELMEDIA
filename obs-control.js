@@ -3,8 +3,11 @@
   var PRODUCTION_ORIGIN='https://wildmanhockey-elitechelmedia.app';
   var OBS_CFG=window.WM_OBS_CONFIG||{defaultFeedFor:function(){return '';}};
   var SCENES=window.WM_OBS_SCENES||null;
+  var MEDIA_TEAM_ID='5f36117c-7a51-4514-bf70-d4c672b41e48';
+  var GBR_STUDIO=MEDIA_TEAM_ID+':gbr';
   var TEAM_CONFIG={
     '5f36117c-7a51-4514-bf70-d4c672b41e48':{name:'Elitechel Media',brand:'wildman',channel:'wildman-main'},
+    [GBR_STUDIO]:{name:'LG3s Team Great Britain',shortName:'GBR',brand:'wildman',channel:'lg3s-gbr',teamId:MEDIA_TEAM_ID},
     'b0bcbdda-da9d-419d-8f61-b34937966d49':{name:'Calgary Hitmen',brand:'hitmen',channel:'hitmen-main'}
   };
   var currentTeamId='';
@@ -20,6 +23,7 @@
   var publishQueued=false;
   var clockState={running:false,baseSeconds:1200,startedAt:'',rate:5};
   var clockUiTimer=null;
+  var gbrGoalTrigger='';
 
   function byId(id){return document.getElementById(id);}
   function val(id){return (byId(id)?.value||'').trim();}
@@ -89,8 +93,9 @@
     if(pill){pill.textContent=message;pill.style.color=isError?'#ff8a9b':'';}
   }
   function config(){return TEAM_CONFIG[currentTeamId]||TEAM_CONFIG['5f36117c-7a51-4514-bf70-d4c672b41e48'];}
-  function stageUrl(){return PRODUCTION_ORIGIN+'/obs-stage.html?channel='+encodeURIComponent(config().channel);}
-  function overlayUrl(){return PRODUCTION_ORIGIN+'/obs-overlay.html?channel='+encodeURIComponent(config().channel);}
+  function gbrOverlayUrl(){return location.origin+'/lg3s-gb?mode=obs';}
+  function stageUrl(){return (currentTeamId===GBR_STUDIO?location.origin:PRODUCTION_ORIGIN)+'/obs-stage.html?channel='+encodeURIComponent(config().channel);}
+  function overlayUrl(){if(currentTeamId===GBR_STUDIO)return gbrOverlayUrl();return PRODUCTION_ORIGIN+'/obs-overlay.html?channel='+encodeURIComponent(config().channel);}
   function feedLayerUrl(){return stageUrl()+'&layer=feed';}
   function isDirty(){return editCount!==savedEditCount;}
   function providerFor(url,provided){
@@ -140,6 +145,10 @@
     byId('openCombinedStage').href=stage;
     if(byId('obsFeedLayerUrl')){byId('obsFeedLayerUrl').value=feedLayerUrl();byId('openFeedLayerUrl').href=feedLayerUrl();}
     byId('heroChannel').textContent=config().channel.toUpperCase();
+    byId('obsGbrSource').hidden=currentTeamId!==GBR_STUDIO;
+    byId('obsStandardCopy').hidden=currentTeamId===GBR_STUDIO;
+    byId('obsStandardSetup').hidden=currentTeamId===GBR_STUDIO;
+    byId('obsStandardGraphics').hidden=currentTeamId===GBR_STUDIO;
     // Only reload the preview when the channel actually changes; it follows edits through realtime.
     if(previewChannel!==config().channel){
       previewChannel=config().channel;
@@ -152,14 +161,14 @@
     var ids=(state.memberships||[])
       .filter(function(m){return m.active!==false&&['owner','gm','agm'].includes(String(m.role||'').toLowerCase());})
       .map(function(m){return m.team_id;});
-    return Object.keys(TEAM_CONFIG).filter(function(id){return ids.includes(id);});
+    return Object.keys(TEAM_CONFIG).filter(function(id){return ids.includes(TEAM_CONFIG[id].teamId||id);});
   }
   function populateTeams(state){
     var select=byId('obsTeamSelect');
     var ids=allowedTeamIds(state);
     if(!ids.length) return false;
     select.innerHTML=ids.map(function(id){return '<option value="'+id+'">'+TEAM_CONFIG[id].name+'</option>';}).join('');
-    var preferred=ids.includes(currentTeamId)?currentTeamId:(ids.includes(state.teamId)?state.teamId:ids[0]);
+    var preferred=ids.includes(currentTeamId)?currentTeamId:((new URLSearchParams(location.search).get('channel')==='lg3s-gbr'&&ids.includes(GBR_STUDIO))?GBR_STUDIO:(ids.includes(state.teamId)?state.teamId:ids[0]));
     select.value=preferred;
     currentTeamId=preferred;
     return true;
@@ -322,7 +331,8 @@
       playerRole:val('obsPlayerRole')||'PLAYER',
       streamUrl:streamUrl,
       streamProvider:selectedProvider==='auto'?providerFor(streamUrl,'auto'):selectedProvider,
-      streamMuted:Boolean(byId('obsStreamMuted')?.checked)
+      streamMuted:Boolean(byId('obsStreamMuted')?.checked),
+      ...(currentTeamId===GBR_STUDIO&&gbrGoalTrigger?{goalHornTrigger:gbrGoalTrigger}:{})
     };
   }
   async function loadState(force){
@@ -348,7 +358,7 @@
     setStatus('PUBLISHING');
     var row={
       channel:config().channel,
-      team_id:currentTeamId,
+      team_id:config().teamId||currentTeamId,
       brand:config().brand,
       scene:currentScene,
       payload:collectPayload(),
@@ -381,7 +391,7 @@
     });
     byId('obsTeamSelect').addEventListener('change',async function(e){
       currentTeamId=e.target.value;
-      window.localStorage.setItem('vvhl-team-context',currentTeamId);
+      window.localStorage.setItem('vvhl-team-context',config().teamId||currentTeamId);
       updateSourceLinks();
       setSceneButtons();
       await loadState(true);
@@ -497,6 +507,14 @@
     });
     byId('publishObsState').addEventListener('click',function(){publish();});
     byId('reloadObsState').addEventListener('click',function(){loadState(true);});
+    byId('triggerGbrGoal').addEventListener('click',function(){
+      if(currentTeamId!==GBR_STUDIO)return;
+      gbrGoalTrigger=new Date().toISOString();
+      publish();
+    });
+    byId('copyGbrObsUrl').addEventListener('click',function(){copyText('gbrObsUrl',gbrOverlayUrl());});
+    byId('gbrObsUrl').value=gbrOverlayUrl();
+    byId('openGbrObsUrl').href=gbrOverlayUrl();
     byId('copyObsUrl').addEventListener('click',function(){copyText('obsSourceUrl',stageUrl());});
     byId('copyOverlayUrl').addEventListener('click',function(){copyText('obsOverlayOnlyUrl',overlayUrl());});
     byId('copyFeedLayerUrl')?.addEventListener('click',function(){copyText('obsFeedLayerUrl',feedLayerUrl());});
