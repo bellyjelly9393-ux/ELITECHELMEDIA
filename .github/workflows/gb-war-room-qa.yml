@@ -1,0 +1,28 @@
+name: Great Britain War Room Gate QA
+on:
+  pull_request:
+    paths:
+      - "lg3s-gb-war-room.html"
+      - "lg3s-gb-war-room.css"
+      - "lg3s-gb-war-room.js"
+      - ".github/workflows/gb-war-room-qa.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # stable action
+      - name: Verify JavaScript parses
+        run: node --check lg3s-gb-war-room.js
+      - name: Check no public private content and verified gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F 'noindex,nofollow,noarchive' lg3s-gb-war-room.html
+          grep -F 'id="privateApp"' lg3s-gb-war-room.html
+          grep -F 'window.VVHLBackend' lg3s-gb-war-room.js
+          grep -F 'lg3s_gb_members' lg3s-gb-war-room.js
+          grep -F 'role==="owner"' lg3s-gb-war-room.js
+          ! grep -E '(service_role|SUPABASE_SERVICE|sk-[[:alnum:]]{10}|DISCORD_CLIENT_SECRET)' lg3s-gb-war-room.js lg3s-gb-war-room.html
