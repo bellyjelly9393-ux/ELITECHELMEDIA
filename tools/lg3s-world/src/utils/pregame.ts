@@ -32,7 +32,7 @@ export interface SeasonStats {
   plus_minus?: number | null;
   sv_pct?: number | null;
   sv?: number | null;
-  sa?: number | null;
+  gaa_per_game?: number | null;
 }
 export interface PregameMarker {
   id: number;

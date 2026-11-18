@@ -3,7 +3,41 @@ import { demoMatch, type CameraAngle } from '../utils/match';
 import { greatBritain, makeBoard, makePlayer, rinkSlots, type PregameGame, type PregamePlayer, type PregameUnit, type SeasonStats } from '../utils/pregame';
 import './pregame.css';
 
+interface CardLayout {
+  background?: string;
+  imageScale?: number;
+  imageX?: number;
+  imageY?: number;
+}
+interface CardPublication {
+  lg_user_id: number;
+  player_kind: 'skater' | 'goalie';
+  object_path: string;
+  layout: CardLayout;
+}
+interface RenderCard extends CardLayout {
+  player: { tag: string; team: string; pos: string };
+  league: 'lg3s';
+  season: string;
+  ratingKind: 'pending';
+  edition: 'season';
+  finish: 'ice';
+  readOnly: true;
+  jersey?: string;
+  portrait?: HTMLImageElement;
+  logo: string;
+  labels: string[];
+  values: string[];
+}
+declare global {
+  interface Window {
+    ECMCardRenderer?: { draw(canvas: HTMLCanvasElement, card: RenderCard): Promise<boolean> };
+  }
+}
+
 const params = new URLSearchParams(location.search);
+const cardRendererUrl = '/player-card-renderer.js?v=20261118-pregame';
+const cardRenderer = import(/* @vite-ignore */ cardRendererUrl).then(() => window.ECMCardRenderer).catch(() => undefined);
 const onAir = params.get('mode') === 'obs';
 document.body.classList.toggle('on-air', onAir);
 function trustedCompanion() {
@@ -40,6 +74,7 @@ interface Matchup {
 interface Review {
   games: Matchup[];
   stats: Map<string, SeasonStats>;
+  publications: Map<string, CardPublication>;
 }
 interface RosterFile {
   teams: { lgTeamId: number | string; players: { lgUserId: unknown; gamertag: unknown; position: unknown; jerseyNumber?: unknown; rosterStatus: string }[] }[];
@@ -163,10 +198,13 @@ async function loadReview(): Promise<Review> {
 
   const all = unique(matches.flatMap((m) => [...m.gb.players,...m.away.players]));
   const stats = new Map<string, SeasonStats>();
-  await Promise.all((['skater','goalie'] as const).map(async (kind) => {
+  const artwork = all.length ? db.from('ecm_card_publications')
+    .select('lg_user_id,player_kind,object_path,layout').eq('league','lg3s')
+    .in('lg_user_id',all.map((player) => player.id)).abortSignal(signal) : undefined;
+  const [published] = await Promise.all([artwork, ...(['skater','goalie'] as const).map(async (kind) => {
     const ids = all.filter((p) => (p.slot === 'G') === (kind === 'goalie')).map((p) => p.id);
     if (!ids.length) return;
-    const fields = kind === 'goalie' ? 'lg_user_id,gp,sv_pct,sv,sa' : 'lg_user_id,gp,g,a,p,plus_minus';
+    const fields = kind === 'goalie' ? 'lg_user_id,gp,sv,sv_pct,gaa_per_game' : 'lg_user_id,gp,g,a,p';
     const result = await db.from(`lg3s_public_${kind}_leaders`).select(fields).in('lg_user_id',ids).abortSignal(signal);
     if (result.error) {
       for (const id of ids) {
@@ -176,36 +214,83 @@ async function loadReview(): Promise<Review> {
       return;
     }
     for (const row of (result.data ?? []) as unknown as SeasonStats[]) stats.set(`${kind}:${row.lg_user_id}`,row);
-  }));
-  return { games:matches,stats };
+  })]);
+  const publications = new Map<string, CardPublication>();
+  for (const row of (published?.data ?? []) as CardPublication[]) {
+    publications.set(`${row.player_kind}:${row.lg_user_id}`,row);
+  }
+  return { games:matches,stats,publications };
 }
 
 function formatStat(value: unknown) { return value === null || value === undefined ? '—' : String(value); }
+const portraits = new WeakMap<CardPublication,Promise<HTMLImageElement | undefined>>();
+function loadApprovedPortrait(publication: CardPublication) {
+  const previous = portraits.get(publication);
+  if (previous) return previous;
+  const loaded = (async () => {
+    const bucket = db.storage.from('ecm-card-artwork-review');
+    const { data, error } = await bucket.download(publication.object_path, {}, { signal:AbortSignal.timeout(6500) });
+    if (error || !data?.type.startsWith('image/')) return;
+    const url = URL.createObjectURL(data);
+    try {
+      const img = new Image();
+      img.src = url;
+      await img.decode();
+      return img;
+    } finally { URL.revokeObjectURL(url); }
+  })().catch(() => undefined);
+  portraits.set(publication,loaded);
+  return loaded;
+}
+
 function playerCard(player: PregamePlayer | undefined, unit: PregameUnit, teamId: number, team: string, gb: boolean) {
+  const article = document.createElement('article');
+  article.className = 'player';
+  article.dataset.gb = String(gb);
   const badge = teamId ? `<img class="team-crest" src="/assets/lg3s/team${teamId}.svg" alt="">` : '';
   const proof = unit.basis === 'posted' ? 'Posted lineup' : 'Roster spotlight · lineup pending';
-  if (!player) return `<article class="player" data-gb="${gb}">${badge}<div class="player-content"><p class="player-meta">${esc(team)}</p><h2 class="player-title">${unit.basis==='posted'?'Slot not posted':'Lineup pending'}</h2></div></article>`;
+  if (!player) {
+    article.innerHTML = `<div class="player-placeholder">${badge}<p class="player-meta">${esc(team)}</p><h2 class="player-title">${unit.basis==='posted'?'Slot not posted':'Lineup pending'}</h2></div>`;
+    return article;
+  }
   const kind = player.slot === 'G' ? 'goalie' : 'skater';
   const stat = review?.stats.get(`${kind}:${player.id}`);
-  const sv = stat?.sv_pct == null ? null : `${(Number(stat.sv_pct) * 100).toFixed(1)}%`;
-  const fields = kind === 'goalie'
-    ? [['GP',stat?.gp],['SV%',sv],['SAVES',stat?.sv],['SA',stat?.sa]]
-    : [['GP',stat?.gp],['G',stat?.g],['A',stat?.a],['PTS',stat?.p],['+/−',stat?.plus_minus]];
+  const sv = stat?.sv_pct == null ? null : `${(stat.sv_pct <= 1 ? stat.sv_pct * 100 : stat.sv_pct).toFixed(1)}%`;
+  const labels = kind === 'goalie' ? ['GP','SV','SV%','GAA'] : ['GP','G','A','PTS'];
+  const values = (kind === 'goalie'
+    ? [stat?.gp,stat?.sv,sv,stat?.gaa_per_game?.toFixed(2)]
+    : [stat?.gp,stat?.g,stat?.a,stat?.p]).map(formatStat);
   const href = `/player-cards.html?league=lg3s&id=${player.id}&kind=${kind}`;
-  const artwork = gb
-    ? `<span class="card-portrait ${kind}" aria-hidden="true"><img src="/assets/lg3s/scene/gbr-warmup-reference.jpg" alt="" width="1376" height="768"></span>`
-    : `<img class="card-jersey" src="/assets/lg3s/jerseys/${teamId}.webp" alt="">`;
-  return `<article class="player card-motion" data-gb="${gb}">
-    <div class="card-art">
-      ${badge}${artwork}
-      ${player.jersey ? `<b class="card-number">#${esc(player.jersey)}</b>` : ''}
-    </div>
-    <div class="player-content">
-      <p class="player-meta">${esc(team)} <span>${esc(player.position)}</span></p>
-      <h2 class="player-title"><a href="${href}" target="_blank" rel="noopener">${esc(player.name)}</a></h2>
-      <p class="player-source">${proof}</p>
-      <dl class="stats">${fields.map(([label,value]) => `<div><dt>${label}</dt><dd>${esc(formatStat(value))}</dd></div>`).join('')}</dl>
-    </div></article>`;
+  article.innerHTML = `<a class="card-motion" href="${href}" target="_blank" rel="noopener" aria-label="${esc(player.name)}">
+    <canvas class="player-card-canvas" role="img" hidden></canvas>
+    <div class="player-placeholder">${badge}<p class="player-meta">${esc(team)} · ${esc(player.position)}</p><h2 class="player-title">${esc(player.name)}</h2></div>
+  </a><p class="player-source">${proof}</p>
+  <dl class="player-stats">${labels.map((label,i) => `<div><dt>${label}</dt><dd>${esc(values[i])}</dd></div>`).join('')}</dl>`;
+  const card: RenderCard = {
+    player:{ tag:player.name, team, pos:player.position }, league:'lg3s', season:'LG3S · SEASON 1',
+    ratingKind:'pending', edition:'season', finish:'ice', readOnly:true, jersey:player.jersey,
+    background:'arena', logo:teamId ? `/assets/lg3s/team${teamId}.svg` : '', labels, values,
+  };
+  const canvas = article.querySelector('canvas')!;
+  const placeholder = article.querySelector<HTMLElement>('.player-placeholder')!;
+  const publication = review?.publications.get(`${kind}:${player.id}`);
+  async function draw() {
+    const renderer = await cardRenderer;
+    if (!renderer || !article.isConnected) return;
+    if (await renderer.draw(canvas,card) && article.isConnected) {
+      canvas.hidden = false;
+      placeholder.hidden = true;
+    }
+    if (!publication || !article.isConnected) return;
+    const portrait = await loadApprovedPortrait(publication);
+    if (portrait && article.isConnected) {
+      const { background, imageScale, imageX, imageY } = publication.layout;
+      await renderer.draw(canvas,{ ...card, background, imageScale, imageX, imageY, portrait });
+    }
+  }
+  void Promise.all([document.fonts.load('46px CardDisplay'),document.fonts.load('36px CardLabel')])
+    .then(draw,draw).catch(console.warn);
+  return article;
 }
 
 const pointerTilt = matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
@@ -247,8 +332,8 @@ function render() {
   $('game-time').textContent = fixture ? puckDrop.format(new Date(fixture.scheduled_at)) : 'Roster spotlight';
   $('queue').textContent = fixture && review ? `Game ${review.games.indexOf(game)+1} of ${review.games.length}` : '';
   $<HTMLAnchorElement>('fixture-link').href = fixture ? `/lg3s-media.html#game/${fixture.lg_game_id}` : '/lg3s-media.html#nation/1446';
-  $('world-players').innerHTML = playerCard(a,game.gb,greatBritain,'Great Britain',true)
-    + playerCard(b,game.away,game.opponentId,game.opponent || 'Opponent',false);
+  $('world-players').replaceChildren(playerCard(a,game.gb,greatBritain,'Great Britain',true),
+    playerCard(b,game.away,game.opponentId,game.opponent || 'Opponent',false));
   enableCardTilt();
   const view: Record<string,CameraAngle> = { O:'ice', C:'orbit', D:'overhead', G:'goalie' };
   latestCamera = playing ? view[slot] : 'ice';

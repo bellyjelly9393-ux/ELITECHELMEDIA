@@ -174,6 +174,7 @@
     byId('obsMonitorNote').textContent=previewMode==='pregame'?'Pregame loop · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
       :previewMode==='graphics'?'Transparent graphics · Muted':'Game feed and graphics · Muted';
     byId('obsOpenMonitor').href=source;
+    byId('obsOpenCarbonArena').hidden=previewMode!=='pregame';
     document.querySelectorAll('[data-preview]').forEach(function(button){
       button.hidden=['sample','pregame'].includes(button.dataset.preview)&&!isGbr();
       button.setAttribute('aria-pressed',String(button.dataset.preview===previewMode));
