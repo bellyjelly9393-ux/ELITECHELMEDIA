@@ -25,7 +25,8 @@ export function mergeExport(incoming, previous, allowedTeamIds) {
         const position = String(row.position || '').toUpperCase();
         const gamertag = String(row.gamertag ?? row.player ?? '').trim();
         if (!lg_user_id || !positions.has(position) || !gamertag || gamertag.length > 80) throw new Error('Invalid lineup identity or position');
-        return { lg_user_id,gamertag,position };
+        const jersey_number = /^\d{1,2}$/.test(String(row.jersey_number)) ? String(row.jersey_number) : undefined;
+        return { lg_user_id,gamertag,position,...(jersey_number ? { jersey_number } : {}) };
       });
       teams[id] = [...new Map(players.map((player)=>[player.lg_user_id,player])).values()];
     }
