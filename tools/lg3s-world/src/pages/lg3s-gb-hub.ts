@@ -80,11 +80,11 @@ const graphics = `
     <div class="lower-title"><span>★ ★ ★</span><strong>THREE STARS</strong><small>FAN BALLOT</small></div><div id="lower-players"></div>
   </aside>`;
 const rink = `<iframe id="rink" title="IceVision 3D tactical rink"></iframe>`;
-$('app')!.innerHTML = obs ? `<main class="obs-stage" aria-label="OBS broadcast graphics">${graphics}<div class="rink-pip" id="rink-pip">${rink}</div></main>` : `
+$('app')!.innerHTML = obs ? `<main class="obs-stage" aria-label="OBS broadcast graphics">${graphics}<iframe id="studio-pregame" class="studio-pregame" title="LG3s pregame matchup loop" hidden></iframe><div class="rink-pip" id="rink-pip">${rink}</div></main>` : `
 <header class="site-header">
   <div class="nav-shell">
     <a class="brand" href="/lg3s-gb" aria-label="Elite Chel Media live hub"><span class="brand-mark"><i></i><i></i><i></i></span><span>ELITE CHEL<small>MEDIA</small></span></a>
-    <nav aria-label="Hub sections"><a href="#broadcast" class="selected">Live hub</a><a href="#tactics">Tactical rink</a><a href="#match-data">Match centre</a></nav>
+    <nav aria-label="Hub sections"><a href="#broadcast" class="selected">Live hub</a><a href="/lg3s-gb/pregame">Pregame</a><a href="#tactics">Tactical rink</a><a href="#match-data">Match centre</a></nav>
     <a class="obs-link" href="?mode=obs${preview ? '&amp;preview=true' : ''}" target="_blank" rel="noopener">${icon('expand')} OBS overlay</a>
   </div>
 </header>
@@ -343,9 +343,14 @@ function renderFeed() {
 function renderStudioGraphics() {
   if (!obs) return;
   const scene = studioState?.scene ?? 'game';
+  const pregame = scene === 'starting' && studioState?.payload?.presetId === 'pregame-gbr';
+  const world = $<HTMLIFrameElement>('studio-pregame')!;
+  world.hidden = !pregame;
+  if (pregame && !world.hasAttribute('src')) world.src = '/lg3s-gb/pregame?mode=obs';
+  if (!pregame) world.removeAttribute('src');
   const titles: Record<string, string> = { starting: 'Starting soon', intermission: 'Intermission', final: 'Final', brb: 'Back shortly' };
   const title = titles[scene];
-  $('studio-scene')!.hidden = !title;
+  $('studio-scene')!.hidden = pregame || !title;
   $('rink-pip')!.hidden = studioState?.payload?.rinkVisible === false || !!title;
   if (!title) return;
   set('studio-event', studioState?.payload?.event || 'TEAM GREAT BRITAIN');
@@ -485,7 +490,7 @@ interface StudioState {
     streamUrl?: string; homeScore?: number; awayScore?: number;
     clock?: string; clockRunning?: boolean; clockBaseSeconds?: number; clockStartedAt?: string; clockRate?: number;
     period?: string; awayName?: string; goalHornTrigger?: string | null;
-    event?: string; message?: string; threeStarsUntil?: string | null;
+    event?: string; message?: string; presetId?: string; threeStarsUntil?: string | null;
     rinkCamera?: Match['camera_angle']; rinkFormation?: Match['active_formation'];
     rinkHighlight?: number; rinkVisible?: boolean;
   };
@@ -565,7 +570,9 @@ async function refresh() {
   if (version !== request) return;
   const [state, ballot, positions, studio] = results;
   if (!studio.error) studioState = studio.data as StudioState | null;
-  if (state.data) ocrMatch = state.data as Match;
+  if (state.data && Number.isInteger(state.data.home_score) && Number.isInteger(state.data.away_score)) {
+    ocrMatch = state.data as Match;
+  }
   if (ballot.data) votes = ballot.data as Vote[];
   if (positions.data) tactical = positions.data as TacticalFormation[];
   applyBroadcastState();

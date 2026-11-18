@@ -2,7 +2,10 @@ import * as THREE from 'three';
 import { createGBR3DSkaterTexture, GBR_ROSTER, jerseyImage } from '../utils/gbrRoyalBlueJersey';
 import { demoFormations, demoMatch, type CameraAngle, type Match } from '../utils/match';
 
-type State = Match & { positions?: Record<number, [number, number]> };
+import type { PregameBoard } from '../utils/pregame';
+
+type State = Match & { positions?: Record<number, [number, number]>; pregame?: PregameBoard };
+const pregameOnly = new URLSearchParams(location.search).get('pregame') === '1';
 declare global {
   interface Window {
     installLG3SRinkBridge: (arena: {
@@ -101,7 +104,7 @@ function mountRink() {
   scene.add(screen);
   const baseGeometry = new THREE.CylinderGeometry(.75, .88, .25, 14);
   const helmetGeometry = new THREE.SphereGeometry(.35, 16, 10);
-  let state: State = demoMatch;
+  let state: State = pregameOnly ? { ...demoMatch, pregame:{ markers:[], highlighted:[] } } : demoMatch;
   let chosen = state.highlighted_player;
   let cameraMode: CameraAngle = state.camera_angle;
   const jumpTarget = new THREE.Vector3();
@@ -133,6 +136,7 @@ function mountRink() {
     group.add(hitbox);
     return { spec, group, material, back, ring, hitbox };
   });
+  const pregameSkaters = pregameOnly ? createPregameSkaters(scene) : [];
   let kitVersion = 0;
   function dress() {
     const version = ++kitVersion;
@@ -147,7 +151,7 @@ function mountRink() {
       }
     }
   }
-  dress();
+  if (!pregameOnly) dress();
   function updateScore() {
     scoreCtx.fillStyle = '#081325';
     scoreCtx.fillRect(0, 0, 512, 128);
@@ -208,6 +212,8 @@ function mountRink() {
     camera.lookAt(jumpTarget);
     const positions = state.positions ?? demoFormations.find((f) => f.slug === state.active_formation)?.positions;
     for (const p of players) {
+      p.group.visible = !pregameOnly;
+      if (pregameOnly) continue;
       const [px, pz] = positions?.[p.spec.num] ?? [0, 0];
       p.group.position.x = THREE.MathUtils.lerp(p.group.position.x, px, damping);
       p.group.position.z = THREE.MathUtils.lerp(p.group.position.z, pz, damping);
@@ -216,6 +222,16 @@ function mountRink() {
       p.ring.visible = p.spec.num === chosen;
       p.ring.scale.setScalar(1 + .14 * Math.sin(now * .007));
     }
+    pregameSkaters.forEach(({group,body,ring}, index) => {
+      const marker = state.pregame?.markers[index];
+      group.visible = !!marker;
+      if (!marker) return;
+      group.rotation.y = marker.britain ? Math.PI / 2 : -Math.PI / 2;
+      group.position.set(marker.x,0,marker.z);
+      body.material.color.setHex(marker.britain ? 0x1267ca : 0xc72b47);
+      ring.visible = state.pregame?.highlighted.includes(marker.id) ?? false;
+      ring.scale.setScalar(1 + .1 * Math.sin(now * .006));
+    });
     renderer.render(scene, camera);
   });
 }
@@ -233,7 +249,7 @@ function mountCanvasRink() {
   if (!context) { status.value = 'Tactical view unavailable'; return; }
   const ctx = context;
   const camera = new THREE.PerspectiveCamera(40, 1, .1, 180);
-  let state: State = demoMatch;
+  let state: State = pregameOnly ? { ...demoMatch, pregame:{ markers:[], highlighted:[] } } : demoMatch;
   let alpha = false;
   const selects = new Set<(num: number) => void>();
   const images = new Map<number, HTMLImageElement>();
@@ -245,7 +261,7 @@ function mountCanvasRink() {
       images.set(spec.num, image);
     }
   }
-  dress();
+  if (!pregameOnly) dress();
   window.installLG3SRinkBridge({
     setState(next) {
       const updateKit = state.kit_variant !== next.kit_variant || state.jersey_side !== next.jersey_side;
@@ -333,6 +349,22 @@ function mountCanvasRink() {
       ctx.font = '600 12px sans-serif'; ctx.fillStyle = '#d8eaff';
       ctx.fillText(`${state.home_team} ${state.home_score}–${state.away_score} ${state.away_team}`, width - 120, 33);
     }
+    if (pregameOnly) {
+      for (const marker of state.pregame?.markers ?? []) {
+        const foot = point(marker.x,marker.z);
+        const head = point(marker.x,marker.z,3.5);
+        const selected = state.pregame?.highlighted.includes(marker.id);
+        ctx.lineWidth = selected ? 3 : 1.5;
+        ctx.strokeStyle = selected ? '#e5a722' : '#e1eafa';
+        ctx.beginPath(); ctx.ellipse(foot.x,foot.y,selected?10:7,4,0,0,Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(foot.x,foot.y-2); ctx.lineTo(head.x,head.y);
+        ctx.strokeStyle = marker.britain ? '#1267ca' : '#c72b47';
+        ctx.lineWidth = 8; ctx.lineCap = 'round'; ctx.stroke();
+        ctx.beginPath(); ctx.arc(head.x,head.y,4,0,Math.PI*2);
+        ctx.fillStyle = '#132239'; ctx.fill();
+      }
+      return;
+    }
     const positions = state.positions ?? demoFormations.find((f) => f.slug === state.active_formation)?.positions;
     hits = GBR_ROSTER.map(({ num }) => {
       const [x,z] = positions?.[num] ?? [0,0];
@@ -351,4 +383,36 @@ function mountCanvasRink() {
     if (status.value !== label) status.value = label;
   }
   requestAnimationFrame(render);
+}
+
+function createPregameSkaters(scene: THREE.Scene) {
+  const torsoGeometry = new THREE.CapsuleGeometry(.58,.65,5,9);
+  const helmetGeometry = new THREE.SphereGeometry(.39,12,9);
+  const legGeometry = new THREE.BoxGeometry(.28,.93,.28);
+  const stickGeometry = new THREE.BoxGeometry(.08,1.55,.10);
+  const bladeGeometry = new THREE.BoxGeometry(.55,.09,.12);
+  const dark = new THREE.MeshStandardMaterial({color:0x152138});
+  const tape = new THREE.MeshStandardMaterial({color:0xe9f0fc});
+  const ringMaterial = new THREE.MeshBasicMaterial({color:0xffc76b,side:THREE.DoubleSide});
+  const ringGeometry = new THREE.RingGeometry(.95,1.1,30);
+  return Array.from({length:18}, () => {
+    const group = new THREE.Group();
+    group.visible=false;
+    scene.add(group);
+    const add = (mesh: THREE.Mesh, x: number, y: number, z: number) => {
+      mesh.position.set(x,y,z);
+      group.add(mesh);
+      return mesh;
+    };
+    const body = new THREE.Mesh(torsoGeometry,new THREE.MeshStandardMaterial({color:0x1267ca,roughness:.7}));
+    add(body,0,1.42,.02);
+    add(new THREE.Mesh(helmetGeometry,dark),0,2.43,.17);
+    for (const x of [-.27,.27]) add(new THREE.Mesh(legGeometry,dark),x,.52,0);
+    const stick = add(new THREE.Mesh(stickGeometry,tape),.72,.91,.44);
+    stick.rotation.z = -.3;
+    add(new THREE.Mesh(bladeGeometry,dark),.53,.16,.51);
+    const ring = add(new THREE.Mesh(ringGeometry,ringMaterial),0,.045,0);
+    ring.rotation.x = -Math.PI / 2;
+    return {group,body,ring};
+  });
 }

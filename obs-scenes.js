@@ -87,6 +87,14 @@
       }
     },
     {
+      id:'pregame-gbr',
+      scene:'starting',
+      label:'Pregame',
+      sublabel:'3D matchup loop',
+      template:'full',
+      preset:{ feedLayout:'full', bugPosition:'hidden', showScoreboard:false, logoBug:'off', streamMuted:true }
+    },
+    {
       id:'starting-hitmen-bobbleheads',
       scene:'starting',
       label:'Hitmen Starting Soon',

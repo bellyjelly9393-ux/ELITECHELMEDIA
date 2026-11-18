@@ -160,3 +160,5 @@ body.wildman-site.obs-control-page:not(.wm-theme-hitmen) {
   .obs-access-layout{grid-template-columns:minmax(0,1fr)}
   .obs-access-account{order:-1}
 }
+
+.obs-preview-switch{flex-wrap:wrap;justify-content:flex-end}
