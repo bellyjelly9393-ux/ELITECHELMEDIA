@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="wildman.css">
   <link rel="stylesheet" href="management.css">
   <link rel="stylesheet" href="network-v2.css">
-  <link rel="stylesheet" href="obs-control.css?v=20261118-desk">
+  <link rel="stylesheet" href="obs-control.css?v=20261118-release">
 </head>
 <body class="wildman-site management-protected obs-control-page">
 <header class="site-header">
@@ -29,12 +29,27 @@
 
 <main>
   <section class="section-shell section-block management-login-shell" id="obsAccountPanel">
-    <div class="section-heading">
-      <div><div class="eyebrow">PRIVATE · LIVE PRODUCTION</div><h2>BROADCAST STUDIO ACCESS</h2></div>
-      <div id="managementAccessStatus" class="status-pill">PRIVATE · MANAGEMENT ONLY</div>
+    <header class="obs-access-heading">
+      <div class="obs-overline">ELITECHEL MEDIA</div>
+      <h1>Broadcast Studio</h1>
+      <p>Run scenes, match graphics, and OBS browser sources from one desk.</p>
+    </header>
+    <div class="obs-access-layout">
+      <section class="obs-preview-card obs-access-sample" aria-labelledby="obsAccessSampleTitle">
+        <div class="obs-card-head">
+          <div><h2 id="obsAccessSampleTitle">GBR graphics preview</h2><p>Sample scorebug and tactical rink</p></div>
+          <a href="/lg3s-gb?mode=obs&amp;preview=true&amp;audio=off" target="_blank" rel="noopener">Open preview ↗</a>
+        </div>
+        <div class="obs-preview-frame" data-mode="sample">
+          <iframe src="/lg3s-gb?mode=obs&amp;preview=true&amp;audio=off" title="Sample GBR OBS graphics" loading="lazy"></iframe>
+        </div>
+      </section>
+      <div class="obs-access-account">
+        <div id="managementAccessStatus" class="status-pill">PRIVATE · MANAGEMENT ONLY</div>
+        <section id="accountPanel" class="panel account-panel"><div><div class="eyebrow">SECURE ACCESS</div><h3>Loading account…</h3></div></section>
+        <div id="managementLockedMessage" class="wm-card"><b>Management sign-in required.</b><p>Broadcast controls are restricted to authorized Elitechel or team management.</p></div>
+      </div>
     </div>
-    <section id="accountPanel" class="panel account-panel"><div><div class="eyebrow">SECURE ACCESS</div><h3>Loading account…</h3></div></section>
-    <div id="managementLockedMessage" class="wm-card" style="margin-top:16px"><b>Management sign-in required.</b><p>Broadcast controls are restricted to authorized Elitechel or team management.</p></div>
   </section>
 
   <div data-management-content hidden class="obs-workspace">
