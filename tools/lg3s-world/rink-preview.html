@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IceVision Tactical Preview</title>
+  <style>
+    html {color-scheme:dark;background:transparent}
+    html,body,#viewport {width:100%;height:100%;margin:0;overflow:hidden}
+    body {background:radial-gradient(ellipse at 50% 65%,#29405e,#080d18 74%);color:#e8efff;font:600 12px system-ui}
+    canvas {display:block}
+    output {position:absolute;bottom:12px;left:14px;pointer-events:none;color:#c5d2e9;text-shadow:0 1px 5px #000}
+    html.alpha body {background:transparent}
+    html.alpha output {display:none}
+  </style>
+</head>
+<body>
+  <div id="viewport" aria-label="Interactive 3D tactical hockey rink"></div>
+  <output id="status"></output>
+  <script src="/lg3s-rink-bridge.js"></script>
+  <script type="module" src="/src/pages/rink-preview.ts"></script>
+</body>
+</html>

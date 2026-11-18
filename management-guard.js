@@ -89,7 +89,7 @@
 
     document.body.classList.toggle("management-authorized", allowed);
     // Rostered players (no management role) see these pages read-only: write controls are hidden.
-    const playerOnly = allowed && !(state.profile && ["admin","commissioner"].includes(String(state.profile.role||"").toLowerCase())) &&
+    const playerOnly = page !== "obs-control.html" && allowed && !(state.profile && ["admin","commissioner"].includes(String(state.profile.role||"").toLowerCase())) &&
       !(state.memberships || []).some((m) => m.team_id === HITMEN_TEAM_ID && m.active !== false && hitmenRoles.has(String(m.role || "").toLowerCase()));
     document.body.classList.toggle("hitmen-readonly", playerOnly);
     if (playerOnly && !document.getElementById("hitmenReadonlyStyle")) {
