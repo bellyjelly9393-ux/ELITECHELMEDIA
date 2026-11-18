@@ -13,7 +13,7 @@ jobs:
   static-gate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73e2653cde18e8c46a2dc1c73a40b4c9facf8cb4 # v4.2.2
+      - uses: actions/checkout@v4 # stable action
       - name: Verify JavaScript parses
         run: node --check lg3s-gb-war-room.js
       - name: Check no public private content and verified gate
