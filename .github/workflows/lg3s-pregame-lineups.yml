@@ -1,0 +1,46 @@
+name: LG3s pregame lineup sync
+
+on:
+  schedule:
+    - cron: '0 2 * * 3'
+      timezone: America/Toronto
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lg3s-pregame-data
+
+jobs:
+  import-lineups:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate and publish the LG Client export
+        env:
+          LG3S_LINEUP_FEED_URL: ${{ secrets.LG3S_LINEUP_FEED_URL }}
+        run: |
+          set -euo pipefail
+          if [ -z "$LG3S_LINEUP_FEED_URL" ]; then
+            echo 'LG Client export feed is not configured.'
+            exit 0
+          fi
+          snapshot=data/lg3s/pregame-lineups.json
+          branch=lg3s-pregame-data
+          importer=$(mktemp)
+          cp tools/lg3s-world/import-pregame.mjs "$importer.mjs"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null; then
+            git fetch --depth=1 origin "$branch"
+            git switch -c "$branch" FETCH_HEAD
+          else
+            git switch -c "$branch"
+          fi
+          node "$importer.mjs"
+          git add "$snapshot"
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update public LG3s pregame lineups'
+          git push origin "HEAD:refs/heads/$branch"

@@ -16,6 +16,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         live: resolve(import.meta.dirname, 'live.html'),
+        pregame: resolve(import.meta.dirname, 'pregame.html'),
         rink: resolve(import.meta.dirname, 'rink-preview.html'),
       },
     },

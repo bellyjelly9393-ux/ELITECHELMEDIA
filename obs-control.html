@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="wildman.css">
   <link rel="stylesheet" href="management.css">
   <link rel="stylesheet" href="network-v2.css">
-  <link rel="stylesheet" href="obs-control.css?v=20261118-release">
+  <link rel="stylesheet" href="obs-control.css?v=20261118-pregame">
 </head>
 <body class="wildman-site management-protected obs-control-page">
 <header class="site-header">
@@ -81,6 +81,7 @@
               <div class="obs-preview-switch" aria-label="Monitor view">
                 <button type="button" data-preview="program" aria-pressed="true">Program</button>
                 <button type="button" data-preview="graphics" aria-pressed="false">Graphics</button>
+                <button type="button" data-preview="pregame" aria-pressed="false" hidden>Pregame</button>
                 <button type="button" data-preview="sample" aria-pressed="false" hidden>Sample</button>
               </div>
             </div>
@@ -93,7 +94,7 @@
           </section>
 
           <section class="obs-scenes-card" aria-labelledby="obsScenesHeading">
-            <div class="obs-card-head"><div><h2 id="obsScenesHeading">Scenes</h2><p>Scene buttons publish immediately.</p></div></div>
+            <div class="obs-card-head"><div><h2 id="obsScenesHeading">Scenes</h2><p>Scene buttons publish immediately. Use the monitor tabs to preview off air.</p></div></div>
             <div class="obs-scene-strip" id="obsSceneStrip"></div>
           </section>
 
@@ -340,6 +341,7 @@
             <button id="copyGbrObsUrl" class="small-btn primary" type="button">Copy GBR OBS URL</button>
             <a id="openGbrObsUrl" class="small-btn" href="/lg3s-gb?mode=obs" target="_blank" rel="noopener">Open GBR Graphics</a>
             <a class="small-btn" href="/lg3s-gb" target="_blank" rel="noopener">Open Live Hub</a>
+            <a class="small-btn" href="/lg3s-gb/pregame" target="_blank" rel="noopener">Open Pregame Loop</a>
             <a class="small-btn" href="/lg3s-gb?mode=obs&amp;preview=true" target="_blank" rel="noopener">Preview Sample Graphics</a>
           </div>
           <p class="obs-preview-note">Set this Browser Source to <b>1920 × 1080 at 60 FPS</b> and enable <b>Control audio via OBS</b> for the goal horn. Place it above your gameplay capture or the Gameplay Only browser source.</p>
@@ -364,7 +366,7 @@
 <script src="management-guard.js"></script>
 <script src="script.js"></script>
 <script src="obs-config.js?v=20261005b"></script>
-<script src="obs-scenes.js?v=20261011-bobbleheads"></script>
-<script src="obs-control.js?v=20261118-desk"></script>
+<script src="obs-scenes.js?v=20261118-pregame"></script>
+<script src="obs-control.js?v=20261118-pregame"></script>
 </body>
 </html>

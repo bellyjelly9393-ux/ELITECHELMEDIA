@@ -155,10 +155,10 @@
   }
   function updatePreview(){
     var channel=encodeURIComponent(config().channel);
-    if(!isGbr()&&previewMode==='sample')previewMode='program';
+    if(!isGbr()&&['sample','pregame'].includes(previewMode))previewMode='program';
     var program='/obs-stage.html?channel='+channel+'&preview=1';
     var graphics=isGbr()?'/lg3s-gb?mode=obs&audio=off':'/obs-overlay.html?channel='+channel;
-    var source=previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
+    var source=previewMode==='pregame'?'/lg3s-gb/pregame?mode=obs':previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
     var monitor=byId('obsPreview');
     var width=isGbr()?1920:1280;
     var height=isGbr()?1080:720;
@@ -167,15 +167,15 @@
     canvas.style.height=height+'px';
     monitor.width=width;
     monitor.height=height;
-    monitor.title=previewMode==='program'?'OBS program monitor':'OBS graphics monitor';
+    monitor.title=previewMode==='pregame'?'GBR pregame matchup monitor':previewMode==='program'?'OBS program monitor':'OBS graphics monitor';
     if(monitor.getAttribute('src')!==source)monitor.src=source;
     byId('obsPreviewFrame').dataset.mode=previewMode;
     byId('obsPreviewDimensions').textContent=width+' × '+height+(isGbr()?' · 60 FPS source':'');
-    byId('obsMonitorNote').textContent=previewMode==='sample'?'Sample GBR graphics · Muted'
+    byId('obsMonitorNote').textContent=previewMode==='pregame'?'Pregame loop · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
       :previewMode==='graphics'?'Transparent graphics · Muted':'Game feed and graphics · Muted';
     byId('obsOpenMonitor').href=source;
     document.querySelectorAll('[data-preview]').forEach(function(button){
-      button.hidden=button.dataset.preview==='sample'&&!isGbr();
+      button.hidden=['sample','pregame'].includes(button.dataset.preview)&&!isGbr();
       button.setAttribute('aria-pressed',String(button.dataset.preview===previewMode));
     });
     fitPreviewCanvas();
@@ -258,8 +258,8 @@
       var selected=button.dataset.preset===currentPresetId;
       button.classList.toggle('active',selected);
       button.setAttribute('aria-pressed',String(selected));
-      button.hidden=isGbr()? !['game-matchup','starting','intermission','final','brb'].includes(button.dataset.preset)
-        :button.dataset.preset==='starting-hitmen-bobbleheads'&&config().channel!=='hitmen-main';
+      button.hidden=isGbr()? !['game-matchup','pregame-gbr','starting','intermission','final','brb'].includes(button.dataset.preset)
+        :button.dataset.preset==='pregame-gbr'||(button.dataset.preset==='starting-hitmen-bobbleheads'&&config().channel!=='hitmen-main');
     });
   }
   function setValue(id,value){var node=byId(id);if(node)node.value=value;}

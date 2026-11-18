@@ -1,0 +1,110 @@
+{
+  "schema": "lg3s-pregame-lineups-v1",
+  "games": [
+    {
+      "lg_game_id": 921754,
+      "teams": {
+        "1446": [
+          {
+            "lg_user_id": 77323,
+            "gamertag": "Splxsh x 34",
+            "position": "LW"
+          },
+          {
+            "lg_user_id": 56067,
+            "gamertag": "Sceebzy",
+            "position": "C"
+          },
+          {
+            "lg_user_id": 75845,
+            "gamertag": "Pazqi",
+            "position": "LD"
+          },
+          {
+            "lg_user_id": 70480,
+            "gamertag": "ItsaMeAquino",
+            "position": "G"
+          }
+        ],
+        "591": [
+          {
+            "lg_user_id": 77012,
+            "gamertag": "mynvi",
+            "position": "LW"
+          },
+          {
+            "lg_user_id": 73010,
+            "gamertag": "Kxne I88I",
+            "position": "C"
+          },
+          {
+            "lg_user_id": 36272,
+            "gamertag": "Fug84",
+            "position": "LD"
+          },
+          {
+            "lg_user_id": 80303,
+            "gamertag": "ClxpNHL",
+            "position": "G"
+          }
+        ]
+      }
+    },
+    {
+      "lg_game_id": 921758,
+      "teams": {
+        "1446": [
+          {
+            "lg_user_id": 77323,
+            "gamertag": "Splxsh x 34",
+            "position": "LW"
+          },
+          {
+            "lg_user_id": 56067,
+            "gamertag": "Sceebzy",
+            "position": "C"
+          },
+          {
+            "lg_user_id": 75845,
+            "gamertag": "Pazqi",
+            "position": "LD"
+          },
+          {
+            "lg_user_id": 70480,
+            "gamertag": "ItsaMeAquino",
+            "position": "G"
+          }
+        ],
+        "1079": []
+      }
+    },
+    {
+      "lg_game_id": 921764,
+      "teams": {
+        "1446": [
+          {
+            "lg_user_id": 77323,
+            "gamertag": "Splxsh x 34",
+            "position": "LW"
+          },
+          {
+            "lg_user_id": 56067,
+            "gamertag": "Sceebzy",
+            "position": "C"
+          },
+          {
+            "lg_user_id": 75845,
+            "gamertag": "Pazqi",
+            "position": "LD"
+          },
+          {
+            "lg_user_id": 70480,
+            "gamertag": "ItsaMeAquino",
+            "position": "G"
+          }
+        ],
+        "404": []
+      }
+    }
+  ]
+}
