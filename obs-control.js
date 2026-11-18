@@ -1,6 +1,9 @@
 (function(){
   'use strict';
   var PRODUCTION_ORIGIN='https://wildmanhockey-elitechelmedia.app';
+  var CARBON_ORIGIN='http://127.0.0.1:4180';
+  var CARBON_PREVIEW=CARBON_ORIGIN+'/broadcast.html?preview=desk';
+  var carbonTimeout=0;
   var OBS_CFG=window.WM_OBS_CONFIG||{defaultFeedFor:function(){return '';}};
   var SCENES=window.WM_OBS_SCENES||null;
   var MEDIA_TEAM_ID='5f36117c-7a51-4514-bf70-d4c672b41e48';
@@ -153,12 +156,33 @@
       window.addEventListener('resize',fitPreviewCanvas);
     }
   }
+  function setCarbonPreview(state){
+    clearTimeout(carbonTimeout);
+    byId('obsCarbonPreviewStatus').hidden=!state||state==='ready';
+    if(!state)return;
+    var messages={
+      connecting:['Connecting to Carbon Arena','Allow local network access if your browser asks.'],
+      loading:['Loading the Elite Labs rink','The warmup preview opens when the arena renders.'],
+      unreachable:['Carbon Arena is unavailable','Start the updated Elite Labs server on this computer, then try again or open the monitor in a new tab.'],
+      'renderer-error':['The rink could not render','Enable browser hardware acceleration, then try again.']
+    };
+    var message=messages[state];
+    byId('obsMonitorNote').textContent=state==='ready'?'Elite Labs Carbon Arena · Off-air preview':'Carbon Arena · Off-air';
+    if(state==='ready')return;
+    byId('obsCarbonHeading').textContent=message[0];
+    byId('obsCarbonDetail').textContent=message[1];
+    byId('obsRetryCarbon').hidden=state==='connecting'||state==='loading';
+    if(state==='connecting'||state==='loading'){
+      carbonTimeout=setTimeout(function(){setCarbonPreview('unreachable');},state==='loading'?20000:12000);
+    }
+  }
   function updatePreview(){
     var channel=encodeURIComponent(config().channel);
     if(!isGbr()&&['sample','pregame'].includes(previewMode))previewMode='program';
     var program='/obs-stage.html?channel='+channel+'&preview=1';
     var graphics=isGbr()?'/lg3s-gb?mode=obs&audio=off':'/obs-overlay.html?channel='+channel;
-    var source=previewMode==='pregame'?'/lg3s-gb/pregame?mode=obs':previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
+    var carbon=previewMode==='pregame';
+    var source=carbon?CARBON_PREVIEW:previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
     var monitor=byId('obsPreview');
     var width=isGbr()?1920:1280;
     var height=isGbr()?1080:720;
@@ -167,14 +191,18 @@
     canvas.style.height=height+'px';
     monitor.width=width;
     monitor.height=height;
-    monitor.title=previewMode==='pregame'?'GBR pregame matchup monitor':previewMode==='program'?'OBS program monitor':'OBS graphics monitor';
-    if(monitor.getAttribute('src')!==source)monitor.src=source;
+    monitor.title=carbon?'Elite Labs Carbon Arena pregame monitor':previewMode==='program'?'OBS program monitor':'OBS graphics monitor';
+    if(carbon)monitor.setAttribute('allow','local-network-access '+CARBON_ORIGIN+'; loopback-network '+CARBON_ORIGIN);
+    else monitor.removeAttribute('allow');
+    if(monitor.getAttribute('src')!==source){
+      setCarbonPreview(carbon?'connecting':'');
+      monitor.src=source;
+    }
     byId('obsPreviewFrame').dataset.mode=previewMode;
     byId('obsPreviewDimensions').textContent=width+' × '+height+(isGbr()?' · 60 FPS source':'');
-    byId('obsMonitorNote').textContent=previewMode==='pregame'?'Pregame loop · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
+    if(!carbon)byId('obsMonitorNote').textContent=previewMode==='sample'?'Sample GBR graphics · Muted'
       :previewMode==='graphics'?'Transparent graphics · Muted':'Game feed and graphics · Muted';
     byId('obsOpenMonitor').href=source;
-    byId('obsOpenCarbonArena').hidden=previewMode!=='pregame';
     document.querySelectorAll('[data-preview]').forEach(function(button){
       button.hidden=['sample','pregame'].includes(button.dataset.preview)&&!isGbr();
       button.setAttribute('aria-pressed',String(button.dataset.preview===previewMode));
@@ -483,6 +511,17 @@
     document.querySelectorAll('[data-preview]').forEach(function(button){
       button.addEventListener('click',function(){previewMode=button.dataset.preview;updatePreview();});
     });
+    byId('obsRetryCarbon').addEventListener('click',function(){
+      setCarbonPreview('connecting');
+      byId('obsPreview').src=CARBON_PREVIEW;
+    });
+    window.addEventListener('message',function(event){
+      var data=event.data;
+      if(previewMode==='pregame'&&event.origin===CARBON_ORIGIN&&event.source===byId('obsPreview').contentWindow
+          &&data?.protocol==='icevision:desk-preview:1'&&['loading','ready','renderer-error'].includes(data.state)){
+        setCarbonPreview(data.state);
+      }
+    });
     function markChanged(event){
       if(!event.target.matches('input:not([readonly]),select,textarea'))return;
       editCount++;
@@ -639,6 +678,7 @@
     channelReady=false;
     byId('obsDeskControls').hidden=true;
     byId('obsPreview').removeAttribute('src');
+    setCarbonPreview('');
     byId('obsTeamSelect').replaceChildren(new Option('No available channel',''));
     byId('heroChannel').textContent='NO CHANNEL';
     updatePublished(null);

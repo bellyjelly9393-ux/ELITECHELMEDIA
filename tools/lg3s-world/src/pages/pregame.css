@@ -52,6 +52,7 @@ button,a:focus-visible{outline-offset:4px}
 .world-empty{grid-column:1/-1;padding:20px;color:#c0d1e4}
 .on-air .world{width:100%;min-height:100dvh}
 .on-air .world-controls{display:none}
+.cards-only .world-board{grid-template-columns:minmax(0,680px);justify-content:center}
 .companion{background:transparent}
 .companion .world-rink{visibility:hidden}
 @media(max-width:720px){.world-header{display:block;padding-bottom:12px}.kickoff{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin:12px 0 0;padding:8px 10px}.kickoff strong{font-size:15px}.world-board{grid-template-columns:1fr}.world-rink{min-height:230px}.world-footer{flex-wrap:wrap;align-items:start;font-size:11px}}

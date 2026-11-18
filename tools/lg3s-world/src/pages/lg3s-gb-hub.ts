@@ -354,7 +354,7 @@ function renderStudioGraphics() {
   const world = $<HTMLIFrameElement>('studio-pregame')!;
   const showWebPregame = pregame && !programParent;
   world.hidden = !showWebPregame;
-  if (showWebPregame && !world.hasAttribute('src')) world.src = '/lg3s-gb/pregame?mode=obs';
+  if (showWebPregame && !world.hasAttribute('src')) world.src = '/lg3s-gb/pregame?mode=obs&layout=cards';
   if (!showWebPregame) world.removeAttribute('src');
   const titles: Record<string, string> = { starting: 'Starting soon', intermission: 'Intermission', final: 'Final', brb: 'Back shortly' };
   const title = titles[scene];
