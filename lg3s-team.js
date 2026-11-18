@@ -92,7 +92,7 @@ function render(){
  $('roomPlayers').innerHTML=filtered.map((p,idx)=>{
   const kind=p.pos==='G'?'goalie':'skater';
   const card='player-cards.html?league=lg3s&id='+p.id+'&kind='+kind;
-  const image=teamId===1446?'assets/lg3s/scene/gb-kit.webp':jersey(teamId);
+  const image=teamId===1446?'assets/lg3s/scene/gb-royal-blue.webp':jersey(teamId);
   const crest=''; // Chest motif is already baked into the photoreal-style jersey image.
   const stats=p.stats;
   const second=kind==='goalie'?(stats?.sv_pct==null?'—':(Number(stats.sv_pct)<=1?Number(stats.sv_pct)*100:Number(stats.sv_pct)).toFixed(1)+'%'):(stats?.p??'—');

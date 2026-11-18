@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { GBR_ROSTER, jerseyImage } from '../utils/gbrRoyalBlueJersey';
+import { localIceVisionParent } from '../utils/icevision';
 import { cameras, defaultCrop, demoFormations, demoMatch, demoVotes, formations, matchId,
   type Match, type TacticalFormation, type Vote } from '../utils/match';
 import './lg3s.css';
@@ -8,6 +9,7 @@ const assetBase = import.meta.env.BASE_URL;
 const studioChannel = 'lg3s-gbr';
 const params = new URLSearchParams(location.search);
 const obs = params.get('mode') === 'obs';
+const programParent = obs ? localIceVisionParent('programParent') : '';
 const preview = params.get('preview') === 'true';
 const muteHorn = params.get('audio') === 'off';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -37,6 +39,7 @@ let director = false;
 let haveMatch = false;
 let studioState: StudioState | null = null;
 let studioStarsUntil = 0;
+let lastProgramPregame: boolean | undefined;
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T | null;
 const set = (id: string, value: string | number) => { const el = $(id); if (el) el.textContent = String(value); };
@@ -344,10 +347,15 @@ function renderStudioGraphics() {
   if (!obs) return;
   const scene = studioState?.scene ?? 'game';
   const pregame = scene === 'starting' && studioState?.payload?.presetId === 'pregame-gbr';
+  if (programParent && pregame !== lastProgramPregame) {
+    window.parent.postMessage({ protocol:'icevision:program:1', type:'scene', pregame },programParent);
+    lastProgramPregame = pregame;
+  }
   const world = $<HTMLIFrameElement>('studio-pregame')!;
-  world.hidden = !pregame;
-  if (pregame && !world.hasAttribute('src')) world.src = '/lg3s-gb/pregame?mode=obs';
-  if (!pregame) world.removeAttribute('src');
+  const showWebPregame = pregame && !programParent;
+  world.hidden = !showWebPregame;
+  if (showWebPregame && !world.hasAttribute('src')) world.src = '/lg3s-gb/pregame?mode=obs';
+  if (!showWebPregame) world.removeAttribute('src');
   const titles: Record<string, string> = { starting: 'Starting soon', intermission: 'Intermission', final: 'Final', brb: 'Back shortly' };
   const title = titles[scene];
   $('studio-scene')!.hidden = pregame || !title;

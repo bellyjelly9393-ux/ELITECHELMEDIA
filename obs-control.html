@@ -342,11 +342,16 @@
             <a id="openGbrObsUrl" class="small-btn" href="/lg3s-gb?mode=obs" target="_blank" rel="noopener">Open GBR Graphics</a>
             <a class="small-btn" href="/lg3s-gb" target="_blank" rel="noopener">Open Live Hub</a>
             <a class="small-btn" href="/lg3s-gb/pregame" target="_blank" rel="noopener">Open Pregame Loop</a>
-            <a class="small-btn" href="http://127.0.0.1:4180/broadcast.html" target="_blank" rel="noopener">Open Local Carbon Arena</a>
             <a class="small-btn" href="/lg3s-gb?mode=obs&amp;preview=true" target="_blank" rel="noopener">Preview Sample Graphics</a>
           </div>
           <p class="obs-preview-note">Set this Browser Source to <b>1920 × 1080 at 60 FPS</b> and enable <b>Control audio via OBS</b> for the goal horn. Place it above your gameplay capture or the Gameplay Only browser source.</p>
-          <p class="obs-preview-note">Run Elite Labs Carbon Arena on the OBS computer and use its local URL for the Pregame Browser Source.</p>
+          <small>CARBON ARENA · FOLLOWS DESK SCENES</small>
+          <div class="obs-source-row">
+            <input id="carbonObsUrl" class="field" aria-label="Carbon Arena OBS browser source URL" value="http://127.0.0.1:4180/broadcast.html?follow=desk" readonly>
+            <button id="copyCarbonObsUrl" class="small-btn primary" type="button">Copy Carbon Arena OBS URL</button>
+            <a class="small-btn" href="http://127.0.0.1:4180/broadcast.html" target="_blank" rel="noopener">Preview Carbon Arena</a>
+          </div>
+          <p class="obs-preview-note">With Elite Labs running on the OBS computer, put the Carbon Arena URL in your GBR Browser Source. Select <b>Pregame</b> in Scenes to show the full rink, warmup, and player cards.</p>
         </div>
         <div class="obs-setup-grid" id="obsStandardSetup">
           <div><small>OBS SOURCE</small><strong>Browser</strong><span>Paste the permanent URL.</span></div>
@@ -369,6 +374,6 @@
 <script src="script.js"></script>
 <script src="obs-config.js?v=20261005b"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
-<script src="obs-control.js?v=20261118-carbon-pregame"></script>
+<script src="obs-control.js?v=20261118-carbon-program"></script>
 </body>
 </html>
