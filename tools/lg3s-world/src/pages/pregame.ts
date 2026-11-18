@@ -25,6 +25,7 @@ interface RenderCard extends CardLayout {
   readOnly: true;
   jersey?: string;
   portrait?: HTMLImageElement;
+  teamJersey?: string;
   logo: string;
   labels: string[];
   values: string[];
@@ -36,7 +37,7 @@ declare global {
 }
 
 const params = new URLSearchParams(location.search);
-const cardRendererUrl = '/player-card-renderer.js?v=20261118-pregame';
+const cardRendererUrl = '/player-card-renderer.js?v=20261118-locker-jerseys';
 const cardRenderer = import(/* @vite-ignore */ cardRendererUrl).then(() => window.ECMCardRenderer).catch(() => undefined);
 const onAir = params.get('mode') === 'obs';
 document.body.classList.toggle('on-air', onAir);
@@ -269,6 +270,7 @@ function playerCard(player: PregamePlayer | undefined, unit: PregameUnit, teamId
   const card: RenderCard = {
     player:{ tag:player.name, team, pos:player.position }, league:'lg3s', season:'LG3S · SEASON 1',
     ratingKind:'pending', edition:'season', finish:'ice', readOnly:true, jersey:player.jersey,
+    teamJersey:gb ? '/assets/lg3s/scene/gb-kit.webp' : teamId ? `/assets/lg3s/jerseys/${teamId}.webp` : undefined,
     background:'arena', logo:teamId ? `/assets/lg3s/team${teamId}.svg` : '', labels, values,
   };
   const canvas = article.querySelector('canvas')!;
