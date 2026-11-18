@@ -9,6 +9,7 @@ const studioChannel = 'lg3s-gbr';
 const params = new URLSearchParams(location.search);
 const obs = params.get('mode') === 'obs';
 const preview = params.get('preview') === 'true';
+const muteHorn = params.get('audio') === 'off';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 const db = supabaseUrl && supabaseKey && !preview ? createClient(supabaseUrl, supabaseKey, obs ? {
@@ -34,6 +35,8 @@ let lowerTimer: number | undefined;
 let audio: AudioContext | undefined;
 let director = false;
 let haveMatch = false;
+let studioState: StudioState | null = null;
+let studioStarsUntil = 0;
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T | null;
 const set = (id: string, value: string | number) => { const el = $(id); if (el) el.textContent = String(value); };
@@ -65,12 +68,19 @@ const graphics = `
     <div class="team-score away" id="away-score-cell"><b id="away-score"></b><span id="away-team"></span><span id="away-flag"></span></div>
     <div class="score-time"><span id="score-period"></span><b id="score-clock"></b></div>
   </div>
+  ${obs ? `<div id="studio-scene" class="studio-scene" hidden style="${water('GBR')}">
+      <div class="studio-scene-content">
+        <span id="studio-event">TEAM GREAT BRITAIN</span>
+        <strong id="studio-scene-title"></strong>
+        <p id="studio-scene-detail"></p>
+      </div>
+    </div>` : ''}
   <div id="goal" class="goal" hidden><div><small>TEAM GREAT BRITAIN</small><strong>GOAL!</strong></div></div>
   <aside id="lower" class="lower" aria-label="Three stars of the game" hidden>
     <div class="lower-title"><span>★ ★ ★</span><strong>THREE STARS</strong><small>FAN BALLOT</small></div><div id="lower-players"></div>
   </aside>`;
 const rink = `<iframe id="rink" title="IceVision 3D tactical rink"></iframe>`;
-$('app')!.innerHTML = obs ? `<main class="obs-stage" aria-label="OBS broadcast graphics">${graphics}<div class="rink-pip">${rink}</div></main>` : `
+$('app')!.innerHTML = obs ? `<main class="obs-stage" aria-label="OBS broadcast graphics">${graphics}<div class="rink-pip" id="rink-pip">${rink}</div></main>` : `
 <header class="site-header">
   <div class="nav-shell">
     <a class="brand" href="/lg3s-gb" aria-label="Elite Chel Media live hub"><span class="brand-mark"><i></i><i></i><i></i></span><span>ELITE CHEL<small>MEDIA</small></span></a>
@@ -161,7 +171,7 @@ function sortedVotes() { return [...votes].sort((a, b) => b.votes - a.votes || a
 function renderLower() {
   clearTimeout(lowerTimer);
   const lower = $('lower')!;
-  const expires = Math.max(lowerPreviewUntil, match.lower_third_visible ? (match.lower_third_until ? Date.parse(match.lower_third_until) : Infinity) : 0);
+  const expires = Math.max(studioStarsUntil, lowerPreviewUntil, match.lower_third_visible ? (match.lower_third_until ? Date.parse(match.lower_third_until) : Infinity) : 0);
   const remaining = expires - Date.now();
   const leaders = sortedVotes().slice(0, 3);
   lower.hidden = remaining <= 0 || !leaders.length;
@@ -170,6 +180,7 @@ function renderLower() {
 }
 function playHorn() {
   if (!obs && !demo && $('audio')?.getAttribute('aria-pressed') !== 'true') return;
+  if (muteHorn) return;
   try {
     const context = audio ??= new AudioContext();
     void context.resume().catch(console.warn);
@@ -329,6 +340,21 @@ function renderFeed() {
   set('feed-badge', demo ? 'PREVIEW' : url ? 'BROADCAST' : 'STANDBY');
   $('main-feed')!.hidden = activeFeed === 'main';
 }
+function renderStudioGraphics() {
+  if (!obs) return;
+  const scene = studioState?.scene ?? 'game';
+  const titles: Record<string, string> = { starting: 'Starting soon', intermission: 'Intermission', final: 'Final', brb: 'Back shortly' };
+  const title = titles[scene];
+  $('studio-scene')!.hidden = !title;
+  $('rink-pip')!.hidden = studioState?.payload?.rinkVisible === false || !!title;
+  if (!title) return;
+  set('studio-event', studioState?.payload?.event || 'TEAM GREAT BRITAIN');
+  set('studio-scene-title', title);
+  const score = scene === 'intermission' || scene === 'final'
+    ? `${match.home_team} ${match.home_score} – ${match.away_score} ${match.away_team}` : '';
+  set('studio-scene-detail', [score, studioState?.payload?.message].filter(Boolean).join(' · '));
+}
+
 function renderMatch() {
   for (const side of ['home','away'] as const) {
     const team = match[`${side}_team`];
@@ -349,6 +375,7 @@ function renderMatch() {
   lastGoal = goal;
   rinkState();
   renderLower();
+  renderStudioGraphics();
   if (obs) return;
   $<HTMLSelectElement>('camera')!.value = local.camera_angle ?? match.camera_angle;
   $<HTMLSelectElement>('formation')!.value = local.active_formation ?? match.active_formation;
@@ -457,10 +484,12 @@ interface StudioState {
   payload?: {
     streamUrl?: string; homeScore?: number; awayScore?: number;
     clock?: string; clockRunning?: boolean; clockBaseSeconds?: number; clockStartedAt?: string; clockRate?: number;
-    period?: string; awayName?: string; goalHornTrigger?: string;
+    period?: string; awayName?: string; goalHornTrigger?: string | null;
+    event?: string; message?: string; threeStarsUntil?: string | null;
+    rinkCamera?: Match['camera_angle']; rinkFormation?: Match['active_formation'];
+    rinkHighlight?: number; rinkVisible?: boolean;
   };
 }
-let studioState: StudioState | null = null;
 let ocrMatch: Match | null = null;
 let request = 0;
 function studioEmbed(raw?: string) {
@@ -482,7 +511,7 @@ function studioEmbed(raw?: string) {
   } catch { return ''; }
   return '';
 }
-function applyBroadcastState() {
+function applyBroadcastState(previous = match) {
   const p = studioState?.payload;
   const studioOwnsScore = p && !(ocrMatch?.ocr_result && Date.now() - Date.parse(ocrMatch.updated_at) < 20000);
   if (studioOwnsScore) {
@@ -497,11 +526,25 @@ function applyBroadcastState() {
       home_score: Number(p.homeScore) || 0, away_score: Number(p.awayScore) || 0, clock, period,
       red_zone_active: period === 'OT' || (period === '3RD' && clock !== '—' && Number(clock.slice(0, 2)) < 5) };
   } else if (ocrMatch) {
-    match = ocrMatch;
+    match = { ...ocrMatch };
   }
   const validGoalTimes = [ocrMatch?.goal_horn_trigger, p?.goalHornTrigger]
     .filter((time): time is string => !!time && Number.isFinite(Date.parse(time)));
   match = { ...match, goal_horn_trigger: validGoalTimes.sort((a, b) => Date.parse(b) - Date.parse(a))[0] ?? null };
+  if (p?.rinkCamera && cameras.includes(p.rinkCamera)) {
+    match.camera_angle = p.rinkCamera;
+  }
+  if (p?.rinkFormation && formations.includes(p.rinkFormation)) {
+    match.active_formation = p.rinkFormation;
+  }
+  if (p?.rinkHighlight && GBR_ROSTER.some((player) => player.num === p.rinkHighlight)) {
+    match.highlighted_player = p.rinkHighlight;
+  }
+  if (match.camera_angle !== previous.camera_angle) delete local.camera_angle;
+  if (match.active_formation !== previous.active_formation) delete local.active_formation;
+  if (match.jersey_side !== previous.jersey_side) delete local.jersey_side;
+  if (match.highlighted_player !== previous.highlighted_player) delete local.highlighted_player;
+  studioStarsUntil = Date.parse(p?.threeStarsUntil ?? '') || 0;
   haveMatch = !!(ocrMatch || p);
   const stream = studioEmbed(p?.streamUrl);
   if (stream !== studioStream) {
@@ -522,15 +565,7 @@ async function refresh() {
   if (version !== request) return;
   const [state, ballot, positions, studio] = results;
   if (!studio.error) studioState = studio.data as StudioState | null;
-  if (state.data) {
-    const previous = match;
-    ocrMatch = state.data as Match;
-    match = ocrMatch;
-    if (match.camera_angle !== previous.camera_angle) delete local.camera_angle;
-    if (match.active_formation !== previous.active_formation) delete local.active_formation;
-    if (match.jersey_side !== previous.jersey_side) delete local.jersey_side;
-    if (match.highlighted_player !== previous.highlighted_player) delete local.highlighted_player;
-  }
+  if (state.data) ocrMatch = state.data as Match;
   if (ballot.data) votes = ballot.data as Vote[];
   if (positions.data) tactical = positions.data as TacticalFormation[];
   applyBroadcastState();

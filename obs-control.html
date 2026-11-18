@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="wildman.css">
   <link rel="stylesheet" href="management.css">
   <link rel="stylesheet" href="network-v2.css">
-  <link rel="stylesheet" href="obs-control.css?v=20261006-size1">
+  <link rel="stylesheet" href="obs-control.css?v=20261118-desk">
 </head>
 <body class="wildman-site management-protected obs-control-page">
 <header class="site-header">
@@ -23,11 +23,12 @@
     <a href="multiview.html">Multiview</a>
     <a href="tournament-control.html">Tournament Ops</a>
     <a href="management.html">Management</a>
+    <button id="obsAccountToggle" class="obs-account-toggle" type="button" aria-expanded="false" aria-controls="obsAccountPanel" hidden>Account</button>
   </nav>
 </header>
 
 <main>
-  <section class="section-shell section-block management-login-shell">
+  <section class="section-shell section-block management-login-shell" id="obsAccountPanel">
     <div class="section-heading">
       <div><div class="eyebrow">PRIVATE · LIVE PRODUCTION</div><h2>BROADCAST STUDIO ACCESS</h2></div>
       <div id="managementAccessStatus" class="status-pill">PRIVATE · MANAGEMENT ONLY</div>
@@ -36,36 +37,131 @@
     <div id="managementLockedMessage" class="wm-card" style="margin-top:16px"><b>Management sign-in required.</b><p>Broadcast controls are restricted to authorized Elitechel or team management.</p></div>
   </section>
 
-  <div data-management-content hidden>
-    <section class="section-shell obs-studio-hero">
-      <div>
-        <div class="eyebrow">ELITECHEL MEDIA · OBS</div>
-        <h1>LIVE<br><span>BROADCAST STUDIO.</span></h1>
-        <p>One permanent Browser Source. Change scenes, score, clock, matchup and player graphics here and OBS updates automatically.</p>
-      </div>
-      <div class="obs-hero-status">
-        <small>CHANNEL</small><strong id="heroChannel">ELITECHEL-MAIN</strong>
-        <span id="publishStatus">READY</span>
-      </div>
-    </section>
+  <div data-management-content hidden class="obs-workspace">
+    <div class="obs-desk section-shell">
+      <section class="obs-desk-header" aria-labelledby="obsDeskTitle">
+        <div class="obs-desk-title">
+          <div class="obs-overline">ELITECHEL MEDIA</div>
+          <h1 id="obsDeskTitle">Broadcast Studio</h1>
+        </div>
+        <div class="obs-desk-toolbar">
+          <label class="obs-channel-select">Channel<select id="obsTeamSelect" aria-label="Channel" class="select-field"></select></label>
+          <button id="reloadObsState" class="small-btn" type="button">Reload state</button>
+          <button id="publishObsState" class="small-btn primary" type="button">Publish changes</button>
+        </div>
+      </section>
 
-    <section class="section-shell section-block">
-      <div class="obs-layout">
-        <article class="obs-control-card">
-          <div class="obs-card-head">
-            <div><div class="eyebrow">1 · CONTROL CHANNEL</div><h2>Production Desk</h2></div>
-            <span id="stateUpdated" class="status-pill">WAITING</span>
+      <div class="obs-statusbar">
+        <span class="obs-channel-tag" id="heroChannel">SELECT A CHANNEL</span>
+        <span class="obs-scene-status">Scene <b id="obsPublishedScene">—</b></span>
+        <span class="obs-publish-state" id="publishStatus" role="status">Connecting</span>
+        <span id="stateUpdated" class="obs-saved-state">Waiting for channel</span>
+      </div>
+
+      <div class="obs-layout" id="obsDeskControls" hidden>
+        <div class="obs-program">
+          <section class="obs-preview-card" aria-labelledby="obsPreviewHeading">
+            <div class="obs-card-head">
+              <div><h2 id="obsPreviewHeading">Program monitor</h2><p id="obsPreviewDimensions">1280 × 720</p></div>
+              <div class="obs-preview-switch" aria-label="Monitor view">
+                <button type="button" data-preview="program" aria-pressed="true">Program</button>
+                <button type="button" data-preview="graphics" aria-pressed="false">Graphics</button>
+                <button type="button" data-preview="sample" aria-pressed="false" hidden>Sample</button>
+              </div>
+            </div>
+            <div class="obs-preview-frame" id="obsPreviewFrame">
+              <div class="obs-preview-canvas" id="obsPreviewCanvas">
+                <iframe id="obsPreview" width="1280" height="720" title="OBS program monitor"></iframe>
+              </div>
+            </div>
+            <div class="obs-monitor-footer"><span id="obsMonitorNote">Game feed and graphics · Muted</span><a id="obsOpenMonitor" href="#" target="_blank" rel="noopener">Open monitor ↗</a></div>
+          </section>
+
+          <section class="obs-scenes-card" aria-labelledby="obsScenesHeading">
+            <div class="obs-card-head"><div><h2 id="obsScenesHeading">Scenes</h2><p>Scene buttons publish immediately.</p></div></div>
+            <div class="obs-scene-strip" id="obsSceneStrip"></div>
+          </section>
+
+          <section class="obs-gbr-cues" id="obsGbrCues" aria-labelledby="obsGbrCuesHeading" hidden>
+            <div><h2 id="obsGbrCuesHeading">GBR graphics cues</h2><p>Three Stars uses the live fan ballot.</p></div>
+            <div class="obs-cue-buttons">
+              <button id="triggerGbrGoal" class="small-btn obs-goal-button" type="button">Goal horn</button>
+              <button id="triggerGbrStars" class="small-btn" type="button">Show Three Stars</button>
+              <button id="obsToggleGbrRink" class="small-btn" type="button" aria-pressed="true">Tactical rink</button>
+            </div>
+          </section>
+        </div>
+
+        <section class="obs-control-card" aria-label="Channel controls">
+          <div class="obs-tabs" role="tablist" aria-label="Production controls">
+            <button type="button" id="obsTabMatch" role="tab" aria-selected="true" aria-controls="obsMatchPanel">Match</button>
+            <button type="button" id="obsTabFeed" role="tab" aria-selected="false" aria-controls="obsFeedPanel" tabindex="-1">Feed</button>
+            <button type="button" id="obsTabGraphics" role="tab" aria-selected="false" aria-controls="obsGraphicsPanel" tabindex="-1">Graphics</button>
+            <button type="button" id="obsTabSources" role="tab" aria-selected="false" aria-controls="obsSourcesPanel" tabindex="-1">OBS setup</button>
+          </div>
+          <div class="obs-tab-panel" id="obsMatchPanel" role="tabpanel" aria-labelledby="obsTabMatch">
+            <h2>Match control</h2>
+            <label>Event<input id="obsEvent" class="field" placeholder="League or tournament"></label>
+            <div class="obs-score-editor">
+            <div class="obs-score-side">
+              <label>Home Team<input id="obsHomeName" class="field" placeholder="Elitechel Media"></label>
+              <div class="obs-score-stepper">
+                <button type="button" data-score="home" data-delta="-1" aria-label="Subtract one home goal">−</button>
+                <strong id="homeScoreDisplay">0</strong>
+                <button type="button" data-score="home" data-delta="1" aria-label="Add one home goal">+</button>
+              </div>
+              <input id="obsHomeScore" type="number" min="0" value="0" hidden>
+            </div>
+            <div class="obs-score-vs">VS</div>
+            <div class="obs-score-side">
+              <label>Away Team<input id="obsAwayName" class="field" placeholder="Blank = tonight's opponent"></label>
+              <div class="obs-score-stepper">
+                <button type="button" data-score="away" data-delta="-1" aria-label="Subtract one away goal">−</button>
+                <strong id="awayScoreDisplay">0</strong>
+                <button type="button" data-score="away" data-delta="1" aria-label="Add one away goal">+</button>
+              </div>
+              <input id="obsAwayScore" type="number" min="0" value="0" hidden>
+            </div>
           </div>
 
           <div class="obs-field-grid two">
-            <label>Team / Brand<select id="obsTeamSelect" class="select-field"></select></label>
-            <label>Event<input id="obsEvent" class="field" placeholder="LGCHL Season 55"></label>
+            <label>Period<input id="obsPeriod" class="field" placeholder="1ST"></label>
+            <label>Team Record<input id="obsRecord" class="field" placeholder="5-7-0"></label>
           </div>
 
-          <div class="obs-feed-editor">
-            <div class="eyebrow">LIVE STREAM FEED</div>
-            <h3>Attach the gameplay source</h3>
-            <p>Paste the Twitch or YouTube link from the player whose feed you are using. The Calgary channel defaults to twitch.tv/ctbli. Scenes drive the feed: Game and Player ID play it with audio, Starting Soon, Intermission, Final and BRB mute it under the full-screen card.</p>
+          <div class="obs-advanced-panel">
+            <h3>Game clock</h3>
+            <label>Clock Set<input id="obsClock" class="field" placeholder="20:00" inputmode="numeric"></label>
+            <div class="obs-clock-panel">
+              <div class="obs-clock-readout">
+                <small>TIME REMAINING</small>
+                <strong id="obsClockDisplay">20:00</strong>
+                <span id="obsClockStatus">PAUSED</span>
+              </div>
+              <label>Clock Speed
+                <select id="obsClockRate" class="select-field">
+                  <option value="5">5× · EA 4-minute periods</option>
+                  <option value="1">1× · Real-time</option>
+                  <option value="4">4×</option>
+                  <option value="6">6×</option>
+                </select>
+              </label>
+              <div class="obs-clock-actions">
+                <button id="obsClockStart" class="small-btn primary" type="button">Start</button>
+                <button id="obsClockPause" class="small-btn" type="button">Pause</button>
+                <button id="obsClockSet" class="small-btn" type="button">Set</button>
+                <button id="obsClockMinus" class="small-btn" type="button">−5 sec</button>
+                <button id="obsClockPlus" class="small-btn" type="button">+5 sec</button>
+                <button id="obsClockReset" class="small-btn" type="button">Reset</button>
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="obs-tab-panel" id="obsFeedPanel" role="tabpanel" aria-labelledby="obsTabFeed" hidden>
+            <div class="obs-feed-editor">
+
+            <h3>Gameplay feed</h3>
+            <p>Choose a saved player stream or paste a Twitch, YouTube, or direct MP4 URL. Break scenes mute gameplay.</p>
             <div class="obs-field-grid two">
               <label>Player Stream<select id="obsPlayerStream" class="select-field"></select></label>
               <label>Game Layout<select id="obsFeedLayout" class="select-field">
@@ -96,69 +192,25 @@
             </div>
             <span id="streamFeedStatus" class="obs-feed-status">No feed attached yet.</span>
           </div>
-
-          <div class="obs-simple-guide">
-            <strong>GAMEPLAY</strong><span>Uses the EA score + clock. We only add the Elite Media logo and your right-side panel.</span>
           </div>
-          <p style="margin:8px 0;color:#e9acc3;font-size:13px">Calgary Hitmen channel: select <b>Hitmen Starting Soon</b> for the new team graphics scene. The same OBS Browser Source updates automatically.</p><div class="obs-scene-strip" id="obsSceneStrip"></div>
-
-          <div class="obs-score-editor">
-            <div class="obs-score-side">
-              <label>Home Team<input id="obsHomeName" class="field" placeholder="Elitechel Media"></label>
-              <div class="obs-score-stepper">
-                <button type="button" data-score="home" data-delta="-1">−</button>
-                <strong id="homeScoreDisplay">0</strong>
-                <button type="button" data-score="home" data-delta="1">+</button>
+          <div class="obs-tab-panel" id="obsGraphicsPanel" role="tabpanel" aria-labelledby="obsTabGraphics" hidden>
+            <h2>Graphics</h2>
+            <div id="obsGbrTactics" hidden>
+              <h3>Tactical rink</h3>
+              <div class="obs-field-grid two">
+                <label>Camera<select id="obsGbrCamera" class="select-field">
+                  <option value="ice">Ice level</option><option value="overhead">Overhead</option><option value="jumbotron">Jumbotron</option><option value="goalie">Goalie</option><option value="orbit">Orbit</option>
+                </select></label>
+                <label>Formation<select id="obsGbrFormation" class="select-field">
+                  <option value="trap">Trap</option><option value="overload">Overload</option><option value="rush">Rush</option>
+                </select></label>
               </div>
-              <input id="obsHomeScore" type="number" min="0" value="0" hidden>
+              <label>Highlight player<select id="obsGbrHighlight" class="select-field">
+                <option value="88">#88 L. Kirk</option><option value="20">#20 B. Lake</option><option value="19">#19 D. Clements</option><option value="35">#35 B. Bowns</option>
+              </select></label>
+              <p class="obs-preview-note">Use Publish changes to update the rink on the graphics source.</p>
             </div>
-            <div class="obs-score-vs">VS</div>
-            <div class="obs-score-side">
-              <label>Away Team<input id="obsAwayName" class="field" placeholder="Blank = tonight's opponent"></label>
-              <div class="obs-score-stepper">
-                <button type="button" data-score="away" data-delta="-1">−</button>
-                <strong id="awayScoreDisplay">0</strong>
-                <button type="button" data-score="away" data-delta="1">+</button>
-              </div>
-              <input id="obsAwayScore" type="number" min="0" value="0" hidden>
-            </div>
-          </div>
-
-          <div class="obs-field-grid two">
-            <label>Period<input id="obsPeriod" class="field" placeholder="1ST"></label>
-            <label>Team Record<input id="obsRecord" class="field" placeholder="5-7-0"></label>
-          </div>
-
-          <details class="obs-advanced-panel">
-            <summary>Backup Custom Clock</summary>
-            <p>Gameplay normally uses the EA scoreboard and EA clock. Only touch this if you turn on our backup bottom scoreboard.</p>
-            <label>Clock Set<input id="obsClock" class="field" placeholder="20:00" inputmode="numeric"></label>
-            <div class="obs-clock-panel">
-              <div class="obs-clock-readout">
-                <small>BACKUP CLOCK</small>
-                <strong id="obsClockDisplay">20:00</strong>
-                <span id="obsClockStatus">PAUSED</span>
-              </div>
-              <label>Clock Speed
-                <select id="obsClockRate" class="select-field">
-                  <option value="5">5× · EA 4-minute periods</option>
-                  <option value="1">1× · Real-time</option>
-                  <option value="4">4×</option>
-                  <option value="6">6×</option>
-                </select>
-              </label>
-              <div class="obs-clock-actions">
-                <button id="obsClockStart" class="small-btn primary" type="button">Start</button>
-                <button id="obsClockPause" class="small-btn" type="button">Pause</button>
-                <button id="obsClockSet" class="small-btn" type="button">Set</button>
-                <button id="obsClockMinus" class="small-btn" type="button">−5 sec</button>
-                <button id="obsClockPlus" class="small-btn" type="button">+5 sec</button>
-                <button id="obsClockReset" class="small-btn" type="button">Reset</button>
-              </div>
-            </div>
-          </details>
-
-          <div class="obs-field-grid two">
+            <div class="obs-field-grid two" data-standard-graphics>
             <label>Extra Header<select id="obsBugPosition" class="select-field">
               <option value="hidden">Off</option>
               <option value="right">Top Right</option>
@@ -167,7 +219,7 @@
             <label class="obs-audio-toggle"><input id="obsShowScoreboard" type="checkbox"> Elite Media Bottom Scoreboard</label>
           </div>
 
-          <div class="obs-player-editor obs-logo-editor">
+          <div class="obs-player-editor obs-logo-editor" data-standard-graphics>
             <div class="eyebrow">ELITE MEDIA LOGO</div>
             <div class="obs-field-grid two">
               <label>Show Logo<select id="obsLogoBug" class="select-field">
@@ -191,48 +243,48 @@
           </div>
 
 
-          <details class="obs-break-stats">
+          <details class="obs-break-stats" data-standard-graphics>
             <summary>Intermission / Final Stats</summary>
             <p>These only show on the big Intermission and Final screens. Leave a value blank if you do not want it shown.</p>
 
             <div class="eyebrow">INTERMISSION</div>
             <div class="obs-break-stat-row">
               <b>Shots</b>
-              <input id="obsIntShotsHome" class="field" placeholder="CGY">
-              <input id="obsIntShotsAway" class="field" placeholder="OPP">
+              <input id="obsIntShotsHome" aria-label="Intermission shots, home" class="field" placeholder="CGY">
+              <input id="obsIntShotsAway" aria-label="Intermission shots, away" class="field" placeholder="OPP">
             </div>
             <div class="obs-break-stat-row">
               <b>Hits</b>
-              <input id="obsIntHitsHome" class="field" placeholder="CGY">
-              <input id="obsIntHitsAway" class="field" placeholder="OPP">
+              <input id="obsIntHitsHome" aria-label="Intermission hits, home" class="field" placeholder="CGY">
+              <input id="obsIntHitsAway" aria-label="Intermission hits, away" class="field" placeholder="OPP">
             </div>
             <div class="obs-break-stat-row">
               <b>Faceoffs</b>
-              <input id="obsIntFaceoffsHome" class="field" placeholder="CGY">
-              <input id="obsIntFaceoffsAway" class="field" placeholder="OPP">
+              <input id="obsIntFaceoffsHome" aria-label="Intermission faceoffs, home" class="field" placeholder="CGY">
+              <input id="obsIntFaceoffsAway" aria-label="Intermission faceoffs, away" class="field" placeholder="OPP">
             </div>
 
             <div class="eyebrow obs-break-stat-final">FINAL</div>
             <div class="obs-break-stat-row">
               <b>Shots</b>
-              <input id="obsFinalShotsHome" class="field" placeholder="CGY">
-              <input id="obsFinalShotsAway" class="field" placeholder="OPP">
+              <input id="obsFinalShotsHome" aria-label="Final shots, home" class="field" placeholder="CGY">
+              <input id="obsFinalShotsAway" aria-label="Final shots, away" class="field" placeholder="OPP">
             </div>
             <div class="obs-break-stat-row">
               <b>Power Play</b>
-              <input id="obsFinalPpHome" class="field" placeholder="1/2">
-              <input id="obsFinalPpAway" class="field" placeholder="1/2">
+              <input id="obsFinalPpHome" aria-label="Final power play, home" class="field" placeholder="1/2">
+              <input id="obsFinalPpAway" aria-label="Final power play, away" class="field" placeholder="1/2">
             </div>
             <div class="obs-break-stat-row">
               <b>Saves</b>
-              <input id="obsFinalSavesHome" class="field" placeholder="CGY">
-              <input id="obsFinalSavesAway" class="field" placeholder="OPP">
+              <input id="obsFinalSavesHome" aria-label="Final saves, home" class="field" placeholder="CGY">
+              <input id="obsFinalSavesAway" aria-label="Final saves, away" class="field" placeholder="OPP">
             </div>
           </details>
 
           <label>Break Headline<input id="obsMessage" class="field" placeholder="Optional: Period 2 Complete / Hitmen Take Game 3"></label>
 
-          <div class="obs-player-editor">
+          <div class="obs-player-editor" data-standard-graphics>
             <div class="eyebrow">PLAYER LOWER THIRD</div>
             <div class="obs-field-grid three">
               <label>Name<input id="obsPlayerName" class="field" placeholder="Bad News Kells"></label>
@@ -240,53 +292,28 @@
               <label>Role<input id="obsPlayerRole" class="field" placeholder="GM · RW"></label>
             </div>
           </div>
-
-          <div class="obs-actions">
-            <button id="publishObsState" class="small-btn primary" type="button">Publish Changes</button>
-            <button id="reloadObsState" class="small-btn" type="button">Reload Saved State</button>
           </div>
-        </article>
-
-        <article class="obs-preview-card">
-          <div class="obs-card-head">
-            <div><div class="eyebrow">2 · LIVE PREVIEW</div><h2>OBS Output</h2></div>
-            <span class="status-pill">16:9 · 1280×720 · 48 FPS</span>
-          </div>
-          <div class="obs-preview-frame" id="obsPreviewFrame">
-            <div class="obs-preview-canvas" id="obsPreviewCanvas">
-              <iframe id="obsPreview" width="1280" height="720" title="OBS combined stage preview" src="obs-stage.html?channel=wildman-main&preview=1"></iframe>
-            </div>
-          </div>
-          <p class="obs-preview-note">This is the combined stage: attached gameplay feed underneath, broadcast graphics above it. Preview audio is muted here to prevent echo.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section-shell section-block">
-      <article class="obs-source-card">
-        <div>
-          <div class="eyebrow">3 · OBS BROWSER SOURCE</div>
-          <h2>OBS Browser Sources</h2>
-          <p id="obsStandardCopy">For Twitch, use the two clearly labeled Browser Sources below at <b>1280 × 720</b>: Gameplay Only on the bottom and Graphics Only on the top. The Combined Preview is just for checking the finished look in a browser.</p>
-        </div>
-        <div class="obs-source-row">
-          <input id="obsSourceUrl" class="field" readonly>
+          <div class="obs-tab-panel obs-source-card" id="obsSourcesPanel" role="tabpanel" aria-labelledby="obsTabSources" hidden>
+            <h2>Browser sources</h2>
+            <p id="obsStandardCopy">In OBS, place Gameplay below Graphics. Use the combined link for browser monitoring.</p>
+        <div class="obs-overlay-only"><small>COMBINED PREVIEW</small><div class="obs-source-row">
+          <input id="obsSourceUrl" class="field" aria-label="Combined preview URL" readonly>
           <button id="copyObsUrl" class="small-btn primary" type="button">Copy Combined URL</button>
           <a id="openObsUrl" class="small-btn" href="#" target="_blank" rel="noopener">Open Combined Preview</a>
-        </div>
+        </div></div>
         <div class="obs-overlay-only">
           <small>GAMEPLAY ONLY · BOTTOM SOURCE</small>
           <div class="obs-source-row">
-            <input id="obsFeedLayerUrl" class="field" readonly>
+            <input id="obsFeedLayerUrl" class="field" aria-label="Gameplay browser source URL" readonly>
             <button id="copyFeedLayerUrl" class="small-btn" type="button">Copy Gameplay URL</button>
             <a id="openFeedLayerUrl" class="small-btn" href="#" target="_blank" rel="noopener">Open Gameplay Only</a>
           </div>
-          <p class="obs-preview-note">This source is the live gameplay picture only. Add it as the <b>bottom</b> Browser Source in OBS. It will not show Elite Media graphics by itself.</p>
+          <p class="obs-preview-note">Place this below the graphics source, or use your own capture.</p>
         </div>
         <div class="obs-overlay-only" id="obsStandardGraphics">
           <small>GRAPHICS ONLY · TOP SOURCE</small>
           <div class="obs-source-row">
-            <input id="obsOverlayOnlyUrl" class="field" readonly>
+            <input id="obsOverlayOnlyUrl" class="field" aria-label="Graphics browser source URL" readonly>
             <button id="copyOverlayUrl" class="small-btn" type="button">Copy Graphics URL</button>
             <a id="openOverlayUrl" class="small-btn" href="#" target="_blank" rel="noopener">Open Graphics Only</a>
           </div>
@@ -301,8 +328,6 @@
             <a class="small-btn" href="/lg3s-gb?mode=obs&amp;preview=true" target="_blank" rel="noopener">Preview Sample Graphics</a>
           </div>
           <p class="obs-preview-note">Set this Browser Source to <b>1920 × 1080 at 60 FPS</b> and enable <b>Control audio via OBS</b> for the goal horn. Place it above your gameplay capture or the Gameplay Only browser source.</p>
-          <button id="triggerGbrGoal" class="small-btn" type="button">Trigger GBR Goal Horn</button>
-          <p class="obs-preview-note">Publish the gameplay feed, score, period and clock from this channel. Use a three-letter opponent code for the scorebug.</p>
         </div>
         <div class="obs-setup-grid" id="obsStandardSetup">
           <div><small>OBS SOURCE</small><strong>Browser</strong><span>Paste the permanent URL.</span></div>
@@ -310,8 +335,10 @@
           <div><small>HEIGHT</small><strong>720</strong><span>Browser source height.</span></div>
           <div><small>REFRESH</small><strong>Automatic</strong><span>Realtime plus polling fallback.</span></div>
         </div>
-      </article>
-    </section>
+          </div>
+        </section>
+      </div>
+    </div>
   </div>
 </main>
 
@@ -323,6 +350,6 @@
 <script src="script.js"></script>
 <script src="obs-config.js?v=20261005b"></script>
 <script src="obs-scenes.js?v=20261011-bobbleheads"></script>
-<script src="obs-control.js?v=20261118-gbr"></script>
+<script src="obs-control.js?v=20261118-desk"></script>
 </body>
 </html>

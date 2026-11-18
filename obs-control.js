@@ -16,7 +16,9 @@
   var initialized=false;
   var stateRef=null;
   var lastUserId='';
-  var previewChannel='';
+  var previewMode='program';
+  var stateRequest=0;
+  var channelReady=false;
   var editCount=0;        // bumps on every manual edit; protects unsaved typing from auto refills
   var savedEditCount=0;
   var publishing=false;
@@ -24,6 +26,8 @@
   var clockState={running:false,baseSeconds:1200,startedAt:'',rate:5};
   var clockUiTimer=null;
   var gbrGoalTrigger='';
+  var gbrStarsUntil='';
+  var gbrRinkVisible=true;
 
   function byId(id){return document.getElementById(id);}
   function val(id){return (byId(id)?.value||'').trim();}
@@ -88,10 +92,23 @@
   }
   function setStatus(message,isError){
     var status=byId('publishStatus');
-    var pill=byId('stateUpdated');
-    if(status) status.textContent=message;
-    if(pill){pill.textContent=message;pill.style.color=isError?'#ff8a9b':'';}
+    status.textContent=message;
+    status.dataset.tone=isError?'error':message==='Published'?'saved':'working';
   }
+  function updateDeskActions(){
+    byId('publishObsState').disabled=!channelReady||publishing;
+    byId('reloadObsState').disabled=!currentTeamId||publishing;
+    byId('obsTeamSelect').disabled=publishing||!allowedTeamIds(stateRef||{}).length;
+    byId('obsDeskControls').inert=!channelReady;
+  }
+  function updatePublished(row){
+    var scene=SCENES?.infer(row?.scene||'game',row?.payload||{});
+    byId('obsPublishedScene').textContent=row?.updated_at?(scene?.label||row.scene||'Gameplay'):'—';
+    byId('stateUpdated').textContent=row?.updated_at
+      ? 'Saved '+new Date(row.updated_at).toLocaleTimeString([], {hour:'numeric',minute:'2-digit',second:'2-digit'})
+      : 'No state published';
+  }
+  function isGbr(){return currentTeamId===GBR_STUDIO;}
   function config(){return TEAM_CONFIG[currentTeamId]||TEAM_CONFIG['5f36117c-7a51-4514-bf70-d4c672b41e48'];}
   function gbrOverlayUrl(){return location.origin+'/lg3s-gb?mode=obs';}
   function stageUrl(){return (currentTeamId===GBR_STUDIO?location.origin:PRODUCTION_ORIGIN)+'/obs-stage.html?channel='+encodeURIComponent(config().channel);}
@@ -121,7 +138,7 @@
     if(!frame||!canvas)return;
     var width=frame.clientWidth||0;
     if(!width)return;
-    var scale=width/1280;
+    var scale=width/(isGbr()?1920:1280);
     canvas.style.transform='scale('+scale+')';
   }
   function watchPreviewSize(){
@@ -136,24 +153,58 @@
       window.addEventListener('resize',fitPreviewCanvas);
     }
   }
+  function updatePreview(){
+    var channel=encodeURIComponent(config().channel);
+    if(!isGbr()&&previewMode==='sample')previewMode='program';
+    var program='/obs-stage.html?channel='+channel+'&preview=1';
+    var graphics=isGbr()?'/lg3s-gb?mode=obs&audio=off':'/obs-overlay.html?channel='+channel;
+    var source=previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
+    var monitor=byId('obsPreview');
+    var width=isGbr()?1920:1280;
+    var height=isGbr()?1080:720;
+    var canvas=byId('obsPreviewCanvas');
+    canvas.style.width=width+'px';
+    canvas.style.height=height+'px';
+    monitor.width=width;
+    monitor.height=height;
+    monitor.title=previewMode==='program'?'OBS program monitor':'OBS graphics monitor';
+    if(monitor.getAttribute('src')!==source)monitor.src=source;
+    byId('obsPreviewFrame').dataset.mode=previewMode;
+    byId('obsPreviewDimensions').textContent=width+' × '+height+(isGbr()?' · 60 FPS source':'');
+    byId('obsMonitorNote').textContent=previewMode==='sample'?'Sample GBR graphics · Muted'
+      :previewMode==='graphics'?'Transparent graphics · Muted':'Game feed and graphics · Muted';
+    byId('obsOpenMonitor').href=source;
+    document.querySelectorAll('[data-preview]').forEach(function(button){
+      button.hidden=button.dataset.preview==='sample'&&!isGbr();
+      button.setAttribute('aria-pressed',String(button.dataset.preview===previewMode));
+    });
+    fitPreviewCanvas();
+  }
   function updateSourceLinks(){
     var stage=stageUrl(),overlay=overlayUrl();
     byId('obsSourceUrl').value=stage;
     byId('openObsUrl').href=stage;
     byId('obsOverlayOnlyUrl').value=overlay;
     byId('openOverlayUrl').href=overlay;
-    byId('openCombinedStage').href=stage;
-    if(byId('obsFeedLayerUrl')){byId('obsFeedLayerUrl').value=feedLayerUrl();byId('openFeedLayerUrl').href=feedLayerUrl();}
+    byId('openCombinedStage').href=stage+'&preview=1';
+    byId('obsFeedLayerUrl').value=feedLayerUrl();
+    byId('openFeedLayerUrl').href=feedLayerUrl();
     byId('heroChannel').textContent=config().channel.toUpperCase();
-    byId('obsGbrSource').hidden=currentTeamId!==GBR_STUDIO;
-    byId('obsStandardCopy').hidden=currentTeamId===GBR_STUDIO;
-    byId('obsStandardSetup').hidden=currentTeamId===GBR_STUDIO;
-    byId('obsStandardGraphics').hidden=currentTeamId===GBR_STUDIO;
-    // Only reload the preview when the channel actually changes; it follows edits through realtime.
-    if(previewChannel!==config().channel){
-      previewChannel=config().channel;
-      byId('obsPreview').src='obs-stage.html?channel='+encodeURIComponent(previewChannel)+'&preview=1';
-    }
+    for(var id of ['obsGbrSource','obsGbrCues','obsGbrTactics'])byId(id).hidden=!isGbr();
+    for(var id of ['obsStandardCopy','obsStandardSetup','obsStandardGraphics'])byId(id).hidden=isGbr();
+    document.querySelectorAll('[data-standard-graphics]').forEach(function(el){el.hidden=isGbr();});
+    byId('obsHomeName').readOnly=isGbr();
+    byId('obsAwayName').maxLength=isGbr()?3:80;
+    byId('obsAwayName').placeholder=isGbr()?'Three-letter code, e.g. SWE':"Blank = tonight’s opponent";
+    updatePreview();
+  }
+  function activateTab(next){
+    document.querySelectorAll('.obs-tabs [role="tab"]').forEach(function(tab){
+      var active=tab===next;
+      tab.setAttribute('aria-selected',String(active));
+      tab.tabIndex=active?0:-1;
+      byId(tab.getAttribute('aria-controls')).hidden=!active;
+    });
   }
   function allowedTeamIds(state){
     var role=String(state.profile?.role||'').toLowerCase();
@@ -204,8 +255,11 @@
   }
   function setSceneButtons(){
     document.querySelectorAll('#obsSceneStrip [data-preset]').forEach(function(button){
-      button.classList.toggle('active',button.dataset.preset===currentPresetId);
-      if(button.dataset.preset==='starting-hitmen-bobbleheads')button.hidden=config().channel!=='hitmen-main';
+      var selected=button.dataset.preset===currentPresetId;
+      button.classList.toggle('active',selected);
+      button.setAttribute('aria-pressed',String(selected));
+      button.hidden=isGbr()? !['game-matchup','starting','intermission','final','brb'].includes(button.dataset.preset)
+        :button.dataset.preset==='starting-hitmen-bobbleheads'&&config().channel!=='hitmen-main';
     });
   }
   function setValue(id,value){var node=byId(id);if(node)node.value=value;}
@@ -236,13 +290,13 @@
     feedSummary();
   }
   function fill(row){
-    if(!row) return;
+    row=row||{scene:'game'};
     var p=row.payload||{};
     currentScene=row.scene||'game';
     var savedPreset=SCENES&&SCENES.infer?SCENES.infer(currentScene,p):null;
     currentPresetId=savedPreset?savedPreset.id:'game-matchup';
     byId('obsEvent').value=p.event||'';
-    byId('obsHomeName').value=p.homeName||config().name;
+    byId('obsHomeName').value=isGbr()?'GBR':p.homeName||config().name;
     // 'OPPONENT' was the old placeholder; blank lets the overlay use tonight's opponent.
     byId('obsAwayName').value=String(p.awayName||'').trim().toUpperCase()==='OPPONENT'?'':(p.awayName||'');
     byId('obsBugPosition').value=['left','right','hidden'].includes(p.bugPosition)?p.bugPosition:'hidden';
@@ -283,7 +337,14 @@
     updateScoreDisplay();
     setSceneButtons();
     feedSummary();
-    byId('stateUpdated').textContent=row.updated_at?'SYNCED':'READY';
+    gbrGoalTrigger=isGbr()?p.goalHornTrigger||'':'';
+    gbrStarsUntil=isGbr()?p.threeStarsUntil||'':'';
+    setValue('obsGbrCamera',p.rinkCamera||'ice');
+    setValue('obsGbrFormation',p.rinkFormation||'trap');
+    setValue('obsGbrHighlight',p.rinkHighlight||88);
+    gbrRinkVisible=p.rinkVisible!==false;
+    byId('obsToggleGbrRink').setAttribute('aria-pressed',String(gbrRinkVisible));
+    updatePublished(row);
     savedEditCount=editCount;
   }
   function collectPayload(){
@@ -332,30 +393,46 @@
       streamUrl:streamUrl,
       streamProvider:selectedProvider==='auto'?providerFor(streamUrl,'auto'):selectedProvider,
       streamMuted:Boolean(byId('obsStreamMuted')?.checked),
-      ...(currentTeamId===GBR_STUDIO&&gbrGoalTrigger?{goalHornTrigger:gbrGoalTrigger}:{})
+      ...(isGbr()?{
+        goalHornTrigger:gbrGoalTrigger||null,threeStarsUntil:gbrStarsUntil||null,
+        rinkCamera:val('obsGbrCamera')||'ice',rinkFormation:val('obsGbrFormation')||'trap',
+        rinkHighlight:numberVal('obsGbrHighlight')||88,rinkVisible:gbrRinkVisible
+      }:{})
     };
   }
   async function loadState(force){
-    if(!currentTeamId||!window.VVHLBackend?.db) return;
-    if(!force&&isDirty()) return; // never overwrite unsaved edits with an automatic reload
-    setStatus('LOADING');
+    if(!currentTeamId||!window.VVHLBackend?.db||publishing) return;
+    if(!force&&isDirty()) return;
+    var request=++stateRequest;
+    var channel=config().channel;
+    channelReady=false;
+    updateDeskActions();
+    setStatus('Loading channel');
     try{
-      var result=await window.VVHLBackend.db.from('obs_broadcast_state').select('*').eq('channel',config().channel).maybeSingle();
-      if(result.error){setStatus(result.error.message,true);return;}
+      var result=await window.VVHLBackend.db.from('obs_broadcast_state').select('*').eq('channel',channel).maybeSingle();
+      if(request!==stateRequest)return;
+      if(result.error)throw result.error;
       fill(result.data);
-      setStatus('READY');
-    }catch(err){setStatus('LOAD FAILED · '+(err?.message||'network'),true);}
+      channelReady=true;
+      setStatus(result.data?'Ready':'Channel ready to publish');
+    }catch(err){
+      if(request===stateRequest)setStatus('Load failed · '+(err?.message||'network'),true);
+    }finally{
+      if(request===stateRequest)updateDeskActions();
+    }
   }
   async function publish(sceneOverride){
-    if(!currentTeamId||!stateRef?.user) return;
-    if(sceneOverride) currentScene=sceneOverride;
+    if(!channelReady||!stateRef?.user||!allowedTeamIds(stateRef).includes(currentTeamId))return;
+    if(sceneOverride)currentScene=sceneOverride;
     currentScene=currentScene||'game';
     setSceneButtons();
-    // One write at a time, last edit wins: rapid score taps cannot land out of order.
     if(publishing){publishQueued=true;return;}
     publishing=true;
+    var channelAtSend=currentTeamId;
+    var requestAtSend=stateRequest;
     var editsAtSend=editCount;
-    setStatus('PUBLISHING');
+    setStatus('Publishing');
+    updateDeskActions();
     var row={
       channel:config().channel,
       team_id:config().teamId||currentTeamId,
@@ -368,28 +445,52 @@
     };
     try{
       var result=await window.VVHLBackend.db.from('obs_broadcast_state').upsert(row,{onConflict:'channel'}).select('channel,updated_at').single();
-      if(result.error){setStatus(result.error.message,true);return;}
+      if(channelAtSend!==currentTeamId||requestAtSend!==stateRequest)return;
+      if(result.error)throw result.error;
       savedEditCount=editsAtSend;
-      byId('stateUpdated').textContent='SYNCED';
-      setStatus('LIVE');
-      setTimeout(function(){if(byId('publishStatus')?.textContent==='LIVE') setStatus('READY');},1200);
+      updatePublished({...row,updated_at:result.data?.updated_at||row.updated_at});
+      setStatus(isDirty()?'Unpublished changes':'Published');
     }catch(err){
-      setStatus('PUBLISH FAILED · '+(err?.message||'network'),true);
+      if(channelAtSend===currentTeamId&&requestAtSend===stateRequest)setStatus('Publish failed · '+(err?.message||'network'),true);
     }finally{
       publishing=false;
-      if(publishQueued){publishQueued=false;publish();}
+      updateDeskActions();
+      if(publishQueued&&channelAtSend===currentTeamId&&requestAtSend===stateRequest){publishQueued=false;publish();}
+      else {
+        publishQueued=false;
+        if(requestAtSend!==stateRequest&&currentTeamId&&!channelReady&&allowedTeamIds(stateRef||{}).includes(currentTeamId))loadState(true);
+      }
     }
   }
   async function copyText(inputId,value){
-    try{await navigator.clipboard.writeText(value);setStatus('URL COPIED');}
-    catch(err){var input=byId(inputId);input.select();document.execCommand('copy');setStatus('URL COPIED');}
+    try{await navigator.clipboard.writeText(value);setStatus('URL copied');}
+    catch{
+      var input=byId(inputId);input.select();
+      setStatus(document.execCommand('copy')?'URL copied':'URL selected for copying');
+    }
   }
   function wire(){
-    document.querySelectorAll('.obs-control-card input,.obs-control-card select:not(#obsTeamSelect)').forEach(function(field){
-      field.addEventListener('input',function(){editCount++;});
-      field.addEventListener('change',function(){editCount++;});
+    var tabs=Array.from(document.querySelectorAll('.obs-tabs [role="tab"]'));
+    tabs.forEach(function(tab,index){
+      tab.addEventListener('click',function(){activateTab(tab);});
+      tab.addEventListener('keydown',function(event){
+        var next=event.key==='Home'?tabs[0]:event.key==='End'?tabs[tabs.length-1]
+          :event.key==='ArrowRight'?tabs[(index+1)%tabs.length]:event.key==='ArrowLeft'?tabs[(index+tabs.length-1)%tabs.length]:null;
+        if(next){event.preventDefault();activateTab(next);next.focus();}
+      });
     });
+    document.querySelectorAll('[data-preview]').forEach(function(button){
+      button.addEventListener('click',function(){previewMode=button.dataset.preview;updatePreview();});
+    });
+    function markChanged(event){
+      if(!event.target.matches('input:not([readonly]),select,textarea'))return;
+      editCount++;
+      setStatus('Unpublished changes');
+    }
+    document.querySelector('.obs-control-card').addEventListener('input',markChanged);
+    document.querySelector('.obs-control-card').addEventListener('change',markChanged,true);
     byId('obsTeamSelect').addEventListener('change',async function(e){
+      if(publishing){e.target.value=currentTeamId;return;}
       currentTeamId=e.target.value;
       window.localStorage.setItem('vvhl-team-context',config().teamId||currentTeamId);
       updateSourceLinks();
@@ -512,6 +613,17 @@
       gbrGoalTrigger=new Date().toISOString();
       publish();
     });
+    byId('triggerGbrStars').addEventListener('click',function(){
+      if(!isGbr())return;
+      gbrStarsUntil=new Date(Date.now()+15000).toISOString();
+      publish();
+    });
+    byId('obsToggleGbrRink').addEventListener('click',function(){
+      if(!isGbr())return;
+      gbrRinkVisible=!gbrRinkVisible;
+      byId('obsToggleGbrRink').setAttribute('aria-pressed',String(gbrRinkVisible));
+      publish();
+    });
     byId('copyGbrObsUrl').addEventListener('click',function(){copyText('gbrObsUrl',gbrOverlayUrl());});
     byId('gbrObsUrl').value=gbrOverlayUrl();
     byId('openGbrObsUrl').href=gbrOverlayUrl();
@@ -519,35 +631,50 @@
     byId('copyOverlayUrl').addEventListener('click',function(){copyText('obsOverlayOnlyUrl',overlayUrl());});
     byId('copyFeedLayerUrl')?.addEventListener('click',function(){copyText('obsFeedLayerUrl',feedLayerUrl());});
   }
-  function showNoTeam(){
-    setStatus('NO STUDIO CHANNEL',true);
-    var select=byId('obsTeamSelect');
-    if(select){select.innerHTML='<option>No studio channel for your team</option>';select.disabled=true;}
+  function closeDesk(message){
+    ++stateRequest;
+    currentTeamId='';
+    channelReady=false;
+    byId('obsDeskControls').hidden=true;
+    byId('obsPreview').removeAttribute('src');
+    byId('obsTeamSelect').replaceChildren(new Option('No available channel',''));
+    byId('heroChannel').textContent='NO CHANNEL';
+    updatePublished(null);
+    updateDeskActions();
+    setStatus(message,true);
   }
+  byId('obsAccountToggle').addEventListener('click',function(){
+    var open=document.body.classList.toggle('obs-account-open');
+    this.setAttribute('aria-expanded',String(open));
+  });
   async function init(state){
     stateRef=state||window.VVHLBackend?.state||{};
-    if(!window.VVHLManagementGuard?.hasAccess(stateRef)) return;
+    var authorized=Boolean(window.VVHLManagementGuard?.hasAccess(stateRef));
+    byId('obsAccountToggle').hidden=!authorized;
+    if(!authorized){
+      document.body.classList.remove('obs-account-open');
+      byId('obsAccountToggle').setAttribute('aria-expanded','false');
+      if(initialized)closeDesk('Access restricted');
+      return;
+    }
     var userId=stateRef.user?.id||'';
+    var previousTeam=currentTeamId;
+    if(!populateTeams(stateRef)){closeDesk('No Studio channel assigned');return;}
     if(!initialized){
-      if(!populateTeams(stateRef)){showNoTeam();return;}
-      byId('obsTeamSelect').disabled=false;
       populateStreams();
       renderSceneButtons();
       wire();
       watchPreviewSize();
       initialized=true;
-      lastUserId=userId;
-      updateSourceLinks();
-      await loadState(true);
+    }else if(userId===lastUserId&&currentTeamId===previousTeam){
       return;
     }
-    // Auth events repeat (tab focus, token refresh, other tabs). Only react when the account changes.
-    if(userId===lastUserId) return;
     lastUserId=userId;
-    var previousTeam=currentTeamId;
-    if(!populateTeams(stateRef)){showNoTeam();return;}
+    byId('obsDeskControls').hidden=false;
     updateSourceLinks();
-    if(currentTeamId!==previousTeam) await loadState(true);
+    setSceneButtons();
+    if(publishing){++stateRequest;channelReady=false;updateDeskActions();}
+    else await loadState(true);
   }
   window.addEventListener('vvhl-auth-change',function(event){init(event.detail);});
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){init(window.VVHLBackend?.state);});
