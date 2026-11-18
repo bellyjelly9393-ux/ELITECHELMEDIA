@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { demoMatch, type CameraAngle } from '../utils/match';
 import { greatBritain, makeBoard, makePlayer, rinkSlots, type PregameGame, type PregamePlayer, type PregameUnit, type SeasonStats } from '../utils/pregame';
+import { localIceVisionParent } from '../utils/icevision';
 import './pregame.css';
 
 interface CardLayout {
@@ -41,15 +42,7 @@ const cardRendererUrl = '/player-card-renderer.js?v=20261118-locker-jerseys';
 const cardRenderer = import(/* @vite-ignore */ cardRendererUrl).then(() => window.ECMCardRenderer).catch(() => undefined);
 const onAir = params.get('mode') === 'obs';
 document.body.classList.toggle('on-air', onAir);
-function trustedCompanion() {
-  try {
-    const origin = new URL(params.get('arenaParent') ?? '');
-    if (!onAir || origin.origin !== new URL(document.referrer).origin || origin.protocol !== 'http:'
-        || !['localhost','127.0.0.1'].includes(origin.hostname) || window.parent === window) return '';
-    return origin.origin;
-  } catch { return ''; }
-}
-const companionOrigin = trustedCompanion();
+const companionOrigin = onAir ? localIceVisionParent('arenaParent') : '';
 const db = createClient(import.meta.env.VITE_SUPABASE_URL || 'http://localhost', import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'preview', {
   auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: 'lg3s-pregame-public' },
 });
@@ -88,8 +81,15 @@ interface PostedFile {
 $('pregame').innerHTML = `
 <div class="world">
   <header class="world-header">
-    <div><p class="world-kicker">EliteChel Media / LG3s Pregame</p><h1>Great Britain <em id="opponent"></em></h1></div>
-    <div class="kickoff"><span id="game-day"></span><span id="game-time"></span><small id="queue"></small></div>
+    <div class="match-heading">
+      <p class="world-kicker">EliteChel Media <span aria-hidden="true"></span> LG3s Pregame</p>
+      <h1><span class="match-team"><img src="/assets/lg3s/team1446.svg" alt="">Great Britain</span>
+        <span class="match-opponent" id="opponent" hidden><span class="versus">vs</span>
+          <span class="match-team"><img id="opponent-mark" alt=""><span id="opponent-name"></span></span>
+        </span>
+      </h1>
+    </div>
+    <div class="kickoff" id="kickoff" hidden><span id="game-day"></span><strong id="game-time"></strong><small id="queue"></small></div>
   </header>
   <div class="world-board">
     <section class="world-rink" aria-label="3D warmup rink">
@@ -103,7 +103,7 @@ $('pregame').innerHTML = `
     <div class="world-controls" aria-label="Pregame playback">
       <button id="previous" type="button">Previous</button><button id="pause" type="button" aria-pressed="false">Pause</button><button id="next" type="button">Next</button>
     </div>
-    <a id="fixture-link" href="/lg3s-media.html" target="_blank" rel="noopener">Schedule and game sheets ↗</a>
+    <a id="fixture-link" href="/lg3s-media.html" target="_blank" rel="noopener">Schedule and game sheets</a>
   </footer>
 </div>`;
 const rink = $<HTMLIFrameElement>('world-rink');
@@ -113,12 +113,13 @@ let playing = !matchMedia('(prefers-reduced-motion: reduce)').matches || onAir;
 let rinkReady = false;
 let latestBoard: ReturnType<typeof makeBoard> = { markers:[], highlighted:[] };
 let latestCamera: CameraAngle = 'ice';
+let latestOpponent = '';
 function sendBoard() {
   const board = { ...latestBoard, skating:playing };
   if (companionOrigin) {
     const box = rink.parentElement!.getBoundingClientRect();
     window.parent.postMessage({
-      protocol:'icevision:pregame:1', type:'board', board, camera:latestCamera,
+      protocol:'icevision:pregame:1', type:'board', board, camera:latestCamera, opponent:latestOpponent,
       viewport:{ x:box.x, y:box.y, width:box.width, height:box.height },
     },companionOrigin);
     return;
@@ -270,7 +271,7 @@ function playerCard(player: PregamePlayer | undefined, unit: PregameUnit, teamId
   const card: RenderCard = {
     player:{ tag:player.name, team, pos:player.position }, league:'lg3s', season:'LG3S · SEASON 1',
     ratingKind:'pending', edition:'season', finish:'ice', readOnly:true, jersey:player.jersey,
-    teamJersey:gb ? '/assets/lg3s/scene/gb-kit.webp' : teamId ? `/assets/lg3s/jerseys/${teamId}.webp` : undefined,
+    teamJersey:gb ? '/assets/lg3s/scene/gb-royal-blue.webp' : teamId ? `/assets/lg3s/jerseys/${teamId}.webp` : undefined,
     background:'arena', logo:teamId ? `/assets/lg3s/team${teamId}.svg` : '', labels, values,
   };
   const canvas = article.querySelector('canvas')!;
@@ -329,7 +330,12 @@ function render() {
   current = (current % all.length + all.length) % all.length;
   const {game,slot,a,b} = all[current];
   const fixture = game.fixture;
-  $('opponent').textContent = game.opponent ? `vs ${game.opponent}` : '';
+  $('opponent').hidden = !game.opponent;
+  $('opponent-name').textContent = game.opponent;
+  const opponentMark = $<HTMLImageElement>('opponent-mark');
+  if (game.opponentId) opponentMark.src = `/assets/lg3s/team${game.opponentId}.svg`;
+  else opponentMark.removeAttribute('src');
+  $('kickoff').hidden = false;
   $('game-day').textContent = fixture ? time.format(new Date(fixture.scheduled_at)) : '';
   $('game-time').textContent = fixture ? puckDrop.format(new Date(fixture.scheduled_at)) : 'Roster spotlight';
   $('queue').textContent = fixture && review ? `Game ${review.games.indexOf(game)+1} of ${review.games.length}` : '';
@@ -340,6 +346,7 @@ function render() {
   const view: Record<string,CameraAngle> = { O:'ice', C:'orbit', D:'overhead', G:'goalie' };
   latestCamera = playing ? view[slot] : 'ice';
   latestBoard = makeBoard(game.gb,game.away,[a,b]);
+  latestOpponent = game.opponent;
   $('rink-label').textContent = 'Pregame warmup · ' + ({O:'Wing',C:'Center',D:'Defense',G:'Goaltending'})[slot] + ' matchup';
   sendBoard();
 }

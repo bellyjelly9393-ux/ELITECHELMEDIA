@@ -626,6 +626,7 @@
       publish();
     });
     byId('copyGbrObsUrl').addEventListener('click',function(){copyText('gbrObsUrl',gbrOverlayUrl());});
+    byId('copyCarbonObsUrl').addEventListener('click',function(){copyText('carbonObsUrl',byId('carbonObsUrl').value);});
     byId('gbrObsUrl').value=gbrOverlayUrl();
     byId('openGbrObsUrl').href=gbrOverlayUrl();
     byId('copyObsUrl').addEventListener('click',function(){copyText('obsSourceUrl',stageUrl());});
