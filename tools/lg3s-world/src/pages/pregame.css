@@ -59,6 +59,9 @@ button,a:focus-visible{outline-offset:4px}
 .card-motion .card-art{position:relative;min-height:calc(100% - 4px);align-self:stretch;display:grid;place-items:center}
 .card-art .team-crest{position:absolute;inset:5% 10%;height:64%;width:80%;opacity:.34;filter:drop-shadow(0 13px 12px #0006)}
 .card-art .card-jersey{position:relative;z-index:1;width:100%;max-height:clamp(67px,10vw,168px);filter:drop-shadow(0 11px 8px #0008);transform:rotate(-6deg)}
+.card-art .card-portrait{position:relative;z-index:1;display:block;width:100%;max-width:clamp(73px,10.5vw,192px);aspect-ratio:300/355;overflow:hidden;mask-image:radial-gradient(ellipse 70% 64% at 50% 43%,#000 49%,transparent 97%)}
+.card-art .card-portrait img{position:absolute;width:458.67%;height:auto;max-height:none;left:-19%;top:-19.72%}
+.card-art .card-portrait.goalie img{width:345.73%;left:-175.13%;top:-40.35%}
 .card-number{position:absolute;left:2px;bottom:0;z-index:2;color:#f8e4ab;font:italic 900 clamp(14px,2vw,33px)/1 var(--display);text-shadow:0 2px 4px #030609}
 .card-motion .player-content {position:relative;z-index:2}
 .card-motion .player-meta span{margin-left:5px;padding:2px 5px;border:1px solid #a5c9ef73;border-radius:4px;color:#ecf5ff}
