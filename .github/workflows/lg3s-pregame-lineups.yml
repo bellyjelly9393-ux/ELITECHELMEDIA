@@ -25,21 +25,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Pull and validate the GBR game-night lineups
+      - name: Validate and publish the LG Client export
         env:
           LG3S_LINEUP_FEED_URL: ${{ secrets.LG3S_LINEUP_FEED_URL }}
           PUBLISH_SNAPSHOT: ${{ github.event_name == 'schedule' || inputs.publish }}
         run: |
           set -euo pipefail
+          if [[ -z "$LG3S_LINEUP_FEED_URL" ]]; then
+            echo 'Hosted import needs an LG Client export feed URL. The signed-in desktop LG Client can publish directly to lg3s-pregame-data.'
+            exit 0
+          fi
           temp=$(mktemp -d)
           trap 'rm -rf -- "$temp"' EXIT
-          incoming=()
-          if [[ -z "$LG3S_LINEUP_FEED_URL" ]]; then
-            npm ci --ignore-scripts --prefix tools/lg3s-world
-            node tools/lg3s-world/pull-pregame.mjs "$temp/incoming.json"
-            [[ -f "$temp/incoming.json" ]] || exit 0
-            incoming=("$temp/incoming.json")
-          fi
           snapshot=data/lg3s/pregame-lineups.json
           branch=lg3s-pregame-data
           cp tools/lg3s-world/import-pregame.mjs "$temp/importer.mjs"
@@ -49,7 +46,7 @@ jobs:
           else
             git switch -c "$branch"
           fi
-          node "$temp/importer.mjs" "${incoming[@]}"
+          node "$temp/importer.mjs"
           if [[ "$PUBLISH_SNAPSHOT" != true ]]; then
             echo 'Snapshot validated. Manual test did not publish it.'
             exit 0
