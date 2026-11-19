@@ -5,6 +5,7 @@ on:
       - "lg3s-gb-war-room.html"
       - "lg3s-gb-war-room.css"
       - "lg3s-gb-war-room.js"
+      - "tests/gb-war-login-smoke.cjs"
       - "lg3s-gb-war-room-panorama.css"
       - "lg3s-gb-war-room-panorama.js"
       - ".github/workflows/gb-war-room-qa.yml"
@@ -20,6 +21,8 @@ jobs:
         run: |
           node --check lg3s-gb-war-room.js
           node --check lg3s-gb-war-room-panorama.js
+      - name: 'Regression test: owner sign-in survives missing widgets'
+        run: node tests/gb-war-login-smoke.cjs
       - name: Check no public private content and verified gate
         shell: bash
         run: |
