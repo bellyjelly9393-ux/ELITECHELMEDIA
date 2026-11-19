@@ -4,28 +4,6 @@
     {
       "lg_game_id": 921754,
       "teams": {
-        "1446": [
-          {
-            "lg_user_id": 77323,
-            "gamertag": "Splxsh x 34",
-            "position": "LW"
-          },
-          {
-            "lg_user_id": 56067,
-            "gamertag": "Sceebzy",
-            "position": "C"
-          },
-          {
-            "lg_user_id": 75845,
-            "gamertag": "Pazqi",
-            "position": "LD"
-          },
-          {
-            "lg_user_id": 70480,
-            "gamertag": "ItsaMeAquino",
-            "position": "G"
-          }
-        ],
         "591": [
           {
             "lg_user_id": 77012,
@@ -47,17 +25,13 @@
             "gamertag": "ClxpNHL",
             "position": "G"
           }
-        ]
-      }
-    },
-    {
-      "lg_game_id": 921758,
-      "teams": {
+        ],
         "1446": [
           {
-            "lg_user_id": 77323,
-            "gamertag": "Splxsh x 34",
-            "position": "LW"
+            "lg_user_id": 58225,
+            "gamertag": "offtheyrk",
+            "position": "LW",
+            "jersey_number": "41"
           },
           {
             "lg_user_id": 56067,
@@ -74,36 +48,110 @@
             "gamertag": "ItsaMeAquino",
             "position": "G"
           }
+        ]
+      },
+      "forfeit_by_team_id": 591
+    },
+    {
+      "lg_game_id": 921758,
+      "teams": {
+        "1079": [
+          {
+            "lg_user_id": 73616,
+            "gamertag": "Hxndsor",
+            "position": "LW"
+          },
+          {
+            "lg_user_id": 29846,
+            "gamertag": "Shlarchey",
+            "position": "C"
+          },
+          {
+            "lg_user_id": 67347,
+            "gamertag": "Blaze Jaeger",
+            "position": "LD"
+          },
+          {
+            "lg_user_id": 77863,
+            "gamertag": "Jahkss",
+            "position": "G"
+          }
         ],
-        "1079": []
+        "1446": [
+          {
+            "lg_user_id": 58225,
+            "gamertag": "offtheyrk",
+            "position": "LW",
+            "jersey_number": "41"
+          },
+          {
+            "lg_user_id": 51991,
+            "gamertag": "Myltxn",
+            "position": "C"
+          },
+          {
+            "lg_user_id": 44814,
+            "gamertag": "HowToFIFA8",
+            "position": "LD"
+          },
+          {
+            "lg_user_id": 70480,
+            "gamertag": "ItsaMeAquino",
+            "position": "G"
+          }
+        ]
       }
     },
     {
       "lg_game_id": 921764,
       "teams": {
-        "1446": [
+        "404": [
           {
-            "lg_user_id": 77323,
-            "gamertag": "Splxsh x 34",
-            "position": "LW"
+            "lg_user_id": 9131,
+            "gamertag": "goosekevin",
+            "position": "LW",
+            "jersey_number": "11"
           },
           {
-            "lg_user_id": 56067,
-            "gamertag": "Sceebzy",
+            "lg_user_id": 9189,
+            "gamertag": "Mojox90",
             "position": "C"
           },
           {
-            "lg_user_id": 75845,
-            "gamertag": "Pazqi",
+            "lg_user_id": 79209,
+            "gamertag": "harlem_143rd",
             "position": "LD"
+          },
+          {
+            "lg_user_id": 55861,
+            "gamertag": "dobyyx75",
+            "position": "G"
+          }
+        ],
+        "1446": [
+          {
+            "lg_user_id": 58225,
+            "gamertag": "offtheyrk",
+            "position": "LW",
+            "jersey_number": "41"
+          },
+          {
+            "lg_user_id": 51991,
+            "gamertag": "Myltxn",
+            "position": "C"
+          },
+          {
+            "lg_user_id": 44814,
+            "gamertag": "HowToFIFA8",
+            "position": "LD",
+            "jersey_number": "8"
           },
           {
             "lg_user_id": 70480,
             "gamertag": "ItsaMeAquino",
             "position": "G"
           }
-        ],
-        "404": []
+        ]
       }
     }
   ]
