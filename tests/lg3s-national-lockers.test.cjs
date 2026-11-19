@@ -151,7 +151,7 @@ test('panoramic arena remains real navigable content with twelve nations and liv
  await new Promise(resolve=>setTimeout(resolve,25));
  const nav=h.get('nationRibbon').innerHTML;
  assert.equal((nav.match(/class="nation-tab/g)||[]).length,12);
- assert.match(nav,/lg3s-team\.html\?team=1446&fallback=1/);
+ assert.match(nav,/lg3s-gb-locker\.html/);
  assert.match(nav,/aria-current="page"/);
  assert.equal(h.get('roomFloorName').textContent,'CANADA');
  assert.match(h.get('roomName').textContent,/TEAM Canada/);
@@ -191,4 +191,23 @@ test('all 11 national jersey photographs are valid WebP assets and retain the na
  assert.ok(teamJS.includes("const jersey=id=>'assets/lg3s/jerseys/'+id+'.webp';"));
  const order=['341','342','1446','532','343','591','822','404','1439','1444','1079','531'];
  assert.match(teamJS,new RegExp('const order=\\['+order.join(',')+'\\]'));
+});
+
+test('Great Britain public page renders a native panorama with the original 3D entry preserved',async()=>{
+ const page=load('lg3s-gb-locker.html');
+ const loader=load('lg3s-gb-locker.js');
+ for(const id of ['nationRibbon','roomPlayers','roomPrev','roomNext','roomSearch','roomFloorCrest','immersive-3d','lockerFrame','enterLocker'])
+  assert.match(page,new RegExp('id="'+id+'"'));
+ assert.match(page,/class="room-stage"/);
+ assert.ok(page.includes('lg3s-gb-locker-config.js'));
+ assert.ok(!loader.includes('if(!navigator.connection?.saveData) enterRoom();'));
+ const h=roomHarness(1446);
+ h.location.pathname='/lg3s-gb-locker.html';
+ vm.runInNewContext(teamJS,h.context,{timeout:2000,filename:'lg3s-team.js'});
+ await new Promise(resolve=>setTimeout(resolve,30));
+ assert.equal(h.location.replaced,null);
+ assert.match(h.get('roomName').textContent,/Great Britain/);
+ assert.match(h.get('roomRecord').textContent,/11 main-roster players/);
+ assert.ok(h.get('roomPlayers').innerHTML.includes('assets/lg3s/scene/gb-royal-blue.webp'));
+ assert.match(h.get('roomPageStatus').textContent,/STALLS 1–6 OF 11/);
 });
