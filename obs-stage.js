@@ -26,6 +26,9 @@
   var streamSignature='';
   var twitchPlayer=null;
   var twitchMuted=null;
+  var twitchStarted=false;
+  var twitchRequestedMute=true;
+  var twitchAudioBlocked=false;
   var twitchMountId='twitchPersistentPlayer';
   var realtimeUp=false;
   var pollTimer=null;
@@ -97,6 +100,14 @@
     var parents=CFG.twitchParentList().map(function(h){return '&parent='+encodeURIComponent(h);}).join('');
     return '<iframe src="https://player.twitch.tv/?'+q+parents+'&autoplay=true&muted='+(muted?'true':'false')+'" allow="autoplay; fullscreen" allowfullscreen title="Twitch stream"></iframe>';
   }
+  function syncTwitchMute(){
+    if(!twitchPlayer||!twitchStarted||(!twitchRequestedMute&&twitchAudioBlocked))return;
+    if(twitchMuted===twitchRequestedMute)return;
+    try{
+      twitchPlayer.setMuted(twitchRequestedMute);
+      twitchMuted=twitchRequestedMute;
+    }catch(e){}
+  }
   function ensurePersistentTwitch(ref,muted){
     var key=ref.video?('video:'+ref.video):('channel:'+String(ref.channel||''));
     var sdk=window.Twitch&&typeof window.Twitch.Player==='function';
@@ -110,6 +121,7 @@
       }
       return;
     }
+    twitchRequestedMute=!!muted;
     if(streamSignature!==key||!twitchPlayer){
       mount.innerHTML='<div id="'+twitchMountId+'" style="width:100%;height:100%"></div>';
       twitchPlayer=new window.Twitch.Player(twitchMountId,{
@@ -122,10 +134,22 @@
         video:ref.video||undefined
       });
       twitchMuted=true;
+      twitchStarted=false;
+      twitchAudioBlocked=false;
       streamSignature=key;
       setOffline(false);
+      var player=twitchPlayer;
+      player.addEventListener(window.Twitch.Player.PLAYING,function(){
+        if(player!==twitchPlayer)return;
+        twitchStarted=true;
+        syncTwitchMute();
+      });
+      player.addEventListener(window.Twitch.Player.PLAYBACK_BLOCKED,function(){
+        if(player!==twitchPlayer||twitchRequestedMute||twitchAudioBlocked)return;
+        twitchAudioBlocked=true;
+        try{player.setMuted(true);twitchMuted=true;player.play();}catch(e){}
+      });
       if(!ref.video&&window.Twitch.Player.OFFLINE){
-        var player=twitchPlayer;
         player.addEventListener(window.Twitch.Player.OFFLINE,function(){if(player===twitchPlayer)setOffline(true,ref.channel);});
         player.addEventListener(window.Twitch.Player.ONLINE,function(){
           if(player!==twitchPlayer)return;
@@ -134,11 +158,7 @@
         });
       }
     }
-    if(twitchMuted!==!!muted){
-      try{
-        if(twitchPlayer&&typeof twitchPlayer.setMuted==='function'){twitchPlayer.setMuted(!!muted);twitchMuted=!!muted;}
-      }catch(e){}
-    }
+    syncTwitchMute();
   }
   function renderFeed(payload,scene,brand){
     var attached=String(payload.streamUrl||'').trim();
