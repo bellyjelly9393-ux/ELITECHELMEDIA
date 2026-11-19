@@ -5,6 +5,8 @@ on:
       - "lg3s-gb-war-room.html"
       - "lg3s-gb-war-room.css"
       - "lg3s-gb-war-room.js"
+      - "lg3s-gb-war-room-panorama.css"
+      - "lg3s-gb-war-room-panorama.js"
       - ".github/workflows/gb-war-room-qa.yml"
   workflow_dispatch:
 permissions:
@@ -15,7 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4 # stable action
       - name: Verify JavaScript parses
-        run: node --check lg3s-gb-war-room.js
+        run: |
+          node --check lg3s-gb-war-room.js
+          node --check lg3s-gb-war-room-panorama.js
       - name: Check no public private content and verified gate
         shell: bash
         run: |
@@ -25,4 +29,7 @@ jobs:
           grep -F 'window.VVHLBackend' lg3s-gb-war-room.js
           grep -F 'lg3s_gb_members' lg3s-gb-war-room.js
           grep -F 'role==="owner"' lg3s-gb-war-room.js
-          ! grep -E '(service_role|SUPABASE_SERVICE|sk-[[:alnum:]]{10}|DISCORD_CLIENT_SECRET)' lg3s-gb-war-room.js lg3s-gb-war-room.html
+          grep -F 'gb-panorama-stage' lg3s-gb-war-room.html
+          grep -F 'lg3s-gb-war-room-panorama.css' lg3s-gb-war-room.html
+          grep -F 'lg3s_gb_members' lg3s-gb-war-room-panorama.js
+          ! grep -E '(service_role|SUPABASE_SERVICE|sk-[[:alnum:]]{10}|DISCORD_CLIENT_SECRET)' lg3s-gb-war-room.js lg3s-gb-war-room-panorama.js lg3s-gb-war-room.html
