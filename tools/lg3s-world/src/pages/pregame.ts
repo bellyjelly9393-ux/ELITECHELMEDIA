@@ -54,6 +54,7 @@ const postedPath = '/data/lg3s/pregame-lineups.json';
 const syncedPath = 'https://raw.githubusercontent.com/bellyjelly9393-ux/ELITECHELMEDIA/lg3s-pregame-data/data/lg3s/pregame-lineups.json';
 const fixtureFields = 'lg_game_id,game_night_date,scheduled_at,home_lg_team_id,away_lg_team_id,home_nation,away_nation';
 const interval = 8500;
+const leagueDate = new Intl.DateTimeFormat('sv-SE', { timeZone:'America/Toronto', year:'numeric', month:'2-digit', day:'2-digit' });
 const time = new Intl.DateTimeFormat('en-CA', { timeZone:'America/Toronto', weekday:'short', month:'short', day:'numeric' });
 const puckDrop = new Intl.DateTimeFormat('en-CA', { timeZone:'America/Toronto', hour:'numeric', minute:'2-digit', timeZoneName:'short' });
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -67,6 +68,7 @@ interface Matchup {
   opponent: string;
   gb: PregameUnit;
   away: PregameUnit;
+  forfeitBy?: string;
 }
 interface Review {
   games: Matchup[];
@@ -76,9 +78,14 @@ interface Review {
 interface RosterFile {
   teams: { lgTeamId: number | string; players: { lgUserId: unknown; gamertag: unknown; position: unknown; jerseyNumber?: unknown; rosterStatus: string }[] }[];
 }
+interface PostedGame {
+  lg_game_id: number;
+  forfeit_by_team_id?: number;
+  teams: Record<string, { lg_user_id: unknown; gamertag: unknown; position: unknown; jersey_number?: unknown }[]>;
+}
 interface PostedFile {
   schema: string;
-  games: { lg_game_id: number; teams: Record<string, { lg_user_id: unknown; gamertag: unknown; position: unknown; jersey_number?: unknown }[]> }[];
+  games: PostedGame[];
 }
 
 $('pregame').innerHTML = `
@@ -117,8 +124,9 @@ let rinkReady = false;
 let latestBoard: ReturnType<typeof makeBoard> = { markers:[], highlighted:[] };
 let latestCamera: CameraAngle = 'ice';
 let latestOpponent = '';
+let latestForfeit = false;
 function sendBoard() {
-  const board = { ...latestBoard, skating:playing };
+  const board = { ...latestBoard, skating:playing && !latestForfeit };
   if (companionOrigin) {
     const box = rink.parentElement!.getBoundingClientRect();
     window.parent.postMessage({
@@ -162,12 +170,15 @@ function playersFromRoster(data: RosterFile | undefined) {
     })),
   ]));
 }
-function postedUnit(source: PostedFile | undefined, fixture: PregameGame, teamId: number): PregameUnit | undefined {
-  if (source?.schema !== 'lg3s-pregame-lineups-v1') return;
-  const rows = source.games.find((game) => Number(game.lg_game_id) === fixture.lg_game_id)?.teams[String(teamId)];
+function postedGame(source: PostedFile | undefined, gameId: number): PostedGame | undefined {
+  if (source?.schema === 'lg3s-pregame-lineups-v1') return source.games.find((game) => Number(game.lg_game_id) === gameId);
+}
+function postedUnit(posted: PostedGame | undefined, teamId: number): PregameUnit | undefined {
+  if (!posted) return;
+  const rows = posted.teams[String(teamId)];
   if (!rows) return;
   const players = unique(rows.flatMap((p) => makePlayer(p.lg_user_id,p.gamertag,p.position,p.jersey_number) ?? []));
-  return players.length ? { players, basis:'posted', sourceGame:fixture.lg_game_id } : noSide;
+  return players.length ? { players, basis:'posted', sourceGame:posted.lg_game_id } : noSide;
 }
 function opponentFor(fixture: PregameGame) {
   return fixture.home_lg_team_id === greatBritain ? {
@@ -176,10 +187,10 @@ function opponentFor(fixture: PregameGame) {
 }
 async function loadReview(): Promise<Review> {
   const signal = AbortSignal.timeout(12000);
-  const now = new Date();
+  const today = leagueDate.format(new Date());
   const [schedule, roster, posted, synced] = await Promise.allSettled([
-    db.from('lg3s_public_games').select(fixtureFields).eq('status','scheduled').eq('season',1)
-      .or('home_lg_team_id.eq.1446,away_lg_team_id.eq.1446').gte('scheduled_at',now.toISOString())
+    db.from('lg3s_public_games').select(fixtureFields).eq('season',1).gte('game_night_date',today)
+      .in('status',['scheduled','in_progress','final']).or('home_lg_team_id.eq.1446,away_lg_team_id.eq.1446')
       .order('scheduled_at',{ ascending:true }).limit(10).abortSignal(signal),
     readJson<RosterFile>(rosterPath,signal),
     readJson<PostedFile>(postedPath,signal),
@@ -194,10 +205,14 @@ async function loadReview(): Promise<Review> {
   const rosters = playersFromRoster(roster.status === 'fulfilled' ? roster.value : undefined);
   const matches: Matchup[] = gameNight.map((fixture) => {
     const opponent = opponentFor(fixture);
-    const unit = (team: number) => postedUnit(synced.status === 'fulfilled' ? synced.value : undefined,fixture,team)
-      ?? postedUnit(posted.status === 'fulfilled' ? posted.value : undefined,fixture,team)
+    const latest = postedGame(synced.status === 'fulfilled' ? synced.value : undefined,fixture.lg_game_id);
+    const fallback = postedGame(posted.status === 'fulfilled' ? posted.value : undefined,fixture.lg_game_id);
+    const forfeitTeam = latest?.forfeit_by_team_id ?? fallback?.forfeit_by_team_id;
+    const forfeitBy = forfeitTeam === opponent.id ? opponent.name : forfeitTeam === greatBritain ? 'Great Britain' : undefined;
+    const unit = (team: number) => postedUnit(latest,team)
+      ?? postedUnit(fallback,team)
       ?? { players:rosters.get(team) ?? [], basis:'roster' as const };
-    return { fixture, opponentId:opponent.id, opponent:opponent.name, gb:unit(greatBritain), away:unit(opponent.id) };
+    return { fixture, opponentId:opponent.id, opponent:opponent.name, gb:unit(greatBritain), away:unit(opponent.id), forfeitBy };
   });
   if (!matches.length) matches.push({ opponentId:0, opponent:'', gb:{ players:rosters.get(greatBritain) ?? [], basis:'roster' }, away:noSide });
 
@@ -248,12 +263,12 @@ function loadApprovedPortrait(publication: CardPublication) {
   return loaded;
 }
 
-function playerCard(player: PregamePlayer | undefined, unit: PregameUnit, teamId: number, team: string, gb: boolean) {
+function playerCard(player: PregamePlayer | undefined, unit: PregameUnit, teamId: number, team: string, gb: boolean, forfeit: boolean) {
   const article = document.createElement('article');
   article.className = 'player';
   article.dataset.gb = String(gb);
   const badge = teamId ? `<img class="team-crest" src="/assets/lg3s/team${teamId}.svg" alt="">` : '';
-  const proof = unit.basis === 'posted' ? 'Posted lineup' : 'Roster spotlight · lineup pending';
+  const proof = unit.basis === 'posted' ? (forfeit ? 'Listed lineup' : 'Posted lineup') : 'Roster spotlight · lineup pending';
   if (!player) {
     article.innerHTML = `<div class="player-placeholder">${badge}<p class="player-meta">${esc(team)}</p><h2 class="player-title">${unit.basis==='posted'?'Slot not posted':'Lineup pending'}</h2></div>`;
     return article;
@@ -341,16 +356,18 @@ function render() {
   $('kickoff').hidden = false;
   $('game-day').textContent = fixture ? time.format(new Date(fixture.scheduled_at)) : '';
   $('game-time').textContent = fixture ? puckDrop.format(new Date(fixture.scheduled_at)) : 'Roster spotlight';
-  $('queue').textContent = fixture && review ? `Game ${review.games.indexOf(game)+1} of ${review.games.length}` : '';
+  const gameNumber = fixture && review ? `Game ${review.games.indexOf(game)+1} of ${review.games.length}` : '';
+  $('queue').textContent = game.forfeitBy ? `${gameNumber} · ${game.forfeitBy} forfeited` : gameNumber;
   $<HTMLAnchorElement>('fixture-link').href = fixture ? `/lg3s-media.html#game/${fixture.lg_game_id}` : '/lg3s-media.html#nation/1446';
-  $('world-players').replaceChildren(playerCard(a,game.gb,greatBritain,'Great Britain',true),
-    playerCard(b,game.away,game.opponentId,game.opponent || 'Opponent',false));
+  latestForfeit = Boolean(game.forfeitBy);
+  $('world-players').replaceChildren(playerCard(a,game.gb,greatBritain,'Great Britain',true,latestForfeit),
+    playerCard(b,game.away,game.opponentId,game.opponent || 'Opponent',false,latestForfeit));
   enableCardTilt();
   const view: Record<string,CameraAngle> = { O:'ice', C:'orbit', D:'overhead', G:'goalie' };
   latestCamera = playing ? view[slot] : 'ice';
   latestBoard = makeBoard(game.gb,game.away,[a,b]);
   latestOpponent = game.opponent;
-  $('rink-label').textContent = 'Pregame warmup · ' + ({O:'Wing',C:'Center',D:'Defense',G:'Goaltending'})[slot] + ' matchup';
+  $('rink-label').textContent = game.forfeitBy ? `${game.forfeitBy} forfeited` : 'Pregame warmup · ' + ({O:'Wing',C:'Center',D:'Defense',G:'Goaltending'})[slot] + ' matchup';
   sendBoard();
 }
 async function refresh() {

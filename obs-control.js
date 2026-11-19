@@ -249,6 +249,7 @@
     byId('openCombinedStage').href=stage+'&preview=1';
     byId('obsFeedLayerUrl').value=feedLayerUrl();
     byId('openFeedLayerUrl').href=feedLayerUrl();
+    byId('testGameplayFeed').href=feedLayerUrl()+'&preview=1';
     byId('heroChannel').textContent=config().channel.toUpperCase();
     for(var id of ['obsGbrSource','obsGbrCues','obsGbrTactics'])byId(id).hidden=!isGbr();
     for(var id of ['obsStandardCopy','obsStandardSetup','obsStandardGraphics'])byId(id).hidden=isGbr();

@@ -30,7 +30,12 @@ export function mergeExport(incoming, previous, allowedTeamIds) {
       });
       teams[id] = [...new Map(players.map((player)=>[player.lg_user_id,player])).values()];
     }
-    games.set(gameId,{ lg_game_id:gameId,teams });
+    const forfeit = game.forfeit_by_team_id ?? games.get(gameId)?.forfeit_by_team_id;
+    const forfeitTeam = idOf(forfeit);
+    if (forfeit != null && (!forfeitTeam || !Object.hasOwn(teams,forfeitTeam))) {
+      throw new Error('Forfeit must identify a team on the game sheet');
+    }
+    games.set(gameId,{ lg_game_id:gameId,teams,...(forfeitTeam ? { forfeit_by_team_id:forfeitTeam } : {}) });
   }
   return { schema, games:[...games.values()].sort((a,b)=>a.lg_game_id-b.lg_game_id).slice(-150) };
 }
