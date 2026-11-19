@@ -17,7 +17,8 @@ export function mergeExport(incoming, previous, allowedTeamIds) {
       team.lg_team_id,[...team.skaters,...team.goalies],
     ]));
     if (!Object.keys(sides).length || Object.keys(sides).length > 2) throw new Error('Expected one or two teams per game');
-    const teams = { ...games.get(gameId)?.teams };
+    const previousGame = games.get(gameId);
+    const teams = { ...previousGame?.teams };
     for (const [id, rows] of Object.entries(sides)) {
       if (!allowedTeamIds.has(idOf(id)) || !Array.isArray(rows) || rows.length > 16) throw new Error('Invalid LG3s team or lineup');
       const players = rows.map((row) => {
@@ -30,12 +31,23 @@ export function mergeExport(incoming, previous, allowedTeamIds) {
       });
       teams[id] = [...new Map(players.map((player)=>[player.lg_user_id,player])).values()];
     }
-    const forfeit = game.forfeit_by_team_id ?? games.get(gameId)?.forfeit_by_team_id;
+    const forfeit = game.forfeit_by_team_id ?? previousGame?.forfeit_by_team_id;
     const forfeitTeam = idOf(forfeit);
     if (forfeit != null && (!forfeitTeam || !Object.hasOwn(teams,forfeitTeam))) {
       throw new Error('Forfeit must identify a team on the game sheet');
     }
-    games.set(gameId,{ lg_game_id:gameId,teams,...(forfeitTeam ? { forfeit_by_team_id:forfeitTeam } : {}) });
+    const crew = game.broadcast_crew ?? previousGame?.broadcast_crew;
+    const broadcastCrew = {};
+    for (const role of ['play_by_play','analyst']) {
+      const name = crew?.[role];
+      if (name == null) continue;
+      if (typeof name !== 'string' || !name.trim() || name.trim().length > 80) throw new Error('Invalid broadcast crew name');
+      broadcastCrew[role] = name.trim();
+    }
+    games.set(gameId,{
+      lg_game_id:gameId,teams,...(forfeitTeam ? { forfeit_by_team_id:forfeitTeam } : {}),
+      ...(Object.keys(broadcastCrew).length ? { broadcast_crew:broadcastCrew } : {}),
+    });
   }
   return { schema, games:[...games.values()].sort((a,b)=>a.lg_game_id-b.lg_game_id).slice(-150) };
 }

@@ -52,7 +52,7 @@ const db = createClient(import.meta.env.VITE_SUPABASE_URL || 'http://localhost',
 const rosterPath = '/data/lg3s/season1-active-roster-2026-11-14.json';
 const postedPath = '/data/lg3s/pregame-lineups.json';
 const syncedPath = 'https://raw.githubusercontent.com/bellyjelly9393-ux/ELITECHELMEDIA/lg3s-pregame-data/data/lg3s/pregame-lineups.json';
-const fixtureFields = 'lg_game_id,game_night_date,scheduled_at,home_lg_team_id,away_lg_team_id,home_nation,away_nation';
+const fixtureFields = 'lg_game_id,game_night_date,scheduled_at,home_lg_team_id,away_lg_team_id,home_nation,away_nation,status,home_score,away_score';
 const interval = 8500;
 const leagueDate = new Intl.DateTimeFormat('sv-SE', { timeZone:'America/Toronto', year:'numeric', month:'2-digit', day:'2-digit' });
 const time = new Intl.DateTimeFormat('en-CA', { timeZone:'America/Toronto', weekday:'short', month:'short', day:'numeric' });
@@ -61,6 +61,13 @@ const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getEleme
 const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]!);
 const unique = (players: PregamePlayer[]) => [...new Map(players.map((p) => [p.id,p])).values()];
 const noSide: PregameUnit = { players:[], basis:'roster' };
+const flagCodes: Record<number, string> = { 341:'ca',532:'de',1446:'gb',822:'it',591:'jp',531:'kz',1439:'lv',1444:'pl',1079:'sk',343:'se',404:'ch',342:'us' };
+const intelIcon = (path: string) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${path}"/></svg>`;
+
+interface BroadcastCrew {
+  play_by_play?: string;
+  analyst?: string;
+}
 
 interface Matchup {
   fixture?: PregameGame;
@@ -69,6 +76,7 @@ interface Matchup {
   gb: PregameUnit;
   away: PregameUnit;
   forfeitBy?: string;
+  crew?: BroadcastCrew;
 }
 interface Review {
   games: Matchup[];
@@ -81,6 +89,7 @@ interface RosterFile {
 interface PostedGame {
   lg_game_id: number;
   forfeit_by_team_id?: number;
+  broadcast_crew?: BroadcastCrew;
   teams: Record<string, { lg_user_id: unknown; gamertag: unknown; position: unknown; jersey_number?: unknown }[]>;
 }
 interface PostedFile {
@@ -93,9 +102,9 @@ $('pregame').innerHTML = `
   <header class="world-header">
     <div class="match-heading">
       <p class="world-kicker">EliteChel Media <span aria-hidden="true"></span> LG3s Pregame</p>
-      <h1><span class="match-team"><img src="/assets/lg3s/team1446.svg" alt="">Great Britain</span>
+      <h1><span class="match-team match-gb"><span class="match-flag" aria-hidden="true"></span><img src="/assets/lg3s/team1446.svg" alt=""><span>Great Britain</span></span>
         <span class="match-opponent" id="opponent" hidden><span class="versus">vs</span>
-          <span class="match-team"><img id="opponent-mark" alt=""><span id="opponent-name"></span></span>
+          <span class="match-team"><span class="match-flag" id="opponent-flag" aria-hidden="true"></span><img id="opponent-mark" alt=""><span id="opponent-name"></span></span>
         </span>
       </h1>
     </div>
@@ -115,6 +124,30 @@ $('pregame').innerHTML = `
     </div>
     <a id="fixture-link" href="/lg3s-media.html" target="_blank" rel="noopener">Schedule and game sheets</a>
   </footer>
+  <section class="world-intel" aria-labelledby="intel-title" hidden>
+    <h2 id="intel-title">Pregame Intel</h2>
+    <div class="intel-frame">
+      <article class="intel-panel intel-keys">
+        <h3>${intelIcon('M9 5H5v16h14V5h-4 M9 5V3h6v4H9V5 M8 11l3 3m-3 0 3-3m3 7 3-4m-3 0h3v3')}Keys to the game</h3>
+        <ul id="intel-keys"><li>Win the special teams battle.</li><li>Limit high-danger chances in front.</li><li>Stay disciplined and control the pace.</li></ul>
+        <p class="intel-empty" id="intel-forfeit" hidden>Result decided by forfeit.</p>
+      </article>
+      <article class="intel-panel intel-watch">
+        <h3>${intelIcon('M15 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2m19 0v-2a4 4 0 0 0-3-3.87M9 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8m8-8a4 4 0 0 1 0 8')}Players to watch</h3>
+        <div class="intel-watch-list" id="intel-watch"></div>
+      </article>
+      <div class="intel-side">
+        <article class="intel-panel intel-crew">
+          <h3>${intelIcon('M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM5 10v1a7 7 0 0 0 14 0v-1m-7 8v4m-4 0h8')}Broadcast team</h3>
+          <dl><div><dt>Play-by-play</dt><dd id="intel-play-by-play">—</dd></div><div><dt>Analyst</dt><dd id="intel-analyst">—</dd></div></dl>
+        </article>
+        <article class="intel-panel intel-notes">
+          <h3>${intelIcon('M6 3h9l3 3v15H6V3zm8 0v5h4M9 12h6m-6 4h6')}Game notes</h3>
+          <p><span id="intel-game"></span><span id="intel-note"></span></p>
+        </article>
+      </div>
+    </div>
+  </section>
 </div>`;
 const rink = $<HTMLIFrameElement>('world-rink');
 let review: Review | null = null;
@@ -153,7 +186,7 @@ window.addEventListener('message', (event) => {
   }
 });
 rink.addEventListener('load', () => rink.contentWindow?.postMessage({ protocol:'lg3s:1', type:'hello' }, location.origin));
-if (companionOrigin) new ResizeObserver(sendBoard).observe(document.querySelector('.world')!);
+if (companionOrigin) new ResizeObserver(sendBoard).observe(rink.parentElement!);
 if (!expectsArena && !cardsOnly) rink.src = import.meta.env.BASE_URL + 'rink-preview.html?embed=true&mode=obs&pregame=1';
 
 async function readJson<T>(path: string, signal: AbortSignal): Promise<T> {
@@ -209,10 +242,11 @@ async function loadReview(): Promise<Review> {
     const fallback = postedGame(posted.status === 'fulfilled' ? posted.value : undefined,fixture.lg_game_id);
     const forfeitTeam = latest?.forfeit_by_team_id ?? fallback?.forfeit_by_team_id;
     const forfeitBy = forfeitTeam === opponent.id ? opponent.name : forfeitTeam === greatBritain ? 'Great Britain' : undefined;
+    const crew = latest?.broadcast_crew ?? fallback?.broadcast_crew;
     const unit = (team: number) => postedUnit(latest,team)
       ?? postedUnit(fallback,team)
       ?? { players:rosters.get(team) ?? [], basis:'roster' as const };
-    return { fixture, opponentId:opponent.id, opponent:opponent.name, gb:unit(greatBritain), away:unit(opponent.id), forfeitBy };
+    return { fixture, opponentId:opponent.id, opponent:opponent.name, gb:unit(greatBritain), away:unit(opponent.id), forfeitBy, crew };
   });
   if (!matches.length) matches.push({ opponentId:0, opponent:'', gb:{ players:rosters.get(greatBritain) ?? [], basis:'roster' }, away:noSide });
 
@@ -263,6 +297,17 @@ function loadApprovedPortrait(publication: CardPublication) {
   return loaded;
 }
 
+function playerStats(player: PregamePlayer) {
+  const kind = player.slot === 'G' ? 'goalie' : 'skater';
+  const stat = review?.stats.get(`${kind}:${player.id}`);
+  const sv = stat?.sv_pct == null ? null : `${(stat.sv_pct <= 1 ? stat.sv_pct * 100 : stat.sv_pct).toFixed(1)}%`;
+  const labels = kind === 'goalie' ? ['GP','SV','SV%','GAA'] : ['GP','G','A','PTS'];
+  const values = (kind === 'goalie'
+    ? [stat?.gp,stat?.sv,sv,stat?.gaa_per_game?.toFixed(2)]
+    : [stat?.gp,stat?.g,stat?.a,stat?.p]).map(formatStat);
+  return { kind, labels, values };
+}
+
 function playerCard(player: PregamePlayer | undefined, unit: PregameUnit, teamId: number, team: string, gb: boolean, forfeit: boolean) {
   const article = document.createElement('article');
   article.className = 'player';
@@ -273,13 +318,7 @@ function playerCard(player: PregamePlayer | undefined, unit: PregameUnit, teamId
     article.innerHTML = `<div class="player-placeholder">${badge}<p class="player-meta">${esc(team)}</p><h2 class="player-title">${unit.basis==='posted'?'Slot not posted':'Lineup pending'}</h2></div>`;
     return article;
   }
-  const kind = player.slot === 'G' ? 'goalie' : 'skater';
-  const stat = review?.stats.get(`${kind}:${player.id}`);
-  const sv = stat?.sv_pct == null ? null : `${(stat.sv_pct <= 1 ? stat.sv_pct * 100 : stat.sv_pct).toFixed(1)}%`;
-  const labels = kind === 'goalie' ? ['GP','SV','SV%','GAA'] : ['GP','G','A','PTS'];
-  const values = (kind === 'goalie'
-    ? [stat?.gp,stat?.sv,sv,stat?.gaa_per_game?.toFixed(2)]
-    : [stat?.gp,stat?.g,stat?.a,stat?.p]).map(formatStat);
+  const { kind, labels, values } = playerStats(player);
   const href = `/player-cards.html?league=lg3s&id=${player.id}&kind=${kind}`;
   article.innerHTML = `<a class="card-motion" href="${href}" target="_blank" rel="noopener" aria-label="${esc(player.name)}">
     <canvas class="player-card-canvas" role="img" hidden></canvas>
@@ -338,6 +377,44 @@ function framesFor(game: Matchup) {
     return Array.from({ length:count }, (_, i) => ({ game, slot, a:a[i], b:b[i] }));
   });
 }
+function watchRow(unit: PregameUnit, teamId: number, team: string, gb: boolean) {
+  if (!teamId) return '';
+  const points = (player: PregamePlayer) => review?.stats.get(`skater:${player.id}`)?.p ?? -1;
+  const skaters = unit.players.filter(player => player.slot !== 'G');
+  const player = skaters.reduce<PregamePlayer | undefined>((pick, candidate) =>
+    !pick || points(candidate) > points(pick) ? candidate : pick, undefined) ?? unit.players[0];
+  const crest = `<img src="/assets/lg3s/team${teamId}.svg" alt="">`;
+  if (!player) return `<div class="intel-player empty-row" data-gb="${gb}">${crest}<span class="intel-player-name"><strong>${esc(team)}</strong><small>Lineup pending</small></span></div>`;
+  const { kind, labels, values } = playerStats(player);
+  const jersey = player.jersey ? `<span class="intel-number">#${player.jersey}</span> ` : '';
+  return `<a class="intel-player" data-gb="${gb}" href="/player-cards.html?league=lg3s&id=${player.id}&kind=${kind}" target="_blank" rel="noopener">
+    ${crest}<span class="intel-player-name"><strong>${jersey}${esc(player.name)}</strong><small>${esc(team)} · ${esc(player.position)}${unit.basis === 'roster' ? ' · Roster spotlight' : ''}</small></span>
+    <dl>${labels.map((label, i) => `<div><dt>${label}</dt><dd>${esc(values[i])}</dd></div>`).join('')}</dl>
+  </a>`;
+}
+
+function renderIntel(game: Matchup, gameNumber: string) {
+  const fixture = game.fixture;
+  const gbIsHome = fixture?.home_lg_team_id === greatBritain;
+  const homeScore = fixture?.home_score;
+  const awayScore = fixture?.away_score;
+  const score = Number.isInteger(homeScore) && Number.isInteger(awayScore)
+    ? `${gbIsHome ? homeScore : awayScore}–${gbIsHome ? awayScore : homeScore}` : '';
+  document.querySelector<HTMLElement>('.world-intel')!.hidden = false;
+  $('intel-keys').hidden = Boolean(game.forfeitBy);
+  $('intel-forfeit').hidden = !game.forfeitBy;
+  $('intel-watch').innerHTML = watchRow(game.gb,greatBritain,'Great Britain',true) + watchRow(game.away,game.opponentId,game.opponent,false);
+  const crewName = (name: unknown) => typeof name === 'string' && name.trim() || 'To be announced';
+  $('intel-play-by-play').textContent = crewName(game.crew?.play_by_play);
+  $('intel-analyst').textContent = crewName(game.crew?.analyst);
+  $('intel-game').textContent = gameNumber || 'Roster spotlight';
+  $('intel-note').textContent = game.forfeitBy ? `${game.forfeitBy} forfeited`
+    : fixture?.status === 'final' ? (score ? `Final · GBR ${score}` : 'Final')
+    : fixture?.status === 'in_progress' ? 'In progress'
+    : fixture ? (gbIsHome ? 'GBR home' : 'GBR away') : 'Schedule pending';
+}
+
+let intelGame: Matchup | undefined;
 function render() {
   const all = review?.games.flatMap(framesFor) ?? [];
   if (!all.length) {
@@ -351,6 +428,8 @@ function render() {
   $('opponent').hidden = !game.opponent;
   $('opponent-name').textContent = game.opponent;
   const opponentMark = $<HTMLImageElement>('opponent-mark');
+  const flag = flagCodes[game.opponentId];
+  $('opponent-flag').style.backgroundImage = flag ? `url(/assets/lg3s/flags/${flag}.png)` : '';
   if (game.opponentId) opponentMark.src = `/assets/lg3s/team${game.opponentId}.svg`;
   else opponentMark.removeAttribute('src');
   $('kickoff').hidden = false;
@@ -358,6 +437,10 @@ function render() {
   $('game-time').textContent = fixture ? puckDrop.format(new Date(fixture.scheduled_at)) : 'Roster spotlight';
   const gameNumber = fixture && review ? `Game ${review.games.indexOf(game)+1} of ${review.games.length}` : '';
   $('queue').textContent = game.forfeitBy ? `${gameNumber} · ${game.forfeitBy} forfeited` : gameNumber;
+  if (intelGame !== game) {
+    renderIntel(game,gameNumber);
+    intelGame = game;
+  }
   $<HTMLAnchorElement>('fixture-link').href = fixture ? `/lg3s-media.html#game/${fixture.lg_game_id}` : '/lg3s-media.html#nation/1446';
   latestForfeit = Boolean(game.forfeitBy);
   $('world-players').replaceChildren(playerCard(a,game.gb,greatBritain,'Great Britain',true,latestForfeit),
