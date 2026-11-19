@@ -199,8 +199,8 @@ test('Great Britain public page renders a native panorama with the original 3D e
  for(const id of ['nationRibbon','roomPlayers','roomPrev','roomNext','roomSearch','roomFloorCrest','immersive-3d','lockerFrame','enterLocker'])
   assert.match(page,new RegExp('id="'+id+'"'));
  assert.match(page,/class="room-stage"/);
- assert.match(page,/lg3s-gb-locker-config\\.js/);
- assert.doesNotMatch(loader,/if\\(!navigator\\.connection\\?\\.saveData\\) enterRoom/);
+ assert.ok(page.includes('lg3s-gb-locker-config.js'));
+ assert.ok(!loader.includes('if(!navigator.connection?.saveData) enterRoom();'));
  const h=roomHarness(1446);
  h.location.pathname='/lg3s-gb-locker.html';
  vm.runInNewContext(teamJS,h.context,{timeout:2000,filename:'lg3s-team.js'});
@@ -208,6 +208,6 @@ test('Great Britain public page renders a native panorama with the original 3D e
  assert.equal(h.location.replaced,null);
  assert.match(h.get('roomName').textContent,/Great Britain/);
  assert.match(h.get('roomRecord').textContent,/11 main-roster players/);
- assert.match(h.get('roomPlayers').innerHTML,/assets\\/lg3s\\/scene\\/gb-royal-blue\\.webp/);
+ assert.ok(h.get('roomPlayers').innerHTML.includes('assets/lg3s/scene/gb-royal-blue.webp'));
  assert.match(h.get('roomPageStatus').textContent,/STALLS 1–6 OF 11/);
 });
