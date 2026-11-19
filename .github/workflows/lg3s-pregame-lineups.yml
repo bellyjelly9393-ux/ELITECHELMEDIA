@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
           if [[ -z "$LG3S_LINEUP_FEED_URL" ]]; then
-            echo 'Hosted import needs an LG Client export feed URL. The signed-in desktop LG Client can publish directly to lg3s-pregame-data.'
+            echo 'Hosted import needs an LG Client export feed URL. The desktop LG Client reads public game sheets and can publish with GitHub write access.'
             exit 0
           fi
           temp=$(mktemp -d)
