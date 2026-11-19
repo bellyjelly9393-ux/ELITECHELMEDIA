@@ -369,13 +369,14 @@ function enableCardTilt() {
   });
 }
 function framesFor(game: Matchup) {
-  return rinkSlots.flatMap((slot) => {
+  const frames = rinkSlots.flatMap((slot) => {
     const a = game.gb.players.filter((p) => p.slot === slot);
     const b = game.away.players.filter((p) => p.slot === slot);
     // On a posted lineup, keep every listed player. A fallback roster shows one spotlight per role for the matchup.
     const count = Math.max(game.gb.basis==='posted'?a.length:Math.min(a.length,1),game.away.basis==='posted'?b.length:Math.min(b.length,1));
-    return Array.from({ length:count }, (_, i) => ({ game, slot, a:a[i], b:b[i] }));
+    return Array.from({ length:count }, (_, i) => ({ game, slot, a:a.at(i), b:b.at(i) }));
   });
+  return frames.length || !game.fixture ? frames : [{ game, slot:'O' as const, a:undefined, b:undefined }];
 }
 function watchRow(unit: PregameUnit, teamId: number, team: string, gb: boolean) {
   if (!teamId) return '';
