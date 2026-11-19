@@ -1,14 +1,14 @@
 /* EliteChel Media LG3s public national lockers. Only verified main-roster
    players from the saved snapshot; read-only season stats from Supabase public views.
-   The GB 3D entry stays isolated and unchanged. No unverified numbers or ratings. */
+   GB's native panoramic page reuses this renderer while preserving its 3D entry. No invented ratings. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const params=new URLSearchParams(location.search);
-const teamId=Number(params.get('team'));
+const teamId=/\/lg3s-gb-locker\.html$/i.test(String(location.pathname||''))?1446:Number(params.get('team'));
 const logo=id=>'assets/lg3s/team'+id+'.svg';
 const jersey=id=>'assets/lg3s/jerseys/'+id+'.webp';
-const room=id=>id===1446?'lg3s-team.html?team=1446&fallback=1':'lg3s-team.html?team='+id;
+const room=id=>id===1446?'lg3s-gb-locker.html':'lg3s-team.html?team='+id;
 const API='https://lrgllzvwgvqagcpiyvfd.supabase.co/rest/v1/';
 const KEY='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
 const kits={
@@ -189,7 +189,7 @@ async function start(){
   await Promise.all([loadStats(),loadNextGame()]);
  }catch(error){console.warn('LG3s public locker:',error);$('roomName').textContent='LG3s Team Locker';fail('Public roster snapshot unavailable.');}
 }
-if(teamId===1446&&params.get('fallback')!=='1'){location.replace('lg3s-gb-locker.html');return;}
+if(teamId===1446&&!/\/lg3s-gb-locker\.html$/i.test(String(location.pathname||''))&&params.get('fallback')!=='1'){location.replace('lg3s-gb-locker.html');return;}
 $('roomSearch').addEventListener('input',()=>{page=0;render();});
 $('roomPrev').addEventListener('click',()=>{if(page>0){page--;render();}});
 $('roomNext').addEventListener('click',()=>{
