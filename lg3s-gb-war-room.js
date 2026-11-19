@@ -46,8 +46,15 @@ async function boot(){
     " · "+state.member.role.toUpperCase();
   $("roleBadge").textContent=state.member.role.toUpperCase()+" ACCESS";
   $("accessNav").hidden=!owner();
-  await loadTeam();
- }catch(err){console.error("GB War Room sign-in:",err);setGate("guest");$("joinMessage").textContent="Could not check access. Try refreshing or signing in again."}
+  // A rendering or optional data-feed failure must NOT revoke an already-verified team login.
+  // Access is established above from the authenticated Supabase user and RLS-backed membership.
+  try{
+   await loadTeam();
+  }catch(dataError){
+   console.error("GB War Room data load:",dataError);
+   msg("You are signed in with "+state.member.role.toUpperCase()+" access. Some team panels failed to load. Refresh the page to retry.");
+  }
+ }catch(err){console.error("GB War Room sign-in:",err);setGate("guest");$("joinMessage").textContent="Could not verify sign-in. Try refreshing or signing in again."}
  finally{state.refreshing=false}
 }
 async function loadMyRequest(){
@@ -90,9 +97,14 @@ const homeOpp=g=>g.home_lg_team_id===TEAM?g.away_nation:g.home_nation;
 const card=g=>'<div class="match-card"><div class="match-time"><b>'+E(dateLabel(g.scheduled_at||g.game_night_date))+'</b><span>'+E(timeLabel(g.scheduled_at))+' ET</span></div><div class="match-body"><div class="eyebrow">LG GAME #'+E(g.lg_game_id)+'</div><b>🇬🇧 GBR vs '+E(homeOpp(g))+'</b><small>'+E(g.status_label||"Scheduled")+' · '+(g.is_verified?"Verified result":"Fixture / result unverified")+'</small></div><button data-opponent="'+E(homeOpp(g))+'" title="Scout opponent">↗</button></div>';
 function renderSchedule(){
  const arr=state.upcoming||[];
- $("homeMatches").innerHTML=arr.length?arr.slice(0,3).map(card).join(""):'<p class="evidence-note">No upcoming fixtures currently in the LG3s feed.</p>';
- $("scheduleCards").innerHTML=arr.length?arr.map(card).join(""):'<p class="evidence-note">No upcoming fixtures currently in the LG3s feed.</p>';
- const next=arr[0];$("nextOpponent").textContent=next?homeOpp(next):"TBA";$("nextDetails").textContent=next?dateLabel(next.scheduled_at)+" · "+timeLabel(next.scheduled_at)+" Eastern · LG #"+next.lg_game_id:"No future fixtures loaded";
+ // The cinematic headquarters uses gbDashboardGames instead of the retired homeMatches / nextOpponent widgets.
+ // Keep this renderer compatible with both layouts so a missing optional panel never throws during login.
+ const home=$("homeMatches"),schedule=$("scheduleCards"),nextOpponent=$("nextOpponent"),nextDetails=$("nextDetails");
+ if(home)home.innerHTML=arr.length?arr.slice(0,3).map(card).join(""):'<p class="evidence-note">No upcoming fixtures currently in the LG3s feed.</p>';
+ if(schedule)schedule.innerHTML=arr.length?arr.map(card).join(""):'<p class="evidence-note">No upcoming fixtures currently in the LG3s feed.</p>';
+ const next=arr[0];
+ if(nextOpponent)nextOpponent.textContent=next?homeOpp(next):"TBA";
+ if(nextDetails)nextDetails.textContent=next?dateLabel(next.scheduled_at)+" · "+timeLabel(next.scheduled_at)+" Eastern · LG #"+next.lg_game_id:"No future fixtures loaded";
 }
 function playerCard(p){
  const stats=playerTotals(p.lg_user_id);
