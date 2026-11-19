@@ -473,4 +473,3 @@ $('pause').onclick = () => { playing = !playing; playButton(); render(); };
 playButton();
 void refresh();
 window.setInterval(() => { if (playing && review) { current++; render(); } },interval);
-window.setInterval(() => void refresh(),5 * 60 * 1000);
