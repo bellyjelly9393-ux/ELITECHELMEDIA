@@ -40,7 +40,6 @@
           <div><h2 id="obsAccessSampleTitle">GBR graphics preview</h2><p>Sample scorebug and tactical rink</p></div>
           <div class="obs-preview-switch">
             <a href="/lg3s-gb?mode=obs&amp;preview=true&amp;audio=off" target="_blank" rel="noopener">Open sample ↗</a>
-            <a href="http://127.0.0.1:4180/broadcast.html" target="_blank" rel="noopener">Open Carbon Arena ↗</a>
           </div>
         </div>
         <div class="obs-preview-frame" data-mode="sample">
@@ -344,11 +343,11 @@
         <div class="obs-overlay-only" id="obsGbrSource" hidden>
           <small>CARBON ARENA · FOLLOWS DESK SCENES</small>
           <div class="obs-source-row">
-            <input id="carbonObsUrl" class="field" aria-label="Carbon Arena OBS browser source URL" value="http://127.0.0.1:4180/broadcast.html?follow=desk" readonly>
+            <input id="carbonObsUrl" class="field" aria-label="Carbon Arena OBS browser source URL" placeholder="Copy to generate a private URL" readonly>
             <button id="copyCarbonObsUrl" class="small-btn primary" type="button">Copy Carbon Arena OBS URL</button>
-            <a class="small-btn" href="http://127.0.0.1:4180/broadcast.html" target="_blank" rel="noopener">Preview Carbon Arena</a>
+            <button id="previewCarbonObs" class="small-btn" type="button">Preview Carbon Arena</button>
           </div>
-          <p class="obs-preview-note">Run Elite Labs on the OBS computer and use the Carbon Arena URL for your GBR Browser Source. Set it to <b>1920 × 1080 at 60 FPS</b> and enable <b>Control audio via OBS</b> for the goal horn.</p>
+          <p class="obs-preview-note">Use the private Carbon Arena URL in your GBR Browser Source above gameplay. Set it to <b>1920 × 1080 at 60 FPS</b> and enable <b>Control audio via OBS</b>. The link is valid for 90 days.</p>
           <small>GBR WEB GRAPHICS</small>
           <div class="obs-source-row">
             <input id="gbrObsUrl" class="field" aria-label="Great Britain OBS browser source URL" readonly>
@@ -380,6 +379,6 @@
 <script src="script.js"></script>
 <script src="obs-config.js?v=20261005b"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
-<script src="obs-control.js?v=20261118-carbon-preview"></script>
+<script src="obs-control.js?v=20261119-hosted-carbon"></script>
 </body>
 </html>
