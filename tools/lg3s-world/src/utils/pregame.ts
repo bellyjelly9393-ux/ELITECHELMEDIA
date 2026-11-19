@@ -22,6 +22,9 @@ export interface PregameGame {
   away_lg_team_id: number;
   home_nation: string;
   away_nation: string;
+  status?: 'scheduled' | 'in_progress' | 'final';
+  home_score?: number | null;
+  away_score?: number | null;
 }
 export interface SeasonStats {
   lg_user_id: number;
