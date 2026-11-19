@@ -21,12 +21,14 @@ export function mergeExport(incoming, previous, allowedTeamIds) {
     const teams = { ...previousGame?.teams };
     for (const [id, rows] of Object.entries(sides)) {
       if (!allowedTeamIds.has(idOf(id)) || !Array.isArray(rows) || rows.length > 16) throw new Error('Invalid LG3s team or lineup');
+      const previousNumbers = new Map((teams[id] ?? []).map(player => [player.lg_user_id,player.jersey_number]));
       const players = rows.map((row) => {
         const lg_user_id = idOf(row.lg_user_id);
         const position = String(row.position || '').toUpperCase();
         const gamertag = String(row.gamertag ?? row.player ?? '').trim();
         if (!lg_user_id || !positions.has(position) || !gamertag || gamertag.length > 80) throw new Error('Invalid lineup identity or position');
-        const jersey_number = /^\d{1,2}$/.test(String(row.jersey_number)) ? String(row.jersey_number) : undefined;
+        const jersey = row.jersey_number ?? previousNumbers.get(lg_user_id);
+        const jersey_number = /^\d{1,2}$/.test(String(jersey)) ? String(jersey) : undefined;
         return { lg_user_id,gamertag,position,...(jersey_number ? { jersey_number } : {}) };
       });
       teams[id] = [...new Map(players.map((player)=>[player.lg_user_id,player])).values()];

@@ -2,9 +2,14 @@ name: LG3s pregame lineup sync
 
 on:
   schedule:
-    - cron: '0 2 * * 3'
+    - cron: '0 19 * * 3-5'
       timezone: America/Toronto
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the snapshot after checking the game sheets
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -20,26 +25,35 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Validate and publish the LG Client export
+      - name: Pull and validate the GBR game-night lineups
         env:
           LG3S_LINEUP_FEED_URL: ${{ secrets.LG3S_LINEUP_FEED_URL }}
+          PUBLISH_SNAPSHOT: ${{ github.event_name == 'schedule' || inputs.publish }}
         run: |
           set -euo pipefail
-          if [ -z "$LG3S_LINEUP_FEED_URL" ]; then
-            echo 'LG Client export feed is not configured.'
-            exit 0
+          temp=$(mktemp -d)
+          trap 'rm -rf -- "$temp"' EXIT
+          incoming=()
+          if [[ -z "$LG3S_LINEUP_FEED_URL" ]]; then
+            npm ci --ignore-scripts --prefix tools/lg3s-world
+            node tools/lg3s-world/pull-pregame.mjs "$temp/incoming.json"
+            [[ -f "$temp/incoming.json" ]] || exit 0
+            incoming=("$temp/incoming.json")
           fi
           snapshot=data/lg3s/pregame-lineups.json
           branch=lg3s-pregame-data
-          importer=$(mktemp)
-          cp tools/lg3s-world/import-pregame.mjs "$importer.mjs"
+          cp tools/lg3s-world/import-pregame.mjs "$temp/importer.mjs"
           if git ls-remote --exit-code --heads origin "$branch" >/dev/null; then
             git fetch --depth=1 origin "$branch"
             git switch -c "$branch" FETCH_HEAD
           else
             git switch -c "$branch"
           fi
-          node "$importer.mjs"
+          node "$temp/importer.mjs" "${incoming[@]}"
+          if [[ "$PUBLISH_SNAPSHOT" != true ]]; then
+            echo 'Snapshot validated. Manual test did not publish it.'
+            exit 0
+          fi
           git add "$snapshot"
           if git diff --cached --quiet; then exit 0; fi
           git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update public LG3s pregame lineups'
