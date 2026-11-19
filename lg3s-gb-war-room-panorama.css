@@ -1,0 +1,130 @@
+/* Great Britain LG3s cinematic 360 War Room, source-of-truth: approved mockup.
+   This stylesheet modifies presentation only. Team authentication/RLS stay unchanged. */
+:root{--gb-ink:#050a13;--gb-panel:#0a1727;--gb-sky:#84b1e9;--gb-red:#e12745;--gb-steel:#46637f}
+body.lg3s-gb-war-room-page{background:radial-gradient(ellipse at 50% 12%,#193658 0%,#060d19 55%,#030811 100%);color:#f4f8ff}
+.lg3s-gb-war-room-page .app{display:block;min-height:100vh}
+.lg3s-gb-war-room-page .sidebar{position:relative;top:auto;z-index:40;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:99px 54px;width:100%;height:auto;min-height:0;flex:none;transform:none;overflow:visible;background:#07101ef5;border-right:0;border-bottom:2px solid #8e142a;box-shadow:0 5px 25px #0009}
+.lg3s-gb-war-room-page .sidebar:before{content:"";position:absolute;inset:0 0 55px;z-index:-1;background:linear-gradient(90deg,#04101beb 0%,#071324ac 41%,#071525e2 80%),url("assets/lg3s/nations/great-britain-banner.webp") center 40%/cover no-repeat}
+.lg3s-gb-war-room-page .side-logo{grid-area:1/1/2/2;border:0;height:auto;min-height:99px;padding:9px clamp(18px,4.5vw,85px);gap:16px}
+.lg3s-gb-war-room-page .side-logo img{width:75px;height:80px;object-fit:contain;filter:drop-shadow(0 2px 3px #000)}
+.lg3s-gb-war-room-page .side-logo b{font:italic 900 clamp(30px,3.2vw,48px)/.95 'Barlow Condensed',Impact,sans-serif;color:#fff;letter-spacing:.055em;text-shadow:2px 3px 0 #000}
+.lg3s-gb-war-room-page .side-logo em{color:#fff}
+.lg3s-gb-war-room-page .side-logo span{font-size:12px;letter-spacing:.31em;color:#e8f0ff;margin-top:12px}
+.lg3s-gb-war-room-page .side-logo span:before,.lg3s-gb-war-room-page .side-logo span:after{content:"";display:inline-block;width:22px;height:3px;vertical-align:middle;background:#e7334a;margin:0 10px 2px 0}
+.lg3s-gb-war-room-page .side-logo span:after{margin:0 0 2px 10px}
+.lg3s-gb-war-room-page .side-team,.lg3s-gb-war-room-page .nav-label{display:none}
+.lg3s-gb-war-room-page .side-bottom{grid-area:1/2/2/3;margin:0;align-self:center;justify-self:end;border:1px solid #ce3851;border-radius:10px;background:#050e1dcf;padding:10px 15px;margin-right:clamp(14px,3vw,48px);font-size:10px;color:#fff;max-width:220px}
+.lg3s-gb-war-room-page .side-bottom button{display:block;padding:3px 7px;margin-top:4px;font-size:8px;border:0;background:transparent}
+.lg3s-gb-war-room-page .side-bottom small{font-size:9px;max-width:185px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lg3s-gb-war-room-page #roomNav{grid-area:2/1/3/3;display:flex;justify-content:space-evenly;align-items:stretch;padding:0 clamp(12px,5vw,100px);height:54px;background:linear-gradient(#121f32,#050c16);border-top:1px solid #283c54;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+.lg3s-gb-war-room-page #roomNav button{flex:1 0 auto;max-width:260px;height:51px;min-height:0;display:flex;justify-content:center;align-items:center;margin:0;padding:10px 15px;background:transparent;border:0;border-bottom:3px solid transparent;border-radius:0;color:#e1eaf5;font:900 21px/1 'Barlow Condensed';letter-spacing:0}
+.lg3s-gb-war-room-page #roomNav button+button{box-shadow:-1px 0 0 #273b53}
+.lg3s-gb-war-room-page #roomNav button.active{background:linear-gradient(110deg,#6b0a1b,#e33149 50%,#7d1027);border-bottom:3px solid #fe768b;box-shadow:0 0 20px #e51e4c4a}
+.lg3s-gb-war-room-page #roomNav button:hover:not(.active){background:#14253a}
+.lg3s-gb-war-room-page #roomNav button span{flex:none;font:900 15px/1 'Barlow Condensed';color:#f8faff}
+.lg3s-gb-war-room-page #roomNav button small{display:none}
+.lg3s-gb-war-room-page .main-frame{width:100%;display:block}
+.lg3s-gb-war-room-page .topbar{min-height:0;height:0;padding:0;border:0;overflow:hidden}
+.lg3s-gb-war-room-page #mainArea{width:100%;max-width:1920px;padding:17px clamp(12px,1.55vw,32px) 26px}
+.lg3s-gb-war-room-page .masthead{margin-bottom:15px}
+.lg3s-gb-war-room-page .main-frame:has(#view-headquarters:not([hidden])) .masthead{display:none}
+.lg3s-gb-war-room-page .main-frame:has(#view-headquarters:not([hidden])) #messages:empty{display:none}
+.lg3s-gb-war-room-page .main-frame:has(#view-headquarters:not([hidden])) footer{margin-top:22px}
+.gb-cinematic-home{color:#f0f6fe}
+.gb-command-layout{display:grid;grid-template-columns:minmax(220px,.85fr) minmax(480px,3.35fr) minmax(230px,.86fr);gap:13px;align-items:stretch}
+.gb-left-panels,.gb-right-panels{min-width:0;display:grid;grid-template-rows:1fr 1fr;gap:13px}
+.gb-glass-panel{min-width:0;overflow:hidden;background:linear-gradient(165deg,#132437,#071322);border:1px solid #45617e;border-radius:9px;box-shadow:inset 0 1px #6d8aac4a,0 8px 20px #0004}
+.gb-panel-title{height:42px;padding:9px 14px;border-bottom:1px solid #80273b;display:flex;align-items:center;gap:10px}
+.gb-panel-title h2{font:italic 900 20px/1 'Barlow Condensed',Impact,sans-serif;white-space:nowrap;letter-spacing:.02em;margin:0}
+.gb-panel-symbol{font-size:22px;color:#eff7ff;line-height:1}
+.gb-panel-body{padding:9px 12px;min-height:118px}
+.gb-empty{font-size:11px;line-height:1.7;color:#a8bed6;margin:15px 4px}
+.gb-chem-row{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px solid #2d44586b}
+.gb-chem-row:last-child{border:0}
+.gb-chem-id{font:800 12px 'Inter',sans-serif;color:#edf4fb;min-width:36px}
+.gb-chem-track{height:8px;border-radius:8px;background:#263b51;flex:1;overflow:hidden}
+.gb-chem-bar{height:100%;border-radius:8px;background:linear-gradient(90deg,#5cbd92,#8cdec0)}
+.gb-chem-value{width:30px;text-align:right;font-size:11px;font-weight:900;color:#ebf8f2}
+.gb-chem-explainer{font-size:9px;color:#92a8c4;line-height:1.5;padding:6px 2px 0}
+.gb-activity-entry{display:flex;align-items:flex-start;gap:9px;padding:10px 2px;border-bottom:1px solid #243c55;color:#d8e7f7}
+.gb-activity-entry:last-child{border-bottom:0}
+.gb-activity-icon{color:#df5e74;font-size:16px;line-height:1}
+.gb-activity-entry span:last-child{font-size:11px;flex:1;line-height:1.5}
+.gb-activity-entry b{display:block;font-weight:700;color:#f3f7fd}
+.gb-activity-entry small{display:block;font-size:9px;color:#9daec5;margin-top:3px}
+.gb-panorama-stage{min-width:0;overflow:hidden;display:flex;flex-direction:column;position:relative;min-height:520px;border-radius:15px;border:2px solid #506988;background:#061426;box-shadow:0 0 0 2px #08101c,0 12px 40px #0008, inset 0 0 30px #24446f}
+.gb-panorama-stage:before{content:"";height:4px;position:absolute;z-index:6;left:3%;right:3%;top:0;background:linear-gradient(90deg,transparent,#cf284c,#fff,#e4355c,transparent)}
+.gb-panorama-banner{position:relative;z-index:5;padding:13px 16px;display:flex;align-items:center;justify-content:center;gap:15px;min-height:88px;border-bottom:2px solid #9d253d;background:linear-gradient(105deg,#111c30d9 10%,#182b44cc 52%,#151d33e8),url("assets/lg3s/nations/great-britain-banner.webp") center 46%/cover}
+.gb-panorama-shield img{width:52px;height:57px;object-fit:contain;filter:drop-shadow(0 4px 4px #000)}
+.gb-panorama-banner strong{display:block;font:italic 900 clamp(25px,3.3vw,43px)/.97 'Barlow Condensed',Impact,sans-serif;text-shadow:2px 3px #020407}
+.gb-panorama-banner span:not(.gb-panorama-shield){display:block;margin-top:7px;font-weight:900;letter-spacing:.2em;font-size:10px;color:#d6e2f4}
+.gb-panorama-content{position:relative;flex:1;min-height:400px;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#2b5179,#071323 78%)}
+.gb-panorama-content iframe{border:0;display:block;position:absolute;inset:0;width:100%;height:100%;background:#0d1e30}
+.gb-panorama-vignette{position:absolute;inset:0;pointer-events:none;border:3px solid #04101f;box-shadow:inset 0 0 50px #010812;z-index:2}
+.gb-panorama-controls{position:absolute;bottom:12px;left:13px;right:13px;z-index:4;display:flex;justify-content:space-between;align-items:center;gap:10px;pointer-events:none}
+.gb-panorama-controls>span{color:#fff;font-size:10px;font-weight:900;text-shadow:0 2px 8px #000;background:#081526bc;border:1px solid #647c9b;padding:9px 11px;letter-spacing:.09em}
+.gb-panorama-controls button{pointer-events:auto;border:1px solid #8ea6bd;color:#fff;background:#061221ed;padding:9px 13px;font:900 11px 'Inter',sans-serif;white-space:nowrap}
+.gb-panorama-controls button:hover{background:#b71d3b}
+.gb-panorama-caption{padding:10px 14px;display:flex;align-items:center;gap:10px;min-height:43px;background:linear-gradient(90deg,#0b182a,#172e48);font-size:10px;color:#b1c9df}
+.gb-panorama-caption b{color:#f2f8ff;font:900 15px 'Barlow Condensed'}
+.gb-panorama-caption>button{margin-left:auto;border:0;background:transparent;color:#f0c1cc;font-size:10px;font-weight:900;white-space:nowrap}
+.gb-led{width:7px;height:7px;border-radius:50%;background:#6fd1ad;box-shadow:0 0 9px #56dbb2}
+.gb-schedule-panel{display:flex;flex-direction:column}
+.gb-schedule-panel .gb-panel-body{flex:1}
+.gb-game-tile{display:flex;align-items:center;gap:9px;padding:11px 2px;border-bottom:1px solid #30465b;font-size:10px}
+.gb-game-tile .gb-opp-flag{font-size:22px;line-height:1.2;flex:0 0 28px}
+.gb-game-info{flex:1;min-width:0}
+.gb-game-info strong{font-size:12px;font-weight:900;white-space:nowrap;display:block;overflow:hidden;text-overflow:ellipsis}
+.gb-game-info small{display:block;color:#9fb3cd;font-size:9px;line-height:1.7}
+.gb-game-datetime{border:1px solid #4b607c;padding:6px;min-width:67px;text-align:right;border-radius:5px;color:#f4f9ff}
+.gb-game-datetime strong{display:block;font:900 14px 'Barlow Condensed'}
+.gb-game-datetime span{display:block;font-size:9px;color:#a8bcd5}
+.gb-view-schedule{padding:11px;border:0;border-top:1px solid #43516b;background:#13253a;color:#eef2f8;font-size:10px;font-weight:900;cursor:pointer}
+.gb-flag-feature{position:relative;overflow:hidden;border:1px solid #4c698c;border-radius:9px;background:linear-gradient(135deg,#ab1534,#152b4b);box-shadow:inset 0 0 25px #000}
+.gb-flag-feature img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.17) saturate(1.15) brightness(.72)}
+.gb-flag-feature:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#050e1db9,transparent 70%)}
+.gb-flag-monogram{position:absolute;z-index:2;top:47%;left:50%;transform:translate(-50%,-50%);font:italic 900 clamp(55px,6vw,105px) 'Barlow Condensed';color:#f7f8ff;letter-spacing:.02em;text-shadow:0 4px 3px #071326,4px 6px 0 #ab1f3b,-2px -1px 0 #081c34}
+.gb-flag-feature small{position:absolute;z-index:2;bottom:13px;left:0;right:0;text-align:center;font-weight:900;letter-spacing:.11em;color:#fff;font-size:9px}
+.gb-feature-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px;margin:18px 0 0}
+.gb-feature-card{height:177px;position:relative;min-width:0;overflow:hidden;text-align:left;color:#fff;padding:0;border:1px solid #496784;border-bottom:2px solid #e32e4b;background:linear-gradient(160deg,#172b42,#050d19 70%);border-radius:10px;box-shadow:0 6px 24px #0006;transition:transform .15s,border-color .15s}
+.gb-feature-card:hover{transform:translateY(-3px);border-color:#e44b63}
+.gb-feature-art{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(170deg,#264468,#0d1c2e 67%,#020710)}
+.gb-feature-scout .gb-feature-art{background:radial-gradient(circle at 44% 22%,#598db733,#0a1426 68%),url("assets/war-room/fx-ice.webp") center/cover}
+.gb-feature-battle .gb-feature-art{background:linear-gradient(90deg,#0b1c30a6,#1526396b),url("assets/lg3s/art/rink-3v3.svg") center/cover}
+.gb-feature-vod .gb-feature-art{background:linear-gradient(90deg,#0e192ab2,#102740a3),url("assets/lg3s-world/arena.webp") center/cover}
+.gb-feature-stalls .gb-feature-art{background:radial-gradient(circle,#274f7a,#071222)}
+.gb-feature-stalls .gb-feature-art img{height:94%;max-width:90%;object-fit:contain;filter:drop-shadow(0 3px 8px #000)}
+.gb-feature-schedule .gb-feature-art{background:radial-gradient(circle,#2e5375,#071222)}
+.gb-feature-schedule .gb-feature-art img{width:90%;height:85%;object-fit:contain;filter:brightness(1.8)}
+.gb-feature-glyph{font:900 93px/.85 'Barlow Condensed';text-shadow:0 0 25px #6da0d9aa}
+.gb-tactics-art>span{font:bold 28px/1.4 monospace;transform:rotate(-13deg);color:#f3f5f9;text-shadow:0 0 12px #d13450}
+.gb-feature-art:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#05101ff5 0%,#0714228a 28%,transparent 85%)}
+.gb-feature-label{position:absolute;z-index:2;left:13px;right:25px;bottom:14px}
+.gb-feature-label b{display:block;font:italic 900 clamp(21px,2vw,29px)/.9 'Barlow Condensed',Impact,sans-serif;letter-spacing:.02em;text-shadow:0 2px 4px #000}
+.gb-feature-label small{display:block;margin-top:9px;font-weight:700;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#d4e1ee}
+.gb-feature-arrow{position:absolute;z-index:3;right:0;bottom:0;background:linear-gradient(135deg,#ad102d,#ed3b54);font-size:17px;padding:9px 11px}
+.gb-integrity-note{color:#91a9c3;font-size:10px;margin:12px 4px 0;line-height:1.5}
+@media(max-width:1250px){.gb-command-layout{grid-template-columns:minmax(180px,.8fr) minmax(390px,2fr) minmax(185px,.8fr)}.gb-panorama-stage{min-height:490px}.gb-feature-card{height:150px}.gb-feature-label b{font-size:22px}.gb-feature-label small{font-size:8px}}
+@media(max-width:1000px){.gb-command-layout{grid-template-columns:minmax(175px,1fr) minmax(360px,2.1fr)}.gb-right-panels{grid-column:1/-1;grid-template-columns:1.6fr 1fr;grid-template-rows:auto;min-height:195px}.gb-left-panels{grid-template-rows:1fr 1fr}.gb-feature-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.lg3s-gb-war-room-page .side-logo b{font-size:35px}.lg3s-gb-war-room-page #roomNav{justify-content:flex-start}}
+@media(max-width:750px){.lg3s-gb-war-room-page .sidebar{grid-template-rows:89px 55px}.lg3s-gb-war-room-page .side-logo{min-height:89px;padding:8px 13px}.lg3s-gb-war-room-page .side-logo img{width:52px;height:62px}.lg3s-gb-war-room-page .side-logo b{font-size:29px}.lg3s-gb-war-room-page .side-logo span{font-size:9px;letter-spacing:.15em}.lg3s-gb-war-room-page .side-bottom{padding:7px;margin-right:8px;font-size:8px;max-width:90px}.lg3s-gb-war-room-page .side-bottom small{display:none}.lg3s-gb-war-room-page #roomNav button{padding:10px 13px;flex:0 0 auto}.lg3s-gb-war-room-page #roomNav button span{font-size:14px}.gb-command-layout{display:flex;flex-direction:column}.gb-panorama-stage{order:-1;min-height:460px}.gb-left-panels,.gb-right-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;min-height:220px}.gb-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.gb-feature-card{height:155px}.gb-flag-feature{min-height:215px}.gb-panorama-content{min-height:350px}}
+@media(max-width:510px){.lg3s-gb-war-room-page .sidebar{grid-template-rows:79px 51px}.lg3s-gb-war-room-page .side-logo{min-height:79px;gap:7px}.lg3s-gb-war-room-page .side-logo img{width:45px;height:55px}.lg3s-gb-war-room-page .side-logo b{font-size:23px}.lg3s-gb-war-room-page .side-logo span{font-size:7px;letter-spacing:.11em;margin-top:7px}.lg3s-gb-war-room-page .side-bottom{font-size:0;padding:5px}.lg3s-gb-war-room-page .side-bottom i{margin:0}.lg3s-gb-war-room-page .side-bottom button{font-size:7px}.lg3s-gb-war-room-page #roomNav{height:51px}.gb-left-panels,.gb-right-panels{grid-template-columns:1fr}.gb-command-layout{gap:10px}.gb-panorama-stage{min-height:440px}.gb-panorama-banner{min-height:72px;padding:8px}.gb-panorama-banner strong{font-size:28px}.gb-panorama-shield img{width:38px;height:43px}.gb-panorama-content{min-height:300px}.gb-panorama-controls>span{font-size:8px;padding:8px}.gb-panorama-controls button{font-size:9px}.gb-feature-grid{gap:9px}.gb-feature-card{height:140px}.gb-feature-label{left:9px;bottom:10px}.gb-feature-label b{font-size:21px}.gb-feature-label small{font-size:8px;margin-top:7px}.gb-feature-arrow{font-size:13px;padding:7px}.gb-activity-panel{min-height:210px}.gb-flag-feature{min-height:180px}}
+
+
+/* Locker tab uses the same room design as the War Room command center. */
+.gb-full-locker-title{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:0 5px 17px}
+.gb-full-locker-identity{display:flex;align-items:center;gap:18px;min-width:0}
+.gb-full-locker-identity img{width:70px;height:78px;object-fit:contain;filter:drop-shadow(0 3px 6px #0009)}
+.gb-full-locker-identity h2{font:italic 900 clamp(28px,3.5vw,51px)/1 'Barlow Condensed';letter-spacing:.025em;margin:7px 0}
+.gb-full-locker-identity p{font-size:11px;color:#b2c7df;margin:0;line-height:1.5}
+.gb-locker-stage{min-height:710px}
+.gb-locker-stage .gb-panorama-banner{min-height:96px}
+.gb-locker-stage .gb-panorama-content{min-height:570px}
+.gb-room-newwindow{display:inline-block;pointer-events:auto;text-decoration:none;border:1px solid #93acc7;background:#061324f0;padding:9px 13px;color:#fff;font-size:10px;font-weight:900;white-space:nowrap}
+.gb-room-newwindow:hover{background:#c82244}
+.gb-stall-strip{margin-top:27px;border-top:2px solid #9d2540;padding-top:21px}
+.gb-stall-strip>.section-head h2{font:italic 900 32px 'Barlow Condensed'}
+.gb-stall-strip .player-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr))}
+.gb-stall-strip .player-card{border:1px solid #48627e;border-bottom:2px solid #b82d47;box-shadow:0 10px 16px #0004;min-height:95px;border-radius:5px}
+.gb-stall-strip .player-icon{background:linear-gradient(160deg,#294b74,#8d172d);border:1px solid #c3a77f}
+@media(max-width:750px){.gb-full-locker-title{flex-direction:column;align-items:stretch}.gb-locker-stage{min-height:560px}.gb-locker-stage .gb-panorama-content{min-height:420px}.gb-full-locker-identity img{width:55px;height:68px}}
+@media(max-width:510px){.gb-locker-stage{min-height:460px}.gb-locker-stage .gb-panorama-content{min-height:345px}.gb-full-locker-identity h2{font-size:30px}.gb-stall-strip .player-grid{grid-template-columns:1fr}.gb-full-locker-title .outline-link{align-self:flex-start}}
