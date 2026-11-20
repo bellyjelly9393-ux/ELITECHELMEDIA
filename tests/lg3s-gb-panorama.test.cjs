@@ -76,7 +76,7 @@ test('all verified GB players have on-scene jersey hotspots and direct public ca
  const ids=gb.players.map(p=>Number(p.lgUserId));
  assert.equal(ids.length,11);
  assert.equal(ids.filter(x=>x>0).length,11);
- assert.match(js,/const JERSEY='assets\\/lg3s\\/scene\\/gb-royal-blue\\.webp'/);
+ assert.ok(js.includes("const JERSEY='assets/lg3s/scene/gb-royal-blue.webp'"));
  assert.match(js,/jersey\.src=JERSEY/);
  assert.match(js,/const plate=element\('span','gbp-stall-nameplate',p\.name\)/);
  assert.match(js,/createTooltipFunc:playerHotspot/);
