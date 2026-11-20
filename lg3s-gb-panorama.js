@@ -12,12 +12,14 @@ const JERSEY='assets/lg3s/scene/gb-royal-blue.webp';
 const GB_KIT='assets/lg3s/scene/gb-kit.webp';
 const GB_GEAR_NOTE='Concept equipment only; no player-specific gear has been verified.';
 const SCENES={
- entrance:{title:'Entrance',image:'assets/lgchl/room-360/entrance-empty-v5.png',coords:[[-75,0],[-66,0],[-58,0],[-49,0],[-38,0],[-18,-1],[0,-1],[18,-1],[38,0],[52,0],[66,0]]},
- centre:{title:'Centre',image:'assets/lgchl/room-360/centre-empty-v5.png',coords:[[-143,4],[-126,4],[-110,4],[-94,4],[-65,4],[-18,1.4],[0,1.4],[18,1.4],[65,4],[95,4],[127,4]]}
+ // Bay-centre yaws are adapted from the actual Calgary Hitmen room (not evenly
+ // scattered on a floating UI layer). Pitch is the physical jersey centre.
+ entrance:{title:'Entrance',image:'assets/lgchl/room-360/entrance-empty-v5.png',coords:[[-50,-7],[-43,-7],[-36,-7],[-18,-7],[-9,-7],[0,-7],[9,-7],[18,-7],[36,-7],[43,-7],[50,-7]]},
+ centre:{title:'Centre',image:'assets/lgchl/room-360/centre-empty-v5.png',coords:[[-143,-11.5],[-126,-11.5],[-110,-11.5],[-94,-11.5],[-65,-11.5],[-36,-11.5],[0,-11.5],[36,-11.5],[65,-11.5],[111,-11.5],[144,-11.5]]}
 };
 const buttons={left:$('gbpLeft'),right:$('gbpRight'),reset:$('gbpReset'),zoomIn:$('gbpZoomIn'),zoomOut:$('gbpZoomOut'),full:$('gbpFull'),prev:$('gbpPrev'),next:$('gbpNext'),entrance:$('gbpEntrance'),centre:$('gbpCentre'),roster:$('gbpRosterToggle')};
 const stage=$('gbPanorama'),status=$('gbpLoading'),tileGrid=$('gbpPlayers'),search=$('gbpSearch'),modal=$('gbpStallModal');
-let roster=[],viewer=null,loaded=false,selected=-1,activeScene='entrance';
+let roster=[],viewer=null,loaded=false,selected=-1,activeScene='entrance',usingTexture=false;
 const safeId=x=>Number.isSafeInteger(Number(x))&&Number(x)>0;
 const cardLink=p=>'player-cards.html?league=lg3s&id='+encodeURIComponent(p.id)+'&kind='+(p.position==='G'?'goalie':'skater');
 const reduce=()=>window.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false;
@@ -45,7 +47,7 @@ function showPlayer(index,{open=false,scroll=true}={}){
  updateButtons();
  if(viewer&&loaded){
   const point=SCENES[activeScene].coords[index];
-  if(point)viewer.lookAt(point[1]-4,point[0],innerWidth<640?58:82,reduce()?false:700);
+  if(point)viewer.lookAt(point[1],point[0],innerWidth<640?58:82,reduce()?false:700);
  }
  if(scroll&&!open){document.querySelector('.gbp-tour').scrollIntoView({behavior:reduce()?'auto':'smooth',block:'start'});stage.focus({preventScroll:true});}
  if(open)openStall(player);
@@ -59,6 +61,11 @@ function openStall(player){
  $('gbpModalCard').href=cardLink(player);
  $('gbpModalJersey').src=JERSEY;
  $('gbpModalJersey').alt='Great Britain national concept jersey for '+player.name+'; number unassigned';
+ $('gbpCloseupName').textContent=player.name;
+ $('gbpCloseupPosition').textContent=position.toUpperCase();
+ $('gbpCloseupBackground').src=isGoalie?'assets/lgchl/room-360/stall-goalie-v7.png':'assets/lgchl/room-360/stall-empty-v5.png';
+ $('gbpCloseupBackground').alt=isGoalie?'Concept goalie locker with goalie equipment, not verified personal gear':'Concept skater locker with gloves, sticks and a towel';
+ $('gbpCloseupScene').setAttribute('aria-label',player.name+' Great Britain '+position+' player locker. Concept artwork, no number assigned.');
  $('gbpModalKit').src=GB_KIT;
  $('gbpModalKit').alt='Great Britain concept equipment reference';
  $('gbpModalEquipmentTitle').textContent=isGoalie?'GOALTENDER EQUIPMENT':'SKATER EQUIPMENT';
@@ -101,49 +108,61 @@ function drawRoster(){
 }
 function playerHotspot(host,args){
  const p=roster[args.index];if(!p)return;
- const isGoalie=p.position==='G';
- const button=element('button','gbp-hotspot gbp-jersey-stall'+(isGoalie?' gbp-jersey-stall-goalie':''));
+ // Rendered jersey and nameplate are part of the 360 texture. The only overlay
+ // is this transparent, accessible click region, which matches the physical bay.
+ const button=element('button','gbp-hotspot gbp-mounted-hit');
  button.type='button';button.dataset.playerId=String(p.id);
- button.setAttribute('aria-label','Open '+p.name+' '+(isGoalie?'goalie':'skater')+' jersey stall');
- const hanger=element('span','gbp-jersey-hanger');hanger.setAttribute('aria-hidden','true');
- const jersey=element('img','gbp-jersey-front');
- jersey.src=JERSEY;jersey.alt='';jersey.loading='lazy';jersey.decoding='async';jersey.draggable=false;
- const gear=element('span','gbp-stall-gear-symbol',isGoalie?'G':'S');gear.setAttribute('aria-hidden','true');
- const plate=element('span','gbp-stall-nameplate',p.name);
- const position=element('span','gbp-stall-position',isGoalie?'GOALTENDER':p.position);
- button.append(hanger,jersey,gear,plate,position);
+ button.setAttribute('aria-label','Open '+p.name+' '+(p.position==='G'?'goalie':'skater')+' locker');
+ button.title=p.name+' · '+(p.position==='G'?'Goalie':p.position);
+ button.append(element('span','gbp-fallback-label',p.name));
  button.addEventListener('click',e=>{e.stopPropagation();showPlayer(args.index,{open:true,scroll:false});});
  host.append(button);
 }
-function signHotspot(host){
- const sign=element('div','gbp-wall-sign');
- const logo=element('img');logo.src=CREST;logo.alt='';
- const copy=element('div');copy.append(element('strong',null,'GREAT BRITAIN'),element('small',null,'LG3S · THE BLUE ROOM'));
- sign.append(logo,copy);host.append(sign);
+function sceneConfig(name,textures){
+ return {title:SCENES[name].title,type:'equirectangular',
+ panorama:textures?.[name]||SCENES[name].image,pitch:0,yaw:0,hfov:fov(),
+ hotSpots:roster.map((p,index)=>({
+  id:name+'-player-'+p.id,
+  pitch:SCENES[name].coords[index][1],
+  yaw:SCENES[name].coords[index][0],
+  cssClass:'gbp-hotspot-host',
+  createTooltipFunc:playerHotspot,
+  createTooltipArgs:{index}
+ }))};
 }
-function sceneConfig(name){
- return {title:SCENES[name].title,type:'equirectangular',panorama:SCENES[name].image,pitch:0,yaw:0,hfov:fov(),
- hotSpots:[
-  {id:name+'-brand',pitch:name==='entrance'?12:23,yaw:0,cssClass:'gbp-hotspot-host',createTooltipFunc:signHotspot},
-  ...roster.map((p,index)=>({
-   id:name+'-player-'+p.id,
-   pitch:SCENES[name].coords[index][1],
-   yaw:SCENES[name].coords[index][0],
-   cssClass:'gbp-hotspot-host',
-   createTooltipFunc:playerHotspot,
-   createTooltipArgs:{index}
-  }))
- ]};
+function resizeMountedHits(){
+ if(!viewer)return;
+ const focal=stage.clientWidth/(2*Math.tan(viewer.getHfov()*Math.PI/360));
+ const width=Math.max(35,Math.min(160,2*focal*Math.tan(3.05*Math.PI/180)));
+ const height=Math.max(50,Math.min(220,2*focal*Math.tan(5.5*Math.PI/180)));
+ document.querySelectorAll('.gbp-mounted-hit').forEach(b=>{
+  b.style.width=width+'px';b.style.height=height+'px';
+ });
 }
-function startPanorama(){
+async function startPanorama(){
  if(!window.pannellum){setLoading('Interactive 360° viewer unavailable. Player roster and cards remain accessible below.');return;}
+ let textures=null;
+ try{
+  setLoading('Mounting Great Britain jerseys inside the panoramic locker bays…');
+  textures=await window.GBPanoramaTextures.composeScenes({
+   scenes:SCENES,players:roster,jerseyPath:JERSEY,crestPath:CREST,
+   ecmPath:'assets/brand/ecm-logo.webp'
+  });
+  usingTexture=true;
+ }catch(error){
+  console.warn('GB scene texture composition failed; using accessible fallback:',error);
+  document.body.classList.add('gbp-texture-fallback');
+  setLoading('The original room image loaded without mounted jerseys. Use the roster or player markers to open a stall.');
+ }
  try{
   viewer=window.pannellum.viewer(stage,{
    default:{firstScene:'entrance',autoLoad:true,showControls:false,showFullscreenCtrl:false,mouseZoom:'fullscreenonly',keyboardZoom:false,
    minHfov:45,maxHfov:110,minPitch:-65,maxPitch:65,sceneFadeDuration:reduce()?0:500,escapeHTML:true},
-   scenes:{entrance:sceneConfig('entrance'),centre:sceneConfig('centre')}
+   scenes:{entrance:sceneConfig('entrance',textures),centre:sceneConfig('centre',textures)}
   });
-  viewer.on('load',()=>{loaded=true;activeScene=viewer.getScene();status.hidden=true;updateButtons();});
+  viewer.on('load',()=>{loaded=true;activeScene=viewer.getScene();status.hidden=true;resizeMountedHits();updateButtons();});
+  viewer.on('zoomchange',resizeMountedHits);
+  window.addEventListener('resize',resizeMountedHits);
   viewer.on('error',()=>{loaded=false;setLoading('360° scene could not load. Use Find My Stall below for verified player cards.');updateButtons();});
  }catch(error){console.warn('GB public panorama:',error);setLoading('The 360° scene is unavailable. Use the player list to open a player card.');viewer=null;}
 }

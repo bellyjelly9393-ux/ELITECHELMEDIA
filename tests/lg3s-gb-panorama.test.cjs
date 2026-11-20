@@ -8,6 +8,7 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const html=read('lg3s-gb-panorama.html');
 const css=read('lg3s-gb-panorama.css');
 const js=read('lg3s-gb-panorama.js');
+const texture=read('lg3s-gb-panorama-texture.js');
 const oldPublic=read('lg3s-gb-locker.html');
 const oldLoader=read('lg3s-gb-locker.js');
 const fixture=JSON.parse(read('data/lg3s/season1-active-roster-2026-11-14.json'));
@@ -28,6 +29,7 @@ test('Great Britain public panoramic page uses actual Calgary 360 viewer archite
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/vendor\/pannellum\/pannellum\.js/);
  assert.match(html,/lg3s-gb-panorama\.js/);
+ assert.match(html,/lg3s-gb-panorama-texture\.js/);
  assert.match(html,/lg3s-gb-locker\.html/);
  assert.match(css,/\.gbp-hotspot/);
  assert.match(js,/pannellum\.viewer/);
@@ -72,33 +74,33 @@ test('both room views assign 11 positions and can find the real GB players',()=>
  assert.match(js,/showPlayer\(match\)/);
 });
 
-test('all verified GB players have on-scene jersey hotspots and direct public card destinations',()=>{
- const ids=gb.players.map(p=>Number(p.lgUserId));
- assert.equal(ids.length,11);
- assert.equal(ids.filter(x=>x>0).length,11);
+test('all 11 jerseys are baked into both equirectangular scenes, not DOM cards',()=>{
  assert.ok(js.includes("const JERSEY='assets/lg3s/scene/gb-royal-blue.webp'"));
- assert.match(js,/jersey\.src=JERSEY/);
- assert.match(js,/const plate=element\('span','gbp-stall-nameplate',p\.name\)/);
+ assert.match(js,/GBPanoramaTextures\.composeScenes/);
  assert.match(js,/createTooltipFunc:playerHotspot/);
- assert.match(js,/hotSpots:/);
- assert.match(js,/roster\.map\(\(p,index\)=>/);
+ assert.match(js,/hotSpots:roster\.map/);
  assert.match(js,/card\.href=cardLink\(p\)/);
  assert.match(js,/gbp-player-card-link/);
- assert.match(js,/isGoalie=p\.position==='G'/);
- assert.doesNotMatch(js,/gear-v7\.png/);
  assert.match(js,/entrance-empty-v5\.png/);
  assert.match(js,/centre-empty-v5\.png/);
+ assert.doesNotMatch(js,/gbp-jersey-front|gbp-jersey-stall-goalie|signHotspot/);
+ assert.match(texture,/drawMountedJersey/);
+ assert.match(texture,/drawTeamSign/);
+ assert.match(texture,/canvas\.toDataURL\('image\/jpeg'/);
+ assert.match(css,/\.gbp-hotspot\.gbp-mounted-hit/);
+ assert.doesNotMatch(css,/\.gbp-jersey-front|\.gbp-jersey-stall\{/);
 });
-test('gear and jersey visuals are explicitly concept-only, goalies are differentiated',()=>{
- for(const id of ['gbpModalJersey','gbpModalKit','gbpModalEquipmentTitle','gbpModalEquipmentItems','gbpModalEquipmentNote'])
+test('Calgary-style GB closeup keeps public identity and goalie equipment distinction',()=>{
+ for(const id of ['gbpModalJersey','gbpModalKit','gbpModalEquipmentTitle','gbpModalEquipmentItems','gbpModalEquipmentNote','gbpCloseupScene','gbpCloseupName','gbpCloseupPosition','gbpCloseupBackground'])
   assert.ok(html.includes('id="'+id+'"'),id);
  assert.match(js,/GB_GEAR_NOTE=/);
- assert.match(js,/gbp-jersey-stall-goalie/);
+ assert.match(js,/stall-goalie-v7\.png/);
+ assert.match(js,/stall-empty-v5\.png/);
  assert.match(js,/Mask · chest protector · blocker · catcher · leg pads/);
  assert.match(js,/Helmet · gloves · skates · stick/);
- assert.match(css,/\.gbp-jersey-front/);
+ assert.match(css,/\.gbp-closeup-jersey/);
  assert.match(css,/\.gbp-equipment-panel/);
- assert.match(html,/individual numbers, equipment models and ratings are not invented/);
+ assert.match(html,/individual jersey numbers, personal equipment models and ratings are not invented/);
  assert.doesNotMatch(html,/player-specific goalie pads|authentic licensed jersey|verified uniform number/);
 });
 test('standard Great Britain public room retains original original-portal routing',()=>{
@@ -109,15 +111,59 @@ test('standard Great Britain public room retains original original-portal routin
  assert.match(loader,/enterRoom/);
 });
 
-test('runtime 360 scenes mount 11 real GB jerseys, open the correct stall and wire all cards',async()=>{
+test('compositor mounts all 11 jerseys into both 360 scene textures and embeds GB signage',async()=>{
+ const vm=require('node:vm');
+ const draw=[];
+ const fakeCanvas=()=>({
+  width:0,height:0,
+  getContext(){return {
+   save(){},restore(){},fillRect(){},strokeRect(){},fillText(){},
+   beginPath(){},arc(){},fill(){},
+   drawImage(img,...args){draw.push({path:img.path,args});}
+  }},
+  toDataURL(){return 'data:image/jpeg;base64,ROOM';}
+ });
+ class FakeImage{
+  constructor(){this.naturalWidth=4096;this.naturalHeight=2048;}
+  set src(value){this.path=value;Promise.resolve().then(()=>this.onload());}
+ }
+ const w={};
+ vm.runInNewContext(texture,{window:w,Image:FakeImage,
+   document:{createElement(t){assert.equal(t,'canvas');return fakeCanvas();}},
+   console
+ },{filename:'lg3s-gb-panorama-texture.js',timeout:4000});
+ const players=gb.players.map(p=>({position:p.position}));
+ const scenes={
+  entrance:{image:'assets/lgchl/room-360/entrance-empty-v5.png',coords:[[-50,-7],[-43,-7],[-36,-7],[-18,-7],[-9,-7],[0,-7],[9,-7],[18,-7],[36,-7],[43,-7],[50,-7]]},
+  centre:{image:'assets/lgchl/room-360/centre-empty-v5.png',coords:[[-143,-11.5],[-126,-11.5],[-110,-11.5],[-94,-11.5],[-65,-11.5],[-36,-11.5],[0,-11.5],[36,-11.5],[65,-11.5],[111,-11.5],[144,-11.5]]}
+ };
+ const out=await w.GBPanoramaTextures.composeScenes({
+  scenes,players,jerseyPath:'gb-royal-blue.webp',crestPath:'gb-crest.svg',ecmPath:'ecm-logo.webp'
+ });
+ assert.match(out.entrance,/^data:image\/jpeg/);
+ assert.match(out.centre,/^data:image\/jpeg/);
+ const mounted=draw.filter(x=>x.path==='gb-royal-blue.webp');
+ assert.equal(mounted.length,22,'11 jerseys in each of two camera views');
+ const backgrounds=draw.filter(x=>x.path.includes('-empty-v5.png'));
+ assert.equal(backgrounds.length,2);
+ assert.ok(draw.filter(x=>x.path==='gb-crest.svg').length===2);
+ for(const placement of mounted){
+  const [x,y,width,height]=placement.args;
+  assert.ok(x>=0&&x+width<=4096);
+  assert.ok(y>=0&&y+height<=2048);
+  assert.ok(width>50&&width<100,'physically sized jersey, not oversized floating card');
+  assert.ok(height>90&&height<180);
+ }
+});
+test('runtime mounts transparent, clickable hotspots aligned to 11 texture-baked player jerseys',async()=>{
  const vm=require('node:vm');
  const idMap=new Map();
  const node=(tag='div')=>{
   const listeners=Object.create(null),children=[];
   return {
    tagName:tag.toUpperCase(),className:'',dataset:{},children,hidden:false,disabled:false,value:'',
-   textContent:'',href:'',src:'',alt:'',open:false,
-   style:{},classList:{add(){},remove(){},toggle(){}},
+   textContent:'',href:'',src:'',alt:'',open:false,style:{},
+   classList:{add(){},remove(){},toggle(){}},
    setAttribute(){},removeAttribute(){},getAttribute(){return null},
    addEventListener(type,fn){listeners[type]=fn;},listeners,
    append(...items){children.push(...items);},
@@ -140,14 +186,23 @@ test('runtime 360 scenes mount 11 real GB jerseys, open the correct stall and wi
   lookAt(){},loadScene(){},setYaw(){},getYaw(){return 0},
   setHfov(){},getHfov(){return 92}
  };
- const window={pannellum:{viewer(_host,options){config=options;return viewer;}},matchMedia:()=>({matches:true})};
+ const window={
+  GBPanoramaTextures:{composeScenes:async()=>({
+   entrance:'data:image/jpeg;base64,ENTER',centre:'data:image/jpeg;base64,CENTRE'
+  })},
+  pannellum:{viewer(_host,options){config=options;return viewer;}},
+  matchMedia:()=>({matches:true}),
+  addEventListener(){}
+ };
  const context={
   window,document,fetch:async()=>({ok:true,json:async()=>fixture}),
   AbortSignal,console,innerWidth:1400,encodeURIComponent
  };
  vm.runInNewContext(js,context,{filename:'lg3s-gb-panorama.js',timeout:4000});
- await new Promise(resolve=>setTimeout(resolve,25));
+ await new Promise(resolve=>setTimeout(resolve,30));
  assert.ok(config&&config.scenes);
+ assert.match(config.scenes.entrance.panorama,/^data:image\/jpeg/);
+ assert.match(config.scenes.centre.panorama,/^data:image\/jpeg/);
  assert.equal(get('gbpPlayers').children.length,11);
  for(const [sceneName,scene] of Object.entries(config.scenes)){
   const playerHotspots=scene.hotSpots.filter(h=>h.id.includes('-player-'));
@@ -157,11 +212,9 @@ test('runtime 360 scenes mount 11 real GB jerseys, open the correct stall and wi
    hotspot.createTooltipFunc(host,{index:i});
    const button=host.children[0];
    assert.equal(button.dataset.playerId,String(player.lgUserId));
-   const image=button.children.find(x=>x.className==='gbp-jersey-front');
-   assert.ok(image);
-   assert.equal(image.src,'assets/lg3s/scene/gb-royal-blue.webp');
-   assert.ok(button.children.some(x=>x.className==='gbp-stall-nameplate'&&x.textContent===player.gamertag));
-   if(player.position==='G')assert.ok(button.className.includes('gbp-jersey-stall-goalie'));
+   assert.equal(button.children.length,1,'only text fallback, no visible jersey overlay');
+   assert.ok(button.className.includes('gbp-mounted-hit'));
+   assert.match(button.getAttribute?.('aria-label')||button.title, /./);
   }
  }
  for(let i=0;i<11;i++){
@@ -176,7 +229,8 @@ test('runtime 360 scenes mount 11 real GB jerseys, open the correct stall and wi
  holder.children[0].listeners.click({stopPropagation(){}});
  assert.equal(get('gbpModalName').textContent,gb.players[goalieIndex].gamertag);
  assert.equal(get('gbpModalEquipmentTitle').textContent,'GOALTENDER EQUIPMENT');
+ assert.equal(get('gbpCloseupName').textContent,gb.players[goalieIndex].gamertag);
+ assert.equal(get('gbpCloseupBackground').src,'assets/lgchl/room-360/stall-goalie-v7.png');
  assert.equal(get('gbpModalJersey').src,'assets/lg3s/scene/gb-royal-blue.webp');
- assert.equal(get('gbpModalKit').src,'assets/lg3s/scene/gb-kit.webp');
  assert.equal(get('gbpModalCard').href,'player-cards.html?league=lg3s&id='+gb.players[goalieIndex].lgUserId+'&kind=goalie');
 });

@@ -36,6 +36,7 @@ jobs:
         run: |
           node --check lg3s-team.js
           node --check lg3s-gb-panorama.js
+          node --check lg3s-gb-panorama-texture.js
           node --check player-cards.js
       - name: Run national locker regression tests
         run: node --test tests/lg3s-national-lockers.test.cjs tests/lg3s-gb-panorama.test.cjs
