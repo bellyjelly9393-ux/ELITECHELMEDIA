@@ -1,4 +1,4 @@
-:root{color-scheme:dark;font-family:Arial,Helvetica,sans-serif;background:#070b14;color:#f3f6fc;--gb-blue:#1956a3;--gb-red:#ca284f;--gb-border:#2a3a55}
+:root{color-scheme:dark;font-family:Arial,Helvetica,sans-serif;background:#070b14;color:#f3f6fc;--gb-blue:#1c69d3;--gb-red:#d62b4d;--gb-white:#f2f7ff;--gb-border:#2c4b78}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#224e8a66,transparent 43%),#070b14}a{color:#d3e7ff;text-underline-offset:4px}button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.4;cursor:not-allowed}a:focus-visible,button:focus-visible,input:focus-visible,#gbPanorama:focus-visible{outline:3px solid #92c8ff;outline-offset:3px}
 .gbp-visually-hidden,.gbp-skip:not(:focus){position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden;white-space:nowrap}.gbp-skip:focus{position:fixed;top:4px;left:4px;z-index:999;padding:10px;background:#fff;color:#000}
 .gbp-header{height:auto;min-height:84px;padding:12px clamp(18px,4vw,60px);display:flex;gap:22px;align-items:center;background:#070e1c;border-bottom:1px solid #344665}
@@ -177,3 +177,49 @@ footer{padding:20px;text-align:center;color:#657c9c;border-top:1px solid #253b5c
 @media(prefers-reduced-motion:reduce){
   .gbp-hotspot.gbp-mounted-hit{transition:none}
 }
+
+/* GREAT BRITAIN TEAM LIGHTING
+   The panorama's real red/orange fixtures are recoloured into royal-blue
+   illumination by the canvas compositor. This CSS coordinates interface chrome
+   and closeup highlights with those baked scene colours. */
+.gbp-page{background:radial-gradient(ellipse at 50% -18%,#225ab54f,transparent 48%),#070d19}
+.gbp-tour{border-color:#5279b0;box-shadow:0 0 0 1px #366dbc44,0 18px 55px #000b,0 0 40px #0e56bc20}
+.gbp-tour-head{background:linear-gradient(95deg,#0e2d57,#08182f 62%,#101522)}
+.gbp-scenes button[aria-pressed=true]{
+ background:linear-gradient(150deg,#1b64c5,#0d397b);
+ color:var(--gb-white);border-color:#89b9ff;
+ box-shadow:inset 0 -3px var(--gb-red),0 0 13px #196ee53d;
+}
+.gbp-closeup-scene:before{
+ content:"";position:absolute;z-index:1;inset:0;pointer-events:none;
+ background:
+  radial-gradient(ellipse 46% 22% at 50% 11%,#95c7ff20,transparent 85%),
+  linear-gradient(90deg,#08439c24,transparent 26%,transparent 74%,#08439c24),
+  radial-gradient(ellipse 74% 22% at 50% 96%,#ce234b18,transparent 82%);
+ box-shadow:inset 0 0 70px #071c3c8a;
+}
+.gbp-closeup-team{
+ border-bottom-color:var(--gb-red);
+ box-shadow:0 8px 24px #093c83aa,0 0 18px #237de24d;
+}
+.gbp-closeup-plate{
+ border-color:#9cbee7;
+ box-shadow:0 0 0 3px #061329,0 7px 16px #000b,0 0 15px #266acf77;
+}
+.gbp-closeup-plate span{border-right-color:var(--gb-red)}
+.gbp-closeup-bottom{
+ border-color:#5d8ccb;
+ box-shadow:0 0 25px #246ad185,0 2px 10px #000b;
+}
+.gbp-stall-modal .gbp-modal-info{
+ background:linear-gradient(145deg,#123661,#091a34 65%,#070f1c);
+ border-top:2px solid #2757a0;
+}
+.gbp-modal-player a{
+ background:linear-gradient(135deg,#246ed0,#12458d);
+ border-color:#9cc7ff;
+ box-shadow:inset 0 -3px var(--gb-red);
+}
+.gbp-equipment-panel{background:linear-gradient(100deg,#113b71,#081b32);border-color:#5483bb}
+.gbp-goalie-stall .gbp-equipment-panel{border-color:#be9c6a}
+.gbp-stall-modal #gbpModalLocate{border-color:#5b8fd0;background:#0b2347}
