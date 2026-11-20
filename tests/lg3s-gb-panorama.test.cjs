@@ -14,6 +14,45 @@ const oldLoader=read('lg3s-gb-locker.js');
 const fixture=JSON.parse(read('data/lg3s/season1-active-roster-2026-11-14.json'));
 const gb=fixture.teams.find(t=>Number(t.lgTeamId)===1446);
 
+// Team-colour lighting modifies only warm photo emissions. Since the GB
+// jersey art is applied AFTER this pass, existing jersey colours are untouched.
+test('Great Britain lights are royal blue main, Union red floor, white neutral',()=>{
+ const vm=require('node:vm');
+ const scope={window:{},console};
+ vm.runInNewContext(texture,scope,{filename:'lg3s-gb-panorama-texture.js',timeout:3000});
+ const light={primary:'#1C69D3',secondary:'#D62B4D',neutral:'#F2F7FF'};
+ const width=4,height=2;
+ const input=new Uint8ClampedArray(width*height*4);
+ const set=(x,y,[r,g,b])=>input.set([r,g,b,255],(y*width+x)*4);
+ const get=(x,y)=>Array.from(input.slice((y*width+x)*4,(y*width+x)*4+3));
+ set(0,0,[245,35,25]);   // bright red overhead emitter
+ set(1,0,[118,70,48]);   // wood panel, should be protected
+ set(2,0,[245,244,241]); // neutral white ceiling lamp
+ set(3,0,[30,80,180]);   // royal-blue concept kit
+ set(0,1,[245,35,25]);   // floor perimeter accent
+ const result=scope.window.GBPanoramaTextures.relightPixels({data:input},width,height,light);
+ assert.equal(result.blue,1);
+ assert.equal(result.red,1);
+ const ceiling=get(0,0),floor=get(0,1);
+ assert.ok(ceiling[2]>ceiling[0]*1.5,'main red ceiling light must turn blue');
+ assert.ok(ceiling[2]>ceiling[1],'main emitter should have a blue peak');
+ assert.ok(floor[0]>floor[2]*1.5,'floor accent should stay GB red');
+ assert.deepEqual(get(1,0),[118,70,48],'warm wood texture must remain intact');
+ assert.deepEqual(get(2,0),[245,244,241],'white light must remain neutral');
+ assert.deepEqual(get(3,0),[30,80,180],'already-blue colours must remain unchanged');
+});
+test('GB palette is exclusive to standalone room, not Calgary or original public GB 3D',()=>{
+ assert.match(js,/GB_TEAM_LIGHTING=Object\.freeze/);
+ assert.match(js,/primary:'#1C69D3',secondary:'#D62B4D',neutral:'#F2F7FF'/);
+ assert.match(js,/lighting:GB_TEAM_LIGHTING/);
+ assert.match(js,/relightImage\(source,GB_TEAM_LIGHTING\)/);
+ assert.match(texture,/relightCanvas\(ctx,width,height,lighting\);/);
+ assert.match(texture,/Paint GB jerseys after lighting/);
+ assert.match(html,/20261120-gb-light-v1/);
+ assert.match(css,/GREAT BRITAIN TEAM LIGHTING/);
+ assert.doesNotMatch(oldPublic,/GB_TEAM_LIGHTING|20261120-gb-light-v1/);
+});
+
 test('original Great Britain public 3D locker remains independent and unchanged in shape',()=>{
  assert.match(oldPublic,/<title>Great Britain 3D Locker Room/);
  assert.match(oldPublic,/id="enterLocker"/);
@@ -187,7 +226,7 @@ test('runtime mounts transparent, clickable hotspots aligned to 11 texture-baked
   setHfov(){},getHfov(){return 92}
  };
  const window={
-  GBPanoramaTextures:{composeScenes:async()=>({
+  GBPanoramaTextures:{relightImage:async()=>('data:image/jpeg;base64,LIT'),composeScenes:async()=>({
    entrance:'data:image/jpeg;base64,ENTER',centre:'data:image/jpeg;base64,CENTRE'
   })},
   pannellum:{viewer(_host,options){config=options;return viewer;}},
