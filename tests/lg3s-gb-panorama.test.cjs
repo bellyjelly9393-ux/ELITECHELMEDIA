@@ -98,7 +98,7 @@ test('gear and jersey visuals are explicitly concept-only, goalies are different
  assert.match(js,/Helmet · gloves · skates · stick/);
  assert.match(css,/\.gbp-jersey-front/);
  assert.match(css,/\.gbp-equipment-panel/);
- assert.match(html,/number, equipment models and ratings are not invented/);
+ assert.match(html,/individual numbers, equipment models and ratings are not invented/);
  assert.doesNotMatch(html,/player-specific goalie pads|authentic licensed jersey|verified uniform number/);
 });
 test('standard Great Britain public room retains original original-portal routing',()=>{
