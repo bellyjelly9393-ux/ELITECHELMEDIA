@@ -9,9 +9,10 @@
   <link rel="canonical" href="https://wildmanhockey-elitechelmedia.app/lg3s-gb-panorama.html">
   <title>Great Britain | 360° Panoramic Locker Room | EliteChel Media</title>
   <link rel="stylesheet" href="vendor/pannellum/pannellum.css">
-  <link rel="stylesheet" href="lg3s-gb-panorama.css?v=20261120-jersey1">
+  <link rel="stylesheet" href="lg3s-gb-panorama.css?v=20261120-mounted2">
   <script defer src="vendor/pannellum/pannellum.js"></script>
-  <script defer src="lg3s-gb-panorama.js?v=20261120-jersey1"></script>
+  <script defer src="lg3s-gb-panorama-texture.js?v=20261120-mounted2"></script>
+  <script defer src="lg3s-gb-panorama.js?v=20261120-mounted2"></script>
 </head>
 <body class="gbp-page">
 <a href="#main" class="gbp-skip">Skip to panoramic room</a>
@@ -29,7 +30,7 @@
 </header>
 <main id="main" class="gbp-main">
   <div class="gbp-titlebar">
-    <div><p class="gbp-eyebrow">THE BLUE ROOM · PUBLIC PANORAMA</p><h1>Inside Great Britain's locker room.</h1><p class="gbp-lead">Explore the Great Britain jerseys in the 360° room. Select a stall, view the concept equipment and open its verified EliteChel player card.</p></div>
+    <div><p class="gbp-eyebrow">THE BLUE ROOM · PUBLIC PANORAMA</p><h1>Inside Great Britain's locker room.</h1><p class="gbp-lead">Explore the jerseys mounted inside the Great Britain locker bays. Select a locker to inspect its equipment and verified EliteChel player card.</p></div>
     <div class="gbp-identity"><span>🇬🇧</span><img src="assets/lg3s/team1446.svg" alt="Great Britain crest"></div>
   </div>
   <section class="gbp-tour" aria-labelledby="tourTitle">
@@ -44,7 +45,6 @@
     <div class="gbp-view" id="gbpView">
       <div id="gbPanorama" class="gbp-panorama" tabindex="0" aria-label="360-degree panoramic locker room. Drag or swipe to look around; choose a named player stall."></div>
       <div class="gbp-loading" id="gbpLoading" role="status">Loading the public 360° locker room…</div>
-      <div class="gbp-room-brand" aria-hidden="true"><img src="assets/lg3s/team1446.svg" alt=""><span>THE BLUE ROOM<small>GREAT BRITAIN · LG3S</small></span></div>
       <div class="gbp-controls">
         <div class="gbp-control-left">
           <button id="gbpLeft" type="button" aria-label="Look left" disabled>←</button>
@@ -74,19 +74,33 @@
     <div class="gbp-player-grid" id="gbpPlayers" aria-live="polite" aria-busy="true"></div>
   </section>
   <section class="gbp-explainer">
-    <p>All 11 panoramic stalls display the Great Britain concept jersey, connected to verified LG3s player IDs. The same national kit is shared across the roster. Skater and goalie positions are distinguished; individual numbers, equipment models and ratings are not invented.</p>
+    <p>The 11 publicly verified GB roster identities are mapped to physical locker bays in each panoramic room view. Jersey artwork is a team concept; individual jersey numbers, personal equipment models and ratings are not invented.</p>
     <p>This panoramic tour uses EliteChel Media's shared locker-room environment, personalized for Great Britain. The <a href="lg3s-gb-locker.html">original GB 3D locker room</a> remains separate and unchanged.</p>
   </section>
 </main>
 <dialog class="gbp-stall-modal" id="gbpStallModal" aria-labelledby="gbpModalName">
   <div class="gbp-modal-top"><span>🇬🇧 GREAT BRITAIN · PLAYER STALL</span><button id="gbpModalClose" type="button" aria-label="Close player stall">×</button></div>
   <div class="gbp-modal-body">
-    <figure class="gbp-modal-jersey"><img id="gbpModalJersey" src="assets/lg3s/scene/gb-royal-blue.webp" alt="Great Britain national concept hockey jersey" width="280" height="280"><figcaption>GB NATIONAL CONCEPT JERSEY · NO VERIFIED NUMBER</figcaption></figure>
+    <figure class="gbp-closeup-scene" id="gbpCloseupScene" aria-label="Great Britain player locker with mounted jersey and equipment concept">
+      <img id="gbpCloseupBackground" class="gbp-closeup-background" src="assets/lgchl/room-360/stall-empty-v5.png" alt="Physical hockey locker bay" width="850" height="850">
+      <div class="gbp-closeup-team" aria-hidden="true">
+        <img src="assets/lg3s/team1446.svg" alt="">
+        <strong>GREAT BRITAIN</strong>
+        <img src="assets/brand/ecm-logo.webp" alt="">
+      </div>
+      <div class="gbp-closeup-plate" aria-hidden="true">
+        <span id="gbpCloseupPosition">LW</span><strong id="gbpCloseupName">PLAYER</strong>
+      </div>
+      <img id="gbpModalJersey" class="gbp-closeup-jersey" src="assets/lg3s/scene/gb-royal-blue.webp" alt="Great Britain national concept hockey jersey" width="280" height="280">
+      <div class="gbp-closeup-bottom" aria-hidden="true">
+        <img src="assets/lg3s/team1446.svg" alt=""><span>GB · LG3S</span><img src="assets/brand/ecm-crest.webp" alt="">
+      </div>
+    </figure>
     <div class="gbp-modal-info">
-      <p class="gbp-eyebrow">LG3S · SEASON 1</p>
-      <h2 id="gbpModalName">Player</h2>
-      <p id="gbpModalPosition"></p>
-      <p id="gbpModalIdentity" class="gbp-identity-note"></p>
+      <div class="gbp-modal-player">
+        <div><p class="gbp-eyebrow">LG3S · SEASON 1 · VERIFIED ROSTER</p><h2 id="gbpModalName">Player</h2><p id="gbpModalPosition"></p><p id="gbpModalIdentity" class="gbp-identity-note"></p></div>
+        <a id="gbpModalCard" href="player-cards.html?league=lg3s">OPEN PLAYER CARD ↗</a>
+      </div>
       <section class="gbp-equipment-panel" aria-labelledby="gbpModalEquipmentTitle">
         <img id="gbpModalKit" src="assets/lg3s/scene/gb-kit.webp" alt="Great Britain concept equipment reference" width="96" height="96">
         <div>
@@ -95,8 +109,7 @@
           <small id="gbpModalEquipmentNote">Concept equipment only; no player-specific gear has been verified.</small>
         </div>
       </section>
-      <a id="gbpModalCard" href="player-cards.html?league=lg3s">OPEN PLAYER CARD ↗</a>
-      <button id="gbpModalLocate" type="button">LOCATE THIS STALL IN THE ROOM</button>
+      <button id="gbpModalLocate" type="button">RETURN TO THIS STALL IN THE ROOM</button>
     </div>
   </div>
 </dialog>
