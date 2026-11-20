@@ -11,6 +11,20 @@ const CREST='assets/lg3s/team1446.svg';
 const JERSEY='assets/lg3s/scene/gb-royal-blue.webp';
 const GB_KIT='assets/lg3s/scene/gb-kit.webp';
 const GB_GEAR_NOTE='Concept equipment only; no player-specific gear has been verified.';
+// Great Britain lighting: royal blue main glow, Union red floor accents,
+// preserved neutral-white fixtures. Passed to the shared colour compositor.
+const GB_TEAM_LIGHTING=Object.freeze({
+ primary:'#1C69D3',secondary:'#D62B4D',neutral:'#F2F7FF'
+});
+const closeupLightCache=new Map();
+let closeupLightToken=0;
+function litCloseup(source){
+ if(!closeupLightCache.has(source)){
+  closeupLightCache.set(source,window.GBPanoramaTextures.relightImage(source,GB_TEAM_LIGHTING)
+   .catch(err=>{console.warn('GB closeup relighting unavailable:',err);return source;}));
+ }
+ return closeupLightCache.get(source);
+}
 const SCENES={
  // Bay-centre yaws are adapted from the actual Calgary Hitmen room (not evenly
  // scattered on a floating UI layer). Pitch is the physical jersey centre.
@@ -63,7 +77,13 @@ function openStall(player){
  $('gbpModalJersey').alt='Great Britain national concept jersey for '+player.name+'; number unassigned';
  $('gbpCloseupName').textContent=player.name;
  $('gbpCloseupPosition').textContent=position.toUpperCase();
- $('gbpCloseupBackground').src=isGoalie?'assets/lgchl/room-360/stall-goalie-v7.png':'assets/lgchl/room-360/stall-empty-v5.png';
+ const closeupPath=isGoalie?'assets/lgchl/room-360/stall-goalie-v7.png':'assets/lgchl/room-360/stall-empty-v5.png';
+ const requested=++closeupLightToken;
+ $('gbpCloseupBackground').src=closeupPath;
+ // Relight the photograph only. The shirt and crest are separate, untouched.
+ litCloseup(closeupPath).then(image=>{
+  if(requested===closeupLightToken)$('gbpCloseupBackground').src=image;
+ });
  $('gbpCloseupBackground').alt=isGoalie?'Concept goalie locker with goalie equipment, not verified personal gear':'Concept skater locker with gloves, sticks and a towel';
  $('gbpCloseupScene').setAttribute('aria-label',player.name+' Great Britain '+position+' player locker. Concept artwork, no number assigned.');
  $('gbpModalKit').src=GB_KIT;
@@ -146,7 +166,7 @@ async function startPanorama(){
   setLoading('Mounting Great Britain jerseys inside the panoramic locker bays…');
   textures=await window.GBPanoramaTextures.composeScenes({
    scenes:SCENES,players:roster,jerseyPath:JERSEY,crestPath:CREST,
-   ecmPath:'assets/brand/ecm-logo.webp'
+   ecmPath:'assets/brand/ecm-logo.webp',lighting:GB_TEAM_LIGHTING
   });
   usingTexture=true;
  }catch(error){
