@@ -7,10 +7,13 @@ const $=id=>document.getElementById(id);
 const SNAPSHOT='data/lg3s/season1-active-roster-2026-11-14.json';
 const TEAM_ID=1446;
 const CREST='assets/lg3s/team1446.svg';
+// All 11 verified players share the GB national concept kit; jersey numbers are unverified.
 const JERSEY='assets/lg3s/scene/gb-royal-blue.webp';
+const GB_KIT='assets/lg3s/scene/gb-kit.webp';
+const GB_GEAR_NOTE='Concept equipment only; no player-specific gear has been verified.';
 const SCENES={
- entrance:{title:'Entrance',image:'assets/lgchl/room-360/entrance-gear-v7.png',coords:[[-75,0],[-66,0],[-58,0],[-49,0],[-38,0],[-18,-1],[0,-1],[18,-1],[38,0],[52,0],[66,0]]},
- centre:{title:'Centre',image:'assets/lgchl/room-360/centre-gear-v7.png',coords:[[-143,4],[-126,4],[-110,4],[-94,4],[-65,4],[-18,1.4],[0,1.4],[18,1.4],[65,4],[95,4],[127,4]]}
+ entrance:{title:'Entrance',image:'assets/lgchl/room-360/entrance-empty-v5.png',coords:[[-75,0],[-66,0],[-58,0],[-49,0],[-38,0],[-18,-1],[0,-1],[18,-1],[38,0],[52,0],[66,0]]},
+ centre:{title:'Centre',image:'assets/lgchl/room-360/centre-empty-v5.png',coords:[[-143,4],[-126,4],[-110,4],[-94,4],[-65,4],[-18,1.4],[0,1.4],[18,1.4],[65,4],[95,4],[127,4]]}
 };
 const buttons={left:$('gbpLeft'),right:$('gbpRight'),reset:$('gbpReset'),zoomIn:$('gbpZoomIn'),zoomOut:$('gbpZoomOut'),full:$('gbpFull'),prev:$('gbpPrev'),next:$('gbpNext'),entrance:$('gbpEntrance'),centre:$('gbpCentre'),roster:$('gbpRosterToggle')};
 const stage=$('gbPanorama'),status=$('gbpLoading'),tileGrid=$('gbpPlayers'),search=$('gbpSearch'),modal=$('gbpStallModal');
@@ -48,11 +51,20 @@ function showPlayer(index,{open=false,scroll=true}={}){
  if(open)openStall(player);
 }
 function openStall(player){
- const position=player.position==='G'?'Goaltender':player.position;
+ const isGoalie=player.position==='G';
+ const position=isGoalie?'Goaltender':player.position;
  $('gbpModalName').textContent=player.name;
  $('gbpModalPosition').textContent=position+' · Great Britain main roster';
  $('gbpModalIdentity').textContent='Verified LG player ID '+player.id+' · No unverified jersey numbers or ratings';
  $('gbpModalCard').href=cardLink(player);
+ $('gbpModalJersey').src=JERSEY;
+ $('gbpModalJersey').alt='Great Britain national concept jersey for '+player.name+'; number unassigned';
+ $('gbpModalKit').src=GB_KIT;
+ $('gbpModalKit').alt='Great Britain concept equipment reference';
+ $('gbpModalEquipmentTitle').textContent=isGoalie?'GOALTENDER EQUIPMENT':'SKATER EQUIPMENT';
+ $('gbpModalEquipmentItems').textContent=isGoalie?'Mask · chest protector · blocker · catcher · leg pads':'Helmet · gloves · skates · stick';
+ $('gbpModalEquipmentNote').textContent=GB_GEAR_NOTE;
+ modal.classList.toggle('gbp-goalie-stall',isGoalie);
  if(!modal.open)modal.showModal();
 }
 function element(tag,cls,text){
@@ -66,14 +78,19 @@ function drawRoster(){
  const q=search.value.trim().toLocaleLowerCase().replace(/\s+/g,' ');
  const visible=roster.map((p,index)=>({...p,index})).filter(p=>p.name.toLocaleLowerCase().includes(q));
  for(const p of visible){
-  const tile=element('button','gbp-player-tile');
-  tile.type='button';tile.dataset.playerId=String(p.id);
-  tile.setAttribute('aria-label','Find '+p.name+' locker stall');
+  const tile=element('div','gbp-player-tile');
+  tile.dataset.playerId=String(p.id);
+  const find=element('button','gbp-player-find');
+  find.type='button';find.setAttribute('aria-label','Locate '+p.name+' jersey in the panoramic room');
   const crest=element('img');crest.src=CREST;crest.alt='';crest.loading='lazy';
   const details=element('span');
-  details.append(element('strong',null,p.name),element('small',null,p.position+' · MAIN ROSTER'));
-  tile.append(crest,details,element('b',null,'›'));
-  tile.addEventListener('click',()=>{showPlayer(p.index,{scroll:!!viewer});if(!viewer)openStall(p);});
+  details.append(element('strong',null,p.name),element('small',null,(p.position==='G'?'GOALTENDER':p.position)+' · VERIFIED ROSTER'));
+  find.append(crest,details,element('b',null,'LOCATE'));
+  find.addEventListener('click',()=>{showPlayer(p.index,{scroll:!!viewer});if(!viewer)openStall(p);});
+  const card=element('a','gbp-player-card-link','CARD ↗');
+  card.href=cardLink(p);
+  card.setAttribute('aria-label','Open '+p.name+' EliteChel player card');
+  tile.append(find,card);
   tileGrid.append(tile);
  }
  tileGrid.setAttribute('aria-busy','false');
@@ -84,9 +101,17 @@ function drawRoster(){
 }
 function playerHotspot(host,args){
  const p=roster[args.index];if(!p)return;
- const button=element('button','gbp-hotspot',p.name);
+ const isGoalie=p.position==='G';
+ const button=element('button','gbp-hotspot gbp-jersey-stall'+(isGoalie?' gbp-jersey-stall-goalie':''));
  button.type='button';button.dataset.playerId=String(p.id);
- button.setAttribute('aria-label','Open '+p.name+' player stall');
+ button.setAttribute('aria-label','Open '+p.name+' '+(isGoalie?'goalie':'skater')+' jersey stall');
+ const hanger=element('span','gbp-jersey-hanger');hanger.setAttribute('aria-hidden','true');
+ const jersey=element('img','gbp-jersey-front');
+ jersey.src=JERSEY;jersey.alt='';jersey.loading='lazy';jersey.decoding='async';jersey.draggable=false;
+ const gear=element('span','gbp-stall-gear-symbol',isGoalie?'G':'S');gear.setAttribute('aria-hidden','true');
+ const plate=element('span','gbp-stall-nameplate',p.name);
+ const position=element('span','gbp-stall-position',isGoalie?'GOALTENDER':p.position);
+ button.append(hanger,jersey,gear,plate,position);
  button.addEventListener('click',e=>{e.stopPropagation();showPlayer(args.index,{open:true,scroll:false});});
  host.append(button);
 }

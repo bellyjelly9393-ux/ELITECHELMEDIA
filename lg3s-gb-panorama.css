@@ -27,3 +27,79 @@ footer{padding:20px;text-align:center;color:#657c9c;border-top:1px solid #253b5c
 @media(max-width:800px){.gbp-header{flex-wrap:wrap;gap:10px}.gbp-toplinks{order:3;width:100%;margin-left:0;justify-content:center;padding:8px 0}.gbp-publisher{margin-left:auto}.gbp-titlebar{padding-top:22px}.gbp-identity{display:none}.gbp-room-brand{top:12px;left:12px}.gbp-view{height:560px}.gbp-statusbar{flex-wrap:wrap}.gbp-statusbar>div{flex-basis:100%}.gbp-roster-header{align-items:stretch;flex-direction:column}.gbp-explainer{flex-direction:column;gap:13px}}
 @media(max-width:480px){.gbp-brand strong{font-size:14px}.gbp-brand img{width:44px;height:44px}.gbp-back span{display:none}.gbp-titlebar h1{font-size:28px}.gbp-view{height:500px}.gbp-room-brand{padding:8px}.gbp-room-brand span{font-size:12px}.gbp-room-brand img{width:29px;height:29px}.gbp-controls{left:8px;right:8px;bottom:8px}.gbp-controls button{min-width:36px;height:38px;padding:6px 8px}.gbp-controls #gbpFull,.gbp-controls #gbpReset{font-size:9px}.gbp-tour-head{flex-direction:column;align-items:start}.gbp-statusbar button{flex:1;padding:10px 7px}.gbp-player-grid{grid-template-columns:1fr 1fr}.gbp-player-tile{grid-template-columns:24px minmax(0,1fr);gap:8px;padding:8px;min-height:60px}.gbp-player-tile img{width:25px;height:31px}.gbp-player-tile b{display:none}.gbp-modal-body{grid-template-columns:1fr}.gbp-modal-body>img{height:200px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Great Britain kit wiring. Every verified player has a visible jersey, not a floating name hotspot.
+   The kit is a shared concept asset, with a real player ID/nameplate; no unverified numbers. */
+.gbp-jersey-stall{
+  width:clamp(85px,9.5vw,140px);min-width:0;max-width:none;min-height:155px;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;
+  padding:15px 5px 5px;white-space:normal;overflow:visible;text-overflow:clip;
+  color:#f6f8ff;background:linear-gradient(160deg,#0c1c30eb,#1a3552eb 65%,#06101ae8);
+  border:1px solid #6989b8;border-top:3px solid #c62b52;border-radius:5px;
+  transform:translate(-50%,-58%);box-shadow:0 10px 22px #000a,inset 0 0 12px #61abef23;
+  text-shadow:none;transition:filter .18s,box-shadow .18s;
+}
+.gbp-jersey-stall:hover,.gbp-jersey-stall.is-selected{
+  filter:brightness(1.14);
+  border-color:#d8e7ff;box-shadow:0 0 0 2px #ce2d52,0 0 35px #509af0bb,0 12px 25px #000c;
+}
+.gbp-jersey-stall .gbp-jersey-hanger{
+  position:absolute;top:9px;left:50%;width:28%;height:11px;transform:translateX(-50%);
+  border-top:2px solid #bdc9de;border-left:2px solid #bdc9de;border-right:2px solid #bdc9de;
+  border-radius:50% 50% 0 0;opacity:.83;pointer-events:none;
+}
+.gbp-jersey-front{width:100%;height:clamp(86px,10.5vw,130px);object-fit:contain;filter:drop-shadow(0 6px 5px #000c);pointer-events:none;user-select:none}
+.gbp-stall-gear-symbol{
+  display:grid;place-items:center;position:absolute;top:6px;right:5px;
+  width:18px;height:18px;border-radius:50%;background:#b7284e;color:#fff;
+  border:1px solid #ffd1db;font:900 10px Arial,sans-serif;
+}
+.gbp-jersey-stall-goalie{border-top-color:#e7bd67;background:linear-gradient(160deg,#0f2133ee,#204069ef,#07111ce8)}
+.gbp-jersey-stall-goalie .gbp-stall-gear-symbol{background:#c8a35c;color:#08172c;border-color:#f2dc9e}
+.gbp-stall-nameplate{
+  display:block;box-sizing:border-box;max-width:100%;width:100%;min-height:20px;
+  padding:4px 3px;overflow-wrap:anywhere;text-align:center;background:linear-gradient(#cbd9ea,#8cadd0);
+  color:#0b2341;font:900 clamp(9px,1.05vw,13px)/1.13 Arial,sans-serif;letter-spacing:0;
+  border:1px solid #597698;border-radius:2px;box-shadow:0 2px 4px #0007;
+}
+.gbp-stall-position{padding-top:3px;color:#c2d7f0;font:800 clamp(8px,.8vw,10px)/1 Arial,sans-serif;letter-spacing:.08em}
+.gbp-player-grid .gbp-player-tile{
+  display:flex;align-items:stretch;gap:0;padding:0;min-height:72px;overflow:hidden;
+}
+.gbp-player-find{
+  min-width:0;flex:1;display:grid;grid-template-columns:38px minmax(0,1fr) auto;
+  align-items:center;gap:10px;border:0;padding:10px 8px;
+  background:none;color:#f1f5fb;text-align:left;
+}
+.gbp-player-find:hover{background:#1b3454}
+.gbp-player-find b{font-size:10px;letter-spacing:.08em;color:#b3d4ff}
+.gbp-player-card-link{
+  flex:0 0 auto;min-width:73px;display:flex;align-items:center;justify-content:center;
+  padding:12px 9px;border-left:1px solid #395779;background:#0b294b;
+  color:#daedff;text-decoration:none;font-size:11px;font-weight:900;
+}
+.gbp-player-card-link:hover{background:#24548c;color:#fff}
+.gbp-modal-jersey{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;margin:0;min-width:0}
+.gbp-modal-jersey img{width:100%;max-width:290px;max-height:340px;object-fit:contain;filter:drop-shadow(0 12px 13px #000a)}
+.gbp-modal-jersey figcaption{text-align:center;color:#9cb7da;font-size:10px;font-weight:800;letter-spacing:.08em;line-height:1.5}
+.gbp-equipment-panel{
+  display:grid;grid-template-columns:66px minmax(0,1fr);align-items:center;gap:11px;
+  margin:20px 0;padding:11px;border:1px solid #3a648f;background:linear-gradient(120deg,#0c3259,#0c1c32);
+}
+.gbp-equipment-panel>img{width:64px;height:76px;object-fit:contain;filter:drop-shadow(0 4px 7px #000b)}
+.gbp-equipment-panel>div{display:grid;gap:5px}
+.gbp-equipment-panel strong{font-size:11px;color:#e8f2ff;letter-spacing:.08em}
+.gbp-equipment-panel span{font-size:12px;color:#c3d7f0;line-height:1.35}
+.gbp-equipment-panel small{font-size:10px;color:#829fbe;line-height:1.35}
+.gbp-goalie-stall .gbp-equipment-panel{border-color:#9d875b;background:linear-gradient(120deg,#1b344c,#121b2b)}
+@media(max-width:600px){
+ .gbp-jersey-stall{width:clamp(65px,19vw,96px);min-height:105px;padding:11px 3px 4px;transform:translate(-50%,-60%)}
+ .gbp-jersey-front{height:clamp(65px,18vw,90px)}
+ .gbp-stall-nameplate{font-size:8px;padding:3px 1px;min-height:16px}
+ .gbp-stall-position{font-size:7px}
+ .gbp-stall-gear-symbol{height:14px;width:14px;font-size:8px;right:2px;top:3px}
+ .gbp-player-find{grid-template-columns:25px minmax(0,1fr);gap:6px;padding:8px 5px}
+ .gbp-player-find b{display:none}
+ .gbp-player-card-link{min-width:54px;padding:8px 4px;font-size:9px}
+ .gbp-modal-jersey img{height:180px}
+}
