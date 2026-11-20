@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#091529">
+  <meta name="description" content="Explore the public Great Britain LG3s 360-degree panoramic locker room with verified roster stalls, Find My Stall and player cards.">
+  <link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
+  <link rel="canonical" href="https://wildmanhockey-elitechelmedia.app/lg3s-gb-panorama.html">
+  <title>Great Britain | 360° Panoramic Locker Room | EliteChel Media</title>
+  <link rel="stylesheet" href="vendor/pannellum/pannellum.css">
+  <link rel="stylesheet" href="lg3s-gb-panorama.css?v=20261119-1">
+  <script defer src="vendor/pannellum/pannellum.js"></script>
+  <script defer src="lg3s-gb-panorama.js?v=20261119-1"></script>
+</head>
+<body class="gbp-page">
+<a href="#main" class="gbp-skip">Skip to panoramic room</a>
+<header class="gbp-header">
+  <a class="gbp-back" href="lg3s-media.html" aria-label="Back to LG3s coverage">‹ <span>LG3s DESK</span></a>
+  <div class="gbp-brand">
+    <img src="assets/lg3s/team1446.svg" alt="" width="54" height="54">
+    <div><strong>GREAT BRITAIN</strong><span>LG3s · Season 1 · Public locker room</span></div>
+  </div>
+  <nav class="gbp-toplinks" aria-label="Locker room navigation">
+    <a href="lg3s-gb-locker.html">Original GB 3D room</a>
+    <a href="player-cards.html?league=lg3s">Hockey cards</a>
+  </nav>
+  <a href="index.html" class="gbp-publisher" aria-label="EliteChel Media home"><img src="assets/brand/ecm-crest.webp" alt="" width="44" height="44">ECM</a>
+</header>
+<main id="main" class="gbp-main">
+  <div class="gbp-titlebar">
+    <div><p class="gbp-eyebrow">THE BLUE ROOM · PUBLIC PANORAMA</p><h1>Inside Great Britain's locker room.</h1><p class="gbp-lead">Look around the dressing room, find your stall and open your EliteChel player card.</p></div>
+    <div class="gbp-identity"><span>🇬🇧</span><img src="assets/lg3s/team1446.svg" alt="Great Britain crest"></div>
+  </div>
+  <section class="gbp-tour" aria-labelledby="tourTitle">
+    <div class="gbp-tour-head">
+      <div class="gbp-scenes" role="group" aria-label="360 degree room viewpoints">
+        <button id="gbpEntrance" type="button" aria-pressed="true">Entrance</button>
+        <button id="gbpCentre" type="button" aria-pressed="false">Centre</button>
+      </div>
+      <p id="gbpTourHint">Drag, swipe or use the arrows to look around.</p>
+    </div>
+    <h2 id="tourTitle" class="gbp-visually-hidden">Great Britain panoramic room tour</h2>
+    <div class="gbp-view" id="gbpView">
+      <div id="gbPanorama" class="gbp-panorama" tabindex="0" aria-label="360-degree panoramic locker room. Drag or swipe to look around; choose a named player stall."></div>
+      <div class="gbp-loading" id="gbpLoading" role="status">Loading the public 360° locker room…</div>
+      <div class="gbp-room-brand" aria-hidden="true"><img src="assets/lg3s/team1446.svg" alt=""><span>THE BLUE ROOM<small>GREAT BRITAIN · LG3S</small></span></div>
+      <div class="gbp-controls">
+        <div class="gbp-control-left">
+          <button id="gbpLeft" type="button" aria-label="Look left" disabled>←</button>
+          <button id="gbpRight" type="button" aria-label="Look right" disabled>→</button>
+          <button id="gbpReset" type="button" disabled>Reset view</button>
+        </div>
+        <div class="gbp-control-right">
+          <button id="gbpZoomOut" type="button" aria-label="Zoom out" disabled>−</button>
+          <button id="gbpZoomIn" type="button" aria-label="Zoom in" disabled>+</button>
+          <button id="gbpFull" type="button" disabled>Full screen</button>
+        </div>
+      </div>
+    </div>
+    <div class="gbp-statusbar">
+      <div><strong id="gbpSelected">Explore the room</strong><span id="gbpCount">Verified GB roster loading…</span></div>
+      <button id="gbpPrev" type="button" disabled>‹ Previous stall</button>
+      <button id="gbpNext" type="button" disabled>Next stall ›</button>
+      <button id="gbpRosterToggle" type="button" aria-controls="gbpRosterPanel" aria-expanded="true">Hide roster</button>
+    </div>
+  </section>
+  <section class="gbp-roster" id="gbpRosterPanel" aria-labelledby="gbpRosterTitle">
+    <div class="gbp-roster-header">
+      <div><p class="gbp-eyebrow">VERIFIED LG3S · SEASON 1</p><h2 id="gbpRosterTitle">Find My Stall</h2></div>
+      <label for="gbpSearch">Search the Great Britain roster<input type="search" id="gbpSearch" maxlength="90" placeholder="Search a player's gamertag" autocomplete="off"></label>
+    </div>
+    <p class="gbp-search-status" id="gbpRosterStatus" role="status">Loading verified main-roster identities…</p>
+    <div class="gbp-player-grid" id="gbpPlayers" aria-live="polite" aria-busy="true"></div>
+  </section>
+  <section class="gbp-explainer">
+    <p>Public main-roster identities come from the saved November 14, 2026 LG3s snapshot. Player numbers and performance ratings are not invented. The jersey artwork is a national-team concept, not an official licensed uniform.</p>
+    <p>This panoramic tour uses EliteChel Media's shared locker-room environment, personalized for Great Britain. The <a href="lg3s-gb-locker.html">original GB 3D locker room</a> remains separate and unchanged.</p>
+  </section>
+</main>
+<dialog class="gbp-stall-modal" id="gbpStallModal" aria-labelledby="gbpModalName">
+  <div class="gbp-modal-top"><span>🇬🇧 GREAT BRITAIN · PLAYER STALL</span><button id="gbpModalClose" type="button" aria-label="Close player stall">×</button></div>
+  <div class="gbp-modal-body">
+    <img src="assets/lg3s/scene/gb-royal-blue.webp" alt="Great Britain national concept hockey jersey" width="280" height="280">
+    <div class="gbp-modal-info"><p class="gbp-eyebrow">LG3S · SEASON 1</p><h2 id="gbpModalName">Player</h2><p id="gbpModalPosition"></p><p id="gbpModalIdentity" class="gbp-identity-note"></p><a id="gbpModalCard" href="player-cards.html?league=lg3s">OPEN PLAYER CARD ↗</a><button id="gbpModalLocate" type="button">LOCATE THIS STALL IN THE ROOM</button></div>
+  </div>
+</dialog>
+<footer>ELITE CHEL MEDIA · INDEPENDENT LG3S PUBLIC SHOWCASE · NOT AN OFFICIAL LEAGUEGAMING PRODUCT</footer>
+</body>
+</html>
