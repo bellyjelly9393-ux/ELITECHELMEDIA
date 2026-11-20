@@ -3,18 +3,22 @@ on:
   push:
     paths:
       - "lg3s-team.*"
+      - "lg3s-gb-panorama.*"
       - "player-cards.*"
       - "assets/lg3s/jerseys/**"
       - "data/lg3s/season1-active-roster-2026-11-14.json"
       - "tests/lg3s-national-lockers.test.cjs"
+      - "tests/lg3s-gb-panorama.test.cjs"
       - ".github/workflows/lg3s-national-lockers.yml"
   pull_request:
     paths:
       - "lg3s-team.*"
+      - "lg3s-gb-panorama.*"
       - "player-cards.*"
       - "assets/lg3s/jerseys/**"
       - "data/lg3s/season1-active-roster-2026-11-14.json"
       - "tests/lg3s-national-lockers.test.cjs"
+      - "tests/lg3s-gb-panorama.test.cjs"
       - ".github/workflows/lg3s-national-lockers.yml"
 permissions:
   contents: read
@@ -31,9 +35,10 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check lg3s-team.js
+          node --check lg3s-gb-panorama.js
           node --check player-cards.js
       - name: Run national locker regression tests
-        run: node --test tests/lg3s-national-lockers.test.cjs
+        run: node --test tests/lg3s-national-lockers.test.cjs tests/lg3s-gb-panorama.test.cjs
       - name: Validate eleven SVG jersey documents
         shell: bash
         run: |
