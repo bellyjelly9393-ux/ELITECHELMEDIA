@@ -1,5 +1,5 @@
-/* Optional Great Britain 3D experience below its native panoramic locker room.
- * Keeps WebGL off until explicitly requested; never embeds the private AI Studio app.
+/* Loads the standalone Great Britain 3D app only when the visitor enters.
+ * Keeps WebGL off normal EliteChel Media pages and never embeds the private AI Studio app.
  */
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
@@ -33,6 +33,7 @@ const enterRoom=()=>{
   splash.hidden=true;
 };
 button.addEventListener('click',enterRoom);
-// The panoramic roster is the GB default. Only load the 3D iframe when Enter is clicked.
-// This prevents wasted GPU usage when visitors only need player stalls and cards.
+// Nation-card visitors have already chosen the 3D room: enter directly.
+// On data-saver connections keep the explicit Enter button, with a 2D fallback.
+if(!navigator.connection?.saveData) enterRoom();
 })();
