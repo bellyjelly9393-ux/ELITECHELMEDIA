@@ -21,7 +21,7 @@ test('Great Britain lights are royal blue main, Union red floor, white neutral',
  const scope={window:{},console};
  vm.runInNewContext(texture,scope,{filename:'lg3s-gb-panorama-texture.js',timeout:3000});
  const light={primary:'#1C69D3',secondary:'#D62B4D',neutral:'#F2F7FF'};
- const width=4,height=2;
+ const width=4,height=4;
  const input=new Uint8ClampedArray(width*height*4);
  const set=(x,y,[r,g,b])=>input.set([r,g,b,255],(y*width+x)*4);
  const get=(x,y)=>Array.from(input.slice((y*width+x)*4,(y*width+x)*4+3));
@@ -29,11 +29,11 @@ test('Great Britain lights are royal blue main, Union red floor, white neutral',
  set(1,0,[118,70,48]);   // wood panel, should be protected
  set(2,0,[245,244,241]); // neutral white ceiling lamp
  set(3,0,[30,80,180]);   // royal-blue concept kit
- set(0,1,[245,35,25]);   // floor perimeter accent
+ set(0,3,[245,35,25]);   // floor perimeter accent (bottom 30%)
  const result=scope.window.GBPanoramaTextures.relightPixels({data:input},width,height,light);
  assert.equal(result.blue,1);
  assert.equal(result.red,1);
- const ceiling=get(0,0),floor=get(0,1);
+ const ceiling=get(0,0),floor=get(0,3);
  assert.ok(ceiling[2]>ceiling[0]*1.5,'main red ceiling light must turn blue');
  assert.ok(ceiling[2]>ceiling[1],'main emitter should have a blue peak');
  assert.ok(floor[0]>floor[2]*1.5,'floor accent should stay GB red');
