@@ -61,6 +61,11 @@ function openStall(player){
  $('gbpModalCard').href=cardLink(player);
  $('gbpModalJersey').src=JERSEY;
  $('gbpModalJersey').alt='Great Britain national concept jersey for '+player.name+'; number unassigned';
+ $('gbpCloseupName').textContent=player.name;
+ $('gbpCloseupPosition').textContent=position.toUpperCase();
+ $('gbpCloseupBackground').src=isGoalie?'assets/lgchl/room-360/stall-goalie-v7.png':'assets/lgchl/room-360/stall-empty-v5.png';
+ $('gbpCloseupBackground').alt=isGoalie?'Concept goalie locker with goalie equipment, not verified personal gear':'Concept skater locker with gloves, sticks and a towel';
+ $('gbpCloseupScene').setAttribute('aria-label',player.name+' Great Britain '+position+' player locker. Concept artwork, no number assigned.');
  $('gbpModalKit').src=GB_KIT;
  $('gbpModalKit').alt='Great Britain concept equipment reference';
  $('gbpModalEquipmentTitle').textContent=isGoalie?'GOALTENDER EQUIPMENT':'SKATER EQUIPMENT';
