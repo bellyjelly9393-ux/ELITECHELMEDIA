@@ -5,13 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>IceVision Tactical Preview</title>
   <style>html{--lightningcss-light: ;--lightningcss-dark:initial;color-scheme:dark;background:0 0}html,body,#viewport{width:100%;height:100%;margin:0;overflow:hidden}body{color:#e8efff;background:radial-gradient(at 50% 65%,#29405e,#080d18 74%);font:600 12px system-ui}canvas{display:block}output{pointer-events:none;color:#c5d2e9;text-shadow:0 1px 5px #000;position:absolute;bottom:12px;left:14px}html.alpha body{background:0 0}html.alpha output{display:none}</style>
-  <script type="module" crossorigin src="/assets/lg3s-world/assets/rink-Bd7wg-oo.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/lg3s-world/assets/match-DgEO52-w.js">
+  <script type="module" crossorigin src="/assets/lg3s-world/assets/rink-Bd7wg-oo.js?v=20261120-gb-starting-four"></script>
+  <link rel="modulepreload" crossorigin href="/assets/lg3s-world/assets/match-DgEO52-w.js?v=20261120-gb-starting-four">
   <link rel="modulepreload" crossorigin href="/assets/lg3s-world/assets/pregame-Cmzedl1M.js">
+<style>
+  .gb-rink-lineup{position:absolute;left:14px;top:14px;z-index:8;display:grid;gap:8px;
+    max-width:min(420px,calc(100vw - 28px));padding:12px 15px;
+    border:1px solid #7da7d2a8;border-left:4px solid #d72b51;border-radius:5px;
+    background:#08182ddf;color:#ecf4ff;box-shadow:0 5px 20px #0007;
+    font:700 12px/1.3 system-ui;pointer-events:none}
+  .gb-rink-lineup[hidden]{display:none}
+  .gb-rink-lineup h2{font-size:10px;color:#9fcdff;letter-spacing:.18em;margin:0}
+  .gb-rink-lineup-players{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px}
+  .gb-rink-lineup-players span{white-space:nowrap;font-size:12px}
+  .gb-rink-lineup-players b{color:#83bcff;margin-right:4px}
+  @media(max-width:570px){.gb-rink-lineup{left:7px;top:7px;padding:8px 10px;max-width:calc(100vw - 14px)}.gb-rink-lineup-players span{font-size:10px}}
+</style>
 </head>
 <body>
   <div id="viewport" aria-label="Interactive 3D tactical hockey rink"></div>
   <output id="status"></output>
-  <script src="/assets/lg3s-world/lg3s-rink-bridge.js"></script>
+  <aside id="gbRinkLineup" class="gb-rink-lineup" aria-label="Great Britain OBS starting lineup" hidden>
+    <h2>GBR · STARTING FOUR</h2>
+    <div class="gb-rink-lineup-players" id="gbRinkLineupPlayers" role="list"></div>
+  </aside>
+  <script src="/assets/lg3s-world/lg3s-rink-bridge.js?v=20261120-gb-starting-four"></script>
+  <script>
+  (() => {
+    const params = new URLSearchParams(location.search);
+    if(params.get('lineup')==='off')return;
+    const panel=document.getElementById('gbRinkLineup');
+    const list=document.getElementById('gbRinkLineupPlayers');
+    fetch('/data/lg3s/gb-obs-lineup.json',{cache:'no-store'}).then(r=>{
+      if(!r.ok)throw Error('Lineup unavailable');
+      return r.json();
+    }).then(data=>{
+      if(data.schema!=='lg3s-gbr-obs-lineup-v1'||data.team_id!==1446||data.players?.length!==4)return;
+      const slots=['C','W','D','G'];
+      for(const slot of slots){
+        const p=data.players.find(x=>x.slot===slot);
+        if(!p||typeof p.display_name!=='string'||!p.display_name.trim())return;
+        const cell=document.createElement('span');
+        cell.setAttribute('role','listitem');
+        const label=document.createElement('b');
+        label.textContent=slot;
+        cell.append(label,document.createTextNode(' '+p.display_name.trim()));
+        list.append(cell);
+      }
+      if(list.children.length===4)panel.hidden=false;
+    }).catch(()=>{panel.hidden=true;});
+  })();
+  </script>
 </body>
 </html>

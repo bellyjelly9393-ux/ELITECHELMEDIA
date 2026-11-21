@@ -208,11 +208,11 @@
   }
   function updatePreview(){
     var channel=encodeURIComponent(config().channel);
-    if(!isGbr()&&['sample','pregame'].includes(previewMode))previewMode='program';
+    if(!isGbr()&&['sample','pregame','lineup'].includes(previewMode))previewMode='program';
     var program='/obs-stage.html?channel='+channel+'&preview=1';
     var graphics=isGbr()?'/lg3s-gb?mode=obs&audio=off':'/obs-overlay.html?channel='+channel;
     var carbon=previewMode==='pregame';
-    var source=carbon?CARBON_PREVIEW:previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
+    var source=carbon?CARBON_PREVIEW:previewMode==='lineup'?'/lg3s-gb/pregame?mode=obs':previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
     var monitor=byId('obsPreview');
     var width=isGbr()?1920:1280;
     var height=isGbr()?1080:720;
@@ -221,7 +221,7 @@
     canvas.style.height=height+'px';
     monitor.width=width;
     monitor.height=height;
-    monitor.title=carbon?'Elite Labs Carbon Arena pregame monitor':previewMode==='program'?'OBS program monitor':'OBS graphics monitor';
+    monitor.title=carbon?'Elite Labs Carbon Arena pregame monitor':previewMode==='lineup'?'Great Britain 3D rink starting lineup':previewMode==='program'?'OBS program monitor':'OBS graphics monitor';
     if(carbon){
       if(byId('obsPreviewFrame').dataset.mode!=='pregame')openCarbonPreview();
     }else{
@@ -232,10 +232,10 @@
     }
     byId('obsPreviewFrame').dataset.mode=previewMode;
     byId('obsPreviewDimensions').textContent=width+' × '+height+(isGbr()?' · 60 FPS source':'');
-    if(!carbon)byId('obsMonitorNote').textContent=previewMode==='sample'?'Sample GBR graphics · Muted'
+    if(!carbon)byId('obsMonitorNote').textContent=previewMode==='lineup'?'Current GBR starting four · 3D rink · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
       :previewMode==='graphics'?'Transparent graphics · Muted':'Game feed and graphics · Muted';
     document.querySelectorAll('[data-preview]').forEach(function(button){
-      button.hidden=['sample','pregame'].includes(button.dataset.preview)&&!isGbr();
+      button.hidden=['sample','pregame','lineup'].includes(button.dataset.preview)&&!isGbr();
       button.setAttribute('aria-pressed',String(button.dataset.preview===previewMode));
     });
     fitPreviewCanvas();
@@ -402,7 +402,7 @@
     gbrStarsUntil=isGbr()?p.threeStarsUntil||'':'';
     setValue('obsGbrCamera',p.rinkCamera||'ice');
     setValue('obsGbrFormation',p.rinkFormation||'trap');
-    setValue('obsGbrHighlight',p.rinkHighlight||88);
+    setValue('obsGbrHighlight',[1,2,3,4].includes(Number(p.rinkHighlight))?Number(p.rinkHighlight):1);
     gbrRinkVisible=p.rinkVisible!==false;
     byId('obsToggleGbrRink').setAttribute('aria-pressed',String(gbrRinkVisible));
     updatePublished(row);
@@ -457,7 +457,7 @@
       ...(isGbr()?{
         goalHornTrigger:gbrGoalTrigger||null,threeStarsUntil:gbrStarsUntil||null,
         rinkCamera:val('obsGbrCamera')||'ice',rinkFormation:val('obsGbrFormation')||'trap',
-        rinkHighlight:numberVal('obsGbrHighlight')||88,rinkVisible:gbrRinkVisible
+        rinkHighlight:numberVal('obsGbrHighlight')||1,rinkVisible:gbrRinkVisible
       }:{})
     };
   }
