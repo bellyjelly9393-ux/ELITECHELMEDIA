@@ -1,0 +1,49 @@
+{
+  "schema": "lg3s-gbr-obs-lineup-v1",
+  "league": "LG3s",
+  "season": 1,
+  "team_id": 1446,
+  "team": "Great Britain",
+  "scope": "OBS 3D rink and pregame only",
+  "status": "operator-selected",
+  "updated_at": "2026-11-20",
+  "note": "Team-selected OBS lineup. This does not modify verified LeagueGaming match sheets, historical results or official roster status. Slot IDs are internal scene handles, not jersey numbers. Johnny has no verified LG user ID in the saved active roster.",
+  "players": [
+    {
+      "slot": "C",
+      "display_name": "Setty",
+      "gamertag": "l Setty l",
+      "lg_user_id": 73707,
+      "scene_slot_id": 1,
+      "jersey_number": null,
+      "identity": "verified roster"
+    },
+    {
+      "slot": "W",
+      "display_name": "xSogaard",
+      "gamertag": "xSogaard",
+      "lg_user_id": 58727,
+      "scene_slot_id": 2,
+      "jersey_number": null,
+      "identity": "verified roster"
+    },
+    {
+      "slot": "D",
+      "display_name": "Pazi",
+      "gamertag": "Pazqi",
+      "lg_user_id": 75845,
+      "scene_slot_id": 3,
+      "jersey_number": null,
+      "identity": "verified roster (display alias)"
+    },
+    {
+      "slot": "G",
+      "display_name": "Johnny",
+      "gamertag": "Johnny",
+      "lg_user_id": null,
+      "scene_slot_id": 4,
+      "jersey_number": null,
+      "identity": "unverified identity (operator supplied)"
+    }
+  ]
+}
