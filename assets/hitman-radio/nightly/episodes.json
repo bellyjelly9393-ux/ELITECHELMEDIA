@@ -1,8 +1,20 @@
 {
   "featured": [
-    "2026-11-15-season55-playoff-preview"
+    "2026-11-21-season55-round1-playoff-recap"
   ],
   "episodes": [
+    {
+      "id": "2026-11-21-season55-round1-playoff-recap",
+      "date": "2026-11-21",
+      "type": "recap",
+      "label": "Season 55 Round 1 Playoff Recap · Nov 21",
+      "title": "Hitmen Radio: Season 55 Round 1 Playoff Recap",
+      "headline": "Twelve series, five Game Sevens, four lower-seed upsets — and not one sweep",
+      "description": "Graham and David recap every LGCHL Season 55 first-round series: sixth-seeded Chilliwack and Erie going through, Sepo L's four-goal Game 7 for Swift Current, Loki's two goals in Shawinigan's 2-1 clincher, and Petey Pipes' winner that knocked out Sarnia. Round 2 opens Sunday, Nov 22 at 9 PM ET, and the EliteChel Media Pick'em Challenge is open.",
+      "duration": "9:00",
+      "video": "assets/hitman-radio/nightly/2026-11-21-season55-round1-playoff-recap.mp4?v=20261121",
+      "poster": "assets/hitman-radio/nightly/2026-11-21-season55-round1-playoff-recap-poster.jpg?v=20261121"
+    },
     {
       "id": "2026-11-15-season55-playoff-preview",
       "date": "2026-11-15",
