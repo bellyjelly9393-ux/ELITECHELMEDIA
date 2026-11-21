@@ -50,6 +50,10 @@ test('OBS control highlights only current scene positions, not old player number
  assert.doesNotMatch(ctl,/#88 L\. Kirk|#20 B\. Lake|#19 D\. Clements|#35 B\. Bowns/);
  assert.match(ctljs,/\[1,2,3,4\]\.includes\(Number\(p\.rinkHighlight\)\)/);
  assert.match(ctljs,/numberVal\('obsGbrHighlight'\)\|\|1/);
+ assert.match(ctl,/data-preview="lineup"/);
+ assert.match(ctl,/Carbon Arena/);
+ assert.match(ctljs,/previewMode==='lineup'\?'\/lg3s-gb\/pregame\?mode=obs'/);
+ assert.match(ctljs,/Current GBR starting four/);
 });
 test('pregame OBS view reads operator selection without rewriting official posted game sheets',()=>{
  assert.match(pregame,/gb-obs-lineup\.json/);
