@@ -15,7 +15,7 @@ window.installLG3SRinkBridge = (arena) => {
     if (type === 'hello') send('ready');
     if (type === 'state' && payload && Number.isInteger(payload.home_score) && Number.isInteger(payload.away_score)) arena.setState(payload);
     if (type === 'camera' && ['ice','overhead','jumbotron','goalie','orbit'].includes(payload)) arena.setCamera(payload);
-    if (type === 'highlight' && [88,20,19,35].includes(payload)) arena.highlightPlayer(payload);
+    if (type === 'highlight' && [1,2,3,4].includes(payload)) arena.highlightPlayer(payload);
     if (type === 'alpha' && typeof payload === 'boolean') alpha(payload);
   };
   window.addEventListener('message', receive);
