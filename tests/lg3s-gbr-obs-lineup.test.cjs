@@ -62,6 +62,16 @@ test('pregame OBS view reads operator selection without rewriting official poste
  assert.ok(JSON.parse(read('data/lg3s/pregame-lineups.json')).games.length>=3,
    'historical posted lineup file must be unchanged and present');
 });
+test('3D rink displays source-linked four-player lineup beside models rather than fake jersey numbers',()=>{
+ const html=read('assets/lg3s-world/rink-preview.html');
+ assert.match(html,/gbRinkLineup/);
+ assert.match(html,/GBR · STARTING FOUR/);
+ assert.match(html,/gb-obs-lineup\.json/);
+ assert.match(html,/\.textContent=slot/);
+ assert.match(html,/\.display_name\.trim\(\)/);
+ assert.match(html,/lineup'\)===\s*'off'/);
+ assert.doesNotMatch(html,/L\. Kirk|B\. Lake|D\. Clements|B\. Bowns/);
+});
 test('cache-busted public HTML and modules point at the new OBS lineup assets',()=>{
  for(const file of ['assets/lg3s-world/live.html','assets/lg3s-world/pregame.html','assets/lg3s-world/rink-preview.html']){
    assert.ok(read(file).includes('20261120-gb-starting-four'),file);
