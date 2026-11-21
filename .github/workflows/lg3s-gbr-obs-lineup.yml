@@ -1,0 +1,39 @@
+name: LG3s Great Britain OBS Lineup Checks
+on:
+  pull_request:
+    paths:
+      - "data/lg3s/gb-obs-lineup.json"
+      - "assets/lg3s-world/**"
+      - "obs-control.html"
+      - "obs-control.js"
+      - "tests/lg3s-gbr-obs-lineup.test.cjs"
+      - ".github/workflows/lg3s-gbr-obs-lineup.yml"
+  push:
+    paths:
+      - "data/lg3s/gb-obs-lineup.json"
+      - "assets/lg3s-world/**"
+      - "obs-control.html"
+      - "obs-control.js"
+      - "tests/lg3s-gbr-obs-lineup.test.cjs"
+      - ".github/workflows/lg3s-gbr-obs-lineup.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax check OBS control, bridge and bundled modules
+        run: |
+          node --check obs-control.js
+          node --check assets/lg3s-world/lg3s-rink-bridge.js
+          for file in assets/lg3s-world/assets/match-DgEO52-w.js assets/lg3s-world/assets/live-gkMd1E-Q.js assets/lg3s-world/assets/pregame-BV4tjS1-.js assets/lg3s-world/assets/rink-Bd7wg-oo.js; do
+            node --input-type=module --check < "$file"
+          done
+      - name: Verify Great Britain selected OBS four and public isolation
+        run: node --test tests/lg3s-gbr-obs-lineup.test.cjs
