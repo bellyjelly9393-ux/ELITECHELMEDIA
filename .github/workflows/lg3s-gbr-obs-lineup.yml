@@ -6,6 +6,8 @@ on:
       - "assets/lg3s-world/**"
       - "obs-control.html"
       - "obs-control.js"
+      - "lg3s-carbon-source.*"
+      - "tests/gbr-carbon-source.test.cjs"
       - "tests/lg3s-gbr-obs-lineup.test.cjs"
       - ".github/workflows/lg3s-gbr-obs-lineup.yml"
   push:
@@ -14,6 +16,8 @@ on:
       - "assets/lg3s-world/**"
       - "obs-control.html"
       - "obs-control.js"
+      - "lg3s-carbon-source.*"
+      - "tests/gbr-carbon-source.test.cjs"
       - "tests/lg3s-gbr-obs-lineup.test.cjs"
       - ".github/workflows/lg3s-gbr-obs-lineup.yml"
 permissions:
@@ -31,9 +35,10 @@ jobs:
       - name: Syntax check OBS control, bridge and bundled modules
         run: |
           node --check obs-control.js
+          node --check lg3s-carbon-source.js
           node --check assets/lg3s-world/lg3s-rink-bridge.js
           for file in assets/lg3s-world/assets/match-DgEO52-w.js assets/lg3s-world/assets/live-gkMd1E-Q.js assets/lg3s-world/assets/pregame-BV4tjS1-.js assets/lg3s-world/assets/rink-Bd7wg-oo.js; do
             node --input-type=module --check < "$file"
           done
       - name: Verify Great Britain selected OBS four and public isolation
-        run: node --test tests/lg3s-gbr-obs-lineup.test.cjs
+        run: node --test tests/lg3s-gbr-obs-lineup.test.cjs tests/gbr-carbon-source.test.cjs
