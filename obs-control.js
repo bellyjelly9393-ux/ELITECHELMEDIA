@@ -402,7 +402,7 @@
     gbrStarsUntil=isGbr()?p.threeStarsUntil||'':'';
     setValue('obsGbrCamera',p.rinkCamera||'ice');
     setValue('obsGbrFormation',p.rinkFormation||'trap');
-    setValue('obsGbrHighlight',p.rinkHighlight||88);
+    setValue('obsGbrHighlight',p.rinkHighlight||1);
     gbrRinkVisible=p.rinkVisible!==false;
     byId('obsToggleGbrRink').setAttribute('aria-pressed',String(gbrRinkVisible));
     updatePublished(row);
@@ -457,7 +457,7 @@
       ...(isGbr()?{
         goalHornTrigger:gbrGoalTrigger||null,threeStarsUntil:gbrStarsUntil||null,
         rinkCamera:val('obsGbrCamera')||'ice',rinkFormation:val('obsGbrFormation')||'trap',
-        rinkHighlight:numberVal('obsGbrHighlight')||88,rinkVisible:gbrRinkVisible
+        rinkHighlight:numberVal('obsGbrHighlight')||1,rinkVisible:gbrRinkVisible
       }:{})
     };
   }
