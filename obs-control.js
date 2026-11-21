@@ -402,7 +402,7 @@
     gbrStarsUntil=isGbr()?p.threeStarsUntil||'':'';
     setValue('obsGbrCamera',p.rinkCamera||'ice');
     setValue('obsGbrFormation',p.rinkFormation||'trap');
-    setValue('obsGbrHighlight',p.rinkHighlight||1);
+    setValue('obsGbrHighlight',[1,2,3,4].includes(Number(p.rinkHighlight))?Number(p.rinkHighlight):1);
     gbrRinkVisible=p.rinkVisible!==false;
     byId('obsToggleGbrRink').setAttribute('aria-pressed',String(gbrRinkVisible));
     updatePublished(row);
