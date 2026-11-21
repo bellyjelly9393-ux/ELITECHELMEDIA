@@ -9,10 +9,36 @@
   <style>
     html, body, iframe { width: 100%; height: 100%; margin: 0; background: transparent; overflow: hidden; }
     iframe { display: block; border: 0; }
+    iframe[hidden], [hidden] { display: none !important; }
+    body { font: 600 16px/1.5 system-ui, sans-serif; color: #eef6ff; }
+    .carbon-access-status {
+      box-sizing: border-box; min-height: 100%; width: 100%;
+      display: grid; place-content: center; gap: 14px;
+      padding: 48px 8vw; text-align: center;
+      background: radial-gradient(circle at 50% 40%, #153d75 0%, #091528 48%, #050c18 100%);
+      border: 3px solid #c43054;
+    }
+    .carbon-access-status strong { font-size: clamp(20px, 3vw, 36px); letter-spacing: .06em; }
+    .carbon-access-status small { color: #93bcfa; letter-spacing: .18em; font-weight: 900; }
+    .carbon-access-status p { max-width: 65ch; margin: 0 auto; color: #d1def1; }
+    .carbon-access-status a {
+      display: inline-block; justify-self: center; padding: 13px 22px;
+      color: #fff; background: #1458ae; border: 1px solid #90bdfd;
+      text-decoration: none; border-radius: 4px; font-weight: 900;
+    }
+    .carbon-access-status a:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+    .carbon-access-note { color: #9fb5d1 !important; font-size: 13px; }
   </style>
-  <script src="/lg3s-carbon-source.js" defer></script>
+  <script src="/lg3s-carbon-source.js?v=20261120-carbon-errors1" defer></script>
 </head>
 <body>
   <iframe id="program" title="GBR Carbon Arena broadcast graphics" allow="autoplay"></iframe>
+  <main id="carbonAccessStatus" class="carbon-access-status" role="status" aria-live="polite" hidden>
+    <small>GREAT BRITAIN · PRIVATE BROADCAST SOURCE</small>
+    <strong>CARBON ARENA NOT CONNECTED</strong>
+    <p id="carbonAccessMessage">The private arena could not open.</p>
+    <a href="/obs-control.html">OPEN GBR OBS CONTROL CENTER</a>
+    <p class="carbon-access-note">GBR Desk → Browser Sources → Copy Carbon Arena OBS URL. Use that private link in OBS at 1920 × 1080, 60 FPS, with Control audio via OBS.</p>
+  </main>
 </body>
 </html>
