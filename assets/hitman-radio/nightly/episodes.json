@@ -1,8 +1,33 @@
 {
   "featured": [
-    "2026-11-21-season55-round1-playoff-recap"
+    "2026-11-22-season55-round2-preview",
+    "2026-11-22-lg-world-juniors-preview"
   ],
   "episodes": [
+    {
+      "id": "2026-11-22-season55-round2-preview",
+      "date": "2026-11-22",
+      "type": "preview",
+      "label": "Double Header · Nov 22 · Season 55 Round 2 Preview",
+      "title": "Hitmen Radio: LGCHL Season 55 Round 2 Preview",
+      "headline": "All twelve second-round series: twelve rested teams against twelve that just fought through round one",
+      "description": "Graham and David preview every LGCHL Season 55 second-round series across the WHL, OHL and QMJHL. Three six seeds are still alive in Erie, Shawinigan and Chilliwack, and it's rest against rhythm all round long. Round 2 drops the puck tonight at 9 PM ET, so get your EliteChel Media Pick'em in before puck drop.",
+      "duration": "13:37",
+      "video": "assets/hitman-radio/nightly/2026-11-22-season55-round2-preview.mp4?v=20261122",
+      "poster": "assets/hitman-radio/nightly/2026-11-22-season55-round2-preview-poster.jpg?v=20261122"
+    },
+    {
+      "id": "2026-11-22-lg-world-juniors-preview",
+      "date": "2026-11-22",
+      "type": "preview",
+      "label": "Double Header · Nov 22 · LG World Juniors Preview",
+      "title": "Hitmen Radio: LG World Juniors Preview",
+      "headline": "Same Guys, Different Sweater",
+      "description": "Czechia's roster is built around seven Calgary Hitmen, and it put up more LGCHL points this season than any other nation. We preview all eight teams, from Slovakia's top line to Germany's NHL veterans.",
+      "duration": "5:48",
+      "video": "assets/hitman-radio/nightly/2026-11-22-lg-world-juniors-preview.mp4?v=20261122",
+      "poster": "assets/hitman-radio/nightly/2026-11-22-lg-world-juniors-preview-poster.jpg?v=20261122"
+    },
     {
       "id": "2026-11-21-season55-round1-playoff-recap",
       "date": "2026-11-21",
