@@ -140,21 +140,6 @@ a{color:#f0c14b}a:hover{color:#ffd978}
 .pts b{display:block;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:900;font-size:26px;line-height:1;color:#f0c14b}
 .pts span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#aab0bb}
 
-/* TEAM LOCKER ROOMS: a compact, first-class entry to the public team selector. */
-.locker-entry{display:flex;align-items:center;gap:20px;padding:18px 22px;background:linear-gradient(108deg,rgba(130,15,36,.28),rgba(24,26,32,.98) 38%,#111319);border:1px solid #55525a;border-left:5px solid #c8102e;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 4px 0 #000;scroll-margin-top:24px}
-.locker-entry-icon{flex:none;width:64px;height:64px;display:grid;place-items:center;background:linear-gradient(150deg,#d92342,#650d1e);border:1px solid #e54b60;box-shadow:0 3px 0 #090a0c;color:#fff;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
-.locker-entry-icon svg{width:36px;height:36px}
-.locker-entry-copy{min-width:0;flex:1}
-.locker-entry-kicker{margin:0 0 3px;font-size:10px;letter-spacing:.14em;color:#f0c14b;font-weight:600}
-.locker-entry h2{margin:0;font-size:clamp(26px,3vw,36px);line-height:1;color:#fff;text-shadow:0 2px 0 #000}
-.locker-entry-desc{margin:7px 0 0;color:#d5d8de;font-size:14px;line-height:1.45;max-width:680px}
-.locker-entry-actions{flex:none;width:min(100%,252px);display:flex;flex-direction:column;gap:8px;align-items:stretch}
-.locker-entry-actions .lg-locker-trigger,.locker-entry-fallback{display:flex;align-items:center;justify-content:space-between;min-height:50px;width:100%;padding:11px 15px;background:linear-gradient(180deg,#e93450 0 2px,#c8102e 2px 86%,#7d0a1c 86%);border:1px solid #a71029;box-shadow:0 3px 0 #000;color:#fff;text-transform:uppercase;text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:19px;font-style:italic;letter-spacing:.035em;cursor:pointer}
-.locker-entry-actions .lg-locker-trigger:hover,.locker-entry-fallback:hover{background:#b30e28;color:#fff}
-.locker-entry-actions .lg-locker-panel{font-family:'Barlow',sans-serif;font-style:normal;text-align:left}
-.locker-entry-hint{color:#aeb2bd;font-size:10px;letter-spacing:.1em;text-align:center}
-@media(max-width:760px){.locker-entry{align-items:flex-start;flex-wrap:wrap;gap:14px;padding:16px}.locker-entry-icon{width:48px;height:48px}.locker-entry-icon svg{width:29px;height:29px}.locker-entry-copy{flex:1 1 calc(100% - 70px)}.locker-entry-actions{width:100%}.locker-entry-actions .lg-locker-trigger{width:100%}}
-
 /* LEAGUE TILES */
 .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 @media(max-width:860px){.tiles{grid-template-columns:minmax(0,1fr)}}
@@ -166,7 +151,7 @@ a{color:#f0c14b}a:hover{color:#ffd978}
 .foot a{color:#c9cdd5;text-decoration:none;font-size:14px;display:inline-flex;align-items:center;min-height:44px}
 .foot a:hover{color:#fff}
 </style>
-<style>*{box-sizing:border-box}.nav{position:relative;z-index:10}.nl details{position:relative}.nl summary{cursor:pointer;padding:12px;color:#f0c14b;border:1px solid #aa8636}.nl details nav{position:absolute;right:0;min-width:195px;background:#12141a;border:1px solid #aa8636;box-shadow:0 8px 16px #0009}.nl details a:hover{background:#56232b}@media(max-width:700px){.nl{position:relative}.nl details{position:static}.nl details nav{right:0;left:0;max-height:55vh;overflow:auto}.nav-in{padding-bottom:8px}}[hidden]{display:none!important}[data-round]{display:contents}</style><link rel="icon" href="assets/brand/ecm-crest.webp"><style>#league-view,.c-mid,.c-mid .pb{min-width:0}.bk-scroll{max-width:100%}</style><link rel="stylesheet" href="lgchl-segments-home.css?v=20261115-s55a"><link rel="stylesheet" href="s55-predictor.css"><link rel="stylesheet" href="lgchl-locker-chooser.css?v=20261105-lockers1"></head><body><div class="pg" style="min-height: 100vh">
+<style>*{box-sizing:border-box}.nav{position:relative;z-index:10}.nl details{position:relative}.nl summary{cursor:pointer;padding:12px;color:#f0c14b;border:1px solid #aa8636}.nl details nav{position:absolute;right:0;min-width:195px;background:#12141a;border:1px solid #aa8636;box-shadow:0 8px 16px #0009}.nl details a:hover{background:#56232b}@media(max-width:700px){.nl{position:relative}.nl details{position:static}.nl details nav{right:0;left:0;max-height:55vh;overflow:auto}.nav-in{padding-bottom:8px}}[hidden]{display:none!important}[data-round]{display:contents}</style><link rel="icon" href="assets/brand/ecm-crest.webp"><style>#league-view,.c-mid,.c-mid .pb{min-width:0}.bk-scroll{max-width:100%}</style><link rel="stylesheet" href="lgchl-segments-home.css?v=20261115-s55a"><link rel="stylesheet" href="s55-predictor.css"></head><body><div class="pg" style="min-height: 100vh">
 
 <header class="nav">
 <div class="wrap nav-in">
@@ -180,7 +165,7 @@ a{color:#f0c14b}a:hover{color:#ffd978}
 <a href="#episodes">Episodes</a>
 <a href="#predictor">Predictor</a>
 <a href="#scores">Scores</a>
-<a href="#locker-rooms">Locker Rooms</a>
+<a href="#leagues">Teams</a>
 <details><summary>All Media ▾</summary><nav aria-label="Other EliteChel Media coverage"><a href="lgchl-media.html">LGCHL Media</a><a href="esports-hub.html">Live Hub</a><a href="lg3s-media.html">LG3s</a><a href="interest.html?program=hut">HUT Tournament</a></nav></details>
 </nav>
 </div>
@@ -191,12 +176,6 @@ a{color:#f0c14b}a:hover{color:#ffd978}
 <div class="rl" aria-hidden="true"><span></span></div>
 
 <div class="wrap" style="padding-top: 14px; padding-bottom: 28px; display: flex; flex-direction: column; gap: 22px">
-
-<section class="locker-entry" id="locker-rooms" aria-labelledby="lockerEntryTitle">
-<div class="locker-entry-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7.7 3.5 10 5a3.5 3.5 0 0 0 4 0l2.3-1.5L21 7.4l-2.6 4.3L16 10.5V21H8V10.5l-2.4 1.2L3 7.4l4.7-3.9Z"/><path d="M10 5c.4 1.3 1 2 2 2s1.6-.7 2-2"/></svg></div>
-<div class="locker-entry-copy"><p class="locker-entry-kicker mono">ELITE CHEL MEDIA · TEAM HUB</p><h2 class="disp" id="lockerEntryTitle">TEAM LOCKER ROOMS</h2><p class="locker-entry-desc">Find your LGCHL team, enter its locker room, and explore the roster, player cards, and team stats.</p></div>
-<div class="locker-entry-actions"><div class="lg-locker-mount" data-locker-chooser data-locker-variant="nav" data-locker-label="Explore Locker Rooms"><a class="locker-entry-fallback" href="lgchl-team.html">Explore Locker Rooms</a></div><span class="locker-entry-hint mono">CHOOSE YOUR TEAM · SEASON 55</span></div>
-</section>
 
 <div class="dash">
 
@@ -390,4 +369,4 @@ a{color:#f0c14b}a:hover{color:#ffd978}
 </div>
 </footer>
 
-</div><script defer src="lgchl-segments-core.js?v=20261115-s55a"></script><script defer src="lgchl-segments-home.js?v=20261115-s55a"></script><script defer src="s55-home.js?v=s55-inline1"></script><script defer src="lgchl-locker-chooser.js?v=20261105-lockers1"></script><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script><script defer src="backend.js"></script><script defer src="playoff-central.js?v=20261116-late2"></script></body></html>
+</div><script defer src="lgchl-segments-core.js?v=20261115-s55a"></script><script defer src="lgchl-segments-home.js?v=20261115-s55a"></script><script defer src="s55-home.js?v=s55-inline1"></script><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script><script defer src="backend.js"></script><script defer src="playoff-central.js?v=20261116-late2"></script></body></html>
