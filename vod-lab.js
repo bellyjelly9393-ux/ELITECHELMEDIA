@@ -220,7 +220,7 @@
     if(!rows.length){el.innerHTML=`<div class="vod-empty">No timestamp markers for ${esc(s.label)} yet.</div>`;return;}
     el.innerHTML=rows.map(m=>`<div class="marker-row"><b>${timestampLink(m.timestamp_seconds,fmtTime(m.timestamp_seconds))}</b><small>${esc(String(m.category).replaceAll("_"," "))}${m.player_label?` · ${esc(m.player_label)}`:""}</small><span>${esc(m.note)}</span></div>`).join("");
   }
-  function renderAll(){renderKpis();renderLibrary();renderDetail();}
+  function renderAll(){renderKpis();renderLibrary();renderDetail();window.WildmanVODCoverage?.load(state.selectedReviewId,state.teamId,currentReview()?.game_format);}
 
   function selectReview(id){
     editingPeriod=false; state.selectedReviewId=id; state.selectedSegmentId=""; renderAll();
@@ -607,17 +607,17 @@
     $("lookupVodChelNames").disabled=!loaded||publishing;
     $("saveVodPlayerMatches").disabled=!loaded||publishing||model.periodErrors(currentReview(),reviewSegments(),{approved:true}).length>0;
     if(!loaded){box.innerHTML="";$("vodPlayerMatchStatus").textContent="Load the game’s players to match names or review saved matches.";return;}
-    const {candidates,matches,suggestions}=playerMatching;
+    const {candidates,matches,suggestions,verifiedAliases={}}=playerMatching;
     const groups=[["Played this game · official box score",candidates.filter(p=>p.played)],
       ["Listed in this game’s lineup",candidates.filter(p=>!p.played&&p.lineup)],
       ["Other team players · confirm participation",candidates.filter(p=>!p.played&&!p.lineup)]];
     const names=[...new Set(reportDocument().players.map(p=>p.player))];
     box.innerHTML=names.map((name,i)=>{
       const key=playerNameKey(name),exact=candidates.filter(p=>playerNameKey(p.gamertag)===key);
-      const value=matches[key]??(exact.length===1?exact[0].id:"");
+      const value=matches[key]??(verifiedAliases[key]||(exact.length===1?exact[0].id:""));
       const hints=suggestions.filter(s=>playerNameKey(s.name)===key).map(s=>s.gamertag);
       const chel=candidates.filter(p=>p.chelName&&playerNameKey(p.chelName)===key).map(p=>p.gamertag);
-      const hint=[...new Set([...hints,...chel])];
+      const hint=[...new Set([...hints,...chel])];if(verifiedAliases[key])hint.unshift('Confirmed LG identity');
       return `<label class="vod-player-match-row" for="vodMatch${i}"><span><strong>${esc(name)}</strong><small>${hint.length?'Suggested: '+esc(hint.join(' / '))+' · confirm below':value==='ignore'?'Excluded from team stalls':value?'Linked to one player':'Needs a match'}</small></span><select id="vodMatch${i}" class="select-field" data-vod-player-name="${esc(key)}"><option value="">Leave unmatched</option><option value="ignore" ${value==='ignore'?'selected':''}>Opponent / exclude from team stalls</option>${groups.filter(([,players])=>players.length).map(([label,players])=>`<optgroup label="${esc(label)}">${players.map(p=>`<option value="${esc(p.id)}" ${value===p.id?'selected':''}>${esc(p.gamertag)} · ${esc(p.position||'?')}${p.chelName?' · CHEL: '+esc(p.chelName):''}${p.lg_user_id?' · LG '+esc(p.lg_user_id):''}</option>`).join('')}</optgroup>`).join('')}</select></label>`;
     }).join('');
     box.querySelectorAll('select').forEach(el=>el.addEventListener('change',()=>{
@@ -632,7 +632,25 @@
     try{
       const {data,error}=await db().rpc('vod_player_match_context',{target_review:r.id});if(error)throw error;
       if(currentReview()?.id!==r.id)return;
-      playerMatching={reviewId:r.id,candidates:data.candidates||[],suggestions:data.suggestions||[],matches:data.matches||{}};
+      let verifiedAliases={};
+      // Confirmed aliases are only suggested as a preselected locker choice.
+      // A manager must still review and explicitly save the existing matching form.
+      const {data:aliasRows,error:aliasError}=await db().from('labs_player_aliases')
+        .select('alias,lg_user_id').eq('team_id',state.teamId).eq('status','confirmed');
+      if(aliasError){console.warn('LG identity overlay unavailable',aliasError);}
+      else{
+        const candidates=data.candidates||[];
+        const conflict=new Set();
+        for(const alias of aliasRows||[]){
+          const matching=candidates.filter(p=>String(p.lg_user_id||'')===String(alias.lg_user_id));
+          if(matching.length!==1)continue;
+          const key=playerNameKey(alias.alias);
+          if(verifiedAliases[key] && verifiedAliases[key]!==matching[0].id){
+            delete verifiedAliases[key]; conflict.add(key);
+          }else if(!conflict.has(key))verifiedAliases[key]=matching[0].id;
+        }
+      }
+      playerMatching={reviewId:r.id,candidates:data.candidates||[],suggestions:data.suggestions||[],matches:data.matches||{},verifiedAliases};
       renderPlayerMatches();
       const count=playerMatching.candidates.filter(p=>p.played).length;
       $("vodPlayerMatchStatus").textContent=count?`${count} players confirmed by this game’s box score. Other roster players are listed separately.`:'No official box-score participants are linked yet. Verify participation before choosing a roster player.';
