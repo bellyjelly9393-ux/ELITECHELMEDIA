@@ -416,3 +416,24 @@
 .lg3s .th-week-nav{font:700 12px var(--f-ui);letter-spacing:.14em;color:#c9d3dc;background:transparent;border:1px solid rgba(200,217,232,.18);padding:10px 12px;cursor:pointer}
 .lg3s .th-week-nav:hover{border-color:rgba(249,206,111,.5);color:#ffe39a}
 .lg3s .th-draft span b{color:#f5cf6b;letter-spacing:.12em}
+
+/* LG3s team locker discovery: scoped to the LG3s Media page only. */
+.lg3s .lg3-locker-entry{position:relative;scroll-margin-top:18px;background:linear-gradient(105deg,rgba(29,57,79,.55),rgba(9,13,19,.97) 46%,rgba(22,25,33,.96));border-top:1px solid rgba(200,217,232,.25);border-bottom:2px solid rgba(224,178,79,.75)}
+.lg3s .lg3-locker-entry-inner{max-width:1320px;margin:0 auto;padding:18px clamp(16px,2.7vw,32px);display:flex;align-items:center;gap:20px}
+.lg3s .lg3-locker-entry-icon{flex:0 0 62px;height:62px;display:grid;place-items:center;color:#f3f5f6;background:linear-gradient(140deg,#374c60,#18202d);border:1px solid rgba(211,225,237,.44);box-shadow:0 4px 0 rgba(0,0,0,.7);clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
+.lg3s .lg3-locker-entry-icon svg{width:35px;height:35px}
+.lg3s .lg3-locker-entry-copy{min-width:0;flex:1 1 480px}
+.lg3s .lg3-locker-entry-copy .eyebrow{margin:0 0 4px;color:#e7bf71;font-size:11px;letter-spacing:.15em}
+.lg3s .lg3-locker-entry-copy h2{margin:0;color:#f5f6f8;font:900 clamp(27px,3vw,38px)/1.05 var(--f-head,'Barlow Condensed',sans-serif);letter-spacing:.025em}
+.lg3s .lg3-locker-entry-copy p:not(.eyebrow){margin:6px 0 5px;color:#d2dae2;font-size:14px;line-height:1.45}
+.lg3s .lg3-locker-gb{display:inline-block;color:#f0cc80;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.lg3s .lg3-locker-gb:hover{color:#fff4d7}
+.lg3s .lg3-locker-entry-form{display:grid;gap:7px;flex:0 1 290px;min-width:245px;margin:0}
+.lg3s .lg3-locker-entry-form label{color:#c7d0dc;letter-spacing:.13em;font-size:11px;font-weight:800}
+.lg3s .lg3-locker-entry-form select{display:block;max-width:100%;width:100%;min-height:47px;padding:8px 12px;color:#f4f6f8;background:#111a24;border:1px solid #748798;border-radius:2px;font:600 15px var(--f-ui,sans-serif)}
+.lg3s .lg3-locker-entry-form select option{color:#131b24;background:#f4f6f8}
+.lg3s .lg3-locker-entry-form button{min-height:45px;cursor:pointer;border:1px solid #c8a34f;border-radius:2px;background:linear-gradient(180deg,#ffdf91,#cfaa58);color:#121416;font:800 17px var(--f-head,sans-serif);letter-spacing:.035em}
+.lg3s .lg3-locker-entry-form button:hover{background:#ffe8b3}
+.lg3s .lg3-locker-entry-form :is(select,button):focus-visible,.lg3s .lg3-locker-gb:focus-visible{outline:3px solid #ffda7c;outline-offset:2px}
+@media(max-width:880px){.lg3s .lg3-locker-entry-inner{flex-wrap:wrap;align-items:flex-start}.lg3s .lg3-locker-entry-copy{flex:1 1 calc(100% - 90px)}.lg3s .lg3-locker-entry-form{flex:1 1 100%;min-width:0;grid-template-columns:1fr auto;align-items:end;gap:9px}.lg3s .lg3-locker-entry-form label{grid-column:1/-1}.lg3s .lg3-locker-entry-form button{padding-inline:16px}}
+@media(max-width:540px){.lg3s .lg3-locker-entry-icon{flex-basis:48px;height:48px}.lg3s .lg3-locker-entry-icon svg{width:28px;height:28px}.lg3s .lg3-locker-entry-copy{flex:1 1 calc(100% - 68px)}.lg3s .lg3-locker-entry-copy h2{font-size:29px}.lg3s .lg3-locker-entry-form{grid-template-columns:1fr}.lg3s .lg3-locker-entry-form label{grid-column:auto}}
