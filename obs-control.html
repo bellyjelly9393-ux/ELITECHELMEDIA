@@ -38,7 +38,7 @@
       <section class="obs-preview-card obs-access-sample" aria-labelledby="obsAccessSampleTitle">
         <div class="obs-card-head">
           <div><h2 id="obsAccessSampleTitle">GBR graphics preview</h2><p>Sample scorebug and tactical rink</p></div>
-          <div class="obs-preview-switch">
+          <div id="obsPreviewSwitch" class="obs-preview-switch">
             <a href="/lg3s-gb?mode=obs&amp;preview=true&amp;audio=off" target="_blank" rel="noopener">Open sample ↗</a>
           </div>
         </div>
@@ -100,7 +100,7 @@
             <div class="obs-monitor-footer"><span id="obsMonitorNote">Game feed and graphics · Muted</span><a id="obsOpenMonitor" href="#" target="_blank" rel="noopener">Open monitor ↗</a></div>
           </section>
 
-          <section class="obs-scenes-card" aria-labelledby="obsScenesHeading">
+          <section id="obsLiveScenes" class="obs-scenes-card" aria-labelledby="obsScenesHeading">
             <div class="obs-card-head"><div><h2 id="obsScenesHeading">Scenes</h2><p>Scene buttons publish immediately. Use the monitor tabs to preview off air.</p></div></div>
             <div class="obs-scene-strip" id="obsSceneStrip"></div>
           </section>
@@ -115,7 +115,25 @@
           </section>
         </div>
 
-        <section class="obs-control-card" aria-label="Channel controls">
+        <section class="obs-control-card" id="obsCzechiaControls" aria-labelledby="obsCzechiaHeading" hidden>
+          <h2 id="obsCzechiaHeading">Czechia pregame</h2>
+          <label>Matchup
+            <select id="obsCzechiaGame" class="select-field">
+              <option value="germany">9:00 p.m. ET · Germany</option>
+              <option value="usa">9:35 p.m. ET · USA</option>
+              <option value="sweden">10:10 p.m. ET · Sweden</option>
+            </select>
+          </label>
+          <h3>OBS Browser Source</h3>
+          <p>Set the source to 1920 × 1080. Use the selected game’s URL in OBS.</p>
+          <div class="obs-source-row">
+            <input id="obsCzechiaUrl" class="field" aria-label="Czechia OBS browser source URL" readonly>
+            <button id="copyCzechiaUrl" class="small-btn primary" type="button">Copy OBS URL</button>
+            <a id="openCzechiaUrl" class="small-btn" href="#" target="_blank" rel="noopener">Open pregame</a>
+          </div>
+          <p class="obs-preview-note">Sweden’s RD and goalie assignments are provisional.</p>
+        </section>
+        <section id="obsLiveControls" class="obs-control-card" aria-label="Channel controls">
           <div class="obs-tabs" role="tablist" aria-label="Production controls">
             <button type="button" id="obsTabMatch" role="tab" aria-selected="true" aria-controls="obsMatchPanel">Match</button>
             <button type="button" id="obsTabFeed" role="tab" aria-selected="false" aria-controls="obsFeedPanel" tabindex="-1">Feed</button>
@@ -320,10 +338,7 @@
           </div>
           <div class="obs-tab-panel obs-source-card" id="obsSourcesPanel" role="tabpanel" aria-labelledby="obsTabSources" hidden>
             <h2>Browser sources</h2>
-            <div class="obs-overlay-only">
-              <small>LG WORLD JUNIORS · CZECHIA PREGAME</small>
-              <a class="small-btn" href="/czechia-obs.html" target="_blank" rel="noopener">Open Czechia OBS URLs</a>
-            </div>
+
             <p id="obsStandardCopy">In OBS, place Gameplay below Graphics. Use the combined link for browser monitoring.</p>
         <div class="obs-overlay-only"><small>COMBINED PREVIEW</small><div class="obs-source-row">
           <input id="obsSourceUrl" class="field" aria-label="Combined preview URL" readonly>
@@ -387,6 +402,6 @@
 <script src="script.js"></script>
 <script src="obs-config.js?v=20261005b"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
-<script src="obs-control.js?v=20261120-gbr-lineup"></script>
+<script src="obs-control.js?v=20261122-czechia-desk"></script>
 </body>
 </html>
