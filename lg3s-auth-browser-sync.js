@@ -46,7 +46,8 @@
         const original = doc.querySelector('main,.p-body-main,#content,.mainContent,.pageContent') || doc.body;
         if (!original) throw Error('LG page content is missing.');
         const root = original.cloneNode(true);
-        root.querySelectorAll('script,style,iframe,textarea,input,button,select,option,meta,link,form,canvas,video,audio,noscript').forEach(n => n.remove());
+        root.querySelectorAll('script,style,iframe,textarea,input,button,select,option,meta,link,canvas,video,audio,noscript').forEach(n => n.remove());
+        root.querySelectorAll('form').forEach(n => n.replaceWith(...n.childNodes));
         const allowed = new Set(['href','src','title','alt','class','id','colspan','rowspan','style']);
         for (const el of root.querySelectorAll('*')) {
           for (const attr of [...el.attributes]) {
@@ -174,17 +175,19 @@
         .filter(x => Number.isSafeInteger(x)).slice(0, LIMIT);
       if (!ids.length) {
         setMessage('No overdue unverified LG3S games were found in the last 14 days.');
+        busy = false;
+        $('lg3sFetchMissing').disabled = false;
         return;
       }
       setStatus('Fetching ' + ids.length + ' LG3S game sheets from your signed-in LeagueGaming tab…');
       setMessage('First captures are provisional. Repeat after 10 minutes for the stability check.');
       lgWindow.postMessage({type:'ECM_LG3S_FETCH',gameIds:ids},lgOrigin);
+      return; // Re-enable only after the browser finishes this batch.
     } catch (e) {
       setMessage(String(e?.message || e), true);
-    } finally {
-      busy = false;
-      $('lg3sFetchMissing').disabled = false;
     }
+    busy = false;
+    $('lg3sFetchMissing').disabled = false;
   }
   function receive(event) {
     if (!LG_ORIGIN.test(event.origin)) return;
@@ -204,9 +207,13 @@
       updateCounts();
       setMessage('Game ' + event.data.gameId + ': ' + event.data.error, true);
     } else if (event.data?.type === 'ECM_LG3S_DONE') {
-      queue = queue.then(() => setMessage(
-        'Browser collection finished. Verified results are now included automatically; ' +
-        'provisional games require a second capture after 10 minutes.'));
+      queue = queue.then(() => {
+        busy = false;
+        $('lg3sFetchMissing').disabled = false;
+        updateCounts();
+        setMessage('Browser collection finished. Verified results are now included automatically; ' +
+          'provisional games require a second capture after 10 minutes.');
+      });
     }
   }
   function install() {
