@@ -1,0 +1,22 @@
+name: LGCHL Live Round 2 Bracket
+on:
+  pull_request:
+    paths:
+      - 'api/lgchl-playoffs.js'
+      - 'lib/lgchl-playoff.mjs'
+      - 'lgchl-playoffs.js'
+      - 'tests/lgchl-round2-bracket-live.test.mjs'
+      - '.github/workflows/lgchl-live-round2-bracket.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bracket-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Round 2 matching and safety rules
+        run: node --test tests/lgchl-round2-bracket-live.test.mjs tests/lgchl-playoff.test.mjs tests/playoff-api-compat.test.mjs
