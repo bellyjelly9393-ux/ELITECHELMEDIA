@@ -30,6 +30,13 @@
   window.WM_OBS_CONFIG.defaultFeedFor=function(channel){
     return window.WM_OBS_CONFIG.defaultFeeds[String(channel||'')]||'';
   };
+  window.WM_OBS_CONFIG.czechiaFeedUrl=function(raw){
+    try{
+      var url=new URL(String(raw||'').trim());
+      var hosts=['twitch.tv','www.twitch.tv','clips.twitch.tv','youtube.com','www.youtube.com','youtu.be'];
+      return url.protocol==='https:'&&!url.username&&!url.password&&!url.port&&hosts.includes(url.hostname)&&url.pathname!=='/'?url.href:'';
+    }catch{return '';}
+  };
   window.WM_OBS_CONFIG.playerForUrl=function(url){
     var key=String(url||'').toLowerCase().replace(/\/+$/,'').replace('://twitch.tv','://www.twitch.tv');
     return (window.WM_OBS_CONFIG.playerStreams||[]).find(function(s){return String(s.url).toLowerCase()===key;})||null;
