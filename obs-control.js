@@ -116,6 +116,14 @@
   }
   function isCzechia(){return currentTeamId===CZECHIA_STUDIO;}
   function czechiaUrl(){return location.origin+'/czechia-obs.html?game='+encodeURIComponent(val('obsCzechiaGame'));}
+  function updateCzechiaFeed(){
+    var stream=OBS_CFG.czechiaFeedUrl(val('obsCzechiaStream'));
+    var url=stream?location.origin+'/obs-stage.html?channel=wjhc-czechia&layer=feed&stream='+encodeURIComponent(stream):'';
+    byId('obsCzechiaFeedUrl').value=url;
+    byId('copyCzechiaFeedUrl').disabled=!url;
+    byId('openCzechiaFeedUrl').hidden=!url;
+    if(url)byId('openCzechiaFeedUrl').href=url+'&preview=1';
+  }
   function updateCzechiaSource(){
     var url=czechiaUrl();
     byId('obsCzechiaUrl').value=url;
@@ -259,6 +267,7 @@
       byId('heroChannel').textContent='WORLD JUNIORS · CZECHIA';
       byId('obsGbrCues').hidden=true;
       updateCzechiaSource();
+      updateCzechiaFeed();
       return;
     }
     var stage=stageUrl(),overlay=overlayUrl();
@@ -593,6 +602,8 @@
       editCount++;
       setStatus('Unpublished changes');
     }
+    byId('obsCzechiaStream').addEventListener('input',updateCzechiaFeed);
+    byId('copyCzechiaFeedUrl').addEventListener('click',function(){copyText('obsCzechiaFeedUrl',val('obsCzechiaFeedUrl'));});
     byId('obsCzechiaGame').addEventListener('change',updateCzechiaSource);
     byId('copyCzechiaUrl').addEventListener('click',function(){copyText('obsCzechiaUrl',czechiaUrl());});
     byId('obsLiveControls').addEventListener('input',markChanged);
