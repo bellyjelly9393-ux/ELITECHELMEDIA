@@ -63,6 +63,7 @@
         </div>
         <div class="obs-desk-toolbar">
           <label class="obs-channel-select">Channel<select id="obsTeamSelect" aria-label="Channel" class="select-field"></select></label>
+          <button id="broadcastRehearsalOpen" class="small-btn primary" type="button" aria-controls="broadcastRehearsal">Open Broadcast Rehearsal</button>
           <button id="reloadObsState" class="small-btn" type="button">Reload state</button>
           <button id="publishObsState" class="small-btn primary" type="button">Publish changes</button>
         </div>
@@ -74,6 +75,9 @@
         <span class="obs-publish-state" id="publishStatus" role="status">Connecting</span>
         <span id="stateUpdated" class="obs-saved-state">Waiting for channel</span>
       </div>
+
+      <p id="broadcastRehearsalStatus" role="status" style="margin:0"></p>
+      <div id="broadcastRehearsal"></div>
 
       <div class="obs-layout" id="obsDeskControls" hidden>
         <div class="obs-program">
@@ -413,6 +417,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script src="backend.js"></script>
 <script src="management-guard.js"></script>
+<script src="broadcast-rehearsal.js" defer></script>
 <script src="script.js"></script>
 <script src="obs-config.js?v=20261122-czechia-feed"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
