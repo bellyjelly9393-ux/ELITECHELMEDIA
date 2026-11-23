@@ -4,7 +4,7 @@ const { extname } = require('node:path');
 const encryptedPack = require('./_lg3s-carbon-pack.cjs');
 
 const BASE = '/lg3s-gb/arena/';
-const CZECHIA_FIXTURES = new Set(['germany', 'usa', 'sweden']);
+const CZECHIA_FIXTURE = /^(?:germany|usa|sweden|lg-[1-9]\d{0,9})$/;
 const COOKIE = '__Secure-ecmCarbon';
 const PREVIEW_TTL = 60 * 60;
 const PROGRAM_TTL = 90 * 24 * 60 * 60;
@@ -85,7 +85,7 @@ module.exports = async function handler(req, res) {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'no-referrer');
   const { asset, fixture } = req.query;
-  if (fixture !== undefined && !CZECHIA_FIXTURES.has(fixture)) return res.status(404).end();
+  if (fixture !== undefined && (typeof fixture !== 'string' || !CZECHIA_FIXTURE.test(fixture))) return res.status(404).end();
   if (asset === 'broadcast.html' && (fixture
     ? req.query.team !== 'czechia' || req.query.game !== fixture
     : req.query.team === 'czechia')) return res.status(404).end();

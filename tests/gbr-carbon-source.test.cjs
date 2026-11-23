@@ -37,7 +37,7 @@ test('successful private program exchange loads only authenticated Carbon broadc
   assert.equal(result.warnings.length,0);
 });
 test('private Czechia OBS links keep their selected matchup and reject unknown matchups',async()=>{
-  for(const game of ['germany','usa','sweden']){
+  for(const game of ['germany','usa','sweden','lg-923931']){
     const result=await execute('#test-opaque-token',204,'?game='+game);
     assert.equal(result.count,1);
     assert.equal(result.request[0],'/czechia/arena/'+game+'/open-program');

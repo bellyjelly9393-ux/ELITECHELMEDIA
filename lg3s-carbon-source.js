@@ -23,7 +23,7 @@
     program.title = 'Czechia Carbon Arena broadcast graphics';
     document.getElementById('carbonAccessBrand').textContent = 'CZECHIA · PRIVATE BROADCAST SOURCE';
     document.getElementById('carbonAccessDesk').href = '/obs-control.html?channel=wjhc-czechia';
-    if (!['germany', 'usa', 'sweden'].includes(game)) {
+    if (!/^(?:germany|usa|sweden|lg-[1-9]\d{0,9})$/.test(game)) {
       showUnavailable('Choose a valid Czechia matchup in the OBS Desk and copy a new private OBS URL.');
       return;
     }

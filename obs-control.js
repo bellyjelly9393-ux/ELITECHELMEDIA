@@ -123,7 +123,7 @@
     if(game)return carbonPath(game)+'broadcast.html?preview=desk&team=czechia&game='+encodeURIComponent(game);
     return isGbr()&&previewMode==='pregame'?CARBON_PREVIEW:'';
   }
-  function czechiaUrl(){return location.origin+'/czechia-obs.html?game='+encodeURIComponent(val('obsCzechiaGame'));}
+  function czechiaUrl(){return czechiaGame()?location.origin+'/czechia-obs.html?game='+encodeURIComponent(czechiaGame()):'';}
   function updateCzechiaFeed(){
     var stream=OBS_CFG.czechiaFeedUrl(val('obsCzechiaStream'));
     var url=stream?location.origin+'/obs-stage.html?channel=wjhc-czechia&layer=feed&stream='+encodeURIComponent(stream):'';
@@ -133,18 +133,47 @@
     if(url)byId('openCzechiaFeedUrl').href=url+'&preview=1';
   }
   function updateCzechiaSource(){
+    var game=czechiaGame();
     var url=czechiaUrl();
     var input=byId('obsCzechiaCarbonUrl');
-    if(input.dataset.game!==czechiaGame()){
+    if(input.dataset.game!==game){
       ++czechiaLinkRequest;
-      input.dataset.game=czechiaGame();
+      input.dataset.game=game;
       input.value='';
-      byId('copyCzechiaCarbonUrl').disabled=false;
-      byId('obsCzechiaCarbonStatus').textContent='Private link for the selected matchup. Valid for 90 days.';
     }
+    byId('copyCzechiaCarbonUrl').disabled=!game;
+    byId('copyCzechiaUrl').disabled=!game;
+    byId('obsCzechiaCarbonStatus').textContent=game?'Private link for the selected matchup. Valid for 90 days.':'The private link is available when a matchup is selected.';
     byId('obsCzechiaUrl').value=url;
     byId('openCzechiaUrl').href=url;
+    byId('openCzechiaUrl').hidden=!game;
     updatePreview();
+  }
+  async function loadCzechiaGames(request){
+    var select=byId('obsCzechiaGame');
+    var previous=select.value;
+    var status=byId('obsCzechiaScheduleStatus');
+    select.disabled=true;
+    try{
+      var feed=window.ECMCzechiaPregame;
+      var snapshot=await feed.load();
+      if(request!==stateRequest||!isCzechia())return;
+      var today=feed.today();
+      var games=snapshot.games.filter(function(game){return game.date===today;});
+      select.replaceChildren(...games.map(function(game){return new Option(game.time+' · '+game.opponent,game.key);}));
+      if(!games.length)select.add(new Option('No game listed tonight',''));
+      if(games.some(function(game){return game.key===previous;}))select.value=previous;
+      select.disabled=!games.length;
+      status.textContent=(snapshot.usingSeed?'Saved schedule · ':'LeagueGaming · ')+
+        (games.length?games.length+' '+(games.length===1?'matchup':'matchups')+' tonight. Posted lineups refresh at 11 a.m. ET.':'No Czechia game is listed tonight.');
+      byId('stateUpdated').textContent=games.length?games.length+' game sources':'No game sources tonight';
+      updateCzechiaSource();
+    }catch{
+      if(request!==stateRequest||!isCzechia())return;
+      select.replaceChildren(new Option('Schedule unavailable',''));
+      status.textContent='The tournament schedule could not load. Refresh the desk to retry.';
+      updateCzechiaSource();
+    }
   }
   function isGbr(){return currentTeamId===GBR_STUDIO;}
   function config(){return TEAM_CONFIG[currentTeamId]||TEAM_CONFIG['5f36117c-7a51-4514-bf70-d4c672b41e48'];}
@@ -248,7 +277,7 @@
     var program='/obs-stage.html?channel='+channel+'&preview=1';
     var graphics=isGbr()?'/lg3s-gb?mode=obs&audio=off':'/obs-overlay.html?channel='+channel;
     var carbon=carbonPreviewUrl();
-    var source=previewMode==='lineup'?'/lg3s-gb/pregame?mode=obs':previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
+    var source=isCzechia()?'/czechia-obs.html':previewMode==='lineup'?'/lg3s-gb/pregame?mode=obs':previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
     var monitor=byId('obsPreview');
     var frame=byId('obsPreviewFrame');
     var width=(isGbr()||isCzechia())?1920:1280;
@@ -270,7 +299,7 @@
     frame.dataset.carbonTarget=carbon;
     frame.dataset.mode=previewMode;
     byId('obsPreviewDimensions').textContent=width+' × '+height+((isGbr()||isCzechia())?' · 60 FPS source':'');
-    if(!carbon)byId('obsMonitorNote').textContent=previewMode==='lineup'?'Current GBR starting four · 3D rink · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
+    if(!carbon)byId('obsMonitorNote').textContent=isCzechia()?'Czechia matchup setup':previewMode==='lineup'?'Current GBR starting four · 3D rink · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
       :previewMode==='graphics'?'Transparent graphics · Muted':'Game feed and graphics · Muted';
     document.querySelectorAll('[data-preview]').forEach(function(button){
       button.hidden=['sample','pregame','lineup'].includes(button.dataset.preview)&&!isGbr();
@@ -514,13 +543,14 @@
   }
   async function loadState(force){
     if(isCzechia()){
-      ++stateRequest;
+      var scheduleRequest=++stateRequest;
       channelReady=false;
       updatePublished(null);
       byId('obsPublishedScene').textContent='Pregame';
-      byId('stateUpdated').textContent='Three game sources';
+      byId('stateUpdated').textContent='Loading game sources';
       updateDeskActions();
       setStatus('Ready');
+      await loadCzechiaGames(scheduleRequest);
       return;
     }
     if(!currentTeamId||!window.VVHLBackend?.db||publishing) return;

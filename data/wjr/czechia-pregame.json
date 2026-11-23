@@ -1,0 +1,465 @@
+{
+  "schema": "lgwjc-czechia-pregame-v1",
+  "season": 33,
+  "games": [
+    {
+      "id": 923918,
+      "date": "2026-11-22",
+      "time": "21:00",
+      "opponent": "Germany",
+      "opponentId": 532,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923918",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923923,
+      "date": "2026-11-22",
+      "time": "21:35",
+      "opponent": "USA",
+      "opponentId": 342,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923923",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923926,
+      "date": "2026-11-22",
+      "time": "22:10",
+      "opponent": "Sweden",
+      "opponentId": 343,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923926",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923931,
+      "date": "2026-11-23",
+      "time": "21:00",
+      "opponent": "Canada",
+      "opponentId": 341,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923931",
+      "czech": [
+        {
+          "position": "LW",
+          "gamertag": "l Setty l",
+          "lgUserId": 73707
+        },
+        {
+          "position": "C",
+          "gamertag": "Noahbroskii",
+          "lgUserId": 74156
+        },
+        {
+          "position": "RW",
+          "gamertag": "Bxbbzz",
+          "lgUserId": 73485
+        },
+        {
+          "position": "LD",
+          "gamertag": "WhyKayWins",
+          "lgUserId": 77094
+        },
+        {
+          "position": "RD",
+          "gamertag": "D Acuff Jr",
+          "lgUserId": 23501
+        },
+        {
+          "position": "G",
+          "gamertag": "XxPASTRNAK88",
+          "lgUserId": 80604
+        }
+      ],
+      "away": [
+        {
+          "position": "LW",
+          "gamertag": "PR7_Runtzxx",
+          "lgUserId": 48379
+        },
+        {
+          "position": "C",
+          "gamertag": "Juul-Mint_",
+          "lgUserId": 75904
+        },
+        {
+          "position": "RW",
+          "gamertag": "Big Boutchyy",
+          "lgUserId": 61240
+        },
+        {
+          "position": "LD",
+          "gamertag": "LeagueFreak1807",
+          "lgUserId": 79344
+        },
+        {
+          "position": "RD",
+          "gamertag": "xSedin22l33",
+          "lgUserId": 71683
+        },
+        {
+          "position": "G",
+          "gamertag": "mgb2092",
+          "lgUserId": 55638
+        }
+      ],
+      "lineupDate": "2026-11-23"
+    },
+    {
+      "id": 923935,
+      "date": "2026-11-23",
+      "time": "21:35",
+      "opponent": "Finland",
+      "opponentId": 344,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923935",
+      "away": [
+        {
+          "position": "LW",
+          "gamertag": "xGonyou",
+          "lgUserId": 26592
+        },
+        {
+          "position": "C",
+          "gamertag": "Trey I67I",
+          "lgUserId": 46265
+        },
+        {
+          "position": "RW",
+          "gamertag": "xMecciah",
+          "lgUserId": 28706
+        },
+        {
+          "position": "LD",
+          "gamertag": "aCanadianGamer",
+          "lgUserId": 43704
+        },
+        {
+          "position": "RD",
+          "gamertag": "STL TopShelf",
+          "lgUserId": 16056
+        },
+        {
+          "position": "G",
+          "gamertag": "XxGuentzel59xX",
+          "lgUserId": 79315
+        }
+      ],
+      "czech": [
+        {
+          "position": "LW",
+          "gamertag": "l Setty l",
+          "lgUserId": 73707
+        },
+        {
+          "position": "C",
+          "gamertag": "Noahbroskii",
+          "lgUserId": 74156
+        },
+        {
+          "position": "RW",
+          "gamertag": "Bxbbzz",
+          "lgUserId": 73485
+        },
+        {
+          "position": "LD",
+          "gamertag": "WhyKayWins",
+          "lgUserId": 77094
+        },
+        {
+          "position": "RD",
+          "gamertag": "D Acuff Jr",
+          "lgUserId": 23501
+        },
+        {
+          "position": "G",
+          "gamertag": "XxPASTRNAK88",
+          "lgUserId": 80604
+        }
+      ],
+      "lineupDate": "2026-11-23"
+    },
+    {
+      "id": 923937,
+      "date": "2026-11-23",
+      "time": "22:10",
+      "opponent": "Slovakia",
+      "opponentId": 1079,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923937",
+      "czech": [
+        {
+          "position": "LW",
+          "gamertag": "l Setty l",
+          "lgUserId": 73707
+        },
+        {
+          "position": "C",
+          "gamertag": "Noahbroskii",
+          "lgUserId": 74156
+        },
+        {
+          "position": "RW",
+          "gamertag": "Bxbbzz",
+          "lgUserId": 73485
+        },
+        {
+          "position": "LD",
+          "gamertag": "WhyKayWins",
+          "lgUserId": 77094
+        },
+        {
+          "position": "RD",
+          "gamertag": "D Acuff Jr",
+          "lgUserId": 23501
+        },
+        {
+          "position": "G",
+          "gamertag": "XxPASTRNAK88",
+          "lgUserId": 80604
+        }
+      ],
+      "away": [
+        {
+          "position": "LW",
+          "gamertag": "LIL_Dawso",
+          "lgUserId": 76626
+        },
+        {
+          "position": "C",
+          "gamertag": "majorbigmeat",
+          "lgUserId": 81031
+        },
+        {
+          "position": "RW",
+          "gamertag": "lxbiz",
+          "lgUserId": 76368
+        },
+        {
+          "position": "LD",
+          "gamertag": "tthehorse",
+          "lgUserId": 79200
+        },
+        {
+          "position": "RD",
+          "gamertag": "D1ggy420",
+          "lgUserId": 28996
+        },
+        {
+          "position": "G",
+          "gamertag": "Eclipse I90I",
+          "lgUserId": 67180
+        }
+      ],
+      "lineupDate": "2026-11-23"
+    },
+    {
+      "id": 923944,
+      "date": "2026-11-24",
+      "time": "21:00",
+      "opponent": "Switzerland",
+      "opponentId": 404,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923944",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923948,
+      "date": "2026-11-24",
+      "time": "21:35",
+      "opponent": "Canada",
+      "opponentId": 341,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923948",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923952,
+      "date": "2026-11-24",
+      "time": "22:10",
+      "opponent": "USA",
+      "opponentId": 342,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923952",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923956,
+      "date": "2026-11-29",
+      "time": "21:00",
+      "opponent": "Canada",
+      "opponentId": 341,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923956",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923960,
+      "date": "2026-11-29",
+      "time": "21:35",
+      "opponent": "Slovakia",
+      "opponentId": 1079,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923960",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923962,
+      "date": "2026-11-29",
+      "time": "22:10",
+      "opponent": "Finland",
+      "opponentId": 344,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923962",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923967,
+      "date": "2026-11-30",
+      "time": "21:00",
+      "opponent": "Germany",
+      "opponentId": 532,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923967",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923971,
+      "date": "2026-11-30",
+      "time": "21:35",
+      "opponent": "Sweden",
+      "opponentId": 343,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923971",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923974,
+      "date": "2026-11-30",
+      "time": "22:10",
+      "opponent": "Finland",
+      "opponentId": 344,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923974",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923980,
+      "date": "2026-12-01",
+      "time": "21:00",
+      "opponent": "Switzerland",
+      "opponentId": 404,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923980",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923984,
+      "date": "2026-12-01",
+      "time": "21:35",
+      "opponent": "USA",
+      "opponentId": 342,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923984",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923987,
+      "date": "2026-12-01",
+      "time": "22:10",
+      "opponent": "Sweden",
+      "opponentId": 343,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923987",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923990,
+      "date": "2026-12-06",
+      "time": "21:00",
+      "opponent": "Germany",
+      "opponentId": 532,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923990",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923994,
+      "date": "2026-12-06",
+      "time": "21:35",
+      "opponent": "Slovakia",
+      "opponentId": 1079,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923994",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 923997,
+      "date": "2026-12-06",
+      "time": "22:10",
+      "opponent": "Switzerland",
+      "opponentId": 404,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923997",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 924002,
+      "date": "2026-12-07",
+      "time": "21:00",
+      "opponent": "USA",
+      "opponentId": 342,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=924002",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 924006,
+      "date": "2026-12-07",
+      "time": "21:35",
+      "opponent": "Slovakia",
+      "opponentId": 1079,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=924006",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 924012,
+      "date": "2026-12-07",
+      "time": "22:10",
+      "opponent": "Switzerland",
+      "opponentId": 404,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=924012",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 924016,
+      "date": "2026-12-08",
+      "time": "21:00",
+      "opponent": "Germany",
+      "opponentId": 532,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=924016",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 924017,
+      "date": "2026-12-08",
+      "time": "21:35",
+      "opponent": "Finland",
+      "opponentId": 344,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=924017",
+      "czech": [],
+      "away": []
+    },
+    {
+      "id": 924024,
+      "date": "2026-12-08",
+      "time": "22:10",
+      "opponent": "USA",
+      "opponentId": 342,
+      "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=924024",
+      "czech": [],
+      "away": []
+    }
+  ]
+}
