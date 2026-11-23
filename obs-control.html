@@ -118,12 +118,11 @@
         <section class="obs-control-card" id="obsCzechiaControls" aria-labelledby="obsCzechiaHeading" hidden>
           <h2 id="obsCzechiaHeading">Czechia pregame</h2>
           <label>Matchup
-            <select id="obsCzechiaGame" class="select-field">
-              <option value="germany">9:00 p.m. ET · Germany</option>
-              <option value="usa">9:35 p.m. ET · USA</option>
-              <option value="sweden">10:10 p.m. ET · Sweden</option>
+            <select id="obsCzechiaGame" class="select-field" disabled>
+              <option value="">Loading tonight’s matchups…</option>
             </select>
           </label>
+          <p id="obsCzechiaScheduleStatus" class="obs-preview-note" role="status"></p>
           <h3>Private Carbon Arena</h3>
           <p>The monitor previews the selected matchup off air.</p>
           <div class="obs-source-row">
@@ -147,7 +146,6 @@
             <a id="openCzechiaFeedUrl" class="small-btn" target="_blank" rel="noopener">Preview gameplay</a>
           </div>
           <p class="obs-preview-note">Add gameplay as its own OBS Browser Source. Copy the new link after changing the stream.</p>
-          <p class="obs-preview-note">Sweden’s RD and goalie assignments are provisional.</p>
         </section>
         <section id="obsLiveControls" class="obs-control-card" aria-label="Channel controls">
           <div class="obs-tabs" role="tablist" aria-label="Production controls">
@@ -418,6 +416,7 @@
 <script src="script.js"></script>
 <script src="obs-config.js?v=20261122-czechia-feed"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
-<script src="obs-control.js?v=20261122-czechia-carbon"></script>
+<script src="czechia-pregame-feed.js?v=1"></script>
+<script src="obs-control.js?v=20261123-czechia-lineups"></script>
 </body>
 </html>
