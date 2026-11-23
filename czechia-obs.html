@@ -15,11 +15,22 @@ h2{font-size:24px;letter-spacing:3px;text-transform:uppercase;margin:0 0 18px;co
 footer{position:absolute;bottom:50px;left:74px;right:74px;display:flex;justify-content:space-between;border-top:1px solid #60708a;padding-top:22px;font-size:22px;font-weight:800;letter-spacing:3px}
 #setup{position:fixed;z-index:1;inset:0;margin:auto;width:min(650px,94vw);height:max-content;max-height:94vh;overflow:auto;padding:28px;background:#101d31;border:1px solid #7990b4;box-shadow:0 0 0 100vmax #000a}
 #setup h2{color:white}label{display:block;margin-top:12px}input,textarea,button{font:inherit}input,textarea{display:block;width:100%;padding:8px;margin-top:5px;color:white;background:#081224;border:1px solid #63789a}textarea{min-height:96px}button{padding:10px 15px;margin:15px 8px 0 0;border:0;background:#d8e7ff;color:#10213c;font-weight:bold;cursor:pointer}p{color:#b9cbe6;line-height:1.4}
+
+.grid{grid-template-columns:350px minmax(0,1fr) 350px;align-items:stretch}
+.lineup{padding:24px 20px;min-height:490px}
+.row{grid-template-columns:45px minmax(0,1fr);font-size:23px;min-height:61px}
+.row span:first-child{font-size:17px}
+.rink{margin:0;position:relative;display:grid;grid-template-rows:1fr auto;overflow:hidden;border:1px solid #425677;background:radial-gradient(ellipse at center,#243f61,#0a1424 74%)}
+.rink iframe{width:100%;height:100%;min-height:0;border:0;display:block;pointer-events:none}
+.rink figcaption{padding:12px;text-align:center;color:#b9cbe6;font-size:17px;font-weight:700;letter-spacing:2px}
 </style>
 <main id="stage" aria-label="Czechia pregame broadcast graphic">
 <header><strong><img alt="" src="/assets/brand/ecm-crest.webp">LG WORLD JUNIOR CHAMPIONSHIPS</strong> <span>PREGAME</span></header>
 <div class="hero"><div><div class="flag" aria-label="Czechia flag"></div><h1>CZECHIA</h1></div><b>VS</b><h1 id="opponent"></h1></div>
-<section class="grid"><article class="lineup"><h2>Czechia lineup</h2><div id="czech"></div></article><article class="lineup"><h2 id="away-title">Opponent lineup</h2><div id="away"></div></article></section>
+<section class="grid"><article class="lineup"><h2>Czechia lineup</h2><div id="czech"></div></article><figure class="rink">
+  <iframe id="pregame-rink" title="Czechia 6-on-6 pregame rink"></iframe>
+  <figcaption id="rink-caption">PREGAME LINEUP VISUALIZATION</figcaption>
+</figure><article class="lineup"><h2 id="away-title">Opponent lineup</h2><div id="away"></div></article></section>
 <footer>ELITE CHEL MEDIA <span id="air-time"></span></footer>
 </main>
 <section id="setup" hidden>
@@ -101,7 +112,46 @@ function render() {
   drawLineup('czech', game.czech);
   drawLineup('away', game.away);
 }
+function mountRink() {
+  const rink = document.querySelector('#pregame-rink');
+  const caption = document.querySelector('#rink-caption');
+  const slots = { LW: [9, -9], C: [4, 0], RW: [9, 9], LD: [17, -5], RD: [17, 5], G: [26, 0] };
+  const markers = [game.czech, game.away].flatMap((lineup, side) =>
+    lineup.split('\n').flatMap((line, index) => {
+      const [position, name] = line.split('|').map(value => value.trim());
+      const slot = slots[position];
+      if (!slot || !name) return [];
+      const direction = side === 0 ? -1 : 1;
+      return [{
+        id: side * 6 + index + 1, name, goalie: position === 'G',
+        britain: side === 1, x: slot[0] * direction, z: slot[1] * direction,
+      }];
+    })
+  );
+  const timeout = setTimeout(() => {
+    caption.textContent = 'RINK UNAVAILABLE · STARTING LINEUPS SHOWN';
+  }, 8000);
+  addEventListener('message', event => {
+    if (event.origin !== location.origin || event.source !== rink.contentWindow ||
+        event.data?.protocol !== 'lg3s:1' || event.data.type !== 'ready') return;
+    rink.contentWindow.postMessage({
+      protocol: 'lg3s:1',
+      type: 'state',
+      payload: {
+        home_team: 'CZE', away_team: game.opponent, home_score: 0, away_score: 0,
+        period: 'Pregame', clock: '—', active_formation: 'lineups', camera_angle: 'ice',
+        kit_variant: 'royal_blue', jersey_side: 'front',
+        pregame: { markers, highlighted: [] },
+      },
+    }, location.origin);
+    clearTimeout(timeout);
+    caption.textContent = 'CZECHIA IN RED · PREGAME LINEUP VISUALIZATION';
+  });
+  rink.src = '/assets/lg3s-world/rink-preview.html?embed=true&mode=obs&pregame=1&lineup=off';
+}
+
 if (game) {
+  mountRink();
   addEventListener('resize', fit);
   fit();
   render();
