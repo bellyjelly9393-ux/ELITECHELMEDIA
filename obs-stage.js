@@ -238,6 +238,12 @@
     pollTimer=setTimeout(async function(){await refresh();schedulePoll();},realtimeUp?SLOW_POLL_MS:FAST_POLL_MS);
   }
 
+  if(channel==='wjhc-czechia'&&feedLayer&&params.has('stream')){
+    var customFeed=CFG.czechiaFeedUrl(params.get('stream'));
+    if(customFeed)render({scene:'game',brand:'wildman',payload:{streamUrl:customFeed}});
+    else setStatus('ENTER A TWITCH OR YOUTUBE STREAM URL');
+    return;
+  }
   var realtime=db.channel('obs-stage-'+channel)
     .on('postgres_changes',{event:'*',schema:'public',table:'obs_broadcast_state',filter:'channel=eq.'+channel},function(evt){
       if(evt&&evt.new&&evt.new.payload){lastRowKey=String(evt.new.updated_at||'')+'|'+String(evt.new.scene||'');render(evt.new);}
