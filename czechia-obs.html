@@ -197,32 +197,9 @@ function mountRink() {
   rink.src = '/assets/lg3s-world/rink-preview.html?embed=true&mode=obs&pregame=1&lineup=off';
 }
 
-function jerseyArt(primary, stripe, trim) {
-  const canvas = document.createElement('canvas');
-  canvas.width = 640;
-  canvas.height = 580;
-  const ctx = canvas.getContext('2d');
-  const jersey = new Path2D('M227 52 L160 69 L50 166 L18 382 L132 405 L180 231 L172 526 Q320 555 468 526 L460 231 L508 405 L622 382 L590 166 L480 69 L413 52 Q320 138 227 52 Z');
-  const cloth = ctx.createLinearGradient(40, 0, 600, 0);
-  cloth.addColorStop(0, primary);
-  cloth.addColorStop(.5, trim);
-  cloth.addColorStop(1, primary);
-  ctx.save();
-  ctx.clip(jersey);
-  ctx.fillStyle = cloth;
-  ctx.fillRect(0, 0, 640, 580);
-  ctx.fillStyle = stripe;
-  for (const y of [333, 464]) ctx.fillRect(0, y, 640, 22);
-  ctx.fillStyle = primary;
-  ctx.fillRect(0, 488, 640, 80);
-  ctx.restore();
-  ctx.strokeStyle = '#e8f1ff66';
-  ctx.lineWidth = 5;
-  ctx.stroke(jersey);
-  return canvas;
-}
 function startSpotlights() {
-  const opponentJersey = {
+  const teamJerseys = {
+    Czechia: '/assets/lg3s/jerseys/czechia-home.webp',
     Germany: '/assets/lg3s/jerseys/532.webp',
     USA: '/assets/lg3s/jerseys/342.webp',
     Sweden: '/assets/lg3s/jerseys/343.webp',
@@ -232,7 +209,7 @@ function startSpotlights() {
     { id: 'away', team: game.opponent, lineup: game.away },
   ].map(side => ({
     ...side,
-    jersey: opponentJersey[side.team] || jerseyArt('#9b1630', '#e9eff7', '#d5344b'),
+    jersey: teamJerseys[side.team],
     players: side.lineup.split('\n').filter(Boolean).map(line => line.split('|').map(value => value.trim())),
   }));
   let slot = 0;
