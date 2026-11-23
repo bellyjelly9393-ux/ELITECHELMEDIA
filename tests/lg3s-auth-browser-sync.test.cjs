@@ -95,6 +95,7 @@ test('server endpoint is restricted, validates source, and reuses the existing v
   assert.match(server,/lg3s_ingest_game/);
   assert.match(server,/game\.away_lg_team_id/);
   assert.match(server,/last_fetched_at/);
+  assert.match(server,/kind:\"game\"/,'source snapshot kind must satisfy the existing database constraint');
   assert.match(server,/14 \* 86400000/);
   assert.doesNotMatch(server,/console\.log\(html\)|JSON\.stringify\(html\)/);
 });
