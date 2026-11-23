@@ -44,7 +44,9 @@
 
   function gameState(game, now) {
     if (game.status === 'cancelled') return 'cancelled';
+    if (game.status === 'postponed') return 'postponed';
     if (game.away_score != null && game.home_score != null) return 'final';
+    if (game.status === 'live' || game.status === 'in_progress') return 'live';
     if (game.winner) return 'final';
     const t = Date.parse(game.at || '');
     if (!Number.isFinite(t)) return 'scheduled';
