@@ -4,14 +4,18 @@
 import { createClient } from "npm:@supabase/supabase-js@2.57.4";
 import { buildPayload, sha256, urls, ParseError } from "./lib.ts";
 
-const ORIGIN = "https://wildmanhockey-elitechelmedia.app";
+const ALLOWED_ORIGINS = new Set([
+  "https://wildmanhockey-elitechelmedia.app",
+  "https://wildmanhockey-esportshub-eliteserieschelmedia.vercel.app",
+  "https://wildmanhockey-esportshub-git-main-eliteserieschelmedia.vercel.app"
+]);
 const json = (req: Request, body: unknown, status = 200) => {
   const origin = req.headers.get("origin");
   return new Response(JSON.stringify(body), {
     status, headers: {
       "content-type": "application/json",
       "cache-control": "no-store",
-      "access-control-allow-origin": origin === ORIGIN ? ORIGIN : "",
+      "access-control-allow-origin": origin && ALLOWED_ORIGINS.has(origin) ? origin : "",
       "access-control-allow-methods": "POST, OPTIONS",
       "access-control-allow-headers": "authorization, apikey, x-client-info, content-type",
       "vary": "Origin"
