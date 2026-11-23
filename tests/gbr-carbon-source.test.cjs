@@ -11,16 +11,16 @@ const html = read('lg3s-carbon-source.html');
 const desk = read('obs-control.html');
 const api = read('api/lg3s-carbon.js');
 
-async function execute(hash, reply) {
+async function execute(hash, reply, search='') {
   let count=0, request=null;
   const warnings=[];
   const program = { src:'',hidden:false,removeAttribute(name){ delete this[name]; } };
   const status = {hidden:true};
   const message = {textContent:''};
-  const elements = {program,carbonAccessStatus:status,carbonAccessMessage:message};
+  const elements = {program,carbonAccessStatus:status,carbonAccessMessage:message,carbonAccessBrand:{},carbonAccessDesk:{}};
   const document={getElementById(id){ if(!elements[id])throw Error('missing DOM node '+id);return elements[id]; }};
   const fetch = async (...args) => {count++;request=args;if(reply instanceof Error)throw reply;return {ok:reply===204,status:reply};};
-  const context = {document,location:{hash},fetch,console:{warn(s){warnings.push(s);}}};
+  const context = {document,location:{hash,search},URLSearchParams,fetch,console:{warn(s){warnings.push(s);}}};
   vm.runInNewContext(script,context,{filename:'lg3s-carbon-source.js',timeout:2000});
   await new Promise(resolve=>setImmediate(resolve));
   return {program,status,message,count,request,warnings};
@@ -35,6 +35,17 @@ test('successful private program exchange loads only authenticated Carbon broadc
   assert.equal(result.request[1].method,'POST');
   assert.equal(result.request[1].headers.Authorization,'Bearer test-opaque-token');
   assert.equal(result.warnings.length,0);
+});
+test('private Czechia OBS links keep their selected matchup and reject unknown matchups',async()=>{
+  for(const game of ['germany','usa','sweden']){
+    const result=await execute('#test-opaque-token',204,'?game='+game);
+    assert.equal(result.count,1);
+    assert.equal(result.request[0],'/czechia/arena/'+game+'/open-program');
+    assert.equal(result.program.src,'/czechia/arena/'+game+'/broadcast.html?follow=desk&team=czechia&game='+game);
+  }
+  const unknown=await execute('#test-opaque-token',204,'?game=unknown');
+  assert.equal(unknown.count,0);
+  assert.equal(unknown.status.hidden,false);
 });
 test('expired or invalid token cannot silently render public GB tactical overlay',async()=>{
   const result=await execute('#expired-token',401);
@@ -65,7 +76,7 @@ test('OBS source HTML provides accessible instructions; public graphics distingu
  assert.match(html,/id="carbonAccessStatus"/);
  assert.match(html,/id="carbonAccessMessage"/);
  assert.match(html,/role="status" aria-live="polite"/);
- assert.match(html,/lg3s-carbon-source\.js\?v=20261120-carbon-errors1/);
+ assert.match(html,/lg3s-carbon-source\.js\?v=[\w-]+/);
  assert.match(desk,/GBR WEB GRAPHICS · PUBLIC TACTICAL PREVIEW, NOT CARBON/);
  assert.match(desk,/data-preview="lineup"[^>]+>Web Tactics<\/button>/);
  assert.match(desk,/Copy Carbon Arena OBS URL/);

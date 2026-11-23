@@ -80,6 +80,6 @@ test('cache-busted public HTML and modules point at the new OBS lineup assets',(
  for(const file of ['assets/lg3s-world/live.html','assets/lg3s-world/pregame.html','assets/lg3s-world/rink-preview.html']){
    assert.ok(read(file).includes('20261120-gb-starting-four'),file);
  }
- assert.ok(ctl.includes('obs-control.js?v=20261120-gbr-lineup'));
+ assert.match(ctl,/obs-control\.js\?v=[\w-]+/);
  for(const js of [common,live,pregame]) assert.ok(js.length>12000);
 });

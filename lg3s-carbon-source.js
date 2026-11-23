@@ -30,7 +30,7 @@
   }
 
   if (!token) {
-    showUnavailable('Generate a Carbon Arena OBS URL from the OBS Desk, then paste the complete URL into your OBS Browser Source.');
+    showUnavailable('No private program link was supplied. Copy a Carbon Arena OBS URL from the OBS Desk and paste the complete URL into your OBS Browser Source.');
     return;
   }
 
