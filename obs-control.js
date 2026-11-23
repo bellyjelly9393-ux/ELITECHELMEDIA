@@ -5,6 +5,7 @@
   var CARBON_PREVIEW=CARBON_PATH+'broadcast.html?preview=desk';
   var carbonTimeout=0;
   var carbonRequest=0;
+  var czechiaLinkRequest=0;
   var OBS_CFG=window.WM_OBS_CONFIG||{defaultFeedFor:function(){return '';}};
   var SCENES=window.WM_OBS_SCENES||null;
   var MEDIA_TEAM_ID='5f36117c-7a51-4514-bf70-d4c672b41e48';
@@ -115,6 +116,13 @@
       : 'No state published';
   }
   function isCzechia(){return currentTeamId===CZECHIA_STUDIO;}
+  function czechiaGame(){return isCzechia()?val('obsCzechiaGame'):'';}
+  function carbonPath(game){return game?'/czechia/arena/'+encodeURIComponent(game)+'/':CARBON_PATH;}
+  function carbonPreviewUrl(){
+    var game=czechiaGame();
+    if(game)return carbonPath(game)+'broadcast.html?preview=desk&team=czechia&game='+encodeURIComponent(game);
+    return isGbr()&&previewMode==='pregame'?CARBON_PREVIEW:'';
+  }
   function czechiaUrl(){return location.origin+'/czechia-obs.html?game='+encodeURIComponent(val('obsCzechiaGame'));}
   function updateCzechiaFeed(){
     var stream=OBS_CFG.czechiaFeedUrl(val('obsCzechiaStream'));
@@ -126,6 +134,14 @@
   }
   function updateCzechiaSource(){
     var url=czechiaUrl();
+    var input=byId('obsCzechiaCarbonUrl');
+    if(input.dataset.game!==czechiaGame()){
+      ++czechiaLinkRequest;
+      input.dataset.game=czechiaGame();
+      input.value='';
+      byId('copyCzechiaCarbonUrl').disabled=false;
+      byId('obsCzechiaCarbonStatus').textContent='Private link for the selected matchup. Valid for 90 days.';
+    }
     byId('obsCzechiaUrl').value=url;
     byId('openCzechiaUrl').href=url;
     updatePreview();
@@ -180,10 +196,10 @@
     byId('obsCarbonPreviewStatus').hidden=!state||state==='ready';
     if(!state)return;
     var messages={
-      connecting:['Connecting to Carbon Arena','Checking your GBR Desk access.'],
+      connecting:['Connecting to Carbon Arena','Checking your OBS Desk access.'],
       loading:['Loading the Elite Labs rink','The warmup preview opens when the arena renders.'],
       unreachable:['Carbon Arena is unavailable','Try again to reload the arena from Elite Chel Media.'],
-      unauthorized:['Carbon Arena access required','Sign in with a GBR Desk management account, then try again.'],
+      unauthorized:['Carbon Arena access required','Sign in with an OBS Desk management account, then try again.'],
       'renderer-error':['The rink could not render','Enable browser hardware acceleration, then try again.']
     };
     var message=messages[state];
@@ -196,32 +212,34 @@
       carbonTimeout=setTimeout(function(){setCarbonPreview('unreachable');},state==='loading'?20000:12000);
     }
   }
-  async function requestCarbon(route){
+  async function requestCarbon(route,game){
     var {data}=await window.VVHLBackend.db.auth.getSession();
     if(!data?.session?.access_token)return {ok:false,status:401};
-    return fetch(CARBON_PATH+route,{
+    return fetch(carbonPath(game)+route,{
       method:'POST',
       headers:{Authorization:'Bearer '+data.session.access_token}
     });
   }
   async function openCarbonPreview(){
+    var url=carbonPreviewUrl();
+    if(!url)return;
     var request=++carbonRequest;
     var monitor=byId('obsPreview');
     monitor.removeAttribute('src');
     byId('obsOpenMonitor').removeAttribute('href');
     setCarbonPreview('connecting');
     try{
-      var response=await requestCarbon('preview-session');
-      if(request!==carbonRequest||previewMode!=='pregame'||!isGbr())return;
+      var response=await requestCarbon('preview-session',czechiaGame());
+      if(request!==carbonRequest||url!==carbonPreviewUrl())return;
       if(!response.ok){
         setCarbonPreview([401,403].includes(response.status)?'unauthorized':'unreachable');
         return;
       }
       setCarbonPreview('loading');
-      monitor.src=CARBON_PREVIEW;
-      byId('obsOpenMonitor').href=CARBON_PREVIEW;
+      monitor.src=url;
+      byId('obsOpenMonitor').href=url;
     }catch{
-      if(request===carbonRequest&&previewMode==='pregame'&&isGbr())setCarbonPreview('unreachable');
+      if(request===carbonRequest&&url===carbonPreviewUrl())setCarbonPreview('unreachable');
     }
   }
   function updatePreview(){
@@ -229,9 +247,10 @@
     if(!isGbr()&&['sample','pregame','lineup'].includes(previewMode))previewMode='program';
     var program='/obs-stage.html?channel='+channel+'&preview=1';
     var graphics=isGbr()?'/lg3s-gb?mode=obs&audio=off':'/obs-overlay.html?channel='+channel;
-    var carbon=previewMode==='pregame';
-    var source=isCzechia()?czechiaUrl():carbon?CARBON_PREVIEW:previewMode==='lineup'?'/lg3s-gb/pregame?mode=obs':previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
+    var carbon=carbonPreviewUrl();
+    var source=previewMode==='lineup'?'/lg3s-gb/pregame?mode=obs':previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
     var monitor=byId('obsPreview');
+    var frame=byId('obsPreviewFrame');
     var width=(isGbr()||isCzechia())?1920:1280;
     var height=(isGbr()||isCzechia())?1080:720;
     var canvas=byId('obsPreviewCanvas');
@@ -239,18 +258,19 @@
     canvas.style.height=height+'px';
     monitor.width=width;
     monitor.height=height;
-    monitor.title=isCzechia()?'Czechia pregame monitor':carbon?'Elite Labs Carbon Arena pregame monitor':previewMode==='lineup'?'Great Britain 3D rink starting lineup':previewMode==='program'?'OBS program monitor':'OBS graphics monitor';
+    monitor.title=isCzechia()?'Czechia private Carbon Arena pregame monitor':carbon?'Elite Labs Carbon Arena pregame monitor':previewMode==='lineup'?'Great Britain 3D rink starting lineup':previewMode==='program'?'OBS program monitor':'OBS graphics monitor';
     if(carbon){
-      if(byId('obsPreviewFrame').dataset.mode!=='pregame')openCarbonPreview();
+      if(frame.dataset.carbonTarget!==carbon)openCarbonPreview();
     }else{
       ++carbonRequest;
       setCarbonPreview('');
       if(monitor.getAttribute('src')!==source)monitor.src=source;
       byId('obsOpenMonitor').href=source;
     }
-    byId('obsPreviewFrame').dataset.mode=previewMode;
-    byId('obsPreviewDimensions').textContent=width+' × '+height+(isGbr()?' · 60 FPS source':'');
-    if(!carbon)byId('obsMonitorNote').textContent=isCzechia()?'Czechia pregame preview':previewMode==='lineup'?'Current GBR starting four · 3D rink · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
+    frame.dataset.carbonTarget=carbon;
+    frame.dataset.mode=previewMode;
+    byId('obsPreviewDimensions').textContent=width+' × '+height+((isGbr()||isCzechia())?' · 60 FPS source':'');
+    if(!carbon)byId('obsMonitorNote').textContent=previewMode==='lineup'?'Current GBR starting four · 3D rink · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
       :previewMode==='graphics'?'Transparent graphics · Muted':'Game feed and graphics · Muted';
     document.querySelectorAll('[data-preview]').forEach(function(button){
       button.hidden=['sample','pregame','lineup'].includes(button.dataset.preview)&&!isGbr();
@@ -565,10 +585,37 @@
     }
   }
   async function copyText(inputId,value){
-    try{await navigator.clipboard.writeText(value);setStatus('URL copied');}
+    var message;
+    try{await navigator.clipboard.writeText(value);message='URL copied';}
     catch{
       var input=byId(inputId);input.select();
-      setStatus(document.execCommand('copy')?'URL copied':'URL selected for copying');
+      message=document.execCommand('copy')?'URL copied':'URL selected for copying';
+    }
+    setStatus(message);
+    return message;
+  }
+  async function copyCzechiaCarbonUrl(){
+    var game=czechiaGame();
+    if(!game)return;
+    var request=++czechiaLinkRequest;
+    var button=byId('copyCzechiaCarbonUrl');
+    var input=byId('obsCzechiaCarbonUrl');
+    var status=byId('obsCzechiaCarbonStatus');
+    button.disabled=true;
+    try{
+      if(!input.value){
+        var response=await requestCarbon('program-link',game);
+        if(!response.ok)throw new Error('Link unavailable');
+        var {token}=await response.json();
+        if(request!==czechiaLinkRequest||game!==czechiaGame())return;
+        input.value=location.origin+'/lg3s-carbon-source.html?game='+encodeURIComponent(game)+'#'+token;
+      }
+      var message=await copyText(input.id,input.value);
+      if(request===czechiaLinkRequest)status.textContent=message+'. Set the OBS source to 1920 × 1080 at 60 FPS.';
+    }catch{
+      if(request===czechiaLinkRequest)status.textContent='Could not generate the private OBS URL. Check your OBS Desk access and try again.';
+    }finally{
+      if(request===czechiaLinkRequest)button.disabled=false;
     }
   }
   function wire(){
@@ -592,7 +639,8 @@
     });
     window.addEventListener('message',function(event){
       var data=event.data;
-      if(previewMode==='pregame'&&event.origin===location.origin&&event.source===byId('obsPreview').contentWindow
+      if(carbonPreviewUrl()&&event.origin===location.origin&&event.source===byId('obsPreview').contentWindow
+          &&(!isCzechia()||data?.game===czechiaGame())
           &&data?.protocol==='icevision:desk-preview:1'&&['loading','ready','renderer-error'].includes(data.state)){
         setCarbonPreview(data.state);
       }
@@ -606,6 +654,7 @@
     byId('copyCzechiaFeedUrl').addEventListener('click',function(){copyText('obsCzechiaFeedUrl',val('obsCzechiaFeedUrl'));});
     byId('obsCzechiaGame').addEventListener('change',updateCzechiaSource);
     byId('copyCzechiaUrl').addEventListener('click',function(){copyText('obsCzechiaUrl',czechiaUrl());});
+    byId('copyCzechiaCarbonUrl').addEventListener('click',copyCzechiaCarbonUrl);
     byId('obsLiveControls').addEventListener('input',markChanged);
     byId('obsLiveControls').addEventListener('change',markChanged,true);
     byId('obsTeamSelect').addEventListener('change',async function(e){
@@ -770,12 +819,16 @@
   function closeDesk(message){
     ++stateRequest;
     ++carbonRequest;
+    ++czechiaLinkRequest;
     previewMode='program';
     currentTeamId='';
     channelReady=false;
     byId('obsDeskControls').hidden=true;
     byId('obsPreview').removeAttribute('src');
+    byId('obsPreviewFrame').dataset.carbonTarget='';
     byId('carbonObsUrl').value='';
+    byId('obsCzechiaCarbonUrl').removeAttribute('data-game');
+    byId('obsCzechiaCarbonUrl').value='';
     setCarbonPreview('');
     byId('obsTeamSelect').replaceChildren(new Option('No available channel',''));
     byId('heroChannel').textContent='NO CHANNEL';
