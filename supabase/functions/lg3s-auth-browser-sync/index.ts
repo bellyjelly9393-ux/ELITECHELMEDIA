@@ -103,7 +103,7 @@ Deno.serve(async (req: Request) => {
   const source = urls.game(id);
   const digest = await sha256(html);
   const snap = await db.from("lg3s_source_snapshots").insert({
-    kind:"browser_game",source_id:String(id),url:source,
+    kind:"game",source_id:String(id),url:source,
     http_status:200,sha256:digest,payload_hash:verification.payload_hash,bytes:html.length
   }).select("id").single();
   if (snap.error || !snap.data) return fail(req, 503, "Source evidence could not be recorded.");
