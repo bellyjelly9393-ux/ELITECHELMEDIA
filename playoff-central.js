@@ -3,7 +3,7 @@
 (() => {
   'use strict';
   const $ = (id) => document.getElementById(id);
-  const state = { bracket: null, league: 'ALL', round: 'R1', series: [], picks: new Map(), saved: new Map(), dbReady: false };
+  const state = { bracket: null, league: 'ALL', round: 'R2', series: [], picks: new Map(), saved: new Map(), dbReady: false };
   // HTML data-* attributes are strings, while Supabase can return numeric series IDs.
   // Use one key type for draft picks and saved picks so rerenders preserve changes.
   const seriesKey = (id) => String(id);
