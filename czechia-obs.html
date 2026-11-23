@@ -4,7 +4,10 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Czechia OBS Browser Sources | Elite Chel Media</title>
+<script src="/player-card-renderer.js" defer></script>
 <style>
+@font-face{font-family:CardDisplay;src:url('/assets/fonts/Kanit-BlackItalic.woff') format('woff');font-display:swap}
+@font-face{font-family:CardLabel;src:url('/assets/fonts/Teko.woff') format('woff');font-display:swap}
 *{box-sizing:border-box}body{margin:0;background:#080f1d;color:#f2f6ff;font-family:Arial,sans-serif;overflow:hidden}
 #stage{position:absolute;width:1920px;height:1080px;transform-origin:0 0;background:radial-gradient(ellipse at 36% 0%,#254676,transparent 49%),linear-gradient(130deg,#101d33,#080f1d 62%,#231523);padding:54px 74px}
 header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #60708a;padding-bottom:17px;font-weight:800;letter-spacing:4px;font-size:24px}
@@ -23,14 +26,29 @@ footer{position:absolute;bottom:50px;left:74px;right:74px;display:flex;justify-c
 .rink{margin:0;position:relative;display:grid;grid-template-rows:1fr auto;overflow:hidden;border:1px solid #425677;background:radial-gradient(ellipse at center,#243f61,#0a1424 74%)}
 .rink iframe{width:100%;height:100%;min-height:0;border:0;display:block;pointer-events:none}
 .rink figcaption{padding:12px;text-align:center;color:#b9cbe6;font-size:17px;font-weight:700;letter-spacing:2px}
+
+.lineup{padding:18px 20px;min-height:540px}
+.lineup h2{margin-bottom:8px;font-size:20px}
+.lineup .row{min-height:28px;font-size:18px}
+.lineup .row span:first-child{font-size:14px}
+.row.featured{background:#29415f;color:white}
+.spotlight{width:206px;height:294px;margin:0 auto 11px;perspective:900px}
+.spotlight-face{position:relative;width:100%;height:100%;border-radius:8px;background:linear-gradient(150deg,#263c5d,#0b1729);box-shadow:0 8px 24px #0009;overflow:hidden}
+.spotlight canvas{position:absolute;inset:0;width:100%;height:100%}
+.spotlight-fallback{position:absolute;inset:0;display:grid;place-content:center;gap:8px;padding:15px;text-align:center;font-size:24px}
+.spotlight-fallback[hidden],.spotlight canvas[hidden]{display:none}
+.spotlight-fallback small{color:#a8c2e8;font-size:15px}
+.spotlight-face.deal{animation:card-deal .45s ease-out}
+@keyframes card-deal{from{transform:rotateY(-15deg);opacity:.55}to{transform:rotateY(0);opacity:1}}
+@media(prefers-reduced-motion:reduce){.spotlight-face.deal{animation:none}}
 </style>
 <main id="stage" aria-label="Czechia pregame broadcast graphic">
 <header><strong><img alt="" src="/assets/brand/ecm-crest.webp">LG WORLD JUNIOR CHAMPIONSHIPS</strong> <span>PREGAME</span></header>
 <div class="hero"><div><div class="flag" aria-label="Czechia flag"></div><h1>CZECHIA</h1></div><b>VS</b><h1 id="opponent"></h1></div>
-<section class="grid"><article class="lineup"><h2>Czechia lineup</h2><div id="czech"></div></article><figure class="rink">
+<section class="grid"><article class="lineup"><h2>Czechia lineup</h2><div id="czech-card" class="spotlight"></div><div id="czech"></div></article><figure class="rink">
   <iframe id="pregame-rink" title="Czechia 6-on-6 pregame rink"></iframe>
   <figcaption id="rink-caption">PREGAME LINEUP VISUALIZATION</figcaption>
-</figure><article class="lineup"><h2 id="away-title">Opponent lineup</h2><div id="away"></div></article></section>
+</figure><article class="lineup"><h2 id="away-title">Opponent lineup</h2><div id="away-card" class="spotlight"></div><div id="away"></div></article></section>
 <footer>ELITE CHEL MEDIA <span id="air-time"></span></footer>
 </main>
 <section id="setup" hidden>
@@ -150,11 +168,91 @@ function mountRink() {
   rink.src = '/assets/lg3s-world/rink-preview.html?embed=true&mode=obs&pregame=1&lineup=off';
 }
 
+function jerseyArt(primary, stripe, trim) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 640;
+  canvas.height = 580;
+  const ctx = canvas.getContext('2d');
+  const jersey = new Path2D('M227 52 L160 69 L50 166 L18 382 L132 405 L180 231 L172 526 Q320 555 468 526 L460 231 L508 405 L622 382 L590 166 L480 69 L413 52 Q320 138 227 52 Z');
+  const cloth = ctx.createLinearGradient(40, 0, 600, 0);
+  cloth.addColorStop(0, primary);
+  cloth.addColorStop(.5, trim);
+  cloth.addColorStop(1, primary);
+  ctx.save();
+  ctx.clip(jersey);
+  ctx.fillStyle = cloth;
+  ctx.fillRect(0, 0, 640, 580);
+  ctx.fillStyle = stripe;
+  for (const y of [333, 464]) ctx.fillRect(0, y, 640, 22);
+  ctx.fillStyle = primary;
+  ctx.fillRect(0, 488, 640, 80);
+  ctx.restore();
+  ctx.strokeStyle = '#e8f1ff66';
+  ctx.lineWidth = 5;
+  ctx.stroke(jersey);
+  return canvas;
+}
+function startSpotlights() {
+  const palettes = {
+    Czechia: ['#9b1630', '#e9eff7', '#d5344b'],
+    Germany: ['#15171d', '#efbf36', '#3f4148'],
+    USA: ['#152f63', '#f1f4f9', '#3765a6'],
+    Sweden: ['#c79d17', '#194879', '#ffda52'],
+  };
+  const sides = [
+    { id: 'czech', team: 'Czechia', lineup: game.czech },
+    { id: 'away', team: game.opponent, lineup: game.away },
+  ].map(side => ({
+    ...side,
+    jersey: jerseyArt(...palettes[side.team]),
+    players: side.lineup.split('\n').filter(Boolean).map(line => line.split('|').map(value => value.trim())),
+  }));
+  let slot = 0;
+  function show() {
+    for (const side of sides) {
+      if (!side.players.length) continue;
+      const index = slot % side.players.length;
+      const [pos, tag] = side.players[index];
+      const face = document.createElement('div');
+      face.className = 'spotlight-face deal';
+      const fallback = document.createElement('div');
+      fallback.className = 'spotlight-fallback';
+      const label = document.createElement('small');
+      label.textContent = side.team + ' · ' + pos;
+      const name = document.createElement('strong');
+      name.textContent = tag;
+      fallback.append(label, name);
+      const canvas = document.createElement('canvas');
+      canvas.hidden = true;
+      canvas.setAttribute('role', 'img');
+      face.append(fallback, canvas);
+      document.getElementById(side.id + '-card').replaceChildren(face);
+      document.querySelectorAll('#' + side.id + ' .row').forEach((row, i) =>
+        row.classList.toggle('featured', i === index));
+      const card = {
+        player: { team: side.team, pos, tag }, season: 'LG WORLD JUNIORS',
+        ratingKind: 'pending', edition: 'season', finish: 'ice', background: 'arena',
+        teamJersey: side.jersey, labels: pos === 'G' ? ['GP','SV','SV%','GAA'] : ['GP','G','A','PTS'],
+        values: ['—','—','—','—'],
+      };
+      window.ECMCardRenderer?.draw(canvas, card).then(ok => {
+        if (ok && face.isConnected) { canvas.hidden = false; fallback.hidden = true; }
+      }).catch(() => {});
+    }
+    slot++;
+  }
+  show();
+  setInterval(show, 8500);
+}
 if (game) {
   mountRink();
   addEventListener('resize', fit);
   fit();
   render();
+  addEventListener('DOMContentLoaded', () => {
+    Promise.allSettled([document.fonts.load('46px CardDisplay'), document.fonts.load('36px CardLabel')])
+      .then(startSpotlights);
+  }, { once: true });
 }
 </script>
 </html>
