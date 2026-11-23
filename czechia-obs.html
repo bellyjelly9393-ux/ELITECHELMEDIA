@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Czechia OBS Browser Sources | Elite Chel Media</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080f1d;color:#f2f6ff;font-family:Arial,sans-serif;overflow:hidden}
+#stage{position:absolute;width:1920px;height:1080px;transform-origin:0 0;background:radial-gradient(ellipse at 36% 0%,#254676,transparent 49%),linear-gradient(130deg,#101d33,#080f1d 62%,#231523);padding:54px 74px}
+header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #60708a;padding-bottom:17px;font-weight:800;letter-spacing:4px;font-size:24px}
+header strong{display:flex;align-items:center;gap:22px}header img{width:116px;height:65px;object-fit:contain}header span,footer span{color:#b0c2dd}.hero{display:grid;grid-template-columns:1fr 86px 1fr;align-items:center;margin:30px 0 28px;gap:22px}.hero h1{font-size:88px;margin:0;letter-spacing:-4px;line-height:1}.hero h1:last-child{text-align:right}.hero b{text-align:center;color:#9fb0ca;font-size:27px;letter-spacing:2px}
+.flag{width:80px;height:48px;position:relative;margin-bottom:18px;background:linear-gradient(white 50%,#d71435 50%)}.flag:after{content:"";position:absolute;border-left:37px solid #11457e;border-top:24px solid transparent;border-bottom:24px solid transparent}
+#opponent{overflow-wrap:anywhere}.grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}.lineup{background:#111e32;border:1px solid #425677;border-top:5px solid #e33b51;min-height:430px;padding:25px 30px}.lineup:last-child{border-top-color:#76a9f3}
+h2{font-size:24px;letter-spacing:3px;text-transform:uppercase;margin:0 0 18px;color:#b9cbe6}.row{display:grid;grid-template-columns:95px 1fr;align-items:center;min-height:54px;border-top:1px solid #34445f;gap:12px;font-size:30px;font-weight:700}.row span:first-child{font-size:22px;letter-spacing:2px;color:#a8c2e8}.waiting{margin:26px 0;color:#b9cbe6;font-size:29px}
+footer{position:absolute;bottom:50px;left:74px;right:74px;display:flex;justify-content:space-between;border-top:1px solid #60708a;padding-top:22px;font-size:22px;font-weight:800;letter-spacing:3px}
+#setup{position:fixed;z-index:1;inset:0;margin:auto;width:min(650px,94vw);height:max-content;max-height:94vh;overflow:auto;padding:28px;background:#101d31;border:1px solid #7990b4;box-shadow:0 0 0 100vmax #000a}
+#setup h2{color:white}label{display:block;margin-top:12px}input,textarea,button{font:inherit}input,textarea{display:block;width:100%;padding:8px;margin-top:5px;color:white;background:#081224;border:1px solid #63789a}textarea{min-height:96px}button{padding:10px 15px;margin:15px 8px 0 0;border:0;background:#d8e7ff;color:#10213c;font-weight:bold;cursor:pointer}p{color:#b9cbe6;line-height:1.4}
+</style>
+<main id="stage" aria-label="Czechia pregame broadcast graphic">
+<header><strong><img alt="" src="/assets/brand/ecm-crest.webp">LG WORLD JUNIOR CHAMPIONSHIPS</strong> <span>PREGAME</span></header>
+<div class="hero"><div><div class="flag" aria-label="Czechia flag"></div><h1>CZECHIA</h1></div><b>VS</b><h1 id="opponent"></h1></div>
+<section class="grid"><article class="lineup"><h2>Czechia lineup</h2><div id="czech"></div></article><article class="lineup"><h2 id="away-title">Opponent lineup</h2><div id="away"></div></article></section>
+<footer>ELITE CHEL MEDIA <span id="air-time"></span></footer>
+</main>
+<section id="setup" hidden>
+<h1>Czechia OBS Browser Sources</h1>
+<p>Set each OBS Browser Source to 1920 × 1080. Copy the URL for the game you want to show.</p>
+<div id="games"></div>
+<p>Sweden’s RD and goalie assignments are provisional.</p>
+<p id="copy-status" role="status"></p>
+</section>
+<script id="game-data" type="application/json">{"germany": {"opponent": "Germany", "time": "GAME 1  \u2022  9:00 PM ET", "czech": "LW | MrNoOvO\nC | Kxprizovvv\nRW | Gullyrr\nLD | ItzNoggin_\nRD | Koldex Bands\nG | Borat_Sogdiyev94", "away": "LW | sTKampe\nC | Puregenesis88\nRW | Young 2 Sip\nLD | KrunchyKow\nRD | SmeeredPap\nG | Moossiahh"}, "usa": {"opponent": "USA", "time": "GAME 2  \u2022  9:35 PM ET", "czech": "LW | MrNoOvO\nC | Kxprizovvv\nRW | Gullyrr\nLD | ItzNoggin_\nRD | Koldex Bands\nG | Borat_Sogdiyev94", "away": "LW | YaDayz-_-\nC | Foxl14l\nRW | Bolts4Six\nLD | Bignbeefy_jay\nRD | itsjust2RUG\nG | PapaDimez"}, "sweden": {"opponent": "Sweden", "time": "GAME 3  \u2022  10:10 PM ET", "czech": "LW | MrNoOvO\nC | Kxprizovvv\nRW | Gullyrr\nLD | ItzNoggin_\nRD | Koldex Bands\nG | Borat_Sogdiyev94", "away": "LW | MaximeQc\nC | Fakky359\nRW | Mxlsyy\nLD | superchimp99\nRD | reddaddy69\nG | jasonx1755"}}</script>
+<script>
+const stage = document.querySelector('#stage');
+const setup = document.querySelector('#setup');
+const gameData = document.querySelector('#game-data');
+const games = JSON.parse(gameData.textContent);
+const key = new URLSearchParams(location.search).get('game');
+const game = Object.hasOwn(games, key) ? games[key] : null;
+if (!game) {
+  stage.hidden = true;
+  setup.hidden = false;
+  for (const [slug, matchup] of Object.entries(games)) {
+    const row = document.createElement('p');
+    const url = new URL(location.pathname, location.origin);
+    url.searchParams.set('game', slug);
+    const preview = document.createElement('a');
+    preview.href = url.href;
+    preview.style.color = '#d8e7ff';
+    preview.textContent = matchup.time + ' · ' + matchup.opponent;
+    const copy = document.createElement('button');
+    copy.type = 'button';
+    copy.textContent = 'Copy OBS URL';
+    copy.addEventListener('click', async () => {
+      const status = document.querySelector('#copy-status');
+      try {
+        await navigator.clipboard.writeText(url.href);
+        status.textContent = matchup.opponent + ' OBS URL copied.';
+      } catch {
+        status.textContent = url.href;
+      }
+    });
+    row.append(preview, ' ', copy);
+    document.querySelector('#games').append(row);
+  }
+}
+function fit() {
+  const scale = Math.min(innerWidth / 1920, innerHeight / 1080);
+  stage.style.transform = `translate(${(innerWidth - 1920 * scale) / 2}px,${(innerHeight - 1080 * scale) / 2}px) scale(${scale})`;
+}
+function drawLineup(id, value) {
+  const target = document.getElementById(id);
+  const rows = value.split(/\r?\n/).map(line => line.trim()).filter(Boolean).slice(0, 6);
+  target.replaceChildren();
+  if (!rows.length) {
+    const pending = document.createElement('p');
+    pending.className = 'waiting';
+    pending.textContent = 'Lineup awaiting confirmation';
+    target.append(pending);
+  }
+  for (const line of rows) {
+    const divider = line.indexOf('|');
+    const row = document.createElement('div');
+    row.className = 'row';
+    const position = document.createElement('span');
+    position.textContent = divider < 0 ? '' : line.slice(0, divider).trim();
+    const name = document.createElement('span');
+    name.textContent = line.slice(divider + 1).trim();
+    name.style.overflowWrap = 'anywhere';
+    row.append(position, name);
+    target.append(row);
+  }
+}
+function render() {
+  const opponent = document.querySelector('#opponent');
+  document.title = 'Czechia vs ' + game.opponent + ' | LG World Juniors';
+  document.querySelector('#away-title').textContent = game.opponent + ' lineup';
+  opponent.textContent = game.opponent.toUpperCase() || 'OPPONENT TBC';
+  opponent.style.fontSize = opponent.textContent.length > 16 ? '57px' : '88px';
+  document.querySelector('#air-time').textContent = game.time || 'CZECHIA • GAME NIGHT';
+  drawLineup('czech', game.czech);
+  drawLineup('away', game.away);
+}
+if (game) {
+  addEventListener('resize', fit);
+  fit();
+  render();
+}
+</script>
+</html>
