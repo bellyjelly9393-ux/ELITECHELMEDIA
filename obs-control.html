@@ -131,6 +131,16 @@
             <button id="copyCzechiaUrl" class="small-btn primary" type="button">Copy OBS URL</button>
             <a id="openCzechiaUrl" class="small-btn" href="#" target="_blank" rel="noopener">Open pregame</a>
           </div>
+          <h3>Gameplay feed</h3>
+          <label>Twitch or YouTube URL
+            <input id="obsCzechiaStream" class="field" type="url" value="https://www.twitch.tv/aichelmachine">
+          </label>
+          <div class="obs-source-row">
+            <input id="obsCzechiaFeedUrl" class="field" aria-label="Czechia gameplay OBS URL" readonly>
+            <button id="copyCzechiaFeedUrl" class="small-btn" type="button">Copy gameplay URL</button>
+            <a id="openCzechiaFeedUrl" class="small-btn" target="_blank" rel="noopener">Preview gameplay</a>
+          </div>
+          <p class="obs-preview-note">Add gameplay as its own OBS Browser Source. Copy the new link after changing the stream.</p>
           <p class="obs-preview-note">Sweden’s RD and goalie assignments are provisional.</p>
         </section>
         <section id="obsLiveControls" class="obs-control-card" aria-label="Channel controls">
@@ -400,8 +410,8 @@
 <script src="backend.js"></script>
 <script src="management-guard.js"></script>
 <script src="script.js"></script>
-<script src="obs-config.js?v=20261005b"></script>
+<script src="obs-config.js?v=20261122-czechia-feed"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
-<script src="obs-control.js?v=20261122-czechia-desk"></script>
+<script src="obs-control.js?v=20261122-czechia-feed"></script>
 </body>
 </html>
