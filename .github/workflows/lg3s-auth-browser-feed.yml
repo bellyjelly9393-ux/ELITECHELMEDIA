@@ -1,0 +1,22 @@
+name: LG3S Authenticated Browser Feed
+on:
+  pull_request:
+    paths:
+      - 'lg-capture.html'
+      - 'lg3s-auth-browser-sync.js'
+      - 'supabase/functions/lg3s-auth-browser-sync/**'
+      - 'tests/lg3s-auth-browser-sync.test.cjs'
+      - '.github/workflows/lg3s-auth-browser-feed.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-feed-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify browser collector and application safety
+        run: node --test tests/lg3s-auth-browser-sync.test.cjs

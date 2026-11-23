@@ -65,6 +65,23 @@
 <p class="control-message">Roster pages are applied immediately after validation. Weekly Lines and transaction pages are captured into a review-safe staging queue until their exact LG page structure has been verified, so Elitechel does not invent trades or line changes from ambiguous text.</p>
 </div>
 </section>
+<section class="section-shell section-block" id="lg3sBrowserSync">
+<div class="control-card">
+<div class="eyebrow">LG3S INTERNATIONAL · VERIFIED STATS RECOVERY</div>
+<h3>LG3S Browser Sync</h3>
+<p>When LeagueGaming blocks our cloud importer, use your own signed-in LG browser to capture the missing Season 1 game sheets. Each source passes the same game ID, score, player, goalie, and 10-minute stability checks before it appears in verified leaderboards. No LG passwords, cookies, or session tokens are uploaded.</p>
+<p><strong>Setup:</strong> Sign in to Elitechel management above, drag LG3S Browser Sync to your bookmarks bar, then open LeagueGaming while signed in and click that bookmark. Return to this bridge window and choose Fetch Missing LG3S Games. You can fetch up to 12 per click; repeat after 10 minutes to confirm provisional results. Games missing complete player sheets remain under review.</p>
+<div class="control-actions" style="margin-top:14px">
+<a id="lg3sBrowserBookmarklet" class="small-btn primary" href="#">LG3S Browser Sync</a>
+<button id="lg3sCopyBookmarklet" class="small-btn" type="button">Copy LG3S Bookmark</button>
+<button id="lg3sFetchMissing" class="small-btn" type="button">Fetch Missing LG3S Games</button>
+<a class="small-btn" href="https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=standing&leagueid=154&seasonid=1" target="_blank" rel="noopener">Open LG3S Season 1</a>
+</div>
+<p id="lg3sAuthMessage" class="control-message" aria-live="polite"></p>
+<div id="lg3sAuthStatus" class="empty-state" aria-live="polite">Waiting for a signed-in LeagueGaming tab…</div>
+<p class="control-message">Only verified or corrected games can affect the public LG3S leaderboard. This tool never invents results, reclassifies forfeits, or publishes editorial articles.</p>
+</div>
+</section>
 <section class="section-shell section-block">
 <div class="control-card">
 <div class="eyebrow">HOW TO USE IT</div>
@@ -79,5 +96,6 @@
 <script src="backend.js"></script>
 <script src="lg-capture.js"></script>
 <script src="lg-auth-sync.js"></script>
+<script src="lg3s-auth-browser-sync.js"></script>
 </body>
 </html>
