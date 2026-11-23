@@ -180,6 +180,24 @@ function graphics(panel,d){
 function stopMic(){micRequest++;clearInterval(micTimer);micTimer=null;mic?.getTracks().forEach(track=>track.stop());mic=null;audio?.close().catch(()=>{});audio=null;}
 
 function flag(name){return catalog[name]||'🏒';}
+const leagueJerseys = {'Canada':341,'USA':342,'Sweden':343,'Switzerland':404,'Kazakhstan':531,'Germany':532,'Japan':591,'Italy':822,'Slovakia':1079,'Latvia':1439,'Poland':1444};
+const worldFlags = {'Canada':'ca','USA':'us','Sweden':'se','Switzerland':'ch','Germany':'de','Great Britain':'gb','Czechia':'cz','Finland':'fi'};
+const leagueFlags = {'Kazakhstan':'kz','Japan':'jp','Italy':'it','Slovakia':'sk','Latvia':'lv','Poland':'pl'};
+
+function teamArtwork(name) {
+ const asset = path => path && new URL(path, window.origin).href;
+ const world = worldFlags[name];
+ const league = leagueFlags[name];
+ const jerseyId = leagueJerseys[name];
+ return {
+  logo: asset(name === 'Calgary Hitmen' ? '/assets/lgchl/room-360/hitmen-crest-vector.svg' : world ? '/assets/lg3s-world/flags/'+world+'.svg' : league ? '/assets/lg3s/flags/'+league+'.png' : ''),
+  home: asset(name === 'Calgary Hitmen' ? '/assets/war-room/jersey-home.webp' : name === 'Czechia' ? '/assets/lg3s/jerseys/czechia-home.webp' : jerseyId ? '/assets/lg3s/jerseys/'+jerseyId+'.webp' : ''),
+  away: asset(name === 'Calgary Hitmen' ? '/assets/war-room/jersey-away.webp' : ''),
+ };
+}
+function withArtwork(name, edits) {
+ return {...edits,...Object.fromEntries(Object.entries(teamArtwork(name)).map(([key,value])=>[key,edits?.[key]||value]))};
+}
 function statLine(p){
  const numbers=[['GP','gp'],['G','g'],['A','a'],['PTS','pts'],['SV%','sv']].filter(([,k])=>p[k]!==undefined&&p[k]!=='');
  return numbers.map(([name,k])=>name+' '+p[k]).join(' · ')||'Stats pending';
@@ -217,11 +235,13 @@ function matchup(panel,d){
  const home=d.graphics??={};
  const row=block(c,'fields');
  for(const [label,k] of [['logo / flag art URL','logo'],['home jersey URL','home'],['away jersey URL','away']]){
-  field(row,teams[state.team]+' '+label,home,k);field(row,'Opponent '+label,opp,k);
+  field(row,teams[state.team]+' '+label,home,k,{placeholder:teamArtwork(teams[state.team])[k]?'Using team artwork':''});field(row,'Opponent '+label,opp,k,{placeholder:teamArtwork(match.name)[k]?'Using team artwork':''});
  }
  const previewArea=block(c,'compact');
- const paint=art=>{previewArea.replaceChildren();matchupCards(previewArea,{...home,name:teams[state.team],players:d.players},{...opp,name:match.name},roles(),art);};
- paint(false);button(c,'Preview matchup with artwork',()=>paint(true));
+ const paint=art=>{previewArea.replaceChildren();matchupCards(previewArea,{...withArtwork(teams[state.team],home),name:teams[state.team],players:d.players},{...withArtwork(match.name,opp),name:match.name},roles(),art);};
+ const repaint=()=>paint(true);
+ paint(true);
+ row.addEventListener('change',repaint);
  const e=card(panel,'Matchup stats');field(e,'Stats source / sample period',match,'statSource');
  const points=[['Games played','gp'],['Goals','g'],['Assists','a'],['Points','pts']];
  for(const position of roles()){
@@ -229,15 +249,15 @@ function matchup(panel,d){
   const editor=block(pair,'fields');
   const homePlayer=d.players[position]??={};const awayPlayer=opp.players[position]??={};
   for(const [label,k] of [['Player label','label'],...(position==='G'?[['Games played','gp'],['Save percentage','sv']]:points)]){
-   field(editor,'Home '+label,homePlayer,k).addEventListener('input',()=>paint(false));
-   field(editor,'Opponent '+label,awayPlayer,k).addEventListener('input',()=>paint(false));
+   field(editor,'Home '+label,homePlayer,k).addEventListener('input',repaint);
+   field(editor,'Opponent '+label,awayPlayer,k).addEventListener('input',repaint);
   }
  }
 }
 function packetFor(d){
  const match=d.matchup;const opp=match?.opponents['team:'+match.name]||{};
  const positions=roles();
- const trimTeam=(name,art,players)=>({name,logo:art?.logo,home:art?.home,away:art?.away,players:Object.fromEntries(positions.map(pos=>[pos,Object.fromEntries(['label','gp','g','a','pts','sv'].map(k=>[k,players?.[pos]?.[k]??'']))]))});
+ const trimTeam=(name,art,players)=>({name,...withArtwork(name,art),players:Object.fromEntries(positions.map(pos=>[pos,Object.fromEntries(['label','gp','g','a','pts','sv'].map(k=>[k,players?.[pos]?.[k]??'']))]))});
  return {format:1,positions,home:trimTeam(teams[state.team],d.graphics,d.players),away:trimTeam(match?.name||'',opp,opp.players),statSource:match?.statSource,booth:Object.fromEntries(['pbp','colour','producer','game','room','notes'].map(k=>[k,d.booth?.[k]??''])),cue:d.cue,feed:d.booth?.casterFeed||source().feed,kind:d.booth?.casterFeed?'Browser page':source().kind};
 }
 function download(name,content,type){
