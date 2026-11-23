@@ -4,6 +4,7 @@ const { extname } = require('node:path');
 const encryptedPack = require('./_lg3s-carbon-pack.cjs');
 
 const BASE = '/lg3s-gb/arena/';
+const CZECHIA_FIXTURES = new Set(['germany', 'usa', 'sweden']);
 const COOKIE = '__Secure-ecmCarbon';
 const PREVIEW_TTL = 60 * 60;
 const PROGRAM_TTL = 90 * 24 * 60 * 60;
@@ -17,27 +18,29 @@ const TYPES = {
 };
 let pack;
 
-function sign(key, payload) {
-  return createHmac('sha256', key).update('ecm-carbon-access-v1:').update(payload).digest();
+function sign(key, payload, fixture) {
+  const context = fixture ? `ecm-carbon-access-v1:czechia:${fixture}:` : 'ecm-carbon-access-v1:';
+  return createHmac('sha256', key).update(context).update(payload).digest();
 }
 
-function issue(key, purpose, ttl) {
+function issue(key, purpose, ttl, fixture) {
   const expires = Math.floor(Date.now() / 1000) + ttl;
   const payload = `${purpose}.${expires}.${randomBytes(16).toString('base64url')}`;
-  return `${payload}.${sign(key, payload).toString('base64url')}`;
+  return `${payload}.${sign(key, payload, fixture).toString('base64url')}`;
 }
 
-function verify(key, token) {
+function verify(key, token, fixture) {
   if (typeof token !== 'string' || !/^(preview|program)\.\d{10,11}\.[\w-]{22}\.[\w-]{43}$/.test(token)) return false;
   const [purpose, expires, nonce, signature] = token.split('.');
   const remaining = Number(expires) - Math.floor(Date.now() / 1000);
   if (remaining <= 0) return false;
-  const expected = sign(key, `${purpose}.${expires}.${nonce}`);
+  const expected = sign(key, `${purpose}.${expires}.${nonce}`, fixture);
   return timingSafeEqual(expected, Buffer.from(signature, 'base64url')) ? { purpose, remaining } : false;
 }
 
-function setCookie(res, purpose, token, seconds) {
-  res.setHeader('Set-Cookie', `${COOKIE}-${purpose}=${token}; Path=${BASE}; Max-Age=${seconds}; Secure; HttpOnly; SameSite=Strict`);
+function setCookie(res, purpose, token, seconds, fixture) {
+  const path = fixture ? `/czechia/arena/${fixture}/` : BASE;
+  res.setHeader('Set-Cookie', `${COOKIE}-${purpose}=${token}; Path=${path}; Max-Age=${seconds}; Secure; HttpOnly; SameSite=Strict`);
 }
 
 function fromCookie(req, purpose) {
@@ -81,7 +84,11 @@ module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'private, no-store');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'no-referrer');
-  const asset = req.query.asset;
+  const { asset, fixture } = req.query;
+  if (fixture !== undefined && !CZECHIA_FIXTURES.has(fixture)) return res.status(404).end();
+  if (asset === 'broadcast.html' && (fixture
+    ? req.query.team !== 'czechia' || req.query.game !== fixture
+    : req.query.team === 'czechia')) return res.status(404).end();
   const exchange = asset === 'preview-session' || asset === 'program-link' || asset === 'open-program';
   if (exchange ? req.method !== 'POST' : !['GET', 'HEAD'].includes(req.method)) {
     res.setHeader('Allow', exchange ? 'POST' : 'GET, HEAD');
@@ -96,24 +103,24 @@ module.exports = async function handler(req, res) {
       if (req.headers['sec-fetch-site'] && req.headers['sec-fetch-site'] !== 'same-origin') return res.status(403).end();
       if (asset === 'open-program') {
         const token = req.headers.authorization?.split(' ')[1];
-        const access = verify(key, token);
+        const access = verify(key, token, fixture);
         if (access?.purpose !== 'program') return res.status(401).end();
         files(key);
-        setCookie(res, 'program', token, access.remaining);
+        setCookie(res, 'program', token, access.remaining, fixture);
         return res.status(204).end();
       }
       const status = await checkStaff(req.headers.authorization);
       if (status !== 200) return res.status(status).end();
       files(key);
-      if (asset === 'program-link') return res.status(200).json({ token: issue(key, 'program', PROGRAM_TTL) });
-      setCookie(res, 'preview', issue(key, 'preview', PREVIEW_TTL), PREVIEW_TTL);
+      if (asset === 'program-link') return res.status(200).json({ token: issue(key, 'program', PROGRAM_TTL, fixture) });
+      setCookie(res, 'preview', issue(key, 'preview', PREVIEW_TTL, fixture), PREVIEW_TTL, fixture);
       return res.status(204).end();
     }
 
-    const canOpenProgram = verify(key, fromCookie(req, 'program'))?.purpose === 'program';
-    const canPreview = req.query.follow !== 'desk' && verify(key, fromCookie(req, 'preview'))?.purpose === 'preview';
+    const canOpenProgram = verify(key, fromCookie(req, 'program'), fixture)?.purpose === 'program';
+    const canPreview = req.query.follow !== 'desk' && verify(key, fromCookie(req, 'preview'), fixture)?.purpose === 'preview';
     if (!canOpenProgram && !canPreview) {
-      return res.status(403).end('Open Pregame or OBS setup from the GBR Desk.');
+      return res.status(403).end('Open the private Carbon Arena from the OBS Desk.');
     }
     const assets = files(key);
     if (typeof asset !== 'string' || !Object.hasOwn(assets, asset)) return res.status(404).end();

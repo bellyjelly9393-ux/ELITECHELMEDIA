@@ -124,12 +124,18 @@
               <option value="sweden">10:10 p.m. ET · Sweden</option>
             </select>
           </label>
-          <h3>OBS Browser Source</h3>
-          <p>Set the source to 1920 × 1080. Use the selected game’s URL in OBS.</p>
+          <h3>Private Carbon Arena</h3>
+          <p>The monitor previews the selected matchup off air.</p>
+          <div class="obs-source-row">
+            <input id="obsCzechiaCarbonUrl" class="field" aria-label="Private Czechia Carbon Arena OBS URL" placeholder="Generate a private link" readonly>
+            <button id="copyCzechiaCarbonUrl" class="small-btn primary" type="button">Copy Carbon Arena OBS URL</button>
+          </div>
+          <p id="obsCzechiaCarbonStatus" class="obs-preview-note" role="status">Private link for the selected matchup. Valid for 90 days.</p>
+          <h3>Public lineup source</h3>
           <div class="obs-source-row">
             <input id="obsCzechiaUrl" class="field" aria-label="Czechia OBS browser source URL" readonly>
-            <button id="copyCzechiaUrl" class="small-btn primary" type="button">Copy OBS URL</button>
-            <a id="openCzechiaUrl" class="small-btn" href="#" target="_blank" rel="noopener">Open pregame</a>
+            <button id="copyCzechiaUrl" class="small-btn" type="button">Copy public URL</button>
+            <a id="openCzechiaUrl" class="small-btn" href="#" target="_blank" rel="noopener">Open public lineup</a>
           </div>
           <h3>Gameplay feed</h3>
           <label>Twitch or YouTube URL
@@ -412,6 +418,6 @@
 <script src="script.js"></script>
 <script src="obs-config.js?v=20261122-czechia-feed"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
-<script src="obs-control.js?v=20261122-czechia-feed"></script>
+<script src="obs-control.js?v=20261122-czechia-carbon"></script>
 </body>
 </html>

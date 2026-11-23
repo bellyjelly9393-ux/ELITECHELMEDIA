@@ -29,16 +29,16 @@
     .carbon-access-status a:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
     .carbon-access-note { color: #9fb5d1 !important; font-size: 13px; }
   </style>
-  <script src="/lg3s-carbon-source.js?v=20261120-carbon-errors1" defer></script>
+  <script src="/lg3s-carbon-source.js?v=20261122-czechia-carbon" defer></script>
 </head>
 <body>
   <iframe id="program" title="GBR Carbon Arena broadcast graphics" allow="autoplay"></iframe>
   <main id="carbonAccessStatus" class="carbon-access-status" role="status" aria-live="polite" hidden>
-    <small>GREAT BRITAIN · PRIVATE BROADCAST SOURCE</small>
+    <small id="carbonAccessBrand">GREAT BRITAIN · PRIVATE BROADCAST SOURCE</small>
     <strong>CARBON ARENA NOT CONNECTED</strong>
     <p id="carbonAccessMessage">The private arena could not open.</p>
-    <a href="/obs-control.html">OPEN GBR OBS CONTROL CENTER</a>
-    <p class="carbon-access-note">GBR Desk → Browser Sources → Copy Carbon Arena OBS URL. Use that private link in OBS at 1920 × 1080, 60 FPS, with Control audio via OBS.</p>
+    <a id="carbonAccessDesk" href="/obs-control.html?channel=lg3s-gbr">OPEN OBS CONTROL CENTER</a>
+    <p class="carbon-access-note">Use Copy Carbon Arena OBS URL in the OBS Desk, then add the private link at 1920 × 1080, 60 FPS, with Control audio via OBS.</p>
   </main>
 </body>
 </html>

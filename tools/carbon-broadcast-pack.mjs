@@ -32,14 +32,13 @@ const paths = {
   'vendor/three/LICENSE.txt': 'node_modules/three/LICENSE',
 };
 
-const base = '/lg3s-gb/arena/';
 const entries = await Promise.all(Object.entries(paths).map(async ([route, relative]) => {
   let bytes = await readFile(resolve(arenaRoot, relative));
   if (route === 'broadcast.html') {
-    bytes = Buffer.from(bytes.toString().replace(/"\/(broadcast\.css|src\/broadcast\.js|vendor\/three\/)/g, `"${base}$1`));
+    bytes = Buffer.from(bytes.toString().replace(/"\/(broadcast\.css|src\/broadcast\.js|vendor\/three\/)/g, '"./$1'));
   }
   if (route.startsWith('src/characters/')) {
-    bytes = Buffer.from(bytes.toString().replaceAll("'/assets/", `'${base}assets/`));
+    bytes = Buffer.from(bytes.toString().replaceAll("'/assets/", "'./assets/"));
   }
   if (route === 'src/broadcast.js') {
     bytes = Buffer.from(bytes.toString().replace("const site = 'https://wildmanhockey-elitechelmedia.app';", 'const site = location.origin;'));

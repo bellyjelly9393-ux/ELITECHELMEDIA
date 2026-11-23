@@ -25,6 +25,7 @@ footer{position:absolute;bottom:50px;left:74px;right:74px;display:flex;justify-c
 .row span:first-child{font-size:17px}
 .rink{margin:0;position:relative;display:grid;grid-template-rows:1fr auto;overflow:hidden;border:1px solid #425677;background:radial-gradient(ellipse at center,#243f61,#0a1424 74%)}
 .rink iframe{width:100%;height:100%;min-height:0;border:0;display:block;pointer-events:none}
+.rink iframe[hidden],.rink figcaption[hidden]{display:none}
 .rink figcaption{padding:12px;text-align:center;color:#b9cbe6;font-size:17px;font-weight:700;letter-spacing:2px}
 
 .lineup{padding:18px 20px;min-height:540px}
@@ -134,6 +135,7 @@ function render() {
 function mountRink() {
   const rink = document.querySelector('#pregame-rink');
   const caption = document.querySelector('#rink-caption');
+  const carbon = new URLSearchParams(location.search).get('view') === 'arena-graphics' && parent !== window;
   const slots = { LW: [9, -9], C: [4, 0], RW: [9, 9], LD: [17, -5], RD: [17, 5], G: [26, 0] };
   const markers = [game.czech, game.away].flatMap((lineup, side) =>
     lineup.split('\n').flatMap((line, index) => {
@@ -143,11 +145,11 @@ function mountRink() {
       const direction = side === 0 ? -1 : 1;
       return [{
         id: side * 6 + index + 1, name, goalie: position === 'G',
-        britain: side === 1, x: slot[0] * direction, z: slot[1] * direction,
+        britain: carbon ? side === 0 : side === 1, x: slot[0] * direction, z: slot[1] * direction,
       }];
     })
   );
-  if (new URLSearchParams(location.search).get('view') === 'arena-graphics' && parent !== window) {
+  if (carbon) {
     function sendBoard() {
       const box = rink.parentElement.getBoundingClientRect();
       const height = Math.min(box.height, innerHeight - box.top);
@@ -160,7 +162,8 @@ function mountRink() {
     }
     rink.hidden = true;
     rink.parentElement.style.gridTemplateRows = '1fr';
-    caption.textContent = '';
+    caption.hidden = true;
+    requestAnimationFrame(sendBoard);
     addEventListener('resize', () => requestAnimationFrame(sendBoard));
     addEventListener('load', () => requestAnimationFrame(sendBoard), { once: true });
     // The parent may still be initializing its renderer on the first message.
