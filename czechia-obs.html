@@ -194,18 +194,17 @@ function jerseyArt(primary, stripe, trim) {
   return canvas;
 }
 function startSpotlights() {
-  const palettes = {
-    Czechia: ['#9b1630', '#e9eff7', '#d5344b'],
-    Germany: ['#15171d', '#efbf36', '#3f4148'],
-    USA: ['#152f63', '#f1f4f9', '#3765a6'],
-    Sweden: ['#c79d17', '#194879', '#ffda52'],
+  const opponentJersey = {
+    Germany: '/assets/lg3s/jerseys/532.webp',
+    USA: '/assets/lg3s/jerseys/342.webp',
+    Sweden: '/assets/lg3s/jerseys/343.webp',
   };
   const sides = [
     { id: 'czech', team: 'Czechia', lineup: game.czech },
     { id: 'away', team: game.opponent, lineup: game.away },
   ].map(side => ({
     ...side,
-    jersey: jerseyArt(...palettes[side.team]),
+    jersey: opponentJersey[side.team] || jerseyArt('#9b1630', '#e9eff7', '#d5344b'),
     players: side.lineup.split('\n').filter(Boolean).map(line => line.split('|').map(value => value.trim())),
   }));
   let slot = 0;
