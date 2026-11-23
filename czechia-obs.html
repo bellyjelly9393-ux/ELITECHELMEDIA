@@ -147,6 +147,31 @@ function mountRink() {
       }];
     })
   );
+  if (new URLSearchParams(location.search).get('view') === 'arena-graphics' && parent !== window) {
+    function sendBoard() {
+      const box = rink.parentElement.getBoundingClientRect();
+      const height = Math.min(box.height, innerHeight - box.top);
+      if (height <= 0 || box.width <= 0) return;
+      parent.postMessage({
+        protocol: 'icevision:pregame:1', type: 'board', camera: 'ice', opponent: game.opponent,
+        board: { markers, highlighted: [] },
+        viewport: { x: box.x, y: box.y, width: box.width, height },
+      }, location.origin);
+    }
+    rink.hidden = true;
+    rink.parentElement.style.gridTemplateRows = '1fr';
+    caption.textContent = '';
+    addEventListener('resize', () => requestAnimationFrame(sendBoard));
+    addEventListener('load', () => requestAnimationFrame(sendBoard), { once: true });
+    // The parent may still be initializing its renderer on the first message.
+    const retry = setInterval(sendBoard, 500);
+    setTimeout(() => clearInterval(retry), 15000);
+    addEventListener('message', event => {
+      if (event.origin === location.origin && event.source === parent &&
+          event.data?.protocol === 'icevision:pregame:1' && event.data.type === 'ready') clearInterval(retry);
+    });
+    return;
+  }
   const timeout = setTimeout(() => {
     caption.textContent = 'RINK UNAVAILABLE · STARTING LINEUPS SHOWN';
   }, 8000);
