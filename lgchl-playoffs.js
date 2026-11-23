@@ -49,7 +49,7 @@
     const t = Date.parse(game.at || '');
     if (!Number.isFinite(t)) return 'scheduled';
     if (now < t) return 'scheduled';
-    if (now < t + 35 * 60 * 1000) return 'live';
+    // A scheduled kickoff is not evidence that gameplay actually started.
     return 'pending';
   }
 
