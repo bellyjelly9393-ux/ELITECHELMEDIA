@@ -43,17 +43,17 @@ test('reversed home-ice orientation still credits the correct series side',()=>{
     row(1,2983,413,4,3,'final'),
     row(2,2983,413,5,0,'final'),
     row(3,2983,413,7,0,'final'),
-    row(4,2983,413,1,0,'final'),
+    row(4,2983,413,1,0,'scheduled'),
   ]);
   const slot=result.leagues[0].conferences[0].rounds[1].slots[0];
-  assert.deepEqual(slot.score,[0,5]);
+  assert.deepEqual(slot.score,[0,4]);
   assert.equal(slot.winner_id,2983);
   assert.equal(slot.clinched,true);
 });
 
 test('ignore other matchups, duplicates, ties, and unfinished games',()=>{
   const games=[
-    row(0,999,998,4,0,'final'),
+    {...row(0,999,998,4,0,'final'),lg_game_id:923900},
     row(0,2983,413,0,4,'final'),
     row(1,2983,413,1,1,'final'),
     row(2,2983,413,0,3,'scheduled'),
