@@ -6,6 +6,8 @@
   var carbonTimeout=0;
   var carbonRequest=0;
   var czechiaLinkRequest=0;
+  var czechiaView='arena';
+  var czechiaAppliedFeed='';
   var OBS_CFG=window.WM_OBS_CONFIG||{defaultFeedFor:function(){return '';}};
   var SCENES=window.WM_OBS_SCENES||null;
   var MEDIA_TEAM_ID='5f36117c-7a51-4514-bf70-d4c672b41e48';
@@ -120,12 +122,12 @@
   function carbonPath(game){return game?'/czechia/arena/'+encodeURIComponent(game)+'/':CARBON_PATH;}
   function carbonPreviewUrl(){
     var game=czechiaGame();
-    if(game)return carbonPath(game)+'broadcast.html?preview=desk&team=czechia&game='+encodeURIComponent(game);
+    if(game&&czechiaView==='arena')return carbonPath(game)+'broadcast.html?preview=desk&team=czechia&game='+encodeURIComponent(game);
     return isGbr()&&previewMode==='pregame'?CARBON_PREVIEW:'';
   }
   function czechiaUrl(){return czechiaGame()?location.origin+'/czechia-obs.html?game='+encodeURIComponent(czechiaGame()):'';}
   function updateCzechiaFeed(){
-    var stream=OBS_CFG.czechiaFeedUrl(val('obsCzechiaStream'));
+    var stream=OBS_CFG.czechiaFeedUrl(czechiaAppliedFeed);
     var url=stream?location.origin+'/obs-stage.html?channel=wjhc-czechia&layer=feed&stream='+encodeURIComponent(stream):'';
     byId('obsCzechiaFeedUrl').value=url;
     byId('copyCzechiaFeedUrl').disabled=!url;
@@ -277,7 +279,14 @@
     var program='/obs-stage.html?channel='+channel+'&preview=1';
     var graphics=isGbr()?'/lg3s-gb?mode=obs&audio=off':'/obs-overlay.html?channel='+channel;
     var carbon=carbonPreviewUrl();
-    var source=isCzechia()?'/czechia-obs.html':previewMode==='lineup'?'/lg3s-gb/pregame?mode=obs':previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
+    var source=isCzechia()?(czechiaView==='gameplay'?(val('obsCzechiaFeedUrl')?val('obsCzechiaFeedUrl')+'&preview=1':'about:blank'):(czechiaUrl()||'/czechia-obs.html')):previewMode==='lineup'?'/lg3s-gb/pregame?mode=obs':previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
+    if(isCzechia()){
+      document.querySelectorAll('[data-czechia-view]').forEach(function(button){
+        button.setAttribute('aria-pressed',String(button.dataset.czechiaView===czechiaView));
+        button.classList.toggle('primary',button.dataset.czechiaView===czechiaView);
+      });
+      byId('obsPublishedScene').textContent={arena:'Carbon Arena',lineups:'Lineups',gameplay:'Gameplay'}[czechiaView];
+    }
     var monitor=byId('obsPreview');
     var frame=byId('obsPreviewFrame');
     var width=(isGbr()||isCzechia())?1920:1280;
@@ -299,7 +308,7 @@
     frame.dataset.carbonTarget=carbon;
     frame.dataset.mode=previewMode;
     byId('obsPreviewDimensions').textContent=width+' × '+height+((isGbr()||isCzechia())?' · 60 FPS source':'');
-    if(!carbon)byId('obsMonitorNote').textContent=isCzechia()?'Czechia matchup setup':previewMode==='lineup'?'Current GBR starting four · 3D rink · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
+    if(!carbon)byId('obsMonitorNote').textContent=isCzechia()?(czechiaView==='gameplay'?'Gameplay · Off-air preview':'Posted lineups · Off-air preview'):previewMode==='lineup'?'Current GBR starting four · 3D rink · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
       :previewMode==='graphics'?'Transparent graphics · Muted':'Game feed and graphics · Muted';
     document.querySelectorAll('[data-preview]').forEach(function(button){
       button.hidden=['sample','pregame','lineup'].includes(button.dataset.preview)&&!isGbr();
@@ -680,7 +689,25 @@
       editCount++;
       setStatus('Unpublished changes');
     }
-    byId('obsCzechiaStream').addEventListener('input',updateCzechiaFeed);
+    var czechiaInput=byId('obsCzechiaStream');
+    var fetchButton=byId('fetchCzechiaFeed');
+    try{czechiaInput.value=localStorage.getItem('ecm-czechia-gameplay-v1')||czechiaInput.value;}catch{}
+    czechiaAppliedFeed=val('obsCzechiaStream');
+    if(!fetchButton)czechiaInput.addEventListener('input',function(){czechiaAppliedFeed=val('obsCzechiaStream');updateCzechiaFeed();});
+    fetchButton?.addEventListener('click',function(){
+      var value=val('obsCzechiaStream');
+      if(!OBS_CFG.czechiaFeedUrl(value)){byId('obsCzechiaFeedStatus').textContent='Enter a valid Twitch or YouTube link.';return;}
+      czechiaAppliedFeed=value;
+      try{localStorage.setItem('ecm-czechia-gameplay-v1',value);}catch{}
+      updateCzechiaFeed();
+      czechiaView='gameplay';
+      updatePreview();
+      byId('obsCzechiaFeedStatus').textContent='Gameplay preview loaded. Use Copy gameplay URL for OBS.';
+    });
+    document.querySelectorAll('[data-czechia-view]').forEach(function(button){
+      button.addEventListener('click',function(){czechiaView=button.dataset.czechiaView;updatePreview();});
+    });
+    byId('refreshCzechiaFixtures')?.addEventListener('click',function(){loadCzechiaGames(++stateRequest);});
     byId('copyCzechiaFeedUrl').addEventListener('click',function(){copyText('obsCzechiaFeedUrl',val('obsCzechiaFeedUrl'));});
     byId('obsCzechiaGame').addEventListener('change',updateCzechiaSource);
     byId('copyCzechiaUrl').addEventListener('click',function(){copyText('obsCzechiaUrl',czechiaUrl());});
