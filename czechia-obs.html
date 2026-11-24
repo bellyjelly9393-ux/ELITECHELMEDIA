@@ -44,6 +44,16 @@ footer{position:absolute;bottom:50px;left:74px;right:74px;display:flex;justify-c
 @keyframes card-deal{from{transform:rotateY(-15deg);opacity:.55}to{transform:rotateY(0);opacity:1}}
 @media(prefers-reduced-motion:reduce){.spotlight-face.deal{animation:none}}
 .czechia-wordmark img{display:block;width:360px;height:158px;object-fit:contain;object-position:left center}
+/* WJC pregame rundown, composed on the OBS canvas */
+#stage{padding:32px 50px}
+.hero{display:flex;justify-content:flex-start;gap:26px;margin:12px 0}
+.hero h1#opponent{font:italic 64px CardDisplay,Arial!important;letter-spacing:-2px}
+.hero img,.czechia-wordmark img,#opponent img{height:94px;width:auto;max-width:285px}
+.grid{grid-template-columns:minmax(0,1fr) 320px 320px;grid-template-rows:535px;gap:14px}
+.rink{grid-column:1;grid-row:1}.lineup{min-height:0;padding:12px 18px}
+.spotlight{height:290px;width:203px}
+.intel{margin-top:16px;padding:12px 20px 18px;border:2px solid #759ab6;border-top:5px solid #da354d;background:linear-gradient(155deg,#254d70,#0e1c31 56%);box-shadow:inset 0 0 0 5px #152d44,0 8px 20px #020811}
+.intel h2{text-align:center;color:white;font:italic 32px CardDisplay,Arial;margin:0 0 8px}.intel-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}.intel-grid article{background:#0a182c;border:1px solid #5080a3;padding:12px 18px;min-height:125px}.intel h3{font:28px CardLabel,Arial;text-transform:uppercase;border-bottom:2px solid #4592c2;margin:0 0 8px}.intel p{font-size:22px;line-height:1.2;color:#e6efff;margin:5px 0}.intel small{color:#b4cce4;font-size:18px}footer{bottom:20px;left:50px;right:50px;padding-top:8px}
 </style>
 <main id="stage" aria-label="Czechia pregame broadcast graphic" hidden>
 <header><strong><img alt="" src="/assets/brand/ecm-crest.webp">LG WORLD JUNIOR CHAMPIONSHIPS</strong> <span>PREGAME</span></header>
@@ -52,6 +62,7 @@ footer{position:absolute;bottom:50px;left:74px;right:74px;display:flex;justify-c
   <iframe id="pregame-rink" title="Czechia 6-on-6 pregame rink"></iframe>
   <figcaption id="rink-caption">PREGAME LINEUP VISUALIZATION</figcaption>
 </figure><article class="lineup"><h2 id="away-title">Opponent lineup</h2><div id="away-card" class="spotlight"></div><div id="away"></div></article></section>
+<section class="intel"><h2>PREGAME INTEL</h2><div class="intel-grid"><article><h3>Keys to the game</h3><p>Protect the slot on the rush.</p><p>Win the first pass out of the zone.</p></article><article><h3>Players to watch</h3><p id="watch-home"></p><p id="watch-away"></p></article><article><h3>Broadcast team</h3><p id="crew"></p><small id="game-note"></small></article></div></section>
 <footer><a id="source-sheet" style="color:inherit" target="_blank" rel="noopener" hidden>LEAGUEGAMING GAME SHEET</a> <span id="air-time"></span></footer>
 </main>
 <section id="setup" hidden>
@@ -141,6 +152,11 @@ function render() {
     source.href = game.source;
     source.hidden = false;
   }
+  document.querySelector('#crew').textContent = ['pbp','analyst'].map((role,i) => {
+    const name = new URLSearchParams(location.search).get(role);
+    return name ? name.slice(0,48) + (i ? ' · Analyst' : ' · Play-by-play') : '';
+  }).filter(Boolean).join(' / ') || 'Elite Chel Media';
+  document.querySelector('#game-note').textContent = [game.opponent,game.time].filter(Boolean).join(' · ');
   drawLineup('czech', game.czech);
   drawLineup('away', game.away);
 }
@@ -226,11 +242,19 @@ function startSpotlights() {
     jersey: teamJerseys[side.team],
     players: side.lineup,
   }));
+  const positions = [...new Set(sides.flatMap(side => side.players.map(player => player.position)))];
   let slot = 0;
   function show() {
     for (const side of sides) {
-      if (!side.players.length) continue;
-      const index = slot % side.players.length;
+      const position = positions[slot % positions.length];
+      const index = side.players.findIndex(player => player.position === position);
+      const watch = document.querySelector(side.id === 'czech' ? '#watch-home' : '#watch-away');
+      watch.textContent = side.team + ' · ' + (side.players[index]?.name || 'Awaiting lineup');
+      if (index < 0) {
+        document.getElementById(side.id + '-card').replaceChildren();
+        document.querySelectorAll('#' + side.id + ' .featured').forEach(row => row.classList.remove('featured'));
+        continue;
+      }
       const {position:pos, name:tag, jersey} = side.players[index];
       const face = document.createElement('div');
       face.className = 'spotlight-face deal';
