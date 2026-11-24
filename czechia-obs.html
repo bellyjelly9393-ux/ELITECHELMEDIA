@@ -10,7 +10,7 @@
 @font-face{font-family:CardDisplay;src:url('/assets/fonts/Kanit-BlackItalic.woff') format('woff');font-display:swap}
 @font-face{font-family:CardLabel;src:url('/assets/fonts/Teko.woff') format('woff');font-display:swap}
 *{box-sizing:border-box}body{margin:0;background:#080f1d;color:#f2f6ff;font-family:Arial,sans-serif;overflow:hidden}
-#stage{position:absolute;width:1920px;height:1080px;transform-origin:0 0;background:radial-gradient(ellipse at 36% 0%,#254676,transparent 49%),linear-gradient(130deg,#101d33,#080f1d 62%,#231523);padding:54px 74px}
+#opponent{display:flex;align-items:center;justify-content:flex-end;gap:24px}#opponent img{width:144px;height:144px;object-fit:contain;flex:none;filter:drop-shadow(0 8px 16px #0008)}#stage{position:absolute;width:1920px;height:1080px;transform-origin:0 0;background:radial-gradient(ellipse at 36% 0%,#254676,transparent 49%),linear-gradient(130deg,#101d33,#080f1d 62%,#231523);padding:54px 74px}
 header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #60708a;padding-bottom:17px;font-weight:800;letter-spacing:4px;font-size:24px}
 header strong{display:flex;align-items:center;gap:22px}header img{width:116px;height:65px;object-fit:contain}header span,footer span{color:#b0c2dd}.hero{display:grid;grid-template-columns:1fr 86px 1fr;align-items:center;margin:30px 0 28px;gap:22px}.hero h1{font-size:88px;margin:0;letter-spacing:-4px;line-height:1}.hero h1:last-child{text-align:right}.hero b{text-align:center;color:#9fb0ca;font-size:27px;letter-spacing:2px}
 .flag{width:80px;height:48px;position:relative;margin-bottom:18px;background:linear-gradient(white 50%,#d71435 50%)}.flag:after{content:"";position:absolute;border-left:37px solid #11457e;border-top:24px solid transparent;border-bottom:24px solid transparent}
@@ -125,6 +125,16 @@ function render() {
   document.querySelector('#away-title').textContent = game.opponent + ' lineup';
   opponent.textContent = game.opponent.toUpperCase() || 'OPPONENT TBC';
   opponent.style.fontSize = opponent.textContent.length > 16 ? '57px' : '88px';
+  const knownCrests = {Canada:341,USA:342,Sweden:343,Switzerland:404,Kazakhstan:531,Germany:532,Japan:591,Italy:822,Slovakia:1079,Latvia:1439,Poland:1444,'Great Britain':1446};
+  const logoId = Object.hasOwn(knownCrests,game.opponent) ? knownCrests[game.opponent] : null;
+  const flagArt = {Finland:'fi'};
+  if (logoId || Object.hasOwn(flagArt,game.opponent)) {
+    const crest = document.createElement('img');
+    crest.alt = '';
+    crest.src = logoId ? '/assets/lg3s/team' + logoId + '.svg' : '/assets/lg3s-world/flags/' + flagArt[game.opponent] + '.svg';
+    crest.addEventListener('error', () => crest.remove(), {once:true});
+    opponent.prepend(crest);
+  }
   document.querySelector('#air-time').textContent = game.time || 'CZECHIA • GAME NIGHT';
   const source = document.querySelector('#source-sheet');
   if (game.source) {
