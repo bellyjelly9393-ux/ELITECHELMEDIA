@@ -7,6 +7,7 @@
   var carbonRequest=0;
   var czechiaLinkRequest=0;
   var czechiaView='arena';
+  var czechiaFixtures=[];
   var czechiaAppliedFeed='';
   var OBS_CFG=window.WM_OBS_CONFIG||{defaultFeedFor:function(){return '';}};
   var SCENES=window.WM_OBS_SCENES||null;
@@ -134,6 +135,30 @@
     byId('openCzechiaFeedUrl').hidden=!url;
     if(url)byId('openCzechiaFeedUrl').href=url+'&preview=1';
   }
+  function renderCzechiaMatchup(){
+    var panel=byId('obsCzechiaMatchupDock');
+    if(!panel)return;
+    panel.hidden=!isCzechia();
+    if(panel.hidden)return;
+    var game=czechiaFixtures.find(function(item){return item.key===czechiaGame();});
+    var heading=byId('obsCzechiaMatchupTitle');
+    var rows=byId('obsCzechiaMatchupRows');
+    heading.textContent=game?'Czechia vs '+game.opponent+' · '+game.time:'Pregame matchup';
+    rows.replaceChildren();
+    if(!game){rows.textContent='Select a fixture to load posted lineups.';return;}
+    var table=document.createElement('table');
+    table.style.cssText='width:100%;text-align:left;border-spacing:0 .4rem';
+    function row(values,cell){
+      var line=table.insertRow();
+      values.forEach(function(value){var item=document.createElement(cell);item.textContent=value;line.append(item);});
+    }
+    row(['Position','Czechia',game.opponent],'th');
+    ['LW','C','RW','LD','RD','G'].forEach(function(position){
+      function name(players){return players.find(function(player){return player.position===position;})?.name||'—';}
+      row([position,name(game.czech),name(game.away)],'td');
+    });
+    rows.append(table);
+  }
   function updateCzechiaSource(){
     var game=czechiaGame();
     var url=czechiaUrl();
@@ -149,6 +174,7 @@
     byId('obsCzechiaUrl').value=url;
     byId('openCzechiaUrl').href=url;
     byId('openCzechiaUrl').hidden=!game;
+    renderCzechiaMatchup();
     updatePreview();
   }
   async function loadCzechiaGames(request){
@@ -162,6 +188,7 @@
       if(request!==stateRequest||!isCzechia())return;
       var today=feed.today();
       var games=snapshot.games.filter(function(game){return game.date===today;});
+      czechiaFixtures=games;
       select.replaceChildren(...games.map(function(game){return new Option(game.time+' · '+game.opponent,game.key);}));
       if(!games.length)select.add(new Option('No game listed tonight',''));
       if(games.some(function(game){return game.key===previous;}))select.value=previous;
@@ -172,6 +199,7 @@
       updateCzechiaSource();
     }catch{
       if(request!==stateRequest||!isCzechia())return;
+      czechiaFixtures=[];
       select.replaceChildren(new Option('Schedule unavailable',''));
       status.textContent='The tournament schedule could not load. Refresh the desk to retry.';
       updateCzechiaSource();
@@ -320,6 +348,7 @@
     var czechia=isCzechia();
     for(var id of ['obsLiveControls','obsLiveScenes','obsPreviewSwitch','publishObsState','reloadObsState'])byId(id).hidden=czechia;
     byId('obsCzechiaControls').hidden=!czechia;
+    renderCzechiaMatchup();
     if(czechia){
       previewMode='program';
       byId('heroChannel').textContent='WORLD JUNIORS · CZECHIA';
@@ -689,6 +718,13 @@
       editCount++;
       setStatus('Unpublished changes');
     }
+    ['obsCzechiaPlayByPlay','obsCzechiaAnalyst'].forEach(function(id){
+      var input=byId(id);
+      if(!input)return;
+      var key='ecm-czechia-commentary:'+id;
+      try{input.value=localStorage.getItem(key)||'';}catch{}
+      input.addEventListener('change',function(){try{localStorage.setItem(key,input.value.trim());}catch{}});
+    });
     var czechiaInput=byId('obsCzechiaStream');
     var fetchButton=byId('fetchCzechiaFeed');
     try{czechiaInput.value=localStorage.getItem('ecm-czechia-gameplay-v1')||czechiaInput.value;}catch{}
