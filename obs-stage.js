@@ -211,6 +211,12 @@
   function render(row){
     if(!row)return;
     var p=row.payload||{};
+    if(overlay&&channel==='wjhc-czechia'){
+      var target=p.presetId==='pregame-gbr'&&p.gameKey
+        ? '/czechia-obs.html?game='+encodeURIComponent(p.gameKey)
+        : 'obs-overlay.html?channel=wjhc-czechia';
+      if(overlay.getAttribute('src')!==target)overlay.src=target;
+    }
     var panel=Boolean(window.WMSidePanel&&window.WMSidePanel.update(p,channel));
     stage.classList.toggle('layout-panel',panel);
     var note=renderFeed(p,row.scene||'game',row.brand||'wildman');

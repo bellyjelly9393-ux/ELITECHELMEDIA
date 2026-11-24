@@ -16,7 +16,7 @@
   var CZECHIA_STUDIO=MEDIA_TEAM_ID+':czechia';
   var TEAM_CONFIG={
     '5f36117c-7a51-4514-bf70-d4c672b41e48':{name:'Elitechel Media',brand:'wildman',channel:'wildman-main'},
-    [CZECHIA_STUDIO]:{name:'World Juniors · Czechia',channel:'wjhc-czechia',teamId:MEDIA_TEAM_ID},
+    [CZECHIA_STUDIO]:{name:'World Juniors · Czechia',channel:'wjhc-czechia',brand:'wildman',teamId:MEDIA_TEAM_ID},
     [GBR_STUDIO]:{name:'LG3s Team Great Britain',shortName:'GBR',brand:'wildman',channel:'lg3s-gbr',teamId:MEDIA_TEAM_ID},
     'b0bcbdda-da9d-419d-8f61-b34937966d49':{name:'Calgary Hitmen',brand:'hitmen',channel:'hitmen-main'}
   };
@@ -106,6 +106,7 @@
     status.dataset.tone=isError?'error':message==='Published'?'saved':'working';
   }
   function updateDeskActions(){
+    byId('obsSceneStrip').inert=!channelReady;
     byId('publishObsState').disabled=!channelReady||publishing;
     byId('reloadObsState').disabled=!currentTeamId||publishing;
     byId('obsTeamSelect').disabled=publishing||!allowedTeamIds(stateRef||{}).length;
@@ -123,7 +124,7 @@
   function carbonPath(game){return game?'/czechia/arena/'+encodeURIComponent(game)+'/':CARBON_PATH;}
   function carbonPreviewUrl(){
     var game=czechiaGame();
-    if(game&&czechiaView==='arena')return carbonPath(game)+'broadcast.html?preview=desk&team=czechia&game='+encodeURIComponent(game);
+    if(game&&previewMode==='pregame')return carbonPath(game)+'broadcast.html?preview=desk&team=czechia&game='+encodeURIComponent(game);
     return isGbr()&&previewMode==='pregame'?CARBON_PREVIEW:'';
   }
   function czechiaUrl(){
@@ -313,17 +314,13 @@
   }
   function updatePreview(){
     var channel=encodeURIComponent(config().channel);
-    if(!isGbr()&&['sample','pregame','lineup'].includes(previewMode))previewMode='program';
+    if(!isGbr()&&!isCzechia()&&['sample','pregame','lineup'].includes(previewMode))previewMode='program';
     var program='/obs-stage.html?channel='+channel+'&preview=1';
     var graphics=isGbr()?'/lg3s-gb?mode=obs&audio=off':'/obs-overlay.html?channel='+channel;
     var carbon=carbonPreviewUrl();
     var source=isCzechia()?(czechiaView==='gameplay'?(val('obsCzechiaFeedUrl')?val('obsCzechiaFeedUrl')+'&preview=1':'about:blank'):(czechiaUrl()||'/czechia-obs.html')):previewMode==='lineup'?'/lg3s-gb/pregame?mode=obs':previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
     if(isCzechia()){
-      document.querySelectorAll('[data-czechia-view]').forEach(function(button){
-        button.setAttribute('aria-pressed',String(button.dataset.czechiaView===czechiaView));
-        button.classList.toggle('primary',button.dataset.czechiaView===czechiaView);
-      });
-      byId('obsPublishedScene').textContent={arena:'Carbon Arena',lineups:'Lineups',gameplay:'Gameplay'}[czechiaView];
+      source=({program:program,graphics:graphics,pregame:czechiaUrl(),lineup:czechiaUrl(),sample:'/czechia-obs.html?game=germany'})[previewMode]||'/czechia-obs.html';
     }
     var monitor=byId('obsPreview');
     var frame=byId('obsPreviewFrame');
@@ -346,21 +343,22 @@
     frame.dataset.carbonTarget=carbon;
     frame.dataset.mode=previewMode;
     byId('obsPreviewDimensions').textContent=width+' × '+height+((isGbr()||isCzechia())?' · 60 FPS source':'');
-    if(!carbon)byId('obsMonitorNote').textContent=isCzechia()?(czechiaView==='gameplay'?'Gameplay · Off-air preview':'Posted lineups · Off-air preview'):previewMode==='lineup'?'Current GBR starting four · 3D rink · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
+    if(!carbon)byId('obsMonitorNote').textContent=isCzechia()?({program:'Program monitor',graphics:'Graphics · Off-air preview',lineup:'Web tactics · Posted lineups',sample:'Sample matchup · Off-air preview',pregame:'Carbon Arena · Off-air preview'}[previewMode]):previewMode==='lineup'?'Current GBR starting four · 3D rink · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
       :previewMode==='graphics'?'Transparent graphics · Muted':'Game feed and graphics · Muted';
     document.querySelectorAll('[data-preview]').forEach(function(button){
-      button.hidden=['sample','pregame','lineup'].includes(button.dataset.preview)&&!isGbr();
+      button.hidden=['sample','pregame','lineup'].includes(button.dataset.preview)&&!isGbr()&&!isCzechia();
       button.setAttribute('aria-pressed',String(button.dataset.preview===previewMode));
     });
     fitPreviewCanvas();
   }
   function updateSourceLinks(){
     var czechia=isCzechia();
-    for(var id of ['obsLiveControls','obsLiveScenes','obsPreviewSwitch','publishObsState','reloadObsState'])byId(id).hidden=czechia;
+    for(var id of ['obsLiveControls','obsPreviewSwitch','publishObsState','reloadObsState'])byId(id).hidden=czechia;
     byId('obsCzechiaControls').hidden=!czechia;
     renderCzechiaMatchup();
     if(czechia){
-      previewMode='program';
+      previewMode='pregame';
+      byId('czechProgramSource').value=stageUrl();
       byId('heroChannel').textContent='WORLD JUNIORS · CZECHIA';
       byId('obsGbrCues').hidden=true;
       updateCzechiaSource();
@@ -447,7 +445,7 @@
       var selected=button.dataset.preset===currentPresetId;
       button.classList.toggle('active',selected);
       button.setAttribute('aria-pressed',String(selected));
-      button.hidden=isGbr()? !['game-matchup','pregame-gbr','starting','intermission','final','brb'].includes(button.dataset.preset)
+      button.hidden=(isGbr()||isCzechia())? !['game-matchup','pregame-gbr','starting','intermission','final','brb'].includes(button.dataset.preset)
         :button.dataset.preset==='pregame-gbr'||(button.dataset.preset==='starting-hitmen-bobbleheads'&&config().channel!=='hitmen-main');
     });
   }
@@ -590,21 +588,11 @@
     };
   }
   async function loadState(force){
-    if(isCzechia()){
-      var scheduleRequest=++stateRequest;
-      channelReady=false;
-      updatePublished(null);
-      byId('obsPublishedScene').textContent='Pregame';
-      byId('stateUpdated').textContent='Loading game sources';
-      updateDeskActions();
-      setStatus('Ready');
-      await loadCzechiaGames(scheduleRequest);
-      return;
-    }
     if(!currentTeamId||!window.VVHLBackend?.db||publishing) return;
     if(!force&&isDirty()) return;
     var request=++stateRequest;
     var channel=config().channel;
+    if(isCzechia())loadCzechiaGames(request);
     channelReady=false;
     updateDeskActions();
     setStatus('Loading channel');
@@ -638,7 +626,11 @@
       team_id:config().teamId||currentTeamId,
       brand:config().brand,
       scene:currentScene,
-      payload:collectPayload(),
+      payload:isCzechia()?Object.assign(collectPayload(),{
+        gameKey:czechiaGame(),homeName:'Czechia',
+        awayName:czechiaFixtures.find(function(g){return g.key===czechiaGame();})?.opponent||'Opponent',
+        streamUrl:'https://www.twitch.tv/aichelmachine',streamProvider:'twitch'
+      }):collectPayload(),
       is_public:true,
       updated_by:stateRef.user.id,
       updated_at:new Date().toISOString()
@@ -749,8 +741,7 @@
       czechiaAppliedFeed=value;
       try{localStorage.setItem('ecm-czechia-gameplay-v1',value);}catch{}
       updateCzechiaFeed();
-      czechiaView='gameplay';
-      updatePreview();
+      byId('openCzechiaFeedUrl').focus();
       byId('obsCzechiaFeedStatus').textContent='Gameplay preview loaded. Use Copy gameplay URL for OBS.';
     });
     document.querySelectorAll('[data-czechia-view]').forEach(function(button){
@@ -759,6 +750,7 @@
     byId('refreshCzechiaFixtures')?.addEventListener('click',function(){loadCzechiaGames(++stateRequest);});
     byId('copyCzechiaFeedUrl').addEventListener('click',function(){copyText('obsCzechiaFeedUrl',val('obsCzechiaFeedUrl'));});
     byId('obsCzechiaGame').addEventListener('change',updateCzechiaSource);
+    byId('copyCzechProgram').onclick=function(){copyText('czechProgramSource',stageUrl());};
     byId('copyCzechiaUrl').addEventListener('click',function(){copyText('obsCzechiaUrl',czechiaUrl());});
     byId('copyCzechiaCarbonUrl').addEventListener('click',copyCzechiaCarbonUrl);
     byId('obsLiveControls').addEventListener('input',markChanged);
