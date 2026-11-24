@@ -79,13 +79,15 @@
     <div class="lh-in">
       <div class="lh-head">
         <div><p class="eyebrow">World Juniors</p><h2 class="sec-title" id="czechiaTitle">Czechia <em>broadcast</em></h2></div>
-        <a class="btn btn-line btn-sm" href="https://www.twitch.tv/aichelmachine" target="_blank" rel="noopener noreferrer">Watch on Twitch ↗</a>
+        <a class="btn btn-line btn-sm" href="https://www.twitch.tv/aichelmachine" target="_blank" rel="noopener noreferrer">Finished broadcast · AIChelMachine ↗</a>
       </div>
       <div class="card lh-player">
-        <div class="lh-player-frame"><iframe id="czechiaPlayer" title="Czechia World Juniors on AIChelMachine" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="lh-player-top"><b>Gameplay feed</b><a id="czechiaGameplayLink" href="https://www.twitch.tv/lbubbzzl" target="_blank" rel="noopener noreferrer">lbubbzzl ↗</a></div>
+        <div class="lh-player-frame"><iframe id="czechiaPlayer" title="Czechia gameplay from lbubbzzl" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
       </div>
       <script>
-        document.getElementById('czechiaPlayer').src = 'https://player.twitch.tv/?channel=aichelmachine&parent=' + encodeURIComponent(location.hostname) + '&autoplay=false';
+        const gameplayChannel = document.getElementById('czechiaGameplayLink').pathname.slice(1);
+        document.getElementById('czechiaPlayer').src = 'https://player.twitch.tv/?channel=' + encodeURIComponent(gameplayChannel) + '&parent=' + encodeURIComponent(location.hostname) + '&autoplay=false';
       </script>
     </div>
   </section>
