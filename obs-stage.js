@@ -208,6 +208,14 @@
     if(activeScene||feedLayer)stage.classList.add('has-feed');else stage.classList.remove('has-feed');
     return '';
   }
+  var breakImage=document.createElement('img');
+  breakImage.alt='';
+  breakImage.hidden=true;
+  breakImage.referrerPolicy='no-referrer';
+  breakImage.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:black;z-index:4';
+  breakImage.addEventListener('error',function(){breakImage.hidden=true;});
+  if(overlay&&channel==='wjhc-czechia')stage.append(breakImage);
+
   function render(row){
     if(!row)return;
     var p=row.payload||{};
@@ -215,7 +223,26 @@
       var target=p.presetId==='pregame-gbr'&&p.gameKey
         ? '/czechia-obs.html?game='+encodeURIComponent(p.gameKey)
         : 'obs-overlay.html?channel=wjhc-czechia';
+      var carbonGame=params.get('carbonGame');
+      if(p.presetId==='pregame-gbr'&&p.gameKey&&carbonGame===p.gameKey&&location.hash){
+        target='/lg3s-carbon-source.html?game='+encodeURIComponent(p.gameKey)+location.hash;
+      }
       if(overlay.getAttribute('src')!==target)overlay.src=target;
+      var imageUrl='';
+      if(row.scene==='intermission'&&p.intermissionImage){
+        try{
+          var image=new URL(p.intermissionImage);
+          if(image.protocol==='https:'&&!image.username&&!image.password)imageUrl=image.href;
+        }catch{}
+      }
+      if(!imageUrl){
+        breakImage.hidden=true;
+        breakImage.removeAttribute('src');
+      }else if(breakImage.getAttribute('src')!==imageUrl){
+        breakImage.hidden=true;
+        breakImage.onload=function(){breakImage.hidden=false;};
+        breakImage.src=imageUrl;
+      }
     }
     var panel=Boolean(window.WMSidePanel&&window.WMSidePanel.update(p,channel));
     stage.classList.toggle('layout-panel',panel);
