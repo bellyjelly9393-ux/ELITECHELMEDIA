@@ -104,16 +104,6 @@
             <div class="obs-monitor-footer"><span id="obsMonitorNote">Game feed and graphics · Muted</span><a id="obsOpenMonitor" href="#" target="_blank" rel="noopener">Open monitor ↗</a></div>
           </section>
 
-          <section id="obsCzechiaMatchupDock" class="obs-scenes-card" aria-labelledby="obsCzechiaMatchupTitle" hidden>
-            <div class="obs-card-head"><h2 id="obsCzechiaMatchupTitle">Pregame matchup</h2></div>
-            <div id="obsCzechiaMatchupRows"></div>
-            <h3>Commentary team</h3><label><input type="checkbox" id="obsIncludeCrew"> Include announcer names in the lineup OBS link</label>
-            <div class="obs-field-grid two">
-              <label>Play-by-play<input id="obsCzechiaPlayByPlay" class="field" maxlength="80"></label>
-              <label>Colour analyst<input id="obsCzechiaAnalyst" class="field" maxlength="80"></label>
-            </div>
-          </section>
-
           <section id="obsLiveScenes" class="obs-scenes-card" aria-labelledby="obsScenesHeading">
             <div class="obs-card-head"><div><h2 id="obsScenesHeading">Scenes</h2><p>Scene buttons publish immediately. Use the monitor tabs to preview off air.</p></div></div>
             <div class="obs-scene-strip" id="obsSceneStrip"></div>
@@ -131,11 +121,8 @@
 
         <section class="obs-control-card" id="obsCzechiaControls" aria-labelledby="obsCzechiaHeading" hidden>
           <h2 id="obsCzechiaHeading">Czechia broadcast</h2>
-          <div class="obs-source-row" role="group" aria-label="Czechia monitor view">
-            <button type="button" class="small-btn primary" data-czechia-view="arena" aria-pressed="true">Carbon Arena</button>
-            <button type="button" class="small-btn" data-czechia-view="lineups" aria-pressed="false">Lineups</button>
-            <button type="button" class="small-btn" data-czechia-view="gameplay" aria-pressed="false">Gameplay</button>
-          </div>
+          <label>Program OBS browser source<input class="field" readonly id="czechProgramSource"></label>
+          <button type="button" class="small-btn" id="copyCzechProgram">Copy program URL</button>
           <label>Matchup
             <select id="obsCzechiaGame" class="select-field" disabled>
               <option value="">Loading tonight’s matchups…</option>
@@ -143,6 +130,16 @@
           </label>
           <button type="button" class="small-btn" id="refreshCzechiaFixtures">Refresh matchups</button>
           <p id="obsCzechiaScheduleStatus" class="obs-preview-note" role="status"></p>
+                    <section id="obsCzechiaMatchupDock" class="obs-scenes-card" aria-labelledby="obsCzechiaMatchupTitle" hidden>
+            <div class="obs-card-head"><h2 id="obsCzechiaMatchupTitle">Pregame matchup</h2></div>
+            <div id="obsCzechiaMatchupRows"></div>
+            <h3>Commentary team</h3><label><input type="checkbox" id="obsIncludeCrew"> Include announcer names in the lineup OBS link</label>
+            <div class="obs-field-grid two">
+              <label>Play-by-play<input id="obsCzechiaPlayByPlay" class="field" maxlength="80"></label>
+              <label>Colour analyst<input id="obsCzechiaAnalyst" class="field" maxlength="80"></label>
+            </div>
+          </section>
+
           <h3>Private Carbon Arena</h3>
           <p>The monitor previews the selected matchup off air.</p>
           <div class="obs-source-row">
@@ -440,6 +437,6 @@
 <script src="obs-config.js?v=20261122-czechia-feed"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
 <script src="czechia-pregame-feed.js?v=1"></script>
-<script src="obs-control.js?v=czechia-intel-1"></script>
+<script src="obs-control.js?v=czechia-program-2"></script>
 </body>
 </html>
