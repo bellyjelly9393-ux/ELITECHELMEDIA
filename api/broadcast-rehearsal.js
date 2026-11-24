@@ -1,3 +1,4 @@
+const czechiaTemplates = require('./_czechia-rehearsal-graphics.cjs');
 const SUPABASE = 'https://lrgllzvwgvqagcpiyvfd.supabase.co';
 const API_KEY = 'sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
 const MANAGEMENT_ROLES = new Set(['owner', 'gm', 'agm']);
@@ -43,7 +44,7 @@ module.exports = async function handler(req, res) {
     }
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    return res.status(200).end(WORKSPACE.replace('<meta charset="utf-8">', '<meta charset="utf-8"><meta name="ecm-account" content="' + id + '">'));
+    return res.status(200).end(WORKSPACE.replace('<!-- CZECHIA_TEMPLATES -->', '<script type="application/json" id="czechiaTemplates">' + JSON.stringify(czechiaTemplates) + '</script>').replace('<meta charset="utf-8">', '<meta charset="utf-8"><meta name="ecm-account" content="' + id + '">'));
   } catch {
     return res.status(503).end();
   }
@@ -57,6 +58,7 @@ const WORKSPACE = `<!doctype html><html lang="en"><meta charset="utf-8"><meta na
 </style>
 <header><div><span class="brand">ECM</span><strong>Broadcast Control</strong><small>Private draft</small><label>Setup <select id="team"></select></label></div></header>
 <main><div class="hero"><h1 id="title"></h1><div id="match-title" class="match-name"></div></div><div id="stats" class="stats"></div><nav role="tablist" aria-label="Workspace"></nav><div id="panel"></div><p id="notice" role="status"></p></main>
+<!-- CZECHIA_TEMPLATES -->
 <script>
 'use strict';
 const teams={cz:'Czechia',gb:'Great Britain',cal:'Calgary Hitmen'};
@@ -65,6 +67,7 @@ const catalog={'Czechia':'🇨🇿','Great Britain':'🇬🇧','Calgary Hitmen':
 const uniforms={'Czechia':['#b81c36','#193f77'],'Great Britain':['#153676','#cb233d'],'Calgary Hitmen':['#161923','#ad7d42'],'Canada':['#c31028','#191d28'],'USA':['#123975','#e32340'],'Finland':['#2467a6','#a4c3e8'],'Sweden':['#ffc82e','#1a60b0'],'Germany':['#202022','#f3bc3b'],'Japan':['#a71535','#1d2235'],'Italy':['#2279bb','#27a16f'],'Switzerland':['#d32632','#202128'],'Latvia':['#821f37','#ddc2c7'],'Poland':['#da2849','#8d152f'],'Slovakia':['#2554a5','#e6344a'],'Kazakhstan':['#139db4','#f8d543']};
 const blankPage=document.documentElement.cloneNode(true);
 blankPage.querySelector('meta[name=ecm-account]')?.remove();
+blankPage.querySelector('#czechiaTemplates')?.remove();
 const casterMode=!!document.querySelector('meta[name=ecm-caster]')||new URLSearchParams(location.search).has('caster');
 const casterKey='ecm-obs-caster-v1';
 const statuses=['Needs verification','Working','Wrong scene','Stale source','Needs refresh','Blocked'];
@@ -153,6 +156,12 @@ function setup(panel,d){
  const urls=right.querySelectorAll('input[type=password]');
  let shown=false;button(right,'Reveal URLs',e=>{shown=!shown;urls.forEach(input=>input.type=shown?'text':'password'); e.target.textContent=shown?'Hide URLs':'Reveal URLs';});
  const checklist=card(panel,'OBS preflight');checkList(checklist,checks,d.checks);
+ const footer=card(panel,'Pregame matchup');
+ const match=d.matchup;
+ if(match?.statSource)footer.append(tag('small',match.statSource));
+ const away=match?.opponents['team:'+match.name]||{};
+ matchupCards(footer,{...withArtwork(teams[state.team],d.graphics),name:teams[state.team],players:d.players},{...withArtwork(match?.name,away),name:match?.name},roles(),true);
+ button(footer,'Edit matchup',()=>{tab='Matchup';render();});
 }
 function lineup(panel,d){
  const listing=card(panel,'Roster and player-card mapping');
@@ -175,6 +184,10 @@ function graphics(panel,d){
   button(a,label,()=>{const url=getUrl(art[k]);if(!url){message('Enter a valid graphic URL.');return;}preview={url,kind:'Image'};displayPreview(graphicPreview);});
  }
  const graphicPreview=block(c,'preview');displayPreview(graphicPreview);
+ if(state.team==='cz'){
+  const templates=JSON.parse(by('czechiaTemplates')?.textContent||'{}');
+  for(const [label,url] of Object.entries(templates))button(a,label+' template',()=>{preview={url,kind:'Image'};displayPreview(graphicPreview);message('Static graphic template.');});
+ }
  button(a,'Use rink URL in Carbon preset',()=>{if(!getUrl(art.rink)){message('Enter a valid Carbon rink scene URL first.');return;}d.scene='Carbon rink';source().url=art.rink;d.status=statuses[0];save();tab='Setup';render();message('Carbon URL set in this workspace preset.');});
 }
 function stopMic(){micRequest++;clearInterval(micTimer);micTimer=null;mic?.getTracks().forEach(track=>track.stop());mic=null;audio?.close().catch(()=>{});audio=null;}
