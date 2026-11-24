@@ -3,7 +3,7 @@
   const program = document.getElementById('program');
   const status = document.getElementById('carbonAccessStatus');
   const explanation = document.getElementById('carbonAccessMessage');
-  const token = location.hash.slice(1);
+  const token = location.hash.slice(1).split('&', 1)[0];
   const params = new URLSearchParams(location.search);
   const game = params.get('game');
   const isCzechia = params.has('game');

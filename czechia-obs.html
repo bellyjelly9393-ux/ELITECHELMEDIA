@@ -168,11 +168,29 @@ function render() {
   drawLineup('czech', game.czech);
   drawLineup('away', game.away);
 }
+function applyPrivateLineup(match) {
+  if (parent === window || new URLSearchParams(location.search).get('view') !== 'arena-graphics') return match;
+  try {
+    const source = new URL(window.top.location.href);
+    if (source.origin !== location.origin || source.pathname !== '/lg3s-carbon-source.html' ||
+        source.searchParams.get('game') !== match.key) return match;
+    const [token, ...options] = source.hash.slice(1).split('&');
+    if (!/^program\.\d{10,11}\.[\w-]{22}\.[\w-]{43}$/.test(token)) return match;
+    const leftWing = new URLSearchParams(options.join('&')).get('lw')?.trim();
+    if (!leftWing || !/^[A-Za-z0-9_. -]{2,32}$/.test(leftWing)) return match;
+    return {...match, czech:match.czech.map(player => player.position === 'LW'
+      ? {position:'LW', name:leftWing} : player)};
+  } catch {
+    return match;
+  }
+}
+
 function mountRink() {
   const rink = document.querySelector('#pregame-rink');
   const caption = document.querySelector('#rink-caption');
   const carbon = new URLSearchParams(location.search).get('view') === 'arena-graphics' && parent !== window;
   const slots = { LW: [9, -9], C: [4, 0], RW: [9, 9], LD: [17, -5], RD: [17, 5], G: [26, 0] };
+  const warmupOrder = ['LW', 'C', 'RW', 'LD', 'RD'];
   const markers = [game.czech, game.away].flatMap((lineup, side) =>
     lineup.flatMap(({position, name, jersey}, index) => {
       const slot = slots[position];
@@ -181,6 +199,10 @@ function mountRink() {
       return [{
         id: side * 6 + index + 1, name, jersey, goalie: position === 'G',
         britain: carbon ? side === 0 : side === 1, x: slot[0] * direction, z: slot[1] * direction,
+        ...(carbon && position !== 'G' ? {warmup:{
+          centerX:13 * direction, radiusX:8, radiusZ:8.7,
+          phase:Math.PI * (side + warmupOrder.indexOf(position) * 2 / warmupOrder.length), rate:0.48,
+        }} : {}),
       }];
     })
   );
@@ -191,7 +213,7 @@ function mountRink() {
       if (height <= 0 || box.width <= 0) return;
       parent.postMessage({
         protocol: 'icevision:pregame:1', type: 'board', camera: 'ice', opponent: game.opponent,
-        board: { markers, highlighted: [] },
+        board: { markers, highlighted: [], skating: true },
         viewport: { x: box.x, y: box.y, width: box.width, height },
       }, location.origin);
     }
@@ -321,6 +343,7 @@ async function initialize() {
     showSetup(tonight, key ? 'This matchup is unavailable.' : tonight.length ? '' : message);
     return;
   }
+  game = applyPrivateLineup(game);
   stage.hidden = false;
   mountRink();
   addEventListener('resize', fit);
