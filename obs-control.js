@@ -320,7 +320,7 @@
     var carbon=carbonPreviewUrl();
     var source=isCzechia()?(czechiaView==='gameplay'?(val('obsCzechiaFeedUrl')?val('obsCzechiaFeedUrl')+'&preview=1':'about:blank'):(czechiaUrl()||'/czechia-obs.html')):previewMode==='lineup'?'/lg3s-gb/pregame?mode=obs':previewMode==='sample'?graphics+'&preview=true':previewMode==='graphics'?graphics:program;
     if(isCzechia()){
-      source=({program:program,graphics:graphics,pregame:czechiaUrl(),lineup:czechiaUrl(),sample:'/czechia-obs.html?game=germany'})[previewMode]||'/czechia-obs.html';
+      source=({feed:val('obsCzechiaFeedUrl')+'&preview=1',program:program,graphics:graphics,pregame:czechiaUrl(),lineup:czechiaUrl(),sample:'/czechia-obs.html?game=germany'})[previewMode]||'/czechia-obs.html';
     }
     var monitor=byId('obsPreview');
     var frame=byId('obsPreviewFrame');
@@ -343,7 +343,7 @@
     frame.dataset.carbonTarget=carbon;
     frame.dataset.mode=previewMode;
     byId('obsPreviewDimensions').textContent=width+' × '+height+((isGbr()||isCzechia())?' · 60 FPS source':'');
-    if(!carbon)byId('obsMonitorNote').textContent=isCzechia()?({program:'Program monitor',graphics:'Graphics · Off-air preview',lineup:'Web tactics · Posted lineups',sample:'Sample matchup · Off-air preview',pregame:'Carbon Arena · Off-air preview'}[previewMode]):previewMode==='lineup'?'Current GBR starting four · 3D rink · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
+    if(!carbon)byId('obsMonitorNote').textContent=isCzechia()?({feed:'Gameplay feed · Off-air preview',program:'Program monitor',graphics:'Graphics · Off-air preview',lineup:'Web tactics · Posted lineups',sample:'Sample matchup · Off-air preview',pregame:'Carbon Arena · Off-air preview'}[previewMode]):previewMode==='lineup'?'Current GBR starting four · 3D rink · Off-air preview':previewMode==='sample'?'Sample GBR graphics · Muted'
       :previewMode==='graphics'?'Transparent graphics · Muted':'Game feed and graphics · Muted';
     document.querySelectorAll('[data-preview]').forEach(function(button){
       button.hidden=['sample','pregame','lineup'].includes(button.dataset.preview)&&!isGbr()&&!isCzechia();
@@ -629,7 +629,7 @@
       payload:isCzechia()?Object.assign(collectPayload(),{
         gameKey:czechiaGame(),homeName:'Czechia',
         awayName:czechiaFixtures.find(function(g){return g.key===czechiaGame();})?.opponent||'Opponent',
-        streamUrl:'https://www.twitch.tv/aichelmachine',streamProvider:'twitch'
+        streamUrl:OBS_CFG.czechiaFeedUrl(czechiaAppliedFeed),streamProvider:providerFor(czechiaAppliedFeed,'auto')
       }):collectPayload(),
       is_public:true,
       updated_by:stateRef.user.id,
@@ -741,8 +741,9 @@
       czechiaAppliedFeed=value;
       try{localStorage.setItem('ecm-czechia-gameplay-v1',value);}catch{}
       updateCzechiaFeed();
-      byId('openCzechiaFeedUrl').focus();
-      byId('obsCzechiaFeedStatus').textContent='Gameplay preview loaded. Use Copy gameplay URL for OBS.';
+      previewMode='feed';
+      updatePreview();
+      byId('obsCzechiaFeedStatus').textContent='Feed selected for preview. Press Gameplay to send it to the program source.';
     });
     document.querySelectorAll('[data-czechia-view]').forEach(function(button){
       button.addEventListener('click',function(){czechiaView=button.dataset.czechiaView;updatePreview();});
