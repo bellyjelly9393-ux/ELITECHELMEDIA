@@ -445,6 +445,9 @@
       var selected=button.dataset.preset===currentPresetId;
       button.classList.toggle('active',selected);
       button.setAttribute('aria-pressed',String(selected));
+      if(button.dataset.preset==='pregame-gbr'){
+        button.querySelector('b').textContent=isCzechia()?'Carbon Rink':'Pregame';
+      }
       button.hidden=(isGbr()||isCzechia())? !['game-matchup','pregame-gbr','starting','intermission','final','brb'].includes(button.dataset.preset)
         :button.dataset.preset==='pregame-gbr'||(button.dataset.preset==='starting-hitmen-bobbleheads'&&config().channel!=='hitmen-main');
     });
@@ -479,6 +482,7 @@
   function fill(row){
     row=row||{scene:'game'};
     var p=row.payload||{};
+    if(isCzechia())setValue('czechIntermissionImage',p.intermissionImage||'');
     currentScene=row.scene||'game';
     var savedPreset=SCENES&&SCENES.infer?SCENES.infer(currentScene,p):null;
     currentPresetId=savedPreset?savedPreset.id:'game-matchup';
@@ -628,6 +632,7 @@
       scene:currentScene,
       payload:isCzechia()?Object.assign(collectPayload(),{
         gameKey:czechiaGame(),homeName:'Czechia',
+        intermissionImage:val('czechIntermissionImage'),
         awayName:czechiaFixtures.find(function(g){return g.key===czechiaGame();})?.opponent||'Opponent',
         streamUrl:OBS_CFG.czechiaFeedUrl(czechiaAppliedFeed),streamProvider:providerFor(czechiaAppliedFeed,'auto')
       }):collectPayload(),
@@ -754,7 +759,30 @@
     byId('refreshCzechiaFixtures')?.addEventListener('click',function(){loadCzechiaGames(++stateRequest);});
     byId('copyCzechiaFeedUrl').addEventListener('click',function(){copyText('obsCzechiaFeedUrl',val('obsCzechiaFeedUrl'));});
     byId('obsCzechiaGame').addEventListener('change',updateCzechiaSource);
-    byId('copyCzechProgram').onclick=function(){copyText('czechProgramSource',stageUrl());};
+    byId('copyCzechCombined').addEventListener('click',async function(){
+      var game=czechiaGame();
+      var status=byId('czechCombinedStatus');
+      if(!game){status.textContent='Select a matchup first.';return;}
+      var button=this;
+      button.disabled=true;
+      try{
+        var response=await requestCarbon('program-link',game);
+        if(!response.ok)throw new Error('Carbon access unavailable');
+        var {token}=await response.json();
+        if(!token||game!==czechiaGame())return;
+        var url=new URL(stageUrl());
+        url.searchParams.set('carbonGame',game);
+        url.hash=token;
+        byId('czechProgramSource').value=url.href;
+        status.textContent=await copyText('czechProgramSource',url.href);
+      }catch{
+        status.textContent='Could not create the Carbon program link. Check management access and retry.';
+      }finally{button.disabled=false;}
+    });
+    byId('copyCzechProgram').onclick=function(){
+      byId('czechProgramSource').value=stageUrl();
+      copyText('czechProgramSource',stageUrl());
+    };
     byId('copyCzechiaUrl').addEventListener('click',function(){copyText('obsCzechiaUrl',czechiaUrl());});
     byId('copyCzechiaCarbonUrl').addEventListener('click',copyCzechiaCarbonUrl);
     byId('obsLiveControls').addEventListener('input',markChanged);
