@@ -148,9 +148,15 @@
           </section>
 
 </details>
+          <details><summary>Intermission image</summary>
+            <label>Public HTTPS image URL<input class="field" type="url" id="czechIntermissionImage" placeholder="https://…/intermission.png"></label>
+            <p class="obs-preview-note">Choose Intermission under the monitor to show this image. Leave it blank to use the scoreboard.</p>
+          </details>
           <details><summary>OBS setup and source links</summary>
           <label>Program OBS browser source<input class="field" readonly id="czechProgramSource"></label>
           <button type="button" class="small-btn" id="copyCzechProgram">Copy program URL</button>
+          <button type="button" class="small-btn" id="copyCzechCombined">Copy program URL with Carbon</button>
+          <p class="obs-preview-note" id="czechCombinedStatus" role="status">Use the private program URL in OBS for this matchup’s Carbon Rink scene.</p>
           <h3>Private Carbon Arena</h3>
           <p>The monitor previews the selected matchup off air.</p>
           <div class="obs-source-row">
@@ -442,6 +448,6 @@
 <script src="obs-config.js?v=20261122-czechia-feed"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
 <script src="czechia-pregame-feed.js?v=1"></script>
-<script src="obs-control.js?v=czechia-fetch-3"></script>
+<script src="obs-control.js?v=czechia-breaks-1"></script>
 </body>
 </html>
