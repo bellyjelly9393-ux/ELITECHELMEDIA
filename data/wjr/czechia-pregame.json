@@ -258,8 +258,71 @@
       "opponent": "Switzerland",
       "opponentId": 404,
       "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923944",
-      "czech": [],
-      "away": []
+      "away": [
+        {
+          "position": "LW",
+          "gamertag": "II_Prxvoke_II",
+          "lgUserId": 20579
+        },
+        {
+          "position": "C",
+          "gamertag": "Jinglebells96",
+          "lgUserId": 42974
+        },
+        {
+          "position": "RW",
+          "gamertag": "Diamond_supply90",
+          "lgUserId": 29789
+        },
+        {
+          "position": "LD",
+          "gamertag": "Pxrekh",
+          "lgUserId": 62640
+        },
+        {
+          "position": "RD",
+          "gamertag": "mattd_55",
+          "lgUserId": 79499
+        },
+        {
+          "position": "G",
+          "gamertag": "EVO Volcano",
+          "lgUserId": 15980
+        }
+      ],
+      "czech": [
+        {
+          "position": "LW",
+          "gamertag": "offtheyrk",
+          "lgUserId": 58225
+        },
+        {
+          "position": "C",
+          "gamertag": "SmokoLi",
+          "lgUserId": 74341
+        },
+        {
+          "position": "RW",
+          "gamertag": "geocustom",
+          "lgUserId": 77868
+        },
+        {
+          "position": "LD",
+          "gamertag": "VYX1627",
+          "lgUserId": 70598
+        },
+        {
+          "position": "RD",
+          "gamertag": "MetroI72I",
+          "lgUserId": 77100
+        },
+        {
+          "position": "G",
+          "gamertag": "XxPASTRNAK88",
+          "lgUserId": 80604
+        }
+      ],
+      "lineupDate": "2026-11-24"
     },
     {
       "id": 923948,
@@ -268,8 +331,71 @@
       "opponent": "Canada",
       "opponentId": 341,
       "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923948",
-      "czech": [],
-      "away": []
+      "czech": [
+        {
+          "position": "LW",
+          "gamertag": "offtheyrk",
+          "lgUserId": 58225
+        },
+        {
+          "position": "C",
+          "gamertag": "SmokoLi",
+          "lgUserId": 74341
+        },
+        {
+          "position": "RW",
+          "gamertag": "geocustom",
+          "lgUserId": 77868
+        },
+        {
+          "position": "LD",
+          "gamertag": "VYX1627",
+          "lgUserId": 70598
+        },
+        {
+          "position": "RD",
+          "gamertag": "MetroI72I",
+          "lgUserId": 77100
+        },
+        {
+          "position": "G",
+          "gamertag": "XxPASTRNAK88",
+          "lgUserId": 80604
+        }
+      ],
+      "away": [
+        {
+          "position": "LW",
+          "gamertag": "vKucherov x",
+          "lgUserId": 80066
+        },
+        {
+          "position": "C",
+          "gamertag": "BucketOfPucks",
+          "lgUserId": 59995
+        },
+        {
+          "position": "RW",
+          "gamertag": "TroySandy92",
+          "lgUserId": 77237
+        },
+        {
+          "position": "LD",
+          "gamertag": "micleross",
+          "lgUserId": 77621
+        },
+        {
+          "position": "RD",
+          "gamertag": "NotSoIRISHmick1",
+          "lgUserId": 37446
+        },
+        {
+          "position": "G",
+          "gamertag": "RAMER5440",
+          "lgUserId": 76522
+        }
+      ],
+      "lineupDate": "2026-11-24"
     },
     {
       "id": 923952,
@@ -278,8 +404,71 @@
       "opponent": "USA",
       "opponentId": 342,
       "source": "https://www.leaguegaming.com/forums/index.php?leaguegaming/league&action=league&page=game&gameid=923952",
-      "czech": [],
-      "away": []
+      "czech": [
+        {
+          "position": "LW",
+          "gamertag": "offtheyrk",
+          "lgUserId": 58225
+        },
+        {
+          "position": "C",
+          "gamertag": "SmokoLi",
+          "lgUserId": 74341
+        },
+        {
+          "position": "RW",
+          "gamertag": "geocustom",
+          "lgUserId": 77868
+        },
+        {
+          "position": "LD",
+          "gamertag": "VYX1627",
+          "lgUserId": 70598
+        },
+        {
+          "position": "RD",
+          "gamertag": "MetroI72I",
+          "lgUserId": 77100
+        },
+        {
+          "position": "G",
+          "gamertag": "XxPASTRNAK88",
+          "lgUserId": 80604
+        }
+      ],
+      "away": [
+        {
+          "position": "LW",
+          "gamertag": "BaronVonBass",
+          "lgUserId": 39598
+        },
+        {
+          "position": "C",
+          "gamertag": "Blake1288",
+          "lgUserId": 57392
+        },
+        {
+          "position": "RW",
+          "gamertag": "EazyBreezy_91",
+          "lgUserId": 46861
+        },
+        {
+          "position": "LD",
+          "gamertag": "xFrankxLegiTx",
+          "lgUserId": 44733
+        },
+        {
+          "position": "RD",
+          "gamertag": "Kenabik",
+          "lgUserId": 80426
+        },
+        {
+          "position": "G",
+          "gamertag": "PapaDimez",
+          "lgUserId": 59812
+        }
+      ],
+      "lineupDate": "2026-11-24"
     },
     {
       "id": 923956,
