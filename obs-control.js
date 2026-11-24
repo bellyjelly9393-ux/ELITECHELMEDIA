@@ -735,7 +735,7 @@
     try{czechiaInput.value=localStorage.getItem('ecm-czechia-gameplay-v1')||czechiaInput.value;}catch{}
     czechiaAppliedFeed=val('obsCzechiaStream');
     if(!fetchButton)czechiaInput.addEventListener('input',function(){czechiaAppliedFeed=val('obsCzechiaStream');updateCzechiaFeed();});
-    fetchButton?.addEventListener('click',function(){
+    function applyCzechiaFeed(){
       var value=val('obsCzechiaStream');
       if(!OBS_CFG.czechiaFeedUrl(value)){byId('obsCzechiaFeedStatus').textContent='Enter a valid Twitch or YouTube link.';return;}
       czechiaAppliedFeed=value;
@@ -744,7 +744,10 @@
       previewMode='feed';
       updatePreview();
       byId('obsCzechiaFeedStatus').textContent='Feed selected for preview. Press Gameplay to send it to the program source.';
-    });
+    }
+    fetchButton?.addEventListener('click',applyCzechiaFeed);
+    czechiaInput.addEventListener('change',function(){if(isCzechia()&&val('obsCzechiaStream')!==czechiaAppliedFeed)applyCzechiaFeed();});
+    czechiaInput.addEventListener('paste',function(){setTimeout(function(){if(isCzechia())applyCzechiaFeed();},0);});
     document.querySelectorAll('[data-czechia-view]').forEach(function(button){
       button.addEventListener('click',function(){czechiaView=button.dataset.czechiaView;updatePreview();});
     });
