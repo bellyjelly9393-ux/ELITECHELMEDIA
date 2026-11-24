@@ -137,6 +137,144 @@ function displayPreview(holder){
  if(el.tagName==='IMG'){el.alt='Selected broadcast graphic';el.referrerPolicy='no-referrer';}
  el.src=preview.url;holder.append(el);
 }
+const statHost='https://lrgllzvwgvqagcpiyvfd.supabase.co';
+const statKey='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
+let horn;
+function stopHorn(){if(horn){horn.pause();horn=null;}}
+function hornControls(panel,d){
+ const c=card(panel,'Goal horn audio test');
+ const audio=d.goalHorn??={};
+ field(c,'Goal horn audio URL',audio,'url',{type:'url'});
+ const a=block(c,'actions');
+ button(a,'Test goal horn',async()=>{
+  const url=getUrl(audio.url);
+  if(!url){message('Enter a playable goal horn audio URL.');return;}
+  stopHorn();
+  const clip=new Audio(url);
+  horn=clip;
+  clip.volume=.5;
+  try{await clip.play();if(horn===clip)message('Goal horn playing locally. Check the OBS mixer separately.');}
+  catch{if(horn===clip)message('The horn could not play. Check the audio URL and access.');}
+ });
+ button(a,'Stop horn',stopHorn);
+ c.append(tag('small','This test plays in your browser. Live triggering requires the game’s goal event and an armed OBS audio source.'));
+}
+function fixtureSlots(rows){
+ const slots={};
+ for(const row of rows??[]){
+  const pos=row.position;
+  if(!['LW','C','RW','LD','RD','G'].includes(pos)||typeof row.gamertag!=='string'||!row.gamertag.trim()||Object.hasOwn(slots,pos))continue;
+  slots[pos]={label:row.gamertag,id:Number(row.lgUserId??row.lg_user_id),jersey:row.jerseyNumber??row.jersey_number};
+ }
+ return slots;
+}
+async function existingSeasonStats(sides,signal){
+ const entries=sides.flatMap(side=>Object.entries(side.players));
+ await Promise.all(['skater','goalie'].map(async kind=>{
+  const players=entries.filter(([pos,p])=>(pos==='G')===(kind==='goalie')&&Number.isSafeInteger(p.id)&&p.id>0).map(([,p])=>p);
+  if(!players.length)return;
+  const fields=kind==='goalie'?'lg_user_id,gp,sv,sv_pct,gaa_per_game':'lg_user_id,gp,g,a,p';
+  const ids=[...new Set(players.map(p=>p.id))];
+  const query=new URLSearchParams({select:fields,lg_user_id:'in.('+ids.join(',')+')'});
+  const r=await fetch(statHost+'/rest/v1/lg3s_public_'+kind+'_leaders?'+query,{headers:{apikey:statKey},signal});
+  if(!r.ok)throw Error('Stats unavailable');
+  const rows=await r.json();
+  const indexed=new Map(rows.map(row=>[Number(row.lg_user_id),row]));
+  for(const player of players){
+   const stat=indexed.get(player.id);
+   if(!stat)continue;
+   const put=(key,value)=>{if(typeof value==='number'&&Number.isFinite(value))player[key]=String(value);};
+   put('gp',stat.gp);put('g',stat.g);put('a',stat.a);put('pts',stat.p);put('saves',stat.sv);
+   if(typeof stat.sv_pct==='number')player.sv=(stat.sv_pct*(stat.sv_pct<=1?100:1)).toFixed(1)+'%';
+   if(typeof stat.gaa_per_game==='number')player.gaa=stat.gaa_per_game.toFixed(2);
+  }
+ }));
+}
+function addRenderedCards(holder,sides){
+ const grid=block(holder,'fields');
+ return import('/player-card-renderer.js?v=20261118-locker-jerseys').then(async()=>{
+  const renderer=window.ECMCardRenderer;
+  if(!renderer?.draw)throw Error('Card renderer unavailable');
+  const draws=[];
+  for(const team of sides){
+   const group=block(grid,'stack');group.append(tag('h3',team.name+' · '+team.kit+' kit'));
+   for(const [position,p] of Object.entries(team.players)){
+    const canvas=tag('canvas');canvas.width=420;canvas.height=600;canvas.style.cssText='display:block;width:min(100%,280px);height:auto';
+    canvas.setAttribute('aria-label',p.label+' player card');group.append(canvas);
+    const fields=position==='G'?[['GP','gp'],['SV','saves'],['SV%','sv'],['GAA','gaa']]:[['GP','gp'],['G','g'],['A','a'],['PTS','pts']];
+    draws.push(renderer.draw(canvas,{
+     player:{tag:p.label,team:team.name,pos:position},league:'lg3s',season:'WJC · LINEUP',readOnly:true,
+     ratingKind:'pending',edition:'season',finish:'ice',background:'arena',jersey:p.jersey,teamJersey:team[team.kit.toLowerCase()]||undefined,
+     logo:team.logo,labels:fields.map(([l])=>l),values:fields.map(([,k])=>p[k]??'—')
+    }));
+   }
+  }
+  const results=await Promise.allSettled(draws);
+  if(holder.isConnected&&results.some(r=>r.status==='rejected'||!r.value))holder.append(tag('p','Some player cards could not render.'));
+ });
+}
+function wjcMatchup(panel,d){
+ const c=card(panel,'World Juniors matchup');
+ const settings=d.wjc??={};
+ const choice=tag('select');
+ choice.setAttribute('aria-label','World Juniors fixture');
+ const sync=block(c,'actions');
+ sync.append(choice);
+ const status=tag('p','Loading posted fixtures…');status.setAttribute('role','status');
+ const output=block(c,'compact');
+ c.insertBefore(status,output);
+ const kit=field(c,'Czechia jersey assignment',settings,'kit',{options:['Home','Away']});
+ kit.value=settings.kit||'Home';
+ let matches=[],drawRequest=0,reading=false;
+ function paint(){
+  const request=++drawRequest;
+  output.replaceChildren();
+  const match=matches.find(game=>String(game.id)===choice.value);
+  if(!match)return;
+  if(getUrl(match.source)){
+   const link=tag('a','LeagueGaming game sheet');link.href=getUrl(match.source);link.target='_blank';link.rel='noopener noreferrer';output.append(link);
+  }
+  const sides=[
+   {...withArtwork('Czechia',d.graphics),name:'Czechia',players:fixtureSlots(match.czech),kit:kit.value},
+   {...withArtwork(match.opponent,d.matchup?.opponents['team:'+match.opponent]),name:match.opponent,players:fixtureSlots(match.away),kit:kit.value==='Home'?'Away':'Home'},
+  ];
+  const display=block(output,'compact');
+  const note=tag('small','Cards show posted WJC players. WJC season totals are unavailable here.');output.append(note);
+  const draw=()=>{display.replaceChildren();matchupCards(display,...sides,['LW','C','RW','LD','RD','G'],true);};
+  draw();
+  const controls=block(output,'actions');
+  const cards=block(output,'compact');
+  button(controls,'Render player cards',()=>{cards.replaceChildren();addRenderedCards(cards,sides).catch(()=>{if(cards.isConnected)cards.textContent='Player card renderer unavailable.';});});
+  existingSeasonStats(sides,AbortSignal.timeout(8000)).then(()=>{
+   if(request!==drawRequest||!output.isConnected)return;
+   const has=sides.some(team=>Object.values(team.players).some(p=>p.gp!==undefined));
+   if(has){note.textContent='Stats shown are LG3s Season 1 comparison totals, matched by LeagueGaming player ID.';draw();if(cards.childNodes.length){cards.replaceChildren();addRenderedCards(cards,sides).catch(()=>{if(cards.isConnected)cards.textContent='Player card renderer unavailable.';});}}
+  }).catch(()=>{if(request===drawRequest&&output.isConnected)note.textContent='Posted WJC lineup loaded. LG3s comparison stats could not be checked.';});
+ }
+ async function refresh(){
+  if(reading)return;
+  reading=true;
+  try{
+   const response=await fetch('/api/czechia-pregame',{cache:'no-store',signal:AbortSignal.timeout(8000)});
+   if(!response.ok)throw Error();
+   const feed=await response.json();
+   if(!choice.isConnected)return;
+   matches=feed.games.filter(game=>game&&Number.isSafeInteger(game.id)&&typeof game.opponent==='string');
+   const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+   const next=matches.find(game=>game.date===today)??matches.find(game=>game.date>=today)??matches.at(-1);
+   choice.replaceChildren(...matches.map(game=>new Option([game.date,game.time+' ET',game.opponent].join(' · '),String(game.id))));
+   choice.value=matches.some(game=>String(game.id)===settings.fixture)?settings.fixture:String(next?.id??'');
+   status.textContent=matches.length?(feed.usingSeed?'Using the saved schedule snapshot.':'Posted World Juniors feed synced.'):'No fixtures are available.';
+   paint();
+  }catch{if(choice.isConnected)status.textContent='Fixture refresh failed. Try Refresh fixtures.';}
+  finally{reading=false;}
+ }
+ choice.onchange=()=>{settings.fixture=choice.value;save();paint();};
+ kit.addEventListener('change',paint);
+ button(sync,'Refresh fixtures',refresh);
+ refresh();
+}
+
 function setup(panel,d){
  const g=block(panel,'grid'),left=card(g,'Live preview'),right=card(g,'Scene & source');
  const viewport=block(left,'preview');displayPreview(viewport);
@@ -156,7 +294,10 @@ function setup(panel,d){
  const urls=right.querySelectorAll('input[type=password]');
  let shown=false;button(right,'Reveal URLs',e=>{shown=!shown;urls.forEach(input=>input.type=shown?'text':'password'); e.target.textContent=shown?'Hide URLs':'Reveal URLs';});
  const checklist=card(panel,'OBS preflight');checkList(checklist,checks,d.checks);
- const footer=card(panel,'Pregame matchup');
+ if(state.team==='cz')wjcMatchup(panel,d);
+ if(state.team==='gb'){const c=card(panel,'Great Britain matchup');const link=tag('a','Open synced LG3s pregame preview');link.href='/lg3s-gb/pregame';link.target='_blank';link.rel='noopener noreferrer';c.append(link);}
+ hornControls(panel,d);
+ const footer=card(panel,'Manual pregame matchup');
  const match=d.matchup;
  if(match?.statSource)footer.append(tag('small',match.statSource));
  const away=match?.opponents['team:'+match.name]||{};
@@ -202,9 +343,10 @@ function teamArtwork(name) {
  const world = worldFlags[name];
  const league = leagueFlags[name];
  const jerseyId = leagueJerseys[name];
+ const crestId = name === 'Great Britain' ? 1446 : jerseyId;
  return {
-  logo: asset(name === 'Calgary Hitmen' ? '/assets/lgchl/room-360/hitmen-crest-vector.svg' : world ? '/assets/lg3s-world/flags/'+world+'.svg' : league ? '/assets/lg3s/flags/'+league+'.png' : ''),
-  home: asset(name === 'Calgary Hitmen' ? '/assets/war-room/jersey-home.webp' : name === 'Czechia' ? '/assets/lg3s/jerseys/czechia-home.webp' : jerseyId ? '/assets/lg3s/jerseys/'+jerseyId+'.webp' : ''),
+  logo: asset(name === 'Calgary Hitmen' ? '/assets/lgchl/room-360/hitmen-crest-vector.svg' : crestId ? '/assets/lg3s/team'+crestId+'.svg' : world ? '/assets/lg3s-world/flags/'+world+'.svg' : league ? '/assets/lg3s/flags/'+league+'.png' : ''),
+  home: asset(name === 'Calgary Hitmen' ? '/assets/war-room/jersey-home.webp' : name === 'Czechia' ? '/assets/lg3s/jerseys/czechia-home.webp' : name === 'Great Britain' ? '/assets/lg3s/scene/gb-royal-blue.webp' : jerseyId ? '/assets/lg3s/jerseys/'+jerseyId+'.webp' : ''),
   away: asset(name === 'Calgary Hitmen' ? '/assets/war-room/jersey-away.webp' : ''),
  };
 }
@@ -230,7 +372,7 @@ function jersey(holder,team,side,showArt){
 }
 function matchupCards(parent,home,away,positions,showArt){
  const band=block(parent,'matchup');
- const branding=(team,side)=>{const t=block(band,'score-side '+side);t.append(tag('strong',flag(team.name)+' '+(team.name||'Opponent pending')));const art=block(t,'jerseys');if(showArt)artImage(art,team.logo,'Team logo');jersey(art,team,'home',showArt);jersey(art,team,'away',showArt);};
+ const branding=(team,side)=>{const t=block(band,'score-side '+side);t.append(tag('strong',flag(team.name)+' '+(team.name||'Opponent pending')+(team.kit?' · '+team.kit:'')));const art=block(t,'jerseys');if(showArt)artImage(art,team.logo,'Team logo');if(team.kit){jersey(art,team,team.kit.toLowerCase(),showArt);}else{jersey(art,team,'home',showArt);jersey(art,team,'away',showArt);}};
  branding(home,'home');band.append(tag('div','VS','faceoff'));branding(away,'away');
  for(const position of positions){
   const pair=block(parent,'matchup');
@@ -389,14 +531,14 @@ function troubleshoot(panel,d){
  displayShot();
 }
 function render(){
- stopMic();stopCamera();preview=null;message('');summary();
+ stopMic();stopCamera();stopHorn();preview=null;message('');summary();
  const nav=document.querySelector('nav');nav.replaceChildren();
  for(const section of sections){const b=button(nav,section,()=>{tab=section;render();document.querySelector('[aria-selected=true]').focus();});b.setAttribute('role','tab');b.setAttribute('aria-selected',String(section===tab));b.id='tab-'+sections.indexOf(section);b.setAttribute('aria-controls','panel');}
  const panel=by('panel');panel.replaceChildren();panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby','tab-'+sections.indexOf(tab));[setup,matchup,lineup,graphics,commentary,troubleshoot][sections.indexOf(tab)](panel,data());
 }
 for(const [id,name] of Object.entries(teams))by('team').add(new Option(name,id));
 by('team').value=state.team;by('team').onchange=e=>{state.team=e.target.value;save();render();};
-window.addEventListener('pagehide',()=>{stopMic();stopCamera();});
+window.addEventListener('pagehide',()=>{stopMic();stopCamera();stopHorn();});
 if(casterMode)renderCaster();else render();
 </script></html>
 `;
