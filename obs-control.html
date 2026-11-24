@@ -121,8 +121,6 @@
 
         <section class="obs-control-card" id="obsCzechiaControls" aria-labelledby="obsCzechiaHeading" hidden>
           <h2 id="obsCzechiaHeading">Czechia broadcast</h2>
-          <label>Program OBS browser source<input class="field" readonly id="czechProgramSource"></label>
-          <button type="button" class="small-btn" id="copyCzechProgram">Copy program URL</button>
           <label>Matchup
             <select id="obsCzechiaGame" class="select-field" disabled>
               <option value="">Loading tonight’s matchups…</option>
@@ -130,7 +128,16 @@
           </label>
           <button type="button" class="small-btn" id="refreshCzechiaFixtures">Refresh matchups</button>
           <p id="obsCzechiaScheduleStatus" class="obs-preview-note" role="status"></p>
-                    <section id="obsCzechiaMatchupDock" class="obs-scenes-card" aria-labelledby="obsCzechiaMatchupTitle" hidden>
+          <h3>Gameplay feed</h3>
+          <label>Twitch or YouTube URL
+            <input id="obsCzechiaStream" class="field" type="url" value="https://www.twitch.tv/aichelmachine">
+          </label>
+          <div class="obs-source-row">
+            <button type="button" class="small-btn primary" id="fetchCzechiaFeed">Fetch</button>
+          </div>
+          <p id="obsCzechiaFeedStatus" class="obs-preview-note" role="status"></p>
+          <details><summary>Lineups and commentary</summary>
+<section id="obsCzechiaMatchupDock" class="obs-scenes-card" aria-labelledby="obsCzechiaMatchupTitle" hidden>
             <div class="obs-card-head"><h2 id="obsCzechiaMatchupTitle">Pregame matchup</h2></div>
             <div id="obsCzechiaMatchupRows"></div>
             <h3>Commentary team</h3><label><input type="checkbox" id="obsIncludeCrew"> Include announcer names in the lineup OBS link</label>
@@ -140,6 +147,10 @@
             </div>
           </section>
 
+</details>
+          <details><summary>OBS setup and source links</summary>
+          <label>Program OBS browser source<input class="field" readonly id="czechProgramSource"></label>
+          <button type="button" class="small-btn" id="copyCzechProgram">Copy program URL</button>
           <h3>Private Carbon Arena</h3>
           <p>The monitor previews the selected matchup off air.</p>
           <div class="obs-source-row">
@@ -153,18 +164,12 @@
             <button id="copyCzechiaUrl" class="small-btn" type="button">Copy public URL</button>
             <a id="openCzechiaUrl" class="small-btn" href="#" target="_blank" rel="noopener">Open public lineup</a>
           </div>
-          <h3>Gameplay feed</h3>
-          <label>Twitch or YouTube URL
-            <input id="obsCzechiaStream" class="field" type="url" value="https://www.twitch.tv/aichelmachine">
-          </label>
-          <div class="obs-source-row">
-            <button type="button" class="small-btn primary" id="fetchCzechiaFeed">Fetch gameplay</button>
+          <h3>Separate gameplay source</h3><div class="obs-source-row">
             <input id="obsCzechiaFeedUrl" class="field" aria-label="Czechia gameplay OBS URL" readonly>
             <button id="copyCzechiaFeedUrl" class="small-btn" type="button">Copy gameplay URL</button>
             <a id="openCzechiaFeedUrl" class="small-btn" target="_blank" rel="noopener">Preview gameplay</a>
           </div>
-          <p id="obsCzechiaFeedStatus" class="obs-preview-note" role="status"></p>
-          <p class="obs-preview-note">Add gameplay as its own OBS Browser Source. Copy the new link after changing the stream.</p>
+</details>
         </section>
         <section id="obsLiveControls" class="obs-control-card" aria-label="Channel controls">
           <div class="obs-tabs" role="tablist" aria-label="Production controls">
@@ -437,6 +442,6 @@
 <script src="obs-config.js?v=20261122-czechia-feed"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
 <script src="czechia-pregame-feed.js?v=1"></script>
-<script src="obs-control.js?v=czechia-program-2"></script>
+<script src="obs-control.js?v=czechia-fetch-3"></script>
 </body>
 </html>
