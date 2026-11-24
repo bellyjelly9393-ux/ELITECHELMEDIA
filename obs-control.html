@@ -120,12 +120,18 @@
         </div>
 
         <section class="obs-control-card" id="obsCzechiaControls" aria-labelledby="obsCzechiaHeading" hidden>
-          <h2 id="obsCzechiaHeading">Czechia pregame</h2>
+          <h2 id="obsCzechiaHeading">Czechia broadcast</h2>
+          <div class="obs-source-row" role="group" aria-label="Czechia monitor view">
+            <button type="button" class="small-btn primary" data-czechia-view="arena" aria-pressed="true">Carbon Arena</button>
+            <button type="button" class="small-btn" data-czechia-view="lineups" aria-pressed="false">Lineups</button>
+            <button type="button" class="small-btn" data-czechia-view="gameplay" aria-pressed="false">Gameplay</button>
+          </div>
           <label>Matchup
             <select id="obsCzechiaGame" class="select-field" disabled>
               <option value="">Loading tonight’s matchups…</option>
             </select>
           </label>
+          <button type="button" class="small-btn" id="refreshCzechiaFixtures">Refresh matchups</button>
           <p id="obsCzechiaScheduleStatus" class="obs-preview-note" role="status"></p>
           <h3>Private Carbon Arena</h3>
           <p>The monitor previews the selected matchup off air.</p>
@@ -145,10 +151,12 @@
             <input id="obsCzechiaStream" class="field" type="url" value="https://www.twitch.tv/aichelmachine">
           </label>
           <div class="obs-source-row">
+            <button type="button" class="small-btn primary" id="fetchCzechiaFeed">Fetch gameplay</button>
             <input id="obsCzechiaFeedUrl" class="field" aria-label="Czechia gameplay OBS URL" readonly>
             <button id="copyCzechiaFeedUrl" class="small-btn" type="button">Copy gameplay URL</button>
             <a id="openCzechiaFeedUrl" class="small-btn" target="_blank" rel="noopener">Preview gameplay</a>
           </div>
+          <p id="obsCzechiaFeedStatus" class="obs-preview-note" role="status"></p>
           <p class="obs-preview-note">Add gameplay as its own OBS Browser Source. Copy the new link after changing the stream.</p>
         </section>
         <section id="obsLiveControls" class="obs-control-card" aria-label="Channel controls">
@@ -422,6 +430,6 @@
 <script src="obs-config.js?v=20261122-czechia-feed"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
 <script src="czechia-pregame-feed.js?v=1"></script>
-<script src="obs-control.js?v=20261123-czechia-lineups"></script>
+<script src="obs-control.js?v=czechia-quick-switch-1"></script>
 </body>
 </html>
