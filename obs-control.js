@@ -126,7 +126,17 @@
     if(game&&czechiaView==='arena')return carbonPath(game)+'broadcast.html?preview=desk&team=czechia&game='+encodeURIComponent(game);
     return isGbr()&&previewMode==='pregame'?CARBON_PREVIEW:'';
   }
-  function czechiaUrl(){return czechiaGame()?location.origin+'/czechia-obs.html?game='+encodeURIComponent(czechiaGame()):'';}
+  function czechiaUrl(){
+    if(!czechiaGame())return '';
+    var url=new URL('/czechia-obs.html',location.origin);
+    url.searchParams.set('game',czechiaGame());
+    if(byId('obsIncludeCrew')?.checked){
+      for(var [param,id] of [['pbp','obsCzechiaPlayByPlay'],['analyst','obsCzechiaAnalyst']]){
+        if(val(id))url.searchParams.set(param,val(id));
+      }
+    }
+    return url.href;
+  }
   function updateCzechiaFeed(){
     var stream=OBS_CFG.czechiaFeedUrl(czechiaAppliedFeed);
     var url=stream?location.origin+'/obs-stage.html?channel=wjhc-czechia&layer=feed&stream='+encodeURIComponent(stream):'';
@@ -724,6 +734,9 @@
       var key='ecm-czechia-commentary:'+id;
       try{input.value=localStorage.getItem(key)||'';}catch{}
       input.addEventListener('change',function(){try{localStorage.setItem(key,input.value.trim());}catch{}});
+    });
+    ['obsIncludeCrew','obsCzechiaPlayByPlay','obsCzechiaAnalyst'].forEach(function(id){
+      byId(id)?.addEventListener('change',function(){if(isCzechia())updateCzechiaSource();});
     });
     var czechiaInput=byId('obsCzechiaStream');
     var fetchButton=byId('fetchCzechiaFeed');
