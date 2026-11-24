@@ -34,6 +34,7 @@
 <nav class="lh-sub band" aria-label="Live Hub sections">
   <div class="lh-sub-in">
     <a href="#lgchl">LGCHL Games</a>
+    <a href="#czechia">Czechia World Juniors</a>
     <a href="#hitman">Hitmen Live</a>
     <a href="#lg3s">LG Threes</a>
     <a href="#add">Add a stream</a>
@@ -74,6 +75,20 @@
     </div>
   </section>
 
+  <section id="czechia" class="lh-sec band" aria-labelledby="czechiaTitle">
+    <div class="lh-in">
+      <div class="lh-head">
+        <div><p class="eyebrow">World Juniors</p><h2 class="sec-title" id="czechiaTitle">Czechia <em>broadcast</em></h2></div>
+        <a class="btn btn-line btn-sm" href="https://www.twitch.tv/aichelmachine" target="_blank" rel="noopener noreferrer">Watch on Twitch ↗</a>
+      </div>
+      <div class="card lh-player">
+        <div class="lh-player-frame"><iframe id="czechiaPlayer" title="Czechia World Juniors on AIChelMachine" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+      </div>
+      <script>
+        document.getElementById('czechiaPlayer').src = 'https://player.twitch.tv/?channel=aichelmachine&parent=' + encodeURIComponent(location.hostname) + '&autoplay=false';
+      </script>
+    </div>
+  </section>
   <section id="lgchl" class="lh-sec band" aria-labelledby="lgchlTitle">
     <div class="lh-in">
       <div class="lh-head">
