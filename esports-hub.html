@@ -4,14 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#08090b">
-<meta name="description" content="LGCHL Live Hub: follow public LGCHL and LG Threes hockey broadcasts, watch Hitmen Live, and build a Twitch multiview.">
+<meta name="description" content="LGCHL Live Hub: watch Czechia World Juniors pregame, follow LGCHL and LG Threes broadcasts, and watch Hitmen Live.">
 <title>LGCHL Live Hub | Elitechel Media</title>
-<link rel="canonical" href="https://wildmanhockey-elitechelmedia.app/esports-hub.html"><link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp"><meta property="og:type" content="website"><meta property="og:site_name" content="Elitechel Media"><meta property="og:title" content="LGCHL Live Hub | Elitechel Media"><meta property="og:description" content="LGCHL Live Hub: follow public LGCHL and LG Threes hockey broadcasts, watch Hitmen Live, and build a Twitch multiview."><meta property="og:url" content="https://wildmanhockey-elitechelmedia.app/esports-hub.html"><meta property="og:image" content="https://wildmanhockey-elitechelmedia.app/assets/brand/ecm-share.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://wildmanhockey-elitechelmedia.app/assets/brand/ecm-share.jpg">
+<link rel="canonical" href="https://wildmanhockey-elitechelmedia.app/esports-hub.html"><link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp"><meta property="og:type" content="website"><meta property="og:site_name" content="Elitechel Media"><meta property="og:title" content="LGCHL Live Hub | Elitechel Media"><meta property="og:description" content="LGCHL Live Hub: watch Czechia World Juniors pregame, follow LGCHL and LG Threes broadcasts, and watch Hitmen Live."><meta property="og:url" content="https://wildmanhockey-elitechelmedia.app/esports-hub.html"><meta property="og:image" content="https://wildmanhockey-elitechelmedia.app/assets/brand/ecm-share.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://wildmanhockey-elitechelmedia.app/assets/brand/ecm-share.jpg">
 <link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="live-hub-home-nav.css?v=20261024-leaders">
 <link rel="stylesheet" href="live-hub-v2.css?v=20261017-1">
+<link rel="stylesheet" href="/czechia-live-hub.css?v=20261124">
+<script src="/czechia-pregame-feed.js?v=1" defer></script>
+<script src="/czechia-live-hub.js?v=20261124" defer></script>
 <script src="league-nav.js?v=20261024" defer></script><link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script></head>
 <body>
 <header class="top band">
@@ -33,8 +36,8 @@
 
 <nav class="lh-sub band" aria-label="Live Hub sections">
   <div class="lh-sub-in">
-    <a href="#lgchl">LGCHL Games</a>
     <a href="#czechia">Czechia World Juniors</a>
+    <a href="#lgchl">LGCHL Games</a>
     <a href="#hitman">Hitmen Live</a>
     <a href="#lg3s">LG Threes</a>
     <a href="#add">Add a stream</a>
@@ -43,6 +46,32 @@
 </nav>
 
 <main class="lh-page" id="top">
+  <section id="czechia" class="lh-sec band czechia-feature" aria-labelledby="czechiaTitle">
+    <div class="lh-in">
+      <div class="lh-head">
+        <div><p class="eyebrow">LG World Junior Championships</p><h2 class="sec-title" id="czechiaTitle">Czechia <em>Live Hub</em></h2></div>
+        <div class="czechia-views" role="group" aria-label="Czechia viewer mode">
+          <button class="btn btn-line btn-sm" id="czechiaPregameTab" type="button" aria-pressed="true" aria-controls="czechiaPregamePanel">Pregame</button>
+          <button class="btn btn-line btn-sm" id="czechiaGameplayTab" type="button" aria-pressed="false" aria-controls="czechiaGameplayPanel">Gameplay feed</button>
+        </div>
+      </div>
+      <div id="czechiaPregamePanel" class="card lh-player">
+        <div class="lh-player-top czechia-pregame-toolbar">
+          <div><b id="czechiaMatchTitle">Czechia pregame</b><small id="czechiaMatchDay"></small></div>
+          <label id="czechiaMatchLabel" hidden>Matchup <select id="czechiaMatch"></select></label>
+        </div>
+        <p id="czechiaPregameStatus" class="czechia-pregame-message" role="status">Loading the World Juniors matchup…</p>
+        <div id="czechiaPregameFrame" class="czechia-pregame-frame" hidden>
+          <iframe id="czechiaPregamePlayer" title="Czechia pregame with 3D rink and hockey cards" allow="fullscreen" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div id="czechiaGameplayPanel" class="card lh-player" hidden>
+        <div class="lh-player-top"><b>Gameplay feed</b><a id="czechiaGameplayLink" href="https://www.twitch.tv/lbubbzzl" target="_blank" rel="noopener noreferrer">lbubbzzl</a><a href="https://www.twitch.tv/aichelmachine" target="_blank" rel="noopener noreferrer">AIChelMachine broadcast</a></div>
+        <div class="lh-player-frame"><iframe id="czechiaPlayer" title="Czechia gameplay from lbubbzzl" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+      </div>
+    </div>
+  </section>
+
   <section class="lh-hero band" aria-labelledby="liveHubTitle">
     <div class="lh-hero-in">
       <div class="lh-hero-copy">
@@ -75,22 +104,6 @@
     </div>
   </section>
 
-  <section id="czechia" class="lh-sec band" aria-labelledby="czechiaTitle">
-    <div class="lh-in">
-      <div class="lh-head">
-        <div><p class="eyebrow">World Juniors</p><h2 class="sec-title" id="czechiaTitle">Czechia <em>broadcast</em></h2></div>
-        <a class="btn btn-line btn-sm" href="https://www.twitch.tv/aichelmachine" target="_blank" rel="noopener noreferrer">Finished broadcast · AIChelMachine ↗</a>
-      </div>
-      <div class="card lh-player">
-        <div class="lh-player-top"><b>Gameplay feed</b><a id="czechiaGameplayLink" href="https://www.twitch.tv/lbubbzzl" target="_blank" rel="noopener noreferrer">lbubbzzl ↗</a></div>
-        <div class="lh-player-frame"><iframe id="czechiaPlayer" title="Czechia gameplay from lbubbzzl" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
-      </div>
-      <script>
-        const gameplayChannel = document.getElementById('czechiaGameplayLink').pathname.slice(1);
-        document.getElementById('czechiaPlayer').src = 'https://player.twitch.tv/?channel=' + encodeURIComponent(gameplayChannel) + '&parent=' + encodeURIComponent(location.hostname) + '&autoplay=false';
-      </script>
-    </div>
-  </section>
   <section id="lgchl" class="lh-sec band" aria-labelledby="lgchlTitle">
     <div class="lh-in">
       <div class="lh-head">
@@ -178,3 +191,4 @@
 <script src="live-hub.js?v=20261018a"></script>
 </body>
 </html>
+
