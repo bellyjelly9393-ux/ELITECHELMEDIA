@@ -11,9 +11,9 @@
 <link rel="preload" href="assets/fonts/Teko.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="live-hub-home-nav.css?v=20261024-leaders">
-<link rel="stylesheet" href="live-hub-v2.css?v=20261126g">
+<link rel="stylesheet" href="live-hub-v2.css?v=20261126h">
 <link rel="stylesheet" href="/czechia-live-hub.css?v=20261125-carbon">
-<script src="/live-hub-channels.js?v=20261126g" defer></script>
+<script src="/live-hub-channels.js?v=20261126h" defer></script>
 <script src="/czechia-pregame-feed.js?v=1" defer></script>
 <script src="/czechia-live-hub.js?v=20261126g" defer></script>
 <script src="league-nav.js?v=20261024" defer></script><link rel="stylesheet" href="public-navigation.css?v=20261025"><script defer src="public-navigation.js?v=20261025"></script></head>
@@ -135,12 +135,12 @@
   <section id="ch-games" data-channel="games" role="tabpanel" aria-labelledby="tab-games" class="lh-sec lh-games band" hidden>
     <div class="lh-in">
       <div class="lh-head">
-        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Channel 04 · Every league</p><h2 class="sec-title" id="gamesTitle">All <em>Games</em></h2><p class="lh-note">Games Elitechel Media hosts for other teams play here, with every public LGCHL and LG Threes broadcast listed below.</p></div>
+        <div><span class="sec-rule" aria-hidden="true"></span><p class="eyebrow">Channel 04 · Every league</p><h2 class="sec-title" id="gamesTitle">All <em>Games</em></h2><p class="lh-note">Games Elitechel Media hosts for other teams play here. Below is every public game, including the ones people add.</p></div>
         <a class="btn btn-line btn-sm" href="multiview.html?hub=1"><span>Open Multiview</span> <span class="arr">↗</span></a>
       </div>
       <div class="lh-feature">
         <div class="card lh-player" style="--tc:86,204,242">
-          <div class="lh-player-top"><span class="lh-live-dot" aria-hidden="true"></span><b id="gamesMatchup">Hosted game</b><small id="gamesNote" class="lh-games-note">No hosted game right now</small><a id="gamesStreamLink" class="lh-team-link" href="multiview.html?hub=1" data-live="0" target="_blank" rel="noopener noreferrer" hidden>Open stream ↗</a></div>
+          <div class="lh-player-top"><span class="lh-live-dot" aria-hidden="true"></span><b id="gamesMatchup">Hosted game</b><small id="gamesNote" class="lh-games-note">No hosted game right now</small><a id="gamesStreamLink" class="lh-team-link" href="multiview.html?hub=1" data-live="0" target="_blank" rel="noopener noreferrer" hidden>Open stream ↗</a><button id="gamesBack" type="button" class="lh-games-back" hidden>Close</button></div>
           <div class="lh-player-frame lh-poster lh-poster-games">
             <iframe title="Hosted game broadcast" data-stream-link="gamesStreamLink" data-live-src="public-broadcast-stage.html?channel=ecm-games" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen hidden></iframe>
             <div class="lh-poster-copy"><b>Hosted by Elitechel Media</b><span>No game on right now</span><a href="#games-list">Browse every public game ↓</a></div>
@@ -165,12 +165,32 @@
           <button type="button" class="lh-chip" data-games-league="all" aria-pressed="true">All</button>
           <button type="button" class="lh-chip" data-games-league="lgchl" aria-pressed="false">LGCHL</button>
           <button type="button" class="lh-chip" data-games-league="lg3s" aria-pressed="false">LG Threes</button>
+          <button type="button" class="lh-chip" data-games-league="wjhc" aria-pressed="false">World Juniors</button>
+          <button type="button" class="lh-chip" data-games-league="other" aria-pressed="false">Other</button>
         </div>
         <span id="gamesCount" class="lh-count" aria-live="polite">Checking public listings…</span>
       </div>
       <div id="gamesStreams" class="lh-cards" aria-live="polite"><p class="lh-empty">Loading public game listings…</p></div>
+      <h3 class="lh-subhead" id="games-add">Add a game</h3>
+      <form id="gamesAddForm" class="card lh-addgame" style="--tc:86,204,242" novalidate>
+        <p class="lh-addgame-lead">Know a game that should be on here? Add its public Twitch channel or YouTube link. Elitechel Media checks every game before it shows, and it comes off after 7 days.</p>
+        <div class="lh-addgame-grid">
+          <label class="lh-field lh-field-wide"><span>Stream link</span><input id="gamesAddUrl" type="url" inputmode="url" autocomplete="off" placeholder="twitch.tv/channel or a YouTube link" required></label>
+          <label class="lh-field"><span>Home team</span><input id="gamesAddHome" maxlength="40" autocomplete="off" required></label>
+          <label class="lh-field"><span>Away team</span><input id="gamesAddAway" maxlength="40" autocomplete="off" required></label>
+          <label class="lh-field"><span>League</span><select id="gamesAddLeague"><option value="lgchl">LGCHL</option><option value="lg3s">LG Threes</option><option value="wjhc">World Juniors</option><option value="other" selected>Other</option></select></label>
+          <label class="lh-field"><span>Starts <small>optional</small></span><input id="gamesAddStart" type="datetime-local"></label>
+          <label class="lh-field lh-field-wide"><span>Note <small>optional</small></span><input id="gamesAddNote" maxlength="80" autocomplete="off" placeholder="Week 6 · Game 2"></label>
+        </div>
+        <label id="gamesAddNowRow" class="lh-addgame-now" hidden><input id="gamesAddNow" type="checkbox"> Put it on the site now (staff)</label>
+        <div class="lh-addgame-actions">
+          <button type="submit" class="btn btn-line btn-sm" id="gamesAddSubmit"><span>Sign in with Discord to add</span></button>
+          <a id="gamesAddReview" href="live-hub-review.html" hidden>Review added games ↗</a>
+          <p id="gamesAddStatus" class="lh-addgame-status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
       <div class="lh-help">
-        <p>Missing a game? Paste its public Twitch or YouTube link in <a href="#multiview">Multiview</a> to watch it on your device. A channel must be verified and registered before it appears for all visitors.</p>
+        <p>Just want to watch something yourself? Paste any public Twitch or YouTube link in <a href="#multiview">Multiview</a>. It only plays on your device.</p>
         <a href="multiview.html?hub=1&amp;league=lgchl">LGCHL Multiview ↗</a>
       </div>
     </div>
@@ -224,7 +244,7 @@
 <script src="media-desk.js?v=20261011-1"></script>
 <script>window.WMDesk && window.WMDesk.menu();</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
-<script src="live-hub.js?v=20261126g"></script>
+<script src="live-hub.js?v=20261126h"></script>
 </body>
 </html>
 

@@ -1,0 +1,15 @@
+/* Added games review: same broadcast neutrals as the VOD Archive. */
+.lhr-head { margin: 26px 0 10px; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--bc-muted, #8C9096); }
+.lhr-list { display: grid; gap: 1px; background: var(--bc-hair, rgba(255,255,255,.085)); border: 1px solid var(--bc-hair, rgba(255,255,255,.085)); }
+.lhr-list > .va-empty { border: 0; }
+.lhr-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding: 14px 16px; background: var(--bc-charcoal, #0D0E10); }
+.lhr-row > div:first-child { display: grid; gap: 3px; min-width: 0; }
+.lhr-row b { color: var(--bc-offwhite, #F2F3F4); font-size: 17px; }
+.lhr-row span { color: var(--bc-soft, #B4B7BC); font-size: 14px; }
+.lhr-row a { color: var(--bc-offwhite, #F2F3F4); font-size: 14px; overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 3px; }
+.lhr-row small { color: var(--bc-dim, #62666C); font-size: 12px; }
+.lhr-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.lhr-btn { background: transparent; color: var(--bc-soft, #B4B7BC); border: 1px solid var(--bc-steel, #2A2C30); border-radius: 0; padding: 8px 14px; font: inherit; font-weight: 700; letter-spacing: .08em; font-size: 11px; text-transform: uppercase; cursor: pointer; }
+.lhr-btn:hover { color: var(--bc-offwhite, #F2F3F4); border-color: var(--bc-soft, #B4B7BC); }
+.lhr-btn[disabled], .lhr-row .va-btn[disabled] { opacity: .5; cursor: progress; }
+#lhrNotice { margin-bottom: 18px; }

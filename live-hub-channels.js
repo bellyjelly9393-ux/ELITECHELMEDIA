@@ -5,7 +5,7 @@
   'use strict';
   const CHANNELS = ['wjr', 'hitmen', 'lg3s', 'games', 'multiview'];
   // Links from before the channels existed still land in the right place.
-  const OLD_LINKS = {czechia: 'wjr', hitman: 'hitmen', lgchl: 'games', all: 'games', 'games-list': 'games', add: 'multiview'};
+  const OLD_LINKS = {czechia: 'wjr', hitman: 'hitmen', lgchl: 'games', all: 'games', 'games-list': 'games', 'games-add': 'games', add: 'multiview'};
   const tabs = [...document.querySelectorAll('[data-channel-tab]')];
   // Panels are ch-<channel> so the #channel link never makes the browser jump past the channel bar.
   const panels = new Map(CHANNELS.map(id => [id, document.getElementById('ch-' + id)]));
@@ -36,8 +36,10 @@
   // A player either has a fixed page (data-channel-src) or follows a stream link
   // (data-stream-link) that live-hub.js keeps up to date. data-live="0" means off air.
   // data-live-src plays a broadcast page instead of the bare stream while the link is live.
+  // data-pick is a game the viewer chose to watch here; it plays instead of the hosted game.
   function sourceFor(frame) {
     if (frame.dataset.channelSrc) return frame.dataset.channelSrc;
+    if (frame.dataset.pick) return embed(frame.dataset.pick);
     const link = document.getElementById(frame.dataset.streamLink);
     if (!link || link.dataset.live === '0') return '';
     return frame.dataset.liveSrc ? new URL(frame.dataset.liveSrc, location.href).href : embed(link.href);
@@ -95,14 +97,17 @@
   addEventListener('hashchange', () => {
     const id = fromHash();
     if (!id) return;
-    const anchor = location.hash === '#games-list' && document.getElementById('games-list');
+    const anchor = ['#games-list', '#games-add'].includes(location.hash) && document.getElementById(location.hash.slice(1));
     select(id);
     if (anchor) anchor.scrollIntoView({behavior: 'smooth', block: 'start'});
   });
   document.addEventListener('livehub:streams', syncPlayers);
 
   window.ECMLiveHub = {current: () => current};
-  const start = fromHash() || CHANNELS[0];
-  if (location.hash && location.hash.slice(1) !== start && location.hash !== '#games-list') history.replaceState(null, '', '#' + start);
+  // Coming back from Discord sign-in: leave the sign-in details in the address for the
+  // sign-in script to read, and open All Games where the person was adding a game.
+  const signInReturn = /(^|&)(access_token|error_description)=/.test(location.hash.slice(1));
+  const start = signInReturn ? 'games' : fromHash() || CHANNELS[0];
+  if (!signInReturn && location.hash && location.hash.slice(1) !== start && !['#games-list', '#games-add'].includes(location.hash)) history.replaceState(null, '', '#' + start);
   select(start);
 })();

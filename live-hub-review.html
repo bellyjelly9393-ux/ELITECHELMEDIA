@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#070708">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Added Games Review | Elitechel Media</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="hub.css">
+  <link rel="stylesheet" href="wildman.css">
+  <link rel="stylesheet" href="management.css">
+  <link rel="stylesheet" href="broadcast-tokens.css">
+  <link rel="stylesheet" href="network-v2.css">
+  <link rel="stylesheet" href="vod-archive.css?v=20261020">
+  <link rel="stylesheet" href="live-hub-review.css?v=20261126h">
+</head>
+<body class="wildman-site management-protected">
+<header class="site-header">
+  <a class="brand" href="management.html"><span class="wm-brand-mark">E</span><span class="brand-copy wm-brand-copy">ELITECHEL MEDIA<br><b>LIVE HUB DESK</b></span></a>
+  <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+  <nav class="main-nav"><a href="management.html">Management</a><a href="obs-control.html">OBS Control</a><a href="esports-hub.html#games">Live Hub</a><a href="live-hub-review.html" aria-current="page">Added Games</a></nav>
+</header>
+<main>
+  <section class="section-shell section-block management-login-shell">
+    <div class="section-heading"><div><div class="eyebrow">LIVE HUB · ALL GAMES</div><h2>ADDED GAMES</h2></div><div id="managementAccessStatus" class="status-pill">STAFF ONLY</div></div>
+    <section id="accountPanel" class="panel account-panel"><div><div class="eyebrow">SECURE ACCESS</div><h3>Loading account…</h3></div></section>
+    <div id="managementLockedMessage" class="wm-card" style="margin-top:16px"><b>Staff sign-in required.</b><p>Only Elitechel Media staff can review games people add to the Live Hub.</p></div>
+  </section>
+  <div data-management-content hidden>
+    <section class="va-shell">
+      <div class="va-hero">
+        <div class="eyebrow">GAMES PEOPLE ADD TO ALL GAMES</div>
+        <h1>ADDED <span>GAMES</span></h1>
+        <p>Check each stream before you approve it. Approved games show on the Live Hub's All Games channel for 7 days, then come off by themselves.</p>
+      </div>
+      <p id="lhrNotice" class="va-empty" hidden></p>
+      <div class="va-stats">
+        <div class="va-stat"><small>Waiting</small><b id="lhrWaitingCount">0</b></div>
+        <div class="va-stat"><small>On the site</small><b id="lhrLiveCount">0</b></div>
+        <div class="va-stat"><small>Turned down</small><b id="lhrRejectedCount">0</b></div>
+      </div>
+      <h3 class="lhr-head">Waiting for review</h3>
+      <div id="lhrWaiting" class="lhr-list"></div>
+      <h3 class="lhr-head">On the site now</h3>
+      <div id="lhrLive" class="lhr-list"></div>
+      <h3 class="lhr-head">Turned down or ended</h3>
+      <div id="lhrRejected" class="lhr-list"></div>
+    </section>
+  </div>
+</main>
+<footer><div class="section-shell footer-inner"><div><b>ELITECHEL LIVE HUB</b><span>Added games review</span></div><p>Staff only</p></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="backend.js"></script>
+<script src="management-guard.js"></script>
+<script src="script.js?v=20261003-durable"></script>
+<script src="live-hub-review.js?v=20261126h"></script>
+</body>
+</html>
