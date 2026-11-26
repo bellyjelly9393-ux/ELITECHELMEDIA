@@ -197,3 +197,20 @@
   .lh-tab small { display: none; }
   .lh-tab img, .lh-tab svg { width: 28px; height: 22px; }
 }
+
+/* All Games channel */
+.lh-poster-games { --poster: radial-gradient(circle at 30% 20%, rgba(86,204,242,.32), transparent 55%), linear-gradient(160deg, #0c1a2a, #05070a 70%); }
+.lh-games-note { color: #9fdcf4; }
+.lh-ours { display: grid; gap: 8px; margin-top: 4px; width: 100%; align-self: stretch; }
+.lh-ours a { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--line-2); border-radius: 3px; background: rgba(7,8,10,.55); color: var(--bone); text-decoration: none; }
+.lh-ours a:hover, .lh-ours a:focus-visible { border-color: rgba(86,204,242,.7); background: rgba(86,204,242,.1); color: #fff; }
+.lh-ours img { width: 34px; height: 24px; object-fit: contain; flex: none; }
+.lh-ours span { display: grid; gap: 2px; line-height: 1.05; }
+.lh-ours b { font-family: var(--f-ui); font-weight: 600; font-size: 18px; letter-spacing: .06em; text-transform: uppercase; }
+.lh-ours small { font-size: 13px; letter-spacing: .08em; color: var(--mute); }
+.lh-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.lh-chip { min-height: 46px; padding: 8px 16px; font-family: var(--f-ui); font-weight: 600; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); background: rgba(7,8,10,.72); border: 1px solid var(--line-2); border-radius: 3px; cursor: pointer; }
+.lh-chip:hover { color: #fff; }
+.lh-chip[aria-pressed="true"] { color: #fff; border-color: rgb(86,204,242); background: rgba(86,204,242,.16); }
+.lh-chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+#games-list { scroll-margin-top: 150px; }

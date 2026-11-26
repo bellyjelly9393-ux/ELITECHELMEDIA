@@ -2,7 +2,7 @@
 'use strict';
 const q=new URLSearchParams(location.search);
 const requested=String(q.get('channel')||'hitmen-main').toLowerCase();
-const allowed=new Set(['hitmen-main','wildman-main']);
+const allowed=new Set(['hitmen-main','wildman-main','ecm-games']);
 const channel=allowed.has(requested)?requested:'hitmen-main';
 const stage=document.getElementById('publicBroadcastStage');
 const canvas=document.getElementById('publicBroadcastCanvas');

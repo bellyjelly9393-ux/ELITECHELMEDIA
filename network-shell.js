@@ -57,6 +57,7 @@
             ['esports-hub.html#wjr','World Juniors','Czechia at the LG World Juniors'],
             ['esports-hub.html#hitmen','Hitmen Live','Elitechel Media broadcast channel'],
             ['esports-hub.html#lg3s','LG Threes','Team Great Britain and LG Threes streams'],
+            ['esports-hub.html#games','All Games','Hosted games and every public league game'],
             ['esports-hub.html#multiview','Multiview','All my teams side by side']
           ])}
           ${dropdown('Media','hitmen-media.html',[

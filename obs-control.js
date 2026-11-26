@@ -14,10 +14,13 @@
   var MEDIA_TEAM_ID='5f36117c-7a51-4514-bf70-d4c672b41e48';
   var GBR_STUDIO=MEDIA_TEAM_ID+':gbr';
   var CZECHIA_STUDIO=MEDIA_TEAM_ID+':czechia';
+  var GAMES_STUDIO=MEDIA_TEAM_ID+':games';
   var TEAM_CONFIG={
     '5f36117c-7a51-4514-bf70-d4c672b41e48':{name:'Elitechel Media',brand:'wildman',channel:'wildman-main'},
     [CZECHIA_STUDIO]:{name:'World Juniors · Czechia',channel:'wjhc-czechia',brand:'wildman',teamId:MEDIA_TEAM_ID},
     [GBR_STUDIO]:{name:'LG3s Team Great Britain',shortName:'GBR',brand:'wildman',channel:'lg3s-gbr',teamId:MEDIA_TEAM_ID},
+    // Another team's game hosted on the Live Hub "All Games" channel. Clear the stream link to take it off.
+    [GAMES_STUDIO]:{name:'All Games · Hosted game',shortName:'HOST',brand:'wildman',channel:'ecm-games',teamId:MEDIA_TEAM_ID},
     'b0bcbdda-da9d-419d-8f61-b34937966d49':{name:'Calgary Hitmen',brand:'hitmen',channel:'hitmen-main'}
   };
   var currentTeamId='';

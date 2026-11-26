@@ -1,4 +1,4 @@
-/* Public LGCHL + LG Threes directory. Never reads private VOD or scouting resources. */
+/* Public LGCHL + LG Threes directory and hosted games. Never reads private VOD or scouting resources. */
 (() => {
   'use strict';
   const API='https://lrgllzvwgvqagcpiyvfd.supabase.co';
@@ -49,9 +49,27 @@
     else {const p=document.createElement('p');p.className='lh-empty';p.textContent=data[league].length?'No matching broadcasts. Try a different channel or team name.':'No verified public channels are listed in this section yet. Use the Twitch search link or add a broadcast to your personal multiview.';root.append(p);}
     if(count)count.textContent=data[league].length+' PUBLIC CHANNEL'+(data[league].length===1?'':'S')+' LISTED';
   };
+  // All Games: every listed league in one directory, with a league filter.
+  let gamesLeague='all';
+  const renderGames=()=>{
+    const root=$('gamesStreams');if(!root)return;
+    const text=($('gamesFilter')?.value||'').trim().toLowerCase();
+    const all=['lgchl','lg3s'].flatMap(league=>data[league].map(s=>({s,league})));
+    const rows=all.filter(r=>(gamesLeague==='all'||r.league===gamesLeague)&&[r.s.display_label,r.s.metadata?.title,r.s.url].filter(Boolean).join(' ').toLowerCase().includes(text));
+    root.replaceChildren();
+    if(rows.length)rows.forEach(r=>root.append(item(r.s,r.league)));
+    else {const p=document.createElement('p');p.className='lh-empty';p.textContent=all.length?'No matching games. Try a different channel, team or league.':'No verified public games are listed yet. Paste a public link in Multiview to watch it on your device.';root.append(p);}
+    const count=$('gamesCount');if(count)count.textContent=all.length+' PUBLIC CHANNEL'+(all.length===1?'':'S')+' LISTED';
+  };
+  $('gamesFilter')?.addEventListener('input',renderGames);
+  document.querySelectorAll('[data-games-league]').forEach(chip=>chip.addEventListener('click',()=>{
+    gamesLeague=chip.dataset.gamesLeague;
+    document.querySelectorAll('[data-games-league]').forEach(c=>c.setAttribute('aria-pressed',String(c===chip)));
+    renderGames();
+  }));
   ['lgchl','lg3s'].forEach(k=>$(k+'Filter')?.addEventListener('input',()=>render(k)));
   async function refresh(){
-    if(!db){['lgchl','lg3s'].forEach(k=>{const root=$(k+'Streams');if(root)root.textContent='Public channel listings unavailable. Manual multiview is still available.';});return;}
+    if(!db){['lgchl','lg3s','games'].forEach(k=>{const root=$(k+'Streams');if(root)root.textContent='Public channel listings unavailable. Manual multiview is still available.';});return;}
     try{
       const {data:rows,error}=await db.from('tournament_automation_sources').select('id,url,provider,display_label,metadata,active,public_visible').eq('active',true).eq('public_visible',true).limit(200);
       if(error)throw error;
@@ -63,9 +81,10 @@
         data[category].push({...s,url});
       });
       ['lgchl','lg3s'].forEach(render);
+      renderGames();
     }catch(e){
       console.warn('Public stream listings unavailable',e);
-      ['lgchl','lg3s'].forEach(k=>{const root=$(k+'Streams');if(root){root.replaceChildren();const p=document.createElement('p');p.className='lh-empty';p.textContent='Public listings could not be loaded. Please try later, or add a public stream to your personal multiview.';root.append(p);}const n=$(k+'Count');if(n)n.textContent='LIST UNAVAILABLE';});
+      ['lgchl','lg3s','games'].forEach(k=>{const root=$(k+'Streams');if(root){root.replaceChildren();const p=document.createElement('p');p.className='lh-empty';p.textContent='Public listings could not be loaded. Please try later, or add a public stream to your personal multiview.';root.append(p);}const n=$(k+'Count');if(n)n.textContent='LIST UNAVAILABLE';});
     }
   }
   $('lhAddForm')?.addEventListener('submit',e=>{
@@ -110,7 +129,29 @@
       announce();
     }catch{/* Keep the current state during a network interruption. */}
   }
-  const syncTeams=()=>{syncGameplay();syncBritain();};
+  // Another team's game hosted by Elitechel Media, published from the studio's "All Games" desk.
+  async function syncHosted(){
+    const link=$('gamesStreamLink');
+    if(!db||!link||document.hidden)return;
+    try{
+      const result=await db.from('obs_broadcast_state').select('url:payload->>streamUrl,home:payload->>homeName,away:payload->>awayName,event:payload->>event').eq('channel','ecm-games').eq('is_public',true).maybeSingle();
+      if(result.error)return;
+      const row=result.data||{};
+      const url=canonical(row.url);
+      const live=url&&!HIDDEN.test(url)?'1':'0';
+      const home=String(row.home||'').trim(),away=String(row.away||'').trim();
+      const matchup=live==='1'?(home&&away?home+' vs '+away:home||away||'Hosted game'):'Hosted game';
+      const note=live==='1'?(String(row.event||'').trim()||'Hosted by Elitechel Media'):'No hosted game right now';
+      $('gamesMatchup').textContent=matchup;
+      $('gamesNote').textContent=note;
+      if(live===link.dataset.live&&(live==='0'||url===link.href))return;
+      link.dataset.live=live;
+      link.hidden=live!=='1';
+      if(live==='1')link.href=url;
+      announce();
+    }catch{/* Keep the current state during a network interruption. */}
+  }
+  const syncTeams=()=>{syncGameplay();syncBritain();syncHosted();};
   syncTeams();
   setInterval(syncTeams,15000);
   document.addEventListener('visibilitychange',syncTeams);

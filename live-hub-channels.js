@@ -1,11 +1,11 @@
-// Live Hub channels: World Juniors, Hitmen, LG Threes and Multiview.
+// Live Hub channels: World Juniors, Hitmen, LG Threes, All Games and Multiview.
 // One channel shows at a time, and only its players are loaded, so a hidden
 // channel never plays audio or uses data in the background.
 (() => {
   'use strict';
-  const CHANNELS = ['wjr', 'hitmen', 'lg3s', 'multiview'];
+  const CHANNELS = ['wjr', 'hitmen', 'lg3s', 'games', 'multiview'];
   // Links from before the channels existed still land in the right place.
-  const OLD_LINKS = {czechia: 'wjr', hitman: 'hitmen', lgchl: 'multiview', add: 'multiview'};
+  const OLD_LINKS = {czechia: 'wjr', hitman: 'hitmen', lgchl: 'games', all: 'games', 'games-list': 'games', add: 'multiview'};
   const tabs = [...document.querySelectorAll('[data-channel-tab]')];
   // Panels are ch-<channel> so the #channel link never makes the browser jump past the channel bar.
   const panels = new Map(CHANNELS.map(id => [id, document.getElementById('ch-' + id)]));
@@ -35,10 +35,12 @@
 
   // A player either has a fixed page (data-channel-src) or follows a stream link
   // (data-stream-link) that live-hub.js keeps up to date. data-live="0" means off air.
+  // data-live-src plays a broadcast page instead of the bare stream while the link is live.
   function sourceFor(frame) {
     if (frame.dataset.channelSrc) return frame.dataset.channelSrc;
     const link = document.getElementById(frame.dataset.streamLink);
-    return link && link.dataset.live !== '0' ? embed(link.href) : '';
+    if (!link || link.dataset.live === '0') return '';
+    return frame.dataset.liveSrc ? new URL(frame.dataset.liveSrc, location.href).href : embed(link.href);
   }
 
   function syncPlayers() {
@@ -90,11 +92,17 @@
       }
     });
   });
-  addEventListener('hashchange', () => { const id = fromHash(); if (id) select(id); });
+  addEventListener('hashchange', () => {
+    const id = fromHash();
+    if (!id) return;
+    const anchor = location.hash === '#games-list' && document.getElementById('games-list');
+    select(id);
+    if (anchor) anchor.scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
   document.addEventListener('livehub:streams', syncPlayers);
 
   window.ECMLiveHub = {current: () => current};
   const start = fromHash() || CHANNELS[0];
-  if (location.hash && location.hash.slice(1) !== start) history.replaceState(null, '', '#' + start);
+  if (location.hash && location.hash.slice(1) !== start && location.hash !== '#games-list') history.replaceState(null, '', '#' + start);
   select(start);
 })();
