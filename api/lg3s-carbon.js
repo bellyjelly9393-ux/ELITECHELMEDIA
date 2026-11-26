@@ -7,6 +7,9 @@ const BASE = '/lg3s-gb/arena/';
 const CZECHIA_FIXTURE = /^(?:germany|usa|sweden|lg-[1-9]\d{0,9})$/;
 const COOKIE = '__Secure-ecmCarbon';
 const PREVIEW_TTL = 60 * 60;
+// Public Live Hub viewers get a short pregame-only pass for one Czechia matchup.
+// It cannot follow the desk program and is never accepted as an OBS program link.
+const VIEWER_TTL = 6 * 60 * 60;
 const PROGRAM_TTL = 90 * 24 * 60 * 60;
 const SUPABASE = 'https://lrgllzvwgvqagcpiyvfd.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
@@ -35,7 +38,7 @@ function issue(key, purpose, ttl, fixture) {
 }
 
 function verify(key, token, fixture) {
-  if (typeof token !== 'string' || !/^(preview|program)\.\d{10,11}\.[\w-]{22}\.[\w-]{43}$/.test(token)) return false;
+  if (typeof token !== 'string' || !/^(preview|program|viewer)\.\d{10,11}\.[\w-]{22}\.[\w-]{43}$/.test(token)) return false;
   const [purpose, expires, nonce, signature] = token.split('.');
   const remaining = Number(expires) - Math.floor(Date.now() / 1000);
   if (remaining <= 0) return false;
@@ -95,7 +98,7 @@ module.exports = async function handler(req, res) {
     ? req.query.team !== 'czechia' || req.query.game !== fixture
     : req.query.team === 'czechia')) return res.status(404).end();
   const exchange = asset === 'preview-session' || asset === 'program-link' || asset === 'open-program' ||
-    (asset === 'channel-link' && fixture !== undefined);
+    ((asset === 'channel-link' || asset === 'viewer-session') && fixture !== undefined);
   if (exchange ? req.method !== 'POST' : !['GET', 'HEAD'].includes(req.method)) {
     res.setHeader('Allow', exchange ? 'POST' : 'GET, HEAD');
     return res.status(405).end();
@@ -123,6 +126,11 @@ module.exports = async function handler(req, res) {
         setCookie(res, 'program', issue(key, 'program', channel.remaining, fixture), channel.remaining, fixture);
         return res.status(204).end();
       }
+      if (asset === 'viewer-session') {
+        files(key);
+        setCookie(res, 'viewer', issue(key, 'viewer', VIEWER_TTL, fixture), VIEWER_TTL, fixture);
+        return res.status(204).end();
+      }
       const status = await checkStaff(req.headers.authorization);
       if (status !== 200) return res.status(status).end();
       files(key);
@@ -134,7 +142,9 @@ module.exports = async function handler(req, res) {
 
     const canOpenProgram = verify(key, fromCookie(req, 'program'), fixture)?.purpose === 'program';
     const canPreview = req.query.follow !== 'desk' && verify(key, fromCookie(req, 'preview'), fixture)?.purpose === 'preview';
-    if (!canOpenProgram && !canPreview) {
+    const canView = fixture !== undefined && req.query.follow !== 'desk' &&
+      verify(key, fromCookie(req, 'viewer'), fixture)?.purpose === 'viewer';
+    if (!canOpenProgram && !canPreview && !canView) {
       return res.status(403).end('Open the private Carbon Arena from the OBS Desk.');
     }
     const assets = files(key);

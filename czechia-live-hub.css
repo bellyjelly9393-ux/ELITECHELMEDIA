@@ -17,3 +17,5 @@
   .czechia-pregame-toolbar { flex-wrap: wrap; justify-content: space-between; }
   .czechia-pregame-frame { min-height: 450px; height: min(620px, 131vw); aspect-ratio: auto; }
 }
+/* Carbon Arena pregame is a 16:9 broadcast picture on every screen size. */
+.czechia-pregame-frame.is-carbon { aspect-ratio: 16 / 9; min-height: 0; height: auto; }

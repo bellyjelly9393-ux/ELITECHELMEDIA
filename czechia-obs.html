@@ -199,6 +199,16 @@ function render() {
   drawLineup('czech', game.czech);
   drawLineup('away', game.away);
 }
+// Carbon pregame shown to viewers on the public Live Hub uses the same confirmed lineup as the hub.
+function insideLiveHubCarbon() {
+  if (parent === window || pageParams.get('view') !== 'arena-graphics') return false;
+  try {
+    return window.top.location.origin === location.origin &&
+      ['/esports-hub.html', '/esports-hub'].includes(window.top.location.pathname);
+  } catch {
+    return false;
+  }
+}
 function applyPrivateLineup(match) {
   if (parent === window || new URLSearchParams(location.search).get('view') !== 'arena-graphics') return match;
   try {
@@ -383,7 +393,7 @@ async function initialize() {
     return;
   }
   game = applyPrivateLineup(game);
-  if (liveHubPreview && broadcastGames.has(game.key)) {
+  if ((liveHubPreview || insideLiveHubCarbon()) && broadcastGames.has(game.key)) {
     game = {...game, czech:[
       ...Array.from(confirmedForwards, ([position, name]) => game.czech.find(player =>
         player.position === position && player.name === name) ?? {position,name}),
