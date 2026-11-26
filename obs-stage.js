@@ -224,7 +224,8 @@
         ? '/czechia-obs.html?game='+encodeURIComponent(p.gameKey)
         : 'obs-overlay.html?channel=wjhc-czechia';
       var carbonGame=params.get('carbonGame');
-      if(p.presetId==='pregame-gbr'&&p.gameKey&&carbonGame===p.gameKey&&location.hash){
+      // carbonGame=all is the single Czechia link: Carbon follows whichever matchup the Studio selects.
+      if(p.presetId==='pregame-gbr'&&p.gameKey&&(carbonGame===p.gameKey||carbonGame==='all')&&location.hash){
         target='/lg3s-carbon-source.html?game='+encodeURIComponent(p.gameKey)+location.hash;
       }
       if(overlay.getAttribute('src')!==target)overlay.src=target;

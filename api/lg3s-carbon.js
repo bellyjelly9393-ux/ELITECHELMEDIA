@@ -18,8 +18,13 @@ const TYPES = {
 };
 let pack;
 
+// A channel link opens any Czechia matchup the Studio selects. It is signed with its own
+// context, so it can never be confused with a single-matchup or GBR token.
+const CHANNEL_SCOPE = 'channel:wjhc-czechia';
+
 function sign(key, payload, fixture) {
-  const context = fixture ? `ecm-carbon-access-v1:czechia:${fixture}:` : 'ecm-carbon-access-v1:';
+  const context = fixture === CHANNEL_SCOPE ? 'ecm-carbon-access-v1:czechia-channel:wjhc-czechia:'
+    : fixture ? `ecm-carbon-access-v1:czechia:${fixture}:` : 'ecm-carbon-access-v1:';
   return createHmac('sha256', key).update(context).update(payload).digest();
 }
 
@@ -89,7 +94,8 @@ module.exports = async function handler(req, res) {
   if (asset === 'broadcast.html' && (fixture
     ? req.query.team !== 'czechia' || req.query.game !== fixture
     : req.query.team === 'czechia')) return res.status(404).end();
-  const exchange = asset === 'preview-session' || asset === 'program-link' || asset === 'open-program';
+  const exchange = asset === 'preview-session' || asset === 'program-link' || asset === 'open-program' ||
+    (asset === 'channel-link' && fixture !== undefined);
   if (exchange ? req.method !== 'POST' : !['GET', 'HEAD'].includes(req.method)) {
     res.setHeader('Allow', exchange ? 'POST' : 'GET, HEAD');
     return res.status(405).end();
@@ -104,15 +110,24 @@ module.exports = async function handler(req, res) {
       if (asset === 'open-program') {
         const token = req.headers.authorization?.split(' ')[1];
         const access = verify(key, token, fixture);
-        if (access?.purpose !== 'program') return res.status(401).end();
+        if (access?.purpose === 'program') {
+          files(key);
+          setCookie(res, 'program', token, access.remaining, fixture);
+          return res.status(204).end();
+        }
+        // A Czechia channel link opens this matchup with a matchup-only cookie that
+        // expires with the channel link. The channel link itself never goes in a cookie.
+        const channel = fixture ? verify(key, token, CHANNEL_SCOPE) : false;
+        if (channel?.purpose !== 'program') return res.status(401).end();
         files(key);
-        setCookie(res, 'program', token, access.remaining, fixture);
+        setCookie(res, 'program', issue(key, 'program', channel.remaining, fixture), channel.remaining, fixture);
         return res.status(204).end();
       }
       const status = await checkStaff(req.headers.authorization);
       if (status !== 200) return res.status(status).end();
       files(key);
       if (asset === 'program-link') return res.status(200).json({ token: issue(key, 'program', PROGRAM_TTL, fixture) });
+      if (asset === 'channel-link') return res.status(200).json({ token: issue(key, 'program', PROGRAM_TTL, CHANNEL_SCOPE) });
       setCookie(res, 'preview', issue(key, 'preview', PREVIEW_TTL, fixture), PREVIEW_TTL, fixture);
       return res.status(204).end();
     }

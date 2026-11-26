@@ -155,8 +155,9 @@
           <details><summary>OBS setup and source links</summary>
           <label>Program OBS browser source<input class="field" readonly id="czechProgramSource"></label>
           <button type="button" class="small-btn" id="copyCzechProgram">Copy program URL</button>
-          <button type="button" class="small-btn" id="copyCzechCombined">Copy program URL with Carbon</button>
-          <p class="obs-preview-note" id="czechCombinedStatus" role="status">Use the private program URL in OBS for this matchup’s Carbon Rink scene.</p>
+          <button type="button" class="small-btn primary" id="copyCzechAllCarbon">Copy one program URL for every matchup</button>
+          <button type="button" class="small-btn" id="copyCzechCombined">Copy program URL with Carbon (this matchup only)</button>
+          <p class="obs-preview-note" id="czechCombinedStatus" role="status">One private program URL covers every Czechia matchup: OBS follows the scene and matchup you select here. Use it as a single 1920 × 1080, 60 FPS browser source. Valid for 90 days.</p>
           <h3>Private Carbon Arena</h3>
           <p>The monitor previews the selected matchup off air.</p>
           <div class="obs-source-row">
@@ -448,6 +449,6 @@
 <script src="obs-config.js?v=20261122-czechia-feed"></script>
 <script src="obs-scenes.js?v=20261118-pregame"></script>
 <script src="czechia-pregame-feed.js?v=1"></script>
-<script src="obs-control.js?v=czechia-breaks-1"></script>
+<script src="obs-control.js?v=czechia-single-carbon-1"></script>
 </body>
 </html>

@@ -355,16 +355,9 @@
     var czechia=isCzechia();
     for(var id of ['obsLiveControls','obsPreviewSwitch','publishObsState','reloadObsState'])byId(id).hidden=czechia;
     byId('obsCzechiaControls').hidden=!czechia;
-    renderCzechiaMatchup();
-    if(czechia){
-      previewMode='pregame';
-      byId('czechProgramSource').value=stageUrl();
-      byId('heroChannel').textContent='WORLD JUNIORS · CZECHIA';
-      byId('obsGbrCues').hidden=true;
-      updateCzechiaSource();
-      updateCzechiaFeed();
-      return;
-    }
+    // Set every team's source links and GBR-only blocks before the Czechia branch returns,
+    // so switching GBR or Hitmen -> Czechia never leaves another team's Live Hub,
+    // Pregame, Carbon or channel links on the Czechia desk.
     var stage=stageUrl(),overlay=overlayUrl();
     byId('obsSourceUrl').value=stage;
     byId('openObsUrl').href=stage;
@@ -374,9 +367,18 @@
     byId('obsFeedLayerUrl').value=feedLayerUrl();
     byId('openFeedLayerUrl').href=feedLayerUrl();
     byId('testGameplayFeed').href=feedLayerUrl()+'&preview=1';
-    byId('heroChannel').textContent=config().channel.toUpperCase();
     for(var id of ['obsGbrSource','obsGbrCues','obsGbrTactics'])byId(id).hidden=!isGbr();
     for(var id of ['obsStandardCopy','obsStandardSetup','obsStandardGraphics'])byId(id).hidden=isGbr();
+    renderCzechiaMatchup();
+    if(czechia){
+      previewMode='pregame';
+      byId('czechProgramSource').value=stageUrl();
+      byId('heroChannel').textContent='WORLD JUNIORS · CZECHIA';
+      updateCzechiaSource();
+      updateCzechiaFeed();
+      return;
+    }
+    byId('heroChannel').textContent=config().channel.toUpperCase();
     document.querySelectorAll('[data-standard-graphics]').forEach(function(el){el.hidden=isGbr();});
     byId('obsHomeName').readOnly=isGbr();
     byId('obsAwayName').maxLength=isGbr()?3:80;
@@ -775,6 +777,26 @@
         url.hash=token;
         byId('czechProgramSource').value=url.href;
         status.textContent=await copyText('czechProgramSource',url.href);
+      }catch{
+        status.textContent='Could not create the Carbon program link. Check management access and retry.';
+      }finally{button.disabled=false;}
+    });
+    byId('copyCzechAllCarbon').addEventListener('click',async function(){
+      var game=czechiaGame();
+      var status=byId('czechCombinedStatus');
+      if(!game){status.textContent='Select any matchup first. The link then covers every Czechia matchup.';return;}
+      var button=this;
+      button.disabled=true;
+      try{
+        var response=await requestCarbon('channel-link',game);
+        if(!response.ok)throw new Error('Carbon access unavailable');
+        var {token}=await response.json();
+        if(!token)throw new Error('Carbon access unavailable');
+        var url=new URL(stageUrl());
+        url.searchParams.set('carbonGame','all');
+        url.hash=token;
+        byId('czechProgramSource').value=url.href;
+        status.textContent=(await copyText('czechProgramSource',url.href))+'. This one link follows every Czechia matchup and scene for 90 days.';
       }catch{
         status.textContent='Could not create the Carbon program link. Check management access and retry.';
       }finally{button.disabled=false;}
