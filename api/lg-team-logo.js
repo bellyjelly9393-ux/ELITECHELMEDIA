@@ -11,7 +11,8 @@ export default async function handler(req,res){
   }
 
   const team=String(req.query.team||"").trim();
-  if(!TEAM_IDS.has(team)) return res.status(404).send("Unknown team");
+  // Listed LGCHL teams, plus any numeric LeagueGaming team id so opponents' crests load automatically.
+  if(!TEAM_IDS.has(team)&&!/^[1-9]\d{0,5}$/.test(team)) return res.status(404).send("Unknown team");
 
   const upstreamUrl=`https://www.leaguegaming.com/images/team/p100/team${team}.png`;
 

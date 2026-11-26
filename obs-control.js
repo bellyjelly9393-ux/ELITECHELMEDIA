@@ -121,6 +121,14 @@
   }
   function isCzechia(){return currentTeamId===CZECHIA_STUDIO;}
   function czechiaGame(){return isCzechia()?val('obsCzechiaGame'):'';}
+  // The home team picked in the Studio travels in every Czechia OBS link as ?home=.
+  function homeTeam(){return val('obsHomeTeam')||window.ECMTeams?.defaultHome||'Czechia';}
+  function withHome(href){
+    var url=new URL(href,location.origin);
+    if(isCzechia()&&window.ECMTeams&&homeTeam()!==window.ECMTeams.defaultHome)url.searchParams.set('home',homeTeam());
+    else url.searchParams.delete('home');
+    return url.href;
+  }
   function carbonPath(game){return game?'/czechia/arena/'+encodeURIComponent(game)+'/':CARBON_PATH;}
   function carbonPreviewUrl(){
     var game=czechiaGame();
@@ -136,7 +144,7 @@
         if(val(id))url.searchParams.set(param,val(id));
       }
     }
-    return url.href;
+    return withHome(url.href);
   }
   function updateCzechiaFeed(){
     var stream=OBS_CFG.czechiaFeedUrl(czechiaAppliedFeed);
@@ -372,7 +380,7 @@
     renderCzechiaMatchup();
     if(czechia){
       previewMode='pregame';
-      byId('czechProgramSource').value=stageUrl();
+      byId('czechProgramSource').value=withHome(stageUrl());
       byId('heroChannel').textContent='WORLD JUNIORS · CZECHIA';
       updateCzechiaSource();
       updateCzechiaFeed();
@@ -685,7 +693,7 @@
         if(!response.ok)throw new Error('Link unavailable');
         var {token}=await response.json();
         if(request!==czechiaLinkRequest||game!==czechiaGame())return;
-        input.value=location.origin+'/lg3s-carbon-source.html?game='+encodeURIComponent(game)+'#'+token;
+        input.value=withHome(location.origin+'/lg3s-carbon-source.html?game='+encodeURIComponent(game))+'#'+token;
       }
       var message=await copyText(input.id,input.value);
       if(request===czechiaLinkRequest)status.textContent=message+'. Set the OBS source to 1920 × 1080 at 60 FPS.';
@@ -761,6 +769,21 @@
     byId('refreshCzechiaFixtures')?.addEventListener('click',function(){loadCzechiaGames(++stateRequest);});
     byId('copyCzechiaFeedUrl').addEventListener('click',function(){copyText('obsCzechiaFeedUrl',val('obsCzechiaFeedUrl'));});
     byId('obsCzechiaGame').addEventListener('change',updateCzechiaSource);
+    var homeSelect=byId('obsHomeTeam');
+    if(homeSelect&&window.ECMTeams){
+      homeSelect.replaceChildren(...window.ECMTeams.list().map(function(team){return new Option(team.name,team.name);}));
+      try{homeSelect.value=localStorage.getItem('ecm-obs-home-team')||window.ECMTeams.defaultHome;}catch{homeSelect.value=window.ECMTeams.defaultHome;}
+      if(!homeSelect.value)homeSelect.value=window.ECMTeams.defaultHome;
+      homeSelect.addEventListener('change',function(){
+        try{localStorage.setItem('ecm-obs-home-team',homeSelect.value);}catch{}
+        // Links already copied keep their old home team, so clear them to be regenerated.
+        byId('obsCzechiaCarbonUrl').value='';
+        ++czechiaLinkRequest;
+        byId('czechProgramSource').value=withHome(stageUrl());
+        byId('czechCombinedStatus').textContent='Home team set to '+homeSelect.value+'. Copy the OBS links again so OBS shows it.';
+        updateCzechiaSource();
+      });
+    }
     byId('copyCzechCombined').addEventListener('click',async function(){
       var game=czechiaGame();
       var status=byId('czechCombinedStatus');
@@ -772,7 +795,7 @@
         if(!response.ok)throw new Error('Carbon access unavailable');
         var {token}=await response.json();
         if(!token||game!==czechiaGame())return;
-        var url=new URL(stageUrl());
+        var url=new URL(withHome(stageUrl()));
         url.searchParams.set('carbonGame',game);
         url.hash=token;
         byId('czechProgramSource').value=url.href;
@@ -792,7 +815,7 @@
         if(!response.ok)throw new Error('Carbon access unavailable');
         var {token}=await response.json();
         if(!token)throw new Error('Carbon access unavailable');
-        var url=new URL(stageUrl());
+        var url=new URL(withHome(stageUrl()));
         url.searchParams.set('carbonGame','all');
         url.hash=token;
         byId('czechProgramSource').value=url.href;
@@ -802,8 +825,8 @@
       }finally{button.disabled=false;}
     });
     byId('copyCzechProgram').onclick=function(){
-      byId('czechProgramSource').value=stageUrl();
-      copyText('czechProgramSource',stageUrl());
+      byId('czechProgramSource').value=withHome(stageUrl());
+      copyText('czechProgramSource',withHome(stageUrl()));
     };
     byId('copyCzechiaUrl').addEventListener('click',function(){copyText('obsCzechiaUrl',czechiaUrl());});
     byId('copyCzechiaCarbonUrl').addEventListener('click',copyCzechiaCarbonUrl);
