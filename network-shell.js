@@ -54,10 +54,10 @@
         <nav class="main-nav">
           ${simpleLink('index.html','Home')}
           ${dropdown('Live Hub','esports-hub.html',[
-            ['esports-hub.html#lgchl','LGCHL Games','Public league broadcasts'],
-            ['esports-hub.html#hitman','Hitmen Live','Elitechel Media broadcast channel'],
-            ['esports-hub.html#lg3s','LG Threes','Public LG Threes streams'],
-            ['multiview.html','Multiview','Build your own multi-stream view']
+            ['esports-hub.html#wjr','World Juniors','Czechia at the LG World Juniors'],
+            ['esports-hub.html#hitmen','Hitmen Live','Elitechel Media broadcast channel'],
+            ['esports-hub.html#lg3s','LG Threes','Team Great Britain and LG Threes streams'],
+            ['esports-hub.html#multiview','Multiview','All my teams side by side']
           ])}
           ${dropdown('Media','hitmen-media.html',[
             ['hitmen-media.html','Hitmen Desk','Calgary Hitmen coverage'],

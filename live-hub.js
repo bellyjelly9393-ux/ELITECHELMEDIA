@@ -74,6 +74,9 @@
     if(!url){if(err)err.textContent='Enter a valid public Twitch channel or YouTube video/live link.';return;}
     location.href='multiview.html?hub=1&add='+encodeURIComponent(url);
   });
+  // Keeps each team's stream link current from the public broadcast state. Players are
+  // loaded by the Live Hub channels script only while their channel is open.
+  const announce=()=>document.dispatchEvent(new CustomEvent('livehub:streams'));
   async function syncGameplay(){
     const link=$('czechiaGameplayLink'),player=$('czechiaPlayer');
     if(!db||!link||!player||document.hidden)return;
@@ -84,14 +87,32 @@
       const source=new URL(url);
       const twitch=source.hostname==='www.twitch.tv';
       const label=twitch?source.pathname.slice(1):'YouTube';
-      player.src=twitch?'https://player.twitch.tv/?channel='+encodeURIComponent(label)+'&parent='+encodeURIComponent(location.hostname)+'&autoplay=false':'https://www.youtube.com/embed/'+encodeURIComponent(source.searchParams.get('v'));
+      if(player.hasAttribute('src'))player.src=twitch?'https://player.twitch.tv/?channel='+encodeURIComponent(label)+'&parent='+encodeURIComponent(location.hostname)+'&autoplay=false':'https://www.youtube.com/embed/'+encodeURIComponent(source.searchParams.get('v'));
       link.href=url;
       link.textContent=label+' ↗';
       player.title='Czechia gameplay from '+label;
+      announce();
     }catch{/* Keep the existing player during a network interruption. */}
   }
-  syncGameplay();
-  setInterval(syncGameplay,15000);
-  document.addEventListener('visibilitychange',syncGameplay);
+  async function syncBritain(){
+    const link=$('gbStreamLink');
+    if(!db||!link||document.hidden)return;
+    try{
+      const result=await db.from('obs_broadcast_state').select('url:payload->>streamUrl').eq('channel','lg3s-gbr').eq('is_public',true).maybeSingle();
+      if(result.error)return;
+      const url=canonical(result.data?.url);
+      const live=url&&!HIDDEN.test(url)?'1':'0';
+      if(live===link.dataset.live&&(live==='0'||url===link.href))return;
+      link.dataset.live=live;
+      link.hidden=live!=='1';
+      if(live==='1')link.href=url;
+      document.querySelectorAll('.lh-team-note').forEach(note=>{note.textContent=live==='1'?'Stream: '+(new URL(url).hostname==='www.twitch.tv'?new URL(url).pathname.slice(1)+' on Twitch':'YouTube'):'Broadcast appears here when Great Britain is on';});
+      announce();
+    }catch{/* Keep the current state during a network interruption. */}
+  }
+  const syncTeams=()=>{syncGameplay();syncBritain();};
+  syncTeams();
+  setInterval(syncTeams,15000);
+  document.addEventListener('visibilitychange',syncTeams);
   refresh();
 })();

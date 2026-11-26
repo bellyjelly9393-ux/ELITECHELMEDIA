@@ -146,3 +146,54 @@
   .lh-feature-copy h3 { font-size: 34px; }
   .lh-page::before { opacity: .05; }
 }
+
+/* ---------- Channels: World Juniors, Hitmen, LG Threes, Multiview ---------- */
+.lh-page > [data-channel][hidden] { display: none !important; }
+.lh-sub-in { gap: 4px; }
+.lh-sub-title { flex: none; margin: 0 14px 0 0; font-family: var(--f-head); font-weight: 400; font-size: 30px; line-height: 1; text-transform: uppercase; color: #fff; white-space: nowrap; }
+.lh-sub-title em { font-style: normal; color: var(--gold-hi); }
+.lh-sub-in .lh-tab { --tc: 227,181,74; gap: 10px; min-height: 66px; padding: 6px 18px 3px; border-bottom: 3px solid transparent; color: #cfccc5; transition: background .15s, color .15s; }
+.lh-tab img, .lh-tab svg { width: 34px; height: 28px; object-fit: contain; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,.7)); }
+.lh-tab svg { fill: none; stroke: rgb(var(--tc)); stroke-width: 2; }
+.lh-tab > span { display: grid; gap: 3px; line-height: 1; }
+.lh-tab b { font-weight: 600; font-size: 21px; letter-spacing: .08em; }
+.lh-tab small { font-family: var(--f-body, inherit); font-size: 13px; letter-spacing: .1em; color: var(--mute); }
+.lh-sub-in .lh-tab:hover { color: #fff; background: linear-gradient(180deg, transparent, rgba(var(--tc), .1)); }
+.lh-sub-in .lh-tab[aria-selected="true"] { color: #fff; border-bottom-color: rgb(var(--tc)); background: linear-gradient(180deg, transparent, rgba(var(--tc), .2)); }
+.lh-sub-in .lh-tab[aria-selected="true"] small { color: rgb(var(--tc)); }
+.lh-tab:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+.lh-subhead { margin: 30px 0 14px; font-family: var(--f-head); font-weight: 400; font-size: 32px; line-height: 1; text-transform: uppercase; color: #fff; }
+.lh-add .lh-subhead { margin: 0; }
+
+/* LG Threes: Great Britain */
+.lh-threes { background: linear-gradient(90deg, rgba(6,9,18,.95) 0%, rgba(6,9,18,.8) 40%, rgba(6,9,18,.62) 70%, rgba(6,9,18,.9) 100%), #060912 url("assets/lg3s/nations/great-britain-banner.webp") 70% 30% / cover no-repeat; }
+.lh-threes .lh-player-top { background: linear-gradient(90deg, rgba(47,99,201,.3), transparent 60%); }
+.lh-team-link { margin-left: auto; font-family: var(--f-ui); font-weight: 600; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-hi); }
+.lh-poster { background: linear-gradient(180deg, rgba(5,5,6,.15), rgba(5,5,6,.82)), #050506 var(--poster) center 35% / cover no-repeat; }
+.lh-poster-copy { position: absolute; inset: auto 0 0 0; display: grid; justify-items: start; gap: 6px; padding: 22px; }
+.lh-poster-copy[hidden] { display: none; }
+.lh-poster-copy img { width: 54px; height: 36px; object-fit: cover; box-shadow: 0 0 0 2px rgba(255,255,255,.35), 0 4px 12px rgba(0,0,0,.6); }
+.lh-poster-copy b { font-family: var(--f-head); font-weight: 400; font-size: clamp(28px, 3vw, 44px); line-height: .95; text-transform: uppercase; color: #fff; text-shadow: 0 3px 12px rgba(0,0,0,.8); }
+.lh-poster-copy span { font-family: var(--f-ui); font-weight: 600; font-size: 16px; letter-spacing: .14em; text-transform: uppercase; color: #cfd8ea; }
+.lh-poster-copy a { font-family: var(--f-ui); font-weight: 600; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-hi); }
+.lh-poster-copy a:hover { color: #fff; }
+
+/* Multiview: all my teams */
+.lh-myteams { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
+.lh-myteams .lh-player-top { background: linear-gradient(90deg, rgba(var(--tc), .28), transparent 70%); }
+.lh-myteams .lh-player-top img { width: 30px; height: 22px; object-fit: contain; }
+.lh-myteams .lh-player-top b { font-size: 18px; }
+.lh-myteams .lh-poster-copy { padding: 14px; }
+.lh-myteams .lh-poster-copy b { font-size: 26px; }
+
+@media (max-width: 1000px) {
+  .lh-myteams { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 620px) {
+  .lh-sub-title { display: none; }
+  .lh-sub-in .lh-tab { min-height: 58px; padding-inline: 12px; }
+  .lh-tab b { font-size: 18px; }
+  .lh-tab small { display: none; }
+  .lh-tab img, .lh-tab svg { width: 28px; height: 22px; }
+}

@@ -6,6 +6,9 @@
   const matchSelect = byId('czechiaMatch');
   const player = byId('czechiaPregamePlayer');
   const status = byId('czechiaPregameStatus');
+  // On the Live Hub the Czechia players only run while the World Juniors channel is open.
+  const section = player.closest('[data-channel]');
+  const watching = () => !section || !section.hidden;
   const gameTime = new Intl.DateTimeFormat('en-GB', {
     timeZone: 'America/Toronto', hourCycle: 'h23', hour: '2-digit', minute: '2-digit'
   });
@@ -92,6 +95,7 @@
     player.title = 'Czechia vs ' + match.opponent + ' pregame · Carbon Arena and hockey cards';
     status.hidden = true;
     frame.hidden = false;
+    if (!watching()) { shown = ''; return; }
     showCarbon(match);
   }
 
@@ -138,9 +142,27 @@
   // Keep the page on the next matchup while it stays open between games,
   // unless the viewer picked a matchup themselves.
   setInterval(() => {
-    if (pickedByViewer || document.hidden) return;
+    if (pickedByViewer || document.hidden || !watching()) return;
     loadPregame().catch(() => {});
   }, 60000);
+
+  // Leaving the channel stops Carbon and the gameplay player; coming back restarts the view that was open.
+  document.addEventListener('livehub:channel', event => {
+    if (event.detail.channel !== 'wjr') {
+      clearTimeout(carbonTimer);
+      player.removeAttribute('src');
+      byId('czechiaPlayer').removeAttribute('src');
+      shown = '';
+      return;
+    }
+    if (gameplay.getAttribute('aria-pressed') === 'true') { showGameplay(true); return; }
+    if (pickedByViewer) {
+      const match = currentFixtures.find(item => item.key === matchSelect.value);
+      if (match) setMatch(match);
+      return;
+    }
+    loadPregame().catch(() => {});
+  });
 
   pregame.addEventListener('click', () => showGameplay(false));
   gameplay.addEventListener('click', () => showGameplay(true));
