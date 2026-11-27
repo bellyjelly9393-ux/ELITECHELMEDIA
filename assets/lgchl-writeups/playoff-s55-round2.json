@@ -1,0 +1,110 @@
+{
+ "weeks": [
+  {
+   "id": "s55-playoff-round2",
+   "label": "Round 2 · Final",
+   "range": "Season 55 · Round 2 · Sunday, November 22 – Tuesday, November 24, 2026 · All 12 series complete",
+   "phase": "playoffs",
+   "items": [
+    {
+     "id": "wu-s55-r2-wrap",
+     "kind": "Round wrap",
+     "date": "2026-11-24",
+     "title": "Nine of 12 rested teams survive, and three Round 1 grinders crash the conference finals",
+     "html": "<p>Round 2 matched every bye team against a Round 1 survivor, and rest mostly won. Nine of the 12 clubs that sat out the wildcard round are through. The three that fell lost to teams that have now won two series: <strong>Swift Current</strong> over Medicine Hat in five, <strong>Saginaw</strong> over Guelph in seven, and <strong>Chicoutimi</strong> over top-seeded Moncton in seven.</p><p>It was a goaltender's round. Sixty-five games produced 363 goals, 5.6 a game. Twenty of them were shutouts, and 31 were decided by a single goal. Seven needed overtime, three of them in the Moncton–Chicoutimi series alone.</p><p>Four series ended in sweeps (Prince Albert, Spokane, Prince George and Barrie) and three went the distance. Sault Ste. Marie, Saginaw and Chicoutimi all won Game 7 on Tuesday night, Saginaw and Chicoutimi each by a single goal.</p><p><strong>Conference finals:</strong> Swift Current vs Prince Albert and Prince George vs Spokane in the WHL; Brantford vs Barrie and Saginaw vs Sault Ste. Marie in the OHL; Chicoutimi vs Halifax and Sherbrooke vs Drummondville in the QMJHL.</p>"
+    },
+    {
+     "id": "wu-s55-r2-pa-chi",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Prince Albert Raiders sweep Chilliwack Bruins 4–0",
+     "html": "<p><strong>Prince Albert won 4–0</strong> (4–0, 1–0, 3–1, 5–1) and outscored Chilliwack 13–2.</p><p>Chilliwack was shut out in both games in Prince Albert and never scored more than once in a game. Stolikerr allowed two goals on 36 shots across his three playoff appearances, a .944 save percentage. The clincher was the Raiders' most complete offensive night: Nxsclr had three goals and two assists, and MikeV223 set up four.</p><p><strong>Next:</strong> Swift Current Broncos in the WHL Eastern final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-sc-mh",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Swift Current Broncos eliminate Medicine Hat Tigers 4–1",
+     "html": "<p><strong>Swift Current won 4–1</strong> (4–3 OT, 7–2, 2–5, 7–5, 4–1) and outscored Medicine Hat 24–16.</p><p>The Broncos are the only WHL team to win two series. Game 4 decided it: Medicine Hat scored five and still lost, as scorezyy had four goals and three assists, xDxmba three goals and four assists, and soibelrhxc five assists. sepoL1083 had two goals in the Game 5 clincher and leads every remaining player with 18 playoff points (11 goals) in five games.</p><p><strong>Next:</strong> Prince Albert Raiders in the WHL Eastern final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-spo-pen",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Spokane Chiefs sweep Penticton Vees 4–0",
+     "html": "<p><strong>Spokane won 4–0</strong> (1–0 OT, 9–2, 2–0, 1–0) and outscored Penticton 13–2.</p><p>Penticton scored only in Game 2. In the other three games the Vees were held off the board, and two of Spokane's wins came by 1–0. Both Spokane goalies finished the round above .900: PRKz_Jugg stopped 28 of 30 and dunzy9510 29 of 32. TTV VolkzyFV has nine playoff points (six goals, three assists), all from a single game.</p><p><strong>Next:</strong> Prince George Cougars in the WHL Western final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-pg-tc",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Prince George Cougars sweep Tri City Americans 4–0",
+     "html": "<p><strong>Prince George won 4–0</strong> (3–2 OT, 2–1, 4–3, 5–2) and outscored Tri City 14–8.</p><p>This was the closest sweep of the round. The first three games were decided by a goal, the opener in overtime. Prince George pulled away only in Game 4, when iiCrxshout- scored three goals with an assist and ProximalAbyss41 added a goal and four assists.</p><p><strong>Next:</strong> Spokane Chiefs in the WHL Western final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-bar-sud",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Barrie Colts sweep Sudbury Wolves 4–0",
+     "html": "<p><strong>Barrie won 4–0</strong> (1–0, 5–2, 2–0, 4–3) and outscored Sudbury 12–5.</p><p>Sudbury was shut out twice and scored two or fewer in three of the four games. Barrie closed it with a 4–3 win in Game 4 in which oettysznn and jxppyy each scored twice. Fil x 8 finished the round with a .909 save percentage.</p><p><strong>Next:</strong> Brantford Bulldogs in the OHL Eastern final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-bra-nb",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Brantford Bulldogs beat North Bay Battalion 4–2",
+     "html": "<p><strong>Brantford won 4–2</strong> (4–2, 5–4, 0–3, 6–4, 0–1, 6–3) and outscored North Bay 21–17.</p><p>North Bay twice answered with a shutout, 3–0 in Game 3 and 1–0 in Game 5, but could not win a game in which Brantford scored. The Bulldogs scored six in each of their last two wins. AddictKiller27 had five assists in Game 4, and xBPx 91 had two goals and four assists in the Game 6 clincher. North Bay's LAWRENCE732 goes out with 11 playoff goals in five games, tied with sepoL1083 for the playoff lead.</p><p><strong>Next:</strong> Barrie Colts in the OHL Eastern final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-ssm-eri",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Sault Ste. Marie Greyhounds outlast Erie Otters in seven",
+     "html": "<p><strong>Sault Ste. Marie won 4–3</strong> (7–1, 0–2, 0–8, 5–2, 6–1, 3–6, 5–1) and outscored Erie 26–21.</p><p>Few games were close. Erie won twice by shutout, including an 8–0 Game 3, and the Greyhounds took three games by four goals or more. In Game 7 the same trio did the damage it did in Game 4: MJ l19l scored three and assisted on two, xpugachyov had two goals and an assist, and .lwindzy set up four. Philliesgreat08 stopped 15 of 16 shots.</p><p>Erie leaves with the playoffs' top scorer, peteypipes00500 (19 points), plus I BuIIseye I (17) and HortenseOwl4948 (16).</p><p><strong>Next:</strong> Saginaw Spirit in the OHL Western final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-sag-gue",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Saginaw Spirit rally from 0–2 to beat Guelph Storm in seven",
+     "html": "<p><strong>Saginaw won 4–3</strong> (3–4, 1–2, 5–4, 2–1, 4–1, 2–3, 1–0) and outscored Guelph 18–15.</p><p>Guelph won both opening games by a goal. Saginaw won the next three, Guelph forced Game 7, and vlexx21 settled it with a 10-save shutout in a 1–0 win. Six of the seven games were decided by one goal. vlexx21 has played nine games over two rounds with a .871 save percentage and a 1.67 GAA.</p><p><strong>Next:</strong> Sault Ste. Marie Greyhounds in the OHL Western final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-chi-mon",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Chicoutimi Saguenéens stun top-seeded Moncton Wildcats with back-to-back overtime wins",
+     "html": "<p><strong>Chicoutimi won 4–3</strong> (3–2 OT, 1–0, 1–4, 4–5, 3–4, 1–0 OT, 5–4 OT) while being outscored 19–18.</p><p>The Saguenéens won the first two games in Moncton, then lost three straight and faced elimination on Tuesday. NABOKOVx1995 stopped all 17 shots in a 1–0 overtime win in Game 6. Game 7 went to overtime as well, and Chicoutimi won it 5–4: l Saad x 20 l scored three, R xYATESx77 had two goals and an assist, and NotreDame830 had five assists. NotreDame830 now has 16 playoff points in five games.</p><p>Three of Chicoutimi's four wins came in overtime. It is the only series of the round won by the team that scored fewer goals.</p><p><strong>Next:</strong> Halifax Mooseheads in the QMJHL Eastern final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-hal-cb",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Halifax Mooseheads beat Cape Breton Eagles 4–2",
+     "html": "<p><strong>Halifax won 4–2</strong> (2–3 OT, 5–2, 0–1, 6–0, 4–2, 4–3) and outscored Cape Breton 21–11.</p><p>Cape Breton led 2–1 after an overtime win in Game 1 and a 1–0 win in Game 3. Halifax then won three straight. DeadlyBeren stopped all 20 shots in a 6–0 Game 4, in which speed000racer. had two goals and four assists. Shobaay had two goals and two assists in the 4–3 clincher.</p><p><strong>Next:</strong> Chicoutimi Saguenéens in the QMJHL Eastern final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-dru-sha",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Drummondville Voltigeurs beat Shawinigan Cataractes 4–1",
+     "html": "<p><strong>Drummondville won 4–1</strong> (3–1, 8–0, 8–0, 1–2, 4–3) and outscored Shawinigan 24–6.</p><p>The Voltigeurs won Games 2 and 3 by a combined 16–0. Shawinigan took Game 4 by a goal and lost Game 5 by a goal. xxJONx has eight goals in two playoff games.</p><p><strong>Next:</strong> Sherbrooke Phoenix in the QMJHL Western final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-she-vdo",
+     "kind": "Series write-up",
+     "date": "2026-11-24",
+     "title": "Sherbrooke Phoenix beat Val-d'Or Foreurs 4–2",
+     "html": "<p><strong>Sherbrooke won 4–2</strong> (8–0, 5–4, 8–0, 1–2, 1–2, 4–2) and outscored Val-d'Or 27–10.</p><p>Sherbrooke won the first three by a combined 21–4. Val-d'Or then won consecutive 2–1 games before Pezdemic's three goals and an assist closed it in Game 6. Val-d'Or's Staguts (15 points) and Sinkableloki501 (13) were two of the most productive skaters of the playoffs.</p><p><strong>Next:</strong> Drummondville Voltigeurs in the QMJHL Western final.</p>"
+    },
+    {
+     "id": "wu-s55-r2-segments",
+     "kind": "Features & player spotlight",
+     "date": "2026-11-24",
+     "title": "Round 2 segments: Heat Check, Trending Now, The Stat That Shouldn't Exist and the conference finals",
+     "html": "<h4>The Stat That Shouldn't Exist</h4><p>Twenty of the 65 Round 2 games were shutouts, nearly one in three. Penticton was shut out three times by Spokane. Chicoutimi won a seven-game series in which Moncton outscored it.</p><h4>Heat Check</h4><p>🔥 <strong>Sherbrooke</strong> 27–10 in six games. 🔥 <strong>Drummondville</strong> 24–6 in five. 🔥 <strong>Prince Albert</strong> and <strong>Spokane</strong>, 13–2 each in four-game sweeps. 🧊 <strong>Penticton</strong> and <strong>Chilliwack</strong> scored two goals each in four games.</p><h4>Trending Now</h4><p>Team-level only. 📈 <strong>Swift Current</strong>, <strong>Saginaw</strong> and <strong>Chicoutimi</strong> are the three clubs still alive that played in Round 1, and each has now won two series. 📈 <strong>Saginaw</strong> won four of the last five after losing the first two. 📈 <strong>Chicoutimi</strong> won Games 6 and 7 in overtime.</p><h4>Goalie Watch</h4><p>Among goalies still playing with two or more games: DeadlyBeren (Halifax) .971, Stolikerr (Prince Albert) .944 and PRKz_Jugg (Spokane) .933. NABOKOVx1995 (Chicoutimi) and vlexx21 (Saginaw) have carried the heaviest loads, seven and nine games.</p><h4>Conference finals</h4><p><strong>WHL:</strong> Swift Current vs Prince Albert · Prince George vs Spokane. <strong>OHL:</strong> Brantford vs Barrie · Saginaw vs Sault Ste. Marie. <strong>QMJHL:</strong> Chicoutimi vs Halifax · Sherbrooke vs Drummondville. Points leaders still playing: sepoL1083 (Swift Current) 18, MJ l19l (Sault Ste. Marie) 16, NotreDame830 (Chicoutimi) 16, scorezyy (Swift Current) 16.</p>"
+    }
+   ]
+  }
+ ]
+}

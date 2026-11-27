@@ -19,7 +19,9 @@
     if (s.hasAttribute('data-postseason')) {
       weeks = weeks.map(w => ({...w, items:w.items.filter(it => (it.phase || w.phase) === 'playoffs' || /playoffs|postseason|wildcard/i.test(w.id+' '+w.label))})).filter(w => w.items.length);
       const opening = await fetch('assets/lgchl-writeups/playoff-s55.json', {cache:'no-cache'}).then(r=>r.json());
-      weeks = weeks.concat(opening.weeks);
+      // Later rounds live in their own manifests, newest first; a missing file never blocks the rest.
+      const later = await fetch('assets/lgchl-writeups/playoff-s55-round2.json', {cache:'no-cache'}).then(r=>r.ok?r.json():{weeks:[]}).catch(()=>({weeks:[]}));
+      weeks = weeks.concat(later.weeks || [], opening.weeks);
     }
     if (!weeks.length) { body.innerHTML = '<p class="empty">No write-ups yet.</p>'; return; }
     tabs.innerHTML = weeks.map(function (w) { return '<button type="button" data-week="' + esc(w.id) + '">' + esc(w.label) + '</button>'; }).join('');
