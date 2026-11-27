@@ -355,14 +355,40 @@ section[id]{scroll-margin-top:130px}
 .elh-tile.is-focus{box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 0 2px var(--e-gold),0 3px 0 #050505,0 0 24px -4px rgba(227,181,74,.5)}
 .elh-tile.is-goal{animation:elh-goaltile .45s steps(2) 8}
 @keyframes elh-goaltile{50%{box-shadow:0 0 0 3px var(--e-ember),0 0 40px 6px rgba(254,52,2,.8)}}
-.elh-tile.is-empty{place-content:center;justify-items:center;gap:4px;aspect-ratio:16/9;color:var(--e-dim);font:400 22px/1 var(--f-3d);letter-spacing:.08em;text-transform:uppercase;background:repeating-linear-gradient(135deg,#0b0b0d 0 10px,#0d0d10 10px 20px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
-.elh-tile.is-empty small{font:500 12px var(--f-body);letter-spacing:.04em;text-transform:none}
+.elh-tile.is-empty{place-content:center;justify-items:center;gap:4px;aspect-ratio:16/9;padding:10px 8px;color:#c5c7cd;font:400 22px/1 var(--f-3d);letter-spacing:.08em;text-transform:uppercase;text-align:center;text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 12px rgba(0,0,0,.7);
+  background:
+    radial-gradient(120% 90% at 50% 42%,rgba(21,22,26,.15) 0%,rgba(5,5,5,.78) 100%),
+    repeating-linear-gradient(180deg,transparent 0 3px,rgba(210,216,230,.03) 3px 4px),
+    linear-gradient(180deg,rgba(36,38,44,.4),#08080a 55%,#050505);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),inset 0 0 40px rgba(0,0,0,.55)}
+.elh-tile.is-empty::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url("assets/brand/ecm-crest.webp") center 40%/auto 62% no-repeat;
+  opacity:.26;filter:grayscale(.65) brightness(1.3) contrast(1.2)}
+.elh-tile.is-empty::after{content:"";position:absolute;inset:8px;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(#d0d2d8,#d0d2d8) top left/14px 1.5px no-repeat,
+    linear-gradient(#d0d2d8,#d0d2d8) top left/1.5px 14px no-repeat,
+    linear-gradient(#d0d2d8,#d0d2d8) top right/14px 1.5px no-repeat,
+    linear-gradient(#d0d2d8,#d0d2d8) top right/1.5px 14px no-repeat,
+    linear-gradient(#d0d2d8,#d0d2d8) bottom left/14px 1.5px no-repeat,
+    linear-gradient(#d0d2d8,#d0d2d8) bottom left/1.5px 14px no-repeat,
+    linear-gradient(#d0d2d8,#d0d2d8) bottom right/14px 1.5px no-repeat,
+    linear-gradient(#d0d2d8,#d0d2d8) bottom right/1.5px 14px no-repeat,
+    linear-gradient(90deg,transparent 6%,rgba(227,181,74,.45) 35%,rgba(254,52,2,.4) 50%,rgba(227,181,74,.45) 65%,transparent 94%) bottom center/100% 1px no-repeat}
+.elh-tile.is-empty>*{position:relative;z-index:1}
+.elh-tile.is-empty small{font:600 12px/1.3 var(--f-body);letter-spacing:.04em;text-transform:none;color:var(--e-mute);max-width:18em}
+.elh-mv-grid[data-layout="6"] .elh-tile.is-empty,.elh-mv-grid[data-layout="8"] .elh-tile.is-empty{font-size:18px}
+.elh-mv-grid[data-layout="6"] .elh-tile.is-empty::before,.elh-mv-grid[data-layout="8"] .elh-tile.is-empty::before{opacity:.22;background-size:auto 58%}
+.elh-mv-grid[data-layout="6"] .elh-tile.is-empty::after,.elh-mv-grid[data-layout="8"] .elh-tile.is-empty::after{inset:6px}
 .elh-tile-head{display:flex;align-items:center;gap:8px;min-width:0;padding:7px 9px;background:linear-gradient(180deg,#24262c,#14151a)}
 .elh-tile-head b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
 .elh-tile-head .elh-pill{height:20px;font-size:10px;padding:0 6px}
 .elh-tile-n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:5px;background:var(--e-flame);color:#0a0a0c;font:400 14px/1 var(--f-3d)}
-.elh-tile-media{position:relative;aspect-ratio:16/9;background:#000}
+.elh-tile-media{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
 .elh-tile-media iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.elh-mv-grid[data-layout="4"] .elh-tile-media iframe,
+.elh-mv-grid[data-layout="6"] .elh-tile-media iframe,
+.elh-mv-grid[data-layout="8"] .elh-tile-media iframe{width:200%;height:200%;inset:auto;top:0;left:0;transform:scale(.5);transform-origin:top left}
 .elh-tile-media .elh-poster{position:absolute;inset:0;aspect-ratio:auto;border-radius:0}
 .elh-tile-media .elh-crest{width:clamp(28px,5vw,56px);height:auto}
 .elh-tile-bug{position:absolute;z-index:2;left:8px;top:8px;padding:4px 8px;border-radius:5px;background:rgba(5,5,5,.85);font:500 16px/1 var(--f-led);color:#fff;box-shadow:inset 0 0 0 1px rgba(227,181,74,.35)}
