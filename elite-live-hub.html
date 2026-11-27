@@ -3,24 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#070505">
+<meta name="theme-color" content="#050505">
 <meta name="description" content="EliteChel Media Live Hub: featured broadcast stage, on-air rundown, live channels, an 8-screen multiview control room, live scores and the Carbon 3D arena.">
 <title>Elite Live Hub | EliteChel Media</title>
 <link rel="canonical" href="https://wildmanhockey-elitechelmedia.app/elite-live-hub.html">
 <link rel="icon" href="assets/brand/ecm-crest.webp" type="image/webp">
 <meta property="og:type" content="website"><meta property="og:site_name" content="EliteChel Media"><meta property="og:title" content="Elite Live Hub | EliteChel Media"><meta property="og:description" content="Every EliteChel Media broadcast in one place: stage, rundown, channels, multiview and the Carbon 3D arena."><meta property="og:image" content="https://wildmanhockey-elitechelmedia.app/assets/brand/ecm-share.jpg">
 <link rel="preload" href="assets/fonts/Anton.woff" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="assets/fonts/Kanit-BlackItalic.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" as="image" href="assets/elite-live-hub/elite-live-hub-header.webp" type="image/webp">
 <link rel="stylesheet" href="wildman-home.css?v=20261019">
 <link rel="stylesheet" href="live-hub-home-nav.css?v=20261024-leaders">
 <link rel="stylesheet" href="broadcast-tokens.css">
 <link rel="stylesheet" href="public-navigation.css?v=20261025">
-<link rel="stylesheet" href="elite-live-hub.css?v=20261127-1">
+<link rel="stylesheet" href="elite-live-hub.css?v=20261127-2">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 <script defer src="public-navigation.js?v=20261025"></script>
 </head>
 <body class="elh-body">
-<body>
 <header class="top band">
   <div class="top-in">
     <a class="brand" href="index.html" aria-label="Elitechel Media home">
@@ -41,20 +40,20 @@
 <div class="elh" id="top">
   <div class="elh-backdrop" aria-hidden="true"><i class="elh-bd-photo"></i><i class="elh-bd-lights"></i><i class="elh-bd-embers"></i></div>
 
-  <section class="elh-mast" aria-labelledby="elhTitle">
-    <div class="elh-wrap elh-mast-in">
-      <div class="elh-mast-copy">
-        <p class="elh-eyebrow">EliteChel Media · Broadcast Network</p>
-        <h1 id="elhTitle" class="elh-3d elh-3d-xl" data-text="Elite Live Hub">Elite <em>Live Hub</em></h1>
-        <p class="elh-mast-sub">Every EliteChel broadcast in one control room: the stage, tonight's rundown, live channels, your own multiview and the Carbon 3D arena.</p>
-      </div>
-      <div class="elh-mast-side">
-        <div class="elh-air" id="elhAir" data-air="off" role="status" aria-live="polite"><span class="elh-air-lamp" aria-hidden="true"></span><b id="elhAirLabel">Checking feeds…</b><small id="elhAirSub"></small></div>
-        <div class="elh-seg" role="group" aria-label="Broadcast state view">
-          <button type="button" data-mode="auto" aria-pressed="true">Auto</button>
-          <button type="button" data-mode="on" aria-pressed="false">On-Air</button>
-          <button type="button" data-mode="off" aria-pressed="false">Off-Air</button>
-        </div>
+  <section class="elh-hero" aria-labelledby="elhTitle">
+    <div class="elh-hero-art">
+      <picture>
+        <source type="image/webp" srcset="assets/elite-live-hub/elite-live-hub-header.webp">
+        <img src="assets/elite-live-hub/elite-live-hub-header.jpg" width="1672" height="807" alt="EliteChel Media Elite Live Hub: the EliteChel Media shield and a broadcast camera on the arena ice" decoding="async" fetchpriority="high">
+      </picture>
+      <h1 id="elhTitle" class="sr-only">Elite Live Hub</h1>
+    </div>
+    <div class="elh-wrap elh-hero-bar">
+      <div class="elh-air" id="elhAir" data-air="off" role="status" aria-live="polite"><span class="elh-air-lamp" aria-hidden="true"></span><b id="elhAirLabel">Checking feeds…</b><small id="elhAirSub"></small></div>
+      <div class="elh-seg" role="group" aria-label="Broadcast state view">
+        <button type="button" data-mode="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-mode="on" aria-pressed="false">On-Air</button>
+        <button type="button" data-mode="off" aria-pressed="false">Off-Air</button>
       </div>
     </div>
   </section>
@@ -198,7 +197,7 @@
 <script>window.WMDesk && window.WMDesk.menu();</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script src="czechia-pregame-feed.js?v=1"></script>
-<script src="elite-live-hub.js?v=20261127-1"></script>
-<script type="module" src="elite-live-hub-arena.js?v=20261127-1"></script>
+<script src="elite-live-hub.js?v=20261127-2"></script>
+<script type="module" src="elite-live-hub-arena.js?v=20261127-2"></script>
 </body>
 </html>
