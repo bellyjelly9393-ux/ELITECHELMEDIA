@@ -383,7 +383,7 @@ function insideLiveHubCarbon() {
   if (parent === window || pageParams.get('view') !== 'arena-graphics') return false;
   try {
     return window.top.location.origin === location.origin &&
-      ['/esports-hub.html', '/esports-hub'].includes(window.top.location.pathname);
+      ['/esports-hub.html', '/esports-hub', '/elite-live-hub.html', '/elite-live-hub'].includes(window.top.location.pathname);
   } catch {
     return false;
   }

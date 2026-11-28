@@ -173,7 +173,7 @@
       id: 'czechia', name: 'Czechia · World Juniors', league: 'WJC', kind: 'official', real: true, status: cs,
       title: c ? 'Czechia vs ' + c.opponent : 'Czechia World Juniors',
       story: c ? 'LG World Junior Championships. Carbon Arena pregame with lineups, then the gameplay feed.' : 'The next Czechia matchup appears when the schedule is posted.',
-      start: c ? new Date(c.start) : null, crest: flag('cz'), link: 'esports-hub.html#czechia', external: S.czechiaUrl,
+      start: c ? new Date(c.start) : null, crest: flag('cz'), link: 'elite-live-hub.html#czechia', external: S.czechiaUrl,
       away: c ? {abbr: c.opponent.slice(0, 3).toUpperCase(), name: c.opponent, crest: opp} : null,
       home: c ? {abbr: 'CZE', name: 'Czechia', crest: flag('cz')} : null,
       lineup: c ? [...c.czech.map(p => ({...p, team: 'CZE'})), ...c.away.map(p => ({...p, team: c.opponent.slice(0, 3).toUpperCase()}))] : [],

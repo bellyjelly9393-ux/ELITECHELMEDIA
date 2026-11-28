@@ -69,8 +69,8 @@
       "destination": "/multiview.html"
     },
     {
-      "source": "/esports-hub",
-      "destination": "/esports-hub.html"
+      "source": "/elite-live-hub",
+      "destination": "/elite-live-hub.html"
     }
   ],
   "functions": {
@@ -86,6 +86,16 @@
     }
   },
   "redirects": [
+    {
+      "source": "/esports-hub.html",
+      "destination": "/elite-live-hub.html",
+      "permanent": true
+    },
+    {
+      "source": "/esports-hub",
+      "destination": "/elite-live-hub.html",
+      "permanent": true
+    },
     {
       "source": "/team.html",
       "destination": "/",
