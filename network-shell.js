@@ -23,7 +23,7 @@
     'index.html':'index.html',
     'team.html':'team.html','history.html':'team.html',
     'elite-live-hub.html':'elite-live-hub.html','esports-hub.html':'elite-live-hub.html','esports-team.html':'elite-live-hub.html','services.html':'elite-live-hub.html',
-    'events.html':'events.html','event-format.html':'events.html','pro-series.html':'events.html','caps-gaming.html':'events.html',
+    'events.html':'events.html','event-format.html':'events.html','caps-gaming.html':'events.html',
     'game-center.html':'game-center.html','live-channel.html':'game-center.html','multiview.html':'game-center.html','vod-center.html':'game-center.html','reports.html':'game-center.html','game.html':'game-center.html','live-game.html':'game-center.html','postgame.html':'game-center.html',
 
     'academy.html':'academy.html','academy-training.html':'academy.html',

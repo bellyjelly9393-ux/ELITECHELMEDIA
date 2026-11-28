@@ -5,6 +5,8 @@
  const key='sb_publishable_9GD6JhLzUGgoPNtahx7eQQ_JDARGIaP';
  const db=window.supabase?.createClient(url,key);
  const TEAM=412, SEASON=55, $=id=>document.getElementById(id);
+ // Only the Hitmen's own stream links; World Juniors, LG3s and Memorial Cup links live under their own events.
+ const HITMEN_EVENTS=['801b16d1-3a5f-420a-87e0-e1138766ec72','98690616-2440-41d4-9a04-babdc1572a8e'];
  if(!db||!$('hitmenSeasonGames'))return;
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const S={games:[],teams:new Map(),recaps:new Map(),sources:[],filter:'all',week:'all',broadcast:'',loading:false,expanded:false};
@@ -97,7 +99,7 @@
    db.from('lgchl_games').select('lg_game_id,week,game_at,status,decided_in,home_lg_team_id,away_lg_team_id,home_score,away_score,source_url').eq('season',SEASON).or('home_lg_team_id.eq.'+TEAM+',away_lg_team_id.eq.'+TEAM).order('game_at',{ascending:true}).limit(130),
    db.from('lgchl_teams').select('lg_team_id,name').eq('season',SEASON),
    db.from('media_posts').select('title,source_metrics').eq('published',true).eq('post_type','recap').filter('source_metrics->>team','eq','Calgary Hitmen').limit(90),
-   db.from('tournament_automation_sources').select('id,url,display_label,provider,metadata,slot_order').eq('active',true).eq('public_visible',true).order('slot_order').limit(20),
+   db.from('tournament_automation_sources').select('id,url,display_label,provider,metadata,slot_order').eq('active',true).eq('public_visible',true).in('event_id',HITMEN_EVENTS).order('slot_order').limit(20),
    db.from('lgchl_standings_snapshots').select('w,l,otl,pts,gf,ga,gp,taken_at').eq('season',SEASON).eq('lg_team_id',TEAM).order('taken_at',{ascending:false}).limit(1)
   ]);
   const err=[games,teams,posts,sources,standing].find(x=>x.error);

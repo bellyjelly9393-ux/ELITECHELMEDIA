@@ -161,7 +161,7 @@
     if (eventGrid) eventGrid.innerHTML = state.events.length ? state.events.map(event => {
       const teams = state.eventTeams.filter(x => x.event_id === event.id).length;
       const games = state.games.filter(x => x.event_id === event.id).length;
-      return `<a class="ops-card" href="${event.slug === "road-to-pro-2026" ? "pro-series.html" : `esports-hub.html?event=${encodeURIComponent(event.slug)}`}"><small>${esc(event.organizer || "Tournament")}</small><h3>${esc(event.name)}</h3><p>${esc(event.game_title || "EA SPORTS NHL")} · ${teams} teams indexed · ${games} games loaded.</p><span class="ops-link">Open Event →</span></a>`;
+      return `<a class="ops-card" href="elite-live-hub.html"><small>${esc(event.organizer || "Tournament")}</small><h3>${esc(event.name)}</h3><p>${esc(event.game_title || "EA SPORTS NHL")} · ${teams} teams indexed · ${games} games loaded.</p><span class="ops-link">Open Event →</span></a>`;
     }).join("") : `<div class="empty-state">No event feeds are loaded yet.</div>`;
 
     const search = document.getElementById("networkSearch");
@@ -386,7 +386,7 @@
     document.title = `${team.name} | Elitechel Media`;
     const managerRows = roster.filter(r => roleLabel(r.roster_role));
     const isProSeriesTeam = currentEventEntry?.slug === "road-to-pro-2026";
-    root.innerHTML = `<a class="profile-back" href="pro-series.html">← Back to Pro Series</a>
+    root.innerHTML = `<a class="profile-back" href="elite-live-hub.html">← Back to the Live Hub</a>
       <div class="network-profile-head pro-team-profile-head">
         <div class="pro-profile-crest">${teamMark(team)}</div>
         <div>

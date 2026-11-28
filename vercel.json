@@ -209,12 +209,12 @@
     {
       "source": "/pro-series.html",
       "destination": "/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/pro-series",
       "destination": "/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/caps-gaming.html",

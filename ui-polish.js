@@ -17,7 +17,6 @@
     'scouting-lab.html':'intelligence',
     'scouting.html':'intelligence',
     'vod-lab.html':'intelligence',
-    'pro-series.html':'tournament',
     'events.html':'tournament',
     'event-format.html':'tournament',
     'caps-gaming.html':'tournament',

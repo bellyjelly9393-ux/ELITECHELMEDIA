@@ -87,7 +87,8 @@ async function loadScores(ids) {
 }
 
 // The saved Nov 17 draw predates the Round 2 game IDs. Fetch all *indexed*
-// postseason games, then attach only exact-match Round 2 pairings in the parser.
+// postseason games, then attach only exact-match Round 2 pairings in the parser;
+// later rounds take their games from the same rows once both teams are known.
 async function loadRoundTwoIndex() {
   return rest('lgchl_games?select=lg_game_id,away_lg_team_id,home_lg_team_id,away_score,home_score,status,game_at,decided_in' +
     '&lg_league_id=eq.39&season=eq.55&game_at=gte.2026-11-21T00:00:00Z&order=game_at.asc,lg_game_id.asc');
@@ -100,11 +101,12 @@ export async function loadPlayoffs(now = Date.now()) {
     inflight = refreshFromSources({ snapshot, fetchHtml: fetchLg, loadTeams, loadScores, now })
       .then(async (board) => {
         try {
-          const { mergeRoundTwoGames } = await playoffModule();
+          const { mergeRoundTwoGames, advanceRounds } = await playoffModule();
           const rows = await loadRoundTwoIndex();
           // A missing index is not a fresh bracket: don't silently display 0–0.
           if (!rows?.length) return { ...board, stale: true, stale_reason: 'round2_index_empty' };
-          return mergeRoundTwoGames(board, rows);
+          // Round 3 onward: winners move up, and their games come from the same index.
+          return advanceRounds(mergeRoundTwoGames(board, rows), rows);
         } catch {
           return { ...board, stale: true, stale_reason: 'round2_index_unavailable' };
         }
