@@ -22,7 +22,7 @@
   const groups = {
     'index.html':'index.html',
     'team.html':'team.html','history.html':'team.html',
-    'esports-hub.html':'esports-hub.html','esports-team.html':'esports-hub.html','services.html':'esports-hub.html',
+    'elite-live-hub.html':'elite-live-hub.html','esports-hub.html':'elite-live-hub.html','esports-team.html':'elite-live-hub.html','services.html':'elite-live-hub.html',
     'events.html':'events.html','event-format.html':'events.html','pro-series.html':'events.html','caps-gaming.html':'events.html',
     'game-center.html':'game-center.html','live-channel.html':'game-center.html','multiview.html':'game-center.html','vod-center.html':'game-center.html','reports.html':'game-center.html','game.html':'game-center.html','live-game.html':'game-center.html','postgame.html':'game-center.html',
 
@@ -53,10 +53,10 @@
         <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
         <nav class="main-nav">
           ${simpleLink('index.html','Home')}
-          ${dropdown('Live Hub','esports-hub.html',[
-            ['esports-hub.html#lgchl','LGCHL Games','Public league broadcasts'],
-            ['esports-hub.html#hitman','Hitmen Live','Elitechel Media broadcast channel'],
-            ['esports-hub.html#lg3s','LG Threes','Public LG Threes streams'],
+          ${dropdown('Elite Live Hub','elite-live-hub.html',[
+            ['elite-live-hub.html#lgchl','LGCHL Games','Public league broadcasts'],
+            ['elite-live-hub.html#hitman','Hitmen Live','Elitechel Media broadcast channel'],
+            ['elite-live-hub.html#lg3s','LG Threes','Public LG Threes streams'],
             ['multiview.html','Multiview','Build your own multi-stream view']
           ])}
           ${dropdown('Media','hitmen-media.html',[

@@ -52,7 +52,7 @@
       heading:'NOT LOCKED TO ONE GAME.',
       footer:'Future titles · Shared broadcasts · Shared media',
       cards:[
-        ['Esports Hub','The central discovery layer for teams, players, events and future games.','esports-hub.html'],
+        ['Elite Live Hub','Every EliteChel Media broadcast in one place: stage, channels, multiview and the Carbon 3D arena.','elite-live-hub.html'],
         ['Game Center','A reusable broadcast board for any event with a stream and matchup.','game-center.html'],
         ['Media Network','A reusable editorial and video layer for event coverage.','wildman-media.html'],
         ['Event Formats','Add new verticals alongside 6v6, 4v4 and HUT.','events.html']
