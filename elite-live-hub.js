@@ -228,7 +228,8 @@
       // The shared feed formats ET for display; re-read the raw UTC times for countdowns.
       const [{games}, raw] = await Promise.all([feed.load(), getJSON('/api/czechia-pregame', 6500)]);
       const utc = new Map((raw.games || []).map(g => ['lg-' + g.id, g.time]));
-      S.czechia = games.map(g => ({...g, utc: utc.get(g.key)}));
+      // Same confirmed lineup the Carbon pregame shows, so the sidebar and the rink agree.
+      S.czechia = games.map(g => ({...feed.confirmedLineup(g), utc: utc.get(g.key)}));
       S.feeds.czechia = 'ok';
     } catch { S.feeds.czechia = 'down'; }
     if (!db) return;
@@ -658,13 +659,25 @@
     renderAir(); renderTicker(); renderStage(); renderCompanion(); renderRundown(); renderShelf(); renderMultiview();
     sendArena();
   }
-  function sendArena(id) {
-    const ch = channel(id || S.featured);
-    const fallback = DEMO[0];
-    const src = ch?.lineup?.length ? ch : fallback;
-    window.dispatchEvent(new CustomEvent('elh:lineup', {detail: {label: (src.demo ? 'Demo · ' : '') + (src.away ? `${src.away.abbr} at ${src.home.abbr}` : src.name), home: src.home?.abbr, players: src.lineup}}));
+  // The Carbon Arena always opens on a real Czechia matchup. The demo lineup is handed over
+  // only so the viewer can pick it explicitly; it is never the default.
+  function arenaData() {
+    const games = S.czechia.map(g => ({...g, start: Date.parse(g.date + 'T' + toUtcTime(g) + 'Z')}))
+      .filter(g => Number.isFinite(g.start)).sort((a, b) => a.start - b.start);
+    const next = nextCzechia();
+    const demo = DEMO[0];
+    return {
+      feed: S.feeds.czechia, games, nextKey: next?.key || games.at(-1)?.key || null,
+      demo: {label: `${demo.away.abbr} at ${demo.home.abbr}`, home: demo.home.abbr, players: demo.lineup},
+    };
   }
-  window.ELHLastLineup = () => sendArena();
+  function sendArena() { window.dispatchEvent(new CustomEvent('elh:arena-data', {detail: arenaData()})); }
+  function openInArena(id) {
+    const ch = channel(id);
+    const detail = id === 'czechia' ? {key: nextCzechia()?.key} : ch?.demo ? {demo: true} : null;
+    if (detail) window.dispatchEvent(new CustomEvent('elh:arena-select', {detail}));
+  }
+  window.ELHArenaData = arenaData;
 
   document.addEventListener('click', e => {
     const t = e.target.closest('button, a'); if (!t) return;
@@ -697,13 +710,13 @@
     if (d.mvRemove) { S.mv.slots.splice(+d.mvRemove, 1); if (S.mv.focus >= S.mv.slots.length) S.mv.focus = 0; mvSave(); renderMultiview(); renderShelf(); renderStage(); return; }
     if (d.mvLoad) { const tile = t.closest('.elh-tile'); const c = channel(S.mv.slots[+d.mvLoad]); const src = c && source(c, {muted: true, view: 'game'}); if (src) t.outerHTML = `<iframe src="${esc(src.src)}" title="${esc(src.title)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`; tile?.classList.add('is-loaded'); return; }
     if (d.layout) { S.mv.layout = +d.layout; mvSave(); renderMultiview(); return; }
-    if (d.cam) { $$('#elhCamSeg button').forEach(b => b.setAttribute('aria-pressed', String(b === t))); window.dispatchEvent(new CustomEvent('elh:camera', {detail: d.cam})); return; }
+    if (d.cam) { window.dispatchEvent(new CustomEvent('elh:camera', {detail: {demo: d.cam, carbon: d.carbonCam || null, button: t}})); return; }
     if (d.goal) { goalAlert(d.goal); return; }
     if (d.fav) { const id = d.fav; S.favs = S.favs.includes(id) ? S.favs.filter(x => x !== id) : [...S.favs, id]; store.set('favs', S.favs); t.setAttribute('aria-pressed', String(S.favs.includes(id))); renderShelf(); return; }
     if (d.favTeam) { const id = d.favTeam; S.favs = S.favs.includes(id) ? S.favs.filter(x => x !== id) : [...S.favs, id]; store.set('favs', S.favs); renderCompanion(); return; }
     if (d.pick) { S.picks[d.pick] = d.team; store.set('picks', S.picks); renderCompanion(); return; }
     if (d.remind) { toggleReminder(d.remind); return; }
-    if (d.arenaLineup) { sendArena(d.arenaLineup); document.getElementById('arena').scrollIntoView({behavior: 'smooth'}); return; }
+    if (d.arenaLineup) { openInArena(d.arenaLineup); document.getElementById('arena').scrollIntoView({behavior: 'smooth'}); return; }
     if (d.openChannel) { openChannel(d.openChannel); return; }
     if ('close' in d) { closeChannel(); }
   });

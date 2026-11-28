@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Czechia OBS Browser Sources | Elite Chel Media</title>
 <script src="/obs-teams.js?v=1" defer></script>
-<script src="/czechia-pregame-feed.js?v=1" defer></script>
+<script src="/czechia-pregame-feed.js?v=2" defer></script>
 <style>
 @font-face{font-family:CardDisplay;src:url('/assets/fonts/Kanit-BlackItalic.woff') format('woff');font-display:swap}
 @font-face{font-family:CardLabel;src:url('/assets/fonts/Teko.woff') format('woff');font-display:swap}
@@ -180,8 +180,6 @@ const archived = JSON.parse(document.querySelector('#game-data').textContent);
 const pageParams = new URLSearchParams(location.search);
 const key = pageParams.get('game');
 const liveHubPreview = pageParams.get('view') === 'live-hub';
-const broadcastGames = new Set(['lg-923944', 'lg-923948', 'lg-923952']);
-const confirmedForwards = new Map([['LW', 'l Setty l'], ['C', 'SmokoLi'], ['RW', 'geocustom']]);
 document.body.classList.toggle('live-hub-stage', liveHubPreview);
 let game;
 let teams = null;
@@ -379,11 +377,12 @@ function render() {
   drawLineup('away', game.away);
 }
 // Carbon pregame shown to viewers on the public Live Hub uses the same confirmed lineup as the hub.
+const LIVE_HUB_PAGES = ['/esports-hub.html', '/esports-hub', '/elite-live-hub.html', '/elite-live-hub'];
 function insideLiveHubCarbon() {
   if (parent === window || pageParams.get('view') !== 'arena-graphics') return false;
   try {
     return window.top.location.origin === location.origin &&
-      ['/esports-hub.html', '/esports-hub', '/elite-live-hub.html', '/elite-live-hub'].includes(window.top.location.pathname);
+      LIVE_HUB_PAGES.includes(window.top.location.pathname);
   } catch {
     return false;
   }
@@ -428,16 +427,34 @@ function mountRink() {
     })
   );
   if (carbon) {
+    // The public Live Hub page around Carbon can pick a camera and spotlight one player.
+    // Only the hub page on this site is listened to; the private OBS source never is.
+    const hubView = { camera: 'ice', highlighted: [] };
+    const hub = insideLiveHubCarbon() ? window.top : null;
+    const markerId = (side, position) => {
+      const lineup = side === 'away' ? game.away : game.czech;
+      const index = lineup.findIndex(player => player.position === position && player.name);
+      return index < 0 || !slots[position] ? null : (side === 'away' ? 6 : 0) + index + 1;
+    };
     function sendBoard() {
       const box = rink.parentElement.getBoundingClientRect();
       const height = Math.min(box.height, innerHeight - box.top);
       if (height <= 0 || box.width <= 0) return;
       parent.postMessage({
-        protocol: 'icevision:pregame:1', type: 'board', camera: 'ice', opponent: game.opponent,
-        board: { markers, highlighted: [], skating: true },
+        protocol: 'icevision:pregame:1', type: 'board', camera: hubView.camera, opponent: game.opponent,
+        board: { markers, highlighted: hubView.highlighted, skating: true },
         viewport: { x: box.x, y: box.y, width: box.width, height },
       }, location.origin);
     }
+    if (hub) addEventListener('message', event => {
+      const data = event.data;
+      if (event.origin !== location.origin || event.source !== hub ||
+          data?.protocol !== 'ecm:live-hub-arena:1' || data.type !== 'view' || data.game !== game.key) return;
+      if (['ice', 'overhead', 'orbit', 'goalie'].includes(data.camera)) hubView.camera = data.camera;
+      const id = data.spotlight ? markerId(data.spotlight.side, data.spotlight.position) : null;
+      hubView.highlighted = id ? [id] : [];
+      requestAnimationFrame(sendBoard);
+    });
     rink.hidden = true;
     rink.parentElement.style.gridTemplateRows = '1fr';
     caption.hidden = true;
@@ -448,8 +465,10 @@ function mountRink() {
     const retry = setInterval(sendBoard, 500);
     setTimeout(() => clearInterval(retry), 15000);
     addEventListener('message', event => {
-      if (event.origin === location.origin && event.source === parent &&
-          event.data?.protocol === 'icevision:pregame:1' && event.data.type === 'ready') clearInterval(retry);
+      if (event.origin !== location.origin || event.source !== parent ||
+          event.data?.protocol !== 'icevision:pregame:1' || event.data.type !== 'ready') return;
+      clearInterval(retry);
+      hub?.postMessage({ protocol: 'ecm:live-hub-arena:1', type: 'ready', game: game.key }, location.origin);
     });
     return;
   }
@@ -532,13 +551,7 @@ async function initialize() {
     return;
   }
   game = applyPrivateLineup(game);
-  if ((liveHubPreview || insideLiveHubCarbon()) && broadcastGames.has(game.key)) {
-    game = {...game, czech:[
-      ...Array.from(confirmedForwards, ([position, name]) => game.czech.find(player =>
-        player.position === position && player.name === name) ?? {position,name}),
-      ...game.czech.filter(player => !confirmedForwards.has(player.position)),
-    ]};
-  }
+  if (liveHubPreview || insideLiveHubCarbon()) game = feed.confirmedLineup(game);
   stage.hidden = false;
   render();
   mountRink();

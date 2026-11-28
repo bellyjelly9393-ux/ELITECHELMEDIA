@@ -433,6 +433,24 @@ section[id]{scroll-margin-top:130px}
 .elh-arena-card .elh-pos{grid-row:1/3;min-width:46px;height:46px;font-size:22px}
 .elh-arena-card b{font:400 22px/1.05 var(--f-3d);text-transform:uppercase;letter-spacing:.03em;color:#fff}
 .elh-arena-card small{color:var(--e-mute)}
+/* Carbon Arena: real pregame scene by default, demo rink only on request */
+.elh-arena-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.elh-arena-pick{display:flex;align-items:center;gap:8px;color:var(--e-mute);font:600 11px var(--f-body);letter-spacing:.12em;text-transform:uppercase}
+.elh-arena-pick select{min-height:34px;max-width:min(78vw,330px);padding:0 30px 0 10px;border:1px solid rgba(255,255,255,.14);border-radius:4px;background:#0d0e11;color:var(--e-text);font:500 14px var(--f-body);letter-spacing:0;text-transform:none}
+.elh-arena-pick select:focus-visible{outline:2px solid var(--e-gold-hi);outline-offset:2px}
+.elh-seg[hidden],.elh-seg button[hidden],.elh-arena-msg[hidden],.elh-arena-side [hidden]{display:none!important}
+.elh-arena[data-arena-mode="carbon"] .elh-arena-view,.elh-arena[data-arena-mode="loading"] .elh-arena-view{min-height:0;aspect-ratio:16/9}
+.elh-arena-frame{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#050a14}
+.elh-arena-frame.is-public{background:#07101e}
+.elh-arena-msg{z-index:1;pointer-events:none}
+.elh-arena-when{margin:-6px 0 2px;color:var(--e-mute);font:500 13px var(--f-body)}
+.elh-arena-roster{gap:12px;max-height:none;overflow:visible}
+.elh-arena-team ol{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.elh-arena-team h3{display:flex;align-items:center;gap:8px;margin:0 0 6px;color:#fff;font:400 16px/1 var(--f-3d);letter-spacing:.05em;text-transform:uppercase}
+.elh-arena-team h3 img{width:22px;height:15px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.2)}
+.elh-arena-team.is-away h3{color:var(--e-chrome)}
+.elh-arena-pending{margin:0;padding:10px 12px;border:1px dashed rgba(255,255,255,.18);border-radius:4px;color:var(--e-mute);font:600 12px var(--f-body);letter-spacing:.12em;text-transform:uppercase}
+.elh-arena-roster button[disabled]{cursor:default;opacity:.85}
 
 /* ---------- Legend, dialog, toast ---------- */
 .elh-legend{display:grid;gap:8px;padding:16px 20px;border-radius:12px;background:rgba(5,5,5,.6);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);color:#c5c7cd;font-size:14px}
@@ -517,3 +535,4 @@ body[data-air=off] .elh-ticker-tag{background:linear-gradient(180deg,#3a3c44,#24
 }
 .elh-body .nav a{font-size:19px}
 .elh-body .ecm-nav-trigger{font-family:var(--f-3d),Anton,Impact,sans-serif;font-weight:400;letter-spacing:.06em;text-transform:uppercase}
+.elh-arena-view:fullscreen{aspect-ratio:auto;border-radius:0;background:#050a14}

@@ -9,6 +9,19 @@
   });
   const positions = new Set(['LW', 'C', 'RW', 'LD', 'RD', 'G']);
   const aliases = { germany: 'lg-923918', usa: 'lg-923923', sweden: 'lg-923926' };
+  // Forwards confirmed for the broadcast games. The public Live Hub pages and the Carbon
+  // pregame they embed both read this, so the rink and the hub sidebar show the same players.
+  const broadcastGames = new Set(['lg-923944', 'lg-923948', 'lg-923952']);
+  const confirmedForwards = new Map([['LW', 'l Setty l'], ['C', 'SmokoLi'], ['RW', 'geocustom']]);
+
+  function confirmedLineup(game) {
+    if (!game || !broadcastGames.has(game.key)) return game;
+    return { ...game, czech: [
+      ...Array.from(confirmedForwards, ([position, name]) => game.czech.find(player =>
+        player.position === position && player.name === name) ?? { position, name }),
+      ...game.czech.filter(player => !confirmedForwards.has(player.position)),
+    ] };
+  }
 
   function roster(players) {
     if (!Array.isArray(players)) return [];
@@ -44,5 +57,5 @@
     return { games, usingSeed: data.usingSeed === true };
   }
 
-  window.ECMCzechiaPregame = { load, today: () => easternDate.format(new Date()), aliases };
+  window.ECMCzechiaPregame = { load, today: () => easternDate.format(new Date()), aliases, confirmedLineup };
 })();

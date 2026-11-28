@@ -1,64 +1,303 @@
-/* EliteChel Media · Elite Live Hub · Carbon 3D arena.
- * three.js from the jsDelivr CDN (import map in elite-live-hub.html). Loads only when the
- * arena scrolls into view; falls back to a static message if WebGL is not available.
- * Lineups arrive from elite-live-hub.js through the `elh:lineup` event.
+/* EliteChel Media · Elite Live Hub · Carbon Arena.
+ *
+ * Default view: the real Carbon pregame scene for a Czechia World Juniors matchup. It is served
+ * by this site at /czechia/arena/<game>/broadcast.html; a public viewer pass from
+ * /czechia/arena/<game>/viewer-session opens it for one matchup (api/lg3s-carbon.js).
+ * Carbon only takes camera and spotlight orders from its own lineup-card page
+ * (czechia-obs.html), so this page sends them there as `ecm:live-hub-arena:1` messages and
+ * hears back when the rink is ready. If Carbon cannot start, the public 3D rink and hockey cards
+ * for the same matchup are shown instead.
+ *
+ * Demo mode (a local three.js rink with sample players) runs only when the viewer picks it.
+ * The schedule and lineups arrive from elite-live-hub.js through `elh:arena-data`.
  */
-const view = document.getElementById('elhArenaView');
-const msg = document.getElementById('elhArenaMsg');
-const roster = document.getElementById('elhArenaRoster');
-const card = document.getElementById('elhArenaCard');
-const label = document.getElementById('elhArenaLabel');
+const $ = id => document.getElementById(id);
+const section = $('arena');
+const view = $('elhArenaView');
+const msg = $('elhArenaMsg');
+const roster = $('elhArenaRoster');
+const card = $('elhArenaCard');
+const label = $('elhArenaLabel');
+const when = $('elhArenaWhen');
+const pick = $('elhArenaGame');
+const camSeg = $('elhCamSeg');
+const hint = $('elhArenaHint');
+const full = $('elhArenaFull');
 const esc = v => String(v ?? '').replace(/[&<>'"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'})[c]);
 
-let lineup = null;
-let api = null;
+const PROTOCOL = 'ecm:live-hub-arena:1';
+const READY_TIMEOUT = 25000;
+const ORDER = ['LW', 'C', 'RW', 'LD', 'RD', 'G'];
+const NATION_FLAGS = {canada: 'ca', czechia: 'cz', finland: 'fi', germany: 'de', slovakia: 'sk', sweden: 'se', switzerland: 'ch', usa: 'us'};
+const flag = name => { const c = NATION_FLAGS[String(name).toLowerCase()]; return c ? `/assets/lg3s-world/flags/${c}.svg` : ''; };
+const dayLabel = new Intl.DateTimeFormat('en-CA', {timeZone: 'UTC', weekday: 'short', month: 'short', day: 'numeric'});
 
-// Rink positions (x along the length, z across). Home defends the right end.
-const SPOTS = {C: [-4.5, 0], LW: [-5.5, -5], RW: [-5.5, 5], LD: [-12, -3.2], RD: [-12, 3.2], G: [-21.2, 0]};
+// mode: loading | carbon | public (fallback rink + cards) | demo | empty
+const A = {data: null, key: null, picked: false, demo: false, mode: 'loading', camera: 'ice', demoCam: 'wide',
+  spotlight: null, frame: null, timer: 0, probe: 0, token: 0, near: false};
+let demoApi = null;
 
-function renderRoster() {
-  if (!lineup) return;
-  label.textContent = lineup.label;
-  roster.innerHTML = (lineup.players || []).map((p, i) => `<li><button type="button" data-arena-player="${i}" class="${p.team === lineup.home ? 'is-home' : 'is-away'}"><span class="elh-pos">${esc(p.position)}</span><b>${esc(p.name)}</b><small>${esc(p.team)}</small></button></li>`).join('') || '<li class="elh-note">No lineup posted.</li>';
+const game = () => A.data?.games.find(g => g.key === A.key) || null;
+const byPosition = list => [...(list || [])].sort((a, b) => ORDER.indexOf(a.position) - ORDER.indexOf(b.position));
+
+function showMsg(text) { msg.textContent = text; msg.hidden = !text; }
+function setMode(mode) {
+  A.mode = mode;
+  section.dataset.arenaMode = mode;
+  updateCams();
+  renderHint();
 }
 
-window.addEventListener('elh:lineup', e => {
-  lineup = e.detail;
-  renderRoster();
-  api?.setPlayers(lineup);
-});
-window.addEventListener('elh:camera', e => api?.camera(e.detail));
-roster.addEventListener('click', e => {
-  const b = e.target.closest('[data-arena-player]');
-  if (!b) return;
-  const i = +b.dataset.arenaPlayer;
-  roster.querySelectorAll('button').forEach(x => x.classList.toggle('is-on', x === b));
-  const p = lineup.players[i];
+/* ---------- Sidebar ---------- */
+function teamBlock(side, name, players, home) {
+  const crest = flag(name);
+  const head = `<h3>${crest ? `<img src="${esc(crest)}" alt="" width="22" height="15">` : ''}${esc(name)}</h3>`;
+  if (!players.length) return `<section class="elh-arena-team ${home ? 'is-home' : 'is-away'}">${head}<p class="elh-arena-pending">Lineup pending</p></section>`;
+  const canSpot = A.mode === 'carbon' || A.mode === 'loading' || A.mode === 'demo';
+  return `<section class="elh-arena-team ${home ? 'is-home' : 'is-away'}">${head}<ol>${players.map(p => {
+    const on = A.spotlight && A.spotlight.side === side && A.spotlight.position === p.position && A.spotlight.name === p.name;
+    return `<li><button type="button" class="${home ? 'is-home' : 'is-away'}${on ? ' is-on' : ''}" data-side="${side}" data-position="${esc(p.position)}" data-name="${esc(p.name)}"${canSpot ? '' : ' disabled'}><span class="elh-pos">${esc(p.position)}</span><b>${esc(p.name)}</b>${p.jersey ? `<small>#${esc(p.jersey)}</small>` : ''}</button></li>`;
+  }).join('')}</ol></section>`;
+}
+
+function renderSide() {
+  card.hidden = true;
+  if (A.demo) {
+    const d = A.data?.demo;
+    const players = d?.players || [];
+    const teams = [...new Set(players.map(p => p.team))];
+    label.textContent = 'Demo · ' + (d?.label || 'sample matchup');
+    when.textContent = 'Sample lineup. Not a real game.';
+    roster.innerHTML = teams.map(t => teamBlock(t, t, byPosition(players.filter(p => p.team === t)), t === d?.home)).join('');
+    full.hidden = !fullOK();
+    return;
+  }
+  const g = game();
+  full.hidden = !fullOK();
+  if (!g) {
+    label.textContent = 'Starting lineups';
+    when.textContent = '';
+    roster.innerHTML = '';
+    return;
+  }
+  label.textContent = 'Czechia vs ' + g.opponent;
+  when.textContent = dayLabel.format(new Date(g.date + 'T12:00:00Z')) + ' · ' + g.time;
+  roster.innerHTML = teamBlock('czech', 'Czechia', byPosition(g.czech), true) + teamBlock('away', g.opponent, byPosition(g.away), false);
+  if (A.spotlight) showCard();
+}
+
+function showCard() {
+  const s = A.spotlight;
+  if (!s) { card.hidden = true; return; }
+  const team = s.side === 'czech' ? 'Czechia' : s.side === 'away' ? game()?.opponent : s.side;
+  const note = A.demo ? 'Spotlight on' : A.mode !== 'carbon' ? 'Applies when the 3D rink is ready'
+    : s.side === 'czech' ? 'Follow cam on' : 'Highlighted on the ice';
   card.hidden = false;
-  card.innerHTML = `<span class="elh-pos">${esc(p.position)}</span><b>${esc(p.name)}</b><small>${esc(p.team)}${p.jersey ? ' · #' + esc(p.jersey) : ''}</small>`;
-  api?.spotlight(i);
+  card.innerHTML = `<span class="elh-pos">${esc(s.position)}</span><b>${esc(s.name)}</b><small>${esc(team || '')} · ${esc(note)}</small>`;
+}
+
+function renderHint() {
+  hint.textContent = A.demo ? 'Demo rink. Drag to orbit, scroll or pinch to zoom, pick a player to spotlight them.'
+    : A.mode === 'carbon' ? 'Pick a Czechia player for the follow cam, or an opponent to highlight them. Pick again to clear.'
+    : A.mode === 'public' ? 'Showing the standard pregame rink. Camera and spotlight controls need the 3D Carbon view.'
+    : A.mode === 'loading' ? 'Loading the 3D rink…' : '';
+}
+
+function renderPicker() {
+  const games = A.data?.games || [];
+  const opts = games.map(g => `<option value="${esc(g.key)}">${esc(dayLabel.format(new Date(g.date + 'T12:00:00Z')))} · ${esc(g.time)} · vs ${esc(g.opponent)}</option>`);
+  if (!games.length) opts.push(`<option value="" disabled>${A.data?.feed === 'down' ? 'Schedule unavailable' : A.data?.feed === 'loading' ? 'Loading…' : 'No matchup posted yet'}</option>`);
+  opts.push('<optgroup label="Demo"><option value="demo">Demo · sample matchup (not a real game)</option></optgroup>');
+  pick.innerHTML = opts.join('');
+  pick.value = A.demo ? 'demo' : A.key || '';
+  pick.disabled = false;
+}
+
+/* ---------- Cameras ---------- */
+function updateCams() {
+  let shown = 0;
+  camSeg.querySelectorAll('button').forEach(b => {
+    const show = A.demo || (A.mode === 'carbon' && !!b.dataset.carbonCam);
+    b.hidden = !show;
+    if (show) shown++;
+    b.setAttribute('aria-pressed', String(A.demo ? b.dataset.cam === A.demoCam : b.dataset.carbonCam === A.camera));
+  });
+  camSeg.hidden = !shown;
+}
+
+window.addEventListener('elh:camera', e => {
+  const {demo, carbon} = e.detail || {};
+  if (A.demo) { A.demoCam = demo; demoApi?.camera(demo); updateCams(); return; }
+  if (A.mode !== 'carbon' || !carbon) return;
+  A.camera = carbon;
+  if (A.spotlight?.side === 'czech' && carbon !== 'orbit') { /* ring stays, follow cam off */ }
+  updateCams(); sendView(); showCard();
+});
+
+/* ---------- Carbon ---------- */
+function graphicsWindow() {
+  try { return A.frame?.contentDocument?.getElementById('graphics')?.contentWindow || null; } catch { return null; }
+}
+function sendView() {
+  if (A.mode !== 'carbon' || !A.key) return;
+  const s = A.spotlight;
+  graphicsWindow()?.postMessage({protocol: PROTOCOL, type: 'view', game: A.key, camera: A.camera,
+    spotlight: s ? {side: s.side, position: s.position} : null}, location.origin);
+}
+
+window.addEventListener('message', e => {
+  const d = e.data;
+  if (e.origin !== location.origin || d?.protocol !== PROTOCOL || d.type !== 'ready' || d.game !== A.key) return;
+  if (!A.frame || e.source !== graphicsWindow()) return;
+  if (A.mode === 'carbon') return;
+  clearTimeout(A.timer); clearInterval(A.probe);
+  showMsg('');
+  setMode('carbon');
+  renderSide();
+  sendView();
 });
 
 function webglOK() {
   try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; }
 }
 
-async function boot() {
-  if (!webglOK()) { msg.textContent = 'Your device cannot show the 3D arena. The Czechia Carbon pregame link still works.'; return; }
-  msg.textContent = 'Loading Carbon Arena…';
+function teardown() {
+  clearTimeout(A.timer); clearInterval(A.probe);
+  A.frame?.remove(); A.frame = null;
+  demoApi?.dispose(); demoApi = null;
+}
+
+function frameFor(src, title, cls) {
+  const f = document.createElement('iframe');
+  f.className = cls; f.title = title; f.src = src;
+  f.allow = 'fullscreen'; f.allowFullscreen = true;
+  view.append(f);
+  return f;
+}
+
+function mountPublic(g, token) {
+  if (token !== A.token) return;
+  teardown();
+  showMsg('');
+  A.frame = frameFor('/czechia-obs.html?' + new URLSearchParams({game: g.key, view: 'live-hub'}),
+    'Czechia vs ' + g.opponent + ' pregame · rink and hockey cards', 'elh-arena-frame is-public');
+  A.spotlight = null;
+  setMode('public');
+  renderSide();
+}
+
+async function mountCarbon(g) {
+  const token = ++A.token;
+  teardown();
+  setMode('loading');
+  renderSide();
+  showMsg('Loading Carbon Arena…');
+  if (!webglOK()) return mountPublic(g, token);
+  const base = '/czechia/arena/' + encodeURIComponent(g.key) + '/';
+  try {
+    const pass = await fetch(base + 'viewer-session', {method: 'POST', cache: 'no-store', credentials: 'same-origin'});
+    if (!pass.ok) throw new Error('viewer pass ' + pass.status);
+  } catch {
+    return mountPublic(g, token);
+  }
+  if (token !== A.token) return;
+  A.frame = frameFor(base + 'broadcast.html?' + new URLSearchParams({team: 'czechia', game: g.key}),
+    'Carbon Arena pregame · Czechia vs ' + g.opponent, 'elh-arena-frame');
+  // Carbon shows its own error line if WebGL fails to start; switch to the standard rink then.
+  A.probe = setInterval(() => {
+    try {
+      const err = A.frame?.contentDocument?.getElementById('arenaError');
+      if (err && !err.hidden) mountPublic(g, token);
+    } catch { /* not loaded yet */ }
+  }, 1000);
+  A.timer = setTimeout(() => { if (A.mode !== 'carbon') mountPublic(g, token); }, READY_TIMEOUT);
+}
+
+/* ---------- Demo ---------- */
+async function mountDemo() {
+  const token = ++A.token;
+  teardown();
+  setMode('demo');
+  renderSide();
+  if (!webglOK()) { showMsg('Your device cannot show the 3D demo rink.'); return; }
+  showMsg('Loading the demo rink…');
   let THREE, OrbitControls;
   try {
     THREE = await import('three');
     ({OrbitControls} = await import('three/addons/controls/OrbitControls.js'));
   } catch {
-    msg.textContent = 'The 3D engine could not load. Check your connection and refresh.';
+    if (token === A.token) showMsg('The 3D engine could not load. Check your connection and refresh.');
     return;
   }
-  api = build(THREE, OrbitControls);
-  msg.remove();
-  if (!lineup) window.ELHLastLineup?.();
-  else api.setPlayers(lineup);
+  if (token !== A.token) return;
+  showMsg('');
+  demoApi = build(THREE, OrbitControls);
+  demoApi.setPlayers(A.data?.demo);
+  demoApi.camera(A.demoCam);
 }
+
+/* ---------- Selection ---------- */
+function mount() {
+  if (!A.near) return;
+  if (A.demo) return mountDemo();
+  const g = game();
+  if (g) return mountCarbon(g);
+  teardown();
+  setMode('empty');
+  showMsg(A.data?.feed === 'down' ? 'The World Juniors schedule is unavailable right now. Refresh to try again.'
+    : A.data?.feed === 'loading' || !A.data ? 'Loading the World Juniors matchup…'
+    : 'The next Czechia matchup appears here when the schedule is posted.');
+}
+
+function select(key, byViewer) {
+  if (byViewer) A.picked = true;
+  if (key === 'demo') { A.demo = true; A.key = null; }
+  else { A.demo = false; A.key = key || null; }
+  A.spotlight = null; A.camera = 'ice';
+  pick.value = A.demo ? 'demo' : A.key || '';
+  renderSide(); updateCams(); renderHint();
+  mount();
+}
+
+window.addEventListener('elh:arena-data', e => {
+  const first = !A.data;
+  A.data = e.detail;
+  renderPicker();
+  if (A.demo) { renderSide(); return; }
+  const keep = A.picked && A.data.games.some(g => g.key === A.key);
+  const key = keep ? A.key : A.data.nextKey;
+  if (key !== A.key || first || (!key && A.mode !== 'empty')) select(key, false);
+  else renderSide();
+});
+
+window.addEventListener('elh:arena-select', e => {
+  const d = e.detail || {};
+  if (d.demo) select('demo', true);
+  else if (d.key) select(d.key, true);
+});
+
+pick.addEventListener('change', () => select(pick.value, true));
+full.hidden = !view.requestFullscreen;
+full.addEventListener('click', () => view.requestFullscreen?.().catch(() => {}));
+const fullOK = () => !!view.requestFullscreen;
+
+roster.addEventListener('click', e => {
+  const b = e.target.closest('button[data-side]');
+  if (!b || b.disabled) return;
+  const s = {side: b.dataset.side, position: b.dataset.position, name: b.dataset.name};
+  const same = A.spotlight && A.spotlight.side === s.side && A.spotlight.position === s.position && A.spotlight.name === s.name;
+  A.spotlight = same ? null : s;
+  if (A.demo) {
+    const players = A.data?.demo?.players || [];
+    const i = players.findIndex(p => p.team === s.side && p.position === s.position && p.name === s.name);
+    if (!same && i >= 0) demoApi?.spotlight(i);
+  } else if (s.side === 'czech' && !same) {
+    A.camera = 'orbit'; // Carbon's follow cam tracks Czechia skaters in orbit view.
+  } else if (A.camera === 'orbit') {
+    A.camera = 'ice';
+  }
+  renderSide(); updateCams(); sendView();
+});
 
 function iceTexture(THREE) {
   const c = document.createElement('canvas');
@@ -117,6 +356,7 @@ function nameSprite(THREE, text, sub, color) {
 }
 
 function build(THREE, OrbitControls) {
+  let alive = true;
   const W = () => view.clientWidth, H = () => view.clientHeight;
   const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -255,8 +495,10 @@ function build(THREE, OrbitControls) {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clock = new THREE.Clock();
   let visible = true;
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(view);
+  const seen = new IntersectionObserver(([e]) => { visible = e.isIntersecting; });
+  seen.observe(view);
   function frame() {
+    if (!alive) return;
     requestAnimationFrame(frame);
     if (!visible || document.hidden) return;
     const dt = Math.min(clock.getDelta(), .05);
@@ -279,12 +521,23 @@ function build(THREE, OrbitControls) {
     renderer.render(scene, camera);
   }
   frame();
-  new ResizeObserver(() => { renderer.setSize(W(), H()); camera.aspect = W() / H(); camera.updateProjectionMatrix(); }).observe(view);
-  return {setPlayers, spotlight, camera: name => PRESETS[name] && goTo(...PRESETS[name])};
+  const sized = new ResizeObserver(() => { renderer.setSize(W(), H()); camera.aspect = W() / H(); camera.updateProjectionMatrix(); });
+  sized.observe(view);
+  function dispose() {
+    alive = false; seen.disconnect(); sized.disconnect(); controls.dispose();
+    renderer.dispose(); renderer.domElement.remove();
+  }
+  return {setPlayers, spotlight, dispose, camera: name => PRESETS[name] && goTo(...PRESETS[name])};
 }
 
-window.ELHLastLineup?.();
+
+// Load the 3D scene when the arena comes near the viewport, or straight away if linked to.
 const io = new IntersectionObserver(entries => {
-  if (entries.some(e => e.isIntersecting)) { io.disconnect(); boot(); }
-}, {rootMargin: '300px'});
+  if (!entries.some(e => e.isIntersecting)) return;
+  io.disconnect();
+  A.near = true;
+  mount();
+}, {rootMargin: '600px'});
 io.observe(view);
+const initial = window.ELHArenaData?.();
+if (initial) window.dispatchEvent(new CustomEvent('elh:arena-data', {detail: initial}));

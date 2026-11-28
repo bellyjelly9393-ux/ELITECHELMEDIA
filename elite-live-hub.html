@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="live-hub-home-nav.css?v=20261024-leaders">
 <link rel="stylesheet" href="broadcast-tokens.css">
 <link rel="stylesheet" href="public-navigation.css?v=20261025">
-<link rel="stylesheet" href="elite-live-hub.css?v=20261127-3">
+<link rel="stylesheet" href="elite-live-hub.css?v=20261127-4">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 <script defer src="public-navigation.js?v=20261127-livehub"></script>
 </head>
@@ -152,24 +152,28 @@
       </div>
     </section>
 
-    <section id="arena" class="elh-box elh-arena" aria-labelledby="elhArenaTitle"><span id="czechia"></span>
+    <section id="arena" class="elh-box elh-arena" aria-labelledby="elhArenaTitle" data-arena-mode="loading"><span id="czechia"></span>
       <header class="elh-sec-head">
-        <div><p class="elh-eyebrow">Carbon 3D</p><h2 class="elh-3d elh-3d-md" id="elhArenaTitle" data-text="Carbon Arena">Carbon Arena</h2></div>
-        <div class="elh-seg elh-seg-sm" role="group" aria-label="Arena camera" id="elhCamSeg">
-          <button type="button" data-cam="wide" aria-pressed="true">Broadcast</button>
-          <button type="button" data-cam="top" aria-pressed="false">Overhead</button>
-          <button type="button" data-cam="ice" aria-pressed="false">Ice level</button>
-          <button type="button" data-cam="bench" aria-pressed="false">Bench</button>
+        <div><p class="elh-eyebrow">Carbon 3D · World Juniors pregame</p><h2 class="elh-3d elh-3d-md" id="elhArenaTitle" data-text="Carbon Arena">Carbon Arena</h2></div>
+        <div class="elh-arena-tools">
+          <label class="elh-arena-pick"><span>Matchup</span><select id="elhArenaGame" disabled><option>Loading…</option></select></label>
+          <div class="elh-seg elh-seg-sm" role="group" aria-label="Arena camera" id="elhCamSeg">
+            <button type="button" data-cam="wide" data-carbon-cam="ice" aria-pressed="true">Broadcast</button>
+            <button type="button" data-cam="top" data-carbon-cam="overhead" aria-pressed="false">Overhead</button>
+            <button type="button" data-cam="ice" aria-pressed="false">Ice level</button>
+            <button type="button" data-cam="bench" aria-pressed="false">Bench</button>
+          </div>
         </div>
       </header>
       <div class="elh-arena-deck">
-        <div class="elh-arena-view" id="elhArenaView"><p class="elh-arena-msg" id="elhArenaMsg">The 3D arena loads when you scroll here.</p></div>
+        <div class="elh-arena-view" id="elhArenaView"><p class="elh-arena-msg" id="elhArenaMsg">Loading the World Juniors matchup…</p></div>
         <aside class="elh-arena-side">
-          <p class="elh-eyebrow" id="elhArenaLabel">Starting lineup</p>
-          <ol class="elh-arena-roster" id="elhArenaRoster"></ol>
+          <p class="elh-eyebrow" id="elhArenaLabel">Starting lineups</p>
+          <p class="elh-arena-when" id="elhArenaWhen"></p>
+          <div class="elh-arena-roster" id="elhArenaRoster"></div>
           <div class="elh-arena-card" id="elhArenaCard" hidden></div>
-          <a class="elh-btn elh-btn-gold" href="elite-live-hub.html#czechia">Czechia Carbon pregame ↗</a>
-          <p class="elh-note">Drag to orbit, scroll or pinch to zoom. Pick a player to spotlight them.</p>
+          <button type="button" class="elh-btn elh-btn-ghost" id="elhArenaFull">Full screen ⤢</button>
+          <p class="elh-note" id="elhArenaHint">Pick a player to spotlight them on the ice.</p>
         </aside>
       </div>
     </section>
@@ -196,8 +200,8 @@
 <script src="media-desk.js?v=20261011-1"></script>
 <script>window.WMDesk && window.WMDesk.menu();</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
-<script src="czechia-pregame-feed.js?v=1"></script>
-<script src="elite-live-hub.js?v=20261127-2"></script>
-<script type="module" src="elite-live-hub-arena.js?v=20261127-2"></script>
+<script src="czechia-pregame-feed.js?v=2"></script>
+<script src="elite-live-hub.js?v=20261127-3"></script>
+<script type="module" src="elite-live-hub-arena.js?v=20261127-3"></script>
 </body>
 </html>
