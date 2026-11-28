@@ -29,7 +29,7 @@ const PROTOCOL = 'ecm:live-hub-arena:1';
 const READY_TIMEOUT = 25000;
 const ORDER = ['LW', 'C', 'RW', 'LD', 'RD', 'G'];
 const NATION_FLAGS = {canada: 'ca', czechia: 'cz', finland: 'fi', germany: 'de', slovakia: 'sk', sweden: 'se', switzerland: 'ch', usa: 'us'};
-const flag = name => { const c = NATION_FLAGS[String(name).toLowerCase()]; return c ? `/assets/lg3s-world/flags/${c}.svg` : ''; };
+const flag = name => window.ECMNationFlag?.(name) || ((c => c ? `/assets/lg3s-world/flags/${c}.svg` : '')(NATION_FLAGS[String(name).toLowerCase()]));
 const dayLabel = new Intl.DateTimeFormat('en-CA', {timeZone: 'UTC', weekday: 'short', month: 'short', day: 'numeric'});
 
 // mode: loading | carbon | public (fallback rink + cards) | demo | empty
@@ -70,11 +70,13 @@ function renderSide() {
     when.textContent = 'Sample lineup. Not a real game.';
     roster.innerHTML = teams.map(t => teamBlock(t, t, byPosition(players.filter(p => p.team === t)), t === d?.home)).join('');
     full.hidden = !fullOK();
+    renderCards();
     return;
   }
   const g = game();
   full.hidden = !fullOK();
   if (!g) {
+    renderCards();
     label.textContent = 'Starting lineups';
     when.textContent = '';
     roster.innerHTML = '';
@@ -83,10 +85,12 @@ function renderSide() {
   label.textContent = 'Czechia vs ' + g.opponent;
   when.textContent = dayLabel.format(new Date(g.date + 'T12:00:00Z')) + ' · ' + g.time;
   roster.innerHTML = teamBlock('czech', 'Czechia', byPosition(g.czech), true) + teamBlock('away', g.opponent, byPosition(g.away), false);
-  if (A.spotlight) showCard();
+  if (A.spotlight) showSpotCard();
+  renderCards();
+  spotlightCard();
 }
 
-function showCard() {
+function showSpotCard() {
   const s = A.spotlight;
   if (!s) { card.hidden = true; return; }
   const team = s.side === 'czech' ? 'Czechia' : s.side === 'away' ? game()?.opponent : s.side;
@@ -131,7 +135,7 @@ window.addEventListener('elh:camera', e => {
   if (A.mode !== 'carbon' || !carbon) return;
   A.camera = carbon;
   if (A.spotlight?.side === 'czech' && carbon !== 'orbit') { /* ring stays, follow cam off */ }
-  updateCams(); sendView(); showCard();
+  updateCams(); sendView(); showSpotCard();
 });
 
 /* ---------- Carbon ---------- */
@@ -235,6 +239,142 @@ async function mountDemo() {
   demoApi.setPlayers(A.data?.demo);
   demoApi.camera(A.demoCam);
 }
+
+/* ---------- Rotating 3D player cards ----------
+ * Drawn with the shared Player Card Studio renderer (player-card-renderer.js), one card per
+ * team for the selected matchup. Cards flip to the next player every 8.5 s, tilt under the
+ * pointer, and jump to whoever is spotlighted in the sidebar.
+ */
+const cardsBox = $('elhCards');
+const JERSEYS = {czechia: '/assets/lg3s/jerseys/czechia-home.webp', canada: '/assets/lg3s/jerseys/341.webp', usa: '/assets/lg3s/jerseys/342.webp',
+  sweden: '/assets/lg3s/jerseys/343.webp', switzerland: '/assets/lg3s/jerseys/404.webp', germany: '/assets/lg3s/jerseys/532.webp', slovakia: '/assets/lg3s/jerseys/1079.webp'};
+const ROTATE_MS = 8500;
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const C = {sig: '', sides: {}, timer: 0, visible: false, hover: false};
+const cardCache = new Map();
+
+function cardImage(team, p) {
+  const k = team + '|' + p.position + '|' + p.name;
+  if (!cardCache.has(k)) cardCache.set(k, (async () => {
+    const R = window.ECMCardRenderer;
+    if (!R) return null;
+    await Promise.allSettled([document.fonts.load('46px CardDisplay'), document.fonts.load('36px CardLabel')]);
+    const c = document.createElement('canvas');
+    const ok = await R.draw(c, {
+      player: {team, pos: p.position, tag: p.name}, season: 'LG WORLD JUNIORS',
+      ratingKind: 'pending', edition: 'season', finish: 'ice', background: 'arena',
+      teamJersey: JERSEYS[team.toLowerCase()] || null,
+      labels: p.position === 'G' ? ['GP', 'SV', 'SV%', 'GAA'] : ['GP', 'G', 'A', 'PTS'], values: ['—', '—', '—', '—'],
+    });
+    return ok ? c : null;
+  })().catch(() => null));
+  return cardCache.get(k);
+}
+
+function plainFace(team, p) {
+  const jersey = JERSEYS[team.toLowerCase()];
+  return `<div class="elh-pcard-plain">${jersey ? `<img src="${esc(jersey)}" alt="">` : ''}<small>${esc(team)}${p ? ' · ' + esc(p.position) : ''}</small><b>${esc(p ? p.name : 'Lineup pending')}</b></div>`;
+}
+
+async function dealFace(face, team, p) {
+  const who = team + '|' + (p ? p.position + '|' + p.name : 'pending');
+  face.dataset.who = who;
+  face.innerHTML = plainFace(team, p);
+  if (!p) return;
+  const img = await Promise.race([cardImage(team, p), new Promise(ok => setTimeout(() => ok(null), 2500))]);
+  if (!img || face.dataset.who !== who) return;
+  const v = document.createElement('canvas');
+  v.width = 700; v.height = 1000;
+  v.getContext('2d').drawImage(img, 0, 0, v.width, v.height);
+  v.setAttribute('role', 'img');
+  v.setAttribute('aria-label', `${p.name}, ${team} ${p.position} player card`);
+  face.replaceChildren(v);
+}
+
+async function showCard(sideKey, index, flip = true) {
+  const side = C.sides[sideKey];
+  if (!side) return;
+  const p = side.players.length ? side.players[(index + side.players.length) % side.players.length] : null;
+  side.index = p ? side.players.indexOf(p) : 0;
+  const target = flip && !reduceMotion ? side.faces[1 - side.front] : side.faces[side.front];
+  await dealFace(target, side.team, p);
+  if (flip && !reduceMotion) {
+    side.front = 1 - side.front;
+    side.flip += 180;
+    side.inner.style.setProperty('--flip', side.flip + 'deg');
+  }
+  side.slot.querySelector('figcaption').innerHTML = p ? `${esc(p.name)}<small>${esc(side.team)} · ${esc(p.position)}</small>` : `Lineup pending<small>${esc(side.team)}</small>`;
+  side.slot.querySelectorAll('.elh-pcard-pips button').forEach((b, i) => b.setAttribute('aria-current', String(i === side.index)));
+}
+
+function renderCards() {
+  const g = !A.demo && game();
+  if (!g) { cardsBox.hidden = true; C.sig = ''; return; }
+  const sides = {czech: {team: 'Czechia', players: byPosition(g.czech).filter(p => p.name)}, away: {team: g.opponent, players: byPosition(g.away).filter(p => p.name)}};
+  const sig = g.key + JSON.stringify(sides);
+  cardsBox.hidden = false;
+  if (sig === C.sig) return;
+  C.sig = sig;
+  for (const [key, side] of Object.entries(sides)) {
+    const slot = cardsBox.querySelector(`.elh-pcard-slot[data-side="${key}"]`);
+    const inner = slot.querySelector('.elh-pcard-in');
+    inner.innerHTML = '<div class="elh-pcard-face"></div><div class="elh-pcard-face is-back"></div><div class="elh-pcard-shine"></div>';
+    inner.style.setProperty('--flip', '0deg');
+    slot.querySelector('.elh-pcard-pips').setAttribute('aria-label', side.team + ' player cards');
+    slot.querySelector('.elh-pcard-pips').innerHTML = side.players.map((p, i) =>
+      `<button type="button" data-card-pick="${i}" aria-label="Show ${esc(p.name)} (${esc(p.position)})"></button>`).join('');
+    slot.querySelector('.elh-pcard').setAttribute('aria-label', side.players.length ? `${side.team} player cards. Press Enter for the next player.` : `${side.team} lineup pending`);
+    C.sides[key] = {...side, slot, inner, faces: [...inner.querySelectorAll('.elh-pcard-face')], front: 0, flip: 0, index: 0};
+    showCard(key, 0, false);
+  }
+}
+
+function spotlightCard() {
+  const s = A.spotlight;
+  if (!s || A.demo) return;
+  const side = C.sides[s.side];
+  const i = side?.players.findIndex(p => p.position === s.position && p.name === s.name) ?? -1;
+  if (i >= 0 && i !== side.index) showCard(s.side, i);
+}
+
+function rotateCards() {
+  if (!C.visible || C.hover || document.hidden || A.spotlight || cardsBox.hidden) return;
+  for (const [key, side] of Object.entries(C.sides)) if (side.players.length > 1) showCard(key, side.index + 1);
+}
+C.timer = setInterval(rotateCards, ROTATE_MS);
+new IntersectionObserver(([e]) => { C.visible = e.isIntersecting; }).observe(cardsBox);
+
+cardsBox.addEventListener('click', e => {
+  const pip = e.target.closest('[data-card-pick]');
+  if (pip) { showCard(pip.closest('.elh-pcard-slot').dataset.side, +pip.dataset.cardPick); return; }
+  const card = e.target.closest('.elh-pcard');
+  if (card) { const k = card.closest('.elh-pcard-slot').dataset.side; showCard(k, (C.sides[k]?.index ?? 0) + 1); }
+});
+cardsBox.addEventListener('keydown', e => {
+  const card = e.target.closest('.elh-pcard'); if (!card) return;
+  const k = card.closest('.elh-pcard-slot').dataset.side, side = C.sides[k]; if (!side) return;
+  const step = e.key === 'ArrowLeft' ? -1 : ['ArrowRight', 'Enter', ' '].includes(e.key) ? 1 : 0;
+  if (!step) return;
+  e.preventDefault();
+  showCard(k, side.index + step);
+});
+cardsBox.querySelectorAll('.elh-pcard').forEach(card => {
+  card.addEventListener('pointerenter', () => { C.hover = true; });
+  card.addEventListener('pointerleave', () => {
+    C.hover = false;
+    const inner = card.querySelector('.elh-pcard-in');
+    inner.style.setProperty('--tx', '0deg'); inner.style.setProperty('--ty', '0deg');
+  });
+  if (reduceMotion) return;
+  card.addEventListener('pointermove', e => {
+    const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+    const inner = card.querySelector('.elh-pcard-in');
+    inner.style.setProperty('--ty', ((x - .5) * 22).toFixed(1) + 'deg');
+    inner.style.setProperty('--tx', ((.5 - y) * 16).toFixed(1) + 'deg');
+    inner.style.setProperty('--gx', (x * 100).toFixed(0) + '%');
+    inner.style.setProperty('--gy', (y * 100).toFixed(0) + '%');
+  });
+});
 
 /* ---------- Selection ---------- */
 function mount() {

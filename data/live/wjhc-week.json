@@ -1,0 +1,481 @@
+{
+ "schema": "ecm-wjhc-week-v1",
+ "league": "LG World Junior Championships",
+ "leagueId": 77,
+ "season": 33,
+ "timezone": "America/Toronto",
+ "week": {
+  "from": "2026-11-29",
+  "to": "2026-12-01"
+ },
+ "games": [
+  {
+   "id": 923953,
+   "date": "2026-11-29",
+   "time": "21:00",
+   "away": {
+    "id": 404,
+    "name": "Switzerland"
+   },
+   "home": {
+    "id": 1079,
+    "name": "Slovakia"
+   }
+  },
+  {
+   "id": 923954,
+   "date": "2026-11-29",
+   "time": "21:00",
+   "away": {
+    "id": 342,
+    "name": "USA"
+   },
+   "home": {
+    "id": 343,
+    "name": "Sweden"
+   }
+  },
+  {
+   "id": 923955,
+   "date": "2026-11-29",
+   "time": "21:00",
+   "away": {
+    "id": 344,
+    "name": "Finland"
+   },
+   "home": {
+    "id": 532,
+    "name": "Germany"
+   }
+  },
+  {
+   "id": 923956,
+   "date": "2026-11-29",
+   "time": "21:00",
+   "away": {
+    "id": 345,
+    "name": "Czechia"
+   },
+   "home": {
+    "id": 341,
+    "name": "Canada"
+   }
+  },
+  {
+   "id": 923957,
+   "date": "2026-11-29",
+   "time": "21:35",
+   "away": {
+    "id": 342,
+    "name": "USA"
+   },
+   "home": {
+    "id": 344,
+    "name": "Finland"
+   }
+  },
+  {
+   "id": 923958,
+   "date": "2026-11-29",
+   "time": "21:35",
+   "away": {
+    "id": 341,
+    "name": "Canada"
+   },
+   "home": {
+    "id": 404,
+    "name": "Switzerland"
+   }
+  },
+  {
+   "id": 923959,
+   "date": "2026-11-29",
+   "time": "21:35",
+   "away": {
+    "id": 343,
+    "name": "Sweden"
+   },
+   "home": {
+    "id": 532,
+    "name": "Germany"
+   }
+  },
+  {
+   "id": 923960,
+   "date": "2026-11-29",
+   "time": "21:35",
+   "away": {
+    "id": 1079,
+    "name": "Slovakia"
+   },
+   "home": {
+    "id": 345,
+    "name": "Czechia"
+   }
+  },
+  {
+   "id": 923961,
+   "date": "2026-11-29",
+   "time": "22:10",
+   "away": {
+    "id": 343,
+    "name": "Sweden"
+   },
+   "home": {
+    "id": 341,
+    "name": "Canada"
+   }
+  },
+  {
+   "id": 923962,
+   "date": "2026-11-29",
+   "time": "22:10",
+   "away": {
+    "id": 345,
+    "name": "Czechia"
+   },
+   "home": {
+    "id": 344,
+    "name": "Finland"
+   }
+  },
+  {
+   "id": 923963,
+   "date": "2026-11-29",
+   "time": "22:10",
+   "away": {
+    "id": 404,
+    "name": "Switzerland"
+   },
+   "home": {
+    "id": 342,
+    "name": "USA"
+   }
+  },
+  {
+   "id": 923964,
+   "date": "2026-11-29",
+   "time": "22:10",
+   "away": {
+    "id": 532,
+    "name": "Germany"
+   },
+   "home": {
+    "id": 1079,
+    "name": "Slovakia"
+   }
+  },
+  {
+   "id": 923965,
+   "date": "2026-11-30",
+   "time": "21:00",
+   "away": {
+    "id": 1079,
+    "name": "Slovakia"
+   },
+   "home": {
+    "id": 341,
+    "name": "Canada"
+   }
+  },
+  {
+   "id": 923966,
+   "date": "2026-11-30",
+   "time": "21:00",
+   "away": {
+    "id": 344,
+    "name": "Finland"
+   },
+   "home": {
+    "id": 343,
+    "name": "Sweden"
+   }
+  },
+  {
+   "id": 923967,
+   "date": "2026-11-30",
+   "time": "21:00",
+   "away": {
+    "id": 532,
+    "name": "Germany"
+   },
+   "home": {
+    "id": 345,
+    "name": "Czechia"
+   }
+  },
+  {
+   "id": 923968,
+   "date": "2026-11-30",
+   "time": "21:00",
+   "away": {
+    "id": 404,
+    "name": "Switzerland"
+   },
+   "home": {
+    "id": 342,
+    "name": "USA"
+   }
+  },
+  {
+   "id": 923969,
+   "date": "2026-11-30",
+   "time": "21:35",
+   "away": {
+    "id": 341,
+    "name": "Canada"
+   },
+   "home": {
+    "id": 344,
+    "name": "Finland"
+   }
+  },
+  {
+   "id": 923970,
+   "date": "2026-11-30",
+   "time": "21:35",
+   "away": {
+    "id": 342,
+    "name": "USA"
+   },
+   "home": {
+    "id": 1079,
+    "name": "Slovakia"
+   }
+  },
+  {
+   "id": 923971,
+   "date": "2026-11-30",
+   "time": "21:35",
+   "away": {
+    "id": 343,
+    "name": "Sweden"
+   },
+   "home": {
+    "id": 345,
+    "name": "Czechia"
+   }
+  },
+  {
+   "id": 923972,
+   "date": "2026-11-30",
+   "time": "21:35",
+   "away": {
+    "id": 404,
+    "name": "Switzerland"
+   },
+   "home": {
+    "id": 532,
+    "name": "Germany"
+   }
+  },
+  {
+   "id": 923973,
+   "date": "2026-11-30",
+   "time": "22:10",
+   "away": {
+    "id": 342,
+    "name": "USA"
+   },
+   "home": {
+    "id": 532,
+    "name": "Germany"
+   }
+  },
+  {
+   "id": 923974,
+   "date": "2026-11-30",
+   "time": "22:10",
+   "away": {
+    "id": 345,
+    "name": "Czechia"
+   },
+   "home": {
+    "id": 344,
+    "name": "Finland"
+   }
+  },
+  {
+   "id": 923975,
+   "date": "2026-11-30",
+   "time": "22:10",
+   "away": {
+    "id": 1079,
+    "name": "Slovakia"
+   },
+   "home": {
+    "id": 404,
+    "name": "Switzerland"
+   }
+  },
+  {
+   "id": 923976,
+   "date": "2026-11-30",
+   "time": "22:10",
+   "away": {
+    "id": 343,
+    "name": "Sweden"
+   },
+   "home": {
+    "id": 341,
+    "name": "Canada"
+   }
+  },
+  {
+   "id": 923977,
+   "date": "2026-12-01",
+   "time": "21:00",
+   "away": {
+    "id": 532,
+    "name": "Germany"
+   },
+   "home": {
+    "id": 341,
+    "name": "Canada"
+   }
+  },
+  {
+   "id": 923978,
+   "date": "2026-12-01",
+   "time": "21:00",
+   "away": {
+    "id": 1079,
+    "name": "Slovakia"
+   },
+   "home": {
+    "id": 342,
+    "name": "USA"
+   }
+  },
+  {
+   "id": 923979,
+   "date": "2026-12-01",
+   "time": "21:00",
+   "away": {
+    "id": 344,
+    "name": "Finland"
+   },
+   "home": {
+    "id": 343,
+    "name": "Sweden"
+   }
+  },
+  {
+   "id": 923980,
+   "date": "2026-12-01",
+   "time": "21:00",
+   "away": {
+    "id": 404,
+    "name": "Switzerland"
+   },
+   "home": {
+    "id": 345,
+    "name": "Czechia"
+   }
+  },
+  {
+   "id": 923981,
+   "date": "2026-12-01",
+   "time": "21:35",
+   "away": {
+    "id": 343,
+    "name": "Sweden"
+   },
+   "home": {
+    "id": 1079,
+    "name": "Slovakia"
+   }
+  },
+  {
+   "id": 923982,
+   "date": "2026-12-01",
+   "time": "21:35",
+   "away": {
+    "id": 344,
+    "name": "Finland"
+   },
+   "home": {
+    "id": 532,
+    "name": "Germany"
+   }
+  },
+  {
+   "id": 923983,
+   "date": "2026-12-01",
+   "time": "21:35",
+   "away": {
+    "id": 341,
+    "name": "Canada"
+   },
+   "home": {
+    "id": 404,
+    "name": "Switzerland"
+   }
+  },
+  {
+   "id": 923984,
+   "date": "2026-12-01",
+   "time": "21:35",
+   "away": {
+    "id": 342,
+    "name": "USA"
+   },
+   "home": {
+    "id": 345,
+    "name": "Czechia"
+   }
+  },
+  {
+   "id": 923985,
+   "date": "2026-12-01",
+   "time": "22:10",
+   "away": {
+    "id": 342,
+    "name": "USA"
+   },
+   "home": {
+    "id": 344,
+    "name": "Finland"
+   }
+  },
+  {
+   "id": 923986,
+   "date": "2026-12-01",
+   "time": "22:10",
+   "away": {
+    "id": 341,
+    "name": "Canada"
+   },
+   "home": {
+    "id": 1079,
+    "name": "Slovakia"
+   }
+  },
+  {
+   "id": 923987,
+   "date": "2026-12-01",
+   "time": "22:10",
+   "away": {
+    "id": 345,
+    "name": "Czechia"
+   },
+   "home": {
+    "id": 343,
+    "name": "Sweden"
+   }
+  },
+  {
+   "id": 923988,
+   "date": "2026-12-01",
+   "time": "22:10",
+   "away": {
+    "id": 404,
+    "name": "Switzerland"
+   },
+   "home": {
+    "id": 532,
+    "name": "Germany"
+   }
+  }
+ ]
+}

@@ -1,6 +1,6 @@
 /* EliteChel Media · Elite Live Hub.
  * Public page. Reads only public feeds the rest of the site already uses:
- *   /api/lgchl-scores (LGCHL scores), /api/live-ticker (Hitmen games),
+ *   /api/lgchl-scores (LGCHL scores), /api/live-ticker (Hitmen games, archived for now),
  *   /api/czechia-pregame via czechia-pregame-feed.js (World Juniors fixtures + lineups),
  *   Supabase tournament_automation_sources (public, active listings) and obs_broadcast_state
  *   (public Czechia stream URL) with the publishable key.
@@ -26,11 +26,13 @@
   const when = d => !d ? 'TBD' : (sameDay(d, new Date()) ? 'Tonight ' : dayFmt.format(d) + ' · ') + timeFmt.format(d);
   const host = location.hostname || 'localhost';
   const GAME_WINDOW = 35 * 60e3;
+  // Sections taken off the public Live Hub for now. Remove an id to bring it back.
+  const ARCHIVED = new Set(['HITMEN']);
 
   const LEAGUES = [
     {id: 'ALL', label: 'All'},
     {id: 'LGCHL', label: 'LGCHL'},
-    {id: 'HITMEN', label: 'Hitmen'},
+    ...(ARCHIVED.has('HITMEN') ? [] : [{id: 'HITMEN', label: 'Hitmen'}]),
     {id: 'WJC', label: 'World Juniors'},
     {id: 'LG3S', label: 'LG Threes'},
   ];
@@ -113,7 +115,8 @@
     channels: [], ticker: [], rundown: [], realRundown: false,
     hitmen: null, lgchl: null, czechia: [], czechiaUrl: 'https://www.twitch.tv/lbubbzzl', czechiaView: 'pregame',
     favs: store.get('favs', []), reminders: store.get('reminders', []), picks: store.get('picks', {}),
-    mv: store.get('mv', {layout: 4, slots: ['hitmen', 'czechia', 'demo-ecm1', 'demo-ecm2'], low: false, focus: 0}),
+    mv: store.get('mv', {layout: 4, slots: ['czechia', 'demo-ecm1', 'demo-ecm2'], low: false, focus: 0}),
+    links: [],
     custom: store.get('custom', []), goal: null, feeds: {scores: 'loading', hitmen: 'loading', czechia: 'loading', listings: 'loading'},
   };
 
@@ -178,15 +181,20 @@
       home: c ? {abbr: 'CZE', name: 'Czechia', crest: flag('cz')} : null,
       lineup: c ? [...c.czech.map(p => ({...p, team: 'CZE'})), ...c.away.map(p => ({...p, team: c.opponent.slice(0, 3).toUpperCase()}))] : [],
     };
-    return [hitmen, czechia];
+    return ARCHIVED.has('HITMEN') ? [czechia] : [hitmen, czechia];
   }
   function nextCzechia() {
     const now = Date.now();
-    const list = S.czechia.map(g => ({...g, start: Date.parse(g.date + 'T' + toUtcTime(g) + 'Z')})).filter(g => Number.isFinite(g.start)).sort((a, b) => a.start - b.start);
+    const list = S.czechia.map(g => ({...g, start: czechStart(g)})).filter(g => Number.isFinite(g.start)).sort((a, b) => a.start - b.start);
     return list.find(g => g.start + GAME_WINDOW > now) || null;
   }
-  // The feed gives an ET display time; the raw UTC time is kept on the game as `utc`.
-  const toUtcTime = g => g.utc || '00:00';
+  // LG lists World Juniors times in Eastern time (EST, UTC-5, for the whole tournament).
+  // The raw feed time is kept on the game as `utc` for historical reasons; it is Eastern.
+  const czechStart = g => {
+    const day = Date.parse(g.date + 'T00:00:00Z');
+    const [h, m] = String(g.utc || '00:00').split(':').map(Number);
+    return day + ((h + 5) * 60 + m) * 60e3;
+  };
 
   function allChannels() {
     const custom = S.custom.map((url, i) => ({id: 'custom-' + i, name: urlLabel(url), league: 'ALL', kind: 'community', real: true, custom: true, status: 'listed', url, title: 'Your added stream', story: 'Added by you on this device. Live status not checked.', external: url}));
@@ -215,6 +223,7 @@
     } catch { S.feeds.scores = 'down'; }
   }
   async function loadHitmen() {
+    if (ARCHIVED.has('HITMEN')) { S.feeds.hitmen = 'archived'; return; }
     try {
       const d = await getJSON('/api/live-ticker');
       if (!d?.ok) throw new Error('hitmen');
@@ -245,18 +254,27 @@
       const {data, error} = await db.from('tournament_automation_sources').select('id,url,provider,display_label,metadata').eq('active', true).eq('public_visible', true).limit(200);
       if (error) throw error;
       const seen = new Set();
+      const links = [];
       S.channels = (data || []).flatMap(s => {
         const url = canonical(s.url);
         if (!url || /twitch\.tv\/ctbli\b/i.test(url) || seen.has(url)) return [];
         const m = s.metadata || {};
         const tag = [m.league, m.league_key, m.competition, m.category, m.title, s.display_label].filter(Boolean).join(' ').toLowerCase();
-        const league = /\blg\s*3s\b|\blg\s*threes\b|leaguegaming\s*3s/.test(tag) ? 'LG3S' : /\blgchl\b|\bcalgary hitmen\b/.test(tag) ? 'LGCHL' : null;
+        const league = /\blg\s*3s\b|\blg\s*threes\b|leaguegaming\s*3s/.test(tag) ? 'LG3S'
+          : /world jun|\bwjhc\b|\blgwjc\b|\bwjc\b/.test(tag) ? 'WJC'
+          : /\blgchl\b|\bcalgary hitmen\b|memorial cup/.test(tag) ? 'LGCHL' : null;
         if (!league) return [];
         seen.add(url);
+        // Game-night links name the LG game(s) or series they cover, so the This Week boxes can show them.
+        const gameIds = [m.lg_game_id, ...(Array.isArray(m.lg_game_ids) ? m.lg_game_ids : [])].map(Number).filter(n => Number.isInteger(n) && n > 0);
+        const seriesKey = typeof m.series_key === 'string' && /^\d+-\d+$/.test(m.series_key) ? m.series_key.split('-').map(Number).sort((a, b) => a - b).join('-') : null;
+        if (gameIds.length || seriesKey) links.push({channel: 'src-' + s.id, url, league, gameIds, seriesKey, label: s.display_label || m.title || urlLabel(url)});
         return [{id: 'src-' + s.id, sourceId: s.id, name: s.display_label || m.title || urlLabel(url), league, kind: 'community', real: true, status: 'listed', url, external: url, title: m.title || s.display_label || 'Public broadcast', story: 'Public ' + LEAGUE_NAME[league] + ' listing. Live status is not independently checked.'}];
       });
+      S.links = links;
       S.feeds.listings = 'ok';
     } catch { S.feeds.listings = 'down'; }
+    window.dispatchEvent(new CustomEvent('elh:links', {detail: S.links}));
   }
 
   /* ---------- Ticker ---------- */
@@ -340,12 +358,12 @@
     S.featured = (q && list.some(c => c.id === q) ? q : null) ||
       list.find(c => c.real && c.status === 'live')?.id ||
       (S.mode === 'on' ? DEMO[0].id : null) ||
-      list.find(c => c.real && ['pregame', 'upcoming'].includes(c.status))?.id || 'hitmen';
+      list.find(c => c.real && ['pregame', 'upcoming'].includes(c.status))?.id || (ARCHIVED.has('HITMEN') ? 'czechia' : 'hitmen');
   }
   let stageSig = '';
   function renderStage() {
     const on = isOnAir();
-    const ch = channel(S.featured) || channel('hitmen');
+    const ch = channel(S.featured) || channel('czechia');
     const stage = $('#elhStage');
     stage.classList.toggle('is-theatre', S.theatre);
     $('.elh-stage-row').classList.toggle('is-theatre', S.theatre);
@@ -455,7 +473,7 @@
   function renderCompanion() {
     $$('.elh-comp-tabs [data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === S.companion)));
     $('#elhCompanion').hidden = S.theatre;
-    const ch = channel(S.featured) || channel('hitmen');
+    const ch = channel(S.featured) || channel('czechia');
     const body = $('#elhCompBody');
     if (S.companion === 'scores') {
       const rows = S.ticker.filter(t => !t.demo || isOnAir()).slice(0, 14);
@@ -513,7 +531,7 @@
     const h = S.hitmen;
     if (h?.live) out.push({id: 'hit-' + h.live.id, at: Date.parse(h.live.at), title: `Hitmen ${h.live.home ? 'vs' : 'at'} ${h.live.opponent.abbr}`, sub: 'Hitmen Live · on air', channel: 'hitmen', kind: 'game', real: true, live: true});
     (h?.upcoming || []).slice(0, 3).forEach(g => out.push({id: 'hit-' + g.id, at: Date.parse(g.at), title: `Hitmen ${g.home ? 'vs' : 'at'} ${g.opponent.name}`, sub: 'Hitmen Live', channel: 'hitmen', kind: 'game', real: true}));
-    S.czechia.map(g => ({g, at: Date.parse(g.date + 'T' + toUtcTime(g) + 'Z')})).filter(x => x.at + GAME_WINDOW > now).slice(0, 4).forEach(({g, at}, i) => {
+    S.czechia.map(g => ({g, at: czechStart(g)})).filter(x => x.at + GAME_WINDOW > now).slice(0, 4).forEach(({g, at}, i) => {
       if (!i) out.push({id: 'cz-pre-' + g.key, at: at - 30 * 60e3, title: 'Carbon pregame · Czechia vs ' + g.opponent, sub: 'World Juniors · lineups and 3D rink', channel: 'czechia', kind: 'show', real: true});
       out.push({id: 'cz-' + g.key, at, title: 'Czechia vs ' + g.opponent, sub: 'LG World Juniors', channel: 'czechia', kind: 'game', real: true, live: now >= at && now < at + GAME_WINDOW});
     });
@@ -662,7 +680,7 @@
   // The Carbon Arena always opens on a real Czechia matchup. The demo lineup is handed over
   // only so the viewer can pick it explicitly; it is never the default.
   function arenaData() {
-    const games = S.czechia.map(g => ({...g, start: Date.parse(g.date + 'T' + toUtcTime(g) + 'Z')}))
+    const games = S.czechia.map(g => ({...g, start: czechStart(g)}))
       .filter(g => Number.isFinite(g.start)).sort((a, b) => a.start - b.start);
     const next = nextCzechia();
     const demo = DEMO[0];
@@ -678,6 +696,7 @@
     if (detail) window.dispatchEvent(new CustomEvent('elh:arena-select', {detail}));
   }
   window.ELHArenaData = arenaData;
+  window.ELHLinks = () => S.links;
 
   document.addEventListener('click', e => {
     const t = e.target.closest('button, a'); if (!t) return;
@@ -736,6 +755,7 @@
   });
 
   /* ---------- Boot ---------- */
+  if (ARCHIVED.has('HITMEN') && S.mv.slots.includes('hitmen')) { S.mv.slots = S.mv.slots.filter(id => id !== 'hitmen'); S.mv.focus = 0; mvSave(); }
   renderAll();
   Promise.allSettled([loadScores(), loadHitmen(), loadCzechia(), loadListings()]).then(() => {
     renderAll();
